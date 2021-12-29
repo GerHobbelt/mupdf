@@ -8,56 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// wrapdfb.cpp
-
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/wrapdfb.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// wrapsizer.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wrapsizer.cpp"
-
-
-//------------------------------------------------------------------------
-// wxcrt.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxcrt.cpp"
-
-
-//------------------------------------------------------------------------
-// wxprintf.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxprintf.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_activityindicator.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_activityindicator.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_animatctrl.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_animatctrl.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_aui.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_aui.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_auitoolb.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_auitoolb.cpp"
-
-
-//------------------------------------------------------------------------
 // xh_bannerwindow.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bannerwindow.cpp"
@@ -229,3 +179,51 @@
 // xh_htmllbox.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_htmllbox.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_hyperlink.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_hyperlink.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_infobar.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_infobar.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_listb.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listb.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_listbk.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listbk.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_listc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listc.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_mdi.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_mdi.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_menu.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_menu.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_notbk.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_notbk.cpp"

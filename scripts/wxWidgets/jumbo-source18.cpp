@@ -126,64 +126,6 @@
 
 
 //------------------------------------------------------------------------
-// webview.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webview.cpp"
-
-
-//------------------------------------------------------------------------
-// webview_edge.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webview_edge.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webview_ie.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/webview_ie.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webview_webkit.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webview_webkit2.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webview_webkit2_extension.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2_extension.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// webviewarchivehandler.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webviewarchivehandler.cpp"
-
-
-//------------------------------------------------------------------------
-// webviewfshandler.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/webviewfshandler.cpp"
-
-
-//------------------------------------------------------------------------
 // wfstream.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/wfstream.cpp"
@@ -291,3 +233,53 @@
 // wizard.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/wizard.cpp"
+
+
+//------------------------------------------------------------------------
+// wrapdfb.cpp
+
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/wrapdfb.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// wrapsizer.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/wrapsizer.cpp"
+
+
+//------------------------------------------------------------------------
+// wxcrt.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxcrt.cpp"
+
+
+//------------------------------------------------------------------------
+// wxprintf.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxprintf.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_activityindicator.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_activityindicator.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_animatctrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_animatctrl.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_aui.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_aui.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_auitoolb.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_auitoolb.cpp"

@@ -8,54 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// xh_hyperlink.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_hyperlink.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_infobar.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_infobar.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_listb.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listb.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_listbk.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listbk.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_listc.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listc.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_mdi.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_mdi.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_menu.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_menu.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_notbk.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_notbk.cpp"
-
-
-//------------------------------------------------------------------------
 // xh_odcombo.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_odcombo.cpp"
@@ -227,3 +179,53 @@
 // xlocale.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/xlocale.cpp"
+
+
+//------------------------------------------------------------------------
+// xmcombo.c
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/xmcombo/xmcombo.c"
+#endif
+
+
+//------------------------------------------------------------------------
+// xmlres.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xmlres.cpp"
+
+
+//------------------------------------------------------------------------
+// xmlreshandler.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xmlreshandler.cpp"
+
+
+//------------------------------------------------------------------------
+// xmlrsall.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xmlrsall.cpp"
+
+
+//------------------------------------------------------------------------
+// xpmdecod.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/xpmdecod.cpp"
+
+
+//------------------------------------------------------------------------
+// xti.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/xti.cpp"
+
+
+//------------------------------------------------------------------------
+// xtistrm.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/xtistrm.cpp"
+
+
+//------------------------------------------------------------------------
+// xtixml.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/xtixml.cpp"

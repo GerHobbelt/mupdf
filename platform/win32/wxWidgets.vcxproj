@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXWIDGETS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -123,7 +123,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../thirdparty/owemdjee/webview/script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -141,6 +141,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -152,7 +158,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../thirdparty/owemdjee/webview/script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -171,6 +177,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -184,7 +196,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../thirdparty/owemdjee/webview/script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -202,6 +214,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -213,7 +231,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../thirdparty/owemdjee/webview/script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -232,6 +250,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>node $(ProjectDir)..\..\scripts\wxWidgets\copy_webview_package.js  $(ProjectDir)packages $(ProjectDir)..\..\scripts\wxWidgets\webview2 $(TargetDir)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -516,9 +540,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/variant.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/webrequest.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/webrequest_curl.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/webview.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/webviewarchivehandler.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/webviewfshandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/common/webview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/common/webviewarchivehandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/common/webviewfshandler.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/wfstream.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/wincmn.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/windowid.cpp" />
@@ -744,9 +768,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/toplevel.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/treeentry_gtk.c" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/utilsgtk.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2_extension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/webview_webkit2_extension.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/win_gtk.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/window.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk1/app.cpp" />
@@ -1066,8 +1090,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/uxtheme.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/volume.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/webrequest_winhttp.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/webview_edge.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/webview_ie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/msw/webview_edge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/msw/webview_ie.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/window.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/winestub.c" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/osx/accel.cpp" />
@@ -3712,8 +3736,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.Web.WebView2.1.0.1083-prerelease\build\native\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Web.WebView2.1.0.1083-prerelease\build\native\Microsoft.Web.WebView2.targets'))" />
   </Target>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
