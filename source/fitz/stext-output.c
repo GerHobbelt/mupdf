@@ -102,13 +102,13 @@ fz_print_style_end_html(fz_context *ctx, fz_output *out, fz_font *font, float si
 }
 
 static void
-fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options)
+fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix page_ctm, const fz_stext_options* options)
 {
 	float x = block->bbox.x0;
 	float y = block->bbox.y0;
 	float w = block->bbox.x1 - block->bbox.x0;
 	float h = block->bbox.y1 - block->bbox.y0;
-	fz_rect mediabox = fz_transform_rect(block->bbox, ctm);
+	fz_rect mediabox = fz_transform_rect(block->bbox, page_ctm);
 	fz_matrix ctm = block->u.i.transform;
 	const char *flip = "";
 
@@ -229,9 +229,10 @@ fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 	fz_write_printf(ctx, out, "<img style=\"position:absolute;%stop:%gpt;left:%gpt;width:%gpt;height:%gpt\" data-mediabox=\"%R\" data-dimensions=\"%R\" src=\"", flip, y, x, w, h, &block->bbox, &mediabox);
 #endif	
 	if (options->flags & FZ_STEXT_REFERENCE_IMAGES)
+	{
 		if (options->print_image_object)
 		{
-			(*options->print_image_object)(ctx, out, block, pagenum, object_index, ctm, options);
+			(*options->print_image_object)(ctx, out, block, pagenum, object_index, page_ctm, options);
 		}
 		else
 		{
