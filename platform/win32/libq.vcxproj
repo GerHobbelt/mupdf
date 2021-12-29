@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libq</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF38E14}</ProjectGuid>
+    <RootNamespace>libq</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/codegear/gtest_all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/codegear/gtest_link.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample10_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample1_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample2_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample3_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample4_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample5_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample6_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample7_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample8_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample9_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-death-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-filepath.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-port.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-printers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-test-part.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-typed-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-death-test_ex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-death-test_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-filepath_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-linked_ptr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-listener_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-message_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-options_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-param-test2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-param-test_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-port_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-printers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-test-part_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-tuple_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-typed-test2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-typed-test_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-unittest-api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_all_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_break_on_failure_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_catch_exceptions_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_color_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_env_var_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_environment_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_filter_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_help_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_list_tests_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_main_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_no_test_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_output_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_pred_impl_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_premature_exit_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_prod_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_repeat_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_shuffle_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_sole_header_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_stress_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_throw_on_failure_ex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_throw_on_failure_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_uninitialized_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_outfile1_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_outfile2_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_output_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/production.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Samples/FrameworkSample/widget.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Samples/FrameworkSample/widget_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/p/src/env.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/p/src/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q-test/src/dummy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/abi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/blocking_dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/cpu_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/cpu_osx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/cpu_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/stacktrace_android.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/stacktrace_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/stacktrace_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/stacktrace_osx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/stacktrace_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/exception_errno.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/execution_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/promise/signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/q.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/stacktrace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q/src/threadpool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/progs/benchmark/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/progs/playground/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/arguments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/backlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/bit_flags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/byte_block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/execution_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/expect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/functional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/delay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/finally.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/forward.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/make.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/promisify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/reflect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/tap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/tap_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/then.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/promise/with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/set_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/q/src/threadpool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/eq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/gt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/lt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/ne.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/promises.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/spy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-death-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-param-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-spi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-test-part.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-typed-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest_pred_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest_prod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/custom/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/custom/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/custom/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-death-test-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-filepath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-linked_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-param-util-generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-param-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-port-arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-type-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/prime_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample3-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-internal-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-param-test_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-typed-test_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/production.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Samples/FrameworkSample/widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/env.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/klv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/pp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/process.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/serializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/backend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/backends/boost.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/backends/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/backends/cppunit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/backends/doctest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/backends/gtest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/expect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/fixture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/main.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/q-test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/spy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q-test/include/q-test/stringify.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/abi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/async_termination.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/backlog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/bit_flags.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/blocking_dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/concurrency.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/concurrency_counter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/detail/lib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/detail/platform/windows.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/endian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/event_dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/exception/exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/exception/exception_errno.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/execution_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/expect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/lib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/pp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/async_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/delay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/impl/fail.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/impl/finally.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/impl/rest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/impl/tap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/impl/tap_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/impl/then.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/make.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/promisify.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/reject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/promise/with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/q.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/set_default.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/stacktrace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/static_atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/temporarily_copyable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/threadpool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/time_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/arguments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/arguments_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/convertible.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/fold.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/hierarchical_condition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/type_traits/two_fold.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/include/q/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/exec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/numeric.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/libs/q/src/detail/stacktrace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/tests/q/src/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libq/tests/qtest/src/core.hpp" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/AdvancedGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/DevGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/Documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/Primer.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/PumpManual.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/Samples.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_5_AdvancedGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_5_Documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_5_FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_5_Primer.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_5_PumpManual.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_5_XcodeGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_6_AdvancedGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_6_Documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_6_FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_6_Primer.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_6_PumpManual.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_6_Samples.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_6_XcodeGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_7_AdvancedGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_7_Documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_7_FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_7_Primer.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_7_PumpManual.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_7_Samples.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/V1_7_XcodeGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/docs/XcodeGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/scripts/common.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/scripts/fuse_gtest_files.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/scripts/gen_gtest_pred_impl.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/scripts/pump.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/scripts/release_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/scripts/upload.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/scripts/upload_gtest.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_break_on_failure_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_catch_exceptions_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_color_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_env_var_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_filter_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_help_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_list_tests_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_output_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_output_test_golden_lin.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_shuffle_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_throw_on_failure_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_uninitialized_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_outfiles_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_output_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Samples/FrameworkSample/runtests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Scripts/runtests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Scripts/versiongenerate.py" />
+    <Text Include="../../thirdparty/owemdjee/libq/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/ROADMAP.md" />
+    <Text Include="../../thirdparty/owemdjee/libq/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libq/libs/p/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/libs/q-test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/libs/q/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/progs/benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/progs/playground/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/tests/q/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libq/tests/qtest/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

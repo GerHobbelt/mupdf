@@ -18,7 +18,7 @@ let targetDir = argv[2];
 let binDir = argv[3];		// OutputDir
 let binDir2 = argv[4];		// TargetDir
 
-const mutoolExe = binDir + 'mutool.exe';
+const mutoolExe = binDir + 'mutool_ex.exe';
 const replJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/repl.js';
 const calcJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/qjscalc.js';
 const replCfile = targetDir + 'qjsrepl.c';

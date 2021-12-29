@@ -80,21 +80,30 @@ static struct {
 	{ pdfinfo_main, "info", "show information about pdf resources" },
 	{ pdfmerge_main, "merge", "merge pages from multiple pdf sources into a new pdf" },
 	{ pdfpages_main, "pages", "show information about pdf pages" },
+#if defined(MUTOOL_EX)
 	{ pdfposter_main, "poster", "split large page into many tiles" },
+#endif
 	{ pdfsign_main, "sign", "manipulate PDF digital signatures" },
 	{ pdftagged_main, "tagged", "extract Tagged PDF content" },
 #endif
 #if FZ_ENABLE_JS
+#if defined(MUTOOL_EX)
 	{ murun_main, "run", "run javascript" },
+#endif
 #endif
 #if FZ_ENABLE_PDF
 	{ pdfshow_main, "show", "show internal pdf objects" },
 #ifndef NDEBUG
+#if defined(MUTOOL_EX)
 	{ cmapdump_main, "cmapdump", "dump CMap resource as C source file" },
 #endif
 #endif
-	{ tesseract_main, "tesseract", "OCR given image or PDF" },
+#endif
+#if defined(MUTOOL_EX)
+    { tesseract_main, "tesseract", "OCR given image or PDF" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ tesseract_ambiguous_words_main, "tess_ambiguous_words", "OCR training helper utility" },
 	{ tesseract_classifier_tester_main, "tess_classifier_tester", "OCR training helper utility" },
 	{ tesseract_cn_training_main, "tess_cn_training", "OCR training helper utility" },
@@ -113,11 +122,14 @@ static struct {
 	{ tesseract_lstm_training_main, "tess_lstm_training", "OCR training helper utility" },
 
 	{ tesseract_text2image_main, "tess_text2image", "OCR training helper utility" },
+#endif
 
 	{ curl_main, "curl", "access/fetch a given URI" },
 
+#if defined(MUTOOL_EX)
 	{ mujs_main, "js", "basic REPL for MuJS JavaScript interpreter" },
 	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
+#endif
 
 	{ pdfmetadump_main, "metadump", "multitool shows information about pdf in JSON format" },
 
@@ -129,6 +141,7 @@ static struct {
 	{ qiqqa_fingerprint1_main, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
 
 	{ sqlite_main, "sqlite", "SQLite3 tool" },
+#if defined(MUTOOL_EX)
 	{ sqlite_dbhash_main, "sqlite_dbhash", "SQLite3 dbhash tool" },
 	{ sqlite_dbtotxt_main, "sqlite_dbtotxt", "SQLite3 dbtotxt tool" },
 	{ sqlite_diff_main, "sqlite_diff", "SQLite3 diff tool" },
@@ -160,9 +173,13 @@ static struct {
 	{ sqlite_threadtest4_main, "sqlite_threadtest4", "SQLite3 threadtest4 tool" },
 	{ sqlite_threadtest5_main, "sqlite_threadtest5", "SQLite3 threadtest5 tool" },
 	{ sqlite_wordcount_main, "sqlite_wordcount", "SQLite3 wordcount test tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	//{ jpeginfo_main, "jpeginfo", "jpeginfo tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ jpegturbo_jpegtran_main, "jpegtran", "jpegtran tool" },
 	{ jpegturbo_rdjpegcom_main, "rdjpegcom", "rdjpegcom tool" },
 	{ jpegturbo_wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
@@ -188,20 +205,28 @@ static struct {
 	{ pngidat_main, "pngidat", "pngidat tool" },
 	{ pngiend_main, "pngiend", "pngiend tool" },
 	{ pngihdr_main, "pngihdr", "pngihdr tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ charter_svg_main, "charter_svg", "charter_svg tool" },
 	{ charter_tex_main, "charter_tex", "charter_tex tool" },
 	{ tiny_expr_repl_main, "tiny_expr_repl", "tiny_expr_repl tool" },
 
 	{ smartypants_main, "smartypants", "smartypants tool" },
 	{ upskirt_main, "upskirt", "upskirt tool" },
+#endif
 
-	{ qjscompress_main, "qjscompress", "qjscompress tool" },
+#if defined(MUTOOL_EX)
 	{ qjs_main, "qjs", "qjs (QuickJS) tool" },
 	{ qjsc_main, "qjsc", "qjsc (QuickJS Compiler) tool" },
+#endif
+#if defined(MUTOOL_EX)
+	{ qjscompress_main, "qjscompress", "qjscompress tool" },
 	{ qjs_unicode_gen_main, "qjs_unicode_gen", "qjs_unicode_gen tool" },
 	{ qjs_test262_main, "qjs_test262", "qjs_test262 conformance test tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ brotli_main, "brotli", "brotli tool" },
 
 	{ jpegXL_decode_oneshot_main, "jxl_decode_oneshot", "jxl_decode_oneshot tool" },
@@ -227,6 +252,7 @@ static struct {
 	{ jpegXL_render_hlg_main, "jpegXL_render_hlg", "jpegXL_render_hlg tool" },
 	{ jpegXL_texture_to_cube_main, "jpegXL_texture_to_cube", "jpegXL_texture_to_cube tool" },
 	{ jpegXL_add_noise_main, "jpegXL_add_noise", "jpegXL_add_noise tool" },
+#endif
 
 	{ report_version, "version", "report version of this build / tools" },
 };
