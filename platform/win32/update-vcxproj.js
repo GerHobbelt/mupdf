@@ -44,6 +44,8 @@ if (process.argv[3]) {
 
 console.error({projectName});
 
+const removeLinkTimeCodeGeneration = true;
+
 src = src
 //    <ProjectName>libcurl</ProjectName>
 //    <RootNamespace>libcurl</RootNamespace>
@@ -300,6 +302,11 @@ src = src
 
 	return `<ItemDefinitionGroup${p1}>${p2}</ItemDefinitionGroup>`;
 });
+
+if (removeLinkTimeCodeGeneration) {
+	src = src
+	.replace(/<LinkTimeCodeGeneration>[^]*?<\/LinkTimeCodeGeneration>/g, '')
+}
 
 // and remove any dandruff from a previous run:
 src = src
