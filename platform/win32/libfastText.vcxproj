@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libclipp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9e7b3a}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libfastText</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF96D5C6}</ProjectGuid>
+    <RootNamespace>libfastText</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTTEXT;FASTTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/crawl/dedup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/crawl/filter_utf8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/scripts/kbcompletion/eval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/args.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/autotune.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/densematrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/fasttext.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/loss.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/meter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/productquantizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/quantmatrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastText/src/vector.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/autotune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/densematrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/fasttext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/loss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/meter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/productquantizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/quantmatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/real.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastText/src/vector.h" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/bdwn.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/doc.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/nav_g.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/open.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/search/close.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/search/mag_sel.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/search/search_l.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/search/search_m.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/search/search_r.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/sync_off.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/sync_on.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/docs/en/html/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/authors/armand_joulin.jpg" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/authors/christian_puhrsch.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/authors/piotr_bojanowski.jpg" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/authors/tomas_mikolov.jpg" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/blog/2016-08-18-blog-post-img1.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/blog/2016-08-18-blog-post-img2.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/blog/2017-05-02-blog-post-img1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/blog/2017-05-02-blog-post-img2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/blog/2017-10-02-blog-post-img1.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/cbo_vs_skipgram.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-icon-api.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-icon-bg-web.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-icon-color-square.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-icon-color-web.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-icon-faq.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-icon-tutorial.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-icon-white-web.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-logo-color-web.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/fasttext-logo-white-web.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/logo-color.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/model-black.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/model-blue.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/model-red.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/ogimage.png" />
+    <Image Include="../../thirdparty/owemdjee/fastText/website/static/img/oss_logo.png" />
+    <Text Include="../../thirdparty/owemdjee/fastText/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fastText/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/alignment/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/alignment/align.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/alignment/eval.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/alignment/example.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/alignment/unsup_align.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/alignment/unsup_multialign.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/alignment/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/classification-example.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/classification-results.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/crawl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/crawl/download_crawl.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/crawl/filter_dedup.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/crawl/process_wet_file.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/aligned-vectors.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/api.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/autotune.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/cheatsheet.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/crawl-vectors.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/dataset.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/english-vectors.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/faqs.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/language-identification.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/options.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/pretrained-vectors.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/python-module.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/references.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/supervised-models.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/supervised-tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/support.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/unsupervised-tutorials.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/docs/webassembly-module.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/download_model.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/eval.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/get-wikimedia.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/benchmarks/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/benchmarks/get_word_vector.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/doc/examples/FastTextEmbeddingBag.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/doc/examples/bin_to_vec.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/doc/examples/compute_accuracy.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/doc/examples/get_vocab.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/doc/examples/train_supervised.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/doc/examples/train_unsupervised.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/fasttext_module/fasttext/FastText.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/fasttext_module/fasttext/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/fasttext_module/fasttext/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/fasttext_module/fasttext/tests/test_configurations.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/fasttext_module/fasttext/tests/test_script.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/fasttext_module/fasttext/util/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/python/fasttext_module/fasttext/util/util.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/quantization-example.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/reduce_model.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/runtests.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/scripts/kbcompletion/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/scripts/kbcompletion/data.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/scripts/kbcompletion/fb15k.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/scripts/kbcompletion/fb15k237.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/scripts/kbcompletion/svo.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/scripts/kbcompletion/wn18.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/scripts/quantization/quantization-results.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/fastText/tests/fetch_test_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/fastText/webassembly/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/website/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/website/blog/2016-08-18-blog-post.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/website/blog/2017-05-02-blog-post.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/website/blog/2017-10-02-blog-post.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/website/blog/2019-06-25-blog-post.md" />
+    <Text Include="../../thirdparty/owemdjee/fastText/website/package.json" />
+    <Text Include="../../thirdparty/owemdjee/fastText/website/sidebars.json" />
+    <Text Include="../../thirdparty/owemdjee/fastText/word-vector-example.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
