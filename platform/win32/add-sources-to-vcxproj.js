@@ -101,66 +101,10 @@ if (!filterSrc.match(/<\?xml/)) {
 if (!filterSrc.match(/<\/Project>/)) {
     filterSrc += `
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03fd328}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{42f0fc98-34f6-4567-b3cf-de13e74a89ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files">
-      <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
 </Project>
     `;
 }
 
-if (!filterSrc.match(/<Filter Include="Source Files">/)) {
-    filterSrc = filterSrc.replace(/<\/Project>/, `
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03fd328}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{42f0fc98-34f6-4567-b3cf-de13e74a89ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files">
-      <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-</Project>
-    `);
-}
-
-
-/*
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03fd328}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{42f0fc98-34f6-4567-b3cf-de13e74a89ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files">
-      <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\scripts\libclipp\monolithic_main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\clipp\examples\monolithic_examples.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-</Project>
-*/
 
 const specialFilenames = [
   "README", 
@@ -223,6 +167,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.cxx':
     case '.cpp':
     case '.asm':
+        filterDirs.add('Source Files');
         base = path.dirname(f);
         if (base === '.') {
           base = '';
@@ -246,6 +191,15 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.l':
     case '.md':
     case '.rst':
+    case '.gcc':
+    case '.unx':
+    case '.in':
+    case '.ac':
+    case '.am':
+    case '.bkl':
+    case '.vc':
+    case '.msc':
+        filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {
           base = '';
@@ -262,6 +216,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.hxx':
     case '.hpp':
     case '.icc':
+        filterDirs.add('Header Files');
         base = path.dirname(f);
         if (base === '.') {
           base = '';
@@ -278,10 +233,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.png':
     case '.xpm':
     case '.jpg':
+    case '.gif':
     case '.xrc':
     case '.ttf':
     case '.otf':
     case '.ttc':
+    case '.mpg':
+    case '.pov':
+        filterDirs.add('Resource Files');
         base = path.dirname(f);
         if (base === '.') {
           base = '';
@@ -296,6 +255,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         if (!isSpecialMiscFile(f))
           return false;
 
+        filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {
           base = '';
@@ -312,7 +272,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   let extraFilters = [];
   let m = filterSrc;            // scratchpad: add new slots as we create them to prevent duplicate new entries
   let fcnt = 0;
-  for (let item of filterDirs.keys()) {
+  for (let item of Array.from(filterDirs.keys()).sort().values()) {
     item = item.replace(/\//g, '\\');
     do {
       if (!m.includes(`<Filter Include="${item}">`)) {
@@ -464,6 +424,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.bmp':
     case '.png':
     case '.jpg':
+    case '.gif':
         base = path.dirname(item);
         if (base === '.') {
           base = '';
@@ -566,6 +527,33 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
         slot = `
     <MASM Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
+
+    case '.mpg':
+    case '.pov':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Resource Files/' + base;
+        }
+        else {
+            base = 'Resource Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <None Include="${f}">
+      <Filter>${base}</Filter>
+    </None>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <None Include="${f}" />
         `;
         filesToAddToProj.push(slot);
         break;

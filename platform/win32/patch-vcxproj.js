@@ -30,9 +30,11 @@ if (!fs.existsSync(filepath)) {
 }
 let src = fs.readFileSync(filepath, 'utf8');
 
+let mode = process.argv[3] || "create";
+
 let projectName = path.basename(filepath, '.vcxproj');
 
-console.error({projectName});
+console.error({projectName, mode});
 
 //     <ClCompile Include="..\..\thirdparty\curl\src\tool_operhlp.c" />
 //     <ClInclude Include="..\..\thirdparty\curl\include\curl\easy.h" />
@@ -40,45 +42,49 @@ console.error({projectName});
 //     <ResourceCompile Include="..\..\thirdparty\curl\lib\libcurl.rc" />
 src = src
 .replace(/<[A-Za-z]+ Include="[^"]*" \/>/g, '')
-//    <ProjectName>libcurl</ProjectName>
-//    <RootNamespace>libcurl</RootNamespace>
-.replace(/<ProjectName>[^<]+<\/ProjectName>/g, (m) => `<ProjectName>${projectName}</ProjectName>`)
-.replace(/<RootNamespace>[^<]+<\/RootNamespace>/g, (m) => `<RootNamespace>${projectName}</RootNamespace>`)
-//      <AdditionalDependencies>crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-.replace(/<AdditionalDependencies>[^<]+<\/AdditionalDependencies>/g, "<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>")
-//      <TypeLibraryName>.\Release/libcurl.tlb</TypeLibraryName>
-.replace(/<TypeLibraryName>[^<]+<\/TypeLibraryName>/g, "<TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>")
-//      <AdditionalIncludeDirectories>.;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\curl\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-.replace(/<AdditionalIncludeDirectories>[^<]+<\/AdditionalIncludeDirectories>/g, "<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>")
-//       <PreprocessorDefinitions>BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-.replace(/<PreprocessorDefinitions>([^<]+)<\/PreprocessorDefinitions>/g, (m, p1) => {
-	p1 = p1
-	.replace(/[A-Z]+_DISABLE_LDAP;/g, '')	
-	.replace(/_USRDLL;/g, '')	
-	.replace(/BUILDING_[A-Z_-]+;/g, '')	
-	.replace(/[A-Z_-]+_STATICLIB;/g, '')	
-	.replace(/[A-Z_-]*MONOLITHIC;/g, '')	
-	.replace(/[A-Z_-]+-NDEBUG;/g, 'NDEBUG;')	
-	.replace(/[A-Z_-]+-_DEBUG;/g, '_DEBUG;')	
-	.replace(/[A-Z_-]+-_CRT_/g, '_CRT_')	
-	.replace(/USE_SCHANNEL;/g, '')	
-	.replace(/USE_WINDOWS_SSPI;/g, '')	
 
-	let pnu = projectName.toUpperCase().replace(/-/g, '_');
-	p1 = `BUILD_MONOLITHIC;BUILDING_${pnu};${ pnu.replace(/LIB/, '')}_STATICLIB;${p1}`;
-	return `<PreprocessorDefinitions>${p1}</PreprocessorDefinitions>`;
-})
-//    <ProjectGuid>{87EE9DA4-DE1E-4448-8324-183C98DCA588}</ProjectGuid>
-.replace(/<ProjectGuid>([^<]+)<\/ProjectGuid>/g, (m, p1) => {
-	let r;
-	// make sure we have a usable random hexcode to use as part of our new UUID:
-	do {
-	  r = Math.random().toString(16).toUpperCase().replace(/0\./, '');
-	} while (r.length < 6);
-	// paste it over the end of the existing one:
-	p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
-	return `<ProjectGuid>${p1}</ProjectGuid>`;
-})
+if (mode === "create") {
+	src = src
+	//    <ProjectName>libcurl</ProjectName>
+	//    <RootNamespace>libcurl</RootNamespace>
+	.replace(/<ProjectName>[^<]+<\/ProjectName>/g, (m) => `<ProjectName>${projectName}</ProjectName>`)
+	.replace(/<RootNamespace>[^<]+<\/RootNamespace>/g, (m) => `<RootNamespace>${projectName}</RootNamespace>`)
+	//      <AdditionalDependencies>crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+	.replace(/<AdditionalDependencies>[^<]+<\/AdditionalDependencies>/g, "<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>")
+	//      <TypeLibraryName>.\Release/libcurl.tlb</TypeLibraryName>
+	.replace(/<TypeLibraryName>[^<]+<\/TypeLibraryName>/g, "<TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>")
+	//      <AdditionalIncludeDirectories>.;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\curl\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	.replace(/<AdditionalIncludeDirectories>[^<]+<\/AdditionalIncludeDirectories>/g, "<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>")
+	//       <PreprocessorDefinitions>BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+	.replace(/<PreprocessorDefinitions>([^<]+)<\/PreprocessorDefinitions>/g, (m, p1) => {
+		p1 = p1
+		.replace(/[A-Z]+_DISABLE_LDAP;/g, '')	
+		.replace(/_USRDLL;/g, '')	
+		.replace(/BUILDING_[A-Z_-]+;/g, '')	
+		.replace(/[A-Z_-]+_STATICLIB;/g, '')	
+		.replace(/[A-Z_-]*MONOLITHIC;/g, '')	
+		.replace(/[A-Z_-]+-NDEBUG;/g, 'NDEBUG;')	
+		.replace(/[A-Z_-]+-_DEBUG;/g, '_DEBUG;')	
+		.replace(/[A-Z_-]+-_CRT_/g, '_CRT_')	
+		.replace(/USE_SCHANNEL;/g, '')	
+		.replace(/USE_WINDOWS_SSPI;/g, '')	
+
+		let pnu = projectName.toUpperCase().replace(/-/g, '_');
+		p1 = `BUILD_MONOLITHIC;BUILDING_${pnu};${ pnu.replace(/LIB/, '')}_STATICLIB;${p1}`;
+		return `<PreprocessorDefinitions>${p1}</PreprocessorDefinitions>`;
+	})
+	//    <ProjectGuid>{87EE9DA4-DE1E-4448-8324-183C98DCA588}</ProjectGuid>
+	.replace(/<ProjectGuid>([^<]+)<\/ProjectGuid>/g, (m, p1) => {
+		let r;
+		// make sure we have a usable random hexcode to use as part of our new UUID:
+		do {
+		  r = Math.random().toString(16).toUpperCase().replace(/0\./, '');
+		} while (r.length < 6);
+		// paste it over the end of the existing one:
+		p1 = p1.substr(0, p1.length - 7) + r.substr(0, 6) + '}';
+		return `<ProjectGuid>${p1}</ProjectGuid>`;
+	})
+}
 
 const sections_to_remove = [
 	"ClCompile", "Resourcecompile", "ClInclude", "MASM", "Text", "Image", "Font", "None"
