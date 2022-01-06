@@ -1616,7 +1616,7 @@ class Document:
                 self.isEncrypted = True
                 self.is_encrypted = True
             else: # we won't init until doc is decrypted
-                self.initData()
+                self.init_doc()
         #jlib.log('__init__() returning. {=mupdf.mpdf_xref_len(pdf)}')
 
     def __len__(self) -> int:
@@ -1689,7 +1689,7 @@ class Document:
             mupdf.mpdf_delete_object(pdf, xref) # delete outline item
         xrefs.append(olroot_xref)
         val = xrefs
-        self.initData()
+        self.init_doc()
         return val
 
     def _do_links(self, doc2, from_page=-1, to_page=-1, start_at=-1):
@@ -2428,7 +2428,7 @@ class Document:
         if val:  # the doc is decrypted successfully and we init the outline
             self.is_encrypted = False
             self.isEncrypted = False
-            self.initData()
+            self.init_doc()
             self.thisown = True
         return val
 
@@ -3714,28 +3714,6 @@ class Document:
 
     insertPDF = insert_pdf
 
-    def initData(self):
-        if self.isEncrypted:
-            raise ValueError("cannot initData - document still encrypted")
-        self._outline = self._loadOutline()
-        self.metadata = dict(
-                [(k, self._getMetadata(v))
-                    for k,v in {
-                        'format':'format',
-                        'title':'info:Title',
-                        'author':'info:Author',
-                        'subject':'info:Subject',
-                        'keywords':'info:Keywords',
-                        'creator':'info:Creator',
-                        'producer':'info:Producer',
-                        'creationDate':'info:CreationDate',
-                        'modDate':'info:ModDate',
-                        'trapped':'info:Trapped',
-                        }.items()
-                    ]
-                )
-        self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
-
     @property
     def is_closed(self):
         return self.isClosed
@@ -4080,7 +4058,7 @@ class Document:
             raise ValueError("document closed")
         return _fitz.Document_lastLocation(self)
 
-    def loadPage(self, page_id):
+    def load_page(self, page_id):
         """Load a page.
 
         'page_id' is either a 0-based page number or a tuple (chapter, pno),
@@ -4114,6 +4092,8 @@ class Document:
         val.number = page_id
         return val
 
+    loadPage = load_page
+
     def location_from_page_number(self, pno):
         """Convert pno to (chapter, page)."""
         if self.isClosed:
@@ -4137,6 +4117,8 @@ class Document:
         loc = mupdf.Location(*loc)
         mark = mupdf.make_bookmark2( self.this.m_internal, loc.internal())
         return mark
+
+    makeBookmark = make_bookmark
 
     def move_page(self, pno: int, to: int =-1):
         """Move a page within a PDF document.
@@ -4204,6 +4186,8 @@ class Document:
         ret = mupdf.mfz_needs_password( document)
         #jlib.log('{=self ret}')
         return ret
+
+    needsPass = needs_pass
 
     def new_page_(
             self,
