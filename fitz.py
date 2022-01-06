@@ -478,6 +478,12 @@ class Annot:
         res['stream'] = stream
         return res
 
+    def get_text(*args, **kwargs):
+        return uils.get_text(*args, **kwargs)
+
+    def get_textbox(*args, **kwargs):
+        return utils.get_textbox(*args, **kwargs)
+
     def get_textpage(self, clip=None, flags=0):
         """Make annotation TextPage."""
         CheckParent(self)
@@ -487,6 +493,10 @@ class Annot:
         annot = self.this
         stextpage = mupdf.mpdf_new_stext_page_from_annot(annot, options)
         return TextPage(stextpage)
+
+    getText = get_text
+
+    getTextbox = get_textbox
 
     @property
     def has_popup(self):
@@ -612,6 +622,8 @@ class Annot:
             opy = ca.to_real()
         return opy
 
+    # PyMuPDF doesn't seem to have this .parent member, but removing it breaks
+    # 11 tests...?
     @property
     def parent(self):
         return Page(self.this.annot_page())
@@ -1384,12 +1396,17 @@ class DisplayList:
         val.thisown = True
         return val
 
-    def getTextPage(self, flags=3):
-        #val = _fitz.DisplayList_getTextPage(self, flags)
-        assert 0, '_fitz.DisplayList_getTextPage not found'
-        val.thisown = True
+    getPixmap = get_pixmap
 
+    def get_textpage(self, flags=3):
+        #val = _fitz.DisplayList_getTextPage(self, flags)
+        stext_options = mupdf.StextOptions()
+        stext_options.flags = flags
+        val = mupdf.mfz_new_stext_page_from_display_list( this, stext_options)
+        val.thisown = True
         return val
+
+    getTextPage = get_textpage
 
     @property
     def rect(self):
@@ -1682,13 +1699,13 @@ class Document:
         assert 0, 'Unnecessary'
         return _fitz.Document__dropOutline(self, ol)
 
-    def _embeddedFileAdd(self, name, buffer_, filename=None, ufilename=None, desc=None):
-        assert 0, 'deprecated'
-        return _fitz.Document__embeddedFileAdd(self, name, buffer_, filename, ufilename, desc)
+    #def _embeddedFileAdd(self, name, buffer_, filename=None, ufilename=None, desc=None):
+    #    assert 0, 'deprecated'
+    #    return _fitz.Document__embeddedFileAdd(self, name, buffer_, filename, ufilename, desc)
 
-    def _embeddedFileDel(self, idx):
-        assert 0, 'deprecated'
-        return _fitz.Document__embeddedFileDel(self, idx)
+    #def _embeddedFileDel(self, idx):
+    #    assert 0, 'deprecated'
+    #    return _fitz.Document__embeddedFileDel(self, idx)
 
     def _embeddedFileGet(self, idx):
         #return _fitz.Document__embeddedFileGet(self, idx)
@@ -1719,20 +1736,20 @@ class Document:
             raise ValueError(msg)
         return idx
 
-    def _embeddedFileInfo(self, idx, infodict):
-        assert 0, 'no Document__embeddedFileInfo'
-        return _fitz.Document__embeddedFileInfo(self, idx, infodict)
+    #def _embeddedFileInfo(self, idx, infodict):
+    #    assert 0, 'no Document__embeddedFileInfo'
+    #    return _fitz.Document__embeddedFileInfo(self, idx, infodict)
 
-    def _embeddedFileNames(self, namelist):
-        """Get list of embedded file names."""
-        assert 0, 'no Document__embeddedFileNames'
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document__embeddedFileNames(self, namelist)
+    #def _embeddedFileNames(self, namelist):
+    #    """Get list of embedded file names."""
+    #    assert 0, 'no Document__embeddedFileNames'
+    #    if self.isClosed:
+    #        raise ValueError("document closed")
+    #    return _fitz.Document__embeddedFileNames(self, namelist)
 
-    def _embeddedFileUpd(self, idx, buffer_=None, filename=None, ufilename=None, desc=None):
-        assert 0, 'no Document__embeddedFileUpd'
-        return _fitz.Document__embeddedFileUpd(self, idx, buffer_, filename, ufilename, desc)
+    #def _embeddedFileUpd(self, idx, buffer_=None, filename=None, ufilename=None, desc=None):
+    #    assert 0, 'no Document__embeddedFileUpd'
+    #    return _fitz.Document__embeddedFileUpd(self, idx, buffer_, filename, ufilename, desc)
 
     def _embfile_del(self, idx):
         #return _fitz.Document__embfile_del(self, idx)
@@ -2170,6 +2187,18 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         return _fitz.Document__hasXrefStream(self)
+
+    def _insert_font(self, fontfile=None, fontbuffer=None):
+        '''
+        Utility: insert font from file or binary.
+        '''
+        pdf = self._pdf_document()
+
+        ASSERT_PDF(pdf);
+        if not fontfile and not fontbuffer:
+            THROWMSG("need one of fontfile, fontbuffer");
+        value = JM_insert_font(pdf, None, fontfile, fontbuffer, 0, 0, 0, 0, 0, -1)
+        return value
 
     def _loadOutline(self):
         """Load first outline."""
@@ -5634,6 +5663,7 @@ class linkDest(object):
                 self.named = ""
                 self.kind = LINK_GOTO
                 ftab = self.uri[1:].split(",")
+                jlib.log('{=self.uri ftab}')
                 if len(ftab) == 3:
                     self.page = int(ftab[0]) - 1
                     self.lt = Point(float(ftab[1]), float(ftab[2]))
@@ -16344,52 +16374,6 @@ def dir_str(x):
     for i in dir(x):
         ret += f'    {i}\n'
     return ret
-
-
-def getLinkDict(ln) -> dict:
-    nl = {"kind": ln.dest.kind, "xref": 0}
-    try:
-        nl["from"] = ln.rect
-    except:
-        pass
-    pnt = Point(0, 0)
-    if ln.dest.flags & LINK_FLAG_L_VALID:
-        pnt.x = ln.dest.lt.x
-    if ln.dest.flags & LINK_FLAG_T_VALID:
-        pnt.y = ln.dest.lt.y
-
-    if ln.dest.kind == LINK_URI:
-        nl["uri"] = ln.dest.uri
-
-    elif ln.dest.kind == LINK_GOTO:
-        nl["page"] = ln.dest.page
-        nl["to"] = pnt
-        if ln.dest.flags & LINK_FLAG_R_IS_ZOOM:
-            nl["zoom"] = ln.dest.rb.x
-        else:
-            nl["zoom"] = 0.0
-
-    elif ln.dest.kind == LINK_GOTOR:
-        nl["file"] = ln.dest.fileSpec.replace("\\", "/")
-        nl["page"] = ln.dest.page
-        if ln.dest.page < 0:
-            nl["to"] = ln.dest.dest
-        else:
-            nl["to"] = pnt
-            if ln.dest.flags & LINK_FLAG_R_IS_ZOOM:
-                nl["zoom"] = ln.dest.rb.x
-            else:
-                nl["zoom"] = 0.0
-
-    elif ln.dest.kind == LINK_LAUNCH:
-        nl["file"] = ln.dest.fileSpec.replace("\\", "/")
-
-    elif ln.dest.kind == LINK_NAMED:
-        nl["name"] = ln.dest.named
-
-    else:
-        nl["page"] = ln.dest.page
-    return nl
 
 
 def getTextlength(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
