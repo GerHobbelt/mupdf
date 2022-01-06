@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// tokenzr.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/tokenzr.cpp"
-
-
-//------------------------------------------------------------------------
 // toolbar.cpp
 
 #if defined(__WXGTK20__)
@@ -360,4 +354,12 @@
 
 #if !defined(__WINDOWS__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/unix/utilsunx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// utilswin.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/utilswin.cpp"
 #endif

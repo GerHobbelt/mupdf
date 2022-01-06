@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// xh_odcombo.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_odcombo.cpp"
-
-
-//------------------------------------------------------------------------
 // xh_panel.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_panel.cpp"
@@ -229,3 +223,9 @@
 // xtixml.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/xtixml.cpp"
+
+
+//------------------------------------------------------------------------
+// zipstrm.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/zipstrm.cpp"

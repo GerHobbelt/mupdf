@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// xh_bannerwindow.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bannerwindow.cpp"
-
-
-//------------------------------------------------------------------------
 // xh_bmp.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bmp.cpp"
@@ -227,3 +221,9 @@
 // xh_notbk.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_notbk.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_odcombo.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_odcombo.cpp"

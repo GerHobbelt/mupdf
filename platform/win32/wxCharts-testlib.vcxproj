@@ -19,34 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>wxCharts-sample-radar</ProjectName>
-    <ProjectGuid>{2FF9FCDD-06A9-4469-B025-B62229F42F80}</ProjectGuid>
-    <RootNamespace>wxCharts-sample-radar</RootNamespace>
+    <ProjectName>wxCharts-testlib</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF9A760E}</ProjectGuid>
+    <RootNamespace>wxCharts</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -124,7 +124,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxCharts/include;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS_SAMPLE;WXCHARTS_USINGDLL;WXUSINGDLL;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS;WXCHARTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -150,7 +150,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxCharts/include;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS_SAMPLE;WXCHARTS_USINGDLL;WXUSINGDLL;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS;WXCHARTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -179,7 +179,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxCharts/include;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS_SAMPLE;WXCHARTS_USINGDLL;WXUSINGDLL;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS;WXCHARTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
@@ -205,7 +205,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxCharts/include;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/Catch2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS_SAMPLE;WXCHARTS_USINGDLL;WXUSINGDLL;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXCHARTS;WXCHARTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -225,8 +225,45 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/samples/radar/src/WxRadarApp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/samples/radar/src/WxRadarFrame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/elementcanvaswindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/testsuite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartaxisoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartbackgroundoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartfontoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartsbrushoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartscategoricaldatatests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartsdatasetidtests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartsgridoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartslabeloptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartspenoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartsthemefactorytests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartsthemeidtests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxchartsthemetests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxcolumnchartoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/tests/wxpiechartoptionstests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxareachartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxbarchartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxboxplotpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxbubblechartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxcandlestickchartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartscategoricalaxispanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartsdefaultthemepanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartsgridpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartslabelpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartslabelseriespanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartsnumericalaxispanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartsrectanglepanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartstestsapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartstestsframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxchartstestsmenubar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxcolumnchartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxdoughnutchartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxhistogrampanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxlinechartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxpiechartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxpolarareachartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxstackedbarchartpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxCharts/tests/src/wxstackedcolumnchartpanel.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxCharts/include/wx/charts/wxareachart.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxCharts/include/wx/charts/wxareachartctrl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxCharts/include/wx/charts/wxareachartdatasetoptions.h" />
@@ -422,11 +459,14 @@
     <Text Include="../../thirdparty/owemdjee/wxCharts/README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="wxCharts_DLL.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff9a7101}</Project>
+    <ProjectReference Include="MuPDFLib.vcxproj">
+      <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
     </ProjectReference>
-    <ProjectReference Include="wxWidgets_DLL.vcxproj">
-      <Project>{a41f5ea6-606b-4ee3-835c-a16b739de1c4}</Project>
+    <ProjectReference Include="wxCharts.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9a764f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxWidgets.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffb10a63}</Project>
     </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets">

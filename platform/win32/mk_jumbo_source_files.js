@@ -11,6 +11,7 @@ let path = require('path');
 let glob = require('@gerhobbelt/glob');
 
 let DEBUG = 0;
+
 const globDefaultOptions = {
   debug: (DEBUG > 4),
   matchBase: true, // true: pattern starting with / matches the basedir, while non-/-prefixed patterns will match in any subdirectory --> act like **/<pattern>
@@ -198,7 +199,7 @@ done
 
   let r = a.filter((rec) => {
     let x1 = /^(?:aui|html|propgrid|xrc|common|generic|msw|motif|gtk|gtk1|x11|qt|dfb|osx|univ|unix)\//.test(rec.source);
-    let x2 = /(?:dummy|strconv|graphicsd2d|notifmsgrt|mediactrl_qt|xh_spin|xh_slidr|choice|(?:webview[a-z0-9_]*))\.cpp/.test(rec.source);
+    let x2 = /(?:dummy|regiong|strconv|graphicsd2d|notifmsgrt|mediactrl_qt|xh_spin|xh_slidr|choice|(?:webview[a-z0-9_]*))\.cpp/.test(rec.source);
     return x1 && !x2;
   });
 

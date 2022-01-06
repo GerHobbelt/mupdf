@@ -8,18 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// stackwalk.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/stackwalk.cpp"
-#endif
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/stackwalk.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // statbar.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/statbar.cpp"
@@ -351,3 +339,9 @@
 // tabartmsw.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/aui/tabartmsw.cpp"
+
+
+//------------------------------------------------------------------------
+// tabg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/tabg.cpp"

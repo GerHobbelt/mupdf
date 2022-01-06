@@ -8,18 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// scrolwin.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/scrolwin.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/scrolwin.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // scrthumb.cpp
 
 #if !defined(__WXMSW__)
@@ -381,3 +369,15 @@
 // sstream.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/sstream.cpp"
+
+
+//------------------------------------------------------------------------
+// stackwalk.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/stackwalk.cpp"
+#endif
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/stackwalk.cpp"
+#endif

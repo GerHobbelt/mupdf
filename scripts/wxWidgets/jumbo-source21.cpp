@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// zipstrm.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/zipstrm.cpp"
-
-
-//------------------------------------------------------------------------
 // zstream.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/zstream.cpp"

@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// utilswin.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/utilswin.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // utilsx.cpp
 
 #if defined(__WXX11__)
@@ -283,3 +275,9 @@
 // xh_auitoolb.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_auitoolb.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_bannerwindow.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bannerwindow.cpp"

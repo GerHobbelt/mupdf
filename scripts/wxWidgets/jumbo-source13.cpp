@@ -162,12 +162,6 @@
 
 
 //------------------------------------------------------------------------
-// regiong.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/regiong.cpp"
-
-
-//------------------------------------------------------------------------
 // registry.cpp
 
 #if defined(__WXMSW__)
@@ -353,3 +347,15 @@
 // scrolbarcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/scrolbarcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// scrolwin.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/scrolwin.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/scrolwin.cpp"
+#endif

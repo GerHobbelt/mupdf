@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// tabg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/tabg.cpp"
-
-
-//------------------------------------------------------------------------
 // tabmdi.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/aui/tabmdi.cpp"
@@ -357,3 +351,9 @@
 // tipwin.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/tipwin.cpp"
+
+
+//------------------------------------------------------------------------
+// tokenzr.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/tokenzr.cpp"
