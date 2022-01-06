@@ -2094,13 +2094,6 @@ class Document:
             JM_get_page_labels(rc, nums)
         return rc
 
-    def _getCharWidths(self, xref, bfname, ext, ordering, limit, idx=0):
-        """Return list of glyphs and glyph widths of a font."""
-        assert 0, 'no Document__getCharWidths'
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document__getCharWidths(self, xref, bfname, ext, ordering, limit, idx)
-
     def _getMetadata(self, key):
         """Get metadata."""
         if self.isClosed:
@@ -2171,22 +2164,6 @@ class Document:
                 hex_ = binascii.hexlify(text)
                 idlist.append(hex_)
         return idlist
-
-    @property
-    def _hasXrefOldStyle(self):
-        """Check if xref table is old style."""
-        assert 0, 'no Document__hasXrefOldStyle'
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document__hasXrefOldStyle(self)
-
-    @property
-    def _hasXrefStream(self):
-        """Check if xref table is a stream."""
-        assert 0, 'no Document__hasXrefStream'
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document__hasXrefStream(self)
 
     def _insert_font(self, fontfile=None, fontbuffer=None):
         '''
@@ -2333,12 +2310,6 @@ class Document:
         text = self.xref_object(xref, compressed=True)
         text = text.replace("/Nums[]", "/Nums[%s]" % labels)
         self.update_object(xref, text)
-
-    def _setMetadata(self, text):
-        """Set old style metadata."""
-        if self.isClosed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document__setMetadata(self, text)
 
     def _update_toc_item(self, xref, action=None, title=None, flags=0, collapse=None, color=None):
         return _fitz.Document__update_toc_item(self, xref, action, title, flags, collapse, color)
@@ -4961,10 +4932,8 @@ class Document:
 
     getOCGs = get_ocgs
 
-    addOCG = add_ocg
-
     outline = property(lambda self: self._outline)
-    _getPageXref = page_xref
+
     pageXref = page_xref
 
     getPageFontList = get_page_fonts
