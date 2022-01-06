@@ -1650,7 +1650,7 @@ class Document:
 
     def _delete_page(self, pno):
         #return _fitz.Document__delete_page(self, pno)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         mupdf.mpdf_delete_page( pdf, pno)
         if pdf.m_internal.rev_page_map:
             mupdf.mpdf_drop_page_tree( pdf)
@@ -1753,7 +1753,7 @@ class Document:
 
     def _embfile_del(self, idx):
         #return _fitz.Document__embfile_del(self, idx)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         names = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer(pdf),
                 PDF_NAME('Root'),
@@ -1766,7 +1766,7 @@ class Document:
 
     def _embfile_info(self, idx, infodict):
         #return _fitz.Document__embfile_info(self, idx, infodict)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         xref = 0
         ci_xref=0
 
@@ -1834,7 +1834,7 @@ class Document:
 
     def _embfile_upd(self, idx, buffer_=None, filename=None, ufilename=None, desc=None):
         #return _fitz.Document__embfile_upd(self, idx, buffer, filename, ufilename, desc)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         #fz_buffer *res = NULL;
         #fz_var(res);
         xref = 0
@@ -1876,7 +1876,7 @@ class Document:
         #return _fitz.Document__embeddedFileGet(self, idx)
         #fz_document *doc = (fz_document *) self;
         #PyObject *cont = NULL;
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         #fz_buffer *buf = NULL;
         #fz_var(buf);
         #fz_try(gctx) {
@@ -1897,7 +1897,7 @@ class Document:
     def _embfile_add(self, name, buffer_, filename=None, ufilename=None, desc=None):
         #return _fitz.Document__embfile_add(self, name, buffer, filename, ufilename, desc)
         doc = self.this
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         data = JM_BufferFromBytes(buffer_)
         if not data.m_internal:
@@ -1937,7 +1937,7 @@ class Document:
 
         #return _fitz.Document__embfile_names(self, namelist)
         doc = self.this
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         names = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer(pdf),
@@ -2030,7 +2030,7 @@ class Document:
             self._page_refs[pid] = None
 
     def _get_char_widths(self, xref: int, bfname: str, ext: str, ordering: int, limit: int, idx: int = 0):
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         mylimit = limit;
         if mylimit < 256:
             mylimit = 256
@@ -2063,7 +2063,7 @@ class Document:
 
     def _get_page_labels(self):
         #return _fitz.Document__get_page_labels(self)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
 
         ASSERT_PDF(pdf);
         rc = []
@@ -2130,7 +2130,7 @@ class Document:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document__getPageInfo(self, pno, what)
         doc = self.this
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         pageCount = doc.count_pages()
         n = pno;  # pno < 0 is allowed
         while n < 0:
@@ -2169,7 +2169,7 @@ class Document:
         '''
         Utility: insert font from file or binary.
         '''
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
 
         ASSERT_PDF(pdf);
         if not fontfile and not fontbuffer:
@@ -2194,7 +2194,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         #val = _fitz.Document__move_copy_page(self, pno, nb, before, copy)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         same = 0
         #pdf_obj *parent1 = NULL, *parent2 = NULL, *parent = NULL;
         #pdf_obj *kids1, *kids2;
@@ -2262,20 +2262,16 @@ class Document:
         self._reset_page_refs()
         return val
 
-    def _pdf_document(self):
-        # todo: change all callers to use self._this_as_pdf_document() and remove.
-        return self._this_as_pdf_document()
-
     def _remove_links_to(self, numbers):
         #assert 0, 'no Document__remove_links_to'
         #return _fitz.Document__remove_links_to(self, first, last)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         remove_dest_range(pdf, numbers)
 
     def _remove_toc_item(self, xref):
         #return _fitz.Document__remove_toc_item(self, xref)
             # "remove" bookmark by letting it point to nowhere
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         item = mupdf.mpdf_new_indirect(pdf, xref, 0)
         mupdf.mpdf_dict_del( item, PDF_NAME('Dest'))
         mupdf.mpdf_dict_del( item, PDF_NAME('A'))
@@ -2293,7 +2289,7 @@ class Document:
     def _set_page_labels(self, labels):
         #val = _fitz.Document__set_page_labels(self, labels)
         #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         pagelabels = mupdf.mpdf_new_name("PageLabels")
         root = mupdf.mpdf_dict_get(mupdf.mpdf_trailer(pdf), PDF_NAME('Root'))
@@ -2342,7 +2338,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         #return _fitz.Document_add_layer(self, name, creator, on)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         JM_add_layer_config( pdf, name, creator, on)
         mupdf.mpdf_read_ocg( pdf)
@@ -2355,7 +2351,7 @@ class Document:
         xref = 0
         #pdf_obj *obj = NULL, *cfg = NULL;
         #pdf_obj *indocg = NULL;
-        pdf = self._pdf_document();
+        pdf = self._this_as_pdf_document();
         ASSERT_PDF(pdf);
 
         # make the OCG
@@ -2949,7 +2945,7 @@ class Document:
         '''
         Get a font by xref.
         '''
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         len_ = 0;
         obj = mupdf.mpdf_load_object(pdf, xref)
@@ -2988,7 +2984,7 @@ class Document:
 
         #return _fitz.Document_extract_image(self, xref)
         #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         #pdf_obj *obj = NULL;
         #fz_buffer *res = NULL;
         #fz_image *img = NULL;
@@ -3118,7 +3114,7 @@ class Document:
             raise ValueError("document closed")
 
         #val = _fitz.Document_fullcopy_page(self, pno, to)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         page_count = mupdf.mpdf_count_pages( pdf)
         #fz_buffer *res = NULL, *nres=NULL;
         #pdf_obj *page2 = NULL;
@@ -3288,7 +3284,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         #return _fitz.Document_get_layer(self, config)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         ocp = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer( pdf),
@@ -3316,7 +3312,7 @@ class Document:
         #return _fitz.Document_get_layers(self)
         #PyObject *rc = NULL;
         #pdf_layer_config info = {NULL, NULL};
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         n = mupdf.mpdf_count_layer_configs( pdf)
         if n == 1:
@@ -3347,7 +3343,7 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_get_new_xref(self)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         xref = 0
         ASSERT_PDF(pdf);
         ENSURE_OPERATION(pdf);
@@ -3364,7 +3360,7 @@ class Document:
         #return _fitz.Document_get_ocgs(self)
         #PyObject *rc = NULL;
         ci = mupdf.mpdf_new_name( "CreatorInfo")
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         ocgs = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_dict_get( mupdf.mpdf_trailer( pdf), PDF_NAME('Root')),
@@ -3490,7 +3486,7 @@ class Document:
             raise ValueError("document closed")
 
         #return _fitz.Document_get_sigflags(self)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         if not pdf.m_internal:
             return -1   # not a PDF
         sigflags = mupdf.mpdf_dict_getl(
@@ -3525,7 +3521,7 @@ class Document:
             raise ValueError("document closed")
         #return _fitz.Document_get_xml_metadata(self)
         xml = None
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         if pdf.m_internal:
             xml = mupdf.mpdf_dict_getl(
                     mupdf.mpdf_trailer(pdf),
@@ -3580,7 +3576,7 @@ class Document:
         if self.is_closed:
             raise ValueError("document closed")
         #return _fitz.Document_has_old_style_xrefs(self)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         if pdf.m_internal and pdf.m_internal.has_old_style_xrefs:
             return True
         return False
@@ -3593,7 +3589,7 @@ class Document:
         if self.is_closed:
             raise ValueError("document closed")
         #return _fitz.Document_has_xref_streams(self)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         if pdf.m_internal and pdf.m_internal.has_xref_streams:
             return True
         return False
@@ -3906,7 +3902,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         #return _fitz.Document_layer_ui_configs(self)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         info = mupdf.PdfLayerConfigUi()
         n = mupdf.mpdf_count_layer_config_ui( pdf)
@@ -4473,7 +4469,7 @@ class Document:
             #memcpy(&opts.upwd_utf8, user_pw, strlen(user_pw)+1);
             opts.upwd_utf8_set_value(user_pw)
 
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         out = None
         ASSERT_PDF(pdf)
         JM_embedded_clean(pdf)
@@ -4506,7 +4502,7 @@ class Document:
         # (1) get underlying pdf document,
         # (2) transform Python list into integer array
 
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         # call retainpages (code copy of fz_clean_file.c)
         retainpages(pdf, pyliste);
         if pdf.m_internal.rev_page_map:
@@ -4553,7 +4549,7 @@ class Document:
                 raise ValueError("bad 'basestate'")
         #return _fitz.Document_set_layer(self, config, basestate, on, off, rbgroups)
         #pdf_obj *obj = NULL;
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         ocp = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer( pdf),
@@ -4845,7 +4841,7 @@ class Document:
         if self.isClosed:
             raise ValueError("document closed")
         #return _fitz.Document_switch_layer(self, config, as_default)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         cfgs = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer( pdf),
@@ -4869,7 +4865,7 @@ class Document:
         if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_update_stream(self, xref, stream, new)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         xreflen = mupdf.mpdf_xref_len(pdf)
         if not INRANGE(xref, 1, xreflen-1):
@@ -4886,7 +4882,7 @@ class Document:
         if self.isClosed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_update_stream(self, xref, stream, new)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         xreflen = pdf.xref_len()
         if xref < 1 or xref > xreflen:
             raise Exception(f'bad xref={xref} xreflen={xreflen}')
@@ -4955,7 +4951,7 @@ class Document:
             raise ValueError("document closed")
 
         #return _fitz.Document_xref_get_key(self, xref, key)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         xreflen = mupdf.mpdf_xref_len(pdf)
         if not INRANGE(xref, 1, xreflen-1) and xref != -1:
@@ -5011,7 +5007,7 @@ class Document:
             raise ValueError("document closed")
 
         #return _fitz.Document_xref_get_keys(self, xref)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         xreflen = mupdf.mpdf_xref_len( pdf)
         if not INRANGE(xref, 1, xreflen-1) and xref != -1:
@@ -5036,7 +5032,7 @@ class Document:
         #return _fitz.Document_xref_length(self)
         xreflen = 0
         #pdf_document *pdf = pdf_specifics(gctx, (fz_document *) self);
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         if pdf:
             xreflen = mupdf.mpdf_xref_len(pdf)
         return xreflen
@@ -5048,7 +5044,7 @@ class Document:
             raise ValueError("document closed")
         #return _fitz.Document_xref_object(self, xref, compressed, ascii)
         if 1:
-            pdf = self._pdf_document()
+            pdf = self._this_as_pdf_document()
             #pdf_obj *obj = NULL;
             #PyObject *text = NULL;
             #fz_buffer *res=NULL;
@@ -5069,7 +5065,7 @@ class Document:
         if self.is_closed:
             raise ValueError("document closed")
         #return _fitz.Document_xref_set_key(self, xref, key, value)
-        pdf = self._pdf_document()
+        pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         if not key:
             THROWMSG("bad 'key'")
@@ -19541,7 +19537,7 @@ class TOOLS:
     @staticmethod
     def set_font_width(doc, xref, width):
         #return _fitz.Tools_set_font_width(self, doc, xref, width)
-        pdf = doc._pdf_document()
+        pdf = doc._this_as_pdf_document()
         if not pdf.m_internal:
             return False
         font = mupdf.mpdf_load_object(pdf, xref)
