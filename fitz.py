@@ -2263,14 +2263,8 @@ class Document:
         return val
 
     def _pdf_document(self):
-        '''
-        Returns self.this as a mupdf.PdfDocument using pdf_specifics() as
-        requireds.
-        '''
-        if isinstance(self.this, mupdf.PdfDocument):
-            return self.this
-        #return self.this.specifics()
-        return mupdf.PdfDocument(self.this)
+        # todo: change all callers to use self._this_as_pdf_document() and remove.
+        return self._this_as_pdf_document()
 
     def _remove_links_to(self, numbers):
         #assert 0, 'no Document__remove_links_to'
@@ -2310,6 +2304,28 @@ class Document:
         text = self.xref_object(xref, compressed=True)
         text = text.replace("/Nums[]", "/Nums[%s]" % labels)
         self.update_object(xref, text)
+
+    def _this_as_document(self):
+        '''
+        Returns self.this as a mupdf.Document.
+        '''
+        if isinstance(self.this, mupdf.Document):
+            return self.this
+        if isinstance(self.this, mupdf.PdfDocument):
+            return self.this.super()
+        assert 0, f'Unrecognised type(self.this)={type(self.this)}'
+
+    def _this_as_pdf_document(self):
+        '''
+        Returns self.this as a mupdf.PdfDocument, downcasting as required. If
+        we fail (i.e. self.this is a mupdf.Document(), <ret>.m_internal will be
+        None.
+        '''
+        if isinstance(self.this, mupdf.PdfDocument):
+            return self.this
+        if isinstance(self.this, mupdf.Document):
+            return mupdf.PdfDocument(self.this)
+        assert 0, f'Unrecognised type(self.this)={type(self.this)}'
 
     def _update_toc_item(self, xref, action=None, title=None, flags=0, collapse=None, color=None):
         return _fitz.Document__update_toc_item(self, xref, action, title, flags, collapse, color)
@@ -3556,6 +3572,32 @@ class Document:
         #jlib.log('Returning false')
         return False
 
+    @property
+    def has_old_style_xrefs(self):
+        '''
+        Check if xref table is old style.
+        '''
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_has_old_style_xrefs(self)
+        pdf = self._pdf_document()
+        if pdf.m_internal and pdf.m_internal.has_old_style_xrefs:
+            return True
+        return False
+
+    @property
+    def has_xref_streams(self):
+        '''
+        Check if xref table is a stream.
+        '''
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_has_xref_streams(self)
+        pdf = self._pdf_document()
+        if pdf.m_internal and pdf.m_internal.has_xref_streams:
+            return True
+        return False
+
     def init_doc(self):
         if self.is_encrypted:
             raise ValueError("cannot initialize - document still encrypted")
@@ -3579,6 +3621,11 @@ class Document:
         self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
 
     outline = property(lambda self: self._outline)
+
+    def insert_page(*args, **kwargs):
+        return utils.insert_page(*args, **kwargs)
+
+    insertPage = insert_page
 
     def insert_pdf(
             self,
@@ -3669,6 +3716,8 @@ class Document:
         if final == 1:
             self.Graftmaps[isrt] = None
 
+    insertPDF = insert_pdf
+
     def initData(self):
         if self.isEncrypted:
             raise ValueError("cannot initData - document still encrypted")
@@ -3745,6 +3794,14 @@ class Document:
         return self.isPDF
 
     @property
+    def is_reflowable(self):
+        """Check if document is layoutable."""
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_is_reflowable(self)
+        return mupdf.mfz_is_document_reflowable(self._document())
+
+    @property
     def is_repaired(self):
         """Check whether PDF was repaired."""
         #jlib.log('{self.this.count_pages()=}')
@@ -3759,6 +3816,8 @@ class Document:
             return True
         #jlib.log('returning false')
         return False
+
+    isRepaired = is_repaired
 
     @property
     def isDirty(self):
