@@ -2494,6 +2494,8 @@ class Document:
         doc = JM_convert_to_pdf(fz_doc, fp, tp, rotate)
         return doc
 
+    convertToPDF = convert_to_pdf
+
     def copy_page(self, pno: int, to: int =-1):
         """Copy a page within a PDF document.
 
@@ -2518,6 +2520,11 @@ class Document:
             before = 0
 
         return self._move_copy_page(pno, to, before, copy)
+
+    copyPage = copy_page
+
+    def del_toc_item(self, idx):
+        return utils.del_toc_item(self, idx)
 
     def del_xml_metadata(self):
         """Delete XML metadata."""
@@ -2918,6 +2925,44 @@ class Document:
             raise ValueError("document closed or encrypted")
         #return _fitz.Document_extractFont(self, xref, info_only)
 
+    #FITZEXCEPTION(extract_font, !result)
+    #CLOSECHECK(extract_font, """Get a font by xref.""")
+    def extract_font(xref=0, info_only=0):
+        '''
+        Get a font by xref.
+        '''
+        pdf = self._pdf_document()
+        ASSERT_PDF(pdf)
+        len_ = 0;
+        obj = mupdf.mpdf_load_object(pdf, xref)
+        type_ = mupdf.mpdf_dict_get(obj, PDF_NAME('Type'))
+        subtype = mupdf.mpdf_dict_get(obj, PDF_NAME('Subtype'))
+        if (mupdf.mpdf_name_eq(type_, PDF_NAME('Font'))
+                and not mupdf.mpdf_to_name( subtype).startswith('CIDFontType')
+                ):
+            basefont = mupdf.mpdf_dict_get(obj, PDF_NAME('BaseFont'))
+            if not basefont.m_internal or mupdf.mpdf_is_null(basefont):
+                bname = mupdf.mpdf_dict_get(obj, PDF_NAME('Name'))
+            else:
+                bname = basefont
+            ext = JM_get_fontextension(pdf, xref)
+            if ext != "n/a" and not info_only:
+                buffer_ = JM_get_fontbuffer(pdf, xref)
+                bytes_ = JM_BinFromBuffer(buffer_)
+            else:
+                bytes_ = "y", ""
+            tuple_ = (
+                    JM_EscapeStrFromStr(mupdf.mpdf_to_name(bname)),
+                    JM_UnicodeFromStr(ext),
+                    JM_UnicodeFromStr(mupdf.mpdf_to_name(subtype)),
+                    bytes_,
+                    )
+        else:
+            tuple_ = "", "", "", ""
+        return tuple_
+
+    extractFont = extract_font
+
     def extract_image(self, xref):
         """Get image by xref. Returns a dictionary."""
         if self.is_closed or self.is_encrypted:
@@ -2992,6 +3037,8 @@ class Document:
         rc[ dictkey_cs_name] = cs_name
         rc[ dictkey_image] =JM_BinFromBuffer(res)
         return rc
+
+    extractImage = extract_image
 
     def find_bookmark(self, bm):
         """Find new location after layouting a document."""
