@@ -3872,6 +3872,130 @@ class Document:
 
         return _fitz.Document_isStream(self, xref)
 
+    def journal_can_do(self):
+        """Show if undo and / or redo are possible."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_can_do(self)
+        undo=0
+        redo=0
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf)
+        undo = mupdf.mpdf_can_undo(pdf)
+        redo = mupdf.mpdf_can_redo(pdf)
+        return {'undo': bool(undo), 'redo': bool(redo)}
+
+    def journal_enable(self):
+        """Activate document journalling."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_enable(self)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf)
+        mupdf.mpdf_enable_journal(pdf)
+
+    def journal_is_enabled(self):
+        """Check if journalling is enabled."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_is_enabled(self)
+        pdf = self._this_as_pdf_document()
+        enabled = pdf.m_internal and pdf.m_internal.journal
+        return enabled
+
+    def journal_load(self, filename):
+        """Load a journal from a file."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_load(self, filename)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf);
+        if isinstance(filename, str):
+            mupdf.mpdf_load_journal(pdf, filename)
+        else:
+            res = JM_BufferFromBytes(filename)
+            stm = mupdf.mfz_open_buffer(res)
+            mupdf.mpdf_deserialise_journal(pdf, stm)
+        if not pdf.m_internal.journal:
+            THROWMSG("Journal and document do not match")
+
+    def journal_op_name(self, step):
+        """Show operation name for given step."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_op_name(self, step)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf)
+        name = mupdf.mpdf_undoredo_step(pdf, step)
+        return name
+
+    def journal_position(self):
+        """Show journalling state."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_position(self)
+        steps=0
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf)
+        rc, steps = mupdf.mpdf_undoredo_state(pdf);
+        return rc, steps
+
+    def journal_redo(self):
+        """Move forward in the journal."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_redo(self)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf)
+        mupdf.mpdf_redo(pdf)
+        return True
+
+    def journal_save(self, filename):
+        """Save journal to a file."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_save(self, filename)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf)
+        if isinstance(filename, str):
+            mupdf.mpdf_save_journal(pdf, filename)
+        else:
+            out = JM_new_output_fileptr(filename)
+            mupdf.mpdf_write_journal(pdf, out)
+
+    def journal_start_op(self, name=None):
+        """Begin a journalling operation."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_start_op(self, name)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf)
+        if not pdf.m_internal.journal:
+            THROWMSG("Journalling not enabled")
+        if name:
+            mupdf.mpdf_begin_operation(pdf, name)
+        else:
+            mupdf.mpdf_begin_implicit_operation(pdf)
+
+    def journal_stop_op(self):
+        """End a journalling operation."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_stop_op(self)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf);
+        mupdf.mpdf_end_operation(pdf)
+
+    def journal_undo(self):
+        """Move backwards in the journal."""
+        if self.is_closed or self.is_encrypted:
+            raise ValueError("document closed or encrypted")
+        #return _fitz.Document_journal_undo(self)
+        pdf = self._this_as_pdf_document()
+        ASSERT_PDF(pdf);
+        mupdf.mpdf_undo(pdf)
+        return True
+
     @property
     def language(self):
         """Document language."""
@@ -5024,6 +5148,18 @@ class Document:
             key = mupdf.mpdf_to_name( mupdf.mpdf_dict_get_key( obj, i))
             rc.append(key)
         return rc
+
+    def xref_is_stream(self, xref=0):
+        """Check if xref is a stream object."""
+        if self.is_closed:
+            raise ValueError("document closed")
+        #return _fitz.Document_xref_is_stream(self, xref)
+        pdf = self._this_as_pdf_document()
+        if not pdf.m_internal:
+            return False    # not a PDF
+        return bool(mupdf.mpdf_obj_num_is_stream(pdf, xref))
+
+    is_stream = xref_is_stream
 
     def xref_length(self):
         """Get length of xref table."""
