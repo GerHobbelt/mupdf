@@ -2439,6 +2439,8 @@ class Document:
         #return _fitz.Document_chapter_count(self)
         return mupdf.mfz_count_chapters( self.this)
 
+    chapterCount = chapter_count
+
     def chapter_page_count(self, chapter):
         """Page count of chapter."""
         if self.is_closed:
@@ -3040,6 +3042,45 @@ class Document:
 
     extractImage = extract_image
 
+    def ez_save(
+            self,
+            filename,
+            garbage=3,
+            clean=False,
+            deflate=True,
+            deflate_images=True,
+            deflate_fonts=True,
+            incremental=False,
+            ascii=False,
+            expand=False,
+            linear=False,
+            pretty=False,
+            encryption=1,
+            permissions=4095,
+            owner_pw=None,
+            user_pw=None,
+            ):
+        '''
+        Save PDF using some different defaults
+        '''
+        return self.save(
+                filename,
+                garbage=garbage,
+                clean=clean,
+                deflate=deflate,
+                deflate_images=deflate_images,
+                deflate_fonts=deflate_fonts,
+                incremental=incremental,
+                ascii=ascii,
+                expand=expand,
+                linear=linear,
+                pretty=pretty,
+                encryption=encryption,
+                permissions=permissions,
+                owner_pw=owner_pw,
+                user_pw=user_pw
+                )
+
     def find_bookmark(self, bm):
         """Find new location after layouting a document."""
         if self.is_closed or self.is_encrypted:
@@ -3224,6 +3265,8 @@ class Document:
 
         return glyphs
 
+    getCharWidths = get_char_widths
+
     def get_layer(self, config=-1):
         """Content of ON, OFF, RBGroups of an OC layer."""
         if self.isClosed:
@@ -3405,6 +3448,16 @@ class Document:
     def get_page_numbers(doc, label, only_one=False):
         return utils.get_page_numbers(doc, label, only_one)
 
+    def get_page_pixmap(*args, **kwargs):
+        return utils.get_page_pixmap(*args, **kwargs)
+
+    getPagePixmap = get_page_pixmap
+
+    def get_page_text(*args, **kwargs):
+        return utils.get_page_text(*args, **kwargs)
+
+    getPageText = get_page_text
+
     def get_page_xobjects(self, pno: int) -> list:
         """Retrieve a list of XObjects used on a page.
         """
@@ -3414,6 +3467,28 @@ class Document:
             return ()
         val = self._getPageInfo(pno, 3)
         return val
+
+    def get_sigflags(self):
+        """Get the /SigFlags value."""
+        if self.is_closed:
+            raise ValueError("document closed")
+
+        #return _fitz.Document_get_sigflags(self)
+        pdf = self._pdf_document()
+        if not pdf.m_internal:
+            return -1   # not a PDF
+        sigflags = mupdf.mpdf_dict_getl(
+                mupdf.mpdf_trailer(pdf),
+                PDF_NAME('Root'),
+                PDF_NAME('AcroForm'),
+                PDF_NAME('SigFlags'),
+                )
+        sigflag = -1
+        if sigflags.m_internal:
+            sigflag = mupdf.mpdf_to_int(sigflags)
+        return sigflag
+
+    getSigFlags = get_sigflags
 
     def get_toc(
             doc,#: Document,
@@ -3426,17 +3501,29 @@ class Document:
         """
         return utils.get_toc(doc, simple)
 
-    def getSigFlags(self):
-        """Get the /SigFlags value."""
-        if self.isClosed:
-            raise ValueError("document closed")
-        return _fitz.Document_getSigFlags(self)
+    getToC = get_toc
 
-    def getXmlMetadata(self):
+    def get_xml_metadata(self):
         """Get document XML metadata."""
         if self.isClosed:
             raise ValueError("document closed")
-        return _fitz.Document_getXmlMetadata(self)
+        #return _fitz.Document_get_xml_metadata(self)
+        xml = None
+        pdf = self._pdf_document()
+        if pdf.m_internal:
+            xml = mupdf.mpdf_dict_getl(
+                    mupdf.mpdf_trailer(pdf),
+                    PDF_NAME('Root'),
+                    PDF_NAME('Metadata'),
+                    )
+        if xml and xml.internal:
+            buff = mupdf.mpdf_load_stream(xml)
+            rc = JM_UnicodeFromBuffer(buff)
+        else:
+            rc = ''
+        return rc
+
+    getXmlMetadata = get_xml_metadata
 
     def has_annots(self):
         """Check whether there are annotations on any page."""
