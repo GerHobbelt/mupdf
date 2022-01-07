@@ -68,7 +68,14 @@ So let's see if we can accomplish the same possitive result for wxWidgets by hav
 
 Drat! That didn't change much. (The binary even got a wee little *bigger* this time.) Apparently wxWidgets is so intertwined (like MFC and all those other GUI frameworks out there) that this little fiddling doesn't help to get rid of useless material, once you start using any of it.
 
-Guess that means I'll have to produce specially **carved subsets**[^3] in separate library projects if I'm serious about minimal binary size (for quickest possible start times!) -- the only application of the bunch that would benefit from this extra attention would be the Qiqqa Launcher/Monitor, I suppose. Alas. 
+Guess that means I'll have to produce specially **carved subsets**[^3] in separate library projects if I'm serious about minimal binary size (for quickest possible start times!) -- the only application of the bunch that would benefit from this extra attention would be the Qiqqa Launcher/Monitor, I suppose. Alas.
+
+
+
+## MSVC: *Shared Source Library* next
+
+To make that happen, we finally have reason to use MSVC2019's "Shared Source" project type: let's see what we can accomplish when we drop the entire wxWidgets codebase into such a one and then tweak it with some judicious preprocessor `#define`s in the end project's configuration (`wxw_samples_console` in this case).
+
 
 
 
