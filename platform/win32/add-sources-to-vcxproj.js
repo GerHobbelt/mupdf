@@ -182,6 +182,8 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.lua':
     case '.py':
     case '.sh':
+    case '.cmd':
+    case '.ps1':
     case '.txt':
     case '.rtf':
     case '.xml':
@@ -199,6 +201,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.bkl':
     case '.vc':
     case '.msc':
+    case '.cppcode':
+    case '.phpcode':
+    case '.luacode':
+    case '.pythoncode':
+    case '.jscode':
+    case '.htcpp':
+    case '.js':
+    case '.ts':
         filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {
@@ -240,6 +250,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.ttc':
     case '.mpg':
     case '.pov':
+    case '.fbp':
         filterDirs.add('Resource Files');
         base = path.dirname(f);
         if (base === '.') {
@@ -480,6 +491,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
     case '.xpm':
     case '.xrc':
+    case '.fbp':
         base = path.dirname(item);
         if (base === '.') {
           base = '';
@@ -554,6 +566,32 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
 
         slot = `
     <None Include="${f}" />
+        `;
+        filesToAddToProj.push(slot);
+        break;
+
+    case '.xml':
+        base = path.dirname(item);
+        if (base === '.') {
+          base = '';
+        }
+        if (base.length > 0) {
+            base = 'Misc Files/' + base;
+        }
+        else {
+            base = 'Misc Files';
+        }
+        base = base.replace(/\//g, '\\');
+        f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+        slot = `
+    <Xml Include="${f}">
+      <Filter>${base}</Filter>
+    </Xml>
+        `;
+        filesToAdd.push(slot);
+
+        slot = `
+    <Xml Include="${f}" />
         `;
         filesToAddToProj.push(slot);
         break;
