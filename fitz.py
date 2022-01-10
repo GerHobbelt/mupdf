@@ -272,38 +272,38 @@ class Annot:
             #jlib.log(jlib.exception_info())
             raise
 
-    def blendMode(self):
+    @property
+    def blendmode(self):
         """annotation BlendMode"""
         CheckParent(self)
-
         #return _fitz.Annot_blendMode(self)
-        blend_mode = None
         annot = self.this
-        #pdf_obj *obj, *obj1, *obj2;
-        obj = annot.annot_obj().dict_get(mupdf.PDF_ENUM_NAME_BM)
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        obj = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('BM'))
+        blend_mode = None
         if obj.m_internal:
-            blend_mode = obj.to_name()
+            blend_mode = JM_UnicodeFromStr(mupdf.mpdf_to_name(obj))
             return blend_mode
-
         # loop through the /AP/N/Resources/ExtGState objects
-        obj = annot.annot_obj().dict_getl(
-                mupdf.PDF_ENUM_NAME_AP,
-                mupdf.PDF_ENUM_NAME_N,
-                mupdf.PDF_ENUM_NAME_Resources,
-                mupdf.PDF_ENUM_NAME_ExtGState,
+        obj = mupdf.mpdf_dict_getl(
+                annot_obj,
+                PDF_NAME('AP'),
+                PDF_NAME('N'),
+                PDF_NAME('Resources'),
+                PDF_NAME('ExtGState'),
                 )
-        if obj.is_dict():
-            n = obj.dict_len()
+        if mupdf.mpdf_is_dict(obj):
+            n = mupdf.mpdf_dict_len(obj)
             for i in range(n):
-                obj1 = obj.dict_get_val(i)
-                if obj1.is_dict():
-                    m = obj1.dict_len()
+                obj1 = mupdf.mpdf_dict_get_val(obj, i)
+                if mupdf.mpdf_is_dict(obj1):
+                    m = mupdf.mpdf_dict_len(obj1)
                     for j in range(m):
-                        obj2 = obj1.dict_get_key(j)
-                        if obj2.objcmp(mupdf.PDF_ENUM_NAME_BM) == 0:
-                            blend_mode = obj1.dict_get_val(j).to_name()
+                        obj2 = mupdf.mpdf_dict_get_key(obj1, j)
+                        if mupdf.mpdf_objcmp(obj2, PDF_NAME('BM')) == 0:
+                            blend_mode = JM_UnicodeFromStr(mupdf.mpdf_to_name(mupdf.mpdf_dict_get_val(obj1, j)))
                             return blend_mode
-        return blend_mode;
+        return blend_mode
 
     @property
     def border(self):
@@ -372,12 +372,55 @@ class Annot:
             mupdf.mpdf_dict_put(page.obj(), PDF_NAME('Annots'), annots)
         mupdf.mpdf_dirty_annot(annot)
 
-    def fileInfo(self):
+    @property
+    def file_info(self):
         """Attached file information."""
         CheckParent(self)
+        #return _fitz.Annot_file_info(self)
+        res = dict()
+        length = -1
+        size = -1
+        annot = self.this
+        annot_obj = mupdf.mpdf_annot_obj(annot)
+        type_ = mupdf.mpdf_annot_type(annot)
+        if type_ != mupdf.PDF_ANNOT_FILE_ATTACHMENT:
+            THROWMSG("bad annot type")
+        stream = mupdf.mpdf_dict_getl(
+                annot_obj,
+                PDF_NAME('FS'),
+                PDF_NAME('EF'),
+                PDF_NAME('F'),
+                )
+        if not stream.m_internal:
+            THROWMSG("bad PDF: file entry not found")
 
-        # fixme: no Annot_fileInfo() in PyMuPDF?
-        return _fitz.Annot_fileInfo(self)
+        fs = mupdf.mpdf_dict_get(annot_obj, PDF_NAME('FS'))
+
+        o = mupdf.mpdf_dict_get(fs, PDF_NAME('UF'))
+        if o.m_internal:
+            filename = mupdf.mpdf_to_text_string(o)
+        else:
+            o = mupdf.mpdf_dict_get(fs, PDF_NAME('F'))
+            if o.m_internal:
+                filename = mupdf.mpdf_to_text_string(o)
+
+        o = mupdf.mpdf_dict_get(fs, PDF_NAME('Desc'))
+        if o.m_internal:
+            desc = mupdf.mpdf_to_text_string(o)
+
+        o = mupdf.mpdf_dict_get(stream, PDF_NAME('Length'))
+        if o.m_internal:
+            length = mupdf.mpdf_to_int(o)
+
+        o = mupdf.mpdf_dict_getl(stream, PDF_NAME('Params'), PDF_NAME('Size'))
+        if o.m_internal:
+            size = mupdf.mpdf_to_int(o)
+
+        res[ dictkey_filename] = JM_EscapeStrFromStr(filename)
+        res[ dictkey_desc] = JM_UnicodeFromStr(desc)
+        res[ dictkey_length] = length
+        res[ dictkey_size] = size
+        return res
 
     @property
     def flags(self):
@@ -1316,10 +1359,9 @@ class Annot:
         annot = self.this
         return mupdf.mpdf_to_num(annot.annot_obj())
 
-    blendmode = property(blendMode, doc="annotation BlendMode")
+    #blendmode = property(blendMode, doc="annotation BlendMode")
     fileGet = get_file
     fileUpd = update_file
-    file_info = property(fileInfo, doc="Attached file information")
     getPixmap = get_pixmap
     getTextPage = get_textpage
     lineEnds=line_ends
@@ -1333,7 +1375,7 @@ class Annot:
     setOC = set_oc
     setOpacity = set_opacity
     setRect = set_rect
-    setRotation = set_rotation
+    #setRotation = set_rotation
     soundGet = get_sound
 
 
@@ -18036,40 +18078,6 @@ def ConversionTrailer(i: str):
     else:
         r = text
 
-    return r
-
-
-def DerotateRect(cropbox: rect_like, rect: rect_like, deg: float) -> Rect:
-    """Calculate the non-rotated rect version.
-
-    Args:
-        cropbox: the page's /CropBox
-        rect: rectangle
-        deg: the page's /Rotate value
-    Returns:
-        Rectangle in original (/CropBox) coordinates
-    """
-    while deg < 0:
-        deg += 360
-    while deg >= 360:
-        deg -= 360
-    if deg % 90 > 0:
-        deg = 0
-    if deg == 0:  # no rotation: no-op
-        return rect
-    points = []  # store the new rect points here
-    for p in rect.quad:  # run through the rect's quad points
-        if deg == 90:
-            q = (p.y, cropbox.height - p.x)
-        elif deg == 270:
-            q = (cropbox.width - p.y, p.x)
-        else:
-            q = (cropbox.width - p.x, cropbox.height - p.y)
-        points.append(q)
-
-    r = Rect(points[0], points[0])
-    for p in points[1:]:
-        r |= p
     return r
 
 
