@@ -886,7 +886,7 @@ class Annot:
         CheckParent(self)
         #return _fitz.Annot_set_opacity(self, opacity)
         annot = self.this
-        if not INRANGE(opacity, 0.0, 1.0):
+        if not _INRANGE(opacity, 0.0, 1.0):
             mupdf.mpdf_set_annot_opacity(annot, 1)
             return;
         mupdf.mpdf_set_annot_opacity(annot, opacity)
@@ -1686,7 +1686,7 @@ class Document:
         doc = self.this
         pdf = mupdf.mpdf_specifics(doc)
         ASSERT_PDF(pdf)
-        if not INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
+        if not _INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
             THROWMSG("bad xref")
         mupdf.pdf_delete_object(pdf, xref)
 
@@ -2299,7 +2299,7 @@ class Document:
         #assert 0, 'no Document__remove_links_to'
         #return _fitz.Document__remove_links_to(self, first, last)
         pdf = self._this_as_pdf_document()
-        remove_dest_range(pdf, numbers)
+        _remove_dest_range(pdf, numbers)
 
     def _remove_toc_item(self, xref):
         #return _fitz.Document__remove_toc_item(self, xref)
@@ -3032,7 +3032,7 @@ class Document:
         #fz_var(obj);
 
         ASSERT_PDF(pdf);
-        if not INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
+        if not _INRANGE(xref, 1, mupdf.mpdf_xref_len(pdf)-1):
             THROWMSG("bad xref")
 
         obj = mupdf.mpdf_new_indirect(pdf, xref, 0)
@@ -3153,8 +3153,8 @@ class Document:
         #pdf_obj *page2 = NULL;
         try:
             ASSERT_PDF(pdf);
-            if (not INRANGE(pno, 0, page_count - 1)
-                    or not INRANGE(to, -1, page_count - 1)
+            if (not _INRANGE(pno, 0, page_count - 1)
+                    or not _INRANGE(to, -1, page_count - 1)
                     ):
                 THROWMSG(gctx, "bad page number(s)")
 
@@ -5080,7 +5080,7 @@ class Document:
         pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         xreflen = mupdf.mpdf_xref_len(pdf)
-        if not INRANGE(xref, 1, xreflen-1):
+        if not _INRANGE(xref, 1, xreflen-1):
             THROWMSG("bad xref")
         ENSURE_OPERATION(pdf)
         # create new object with passed-in string
@@ -5166,7 +5166,7 @@ class Document:
         pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         xreflen = mupdf.mpdf_xref_len(pdf)
-        if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+        if not _INRANGE(xref, 1, xreflen-1) and xref != -1:
             THROWMSG(f"bad xref={xref} xreflen={xreflen}")
         if xref > 0:
             obj = mupdf.mpdf_load_object(pdf, xref)
@@ -5222,7 +5222,7 @@ class Document:
         pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf);
         xreflen = mupdf.mpdf_xref_len( pdf)
-        if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+        if not _INRANGE(xref, 1, xreflen-1) and xref != -1:
             THROWMSG( "bad xref")
         if xref > 0:
             obj = mupdf.mpdf_load_object( pdf, xref)
@@ -5298,7 +5298,7 @@ class Document:
             #fz_buffer *res=NULL;
             ASSERT_PDF(pdf);
             xreflen = mupdf.mpdf_xref_len(pdf)
-            if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+            if not _INRANGE(xref, 1, xreflen-1) and xref != -1:
                 THROWMSG("bad xref")
             if xref > 0:
                 obj = mupdf.mpdf_load_object(pdf, xref)
@@ -5320,7 +5320,7 @@ class Document:
         if not value:
             THROWMSG("bad 'value'")
         xreflen = mupdf.mpdf_xref_len(pdf)
-        if not INRANGE(xref, 1, xreflen-1) and xref != -1:
+        if not _INRANGE(xref, 1, xreflen-1) and xref != -1:
             THROWMSG("bad xref")
         if len(value) == 0:
             THROWMSG("bad 'value'")
@@ -5594,10 +5594,6 @@ class Font:
                 ):
             return False
         return True
-
-    @property
-    def isWritable(self):
-        return _fitz.Font_isWritable(self)
 
     @property
     def name(self):
@@ -6691,7 +6687,7 @@ class Page:
         r = JM_rect_from_py(rect)
         if mupdf.mfz_is_infinite_rect(r) or mupdf.mfz_is_empty_rect(r):
             THROWMSG("rect must be finite and not empty")
-        if INRANGE(stamp, 0, n-1):
+        if _INRANGE(stamp, 0, n-1):
             name = stamp_id[stamp]
         annot = mupdf.mpdf_create_annot(page, mupdf.PDF_ANNOT_STAMP)
         mupdf.mpdf_set_annot_rect(annot, r)
@@ -9634,7 +9630,7 @@ class Pixmap:
             spix = args[0]
             alpha = args[1] if len(args) == 2 else 1
             src_pix = spix.this if isinstance(spix, Pixmap) else spix
-            if not INRANGE(alpha, 0, 1):
+            if not _INRANGE(alpha, 0, 1):
                 THROWMSG("bad alpha value")
             cs = mupdf.mfz_pixmap_colorspace(src_pix)
             if not cs.m_internal and not alpha:
@@ -9742,7 +9738,7 @@ class Pixmap:
             ASSERT_PDF(pdf)
             xreflen = mupdf.mpdf_xref_len(pdf)
             #jlib.log('{xreflen=}')
-            if not INRANGE(xref, 1, xreflen-1):
+            if not _INRANGE(xref, 1, xreflen-1):
                 THROWMSG("bad xref")
             ref = mupdf.mpdf_new_indirect(pdf, xref, 0)
             type_ = mupdf.mpdf_dict_get(ref, PDF_NAME('Subtype'))
@@ -12342,7 +12338,7 @@ class TextWriter:
         return val
 
 
-class IRect(Rect):
+class IRect:
     """IRect() - all zeros
     IRect(x0, y0, x1, y1) - 4 coordinates
     IRect(top-left, x1, y1) - point and 2 coordinates
@@ -12356,12 +12352,23 @@ class IRect(Rect):
     def __and__(self, x):
         return Rect.__and__(self, x).round()
 
+    def __eq__(self, r):
+        if not hasattr(r, "__len__"):
+            return False
+        return len(r) == 4 and self.x0 == r[0] and self.y0 == r[1] and self.x1 == r[2] and self.y1 == r[3]
+
     def __init__(self, *args):
         x0, y0, x1, y1 = _make_rect( *args)
         self.x0 = int( x0)
         self.y0 = int( y0)
         self.x1 = int( x1)
         self.y1 = int( y1)
+
+    def __getitem__(self, i):
+        return (self.x0, self.y0, self.x1, self.y1)[i]
+
+    def __len__(self):
+        return 4
 
     def __mul__(self, m):
         return Rect.__mul__(self, m).round()
@@ -12394,6 +12401,19 @@ class IRect(Rect):
     def __truediv__(self, m):
         return Rect.__truediv__(self, m).round()
 
+    @property
+    def bottom_left(self):
+        """Bottom-left corner."""
+        return Point(self.x0, self.y1)
+
+    @property
+    def bottom_right(self):
+        """Bottom-right corner."""
+        return Point(self.x1, self.y1)
+
+    br = bottom_right
+    bl = bottom_left
+
     def get_area(self, unit=None):
         if unit is None:
             return utils.get_area( self)
@@ -12402,32 +12422,102 @@ class IRect(Rect):
     getArea = get_area
     getRectArea = get_area
 
-    def includePoint(self, p):
-        """Extend rectangle to include point p."""
-        return Rect.includePoint(self, p).round()
+    @property
+    def height(self):
+        return max(0, self.y1 - self.y0)
 
-    def includeRect(self, r):
+    def include_point(self, p):
+        """Extend rectangle to include point p."""
+        rect = self.rect.include_point(p)
+        return rect.irect
+
+    def include_rect(self, r):
         """Extend rectangle to include rectangle r."""
-        return Rect.includeRect(self, r).round()
+        rect = self.rect.include_rect(r)
+        return rect.irect
+
+    includePoint = include_point
+    includeRect = include_rect
 
     def intersect(self, r):
         """Restrict rectangle to intersection with rectangle r."""
         return Rect.intersect(self, r).round()
 
+    def intersects(self, x):
+        """Check if intersection with rectangle x is not empty."""
+        r1 = Rect(x)
+        if self.is_empty or self.is_infinite or r1.is_empty or r1.is_infinite:
+            return False
+        r = Rect(self)
+        if r.intersect(r1).is_empty:
+            return False
+        return True
+
     irect = round
-    isEmpty = Rect.is_empty
+
+    @property
+    def is_empty(self):
+        """True if rectangle area is empty."""
+        return self.x0 >= self.x1 or self.y0 >= self.y1
+
+    @property
+    def is_infinite(self):
+        """True if rectangle is infinite."""
+        return self.x0 == self.y0 == FZ_MIN_INF_RECT and self.x1 == self.y1 == FZ_MAX_INF_RECT
 
     @property
     def is_valid(self):
         """True if rectangle is valid."""
         return self.x0 <= self.x1 and self.y0 <= self.y1
 
+    isEmpty = is_empty
+    isInfinite = is_infinite
+
+    def norm(self):
+        return math.sqrt(sum([c*c for c in self]))
+
+    def normalize(self):
+        """Replace rectangle with its valid version."""
+        if self.x1 < self.x0:
+            self.x0, self.x1 = self.x1, self.x0
+        if self.y1 < self.y0:
+            self.y0, self.y1 = self.y1, self.y0
+        return self
+
+    @property
+    def quad(self):
+        """Return Quad version of rectangle."""
+        return Quad(self.tl, self.tr, self.bl, self.br)
+
+    def morph(self, p, m):
+        """Morph with matrix-like m and point-like p.
+
+        Returns a new quad."""
+        return self.quad.morph(p, m)
+
     @property
     def rect(self):
         return Rect(self)
 
+    @property
+    def top_left(self):
+        """Top-left corner."""
+        return Point(self.x0, self.y0)
+
+    @property
+    def top_right(self):
+        """Top-right corner."""
+        return Point(self.x1, self.y0)
+
+    tl = top_left
+    tr = top_right
+
     def transform(self, m):
         return Rect.transform(self, m).round()
+
+    @property
+    def width(self):
+        return max(0, self.x1 - self.x0)
 
 
 # Data
@@ -13201,6 +13291,47 @@ zapf_glyphs = ( # Glyph list for the built-in font 'ZapfDingbats'
 # Functions
 #
 
+def _INRANGE(v, low, high):
+    return low <= v and v <= high
+
+def _remove_dest_range(pdf, numbers):
+
+    pagecount = mupdf.mpdf_count_pages(pdf)
+    #PyObject *n1 = NULL;
+    #pdf_obj *target, *annots, *pageref, *o, *action, *dest;
+    for i in range(pagecount):
+        n1 = i
+        if n1 in numbers:
+            continue
+
+        pageref = mupdf.mpdf_lookup_page_obj( pdf, i)
+        annots = mupdf.mpdf_dict_get( pageref, PDF_NAME('Annots'))
+        if not annots.m_internal:
+            continue
+        len_ = mupdf.mpdf_array_len(annots)
+        for j in range(len_ - 1, -1, -1):
+            o = mupdf.mpdf_array_get( annots, j)
+            if not mupdf.mpdf_name_eq( mupdf.mpdf_dict_get( o, PDF_NAME('Subtype')), PDF_NAME('Link')):
+                continue
+            action = mupdf.mpdf_dict_get( o, PDF_NAME('A'))
+            dest = mupdf.mpdf_dict_get( o, PDF_NAME('Dest'))
+            if action.m_internal:
+                if not mupdf.mpdf_name_eq( mupdf.mpdf_dict_get( action, PDF_NAME('S')), PDF_NAME('GoTo')):
+                    continue
+                dest = mupdf.mpdf_dict_get( action, PDF_NAME('D'))
+            pno = -1
+            if mupdf.mpdf_is_array( dest):
+                target = mupdf.mpdf_array_get( dest, 0)
+                pno = mupdf.mpdf_lookup_page_number( pdf, target)
+            elif mupdf.mpdf_is_string( dest):
+                pno, _, _ = mupdf.mpdf_lookup_anchor( pdf, mupdf.mpdf_to_text_string( dest))
+            if pno < 0: # page number lookup did not work
+                continue
+            n1 = pno
+            if n1 in numbers:
+                mupdf.mpdf_array_delete( annots, j)
+
+
 def ASSERT_PDF(cond):
     assert isinstance(cond, (mupdf.PdfPage, mupdf.PdfDocument)), f'type(cond)={type(cond)} cond={cond}'
     if not cond.m_internal:
@@ -13230,9 +13361,6 @@ def INFINITE_QUAD():
 
 def INFINITE_RECT():
     return Rect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT)
-
-def INRANGE(v, low, high):
-    return low <= v and v <= high
 
 
 def JM_BinFromBuffer(buffer_):
@@ -13876,13 +14004,13 @@ def JM_color_FromSequence(color, col):
         return 1
     if isinstance(color, float):    # maybe just a single float
         c = color
-        if not INRANGE(c, 0, 1):
+        if not _INRANGE(c, 0, 1):
             return 1
         col[0] = c
         return 1
 
     len_ = len(color)
-    if not INRANGE(len_, 1, 4) or len_ == 2:
+    if not _INRANGE(len_, 1, 4) or len_ == 2:
         return 1
 
     mcol = [0,0,0,0]    # local color storage
@@ -13892,7 +14020,7 @@ def JM_color_FromSequence(color, col):
             rc = 0
         else:
             rc = 1
-        if not INRANGE(mcol[i], 0, 1) or rc == 1:
+        if not _INRANGE(mcol[i], 0, 1) or rc == 1:
             mcol[i] = 1;
 
     for i in range(len_):
@@ -13965,10 +14093,10 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
     #fz_buffer *contents = NULL;
     #pdf_obj *resources = NULL;
     #fz_page *page;
-    #for (i = fp; INRANGE(i, s, e); i += incr) {  # interpret & write document pages as PDF pages
+    #for (i = fp; _INRANGE(i, s, e); i += incr) {  # interpret & write document pages as PDF pages
     i = fp
     while 1:    # interpret & write document pages as PDF pages
-        if not INRANGE(i, s, e):
+        if not _INRANGE(i, s, e):
             break
         page = mupdf.mfz_load_page(doc, i)
         mediabox = mupdf.mfz_bound_page(page)
@@ -16769,7 +16897,7 @@ def Page_set_contents(page0, xref):
     page = page0.this.page_from_fz_page()
     assert isinstance(page, mupdf.PdfPage)
     #jlib.log(f'{page.doc=}')
-    if not INRANGE(xref, 1, page.doc().xref_len() - 1):
+    if not _INRANGE(xref, 1, page.doc().xref_len() - 1):
         raise Exception('bad xref')
     contents = page.doc().new_indirect(xref, 0)
     if not contents.is_stream():
@@ -17675,6 +17803,7 @@ def paper_sizes():
         "tabloid-extra": (864, 1296),
     }
 
+paperSizes = paper_sizes
 
 def _get_glyph_text() -> bytes:
     '''
@@ -18635,7 +18764,7 @@ def _make_rect( *args):
     Returns (x0, y0, x1, y1) derived from <args>.
 
     Accepts following forms for <args>:
-        ()  returns all zeros.
+        () returns all zeros.
         (top-left, bottom-right)
         (top-left, x1, y1)
         (x0, y0, bottom-right)
@@ -18651,9 +18780,7 @@ def _make_rect( *args):
         if isinstance( arg, Point):
             return arg.x, arg.y
         return None, None
-    if 0:
-        pass
-    elif len(args) == 0:
+    if len(args) == 0:
         return 0, 0, 0, 0
     elif len(args) == 1:
         arg = args[0]
@@ -18667,10 +18794,9 @@ def _make_rect( *args):
         x0, y0 = get_xy( args[0])
         if (x0, y0) != (None, None):
             return x0, y0, args[1], args[2]
-        else:
-            x1, y1 = get_xy( args[2])
-            if (x1, y1) != (None, None):
-                return args[0], args[1], x1, y1
+        x1, y1 = get_xy( args[2])
+        if (x1, y1) != (None, None):
+            return args[0], args[1], x1, y1
     elif len(args) == 4:
         return args[0], args[1], args[2], args[3]
     raise Exception( f'Unrecognised args: {args}')
@@ -19047,48 +19173,6 @@ def planishLine(p1: point_like, p2: point_like) -> Matrix:
     p1 = Point(p1)
     p2 = Point(p2)
     return Matrix(TOOLS._hor_matrix(p1, p2))
-
-
-def recover_line_quad(line, spans=None):
-    return utils.recover_line_quad(line, spans)
-
-
-def remove_dest_range(pdf, numbers):
-
-    pagecount = mupdf.mpdf_count_pages(pdf)
-    #PyObject *n1 = NULL;
-    #pdf_obj *target, *annots, *pageref, *o, *action, *dest;
-    for i in range(pagecount):
-        n1 = i
-        if n1 in numbers:
-            continue
-
-        pageref = mupdf.mpdf_lookup_page_obj( pdf, i)
-        annots = mupdf.mpdf_dict_get( pageref, PDF_NAME('Annots'))
-        if not annots.m_internal:
-            continue
-        len_ = mupdf.mpdf_array_len(annots)
-        for j in range(len_ - 1, -1, -1):
-            o = mupdf.mpdf_array_get( annots, j)
-            if not mupdf.mpdf_name_eq( mupdf.mpdf_dict_get( o, PDF_NAME('Subtype')), PDF_NAME('Link')):
-                continue
-            action = mupdf.mpdf_dict_get( o, PDF_NAME('A'))
-            dest = mupdf.mpdf_dict_get( o, PDF_NAME('Dest'))
-            if action.m_internal:
-                if not mupdf.mpdf_name_eq( mupdf.mpdf_dict_get( action, PDF_NAME('S')), PDF_NAME('GoTo')):
-                    continue
-                dest = mupdf.mpdf_dict_get( action, PDF_NAME('D'))
-            pno = -1
-            if mupdf.mpdf_is_array( dest):
-                target = mupdf.mpdf_array_get( dest, 0)
-                pno = mupdf.mpdf_lookup_page_number( pdf, target)
-            elif mupdf.mpdf_is_string( dest):
-                pno, _, _ = mupdf.mpdf_lookup_anchor( pdf, mupdf.mpdf_to_text_string( dest))
-            if pno < 0: # page number lookup did not work
-                continue
-            n1 = pno
-            if n1 in numbers:
-                mupdf.mpdf_array_delete( annots, j)
 
 
 def repair_mono_font(page: "Page", font: "Font") -> None:
@@ -19982,3 +20066,9 @@ else:
         ctypes.POINTER(ctypes.c_char),  # str
         )(JM_mupdf_warning)
     ctypes_mupdf.fz_set_warning_callback(0, fn, 0)
+
+recover_bbox_quad = utils.recover_bbox_quad
+recover_char_quad = utils.recover_char_quad
+recover_line_quad = utils.recover_line_quad
+recover_quad = utils.recover_quad
+recover_span_quad = utils.recover_span_quad
