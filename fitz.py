@@ -4292,7 +4292,7 @@ class Document:
         chapter = val
         val = page_id[ 1]
         pno = val
-        loc = muodf.mfz_make_location(chapter, pno)
+        loc = mupdf.mfz_make_location(chapter, pno)
         next_loc = mupdf.fz_next_page( this_doc, loc)
         return next_loc.chapter, next_loc.page
 
@@ -5732,11 +5732,27 @@ class Link:
         return linkDest(self, uri)
 
     @property
-    def isExternal(self):
-        """External indicator."""
+    def flags(self)->int:
         CheckParent(self)
+        doc = self.parent.parent
+        if not doc.is_pdf:
+            return 0
+        f = doc.xref_get_key(self.xref, "F")
+        if f[1] != "null":
+            return int(f[1])
+        return 0
 
-        return _fitz.Link_isExternal(self)
+    @property
+    def is_external(self):
+        """Flag the link as external."""
+        CheckParent(self)
+        #return _fitz.Link_is_external(self)
+        this_link = self.this
+        if not this_link.m_internal or not this_link.m_internal.uri:
+            return False
+        return bool( mupdf.mfz_is_external_link( this_link.m_internal.uri))
+
+    isExternal = is_external
 
     @property
     def next(self):
@@ -5772,16 +5788,48 @@ class Link:
 
         return val
 
-    def setBorder(self, border=None, width=0, dashes=None, style=None):
+    def set_border(self, border=None, width=0, dashes=None, style=None):
         if type(border) is not dict:
             border = {"width": width, "style": style, "dashes": dashes}
         return self._setBorder(border, self.parent.parent.this, self.xref)
 
-    def setColors(self, colors=None, stroke=None, fill=None):
+    setBorder = set_border
+
+    def set_colors(self, colors=None, stroke=None, fill=None):
+        """Set border colors."""
+        CheckParent(self)
+        doc = self.parent.parent
         if type(colors) is not dict:
             colors = {"fill": fill, "stroke": stroke}
-        return self._setColors(colors, self.parent.parent.this, self.xref)
+        fill = colors.get("fill")
+        stroke = colors.get("stroke")
+        if fill is not None:
+            print("warning: links have no fill color")
+        if stroke in ([], ()):
+            doc.xref_set_key(self.xref, "C", "[]")
+            return
+        if hasattr(stroke, "__float__"):
+            stroke = [float(stroke)]
+        CheckColor(stroke)
+        if len(stroke) == 1:
+            s = "[%g]" % stroke[0]
+        elif len(stroke) == 3:
+            s = "[%g %g %g]" % tuple(stroke)
+        else:
+            s = "[%g %g %g %g]" % tuple(stroke)
+        doc.xref_set_key(self.xref, "C", s)
 
+    setColors = set_colors
+
+    def set_flags(self, flags):
+        CheckParent(self)
+        doc = self.parent.parent
+        if not doc.is_pdf:
+            raise ValueError("not a PDF")
+        if not type(flags) is int:
+            raise ValueError("bad 'flags' value")
+        doc.xref_set_key(self.xref, "F", str(flags))
+        return None
     page = -1
 
     @property
@@ -5944,7 +5992,9 @@ class Matrix(object):
     def is_rectilinear(self):
         """True if rectangles are mapped to rectangles."""
         return (abs(self.b) < EPSILON and abs(self.c) < EPSILON) or \
-            (abs(self.a) < EPSILON and abs(self.d) < EPSILON);
+            (abs(self.a) < EPSILON and abs(self.d) < EPSILON)
+
+    isRectilinear = is_rectilinear
 
     def prerotate(self, theta):
         """Calculate pre rotation and replace current matrix."""
@@ -5989,6 +6039,8 @@ class Matrix(object):
 
         return self
 
+    preRotate = prerotate
+
     def prescale(self, sx, sy):
         """Calculate pre scaling and replace current matrix."""
         sx = float(sx)
@@ -5998,6 +6050,8 @@ class Matrix(object):
         self.c *= sy
         self.d *= sy
         return self
+
+    preScale = prescale
 
     def preshear(self, h, v):
         """Calculate pre shearing and replace current matrix."""
@@ -6010,6 +6064,8 @@ class Matrix(object):
         self.d += h * b
         return self
 
+    preShear = preshear
+
     def pretranslate(self, tx, ty):
         """Calculate pre translation and replace current matrix."""
         tx = float(tx)
@@ -6017,6 +6073,8 @@ class Matrix(object):
         self.e += tx * self.a + ty * self.c
         self.f += tx * self.b + ty * self.d
         return self
+
+    preTranslate = pretranslate
 
 
 class IdentityMatrix(Matrix):
@@ -6337,10 +6395,14 @@ class Outline:
             return False
         return mupdf.mfz_is_external_link(uri)
 
+    isExternal = is_external
+
     @property
     def is_open(self):
         #return _fitz.Outline_is_open(self)
         return self.this.is_open()
+
+    isOpen = is_open
 
     @property
     def next(self):
@@ -7871,19 +7933,56 @@ class Page:
         annot._erase()
         return val
 
-    def deleteLink(self, linkdict):
+    def delete_widget(self, widget):
+        return utils.delete_widget( self, widget)
+
+    deleteWidget = delete_widget
+
+    def delete_link(self, linkdict):
         """Delete a Link."""
         CheckParent(self)
+        #val = _fitz.Page_delete_link(self, linkdict)
+        if not isinstance( linkdict, dict):
+            return  # have no dictionary
 
-        val = _fitz.Page_deleteLink(self, linkdict)
-        if linkdict["xref"] == 0: return
-        try:
-            linkid = linkdict["id"]
-            linkobj = self._annot_refs[linkid]
-            linkobj._erase()
-        except:
-            pass
-        return val
+        def finished():
+            if linkdict["xref"] == 0: return
+            try:
+                linkid = linkdict["id"]
+                linkobj = self._annot_refs[linkid]
+                linkobj._erase()
+            except:
+                pass
+            return val
+
+        page = mupdf.mpdf_page_from_fz_page( self.this)
+        if not page.m_internal:
+            return finished()   # have no PDF
+        xref = linkdict[dictkey_xref]
+        if xref < 1:
+            return finished()   # invalid xref
+        annots = mupdf.mpdf_dict_get( page.obj(), PDF_NAME('Annots'))
+        if not annots.m_internal:
+            return finished()   # have no annotations
+        len_ = mupdf.mpdf_array_len( annots)
+        if len_ == 0:
+            return finished()
+        oxref = 0
+        for i in range( len_):
+            oxref = mupdf.mpdf_to_num( mupdf.mpdf_array_get( annots, i))
+            if xref == oxref:
+                break   # found xref in annotations
+
+        if xref != oxref:
+            return finished()   # xref not in annotations
+        mupdf.mpdf_array_delete( annots, i) # delete entry in annotations
+        mupdf.mpdf_delete_object( page.doc(), xref) # delete link object
+        mupdf.mpdf_dict_put( page.obj(), PDF_NAME('Annots'), annots)
+        JM_refresh_page( page)  # reload link / annot tables
+
+        return finished()
+
+    deleteLink = delete_link
 
     @property
     def derotation_matrix(self) -> Matrix:
@@ -8294,6 +8393,33 @@ class Page:
 
         return p
 
+    drawBezier = draw_bezier
+    drawCircle = draw_circle
+    drawCurve = draw_curve
+    drawLine = draw_line
+    drawOval = draw_oval
+    drawPolyline = draw_polyline
+    drawQuad = draw_quad
+    drawRect = draw_rect
+    drawSector = draw_sector
+    drawSquiggle = draw_squiggle
+    drawZigzag = draw_zigzag
+
+    def extend_textpage(self, tpage, flags=0, matrix=None):
+        #return _fitz.Page_extend_textpage(self, tpage, flags, matrix)
+        page = self.this
+        tp = tpage.this
+        assert isinstance( tp, mupdf.StextPage)
+        #fz_device *dev = NULL;
+        #fz_stext_options options;
+        #memset(&options, 0, sizeof options);
+        options = mupdf.StextOptions()
+        options.flags = flags
+        ctm = JM_matrix_from_py(matrix);
+        dev = mupdf.Device(tp, options)
+        mupdf.mfz_run_page( page, dev, ctm, mupdf.Cookie())
+        mupdf.mfz_close_device( dev)
+
     @property
     def firstAnnot(self):
         """First annotation."""
@@ -8586,7 +8712,7 @@ class Page:
         #fz_output *out = NULL;
         #fz_separations *seps = NULL;
         tbounds = mediabox
-        text_option = mupdf.FZ_SVG_TEXT_AS_PATH if text_as_path == 1 else muodf.FZ_SVG_TEXT_AS_TEXT
+        text_option = mupdf.FZ_SVG_TEXT_AS_PATH if text_as_path == 1 else mupdf.FZ_SVG_TEXT_AS_TEXT
         tbounds = mupdf.mfz_transform_rect(tbounds, ctm)
 
         res = mupdf.mfz_new_buffer(1024)
@@ -10640,8 +10766,7 @@ class Rect(object):
 
     def round(self):
         """Return the IRect."""
-        return IRect(min(self.x0, self.x1), min(self.y0, self.y1),
-                     max(self.x0, self.x1), max(self.y0, self.y1))
+        return IRect(TOOLS._round_rect(self))
 
     @property
     def top_left(self):
@@ -12293,12 +12418,13 @@ class IRect(Rect):
     isEmpty = Rect.is_empty
 
     @property
-    def rect(self):
-        return Rect(self)
+    def is_valid(self):
+        """True if rectangle is valid."""
+        return self.x0 <= self.x1 and self.y0 <= self.y1
 
     @property
-    def round(self):
-        pass
+    def rect(self):
+        return Rect(self)
 
     def transform(self, m):
         return Rect.transform(self, m).round()
@@ -15753,6 +15879,10 @@ def JM_put_script(annot_obj, key1, key2, value):
             mupdf.mpdf_dict_putl(annot_obj, newaction, key1, key2)
 
 
+def JM_py_from_irect(r):
+    return r.x0, r.y0, r.x1, r.y1
+
+
 def JM_py_from_matrix(m):
     return m.a, m.b, m.c, m.d, m.e, m.f
 
@@ -17160,7 +17290,7 @@ def jm_bbox_fill_text( dev, text, ctm, *args):
 
 
 def jm_bbox_ignore_text( dev, text, ctm):
-    jm_bbox_add_rect( dev, muodf.bound_text(text, None, ctm), "ignore-text")
+    jm_bbox_add_rect( dev, mupdf.bound_text(text, None, ctm), "ignore-text")
 
 
 def jm_bbox_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
@@ -18499,6 +18629,22 @@ def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> lis
 
 
 def _make_rect( *args):
+    '''
+    Helper for initialising rectangle classes.
+
+    Returns (x0, y0, x1, y1) derived from <args>.
+
+    Accepts following forms for <args>:
+        ()  returns all zeros.
+        (top-left, bottom-right)
+        (top-left, x1, y1)
+        (x0, y0, bottom-right)
+        (x0, y0, x1, y1)
+        (rect)
+
+    Where top-left and bottom-right are (x, y) or something with .x, .y
+    members; rect is something with .x0, .y0, .x1, and .y1 members.
+    '''
     def get_xy( arg):
         if isinstance( arg, (list, tuple)) and len( arg) == 2:
             return arg[0], arg[1]
@@ -19713,6 +19859,11 @@ class TOOLS:
 
         val = (col, font, fsize)
         return val
+
+    @staticmethod
+    def _round_rect(rect):
+        #return _fitz.Tools__round_rect(self, rect)
+        return JM_py_from_irect(mupdf.mfz_round_rect(JM_rect_from_py(rect)))
 
     @staticmethod
     def _save_widget(annot, widget):
