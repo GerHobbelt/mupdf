@@ -524,9 +524,6 @@ class Annot:
     def get_text(*args, **kwargs):
         return uils.get_text(*args, **kwargs)
 
-    def get_textbox(*args, **kwargs):
-        return utils.get_textbox(*args, **kwargs)
-
     def get_textpage(self, clip=None, flags=0):
         """Make annotation TextPage."""
         CheckParent(self)
@@ -538,8 +535,6 @@ class Annot:
         return TextPage(stextpage)
 
     getText = get_text
-
-    getTextbox = get_textbox
 
     @property
     def has_popup(self):
@@ -8417,10 +8412,10 @@ class Page:
         mupdf.mfz_close_device( dev)
 
     @property
-    def firstAnnot(self):
+    def first_annot(self):
         """First annotation."""
         CheckParent(self)
-        #val = _fitz.Page_firstAnnot(self)
+        #val = _fitz.Page_first_annot(self)
         page = self._pdf_page()
         if page:
             annot = mupdf.mpdf_first_annot(page)
@@ -8436,6 +8431,7 @@ class Page:
         '''
         First link on page
         '''
+        return self.load_links
 
     @property
     def first_widget(self):
@@ -8457,6 +8453,8 @@ class Page:
             TOOLS._fill_widget(val, widget)
             val = widget
         return val
+
+    firstAnnot = first_annot
 
     @property
     def firstWidget(self):
@@ -8559,6 +8557,50 @@ class Page:
         else:
             dl = mupdf.mfz_new_display_list_from_page_contents(self.this)
         return DisplayList(dl)
+
+    def get_drawings(self):
+        """Get page drawings paths.
+
+        By default, only 'stroke' and 'fill' drawings are considered. To also extract
+        clipping paths, set the parameter to True.
+
+        Note:
+        For greater comfort, this method converts point-likes, rect-likes, quad-likes
+        of the C version to respective Point / Rect / Quad objects.
+        It also adds default items that are missing in original path types.
+        """
+        allkeys = (
+                ("closePath", False), ("fill", None),
+                ("color", None), ("width", 0), ("lineCap", [0]),
+                ("lineJoin", 0), ("dashes", "[] 0"), ("stroke_opacity", 1),
+                ("fill_opacity", 1), ("even_odd", True),
+            )
+        val = self.get_cdrawings()
+        paths = []
+        for path in val:
+            npath = path.copy()
+            npath["rect"] = Rect(path["rect"])
+            scissor = path.get("scissor")
+            if scissor:
+                npath["scissor"] = Rect(scissor)
+            items = path["items"]
+            newitems = []
+            for item in items:
+                cmd = item[0]
+                rest = item[1:]
+                if  cmd == "re":
+                    item = ("re", Rect(rest[0]))
+                elif cmd == "qu":
+                    item = ("qu", Quad(rest[0]))
+                else:
+                    item = tuple([cmd] + [Point(i) for i in rest])
+                newitems.append(item)
+            npath["items"] = newitems
+            for k, v in allkeys:
+                npath[k] = npath.get(k, v)
+            paths.append(npath)
+        val = None
+        return paths
 
     def get_fonts(self, full=False):
         """List of fonts defined in the page object."""
@@ -8768,6 +8810,28 @@ class Page:
         #jlib.log('{textpage=}')
         return textpage
 
+    def get_texttrace(self):
+
+        CheckParent(self)
+        old_rotation = self.rotation
+        if old_rotation != 0:
+            self.set_rotation(0)
+        #val = _fitz.Page_get_texttrace(self)
+        page = self.this
+        rc = []
+        dev = JM_new_tracetext_device(rc)
+        trace_device_Linewidth = 0
+        prect = mupdf.mfz_bound_page(page)
+        trace_device_rot = mupdf.Matrix()
+        trace_device_ptm = mupdf.mfz_make_matrix(1, 0, 0, -1, 0, prect.y1)
+        mupdf.mfz_run_page(page, dev, mupdf.Matrix(), mupdf.Cookie())
+        mupdf.mfz_close_device(dev)
+
+        if old_rotation != 0:
+            self.set_rotation(old_rotation)
+        return rc
+
+
     def get_xobjects(self):
         """List of xobjects defined in the page object."""
         CheckParent(self)
@@ -8934,6 +8998,13 @@ class Page:
                 print("unexpected item:", item)
 
         return paths
+
+    getImageBbox = get_image_bbox
+    getLinks = get_links
+    getPixmap = get_pixmap
+    getSVGimage = get_svg_image
+    getText = get_text
+    getTextPage = get_textpage
 
     def insert_font(self, fontname="helv", fontfile=None, fontbuffer=None,
                    set_simple=False, wmode=0, encoding=0):
@@ -9161,7 +9232,7 @@ class Page:
                 yield (link)
 
     def load_links(self):
-        return sel.loadLinks()
+        return self.loadLinks()
 
     def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
         """Load an annot by name (/NM key) or xref.
@@ -9254,6 +9325,11 @@ class Page:
         return JM_page_rotation(page);
 
     @property
+    def rotation_matrix(self) -> Matrix:
+        """Reflects page rotation."""
+        return Matrix(TOOLS._rotate_matrix(self))
+
+    @property
     def rotationMatrix(self) -> Matrix:
         """Reflects page rotation."""
         return Matrix(TOOLS._rotate_matrix(self))
@@ -9327,15 +9403,43 @@ class Page:
                     mupdf.mfz_string_from_text_language(buf, lang)  # fixme: needs wrapper to handle char buf[8].
                     )
 
-    def setCropBox(self, rect):
+    def set_cropbox(self, rect):
         """Set the CropBox."""
         CheckParent(self)
-        return _fitz.Page_setCropBox(self, rect)
+        #return _fitz.Page_set_cropbox(self, rect)
+        page = self._pdf_page()
+        ASSERT_PDF(page)
+        mediabox = mupdf.mpdf_bound_page( page)
+        o = mupdf.mpdf_dict_get_inheritable( page.obj(), PDF_NAME('MediaBox'))
+        if o.m_internal:
+            mediabox = mupdf.mpdf_to_rect( o)
+        cropbox = mupdf.Rect( mupdf.fz_empty_rect)
+        r = JM_rect_from_py(rect)
+        cropbox.x0 = r.x0
+        cropbox.x1 = r.x1
+        cropbox.y0 = mediabox.y1 - r.y1 + mediabox.y0
+        cropbox.y1 = mediabox.y1 - r.y0 + mediabox.y0
+        mupdf.mpdf_dict_put_drop(
+                page.obj(),
+                PDF_NAME('CropBox'),
+                mupdf.mpdf_new_rect( page.doc(), cropbox)
+                )
 
-    def setMediaBox(self, rect):
+    def set_mediabox(self, rect):
         """Set the MediaBox."""
         CheckParent(self)
-        return _fitz.Page_setMediaBox(self, rect)
+        #return _fitz.Page_set_mediabox(self, rect)
+        page = self._pdf_page()
+        ASSERT_PDF(page)
+        mediabox = JM_rect_from_py(rect)
+        if (mupdf.mfz_is_empty_rect(mediabox)
+                or mupdf.mfz_is_infinite_rect(mediabox)
+                ):
+            THROWMSG("rect must be finite and not empty")
+        if mediabox.x0 != 0 or mediabox.y0 != 0:
+            THROWMSG("mediabox must start at (0,0)")
+        mupdf.mpdf_dict_put_rect( page.obj(), PDF_NAME('MediaBox'), mediabox)
+        mupdf.mpdf_dict_put_rect( page.obj(), PDF_NAME('CropBox'), mediabox)
 
     firstLink = property(loadLinks, doc="First link on page")
 
@@ -9536,10 +9640,6 @@ class Page:
 
     cleanContents = clean_contents
     getContents = get_contents
-
-    def write_text(self, **kwargs):
-        #jlib.log('{kwargs=}')
-        return utils.write_text(self, **kwargs)
 
     @property
     def xref(self):
@@ -9823,16 +9923,31 @@ class Pixmap:
         #return _fitz.Pixmap_alpha(self)
         return mupdf.mfz_pixmap_alpha(self.this)
 
-    def clearWith(self, *args):
+    def clear_with(self, value=None, bbox=None):
         """Fill all color components with same value."""
-
-        return _fitz.Pixmap_clearWith(self, *args)
+        if value is None:
+            mupdf.mfz_clear_pixmap(self.this)
+        elif bbox is None:
+            mupdf.mfz_clear_pixmap_with_value(self.this, value)
+        else:
+            JM_clear_pixmap_rect_with_value(self.this, value, JM_irect_from_py(bbox))
 
     @property
     def colorspace(self):
         """Pixmap Colorspace."""
         #return _fitz.Pixmap_colorspace(self)
         return Colorspace(mupdf.mfz_pixmap_colorspace(self.this))
+
+    def copy(self, src, bbox):
+        """Copy bbox from another Pixmap."""
+        #return _fitz.Pixmap_copy(self, src, bbox)
+        pm = self.this
+        src_pix = src.this
+        if not mupdf.mfz_pixmap_colorspace(src_pix):
+            THROWMSG("cannot copy pixmap with NULL colorspace")
+        if pm.alpha() != src_pix.alpha():
+            THROWMSG("source and target alpha must be equal")
+        mupdf.mfz_copy_pixmap_rect(pm, src_pix, JM_irect_from_py(bbox), mupdf.DefaultColorspaces(None))
 
     def copyPixmap(self, src, bbox):
         """Copy bbox from another Pixmap."""
@@ -9845,6 +9960,15 @@ class Pixmap:
         #return _fitz.Pixmap_digest(self)
         ret = self.this.md5_pixmap()
         return bytes(ret)
+
+    def gamma_with(self, gamma):
+        """Apply correction with some float.
+        gamma=1 is a no-op."""
+        #return _fitz.Pixmap_gamma_with(self, gamma)
+        if not mupdf.mfz_pixmap_colorspace( self.this):
+            JM_Warning("colorspace invalid for function");
+            return
+        mupdf.mfz_gamma_pixmap( self.this, gamma)
 
     def getImageData(self, output="png"):
         """Convert to binary image stream of desired type.
@@ -9868,21 +9992,24 @@ class Pixmap:
         barray = self._getImageData(idx)
         return barray
 
-    def getPNGData(self):
-        """Wrapper for Pixmap.getImageData("png")."""
-        barray = self._getImageData(1)
-        return barray
-
     @property
     def h(self):
         """The height."""
         #return _fitz.Pixmap_h(self)
         return mupdf.mfz_pixmap_height(self.this)
 
-    def invertIRect(self, bbox=None):
+    def invert_irect(self, bbox=None):
         """Invert the colors inside a bbox."""
+        #return _fitz.Pixmap_invert_irect(self, bbox)
+        pm = self.this
+        if not mupdf.mfz_pixmap_colorspace(pm):
+            JM_Warning("ignored for stencil pixmap")
+            return False
+        r = JM_irect_from_py(bbox)
+        if mupdf.mfz_is_infinite_irect(r):
+            r = mupdf.mfz_pixmap_bbox( pm)
+        return bool(JM_invert_pixmap_rect( pm, r))
 
-        return _fitz.Pixmap_invertIRect(self, bbox)
 
     @property
     def irect(self):
@@ -9893,10 +10020,31 @@ class Pixmap:
         return val
 
     @property
+    def is_monochrome(self):
+        """Check if pixmap is monochrome."""
+        #return _fitz.Pixmap_is_monochrome(self)
+        return mupdf.mfz_is_pixmap_monochrome( self.this)
+
+    @property
     def n(self):
         """The size of one pixel."""
         #return _fitz.Pixmap_n(self)
         return mupdf.mfz_pixmap_components(self.this)
+
+    def pdfocr_save(self, filename, compress=1, language=None):
+        #return _fitz.Pixmap_pdfocr_save(self, filename, compress, language)
+        opts = mupdf.PdfocrOptions()
+        opts.compress = compress;
+        if language:
+            opts.language
+            fz_strlcpy(opts.language, language, sizeof(opts.language));
+        #fz_output *out = NULL;
+        pix = self.this
+        if filename:
+            mupdf.mfz_save_pixmap_as_pdfocr( pix, filename, 0, opts)
+        else:
+            out = JM_new_output_fileptr( filename)
+            mupdf.mfz_write_pixmap_as_pdfocr( out, pix, opts)
 
     def pillowData(self, *args, **kwargs):
         """Convert to binary image stream using pillow.
@@ -12452,8 +12600,6 @@ class IRect:
         if r.intersect(r1).is_empty:
             return False
         return True
-
-    irect = round
 
     @property
     def is_empty(self):
@@ -15314,6 +15460,24 @@ def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, se
     return value
 
 
+def JM_irect_from_py(r):
+    '''
+    PySequence to fz_irect. Default: infinite irect
+    '''
+    if isinstance(r, (muopdf.IRect, mupdf.Rect)):
+        return r
+    if isinstance(r, Rect):
+        return mupdf.mfz_make_irect(r.x0, r.y0, r.x1, r.y1)
+    if not r or not PySequence_Check(r) or PySequence_Size(r) != 4:
+        return mupdf.Rect(mupdf.fz_infinite_irect)
+    f = [0, 0, 0, 0]
+    for i in range(4):
+        f[i] = JM_FLOAT_ITEM(r, i)
+        if f[i] is None:
+            return mupdf.Rect(mupdf.fz_infinite_irect)
+    return mupdf.mfz_make_irect(f[0], f[1], f[2], f[3])
+
+
 def JM_is_jbig2_image(dict_):
     return 0
     #filter_ = pdf_dict_get(ctx, dict_, PDF_NAME(Filter));
@@ -15802,6 +15966,33 @@ def JM_new_tracedraw_device(out):
     dev.seqno = 0
 
     return dev
+
+
+def JM_new_tracetext_device(out):
+    class tracetext_device(mupdf.Device2):
+        def __init__(self):
+            super().__init__()
+            self.use_virtual_fill_path()
+            self.use_virtual_stroke_path()
+            self.use_virtual_fill_text()
+            self.use_virtual_stroke_text()
+            self.use_virtual_ignore_text()
+            self.use_virtual_fill_shade()
+            self.use_virtual_fill_image()
+            self.use_virtual_fill_image_mask()
+            self.out = out
+            self.seqno = 0
+
+        fill_path = jm_increase_seqno;
+        stroke_path = jm_trace_device_Linewidth
+        fill_text = jm_tracedraw_fill_text
+        stroke_text = jm_tracedraw_stroke_text
+        ignore_text = jm_tracedraw_ignore_text
+        fill_shade = jm_increase_seqno
+        fill_image = jm_increase_seqno
+        fill_image_mask = jm_increase_seqno
+
+    return tracetext_device()
 
 
 def JM_norm_rotation(rotate):
@@ -17180,42 +17371,6 @@ def get_pdf_str(s: str) -> str:
     return "(" + r + ")"
 
 
-def get_text_blocks(
-        page: Page,
-        clip: rect_like = None,
-        flags: OptInt = None,
-        textpage: TextPage = None,
-        sort: bool = False,
-        ) -> list:
-    """Return the text blocks on a page.
-
-    Notes:
-        Lines in a block are concatenated with line breaks.
-    Args:
-        flags: (int) control the amount of data parsed into the textpage.
-    Returns:
-        A list of the blocks. Each item contains the containing rectangle
-        coordinates, text lines, block type and running block number.
-    """
-    CheckParent(page)
-    if flags is None:
-        flags = (
-            TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_IMAGES | TEXT_PRESERVE_LIGATURES
-        )
-    tp = textpage
-    if tp is None:
-        tp = page.get_textpage(clip=clip, flags=flags)
-    elif getattr(tp, "parent") != page:
-        raise ValueError("not a textpage of this page")
-
-    blocks = tp.extractBLOCKS()
-    if textpage is None:
-        del tp
-    if sort is True:
-        blocks.sort(key=lambda b: (b[3], b[0]))
-    return blocks
-
-
 def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
     """Calculate length of a string for a built-in font.
 
@@ -17257,34 +17412,6 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
         return ret
 
     raise ValueError("Font '%s' is unsupported" % fontname)
-
-
-def get_text_words(
-        page: Page,
-        clip: rect_like = None,
-        flags: OptInt = None,
-        textpage: TextPage = None,
-        sort: bool = False,
-        ) -> list:
-    """Return the text words as a list with the bbox for each word.
-
-    Args:
-        flags: (int) control the amount of data parsed into the textpage.
-    """
-    CheckParent(page)
-    if flags is None:
-        flags = TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES
-    tp = textpage
-    if tp is None:
-        tp = page.get_textpage(clip=clip, flags=flags)
-    elif getattr(tp, "parent") != page:
-        raise ValueError("not a textpage of this page")
-    words = tp.extractWORDS()
-    if textpage is None:
-        del tp
-    if sort is True:
-        words.sort(key=lambda w: (w[3], w[0]))
-    return words
 
 
 def image_properties(img: typing.ByteString) -> dict:
@@ -17587,6 +17714,24 @@ def jm_tracedraw_fill_path(dev, path, even_odd, ctm, colorspace, color, alpha, c
         jlib.log(jlib.exception_info())
         raise
 
+
+# There are 3 text trace types:
+# 0 - fill text (PDF Tr 0)
+# 1 - stroke text (PDF Tr 1)
+# 3 - ignore text (PDF Tr 3)
+
+def jm_tracedraw_fill_text(ctx, dev, text, ctm, colorspace, color, alpha, color_params):
+    out = dev.out
+    jm_trace_text(out, text, 0, ctm, colorspace, color, alpha, dev.seqno)
+    dev.seqno += 1
+
+
+def jm_tracedraw_ignore_text(dev, text, ctm):
+    out = dev.out
+    jm_trace_text(out, text, 3, ctm, None, None, 1, dev.seqno)
+    dev.seqno += 1
+
+
 def jm_tracedraw_path(dev, path):
 
     class Walker(mupdf.PathWalker2):
@@ -17716,6 +17861,12 @@ def jm_tracedraw_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, 
     except Exception:
         jlib.log(jlib.exception_info())
         raise
+
+
+def jm_tracedraw_stroke_text(dev, text, stroke, ctm, colorspace, color, alpha, color_params):
+    out = dev.out
+    jm_trace_text(out, text, 1, ctm, colorspace, color, alpha, dev.seqno)
+    dev.seqno += 1
 
 
 def jm_trace_device_Linewidth(dev, path, stroke_state, matrix, colorspace, color, alpha, color_params):
@@ -19945,6 +20096,14 @@ class TOOLS:
         return val
 
     @staticmethod
+    def _rotate_matrix(page):
+        #return _fitz.Tools__rotate_matrix(self, page)
+        pdfpage = page._pdf_page()
+        if not pdf_page.m_internal:
+            return JM_py_from_matrix(mupdf.Matrix())
+        return JM_py_from_matrix(JM_rotate_page_matrix(pdfpage))
+
+    @staticmethod
     def _round_rect(rect):
         #return _fitz.Tools__round_rect(self, rect)
         return JM_py_from_irect(mupdf.mfz_round_rect(JM_rect_from_py(rect)))
@@ -20072,3 +20231,42 @@ recover_char_quad = utils.recover_char_quad
 recover_line_quad = utils.recover_line_quad
 recover_quad = utils.recover_quad
 recover_span_quad = utils.recover_span_quad
+
+Annot.get_textbox = utils.get_textbox
+Annot.getTextbox = Annot.get_textbox
+
+Page.get_image_rects = utils.get_image_rects
+Page.get_text_blocks = utils.get_text_blocks
+Page.get_text_selection = utils.get_text_selection
+Page.get_text_words = utils.get_text_words
+Page.get_textbox = utils.get_textbox
+Page.write_text = utils.write_text
+Page.get_textpage_ocr = utils.get_textpage_ocr
+
+Page.getTextBlocks = utils.get_text_blocks
+Page.getTextWords = Page.get_text_words
+Page.getTextbox = utils.get_textbox
+Page.insertImage = Page.insert_image
+Page.insertLink = Page.insert_link
+Page.insertText = Page.insert_text
+Page.insertTextbox = Page.insert_textbox
+Page.newShape = Page.new_shape
+Page.searchFor = Page.search_for
+Page.update_link = utils.update_link
+Page.writeText = Page.write_text
+Page.setRotation = Page.set_rotation
+Page.setCropBox = Page.set_cropbox
+Page.setMediaBox = Page.set_mediabox
+Page.showPDFpage = Page.show_pdf_page
+
+Page.updateLink = Page.update_link
+
+Pixmap.clearWith = Pixmap.clear_with
+Pixmap.gammaWith = Pixmap.gamma_with
+Pixmap.getPNGData = Pixmap.tobytes
+Pixmap.getPNGdata = Pixmap.tobytes
+Pixmap.invertIRect = Pixmap.invert_irect
+
+Rect.getArea = utils.get_area
+Rect.getRectArea = utils.get_area
+Rect.get_area = utils.get_area
