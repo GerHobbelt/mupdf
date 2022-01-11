@@ -10484,53 +10484,11 @@ class Rect(object):
         return len(rect) == 4 and bool(self - rect) is False
 
     def __init__(self, *args):
-        #jlib.log('{args=}')
-        if not args:
-            self.x0 = self.y0 = self.x1 = self.y1 = 0.0
-            return None
-
-        if len(args) > 4:
-            raise ValueError("bad Rect: sequ. length")
-        if len(args) == 4:
-            self.x0, self.y0, self.x1, self.y1 = map(float, args)
-            return None
-        if len(args) == 1:
-            l = args[0]
-            #jlib.log('{l=} {type(l)=}')
-            if isinstance(l, (mupdf.Rect, mupdf.Irect)):
-                self.x0 = l.x0
-                self.y0 = l.y0
-                self.x1 = l.x1
-                self.y1 = l.y1
-                return
-            if hasattr(l, "__getitem__") is False:
-                raise ValueError("bad Rect constructor")
-            if len(l) != 4:
-                raise ValueError("bad Rect: sequ. length")
-            self.x0, self.y0, self.x1, self.y1 = map(float, l)
-            return None
-        if len(args) == 2:                  # 2 Points provided
-            self.x0 = float(args[0][0])
-            self.y0 = float(args[0][1])
-            self.x1 = float(args[1][0])
-            self.y1 = float(args[1][1])
-            return None
-        if len(args) == 3:                  # 2 floats and 1 Point provided
-            a0 = args[0]
-            a1 = args[1]
-            a2 = args[2]
-            if hasattr(a0, "__float__"):    # (float, float, Point) provided
-                self.x0 = float(a0)
-                self.y0 = float(a1)
-                self.x1 = float(a2[0])
-                self.y1 = float(a2[1])
-                return None
-            self.x0 = float(a0[0])          # (Point, float, float) provided
-            self.y0 = float(a0[1])
-            self.x1 = float(a1)
-            self.y1 = float(a2)
-            return None
-        raise ValueError("bad Rect constructor")
+        x0, y0, x1, y1 = _make_rect( *args)
+        self.x0 = float( x0)
+        self.y0 = float( y0)
+        self.x1 = float( x1)
+        self.y1 = float( y1)
 
     def __getitem__(self, i):
         return (self.x0, self.y0, self.x1, self.y1)[i]
