@@ -392,6 +392,9 @@ void ocr_recognise(fz_context *ctx,
 							&smallcaps,
 							&pointsize,
 							&font_id);
+#if defined(_DEBUG)
+			fz_write_printf(ctx, fz_stddbg(ctx), "OCR: %d %d %d %d:", word_bbox[0], word_bbox[1], word_bbox[2], word_bbox[3]);
+#endif			
 			do
 			{
 				const char *graph = res_it->GetUTF8Text(tesseract::RIL_SYMBOL);
@@ -401,6 +404,9 @@ void ocr_recognise(fz_context *ctx,
 					res_it->BoundingBox(tesseract::RIL_SYMBOL,
 							char_bbox, char_bbox+1,
 							char_bbox+2, char_bbox+3);
+#if defined(_DEBUG)
+					fz_write_printf(ctx, fz_stddbg(ctx), " %c(%02X)", (graph[0] >= '\t' ? graph[0] : '.'), graph[0]);
+#endif
 					fz_chartorune_unsafe(&unicode, graph);
 					callback(ctx, arg, unicode, font_name, line_bbox, word_bbox, char_bbox, pointsize);
 				}
@@ -409,6 +415,9 @@ void ocr_recognise(fz_context *ctx,
 			}
 			while (!res_it->Empty(tesseract::RIL_BLOCK) &&
 				!res_it->IsAtBeginningOf(tesseract::RIL_WORD));
+#if defined(_DEBUG)
+			fz_write_printf(ctx, fz_stddbg(ctx), "\n");
+#endif
 		}
 	}
 	fz_always(ctx)

@@ -738,14 +738,14 @@ fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_m
 
 	for (i = 0; i < span->len; i++)
 	{
+		if (dev->opts.flags & FZ_STEXT_MEDIABOX_CLIP)
+			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &dev->page->mediabox))
+				continue;
+
 		/* Calculate new pen location and delta */
 		tm.e = span->items[i].x;
 		tm.f = span->items[i].y;
 		trm = fz_concat(tm, ctm);
-
-		if (dev->opts.flags & FZ_STEXT_MEDIABOX_CLIP)
-			if (fz_glyph_entirely_outside_box(ctx, &ctm, span, &span->items[i], &dev->page->mediabox))
-				continue;
 
 		/* Calculate bounding box and new pen position based on font metrics */
 		if (span->items[i].gid >= 0)
