@@ -12832,6 +12832,16 @@ if 1:
                 assert not inspect.isroutine(value)
                 #print(f'importing {name}')
                 setattr(self, name, value)
+    # This is a macro so not preserved in mupdf C++/Python bindings.
+    #
+    PDF_SIGNATURE_DEFAULT_APPEARANCE = (0
+            | PDF_SIGNATURE_SHOW_LABELS
+            | PDF_SIGNATURE_SHOW_DN
+            | PDF_SIGNATURE_SHOW_DATE
+            | PDF_SIGNATURE_SHOW_TEXT_NAME
+            | PDF_SIGNATURE_SHOW_GRAPHIC_NAME
+            | PDF_SIGNATURE_SHOW_LOGO
+            )
     assert mupdf.UCDN_EAST_ASIAN_H == 1
     assert PDF_TX_FIELD_IS_MULTILINE == mupdf.PDF_TX_FIELD_IS_MULTILINE
     assert UCDN_SCRIPT_ADLAM == mupdf.UCDN_SCRIPT_ADLAM
