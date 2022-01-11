@@ -6323,6 +6323,36 @@ class Widget(object):
 
         self._checker()  # any field_type specific checks
 
+    def button_states(self):
+        """Return the on/off state names for button widgets.
+
+        A button may have 'normal' or 'pressed down' appearances. While the 'Off'
+        state is usually called like this, the 'On' state is often given a name
+        relating to the functional context.
+        """
+        if self.field_type not in (1, 2, 3, 5):
+            return None  # no button type
+        doc = self.parent.parent
+        xref = self.xref
+        states = {"normal": None, "down": None}
+        APN = doc.xref_get_key(xref, "AP/N")
+        if APN[0] == "dict":
+            nstates = []
+            APN = APN[1][2:-2]
+            apnt = APN.split("/")[1:]
+            for x in apnt:
+                nstates.append(x.split()[0])
+            states["normal"] = nstates
+        APD = doc.xref_get_key(xref, "AP/D")
+        if APD[0] == "dict":
+            dstates = []
+            APD = APD[1][2:-2]
+            apdt = APD.split("/")[1:]
+            for x in apdt:
+                dstates.append(x.split()[0])
+            states["down"] = dstates
+        return states
+
     @property
     def next(self):
         return self._annot.next
@@ -10338,8 +10368,13 @@ class Pixmap:
         #return _fitz.Pixmap_stride(self)
         return self.this.stride()
 
-    def tintWith(self, black, white):
-        return _fitz.Pixmap_tintWith(self, black, white)
+    def tint_with(self, black, white):
+        """Tint colors with modifiers for black and white."""
+        if not self.colorspace or self.colorspace.n > 3:
+            print("warning: colorspace invalid for function")
+            return
+        #return _fitz.Pixmap_tint_with(self, black, white)
+        return mupdf.mfz_tint_pixmap( self.this, black, white)
 
     def tobytes(self, output="png"):
         """Convert to binary image stream of desired type.
@@ -10956,6 +10991,11 @@ class Rect(object):
         """True if rectangle is infinite."""
         return self.x0 > self.x1 or self.y0 > self.y1
     isInfinite = is_infinite
+
+    @property
+    def is_valid(self):
+        """True if rectangle is valid."""
+        return self.x0 <= self.x1 and self.y0 <= self.y1
 
     def include_point(self, p):
         """Extend to include point-like p."""
@@ -12292,6 +12332,15 @@ class TextPage:
         """Return page content as a XHTML string."""
         return self._extractText(4)
 
+    def poolsize(self):
+        """TextPage current poolsize."""
+        #return _fitz.TextPage_poolsize(self)
+        tpage = self.this
+        pool = mupdf.Pool(tpage.m_internal.pool)
+        size = mupdf.mfz_pool_size( pool)
+        pool.m_internal = None  # Ensure that pool's destructor does not free the pool.
+        return size
+
     @property
     def rect(self):
         """Page rectangle."""
@@ -12449,9 +12498,6 @@ class TextWriter:
 
         text = " ".join(words)
         return text
-
-    def fill_textbox(*args, **kwargs):
-        return utils.fill_textbox(*args, **kwargs)
 
     def write_text(self, page, color=None, opacity=-1, overlay=1, morph=None, matrix=None, render_mode=0, oc=0):
         """Write the text to a PDF page having the TextWriter's page size.
@@ -17362,48 +17408,6 @@ def dir_str(x):
     return ret
 
 
-def getTextlength(text: str, fontname: str ="helv", fontsize: float =11, encoding: int =0) -> float:
-    """Calculate length of a string for a given built-in font.
-
-    Args:
-        fontname: name of the font.
-        fontsize: size of font in points.
-        encoding: encoding to use (0=Latin, 1=Greek, 2=Cyrillic).
-    Returns:
-        (float) length of text.
-    """
-    fontname = fontname.lower()
-    basename = Base14_fontdict.get(fontname, None)
-
-    glyphs = None
-    if basename == "Symbol":
-        glyphs = symbol_glyphs
-    if basename == "ZapfDingbats":
-        glyphs = zapf_glyphs
-    if glyphs is not None:
-        w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
-        return w * fontsize
-
-    if fontname in Base14_fontdict.keys():
-        return TOOLS._measure_string(
-            text, Base14_fontdict[fontname], fontsize, encoding
-        )
-
-    if fontname in (
-        "china-t",
-        "china-s",
-        "china-ts",
-        "china-ss",
-        "japan",
-        "japan-s",
-        "korea",
-        "korea-s",
-    ):
-        return len(text) * fontsize
-
-    raise ValueError("Font '%s' is unsupported" % fontname)
-
-
 def getTJstr(text: str, glyphs: typing.Union[list, tuple, None], simple: bool, ordering: int) -> str:
     """ Return a PDF string enclosed in [] brackets, suitable for the PDF TJ
     operator.
@@ -17518,28 +17522,29 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
         glyphs = zapf_glyphs
     if glyphs is not None:
         w = sum([glyphs[ord(c)][1] if ord(c) < 256 else glyphs[183][1] for c in text])
-        ret = w * fontsize
-        return ret
+        return w * fontsize
 
     if fontname in Base14_fontdict.keys():
-        ret = TOOLS._measure_string( text, Base14_fontdict[fontname], fontsize, encoding)
-        return ret
+        return TOOLS._measure_string(
+            text, Base14_fontdict[fontname], fontsize, encoding
+        )
 
     if fontname in (
-            "china-t",
-            "china-s",
-            "china-ts",
-            "china-ss",
-            "japan",
-            "japan-s",
-            "korea",
-            "korea-s",
-            ):
-        ret = len(text) * fontsize
-        return ret
+        "china-t",
+        "china-s",
+        "china-ts",
+        "china-ss",
+        "japan",
+        "japan-s",
+        "korea",
+        "korea-s",
+    ):
+        return len(text) * fontsize
 
     raise ValueError("Font '%s' is unsupported" % fontname)
 
+getTextLength = get_text_length
+getTextlength = get_text_length
 
 def image_properties(img: typing.ByteString) -> dict:
     """ Return basic properties of an image.
@@ -20393,7 +20398,18 @@ Pixmap.gammaWith = Pixmap.gamma_with
 Pixmap.getPNGData = Pixmap.tobytes
 Pixmap.getPNGdata = Pixmap.tobytes
 Pixmap.invertIRect = Pixmap.invert_irect
+Pixmap.tintWith = Pixmap.tint_with
+
+Quad.isConvex = Quad.is_convex
+Quad.isEmpty = Quad.is_empty
+Quad.isRectangular = Quad.is_rectangular
 
 Rect.getArea = utils.get_area
 Rect.getRectArea = utils.get_area
 Rect.get_area = utils.get_area
+Rect.includeRect = Rect.include_rect
+Rect.isEmpty = Rect.is_empty
+
+TextWriter.fill_textbox = utils.fill_textbox
+TextWriter.fillTextbox = TextWriter.fill_textbox
+TextWriter.writeText = TextWriter.write_text
