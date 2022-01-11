@@ -2243,6 +2243,45 @@ classextras = ClassExtras(
                     ],
                 ),
 
+        fz_pdfocr_options = ClassExtra(
+                pod = 'inline',
+                constructors_extra = [
+                    ExtraConstructor( '()',
+                        f'''
+                        {{
+                            this->compress = 0;
+                            this->strip_height = 0;
+                            this->language[0] = 0;
+                            this->datadir[0] = 0;
+                        }}
+                        ''',
+                        '/* Default constructor; sets all fields to zero or empty string. */',
+                        ),
+                    ],
+                methods_extra = [
+                    ExtraMethod(
+                        'void',
+                        'language_set2(const char* language)',
+                        f'''
+                        {{
+                            fz_strlcpy(this->language, language, sizeof(this->language));
+                        }}
+                        ''',
+                        '/* Copies <language> into this->language, truncating if necessary. */',
+                        ),
+                    ExtraMethod(
+                        'void',
+                        'datadir_set2(const char* datadir)',
+                        f'''
+                        {{
+                            fz_strlcpy(this->datadir, datadir, sizeof(this->datadir));
+                        }}
+                        ''',
+                        '/* Copies <datadir> into this->datadir, truncating if necessary. */',
+                        ),
+                    ],
+                ),
+
         fz_pixmap = ClassExtra(
                 methods_extra = [
                     ExtraMethod( 'std::vector<unsigned char>', 'md5_pixmap()',
@@ -2781,6 +2820,7 @@ classextras = ClassExtras(
                         ),
                     ]
                 ),
+
         pdf_page = ClassExtra(
                 methods_extra = [
                     ExtraMethod(
