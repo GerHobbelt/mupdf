@@ -12274,56 +12274,11 @@ class IRect(Rect):
         return Rect.__and__(self, x).round()
 
     def __init__(self, *args):
-        def get_xy( arg):
-            if isinstance( arg, (list, tuple)) and len( arg) == 2:
-                return arg[0], arg[1]
-            if isinstance( arg, Point):
-                return arg.x, arg.y
-            return None, None
-        if 0:
-            pass
-        elif len(args) == 0:
-            self.x0 = 0
-            self.y0 = 0
-            self.x1 = 0
-            self.y1 = 0
-        elif len(args) == 1:
-            arg = args[0]
-            if isinstance( arg, (list, tuple)) and len( arg) == 4:
-                self.x0 = int( arg[0])
-                self.y0 = int( arg[1])
-                self.x1 = int( arg[2])
-                self.y1 = int( arg[3])
-            else:
-                self.x0 = arg.x0
-                self.y0 = arg.y0
-                self.x1 = arg.x1
-                self.y1 = arg.y1
-        elif len(args) == 2:
-            self.x0, self.y0 = get_xy( args[0])
-            self.x1, self.y1 = get_xy( args[1])
-        elif len(args) == 3:
-            self.x0, self.y0 = get_xy( args[0])
-            if (self.x0, self.y0) != (None, None):
-                self.x1 = int( args[1])
-                self.y1 = int( args[2])
-                return
-            self.x1, self.y1 = get_xy( args[2])
-            if (self.x1, self.y1) != (None, None):
-                self.x0 = int( args[0])
-                self.y0 = int( args[1])
-                return
-            raise Exception( f'Unrecognised args: {args}')
-        elif len(args) == 4:
-            self.x0 = int( args[0])
-            self.y0 = int( args[1])
-            self.x1 = int( args[2])
-            self.y1 = int( args[3])
-        else:
-            raise Exception( f'Unrecognised args: {args}')
-
-        assert None not in (self.x0, self.y0, self.x1, self.y1), f'Unrecognised args: {args}'
-
+        x0, y0, x1, y1 = _make_rect( *args)
+        self.x0 = int( x0)
+        self.y0 = int( y0)
+        self.x1 = int( x1)
+        self.y1 = int( y1)
 
     def __mul__(self, m):
         return Rect.__mul__(self, m).round()
@@ -18583,6 +18538,38 @@ def make_table(rect: rect_like =(0, 0, 1, 1), cols: int =1, rows: int =1) -> lis
         rects.append(nrow)  # append new row to result
 
     return rects
+
+
+def _make_rect( *args):
+    def get_xy( arg):
+        if isinstance( arg, (list, tuple)) and len( arg) == 2:
+            return arg[0], arg[1]
+        if isinstance( arg, Point):
+            return arg.x, arg.y
+        return None, None
+    if 0:
+        pass
+    elif len(args) == 0:
+        return 0, 0, 0, 0
+    elif len(args) == 1:
+        arg = args[0]
+        if isinstance( arg, (list, tuple)) and len( arg) == 4:
+            return arg[0], arg[1], arg[2], arg[3]
+        else:
+            return arg.x0, arg.y0, arg.x1, arg.y1
+    elif len(args) == 2:
+        return get_xy( args[0]) + get_xy( args[1])
+    elif len(args) == 3:
+        x0, y0 = get_xy( args[0])
+        if (x0, y0) != (None, None):
+            return x0, y0, args[1], args[2]
+        else:
+            x1, y1 = get_xy( args[2])
+            if (x1, y1) != (None, None):
+                return args[0], args[1], x1, y1
+    elif len(args) == 4:
+        return args[0], args[1], args[2], args[3]
+    raise Exception( f'Unrecognised args: {args}')
 
 
 def match_string(h0, n0):
