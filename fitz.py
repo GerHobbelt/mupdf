@@ -10046,6 +10046,63 @@ class Pixmap:
             out = JM_new_output_fileptr( filename)
             mupdf.mfz_write_pixmap_as_pdfocr( out, pix, opts)
 
+    def pdfocr_tobytes(self, compress=True, language="eng"):
+        """Save pixmap as an OCR-ed PDF page.
+
+        Args:
+            compress: (bool) compress, default 1 (True).
+            language: (str) language(s) occurring on page, default "eng" (English),
+                    multiples like "eng,ger" for English and German.
+        Notes:
+            On failure, make sure Tesseract is installed and you have set the
+            environment variable "TESSDATA_PREFIX" to the folder containing your
+            Tesseract's language support data.
+        """
+        from io import BytesIO
+        bio = BytesIO()
+        self.pdfocr_save(bio, compress=compress, language=language)
+        return bio.getvalue()
+
+    def pil_save(self, *args, **kwargs):
+        """Write to image file using Pillow.
+
+        Args are passed to Pillow's Image.save method, see their documentation.
+        Use instead of save when other output formats are desired.
+        """
+        try:
+            from PIL import Image
+        except ImportError:
+            print("PIL/Pillow not instralled")
+            raise
+
+        cspace = self.colorspace
+        if cspace is None:
+            mode = "L"
+        elif cspace.n == 1:
+            mode = "L" if self.alpha == 0 else "LA"
+        elif cspace.n == 3:
+            mode = "RGB" if self.alpha == 0 else "RGBA"
+        else:
+            mode = "CMYK"
+
+        img = Image.frombytes(mode, (self.width, self.height), self.samples)
+
+        if "dpi" not in kwargs.keys():
+            kwargs["dpi"] = (self.xres, self.yres)
+
+        img.save(*args, **kwargs)
+
+    def pil_tobytes(self, *args, **kwargs):
+        """Convert to binary image stream using pillow.
+
+        Args are passed to Pillow's Image.save method, see their documentation.
+        Use instead of 'tobytes' when other output formats are needed.
+        """
+        from io import BytesIO
+        bytes_out = BytesIO()
+        self.pil_save(bytes_out, *args, **kwargs)
+        return bytes_out.getvalue()
+
     def pillowData(self, *args, **kwargs):
         """Convert to binary image stream using pillow.
 
@@ -10193,6 +10250,53 @@ class Pixmap:
             i += n+1
             k += 1
 
+    def set_dpi(self, xres, yres):
+        """Set resolution in both dimensions."""
+
+        #return _fitz.Pixmap_set_dpi(self, xres, yres)
+        pm = self.this
+        pm.m_internal.xres = xres
+        pm.m_internal.yres = yres
+
+    def set_origin(self, x, y):
+        """Set top-left coordinates."""
+        #return _fitz.Pixmap_set_origin(self, x, y)
+        pm = self.this
+        pm.m_internal.x = x
+        pm.m_internal.y = y
+
+    def set_pixel(self, x, y, color):
+        """Set color of pixel (x, y)."""
+        #return _fitz.Pixmap_set_pixel(self, x, y, color)
+        pm = self.this
+        if not INRANGE(x, 0, pm.w() - 1) or not INRANGE(y, 0, pm.h() - 1):
+            THROWMSG("outside image")
+        n = pm.n()
+        c = list()
+        for j in range(n):
+            i = color[j]
+            if not INRANGE(i, 0, 255):
+                THROWMSG(gctx, "bad color sequence");
+            c.append( ord(i))
+        stride = mupdf.mfz_pixmap_stride( pm)
+        i = stride * y + n * x
+        for j in range(n):
+            pm.m_internal.samples[i + j] = c[j]
+
+    def set_rect(self, bbox, color):
+        """Set color of all pixels in bbox."""
+        #return _fitz.Pixmap_set_rect(self, bbox, color)
+        pm = self.this
+        n = pm.n()
+        c = []
+        for j in range(n):
+            i = color[j]
+            if not INRANGE(i, 0, 255):
+                THROWMSG("bad color component")
+            c.append( ord(i))
+        i = JM_fill_pixmap_rect_with_color(pm, c, JM_irect_from_py(bbox))
+        rc = bool(i)
+        return rc
 
     def setAlpha(self, alphavalues=None, premultiply=1):
         """Set alphas to values contained in a byte array.
@@ -14537,6 +14641,29 @@ def JM_field_type_text(wtype):
     if wtype == PDF_WIDGET_TYPE_SIGNATURE:
         return "Signature"
     return "unknown"
+
+
+def JM_fill_pixmap_rect_with_color(dest, col, b):
+    assert isinstance(dest, mupdf.Pixmap)
+    # fill a rect with a color tuple
+    b = mupdf.mfz_intersect_irect(b, mupdf.mfz_pixmap_bbox( dest))
+    w = b.x1 - b.x0
+    y = b.y1 - b.y0
+    if w <= 0 or y <= 0:
+        return 0
+    destspan = dest.stride()
+    destp = destspan * (b.y0 - dest.y()) + dest.n() * (b.x0 - dest.x())
+    while 1:
+        s = destp;
+        for x in range(w):
+            for i in range( dest.n()):
+                dest.samples_set(s, col[i])
+                s += 1
+        destp += destspan
+        y -= 1
+        if y == 0:
+            break
+    return 1
 
 
 def JM_filter_content_stream(
