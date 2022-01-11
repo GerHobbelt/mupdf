@@ -5462,14 +5462,8 @@ class Font:
     def __repr__(self):
         return "Font('%s')" % self.name
 
-    '''
-    def _valid_unicodes(self, arr):
-        #return _fitz.Font__valid_unicodes(self, arr)
-        temp = arr[0]
-        void *ptr = PyLong_AsVoidPtr(temp);
-        JM_valid_chars(gctx, font, ptr);
-        Py_DECREF(temp);
-    '''
+    def _valid_unicodes(self, arr): # Not implemented because implementation calls FT_Get_First_Char() etc.
+        return _fitz.Font__valid_unicodes(self, arr)
 
     @property
     def ascender(self):
@@ -5569,6 +5563,26 @@ class Font:
         """Check whether font has a glyph for this unicode."""
 
         return _fitz.Font_has_glyph(self, chr, language, script, fallback)
+
+    @property
+    def is_bold(self):
+        #return _fitz.Font_is_bold(self)
+        return mupdf.mfz_font_is_bold( self.this)
+
+    @property
+    def is_italic(self):
+        #return _fitz.Font_is_italic(self)
+        return mupdf.mfz_font_is_italic( self.this)
+
+    @property
+    def is_monospaced(self):
+        #return _fitz.Font_is_monospaced(self)
+        return mupdf.mfz_font_is_monospaced( self.this)
+
+    @property
+    def is_serif(self):
+        #return _fitz.Font_is_serif(self)
+        return mupdf.mfz_font_is_serif( self.this)
 
     @property
     def is_writable(self):
@@ -12246,7 +12260,13 @@ class TextWriter:
 
 
 class IRect(Rect):
-    """IRect() - all zeros\nIRect(x0, y0, x1, y1)\nIRect(Rect or IRect) - new copy\nIRect(sequence) - from 'sequence'"""
+    """IRect() - all zeros
+    IRect(x0, y0, x1, y1) - 4 coordinates
+    IRect(top-left, x1, y1) - point and 2 coordinates
+    IRect(x0, y0, bottom-right) - 2 coordinates and point
+    IRect(top-left, bottom-right) - 2 points
+    IRect(sequ) - new from sequence or rect-like
+    """
     def __add__(self, p):
         return Rect.__add__(self, p).round()
 
@@ -12254,12 +12274,56 @@ class IRect(Rect):
         return Rect.__and__(self, x).round()
 
     def __init__(self, *args):
-        Rect.__init__(self, *args)
-        self.x0 = math.floor(self.x0 + 0.001)
-        self.y0 = math.floor(self.y0 + 0.001)
-        self.x1 = math.ceil(self.x1 - 0.001)
-        self.y1 = math.ceil(self.y1 - 0.001)
-        return None
+        def get_xy( arg):
+            if isinstance( arg, (list, tuple)) and len( arg) == 2:
+                return arg[0], arg[1]
+            if isinstance( arg, Point):
+                return arg.x, arg.y
+            return None, None
+        if 0:
+            pass
+        elif len(args) == 0:
+            self.x0 = 0
+            self.y0 = 0
+            self.x1 = 0
+            self.y1 = 0
+        elif len(args) == 1:
+            arg = args[0]
+            if isinstance( arg, (list, tuple)) and len( arg) == 4:
+                self.x0 = int( arg[0])
+                self.y0 = int( arg[1])
+                self.x1 = int( arg[2])
+                self.y1 = int( arg[3])
+            else:
+                self.x0 = arg.x0
+                self.y0 = arg.y0
+                self.x1 = arg.x1
+                self.y1 = arg.y1
+        elif len(args) == 2:
+            self.x0, self.y0 = get_xy( args[0])
+            self.x1, self.y1 = get_xy( args[1])
+        elif len(args) == 3:
+            self.x0, self.y0 = get_xy( args[0])
+            if (self.x0, self.y0) != (None, None):
+                self.x1 = int( args[1])
+                self.y1 = int( args[2])
+                return
+            self.x1, self.y1 = get_xy( args[2])
+            if (self.x1, self.y1) != (None, None):
+                self.x0 = int( args[0])
+                self.y0 = int( args[1])
+                return
+            raise Exception( f'Unrecognised args: {args}')
+        elif len(args) == 4:
+            self.x0 = int( args[0])
+            self.y0 = int( args[1])
+            self.x1 = int( args[2])
+            self.y1 = int( args[3])
+        else:
+            raise Exception( f'Unrecognised args: {args}')
+
+        assert None not in (self.x0, self.y0, self.x1, self.y1), f'Unrecognised args: {args}'
+
 
     def __mul__(self, m):
         return Rect.__mul__(self, m).round()
@@ -12292,6 +12356,14 @@ class IRect(Rect):
     def __truediv__(self, m):
         return Rect.__truediv__(self, m).round()
 
+    def get_area(self, unit=None):
+        if unit is None:
+            return utils.get_area( self)
+        else:
+            return utils.get_area( self, unit)
+    getArea = get_area
+    getRectArea = get_area
+
     def includePoint(self, p):
         """Extend rectangle to include point p."""
         return Rect.includePoint(self, p).round()
@@ -12305,6 +12377,7 @@ class IRect(Rect):
         return Rect.intersect(self, r).round()
 
     irect = round
+    isEmpty = Rect.is_empty
 
     @property
     def rect(self):
@@ -13097,9 +13170,27 @@ def ASSERT_PDF(cond):
 def DUMMY(*args, **kw):
     return
 
+def EMPTY_IRECT():
+    return IRect(FZ_MAX_INF_RECT, FZ_MAX_INF_RECT, FZ_MIN_INF_RECT, FZ_MIN_INF_RECT)
+
+def EMPTY_QUAD():
+    return EMPTY_RECT().quad
+
+def EMPTY_RECT():
+    return Rect(FZ_MAX_INF_RECT, FZ_MAX_INF_RECT, FZ_MIN_INF_RECT, FZ_MIN_INF_RECT)
+
 def ENSURE_OPERATION(pdf):
      if not JM_have_operation(pdf):
         raise Exception("No journalling operation started")
+
+def INFINITE_IRECT():
+    return IRect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT)
+
+def INFINITE_QUAD():
+    return INFINITE_RECT().quad
+
+def INFINITE_RECT():
+    return Rect(FZ_MIN_INF_RECT, FZ_MIN_INF_RECT, FZ_MAX_INF_RECT, FZ_MAX_INF_RECT)
 
 def INRANGE(v, low, high):
     return low <= v and v <= high
