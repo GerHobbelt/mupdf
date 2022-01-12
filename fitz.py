@@ -4944,9 +4944,6 @@ class Document:
             value = mupdf.mpdf_dict_get(o, key)
             #jlib.log( '    {key=}: {value=}')
 
-    def subset_fonts(self):
-        return utils.subset_fonts(self)
-
     def switch_layer(self, config, as_default=0):
         """Activate an OC layer."""
         if self.is_closed:
@@ -7857,11 +7854,6 @@ class Page:
             val.parent._annot_refs[id(val)] = val
         annot._erase()
         return val
-
-    def delete_widget(self, widget):
-        return utils.delete_widget( self, widget)
-
-    deleteWidget = delete_widget
 
     def delete_link(self, linkdict):
         """Delete a Link."""
@@ -20224,85 +20216,97 @@ else:
         )(JM_mupdf_warning)
     ctypes_mupdf.fz_set_warning_callback(0, fn, 0)
 
-recover_bbox_quad = utils.recover_bbox_quad
-recover_char_quad = utils.recover_char_quad
-recover_line_quad = utils.recover_line_quad
-recover_quad = utils.recover_quad
-recover_span_quad = utils.recover_span_quad
+# Use utils.*() fns for some class methods.
+#
+recover_bbox_quad   = utils.recover_bbox_quad
+recover_char_quad   = utils.recover_char_quad
+recover_line_quad   = utils.recover_line_quad
+recover_quad        = utils.recover_quad
+recover_span_quad   = utils.recover_span_quad
 
-Annot.get_textbox = utils.get_textbox
-Annot.getTextbox = Annot.get_textbox
+Annot.get_textbox   = utils.get_textbox
 
-Page.get_image_rects = utils.get_image_rects
-Page.get_text_blocks = utils.get_text_blocks
+Page.delete_widget      = utils.delete_widget
+Page.get_image_info     = utils.get_image_info
+Page.get_image_rects    = utils.get_image_rects
+Page.get_label          = utils.get_label
+Page.get_links          = utils.get_links
+Page.get_text           = utils.get_text
+Page.get_text_blocks    = utils.get_text_blocks
 Page.get_text_selection = utils.get_text_selection
-Page.get_text_words = utils.get_text_words
-Page.get_textbox = utils.get_textbox
-Page.write_text = utils.write_text
-Page.get_textpage_ocr = utils.get_textpage_ocr
-Page.update_link = utils.update_link
-Page.get_image_info = utils.get_image_info
-Page.get_links = utils.get_links
-Page.get_label = utils.get_label
-Page.insert_link = utils.insert_link
-Page.insert_image = utils.insert_image
-Page.insert_textbox = utils.insert_textbox
-Page.get_text = utils.get_text
+Page.get_text_words     = utils.get_text_words
+Page.get_textbox        = utils.get_textbox
+Page.get_textpage_ocr   = utils.get_textpage_ocr
+Page.insert_image       = utils.insert_image
+Page.insert_link        = utils.insert_link
+Page.insert_textbox     = utils.insert_textbox
+Page.update_link        = utils.update_link
+Page.write_text         = utils.write_text
 
-IRect.get_area = utils.get_area
+IRect.get_area          = utils.get_area
 
-IRect.getArea = IRect.get_area
-IRect.getRectArea = IRect.get_area
+Document._do_links          = utils.do_links
+Document.del_toc_item       = utils.del_toc_item
+Document.get_oc             = utils.get_oc
+Document.get_ocmd           = utils.get_ocmd
+Document.get_page_labels    = utils.get_page_labels
+Document.get_page_numbers   = utils.get_page_numbers
+Document.get_page_pixmap    = utils.get_page_pixmap
+Document.get_page_text      = utils.get_page_text
+Document.get_toc            = utils.get_toc
+Document.insert_page        = utils.insert_page
+Document.new_page           = utils.new_page
+Document.scrub              = utils.scrub
+Document.search_page_for    = utils.search_page_for
+Document.set_metadata       = utils.set_metadata
+Document.set_ocmd           = utils.set_ocmd
+Document.set_toc_item       = utils.set_toc_item
+Document.subset_fonts       = utils.subset_fonts
 
+Rect.get_area               = utils.get_area
+
+TextWriter.fill_textbox     = utils.fill_textbox
+
+# Aliases
+#
+Annot.getTextbox    = Annot.get_textbox
+
+Document._newPage = Document.new_page_
+Document.getPagePixmap = Document.get_page_pixmap
+Document.getPageText = Document.get_page_text
+Document.getSigFlags = Document.get_sigflags
+Document.getToC = Document.get_toc
+Document.insertPage = Document.insert_page
+Document.newPage = Document.new_page
+Document.searchPageFor = Document.search_page_for
+Document.setMetadata = Document.set_metadata
+
+IRect.getArea           = IRect.get_area
+IRect.getRectArea       = IRect.get_area
+
+Page.deleteWidget = Page.delete_widget
+Page.getImageBbox = Page.get_image_bbox
+Page.getLinks = Page.get_links
+Page.getPixmap = Page.get_pixmap
+Page.getSVGimage = Page.get_svg_image
+Page.getText = Page.get_text
+Page.getTextBlocks = utils.get_text_blocks
+Page.getTextPage = Page.get_textpage
+Page.getTextWords = Page.get_text_words
+Page.getTextbox = utils.get_textbox
 Page.insertImage = Page.insert_image
 Page.insertLink = Page.insert_link
 Page.insertText = Page.insert_text
 Page.insertTextbox = Page.insert_textbox
+Page.loadLinks = Page.load_links
 Page.newShape = Page.new_shape
 Page.searchFor = Page.search_for
-Page.writeText = Page.write_text
-Page.setRotation = Page.set_rotation
 Page.setCropBox = Page.set_cropbox
 Page.setMediaBox = Page.set_mediabox
-Page.getTextBlocks = utils.get_text_blocks
-Page.getTextWords = Page.get_text_words
-Page.getTextbox = utils.get_textbox
+Page.setRotation = Page.set_rotation
 Page.showPDFpage = Page.show_pdf_page
 Page.updateLink = Page.update_link
-Page.getLinks = Page.get_links
-Page.getImageBbox = Page.get_image_bbox
-Page.getPixmap = Page.get_pixmap
-Page.getSVGimage = Page.get_svg_image
-Page.getText = Page.get_text
-Page.getTextPage = Page.get_textpage
-Page.loadLinks = Page.load_links
-
-Document._do_links = utils.do_links
-Document.get_oc = utils.get_oc
-Document.del_toc_item = utils.del_toc_item
-Document.get_ocmd = utils.get_ocmd
-Document.get_page_labels = utils.get_page_labels
-Document.get_page_numbers = utils.get_page_numbers
-Document.get_page_pixmap = utils.get_page_pixmap
-Document.get_page_text = utils.get_page_text
-Document.get_toc = utils.get_toc
-Document.insert_page = utils.insert_page
-Document.new_page = utils.new_page
-Document.scrub = utils.scrub
-Document.search_page_for = utils.search_page_for
-Document.set_metadata = utils.set_metadata
-Document.set_toc_item = utils.set_toc_item
-Document.set_ocmd = utils.set_ocmd
-
-Document.setMetadata = Document.set_metadata
-Document.searchPageFor = Document.search_page_for
-Document.getPagePixmap = Document.get_page_pixmap
-Document.getPageText = Document.get_page_text
-Document.getToC = Document.get_toc
-Document.getSigFlags = Document.get_sigflags
-Document.insertPage = Document.insert_page
-Document.newPage = Document.new_page
-Document._newPage = Document.new_page_
+Page.writeText = Page.write_text
 
 Pixmap.clearWith = Pixmap.clear_with
 Pixmap.gammaWith = Pixmap.gamma_with
@@ -20315,12 +20319,10 @@ Quad.isConvex = Quad.is_convex
 Quad.isEmpty = Quad.is_empty
 Quad.isRectangular = Quad.is_rectangular
 
-Rect.getArea = utils.get_area
+Rect.getArea = Rect.get_area
 Rect.getRectArea = utils.get_area
-Rect.get_area = utils.get_area
 Rect.includeRect = Rect.include_rect
 Rect.isEmpty = Rect.is_empty
 
-TextWriter.fill_textbox = utils.fill_textbox
 TextWriter.fillTextbox = TextWriter.fill_textbox
 TextWriter.writeText = TextWriter.write_text
