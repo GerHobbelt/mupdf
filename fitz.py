@@ -6751,7 +6751,7 @@ class Page:
         tbounds = mupdf.mfz_transform_rect(tbounds, ctm)
 
         res = mupdf.mfz_new_buffer(1024)
-        out = mupdf.mfz_new_output_with_buffer(res)
+        out = mupdf.Output(res)
         dev = mupdf.mfz_new_svg_device(
                 out,
                 tbounds.x1-tbounds.x0,  # width
@@ -7054,7 +7054,7 @@ class Page:
         cropbox.x1 = r.x1
         cropbox.y0 = mediabox.y1 - r.y1 + mediabox.y0
         cropbox.y1 = mediabox.y1 - r.y0 + mediabox.y0
-        mupdf.mpdf_dict_put_drop(
+        mupdf.mpdf_dict_put(
                 page.obj(),
                 PDF_NAME('CropBox'),
                 mupdf.mpdf_new_rect( page.doc(), cropbox)
@@ -17099,6 +17099,17 @@ version = (VersionBind, VersionFitz, VersionDate2)
 
 def restore_aliases():
     warnings.filterwarnings( "once", category=FitzDeprecation)
+
+    def showthis(msg, cat, filename, lineno, file=None, line=None):
+        text = warnings.formatwarning(msg, cat, filename, lineno, line=line)
+        s = text.find("FitzDeprecation")
+        if s < 0:
+            print(text, file=sys.stderr)
+            return
+        text = text[s:].splitlines()[0][4:]
+        print(text, file=sys.stderr)
+
+    warnings.showwarning = showthis
 
     def _alias(class_, new_name, legacy_name=None):
         '''
