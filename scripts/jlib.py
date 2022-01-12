@@ -571,6 +571,12 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
     try:
         frames = []
 
+        def append_frame(f):
+            f4 = f[4]
+            f4 = f4[0].strip() if f4 else ''
+            ff = f[1], f[2], f[3], f4
+            frames.append(ff)
+
         if tb:
             # There is a live exception.
             #
@@ -583,17 +589,11 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
             # backtraces that miss much useful information.
             #
             for f in reversed(inspect.getouterframes(tb.tb_frame)):
-                f4 = f[4]
-                f4 = f4[0].strip() if f4 else ''
-                ff = f[1], f[2], f[3], f4
-                frames.append(ff)
+                append_frame(f)
         else:
             # No exception; use current backtrace.
             for f in inspect.stack():
-                f4 = f[4]
-                f4 = f[4][0].strip() if f4 else ''
-                ff = f[1], f[2], f[3], f4
-                frames.append(ff)
+                append_frame(f)
 
         # If there is a live exception, append frames from point in the try:
         # block that caused the exception to be raised, to the point at which
@@ -609,8 +609,7 @@ def exception_info( exception=None, limit=None, out=None, prefix='', oneline=Fal
             frames.append( None)
 
             for f in inspect.getinnerframes(tb):
-                ff = f[1], f[2], f[3], f[4][0].strip()
-                frames.append(ff)
+                append_frame(f)
 
         cwd = os.getcwd() + os.sep
         if oneline:
