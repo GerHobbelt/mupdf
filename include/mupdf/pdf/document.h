@@ -374,6 +374,7 @@ struct pdf_document
 	// - 0x01: xref repair;
 	// - 0x02: pagee list repair.
 	int repair_attempted;
+	int repair_in_progress;
 
 	/* Flag to be set while loading signature details */
 	int reading_unencrypted_and_uncached;

@@ -362,6 +362,7 @@ fz_colorspace *proof_cs = NULL;
 static const char *icc_filename = NULL;
 static float gamma_value = 1;
 static int invert = 0;
+static int kill_text = 0;
 static int band_height = 0;
 static int lowmemory = 0;
 
@@ -510,6 +511,7 @@ static int usage(void)
 		"  -A -  number of bits of anti-aliasing (0 to 8)\n"
 		"  -A -/-  number of bits of anti-aliasing (0 to 8) (graphics, text)\n"
 		"  -l -  minimum stroked line width (in pixels)\n"
+		"  -K    do not draw text\n"
 		"  -D    disable use of display list\n"
 		"  -j -  render only selected types of content. Use a comma-separated list\n"
 		"        to combine types (everything,content,annotations,Unknown,\n"
@@ -683,6 +685,11 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 			fz_clear_pixmap_with_value(ctx, pix, 255);
 
 		dev = fz_new_draw_device_with_proof(ctx, fz_identity, pix, proof_cs);
+		if (kill_text)
+		{
+			dev->fill_text = NULL;
+			dev->stroke_text = NULL;
+		}
 		if (lowmemory)
 			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		if (alphabits_graphics == 0)
@@ -2437,7 +2444,7 @@ int main(int argc, const char** argv)
 	num_workers = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:NO:am:x:hj:J:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:NO:am:x:hj:J:K")) != -1)
 	{
 		switch (c)
 		{
@@ -2469,6 +2476,8 @@ int main(int argc, const char** argv)
 		case 'S': layout_em = fz_atof(fz_optarg); break;
 		case 'U': layout_css = fz_optarg; break;
 		case 'X': layout_use_doc_css = 0; break;
+
+		case 'K': kill_text = 1; break;
 
 		case 'O': spots = fz_atof(fz_optarg);
 #ifndef FZ_ENABLE_SPOT_RENDERING
