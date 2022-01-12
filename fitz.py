@@ -3188,105 +3188,6 @@ class Document:
         self._reset_page_refs()
         return val
 
-    def get_char_widths(doc, xref: int, limit: int = 256, idx: int = 0, fontdict: OptDict = None
-            ) -> list:
-        """Get list of glyph information of a font.
-
-        Notes:
-            Must be provided by its XREF number. If we already dealt with the
-            font, it will be recorded in doc.FontInfos. Otherwise we insert an
-            entry there.
-            Finally we return the glyphs for the font. This is a list of
-            (glyph, width) where glyph is an integer controlling the char
-            appearance, and width is a float controlling the char's spacing:
-            width * fontsize is the actual space.
-            For 'simple' fonts, glyph == ord(char) will usually be true.
-            Exceptions are 'Symbol' and 'ZapfDingbats'. We are providing data for these directly here.
-        """
-        fontinfo = CheckFontInfo(doc, xref)
-        if fontinfo is None:  # not recorded yet: create it
-            if fontdict is None:
-                name, ext, stype, asc, dsc = _get_font_properties(doc, xref)
-                fontdict = {
-                    "name": name,
-                    "type": stype,
-                    "ext": ext,
-                    "ascender": asc,
-                    "descender": dsc,
-                }
-            else:
-                #jlib.log('{type(fontdict)=}')
-                name = fontdict["name"]
-                ext = fontdict["ext"]
-                stype = fontdict["type"]
-                ordering = fontdict["ordering"]
-                simple = fontdict["simple"]
-
-            if ext == "":
-                raise ValueError("xref is not a font")
-
-            # check for 'simple' fonts
-            if stype in ("Type1", "MMType1", "TrueType"):
-                simple = True
-            else:
-                simple = False
-
-            # check for CJK fonts
-            if name in ("Fangti", "Ming"):
-                ordering = 0
-            elif name in ("Heiti", "Song"):
-                ordering = 1
-            elif name in ("Gothic", "Mincho"):
-                ordering = 2
-            elif name in ("Dotum", "Batang"):
-                ordering = 3
-            else:
-                ordering = -1
-
-            fontdict["simple"] = simple
-
-            if name == "ZapfDingbats":
-                glyphs = zapf_glyphs
-            elif name == "Symbol":
-                glyphs = symbol_glyphs
-            else:
-                glyphs = None
-
-            fontdict["glyphs"] = glyphs
-            fontdict["ordering"] = ordering
-            fontinfo = [xref, fontdict]
-            doc.FontInfos.append(fontinfo)
-        else:
-            fontdict = fontinfo[1]
-            glyphs = fontdict["glyphs"]
-            simple = fontdict["simple"]
-            ordering = fontdict["ordering"]
-
-        if glyphs is None:
-            oldlimit = 0
-        else:
-            oldlimit = len(glyphs)
-
-        mylimit = max(256, limit)
-
-        if mylimit <= oldlimit:
-            return glyphs
-
-        if ordering < 0:  # not a CJK font
-            glyphs = doc._get_char_widths(
-                xref, fontdict["name"], fontdict["ext"], fontdict["ordering"], mylimit, idx
-            )
-        else:  # CJK fonts use char codes and width = 1
-            glyphs = None
-
-        fontdict["glyphs"] = glyphs
-        fontinfo[1] = fontdict
-        UpdateFontInfo(doc, fontinfo)
-
-        return glyphs
-
-    getCharWidths = get_char_widths
-
     def get_layer(self, config=-1):
         """Content of ON, OFF, RBGroups of an OC layer."""
         if self.is_closed:
@@ -3507,37 +3408,6 @@ class Document:
         return rc
 
     getXmlMetadata = get_xml_metadata
-
-    def has_annots(self):
-        """Check whether there are annotations on any page."""
-        #jlib.log('has_annots()')
-        if self.is_closed:
-            raise ValueError("document closed")
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        for i in range(self.page_count):
-            for item in self.page_annot_xrefs(i):
-                if not (item[1] == mupdf.PDF_ANNOT_LINK or item[1] == mupdf.PDF_ANNOT_WIDGET):
-                    return True
-        return False
-
-    def has_links(self):
-        """Check whether there are links on any page."""
-        #jlib.log('has_links()')
-        if self.is_closed:
-            raise ValueError("document closed")
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        #jlib.log('{self.page_count=}')
-        #jlib.log('calling self.page_count')
-        for i in range(self.page_count):
-            #jlib.log('{i=}')
-            for item in self.page_annot_xrefs(i):
-                if item[1] == mupdf.PDF_ANNOT_LINK:
-                    #jlib.log('Returning true')
-                    return True
-        #jlib.log('Returning false')
-        return False
 
     @property
     def has_old_style_xrefs(self):
@@ -4683,237 +4553,6 @@ class Document:
         if self.is_closed:
             raise ValueError("document closed")
         return _fitz.Document_set_layer_ui_config(self, number, action)
-
-    def set_oc(self, xref, oc):
-        """Attach optional content object to image or form xobject."""
-        if self.is_closed:
-            raise ValueError("document closed")
-
-        return _fitz.Document_set_oc(self, xref, oc)
-
-    def set_page_labels(doc, labels):
-        """Add / replace page label definitions in PDF document.
-
-        Args:
-            doc: PDF document (resp. 'self').
-            labels: list of label dictionaries like:
-            {'startpage': int, 'prefix': str, 'style': str, 'firstpagenum': int},
-            as returned by get_page_labels().
-        """
-        # William Chapman, 2021-01-06
-
-        def create_label_str(label):
-            """Convert Python label dict to correspnding PDF rule string.
-
-            Args:
-                label: (dict) build rule for the label.
-            Returns:
-                PDF label rule string wrapped in "<<", ">>".
-            """
-            s = "%i<<" % label["startpage"]
-            if label.get("prefix", "") != "":
-                s += "/P(%s)" % label["prefix"]
-            if label.get("style", "") != "":
-                s += "/S/%s" % label["style"]
-            if label.get("firstpagenum", 1) > 1:
-                s += "/St %i" % label["firstpagenum"]
-            s += ">>"
-            return s
-
-        def create_nums(labels):
-            """Return concatenated string of all labels rules.
-
-            Args:
-                labels: (list) dictionaries as created by function 'rule_dict'.
-            Returns:
-                PDF compatible string for page label definitions, ready to be
-                enclosed in PDF array 'Nums[...]'.
-            """
-            labels.sort(key=lambda x: x["startpage"])
-            s = "".join([create_label_str(label) for label in labels])
-            return s
-
-        doc._set_page_labels(create_nums(labels))
-
-    def set_toc(
-            doc,#: Document,
-            toc: list,
-            collapse: int = 1,
-            ) -> int:
-        """Create new outline tree (table of contents, TOC).
-
-        Args:
-            toc: (list, tuple) each entry must contain level, title, page and
-                optionally top margin on the page. None or '()' remove the TOC.
-            collapse: (int) collapses entries beyond this level. Zero or None
-                shows all entries unfolded.
-        Returns:
-            the number of inserted items, or the number of removed items respectively.
-        """
-        if doc.is_closed or doc.is_encrypted:
-            raise ValueError("document closed or encrypted")
-        if not doc.is_pdf:
-            raise ValueError("not a PDF")
-        if not toc:  # remove all entries
-            r = doc._delToC()
-            ret = len(r)
-            return ret
-
-        # validity checks --------------------------------------------------------
-        if type(toc) not in (list, tuple):
-            raise ValueError("'toc' must be list or tuple")
-        toclen = len(toc)
-        page_count = doc.page_count
-        t0 = toc[0]
-        if type(t0) not in (list, tuple):
-            raise ValueError("items must be sequences of 3 or 4 items")
-        if t0[0] != 1:
-            raise ValueError("hierarchy level of item 0 must be 1")
-        for i in list(range(toclen - 1)):
-            t1 = toc[i]
-            t2 = toc[i + 1]
-            if not -1 <= t1[2] <= page_count:
-                raise ValueError("row %i: page number out of range" % i)
-            if (type(t2) not in (list, tuple)) or len(t2) not in (3, 4):
-                raise ValueError("bad row %i" % (i + 1))
-            if (type(t2[0]) is not int) or t2[0] < 1:
-                raise ValueError("bad hierarchy level in row %i" % (i + 1))
-            if t2[0] > t1[0] + 1:
-                raise ValueError("bad hierarchy level in row %i" % (i + 1))
-        # no formal errors in toc --------------------------------------------------
-
-        # --------------------------------------------------------------------------
-        # make a list of xref numbers, which we can use for our TOC entries
-        # --------------------------------------------------------------------------
-        old_xrefs = doc._delToC()  # del old outlines, get their xref numbers
-
-        # prepare table of xrefs for new bookmarks
-        old_xrefs = []
-        xref = [0] + old_xrefs
-        xref[0] = doc._getOLRootNumber()  # entry zero is outline root xref number
-        if toclen > len(old_xrefs):  # too few old xrefs?
-            for i in range((toclen - len(old_xrefs))):
-                xref.append(doc.get_new_xref())  # acquire new ones
-
-        lvltab = {0: 0}  # to store last entry per hierarchy level
-
-        # ------------------------------------------------------------------------------
-        # contains new outline objects as strings - first one is the outline root
-        # ------------------------------------------------------------------------------
-        olitems = [{"count": 0, "first": -1, "last": -1, "xref": xref[0]}]
-        # ------------------------------------------------------------------------------
-        # build olitems as a list of PDF-like connnected dictionaries
-        # ------------------------------------------------------------------------------
-        for i in range(toclen):
-            o = toc[i]
-            lvl = o[0]  # level
-            title = get_pdf_str(o[1])  # title
-            pno = min(doc.page_count - 1, max(0, o[2] - 1))  # page number
-            page_xref = doc.page_xref(pno)
-            page_height = doc.page_cropbox(pno).height
-            top = Point(72, page_height - 36)
-            dest_dict = {"to": top, "kind": LINK_GOTO}  # fall back target
-            if o[2] < 0:
-                dest_dict["kind"] = LINK_NONE
-            if len(o) > 3:  # some target is specified
-                if type(o[3]) in (int, float):  # convert a number to a point
-                    dest_dict["to"] = Point(72, page_height - o[3])
-                else:  # if something else, make sure we have a dict
-                    dest_dict = o[3] if type(o[3]) is dict else dest_dict
-                    if "to" not in dest_dict:  # target point not in dict?
-                        dest_dict["to"] = top  # put default in
-                    else:  # transform target to PDF coordinates
-                        point = +dest_dict["to"]
-                        point.y = page_height - point.y
-                        dest_dict["to"] = point
-            d = {}
-            d["first"] = -1
-            d["count"] = 0
-            d["last"] = -1
-            d["prev"] = -1
-            d["next"] = -1
-            d["dest"] = utils.getDestStr(page_xref, dest_dict)
-            d["top"] = dest_dict["to"]
-            d["title"] = title
-            d["parent"] = lvltab[lvl - 1]
-            d["xref"] = xref[i + 1]
-            d["color"] = dest_dict.get("color")
-            d["flags"] = dest_dict.get("italic", 0) + 2 * dest_dict.get("bold", 0)
-            lvltab[lvl] = i + 1
-            parent = olitems[lvltab[lvl - 1]]  # the parent entry
-
-            if (
-                dest_dict.get("collapse") or collapse and lvl > collapse
-            ):  # suppress expansion
-                parent["count"] -= 1  # make /Count negative
-            else:
-                parent["count"] += 1  # positive /Count
-
-            if parent["first"] == -1:
-                parent["first"] = i + 1
-                parent["last"] = i + 1
-            else:
-                d["prev"] = parent["last"]
-                prev = olitems[parent["last"]]
-                prev["next"] = i + 1
-                parent["last"] = i + 1
-            olitems.append(d)
-
-        # ------------------------------------------------------------------------------
-        # now create each outline item as a string and insert it in the PDF
-        # ------------------------------------------------------------------------------
-        for i, ol in enumerate(olitems):
-            txt = "<<"
-            if ol["count"] != 0:
-                txt += "/Count %i" % ol["count"]
-            try:
-                txt += ol["dest"]
-            except:
-                pass
-            try:
-                if ol["first"] > -1:
-                    txt += "/First %i 0 R" % xref[ol["first"]]
-            except:
-                pass
-            try:
-                if ol["last"] > -1:
-                    txt += "/Last %i 0 R" % xref[ol["last"]]
-            except:
-                pass
-            try:
-                if ol["next"] > -1:
-                    txt += "/Next %i 0 R" % xref[ol["next"]]
-            except:
-                pass
-            try:
-                if ol["parent"] > -1:
-                    txt += "/Parent %i 0 R" % xref[ol["parent"]]
-            except:
-                pass
-            try:
-                if ol["prev"] > -1:
-                    txt += "/Prev %i 0 R" % xref[ol["prev"]]
-            except:
-                pass
-            try:
-                txt += "/Title" + ol["title"]
-            except:
-                pass
-
-            if ol.get("color") and len(ol["color"]) == 3:
-                txt += "/C[ %g %g %g]" % tuple(ol["color"])
-            if ol.get("flags", 0) > 0:
-                txt += "/F %i" % ol["flags"]
-
-            if i == 0:  # special: this is the outline root
-                txt += "/Type/Outlines"  # so add the /Type entry
-            txt += ">>"
-            doc.update_object(xref[i], txt)  # insert the PDF object
-
-        doc.init_doc()
-        return toclen
-
-    setToC = set_toc
 
     def set_xml_metadata(self, metadata):
         """Store XML document level metadata."""
@@ -9856,7 +9495,7 @@ class Pixmap:
             return
         mupdf.mfz_gamma_pixmap( self.this, gamma)
 
-    def getImageData(self, output="png"):
+    def tobytes(self, output="png"):
         """Convert to binary image stream of desired type.
 
         Can be used as input to GUI packages like tkinter.
@@ -9875,7 +9514,7 @@ class Pixmap:
             raise ValueError("'%s' cannot have alpha" % output)
         if self.colorspace and self.colorspace.n > 3 and idx in (1, 2, 4):
             raise ValueError("unsupported colorspace for '%s'" % output)
-        barray = self._getImageData(idx)
+        barray = self._tobytes(idx)
         return barray
 
     @property
@@ -10231,28 +9870,6 @@ class Pixmap:
             return
         #return _fitz.Pixmap_tint_with(self, black, white)
         return mupdf.mfz_tint_pixmap( self.this, black, white)
-
-    def tobytes(self, output="png"):
-        """Convert to binary image stream of desired type.
-
-        Can be used as input to GUI packages like tkinter.
-
-        Args:
-            output: (str) image type, default is PNG. Others are PNM, PGM, PPM,
-                    PBM, PAM, PSD, PS.
-        Returns:
-            Bytes object.
-        """
-        valid_formats = {"png": 1, "pnm": 2, "pgm": 2, "ppm": 2, "pbm": 2,
-                         "pam": 3, "tga": 4, "tpic": 4,
-                         "psd": 5, "ps": 6}
-        idx = valid_formats.get(output.lower(), 1)
-        if self.alpha and idx in (2, 6):
-            raise ValueError("'%s' cannot have alpha" % output)
-        if self.colorspace and self.colorspace.this.m_internal.n > 3 and idx in (1, 2, 4):
-            raise ValueError("unsupported colorspace for '%s'" % output)
-        barray = self._tobytes(idx)
-        return barray
 
     def writeImage(self, filename, output=None):
         """Output as image in format determined by filename extension.
@@ -20247,21 +19864,28 @@ IRect.get_area          = utils.get_area
 
 Document._do_links          = utils.do_links
 Document.del_toc_item       = utils.del_toc_item
-Document.get_oc             = utils.get_oc
+Document.get_char_widths    = utils.get_char_widths
 Document.get_ocmd           = utils.get_ocmd
 Document.get_page_labels    = utils.get_page_labels
 Document.get_page_numbers   = utils.get_page_numbers
 Document.get_page_pixmap    = utils.get_page_pixmap
 Document.get_page_text      = utils.get_page_text
 Document.get_toc            = utils.get_toc
+Document.has_annots         = utils.has_annots
+Document.has_links          = utils.has_links
 Document.insert_page        = utils.insert_page
 Document.new_page           = utils.new_page
 Document.scrub              = utils.scrub
 Document.search_page_for    = utils.search_page_for
 Document.set_metadata       = utils.set_metadata
 Document.set_ocmd           = utils.set_ocmd
+Document.set_page_labels    = utils.set_page_labels
+Document.set_toc            = utils.set_toc
 Document.set_toc_item       = utils.set_toc_item
+Document.tobytes            = Document.write
 Document.subset_fonts       = utils.subset_fonts
+Document.get_oc             = utils.get_oc
+Document.set_oc             = utils.set_oc
 
 Rect.get_area               = utils.get_area
 
@@ -20280,6 +19904,8 @@ Document.insertPage = Document.insert_page
 Document.newPage = Document.new_page
 Document.searchPageFor = Document.search_page_for
 Document.setMetadata = Document.set_metadata
+Document.getCharWidths = Document.get_char_widths
+Document.setToC = Document.set_toc
 
 IRect.getArea           = IRect.get_area
 IRect.getRectArea       = IRect.get_area
@@ -20314,6 +19940,7 @@ Pixmap.getPNGData = Pixmap.tobytes
 Pixmap.getPNGdata = Pixmap.tobytes
 Pixmap.invertIRect = Pixmap.invert_irect
 Pixmap.tintWith = Pixmap.tint_with
+Pixmap.getImageData = Pixmap.tobytes
 
 Quad.isConvex = Quad.is_convex
 Quad.isEmpty = Quad.is_empty
