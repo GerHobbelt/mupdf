@@ -41,14 +41,9 @@ rect_like = 'rect_like'
 class Annot:
 
     def __init__(self, annot):
-        #jlib.log('{annot=} {annot.m_internal=} {annot.annot_refs()=}')
-        #assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
-        #assert isinstance(page, Page), f'page is: {page}'
         self.this = annot
-        #self.parent = page
 
     def __repr__(self):
-        #CheckParent(self)
         parent = getattr(self, 'parent', '<>')
         return "'%s' annotation on %s" % (self.type[1], str(parent))
 
@@ -62,18 +57,14 @@ class Annot:
             return
         if getattr(self, "thisown", False):
             self.thisown = False
-        #self.parent = None
 
     def _get_redact_values(self):
-        #jlib.log('')
         #val = _fitz.Annot__get_redact_values(self)
         annot = self.this
         if mupdf.mpdf_annot_type(annot) != mupdf.PDF_ANNOT_REDACT:
             return
 
         values = dict()
-        #pdf_obj *obj = NULL;
-        #const char *text = NULL;
         try:
             obj = mupdf.mpdf_dict_gets(annot.annot_obj(), "RO")
             if obj.m_internal:
@@ -92,7 +83,6 @@ class Annot:
                 align = mupdf.mpdf_to_int(obj)
             values[dictkey_align] = align
         except Exception as e:
-            #jlib.log('{e=}')
             return
         val = values
 
@@ -139,7 +129,6 @@ class Annot:
             if rect:
                 bbox = mupdf.mpdf_dict_get_rect(annot.obj(), PDF_NAME('Rect'))
                 mupdf.mpdf_dict_put_rect(apobj, PDF_NAME('BBox'), bbox)
-                #annot->ap = NULL;
         except Exception:
             return
         return
@@ -218,7 +207,6 @@ class Annot:
             if not extg.m_internal: # no ExtGState yet: make one
                 extg = resources.dict_put_dict(mupdf.PDF_ENUM_NAME_ExtGState, 2)
 
-            #extg.dict_put_drop(mupdf.PDF_ENUM_NAME_H, alp0)
             extg.dict_put(mupdf.PDF_ENUM_NAME_H, alp0)
 
         except Exception:
@@ -265,7 +253,6 @@ class Annot:
 
             return val
         except Exception:
-            #jlib.log(jlib.exception_info())
             raise
 
     @property
@@ -335,7 +322,6 @@ class Annot:
             assert isinstance(annot, mupdf.PdfAnnot)
             return JM_annot_colors(annot.annot_obj())
         except Exception as e:
-            #jlib.log(jlib.exception_info())
             raise
 
     def delete_responses(self):
@@ -345,7 +331,6 @@ class Annot:
         annot = self.this
         annot_obj = mupdf.mpdf_annot_obj(annot)
         page = mupdf.mpdf_annot_page(annot)
-        #pdf_annot *irt_annot = NULL;
         while 1:
             irt_annot = JM_find_annot_irt(annot)
             if not irt_annot.m_internal:
@@ -430,9 +415,6 @@ class Annot:
         """Retrieve attached file content."""
         CheckParent(self)
         #return _fitz.Annot_get_file(self)
-        #PyObject *res = NULL;
-        #pdf_obj *stream = NULL;
-        #fz_buffer *buf = NULL;
         annot = self.this
         annot_obj = mupdf.mpdf_annot_obj(annot)
         type = mupdf.mpdf_annot_type(annot)
@@ -461,10 +443,6 @@ class Annot:
         """annotation Pixmap"""
 
         CheckParent(self)
-        #cspaces = {"gray": mupdf.csGRAY, "rgb": mupdf.csRGB, "cmyk": mupdf.csCMYK}
-        #if type(colorspace) is str:
-        #    colorspace = cspaces.get(colorspace.lower(), None)
-
         #return _fitz.Annot_get_pixmap(self, matrix, colorspace, alpha)
         ctm = JM_matrix_from_py(matrix)
         cs = None
@@ -475,12 +453,7 @@ class Annot:
                 cs = mupdf.Colorspace(f)
         if cs is None:
             cs = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
-        try:
-            pix = mupdf.mpdf_new_pixmap_from_annot(self.this, ctm, cs, mupdf.Separations(0), alpha)
-        except Exception as e:
-            #jlib.log('{e=}')
-            return
-        #jlib.log('{pix=}')
+        pix = mupdf.mpdf_new_pixmap_from_annot(self.this, ctm, cs, mupdf.Separations(0), alpha)
         return Pixmap(pix)
 
     def get_sound(self):
@@ -17057,11 +17030,7 @@ def retainpages(doc, liste):
     This is called by PyMuPDF:
     liste = page numbers to retain
     '''
-    #pdf_obj *oldroot, *root, *pages, *kids, *countobj, *olddests;
     argc = len(liste)
-    #pdf_obj *names_list = NULL;
-    #pdf_obj *outlines;
-    #pdf_obj *ocproperties;
     pagecount = mupdf.mpdf_count_pages(doc)
 
     # Keep only pages/type and (reduced) dest entries to avoid
