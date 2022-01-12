@@ -516,9 +516,6 @@ class Annot:
         res['stream'] = stream
         return res
 
-    def get_text(*args, **kwargs):
-        return uils.get_text(*args, **kwargs)
-
     def get_textpage(self, clip=None, flags=0):
         """Make annotation TextPage."""
         CheckParent(self)
@@ -528,8 +525,6 @@ class Annot:
         annot = self.this
         stextpage = mupdf.mpdf_new_stext_page_from_annot(annot, options)
         return TextPage(stextpage)
-
-    getText = get_text
 
     @property
     def has_popup(self):
@@ -19088,19 +19083,19 @@ else:
 
 # Use utils.*() fns for some class methods.
 #
-recover_bbox_quad   = utils.recover_bbox_quad
-recover_char_quad   = utils.recover_char_quad
-recover_line_quad   = utils.recover_line_quad
-recover_quad        = utils.recover_quad
-recover_span_quad   = utils.recover_span_quad
+recover_bbox_quad           = utils.recover_bbox_quad
+recover_char_quad           = utils.recover_char_quad
+recover_line_quad           = utils.recover_line_quad
+recover_quad                = utils.recover_quad
+recover_span_quad           = utils.recover_span_quad
 
-Annot.get_textbox   = utils.get_textbox
-
-IRect.get_area          = utils.get_area
+Annot.get_text              = utils.get_text
+Annot.get_textbox           = utils.get_textbox
 
 Document._do_links          = utils.do_links
 Document.del_toc_item       = utils.del_toc_item
 Document.get_char_widths    = utils.get_char_widths
+Document.get_oc             = utils.get_oc
 Document.get_ocmd           = utils.get_ocmd
 Document.get_page_labels    = utils.get_page_labels
 Document.get_page_numbers   = utils.get_page_numbers
@@ -19114,48 +19109,49 @@ Document.new_page           = utils.new_page
 Document.scrub              = utils.scrub
 Document.search_page_for    = utils.search_page_for
 Document.set_metadata       = utils.set_metadata
+Document.set_oc             = utils.set_oc
 Document.set_ocmd           = utils.set_ocmd
 Document.set_page_labels    = utils.set_page_labels
 Document.set_toc            = utils.set_toc
 Document.set_toc_item       = utils.set_toc_item
-Document.tobytes            = Document.write
 Document.subset_fonts       = utils.subset_fonts
-Document.get_oc             = utils.get_oc
-Document.set_oc             = utils.set_oc
+Document.tobytes            = Document.write
 
-Page.apply_redactions   = utils.apply_redactions
-Page.delete_widget      = utils.delete_widget
-Page.draw_bezier        = utils.draw_bezier
-Page.draw_circle        = utils.draw_circle
-Page.draw_curve         = utils.draw_curve
-Page.draw_line          = utils.draw_line
-Page.draw_oval          = utils.draw_oval
-Page.draw_polyline      = utils.draw_polyline
-Page.draw_quad          = utils.draw_quad
-Page.draw_rect          = utils.draw_rect
-Page.draw_sector        = utils.draw_sector
-Page.draw_squiggle      = utils.draw_squiggle
-Page.draw_zigzag        = utils.draw_zigzag
-Page.get_image_info     = utils.get_image_info
-Page.get_image_rects    = utils.get_image_rects
-Page.get_label          = utils.get_label
-Page.get_links          = utils.get_links
-Page.get_pixmap         = utils.get_pixmap
-Page.get_text           = utils.get_text
-Page.get_text_blocks    = utils.get_text_blocks
-Page.get_text_selection = utils.get_text_selection
-Page.get_text_words     = utils.get_text_words
-Page.get_textbox        = utils.get_textbox
-Page.get_textpage_ocr   = utils.get_textpage_ocr
-Page.insert_image       = utils.insert_image
-Page.insert_link        = utils.insert_link
-Page.insert_text        = utils.insert_text
-Page.insert_textbox     = utils.insert_textbox
-Page.new_shape          = lambda x: utils.Shape(x)
-Page.search_for         = utils.search_for
-Page.show_pdf_page      = utils.show_pdf_page
-Page.update_link        = utils.update_link
-Page.write_text         = utils.write_text
+IRect.get_area              = utils.get_area
+
+Page.apply_redactions       = utils.apply_redactions
+Page.delete_widget          = utils.delete_widget
+Page.draw_bezier            = utils.draw_bezier
+Page.draw_circle            = utils.draw_circle
+Page.draw_curve             = utils.draw_curve
+Page.draw_line              = utils.draw_line
+Page.draw_oval              = utils.draw_oval
+Page.draw_polyline          = utils.draw_polyline
+Page.draw_quad              = utils.draw_quad
+Page.draw_rect              = utils.draw_rect
+Page.draw_sector            = utils.draw_sector
+Page.draw_squiggle          = utils.draw_squiggle
+Page.draw_zigzag            = utils.draw_zigzag
+Page.get_image_info         = utils.get_image_info
+Page.get_image_rects        = utils.get_image_rects
+Page.get_label              = utils.get_label
+Page.get_links              = utils.get_links
+Page.get_pixmap             = utils.get_pixmap
+Page.get_text               = utils.get_text
+Page.get_text_blocks        = utils.get_text_blocks
+Page.get_text_selection     = utils.get_text_selection
+Page.get_text_words         = utils.get_text_words
+Page.get_textbox            = utils.get_textbox
+Page.get_textpage_ocr       = utils.get_textpage_ocr
+Page.insert_image           = utils.insert_image
+Page.insert_link            = utils.insert_link
+Page.insert_text            = utils.insert_text
+Page.insert_textbox         = utils.insert_textbox
+Page.new_shape              = lambda x: utils.Shape(x)
+Page.search_for             = utils.search_for
+Page.show_pdf_page          = utils.show_pdf_page
+Page.update_link            = utils.update_link
+Page.write_text             = utils.write_text
 
 Rect.get_area               = utils.get_area
 
@@ -19163,6 +19159,7 @@ TextWriter.fill_textbox     = utils.fill_textbox
 
 # Aliases
 #
+Annot.getText        = Annot.get_text
 Annot.getTextbox    = Annot.get_textbox
 
 Document._newPage = Document.new_page_
