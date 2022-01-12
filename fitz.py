@@ -39,11 +39,6 @@ rect_like = "rect_like"
 
 class Annot:
 
-    #def __del__(self):
-    #    if self.parent is None:
-    #        return
-    #    self._erase()
-
     def __init__(self, annot):
         #jlib.log('{annot=} {annot.m_internal=} {annot.annot_refs()=}')
         #assert isinstance(annot, mupdf.PdfAnnot), f'type(annot)={type(annot)}'
@@ -8702,20 +8697,10 @@ class Page:
 
         return val
 
-    def get_image_info(self: Page, hashes: bool = False, xrefs: bool = False) -> list:
-        ret = utils.get_image_info(self, hashes, xrefs)
-        return ret
-
     def get_images(self, full=False):
         """List of images defined in the page object."""
         CheckParent(self)
         return self.parent.get_page_images(self.number, full=full)
-
-    def get_links(self):
-        return utils.get_links(self)
-
-    def get_label(page):
-        return utils.get_label(page)
 
     def get_oc_items(self) -> list:
         """Get OCGs and OCMDs used in the page's contents.
@@ -8796,16 +8781,6 @@ class Page:
         mupdf.mfz_close_device(dev)
         text = JM_EscapeStrFromBuffer(res)
         return text
-
-    def get_text(
-            page: Page,
-            option: str = "text",
-            clip: rect_like = None,
-            flags: OptInt = None,
-            textpage = None,#: TextPage = None,
-            sort: bool = False,
-            ):
-        return utils.get_text(page, option, clip, flags, textpage, sort)
 
     def get_textbox(
             page: Page,
@@ -9029,13 +9004,6 @@ class Page:
 
         return paths
 
-    getImageBbox = get_image_bbox
-    getLinks = get_links
-    getPixmap = get_pixmap
-    getSVGimage = get_svg_image
-    getText = get_text
-    getTextPage = get_textpage
-
     def insert_font(self, fontname="helv", fontfile=None, fontbuffer=None,
                    set_simple=False, wmode=0, encoding=0):
         doc = self.parent
@@ -9103,10 +9071,6 @@ class Page:
         doc.get_char_widths(xref, fontdict=fontdict)
         return xref
 
-    def insert_link(self, lnk: dict, mark: bool = True):
-        return utils.insert_link(self, lnk, mark)
-
-
     def insert_text(
             page,
             point: point_like,
@@ -9151,12 +9115,6 @@ class Page:
         if rc >= 0:
             img.commit(overlay)
         return rc
-
-    def insert_image(page, rect, **kwargs):
-        return utils.insert_image(page, rect, **kwargs)
-
-    def insert_textbox(*args, **kwargs):
-        return utils.insert_textbox(*args, **kwargs)
 
     def insertFont(self, fontname="helv", fontfile=None, fontbuffer=None,
                    set_simple=False, wmode=0, encoding=0):
@@ -9261,9 +9219,6 @@ class Page:
             if kinds is None or link["kind"] in kinds:
                 yield (link)
 
-    def load_links(self):
-        return self.loadLinks()
-
     def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
         """Load an annot by name (/NM key) or xref.
 
@@ -9290,7 +9245,7 @@ class Page:
 
     load_annot = loadAnnot
 
-    def loadLinks(self):
+    def load_links(self):
         """Get first Link."""
         CheckParent(self)
 
@@ -9471,7 +9426,7 @@ class Page:
         mupdf.mpdf_dict_put_rect( page.obj(), PDF_NAME('MediaBox'), mediabox)
         mupdf.mpdf_dict_put_rect( page.obj(), PDF_NAME('CropBox'), mediabox)
 
-    firstLink = property(loadLinks, doc="First link on page")
+    firstLink = property(load_links, doc="First link on page")
 
     def set_rotation(self, rotation):
         """Set page rotation."""
@@ -12711,14 +12666,6 @@ class IRect:
 
     br = bottom_right
     bl = bottom_left
-
-    def get_area(self, unit=None):
-        if unit is None:
-            return utils.get_area( self)
-        else:
-            return utils.get_area( self, unit)
-    getArea = get_area
-    getRectArea = get_area
 
     @property
     def height(self):
@@ -20384,24 +20331,43 @@ Page.get_text_words = utils.get_text_words
 Page.get_textbox = utils.get_textbox
 Page.write_text = utils.write_text
 Page.get_textpage_ocr = utils.get_textpage_ocr
+Page.update_link = utils.update_link
+Page.get_image_info = utils.get_image_info
+Page.get_links = utils.get_links
+Page.get_label = utils.get_label
+Page.insert_link = utils.insert_link
+Page.insert_image = utils.insert_image
+Page.insert_textbox = utils.insert_textbox
+Page.get_text = utils.get_text
 
-Page.getTextBlocks = utils.get_text_blocks
-Page.getTextWords = Page.get_text_words
-Page.getTextbox = utils.get_textbox
+IRect.get_area = utils.get_area
+
+IRect.getArea = IRect.get_area
+IRect.getRectArea = IRect.get_area
+
 Page.insertImage = Page.insert_image
 Page.insertLink = Page.insert_link
 Page.insertText = Page.insert_text
 Page.insertTextbox = Page.insert_textbox
 Page.newShape = Page.new_shape
 Page.searchFor = Page.search_for
-Page.update_link = utils.update_link
 Page.writeText = Page.write_text
 Page.setRotation = Page.set_rotation
 Page.setCropBox = Page.set_cropbox
 Page.setMediaBox = Page.set_mediabox
+Page.getTextBlocks = utils.get_text_blocks
+Page.getTextWords = Page.get_text_words
+Page.getTextbox = utils.get_textbox
 Page.showPDFpage = Page.show_pdf_page
-
 Page.updateLink = Page.update_link
+Page.getLinks = Page.get_links
+Page.getImageBbox = Page.get_image_bbox
+Page.getPixmap = Page.get_pixmap
+Page.getSVGimage = Page.get_svg_image
+Page.getText = Page.get_text
+Page.getTextPage = Page.get_textpage
+Page.loadLinks = Page.load_links
+
 
 Pixmap.clearWith = Pixmap.clear_with
 Pixmap.gammaWith = Pixmap.gamma_with
