@@ -10155,7 +10155,6 @@ Base14_fontnames = (
 Base14_fontdict = {}
 for f in Base14_fontnames:
     Base14_fontdict[f.lower()] = f
-    del f
 Base14_fontdict["helv"] = "Helvetica"
 Base14_fontdict["heit"] = "Helvetica-Oblique"
 Base14_fontdict["hebo"] = "Helvetica-Bold"
@@ -10884,10 +10883,7 @@ def _INRANGE(v, low, high):
     return low <= v and v <= high
 
 def _remove_dest_range(pdf, numbers):
-
     pagecount = mupdf.mpdf_count_pages(pdf)
-    #PyObject *n1 = NULL;
-    #pdf_obj *target, *annots, *pageref, *o, *action, *dest;
     for i in range(pagecount):
         n1 = i
         if n1 in numbers:
@@ -10982,11 +10978,6 @@ def JM_BufferFromBytes(stream):
         else:
             raise Exception(f'.getvalue() returned unexpected type: {type(data)}')
         return mupdf.Buffer.new_buffer_from_copied_data(data)
-    #if instance(stream, io.BytesIO):
-    #    b = stream.getvalue()
-    #    return mupdf.Buffer.new_buffer_from_copied_data(b)
-    #if
-    #jlib.log('Unrecognised {type(stream)=}')
     return mupdf.Buffer()
 
 
@@ -11059,9 +11050,9 @@ def JM_add_oc_object(pdf, ref, xref):
     indobj = mupdf.mpdf_new_indirect(pdf, xref, 0)
     if not mupdf.mpdf_is_dict(indobj):
         THROWMSG("bad 'oc' reference")
-    type = mupdf.mpdf_dict_get(indobj, PDF_NAME('Type'))
-    if (mupdf.mpdf_objcmp(type, PDF_NAME('OCG')) == 0
-            or mupdf.mpdf_objcmp(type, PDF_NAME('OCMD')) == 0
+    type_ = mupdf.mpdf_dict_get(indobj, PDF_NAME('Type'))
+    if (mupdf.mpdf_objcmp(type_, PDF_NAME('OCG')) == 0
+            or mupdf.mpdf_objcmp(type_, PDF_NAME('OCMD')) == 0
             ):
         mupdf.mpdf_dict_put(ref, PDF_NAME('OC'), indobj)
     else:
@@ -11069,7 +11060,6 @@ def JM_add_oc_object(pdf, ref, xref):
 
 def JM_annot_border(annot_obj):
     assert isinstance(annot_obj, mupdf.PdfObj), f'{annot_obj}'
-
     res = {}
     dash_py   = []
     effect_py = []
@@ -11221,113 +11211,11 @@ def JM_append_word(lines, buff, wbbox, block_n, line_n, word_n):
     return word_n + 1, mupdf.Rect(mupdf.Rect.Fixed_EMPTY)   # word counter
 
 
-"""
-# fz_output for Python file objects
-
-def JM_bytesio_write(opaque, data, size_t len):
-    '''
-    bio.write(bytes object)
-    '''
-    bio = opaque, *b, *name, *rc;
-    fz_try(ctx){
-        b = PyBytes_FromStringAndSize((const char *) data, (Py_ssize_t) len);
-        name = PyUnicode_FromString("write");
-        rc = PyObject_CallMethodObjArgs(bio, name, b, NULL);
-        if (!rc) {
-            THROWMSG(ctx, "could not write to Py file obj");
-        }
-    }
-    fz_always(ctx) {
-        Py_XDECREF(b);
-        Py_XDECREF(name);
-        Py_XDECREF(rc);
-        PyErr_Clear();
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-}
-
-static void
-JM_bytesio_truncate(fz_context *ctx, void *opaque)
-{  // bio.truncate(bio.tell()) !!!
-    PyObject *bio = opaque, *trunc = NULL, *tell = NULL, *rctell= NULL, *rc = NULL;
-    fz_try(ctx) {
-        trunc = PyUnicode_FromString("truncate");
-        tell = PyUnicode_FromString("tell");
-        rctell = PyObject_CallMethodObjArgs(bio, tell, NULL);
-        rc = PyObject_CallMethodObjArgs(bio, trunc, rctell, NULL);
-        if (!rc) {
-            THROWMSG(ctx, "could not truncate Py file obj");
-        }
-    }
-    fz_always(ctx) {
-        Py_XDECREF(tell);
-        Py_XDECREF(trunc);
-        Py_XDECREF(rc);
-        Py_XDECREF(rctell);
-        PyErr_Clear();
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-}
-
-static int64_t
-JM_bytesio_tell(fz_context *ctx, void *opaque)
-{  // returns bio.tell() -> int
-    PyObject *bio = opaque, *rc = NULL, *name = NULL;
-    int64_t pos = 0;
-    fz_try(ctx) {
-        name = PyUnicode_FromString("tell");
-        rc = PyObject_CallMethodObjArgs(bio, name, NULL);
-        if (!rc) {
-            THROWMSG(ctx, "could not tell Py file obj");
-        }
-        pos = (int64_t) PyLong_AsUnsignedLongLong(rc);
-    }
-    fz_always(ctx) {
-        Py_XDECREF(name);
-        Py_XDECREF(rc);
-        PyErr_Clear();
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-    return pos;
-}
-
-
-static void
-JM_bytesio_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
-{  // bio.seek(off, whence=0)
-    PyObject *bio = opaque, *rc = NULL, *name = NULL, *pos = NULL;
-    fz_try(ctx) {
-        name = PyUnicode_FromString("seek");
-        pos = PyLong_FromUnsignedLongLong((unsigned long long) off);
-        rc = PyObject_CallMethodObjArgs(bio, name, pos, whence, NULL);
-        if (!rc) {
-            THROWMSG(ctx, "could not seek Py file obj");
-        }
-    }
-    fz_always(ctx) {
-        Py_XDECREF(rc);
-        Py_XDECREF(name);
-        Py_XDECREF(pos);
-        PyErr_Clear();
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-}
-"""
-
 def JM_add_annot_id(annot, stem):
     '''
     Add a unique /NM key to an annotation or widget.
     Append a number to 'stem' such that the result is a unique name.
     '''
-    #PyObject *names = NULL;
     page = mupdf.mpdf_annot_page(annot)
     annot_obj = mupdf.mpdf_annot_obj( annot)
     names = JM_get_annot_id_list(page)
@@ -11347,7 +11235,6 @@ def JM_add_layer_config( pdf, name, creator, ON):
     '''
     Add OC configuration to the PDF catalog
     '''
-    #pdf_obj *D, *ocp, *configs;
     ocp = JM_ensure_ocproperties( pdf)
     configs = mupdf.mpdf_dict_get( ocp, PDF_NAME('Configs'))
     if not mupdf.mpdf_is_array( configs):
@@ -11373,104 +11260,13 @@ def JM_add_layer_config( pdf, name, creator, ON):
                 mupdf.mpdf_array_push( onarray, ind)
     mupdf.mpdf_array_push( configs, D)
 
-'''
-//-------------------------------------
-// fz_output for Python file objects
-//-------------------------------------
-static void
-JM_bytesio_write(fz_context *ctx, void *opaque, const void *data, size_t len)
-{  // bio.write(bytes object)
-    PyObject *bio = opaque, *b, *name, *rc;
-    fz_try(ctx){
-        b = PyBytes_FromStringAndSize((const char *) data, (Py_ssize_t) len);
-        name = PyUnicode_FromString("write");
-        rc = PyObject_CallMethodObjArgs(bio, name, b, NULL);
-        if (!rc) {
-            THROWMSG(ctx, "could not write to Py file obj");
-        }
-    }
-    fz_always(ctx) {
-        Py_XDECREF(b);
-        Py_XDECREF(name);
-        Py_XDECREF(rc);
-        PyErr_Clear();
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-}
 
-static void
-JM_bytesio_truncate(fz_context *ctx, void *opaque)
-{  // bio.truncate(bio.tell()) !!!
-    PyObject *bio = opaque, *trunc = NULL, *tell = NULL, *rctell= NULL, *rc = NULL;
-    fz_try(ctx) {
-        trunc = PyUnicode_FromString("truncate");
-        tell = PyUnicode_FromString("tell");
-        rctell = PyObject_CallMethodObjArgs(bio, tell, NULL);
-        rc = PyObject_CallMethodObjArgs(bio, trunc, rctell, NULL);
-        if (!rc) {
-            THROWMSG(ctx, "could not truncate Py file obj");
-        }
-    }
-    fz_always(ctx) {
-        Py_XDECREF(tell);
-        Py_XDECREF(trunc);
-        Py_XDECREF(rc);
-        Py_XDECREF(rctell);
-        PyErr_Clear();
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-}
-
-static int64_t
-JM_bytesio_tell(fz_context *ctx, void *opaque)
-{  // returns bio.tell() -> int
-    PyObject *bio = opaque, *rc = NULL, *name = NULL;
-    int64_t pos = 0;
-    fz_try(ctx) {
-        name = PyUnicode_FromString("tell");
-        rc = PyObject_CallMethodObjArgs(bio, name, NULL);
-        if (!rc) {
-            THROWMSG(ctx, "could not tell Py file obj");
-        }
-        pos = (int64_t) PyLong_AsUnsignedLongLong(rc);
-    }
-    fz_always(ctx) {
-        Py_XDECREF(name);
-        Py_XDECREF(rc);
-        PyErr_Clear();
-    }
-    fz_catch(ctx) {
-        fz_rethrow(ctx);
-    }
-    return pos;
-}
-
-
-def JM_bytesio_seek(output, off, whence):
-    assert isinstance(output, Output)
-    #  bio.seek(off, whence=0)
-    #PyObject *bio = opaque, *rc = NULL, *name = NULL, *pos = NULL;
-    name = "seek"
-    pos = off
-    #rc = PyObject_CallMethodObjArgs(bio, name, pos, whence, NULL);
-    rc = bio.seek(pos, whence)
-    if not rc:
-        THROWMSG( "could not seek Py file obj");
-'''
-
-def JM_char_bbox(line, ch, verbose=0):
+def JM_char_bbox(line, ch):
     '''
     return rect of char quad
     '''
-    q = JM_char_quad(line, ch, verbose)
-    if verbose: jlib.log('q={q}')
+    q = JM_char_quad(line, ch)
     r = mupdf.mfz_rect_from_quad(q)
-    if verbose: jlib.log('q={q} r={r}')
-    if verbose: jlib.log('{ch.m_internal.size=} {line.m_internal.wmode=} {r=}')
     if not line.m_internal.wmode:
         return r
     if r.y1 < r.y0 + ch.m_internal.size:
@@ -11487,34 +11283,26 @@ def JM_char_font_flags(font, line, ch):
     return flags
 
 
-def JM_char_quad(line, ch, verbose=0):
+def JM_char_quad(line, ch):
     '''
     re-compute char quad if ascender/descender values make no sense
     '''
     assert isinstance(line, mupdf.StextLine)
     assert isinstance(ch, mupdf.StextChar)
-    if verbose: jlib.log('{skip_quad_corrections=} {small_glyph_heights=}')
     if skip_quad_corrections:   # no special handling
-        if verbose: jlib.log('skip_quad_corrections, returning {ch.quad=}')
         return ch.quad
     if line.m_internal.wmode:  # never touch vertical write mode
-        if verbose: jlib.log('wmode set, returning ch.quad')
         return ch.quad
-    #font = mupdf.Font(ch.m_internal.font)
     font = mupdf.Font(mupdf.keep_font(ch.m_internal.font))
     asc = JM_font_ascender(font)
-    dsc = JM_font_descender(font, verbose)
-    if verbose: jlib.log('{asc=} {dsc=} {asc-dsc=} {small_glyph_heights=}')
+    dsc = JM_font_descender(font)
     if asc - dsc >= 1 and small_glyph_heights == 0: # no problem
-        if verbose: jlib.log('{asc=} - {dsc=} >= 1: returning ch.m_internal.quad')
         return mupdf.Quad(ch.m_internal.quad)
 
     # Re-compute quad with adjusted ascender / descender values:
     # Move ch->origin to (0,0) and de-rotate quad, then adjust the corners,
     # re-rotate and move back to ch->origin location.
     fsize = ch.m_internal.size
-    #fz_matrix trm1, trm2, xlate1, xlate2;
-    #fz_quad quad;
     bbox = mupdf.mfz_font_bbox(font)
     fwidth = bbox.x1 - bbox.x0
     if asc < 1e-3:  # probably Tesseract glyphless font
@@ -11565,7 +11353,6 @@ def JM_choice_options(annot):
     # ourselves here.
     #
     #n = mupdf.mpdf_choice_widget_options(annot, 0, 0)
-    #jlib.log('{type(annot)=}')
     optarr = mupdf.mpdf_dict_get_inheritable(annot.this.annot_obj(), PDF_NAME('Opt'))
     n = mupdf.mpdf_array_len(optarr)
 
@@ -11588,7 +11375,6 @@ def JM_choice_options(annot):
 
 
 def JM_color_FromSequence(color, col):
-    #assert isinstance( col, list)
     if not color or (not isinstance(color, list) and not isinstance(color, float)):
         return 1
     if isinstance(color, float):    # maybe just a single float
@@ -11625,7 +11411,6 @@ def JM_compress_buffer(inbuffer):
             inbuffer.m_internal,
             mupdf.FZ_DEFLATE_BEST,
             )
-    #jlib.log('{data=} {compressed_length=}')
     if not data or compressed_length == 0:
         return None
     buf = mupdf.Buffer(mupdf.new_buffer_from_data(data, compressed_length))
@@ -11665,9 +11450,6 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
     Convert any MuPDF document to a PDF
     Returns bytes object containing the PDF, created via 'write' function.
     '''
-    #jlib.log('*** calling mupdf.mpdf_create_document()')
-    #pdfout = mupdf.mpdf_create_document()   # new PDF document
-    #jlib.log('*** calling mupdf.PdfDocument()')
     pdfout = mupdf.PdfDocument()
     incr = 1
     s = fp
@@ -11676,13 +11458,7 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
         incr = -1   # count backwards
         s = tp      # adjust ...
         e = fp      # ... range
-    #fz_rect mediabox;
     rot = JM_norm_rotation(rotate)
-    #fz_device *dev = NULL;
-    #fz_buffer *contents = NULL;
-    #pdf_obj *resources = NULL;
-    #fz_page *page;
-    #for (i = fp; _INRANGE(i, s, e); i += incr) {  # interpret & write document pages as PDF pages
     i = fp
     while 1:    # interpret & write document pages as PDF pages
         if not _INRANGE(i, s, e):
@@ -11699,9 +11475,6 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
         mupdf.mpdf_insert_page(pdfout, -1, page_obj)
         i += 1
     # PDF created - now write it to Python bytearray
-    #PyObject *r = NULL;
-    #fz_output *out = NULL;
-    #fz_buffer *res = NULL;
     # prepare write options structure
     opts = mupdf.PdfWriteOptions()
     opts.do_garbage         = 4
@@ -11718,14 +11491,10 @@ def JM_convert_to_pdf(doc, fp, tp, rotate):
 
     res = mupdf.mfz_new_buffer(8192)
     out = mupdf.Output(res)
-    #jlib.log('{type(out)=} {out=}')
     mupdf.mpdf_write_document(pdfout, out, opts)
-    #unsigned char *c = NULL;
     c = res.buffer_extract()
     assert isinstance(c, bytes)
     return c
-    #r = PyBytes_FromStringAndSize((const char *) c, (Py_ssize_t) len);
-    #return r;
 
 
 # Copied from MuPDF v1.14
@@ -11772,7 +11541,6 @@ def JM_create_widget(doc, page, type, fieldname):
                     PDF_NAME('SigFlags'),
                     )
         raise
-
     return annot;
 
 
@@ -11829,7 +11597,6 @@ def JM_delete_annot(page, annot):
     if type_ != mupdf.PDF_ANNOT_WIDGET:
         mupdf.mpdf_delete_annot(page, annot)
     else:
-        #jlib.log('Calling JM_delete_widget()')
         JM_delete_widget(page, annot)
 
 
@@ -11845,34 +11612,28 @@ def JM_embed_file(
     embed a new file in a PDF (not only /EmbeddedFiles entries)
     '''
     len_ = 0;
-    #pdf_obj *ef, *f, *params, *val = NULL;
-    #fz_var(val);
-    try:
-        val = mupdf.mpdf_new_dict(pdf, 6)
-        mupdf.mpdf_dict_put_dict(val, PDF_NAME('CI'), 4)
-        ef = mupdf.mpdf_dict_put_dict(val, PDF_NAME('EF'), 4)
-        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('F'), filename)
-        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('UF'), ufilename)
-        mupdf.mpdf_dict_put_text_string(val, PDF_NAME('Desc'), desc)
-        mupdf.mpdf_dict_put(val, PDF_NAME('Type'), PDF_NAME('Filespec'))
-        bs = b'  '
-        f = mupdf.mpdf_add_stream(
-                pdf,
-                #mupdf.mfz_new_buffer_from_copied_data(bs),
-                mupdf.Buffer.new_buffer_from_copied_data(bs),
-                mupdf.PdfObj(),
-                0,
-                )
-        mupdf.mpdf_dict_put(ef, PDF_NAME('F'), f)
-        JM_update_stream(pdf, f, buf, compress)
-        len_, _ = buf.buffer_storage_raw()
-        mupdf.mpdf_dict_put_int(f, PDF_NAME('DL'), len_)
-        mupdf.mpdf_dict_put_int(f, PDF_NAME('Length'), len_)
-        params = mupdf.mpdf_dict_put_dict(f, PDF_NAME('Params'), 4)
-        mupdf.mpdf_dict_put_int(params, PDF_NAME('Size'), len_)
-    except Exception as e:
-        #jlib.log('{e=} {jlib.exception_info()=}')
-        raise
+    val = mupdf.mpdf_new_dict(pdf, 6)
+    mupdf.mpdf_dict_put_dict(val, PDF_NAME('CI'), 4)
+    ef = mupdf.mpdf_dict_put_dict(val, PDF_NAME('EF'), 4)
+    mupdf.mpdf_dict_put_text_string(val, PDF_NAME('F'), filename)
+    mupdf.mpdf_dict_put_text_string(val, PDF_NAME('UF'), ufilename)
+    mupdf.mpdf_dict_put_text_string(val, PDF_NAME('Desc'), desc)
+    mupdf.mpdf_dict_put(val, PDF_NAME('Type'), PDF_NAME('Filespec'))
+    bs = b'  '
+    f = mupdf.mpdf_add_stream(
+            pdf,
+            #mupdf.mfz_new_buffer_from_copied_data(bs),
+            mupdf.Buffer.new_buffer_from_copied_data(bs),
+            mupdf.PdfObj(),
+            0,
+            )
+    mupdf.mpdf_dict_put(ef, PDF_NAME('F'), f)
+    JM_update_stream(pdf, f, buf, compress)
+    len_, _ = buf.buffer_storage_raw()
+    mupdf.mpdf_dict_put_int(f, PDF_NAME('DL'), len_)
+    mupdf.mpdf_dict_put_int(f, PDF_NAME('Length'), len_)
+    params = mupdf.mpdf_dict_put_dict(f, PDF_NAME('Params'), 4)
+    mupdf.mpdf_dict_put_int(params, PDF_NAME('Size'), len_)
     return val
 
 
@@ -11912,17 +11673,14 @@ def JM_ensure_identity(pdf):
     '''
     Store ID in PDF trailer
     '''
-    #unsigned char rnd[16];
     id_ = mupdf.mpdf_dict_get( mupdf.mpdf_trailer(pdf), PDF_NAME('ID'))
     if not id_.m_internal:
         rnd0 = mupdf.mfz_memrnd2(16)
-        #jlib.log('{type(rnd0)=} {rnd0!r=}')
         # Need to convert raw bytes into a str to send to
         # mupdf.mpdf_new_string(). chr() seems to work for this.
         rnd = ''
         for i in rnd0:
             rnd += chr(i)
-        #jlib.log('{type(rnd)=} {rnd!r=}')
         id_ = mupdf.mpdf_dict_put_array( mupdf.mpdf_trailer( pdf), PDF_NAME('ID'), 2)
         mupdf.mpdf_array_push( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
         mupdf.mpdf_array_push( id_, mupdf.mpdf_new_string( rnd, len(rnd)))
@@ -12012,8 +11770,6 @@ def JM_filter_content_stream(
         transform,
         filter_,
         struct_parents,
-        #fz_buffer **out_buf,
-        #pdf_obj **out_res
         ):
     '''
     Returns (out_buf, out_res).
@@ -12069,7 +11825,7 @@ def JM_font_ascender(font):
     return mupdf.mfz_font_ascender(font)
 
 
-def JM_font_descender(font, verbose=0):
+def JM_font_descender(font):
     '''
     need own versions of ascender / descender
     '''
@@ -12077,12 +11833,6 @@ def JM_font_descender(font, verbose=0):
     if skip_quad_corrections:
         return -0.2
     ret = mupdf.mfz_font_descender(font)
-    if verbose and abs(ret) > 200:
-        jlib.log('{font.m_internal.t3procs=}')
-        if font.m_internal.t3procs:
-            jlib.log('{font.m_internal.bbox.y0=}')
-        else:
-            jlib.log('{font.m_internal.ft_face=}')
     return ret
 
 
@@ -12140,10 +11890,7 @@ def JM_gather_forms(doc, dict_: mupdf.PdfObj, imagelist, stream_xref: int):
     assert isinstance(doc, mupdf.PdfDocument)
     rc = 1
     n = mupdf.mpdf_dict_len(dict_);
-    #pdf_obj *o = NULL, *m = NULL;
     for i in range(n):
-        #pdf_obj *refname = NULL;
-
         refname = mupdf.mpdf_dict_get_key( dict_, i)
         imagedict = mupdf.mpdf_dict_get_val(dict_, i)
         if not mupdf.mpdf_is_dict(imagedict):
@@ -12224,7 +11971,6 @@ def JM_gather_images(doc: mupdf.PdfDocument, dict_: mupdf.PdfObj, imagelist, str
         height = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('Height'), PDF_NAME('H'))
         bpc = mupdf.mpdf_dict_geta(imagedict, PDF_NAME('BitsPerComponent'), PDF_NAME('BPC'))
 
-        #jlib.log('{altcs=}')
         entry = (
                 xref,
                 gen,
@@ -12247,19 +11993,16 @@ def JM_get_annot_by_xref(page, xref):
     '''
     assert isinstance(page, mupdf.PdfPage)
     found = 0
-    try:    # loop thru MuPDF's internal annots array
-        annot = page.first_annot()
-        while 1:
-            if not annot.m_internal:
-                break
-            if xref == mupdf.mpdf_to_num(annot.annot_obj()):
-                found = 1
-                break
-        if not found:
-            raise Exception("xref %d is not an annot of this page" % xref)
-    except Exception as e:
-        #jlib.log('{e=}')
-        raise
+    # loop thru MuPDF's internal annots array
+    annot = page.first_annot()
+    while 1:
+        if not annot.m_internal:
+            break
+        if xref == mupdf.mpdf_to_num(annot.annot_obj()):
+            found = 1
+            break
+    if not found:
+        raise Exception("xref %d is not an annot of this page" % xref)
     return annot
 
 
@@ -12270,26 +12013,20 @@ def JM_get_annot_by_name(page, name):
     assert isinstance(page, mupdf.PdfPage)
     if not name:
         return
-    #pdf_annot **annotptr = NULL;
-    #pdf_annot *annot = NULL;
     found = 0
+    # loop thru MuPDF's internal annots and widget arrays
+    annot = page.first_annot()
+    while 1:
+        if not annot.m_internal:
+            break
 
-    try:    # loop thru MuPDF's internal annots and widget arrays
-        annot = page.first_annot()
-        while 1:
-            if not annot.m_internal:
-                break
-
-            response, len_ = mupdf.mpdf_to_string(mupdf.mpdf_dict_gets(annot.annot_obj(), "NM"))
-            if name == response:
-                found = 1
-                break
-            annot = annot.next_annot()
-        if not found:
-            raise Exception("'%s' is not an annot of this page" % name)
-    except Exception as e:
-        #jlib.log('{e=}')
-        raise
+        response, len_ = mupdf.mpdf_to_string(mupdf.mpdf_dict_gets(annot.annot_obj(), "NM"))
+        if name == response:
+            found = 1
+            break
+        annot = annot.next_annot()
+    if not found:
+        raise Exception("'%s' is not an annot of this page" % name)
     return annot
 
 
@@ -12309,82 +12046,30 @@ def JM_get_annot_id_list(page):
 
 def JM_get_annot_xref_list(page_or_page_obj):
     '''
-    Wrapper for PyMuPDF/fitz/helper-annot.i:
-        PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
-
-    Not PyMuPDF/fitz/fitz_wrap.c:
-        PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
+    return the xrefs and /NM ids of a page's annots, links and fields
     '''
-    if 0 and isinstance(page_or_page_obj, mupdf.PdfObj):
-        # Wrapper for PyMuPDF/fitz/helper-annot.i:
-        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_obj *page_obj)
-        page_obj = page_or_page_obj
-        names = []
-        #jlib.log('{page_obj=}')
-        #jlib.log('{mupdf.PDF_ENUM_NAME_Annots=}')
-        #jlib.log('calling page_obj.dict_get()')
-        annots = page_obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-        #jlib.log('{annots=}')
-        if not annots:
-            return names
-        n = annots.array_len()
-        #jlib.log('{n=}')
-        for i in range(n):
-            annot_obj = mupdf.ppdf_array_get(annots, i)
-            xref = mupdf.ppdf_to_num(annot_obj)
-            #jlib.log('{mupdf.PDF_ENUM_NAME_Subtype=}')
-            subtype = mupdf.ppdf_dict_get(annot_obj, mupdf.PDF_ENUM_NAME_Subtype)
-            type_ = mupdf.PDF_ANNOT_UNKNOWN
-            if (subtype):
-                name = mupdf.ppdf_to_name(subtype)
-                type_ = mupdf.ppdf_annot_type_from_string(name)
-            id_ = mupdf.ppdf_dict_gets(annot_obj, "NM")
-            names.append( (xref, type_, mupdf.ppdf_to_text_string(id_)) )
-        return names
-    elif 0 and isinstance(page_or_page_obj, mupdf.PdfPage):
-        # Not PyMuPDF/fitz/fitz_wrap.c:
-        #   PyObject *JM_get_annot_xref_list(fz_context *ctx, pdf_page *page)
-        page = page_or_page_obj
-        names = []
-        annots = page.obj().dict_get(mupdf.PDF_ENUM_NAME_Annots)
-        if not annots.m_internal:
-            return names
-        n = annots.array_len()
-        for i in range(n):
-            annot_obj = annots.array_get(i)
-            xref = annot_obj.to_num()
-            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
-            type_ = mupdf.PDF_ANNOT_UNKNOWN
-            if subtype.m_internal:
-                name = subtype.to_name()
-                type_ = name.annot_type_from_string()
-            id_ = annot_obj.dict_gets("NM")
-            names.append( (xref, type_, id_.to_text_string()))
-        return names
-
+    if isinstance(page_or_page_obj, mupdf.PdfPage):
+        obj = page_or_page_obj.obj()
+    elif isinstance(page_or_page_obj, mupdf.PdfObj):
+        obj = page_or_page_obj
     else:
-        if isinstance(page_or_page_obj, mupdf.PdfPage):
-            obj = page_or_page_obj.obj()
-        elif isinstance(page_or_page_obj, mupdf.PdfObj):
-            obj = page_or_page_obj
-        else:
-            assert 0
-        names = []
-        annots = obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-        if not annots.m_internal:
-            return names
-        n = annots.array_len()
-        for i in range(n):
-            annot_obj = annots.array_get(i)
-            xref = annot_obj.to_num()
-            subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
-            type_ = mupdf.PDF_ANNOT_UNKNOWN
-            if subtype.m_internal:
-                name = subtype.to_name()
-                type_ = mupdf.ppdf_annot_type_from_string(name)
-            id_ = annot_obj.dict_gets("NM")
-            names.append( (xref, type_, id_.to_text_string()))
+        assert 0
+    names = []
+    annots = obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
+    if not annots.m_internal:
         return names
+    n = annots.array_len()
+    for i in range(n):
+        annot_obj = annots.array_get(i)
+        xref = annot_obj.to_num()
+        subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
+        type_ = mupdf.PDF_ANNOT_UNKNOWN
+        if subtype.m_internal:
+            name = subtype.to_name()
+            type_ = mupdf.ppdf_annot_type_from_string(name)
+        id_ = annot_obj.dict_gets("NM")
+        names.append( (xref, type_, id_.to_text_string()))
+    return names
 
 
 def JM_get_border_style(style):
@@ -12485,7 +12170,6 @@ def JM_get_widget_properties(annot, Widget):
     Populate a Python Widget object with the values from a PDF form field.
     Called by "Page.firstWidget" and "Widget.next".
     '''
-    #jlib.log('{Widget=} {type(Widget)=}')
     annot_obj = mupdf.mpdf_annot_obj(annot)
     page = mupdf.mpdf_annot_page(annot)
     pdf = page.doc()
@@ -12498,17 +12182,9 @@ def JM_get_widget_properties(annot, Widget):
         # Original C code for this function deletes if PyObject* is NULL. We
         # don't have a representation for that in Python - e.g. None is not
         # represented by NULL.
-        if 0 and value is None:
-            #jlib.log('deleting {mod=} {key=} {value=}')
-            try:
-                delattr(mod, key)
-            except Exception:
-                pass
-        else:
-            setattr(mod, key, value)
+        setattr(mod, key, value)
 
     field_type = mupdf.mpdf_widget_type(tw)
-    #Widget["field_type"] = field_type
     Widget.field_type = field_type
     if field_type == PDF_WIDGET_TYPE_SIGNATURE:
         if mupdf.mpdf_signature_is_signed(pdf, annot_obj):
@@ -12577,7 +12253,6 @@ def JM_get_widget_properties(annot, Widget):
     SETATTR_DROP(Widget, "field_flags", mupdf.mpdf_field_flags(annot_obj))
 
     # call Py method to reconstruct text color, font name, size
-    #call = CALLATTR("_parse_da", NULL)
     call = Widget._parse_da()
 
     # extract JavaScript action texts
@@ -12665,8 +12340,6 @@ def JM_get_ocg_arrays_imp(arr):
 def JM_get_ocg_arrays(conf):
 
     rc = dict()
-    #list_ = NPyDict_New(), *list = NULL, *list1 = NULL;
-    #pdf_obj *arr = NULL, *obj = NULL;
     arr = mupdf.mpdf_dict_get( conf, PDF_NAME('ON'))
     list_ = JM_get_ocg_arrays_imp( arr)
     if list_:
@@ -12688,7 +12361,6 @@ def JM_get_ocg_arrays(conf):
     obj = mupdf.mpdf_dict_get( conf, PDF_NAME('BaseState'))
 
     if obj.m_internal:
-        #PyObject *state = NULL;
         state = mupdf.mpdf_to_name( obj)
         rc["basestate"] = state
     return rc
@@ -12779,7 +12451,6 @@ def JM_image_filter(opaque, ctm, name, image):
 
 
 def JM_image_reporter(page):
-    #assert 0, 'not implemented - needs swig director support for fn ptrs.'
     doc = page.doc()
 
     class Filter(mupdf.PdfFilterOptions2):
@@ -12850,7 +12521,6 @@ def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, se
     '''
     Insert a font in a PDF
     '''
-    #jlib.log('{bfname=} {fontfile=} {fontbuffer=} {set_simple=} {idx=} {wmode=} {serif=} {encoding=} {ordering=}')
     font = None
     res = None
     data = None
@@ -12899,7 +12569,6 @@ def JM_insert_font(pdf, bfname, fontfile, fontbuffer, set_simple, idx, wmode, se
             else:
                 font_obj = mupdf.mpdf_add_simple_font(pdf, font, encoding)
                 simple = 2
-
     #weiter: ;
     ixref = mupdf.mpdf_to_num(font_obj)
     name = JM_EscapeStrFromStr( mupdf.mpdf_to_name( mupdf.mpdf_dict_get(font_obj, PDF_NAME('BaseFont'))))
@@ -13171,7 +12840,6 @@ def JM_mediabox(page_obj):
     return a PDF page's MediaBox
     '''
     page_mediabox = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
-    #fz_rect mediabox, page_mediabox;
     mediabox = mupdf.mpdf_to_rect(
             mupdf.mpdf_dict_get_inheritable(page_obj, PDF_NAME('MediaBox'))
             );
@@ -13256,7 +12924,6 @@ def JM_merge_resources( page, temp_res):
 
     max_alp = -1
     max_fonts = -1
-    #char text[20];
 
     # Handle /Alp objects
     if mupdf.mpdf_is_dict(temp_extg):   # any created at all?
@@ -13307,7 +12974,6 @@ def JM_mupdf_warning(user, message):
     '''
     redirect MuPDF warnings
     '''
-    #jlib.log('{user=} {message=}')
     JM_mupdf_warnings_store.append(message)
     if JM_mupdf_show_warnings:
         sys.stderr.write(f'mupdf: {message}\n')
@@ -13346,9 +13012,6 @@ def JM_new_buffer_from_stext_page(page):
     make a buffer from an stext_page's text
     '''
     assert isinstance(page, mupdf.StextPage)
-    #fz_stext_block *block;
-    #fz_stext_line *line;
-    #fz_stext_char *ch;
     rect = mupdf.Rect(page.m_internal.mediabox)
     buf = mupdf.mfz_new_buffer(256)
     for block in page:
@@ -13366,8 +13029,6 @@ def JM_new_buffer_from_stext_page(page):
 
 
 def JM_new_output_fileptr(bio):
-    #assert 0, 'fz_new_output() not yet supported'
-    #jlib.log('{=bio.write bio.seek bio.tell bio.truncate}')
     class Ret(mupdf.Output2):
         def __init__(self):
             super().__init__()
@@ -13376,11 +13037,8 @@ def JM_new_output_fileptr(bio):
             self.use_virtual_tell()
             self.use_virtual_truncate()
         def write(self, data_raw, data_length):
-            #jlib.log('{=data_raw data_length}')
             data = mupdf.raw_to_python_bytes(data_raw, data_length)
-            #jlib.log('{=data}')
             return bio.write(data)
-        #write = bio.write
         seek = bio.seek
         tell = bio.tell
         truncate = bio.truncate
@@ -13397,15 +13055,8 @@ def JM_new_output_fileptr(bio):
     ret.use_virtual_truncate()
     return ret
 
-    #out = mupdf.mfz_new_output(0, bio, JM_bytesio_write, None, None)
-    #out.seek = JM_bytesio_seek
-    #out.tell = JM_bytesio_tell
-    #out.truncate = JM_bytesio_truncate
-    #return out
-
 
 def JM_new_tracedraw_device(out):
-    #assert 0, 'derived devices not yet supported'
     class TraceDevice(mupdf.Device2):
         def __init__(self):
             super().__init__()
@@ -13476,7 +13127,6 @@ def JM_norm_rotation(rotate):
 def JM_object_to_buffer(what, compress, ascii):
     res = mupdf.mfz_new_buffer(512)
     out = mupdf.Output(res)
-    #jlib.log('{out=}')
     mupdf.mpdf_print_obj(out, what, compress, ascii)
     mupdf.mfz_terminate_buffer(res)
     return res
@@ -13495,12 +13145,10 @@ def JM_outline_xrefs(obj, xrefs):
         first = mupdf.mpdf_dict_get(thisobj, PDF_NAME('First')) # try go down
         if first.m_internal:
             xrefs = JM_outline_xrefs(first, xrefs)
-            #jlib.log('{xrefs=}')
         thisobj = mupdf.mpdf_dict_get(thisobj, PDF_NAME('Next'))    # try go next
         parent = mupdf.mpdf_dict_get(thisobj, PDF_NAME('Parent'))   # get parent
         if not thisobj.m_internal:
             thisobj = parent    # goto parent if no next
-    #jlib.log('{xrefs=}')
     return xrefs
 
 
@@ -13548,10 +13196,6 @@ def JM_pixmap_from_display_list(
 
     rect = mupdf.mfz_bound_display_list(list_)
     matrix = JM_matrix_from_py(ctm)
-    #fz_pixmap *pix = NULL;
-    #fz_var(pix);
-    #fz_device *dev = NULL;
-    #fz_var(dev);
     rclip = JM_rect_from_py(clip)
     rect = mupdf.mfz_intersect_rect(rect, rclip)    # no-op if clip is not given
 
@@ -13579,7 +13223,6 @@ def JM_point_from_py(p):
     '''
     PySequence to fz_point. Default: (FZ_MIN_INF_RECT, FZ_MIN_INF_RECT)
     '''
-    #jlib.log('{p=} {type(p)=}')
     if isinstance(p, mupdf.Point):
         return p
     if isinstance(p, Point):
@@ -13598,14 +13241,11 @@ def JM_print_stext_page_as_text(out, page):
     but lines within a block are concatenated by space instead a new-line
     character (which else leads to 2 new-lines).
     '''
-    #jlib.log('{type(out)=}')
     assert isinstance(out, mupdf.Output)
     assert isinstance(page, mupdf.StextPage)
     rect = mupdf.Rect(page.m_internal.mediabox)
     last_char = 0
 
-    #raw = ''
-    #jlib.log(' ')
     for block in page:
         if block.m_internal.type == mupdf.FZ_STEXT_BLOCK_TEXT:
             for line in block:
@@ -13621,13 +13261,11 @@ def JM_print_stext_page_as_text(out, page):
                         last_char = ch.m_internal.c
                         utf = mupdf.runetochar2(last_char)
                         for c in utf:
-                            #jlib.log('{type(c)=} {c!r=}')
                             assert isinstance(c, int)
                             assert 0 <= c < 256, f'utf={utf!r} cc={c}'
                             mupdf.mfz_write_byte(out, c)
                 if last_char != 10 and last_char > 0:
                     mupdf.mfz_write_string(out, "\n")
-    #jlib.log('{raw!r=}')
 
 
 def JM_put_script(annot_obj, key1, key2, value):
@@ -13637,7 +13275,6 @@ def JM_put_script(annot_obj, key1, key2, value):
     argument name suggests annotations. Up to 2 key values can be specified, so
     JavaScript actions can be stored for '/A' and '/AA/?' keys.
     '''
-    #PyObject *script = NULL;
     key1_obj = mupdf.mpdf_dict_get(annot_obj, key1)
     pdf = mupdf.mpdf_get_bound_document(annot_obj)  # owning PDF
 
@@ -13772,17 +13409,7 @@ def JM_rotate_page_matrix(page):
 
 
 def JM_search_stext_page(page, needle):
-    #struct highlight hits;
-    #fz_stext_block *block;
-    #fz_stext_line *line;
-    #fz_stext_char *ch;
-    #fz_buffer *buffer = NULL;
-    #const char *haystack, *begin, *end;
-    #jlib.log('{page=} {needle=}')
     rect = mupdf.Rect(page.m_internal.mediabox)
-    #int c, inside;
-    #jlib.log('{rect=}')
-
     if not needle:
         return
     quads = []
@@ -13797,84 +13424,55 @@ def JM_search_stext_page(page, needle):
 
     buffer_ = JM_new_buffer_from_stext_page(page)
     haystack_string = mupdf.mfz_string_from_buffer(buffer_)
-    #jlib.log('{haystack_string=}')
     haystack = 0
     begin, end = find_string(haystack_string[haystack:], needle)
-    #jlib.log('{begin=} {end=}')
     if begin is None:
         #goto no_more_matches;
-        #jlib.log('returning {quads=}')
         return quads
-    #jlib.log('{haystack=} {begin-haystack=}')
 
     begin += haystack
     end += haystack
     inside = 0
-    verbose = 0
     i = 0
     for block in page:
-        #jlib.log('block')
         if block.m_internal.type != mupdf.FZ_STEXT_BLOCK_TEXT:
             continue
         for line in block:
-            #jlib.log('line')
             for ch in line:
                 i += 1
-                #verbose = i > 950 and i < 1000
-                if (verbose): jlib.log('========================================')
-                if (verbose): jlib.log('ch loop start: ch {i=} {inside=} {haystack=}')
                 if not mupdf.mfz_is_infinite_rect(rect):
-                    r = JM_char_bbox(line, ch, verbose)
-                    #jlib.log('{rect=} {r=}')
+                    r = JM_char_bbox(line, ch)
                     if not mupdf.mfz_contains_rect(rect, r):
-                        if (verbose): jlib.log('not fz_contains_rect() [goto next_char]')
                         continue
                 while 1:
                     #try_new_match:
-                    if (verbose): jlib.log('[try_new_match] {inside=}')
                     if not inside:
                         hs = haystack_string[haystack:]
-                        if (verbose): jlib.log('{haystack=} {begin=} {haystack-begin=}')
                         if haystack >= begin:
-                            if (verbose): jlib.log('setting inside to 1')
                             inside = 1
-                    if (verbose): jlib.log('{inside=}')
                     if inside:
-                        if (verbose): jlib.log('{haystack-end=}')
                         if haystack < end:
-                            if (verbose): jlib.log('calling on_highlight_char()')
                             on_highlight_char(hits, line, ch)
-
                             break
                         else:
                             inside = 0
-                            if (verbose): jlib.log('calling find_string()')
                             begin, end = find_string(haystack_string[haystack:], needle)
-                            if (verbose): jlib.log('{begin=} {end=} {haystack=}')
                             if begin is None:
                                 #goto no_more_matches;
-                                if (verbose): jlib.log('returning, {len(quods)=}')
                                 return quads
                             else:
                                 #goto try_new_match;
                                 begin += haystack
                                 end += haystack
-                                if (verbose): jlib.log('[try_new_match] doing continue. {inside=}')
                                 continue
                     break
-                #else:
-                #    if (verbose): jlib.log('skpping char')
                 #next_char:;
-                if (verbose): jlib.log('[next_char]')
-                if (verbose): jlib.log('calling fz_chartorune()')
                 rune, _ = mupdf.mfz_chartorune(haystack_string[haystack:])
                 haystack += rune
                 hs = haystack_string[haystack:]
-                if (verbose): jlib.log('{rune=} {haystack=}: {hs}')
                 #break
             assert haystack_string[haystack] == '\n'
             haystack += 1
-            if (verbose): jlib.log('{i=} incremented to {haystack=}')
         assert haystack_string[haystack] == '\n'
         haystack += 1
     #no_more_matches:;
@@ -13894,7 +13492,6 @@ def JM_search_stext_page(page, needle):
     assert isinstance(ret, tuple)
     ret = list(ret)
     nl = '\n'
-    #jlib.log('{len(ret)=}:\n{nl.join([str(i) for i in ret])}\n')
     return ret
 
 
@@ -13953,10 +13550,7 @@ def JM_set_choice_options(annot, liste):
     tuple_ = tuple(liste)
     annot_obj = mupdf.mpdf_annot_obj(annot)
     pdf = mupdf.mpdf_get_bound_document(annot_obj)
-    #const char *opt = NULL, *opt1 = NULL, *opt2 = NULL;
     optarr = mupdf.mpdf_new_array(pdf, n)
-    #pdf_obj *optarrsub = NULL;
-    #PyObject *val = NULL;
     for i in range(n):
         val = tuple_[i]
         opt = val
@@ -14015,11 +13609,6 @@ def JM_set_object_value(obj, key, value):
     '''
     Set a PDF dict key to some value
     '''
-    #fz_buffer *res = NULL;
-    #pdf_obj *new_obj = NULL, *testkey = NULL;
-    #PyObject *skey = PyUnicode_FromString(key);  // Python version of dict key
-    #PyObject *slash = PyUnicode_FromString("/");  // PDF path separator
-    #PyObject *list = NULL, *newval=NULL, *newstr=NULL, *nullval=NULL;
     eyecatcher = "fitz: replace me!"
     pdf = mupdf.mpdf_get_bound_document(obj)
     # split PDF key at path seps and take last key part
@@ -14119,8 +13708,6 @@ def JM_set_widget_properties(annot, Widget):
     page = mupdf.mpdf_annot_page(annot)
     annot_obj = mupdf.mpdf_annot_obj(annot)
     pdf = page.doc()
-    #Py_ssize_t i, n = 0;
-    #result = 0;
     def GETATTR(name):
         return getattr(Widget, name, None)
 
@@ -14290,7 +13877,6 @@ def JM_UnicodeFromBuffer(buff):
     buff_bytes = buff.buffer_extract()
     val = buff_bytes.decode(errors='replace')
     z = val.find(chr(0))
-    #jlib.log('{val!r=} {z=}')
     if z >= 0:
         val = val[:z]
     return val
@@ -14320,39 +13906,15 @@ def JM_update_stream(doc, obj, buffer_, compress):
         doc.update_stream(obj, buffer_, 0);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def JM_xobject_from_page(pdfout, fsrcpage, xref, gmap):
     '''
     Make an XObject from a PDF page
     For a positive xref assume that its object can be used instead
     '''
-    #pdf_obj *xobj1, *resources = NULL, *o, *spageref;
     assert isinstance(gmap, mupdf.PdfGraftMap), f'type(gmap)={type(gmap)}'
     if xref > 0:
         xobj1 = mupdf.mpdf_new_indirect(pdfout, xref, 0)
     else:
-        #fz_buffer *res = NULL;
-        #fz_rect mediabox;
         srcpage = mupdf.mpdf_page_from_fz_page(fsrcpage)
         spageref = srcpage.obj()
         mediabox = mupdf.mpdf_to_rect(mupdf.mpdf_dict_get_inheritable(spageref, PDF_NAME('MediaBox')))
@@ -14394,7 +13956,6 @@ def PyUnicode_DecodeRawUnicodeEscape(s, errors='strict'):
     # fixme: handle escape sequencies
     ret = s.decode('utf8')
     z = ret.find(chr(0))
-    #jlib.log('{ret!r=} {z=}')
     if z >= 0:
         ret = ret[:z]
     return ret
@@ -14518,11 +14079,9 @@ def Page__add_text_marker(self, quads, annot_type):
         JM_add_annot_id(annot, "A")
         mupdf.mpdf_update_annot(annot)
     except Exception as e:
-        #jlib.log('{e=}')
         final()
         return
     final()
-    #annot = mupdf.mpdf_keep_annot(annot)
     return Annot(annot)
 
 
@@ -14553,13 +14112,11 @@ def Page_set_contents(page0, xref):
     assert isinstance(page0, Page)
     page = page0.this.page_from_fz_page()
     assert isinstance(page, mupdf.PdfPage)
-    #jlib.log(f'{page.doc=}')
     if not _INRANGE(xref, 1, page.doc().xref_len() - 1):
         raise Exception('bad xref')
     contents = page.doc().new_indirect(xref, 0)
     if not contents.is_stream():
         raise Exception('xref is no stream')
-    #page.obj().dict_put_drop( mupdf.PDF_ENUM_NAME_Contents, contents)
     page.obj().dict_put( mupdf.PDF_ENUM_NAME_Contents, contents)
     # fixme: page.this.dirty = 1
     return
@@ -14593,22 +14150,17 @@ def args_match(args, *types):
     j = 0
     for i in range(len(types)):
         type_ = types[i]
-        #jlib.log('{type_=}')
         if j >= len(args):
             if isinstance(type_, tuple) and None in type_:
                 # arg is missing but has default value.
                 continue
             else:
-                #jlib.log('returning false: {type=} {i=}>{len(args)=}')
                 return False
         if type_ is not None and not isinstance(args[j], type_):
-            #jlib.log('returning false: {type=} does not match {type(args[i])=}')
             return False
         j += 1
     if j != len(args):
-        #jlib.log('returning false: have only matched first {j} args in {args}')
         return False
-    #jlib.log('returning true: {args=} match {types=}')
     return True
 
 
@@ -14837,8 +14389,6 @@ def jm_append_merge(out):
         and indicate this via path["type"] = "fs".
     '''
     assert isinstance(out, list)
-    #jlib.log('{out=}')
-    #jlib.log('{trace_device.pathdict=}')
     len_ = len(out)
     if len_ == 0:   # 1st path
         out.append(trace_device.pathdict)
@@ -14850,7 +14400,6 @@ def jm_append_merge(out):
         trace_device.pathdict = dict()
         return
     prev = out[ len_ - 1]    # get prev path
-    #jlib.log('{=prev dictkey_type}')
     prevtype = prev[ dictkey_type]
     if prevtype != "f" and prevtype != "s" or prevtype == thistype:
         out.append(trace_device.pathdict)
@@ -15049,13 +14598,10 @@ def jm_checkrect():
 
 
 def jm_tracedraw_color(colorspace, color):
-    #float rgb[3];
-    #jlib.log('{=colorspace color}')
     if colorspace:
         #mupdf.mfz_convert_color( colorspace, color, fz_device_rgb(ctx),
         #                 rgb, NULL, fz_default_color_params);
         #rgb = [0.0, 0.0, 0.0]
-        #jlib.log('calling mupdf.convert_color2()')
         try:
             dv = mupdf.convert_color2_dv()
             mupdf.convert_color2(
@@ -15069,9 +14615,7 @@ def jm_tracedraw_color(colorspace, color):
         except Exception as e:
             jlib.log('{e=}')
             raise
-        #jlib.log('{dv=}')
         rgb = dv.dv0, dv.dv1, dv.dv2
-        #jlib.log('{rgb=}')
         return rgb
     return ()
 
@@ -15091,13 +14635,11 @@ def jm_tracedraw_fill_path(dev, path, even_odd, ctm, colorspace, color, alpha, c
         trace_device.pathdict[ "even_odd"] = even_odd
         trace_device.pathdict[ "fill_opacity"] = alpha
         trace_device.pathdict[ "closePath"] = False
-        #jlib.log('{=colorspace color}')
         trace_device.pathdict[ "fill"] = jm_tracedraw_color( colorspace, color)
         jm_tracedraw_path( dev, path)
         trace_device.pathdict[ dictkey_rect] = JM_py_from_rect(trace_device.pathrect)
         item_count = len(trace_device.pathdict[ dictkey_items])
         if item_count == 0:
-            #jlib.log(' ')
             return
         trace_device.pathdict[ "seqno"] = dev.seqno
         dev.seqno += 1
@@ -15137,7 +14679,6 @@ def jm_tracedraw_path(dev, path):
 
         def moveto(self, x, y):   # trace_moveto().
             try:
-                #jlib.log(' ')
                 trace_device.pathpoint = mupdf.Point(x, y)
                 trace_device.pathpoint = mupdf.mfz_transform_point(
                         trace_device.pathpoint,
@@ -15205,19 +14746,15 @@ def jm_tracedraw_path(dev, path):
 
     try:
         walker = Walker()
-        #jlib.log('{path}')
-        #jlib.log('calling mupdf.mfz_walk_path()')
         mupdf.mfz_walk_path( mupdf.Path(mupdf.keep_path(path)), walker, walker.m_internal)
     except Exception:
         jlib.log(jlib.exception_info())
         raise
-    #jlib.log('mfz_walk_path() returned')
 
 
 def jm_tracedraw_stroke_path( dev, path, stroke, ctm, colorspace, color, alpha, color_params):
     try:
         out = dev.out
-        #jlib.log('{out=}')
         trace_device.pathdict = dict()
         trace_device.pathrect = mupdf.Rect(mupdf.Rect.Fixed_INFINITE)
         trace_device.pathfactor = 1
@@ -15288,63 +14825,6 @@ def planish_line(p1: point_like, p2: point_like) -> Matrix:
     p1 = Point(p1)
     p2 = Point(p2)
     return Matrix(TOOLS._hor_matrix(p1, p2))
-
-
-def paper_sizes():
-    """Known paper formats @ 72 dpi as a dictionary. Key is the format string
-    like "a4" for ISO-A4. Value is the tuple (width, height).
-
-    Information taken from the following web sites:
-    www.din-formate.de
-    www.din-formate.info/amerikanische-formate.html
-    www.directtools.de/wissen/normen/iso.htm
-    """
-    return {
-        "a0": (2384, 3370),
-        "a1": (1684, 2384),
-        "a10": (74, 105),
-        "a2": (1191, 1684),
-        "a3": (842, 1191),
-        "a4": (595, 842),
-        "a5": (420, 595),
-        "a6": (298, 420),
-        "a7": (210, 298),
-        "a8": (147, 210),
-        "a9": (105, 147),
-        "b0": (2835, 4008),
-        "b1": (2004, 2835),
-        "b10": (88, 125),
-        "b2": (1417, 2004),
-        "b3": (1001, 1417),
-        "b4": (709, 1001),
-        "b5": (499, 709),
-        "b6": (354, 499),
-        "b7": (249, 354),
-        "b8": (176, 249),
-        "b9": (125, 176),
-        "c0": (2599, 3677),
-        "c1": (1837, 2599),
-        "c10": (79, 113),
-        "c2": (1298, 1837),
-        "c3": (918, 1298),
-        "c4": (649, 918),
-        "c5": (459, 649),
-        "c6": (323, 459),
-        "c7": (230, 323),
-        "c8": (162, 230),
-        "c9": (113, 162),
-        "card-4x6": (288, 432),
-        "card-5x7": (360, 504),
-        "commercial": (297, 684),
-        "executive": (522, 756),
-        "invoice": (396, 612),
-        "ledger": (792, 1224),
-        "legal": (612, 1008),
-        "legal-13": (612, 936),
-        "letter": (612, 792),
-        "monarch": (279, 540),
-        "tabloid-extra": (864, 1296),
-    }
 
 
 def _get_glyph_text() -> bytes:
@@ -16020,7 +15500,6 @@ def chartocanon(s):
     assert isinstance(s, str)
     n, c = mupdf.mfz_chartorune(s)
     c = canon(c);
-    #jlib.log('{s!r=} => {n=} {c=}')
     return n, c;
 
 
@@ -16079,7 +15558,6 @@ def get_pdf_now() -> str:
     "Now" timestamp in PDF Format
     '''
     import time
-
     tz = "%s'%s'" % (
         str(abs(time.altzone // 3600)).rjust(2, "0"),
         str((abs(time.altzone // 60) % 60)).rjust(2, "0"),
@@ -16325,7 +15803,6 @@ def _make_rect( *args):
 def match_string(h0, n0):
     h = 0
     n = 0
-    #int hc, nc;
     e = h
     delta_h, hc = chartocanon(h0[h:])
     h += delta_h
@@ -16355,34 +15832,26 @@ def match_string(h0, n0):
 
 
 def on_highlight_char(hits, line, ch):
-    #jlib.log('{hits=}')
     assert hits
     assert isinstance(line, mupdf.StextLine)
     assert isinstance(ch, mupdf.StextChar)
-    #struct highlight *hits = arg;
     vfuzz = ch.m_internal.size * hits.vfuzz
     hfuzz = ch.m_internal.size * hits.hfuzz
     ch_quad = JM_char_quad(line, ch)
-    #jlib.log('{hits.len=} {len(hits.quads)=} {vfuzz=} {hfuzz=} {ch_quad=}')
     if hits.len > 0:
         # fixme: end = hits.quads[-1]
         quad = hits.quads[hits.len - 1]
         end = JM_quad_from_py(quad)
-        #jlib.log('{line.m_internal.dir=} {quad=} {end=} {ch_quad=}')
         if ( 1
                 and hdist(line.m_internal.dir, end.lr, ch_quad.ll) < hfuzz
                 and vdist(line.m_internal.dir, end.lr, ch_quad.ll) < vfuzz
                 and hdist(line.m_internal.dir, end.ur, ch_quad.ul) < hfuzz
                 and vdist(line.m_internal.dir, end.ur, ch_quad.ul) < vfuzz
                 ):
-            #jlib.log('extending')
             end.ur = ch_quad.ur
             end.lr = ch_quad.lr
-            #quad = JM_py_from_quad(end)
-            #hits.quads[hits.len - 1] = quad
             assert hits.quads[-1] == end
             return
-    #hits.quads.append(JM_py_from_quad(ch_quad))
     hits.quads.append(ch_quad)
     hits.len += 1
 
@@ -16393,10 +15862,6 @@ def page_merge(doc_des, doc_src, page_from, page_to, rotate, links, copy_annots,
     Modified copy of function of pdfmerge.c: we also copy annotations, but
     we skip **link** annotations. In addition we rotate output.
     '''
-    #pdf_obj *page_ref = NULL;
-    #pdf_obj *page_dict = NULL;
-    #pdf_obj *obj = NULL, *ref = NULL;
-
     # list of object types (per page) we want to copy
     known_page_objs = [
         PDF_NAME('Contents'),
