@@ -7766,38 +7766,6 @@ class Page:
             rc.append((pname, xref, octype))
         return rc
 
-    def get_pixmap(page, **kw): # -> Pixmap:
-        """Create pixmap of page.
-
-        Args:
-            matrix: Matrix for transformation (default: Identity).
-            colorspace: (str/Colorspace) cmyk, rgb, gray - case ignored, default csRGB.
-            clip: (irect-like) restrict rendering to this area.
-            alpha: (bool) whether to include alpha channel
-            annots: (bool) whether to also render annotations
-        """
-        CheckParent(page)
-        matrix = kw.get("matrix", Identity)
-        colorspace = kw.get("colorspace", csRGB)
-        clip = kw.get("clip")
-        alpha = bool(kw.get("alpha", False))
-        annots = bool(kw.get("annots", True))
-
-        if type(colorspace) is str:
-            if colorspace.upper() == "GRAY":
-                colorspace = csGRAY
-            elif colorspace.upper() == "CMYK":
-                colorspace = csCMYK
-            else:
-                colorspace = csRGB
-        if colorspace.n not in (1, 3, 4):
-            raise ValueError("unsupported colorspace")
-
-        dl = page.get_displaylist(annots=annots)
-        pix = dl.get_pixmap(matrix=matrix, colorspace=colorspace, alpha=alpha, clip=clip)
-        dl = None
-        return Pixmap(pix)
-
     def get_svg_image(self, matrix=None, text_as_path=1):
         """Make SVG image from page."""
         CheckParent(self)
@@ -8116,51 +8084,6 @@ class Page:
         doc.get_char_widths(xref, fontdict=fontdict)
         return xref
 
-    def insert_text(
-            page,
-            point: point_like,
-            text: typing.Union[str, list],
-            fontsize: float = 11,
-            lineheight: OptFloat = None,
-            fontname: str = "helv",
-            fontfile: OptStr = None,
-            set_simple: int = 0,
-            encoding: int = 0,
-            color: OptSeq = None,
-            fill: OptSeq = None,
-            border_width: float = 1,
-            render_mode: int = 0,
-            rotate: int = 0,
-            morph: OptSeq = None,
-            overlay: bool = True,
-            stroke_opacity: float = 1,
-            fill_opacity: float = 1,
-            oc: int = 0,
-            ):
-        img = page.new_shape()
-        rc = img.insert_text(
-                point,
-                text,
-                fontsize=fontsize,
-                lineheight=lineheight,
-                fontname=fontname,
-                fontfile=fontfile,
-                set_simple=set_simple,
-                encoding=encoding,
-                color=color,
-                fill=fill,
-                border_width=border_width,
-                render_mode=render_mode,
-                rotate=rotate,
-                morph=morph,
-                stroke_opacity=stroke_opacity,
-                fill_opacity=fill_opacity,
-                oc=oc,
-                )
-        if rc >= 0:
-            img.commit(overlay)
-        return rc
-
     def insertFont(self, fontname="helv", fontfile=None, fontbuffer=None,
                    set_simple=False, wmode=0, encoding=0):
         doc = self.parent
@@ -8326,9 +8249,6 @@ class Page:
     def mediabox_size(self):
         return self.MediaBoxSize
 
-    def new_shape(self):
-        return Shape(self)
-
     def read_contents(self):
         """All /Contents streams concatenated to one bytes object."""
         return TOOLS._get_all_contents(self)
@@ -8371,45 +8291,6 @@ class Page:
         CheckParent(self)
         #return _fitz.Page_run(self, dw, m)
         mupdf.mfz_run_page(self.this, dw.device, JM_matrix_from_py(m), mupdf.Cookie());
-
-
-    def search_for(*args, **kwargs) -> list:
-        """Search for a string on a page.
-
-        Args:
-            text: string to be searched for
-            clip: restrict search to this rectangle
-            quads: (bool) return quads instead of rectangles
-            flags: bit switches, default: join hyphened words
-            textpage: a pre-created TextPage
-        Returns:
-            a list of rectangles or quads, each containing one occurrence.
-        """
-        if len(args) != 2:
-            raise ValueError("bad number of positional parameters")
-        page, text = args
-        quads = kwargs.get("quads", 0)
-        clip = kwargs.get("clip")
-        #jlib.log('{clip=}')
-        textpage = kwargs.get("textpage")
-        if clip != None:
-            clip = Rect(clip)
-        flags = kwargs.get(
-            "flags",
-            TEXT_DEHYPHENATE | TEXT_PRESERVE_WHITESPACE | TEXT_PRESERVE_LIGATURES,
-            )
-        #jlib.log('{flags=}')
-
-        CheckParent(page)
-        tp = textpage
-        if tp is None:
-            tp = page.get_textpage(clip=clip, flags=flags)  # create TextPage
-        elif getattr(tp, "parent") != page:
-            raise ValueError("not a textpage of this page")
-        #jlib.log('{=type(tp) quads}')
-        rlist = tp.search(text, quads=quads)
-        #jlib.log('returning {len(rlist)=} {rlist=}')
-        return rlist
 
     def set_contents(self, xref):
         """Set an xref as the (only) /Contents object."""
@@ -8481,139 +8362,6 @@ class Page:
         ASSERT_PDF(page)
         rot = JM_norm_rotation(rotation)
         mupdf.mpdf_dict_put_int( page.obj(), PDF_NAME('Rotate'), rot)
-
-    def show_pdf_page(*args, **kwargs) -> int:
-        """Show page number 'pno' of PDF 'src' in rectangle 'rect'.
-
-        Args:
-            rect: (rect-like) where to place the source image
-            src: (document) source PDF
-            pno: (int) source page number
-            overlay: (bool) put in foreground
-            keep_proportion: (bool) do not change width-height-ratio
-            rotate: (int) degrees (multiple of 90)
-            clip: (rect-like) part of source page rectangle
-        Returns:
-            xref of inserted object (for reuse)
-        """
-        if len(args) not in (3, 4):
-            raise ValueError("bad number of positional parameters")
-        pno = None
-        if len(args) == 3:
-            page, rect, src = args
-        else:
-            page, rect, src, pno = args
-        if pno == None:
-            pno = int(kwargs.get("pno", 0))
-        overlay = bool(kwargs.get("overlay", True))
-        keep_proportion = bool(kwargs.get("keep_proportion", True))
-        rotate = float(kwargs.get("rotate", 0))
-        oc = int(kwargs.get("oc", 0))
-        reuse_xref = int(kwargs.get("reuse_xref", 0))
-        clip = kwargs.get("clip")
-
-        def calc_matrix(sr, tr, keep=True, rotate=0):
-            """Calculate transformation matrix from source to target rect.
-
-            Notes:
-                The product of four matrices in this sequence: (1) translate correct
-                source corner to origin, (2) rotate, (3) scale, (4) translate to
-                target's top-left corner.
-            Args:
-                sr: source rect in PDF (!) coordinate system
-                tr: target rect in PDF coordinate system
-                keep: whether to keep source ratio of width to height
-                rotate: rotation angle in degrees
-            Returns:
-                Transformation matrix.
-            """
-            # calc center point of source rect
-            smp = (sr.tl + sr.br) / 2.0
-            # calc center point of target rect
-            tmp = (tr.tl + tr.br) / 2.0
-
-            # m moves to (0, 0), then rotates
-            m = Matrix(1, 0, 0, 1, -smp.x, -smp.y) * Matrix(rotate)
-
-            sr1 = sr * m  # resulting source rect to calculate scale factors
-
-            fw = tr.width / sr1.width  # scale the width
-            fh = tr.height / sr1.height  # scale the height
-            if keep:
-                fw = fh = min(fw, fh)  # take min if keeping aspect ratio
-
-            m *= Matrix(fw, fh)  # concat scale matrix
-            m *= Matrix(1, 0, 0, 1, tmp.x, tmp.y)  # concat move to target center
-            return JM_TUPLE(m)
-
-        CheckParent(page)
-        doc = page.parent
-
-        if not doc.is_pdf or not src.is_pdf:
-            raise ValueError("not a PDF")
-
-        rect = page.rect & rect  # intersect with page rectangle
-        if rect.is_empty or rect.is_infinite:
-            raise ValueError("rect must be finite and not empty")
-
-        if reuse_xref > 0:
-            warnings.warn("ignoring 'reuse_xref'", DeprecationWarning)
-
-        while pno < 0:  # support negative page numbers
-            pno += src.page_count
-        src_page = src[pno]  # load source page
-        if src_page.get_contents() == []:
-            raise ValueError("nothing to show - source page empty")
-
-        tar_rect = rect * ~page.transformation_matrix  # target rect in PDF coordinates
-
-        src_rect = src_page.rect if not clip else src_page.rect & clip  # source rect
-        if src_rect.is_empty or src_rect.is_infinite:
-            raise ValueError("clip must be finite and not empty")
-        src_rect = src_rect * ~src_page.transformation_matrix  # ... in PDF coord
-
-        matrix = calc_matrix(src_rect, tar_rect, keep=keep_proportion, rotate=rotate)
-
-        # list of existing /Form /XObjects
-        ilst = [i[1] for i in doc.get_page_xobjects(page.number)]
-        ilst += [i[7] for i in doc.get_page_images(page.number)]
-        ilst += [i[4] for i in doc.get_page_fonts(page.number)]
-
-        # create a name not in that list
-        n = "fzFrm"
-        i = 0
-        _imgname = n + "0"
-        while _imgname in ilst:
-            i += 1
-            _imgname = n + str(i)
-
-        isrc = src._graft_id  # used as key for graftmaps
-        if doc._graft_id == isrc:
-            raise ValueError("source document must not equal target")
-
-        # retrieve / make Graftmap for source PDF
-        gmap = doc.Graftmaps.get(isrc, None)
-        if gmap is None:
-            gmap = Graftmap(doc)
-            doc.Graftmaps[isrc] = gmap
-
-        # take note of generated xref for automatic reuse
-        pno_id = (isrc, pno)  # id of src[pno]
-        xref = doc.ShownPages.get(pno_id, 0)
-
-        xref = page._show_pdf_page(
-            src_page,
-            overlay=overlay,
-            matrix=matrix,
-            xref=xref,
-            oc=oc,
-            clip=src_rect,
-            graftmap=gmap,
-            _imgname=_imgname,
-        )
-        doc.ShownPages[pno_id] = xref
-
-        return xref
 
     @property
     def transformationMatrix(self):
@@ -19392,6 +19140,7 @@ Page.get_image_info     = utils.get_image_info
 Page.get_image_rects    = utils.get_image_rects
 Page.get_label          = utils.get_label
 Page.get_links          = utils.get_links
+Page.get_pixmap         = utils.get_pixmap
 Page.get_text           = utils.get_text
 Page.get_text_blocks    = utils.get_text_blocks
 Page.get_text_selection = utils.get_text_selection
@@ -19400,7 +19149,11 @@ Page.get_textbox        = utils.get_textbox
 Page.get_textpage_ocr   = utils.get_textpage_ocr
 Page.insert_image       = utils.insert_image
 Page.insert_link        = utils.insert_link
+Page.insert_text        = utils.insert_text
 Page.insert_textbox     = utils.insert_textbox
+Page.new_shape          = lambda x: utils.Shape(x)
+Page.search_for         = utils.search_for
+Page.show_pdf_page      = utils.show_pdf_page
 Page.update_link        = utils.update_link
 Page.write_text         = utils.write_text
 
