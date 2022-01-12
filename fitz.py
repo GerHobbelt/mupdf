@@ -10,6 +10,7 @@ import math
 import sys
 import textwrap
 import typing
+import warnings
 import weakref
 
 sys.path.append('scripts')
@@ -28,10 +29,10 @@ OptStr = typing.Optional[str]
 Page = 'Page_forward_decl'
 Point = 'Point_forward_decl'
 
-matrix_like = "matrix_like"
-point_like = "point_like"
-quad_like = "quad_like"
-rect_like = "rect_like"
+matrix_like = 'matrix_like'
+point_like = 'point_like'
+quad_like = 'quad_like'
+rect_like = 'rect_like'
 
 
 # Classes
@@ -1344,25 +1345,6 @@ class Annot:
         annot = self.this
         return mupdf.mpdf_to_num(annot.annot_obj())
 
-    #blendmode = property(blendMode, doc="annotation BlendMode")
-    fileGet = get_file
-    fileUpd = update_file
-    getPixmap = get_pixmap
-    getTextPage = get_textpage
-    lineEnds=line_ends
-    setBlendMode = set_blendmode
-    setBorder = set_border
-    setColors = set_colors
-    setFlags = set_flags
-    setInfo = set_info
-    setLineEnds = set_line_ends
-    setName = set_name
-    setOC = set_oc
-    setOpacity = set_opacity
-    setRect = set_rect
-    #setRotation = set_rotation
-    soundGet = get_sound
-
 
 class Colorspace:
     def __init__(self, type_):
@@ -1423,8 +1405,6 @@ class DisplayList:
         val.thisown = True
         return val
 
-    getPixmap = get_pixmap
-
     def get_textpage(self, flags=3):
         #val = _fitz.DisplayList_getTextPage(self, flags)
         stext_options = mupdf.StextOptions()
@@ -1432,8 +1412,6 @@ class DisplayList:
         val = mupdf.mfz_new_stext_page_from_display_list( this, stext_options)
         val.thisown = True
         return val
-
-    getTextPage = get_textpage
 
     @property
     def rect(self):
@@ -2457,8 +2435,6 @@ class Document:
         #return _fitz.Document_chapter_count(self)
         return mupdf.mfz_count_chapters( self.this)
 
-    chapterCount = chapter_count
-
     def chapter_page_count(self, chapter):
         """Page count of chapter."""
         if self.is_closed:
@@ -2469,13 +2445,6 @@ class Document:
             THROWMSG( "bad chapter number")
         pages = mupdf.mfz_count_chapter_pages( self.this, chapter)
         return pages
-
-    def chapterPageCount(self, chapter):
-        """Page count of chapter."""
-        assert 0, 'no Document_chapterPageCount'
-        if self.is_closed:
-            raise ValueError("document closed")
-        return _fitz.Document_chapterPageCount(self, chapter)
 
     def close(self):
         """Close document."""
@@ -2514,8 +2483,6 @@ class Document:
         doc = JM_convert_to_pdf(fz_doc, fp, tp, rotate)
         return doc
 
-    convertToPDF = convert_to_pdf
-
     def copy_page(self, pno: int, to: int =-1):
         """Copy a page within a PDF document.
 
@@ -2540,8 +2507,6 @@ class Document:
             before = 0
 
         return self._move_copy_page(pno, to, before, copy)
-
-    copyPage = copy_page
 
     def del_xml_metadata(self):
         """Delete XML metadata."""
@@ -2643,177 +2608,6 @@ class Document:
             self._delete_page(i)
 
         self._reset_page_refs()
-
-    def deletePage(self, pno: int =-1):
-        """ Delete one page from a PDF.
-        """
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        if self.is_closed:
-            raise ValueError("document closed")
-
-        pageCount = self.page_count
-        while pno < 0:
-            pno += pageCount
-
-        if not pno in range(pageCount):
-            raise ValueError("bad page number(s)")
-
-        # remove TOC bookmarks pointing to deleted page
-        old_toc = self.getToC()
-        for i, item in enumerate(old_toc):
-            if item[2] == pno + 1:
-                xref = self.outline_xref(i)
-                self._remove_toc_item(xref)
-
-        self._remove_links_to(pno, pno)
-        self._deletePage(pno)
-        self._reset_page_refs()
-
-    def deletePageRange(self, from_page: int =-1, to_page: int =-1):
-        """Delete pages from a PDF.
-        """
-        if not self.isPDF:
-            raise ValueError("not a PDF")
-        if self.is_closed:
-            raise ValueError("document closed")
-
-        pageCount = self.page_count  # page count of document
-        f = from_page  # first page to delete
-        t = to_page  # last page to delete
-        while f < 0:
-            f += pageCount
-        while t < 0:
-            t += pageCount
-        if not f <= t < pageCount:
-            raise ValueError("bad page number(s)")
-
-        old_toc = self.getToC()
-        for i, item in enumerate(old_toc):
-            if f + 1 <= item[2] <= t + 1:
-                xref = self.outline_xref(i)
-                self._remove_toc_item(xref)
-
-        self._remove_links_to(f, t)
-
-        for i in range(t, f - 1, -1):  # delete pages, last to first
-            self._deletePage(i)
-
-        self._reset_page_refs()
-
-    def embeddedFileAdd(
-            self,
-            name: str,
-            buffer_: typing.ByteString,
-            filename: OptStr =None,
-            ufilename: OptStr =None,
-            desc: OptStr =None,
-            ) -> None:
-        """Add an item to the EmbeddedFiles array.
-
-        Args:
-            name: name of the new item, must not already exist.
-            buffer_: (binary data) the file content.
-            filename: (str) the file name, default: the name
-            ufilename: (unicode) the file name, default: filename
-            desc: (str) the description.
-        """
-        filenames = self.embeddedFileNames()
-        msg = "Name '%s' already in EmbeddedFiles array." % str(name)
-        if name in filenames:
-            raise ValueError(msg)
-
-        if filename is None:
-            filename = name
-        if ufilename is None:
-            ufilename = unicode(filename, "utf8") if str is bytes else filename
-        if desc is None:
-            desc = name
-        return self._embeddedFileAdd(
-                name,
-                buffer_=buffer_,
-                filename=filename,
-                ufilename=ufilename,
-                desc=desc,
-                )
-
-    def embeddedFileCount(self) -> int:
-        """Get number of EmbeddedFiles."""
-        return len(self.embeddedFileNames())
-
-    def embeddedFileDel(self, item: typing.Union[int, str]):
-        """Delete an entry from EmbeddedFiles.
-
-        Notes:
-            The argument must be name or index of an EmbeddedFiles item.
-            Physical deletion of data will happen on save to a new
-            file with appropriate garbage option.
-        Args:
-            item: name or number of item.
-        Returns:
-            None
-        """
-        idx = self._embeddedFileIndex(item)
-        return self._embeddedFileDel(idx)
-
-    def embeddedFileGet(self, item: typing.Union[int, str]) -> bytes:
-        """Get the content of an item in the EmbeddedFiles array.
-
-        Args:
-            item: number or name of item.
-        Returns:
-            (bytes) The file content.
-        """
-        idx = self._embeddedFileIndex(item)
-        return self._embeddedFileGet(idx)
-
-    def embeddedFileInfo(self, item: typing.Union[int, str]) -> dict:
-        """Get information of an item in the EmbeddedFiles array.
-
-        Args:
-            item: number or name of item.
-        Returns:
-            Information dictionary.
-        """
-        idx = self._embeddedFileIndex(item)
-        infodict = {"name": self.embeddedFileNames()[idx]}
-        self._embeddedFileInfo(idx, infodict)
-        return infodict
-
-    def embeddedFileNames(self) -> list:
-        """Get list of names of EmbeddedFiles."""
-        filenames = []
-        self._embeddedFileNames(filenames)
-        return filenames
-
-    def embeddedFileUpd(
-            self,
-            item: typing.Union[int, str],
-            buffer_: OptBytes =None,
-            filename: OptStr =None,
-            ufilename: OptStr =None,
-            desc: OptStr =None,
-            ) -> None:
-        """Change an item of the EmbeddedFiles array.
-
-        Notes:
-            Only provided parameters are changed. If all are omitted,
-            the method is a no-op.
-        Args:
-            item: number or name of item.
-            buffer_: (binary data) the new file content.
-            filename: (str) the new file name.
-            ufilename: (unicode) the new filen ame.
-            desc: (str) the new description.
-        """
-        idx = self._embeddedFileIndex(item)
-        return self._embeddedFileUpd(
-                idx,
-                buffer_=buffer_,
-                filename=filename,
-                ufilename=ufilename,
-                desc=desc,
-                )
 
     def embfile_add(self, name: str, buffer_: typing.ByteString,
                               filename: OptStr =None,
@@ -2935,13 +2729,6 @@ class Document:
         self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
         return xref
 
-    def extractFont(self, xref=0, info_only=0):
-        """Get a font by xref."""
-        assert 0, 'no Document_extractFont'
-        if self.is_closed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        #return _fitz.Document_extractFont(self, xref, info_only)
-
     #FITZEXCEPTION(extract_font, !result)
     #CLOSECHECK(extract_font, """Get a font by xref.""")
     def extract_font(xref=0, info_only=0):
@@ -2977,8 +2764,6 @@ class Document:
         else:
             tuple_ = "", "", "", ""
         return tuple_
-
-    extractFont = extract_font
 
     def extract_image(self, xref):
         """Get image by xref. Returns a dictionary."""
@@ -3055,8 +2840,6 @@ class Document:
         rc[ dictkey_image] =JM_BinFromBuffer(res)
         return rc
 
-    extractImage = extract_image
-
     def ez_save(
             self,
             filename,
@@ -3103,13 +2886,6 @@ class Document:
         #return _fitz.Document_find_bookmark(self, bm)
         location = mupdf.lookup_bookmark2( self.this.m_internal, bm)
         return location.chapter, location.page
-
-    def findBookmark(self, bm):
-        """Find new location after layouting a document."""
-        assert 0, 'no Document_findBookmark'
-        if self.is_closed or self.isEncrypted:
-            raise ValueError("document closed or encrypted")
-        return _fitz.Document_findBookmark(self, bm)
 
     def fullcopy_page(self, pno, to=-1):
         """Make a full page duplicate."""
@@ -3174,14 +2950,6 @@ class Document:
 
         self._reset_page_refs()
 
-
-    def fullcopyPage(self, pno, to=-1):
-        """Make full page duplication."""
-        if self.is_closed:
-            raise ValueError("document closed")
-        val = _fitz.Document_fullcopyPage(self, pno, to)
-        self._reset_page_refs()
-        return val
 
     def get_layer(self, config=-1):
         """Content of ON, OFF, RBGroups of an OC layer."""
@@ -3402,8 +3170,6 @@ class Document:
             rc = ''
         return rc
 
-    getXmlMetadata = get_xml_metadata
-
     @property
     def has_old_style_xrefs(self):
         '''
@@ -3543,8 +3309,6 @@ class Document:
         if final == 1:
             self.Graftmaps[isrt] = None
 
-    insertPDF = insert_pdf
-
     @property
     def is_dirty(self):
         #jlib.log('{self.this.count_pages()=}')
@@ -3592,51 +3356,6 @@ class Document:
 
     @property
     def is_pdf(self):
-        return self.isPDF
-
-    @property
-    def is_reflowable(self):
-        """Check if document is layoutable."""
-        if self.is_closed:
-            raise ValueError("document closed")
-        #return _fitz.Document_is_reflowable(self)
-        return mupdf.mfz_is_document_reflowable(self._document())
-
-    @property
-    def is_repaired(self):
-        """Check whether PDF was repaired."""
-        #jlib.log('{self.this.count_pages()=}')
-        #jlib.log('*** calling self.this.document_from_fz_document()')
-        pdf = self.this.document_from_fz_document()
-        if not pdf.m_internal:
-            return False
-        r = pdf.was_repaired()
-        #jlib.log('{r=}')
-        if r:
-            #jlib.log('returning true')
-            return True
-        #jlib.log('returning false')
-        return False
-
-    isRepaired = is_repaired
-
-    @property
-    def isDirty(self):
-        """True if PDF has unsaved changes."""
-        if self.is_closed:
-            raise ValueError("document closed")
-        #return _fitz.Document_isDirty(self)
-        assert 0, 'no Document_isDirty'
-
-    @property
-    def isFormPDF(self):
-        """Check if PDF Form document."""
-        if self.is_closed:
-            raise ValueError("document closed")
-        return _fitz.Document_isFormPDF(self)
-
-    @property
-    def isPDF(self):
         """Check for PDF."""
         #jlib.log('.isPDF')
         if isinstance(self.this, mupdf.PdfDocument):
@@ -3663,19 +3382,28 @@ class Document:
         #return True if pp.m_internal else False
 
     @property
-    def isReflowable(self):
+    def is_reflowable(self):
         """Check if document is layoutable."""
-        assert 0, 'no Document_isReflowable'
         if self.is_closed:
             raise ValueError("document closed")
-        return _fitz.Document_isReflowable(self)
+        #return _fitz.Document_is_reflowable(self)
+        return mupdf.mfz_is_document_reflowable(self._document())
 
-    def isStream(self, xref=0):
-        """Check if xref is a stream object."""
-        if self.is_closed:
-            raise ValueError("document closed")
-
-        return _fitz.Document_isStream(self, xref)
+    @property
+    def is_repaired(self):
+        """Check whether PDF was repaired."""
+        #jlib.log('{self.this.count_pages()=}')
+        #jlib.log('*** calling self.this.document_from_fz_document()')
+        pdf = self.this.document_from_fz_document()
+        if not pdf.m_internal:
+            return False
+        r = pdf.was_repaired()
+        #jlib.log('{r=}')
+        if r:
+            #jlib.log('returning true')
+            return True
+        #jlib.log('returning false')
+        return False
 
     def journal_can_do(self):
         """Show if undo and / or redo are possible."""
@@ -3877,14 +3605,6 @@ class Document:
         self._reset_page_refs()
         self.init_doc()
 
-    @property
-    def lastLocation(self):
-        """Id (chapter, page) of last page."""
-        assert 0, 'no Document_lastLocation'
-        if self.is_closed:
-            raise ValueError("document closed")
-        return _fitz.Document_lastLocation(self)
-
     def load_page(self, page_id):
         """Load a page.
 
@@ -3919,8 +3639,6 @@ class Document:
         val.number = page_id
         return val
 
-    loadPage = load_page
-
     def location_from_page_number(self, pno):
         """Convert pno to (chapter, page)."""
         if self.is_closed:
@@ -3945,8 +3663,6 @@ class Document:
         mark = mupdf.make_bookmark2( self.this.m_internal, loc.internal())
         return mark
 
-    makeBookmark = make_bookmark
-
     def move_page(self, pno: int, to: int =-1):
         """Move a page within a PDF document.
 
@@ -3967,30 +3683,6 @@ class Document:
         copy = 0
         if to == -1:
             to = page_count - 1
-            before = 0
-
-        return self._move_copy_page(pno, to, before, copy)
-
-    def movePage(self, pno: int, to: int =-1):
-        """Move a page within a PDF document.
-
-        Args:
-            pno: source page number.
-            to: put before this page, '-1' means after last page.
-        """
-        if self.is_closed:
-            raise ValueError("document closed")
-
-        pageCount = len(self)
-        if (
-            pno not in range(pageCount) or
-            to not in range(-1, pageCount)
-           ):
-            raise ValueError("bad page number(s)")
-        before = 1
-        copy = 0
-        if to == -1:
-            to = pageCount - 1
             before = 0
 
         return self._move_copy_page(pno, to, before, copy)
@@ -4070,9 +3762,6 @@ class Document:
         next_loc = mupdf.fz_next_page( this_doc, loc)
         return next_loc.chapter, next_loc.page
 
-    def nextLocation(self, page_id):
-        return self.next_location(page_id)
-
     def page_annot_xrefs(self, n):
         page_count = self.this.count_pages()
         #jlib.log('*** {page_count=}')
@@ -4108,10 +3797,6 @@ class Document:
             raise ValueError("document closed")
         ret = self.this.count_pages()
         return ret
-
-    @property
-    def pageCount(self):
-        return self.page_count()
 
     def page_cropbox(self, pno):
         """Get CropBox of page number (without loading page)."""
@@ -4171,15 +3856,6 @@ class Document:
         ASSERT_PDF(pdf)
         xref = mupdf.mpdf_to_num(mupdf.mpdf_lookup_page_obj(pdf, n))
         return xref
-
-    def pageCropBox(self, pno):
-        """Get CropBox of page number (without loading page)."""
-        assert 0, 'no Document_pageCropBox'
-        if self.is_closed:
-            raise ValueError("document closed")
-        val = _fitz.Document_pageCropBox(self, pno)
-        val = Rect(val)
-        return val
 
     def pages(self, start: OptInt =None, stop: OptInt =None, step: OptInt =None) -> "struct Page *":
         """Return a generator iterator over a page range.
@@ -4271,9 +3947,6 @@ class Document:
         prev_loc = mupdf.mfz_previous_page(self.this, loc)
         return prev_loc.chapter, prev_loc.page
 
-    def previousLocation(self, page_id):
-        return self.prev_location(page_id)
-
     def reload_page(self, page: "struct Page *") -> "struct Page *":
         """Make a fresh copy of a page."""
         old_annots = {}  # copy annot references to here
@@ -4317,9 +3990,6 @@ class Document:
             return (loc.chapter, loc.page), xp, yp
         pno = mupdf.mfz_page_number_from_location(this_doc, loc)
         return pno, xp, yp
-
-    def resolveLink(self, uri=None, chapters=0):
-        return self.resolve_link(uri, chapters)
 
     def save(
             self,
@@ -4548,8 +4218,6 @@ class Document:
             lang = mupdf.mfz_text_language_from_string(language)
         mupdf.mpdf_set_document_language(pdf, lang)
         return True
-
-    setLanguage = set_language
 
     @staticmethod
     def show_dict(o):
@@ -4878,29 +4546,8 @@ class Document:
             raise ValueError("document closed")
         return _fitz.Document_xref_xml_metadata(self)
 
-    setXmlMetadata = set_xml_metadata
-
-    getOCGs = get_ocgs
-
     outline = property(lambda self: self._outline)
 
-    pageXref = page_xref
-
-    getPageFontList = get_page_fonts
-
-    getPageImageList = get_page_images
-
-    getPageXObjectList = get_page_xobjects
-
-    updateObject = update_object
-    updateStream = update_stream
-    xrefStream = xref_stream
-    xrefStreamRaw = xref_stream_raw
-    xrefObject = xref_object
-    xrefLength = xref_length
-    PDFTrailer = pdf_trailer
-    PDFCatalog = pdf_catalog
-    metadataXML = xref_xml_metadata
 
 open = Document
 
@@ -5261,8 +4908,6 @@ class Link:
             return False
         return bool( mupdf.mfz_is_external_link( this_link.m_internal.uri))
 
-    isExternal = is_external
-
     @property
     def next(self):
         """Next link."""
@@ -5302,8 +4947,6 @@ class Link:
             border = {"width": width, "style": style, "dashes": dashes}
         return self._setBorder(border, self.parent.parent.this, self.xref)
 
-    setBorder = set_border
-
     def set_colors(self, colors=None, stroke=None, fill=None):
         """Set border colors."""
         CheckParent(self)
@@ -5327,8 +4970,6 @@ class Link:
         else:
             s = "[%g %g %g %g]" % tuple(stroke)
         doc.xref_set_key(self.xref, "C", s)
-
-    setColors = set_colors
 
     def set_flags(self, flags):
         CheckParent(self)
@@ -5503,8 +5144,6 @@ class Matrix(object):
         return (abs(self.b) < EPSILON and abs(self.c) < EPSILON) or \
             (abs(self.a) < EPSILON and abs(self.d) < EPSILON)
 
-    isRectilinear = is_rectilinear
-
     def prerotate(self, theta):
         """Calculate pre rotation and replace current matrix."""
         theta = float(theta)
@@ -5548,8 +5187,6 @@ class Matrix(object):
 
         return self
 
-    preRotate = prerotate
-
     def prescale(self, sx, sy):
         """Calculate pre scaling and replace current matrix."""
         sx = float(sx)
@@ -5559,8 +5196,6 @@ class Matrix(object):
         self.c *= sy
         self.d *= sy
         return self
-
-    preScale = prescale
 
     def preshear(self, h, v):
         """Calculate pre shearing and replace current matrix."""
@@ -5573,8 +5208,6 @@ class Matrix(object):
         self.d += h * b
         return self
 
-    preShear = preshear
-
     def pretranslate(self, tx, ty):
         """Calculate pre translation and replace current matrix."""
         tx = float(tx)
@@ -5582,8 +5215,6 @@ class Matrix(object):
         self.e += tx * self.a + ty * self.c
         self.f += tx * self.b + ty * self.d
         return self
-
-    preTranslate = pretranslate
 
 
 class IdentityMatrix(Matrix):
@@ -5609,15 +5240,9 @@ class IdentityMatrix(Matrix):
     def checkargs(*args):
         raise NotImplementedError("Identity is readonly")
 
-    preRotate    = checkargs
-    preShear     = checkargs
-    preScale     = checkargs
-    preTranslate = checkargs
-    concat       = checkargs
-    invert       = checkargs
-
 
 Identity = IdentityMatrix()
+
 
 class linkDest(object):
     """link or outline destination details"""
@@ -5934,14 +5559,10 @@ class Outline:
             return False
         return mupdf.mfz_is_external_link(uri)
 
-    isExternal = is_external
-
     @property
     def is_open(self):
         #return _fitz.Outline_is_open(self)
         return self.this.is_open()
-
-    isOpen = is_open
 
     @property
     def next(self):
@@ -6736,42 +6357,6 @@ class Page:
         JM_insert_contents(pdfout, tpageref, nres, overlay)
         return rc_xref
 
-    @property
-    def CropBox(self):
-        """The CropBox."""
-        CheckParent(self)
-
-        #val = _fitz.Page_CropBox(self)
-        page = self._pdf_page()
-        if not page.m_internal:
-            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
-        val = JM_py_from_rect(JM_cropbox(page.obj()))
-        val = Rect(val)
-
-        return val
-
-    @property
-    def CropBoxPosition(self):
-        return self.CropBox.tl
-
-    @property
-    def MediaBox(self):
-        """The MediaBox."""
-        CheckParent(self)
-
-        #val = _fitz.Page_MediaBox(self)
-        page = self._pdf_page()
-        if not page.m_internal:
-            return JM_py_from_rect(mupdf.mfz_bound_page(self.this))
-        val = JM_py_from_rect(JM_mediabox(page.obj()))
-        val = Rect(val)
-
-        return val
-
-    @property
-    def MediaBoxSize(self):
-        return Point(self.MediaBox.width, self.MediaBox.height)
-
     def add_caret_annot(self, point: point_like) -> "struct Annot *":
         """Add a 'Caret' annotation."""
         old_rotation = annot_preprocess(self)
@@ -7029,253 +6614,6 @@ class Page:
         widget.update()
         return annot
 
-    def addCaretAnnot(self, point: point_like) -> "struct Annot *":
-        """Add a 'Caret' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_caret_annot(point)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addCircleAnnot(self, rect: rect_like) -> "struct Annot *":
-        """Add a 'Circle' (ellipse, oval) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_CIRCLE)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addFileAnnot(self, point: point_like,
-        buffer_: typing.ByteString,
-        filename: str,
-        ufilename: OptStr =None,
-        desc: OptStr =None,
-        icon: OptStr =None) -> "struct Annot *":
-        """Add a 'FileAttachment' annotation."""
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_file_annot(point,
-                        buffer_,
-                        filename,
-                        ufilename=ufilename,
-                        desc=desc,
-                        icon=icon)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addFreetextAnnot(self, rect: rect_like, text: str, fontsize: float =11,
-                         fontname: OptStr =None, text_color: OptSeq =None,
-                         fill_color: OptSeq =None, align: int =0, rotate: int =0) -> "struct Annot *":
-        """Add a 'FreeText' annotation."""
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_freetext_annot(rect, text, fontsize=fontsize,
-                    fontname=fontname, text_color=text_color,
-                    fill_color=fill_color, align=align, rotate=rotate)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addHighlightAnnot(self, quads=None, start=None,
-                          stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Highlight' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_HIGHLIGHT)
-
-    def addInkAnnot(self, handwriting: list) -> "struct Annot *":
-        """Add a 'Ink' ('handwriting') annotation.
-
-        The argument must be a list of lists of point_likes.
-        """
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_ink_annot(handwriting)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addLineAnnot(self, p1: point_like, p2: point_like) -> "struct Annot *":
-        """Add a 'Line' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_line_annot(p1, p2)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addPolygonAnnot(self, points: list) -> "struct Annot *":
-        """Add a 'Polygon' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLYGON)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addPolylineAnnot(self, points: list) -> "struct Annot *":
-        """Add a 'PolyLine' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_multiline(points, mupdf.PDF_ANNOT_POLY_LINE)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addRectAnnot(self, rect: rect_like) -> "struct Annot *":
-        """Add a 'Square' (rectangle) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_square_or_circle(rect, mupdf.PDF_ANNOT_SQUARE)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addSquigglyAnnot(self, quads=None, start=None,
-                         stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Squiggly' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_SQUIGGLY)
-
-    def addStampAnnot(self, rect: rect_like, stamp: int =0) -> "struct Annot *":
-        """Add a ('rubber') 'Stamp' annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_stamp_annot(rect, stamp)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addStrikeoutAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
-        """Add a 'StrikeOut' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_STRIKE_OUT)
-
-    def addRedactAnnot(self, quad, text: OptStr =None, fontname: OptStr =None,
-                       fontsize: float =11, align: int =0, fill: OptSeq =None, text_color: OptSeq =None,
-                       cross_out: bool =True) -> "struct Annot *":
-        """Add a 'Redact' annotation."""
-        da_str = None
-        if text:
-            CheckColor(fill)
-            CheckColor(text_color)
-            if not fontname:
-                fontname = "Helv"
-            if not fontsize:
-                fontsize = 11
-            if not text_color:
-                text_color = (0, 0, 0)
-            if hasattr(text_color, "__float__"):
-                text_color = (text_color, text_color, text_color)
-            if len(text_color) > 3:
-                text_color = text_color[:3]
-            fmt = "{:g} {:g} {:g} rg /{f:s} {s:g} Tf"
-            da_str = fmt.format(*text_color, f=fontname, s=fontsize)
-            if fill is None:
-                fill = (1, 1, 1)
-            if fill:
-                if hasattr(fill, "__float__"):
-                    fill = (fill, fill, fill)
-                if len(fill) > 3:
-                    fill = fill[:3]
-
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_redact_annot(quad, text=text, da_str=da_str,
-                       align=align, fill=fill)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        #-------------------------------------------------------------
-        # change appearance to show a crossed-out rectangle
-        #-------------------------------------------------------------
-        if cross_out:
-            ap_tab = annot._getAP().splitlines()[:-1]  # get the 4 commands only
-            _, LL, LR, UR, UL = ap_tab
-            ap_tab.append(LR)
-            ap_tab.append(LL)
-            ap_tab.append(UR)
-            ap_tab.append(LL)
-            ap_tab.append(UL)
-            ap_tab.append(b"S")
-            ap = b"\n".join(ap_tab)
-            annot._setAP(ap, 0)
-        return annot
-
-    def addTextAnnot(self, point: point_like, text: str, icon: str ="Note") -> "struct Annot *":
-        """Add a 'Text' (sticky note) annotation."""
-        old_rotation = annot_preprocess(self)
-        try:
-            annot = self._add_text_annot(point, text, icon=icon)
-        finally:
-            if old_rotation != 0:
-                self.setRotation(old_rotation)
-        annot_postprocess(self, annot)
-        return annot
-
-    def addUnderlineAnnot(self, quads=None, start=None, stop=None, clip=None) -> "struct Annot *":
-        """Add a 'Underline' annotation."""
-        if quads is None:
-            q = get_highlight_selection(self, start=start, stop=stop, clip=clip)
-        else:
-            q = CheckMarkerArg(quads)
-        return self._add_text_marker(q, mupdf.PDF_ANNOT_UNDERLINE)
-
-    #---------------------------------------------------------------------
-    # page addWidget
-    #---------------------------------------------------------------------
-    def addWidget(self, widget: Widget) -> "struct Annot *":
-        """Add a 'Widget' (form field)."""
-        CheckParent(self)
-        doc = self.parent
-        if not doc.isPDF:
-            raise ValueError("not a PDF")
-        widget._validate()
-        annot = self._addWidget(widget.field_type, widget.field_name)
-        if not annot:
-            return None
-        annot.thisown = True
-        annot.parent = weakref.proxy(self) # owning page object
-        self._annot_refs[id(annot)] = annot
-        widget.parent = annot.parent
-        widget._annot = annot
-        widget.update()
-        return annot
-
     def annot_names(self):
         """List of names of annotations, fields and links."""
         CheckParent(self)
@@ -7345,7 +6683,7 @@ class Page:
 
     @property
     def cropbox_position(self):
-        return self.CropBoxPosition
+        return self.cropbox.tl
 
     def delete_annot(self, annot):
         """Delete annot and return next one."""
@@ -7367,21 +6705,6 @@ class Page:
         if val:
             val.thisown = True
             #val.parent = weakref.proxy(self) # owning page object
-            val.parent._annot_refs[id(val)] = val
-        annot._erase()
-        return val
-
-    def deleteAnnot(self, annot):
-
-        """Delete annot and return next one."""
-        CheckParent(self)
-        CheckParent(annot)
-
-        val = _fitz.Page_deleteAnnot(self, annot)
-
-        if val:
-            val.thisown = True
-            val.parent = weakref.proxy(self) # owning page object
             val.parent._annot_refs[id(val)] = val
         annot._erase()
         return val
@@ -7430,8 +6753,6 @@ class Page:
 
         return finished()
 
-    deleteLink = delete_link
-
     @property
     def derotation_matrix(self) -> Matrix:
         """Reflects page de-rotation."""
@@ -7441,8 +6762,6 @@ class Page:
             #return JM_py_from_matrix(fz_identity);
             return JM_py_from_matrix(mupdf.Rect(mupdf.Rect.UNIT))
         return JM_py_from_matrix(JM_derotate_page_matrix(pdfpage))
-
-    derotationMatrix = derotation_matrix
 
     def extend_textpage(self, tpage, flags=0, matrix=None):
         #return _fitz.Page_extend_textpage(self, tpage, flags, matrix)
@@ -7497,31 +6816,6 @@ class Page:
             val.thisown = True
             #val.parent = weakref.proxy(self) # owning page object
             #self._annot_refs[id(val)] = val
-            widget = Widget()
-            TOOLS._fill_widget(val, widget)
-            val = widget
-        return val
-
-    firstAnnot = first_annot
-
-    @property
-    def firstWidget(self):
-        """First widget/field."""
-        CheckParent(self)
-
-        #val = _fitz.Page_first_widget(self)
-        annot = None
-        page = self._pdf_page()
-        if page.m_internal:
-            annot = mupdf.mpdf_first_widget(page)
-            if annot.m_internal:
-                 mupdf.mpdf_keep_annot(annot)
-        val = Annot(annot)
-
-        if val:
-            val.thisown = True
-            #val.parent = weakref.proxy(self) # owning page object
-            self._annot_refs[id(val)] = val
             widget = Widget()
             TOOLS._fill_widget(val, widget)
             val = widget
@@ -7833,168 +7127,6 @@ class Page:
         CheckParent(self)
         return self.parent.get_page_xobjects(self.number)
 
-    def getDisplayList(self, annots=1):
-
-        """Make a DisplayList from the page for Pixmap generation.
-
-        Include (default) or exclude annotations."""
-
-        CheckParent(self)
-
-
-        val = _fitz.Page_getDisplayList(self, annots)
-        val.thisown = True
-
-        return val
-
-    def getDrawings(self):
-        """Get page draw paths."""
-        # not used by test_drawings.py:test_drawings1.
-        CheckParent(self)
-        val = self._getDrawings()  # read raw list from trace device
-        paths = []
-
-        def new_path():
-            """Return empty path dict to use as template."""
-            return {
-                "color": None,
-                "fill": None,
-                "width": 1.0,
-                "lineJoin": 0,
-                "lineCap": (0, 0, 0),
-                "dashes": "[] 0",
-                "closePath": False,
-                "even_odd": False,
-                "rect": Rect(),
-                "items": [],
-                "opacity": 1.0,
-            }
-
-        def is_rectangle(path):
-            """Check if path represents a rectangle.
-
-            For this, it must be exactly three connected lines, of which
-            the first and the last one must be horizontal and line two
-            must be vertical.
-            """
-            if not path["closePath"]:
-                return False
-            if [item[0] for item in path["items"]] != ["l", "l", "l"]:
-                return False
-            p1, p2 = path["items"][0][1:]  # first line
-            p3, p4 = path["items"][1][1:]  # second line
-            p5, p6 = path["items"][2][1:]  # third line
-            if p2 != p3 or p4 != p5:  # must be connected
-                return False
-            if p1.y != p2.y or p3.x != p4.x or p5.y != p6.y:
-                return False
-            return True
-
-        def check_and_merge(this, prev):
-            """Check if "this" is the "stroke" version of "prev".
-
-            If so, update "prev" with appropriate values and return True,
-            else do nothing and return False.
-            """
-            if prev is None:
-                return False
-            if this["items"] != prev["items"]:  # must have same items
-                return False
-            if this["closePath"] != prev["closePath"]:
-                return False
-            if this["color"] is not None:
-                prev["color"] = this["color"]
-            if this["width"] != 1:
-                prev["width"] = this["width"]
-            if this["dashes"] != "[] 0":
-                prev["dashes"] = this["dashes"]
-            if this["lineCap"] != (0, 0, 0):
-                prev["lineCap"] = this["lineCap"]
-            if this["lineJoin"] != 0:
-                prev["lineJoin"] = this["lineJoin"]
-            return True
-
-        for item in val:
-            if type(item) is list:
-                if item[0] in ("fill", "stroke", "clip", "clip-stroke"):
-    # this begins a new path
-                    path = new_path()
-                    ctm = Matrix(1, 1)
-                    factor = 1  # modify width and dash length
-                    current = None  # the current point
-                    for x in item[1:]:  # loop through path parms that follow
-                        if x == "non-zero":
-                            path["even_odd"] = False
-                        elif x == "even-odd":
-                            path["even_odd"] = True
-                        elif x[0] == "matrix":
-                            ctm = Matrix(x[1])
-                            if abs(ctm.a) == abs(ctm.d):
-                                factor = abs(ctm.a)
-                        elif x[0] == "w":
-                            path["width"] = x[1] * factor
-                        elif x[0] == "lineCap":
-                            path["lineCap"] = x[1:]
-                        elif x[0] == "lineJoin":
-                            path["lineJoin"] = x[1]
-                        elif x[0] == "color":
-                            if item[0] == "fill":
-                                path["fill"] = x[1:]
-                            else:
-                                path["color"] = x[1:]
-                        elif x[0] == "dashPhase":
-                            dashPhase = x[1] * factor
-                        elif x[0] == "dashes":
-                            dashes = x[1:]
-                            l = list(map(lambda y: float(y) * factor, dashes))
-                            l = list(map(str, l))
-                            path["dashes"] = "[%s] %g" % (" ".join(l), dashPhase)
-                        elif x[0] == "alpha":
-                            path["opacity"] = round(x[1], 2)
-
-                if item[0] == "m":
-                    p = Point(item[1]) * ctm
-                    current = p
-                    path["rect"] = Rect(p, p)
-                elif item[0] == "l":
-                    p2 = Point(item[1]) * ctm
-                    path["items"].append(("l", current, p2))
-                    current = p2
-                    path["rect"] |= p2
-                elif item[0] == "c":
-                    p2 = Point(item[1]) * ctm
-                    p3 = Point(item[2]) * ctm
-                    p4 = Point(item[3]) * ctm
-                    path["items"].append(("c", current, p2, p3, p4))
-                    current = p4
-                    path["rect"] |= p2
-                    path["rect"] |= p3
-                    path["rect"] |= p4
-            elif item == "closePath":
-                path["closePath"] = True
-            elif item in ("estroke", "efill", "eclip", "eclip-stroke"):
-                if is_rectangle(path):
-                    path["items"] = [("re", path["rect"])]
-                    path["closePath"] = False
-
-                try:  # check if path is "stroke" duplicate of previous
-                    prev = paths.pop()  # get previous path in list
-                except IndexError:
-                    prev = None  # we are the first
-                if prev is None:
-                    paths.append(path)
-                elif check_and_merge(path, prev) is False:  # no duplicates
-                    paths.append(prev)  # re-append old one
-                    paths.append(path)  # append new one
-                else:
-                    paths.append(prev)  # append modified old one
-
-                path = None
-            else:
-                print("unexpected item:", item)
-
-        return paths
-
     def insert_font(self, fontname="helv", fontfile=None, fontbuffer=None,
                    set_simple=False, wmode=0, encoding=0):
         doc = self.parent
@@ -8062,70 +7194,6 @@ class Page:
         doc.get_char_widths(xref, fontdict=fontdict)
         return xref
 
-    def insertFont(self, fontname="helv", fontfile=None, fontbuffer=None,
-                   set_simple=False, wmode=0, encoding=0):
-        doc = self.parent
-        if doc is None:
-            raise ValueError("orphaned object: parent is None")
-        idx = 0
-
-        if fontname.startswith("/"):
-            fontname = fontname[1:]
-
-        font = CheckFont(self, fontname)
-        if font is not None:                    # font already in font list of page
-            xref = font[0]                      # this is the xref
-            if CheckFontInfo(doc, xref):        # also in our document font list?
-                return xref                     # yes: we are done
-            # need to build the doc FontInfo entry - done via getCharWidths
-            doc.getCharWidths(xref)
-            return xref
-
-        #--------------------------------------------------------------------------
-        # the font is not present for this page
-        #--------------------------------------------------------------------------
-
-        bfname = Base14_fontdict.get(fontname.lower(), None) # BaseFont if Base-14 font
-
-        serif = 0
-        CJK_number = -1
-        CJK_list_n = ["china-t", "china-s", "japan", "korea"]
-        CJK_list_s = ["china-ts", "china-ss", "japan-s", "korea-s"]
-
-        try:
-            CJK_number = CJK_list_n.index(fontname)
-            serif = 0
-        except:
-            pass
-
-        if CJK_number < 0:
-            try:
-                CJK_number = CJK_list_s.index(fontname)
-                serif = 1
-            except:
-                pass
-
-        if fontname.lower() in fitz_fontdescriptors.keys():
-            import pymupdf_fonts
-            fontbuffer = pymupdf_fonts.myfont(fontname)  # make a copy
-            del pymupdf_fonts
-
-        # install the font for the page
-        val = self._insertFont(fontname, bfname, fontfile, fontbuffer, set_simple, idx,
-                               wmode, serif, encoding, CJK_number)
-
-        if not val:                   # did not work, error return
-            return val
-
-        xref = val[0]                 # xref of installed font
-
-        if CheckFontInfo(doc, xref):  # check again: document already has this font
-            return xref               # we are done
-
-        # need to create document font info
-        doc.getCharWidths(xref)
-        return xref
-
     @property
     def is_wrapped(self):
         """Check if /Contents is wrapped with string pair "q" / "Q"."""
@@ -8165,7 +7233,7 @@ class Page:
             if kinds is None or link["kind"] in kinds:
                 yield (link)
 
-    def loadAnnot(self, ident: typing.Union[str, int]) -> "struct Annot *":
+    def load_annot(self, ident: typing.Union[str, int]) -> "struct Annot *":
         """Load an annot by name (/NM key) or xref.
 
         Args:
@@ -8188,8 +7256,6 @@ class Page:
         #val.parent = weakref.proxy(self)
         self._annot_refs[id(val)] = val
         return val
-
-    load_annot = loadAnnot
 
     def load_links(self):
         """Get first Link."""
@@ -8216,22 +7282,18 @@ class Page:
         CheckParent(self)
         #val = _fitz.Page_mediabox(self)
         page = self._pdf_page()
-        if not page:
+        if not page.m_internal:
             val = JM_py_from_rect(mupdf.mfz_bound_page(self.this))
         else:
-            val = JM_py_from_rect(JM_mediabox(page.page_obj))
+            val = JM_py_from_rect(JM_mediabox(page.obj()))
         val = Rect(val)
         return val
 
     @property
     def mediabox_size(self):
-        return self.MediaBoxSize
+        return Point(self.MediaBox.width, self.MediaBox.height)
 
     def read_contents(self):
-        """All /Contents streams concatenated to one bytes object."""
-        return TOOLS._get_all_contents(self)
-
-    def readContents(self):
         """All /Contents streams concatenated to one bytes object."""
         return TOOLS._get_all_contents(self)
 
@@ -8254,11 +7316,6 @@ class Page:
 
     @property
     def rotation_matrix(self) -> Matrix:
-        """Reflects page rotation."""
-        return Matrix(TOOLS._rotate_matrix(self))
-
-    @property
-    def rotationMatrix(self) -> Matrix:
         """Reflects page rotation."""
         return Matrix(TOOLS._rotate_matrix(self))
 
@@ -8330,8 +7387,6 @@ class Page:
         mupdf.mpdf_dict_put_rect( page.obj(), PDF_NAME('MediaBox'), mediabox)
         mupdf.mpdf_dict_put_rect( page.obj(), PDF_NAME('CropBox'), mediabox)
 
-    firstLink = property(load_links, doc="First link on page")
-
     def set_rotation(self, rotation):
         """Set page rotation."""
         CheckParent(self)
@@ -8342,7 +7397,7 @@ class Page:
         mupdf.mpdf_dict_put_int( page.obj(), PDF_NAME('Rotate'), rot)
 
     @property
-    def transformationMatrix(self):
+    def transformation_matrix(self):
         """Page transformation matrix."""
         CheckParent(self)
 
@@ -8360,12 +7415,6 @@ class Page:
         else:
             val = Matrix(1, 0, 0, -1, 0, self.CropBox.height)
         return val
-
-    @property
-    def transformation_matrix(self):
-        return self.transformationMatrix
-
-    _isWrapped = is_wrapped
 
     def widgets(self, types=None):
         """ Generator over the widgets of a page.
@@ -8387,15 +7436,6 @@ class Page:
         TOOLS._insert_contents(self, b"q\n", False)
         TOOLS._insert_contents(self, b"\nQ", True)
         self.was_wrapped = True  # indicate not needed again
-
-    wrapContents = wrap_contents
-
-    getFontList = get_fonts
-
-    getImageList = get_images
-
-    cleanContents = clean_contents
-    getContents = get_contents
 
     @property
     def xref(self):
@@ -8705,11 +7745,6 @@ class Pixmap:
             THROWMSG("source and target alpha must be equal")
         mupdf.mfz_copy_pixmap_rect(pm, src_pix, JM_irect_from_py(bbox), mupdf.DefaultColorspaces(None))
 
-    def copyPixmap(self, src, bbox):
-        """Copy bbox from another Pixmap."""
-
-        return _fitz.Pixmap_copyPixmap(self, src, bbox)
-
     @property
     def digest(self):
         """MD5 digest of pixmap (bytes)."""
@@ -8858,46 +7893,6 @@ class Pixmap:
         bytes_out = BytesIO()
         self.pil_save(bytes_out, *args, **kwargs)
         return bytes_out.getvalue()
-
-    def pillowData(self, *args, **kwargs):
-        """Convert to binary image stream using pillow.
-
-        Arguments are passed to Pillow's Image.save() method.
-        Use it instead of writeImage when other output formats are needed.
-        """
-        from io import BytesIO
-        bytes_out = BytesIO()
-        self.pillowWrite(bytes_out, *args, **kwargs)
-        return bytes_out.getvalue()
-
-    def pillowWrite(self, *args, **kwargs):
-        """Write to image file using Pillow.
-
-        Arguments are passed to Pillow's Image.save() method.
-        Use instead of writeImage when other output formats are desired.
-        """
-        try:
-            from PIL import Image
-        except ImportError:
-            print("PIL/Pillow not instralled")
-            raise
-
-        cspace = self.colorspace
-        if cspace is None:
-            mode = "L"
-        elif cspace.n == 1:
-            mode = "L" if self.alpha == 0 else "LA"
-        elif cspace.n == 3:
-            mode = "RGB" if self.alpha == 0 else "RGBA"
-        else:
-            mode = "CMYK"
-
-        img = Image.frombytes(mode, (self.width, self.height), self.samples)
-
-        if "dpi" not in kwargs.keys():
-            kwargs["dpi"] = (self.xres, self.yres)
-
-        img.save(*args, **kwargs)
 
     def pixel(self, x, y):
         """Get color tuple of pixel (x, y).
@@ -9054,29 +8049,6 @@ class Pixmap:
         rc = bool(i)
         return rc
 
-    def setAlpha(self, alphavalues=None, premultiply=1):
-        """Set alphas to values contained in a byte array.
-        If omitted, set alphas to 255."""
-
-        return _fitz.Pixmap_setAlpha(self, alphavalues, premultiply)
-
-    def setOrigin(self, x, y):
-        """Set top-left coordinates."""
-        return _fitz.Pixmap_setOrigin(self, x, y)
-
-    def setPixel(self, x, y, color):
-        """Set color of pixel (x, y)."""
-        return _fitz.Pixmap_setPixel(self, x, y, color)
-
-    def setRect(self, bbox, color):
-        """Set color of all pixels in bbox."""
-        return _fitz.Pixmap_setRect(self, bbox, color)
-
-    def setResolution(self, xres, yres):
-        """Set resolution in both dimensions.
-        Use pillowWrite to reflect this in output image."""
-        return _fitz.Pixmap_setResolution(self, xres, yres)
-
     def shrink(self, factor):
         """Divide width and height by 2**factor.
         E.g. factor=1 shrinks to 25% of original size (in place)."""
@@ -9101,35 +8073,6 @@ class Pixmap:
             return
         #return _fitz.Pixmap_tint_with(self, black, white)
         return mupdf.mfz_tint_pixmap( self.this, black, white)
-
-    def writeImage(self, filename, output=None):
-        """Output as image in format determined by filename extension.
-
-        Args:
-            output: (str) only use to override filename extension. Default is PNG.
-                    Others are PNM, PGM, PPM, PBM, PAM, PSD, PS.
-        Returns:
-            Bytes object.
-        """
-        valid_formats = {"png": 1, "pnm": 2, "pgm": 2, "ppm": 2, "pbm": 2,
-                         "pam": 3, "tga": 4, "tpic": 4,
-                         "psd": 5, "ps": 6}
-        if output is None:
-            _, ext = os.path.splitext(filename)
-            output = ext[1:]
-
-        idx = valid_formats.get(output.lower(), 1)
-
-        if self.alpha and idx in (2, 6):
-            raise ValueError("'%s' cannot have alpha" % output)
-        if self.colorspace and self.colorspace.n > 3 and idx in (1, 2, 4):
-            raise ValueError("unsupported colorspace for '%s'" % output)
-
-        return self._writeIMG(filename, idx)
-
-    def writePNG(self, filename):
-        """Wrapper for Pixmap.writeImage(filename, "png")."""
-        return self._writeIMG(filename, 1)
 
     @property
     def w(self):
@@ -9694,7 +8637,6 @@ class Rect(object):
     def is_infinite(self):
         """True if rectangle is infinite."""
         return self.x0 > self.x1 or self.y0 > self.y1
-    isInfinite = is_infinite
 
     @property
     def is_valid(self):
@@ -9707,8 +8649,6 @@ class Rect(object):
             raise ValueError("bad Point: sequ. length")
         self.x0, self.y0, self.x1, self.y1 = TOOLS._include_point_in_rect(self, p)
         return self
-
-    includePoint = include_point
 
     def include_rect(self, r):
         """Extend to include rect-like r."""
@@ -10712,23 +9652,6 @@ class Shape(object):
                 self.rect.x1 = max(self.rect.x1, x.x1)
                 self.rect.y1 = max(self.rect.y1, x.y1)
 
-    updateRect = update_rect
-
-    # define deprecated aliases ------------------------------------------
-    drawBezier = draw_bezier
-    drawCircle = draw_circle
-    drawCurve = draw_curve
-    drawLine = draw_line
-    drawOval = draw_oval
-    drawPolyline = draw_polyline
-    drawQuad = draw_quad
-    drawRect = draw_rect
-    drawSector = draw_sector
-    drawSquiggle = draw_squiggle
-    drawZigzag = draw_zigzag
-    insertText = insert_text
-    insertTextbox = insert_textbox
-
 
 class TextPage:
 
@@ -11430,9 +10353,6 @@ class IRect:
         rect = self.rect.include_rect(r)
         return rect.irect
 
-    includePoint = include_point
-    includeRect = include_rect
-
     def intersect(self, r):
         """Restrict rectangle to intersection with rectangle r."""
         return Rect.intersect(self, r).round()
@@ -11461,9 +10381,6 @@ class IRect:
     def is_valid(self):
         """True if rectangle is valid."""
         return self.x0 <= self.x1 and self.y0 <= self.y1
-
-    isEmpty = is_empty
-    isInfinite = is_infinite
 
     def norm(self):
         return math.sqrt(sum([c*c for c in self]))
@@ -15978,33 +14895,6 @@ def Page_set_contents(page0, xref):
     return
 
 
-def PaperRect(s: str) -> Rect:
-    """Return a Rect for the paper size indicated in string 's'. Must conform to the argument of method 'PaperSize', which will be invoked.
-    """
-    width, height = PaperSize(s)
-    return Rect(0.0, 0.0, width, height)
-
-
-def PaperSize(s: str) -> tuple:
-    """Return a tuple (width, height) for a given paper format string.
-
-    Notes:
-        'A4-L' will return (842, 595), the values for A4 landscape.
-        Suffix '-P' and no suffix return the portrait tuple.
-    """
-    size = s.lower()
-    f = "p"
-    if size.endswith("-l"):
-        f = "l"
-        size = size[:-2]
-    if size.endswith("-p"):
-        size = size[:-2]
-    rc = paperSizes.get(size, (-1, -1))
-    if f == "p":
-        return rc
-    return (rc[1], rc[0])
-
-
 def PDF_NAME(x):
     assert isinstance(x, str)
     return getattr(mupdf, f'PDF_ENUM_NAME_{x}')
@@ -16151,10 +15041,6 @@ def getTJstr(text: str, glyphs: typing.Union[list, tuple, None], simple: bool, o
     return "[<" + otxt + ">]"
 
 
-def get_pdf_now():
-    return getPDFnow()
-
-
 def get_pdf_str(s: str) -> str:
     """ Return a PDF string depending on its coding.
 
@@ -16249,8 +15135,6 @@ def get_text_length(text: str, fontname: str ="helv", fontsize: float =11, encod
 
     raise ValueError("Font '%s' is unsupported" % fontname)
 
-getTextLength = get_text_length
-getTextlength = get_text_length
 
 def image_properties(img: typing.ByteString) -> dict:
     """ Return basic properties of an image.
@@ -16792,7 +15676,6 @@ def paper_sizes():
         "tabloid-extra": (864, 1296),
     }
 
-paperSizes = paper_sizes
 
 def _get_glyph_text() -> bytes:
     '''
@@ -17323,28 +16206,6 @@ def DUMMY(*args, **kw):
     return
 
 
-def ImageProperties(img: typing.ByteString) -> dict:
-    """ Return basic properties of an image.
-
-    Args:
-        img: bytes, bytearray, io.BytesIO object or an opened image file.
-    Returns:
-        A dictionary with keys width, height, colorspace.n, bpc, type, ext and size,
-        where 'type' is the MuPDF image type (0 to 14) and 'ext' the suitable
-        file extension.
-    """
-    if type(img) is io.BytesIO:
-        stream = img.getvalue()
-    elif hasattr(img, "read"):
-        stream = img.read()
-    elif type(img) in (bytes, bytearray):
-        stream = img
-    else:
-        raise ValueError("bad argument 'img'")
-
-    return TOOLS.image_profile(stream)
-
-
 def ConversionHeader(i: str, filename: OptStr ="unknown"):
     t = i.lower()
     html = textwrap.dedent("""
@@ -17543,7 +16404,7 @@ def find_string(s, needle):
     return None, None
 
 
-def getPDFnow() -> str:
+def get_pdf_now() -> str:
     '''
     "Now" timestamp in PDF Format
     '''
@@ -17563,7 +16424,7 @@ def getPDFnow() -> str:
     return tstamp
 
 
-def getPDFstr(s: str) -> str:
+def get_pdf_str(s: str) -> str:
     """ Return a PDF string depending on its coding.
 
     Notes:
@@ -18147,21 +17008,6 @@ def pdfobj_string(o, prefix=''):
         ret += '<>\n'
 
     return ret
-
-
-def planishLine(p1: point_like, p2: point_like) -> Matrix:
-    """Return matrix which flattens out the line from p1 to p2.
-
-    Args:
-        p1, p2: point_like
-    Returns:
-        Matrix which maps p1 to Point(0,0) and p2 to a point on the x axis at
-        the same distance to Point(0,0). Will always combine a rotation and a
-        transformation.
-    """
-    p1 = Point(p1)
-    p2 = Point(p2)
-    return Matrix(TOOLS._hor_matrix(p1, p2))
 
 
 def repair_mono_font(page: "Page", font: "Font") -> None:
@@ -19140,28 +17986,336 @@ Rect.get_area               = utils.get_area
 
 TextWriter.fill_textbox     = utils.fill_textbox
 
-if 1:
+class FitzDeprecation(DeprecationWarning):
+    pass
+
+VersionFitz = "1.19.0"
+VersionBind = "1.19.1"
+VersionDate = "2022-01-12 00:00:01"
+VersionDate2 = VersionDate.replace('-', '').replace(' ', '').replace(':', '')
+version = (VersionBind, VersionFitz, VersionDate2)
+
+def restore_aliases():
+    warnings.filterwarnings( "once", category=FitzDeprecation)
+
+    def _alias(class_, new, legacy=None):
+        '''
+        Added alias for class_.item.
+
+        class_:
+            Class/module to modify, or None for the current module.
+        new:
+            String name of object in class, e.g. name of method.
+        legacy:
+            Name of legacy object to create in <class_>. If None, we generate
+            from <item> by removing underscores and capitalising the next
+            letter.
+        '''
+        if class_ is None:
+            class_ = sys.modules[__name__]
+        if not legacy:
+            legacy = ''
+            capitalise_next = False
+            for c in new:
+                if c == '_':
+                    capitalise_next = True
+                elif capitalise_next:
+                    legacy += c.upper()
+                    capitalise_next = False
+                else:
+                    legacy += c
+            #jlib.log( '{=new legacy}')
+        new2 = getattr( class_, new)
+        assert not getattr( class_, legacy, None), f'class {class_} already has {legacy}'
+        doc = new.__doc__
+        if callable( new):
+            def deprecated_function( *args, **kwargs):
+                if not VersionBind.startswith('1.18'):
+                    warnings.warn(
+                            f'"{legacy}" removed from {class_} after v1.19.0 - use "{new}".',
+                            category=FitzDeprecation,
+                            )
+                return new2( *args, **kw)
+            setattr( class_, legacy, deprecated_function)
+            deprecated_function.__doc__ = (
+                    f'*** Deprecated and removed in version following 1.19.0 - use "{new}". ***\n'
+                    f'{new.__doc__}'
+                    )
+        else:
+            setattr( class_, legacy, new2)
+
+    _alias( Document, 'chapter_count')
+    _alias( Document, 'chapter_page_count')
+    _alias( Document, 'convert_to_pdf', 'convertToPDF')
+    _alias( Document, 'copy_page')
+    _alias( Document, 'delete_page')
+    _alias( Document, 'delete_pages',       'deletePageRange')
+    _alias( Document, 'embfile_add',        'embeddedFileAdd')
+    _alias( Document, 'embfile_count',      'embeddedFileCount')
+    _alias( Document, 'embfile_del',        'embeddedFileDel')
+    _alias( Document, 'embfile_get',        'embeddedFileGet')
+    _alias( Document, 'embfile_info',       'embeddedFileInfo')
+    _alias( Document, 'embfile_names',      'embeddedFileNames')
+    _alias( Document, 'embfile_upd',        'embeddedFileUpd')
+    _alias( Document, 'extract_font')
+    _alias( Document, 'extract_image')
+    _alias( Document, 'find_bookmark')
+    _alias( Document, 'fullcopy_page')
+    _alias( Document, 'get_char_widths')
+    _alias( Document, 'get_ocgs',           'getOCGs')
+    _alias( Document, 'get_page_fonts',     'getPageFontList')
+    _alias( Document, 'get_page_images',    'getPageImageList')
+    _alias( Document, 'get_page_pixmap')
+    _alias( Document, 'get_page_text')
+    _alias( Document, 'get_page_xobjects',  'getPageXObjectList')
+    _alias( Document, 'get_sigflags',       'getSigFlags')
+    _alias( Document, 'get_toc', 'getToC')
+    _alias( Document, 'get_xml_metadata')
+    _alias( Document, 'insert_page')
+    _alias( Document, 'insert_pdf',         'insertPDF')
+    _alias( Document, 'is_dirty')
+    _alias( Document, 'is_form_pdf',        'isFormPDF')
+    _alias( Document, 'is_pdf', 'isPDF')
+    _alias( Document, 'is_reflowable')
+    _alias( Document, 'is_repaired')
+    _alias( Document, 'last_location')
+    _alias( Document, 'load_page')
+    _alias( Document, 'make_bookmark')
+    _alias( Document, 'move_page')
+    _alias( Document, 'needs_pass')
+    _alias( Document, 'new_page')
+    _alias( Document, 'next_location')
+    _alias( Document, 'page_count')
+    _alias( Document, 'page_cropbox',       'pageCropBox')
+    _alias( Document, 'page_xref')
+    _alias( Document, 'pdf_catalog',        'PDFCatalog')
+    _alias( Document, 'pdf_trailer',        'PDFTrailer')
+    _alias( Document, 'prev_location',      'previousLocation')
+    _alias( Document, 'resolve_link')
+    _alias( Document, 'search_page_for')
+    _alias( Document, 'set_language')
+    _alias( Document, 'set_metadata')
+    _alias( Document, 'set_toc', 'setToC')
+    _alias( Document, 'set_xml_metadata')
+    _alias( Document, 'update_object')
+    _alias( Document, 'update_stream')
+    _alias( Document, 'xref_is_stream',     'isStream')
+    _alias( Document, 'xref_length')
+    _alias( Document, 'xref_object')
+    _alias( Document, 'xref_stream')
+    _alias( Document, 'xref_stream_raw')
+    _alias( Document, 'xref_xml_metadata',  'metadataXML')
+
+    # deprecated Page aliases
+    _alias( Page, 'add_caret_annot')
+    _alias( Page, 'add_circle_annot')
+    _alias( Page, 'add_file_annot')
+    _alias( Page, 'add_freetext_annot')
+    _alias( Page, 'add_highlight_annot')
+    _alias( Page, 'add_ink_annot')
+    _alias( Page, 'add_line_annot')
+    _alias( Page, 'add_polygon_annot')
+    _alias( Page, 'add_polyline_annot')
+    _alias( Page, 'add_rect_annot')
+    _alias( Page, 'add_redact_annot')
+    _alias( Page, 'add_squiggly_annot')
+    _alias( Page, 'add_stamp_annot')
+    _alias( Page, 'add_strikeout_annot')
+    _alias( Page, 'add_text_annot')
+    _alias( Page, 'add_underline_annot')
+    _alias( Page, 'add_widget')
+    _alias( Page, 'clean_contents')
+    _alias( Page, 'cropbox',            'CropBox')
+    _alias( Page, 'cropbox_position',   'CropBoxPosition')
+    _alias( Page, 'delete_annot')
+    _alias( Page, 'delete_link')
+    _alias( Page, 'delete_widget')
+    _alias( Page, 'derotation_matrix')
+    _alias( Page, 'draw_bezier')
+    _alias( Page, 'draw_circle')
+    _alias( Page, 'draw_curve')
+    _alias( Page, 'draw_line')
+    _alias( Page, 'draw_oval')
+    _alias( Page, 'draw_polyline')
+    _alias( Page, 'draw_quad')
+    _alias( Page, 'draw_rect')
+    _alias( Page, 'draw_sector')
+    _alias( Page, 'draw_squiggle')
+    _alias( Page, 'draw_zigzag')
+    _alias( Page, 'first_annot')
+    _alias( Page, 'first_link')
+    _alias( Page, 'first_widget')
+    _alias( Page, 'get_contents')
+    _alias( Page, 'get_displaylist',    'getDisplayList')
+    _alias( Page, 'get_drawings')
+    _alias( Page, 'get_fonts',          'getFontList')
+    _alias( Page, 'get_image_bbox')
+    _alias( Page, 'get_images',         'getImageList')
+    _alias( Page, 'get_links')
+    _alias( Page, 'get_pixmap')
+    _alias( Page, 'get_svg_image',      'getSVGimage')
+    _alias( Page, 'get_text')
+    _alias( Page, 'get_text_blocks')
+    _alias( Page, 'get_text_words')
+    _alias( Page, 'get_textbox')
+    _alias( Page, 'get_textpage',       'getTextPage')
+    _alias( Page, 'insert_font')
+    _alias( Page, 'insert_image')
+    _alias( Page, 'insert_link')
+    _alias( Page, 'insert_text')
+    _alias( Page, 'insert_textbox')
+    _alias( Page, 'is_wrapped',         '_isWrapped')
+    _alias( Page, 'load_annot')
+    _alias( Page, 'load_links')
+    _alias( Page, 'mediabox',           'MediaBox')
+    _alias( Page, 'mediabox_size',      'MediaBoxSize')
+    _alias( Page, 'new_shape')
+    _alias( Page, 'read_contents')
+    _alias( Page, 'rotation_matrix')
+    _alias( Page, 'search_for')
+    _alias( Page, 'set_cropbox',        'setCropBox')
+    _alias( Page, 'set_mediabox',       'setMediaBox')
+    _alias( Page, 'set_rotation')
+    _alias( Page, 'show_pdf_page',      'showPDFpage')
+    _alias( Page, 'transformation_matrix')
+    _alias( Page, 'update_link')
+    _alias( Page, 'wrap_contents')
+    _alias( Page, 'write_text')
+
+    # deprecated Shape aliases
+    _alias( utils.Shape, 'draw_bezier')
+    _alias( utils.Shape, 'draw_circle')
+    _alias( utils.Shape, 'draw_curve')
+    _alias( utils.Shape, 'draw_line')
+    _alias( utils.Shape, 'draw_oval')
+    _alias( utils.Shape, 'draw_polyline')
+    _alias( utils.Shape, 'draw_quad')
+    _alias( utils.Shape, 'draw_rect')
+    _alias( utils.Shape, 'draw_sector')
+    _alias( utils.Shape, 'draw_squiggle')
+    _alias( utils.Shape, 'draw_zigzag')
+    _alias( utils.Shape, 'insert_text')
+    _alias( utils.Shape, 'insert_textbox')
+
+    # deprecated Annot aliases
+    _alias( Annot, 'get_file',          'fileGet')
+    _alias( Annot, 'get_pixmap')
+    _alias( Annot, 'get_sound',         'soundGet')
+    _alias( Annot, 'get_text')
+    _alias( Annot, 'get_textbox')
+    _alias( Annot, 'get_textpage',      'getTextPage')
+    _alias( Annot, 'line_ends')
+    _alias( Annot, 'set_blendmode',     'setBlendMode')
+    _alias( Annot, 'set_border')
+    _alias( Annot, 'set_colors')
+    _alias( Annot, 'set_flags')
+    _alias( Annot, 'set_info')
+    _alias( Annot, 'set_line_ends')
+    _alias( Annot, 'set_name')
+    _alias( Annot, 'set_oc', 'setOC')
+    _alias( Annot, 'set_opacity')
+    _alias( Annot, 'set_rect')
+    _alias( Annot, 'update_file',       'fileUpd')
+
+    # deprecated TextWriter aliases
+    _alias( TextWriter, 'fill_textbox')
+    _alias( TextWriter, 'write_text')
+
+    # deprecated DisplayList aliases
+    _alias( DisplayList, 'get_pixmap')
+    _alias( DisplayList, 'get_textpage',    'getTextPage')
+
+    # deprecated Pixmap aliases
+    _alias( Pixmap, 'clear_with')
+    _alias( Pixmap, 'copy',         'copyPixmap')
+    _alias( Pixmap, 'gamma_with')
+    _alias( Pixmap, 'invert_irect', 'invertIRect')
+    _alias( Pixmap, 'pil_save',     'pillowWrite')
+    _alias( Pixmap, 'pil_tobytes',  'pillowData')
+    _alias( Pixmap, 'save',         'writeImage')
+    _alias( Pixmap, 'save',         'writePNG')
+    _alias( Pixmap, 'set_alpha')
+    _alias( Pixmap, 'set_dpi',      'setResolution')
+    _alias( Pixmap, 'set_origin')
+    _alias( Pixmap, 'set_pixel')
+    _alias( Pixmap, 'set_rect')
+    _alias( Pixmap, 'tint_with')
+    _alias( Pixmap, 'tobytes',      'getImageData')
+    _alias( Pixmap, 'tobytes',      'getPNGData')
+    _alias( Pixmap, 'tobytes',      'getPNGdata')
+
+    # deprecated geometry aliases
+    _alias( IRect, 'get_area')
+    _alias( IRect, 'get_area',          'getRectArea')
+    _alias( IRect, 'include_point')
+    _alias( IRect, 'include_rect')
+    _alias( IRect, 'is_empty')
+    _alias( IRect, 'is_infinite')
+    _alias( Matrix, 'is_rectilinear')
+    _alias( Matrix, 'prerotate',        'preRotate')
+    _alias( Matrix, 'prescale',         'preScale')
+    _alias( Matrix, 'preshear',         'preShear')
+    _alias( Matrix, 'pretranslate',     'preTranslate')
+    _alias( Quad, 'is_convex')
+    _alias( Quad, 'is_empty')
+    _alias( Quad, 'is_rectangular')
+    _alias( Rect, 'get_area',           'getRectArea')
+    _alias( Rect, 'get_area')
+    _alias( Rect, 'include_point')
+    _alias( Rect, 'include_rect')
+    _alias( Rect, 'is_empty')
+    _alias( Rect, 'is_infinite')
+
+    # deprecated other aliases
+    _alias( Link, 'is_external')
+    _alias( Link, 'set_border')
+    _alias( Link, 'set_colors')
+    _alias( Outline, 'is_external')
+    _alias( Outline, 'is_open')
+    _alias( None, 'get_pdf_now',         'getPDFnow')
+    _alias( None, 'get_pdf_str',         'getPDFstr')
+    _alias( None, 'get_text_length')
+    _alias( None, 'image_properties',    'ImageProperties')
+    _alias( None, 'paper_rect',          'PaperRect')
+    _alias( None, 'paper_size',          'PaperSize')
+    _alias( None, 'paper_sizes')
+    _alias( None, 'planish_line')
+
+restore_aliases()
+
+if 0:
     # Aliases
     #
-    Annot.getText        = Annot.get_text
+    #Annot.getText        = Annot.get_text
     Annot.getTextbox    = Annot.get_textbox
 
+    Document.getCharWidths = Document.get_char_widths
     Document.getPagePixmap = Document.get_page_pixmap
     Document.getPageText = Document.get_page_text
     Document.getSigFlags = Document.get_sigflags
     Document.getToC = Document.get_toc
     Document.insertPage = Document.insert_page
+    Document.needsPass = Document.needs_pass
     Document.newPage = Document.new_page
     Document.searchPageFor = Document.search_page_for
     Document.setMetadata = Document.set_metadata
-    Document.getCharWidths = Document.get_char_widths
     Document.setToC = Document.set_toc
-    Document.needsPass = Document.needs_pass
 
     IRect.getArea           = IRect.get_area
     IRect.getRectArea       = IRect.get_area
 
     Page.deleteWidget = Page.delete_widget
+    Page.drawBezier = Page.draw_bezier
+    Page.drawCircle = Page.draw_circle
+    Page.drawCurve = Page.draw_curve
+    Page.drawLine = Page.draw_line
+    Page.drawOval = Page.draw_oval
+    Page.drawPolyline = Page.draw_polyline
+    Page.drawQuad = Page.draw_quad
+    Page.drawRect = Page.draw_rect
+    Page.drawSector = Page.draw_sector
+    Page.drawSquiggle = Page.draw_squiggle
+    Page.drawZigzag = Page.draw_zigzag
     Page.getImageBbox = Page.get_image_bbox
     Page.getLinks = Page.get_links
     Page.getPixmap = Page.get_pixmap
@@ -19184,26 +18338,15 @@ if 1:
     Page.showPDFpage = Page.show_pdf_page
     Page.updateLink = Page.update_link
     Page.writeText = Page.write_text
-    Page.drawBezier = Page.draw_bezier
-    Page.drawCircle = Page.draw_circle
-    Page.drawCurve = Page.draw_curve
-    Page.drawLine = Page.draw_line
-    Page.drawOval = Page.draw_oval
-    Page.drawPolyline = Page.draw_polyline
-    Page.drawQuad = Page.draw_quad
-    Page.drawRect = Page.draw_rect
-    Page.drawSector = Page.draw_sector
-    Page.drawSquiggle = Page.draw_squiggle
-    Page.drawZigzag = Page.draw_zigzag
 
 
     Pixmap.clearWith = Pixmap.clear_with
     Pixmap.gammaWith = Pixmap.gamma_with
+    Pixmap.getImageData = Pixmap.tobytes
     Pixmap.getPNGData = Pixmap.tobytes
     Pixmap.getPNGdata = Pixmap.tobytes
     Pixmap.invertIRect = Pixmap.invert_irect
     Pixmap.tintWith = Pixmap.tint_with
-    Pixmap.getImageData = Pixmap.tobytes
 
     Quad.isConvex = Quad.is_convex
     Quad.isEmpty = Quad.is_empty
