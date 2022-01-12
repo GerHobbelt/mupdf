@@ -1,4 +1,4 @@
-# Import Auto-generated MuPDF python bindings
+# PyMuPDF implemented on top of auto-generated MuPDF python bindings
 #
 
 import base64
@@ -835,13 +835,10 @@ class Annot:
         Create annotation 'Popup' or update rectangle.
         '''
         CheckParent(self)
-        #jlib.log('{rect=}')
         annot = self.this
         pdfpage = annot.annot_page()
         rot = JM_rotate_page_matrix(pdfpage)
-        #jlib.log('{rot=}')
         r = mupdf.mfz_transform_rect(JM_rect_from_py(rect), rot)
-        #jlib.log('{r=}')
         mupdf.mpdf_set_annot_popup(annot, r)
 
     def set_rect(self, rect):
@@ -2055,7 +2052,6 @@ class Document:
 
         page2, parent2, i2 = pdf_lookup_page_loc( pdf, nb)
         kids2 = mupdf.mpdf_dict_get( parent2, PDF_NAME('Kids'))
-        #jlib.log('{kids2.m_internal=}')
         if before:  # calc index of source page in target /Kids
             pos = i2
         else:
@@ -2269,7 +2265,6 @@ class Document:
         """Check whether incremental saves are possible."""
         if self.is_closed:
             raise ValueError("document closed")
-        #jlib.log('*** calling self.this.document_from_fz_document()')
         pdf = self.this.document_from_fz_document()
         if not pdf.m_internal:
             return False
@@ -3550,7 +3545,6 @@ class Document:
         while n < 0:
             n += page_count
         if isinstance(self.this, mupdf.PdfDocument):
-            #jlib.log('self.this is a mupdf.PdfDocument')
             pdf_document = self.this
         else:
             pdf_document = self.this.specifics()
@@ -4995,7 +4989,6 @@ class linkDest:
                 self.named = ""
                 self.kind = LINK_GOTO
                 ftab = self.uri[1:].split(",")
-                jlib.log('{=self.uri ftab}')
                 if len(ftab) == 3:
                     self.page = int(ftab[0]) - 1
                     self.lt = Point(float(ftab[1]), float(ftab[2]))
@@ -6564,11 +6557,7 @@ class Page:
         prect = mupdf.mfz_bound_page(page)
         trace_device.ptm = mupdf.mfz_make_matrix(1, 0, 0, -1, 0, prect.y1)
         dev = JM_new_tracedraw_device(rc)
-        try:
-            mupdf.mfz_run_page(page, dev, mupdf.Matrix(), mupdf.Cookie())
-        except Exception:
-            jlib.log(jlib.exception_info())
-            raise
+        mupdf.mfz_run_page(page, dev, mupdf.Matrix(), mupdf.Cookie())
         mupdf.mfz_close_device(dev)
         val = rc
 
@@ -9371,7 +9360,6 @@ class TextPage:
         # although there is an fz_drop_output(). So mupdf.mfz_new_output_with_buffer()
         # doesn't convert the returnd fz_output* into a mupdf.Output.
         out = mupdf.Output(out)
-        #jlib.log('{format_=}')
         if format_ == 1:
             mupdf.mfz_print_stext_page_as_html(out, this_tpage, 0)
         elif format_ == 3:
@@ -9516,7 +9504,6 @@ class TextPage:
 
     def extractText(self, sort=False) -> str:
         """Return simple, bare text on the page."""
-        #jlib.log('{sort=}')
         if sort is False:
             return self._extractText(0)
         blocks = self.extractBLOCKS()[:]
@@ -9562,7 +9549,6 @@ class TextPage:
                     cbbox = JM_char_bbox(line, ch)
                     if mupdf.mfz_is_empty_rect(cbbox):
                         continue
-                    #jlib.log('{type(tp_rect)=} {type(cbbox)=}')
                     if (not mupdf.mfz_contains_rect(tp_rect, cbbox)
                             and not mupdf.mfz_is_infinite_rect(tp_rect)
                             ):
@@ -11775,11 +11761,7 @@ def JM_filter_content_stream(
     Returns (out_buf, out_res).
     '''
     out_buf = mupdf.Buffer( 1024)
-    try:
-        proc_buffer = mupdf.mpdf_new_buffer_processor( out_buf, filter_.ascii)
-    except Exception as e:
-        jlib.log(jlib.exception_info())
-        raise
+    proc_buffer = mupdf.mpdf_new_buffer_processor( out_buf, filter_.ascii)
     if filter_.sanitize:
         out_res = mupdf.mpdf_new_dict( doc, 1)
         proc_filter = mupdf.mpdf_new_filter_processor( doc, proc_buffer, in_res, out_res, struct_parents, transform, filter_)
@@ -13887,7 +13869,6 @@ def JM_update_stream(doc, obj, buffer_, compress):
     update a stream object
     compress stream when beneficial
     '''
-    #jlib.log('{dir(buffer_)}')
     len_, _ = buffer_.buffer_storage_raw()
     nlen = len_
 
@@ -14016,7 +13997,6 @@ def CheckMorph(o: typing.Any) -> bool:
 def CheckParent(o: typing.Any):
     return
     if not hasattr(o, "parent") or o.parent is None:
-        #jlib.log(jlib.exception_info())
         raise ValueError(f"orphaned object type(o)={type(o)}: parent is None")
 
 
@@ -14438,7 +14418,6 @@ def jm_bbox_add_rect(dev, rect, code):
 
 
 def jm_bbox_fill_image( dev, image, ctm, alpha, color_params):
-    #jlib.log('{=dev image ctm alpha color_params}')
     r = mupdf.Rect(mupdf.Rect.Fixed_UNIT)
     r = mupdf.transform_rect( r.internal(), ctm)
     jm_bbox_add_rect( dev, r, "fill-image")
@@ -14613,7 +14592,7 @@ def jm_tracedraw_color(colorspace, color):
                     mupdf.ColorParams().internal(),
                     )
         except Exception as e:
-            jlib.log('{e=}')
+            jlib.log(jlib.exception_info())
             raise
         rgb = dv.dv0, dv.dv1, dv.dv2
         return rgb
@@ -16051,7 +16030,6 @@ def pdf_lookup_page_loc_imp(doc, node, skip, parentp, indexp):
                     if a:
                         mupdf.mfz_warn( "non-page object in page tree (%s)" % mupdf.mpdf_to_name( type_))
                     if skip[0] == 0:
-                        #jlib.log('setting {parentp=} to {node.m_internal=}')
                         parentp[0] = node
                         indexp[0] = i
                         hit = kid
