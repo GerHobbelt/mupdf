@@ -4014,27 +4014,10 @@ class Document:
         #jlib.log('{=self ret}')
         return ret
 
-    needsPass = needs_pass
-
-    def new_page_(
-            self,
-            pno: int = -1,
-            width: float = 595,
-            height: float = 842,
-            ):# -> Page:
-        """Create and return a new page object.
-
-        Args:
-            pno: (int) insert before this page. Default: after last page.
-            width: (float) page width in points. Default: 595 (ISO A4 width).
-            height: (float) page height in points. Default 842 (ISO A4 height).
-        Returns:
-            A Page object.
-        """
-        #doc._newPage(pno, width=width, height=height)
-        if self.is_closed or self.isEncrypted:
+    def _newPage(self, pno=-1, width=595, height=842):
+        """Make a new PDF page."""
+        if self.is_closed or self.is_encrypted:
             raise ValueError("document closed or encrypted")
-
         #val = _fitz.Document__newPage(self, pno, width, height)
         if isinstance(self.this, mupdf.PdfDocument):
             pdf = self.this
@@ -19157,78 +19140,79 @@ Rect.get_area               = utils.get_area
 
 TextWriter.fill_textbox     = utils.fill_textbox
 
-# Aliases
-#
-Annot.getText        = Annot.get_text
-Annot.getTextbox    = Annot.get_textbox
+if 1:
+    # Aliases
+    #
+    Annot.getText        = Annot.get_text
+    Annot.getTextbox    = Annot.get_textbox
 
-Document._newPage = Document.new_page_
-Document.getPagePixmap = Document.get_page_pixmap
-Document.getPageText = Document.get_page_text
-Document.getSigFlags = Document.get_sigflags
-Document.getToC = Document.get_toc
-Document.insertPage = Document.insert_page
-Document.newPage = Document.new_page
-Document.searchPageFor = Document.search_page_for
-Document.setMetadata = Document.set_metadata
-Document.getCharWidths = Document.get_char_widths
-Document.setToC = Document.set_toc
+    Document.getPagePixmap = Document.get_page_pixmap
+    Document.getPageText = Document.get_page_text
+    Document.getSigFlags = Document.get_sigflags
+    Document.getToC = Document.get_toc
+    Document.insertPage = Document.insert_page
+    Document.newPage = Document.new_page
+    Document.searchPageFor = Document.search_page_for
+    Document.setMetadata = Document.set_metadata
+    Document.getCharWidths = Document.get_char_widths
+    Document.setToC = Document.set_toc
+    Document.needsPass = Document.needs_pass
 
-IRect.getArea           = IRect.get_area
-IRect.getRectArea       = IRect.get_area
+    IRect.getArea           = IRect.get_area
+    IRect.getRectArea       = IRect.get_area
 
-Page.deleteWidget = Page.delete_widget
-Page.getImageBbox = Page.get_image_bbox
-Page.getLinks = Page.get_links
-Page.getPixmap = Page.get_pixmap
-Page.getSVGimage = Page.get_svg_image
-Page.getText = Page.get_text
-Page.getTextBlocks = utils.get_text_blocks
-Page.getTextPage = Page.get_textpage
-Page.getTextWords = Page.get_text_words
-Page.getTextbox = utils.get_textbox
-Page.insertImage = Page.insert_image
-Page.insertLink = Page.insert_link
-Page.insertText = Page.insert_text
-Page.insertTextbox = Page.insert_textbox
-Page.loadLinks = Page.load_links
-Page.newShape = Page.new_shape
-Page.searchFor = Page.search_for
-Page.setCropBox = Page.set_cropbox
-Page.setMediaBox = Page.set_mediabox
-Page.setRotation = Page.set_rotation
-Page.showPDFpage = Page.show_pdf_page
-Page.updateLink = Page.update_link
-Page.writeText = Page.write_text
-Page.drawBezier = Page.draw_bezier
-Page.drawCircle = Page.draw_circle
-Page.drawCurve = Page.draw_curve
-Page.drawLine = Page.draw_line
-Page.drawOval = Page.draw_oval
-Page.drawPolyline = Page.draw_polyline
-Page.drawQuad = Page.draw_quad
-Page.drawRect = Page.draw_rect
-Page.drawSector = Page.draw_sector
-Page.drawSquiggle = Page.draw_squiggle
-Page.drawZigzag = Page.draw_zigzag
+    Page.deleteWidget = Page.delete_widget
+    Page.getImageBbox = Page.get_image_bbox
+    Page.getLinks = Page.get_links
+    Page.getPixmap = Page.get_pixmap
+    Page.getSVGimage = Page.get_svg_image
+    Page.getText = Page.get_text
+    Page.getTextBlocks = utils.get_text_blocks
+    Page.getTextPage = Page.get_textpage
+    Page.getTextWords = Page.get_text_words
+    Page.getTextbox = utils.get_textbox
+    Page.insertImage = Page.insert_image
+    Page.insertLink = Page.insert_link
+    Page.insertText = Page.insert_text
+    Page.insertTextbox = Page.insert_textbox
+    Page.loadLinks = Page.load_links
+    Page.newShape = Page.new_shape
+    Page.searchFor = Page.search_for
+    Page.setCropBox = Page.set_cropbox
+    Page.setMediaBox = Page.set_mediabox
+    Page.setRotation = Page.set_rotation
+    Page.showPDFpage = Page.show_pdf_page
+    Page.updateLink = Page.update_link
+    Page.writeText = Page.write_text
+    Page.drawBezier = Page.draw_bezier
+    Page.drawCircle = Page.draw_circle
+    Page.drawCurve = Page.draw_curve
+    Page.drawLine = Page.draw_line
+    Page.drawOval = Page.draw_oval
+    Page.drawPolyline = Page.draw_polyline
+    Page.drawQuad = Page.draw_quad
+    Page.drawRect = Page.draw_rect
+    Page.drawSector = Page.draw_sector
+    Page.drawSquiggle = Page.draw_squiggle
+    Page.drawZigzag = Page.draw_zigzag
 
 
-Pixmap.clearWith = Pixmap.clear_with
-Pixmap.gammaWith = Pixmap.gamma_with
-Pixmap.getPNGData = Pixmap.tobytes
-Pixmap.getPNGdata = Pixmap.tobytes
-Pixmap.invertIRect = Pixmap.invert_irect
-Pixmap.tintWith = Pixmap.tint_with
-Pixmap.getImageData = Pixmap.tobytes
+    Pixmap.clearWith = Pixmap.clear_with
+    Pixmap.gammaWith = Pixmap.gamma_with
+    Pixmap.getPNGData = Pixmap.tobytes
+    Pixmap.getPNGdata = Pixmap.tobytes
+    Pixmap.invertIRect = Pixmap.invert_irect
+    Pixmap.tintWith = Pixmap.tint_with
+    Pixmap.getImageData = Pixmap.tobytes
 
-Quad.isConvex = Quad.is_convex
-Quad.isEmpty = Quad.is_empty
-Quad.isRectangular = Quad.is_rectangular
+    Quad.isConvex = Quad.is_convex
+    Quad.isEmpty = Quad.is_empty
+    Quad.isRectangular = Quad.is_rectangular
 
-Rect.getArea = Rect.get_area
-Rect.getRectArea = utils.get_area
-Rect.includeRect = Rect.include_rect
-Rect.isEmpty = Rect.is_empty
+    Rect.getArea = Rect.get_area
+    Rect.getRectArea = utils.get_area
+    Rect.includeRect = Rect.include_rect
+    Rect.isEmpty = Rect.is_empty
 
-TextWriter.fillTextbox = TextWriter.fill_textbox
-TextWriter.writeText = TextWriter.write_text
+    TextWriter.fillTextbox = TextWriter.fill_textbox
+    TextWriter.writeText = TextWriter.write_text
