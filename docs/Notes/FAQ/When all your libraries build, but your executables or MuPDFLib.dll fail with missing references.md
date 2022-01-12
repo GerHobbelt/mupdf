@@ -2,7 +2,7 @@
 
 The MSVC2019 projects have been set up to use a common *monolithic* DLL: `MuPDFLib.dll`.
 
-When that one fails to build, (almost) all executables won't link/build either, as they depend on this DLL (which carries all our labraries' code).
+When that one fails to build, (almost) all executables won't link/build either, as they depend on this DLL (which carries all our libraries' code).
 
 Visual Studio is sometimes a little confused and hasn't properly updated the *export file* that goes with that DLL. 
 
@@ -17,7 +17,7 @@ rm *.def
 
 ...  and rebuild.
 
-You should see MSVC invoking the Python script `gen_libmupdf.dll.py` as part of (re)building the MuPDFLib project. This script scans the various labrary header files and extracts the API functions which should be exported in the DLL.
+You should see MSVC invoking the Python script `gen_libmupdf.dll.py` as part of (re)building the MuPDFLib project. This script scans the various library header files and extracts the API functions which should be exported in the DLL.
 
 When this script fails to produce the proper set of exports, then LibMUPDF.dll won't be able to link (reporting missing/unknown references).
 

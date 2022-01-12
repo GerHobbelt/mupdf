@@ -10,7 +10,7 @@
 
 		will nuke everything that looks or smells like a build temporary or target file.
 
-		Use this script if you wish to clean *rigorously*, e.g. when Visual Studio starts to behave oddly -- this script nukes all Visual Studio user session settings as well (it kills the `.vs` ddirectory in there!) as any MSVC caches.
+		Use this script if you wish to clean *rigorously*, e.g. when Visual Studio starts to behave oddly -- this script nukes all Visual Studio user session settings as well (it kills the `.vs` directory in there!) as any MSVC caches.
 	
 - when you get LINK errors, you can try Build a second time.
 

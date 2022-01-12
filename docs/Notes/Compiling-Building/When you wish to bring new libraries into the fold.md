@@ -33,7 +33,7 @@ This does three things:
 
 Thus you end up with a **clean** project file, which you can already 'Add' to your MSVC Solution.
 
-### Quickly adding all existing sourcefiles to the Project
+### Quickly adding all existing source files to the Project
 
 You can quickly add all existing source & include files (C and C++) to the project file, and have them automatically placed in the appropriate section too, thanks to the `.filters` file, which will be patched alongside:
 

@@ -24,7 +24,7 @@ At the time of this writing, we also bundle tool and test code in these and expo
 
 wxWidgets is built as a monolithic **static library** by default: this happens in the `wxWidgets` project. 
 
-wxWidgets has a couple of dependencies, which are included as static libraries in that monolith, f.e. `pcre2`, as those are only used by the wxWidgets library thus far (and we don't plan on using theem elsewhere in our codeebase yet, either).
+wxWidgets has a couple of dependencies, which are included as static libraries in that monolith, f.e. `pcre2`, as those are only used by the wxWidgets library thus far (and we don't plan on using them elsewhere in our codebase yet, either).
 
 The monolithic **DLL**  version of wxWidgets comes from the `wxWidgets_DLL` project. That one is, of course, dependent on the MuPDFLib **DLL** for some generic services, including support for regular image formats such as PNG, as the MuPDFLib library/DLL includes those libraries and we don't want any duplication.
 
@@ -56,7 +56,7 @@ wxCharts is built as yet another **DLL** or static library:
 
 ## When building executables: which dependencies should my MSVC project have?
 
-When you wish to produce a *statically linked* executable, use `MuPDFLib_Static` (or `MuPDFLib` if you want to load that part as a shared DLL when your executable has somee heavy usage of that codebasee anyway). Where needed, add `wxWidgets` and `wxCharts` as dependencies and your linker should sort you out.
+When you wish to produce a *statically linked* executable, use `MuPDFLib_Static` (or `MuPDFLib` if you want to load that part as a shared DLL when your executable has some heavy usage of that codebase anyway). Where needed, add `wxWidgets` and `wxCharts` as dependencies and your linker should sort you out.
 
 Alternatively, when you wish to produce a small-size executable which re-uses the DLLs' codebases, then add `MuPDFLib`, `wxCharts_DLL` and `wxWidgets_DLL` as your dependencies.
 

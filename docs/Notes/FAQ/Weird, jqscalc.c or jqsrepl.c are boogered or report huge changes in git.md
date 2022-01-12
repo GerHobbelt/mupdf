@@ -22,7 +22,7 @@ rm ../../scripts/libQuickJS/*.c
 
 ... and build the MSVC Solution once again.
 
-You should now observee that `jqsc` is used to recompile the original JavaScript sources.
+You should now observe that `jqsc` is used to recompile the original JavaScript sources.
 
 You should also observe that, while several thousand deleted lines are reported by git for the commit diff of `jqscalc.c`, the same commit diff should also report several *thousand* lines have been *added* at the same time, thus keeping `jqscalc.c` in the same size ballpark as before.
 

@@ -10,7 +10,7 @@ In the Property Manager pick any C/C++ project and twirl open the property list.
 
 - `common-project.props`is intended to contain any settings that are applied to **all projects** and **all build modes**.
 - `common-project-(Release|Debug)-Win(32|64).props` are the files meant to carry build mode specific settings.
-- `common-project-ultimate-overrides.props` is a last-resort cop-out property file for those who need to test compiler or other settings while testing that stuff; only touch this when you want to blunty override any and all previous configurations: this property list is loaded last and [as the Microsoft documentation states](https://docs.microsoft.com/en-us/cpp/build/reference/vcxproj-file-structure?view=msvc-160), these properties will therefor have precedence over anything else.
+- `common-project-ultimate-overrides.props` is a last-resort cop-out property file for those who need to test compiler or other settings while testing that stuff; only touch this when you want to bluntly override any and all previous configurations: this property list is loaded last and [as the Microsoft documentation states](https://docs.microsoft.com/en-us/cpp/build/reference/vcxproj-file-structure?view=msvc-160), these properties will therefor have precedence over anything else.
 
 You can easily edit the settings in the IDE then by double-clicking on the property file of your choice.
 

@@ -8,7 +8,7 @@
 
 ## Notes
 
-While each of these Visual Studio Solutions has its use, the `m-dev-list` one is *quite* inwieldly and not meant for general use: its purpose is an all-around project loader and is only truely useful when:
+While each of these Visual Studio Solutions has its use, the `m-dev-list` one is *quite* unwieldy and not meant for general use: its purpose is an all-around project loader and is only truly useful when:
 
 - you are developing / debugging the `*-vcxproj.js` project patch scripts: as this solution is meant to load every project available, it should successfully load them all after we've applied our (scripted) patches.
 - you are adding new `*.vcxproj` Visual Studio projects and want to make sure those load fine in Visual Studio alongside the rest. 

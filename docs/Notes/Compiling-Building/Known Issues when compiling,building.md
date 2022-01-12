@@ -24,9 +24,9 @@ When even *that* doesn't deliver and you're pretty confident the code *should* b
    ```
 3. Restart Visual Studio and load the `mupdf.sln` solution as before. Build All.
 
-> What the *nuke* script does is go way beyond Visual Studio's own 'Clean All' command: it completely obliterates all Visual Studio caches and intermediate files in the build environment (MSVC's CleanAll does **not** do this! :facepalm:), only leaving your Debug Settings intact (the commandline(s) you specified for the various tools/projects in the solution as you are debugging them.)
+> What the *nuke* script does is go way beyond Visual Studio's own 'Clean All' command: it completely obliterates all Visual Studio caches and intermediate files in the build environment (MSVC's CleanAll does **not** do this! :facepalm:), only leaving your Debug Settings intact (the command-line(s) you specified for the various tools/projects in the solution as you are debugging them.)
 >
-> More specifically, the script nukes the `.vs` directory (which solves al lot of those *inexplicable Visual Studio problems it seems you can't get rid of*) plus a whole lot more, including all compiler intermediate files, thus forcing a *truely clean build* in Visual Studio.
+> More specifically, the script nukes the `.vs` directory (which solves al lot of those *inexplicable Visual Studio problems it seems you can't get rid of*) plus a whole lot more, including all compiler intermediate files, thus forcing a *truly clean build* in Visual Studio.
 
 
 ### Cause
