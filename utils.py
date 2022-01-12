@@ -2965,7 +2965,7 @@ def get_char_widths(
     return glyphs
 
 
-class Shape(object):
+class Shape:
     """Create a new shape."""
 
     @staticmethod

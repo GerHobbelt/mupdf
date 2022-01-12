@@ -4709,7 +4709,7 @@ class Link:
         return _fitz.Link_uri(self)
 
 
-class Matrix(object):
+class Matrix:
 
     def __abs__(self):
         return math.sqrt(sum([c*c for c in self]))
@@ -4964,7 +4964,7 @@ class IdentityMatrix(Matrix):
 Identity = IdentityMatrix()
 
 
-class linkDest(object):
+class linkDest:
     """link or outline destination details"""
 
     def __init__(self, obj, rlink):
@@ -5029,7 +5029,7 @@ class linkDest(object):
                 self.kind = LINK_LAUNCH
 
 
-class Widget(object):
+class Widget:
     '''
     Class describing a PDF form field ("widget")
     '''
@@ -7811,7 +7811,7 @@ class Pixmap:
     height = h
 
 
-class Point(object):
+class Point:
     """Point() - all zeros
     Point(x, y)
     Point(Point) - new copy
@@ -7991,7 +7991,7 @@ class Point(object):
     norm = __abs__
 
 
-class Quad(object):
+class Quad:
     """Quad() - all zero points\nQuad(ul, ur, ll, lr)\nQuad(quad) - new copy\nQuad(sequence) - from 'sequence'"""
 
     def __abs__(self):
@@ -8181,7 +8181,7 @@ class Quad(object):
     height = property(lambda self: max(abs(self.ul - self.ll), abs(self.ur - self.lr)))
 
 
-class Rect(object):
+class Rect:
     """Rect() - all zeros
     Rect(x0, y0, x1, y1)
     Rect(top-left, x1, y1)
@@ -8425,7 +8425,7 @@ class Rect(object):
     width  = property(lambda self: abs(self.x1 - self.x0))
 
 
-class Shape(object):
+class Shape:
     """Create a new shape."""
 
     def __init__(self, page: Page):
@@ -17264,6 +17264,7 @@ def restore_aliases():
     _alias( None, 'get_pdf_now',            'getPDFnow')
     _alias( None, 'get_pdf_str',            'getPDFstr')
     _alias( None, 'get_text_length')
+    _alias( None, 'get_text_length',        'getTextlength')
     _alias( None, 'image_properties',       'ImageProperties')
     _alias( None, 'paper_rect',             'PaperRect')
     _alias( None, 'paper_size',             'PaperSize')
