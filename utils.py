@@ -3915,21 +3915,6 @@ class Shape(object):
         self.totalcont = ""  # re-use
         return
 
-    # define deprecated aliases ------------------------------------------
-    drawBezier = draw_bezier
-    drawCircle = draw_circle
-    drawCurve = draw_curve
-    drawLine = draw_line
-    drawOval = draw_oval
-    drawPolyline = draw_polyline
-    drawQuad = draw_quad
-    drawRect = draw_rect
-    drawSector = draw_sector
-    drawSquiggle = draw_squiggle
-    drawZigzag = draw_zigzag
-    insertText = insert_text
-    insertTextbox = insert_textbox
-
 
 def apply_redactions(page: Page, images: int = 2) -> bool:
     """Apply the redaction annotations of the page.
