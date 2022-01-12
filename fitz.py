@@ -16089,7 +16089,6 @@ def pdf_lookup_page_loc(doc, needle):
     skip = skip[0]
     parentp = parentp[0]
     indexp = indexp[0]
-    #jlib.log('pdf_lookup_page_loc_imp() => {= hit.m_internal node.m_internal skip parentp.m_internal indexp}')
     if not hit.m_internal:
         raise Exception("cannot find page %d in page tree" % needle+1)
     return hit, parentp, indexp  # We don't seem to return skip.
@@ -16229,7 +16228,6 @@ def retainpages(doc, liste):
     mupdf.mpdf_dict_put(pages, PDF_NAME('Kids'), kids)
 
     pagecount = mupdf.mpdf_count_pages(doc)
-    #page_object_nums = fz_calloc(ctx, pagecount, sizeof(*page_object_nums));
     page_object_nums = []
     for i in range(pagecount):
         pageref = mupdf.mpdf_lookup_page_obj(doc, i)
@@ -16260,10 +16258,6 @@ def retainpages(doc, liste):
         mupdf.mpdf_dict_put(dests, PDF_NAME('Names'), names_list)
         mupdf.mpdf_dict_put(names, PDF_NAME('Dests'), dests)
         mupdf.mpdf_dict_put(root, PDF_NAME('Names'), names)
-
-        #mupdf.mpdf_drop_obj(names)
-        #mupdf.mpdf_drop_obj(dests)
-        #mupdf.mpdf_drop_obj(olddests)
 
     # Edit each pages /Annot list to remove any links pointing to nowhere.
     for i in range(pagecount):
@@ -16432,6 +16426,10 @@ def vdist(dir, a, b):
     return mupdf.mfz_abs(dx * dir.y + dy * dir.x)
 
 class TOOLS:
+    '''
+    We use @staticmethod to avoid the need to create an instance of this class.
+    '''
+
     @staticmethod
     def _get_all_contents(page):
         page = page.this.page_from_fz_page()
@@ -16496,19 +16494,12 @@ class TOOLS:
     @staticmethod
     def _fill_widget(annot, widget):
         #val = _fitz.Tools__fill_widget(self, annot, widget)
-        #jlib.log('{type(widget)=}')
-        #jlib.log('{widget=}')
         val = JM_get_widget_properties(annot, widget)
-        #jlib.log('{type(widget)=}')
-        #jlib.log('{widget=}')
 
         widget.rect = Rect(annot.rect)
-        #jlib.log('{type(widget)=}')
-        #jlib.log('{widget=}')
         widget.xref = annot.xref
         widget.parent = annot.parent
         widget._annot = annot  # backpointer to annot object
-        #jlib.log('{widget=} {type(widget)=}')
         if not widget.script:
             widget.script = None
         if not widget.script_stroke:
@@ -16552,8 +16543,6 @@ class TOOLS:
     def _insert_contents(page, newcont, overlay=1):
         """Add bytes as a new /Contents object for a page, and return its xref."""
         #return _fitz.Tools__insert_contents(self, page, newcont, overlay)
-        #fz_buffer *contbuf = NULL;
-        #int xref = 0;
         pdfpage = page._pdf_page()
         ASSERT_PDF(pdfpage)
         contbuf = JM_BufferFromBytes(newcont)
@@ -16625,7 +16614,7 @@ class TOOLS:
         if not fc:
             fc = (1,1,1)  # white if missing
         fcol = " ".join(map(str, fc)) + " rg\n"
-    # nr = annot.rect
+        # nr = annot.rect
         np1 = p1                   # point coord relative to annot rect
         np2 = p2                   # point coord relative to annot rect
         m = Matrix(TOOLS._hor_matrix(np1, np2))  # matrix makes the line horizontal
@@ -16647,7 +16636,7 @@ class TOOLS:
         d = shift * max(1, w)
         M = R - (d/2., 0) if lr else L + (d/2., 0)
         r = Rect(M, M) + (-d, -d, d, d)         # the square
-    # the square makes line longer by (2*shift - 1)*width
+        # the square makes line longer by (2*shift - 1)*width
         p = (r.tl + (r.bl - r.tl) * 0.5) * im
         ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
         p = (r.tl + (r.tr - r.tl) * 0.5) * im
@@ -16669,7 +16658,7 @@ class TOOLS:
         d = shift * max(1, w)
         M = R - (d/2., 0) if lr else L + (d/2., 0)
         r = Rect(M, M) + (-d, -d, d, d)         # the square
-    # the square makes line longer by (2*shift - 1)*width
+        # the square makes line longer by (2*shift - 1)*width
         p = r.tl * im
         ap = "q\n%s%f %f m\n" % (opacity, p.x, p.y)
         p = r.tr * im
@@ -16877,7 +16866,6 @@ class TOOLS:
                 da_str = mupdf.mpdf_to_text_string(da)
             except Exception:
                 return
-            #return JM_UnicodeFromStr(da_str);
             return da_str
 
         val = Tools__parse_da(annot)
@@ -17009,7 +16997,6 @@ class TOOLS:
                 mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(0))
                 mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(65535))
                 mupdf.mpdf_array_push(warray, mupdf.mpdf_new_int(width))
-                #mupdf.mpdf_dict_put_drop(dfont, PDF_NAME('W'), warray)
                 mupdf.mpdf_dict_put(dfont, PDF_NAME('W'), warray)
         return True
 
@@ -17026,7 +17013,13 @@ class TOOLS:
             small_glyph_heights = 0
         return small_glyph_heights
 
+
+# We cannot import utils earlier because it imports this fitz.py file itself
+# and uses some fitz.* types in function typing.
+#
 import utils
+
+# fixme.
 if 1:
     pass
 elif 0:
@@ -17129,55 +17122,73 @@ version = (VersionBind, VersionFitz, VersionDate2)
 def restore_aliases():
     warnings.filterwarnings( "once", category=FitzDeprecation)
 
-    def _alias(class_, new, legacy=None):
+    def _alias(class_, new_name, legacy_name=None):
         '''
-        Added alias for class_.item.
+        Adds an alias for a class_ or module item clled <class_>.<new>.
 
         class_:
-            Class/module to modify, or None for the current module.
-        new:
-            String name of object in class, e.g. name of method.
-        legacy:
+            Class/module to modify; use None for the current module.
+        new_name:
+            String name of existing item, e.g. name of method.
+        legacy_name:
             Name of legacy object to create in <class_>. If None, we generate
             from <item> by removing underscores and capitalising the next
             letter.
         '''
         if class_ is None:
             class_ = sys.modules[__name__]
-        if not legacy:
-            legacy = ''
+        if not legacy_name:
+            legacy_name = ''
             capitalise_next = False
-            for c in new:
+            for c in new_name:
                 if c == '_':
                     capitalise_next = True
                 elif capitalise_next:
-                    legacy += c.upper()
+                    legacy_name += c.upper()
                     capitalise_next = False
                 else:
-                    legacy += c
-            #jlib.log( '{=new legacy}')
-        new2 = getattr( class_, new)
-        assert not getattr( class_, legacy, None), f'class {class_} already has {legacy}'
-        doc = new.__doc__
-        if callable( new):
+                    legacy_name += c
+        new_object = getattr( class_, new_name)
+        assert not getattr( class_, legacy_name, None), f'class {class_} already has {legacy_name}'
+        if callable( new_object):
             def deprecated_function( *args, **kwargs):
                 if not VersionBind.startswith('1.18'):
                     warnings.warn(
-                            f'"{legacy}" removed from {class_} after v1.19.0 - use "{new}".',
+                            f'"{legacy_name}" removed from {class_} after v1.19.0 - use "{new_name}".',
                             category=FitzDeprecation,
                             )
-                return new2( *args, **kw)
-            setattr( class_, legacy, deprecated_function)
+                return new_object( *args, **kwargs)
+            setattr( class_, legacy_name, deprecated_function)
             deprecated_function.__doc__ = (
-                    f'*** Deprecated and removed in version following 1.19.0 - use "{new}". ***\n'
-                    f'{new.__doc__}'
+                    f'*** Deprecated and removed in version following 1.19.0 - use "{new_name}". ***\n'
+                    f'{new_object.__doc__}'
                     )
         else:
-            setattr( class_, legacy, new2)
+            setattr( class_, legacy_name, new_object)
 
+    _alias( Annot, 'get_file',              'fileGet')
+    _alias( Annot, 'get_pixmap')
+    _alias( Annot, 'get_sound',             'soundGet')
+    _alias( Annot, 'get_text')
+    _alias( Annot, 'get_textbox')
+    _alias( Annot, 'get_textpage',          'getTextPage')
+    _alias( Annot, 'line_ends')
+    _alias( Annot, 'set_blendmode',         'setBlendMode')
+    _alias( Annot, 'set_border')
+    _alias( Annot, 'set_colors')
+    _alias( Annot, 'set_flags')
+    _alias( Annot, 'set_info')
+    _alias( Annot, 'set_line_ends')
+    _alias( Annot, 'set_name')
+    _alias( Annot, 'set_oc', 'setOC')
+    _alias( Annot, 'set_opacity')
+    _alias( Annot, 'set_rect')
+    _alias( Annot, 'update_file',           'fileUpd')
+    _alias( DisplayList, 'get_pixmap')
+    _alias( DisplayList, 'get_textpage',    'getTextPage')
     _alias( Document, 'chapter_count')
     _alias( Document, 'chapter_page_count')
-    _alias( Document, 'convert_to_pdf', 'convertToPDF')
+    _alias( Document, 'convert_to_pdf',     'convertToPDF')
     _alias( Document, 'copy_page')
     _alias( Document, 'delete_page')
     _alias( Document, 'delete_pages',       'deletePageRange')
@@ -17236,8 +17247,30 @@ def restore_aliases():
     _alias( Document, 'xref_stream')
     _alias( Document, 'xref_stream_raw')
     _alias( Document, 'xref_xml_metadata',  'metadataXML')
-
-    # deprecated Page aliases
+    _alias( IRect, 'get_area')
+    _alias( IRect, 'get_area',              'getRectArea')
+    _alias( IRect, 'include_point')
+    _alias( IRect, 'include_rect')
+    _alias( IRect, 'is_empty')
+    _alias( IRect, 'is_infinite')
+    _alias( Link, 'is_external')
+    _alias( Link, 'set_border')
+    _alias( Link, 'set_colors')
+    _alias( Matrix, 'is_rectilinear')
+    _alias( Matrix, 'prerotate',            'preRotate')
+    _alias( Matrix, 'prescale',             'preScale')
+    _alias( Matrix, 'preshear',             'preShear')
+    _alias( Matrix, 'pretranslate',         'preTranslate')
+    _alias( None, 'get_pdf_now',            'getPDFnow')
+    _alias( None, 'get_pdf_str',            'getPDFstr')
+    _alias( None, 'get_text_length')
+    _alias( None, 'image_properties',       'ImageProperties')
+    _alias( None, 'paper_rect',             'PaperRect')
+    _alias( None, 'paper_size',             'PaperSize')
+    _alias( None, 'paper_sizes')
+    _alias( None, 'planish_line')
+    _alias( Outline, 'is_external')
+    _alias( Outline, 'is_open')
     _alias( Page, 'add_caret_annot')
     _alias( Page, 'add_circle_annot')
     _alias( Page, 'add_file_annot')
@@ -17256,8 +17289,8 @@ def restore_aliases():
     _alias( Page, 'add_underline_annot')
     _alias( Page, 'add_widget')
     _alias( Page, 'clean_contents')
-    _alias( Page, 'cropbox',            'CropBox')
-    _alias( Page, 'cropbox_position',   'CropBoxPosition')
+    _alias( Page, 'cropbox',                'CropBox')
+    _alias( Page, 'cropbox_position',       'CropBoxPosition')
     _alias( Page, 'delete_annot')
     _alias( Page, 'delete_link')
     _alias( Page, 'delete_widget')
@@ -17277,43 +17310,69 @@ def restore_aliases():
     _alias( Page, 'first_link')
     _alias( Page, 'first_widget')
     _alias( Page, 'get_contents')
-    _alias( Page, 'get_displaylist',    'getDisplayList')
+    _alias( Page, 'get_displaylist',        'getDisplayList')
     _alias( Page, 'get_drawings')
-    _alias( Page, 'get_fonts',          'getFontList')
+    _alias( Page, 'get_fonts',              'getFontList')
     _alias( Page, 'get_image_bbox')
-    _alias( Page, 'get_images',         'getImageList')
+    _alias( Page, 'get_images',             'getImageList')
     _alias( Page, 'get_links')
     _alias( Page, 'get_pixmap')
-    _alias( Page, 'get_svg_image',      'getSVGimage')
+    _alias( Page, 'get_svg_image',          'getSVGimage')
     _alias( Page, 'get_text')
     _alias( Page, 'get_text_blocks')
     _alias( Page, 'get_text_words')
     _alias( Page, 'get_textbox')
-    _alias( Page, 'get_textpage',       'getTextPage')
+    _alias( Page, 'get_textpage',           'getTextPage')
     _alias( Page, 'insert_font')
     _alias( Page, 'insert_image')
     _alias( Page, 'insert_link')
     _alias( Page, 'insert_text')
     _alias( Page, 'insert_textbox')
-    _alias( Page, 'is_wrapped',         '_isWrapped')
+    _alias( Page, 'is_wrapped',             '_isWrapped')
     _alias( Page, 'load_annot')
     _alias( Page, 'load_links')
-    _alias( Page, 'mediabox',           'MediaBox')
-    _alias( Page, 'mediabox_size',      'MediaBoxSize')
+    _alias( Page, 'mediabox',               'MediaBox')
+    _alias( Page, 'mediabox_size',          'MediaBoxSize')
     _alias( Page, 'new_shape')
     _alias( Page, 'read_contents')
     _alias( Page, 'rotation_matrix')
     _alias( Page, 'search_for')
-    _alias( Page, 'set_cropbox',        'setCropBox')
-    _alias( Page, 'set_mediabox',       'setMediaBox')
+    _alias( Page, 'set_cropbox',            'setCropBox')
+    _alias( Page, 'set_mediabox',           'setMediaBox')
     _alias( Page, 'set_rotation')
-    _alias( Page, 'show_pdf_page',      'showPDFpage')
+    _alias( Page, 'show_pdf_page',          'showPDFpage')
     _alias( Page, 'transformation_matrix')
     _alias( Page, 'update_link')
     _alias( Page, 'wrap_contents')
     _alias( Page, 'write_text')
-
-    # deprecated Shape aliases
+    _alias( Pixmap, 'clear_with')
+    _alias( Pixmap, 'copy',                 'copyPixmap')
+    _alias( Pixmap, 'gamma_with')
+    _alias( Pixmap, 'invert_irect',         'invertIRect')
+    _alias( Pixmap, 'pil_save',             'pillowWrite')
+    _alias( Pixmap, 'pil_tobytes',          'pillowData')
+    _alias( Pixmap, 'save',                 'writeImage')
+    _alias( Pixmap, 'save',                 'writePNG')
+    _alias( Pixmap, 'set_alpha')
+    _alias( Pixmap, 'set_dpi',              'setResolution')
+    _alias( Pixmap, 'set_origin')
+    _alias( Pixmap, 'set_pixel')
+    _alias( Pixmap, 'set_rect')
+    _alias( Pixmap, 'tint_with')
+    _alias( Pixmap, 'tobytes',              'getImageData')
+    _alias( Pixmap, 'tobytes',              'getPNGData')
+    _alias( Pixmap, 'tobytes',              'getPNGdata')
+    _alias( Quad, 'is_convex')
+    _alias( Quad, 'is_empty')
+    _alias( Quad, 'is_rectangular')
+    _alias( Rect, 'get_area')
+    _alias( Rect, 'get_area',               'getRectArea')
+    _alias( Rect, 'include_point')
+    _alias( Rect, 'include_rect')
+    _alias( Rect, 'is_empty')
+    _alias( Rect, 'is_infinite')
+    _alias( TextWriter, 'fill_textbox')
+    _alias( TextWriter, 'write_text')
     _alias( utils.Shape, 'draw_bezier')
     _alias( utils.Shape, 'draw_circle')
     _alias( utils.Shape, 'draw_curve')
@@ -17327,90 +17386,6 @@ def restore_aliases():
     _alias( utils.Shape, 'draw_zigzag')
     _alias( utils.Shape, 'insert_text')
     _alias( utils.Shape, 'insert_textbox')
-
-    # deprecated Annot aliases
-    _alias( Annot, 'get_file',          'fileGet')
-    _alias( Annot, 'get_pixmap')
-    _alias( Annot, 'get_sound',         'soundGet')
-    _alias( Annot, 'get_text')
-    _alias( Annot, 'get_textbox')
-    _alias( Annot, 'get_textpage',      'getTextPage')
-    _alias( Annot, 'line_ends')
-    _alias( Annot, 'set_blendmode',     'setBlendMode')
-    _alias( Annot, 'set_border')
-    _alias( Annot, 'set_colors')
-    _alias( Annot, 'set_flags')
-    _alias( Annot, 'set_info')
-    _alias( Annot, 'set_line_ends')
-    _alias( Annot, 'set_name')
-    _alias( Annot, 'set_oc', 'setOC')
-    _alias( Annot, 'set_opacity')
-    _alias( Annot, 'set_rect')
-    _alias( Annot, 'update_file',       'fileUpd')
-
-    # deprecated TextWriter aliases
-    _alias( TextWriter, 'fill_textbox')
-    _alias( TextWriter, 'write_text')
-
-    # deprecated DisplayList aliases
-    _alias( DisplayList, 'get_pixmap')
-    _alias( DisplayList, 'get_textpage',    'getTextPage')
-
-    # deprecated Pixmap aliases
-    _alias( Pixmap, 'clear_with')
-    _alias( Pixmap, 'copy',         'copyPixmap')
-    _alias( Pixmap, 'gamma_with')
-    _alias( Pixmap, 'invert_irect', 'invertIRect')
-    _alias( Pixmap, 'pil_save',     'pillowWrite')
-    _alias( Pixmap, 'pil_tobytes',  'pillowData')
-    _alias( Pixmap, 'save',         'writeImage')
-    _alias( Pixmap, 'save',         'writePNG')
-    _alias( Pixmap, 'set_alpha')
-    _alias( Pixmap, 'set_dpi',      'setResolution')
-    _alias( Pixmap, 'set_origin')
-    _alias( Pixmap, 'set_pixel')
-    _alias( Pixmap, 'set_rect')
-    _alias( Pixmap, 'tint_with')
-    _alias( Pixmap, 'tobytes',      'getImageData')
-    _alias( Pixmap, 'tobytes',      'getPNGData')
-    _alias( Pixmap, 'tobytes',      'getPNGdata')
-
-    # deprecated geometry aliases
-    _alias( IRect, 'get_area')
-    _alias( IRect, 'get_area',          'getRectArea')
-    _alias( IRect, 'include_point')
-    _alias( IRect, 'include_rect')
-    _alias( IRect, 'is_empty')
-    _alias( IRect, 'is_infinite')
-    _alias( Matrix, 'is_rectilinear')
-    _alias( Matrix, 'prerotate',        'preRotate')
-    _alias( Matrix, 'prescale',         'preScale')
-    _alias( Matrix, 'preshear',         'preShear')
-    _alias( Matrix, 'pretranslate',     'preTranslate')
-    _alias( Quad, 'is_convex')
-    _alias( Quad, 'is_empty')
-    _alias( Quad, 'is_rectangular')
-    _alias( Rect, 'get_area',           'getRectArea')
-    _alias( Rect, 'get_area')
-    _alias( Rect, 'include_point')
-    _alias( Rect, 'include_rect')
-    _alias( Rect, 'is_empty')
-    _alias( Rect, 'is_infinite')
-
-    # deprecated other aliases
-    _alias( Link, 'is_external')
-    _alias( Link, 'set_border')
-    _alias( Link, 'set_colors')
-    _alias( Outline, 'is_external')
-    _alias( Outline, 'is_open')
-    _alias( None, 'get_pdf_now',         'getPDFnow')
-    _alias( None, 'get_pdf_str',         'getPDFstr')
-    _alias( None, 'get_text_length')
-    _alias( None, 'image_properties',    'ImageProperties')
-    _alias( None, 'paper_rect',          'PaperRect')
-    _alias( None, 'paper_size',          'PaperSize')
-    _alias( None, 'paper_sizes')
-    _alias( None, 'planish_line')
 
 restore_aliases()
 
