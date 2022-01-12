@@ -1724,25 +1724,13 @@ class Document:
         self.init_doc()
         return val
 
-    def _do_links(self, doc2, from_page=-1, to_page=-1, start_at=-1):
-        return utils.do_links(self, doc2, from_page, to_page, start_at)
-
     def _dropOutline(self, ol):
         assert 0, 'Unnecessary'
         return _fitz.Document__dropOutline(self, ol)
 
-    #def _embeddedFileAdd(self, name, buffer_, filename=None, ufilename=None, desc=None):
-    #    assert 0, 'deprecated'
-    #    return _fitz.Document__embeddedFileAdd(self, name, buffer_, filename, ufilename, desc)
-
-    #def _embeddedFileDel(self, idx):
-    #    assert 0, 'deprecated'
-    #    return _fitz.Document__embeddedFileDel(self, idx)
-
     def _embeddedFileGet(self, idx):
         #return _fitz.Document__embeddedFileGet(self, idx)
         doc = self.this
-        #jlib.log('*** calling mupdf.mpdf_document_from_fz_document(doc)')
         pdf = mupdf.mpdf_document_from_fz_document(doc)
         names = mupdf.mpdf_dict_getl(
                 mupdf.mpdf_trailer(pdf),
@@ -2560,9 +2548,6 @@ class Document:
 
     copyPage = copy_page
 
-    def del_toc_item(self, idx):
-        return utils.del_toc_item(self, idx)
-
     def del_xml_metadata(self):
         """Delete XML metadata."""
         if self.is_closed or self.isEncrypted:
@@ -3373,9 +3358,6 @@ class Document:
         xref = mupdf.mpdf_create_object(pdf)
         return xref
 
-    def get_oc(self, xref):
-        return utils.get_oc(self, xref)
-
     def get_ocgs(self):
         """Show existing optional content groups."""
         if self.is_closed:
@@ -3423,9 +3405,6 @@ class Document:
             temp = xref
             rc[ temp] = item
         return rc
-
-    def get_ocmd(self, xref):
-        return utils.get_ocmd(self, xref)
 
     def get_outline_xrefs(self):
         """Get list of outline xref numbers."""
@@ -3477,22 +3456,6 @@ class Document:
             return [v[:-1] for v in val]
         return val
 
-    def get_page_labels(doc):
-        return utils.get_page_labels(doc)
-
-    def get_page_numbers(doc, label, only_one=False):
-        return utils.get_page_numbers(doc, label, only_one)
-
-    def get_page_pixmap(*args, **kwargs):
-        return utils.get_page_pixmap(*args, **kwargs)
-
-    getPagePixmap = get_page_pixmap
-
-    def get_page_text(*args, **kwargs):
-        return utils.get_page_text(*args, **kwargs)
-
-    getPageText = get_page_text
-
     def get_page_xobjects(self, pno: int) -> list:
         """Retrieve a list of XObjects used on a page.
         """
@@ -3522,21 +3485,6 @@ class Document:
         if sigflags.m_internal:
             sigflag = mupdf.mpdf_to_int(sigflags)
         return sigflag
-
-    getSigFlags = get_sigflags
-
-    def get_toc(
-            doc,#: Document,
-            simple: bool = True,
-            ) -> list:
-        """Create a table of contents.
-
-        Args:
-            simple: a bool to control output. Returns a list, where each entry consists of outline level, title, page number and link destination (if simple = False). For details see PyMuPDF's documentation.
-        """
-        return utils.get_toc(doc, simple)
-
-    getToC = get_toc
 
     def get_xml_metadata(self):
         """Get document XML metadata."""
@@ -3640,11 +3588,6 @@ class Document:
         self.metadata['encryption'] = None if self._getMetadata('encryption')=='None' else self._getMetadata('encryption')
 
     outline = property(lambda self: self._outline)
-
-    def insert_page(*args, **kwargs):
-        return utils.insert_page(*args, **kwargs)
-
-    insertPage = insert_page
 
     def insert_pdf(
             self,
@@ -4256,13 +4199,6 @@ class Document:
         #jlib.log('after _reset_page_refs(): {=mupdf.mpdf_xref_len(pdf)}')
         return self[pno]
 
-    _newPage = new_page_
-
-    def new_page( *args, **kwargs):
-        return utils.new_page( *args, **kwargs)
-
-    newPage = new_page
-
     def next_location(self, page_id):
         """Get (chapter, page) of next page."""
         if self.is_closed or self.isEncrypted:
@@ -4658,15 +4594,6 @@ class Document:
         """ Save PDF incrementally"""
         return self.save(self.name, incremental=True, encryption=PDF_ENCRYPT_KEEP)
 
-    def scrub(self, *args, **kwargs):
-        return utils.scrub(*args, **kwargs)
-
-    def search_page_for(self, *args, **kwargs):
-        return utils.search_page_for(*args, **kwargs)
-
-    def searchPageFor(self, *args, **kwargs):
-        return self.search_page_for(*args, **kwargs)
-
     def select(self, pyliste):
         """Build sub-pdf with page numbers in the list."""
         if self.is_closed or self.isEncrypted:
@@ -4757,30 +4684,12 @@ class Document:
             raise ValueError("document closed")
         return _fitz.Document_set_layer_ui_config(self, number, action)
 
-    def set_metadata(self, n):
-        return utils.set_metadata(self, n)
-
-    def set_toc_item(*args, **kwargs):
-        return utils.set_toc_item(*args, **kwargs)
-
-    def setMetadata(self, n):
-        return self.set_metadata(n)
-
     def set_oc(self, xref, oc):
         """Attach optional content object to image or form xobject."""
         if self.is_closed:
             raise ValueError("document closed")
 
         return _fitz.Document_set_oc(self, xref, oc)
-
-    def set_ocmd(
-            doc,#: Document,
-            xref: int = 0,
-            ocgs: typing.Union[list, None] = None,
-            policy: OptStr = None,
-            ve: typing.Union[list, None] = None,
-            ) -> int:
-        return utils.set_ocmd(doc, xref, ocgs, policy, ve)
 
     def set_page_labels(doc, labels):
         """Add / replace page label definitions in PDF document.
@@ -20368,6 +20277,32 @@ Page.getText = Page.get_text
 Page.getTextPage = Page.get_textpage
 Page.loadLinks = Page.load_links
 
+Document._do_links = utils.do_links
+Document.get_oc = utils.get_oc
+Document.del_toc_item = utils.del_toc_item
+Document.get_ocmd = utils.get_ocmd
+Document.get_page_labels = utils.get_page_labels
+Document.get_page_numbers = utils.get_page_numbers
+Document.get_page_pixmap = utils.get_page_pixmap
+Document.get_page_text = utils.get_page_text
+Document.get_toc = utils.get_toc
+Document.insert_page = utils.insert_page
+Document.new_page = utils.new_page
+Document.scrub = utils.scrub
+Document.search_page_for = utils.search_page_for
+Document.set_metadata = utils.set_metadata
+Document.set_toc_item = utils.set_toc_item
+Document.set_ocmd = utils.set_ocmd
+
+Document.setMetadata = Document.set_metadata
+Document.searchPageFor = Document.search_page_for
+Document.getPagePixmap = Document.get_page_pixmap
+Document.getPageText = Document.get_page_text
+Document.getToC = Document.get_toc
+Document.getSigFlags = Document.get_sigflags
+Document.insertPage = Document.insert_page
+Document.newPage = Document.new_page
+Document._newPage = Document.new_page_
 
 Pixmap.clearWith = Pixmap.clear_with
 Pixmap.gammaWith = Pixmap.gamma_with
