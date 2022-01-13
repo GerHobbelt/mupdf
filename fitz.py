@@ -1339,7 +1339,6 @@ class DisplayList:
         if not colorspace:
             colorspace = mupdf.Colorspace(mupdf.Colorspace.Fixed_RGB)
         val = JM_pixmap_from_display_list(self.this, matrix, colorspace, alpha, clip, None);
-        jlib.log( '{=alpha type(val) val.is.alpha()}')
         val.thisown = True
         return val
 
@@ -7211,7 +7210,7 @@ class Pixmap:
             self.this = pm
 
         elif args_match(args, str, mupdf.Pixmap) and args[0] == 'raw':
-            jlib.log( 'raw Pixmap construction. {pm=}')
+            # Special raw construction where we set .this directly.
             _, pm = args
             self.this = pm
 
@@ -7219,7 +7218,6 @@ class Pixmap:
             # copy pixmap & add / drop the alpha channel
             spix = args[0]
             alpha = args[1] if len(args) == 2 else 1
-            jlib.log( '{=spix alpha}')
             src_pix = spix.this if isinstance(spix, Pixmap) else spix
             if not _INRANGE(alpha, 0, 1):
                 THROWMSG("bad alpha value")
@@ -7470,7 +7468,6 @@ class Pixmap:
                 "ps": 6,
                 }
         idx = valid_formats.get(output.lower(), 1)
-        jlib.log( '{=output idx self.alpha}')
         if self.alpha and idx in (2, 6):
             raise ValueError("'%s' cannot have alpha" % output)
         if self.colorspace and self.colorspace.n > 3 and idx in (1, 2, 4):
@@ -7701,7 +7698,6 @@ class Pixmap:
                 pixsamples_set(i+n, data_fix)
             i += n+1
             k += 1
-        jlib.log('{=alphavalues, premultiply, opaque ret self.alpha}')
 
     def set_dpi(self, xres, yres):
         """Set resolution in both dimensions."""
@@ -13181,7 +13177,6 @@ def JM_pixmap_from_display_list(
     rendering of only the 'clip' part of the displaylist rectangle
     '''
     assert isinstance(list_, mupdf.DisplayList)
-    jlib.log( '{=alpha}')
     if seps is None:
         seps = mupdf.Separations()
     assert seps is None or isinstance(seps, mupdf.Separations), f'type={type(seps)}: {seps}'
@@ -13208,7 +13203,7 @@ def JM_pixmap_from_display_list(
         mupdf.mfz_run_display_list(list_, dev, mupdf.Matrix(), mupdf.Rect(mupdf.Rect.Fixed_INFINITE), mupdf.Cookie())
 
     mupdf.mfz_close_device(dev)
-    jlib.log( '{=pix.alpha()}')
+    # Use special raw Pixmap constructor so we don't set alpha to true.
     return Pixmap( 'raw', pix)
 
 
