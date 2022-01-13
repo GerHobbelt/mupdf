@@ -233,6 +233,7 @@ static struct {
 	{ jpegXL_encode_oneshot_main, "jxl_encode_oneshot", "jxl_encode_oneshot tool" },
 	{ jpegXL_info_main, "jxl_info", "jxl_info: jpegXL tool" },
 	{ jpegXL_decode_EXIF_metadata_main, "jpegXL_decode_EXIF_metadata", "jpegXL_decode_EXIF_metadata: jpegXL tool" },
+	{ jpegXL_decode_progressive_main, "jpegXL_decode_progressive", "jpegXL_decode_progressive: jpegXL tool" },
 	{ jpegXL_box_list_main, "jxl_box_list", "jxl_box_list tool" },
 	{ jpegXL_butteraugli_main, "jxl_butteraugli", "jxl_butteraugli tool" },
 	{ jpegXL_compress_main, "jxl_compress", "jxl_compress tool" },
