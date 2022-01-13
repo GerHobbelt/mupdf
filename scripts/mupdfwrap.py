@@ -2202,6 +2202,16 @@ classextras = ClassExtras(
                         ''',
                         comment=f'/* Wrapper for fz_search_page(). */',
                         ),
+                    ExtraMethod(
+                        f'{rename.class_("fz_document")}',
+                        'doc()',
+                        f'''
+                        {{
+                            return {rename.class_("fz_document")}( {rename.function_call('fz_keep_document')}( m_internal->doc));
+                        }}
+                        ''',
+                        f'/* Returns wrapper for .doc member. */',
+                        ),
                 ],
                 constructor_raw = True,
                 ),
