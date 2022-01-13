@@ -779,7 +779,7 @@ def get_page_text(
     """
     return doc[pno].get_text(option, clip=clip, flags=flags, sort=sort)
 
-
+import jlib
 def get_pixmap(page: fitz.Page, **kw) -> fitz.Pixmap:
     """Create pixmap of page.
 
@@ -790,6 +790,7 @@ def get_pixmap(page: fitz.Page, **kw) -> fitz.Pixmap:
         alpha: (bool) whether to include alpha channel
         annots: (bool) whether to also render annotations
     """
+    jlib.log( '{=kw}')
     fitz.CheckParent(page)
     matrix = kw.get("matrix", fitz.Identity)
     colorspace = kw.get("colorspace", fitz.csRGB)
@@ -808,7 +809,10 @@ def get_pixmap(page: fitz.Page, **kw) -> fitz.Pixmap:
         raise ValueError("unsupported colorspace")
 
     dl = page.get_displaylist(annots=annots)
+    jlib.log( '{=matrix colorspace alpha clip}')
     pix = dl.get_pixmap(matrix=matrix, colorspace=colorspace, alpha=alpha, clip=clip)
+    jlib.log( '{=type(pix) pix}')
+    jlib.log( '{=pix.this.alpha()}')
     dl = None
     return pix
 
