@@ -225,6 +225,7 @@ struct fz_stext_options
 {
 	unsigned int flags;
 	unsigned int flags_conf_mask;  // mask: each bit is set for each explicitly set option flag. See also fz_parse_stext_options()
+	float scale;
 
 	// customizable stuff for FZ_STEXT_REFERENCE_IMAGES:
 	const char* reference_image_path_template;
