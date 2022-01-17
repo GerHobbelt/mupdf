@@ -201,23 +201,23 @@ fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 	 * Accordingly, we have to adjust the ctm in several steps.
 	 */
 	/* Move to moving the centre of the image. */
-	ctm.e += (ctm.a+ctm.c)/2;
-	ctm.f += (ctm.b+ctm.d)/2;
+	ctm.e += (ctm.a+ctm.c) / 2;
+	ctm.f += (ctm.b+ctm.d) / 2;
 	/* Move from transforming the unit square to w/h */
 	ctm.a /= block->u.i.image->w;
 	ctm.b /= block->u.i.image->w;
 	ctm.c /= block->u.i.image->h;
 	ctm.d /= block->u.i.image->h;
 	/* Move from points to pixels */
-	ctm.a *= 96.0f/72;
-	ctm.b *= 96.0f/72;
-	ctm.c *= 96.0f/72;
-	ctm.d *= 96.0f/72;
-	ctm.e *= 96.0f/72;
-	ctm.f *= 96.0f/72;
+	ctm.a *= 96.0f / 72;
+	ctm.b *= 96.0f / 72;
+	ctm.c *= 96.0f / 72;
+	ctm.d *= 96.0f / 72;
+	ctm.e *= 96.0f / 72;
+	ctm.f *= 96.0f / 72;
 	/* Move to moving the top left of the untransformed image box, cos HTML is bonkers. */
-	ctm.e -= block->u.i.image->w/2;
-	ctm.f -= block->u.i.image->h/2;
+	ctm.e -= block->u.i.image->w / 2;
+	ctm.f -= block->u.i.image->h / 2;
 
 	fz_write_printf(ctx, out, "<img style=\"position:absolute;transform:matrix(%g,%g,%g,%g,%g,%g)\" src=\"",
 		ctm.a, ctm.b, ctm.c, ctm.d, ctm.e, ctm.f);

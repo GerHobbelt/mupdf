@@ -215,7 +215,7 @@ pdf_graft_mapped_object(fz_context *ctx, pdf_graft_map *map, pdf_obj *obj)
 	}
 	else
 	{
-		assert("This never happens" == NULL);
+		assert(!"This never happens");
 		return NULL;
 	}
 }

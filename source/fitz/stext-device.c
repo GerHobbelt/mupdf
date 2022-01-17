@@ -1042,7 +1042,7 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 	{
 		opts->flags_conf_mask |= FZ_STEXT_RESOLUTION;
 		float v = fz_atof(val);
-		// do accept a horribly wide resultion range, but do not accept totally ludicrous values:
+		// do accept a horribly wide resolution range, but do not accept totally ludicrous values:
 		if (v >= 2 && v <= 10e3)
 		{
 			opts->scale = v / 96.0f; /* HTML base resolution is 96ppi */

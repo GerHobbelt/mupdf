@@ -150,6 +150,7 @@ enum
 	FZ_STEXT_MEDIABOX_CLIP = 256,
 	FZ_STEXT_NO_TEXT_AS_PATH = 512,
 	FZ_STEXT_EXTERNAL_STYLES = 1024,
+	FZ_STEXT_RESOLUTION = 2048,
 };
 
 /**
@@ -225,7 +226,7 @@ struct fz_stext_options
 {
 	unsigned int flags;
 	unsigned int flags_conf_mask;  // mask: each bit is set for each explicitly set option flag. See also fz_parse_stext_options()
-	float scale;
+	float scale;           // scaling factor = (FZ_STEXT_RESOLUTION / 96)
 
 	// customizable stuff for FZ_STEXT_REFERENCE_IMAGES:
 	const char* reference_image_path_template;
