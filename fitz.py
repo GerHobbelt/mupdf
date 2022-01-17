@@ -209,8 +209,8 @@ class Annot:
 
             extg.dict_put(mupdf.PDF_ENUM_NAME_H, alp0)
 
-        except Exception:
-            PySys_WriteStderr("could not set opacity or blend mode\n");
+        except Exception as e:
+            print( f'could not set opacity or blend mode: {e}', file=sys.stderr)
             return False
 
         return True
@@ -619,7 +619,10 @@ class Annot:
     # 11 tests...?
     @property
     def parent(self):
-        return Page(self.this.annot_page())
+        p = self.this.annot_page()
+        assert isinstance( p, mupdf.PdfPage)
+        d = Document( p.doc()) if p.m_internal else None
+        return Page(p, d)
 
     @property
     def popup_rect(self):
@@ -719,16 +722,61 @@ class Annot:
         annot = self.this
         return JM_annot_set_border(border, annot.annot_page().doc(), annot.annot_obj())
 
-    def set_colors(self, colors=None, fill=None, stroke=None):
+    if 0:
+        def set_colors(self, colors=None, fill=None, stroke=None):
+            """Set 'stroke' and 'fill' colors.
+
+            Use either a dict or the direct arguments.
+            """
+            CheckParent(self)
+            if type(colors) is not dict:
+                colors = {"fill": fill, "stroke": stroke}
+            assert 0, 'no Annot_set_colors'
+            return _fitz.Annot_set_colors(self, colors, fill, stroke)
+
+    def set_colors(self, colors=None, stroke=None, fill=None):
         """Set 'stroke' and 'fill' colors.
 
         Use either a dict or the direct arguments.
         """
         CheckParent(self)
+        doc = self.parent.parent
         if type(colors) is not dict:
             colors = {"fill": fill, "stroke": stroke}
-        assert 0, 'no Annot_set_colors'
-        return _fitz.Annot_set_colors(self, colors, fill, stroke)
+        fill = colors.get("fill")
+        stroke = colors.get("stroke")
+        fill_annots = (PDF_ANNOT_CIRCLE, PDF_ANNOT_SQUARE, PDF_ANNOT_LINE, PDF_ANNOT_POLY_LINE, PDF_ANNOT_POLYGON,
+                       PDF_ANNOT_REDACT,)
+        if stroke in ([], ()):
+            doc.xref_set_key(self.xref, "C", "[]")
+        elif stroke is not None:
+            if hasattr(stroke, "__float__"):
+                stroke = [float(stroke)]
+            CheckColor(stroke)
+            if len(stroke) == 1:
+                s = "[%g]" % stroke[0]
+            elif len(stroke) == 3:
+                s = "[%g %g %g]" % tuple(stroke)
+            else:
+                s = "[%g %g %g %g]" % tuple(stroke)
+            doc.xref_set_key(self.xref, "C", s)
+
+        if fill and self.type[0] not in fill_annots:
+            print("Warning: fill color ignored for annot type '%s'." % self.type[1])
+            return
+        if fill in ([], ()):
+            doc.xref_set_key(self.xref, "IC", "[]")
+        elif fill is not None:
+            if hasattr(fill, "__float__"):
+                fill = [float(fill)]
+            CheckColor(fill)
+            if len(fill) == 1:
+                s = "[%g]" % fill[0]
+            elif len(fill) == 3:
+                s = "[%g %g %g]" % tuple(fill)
+            else:
+                s = "[%g %g %g %g]" % tuple(fill)
+            doc.xref_set_key(self.xref, "IC", s)
 
     def set_flags(self, flags):
         """Set annotation flags."""
@@ -1439,6 +1487,20 @@ class Document:
             rect, width, height, fontsize: layout reflowable document
             on open (e.g. EPUB). Ignored if n/a.
         """
+        if 1:
+            self.is_closed    = False
+            self.is_encrypted = False
+            self.isEncrypted = False
+            self.metadata    = None
+            self.FontInfos   = []
+            self.Graftmaps   = {}
+            self.ShownPages  = {}
+            self.InsertedImages  = {}
+            self._page_refs  = weakref.WeakValueDictionary()
+        if isinstance(filename, mupdf.PdfDocument):
+            pdf_document = filename
+            self.this = pdf_document
+            return
         if not filename or type(filename) is str:
             pass
         else:
@@ -1465,15 +1527,16 @@ class Document:
         else:
             self.name = ""
 
-        self.is_closed    = False
-        self.is_encrypted = False
-        self.isEncrypted = False
-        self.metadata    = None
-        self.FontInfos   = []
-        self.Graftmaps   = {}
-        self.ShownPages  = {}
-        self.InsertedImages  = {}
-        self._page_refs  = weakref.WeakValueDictionary()
+        if 0:
+            self.is_closed    = False
+            self.is_encrypted = False
+            self.isEncrypted = False
+            self.metadata    = None
+            self.FontInfos   = []
+            self.Graftmaps   = {}
+            self.ShownPages  = {}
+            self.InsertedImages  = {}
+            self._page_refs  = weakref.WeakValueDictionary()
 
         # this = _fitz.new_Document(filename, stream, filetype, rect, width, height, fontsize)
         w = width
@@ -2577,10 +2640,11 @@ class Document:
         self.xref_set_key(xref, "Params/ModDate", get_pdf_str(date))
         return xref
 
-    def extract_font(xref=0, info_only=0):
+    def extract_font(self, xref=0, info_only=0):
         '''
         Get a font by xref.
         '''
+        jlib.log( '{=xref info_only}')
         pdf = self._this_as_pdf_document()
         ASSERT_PDF(pdf)
         len_ = 0;
@@ -3417,10 +3481,10 @@ class Document:
         else:
             chapter, pagenum = page_id
             page = self.this.load_chapter_page(chapter, pagenum)
-        val = Page(page)
+        val = Page(page, self)
 
         val.thisown = True
-        val.parent = weakref.proxy(self)
+        #val.parent = weakref.proxy(self)
         self._page_refs[id(val)] = val
         val._annot_refs = weakref.WeakValueDictionary()
         val.number = page_id
@@ -5317,13 +5381,21 @@ class Outline:
 
 class Page:
 
-    def __init__(self, page):
+    def __init__(self, page, document):
         assert isinstance(page, (mupdf.Page, mupdf.PdfPage)), f'page is: {page}'
         self.this = page
         self.thisown = True
         self.lastPoint = None
         self.draw_cont = ''
         self._annot_refs = dict()
+        self._parent = document
+        if page.m_internal:
+            if isinstance( page, mupdf.PdfPage):
+                self.number = page.m_internal.super.number
+            else:
+                self.number = page.m_internal.number
+        else:
+            self.number = None
 
     def __str__(self):
         #CheckParent(self)
@@ -5653,7 +5725,7 @@ class Page:
             self.parent._forget_page(self)
         except:
             pass
-        self.parent = None
+        self._parent = None
         self.thisown = False
         self.number = None
 
@@ -6979,6 +7051,12 @@ class Page:
             val = JM_py_from_rect(JM_mediabox(page.obj()))
         val = Rect(val)
         return val
+
+    @property
+    def parent( self):
+        if self._parent:
+            return self._parent
+        return Document( self.this.document())
 
     @property
     def mediabox_size(self):
