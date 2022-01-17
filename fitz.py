@@ -42,7 +42,6 @@ class Annot:
 
     def __init__(self, annot):
         self.this = annot
-        jlib.log( '{=self.parent}')
 
     def __repr__(self):
         parent = getattr(self, 'parent', '<>')
@@ -618,10 +617,6 @@ class Annot:
 
     # PyMuPDF doesn't seem to have this .parent member, but removing it breaks
     # 11 tests...?
-    @property
-    def page(self):
-        return Page(self.this.annot_page())
-
     @property
     def parent(self):
         return Page(self.this.annot_page())
@@ -1444,23 +1439,6 @@ class Document:
             rect, width, height, fontsize: layout reflowable document
             on open (e.g. EPUB). Ignored if n/a.
         """
-        self.is_closed    = False
-        self.is_encrypted = False
-        self.isEncrypted = False
-        self.metadata    = None
-        self.FontInfos   = []
-        self.Graftmaps   = {}
-        self.ShownPages  = {}
-        self.InsertedImages  = {}
-        self._page_refs  = weakref.WeakValueDictionary()
-
-        if isinstance( filename, (mupdf.Document, mupdf.PdfDocument)):
-            self.this = filename
-            self.stream = None
-            self.name = None
-            #self.fontinfo = []
-            return
-
         if not filename or type(filename) is str:
             pass
         else:
@@ -1486,6 +1464,16 @@ class Document:
             self.name = filename
         else:
             self.name = ""
+
+        self.is_closed    = False
+        self.is_encrypted = False
+        self.isEncrypted = False
+        self.metadata    = None
+        self.FontInfos   = []
+        self.Graftmaps   = {}
+        self.ShownPages  = {}
+        self.InsertedImages  = {}
+        self._page_refs  = weakref.WeakValueDictionary()
 
         # this = _fitz.new_Document(filename, stream, filetype, rect, width, height, fontsize)
         w = width
@@ -3413,7 +3401,6 @@ class Document:
         'page_id' is either a 0-based page number or a tuple (chapter, pno),
         with chapter number and page number within that chapter.
         """
-        jlib.log( '')
         if self.is_closed or self.isEncrypted:
             raise ValueError("document closed or encrypted")
         if page_id is None:
@@ -3436,8 +3423,7 @@ class Document:
         val.parent = weakref.proxy(self)
         self._page_refs[id(val)] = val
         val._annot_refs = weakref.WeakValueDictionary()
-        #assert val.number == page_id
-        jlib.log( 'returning {=val val.parent}')
+        val.number = page_id
         return val
 
     def location_from_page_number(self, pno):
@@ -6997,19 +6983,6 @@ class Page:
     @property
     def mediabox_size(self):
         return Point(self.MediaBox.width, self.MediaBox.height)
-
-    #@property
-    #def number(self):
-    #    if isinstance( self.this, mupdf.Page):
-    #        return self.this.m_internal.number
-    #    elif isinstance( self.this, mupdf.PdfPage):
-    #        return self.this.m_internal.super.number
-    #    else:
-    #        assert 0
-
-    #@property
-    #def parent(self):
-    #    return Document( self.this.doc())
 
     def read_contents(self):
         """All /Contents streams concatenated to one bytes object."""
@@ -13998,7 +13971,6 @@ def CheckFont(page: "struct Page *", fontname: str) -> tuple:
 def CheckFontInfo(doc: "struct Document *", xref: int) -> list:
     """Return a font info if present in the document.
     """
-    jlib.log( '{=doc.FontInfos}')
     for f in doc.FontInfos:
         if xref == f[0]:
             return f
@@ -17412,3 +17384,80 @@ def restore_aliases():
     _alias( utils.Shape, 'insert_textbox')
 
 restore_aliases()
+
+if 0:
+    # Aliases
+    #
+    #Annot.getText        = Annot.get_text
+    Annot.getTextbox    = Annot.get_textbox
+
+    Document.getCharWidths = Document.get_char_widths
+    Document.getPagePixmap = Document.get_page_pixmap
+    Document.getPageText = Document.get_page_text
+    Document.getSigFlags = Document.get_sigflags
+    Document.getToC = Document.get_toc
+    Document.insertPage = Document.insert_page
+    Document.needsPass = Document.needs_pass
+    Document.newPage = Document.new_page
+    Document.searchPageFor = Document.search_page_for
+    Document.setMetadata = Document.set_metadata
+    Document.setToC = Document.set_toc
+
+    IRect.getArea           = IRect.get_area
+    IRect.getRectArea       = IRect.get_area
+
+    Page.deleteWidget = Page.delete_widget
+    Page.drawBezier = Page.draw_bezier
+    Page.drawCircle = Page.draw_circle
+    Page.drawCurve = Page.draw_curve
+    Page.drawLine = Page.draw_line
+    Page.drawOval = Page.draw_oval
+    Page.drawPolyline = Page.draw_polyline
+    Page.drawQuad = Page.draw_quad
+    Page.drawRect = Page.draw_rect
+    Page.drawSector = Page.draw_sector
+    Page.drawSquiggle = Page.draw_squiggle
+    Page.drawZigzag = Page.draw_zigzag
+    Page.getImageBbox = Page.get_image_bbox
+    Page.getLinks = Page.get_links
+    Page.getPixmap = Page.get_pixmap
+    Page.getSVGimage = Page.get_svg_image
+    Page.getText = Page.get_text
+    Page.getTextBlocks = utils.get_text_blocks
+    Page.getTextPage = Page.get_textpage
+    Page.getTextWords = Page.get_text_words
+    Page.getTextbox = utils.get_textbox
+    Page.insertImage = Page.insert_image
+    Page.insertLink = Page.insert_link
+    Page.insertText = Page.insert_text
+    Page.insertTextbox = Page.insert_textbox
+    Page.loadLinks = Page.load_links
+    Page.newShape = Page.new_shape
+    Page.searchFor = Page.search_for
+    Page.setCropBox = Page.set_cropbox
+    Page.setMediaBox = Page.set_mediabox
+    Page.setRotation = Page.set_rotation
+    Page.showPDFpage = Page.show_pdf_page
+    Page.updateLink = Page.update_link
+    Page.writeText = Page.write_text
+
+
+    Pixmap.clearWith = Pixmap.clear_with
+    Pixmap.gammaWith = Pixmap.gamma_with
+    Pixmap.getImageData = Pixmap.tobytes
+    Pixmap.getPNGData = Pixmap.tobytes
+    Pixmap.getPNGdata = Pixmap.tobytes
+    Pixmap.invertIRect = Pixmap.invert_irect
+    Pixmap.tintWith = Pixmap.tint_with
+
+    Quad.isConvex = Quad.is_convex
+    Quad.isEmpty = Quad.is_empty
+    Quad.isRectangular = Quad.is_rectangular
+
+    Rect.getArea = Rect.get_area
+    Rect.getRectArea = utils.get_area
+    Rect.includeRect = Rect.include_rect
+    Rect.isEmpty = Rect.is_empty
+
+    TextWriter.fillTextbox = TextWriter.fill_textbox
+    TextWriter.writeText = TextWriter.write_text
