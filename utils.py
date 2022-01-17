@@ -1709,9 +1709,7 @@ def insert_text(
     fill_opacity: float = 1,
     oc: int = 0,
 ):
-    import jlib
-    jlib.log( '{=page point fontsize lineheight fontname fontfile}')
-    jlib.log( '{=page.fontinfo}')
+
     img = page.new_shape()
     rc = img.insert_text(
         point,
@@ -3334,10 +3332,8 @@ class Shape:
         xref = self.page.insert_font(
             fontname=fname, fontfile=fontfile, encoding=encoding, set_simple=set_simple
         )
-        import jlib
-        jlib.log( '{=self.doc xref}')
         fontinfo = fitz.CheckFontInfo(self.doc, xref)
-        jlib.log( '{=fontinfo}')
+
         fontdict = fontinfo[1]
         ordering = fontdict["ordering"]
         simple = fontdict["simple"]
