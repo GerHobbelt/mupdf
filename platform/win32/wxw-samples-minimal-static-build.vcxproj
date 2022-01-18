@@ -132,6 +132,10 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Message>Report file size of final executable.</Message>
+      <Command>dir $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -159,6 +163,10 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Message>Report file size of final executable.</Message>
+      <Command>dir $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -183,6 +191,10 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Message>Report file size of final executable.</Message>
+      <Command>dir $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -210,6 +222,10 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Message>Report file size of final executable.</Message>
+      <Command>dir $(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

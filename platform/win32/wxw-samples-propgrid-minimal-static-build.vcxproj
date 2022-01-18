@@ -113,7 +113,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -122,7 +122,7 @@
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <MapFileName>$(TargetPath).map</MapFileName>
@@ -131,6 +131,10 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>dir $(TargetPath)</Command>
+      <Message>Report file size of final executable.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -139,7 +143,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -148,7 +152,7 @@
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <MapFileName>$(TargetPath).map</MapFileName>
@@ -157,13 +161,17 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>dir $(TargetPath)</Command>
+      <Message>Report file size of final executable.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>wx/wxprec.h</PrecompiledHeaderFile>
@@ -173,13 +181,17 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>$(TargetPath).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>dir $(TargetPath)</Command>
+      <Message>Report file size of final executable.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -189,7 +201,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>wx/wxprec.h</PrecompiledHeaderFile>
@@ -199,13 +211,17 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>$(TargetPath).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>dir $(TargetPath)</Command>
+      <Message>Report file size of final executable.</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
