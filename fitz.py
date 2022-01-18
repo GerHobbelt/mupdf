@@ -1471,7 +1471,7 @@ class Document:
     def __getitem__(self, i: int =0):
         if i not in self:
             raise IndexError(f"page {i} not in document")
-        return self.loadPage(i)
+        return self.load_page(i)
 
     def __init__(self, filename=None, stream=None, filetype=None, rect=None, width=0, height=0, fontsize=11):
         """Creates a document. Use 'open' as a synonym.
@@ -3706,7 +3706,7 @@ class Document:
                 step = 1
 
         for pno in range(start, stop, step):
-            yield (self.loadPage(pno))
+            yield (self.load_page(pno))
 
     def pdf_catalog(self):
         """Get xref of PDF catalog."""
@@ -3779,7 +3779,7 @@ class Document:
             old_annots[k] = v
         page._erase()  # remove the page
         page = None
-        page = self.loadPage(pno)  # reload the page
+        page = self.load_page(pno)  # reload the page
 
         # copy annot refs over to the new dictionary
         page_proxy = weakref.proxy(page)
@@ -4615,8 +4615,11 @@ class Link:
     def __del__(self):
         self._erase()
 
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
+    #def __init__(self, *args, **kwargs):
+    #    raise AttributeError("No constructor defined")
+    def __init__( self, this):
+        assert isinstance( this, mupdf.Link)
+        self.this = this
 
     def __repr__(self):
         CheckParent(self)
@@ -4666,7 +4669,7 @@ class Link:
         if self.isExternal or self.uri.startswith("#"):
             uri = None
         else:
-            uri = doc.resolveLink(self.uri)
+            uri = doc.resolve_link(self.uri)
 
         return linkDest(self, uri)
 
@@ -4694,9 +4697,15 @@ class Link:
     @property
     def next(self):
         """Next link."""
+        jlib.log( 'next() {=self.this self.this.m_internal}')
+        if not self.this.m_internal:
+            return None
         CheckParent(self)
-
-        val = _fitz.Link_next(self)
+        #val = _fitz.Link_next(self)
+        val = self.this.next()
+        if not val.m_internal:
+            return None
+        val = Link( val)
         if val:
             val.thisown = True
             val.parent = self.parent  # copy owning page from prev link
@@ -4764,7 +4773,11 @@ class Link:
     def uri(self):
         """Uri string."""
         CheckParent(self)
-        return _fitz.Link_uri(self)
+        #return _fitz.Link_uri(self)
+        this_link = self.this
+        jlib.log( '{=this_link this_link.m_internal}')
+        #assert this_link.m_internal
+        return this_link.uri() if this_link.m_internal else ''
 
 
 class Matrix:
@@ -6412,7 +6425,11 @@ class Page:
         page = self._pdf_page()
         if not page.m_internal:
             return
-        return JM_get_annot_xref_list(page);
+        o = page.obj()
+        jlib.log( '{=page o}')
+        ret = JM_get_annot_xref_list(page.obj())
+        jlib.log( 'Returning: {ret=}')
+        return ret
 
     def annots(self, types=None):
         """ Generator over the annotations of a page.
@@ -7025,15 +7042,29 @@ class Page:
     def load_links(self):
         """Get first Link."""
         CheckParent(self)
-        val = _fitz.Page_loadLinks(self)
+        #val = _fitz.Page_load_links(self)
+
+        val = mupdf.mfz_load_links( self.this)
+        val = Link( val)
+
         if val:
             val.thisown = True
             val.parent = weakref.proxy(self) # owning page object
             self._annot_refs[id(val)] = val
+            val.xref = 0
+            val.id = ""
             if self.parent.isPDF:
-                link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
-                val.xref = link_id[0]
-                val.id = link_id[2]
+                xrefs = self.annot_xrefs()
+                jlib.log( 'xrefs: ({len(xrefs)})')
+                for i in xrefs:
+                    jlib.log( '    {i}')
+                xrefs = [x for x in xrefs if x[1] == mupdf.PDF_ANNOT_LINK]
+                jlib.log( '{xrefs=}')
+                if xrefs:
+                    link_id = xrefs[0]
+                    #link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
+                    val.xref = link_id[0]
+                    val.id = link_id[2]
             else:
                 val.xref = 0
                 val.id = ""
@@ -12109,10 +12140,27 @@ def JM_get_annot_id_list(page):
                 )
     return names
 
-def JM_get_annot_xref_list(page_or_page_obj):
+def JM_get_annot_xref_list( page_obj):
     '''
     return the xrefs and /NM ids of a page's annots, links and fields
     '''
+    names = []
+    annots = mupdf.mpdf_dict_get( page_obj, PDF_NAME('Annots'))
+    if not annots.m_internal:
+        return names
+    n = mupdf.mpdf_array_len( annots)
+    for i in range( n):
+        annot_obj = mupdf.mpdf_array_get( annots, i)
+        xref = mupdf.mpdf_to_num( annot_obj)
+        subtype = mupdf.mpdf_dict_get( annot_obj, PDF_NAME('Subtype'))
+        type_ = mupdf.PDF_ANNOT_UNKNOWN
+        if subtype.m_internal:
+            name = mupdf.mpdf_to_name( subtype)
+            type_ = mupdf.mpdf_annot_type_from_string( name)
+        id_ = mupdf.mpdf_dict_gets( annot_obj, "NM")
+        names.append( (xref, type_, mupdf.mpdf_to_text_string( id_)))
+    return names
+
     if isinstance(page_or_page_obj, mupdf.PdfPage):
         obj = page_or_page_obj.obj()
     elif isinstance(page_or_page_obj, mupdf.PdfObj):
@@ -12134,6 +12182,7 @@ def JM_get_annot_xref_list(page_or_page_obj):
             type_ = mupdf.ppdf_annot_type_from_string(name)
         id_ = annot_obj.dict_gets("NM")
         names.append( (xref, type_, id_.to_text_string()))
+    jlib.log( 'Returning {names=}')
     return names
 
 

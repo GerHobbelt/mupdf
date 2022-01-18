@@ -893,7 +893,7 @@ def get_links(page: fitz.Page) -> list:
     """
 
     fitz.CheckParent(page)
-    ln = page.first_link
+    ln = page.first_link()
     links = []
     while ln:
         nl = getLinkDict(ln)
