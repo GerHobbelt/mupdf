@@ -4615,8 +4615,6 @@ class Link:
     def __del__(self):
         self._erase()
 
-    #def __init__(self, *args, **kwargs):
-    #    raise AttributeError("No constructor defined")
     def __init__( self, this):
         assert isinstance( this, mupdf.Link)
         self.this = this
@@ -4697,7 +4695,6 @@ class Link:
     @property
     def next(self):
         """Next link."""
-        jlib.log( 'next() {=self.this self.this.m_internal}')
         if not self.this.m_internal:
             return None
         CheckParent(self)
@@ -4773,10 +4770,7 @@ class Link:
     def uri(self):
         """Uri string."""
         CheckParent(self)
-        #return _fitz.Link_uri(self)
         this_link = self.this
-        jlib.log( '{=this_link this_link.m_internal}')
-        #assert this_link.m_internal
         return this_link.uri() if this_link.m_internal else ''
 
 
@@ -6425,10 +6419,7 @@ class Page:
         page = self._pdf_page()
         if not page.m_internal:
             return
-        o = page.obj()
-        jlib.log( '{=page o}')
         ret = JM_get_annot_xref_list(page.obj())
-        jlib.log( 'Returning: {ret=}')
         return ret
 
     def annots(self, types=None):
@@ -7055,14 +7046,9 @@ class Page:
             val.id = ""
             if self.parent.isPDF:
                 xrefs = self.annot_xrefs()
-                jlib.log( 'xrefs: ({len(xrefs)})')
-                for i in xrefs:
-                    jlib.log( '    {i}')
                 xrefs = [x for x in xrefs if x[1] == mupdf.PDF_ANNOT_LINK]
-                jlib.log( '{xrefs=}')
                 if xrefs:
                     link_id = xrefs[0]
-                    #link_id = [x for x in self.annot_xrefs() if x[1] == mupdf.PDF_ANNOT_LINK][0]
                     val.xref = link_id[0]
                     val.id = link_id[2]
             else:
@@ -12159,30 +12145,6 @@ def JM_get_annot_xref_list( page_obj):
             type_ = mupdf.mpdf_annot_type_from_string( name)
         id_ = mupdf.mpdf_dict_gets( annot_obj, "NM")
         names.append( (xref, type_, mupdf.mpdf_to_text_string( id_)))
-    return names
-
-    if isinstance(page_or_page_obj, mupdf.PdfPage):
-        obj = page_or_page_obj.obj()
-    elif isinstance(page_or_page_obj, mupdf.PdfObj):
-        obj = page_or_page_obj
-    else:
-        assert 0
-    names = []
-    annots = obj.dict_get(mupdf.PDF_ENUM_NAME_Annots)
-    if not annots.m_internal:
-        return names
-    n = annots.array_len()
-    for i in range(n):
-        annot_obj = annots.array_get(i)
-        xref = annot_obj.to_num()
-        subtype = annot_obj.dict_get(mupdf.PDF_ENUM_NAME_Subtype)
-        type_ = mupdf.PDF_ANNOT_UNKNOWN
-        if subtype.m_internal:
-            name = subtype.to_name()
-            type_ = mupdf.ppdf_annot_type_from_string(name)
-        id_ = annot_obj.dict_gets("NM")
-        names.append( (xref, type_, id_.to_text_string()))
-    jlib.log( 'Returning {names=}')
     return names
 
 
