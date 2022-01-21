@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>uint128_t</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF9711B4}</ProjectGuid>
-    <RootNamespace>uint128_t</RootNamespace>
+    <ProjectName>uint128_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-75186781257E}</ProjectGuid>
+    <RootNamespace>libuint128</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,11 +124,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,12 +150,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,11 +179,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -196,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,12 +205,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UINT128_T;UINT128_T_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUINT128;UINT128_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -225,39 +225,14 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/accessors.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/add.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/and.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/assignment.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/constructor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/div.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/equals.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/fix.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/functions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/gt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/gte.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/invert.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/leftshift.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/logical.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/lt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/lte.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/mod.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/mult.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/notequals.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/or.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/rightshift.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/sub.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/type_traits.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/typecast.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/unary.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/uint128_t/tests/testcases/xor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/uint128_t/uint128_t.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/uint128_t/endianness.h" />
     <ClInclude Include="../../thirdparty/owemdjee/uint128_t/uint128_t.h" />
-    <Text Include="../../thirdparty/owemdjee/uint128_t/README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
     <ProjectReference Include="libuint128.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb1257e}</Project>
     </ProjectReference>
