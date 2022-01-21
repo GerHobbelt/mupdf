@@ -19,9 +19,6 @@ else
 	SRCDIR=$2
 fi
 
-#echo "$1 --> $SRCDIR"
-exit 0
-
 node ./patch-vcxproj.js $1 tweak
 node ./add-sources-to-vcxproj.js $1 $SRCDIR
 node ./update-vcxproj.js $1

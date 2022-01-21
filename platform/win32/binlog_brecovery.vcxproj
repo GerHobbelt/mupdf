@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>binlog_brecovery</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF5B415A}</ProjectGuid>
+    <RootNamespace>binlog_brecovery</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BRECOVERY;BINLOG_BRECOVERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/binaryio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/bread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/brecovery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/getopt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/printers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/ConsumeLoop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/DetailedHelloWorld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/HelloWorld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/LogRotation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/MultiOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/TextOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/TscClock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/EntryStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/EventStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/PrettyPrinter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/TextOutputStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/Time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/ToStringVisitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/OstreamBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/cmake/headers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/cmake/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Categories.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/IntegrationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingAdaptedStructs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingBoostTypes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingCStrings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingContainers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingDuration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingEnums.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingErrorCode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingFilesystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingFundamentals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingOptionals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingPointers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingStrings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingTimePoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingTuples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingVariants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/NamedWriters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/SeverityControl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Shell.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/perf/LargeLogfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/perf/PerftestQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/perf/PerftestSessionWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/UnitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestAdvancedLogMacros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestArrayView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestBasicLogMacros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestConstCharPtrIsString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestCreateSourceAndEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestCreateSourceAndEventIf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestEntryStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestEventFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestEventStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestPrettyPrinter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestPrinters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestSession.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestSessionWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestTextOutputStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestTime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestToStringVisitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/detail/TestOstreamBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/detail/TestSegmentedMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/test_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/cx_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/documentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/inttohex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/roundtrip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/singular.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/tag_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/visit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/tools/generate_foreach_macro.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/bin/getopt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/bin/printers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/ArrayView.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Entries.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/EntryStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/EventFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/EventStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/PrettyPrinter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Session.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/SessionWriter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Severity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/TextOutputStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Time.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/ToStringVisitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_enum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_stdduration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_stderrorcode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_stdfilesystem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_stdoptional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_stdtimepoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_stdvariant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/adapt_struct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/advanced_log_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/basic_log_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/binlog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/char_ptr_is_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/const_char_ptr_is_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/create_source_and_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/create_source_and_event_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/default_session.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/OstreamBuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/Queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/QueueReader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/QueueWriter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/SegmentedMap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/VectorOutputStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/StructDeserializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/StructSerializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/Visitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/cx_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/deserialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/Deserializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/Serializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/Singular.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/Tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/Visit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/foreach.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/integer_to_hex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/preprocessor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/sequence_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/tag_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/detail/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_derived_struct_deserializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_derived_struct_serializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_derived_struct_tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_enum_tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_struct_deserializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_struct_serializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_struct_tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_template_deserializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_template_serializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/make_template_tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/serialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/singular.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/visit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/doctest/detail/doctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/doctest/doctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/test_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/custom_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_enums.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_streams.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_structs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_type_lists.hpp" />
+    <Text Include="../../thirdparty/owemdjee/binlog/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/binlog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/binlog/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/binlog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/binlog/cmake/binlogConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/binlog/dco/dco_template.txt" />
+    <Text Include="../../thirdparty/owemdjee/binlog/doc/Internals.md" />
+    <Text Include="../../thirdparty/owemdjee/binlog/doc/Mserialize.md" />
+    <Text Include="../../thirdparty/owemdjee/binlog/doc/UserGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/binlog/doc/catchfile.py" />
+    <Text Include="../../thirdparty/owemdjee/binlog/doc/codelink.py" />
+    <Text Include="../../thirdparty/owemdjee/binlog/doc/gendoc.py" />
+    <Text Include="../../thirdparty/owemdjee/binlog/test/cmake/install/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/binlog/test/cmake/subdir/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/binlog/test/doctest/detail/doctest-LICENSE.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

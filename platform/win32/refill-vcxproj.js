@@ -98,6 +98,8 @@ const projectMap = {
 	"libatlas": "math-atlas",
 	"libblosc": "c-blosc2",
 	"libbtree": "cpp-btree",
+	"binlog_bread": "binlog",
+	"binlog_brecovery": "binlog",
 	"libchm_io": "CHM-lib",
 	"libcli11-examples": " cli11/examples",
 	"libclipp_examples": "clipp/examples",
@@ -114,6 +116,7 @@ const projectMap = {
 	"libprocess": "subprocess",
 	"libpromise": "promise-cpp",
 	"libQuickJSpp": "QuickJS-C++-Wrapper",
+	"libQuickJSpp2": "QuickJS-C++-Wrapper2",
 	"librobust-bibtex": "bibtex-robust-decoder",
 	"libsvgcharter": "svg-charter",
 	"libtbb": "oneTBB",
@@ -128,6 +131,7 @@ const projectMap = {
     "libjansson": "json-jansson",
     "libjpeg-xl-benchmark": "jpeg-xl",
     "libjpeg-xl-test": "jpeg-xl",
+    "libcxxtest_catch2_2_gtest": "/cxxtest_catch_2_gtest",
     "otl-ml": "OptimizationTemplateLibrary",
 };
 
