@@ -8,12 +8,12 @@
 
 
 //------------------------------------------------------------------------
-// richtextsymboldlg.cpp
+// richtextstyledlg.cpp
  
-#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextsymboldlg.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextstyledlg.cpp"
 
 
 //------------------------------------------------------------------------
-// richtextxml.cpp
+// richtextstyles.cpp
  
-#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextxml.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/richtext/richtextstyles.cpp"

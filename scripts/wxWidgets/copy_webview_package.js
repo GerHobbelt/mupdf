@@ -1,5 +1,5 @@
 //
-// find and copy the WebVieew2 packagee files to a known FIXED location.
+// find and copy the WebView2 package files to a known FIXED location.
 // 
 // usage: run as
 //

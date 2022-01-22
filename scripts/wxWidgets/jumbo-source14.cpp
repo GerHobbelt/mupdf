@@ -8,376 +8,158 @@
 
 
 //------------------------------------------------------------------------
-// scrthumb.cpp
+// geometry.cpp
 
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/scrthumb.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/geometry.cpp"
 
 
 //------------------------------------------------------------------------
-// secretstore.cpp
+// gifdecod.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/secretstore.cpp"
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/secretstore.cpp"
-#endif
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/secretstore.cpp"
-#endif
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/secretstore.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/gifdecod.cpp"
 
 
 //------------------------------------------------------------------------
-// selectdispatcher.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/selectdispatcher.cpp"
-
-
-//------------------------------------------------------------------------
-// selstore.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/selstore.cpp"
-
-
-//------------------------------------------------------------------------
-// settcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/settcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// settings.cpp
-
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/settings.cpp"
-#endif
+// glcanvas.cpp
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/settings.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/glcanvas.cpp"
 #endif
 
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/settings.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/settings.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/glcanvas.cpp"
 #endif
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/settings.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/glcanvas.cpp"
 #endif
 
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/settings.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/glcanvas.cpp"
 #endif
 
 #if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/settings.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/glcanvas.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// settingsuniv.cpp
+// glcanvas_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/glcanvas_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// glcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/glcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// glegl.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/glegl.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// glx11.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/glx11.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// graphcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/graphcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// graphicc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/graphicc.cpp"
+
+
+//------------------------------------------------------------------------
+// graphics.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/graphics.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/graphics.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/graphics.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// grid.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/grid.cpp"
+
+
+//------------------------------------------------------------------------
+// gridcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/gridcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// gridctrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/gridctrl.cpp"
+
+
+//------------------------------------------------------------------------
+// grideditors.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/grideditors.cpp"
+
+
+//------------------------------------------------------------------------
+// gridsel.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/gridsel.cpp"
+
+
+//------------------------------------------------------------------------
+// gtk.cpp
 
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/settingsuniv.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/themes/gtk.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// sizer.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/sizer.cpp"
-
-
-//------------------------------------------------------------------------
-// slider.cpp
+// gvfs.cpp
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/slider.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/slider.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/slider.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/slider.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/slider.cpp"
-#endif
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/slider.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/gnome/gvfs.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// slider_osx.cpp
+// hash.cpp
 
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/slider_osx.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/hash.cpp"
 
 
 //------------------------------------------------------------------------
-// slidercmn.cpp
+// hashmap.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/slidercmn.cpp"
-
-
-//------------------------------------------------------------------------
-// snglinst.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/snglinst.cpp"
-#endif
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/snglinst.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/hashmap.cpp"
 
 
 //------------------------------------------------------------------------
-// socket.cpp
+// headercolcmn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/socket.cpp"
-
-
-//------------------------------------------------------------------------
-// socketiohandler.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/socketiohandler.cpp"
-
-
-//------------------------------------------------------------------------
-// sockgtk.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/sockgtk.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/sockgtk.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sockmot.cpp
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/sockmot.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sockmsw.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/sockmsw.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sockosx.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/sockosx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sockqt.cpp
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/sockqt.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sockunix.cpp
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/sockunix.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sound.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/sound.cpp"
-#endif
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/sound.cpp"
-#endif
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/sound.cpp"
-#endif
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/sound.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sound_osx.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/sound_osx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sound_sdl.cpp
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/sound_sdl.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// spinbtncmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/spinbtncmn.cpp"
-
-
-//------------------------------------------------------------------------
-// spinbutt.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/spinbutt.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/spinbutt.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/spinbutt.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/spinbutt.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/spinbutt.cpp"
-#endif
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/spinbutt.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// spinbutt_osx.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/spinbutt_osx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// spinctlg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/spinctlg.cpp"
-
-
-//------------------------------------------------------------------------
-// spinctrl.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/spinctrl.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/spinctrl.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/spinctrl.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/spinctrl.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// spinctrlcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/spinctrlcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// splash.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/splash.cpp"
-
-
-//------------------------------------------------------------------------
-// splitter.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/splitter.cpp"
-
-
-//------------------------------------------------------------------------
-// srchcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/srchcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// srchctlg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/srchctlg.cpp"
-
-
-//------------------------------------------------------------------------
-// srchctrl.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/srchctrl.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// srchctrl_osx.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/srchctrl_osx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// sstream.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/sstream.cpp"
-
-
-//------------------------------------------------------------------------
-// stackwalk.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/stackwalk.cpp"
-#endif
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/stackwalk.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/headercolcmn.cpp"

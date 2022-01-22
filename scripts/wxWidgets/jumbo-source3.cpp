@@ -8,358 +8,234 @@
 
 
 //------------------------------------------------------------------------
-// choiccmn.cpp
+// barartuwp.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/choiccmn.cpp"
-
-
-//------------------------------------------------------------------------
-// choicdgg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/choicdgg.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/aui/barartuwp.cpp"
 
 
 //------------------------------------------------------------------------
-// choice_osx.cpp
+// base64.cpp
 
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/choice_osx.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/base64.cpp"
+
+
+//------------------------------------------------------------------------
+// basemsw.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/basemsw.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// clipbrd.cpp
+// bitmap.cpp
+
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/bitmap.cpp"
+#endif
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/clipbrd.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/bitmap.cpp"
 #endif
 
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/clipbrd.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/clipbrd.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/bitmap.cpp"
 #endif
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/clipbrd.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/bitmap.cpp"
 #endif
 
 #if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/clipbrd.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/bitmap.cpp"
 #endif
 
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/clipbrd.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/bitmap.cpp"
 #endif
 
 #if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/clipbrd.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/bitmap.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// clipcmn.cpp
+// bmpbase.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/clipcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// clntdata.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/clntdata.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/bmpbase.cpp"
 
 
 //------------------------------------------------------------------------
-// clrpicker.cpp
+// bmpbndl.cpp
 
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/clrpicker.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/clrpicker.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// clrpickercmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/clrpickercmn.cpp"
-
-
-//------------------------------------------------------------------------
-// clrpickerg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/clrpickerg.cpp"
-
-
-//------------------------------------------------------------------------
-// cmdline.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/cmdline.cpp"
-
-
-//------------------------------------------------------------------------
-// cmdproc.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/cmdproc.cpp"
-
-
-//------------------------------------------------------------------------
-// cmndata.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/cmndata.cpp"
-
-
-//------------------------------------------------------------------------
-// collheaderctrlg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/collheaderctrlg.cpp"
-
-
-//------------------------------------------------------------------------
-// collpane.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/collpane.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// collpaneg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/collpaneg.cpp"
-
-
-//------------------------------------------------------------------------
-// colordlg.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/colordlg.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/bmpbndl.cpp"
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/colordlg.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/colordlg.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/bmpbndl.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// colour.cpp
+// bmpbtncmn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/colour.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/bmpbtncmn.cpp"
+
+
+//------------------------------------------------------------------------
+// bmpbuttn.cpp
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/colour.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/bmpbuttn.cpp"
 #endif
 
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/colour.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/bmpbuttn.cpp"
 #endif
 
 #if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/colour.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/bmpbuttn.cpp"
 #endif
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/colour.cpp"
-#endif
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/colour.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/bmpbuttn.cpp"
 #endif
 
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/colour.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/bmpbuttn.cpp"
+#endif
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/bmpbuttn.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// bmpbuttn_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/bmpbuttn_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// bmpcbox.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/bmpcbox.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/bmpcbox.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// bmpcboxcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/bmpcboxcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// bmpcboxg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/bmpcboxg.cpp"
+
+
+//------------------------------------------------------------------------
+// bmpmotif.cpp
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/bmpmotif.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// bmpsvg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/bmpsvg.cpp"
+
+
+//------------------------------------------------------------------------
+// bookctrl.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/bookctrl.cpp"
+
+
+//------------------------------------------------------------------------
+// brush.cpp
+
+#if defined(__WXDFB__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/brush.cpp"
+#endif
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/brush.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/brush.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/brush.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/brush.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/brush.cpp"
 #endif
 
 #if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/colour.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/brush.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// colourcmn.cpp
+// btncmn.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/colourcmn.cpp"
-
-
-//------------------------------------------------------------------------
-// colourdata.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/colourdata.cpp"
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/btncmn.cpp"
 
 
 //------------------------------------------------------------------------
-// colrdlgg.cpp
+// busyinfo.cpp
 
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/colrdlgg.cpp"
-
-
-//------------------------------------------------------------------------
-// combo.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/combo.cpp"
-#endif
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/busyinfo.cpp"
 
 
 //------------------------------------------------------------------------
-// combobox.cpp
+// button.cpp
 
 #if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/combobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/button.cpp"
 #endif
 
 #if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/combobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/button.cpp"
 #endif
 
 #if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/combobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/button.cpp"
 #endif
 
 #if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/combobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/button.cpp"
 #endif
 
 #if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/combobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/button.cpp"
 #endif
 
 #if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/combobox.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/button.cpp"
 #endif
 
 
 //------------------------------------------------------------------------
-// combobox_native.cpp
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/combobox_native.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// combobox_osx.cpp
+// button_osx.cpp
 
 #if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/combobox_osx.cpp"
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/button_osx.cpp"
 #endif
-
-
-//------------------------------------------------------------------------
-// combocmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/combocmn.cpp"
-
-
-//------------------------------------------------------------------------
-// combog.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/combog.cpp"
-
-
-//------------------------------------------------------------------------
-// comimpl.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/ole/comimpl.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// commandlinkbutton.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/commandlinkbutton.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// commandlinkbuttong.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/commandlinkbuttong.cpp"
-
-
-//------------------------------------------------------------------------
-// config.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/config.cpp"
-
-
-//------------------------------------------------------------------------
-// containr.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/containr.cpp"
-
-
-//------------------------------------------------------------------------
-// control.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/control.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/control.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/control.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/control.cpp"
-#endif
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/control.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/control.cpp"
-#endif
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/control.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// convauto.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/convauto.cpp"
-
-
-//------------------------------------------------------------------------
-// converter.cpp
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/converter.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// crashrpt.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/crashrpt.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
-// creddlgg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/creddlgg.cpp"
-
-
-//------------------------------------------------------------------------
-// cshelp.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/cshelp.cpp"

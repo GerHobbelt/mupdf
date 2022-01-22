@@ -134,6 +134,8 @@ done
 
 `;
   let dstCode2 = dstCode1;
+  let dstCode3 = dstCode1;
+  let dstCode4 = dstCode1;
 
   a.filter((rec) => rec.source.includes('richtext/'))
   .forEach((rec, idx) => {
@@ -149,7 +151,14 @@ done
 
     let x2 = /(?:richtextbuffer|richtextctrl|richtextprint|richtextstyledlg|richtextstyles)\.cpp/.test(rec.source);
     let x1 = /(?:richtexttabspage)\.cpp/.test(rec.source);
-    if ((x2 || idx >= 17) && !x1) {
+    if (x2 && !x1) {
+      if (idx < 14) {
+        dstCode3 += chunk;
+      } else {
+        dstCode4 += chunk;
+      }
+    }
+    else if ((idx >= 17) && !x1) {
       dstCode2 += chunk;
     }
     else {
@@ -159,6 +168,8 @@ done
 
   fs.writeFileSync('../../scripts/wxWidgets/jumbo-richtext-source1.cpp', dstCode1, 'utf8');
   fs.writeFileSync('../../scripts/wxWidgets/jumbo-richtext-source2.cpp', dstCode2, 'utf8');
+  fs.writeFileSync('../../scripts/wxWidgets/jumbo-richtext-source3.cpp', dstCode3, 'utf8');
+  fs.writeFileSync('../../scripts/wxWidgets/jumbo-richtext-source4.cpp', dstCode4, 'utf8');
 
   console.log("richtext bunch jumbo-ed.");
 
@@ -198,7 +209,7 @@ done
   let duplimap = new Map();
 
   let r = a.filter((rec) => {
-    let x1 = /^(?:aui|html|propgrid|xrc|common|generic|msw|motif|gtk|gtk1|x11|qt|dfb|osx|univ|unix)\//.test(rec.source);
+    let x1 = /^(?:aui|html|propgrid|xrc|common|generic|msw|motif|gtk|gtk1|x11|qt|dfb|osx|univ|unix|uwp)\//.test(rec.source);
     let x2 = /(?:dummy|regiong|strconv|graphicsd2d|notifmsgrt|mediactrl_qt|xh_spin|xh_slidr|choice|(?:webview[a-z0-9_]*))\.cpp/.test(rec.source);
     return x1 && !x2;
   });
@@ -234,7 +245,7 @@ done
   r.forEach((name) => {
     let recs = duplimap.get(name);
 
-    if (srcCount >= 37) {
+    if (srcCount >= 20) {
       let dstname = `../../scripts/wxWidgets/jumbo-source${dstNum}.cpp`;
       fs.writeFileSync(dstname, dstCode, 'utf8');
 
@@ -325,6 +336,14 @@ done
       case 'qt':
         dstCode += `
 #if defined(__WXQT__)
+#  include "${rec.file}"
+#endif
+`;
+        break;
+
+      case 'uwp':
+        dstCode += `
+#if defined(__UWP__)
 #  include "${rec.file}"
 #endif
 `;
