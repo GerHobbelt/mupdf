@@ -916,12 +916,16 @@ int fz_is_page_range(fz_context *ctx, const char *s)
 
 const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, int n)
 {
+	int rev = 0;
+
 	if (!s || !s[0])
 		return NULL;
 
 	if (s[0] == ',')
 		s += 1;
 
+	if (s[0] == '~')
+		rev = 1, s++;
 	if (s[0] == 'N')
 	{
 		*a = n;
@@ -929,9 +933,14 @@ const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, 
 	}
 	else
 		*a = strtol(s, (char**)&s, 10);
+	if (rev)
+		*a = n+1-*a;
 
 	if (s[0] == '-')
 	{
+		rev = 0;
+		if (s[1] == '~')
+			rev = 1, s++;
 		if (s[1] == 'N')
 		{
 			*b = n;
@@ -939,6 +948,8 @@ const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, 
 		}
 		else
 			*b = strtol(s+1, (char**)&s, 10);
+		if (rev)
+			*b = n+1-*b;
 	}
 	else
 		*b = *a;
