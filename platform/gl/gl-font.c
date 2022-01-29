@@ -34,15 +34,19 @@
  * to pixels accurately.
  */
 
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include "gl-app.h"
 
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
 
 #define PADDING 1		/* set to 0 to save some space but disallow arbitrary transforms */
 

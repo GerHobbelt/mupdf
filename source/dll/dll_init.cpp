@@ -15,25 +15,101 @@
 
 #pragma init_seg(compiler)
 
-static const unsigned char* fz_crtdbg_purpose_stack[100] = { 0 };
-static const unsigned char* fz_crtdbg_purpose_lu_table[100000] = { 0 };
+static struct memPurposeRange
+{
+	long start_reqnum;
+	long end_reqnum;
+
+	const char* source;
+	unsigned int line : 15;
+	unsigned int line2 : 15;
+	unsigned int is_root_slot : 1;
+} fz_crtdbg_purpose_lu_table[100000] = { {0} };
+static int fz_crtdbg_purpose_stack[100] = { 0 };
+static int fz_crtdbg_purpose_lu_table_top = 1;		// use slot [0] as a dummy filler for the entire application duration
+static int fz_crtdbg_purpose_lu_stack_index = 0;
 
 static _CRT_ALLOC_HOOK old_alloc_hook = NULL;
+
+#define countof(e)   (sizeof(e) / sizeof((e)[0]))
+
+extern "C" int fzPushHeapDbgPurpose(const char* s, int l)
+{
+	if (fz_crtdbg_purpose_lu_table_top >= countof(fz_crtdbg_purpose_lu_table))
+		return 0;
+
+	int idx = fz_crtdbg_purpose_lu_table_top++;
+	struct memPurposeRange* info = &fz_crtdbg_purpose_lu_table[idx];
+	info->source = s;
+	info->line = l;
+	info->line2 = l;
+	info->is_root_slot = (fz_crtdbg_purpose_lu_stack_index == 0);
+
+	// As soon we've pushed a 'root slot' above, do we know for certain that any
+	// requestNumbers that are earlier than the start of this new root slot MUST
+	// all be located in previous (root and sub) slots, as the requestNumber in
+	// the MSVCRT debug heap is a continuous ever-incrementing number.
+	// Thus marking our root slots in the trace dump will help us reduce
+	// scan/search times when it comes time to report the heap leaks, etc.
+
+	int sp = ++fz_crtdbg_purpose_lu_stack_index;
+	fz_crtdbg_purpose_stack[sp] = idx;
+
+	return 1;
+}
+extern "C" int fzPopHeapDbgPurpose(int related_dummy, int l)
+{
+	int sp = fz_crtdbg_purpose_lu_stack_index;
+	int idx = fz_crtdbg_purpose_stack[sp];
+	struct memPurposeRange* info = &fz_crtdbg_purpose_lu_table[idx];
+	info->line2 = l;
+
+	fz_crtdbg_purpose_lu_stack_index--;
+
+	return related_dummy + 1;
+}
+void updateHeapDbgPurpose(long requestNumber)
+{
+	int sp = fz_crtdbg_purpose_lu_stack_index;
+	int idx = fz_crtdbg_purpose_stack[sp];
+	struct memPurposeRange* info = &fz_crtdbg_purpose_lu_table[idx];
+	if (info->start_reqnum > requestNumber)
+		return; // bad code/use!
+	if (!info->start_reqnum)
+		info->start_reqnum = requestNumber;
+	// keep updating the end marker until we POP the slot:
+	info->end_reqnum = requestNumber;
+}
 
 // _CRT_ALLOC_HOOK
 static int __CRTDECL fz_alloc_hook_f(int allocType, void* userData, size_t size, int blockType, long requestNumber, const unsigned char* filename, int lineNumber)
 {
+	int sp = fz_crtdbg_purpose_lu_stack_index;
+	if (sp <= 0 && !filename)
+	{
+		sp++;
+	}
+
 	switch (allocType)
 	{
 	case _HOOK_ALLOC:
+		updateHeapDbgPurpose(requestNumber);
 		break;
+
 	case _HOOK_REALLOC:
+		updateHeapDbgPurpose(requestNumber);
 		break;
+
 	case _HOOK_FREE:
 		break;
 	}
 	int rv = (old_alloc_hook != NULL ? old_alloc_hook(allocType, userData, size, blockType, requestNumber, filename, lineNumber) : TRUE);
 	return rv;
+}
+
+static int streq(const char* a, const char* b)
+{
+	return !strcmp(a, b);
 }
 
 static int __CRTDECL fz_debug_report_f(int reportType, char* message, int* returnValue)
@@ -46,6 +122,50 @@ static int __CRTDECL fz_debug_report_f(int reportType, char* message, int* retur
 		break;
 
 	case _CRT_WARN:
+	{
+		//_RPTN(_CRT_WARN, "{%ld} ", header->_request_number);
+		size_t len = strlen(message);
+		if (message[0] == '{' && streq(message + len - 2, "} "))
+		{
+			long reqnum = 0;
+			if (1 == sscanf(message + 1, "%ld", &reqnum))
+			{
+				// find the purpose stack slot(s) which are relevant and pick the most precise match, i.e. the LAST match:
+				struct memPurposeRange* match = NULL;
+
+				// skip the dummy slot at [0]:
+				for (int i = 1; i < fz_crtdbg_purpose_lu_table_top; i++)
+				{
+					struct memPurposeRange* info = &fz_crtdbg_purpose_lu_table[i];
+					if (info->start_reqnum <= reqnum && info->end_reqnum >= reqnum)
+					{
+						match = info;
+					}
+					else if (info->start_reqnum > reqnum && info->is_root_slot)
+					{
+						// quit looking when we know from the stack info that there won't be any more viable slots
+						// as all subsequent slots will certainly be further down the lane, i.e. will all carry
+						// HIGHER requestNumber ranges.
+						break;
+					}
+				}
+
+				if (match)
+				{
+					// abuse the MSVCRT debug output string buffer:
+					if (match->line != match->line2)
+					{
+						sprintf(message + len + 1, "{%ld} (%s:%u-%u) ", reqnum, match->source, match->line, match->line2);
+					}
+					else
+					{
+						sprintf(message + len + 1, "{%ld} (%s:%u) ", reqnum, match->source, match->line);
+					}
+					memmove(message, message + len + 1, strlen(message + len + 1) + 1);
+				}
+			}
+		}
+	}
 		break;
 
 	case _CRT_ERROR:

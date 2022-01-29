@@ -158,6 +158,13 @@
 	END OF CONFIGURATION SECTION
 */
 
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include "timeval.h"
 
 #include "mupdf/mutool.h"
@@ -170,9 +177,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
 
 /*
 	After this point, we convert the #defines set (or not set)

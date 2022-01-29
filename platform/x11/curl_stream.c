@@ -20,6 +20,13 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include "mupdf/fitz.h"
 #include "curl_stream.h"
 
@@ -31,9 +38,6 @@
 
 #ifdef _WIN32
 #include <windows.h>
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
 #else
 #include <pthread.h>
 #endif

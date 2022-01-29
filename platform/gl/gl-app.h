@@ -24,10 +24,14 @@
 #define MUPDF_GL_APP_H
 
 #if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
 #if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
 #include <crtdbg.h>
 #endif
+#include <windows.h>
+
 void win_install(void);
 #endif
 

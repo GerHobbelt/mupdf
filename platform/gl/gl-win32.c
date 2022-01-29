@@ -23,13 +23,19 @@
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #define _CRT_SECURE_NO_WARNINGS
+
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include <windows.h>
 #include <commdlg.h>
 #include <shellapi.h>
 #include <stdio.h>
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
+
 
 #define OPEN_KEY(parent, name, ptr) \
 	RegCreateKeyExA(parent, name, 0, 0, 0, KEY_WRITE, 0, ptr, 0)

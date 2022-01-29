@@ -23,13 +23,17 @@
 #ifndef PDFAPP_H
 #define PDFAPP_H
 
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
 #include <time.h>
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
 
 /*
  * Utility object for handling a pdf application / view

@@ -1,3 +1,11 @@
+
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include "pdfapp.h"
 #include "curl_stream.h"
 #include "mupdf/helpers/pkcs7-openssl.h"
@@ -10,9 +18,6 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <direct.h> /* for getcwd */
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
 #else
 #include <unistd.h> /* for getcwd */
 #endif

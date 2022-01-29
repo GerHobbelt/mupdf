@@ -32,13 +32,18 @@ depending on your environment.
 */
 
 //Include the MuPDF header file, and pthread's header file.
-#include <mupdf/fitz.h>
-#include <mupdf/helpers/mu-threads.h>
-#include <stdio.h>
-#include <stdlib.h>
 #if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
 #include <crtdbg.h>
 #endif
+
+#include <mupdf/fitz.h>
+#include <mupdf/helpers/mu-threads.h>
+
+#include <stdio.h>
+#include <stdlib.h>
 
 // A convenience function for dying abruptly on pthread errors.
 

@@ -2,10 +2,15 @@
 
 #ifndef OCR_DISABLED
 
-#include <climits>
 #if defined(_MSC_VER)
-#  include <crtdbg.h>
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
 #endif
+#include <crtdbg.h>
+#endif
+
+#include <climits>
+
 #include "tesseract/baseapi.h"
 #include "tesseract/capi.h"          // for ETEXT_DESC
 

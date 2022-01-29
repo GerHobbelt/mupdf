@@ -24,6 +24,13 @@
  * mudraw -- command line tool for drawing and converting documents
  */
 
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include "timeval.h"
 
 #include "mupdf/mutool.h"
@@ -51,9 +58,6 @@
 #include <windows.h>
 #include <fcntl.h>
 #include <direct.h> /* for getcwd */
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
 #else
 #include <unistd.h> /* for getcwd */
 #endif

@@ -27,12 +27,17 @@
 #define _UNICODE
 #endif
 #define WIN32_LEAN_AND_MEAN
+
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+#include <crtdbg.h>
+#endif
+
 #include <windows.h>
 #include <commdlg.h>
 #include <shellapi.h>
-#if defined(_MSC_VER)
-#include <crtdbg.h>
-#endif
 
 /* Include pdfapp.h *AFTER* the UNICODE defines */
 #include "pdfapp.h"
