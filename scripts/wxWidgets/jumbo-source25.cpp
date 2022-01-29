@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// scrolbarcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/scrolbarcmn.cpp"
-
-
-//------------------------------------------------------------------------
 // scrolwin.cpp
 
 #if defined(__WXGTK20__)
@@ -214,4 +208,12 @@
 
 #if defined(__WXMAC__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/osx/core/sockosx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// sockqt.cpp
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/sockqt.cpp"
 #endif

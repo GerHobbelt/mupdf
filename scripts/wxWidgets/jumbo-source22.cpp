@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// platinfo.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/platinfo.cpp"
-
-
-//------------------------------------------------------------------------
 // popupcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/popupcmn.cpp"
@@ -173,3 +167,9 @@
 // progdlgg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/progdlgg.cpp"
+
+
+//------------------------------------------------------------------------
+// propdlg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/propdlg.cpp"

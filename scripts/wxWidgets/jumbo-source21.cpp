@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// notifmsgcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/notifmsgcmn.cpp"
-
-
-//------------------------------------------------------------------------
 // notifmsgg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/notifmsgg.cpp"
@@ -177,3 +171,9 @@
 // pickerbase.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/pickerbase.cpp"
+
+
+//------------------------------------------------------------------------
+// platinfo.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/platinfo.cpp"

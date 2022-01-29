@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// mask.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/mask.cpp"
-
-
-//------------------------------------------------------------------------
 // maskededit.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/maskededit.cpp"
@@ -220,4 +214,36 @@
 
 #if !defined(__WINDOWS__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/unix/mimetype.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// minifram.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/minifram.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/minifram.cpp"
+#endif
+
+#if defined(__WXMOTIF__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/minifram.cpp"
+#endif
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/minifram.cpp"
+#endif
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/minifram.cpp"
+#endif
+
+#if defined(__WXQT__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/minifram.cpp"
+#endif
+
+#if defined(__WXX11__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/minifram.cpp"
 #endif

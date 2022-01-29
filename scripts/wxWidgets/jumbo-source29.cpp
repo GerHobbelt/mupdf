@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// taskbarbutton.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/taskbarbutton.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // taskbarcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/taskbarcmn.cpp"
@@ -205,3 +197,11 @@
 // threadinfo.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/threadinfo.cpp"
+
+
+//------------------------------------------------------------------------
+// threadno.cpp
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/threadno.cpp"
+#endif

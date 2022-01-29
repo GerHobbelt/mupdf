@@ -12,6 +12,12 @@
 
 #include "../../thirdparty/owemdjee/crow/include/crow/monolithic_examples.h"
 
+#ifdef _WIN32
+#include "windows.h"
+#include "shellscalingapi.h"
+#endif
+
+
 
 typedef int tool_f();
 
@@ -233,6 +239,28 @@ static void usage(void)
 
 int main(int argc, const char** argv)
 {
+#ifdef _WIN32
+	PROCESS_DPI_AWARENESS dpi = (PROCESS_DPI_AWARENESS)(-1);
+	HRESULT rv = GetProcessDpiAwareness(NULL, &dpi);
+	HMONITOR mon = NULL;
+	const POINT zero = { 0, 0 };
+	mon = MonitorFromPoint(zero, MONITOR_DEFAULTTOPRIMARY);
+	UINT x = 1000000;
+	UINT y = 1000000;
+	rv = GetDpiForMonitor(mon, MDT_EFFECTIVE_DPI, &x, &y);
+	UINT d = GetDpiForWindow(NULL);
+	DEVICE_SCALE_FACTOR scale = (DEVICE_SCALE_FACTOR)(-1);
+	rv = GetScaleFactorForMonitor(mon, &scale);
+
+	HWND w = GetConsoleWindow();
+	d = GetDpiForWindow(w);
+	mon = MonitorFromWindow(w, MONITOR_DEFAULTTONEAREST);
+	rv = GetScaleFactorForMonitor(mon, &scale);
+
+	rv = ::SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
+	rv = ::SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
+#endif
+
 	char* input;
 	int status = 0;
 	int interactive = 0;

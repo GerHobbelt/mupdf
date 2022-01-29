@@ -210,7 +210,7 @@ done
 
   let r = a.filter((rec) => {
     let x1 = /^(?:aui|html|propgrid|xrc|common|generic|msw|motif|gtk|gtk1|x11|qt|dfb|osx|univ|unix|uwp)\//.test(rec.source);
-    let x2 = /(?:dummy|regiong|strconv|graphicsd2d|notifmsgrt|mediactrl_qt|xh_spin|xh_slidr|choice|(?:webview[a-z0-9_]*))\.cpp/.test(rec.source);
+    let x2 = /(?:dummy|dll_init|init|regiong|strconv|graphicsd2d|notifmsgrt|mediactrl_qt|xh_spin|xh_slidr|choice|(?:webview[a-z0-9_]*))\.cpp/.test(rec.source);
     return x1 && !x2;
   });
 

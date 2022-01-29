@@ -8,30 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// utils.cpp
-
-#if defined(__WXDFB__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/utils.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/utils.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/utils.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/utils.cpp"
-#endif
-
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/utils.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // utils_osx.cpp
 
 #if defined(__WXMAC__)
@@ -173,3 +149,9 @@
 // variant.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/variant.cpp"
+
+
+//------------------------------------------------------------------------
+// vlbox.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/vlbox.cpp"

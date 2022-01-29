@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// stdstream.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/stdstream.cpp"
-
-
-//------------------------------------------------------------------------
 // stockitem.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/stockitem.cpp"
@@ -142,4 +136,12 @@
 
 #if defined(__WXQT__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/qt/taskbar.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// taskbarbutton.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/taskbarbutton.cpp"
 #endif

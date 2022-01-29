@@ -8,26 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// renderer.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/renderer.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/renderer.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/renderer.cpp"
-#endif
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/renderer.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // renderg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/renderg.cpp"
@@ -173,3 +153,9 @@
 #if defined(__WXMAC__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/osx/scrolbar_osx.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// scrolbarcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/scrolbarcmn.cpp"

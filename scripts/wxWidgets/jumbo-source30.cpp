@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// threadno.cpp
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/threadno.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // threadpsx.cpp
 
 #if !defined(__WINDOWS__)
@@ -226,4 +218,12 @@
 
 #if defined(__WXMAC__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/osx/toplevel_osx.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// topluniv.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/topluniv.cpp"
 #endif

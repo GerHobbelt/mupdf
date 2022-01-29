@@ -146,6 +146,9 @@
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
     </PreBuildEvent>
+    <Link>
+      <AdditionalDependencies>Shcore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -181,6 +184,9 @@
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
     </PreBuildEvent>
+    <Link>
+      <AdditionalDependencies>Shcore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -217,6 +223,9 @@
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
     </PreBuildEvent>
+    <Link>
+      <AdditionalDependencies>Shcore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -252,6 +261,9 @@
     <PreBuildEvent>
       <Message>Find and copy the installed WebView2 package to a known location: scripts/wxWidgets/webview2</Message>
     </PreBuildEvent>
+    <Link>
+      <AdditionalDependencies>Shcore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -320,6 +332,7 @@
     <ClCompile Include="..\..\scripts\wxWidgets\jumbo-source7.cpp" />
     <ClCompile Include="..\..\scripts\wxWidgets\jumbo-source8.cpp" />
     <ClCompile Include="..\..\scripts\wxWidgets\jumbo-source9.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\wxWidgets\src\msw\dll_init.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/arrimpl.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/listimpl.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/thrimpl.cpp" />
@@ -466,7 +479,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/imagtga.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/imagtiff.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/imagxpm.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/common/init.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/intl.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/ipcbase.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/common/languageinfo.cpp" />

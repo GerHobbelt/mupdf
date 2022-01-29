@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// xtixml.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xtixml.cpp"
-
-
-//------------------------------------------------------------------------
 // zipstrm.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/zipstrm.cpp"

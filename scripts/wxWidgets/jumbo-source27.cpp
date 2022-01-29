@@ -8,34 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// statbmp.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/statbmp.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/statbmp.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/statbmp.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/statbmp.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/statbmp.cpp"
-#endif
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/statbmp.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // statbmp_osx.cpp
 
 #if defined(__WXMAC__)
@@ -239,3 +211,9 @@
 #if !defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/univ/stdrend.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// stdstream.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stdstream.cpp"

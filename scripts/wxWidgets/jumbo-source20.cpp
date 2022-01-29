@@ -8,38 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// minifram.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/minifram.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/minifram.cpp"
-#endif
-
-#if defined(__WXMOTIF__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/motif/minifram.cpp"
-#endif
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/minifram.cpp"
-#endif
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/minifram.cpp"
-#endif
-
-#if defined(__WXQT__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/qt/minifram.cpp"
-#endif
-
-#if defined(__WXX11__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/x11/minifram.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // mnemonics.cpp
 
 #if defined(__WXGTK20__)
@@ -233,3 +201,9 @@
 #if defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/msw/notifmsg.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// notifmsgcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/notifmsgcmn.cpp"

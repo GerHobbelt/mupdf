@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// listctrlcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/listctrlcmn.cpp"
-
-
-//------------------------------------------------------------------------
 // log.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/log.cpp"
@@ -135,3 +129,9 @@
 // markuptext.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/markuptext.cpp"
+
+
+//------------------------------------------------------------------------
+// mask.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/mask.cpp"

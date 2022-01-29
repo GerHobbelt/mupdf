@@ -44,12 +44,6 @@
 
 
 //------------------------------------------------------------------------
-// init.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/init.cpp"
-
-
-//------------------------------------------------------------------------
 // inpcons.cpp
 
 #if !defined(__WXMSW__)
@@ -173,3 +167,9 @@
 #if defined(__WXQT__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/qt/listctrl.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// listctrlcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/listctrlcmn.cpp"

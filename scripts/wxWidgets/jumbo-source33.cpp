@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// vlbox.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/vlbox.cpp"
-
-
-//------------------------------------------------------------------------
 // volume.cpp
 
 #if defined(__WXMSW__)
@@ -175,3 +169,9 @@
 #if defined(__WXDFB__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/wrapdfb.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// wrapsizer.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/wrapsizer.cpp"
