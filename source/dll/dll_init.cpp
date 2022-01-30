@@ -1,17 +1,10 @@
 
 #include "pch.h"
 
+#include "mupdf/helpers/debugheap.h"
+
+
 #if defined(_MSC_VER)
-
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC_NEW
-#endif
-
-#include <stdlib.h>
-#include <crtdbg.h>
-
-
 
 #pragma init_seg(compiler)
 
@@ -57,6 +50,7 @@ extern "C" int fzPushHeapDbgPurpose(const char* s, int l)
 
 	return 1;
 }
+
 extern "C" int fzPopHeapDbgPurpose(int related_dummy, int l)
 {
 	int sp = fz_crtdbg_purpose_lu_stack_index;
@@ -68,6 +62,7 @@ extern "C" int fzPopHeapDbgPurpose(int related_dummy, int l)
 
 	return related_dummy + 1;
 }
+
 void updateHeapDbgPurpose(long requestNumber)
 {
 	int sp = fz_crtdbg_purpose_lu_stack_index;
@@ -153,15 +148,17 @@ static int __CRTDECL fz_debug_report_f(int reportType, char* message, int* retur
 				if (match)
 				{
 					// abuse the MSVCRT debug output string buffer:
+					strcat(message, "--> ...");
+					_CrtDbgReport(reportType, NULL, 0, NULL, "%s\n", message);
+
 					if (match->line != match->line2)
 					{
-						sprintf(message + len + 1, "{%ld} (%s:%u-%u) ", reqnum, match->source, match->line, match->line2);
+						sprintf(message, "%s(%u): {%ld} (source lines: %u-%u) ", match->source, match->line, reqnum, match->line, match->line2);
 					}
 					else
 					{
-						sprintf(message + len + 1, "{%ld} (%s:%u) ", reqnum, match->source, match->line);
+						sprintf(message, "%s(%u): {%ld} ", match->source, match->line, reqnum);
 					}
-					memmove(message, message + len + 1, strlen(message + len + 1) + 1);
 				}
 			}
 		}
