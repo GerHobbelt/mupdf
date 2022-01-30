@@ -190,6 +190,8 @@ EXPORTS
 ; helpers exports
 
 	fz_get_cpu_core_count
+	fzPopHeapDbgPurpose
+	fzPushHeapDbgPurpose
 	fz_chdir
 	fz_mkdir_for_file
 	fz_normalize_path
@@ -1909,6 +1911,7 @@ EXPORTS
 	pdf_find_locked_fields_for_sig
 	pdf_find_version_for_obj
 	pdf_forget_xref
+	pdf_get_existing_xref_entry
 	pdf_get_incremental_xref_entry
 	pdf_get_populating_xref_entry
 	pdf_get_xref_entry
@@ -2079,8 +2082,8 @@ EXPORTS
 	jpegXL_conformance_main
 	jpegXL_dec_enc_main
 	jpegXL_decode_EXIF_metadata_main
-	jpegXL_decode_progressive_main
 	jpegXL_decode_oneshot_main
+	jpegXL_decode_progressive_main
 	jpegXL_decompress_main
 	jpegXL_encode_oneshot_main
 	jpegXL_epf_main
@@ -2535,6 +2538,8 @@ EXPORTS
 	TIFFFieldName
 	TIFFFieldPassCount
 	TIFFFieldReadCount
+	TIFFFieldSetGetCountSize
+	TIFFFieldSetGetSize
 	TIFFFieldTag
 	TIFFFieldWithName
 	TIFFFieldWithTag
@@ -2948,6 +2953,7 @@ EXPORTS
 	sqlite3_errcode
 	sqlite3_errmsg
 	sqlite3_errmsg16
+	sqlite3_error_offset
 	sqlite3_errstr
 	sqlite3_exec
 	sqlite3_expanded_sql
@@ -3123,6 +3129,7 @@ EXPORTS
 	sqlite3_wal_checkpoint
 	sqlite3_wal_checkpoint_v2
 	sqlite3_wal_hook
+	sqlite3_wal_info
 	sqlite3_win32_set_directory
 	sqlite3_win32_set_directory16
 	sqlite3_win32_set_directory8
@@ -3166,6 +3173,7 @@ EXPORTS
 	sqlite3session_delete
 	sqlite3session_diff
 	sqlite3session_enable
+	sqlite3session_fullchangeset
 	sqlite3session_indirect
 	sqlite3session_isempty
 	sqlite3session_memory_used
