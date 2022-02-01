@@ -3,7 +3,7 @@
 - [[Sqlite]] (and [[Sqlite-amalgamation]])
 - [[unicode-icu]]
 - [[zlib]] (and [[zlib-ng]])
-- xxx
+- [[lcms2]]
 - xxx
 - xxx
 - xxx
