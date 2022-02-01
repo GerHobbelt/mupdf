@@ -26,27 +26,27 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -94,7 +94,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
       <SDLCheck>false</SDLCheck>
@@ -123,9 +123,10 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/binlog/include;../../thirdparty/owemdjee/binlog/bin;../../thirdparty/owemdjee/binlog/tools;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -149,10 +150,11 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/binlog/include;../../thirdparty/owemdjee/binlog/bin;../../thirdparty/owemdjee/binlog/tools;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -178,9 +180,10 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/binlog/include;../../thirdparty/owemdjee/binlog/bin;../../thirdparty/owemdjee/binlog/tools;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -204,10 +207,11 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/binlog/include;../../thirdparty/owemdjee/binlog/bin;../../thirdparty/owemdjee/binlog/tools;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_BINLOG_BREAD;BINLOG_BREAD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -225,18 +229,9 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/binaryio.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/bread.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/brecovery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/getopt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/printers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/ConsumeLoop.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/DetailedHelloWorld.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/HelloWorld.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/LogRotation.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/MultiOutput.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/TextOutput.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/TscClock.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/EntryStream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/EventStream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/PrettyPrinter.cpp" />
@@ -244,62 +239,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/Time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/ToStringVisitor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/detail/OstreamBuffer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/cmake/headers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/cmake/lib.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Categories.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/IntegrationTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Logging.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingAdaptedStructs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingBoostTypes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingCStrings.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingContainers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingDuration.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingEnums.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingErrorCode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingFilesystem.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingFundamentals.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingOptionals.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingPointers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingStrings.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingTimePoint.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingTuples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingVariants.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/NamedWriters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/SeverityControl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Shell.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/perf/LargeLogfile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/perf/PerftestQueue.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/perf/PerftestSessionWriter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/UnitTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestAdvancedLogMacros.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestArrayView.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestBasicLogMacros.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestConstCharPtrIsString.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestCreateSourceAndEvent.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestCreateSourceAndEventIf.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestEntryStream.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestEventFilter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestEventStream.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestPrettyPrinter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestPrinters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestQueue.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestSession.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestSessionWriter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestTextOutputStream.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestTime.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/TestToStringVisitor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/detail/TestOstreamBuffer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/detail/TestSegmentedMap.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/test_utils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/cx_string.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/documentation.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/inttohex.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/roundtrip.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/singular.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/tag.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/tag_util.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/visit.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/binlog/tools/generate_foreach_macro.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/bin/getopt.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/bin/printers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Address.hpp" />
@@ -369,14 +308,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/string_view.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/tag.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/include/mserialize/visit.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/doctest/detail/doctest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/doctest/doctest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/binlog/test_utils.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/custom_array.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_enums.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_streams.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_structs.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_type_lists.hpp" />
     <Text Include="../../thirdparty/owemdjee/binlog/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/binlog/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/binlog/INSTALL.md" />
