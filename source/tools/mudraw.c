@@ -2560,6 +2560,7 @@ int main(int argc, const char** argv)
 	uselist = 1;
 	alphabits_text = 8;
 	alphabits_graphics = 8;
+	subpix_preset = 0;
 
 	out_cs = CS_UNSET;
 	proof_filename = NULL;
@@ -2570,6 +2571,7 @@ int main(int argc, const char** argv)
 	band_height = 0;
 	lowmemory = 0;
 
+	kill = 0;
 	quiet = 0;
 	errored = 0;
 	colorspace = NULL;
@@ -2668,7 +2670,10 @@ int main(int argc, const char** argv)
 			{
 				alphabits_text = atoi(sep+1);
 				sep = strchr(sep+1, '/');
-				subpix_preset = atoi(sep+1);
+				if (sep)
+				{
+					subpix_preset = atoi(sep+1);
+				}
 			}
 			else
 				alphabits_text = alphabits_graphics;
