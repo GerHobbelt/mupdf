@@ -192,49 +192,81 @@ fz_subpixel_adjust(fz_context *ctx, fz_matrix *ctm, fz_matrix *subpix_ctm, unsig
 {
 	float size = fz_matrix_expansion(*ctm);
 	int q, hq, vq, qmin;
-	float pix_e, pix_f, r, hr, vr, rmin;
+	float pix_e, pix_f, pix_se, pix_sf, r, hr, vr, rmin;
 	fz_aa_sub_pix_quantizer *quant;
 
 	quant = ctx->aa.sub_pix_quantizer;
 	if (quant == NULL)
-		quant = default_sub_pix_quantizer;
-	quant(size, &q, &qmin);
+		default_sub_pix_quantizer(size, &q, &qmin);
+	else
+		quant(size, &q, &qmin);
 
 	/* Quantise the subpixel positions. */
+	/* q = 0 => round, no subpixel */
 	/* q = 1 => r = 1/2 */
 	/* q = 2 => r = 1/4 */
 	/* q = 3 => r = 1/6 */
 	/* q = 4 => r = 1/8 */
-	r = 0.5f / q;
-	rmin = 0.5f / qmin;
+	if (q > 0)
+		r = 0.5f / q;
+	else {
+		q = 0;
+		r = 0.5f;
+	}
+	if (qmin > 0)
+		rmin = 0.5f / qmin;
+	else {
+		qmin = 0;
+		rmin = 0.5f;
+	}
 
 	/* Suppress subpixel antialiasing in y axis if we have a horizontal
 	 * matrix, and in x axis if we have a vertical matrix, unless we're
 	 * really small. */
 	hq = vq = q;
 	hr = vr = r;
-	if (ctm->a == 0 && ctm->d == 0)
-		hq = qmin, hr = rmin;
-	if (ctm->b == 0 && ctm->c == 0)
-		vq = qmin, vr = rmin;
+	if (ctm->a == 0 && ctm->d == 0) {
+		hq = qmin;
+		hr = rmin;
+	}
+	if (ctm->b == 0 && ctm->c == 0) {
+		vq = qmin;
+		vr = rmin;
+	}
 
 	/* Split translation into pixel and subpixel parts */
 	subpix_ctm->a = ctm->a;
 	subpix_ctm->b = ctm->b;
 	subpix_ctm->c = ctm->c;
 	subpix_ctm->d = ctm->d;
-	subpix_ctm->e = ctm->e + hr;
-	pix_e = floorf(subpix_ctm->e);
-	subpix_ctm->e -= pix_e;
-	subpix_ctm->f = ctm->f + vr;
-	pix_f = floorf(subpix_ctm->f);
-	subpix_ctm->f -= pix_f;
+	pix_se = ctm->e + hr;
+	pix_e = floorf(pix_se);
+	pix_se -= pix_e;
+	pix_sf = ctm->f + vr;
+	pix_f = floorf(pix_sf);
+	pix_sf -= pix_f;
 
 	/* Quantise the subpixel part */
-	subpix_ctm->e = floorf(subpix_ctm->e * hq) / hq;
-	*qe = (int)(256 * subpix_ctm->e);
-	subpix_ctm->f = floorf(subpix_ctm->f * vq) / vq;
-	*qf = (int)(256 * subpix_ctm->f);
+	if (hq) {
+		subpix_ctm->e = floorf(pix_se * hq) / hq;
+		if (qe)
+			*qe = (int)(256 * pix_se);
+	}
+	else {
+		subpix_ctm->e = 0;
+		if (qe)
+			*qe = 0;
+	}
+	if (vq) {
+		subpix_ctm->f = floorf(pix_sf * vq) / vq;
+		if (qf)
+			*qf = (int)(256 * pix_sf);
+	}
+	else {
+		subpix_ctm->f = 0;
+		if (qf)
+			*qf = 0;
+	}
 
 	/* Reassemble the complete translation */
 	ctm->e = subpix_ctm->e + pix_e;
@@ -249,11 +281,10 @@ fz_render_stroked_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix *trm,
 	if (fz_font_ft_face(ctx, font))
 	{
 		fz_matrix subpix_trm;
-		unsigned char qe, qf;
 
 		if (stroke->dash_len > 0)
 			return NULL;
-		(void)fz_subpixel_adjust(ctx, trm, &subpix_trm, &qe, &qf);
+		(void)fz_subpixel_adjust(ctx, trm, &subpix_trm, NULL, NULL);
 		return fz_render_ft_stroked_glyph(ctx, font, gid, subpix_trm, ctm, stroke, aa);
 	}
 	return fz_render_glyph(ctx, font, gid, trm, model, scissor, 1, aa);
@@ -465,9 +496,8 @@ fz_pixmap *
 fz_render_glyph_pixmap(fz_context *ctx, fz_font *font, int gid, fz_matrix *ctm, const fz_irect *scissor, int aa)
 {
 	fz_pixmap *val = NULL;
-	unsigned char qe, qf;
 	fz_matrix subpix_ctm;
-	float size = fz_subpixel_adjust(ctx, ctm, &subpix_ctm, &qe, &qf);
+	float size = fz_subpixel_adjust(ctx, ctm, &subpix_ctm, NULL, NULL);
 	int is_ft_font = !!fz_font_ft_face(ctx, font);
 
 	if (size <= MAX_GLYPH_SIZE)

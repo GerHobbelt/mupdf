@@ -364,6 +364,8 @@ static int uselist = 1;
 static int alphabits_text = 8;
 static int alphabits_graphics = 8;
 static int subpix_preset = 0;
+static int subpix_x_power = 3;
+static int subpix_y_power = 1;
 
 static int out_cs = CS_UNSET;
 static const char *proof_filename = NULL;
@@ -474,27 +476,27 @@ static int usage(void)
 		"\n"
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
-		"    raster: png, pgm, ppm, pnm, pam, pbm, pkm, pwg, pcl, psd, ps, muraw\n"
+		"        raster: png, pgm, ppm, pnm, pam, pbm, pkm, pwg, pcl, psd, ps, muraw\n"
 #if FZ_ENABLE_OCR
-		"    vector: svg, pdf, trace, ocr.trace\n"
+		"        vector: svg, pdf, trace, ocr.trace\n"
 #else
-		"    vector: svg, pdf, trace\n"
+		"        vector: svg, pdf, trace\n"
 #endif
-		"    text: txt, html, xhtml, xml, stext, stext.json, bbox\n"
+		"        text: txt, html, xhtml, xml, stext, stext.json, bbox\n"
 #if FZ_ENABLE_OCR
-		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.xml, ocr.stext, ocr.stext.json\n"
+		"        ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.xml, ocr.stext, ocr.stext.json\n"
 #else
-		"    (ocr'd text is disabled in this build)\n"
+		"        (ocr'd text is disabled in this build)\n"
 #endif
-		"    bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
+		"        bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
 		"\n"
 		"  -q    be quiet (don't print progress messages)\n"
 		"  -v    verbose ~ not quiet (repeat to increase the chattiness of the application)\n"
 		"  -s -  show extra information:\n"
-		"     m      show memory use\n"
-		"     t      show timings\n"
-		"     f      show page features\n"
-		"     5      show md5 checksum of rendered image\n"
+		"     m    show memory use\n"
+		"     t    show timings\n"
+		"     f    show page features\n"
+		"     5    show md5 checksum of rendered image\n"
 		"\n"
 		"  -R {auto,0,90,180,270}\n"
 		"        rotate clockwise (default: auto)\n"
@@ -509,12 +511,12 @@ static int usage(void)
 #ifndef DISABLE_MUTHREADS
 		"  -T -  number of threads to use for rendering (banded mode only), where number arg\n"
 		"        is one of:\n"
-		"     N      equals the number of (virtual) CPU cores on this machine\n"   
-		"     *      = N\n"   
-		"     4      or any other positive integer number\n"   
-		"     50%    or any other percentage of N\n"
-		"     -2     or any other negative integer: so many less than N. (Hence keeps\n"
-		"            cores free for independent tasks.\n"
+		"     N    equals the number of (virtual) CPU cores on this machine\n"   
+		"     *    = N\n"   
+		"     4    or any other positive integer number\n"   
+		"     50%  or any other percentage of N\n"
+		"     -2   or any other negative integer: so many less than N. (Hence keeps\n"
+		"          cores free for independent tasks.\n"
 #else
 		"  -T -  number of threads to use for rendering (disabled in this non-threading\n"
 		"        build)\n"
@@ -532,24 +534,26 @@ static int usage(void)
 		"  -X    disable document styles for EPUB layout\n"
 		"  -a    disable usage of accelerator file\n"
 		"  -x -  text extract options (option=yes --> on, option=no --> off):\n"
-		"     preserve-ligatures,preserve-whitespace,inhibit-spaces,dehyphenate,\n"
-		"     preserve-images,preserve-spans,reference-images,reuse-images,\n"
-		"     mediabox-clip,text-as-path\n"
+		"        preserve-ligatures,preserve-whitespace,inhibit-spaces,dehyphenate,\n"
+		"        preserve-images,preserve-spans,reference-images,reuse-images,\n"
+		"        mediabox-clip,text-as-path\n"
 		"  -c -  colorspace (mono, gray, grayalpha, rgb, rgba, cmyk, cmykalpha,\n"
 		"        filename of ICC profile)\n"
 		"  -e -  proof icc profile (filename of ICC profile)\n"
 		"  -G -  apply gamma correction\n"
 #if FZ_ENABLE_GAMMA
-		"\t-g -\tuse gamma blending\n"
+		"  -g -  use gamma blending\n"
 #else
-		"\t-g -\tuse gamma blending (disabled in this build)\n"
+		"  -g -  use gamma blending (disabled in this build)\n"
 #endif
 		"  -I    invert colors\n"
 		"\n"
-		"  -A -  number of bits of anti-aliasing (0 to 8)\n"
-		"  -A -/-  number of bits of anti-aliasing (0 to 8) (graphics, text)\n"
-		"  -A -/-/-  number of bits of antialiasing (0 to 8) (graphics, text)\n"
-		"            subpix preset: 0 = default, 1 = reduced\n"
+		"  -A -      number of bits of anti-aliasing depth (0 to 8, where 8 is\n"
+		"            256 level greyscale)\n"
+		"  -A g/t    number of bits of anti-aliasing (0 to 8) (graphics, text)\n"
+		"  -A g/t/s  number of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"            + subpix preset: 0 = default, 1 = reduced\n"
+		"  -A g/t/x/y  ditto, with x/y subpix positioning power-of-2 level (0..8)\n"
 		"  -l -  minimum stroked line width (in pixels)\n"
 		"  -K    do not draw text\n"
 		"  -KK   only draw text\n"
@@ -2513,10 +2517,10 @@ static float humanize(size_t value, const char **unit)
 }
 
 /* Reduced quality sub pix quantizer, intended to match pdfium. */
-static void reduced_sub_pix_quantizer(float size, int *x, int *y)
+static void reduced_subpix_quantizer(float size, int *x, int *y)
 {
-	*x = 3;
-	*y = 1;
+	*x = subpix_x_power;
+	*y = subpix_y_power;
 }
 
 static int
@@ -2775,6 +2779,8 @@ int main(int argc, const char** argv)
 	alphabits_text = 8;
 	alphabits_graphics = 8;
 	subpix_preset = 0;
+	subpix_x_power = 3;
+	subpix_y_power = 1;
 
 	make_hyperlinks = 0;
 	out_cs = CS_UNSET;
@@ -2943,7 +2949,20 @@ int main(int argc, const char** argv)
 				sep = strchr(sep+1, '/');
 				if (sep)
 				{
-					subpix_preset = atoi(sep+1);
+					const char* sps = sep + 1;
+					sep = strchr(sps, '/');
+					if (!sep) {
+						subpix_preset = atoi(sps);
+					}
+					else {
+						subpix_preset = 2;
+						subpix_x_power = atoi(sps);
+						subpix_y_power = atoi(sep + 1);
+						if (subpix_x_power < 0 || subpix_x_power > 8 || subpix_y_power < 0 || subpix_y_power > 8) {
+							fz_error(ctx, "illegal subpix x/y power-of-2 value specified: 0..8 is allowed, but %d/%d were specified.", subpix_x_power, subpix_y_power);
+							return EXIT_FAILURE;
+						}
+					}
 				}
 			}
 			else
@@ -3119,7 +3138,7 @@ int main(int argc, const char** argv)
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
 		fz_set_graphics_min_line_width(ctx, min_line_width);
 		if (subpix_preset)
-			fz_set_graphics_sub_pix_quantizer(ctx, reduced_sub_pix_quantizer);
+			fz_set_graphics_sub_pix_quantizer(ctx, reduced_subpix_quantizer);
 		if (no_icc)
 			fz_disable_icc(ctx);
 		else
