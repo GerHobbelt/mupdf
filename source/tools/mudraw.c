@@ -340,6 +340,7 @@ static int ignore_errors = 0;
 static int uselist = 1;
 static int alphabits_text = 8;
 static int alphabits_graphics = 8;
+static int subpix_preset = 0;
 
 static int out_cs = CS_UNSET;
 static const char *proof_filename = NULL;
@@ -462,6 +463,8 @@ static int usage(void)
 		"\n"
 		"\t-A -\tnumber of bits of antialiasing (0 to 8)\n"
 		"\t-A -/-\tnumber of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"\t-A -/-/-\tnumber of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"\t\t\tsubpix preset: 0 = default, 1 = reduced\n"
 		"\t-l -\tminimum stroked line width (in pixels)\n"
 		"\t-K\tdo not draw text\n"
 		"\t-KK\tonly draw text\n"
@@ -2017,6 +2020,13 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 	fz_save_accelerator(ctx, doc, absname);
 }
 
+/* Reduced quality sub pix quantizer, intended to match pdfium. */
+static void reduced_sub_pix_quantizer(float size, int *x, int *y)
+{
+	*x = 3;
+	*y = 1;
+}
+
 #ifdef MUDRAW_STANDALONE
 int main(int argc, char **argv)
 #else
@@ -2096,7 +2106,12 @@ int mudraw_main(int argc, char **argv)
 			alphabits_graphics = atoi(fz_optarg);
 			sep = strchr(fz_optarg, '/');
 			if (sep)
+			{
 				alphabits_text = atoi(sep+1);
+				sep = strchr(sep+1, '/');
+				if (sep)
+					subpix_preset = atoi(sep+1);
+			}
 			else
 				alphabits_text = alphabits_graphics;
 			break;
@@ -2210,6 +2225,8 @@ int mudraw_main(int argc, char **argv)
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
 		fz_set_graphics_min_line_width(ctx, min_line_width);
+		if (subpix_preset)
+			fz_set_graphics_sub_pix_quantizer(ctx, reduced_sub_pix_quantizer);
 		if (no_icc)
 			fz_disable_icc(ctx);
 		else
@@ -2488,7 +2505,7 @@ int mudraw_main(int argc, char **argv)
 					output_format != OUT_OCR_XHTML &&
 					output_format != OUT_XMLTEXT)
 				{
-					setmode(fileno(stdout), O_BINARY);
+					(void)setmode(fileno(stdout), O_BINARY);
 				}
 #endif
 				out = fz_stdout(ctx);

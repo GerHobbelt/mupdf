@@ -580,6 +580,46 @@ float fz_graphics_min_line_width(fz_context *ctx);
 void fz_set_graphics_min_line_width(fz_context *ctx, float min_line_width);
 
 /**
+	Type for a sub pix quantizer function. Given a size,
+	return the quantisation factors to use for major (normally x)
+	and minor (normally y) axes.
+
+	size: Size of the glyph in points.
+
+	x: Should be filled with the quantization factor for the major
+	axis on return.
+
+	y: Should be filled with the quantization factor for the minor
+	axis on return.
+
+	The quantisation factor gives the number of possible positions a
+	glyph may occupy within a pixel. Thus 1 will give less accurate
+	results, and (for example) 4 will give more accurate results.
+*/
+typedef void (fz_aa_sub_pix_quantizer)(float size, int *x, int *y);
+
+/**
+	Set a function to be used for sub pixel quantisation of text.
+	This allows users of the library to tune the tradeoff between
+	appearance of text and the number of distinct cached glyphs
+	generated.
+
+	fn: The quantizer function. This will be called with size as the
+	size of the font in points. The two int * parameters should be filled
+	with the quantisation factor to use; one for the 'axis of motion'
+	(normally x) and one for the 'axis perpendicular to motion' (normally
+	y).
+
+	Passing NULL will revert MuPDF to its default function. For the
+	major axis, this uses 1 for glyphs >= 48points, 2 for glyphs >=
+	24 points, and 4 for all others. For the minor axis, this uses
+	1 for glyphs >= 8 points, 2 for glyphs >= 4 points, and 4 for all
+	others.
+*/
+void
+fz_set_graphics_sub_pix_quantizer(fz_context *ctx, fz_aa_sub_pix_quantizer *fn);
+
+/**
 	Get the user stylesheet source text.
 */
 const char *fz_user_css(fz_context *ctx);
@@ -803,6 +843,7 @@ typedef struct
 	int bits;
 	int text_bits;
 	float min_line_width;
+	fz_aa_sub_pix_quantizer *sub_pix_quantizer;
 } fz_aa_context;
 
 struct fz_context
