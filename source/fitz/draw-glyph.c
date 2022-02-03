@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -162,31 +162,48 @@ fz_keep_glyph_cache(fz_context *ctx)
 	return ctx->glyph_cache;
 }
 
+static void default_sub_pix_quantizer(float size, int *x, int *y)
+{
+	/* First, in the direction of movement (i.e. normally X). We
+	 * never need more than 4 subpixel positions for glyphs -
+	 * arguably even that is too much. Suppress this as we get
+	 * larger, because it makes less impact. */
+	if (size >= 48)
+		*x = 1;
+	else if (size >= 24)
+		*x = 2;
+	else
+		*x = 4;
+
+	/* Then in the 'downward' direction (normally Y). */
+	if (size >= 8)
+		*y = 1;
+	else if (size >= 4)
+		*y = 2;
+	else
+		*y = 4;
+}
+
 float
 fz_subpixel_adjust(fz_context *ctx, fz_matrix *ctm, fz_matrix *subpix_ctm, unsigned char *qe, unsigned char *qf)
 {
 	float size = fz_matrix_expansion(*ctm);
 	int q, hq, vq, qmin;
 	float pix_e, pix_f, r, hr, vr, rmin;
+	fz_aa_sub_pix_quantizer *quant;
 
-	/* Quantise the subpixel positions. First, in the direction of
-	 * movement (i.e. normally X). We never need more than 4 subpixel
-	 * positions for glyphs - arguably even that is too much.
-	 * Suppress this as we get larger, because it makes less impact. */
-	if (size >= 48)
-		q = 0, r = 0.5f;
-	else if (size >= 24)
-		q = 128, r = 0.25f;
-	else
-		q = 192, r = 0.125f;
+	quant = ctx->aa.sub_pix_quantizer;
+	if (quant == NULL)
+		quant = default_sub_pix_quantizer;
+	quant(size, &q, &qmin);
 
-	/* Then in the 'downward' direction (normally Y). */
-	if (size >= 8)
-		qmin = 0, rmin = 0.5f;
-	else if (size >= 4)
-		qmin = 128, rmin =  0.25f;
-	else
-		qmin = 192, rmin = 0.125f;
+	/* Quantise the subpixel positions. */
+	/* q = 1 => r = 1/2 */
+	/* q = 2 => r = 1/4 */
+	/* q = 3 => r = 1/6 */
+	/* q = 4 => r = 1/8 */
+	r = 0.5f / q;
+	rmin = 0.5f / qmin;
 
 	/* Suppress subpixel antialiasing in y axis if we have a horizontal
 	 * matrix, and in x axis if we have a vertical matrix, unless we're
@@ -211,10 +228,10 @@ fz_subpixel_adjust(fz_context *ctx, fz_matrix *ctm, fz_matrix *subpix_ctm, unsig
 	subpix_ctm->f -= pix_f;
 
 	/* Quantise the subpixel part */
-	*qe = (int)(subpix_ctm->e * 256) & hq;
-	subpix_ctm->e = *qe / 256.0f;
-	*qf = (int)(subpix_ctm->f * 256) & vq;
-	subpix_ctm->f = *qf / 256.0f;
+	subpix_ctm->e = floorf(subpix_ctm->e * hq) / hq;
+	*qe = (int)(256 * subpix_ctm->e);
+	subpix_ctm->f = floorf(subpix_ctm->f * vq) / vq;
+	*qf = (int)(256 * subpix_ctm->f);
 
 	/* Reassemble the complete translation */
 	ctm->e = subpix_ctm->e + pix_e;

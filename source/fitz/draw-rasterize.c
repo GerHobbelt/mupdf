@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -187,6 +187,12 @@ float
 fz_rasterizer_graphics_min_line_width(fz_rasterizer *ras)
 {
 	return ras->aa.min_line_width;
+}
+
+void
+fz_set_graphics_sub_pix_quantizer(fz_context *ctx, fz_aa_sub_pix_quantizer *fn)
+{
+	ctx->aa.sub_pix_quantizer = fn;
 }
 
 fz_irect
