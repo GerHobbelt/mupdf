@@ -705,8 +705,6 @@ Usage:
 
             E.g. --sync julian@casper.ghostscript.com:~julian/public_html/
 
-            As of 2020-03-09 requires patched mupdf/ checkout.
-
         --test-csharp
             Tests the experimental C# API.
 
@@ -3713,6 +3711,8 @@ class Generated:
             initialise empty state.
         '''
         if dirpath:
+            self.h_files                = from_pickle( f'{dirpath}/h_files.pickle')
+            self.cpp_files              = from_pickle( f'{dirpath}/cpp_files.pickle')
             self.c_functions            = from_pickle( f'{dirpath}/c_functions.pickle')
             self.c_globals              = from_pickle( f'{dirpath}/c_globals.pickle')
             self.c_enums                = from_pickle( f'{dirpath}/c_enums.pickle')
@@ -3743,6 +3743,8 @@ class Generated:
         '''
         Saves state to .pickle files, to be loaded later via __init__().
         '''
+        to_pickle( self.h_files,                    f'{dirpath}/h_files.pickle')
+        to_pickle( self.cpp_files,                  f'{dirpath}/cpp_files.pickle')
         to_pickle( self.c_functions,                f'{dirpath}/c_functions.pickle')
         to_pickle( self.c_globals,                  f'{dirpath}/c_globals.pickle')
         to_pickle( self.c_enums,                    f'{dirpath}/c_enums.pickle')
@@ -4341,7 +4343,7 @@ def make_function_wrapper(
     # Write first line: <result_type> <fnname_wrapper> (<args>...)
     #
     comment = make_wrapper_comment( tu, cursor, fnname, fnname_wrapper, indent='', is_method=False)
-    comment = f'/* {comment}*/\n'
+    comment = f'/** {comment}*/\n'
     for out in out_h, out_cpp:
         out.write( comment)
 
@@ -4605,7 +4607,7 @@ def make_function_wrapper_class_aware(
                 )
 
     out_h.write( '\n')
-    out_h.write( f'    /* {comment} */\n')
+    out_h.write( f'    /** {comment} */\n')
 
     # Copy any comment (indented) into class definition above method
     # declaration.
@@ -4745,7 +4747,7 @@ def make_internal_functions( namespace, out_h, out_cpp):
     out_h.write(
             textwrap.dedent(
             f'''
-            /* Internal use only. Returns fz_context* for use by current thread. */
+            /** Internal use only. Returns fz_context* for use by current thread. */
             fz_context* {rename.internal('context_get')}();
 
 
@@ -5167,7 +5169,7 @@ def make_function_wrappers(
 
     out_exceptions_h.write( textwrap.dedent(
             f'''
-            /* Base class for {rename.class_( '')} exceptions */
+            /** Base class for {rename.class_( '')} exceptions */
             struct {base_name} : std::exception
             {{
                 int         m_code;
@@ -5199,7 +5201,7 @@ def make_function_wrappers(
     for enum, typename, padding in errors():
         out_exceptions_h.write( textwrap.dedent(
                 f'''
-                /* For {enum}. */
+                /** For {enum}. */
                 struct {typename} : {base_name}
                 {{
                     {typename}(const char* message);
@@ -5224,7 +5226,7 @@ def make_function_wrappers(
     te = rename.internal( 'throw_exception')
     out_exceptions_h.write( textwrap.dedent(
             f'''
-            /* Throw exception appropriate for error in <ctx>. */
+            /** Throw exception appropriate for error in <ctx>. */
             void {te}(fz_context* ctx);
 
             '''))
@@ -5313,7 +5315,7 @@ def make_function_wrappers(
             out_functions_h.write(
                     textwrap.dedent(
                     f'''
-                    /* Extra wrapper for {fnname}() that returns a std::string and sets
+                    /** Extra wrapper for {fnname}() that returns a std::string and sets
                     *o_out to length of string plus one. If <key> is not found, returns empty
                     string with *o_out=-1. <o_out> can be NULL if caller is not interested in
                     error information. */
@@ -5711,7 +5713,7 @@ def class_copy_constructor(
         functions( keep_name)
         comment = f'Copy constructor using {keep_name}().'
         out_h.write( '\n')
-        out_h.write( f'    /* {comment} */\n')
+        out_h.write( f'    /** {comment} */\n')
         out_h.write( f'    FZ_FUNCTION {classname}(const {classname}& rhs);\n')
         out_h.write( '\n')
 
@@ -5720,7 +5722,7 @@ def class_copy_constructor(
             # Need to cast the void* to the correct type.
             cast = f'({struct_name}*) '
 
-        out_cpp.write( f'/* {comment} */\n')
+        out_cpp.write( f'/** {comment} */\n')
         out_cpp.write( f'FZ_FUNCTION {classname}::{classname}(const {classname}& rhs)\n')
         out_cpp.write( f': m_internal({cast}{rename.function_call(keep_name)}(rhs.m_internal))\n')
         out_cpp.write( '{\n')
@@ -5741,7 +5743,7 @@ def class_copy_constructor(
     # Make operator=().
     #
     comment = f'operator= using {keep_name}() and {drop_name}().'
-    out_h.write( f'    /* {comment} */\n')
+    out_h.write( f'    /** {comment} */\n')
     out_h.write( f'    FZ_FUNCTION {classname}& operator=(const {classname}& rhs);\n')
 
     out_cpp.write( f'/* {comment} */\n')
@@ -6140,7 +6142,7 @@ def class_write_method(
         log( '*** warning: {struct_name=} {classname}::{decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} has no raw constructor.')
 
     out_h.write( '\n')
-    out_h.write( f'    /* {comment} */\n')
+    out_h.write( f'    /** {comment} */\n')
 
     # Copy any comment (indented) into class definition above method
     # declaration.
@@ -6221,13 +6223,14 @@ def class_custom_method( tu, register_fn_use, struct_cursor, classname, extramet
 
     out_h.write( f'\n')
     if extramethod.comment:
-        for line in extramethod.comment.strip().split('\n'):
+        for i, line in enumerate( extramethod.comment.strip().split('\n')):
+            line = line.replace( '/* ', '/** ')
             out_h.write( f'    {line}\n')
     else:
-        out_h.write( f'    /* {comment} */\n')
+        out_h.write( f'    /** {comment} */\n')
     out_h.write( f'    FZ_FUNCTION {return_space}{name_args};\n')
 
-    out_cpp.write( f'/* {comment} */\n')
+    out_cpp.write( f'/** {comment} */\n')
     # Remove any default arg values from <name_args>.
     name_args_no_defaults = re.sub('= *[^(][^),]*', '', name_args)
     if name_args_no_defaults != name_args:
@@ -6283,7 +6286,7 @@ def class_raw_constructor(
     does not call fz_keep_*(); the class's destructor will call fz_drop_*().
     '''
     #jlib.log( 'Creating raw constructor {classname=} {struct_name=} {extras.pod=} {extras.constructor_raw=} {fnname=}')
-    comment = f'/* Constructor using raw copy of pre-existing {struct_name}. */'
+    comment = f'/** Constructor using raw copy of pre-existing {struct_name}. */'
     if extras.pod:
         constructor_decl = f'{classname}(const {struct_name}* internal)'
     else:
@@ -6345,7 +6348,7 @@ def class_raw_constructor(
                 space_const = ' const' if const else ''
                 const_space = 'const ' if const else ''
                 out_h.write( '\n')
-                out_h.write( f'    /* Access as underlying struct. */\n')
+                out_h.write( f'    /** Access as underlying struct. */\n')
                 out_h.write( f'    FZ_FUNCTION {const_space}{struct_name}* internal(){space_const};\n')
                 out_cpp.write( f'{comment}\n')
                 out_cpp.write( f'FZ_FUNCTION {const_space}{struct_name}* {classname}::internal(){space_const}\n')
@@ -6501,7 +6504,7 @@ def class_destructor(
     if len(destructor_fns):
         fnname, cursor = destructor_fns[0]
         register_fn_use( cursor.spelling)
-        out_h.write( f'    /* Destructor using {cursor.spelling}(). */\n')
+        out_h.write( f'    /** Destructor using {cursor.spelling}(). */\n')
         out_h.write( f'    FZ_FUNCTION ~{classname}();\n');
 
         out_cpp.write( f'FZ_FUNCTION {classname}::~{classname}()\n')
@@ -6515,7 +6518,7 @@ def class_destructor(
         out_cpp.write(  '}\n')
         out_cpp.write( '\n')
     else:
-        out_h.write( '    /* We use default destructor. */\n')
+        out_h.write( '    /** We use default destructor. */\n')
 
 
 def class_to_string_member(
@@ -6531,7 +6534,7 @@ def class_to_string_member(
     Writes code for wrapper class's to_string() member function.
     '''
     out_h.write( f'\n')
-    out_h.write( f'    /* Returns string containing our members, labelled and inside (...), using operator<<. */\n')
+    out_h.write( f'    /** Returns string containing our members, labelled and inside (...), using operator<<. */\n')
     out_h.write( f'    FZ_FUNCTION std::string to_string();\n')
 
     out_cpp.write( f'FZ_FUNCTION std::string {classname}::to_string()\n')
@@ -6555,11 +6558,11 @@ def struct_to_string_fns(
     Writes functions for text representation of struct/wrapper-class members.
     '''
     out_h.write( f'\n')
-    out_h.write( f'/* Returns string containing a {struct_name}\'s members, labelled and inside (...), using operator<<. */\n')
+    out_h.write( f'/** Returns string containing a {struct_name}\'s members, labelled and inside (...), using operator<<. */\n')
     out_h.write( f'FZ_FUNCTION std::string to_string_{struct_name}(const {struct_name}& s);\n')
 
     out_h.write( f'\n')
-    out_h.write( f'/* Returns string containing a {struct_name}\'s members, labelled and inside (...), using operator<<.\n')
+    out_h.write( f'/** Returns string containing a {struct_name}\'s members, labelled and inside (...), using operator<<.\n')
     out_h.write( f'(Convenience overload). */\n')
     out_h.write( f'FZ_FUNCTION std::string to_string(const {struct_name}& s);\n')
 
@@ -6593,7 +6596,7 @@ def struct_to_string_streaming_fns(
     'namespace mupdf {...}'.
     '''
     out_h.write( f'\n')
-    out_h.write( f'/* Writes {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
+    out_h.write( f'/** Writes {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
     out_h.write( f'FZ_FUNCTION std::ostream& operator<< (std::ostream& out, const {struct_name}& rhs);\n')
 
     out_cpp.write( f'\n')
@@ -6632,7 +6635,7 @@ def class_to_string_fns(
     '''
     assert extras.pod != 'none'
     out_h.write( f'\n')
-    out_h.write( f'/* Writes a {classname}\'s underlying {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
+    out_h.write( f'/** Writes a {classname}\'s underlying {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
     out_h.write( f'FZ_FUNCTION std::ostream& operator<< (std::ostream& out, const {classname}& rhs);\n')
 
     out_cpp.write( f'\n')
@@ -6690,7 +6693,7 @@ def class_wrapper_virtual_fnptrs(
     # Class definition beginning.
     #
     out_h.write( '\n')
-    out_h.write( f'/* Wrapper class for struct {struct_name} with virtual fns for each fnptr. */\n')
+    out_h.write( f'/** Wrapper class for struct {struct_name} with virtual fns for each fnptr. */\n')
     out_h.write( f'struct {classname}2 : {classname}\n')
     out_h.write(  '{\n')
 
@@ -6714,7 +6717,7 @@ def class_wrapper_virtual_fnptrs(
     # Constructor
     #
     out_h.write( '\n')
-    out_h.write( '    /* == Constructor. */\n')
+    out_h.write( '    /** == Constructor. */\n')
     out_h.write(f'    {classname}2();\n')
     out_cpp.write('\n')
     out_cpp.write(f'{classname}2::{classname}2()\n')
@@ -6735,7 +6738,7 @@ def class_wrapper_virtual_fnptrs(
     if free:
         # Destructor
         out_h.write( '\n')
-        out_h.write( '    /* == Destructor. */\n')
+        out_h.write( '    /** == Destructor. */\n')
         out_h.write(f'    ~{classname}2();\n')
         out_cpp.write('\n')
         out_cpp.write(f'{classname}2::~{classname}2()\n')
@@ -6757,7 +6760,7 @@ def class_wrapper_virtual_fnptrs(
     # Define use_virtual_<name>( bool use) method for each fnptr.
     #
     out_h.write(f'\n')
-    out_h.write(f'    /* Use these to set the function pointers within m_internal\n')
+    out_h.write(f'    /** Use these to set the function pointers within m_internal\n')
     out_h.write(f'    to point to our static callbacks, which then call our virtual\n')
     out_h.write(f'    methods. */\n')
     for cursor, fnptr_type in get_fnptrs():
@@ -6778,7 +6781,7 @@ def class_wrapper_virtual_fnptrs(
     # Define static callback for each fnptr.
     #
     out_h.write(f'\n')
-    out_h.write(f'    /* Internal callbacks, each calls the corresponding virtual method. */\n')
+    out_h.write(f'    /** Internal callbacks, each calls the corresponding virtual method. */\n')
     for cursor, fnptr_type in get_fnptrs():
 
         # Write static callback.
@@ -6824,7 +6827,7 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('}\n')
 
     out_h.write(f'\n')
-    out_h.write(f'    /* Default virtual method implementations; these all throw an exception. */\n')
+    out_h.write(f'    /** Default virtual method implementations; these all throw an exception. */\n')
     for cursor, fnptr_type in get_fnptrs():
 
         # Write virtual fn default implementation.
@@ -6915,7 +6918,7 @@ def class_wrapper(
     # Class definition beginning.
     #
     out_h.write( '\n')
-    out_h.write( f'/* Wrapper class for struct {struct_name}. */\n')
+    out_h.write( f'/** Wrapper class for struct {struct_name}. */\n')
     if struct_cursor.raw_comment:
         out_h.write( f'{struct_cursor.raw_comment}')
         if not struct_cursor.raw_comment.endswith( '\n'):
@@ -6949,7 +6952,7 @@ def class_wrapper(
     #
     if constructor_fns:
         out_h.write( '\n')
-        out_h.write( '    /* == Constructors. */\n')
+        out_h.write( '    /** == Constructors. */\n')
     num_constructors = len(constructor_fns)
     for fnname, cursor, duplicate_type in constructor_fns:
         # clang-6 appears not to be able to handle fn args that are themselves
@@ -7023,7 +7026,7 @@ def class_wrapper(
                 )
     else:
         out_h.write( '\n')
-        out_h.write( '    /* We use default copy constructor and operator=. */\n')
+        out_h.write( '    /** We use default copy constructor and operator=. */\n')
 
     # Auto-add all methods that take <struct_name> as first param, but
     # skip methods that are already wrapped in extras.method_wrappers or
@@ -7187,7 +7190,7 @@ def class_wrapper(
                         return (uintptr_t) m_internal;
                     }
                     ''',
-                    '/* Return numerical value of .m_internal; helps with Python debugging. */',
+                    '/** Return numerical value of .m_internal; helps with Python debugging. */',
                     ),
                 out_h,
                 out_cpp,
@@ -7204,9 +7207,9 @@ def class_wrapper(
         for c in struct_cursor.type.get_canonical().get_fields():
             out_h.write( f'    {declaration_text(c.type, c.spelling)};\n')
     elif extras.pod:
-        out_h.write( f'    {struct_cursor.spelling}  m_internal; /* Wrapped data is held by value. */\n')
+        out_h.write( f'    {struct_cursor.spelling}  m_internal; /** Wrapped data is held by value. */\n')
     else:
-        out_h.write( f'    {struct_name}* m_internal; /* Pointer to wrapped data. */\n')
+        out_h.write( f'    {struct_name}* m_internal; /** Pointer to wrapped data. */\n')
 
     # Make operator<< (std::ostream&, ...) for POD classes.
     #
@@ -7234,7 +7237,7 @@ def class_wrapper(
         out_h.write(  '\n')
         out_h.write(  '    private:\n')
         out_h.write(  '\n')
-        out_h.write(  '    /* This class is not copyable or assignable. */\n')
+        out_h.write(  '    /** This class is not copyable or assignable. */\n')
         out_h.write( f'    {classname}(const {classname}& rhs);\n')
         out_h.write( f'    {classname}& operator=(const {classname}& rhs);\n')
 
@@ -7509,7 +7512,7 @@ def cpp_source(
     #
     header_text = textwrap.dedent(
             f'''
-            /*
+            /**
             This file was auto-generated by mupdfwrap.py.
             ''')
 
@@ -10032,7 +10035,8 @@ def main():
                     sync_docs = True
                     destination = args.next()
                 log( 'Syncing to {destination=}')
-                files = list( hs) + list( cpps) + [
+                generated = Generated(f'{build_dirs.dir_mupdf}/platform/c++')
+                files = generated.h_files + generated.cpp_files + [
                         f'{build_dirs.dir_so}/mupdf.py',
                         f'{build_dirs.dir_mupdf}/platform/c++/fn_usage.txt',
                         ]
