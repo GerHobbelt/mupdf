@@ -8366,24 +8366,22 @@ def build_swig(
                 mupdf::convert_color(ss, sv, ds, &dv->dv0, is, params);
             }}
 
-            /* SWIG-friendly alternative to set_warning_callback(). */
+            /* SWIG-friendly alternative to fz_set_warning_callback(). */
             struct SetWarningCallback
             {{
-                SetWarningCallback( void (*printfn)( void* user, const char* message), void* user)
+                SetWarningCallback( void* user=NULL)
                 {{
-                    this->printfn = printfn;
                     this->user = user;
                     mupdf::set_warning_callback( s_print, this);
                 }}
-                virtual void print( void* user, const char* message)
+                virtual void print( const char* message)
                 {{
                 }}
                 static void s_print( void* self0, const char* message)
                 {{
                     SetWarningCallback* self = (SetWarningCallback*) self0;
-                    return self->print( self->user, message);
+                    return self->print( message);
                 }}
-                void (*printfn)( void* user, const char* message);
                 void* user;
             }};
             void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user);
@@ -8397,6 +8395,8 @@ def build_swig(
     text += '%module(directors="1") mupdf\n'
     for i in generated.virtual_fnptrs:
         text += f'%feature("director") {i};\n'
+
+    text += f'%feature("director") SetWarningCallback;\n'
 
     text += textwrap.dedent(
             '''
@@ -8812,11 +8812,14 @@ def build_swig(
 
                 # Override set_warning_callback().
                 set_warning_callback_s = None
-                def set_warning_callback( printfn):
+                def set_warning_callback2( printfn):
+                    class SetWarningCallback2(SetWarningCallback):
+                        def print( self, message):
+                            printfn( message)
                     global set_warning_callback_s
-                    def printfn2( user, message):
-                        return printfn( message)
-                    set_warning_callback_s = SetWarningCallback( printfn2, None)
+                    set_warning_callback_s = SetWarningCallback2()
+                set_warning_callback = set_warning_callback2
+
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.
