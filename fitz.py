@@ -5746,7 +5746,7 @@ class Page:
         if oc == None or oc == 0:
             return None
         doc = self.parent
-        check = doc.xrefObject(oc, compressed=True)
+        check = doc.xref_object(oc, compressed=True)
         if not ("/Type/OCG" in check or "/Type/OCMD" in check):
             raise ValueError("bad optional content: 'oc'")
         props = {}
@@ -6810,7 +6810,7 @@ class Page:
         """
         rc = []
         for pname, xref in self._get_resource_properties():
-            text = self.parent.xrefObject(xref, compressed=True)
+            text = self.parent.xref_object(xref, compressed=True)
             if "/Type/OCG" in text:
                 octype = "ocg"
             elif "/Type/OCMD" in text:
@@ -8362,7 +8362,7 @@ class Rect:
             raise ValueError("bad operand 2")
         r = Rect(self)
         if len(x) == 2:
-            return r.includePoint(x)
+            return r.include_point(x)
         if len(x) == 4:
             return r.include_rect(x)
         raise ValueError("bad operand 2")
