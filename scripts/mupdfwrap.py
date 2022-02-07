@@ -8366,7 +8366,9 @@ def build_swig(
                 mupdf::convert_color(ss, sv, ds, &dv->dv0, is, params);
             }}
 
-            /* SWIG-friendly alternative to fz_set_warning_callback(). */
+            /* SWIG-friendly support for fz_set_warning_callback() and
+            fz_set_error_callback(). */
+
             struct SetWarningCallback
             {{
                 SetWarningCallback( void* user=NULL)
@@ -8384,7 +8386,24 @@ def build_swig(
                 }}
                 void* user;
             }};
-            void fz_set_warning_callback(fz_context *ctx, void (*print)(void *user, const char *message), void *user);
+
+            struct SetErrorCallback
+            {{
+                SetErrorCallback( void* user=NULL)
+                {{
+                    this->user = user;
+                    mupdf::set_error_callback( s_print, this);
+                }}
+                virtual void print( const char* message)
+                {{
+                }}
+                static void s_print( void* self0, const char* message)
+                {{
+                    SetErrorCallback* self = (SetErrorCallback*) self0;
+                    return self->print( message);
+                }}
+                void* user;
+            }};
 
             '''
 
@@ -8397,6 +8416,7 @@ def build_swig(
         text += f'%feature("director") {i};\n'
 
     text += f'%feature("director") SetWarningCallback;\n'
+    text += f'%feature("director") SetErrorCallback;\n'
 
     text += textwrap.dedent(
             '''
@@ -8810,15 +8830,28 @@ def build_swig(
 
                 Device.fill_text = mfz_fill_text
 
-                # Override set_warning_callback().
+                # Override set_warning_callback() and set_error_callback().
+                #
                 set_warning_callback_s = None
+                set_error_callback_s = None
+
                 def set_warning_callback2( printfn):
-                    class SetWarningCallback2(SetWarningCallback):
+                    class Callback( SetWarningCallback):
                         def print( self, message):
                             printfn( message)
                     global set_warning_callback_s
-                    set_warning_callback_s = SetWarningCallback2()
+                    set_warning_callback_s = Callback()
+
+                # Override set_error_callback().
+                def set_error_callback2( printfn):
+                    class Callback( SetErrorCallback):
+                        def print( self, message):
+                            printfn( message)
+                    global set_error_callback_s
+                    set_error_callback_s = Callback()
+
                 set_warning_callback = set_warning_callback2
+                set_error_callback = set_error_callback2
 
                 ''')
 
