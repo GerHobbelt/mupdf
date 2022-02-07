@@ -13046,13 +13046,19 @@ def JM_merge_resources( page, temp_res):
     return (max_alp, max_fonts) # next available numbers
 
 
-def JM_mupdf_warning(message):
+def JM_mupdf_warning( message):
     '''
     redirect MuPDF warnings
     '''
     JM_mupdf_warnings_store.append(message)
     if JM_mupdf_show_warnings:
         sys.stderr.write(f'mupdf: {message}\n')
+
+
+def JM_mupdf_error( message):
+    JM_mupdf_warnings_store.append(message)
+    if JM_mupdf_show_errors:
+        sys.stderr.write(f'mupdf: {message}')
 
 
 def JM_new_bbox_device(result):
@@ -17092,23 +17098,8 @@ class TOOLS:
 #
 import utils
 
-# fixme.
-if 0:
-    pass
-elif 1:
-    mupdf.set_warning_callback(JM_mupdf_warning)
-else:
-    import ctypes
-    jlib.log( ' ')
-    ctypes_mupdf = ctypes.CDLL('libmupdf.so')
-    fn = ctypes.CFUNCTYPE(
-        ctypes.c_int,                   # return
-        ctypes.c_void_p,                # caller_handle
-        ctypes.POINTER(ctypes.c_char),  # str
-        )(JM_mupdf_warning)
-    jlib.log( ' ')
-    ctypes_mupdf.fz_set_warning_callback(0, fn, 0)
-    jlib.log( ' ')
+mupdf.set_warning_callback(JM_mupdf_warning)
+mupdf.set_error_callback(JM_mupdf_error)
 
 # Use utils.*() fns for some class methods.
 #
