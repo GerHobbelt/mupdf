@@ -13046,7 +13046,7 @@ def JM_merge_resources( page, temp_res):
     return (max_alp, max_fonts) # next available numbers
 
 
-def JM_mupdf_warning(user, message):
+def JM_mupdf_warning(message):
     '''
     redirect MuPDF warnings
     '''
@@ -17093,19 +17093,22 @@ class TOOLS:
 import utils
 
 # fixme.
-if 1:
+if 0:
     pass
-elif 0:
-    mupdf.mfz_set_warning_callback(JM_mupdf_warning, 0)
+elif 1:
+    mupdf.set_warning_callback(JM_mupdf_warning)
 else:
     import ctypes
+    jlib.log( ' ')
     ctypes_mupdf = ctypes.CDLL('libmupdf.so')
     fn = ctypes.CFUNCTYPE(
         ctypes.c_int,                   # return
         ctypes.c_void_p,                # caller_handle
         ctypes.POINTER(ctypes.c_char),  # str
         )(JM_mupdf_warning)
+    jlib.log( ' ')
     ctypes_mupdf.fz_set_warning_callback(0, fn, 0)
+    jlib.log( ' ')
 
 # Use utils.*() fns for some class methods.
 #
