@@ -169,7 +169,7 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 				{
 					use_colorkey = 1;
 					for (i = 0; i < n; i++)
-						colorkey[i] = pdf_array_get_real(ctx, obj, i) * 255 + 0.5f;
+						colorkey[i] = fz_clamp(pdf_array_get_real(ctx, obj, i), 0, 1) * 255;
 				}
 			}
 		}
@@ -328,6 +328,7 @@ struct jbig2_segment_header {
 	int length;
 };
 
+/* coverity[-tainted_data_return] */
 static uint32_t getu32(const unsigned char *data)
 {
 	return (((uint32_t)data[0]<<24) | ((uint32_t)data[1]<<16) | ((uint32_t)data[2]<<8) | (uint32_t)data[3]) & 0xFFFFFFFF;
