@@ -1530,7 +1530,7 @@ FUN(PDFDocument_countSignatures)(JNIEnv *env, jobject self)
 	fz_try(ctx)
 		val = pdf_count_signatures(ctx, pdf);
 	fz_catch(ctx)
-		return jni_rethrow(env, ctx), -1;
+		jni_rethrow(env, ctx);
 
 	return val;
 }

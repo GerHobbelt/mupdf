@@ -42,7 +42,9 @@ public class Link
 		for (int i = 1; i < uri.length(); i++)
 		{
 			c = uri.charAt(i);
-			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '+' || c == '-' || c == '.')
+			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+					(c >= '0' && c <= '9') ||
+					c == '+' || c == '-' || c == '.')
 				continue;
 			else
 				return c == ':';

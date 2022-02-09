@@ -70,6 +70,10 @@ public class Context
 	public native static void setUserCSS(String css);
 	public native static void useDocumentCSS(boolean state);
 
+	// The way CSS is controlled may have breaking changes in the future.
+	public native static void setUserCSS(String css);
+	public native static void useDocumentCSS(boolean state);
+
 	public native static Version getVersion();
 
 	public static class Version {
