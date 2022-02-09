@@ -15,7 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with MuPDF. If not, see <https://www.gnu.org/licenses/agpl-3.0.en.html>
 //
-// Alternative licensing terms are available from the licensor.
+// Alternative licensing terms are a
+vailable from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
@@ -359,6 +360,7 @@ static int ignore_errors = 0;
 static int uselist = 1;
 static int alphabits_text = 8;
 static int alphabits_graphics = 8;
+static int subpix_preset = 0;
 
 static int out_cs = CS_UNSET;
 static const char *proof_filename = NULL;
@@ -514,6 +516,8 @@ static int usage(void)
 		"\n"
 		"  -A -  number of bits of anti-aliasing (0 to 8)\n"
 		"  -A -/-  number of bits of anti-aliasing (0 to 8) (graphics, text)\n"
+		"  -A -/-/-  number of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"            subpix preset: 0 = default, 1 = reduced\n"
 		"  -l -  minimum stroked line width (in pixels)\n"
 		"  -K    do not draw text\n"
 		"  -D    disable use of display list\n"
@@ -2202,6 +2206,13 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 	fz_save_accelerator(ctx, doc, absname);
 }
 
+/* Reduced quality sub pix quantizer, intended to match pdfium. */
+static void reduced_sub_pix_quantizer(float size, int *x, int *y)
+{
+	*x = 3;
+	*y = 1;
+}
+
 static int
 read_rotation(const char *arg)
 {
@@ -2516,7 +2527,11 @@ int main(int argc, const char** argv)
 			alphabits_graphics = atoi(fz_optarg);
 			sep = strchr(fz_optarg, '/');
 			if (sep)
+			{
 				alphabits_text = atoi(sep+1);
+				sep = strchr(sep+1, '/');
+				subpix_preset = atoi(sep+1);
+			}
 			else
 				alphabits_text = alphabits_graphics;
 			break;
@@ -2692,6 +2707,8 @@ int main(int argc, const char** argv)
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
 		fz_set_graphics_min_line_width(ctx, min_line_width);
+		if (subpix_preset)
+			fz_set_graphics_sub_pix_quantizer(ctx, reduced_sub_pix_quantizer);
 		if (no_icc)
 			fz_disable_icc(ctx);
 		else
