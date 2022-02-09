@@ -96,7 +96,7 @@ public class Quad
 		return this;
 	}
 
-	protected boolean triangle_contains_point(float x, float y, float ax, float ay, float bx, float by, float cx, float cy) {
+	protected boolean triangleContainsPoint(float x, float y, float ax, float ay, float bx, float by, float cx, float cy) {
 		float s, t, area;
 		s = ay * cx - ax * cy + (cy - ay) * x + (ax - cx) * y;
 		t = ax * by - ay * bx + (ay - by) * x + (bx - ax) * y;
@@ -112,8 +112,8 @@ public class Quad
 	}
 
 	public boolean contains(float x, float y) {
-		return triangle_contains_point(x, y, ul_x, ul_y, ur_x, ur_y, lr_x, lr_y) ||
-			triangle_contains_point(x, y, ul_x, ul_y, lr_x, lr_y, ll_x, ll_y);
+		return triangleContainsPoint(x, y, ul_x, ul_y, ur_x, ur_y, lr_x, lr_y) ||
+			triangleContainsPoint(x, y, ul_x, ul_y, lr_x, lr_y, ll_x, ll_y);
 
 	}
 

@@ -589,7 +589,7 @@ FUN(Document_supportsAccelerator)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
 	fz_document *doc = from_Document(env, self);
-	jboolean support = 0;
+	jboolean support = JNI_FALSE;
 
 	fz_try(ctx)
 		support = fz_document_supports_accelerator(ctx, doc);
