@@ -115,6 +115,11 @@ static inline size_t fz_minz(size_t a, size_t b)
 	return (a < b ? a : b);
 }
 
+static inline int64_t fz_mini64(int64_t a, int64_t b)
+{
+	return (a < b ? a : b);
+}
+
 static inline float fz_max(float a, float b)
 {
 	return (a > b ? a : b);
