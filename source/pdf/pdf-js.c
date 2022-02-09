@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1021,7 +1021,7 @@ static void pdf_js_load_document_level(pdf_js *js)
 				fz_throw(ctx, FZ_ERROR_SYNTAX, "PDF Javascript file %q has embedded NUL characters", buf);
 			}
 
-			pdf_js_execute(js, buf, codebuf);
+			pdf_js_execute(js, buf, codebuf, NULL);
 			fz_free(ctx, codebuf);
 		}
 	}
@@ -1154,7 +1154,7 @@ char *pdf_js_event_value(pdf_js *js)
 	return value;
 }
 
-void pdf_js_execute(pdf_js *js, const char *name, const char *source)
+void pdf_js_execute(pdf_js *js, const char *name, const char *source, char **result)
 {
 	fz_context *ctx;
 
@@ -1165,17 +1165,14 @@ void pdf_js_execute(pdf_js *js, const char *name, const char *source)
 	pdf_begin_implicit_operation(js->ctx, js->doc);
 	fz_try(ctx)
 	{
-		if (js_ploadstring(js->imp, name, source))
+		if (!js_ploadstring(js->imp, name, source))
 		{
-			fz_warn(ctx, "%s", js_trystring(js->imp, -1, "Error"));
-			break;
+			js_pushundefined(js->imp);
+			js_pcall(js->imp, 0);
 		}
-		js_pushundefined(js->imp);
-		if (js_pcall(js->imp, 0))
-		{
-			fz_warn(ctx, "%s", js_trystring(js->imp, -1, "Error"));
-			break;
-		}
+
+		if (result && !js_isundefined(js->imp, -1))
+			*result = fz_strdup(ctx, js_trystring(js->imp, -1, "Error"));
 	}
 	fz_always(ctx)
 	{
@@ -1217,7 +1214,7 @@ void pdf_js_event_init_keystroke(pdf_js *js, pdf_obj *target, pdf_keystroke_even
 int pdf_js_event_result_keystroke(pdf_js *js, pdf_keystroke_event *evt) { return 1; }
 int pdf_js_event_result(pdf_js *js) { return 1; }
 char *pdf_js_event_value(pdf_js *js) { return ""; }
-void pdf_js_execute(pdf_js *js, const char *name, const char *source) { }
+void pdf_js_execute(pdf_js *js, const char *name, const char *source, char **result) { }
 int pdf_js_event_result_validate(pdf_js *js, char **newvalue) { *newvalue=NULL; return 1; }
 
 #endif /* FZ_ENABLE_JS */
