@@ -320,8 +320,12 @@ void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_
 void fz_enable_dbg_output(int severity);
 
 /**
- * The prototype of the error/warning/info callback.
- */
+    The prototype of the error/warning/info callback.
+	
+	A callback called whenever an error message is generated.
+	The user pointer passed to fz_set_error_callback() is passed
+	along with the error message.
+*/
 typedef void fz_error_print_callback(void* user, const char* message);
 
 /**
@@ -333,6 +337,11 @@ typedef void fz_error_print_callback(void* user, const char* message);
 	Returns the previously set error callback.
 */
 void fz_set_error_callback(fz_context *ctx, fz_error_print_callback* print, void *user);
+
+/**
+	Retrieve the currently set error callback, or NULL if none
+	has been set.
+*/
 void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
 /**
@@ -342,6 +351,11 @@ void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, voi
 	The callback must not throw exceptions!
 */
 void fz_set_warning_callback(fz_context *ctx, fz_error_print_callback* print, void *user);
+
+/**
+	Retrieve the currently set warning callback, or NULL if none
+	has been set.
+*/
 void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
 /**
@@ -350,6 +364,11 @@ void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, v
 	The callback must not throw exceptions!
 */
 void fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void* user);
+
+/**
+	Retrieve the currently set info callback, or NULL if none
+	has been set.
+*/
 void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
 /**
