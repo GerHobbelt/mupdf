@@ -58,10 +58,6 @@
 #  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/overlay.cpp"
 #endif
 
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/overlay.cpp"
-#endif
-
 
 //------------------------------------------------------------------------
 // overlaycmn.cpp
