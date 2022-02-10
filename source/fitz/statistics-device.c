@@ -501,7 +501,7 @@ fz_stats_render_flags(fz_context* ctx, fz_device* dev, int set, int clear)
 		flags = 0;
 	else
 	{
-		assert("Unsupported flags combination" == NULL);
+		assert(!"Unsupported flags combination");
 		return;
 	}
 
