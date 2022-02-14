@@ -1339,7 +1339,7 @@ class ClassExtras:
         name = clip( name, 'struct ')
         if not name.startswith( ('fz_', 'pdf_')):
             return
-        return self.items.get( name, ClassExtra())
+        return self.items.setdefault( name, ClassExtra())
     def get_or_none( self, name):
         return self.items.get( name)
 
@@ -5690,7 +5690,8 @@ def class_copy_constructor(
         if not cursor:
             classextra = classextras.get( struct_name)
             if classextra.copyable:
-                jlib.log2( 'changing to non-copyable because no function {name}(): {struct_name}')
+                if g_show_details( struct_name):
+                    jlib.log( 'changing to non-copyable because no function {name}(): {struct_name}')
                 classextra.copyable = False
             return
         if name == keep_name:
@@ -6138,7 +6139,7 @@ def class_write_method(
                     wrap_return = 'value'
 
     if warning_not_copyable:
-        log( '*** warning: {struct_name=} {g_show_details(struct_name)=} {classname}::{decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} is not copyable.')
+        log( '*** warning: {struct_name=} {g_show_details(struct_name)=} {classname}::{decl_h}: Not able to return {return_type} wrapper class for {return_cursor.spelling} because not copyable.')
     if warning_no_raw_constructor:
         log( '*** warning: {struct_name=} {classname}::{decl_h}: Not able to return wrapping class {return_type} from {return_cursor.spelling} because {return_type} has no raw constructor.')
 
