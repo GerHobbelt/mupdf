@@ -7668,7 +7668,7 @@ def cpp_source(
             static const char*  s_check_refs_s = getenv("MUPDF_check_refs");
             static bool         s_check_refs = (s_check_refs_s && !strcmp(s_check_refs_s, "1")) ? true : false;
 
-            /* For each MupDF struct that has an 'int refs' member, we create
+            /* For each MuPDF struct that has an 'int refs' member, we create
             a static instance of this class template with T set to our wrapper
             class, for example:
 
