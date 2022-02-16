@@ -4466,7 +4466,7 @@ def make_function_wrapper_class_aware(
         #jlib.log('Ignoring because ends with "_drop": {fnname}')
         return
 
-    jlib.log( '{=fn_cursor.result_type.spelling fn_cursor.result_type.get_canonical().spelling}')
+    #jlib.log( '{=fn_cursor.result_type.spelling fn_cursor.result_type.get_canonical().spelling}')
     return_type_extras = classextras.get( tu, fn_cursor.result_type.get_canonical().spelling)
     if return_type_extras and not return_type_extras.copyable:
         jlib.log( 'Not generating {fnname_wrapper} because return type is not copyable: {fn_cursor.result_type.spelling}')
@@ -4478,7 +4478,7 @@ def make_function_wrapper_class_aware(
     decl_cpp = f'{fnname_wrapper}('
     num_out_params = 0
     comma = ''
-    jlib.log( '{=fnname_wrapper}')
+    #jlib.log( '{=fnname_wrapper}')
     debug = (fnname_wrapper == 'mfz_make_link_dest_none')
     for arg in get_args( tu, fn_cursor):
         if debug:
@@ -6922,7 +6922,10 @@ def class_wrapper(
     # Class definition beginning.
     #
     out_h.write( '\n')
-    out_h.write( f'/** Wrapper class for struct {struct_name}. */\n')
+    if extras.copyable:
+        out_h.write( f'/** Wrapper class for struct {struct_name}. */\n')
+    else:
+        out_h.write( f'/** Wrapper class for struct {struct_name}. Not copyable or assignable. */\n')
     if struct_cursor.raw_comment:
         out_h.write( f'{struct_cursor.raw_comment}')
         if not struct_cursor.raw_comment.endswith( '\n'):
@@ -7028,7 +7031,7 @@ def class_wrapper(
                 out_h,
                 out_cpp,
                 )
-    else:
+    elif extras.copyable:
         out_h.write( '\n')
         out_h.write( '    /** We use default copy constructor and operator=. */\n')
 
