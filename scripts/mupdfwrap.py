@@ -1340,7 +1340,12 @@ class ClassExtras:
         name = clip( name, 'struct ')
         if not name.startswith( ('fz_', 'pdf_')):
             return
+
         ret = self.items.setdefault( name, ClassExtra())
+
+        if name in g_enums[ tu]:
+            jlib.log( '*** name is an enum: {name=}')
+            return None
 
         if ' ' not in name and not ret.pod and ret.copyable and ret.copyable != 'default':
             # Check whether there is a _keep() fn.
@@ -1348,7 +1353,8 @@ class ClassExtras:
             keep_cursor = find_function( tu, keep_name, method=True)
             if not keep_cursor:
                 if ret.copyable:
-                    jlib.log( '*** Changing .copyable to False for {=name keep_name}')
+                    if 0:
+                        jlib.log( '*** Changing .copyable to False for {=name keep_name}')
                 ret.copyable = False
         return ret
 
@@ -4863,16 +4869,18 @@ def functions_cache_populate( tu):
         return
     fns = dict()
     global_data = dict()
-    enums = list()
+    enums = dict()
 
     for cursor in tu.cursor.get_children():
         if cursor.kind==clang.cindex.CursorKind.ENUM_DECL:
             #jlib.log('ENUM_DECL: {cursor.spelling=}')
+            enum_values = list()
             for cursor2 in cursor.get_children():
                 #jlib.log('    {cursor2.spelling=}')
                 name = cursor2.spelling
                 #if name.startswith('PDF_ENUM_NAME_'):
-                enums.append(name)
+                enum_values.append(name)
+            enums[ cursor.type.get_canonical().spelling] = enum_values
         if (cursor.linkage == clang.cindex.LinkageKind.EXTERNAL
                 or cursor.is_definition()  # Picks up static inline functions.
                 ):
@@ -4997,8 +5005,6 @@ def find_wrappable_function_with_arg0_type_cache_populate( tu):
                         f'no extras defined for result_type={result_type}',
                         ))
             else:
-                if result_type == 'fz_context':
-                    jlib.log( '*** {=result_type result_type_extras.copyable}')
                 if not result_type_extras.constructor_raw:
                     exclude_reasons.append(
                             (
@@ -8988,10 +8994,11 @@ def build_swig(
             with open( swig_py) as f:
                 mupdf_py_content = f.read()
             jlib.log('{len(generated.c_enums)=}')
-            for enum in generated.c_enums:
-                if enum.startswith( 'PDF_ENUM_NAME_'):
-                    #mupdf_py_content += f'print("{enum}=%s" % {enum})\n'
-                    mupdf_py_content += f'{enum} = PdfObj( obj_enum_to_obj( {enum}))\n'
+            for enum_type, enum_names in generated.c_enums.items():
+                for enum_name in enum_names:
+                    if enum_name.startswith( 'PDF_ENUM_NAME_'):
+                        #mupdf_py_content += f'print("{enum_name}=%s" % {enum})\n'
+                        mupdf_py_content += f'{enum_name} = PdfObj( obj_enum_to_obj( {enum_name}))\n'
             with open( swig_py, 'w') as f:
                 f.write( mupdf_py_content)
 
