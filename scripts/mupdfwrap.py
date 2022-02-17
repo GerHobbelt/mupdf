@@ -1344,7 +1344,7 @@ class ClassExtras:
         ret = self.items.setdefault( name, ClassExtra())
 
         if name in g_enums[ tu]:
-            jlib.log( '*** name is an enum: {name=}')
+            #jlib.log( '*** name is an enum: {name=}')
             return None
 
         if ' ' not in name and not ret.pod and ret.copyable and ret.copyable != 'default':
