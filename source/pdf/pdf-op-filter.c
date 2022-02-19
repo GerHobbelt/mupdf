@@ -765,6 +765,7 @@ filter_string_to_segment(fz_context *ctx, pdf_filter_processor *p, unsigned char
 		{
 			uni = FZ_REPLACEMENT_CHARACTER;
 			fz_warn(ctx, "cannot encode character");
+			remove = 0;
 		}
 		else
 			remove = filter_show_char(ctx, p, cid, &uni);
