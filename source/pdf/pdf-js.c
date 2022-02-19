@@ -72,20 +72,64 @@ static pdf_js *unpack_arguments(js_State *J, ...)
 
 static void app_alert(js_State *J)
 {
-	pdf_js *js = unpack_arguments(J, "cMsg", "nIcon", "nType", "cTitle", 0);
+	pdf_js *js = unpack_arguments(J, "cMsg", "nIcon", "nType", "cTitle", "oDoc", "oCheckbox", 0);
 	pdf_alert_event evt;
 
 	evt.message = js_tostring(J, 1);
 	evt.icon_type = js_tointeger(J, 2);
 	evt.button_group_type = js_tointeger(J, 3);
-	evt.title = js_isdefined(J, 4) ? js_tostring(J, 4) : "PDF Alert";
-	evt.button_pressed = 0; /* WIP WIP WIP IS THIS CORRECT? */
-	evt.check_box_message = NULL;
+	evt.title = js_isdefined(J, 4) ? js_tostring(J, 4) : "PDF alert";
+
+	evt.check_box_message = "Do not show this message again";
+	evt.initially_checked = 1;
+	evt.finally_checked = 1;
+
+	if (js_isobject(J, 6))
+	{
+		js_getproperty(J, 6, "cMsg");
+		if (js_isdefined(J, -1))
+			evt.check_box_message = js_tostring(J, -1);
+		js_pop(J, 1);
+
+		js_getproperty(J, 6, "bInitialValue");
+		if (js_isdefined(J, -1))
+			evt.initially_checked = js_tointeger(J, -1);
+		js_pop(J, 1);
+
+		js_getproperty(J, 6, "bAfterValue");
+		if (js_isdefined(J, -1))
+			evt.finally_checked = js_tointeger(J, -1);
+		js_pop(J, 1);
+	}
+
+	/* These are the default buttons automagically "pressed"
+	when the dialog box window is closed in Acrobat. */
+	switch (evt.button_group_type)
+	{
+	case PDF_ALERT_BUTTON_GROUP_OK:
+		evt.button_pressed = PDF_ALERT_BUTTON_OK;
+		break;
+	case PDF_ALERT_BUTTON_GROUP_OK_CANCEL:
+		evt.button_pressed = PDF_ALERT_BUTTON_CANCEL;
+		break;
+	case PDF_ALERT_BUTTON_GROUP_YES_NO:
+		evt.button_pressed = PDF_ALERT_BUTTON_YES;
+		break;
+	case PDF_ALERT_BUTTON_GROUP_YES_NO_CANCEL:
+		evt.button_pressed = PDF_ALERT_BUTTON_CANCEL;
+		break;
+	}
 
 	fz_try(js->ctx)
 		pdf_event_issue_alert(js->ctx, js->doc, &evt);
 	fz_catch(js->ctx)
 		rethrow(js);
+
+	if (js_isobject(J, 6))
+	{
+		js_pushboolean(js->imp, evt.finally_checked);
+		js_setproperty(js->imp, 6, "bAfterValue");
+	}
 
 	js_pushnumber(J, evt.button_pressed);
 }
@@ -820,7 +864,7 @@ static void declare_dom(pdf_js *js)
 #endif
 		js_defproperty(J, -2, "app.platform", JS_READONLY | JS_DONTENUM | JS_DONTCONF);
 
-		addmethod(J, "app.alert", app_alert, 4);
+		addmethod(J, "app.alert", app_alert, 6);
 		addmethod(J, "app.execMenuItem", app_execMenuItem, 1);
 		addmethod(J, "app.launchURL", app_launchURL, 2);
 	}

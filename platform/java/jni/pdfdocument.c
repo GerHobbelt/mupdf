@@ -53,17 +53,34 @@ static void event_cb(fz_context *ctx, pdf_document *doc, pdf_doc_event *event, v
 	case PDF_DOCUMENT_EVENT_ALERT:
 		{
 			pdf_alert_event *alert;
-			jstring jstring = NULL;
+			jstring jtitle = NULL;
+			jstring jmessage = NULL;
+			jstring jcheckboxmsg = NULL;
+			jobject jalertresult;
 
 			alert = pdf_access_alert_event(ctx, event);
 
-			jstring = (*env)->NewStringUTF(env, alert->message);
-			if (!jstring || (*env)->ExceptionCheck(env))
+			jtitle = (*env)->NewStringUTF(env, alert->message);
+			if (!jtitle || (*env)->ExceptionCheck(env))
 				fz_throw_java_and_detach_thread(ctx, env, detach);
 
-			(*env)->CallVoidMethod(env, jlistener, mid_PDFDocument_JsEventListener_onAlert, jstring);
+			jmessage = (*env)->NewStringUTF(env, alert->message);
+			if (!jmessage || (*env)->ExceptionCheck(env))
+				fz_throw_java_and_detach_thread(ctx, env, detach);
+
+			jcheckboxmsg = (*env)->NewStringUTF(env, alert->message);
+			if (!jcheckboxmsg || (*env)->ExceptionCheck(env))
+				fz_throw_java_and_detach_thread(ctx, env, detach);
+
+			jalertresult = (*env)->CallObjectMethod(env, jlistener, mid_PDFDocument_JsEventListener_onAlert, jtitle, jmessage, alert->icon_type, alert->button_group_type, jcheckboxmsg, alert->initially_checked);
 			if ((*env)->ExceptionCheck(env))
 				fz_throw_java_and_detach_thread(ctx, env, detach);
+
+			if (alertresult)
+			{
+				alert->button_pressed = (*env)->GetIntField(env, jalertresult, fid_AlertResult_buttonPressed);
+				alert->finally_checked = (*env)->GetBooleanField(env, jalertresult, fid_AlertResult_checkboxChecked);
+			}
 		}
 		break;
 
