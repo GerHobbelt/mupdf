@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -251,6 +251,7 @@ static float ui_draw_glyph(fz_font *font, float size, int gid, float x, float y)
 {
 	struct glyph *glyph;
 	float s0, t0, s1, t1, xc, yc;
+	fz_irect r;
 
 	glyph = lookup_glyph(font, size, gid, &x, &y);
 	if (!glyph)
@@ -263,10 +264,18 @@ static float ui_draw_glyph(fz_font *font, float size, int gid, float x, float y)
 	xc = floorf(x) + glyph->lsb;
 	yc = floorf(y) - glyph->top + glyph->h;
 
-	glTexCoord2f(s0, t0); glVertex2f(xc, yc - glyph->h);
-	glTexCoord2f(s1, t0); glVertex2f(xc + glyph->w, yc - glyph->h);
-	glTexCoord2f(s1, t1); glVertex2f(xc + glyph->w, yc);
-	glTexCoord2f(s0, t1); glVertex2f(xc, yc);
+	r.x0 = xc;
+	r.y0 = yc - glyph->h;
+	r.x1 = xc + glyph->w;
+	r.y1 = yc;
+
+	if (r.x0 > 0 && r.y0 > 0 && r.y0 <= r.y1 && r.x0 <= r.x1)
+	{
+		glTexCoord2f(s0, t0); glVertex2f(r.x0, r.y0);
+		glTexCoord2f(s1, t0); glVertex2f(r.x1, r.y0);
+		glTexCoord2f(s1, t1); glVertex2f(r.x1, r.y1);
+		glTexCoord2f(s0, t1); glVertex2f(r.x0, r.y1);
+	}
 
 	return fz_advance_glyph(ctx, font, gid, 0) * size;
 }
