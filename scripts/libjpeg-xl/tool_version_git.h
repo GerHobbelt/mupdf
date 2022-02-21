@@ -6,5 +6,5 @@
 #define JPEGXL_PATCH_VERSION    0
 #define JPEGXL_LIBRARY_VERSION "0.6.0"
 
-#define JPEGXL_VERSION         "0.6.0.9a4e68a5"
+#define JPEGXL_VERSION         "0.6.0.c72a478f"
 		
