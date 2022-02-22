@@ -125,6 +125,7 @@ clean:
 	rm -fr ../../$(OUT)/thirdparty
 	rm -f $(MUPDF_JAR)
 	rm -f $(MUPDF_JAVA)
+	rm -f $(MUPDF_CORE)
 	rm -f ../../$(OUT)/*.h
 
 nuke: clean
