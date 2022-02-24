@@ -59,7 +59,7 @@
 
 /* Type declarations */
 
-#ifdef ZLIB_INTERNAL
+#if defined(ZLIB_INTERNAL) && !defined(Z_INTERNAL)
 #  define Z_INTERNAL ZLIB_INTERNAL
 #endif
 
