@@ -779,12 +779,17 @@ import os
 import pickle
 import platform
 import re
-import resource
 import shutil
 import sys
 import textwrap
 import time
 import traceback
+
+try:
+    import resource
+except ModuleNotFoundError:
+    # Not available on Windows.
+    resource = None
 
 import jlib
 
@@ -3263,6 +3268,7 @@ omit_fns = [
         'fz_assert_lock_not_held',  # Is a macro if NDEBUG defined.
         'fz_lock_debug_lock',       # Is a macro if NDEBUG defined.
         'fz_lock_debug_unlock',     # Is a macro if NDEBUG defined.
+        'fz_argv_from_wargv',       # Only defined on Windows. Breaks our out-param wrapper code.
         ]
 
 omit_methods = [
@@ -4353,8 +4359,9 @@ def make_function_wrapper(
     '''
     assert cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL
 
-    verbose = fnname_wrapper == 'pdf_add_annot_ink_list'
-
+    verbose = g_show_details( fnname)
+    if verbose:
+        jlib.log( 'Wrapping {fnname}')
     num_out_params = 0
     for arg in get_args( tu, cursor, include_fz_context=True):
         if is_pointer_to(arg.cursor.type, 'fz_context'):
@@ -4886,7 +4893,8 @@ def functions_cache_populate( tu):
                 ):
             if cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL:
                 fnname = cursor.mangled_name
-                #if fnname.startswith( ('fz_', 'pdf_')) and fnname not in omit_fns:
+                if g_show_details( fnname):
+                    jlib.log( 'Looking at {fnname=}')
                 if fnname not in omit_fns:
                     fns[ fnname] = cursor
             else:
@@ -5275,6 +5283,8 @@ def make_function_wrappers(
     # Sort by function-name to make output easier to read.
     functions.sort()
     for fnname, cursor in functions:
+        if g_show_details( fnname):
+            jlib.log( 'Looking at {fnname}')
         fnname_wrapper = rename.function( fnname)
         # clang-6 appears not to be able to handle fn args that are themselves
         # function pointers, so for now we allow make_function_wrapper() to
@@ -8200,7 +8210,7 @@ def build_swig(
         check_regress=False,
         ):
     '''
-    Builds python/C# wrappers for all mupdf_* functions and classes.
+    Builds python or C# wrappers for all mupdf_* functions and classes.
 
     build_dirs
         A BuildDirs instance.
@@ -8233,6 +8243,18 @@ def build_swig(
             #include "mupdf/classes.h"
             #include "mupdf/classes2.h"
             '''
+    if language == 'csharp':
+        common += f'''
+                /* This is required otherwise compiling the resulting C++ code
+                fails with:
+                    error: use of undeclared identifier 'SWIG_fail'
+
+                But no idea whether it is the 'correct' thing to do; seems odd
+                that SWIG doesn't define SWIG_fail itself.
+                */
+                #define SWIG_fail throw std::runtime_error( e.what());
+                '''
+
     if language == 'python':
         common += f'''
                 /* Support for extracting buffer data into a Python bytes. */
@@ -9829,7 +9851,7 @@ def csharp_settings(build_dirs):
     #   pkg_add mono
     # but we get runtime error when exiting:
     #   mono:build/shared-release/libmupdfcpp.so: undefined symbol '_ZdlPv'
-    # which moght be because of mixing gcc and clang?
+    # which might be because of mixing gcc and clang?
     #
     if g_windows:
         csc = '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe"'
@@ -10336,7 +10358,7 @@ def main():
                         f'{csc} -unsafe {references}  -out:{{OUT}} {{IN}}'
                         )
                 if g_windows:
-                    # Don't know how to mimin Unix's LD_LIBRARY_PATH, so for
+                    # Don't know how to mimic Unix's LD_LIBRARY_PATH, so for
                     # now we cd into the directory containing our generated
                     # libraries.
                     jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
