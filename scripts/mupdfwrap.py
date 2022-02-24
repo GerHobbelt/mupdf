@@ -3906,7 +3906,7 @@ def make_outparam_helper_csharp(
                     text = declaration_text(type_, '').strip()
                     if text == 'int16_t':           text = 'short'
                     elif text == 'int64_t':         text = 'long'
-                    elif text == 'size_t':          text = 'uint'
+                    elif text == 'size_t':          text = 'ulong'
                     elif text == 'unsigned int':    text = 'uint'
                     write(f'{text}')
 
@@ -6701,6 +6701,12 @@ def class_wrapper_virtual_fnptrs(
     if not extras.virtual_fnptrs:
         return
 
+    if g_windows:
+        for out in out_h, out_cpp:
+            out.write( '\n')
+            out.write( f'/* SWIG Directors support not currently available on Windows. */\n')
+            out.write( f'#if 0\n')
+
     generated.virtual_fnptrs.append( f'{classname}2')
     if len(extras.virtual_fnptrs) == 2:
         self_, alloc = extras.virtual_fnptrs
@@ -6871,6 +6877,12 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write( '}\n')
 
     out_h.write(  '};\n')
+
+    if g_windows:
+        for out in out_h, out_cpp:
+            out.write( '\n')
+            out.write( f'/* SWIG Directors support not currently available on Windows. */\n')
+            out.write( f'#endif\n')
 
 
 def class_wrapper(
@@ -7729,13 +7741,13 @@ def cpp_source(
                     if (!this_->m_internal) return;
                     if (allow_int_this)
                     {
-                        std::cerr << __FILE__ << ":" << __LINE__
+                        if (0) std::cerr << __FILE__ << ":" << __LINE__
                                 << " " << file << ":" << line << ":" << fn << ":"
                                 << " this_->m_internal=" << this_->m_internal
                                 << "\\n";
                         if ((intptr_t) this_->m_internal < 4096)
                         {
-                            std::cerr << __FILE__ << ":" << __LINE__
+                            if (0) std::cerr << __FILE__ << ":" << __LINE__
                                     << " " << file << ":" << line << ":" << fn << ":"
                                     << " Ignoring this_->m_internal=" << this_->m_internal
                                     << "\\n";
@@ -8447,24 +8459,29 @@ def build_swig(
     common += translate_ucdn_macros()
 
     text = ''
-    text += '%module(directors="1") mupdf\n'
-    for i in generated.virtual_fnptrs:
-        text += f'%feature("director") {i};\n'
 
-    text += f'%feature("director") SetWarningCallback;\n'
-    text += f'%feature("director") SetErrorCallback;\n'
+    if g_windows:
+        # 2022-02-24: Director classes break Windows builds at the moment.
+        pass
+    else:
+        text += '%module(directors="1") mupdf\n'
+        for i in generated.virtual_fnptrs:
+            text += f'%feature("director") {i};\n'
 
-    text += textwrap.dedent(
-            '''
-            %feature("director:except")
-            {
-              if ($error != NULL)
-              {
-                throw Swig::DirectorMethodException();
-              }
-            }
-            '''
-            )
+        text += f'%feature("director") SetWarningCallback;\n'
+        text += f'%feature("director") SetErrorCallback;\n'
+
+        text += textwrap.dedent(
+                '''
+                %feature("director:except")
+                {
+                  if ($error != NULL)
+                  {
+                    throw Swig::DirectorMethodException();
+                  }
+                }
+                '''
+                )
     for fnname in generated.c_functions:
         if fnname in ('pdf_annot_type', 'pdf_widget_type'):
             # These are also enums which we don't want to ignore. SWIGing the
@@ -8572,22 +8589,30 @@ def build_swig(
 
 
             %array_functions(unsigned char, bytes);
+            ''')
 
-            %exception {{
-              try {{
-                $action
-              }}
-              catch (Swig::DirectorException &e) {{
-                SWIG_fail;
-              }}
-              catch(std::exception& e) {{
-                SWIG_exception(SWIG_RuntimeError, e.what());
-              }}
-              catch(...) {{
-                SWIG_exception(SWIG_RuntimeError, "Unknown exception");
-              }}
-            }}
+    if g_windows:
+        # Directors not currently supported.
+        pass
+    else:
+        text += textwrap.dedent(f'''
+                %exception {{
+                  try {{
+                    $action
+                  }}
+                  catch (Swig::DirectorException &e) {{
+                    SWIG_fail;
+                  }}
+                  catch(std::exception& e) {{
+                    SWIG_exception(SWIG_RuntimeError, e.what());
+                  }}
+                  catch(...) {{
+                    SWIG_exception(SWIG_RuntimeError, "Unknown exception");
+                  }}
+                }}
+                ''')
 
+    text += textwrap.dedent(f'''
             // Ensure SWIG handles OUTPUT params.
             //
             %include "cpointer.i"
@@ -10216,9 +10241,11 @@ def main():
             elif arg in ('--test-python', '-t', '--test-python-gui'):
 
                 env_extra, command_prefix = python_settings(build_dirs)
-
+                join = '&' if g_windows else ''
                 if arg == '--test-python-gui':
-                    command = f'MUPDF_trace=0 MUPDF_check_refs=1 {command_prefix} ./scripts/mupdfwrap_gui.py'
+                    env_extra[ 'MUPDF_trace'] = '0'
+                    env_extra[ 'MUPDF_check_refs'] = '1'
+                    command = f'{command_prefix} ./scripts/mupdfwrap_gui.py'
                     jlib.system( command, env_extra=env_extra, out='log', verbose=1)
 
                 else:
@@ -10362,7 +10389,8 @@ def main():
                     # now we cd into the directory containing our generated
                     # libraries.
                     jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
-                    #jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                    # Note that this doesn't work remotely.
+                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
                 else:
                     jlib.copy(f'thirdparty/zlib/zlib.3.pdf', f'zlib.3.pdf')
                     jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
