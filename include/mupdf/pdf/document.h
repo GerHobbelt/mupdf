@@ -121,7 +121,7 @@ typedef struct pdf_js_console {
 	Retrieve the currently set javascript console, or NULL
 	if none is set.
 */
-pdf_js_console *pdf_get_js_console(fz_context *ctx, pdf_document *doc);
+pdf_js_console *pdf_js_get_console(fz_context *ctx, pdf_document *doc);
 
 /*
 	Set a new javascript console.

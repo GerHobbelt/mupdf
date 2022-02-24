@@ -77,6 +77,13 @@ static void app_alert(js_State *J)
 	pdf_js *js = unpack_arguments(J, "cMsg", "nIcon", "nType", "cTitle", "oDoc", "oCheckbox", 0);
 	pdf_alert_event evt;
 
+	/* TODO: Currently we do not support app.openDoc() in javascript actions, hence
+	oDoc can only point to the current document (or not be passed). When mupdf
+	supports opening other documents oDoc must be converted to a pdf_document * that
+	can be passed to the callback. In the mean time, we just pas the current document.
+	*/
+	evt.doc = js->doc;
+
 	evt.message = js_tostring(J, 1);
 	evt.icon_type = js_tointeger(J, 2);
 	evt.button_group_type = js_tointeger(J, 3);
@@ -88,20 +95,21 @@ static void app_alert(js_State *J)
 
 	if (js_isobject(J, 6))
 	{
-		js_getproperty(J, 6, "cMsg");
-		if (js_isdefined(J, -1))
+		if (js_hasproperty(J, 6, "cMsg"))
+		{
 			evt.check_box_message = js_tostring(J, -1);
-		js_pop(J, 1);
-
-		js_getproperty(J, 6, "bInitialValue");
-		if (js_isdefined(J, -1))
+			js_pop(J, 1);
+		}
+		if (js_hasproperty(J, 6, "bInitialValue"))
+		{
 			evt.initially_checked = js_tointeger(J, -1);
-		js_pop(J, 1);
-
-		js_getproperty(J, 6, "bAfterValue");
-		if (js_isdefined(J, -1))
+			js_pop(J, 1);
+		}
+		if (js_hasproperty(J, 6, "bAfterValue"))
+		{
 			evt.finally_checked = js_tointeger(J, -1);
-		js_pop(J, 1);
+			js_pop(J, 1);
+		}
 	}
 
 	/* These are the default buttons automagically "pressed"
@@ -1215,33 +1223,43 @@ char *pdf_js_event_value(pdf_js *js)
 void pdf_js_execute(pdf_js *js, const char *name, const char *source, char **result)
 {
 	fz_context *ctx;
+	js_State *J;
 
 	if (!js)
 		return;
 
 	ctx = js->ctx;
-	pdf_begin_implicit_operation(js->ctx, js->doc);
+	J = js->imp;
+
+	pdf_begin_implicit_operation(ctx, js->doc);
 	fz_try(ctx)
 	{
-		if (!js_ploadstring(js->imp, name, source))
-		{
-			js_pushundefined(js->imp);
-			js_pcall(js->imp, 0);
+		if (js_ploadstring(J, name, source)) {
+			if (result)
+				*result = fz_strdup(ctx, js_trystring(J, -1, "Error"));
+			js_pop(J, 1);
+		} else {
+			js_pushundefined(J);
+			if (js_pcall(J, 0)) {
+				if (result)
+					*result = fz_strdup(ctx, js_trystring(J, -1, "Error"));
+				js_pop(J, 1);
+			} else {
+				if (result)
+					*result = fz_strdup(ctx, js_tryrepr(J, -1, "can't convert to string"));
+				js_pop(J, 1);
+			}
 		}
-
-		if (result && !js_isundefined(js->imp, -1))
-			*result = fz_strdup(ctx, js_trystring(js->imp, -1, "Error"));
 	}
 	fz_always(ctx)
 	{
-		js_pop(js->imp, 1);
-		pdf_end_operation(js->ctx, js->doc);
+		pdf_end_operation(ctx, js->doc);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
 
-pdf_js_console *pdf_get_js_console(fz_context *ctx, pdf_document *doc)
+pdf_js_console *pdf_js_get_console(fz_context *ctx, pdf_document *doc)
 {
 	return doc->js ? doc->js->console : NULL;
 }
