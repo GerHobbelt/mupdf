@@ -212,6 +212,9 @@ void glColorHex(unsigned int hex)
 
 void ui_draw_bevel_imp(fz_irect area, unsigned ot, unsigned it, unsigned ib, unsigned ob)
 {
+	if (area.x1 - area.x0 < 4 || area.y1 - area.y0 < 4)
+		return;
+
 	glColorHex(ot);
 	glRectf(area.x0, area.y0, area.x1-1, area.y0+1);
 	glRectf(area.x0, area.y0+1, area.x0+1, area.y1-1);
@@ -246,14 +249,26 @@ void ui_draw_bevel_rect(fz_irect area, unsigned int fill, int depressed)
 {
 	ui_draw_bevel(area, depressed);
 	glColorHex(fill);
-	glRectf(area.x0+2, area.y0+2, area.x1-2, area.y1-2);
+
+	if (area.x1 - area.x0 > 2) area.x0 += 2;
+	if (area.x1 - area.x0 > 2) area.x1 -= 2;
+	if (area.y1 - area.y0 > 2) area.y0 += 2;
+	if (area.y1 - area.y0 > 2) area.y1 -= 2;
+
+	glRectf(area.x0, area.y0, area.x1, area.y1);
 }
 
 void ui_draw_ibevel_rect(fz_irect area, unsigned int fill, int depressed)
 {
 	ui_draw_ibevel(area, depressed);
 	glColorHex(fill);
-	glRectf(area.x0+2, area.y0+2, area.x1-2, area.y1-2);
+
+	if (area.x1 - area.x0 > 2) area.x0 += 2;
+	if (area.x1 - area.x0 > 2) area.x1 -= 2;
+	if (area.y1 - area.y0 > 2) area.y0 += 2;
+	if (area.y1 - area.y0 > 2) area.y1 -= 2;
+
+	glRectf(area.x0, area.y0, area.x1, area.y1);
 }
 
 #if defined(FREEGLUT) && (GLUT_API_VERSION >= 6)
@@ -615,35 +630,76 @@ fz_irect ui_pack_layout(int slave_w, int slave_h, enum side side, enum fill fill
 		parcel.x1 = ui.cavity->x1 - padx;
 		parcel.y0 = ui.cavity->y0 + pady;
 		parcel.y1 = ui.cavity->y1 - pady;
-		ui.cavity->x0 = ui.cavity->x1;
-		ui.cavity->y0 = ui.cavity->y1;
 		break;
 	case T:
 		parcel.x0 = ui.cavity->x0 + padx;
 		parcel.x1 = ui.cavity->x1 - padx;
 		parcel.y0 = ui.cavity->y0 + pady;
 		parcel.y1 = ui.cavity->y0 + pady + slave_h;
-		ui.cavity->y0 = parcel.y1 + pady;
 		break;
 	case B:
 		parcel.x0 = ui.cavity->x0 + padx;
 		parcel.x1 = ui.cavity->x1 - padx;
 		parcel.y0 = ui.cavity->y1 - pady - slave_h;
 		parcel.y1 = ui.cavity->y1 - pady;
-		ui.cavity->y1 = parcel.y0 - pady;
 		break;
 	case L:
 		parcel.x0 = ui.cavity->x0 + padx;
 		parcel.x1 = ui.cavity->x0 + padx + slave_w;
 		parcel.y0 = ui.cavity->y0 + pady;
 		parcel.y1 = ui.cavity->y1 - pady;
-		ui.cavity->x0 = parcel.x1 + padx;
 		break;
 	case R:
 		parcel.x0 = ui.cavity->x1 - padx - slave_w;
 		parcel.x1 = ui.cavity->x1 - padx;
 		parcel.y0 = ui.cavity->y0 + pady;
 		parcel.y1 = ui.cavity->y1 - pady;
+		break;
+	}
+
+	parcel.x0 = fz_clampi(parcel.x0, ui.cavity->x0, ui.cavity->x1);
+	parcel.x1 = fz_clampi(parcel.x1, ui.cavity->x0, ui.cavity->x1);
+	parcel.y0 = fz_clampi(parcel.y0, ui.cavity->y0, ui.cavity->y1);
+	parcel.y1 = fz_clampi(parcel.y1, ui.cavity->y0, ui.cavity->y1);
+
+	if (parcel.x1 < parcel.x0)
+	{
+		parcel.x1 = parcel.x0;
+		slave_w = 0;
+	}
+	if (parcel.y1 < parcel.y0)
+	{
+		parcel.y1 = parcel.y0;
+		slave_h = 0;
+	}
+
+	slave_w = parcel.x1 - parcel.x0;
+	slave_w -= padx * 2;
+	if (slave_w < 0)
+		slave_w = 0;
+
+	slave_h = parcel.y1 - parcel.y0;
+	slave_h -= pady * 2;
+	if (slave_h < 0)
+		slave_h = 0;
+
+	switch (side)
+	{
+	default:
+	case ALL:
+		ui.cavity->x0 = ui.cavity->x1;
+		ui.cavity->y0 = ui.cavity->y1;
+		break;
+	case T:
+		ui.cavity->y0 = parcel.y1 + pady;
+		break;
+	case B:
+		ui.cavity->y1 = parcel.y0 - pady;
+		break;
+	case L:
+		ui.cavity->x0 = parcel.x1 + padx;
+		break;
+	case R:
 		ui.cavity->x1 = parcel.x0 - padx;
 		break;
 	}
@@ -755,8 +811,11 @@ void ui_panel_begin(int w, int h, int padx, int pady, int opaque)
 		glColorHex(ui.color.panel);
 		glRectf(area.x0, area.y0, area.x1, area.y1);
 	}
-	area.x0 += padx; area.y0 += pady;
-	area.x1 -= padx; area.y1 -= pady;
+
+	if (area.x1 - area.x0 > padx) area.x0 += padx;
+	if (area.y1 - area.y0 > pady) area.y0 += pady;
+	if (area.x1 - area.x0 > padx) area.x1 -= padx;
+	if (area.y1 - area.y0 > pady) area.y1 -= pady;
 	ui_pack_push(area);
 }
 
@@ -1025,7 +1084,7 @@ void ui_scrollbar(int x0, int y0, int x1, int y1, int *value, int page_size, int
 
 	int total_h = y1 - y0;
 	int thumb_h = fz_maxi(x1 - x0, total_h * page_size / max);
-	int avail_h = total_h - thumb_h;
+	int avail_h = fz_maxi(0, total_h - thumb_h);
 
 	max -= page_size;
 
@@ -1104,11 +1163,16 @@ void ui_tree_begin(struct list *list, int count, int req_w, int req_h, int is_tr
 	static int start_scroll_y = 0; /* we can only drag in one list at a time, so static is safe */
 
 	fz_irect outer_area = ui_pack(req_w, req_h);
-	fz_irect area = { outer_area.x0+2, outer_area.y0+2, outer_area.x1-2, outer_area.y1-2 };
+	fz_irect area = outer_area;
+
+	if (area.x1 - area.x0 > 2) area.x0 += 2;
+	if (area.x1 - area.x0 > 2) area.x1 += -2;
+	if (area.y1 - area.y0 > 2) area.y0 += 2;
+	if (area.y1 - area.y0 > 2) area.y1 -= 2;
 
 	int max_scroll_y = count * ui.lineheight - (area.y1-area.y0);
 
-	if (max_scroll_y > 0)
+	if (max_scroll_y > 0 && area.x1 - area.x0 > 16)
 		area.x1 -= 16;
 
 	if (ui_mouse_inside(area))
@@ -1249,17 +1313,26 @@ void ui_label_with_scrollbar(char *text, int width, int height, int *scroll, int
 			if (ui.scroll_y)
 				*sticky = 0;
 		}
-		ui_scrollbar(area.x1-16, area.y0, area.x1, area.y1,
-				scroll, area.y1-area.y0, n * ui.lineheight, sticky);
+		if (area.x1 - area.x0 >= 16)
+			ui_scrollbar(area.x1-16, area.y0, area.x1, area.y1,
+					scroll, area.y1-area.y0, n * ui.lineheight, sticky);
+		else
+		{
+			ui_scrollbar(area.x0, area.y0, area.x1, area.y1,
+					scroll, area.y1-area.y0, n * ui.lineheight, sticky);
+		}
 	}
 	else
 		*scroll = 0;
 
-	glScissor(area.x0, ui.window_h-area.y1, area.x1-area.x0-16, area.y1-area.y0);
-	glEnable(GL_SCISSOR_TEST);
-	glColorHex(ui.color.text_fg);
-	ui_draw_lines(area.x0, area.y0 - *scroll, lines, n);
-	glDisable(GL_SCISSOR_TEST);
+	if (area.x1 - area.x0 >= 16)
+	{
+		glScissor(area.x0, ui.window_h-area.y1, area.x1-area.x0-16, area.y1-area.y0);
+		glEnable(GL_SCISSOR_TEST);
+		glColorHex(ui.color.text_fg);
+		ui_draw_lines(area.x0, area.y0 - *scroll, lines, n);
+		glDisable(GL_SCISSOR_TEST);
+	}
 }
 
 int ui_popup(const void *id, const char *label, int is_button, int count)
