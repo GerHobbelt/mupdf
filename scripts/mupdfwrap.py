@@ -557,6 +557,9 @@ Usage:
                 -d <details>
                     If specified, we show extra diagnostics when wrapping
                     functions whose name contains <details>.
+                --devenv <path>
+                    Set path of devenv.com script on Windows. If not specified,
+                    as default is used.
                 -f
                     Force rebuilds.
                 --regress
@@ -9399,6 +9402,8 @@ def build( build_dirs, swig, args):
     header_git = False
     swig_python = None
     g_show_details = lambda name: False
+    devenv = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com'
+
     jlib.log('{build_dirs.dir_so=}')
 
     while 1:
@@ -9413,6 +9418,10 @@ def build( build_dirs, swig, args):
                 return d in name
             #g_show_details = lambda name: d in name
             g_show_details = fn
+        elif actions == '--devenv':
+            devenv = args.next()
+            if not g_windows:
+                jlib.log( 'Warning: --devenv was specified, but we are not on Windows so this will have no effect.')
         elif actions == '--python':
             build_python = True
             build_csharp = False
@@ -9565,7 +9574,7 @@ def build( build_dirs, swig, args):
                     #
                     log(f'Building mupdfcpp.dll by running devenv ...')
                     command = (
-                            f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                            f'"{devenv}"'
                             f' platform/win32/mupdf.sln'
                             f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                             f' /Project mupdfcpp'
@@ -9690,7 +9699,7 @@ def build( build_dirs, swig, args):
 
                         jlib.log('Building mupdfpyswig project')
                         command = (
-                                f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                                f'"{devenv}"'
                                 f' platform/win32/mupdfpyswig.sln'
                                 f' /Build "ReleasePython|{build_dirs.cpu.windows_config}"'
                                 f' /Project mupdfpyswig'
@@ -9712,7 +9721,7 @@ def build( build_dirs, swig, args):
 
                         jlib.log('Building mupdfcsharp project')
                         command = (
-                                f'"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com"'
+                                f'"{devenv}"'
                                 f' platform/win32/mupdfcsharpswig.sln'
                                 f' /Build "ReleaseCsharp|{build_dirs.cpu.windows_config}"'
                                 f' /Project mupdfcsharpswig'
