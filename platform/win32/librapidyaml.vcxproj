@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>librapidyaml</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE80885}</ProjectGuid>
+    <RootNamespace>librapidyaml</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDYAML;RAPIDYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/bm/bm_emit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/bm/bm_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/samples/quickstart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/samples/singleheaderlib/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/preprocess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_block_folded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_block_literal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_callbacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_double_quoted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_emit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_empty_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_empty_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_empty_seq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_explicit_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_generic_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_generic_seq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_github_issues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_indentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_location.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_map_of_seq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_mapx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_mapx3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_mapx4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_seqx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_seqx3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_seqx4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_null_val.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_plain_scalar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_preprocess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_scalar_names.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_seq_of_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_serialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_simple_anchor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_simple_doc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_simple_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_simple_seq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_simple_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_single_quoted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_singleheader/libryml_singleheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_style.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_suite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_suite/test_suite_events.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_suite/test_suite_events_emitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_suite/test_suite_parts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_tag_property.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_yaml_events.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/tools/parse_emit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/tools/yaml_events.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/bm/bm_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/bm/libyaml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/detail/checks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/detail/parser_dbg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/detail/print.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/detail/stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/emit.def.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/emit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/preprocess.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/std/map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/std/std.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/std/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/std/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/yml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/ryml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/src/ryml_std.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/test/callbacks_tester.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/test/test_case.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/test/test_group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/test/test_suite/test_suite_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/test/test_suite/test_suite_events.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidyaml/test/test_suite/test_suite_parts.hpp" />
+    <Image Include="../../thirdparty/owemdjee/rapidyaml/img/first_comparison_yaml_cpp.png" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/ROADMAP.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/api/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/api/python/ryml/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/api/python/ryml/tests/parse_bm.py" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/api/python/ryml/tests/test_parse.py" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/cases/bm-cases.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/cases/compile_commands.json" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/results/parse.linux.i7_6800K.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.1.0.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.2.0.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.2.1.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.2.2.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.2.3.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.3.0.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.4.0.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/current.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/add_subdirectory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/add_subdirectory/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/custom_c4core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/custom_c4core/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/fetch_content/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/fetch_content/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/find_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/find_package/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/singleheader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/singleheader/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/singleheaderlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/singleheaderlib/run_shared.sh" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/singleheaderlib/run_static.sh" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/src/ryml-gdbtypes.py" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/test/test_install/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/test/test_singleheader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/tools/amalgamate.py" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/tools/test_suite/run_test_suite.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

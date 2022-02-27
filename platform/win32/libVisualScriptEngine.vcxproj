@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libVisualScriptEngine</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF88DA17}</ProjectGuid>
+    <RootNamespace>libVisualScriptEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BasicUINode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BinaryOperationNodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BuiltInFeatures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_InputUINodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_NodeFeature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_NodeFeatureSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UINodeLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UINodeLayouts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UINodePanels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UnaryOperationNodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_ViewerUINodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/EmbeddingTutorial/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ConnectionInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ConnectionManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Debug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_EvaluationEnv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_InputSlot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_LocString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Localization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_MemoryStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_MemoryXmlStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeCollection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeEngineUtilities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeGroup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeGroupId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeGroupList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeManagerMerge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeManagerSerialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeValueCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_OutputSlot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Serializable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_SingleValues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Slot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_SlotId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Stamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_StringConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_StringUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_UniqueIdGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ValueCombination.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/BinaryOperationNodesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/CacheTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/CompatibitilityTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/DispatcherOutputSlotTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/EnableDisableFeatureTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/GeometryTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/InputNodesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/ListValueNodeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/LocalizationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/MemoryStreamTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/MemoryXmlStreamTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/MultiInputSlotTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeAlignmentTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeConnectionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTestConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTestGrouping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTestNavigation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTestParameterSettings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTestRecalculation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTestSlotMarkers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEditorVisualTestWorkflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeEnumerationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeManagerEventsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeManagerManualUpdateTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeManagerMergeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeManagerSerializationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeManagerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeMultipleConnectionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeRecalculationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeValueCacheTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NodeValueCombinationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/NumberTypeNodeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/OrderedMapTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/SegmentBezierTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/SerializableTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/SlotListTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/StringUtilsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/SvgDrawingContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestEnvironment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestNodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestReference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TypeHandlingTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/UIEngineTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/UINodeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/UnaryOperationNodesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/ValueCombinationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/ValueTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/VersionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ClipboardHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ClipboardState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ConnectionInteractions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ContextDecorators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Drawing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_DrawingCacheKeys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_DrawingContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_DrawingImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_EnvironmentDecorators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_EventHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_FeatureToggle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_FileIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Geometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_IconId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_InputEventHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_InteractionHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Localization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_MenuCommands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NativeNodeEditorControl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeAlignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeCommonMenuCommands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeDrawingImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeDrawingModifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeEditor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeEditorInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeMenuCommands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodePanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodePanelDrawer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeParameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIEnvironment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIManagerCommands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIManagerDrawer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ParameterDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ParameterInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Selection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_SkinParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIDispatcherOutputSlot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIEventHandlers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIInputSlot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIItemFinder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UINode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UINodeGroup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UINodeInvalidator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIOutputSlot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UndoHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UndoState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_VersionCompatibility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ViewBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/TestFramework/SimpleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_ClipboardHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_CustomControl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DContextBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DImageLoader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DOffscreenContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_FileMenu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_GdiOffscreenContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_GdiplusOffscreenContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_GdiplusUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_HwndEventHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_InMemoryDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_NodeEditorHwndControl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_NodeEditorNodeTreeHwndControl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_NodeTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_OffscreenBitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_ParameterDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Toolbar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_WindowsAppUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsEmbeddingDemo/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/AppUIEnvironment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/Application.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BasicUINode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BinaryOperationNodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BuiltInFeatures.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BuiltInNodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_InputUINodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_NodeFeature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_NodeFeatureParameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_NodeFeatureSet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UINodeLayout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UINodeLayouts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UINodePanels.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UnaryOperationNodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_ViewerUINodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_CocoaAppUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_IncludeCocoaHeaders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_MacOSAppUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_NSImageLoader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_NSViewContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_NSViewContextBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_NSViewOffscreenContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_NodeEditorNSViewControl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSAppSupport/MAS_ParameterDialog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/Application.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ConnectionInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ConnectionList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ConnectionManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Debug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_EvaluationEnv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_GenericValue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_InputSlot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_LocString.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Localization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_MemoryStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_MemoryXmlStream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeCollection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeEngineTypes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeEngineUtilities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeGroup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeGroupId.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeGroupList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeId.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeManagerMerge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeManagerSerialization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_NodeValueCache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_OrderedMap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_OutputSlot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Serializable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_SingleValues.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_SlotId.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_SlotList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Stamp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_StringConverter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_StringUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_UniqueIdGenerator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ValueCombination.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/SvgDrawingContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestEnvironment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestNodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestReference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/TestEnvironment/TestUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ClipboardHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ClipboardState.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ConnectionInteractions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ContextDecorators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Drawing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_DrawingCacheKeys.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_DrawingContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_DrawingImage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_EnvironmentDecorators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_EventHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_FeatureToggle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_FileIO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Geometry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_HashUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_IconId.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_InputEventHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_InteractionHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Localization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_MenuCommands.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NativeNodeEditorControl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeAlignment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeCommonMenuCommands.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeCommonParameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeDrawingImage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeDrawingModifier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeEditor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeEditorInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeMenuCommands.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodePanel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodePanelDrawer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeParameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIEnvironment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIManagerCommands.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_NodeUIManagerDrawer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ParameterDialog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ParameterInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Selection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_SkinParams.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIDispatcherOutputSlot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIEventHandlers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIInputSlot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIItemFinder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UINode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UINodeGroup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UINodeInvalidator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UIOutputSlot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UndoHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_UndoState.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_Version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_VersionCompatibility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ViewBox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/TestFramework/SimpleTest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_ClipboardHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_CustomControl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DContextBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DImageLoader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Direct2DOffscreenContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_FileMenu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_GdiOffscreenContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_GdiplusOffscreenContext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_GdiplusUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_HwndEventHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_InMemoryDialog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_IncludeWindowsHeaders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_NodeEditorHwndControl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_NodeEditorNodeTreeHwndControl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_NodeTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_OffscreenBitmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_ParameterDialog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Toolbar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_WindowsAppUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/AppUIEnvironment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/Application.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/CommandIds.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/ResourceIds.hpp" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-Black.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-BlackItalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-Bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-BoldItalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-ExtraBold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-ExtraBoldItalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-ExtraLight.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-ExtraLightItalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-Italic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-Light.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-LightItalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-Medium.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-MediumItalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-Regular.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-SemiBold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-SemiBoldItalic.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-Thin.ttf" />
+    <Font Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/Montserrat-ThinItalic.ttf" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Copy.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Delete.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Group.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/New.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Open.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Paste.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Redo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Save.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Settings.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Undo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_18/Ungroup.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Copy.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Delete.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Group.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/New.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Open.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Paste.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Redo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Save.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Settings.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Undo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_36/Ungroup.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Copy.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Delete.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Group.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/New.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Open.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Paste.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Redo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Save.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Settings.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Undo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_18/Ungroup.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Copy.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Delete.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Group.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/New.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Open.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Paste.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Redo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Save.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Settings.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Undo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/bmp_gray_36/Ungroup.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Copy.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Delete.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Group.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/New.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Open.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Paste.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Redo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Save.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Settings.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Undo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_18/Ungroup.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Copy.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Delete.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Group.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/New.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Open.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Paste.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Redo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Save.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Settings.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Undo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_36/Ungroup.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Copy.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Delete.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Group.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/New.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Open.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Paste.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Redo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Save.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Settings.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Undo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_18/Ungroup.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Copy.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Delete.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Group.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/New.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Open.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Paste.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Redo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Save.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Settings.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Undo.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/CommandIcons/png_gray_36/Ungroup.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/ico/vse.ico" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_016.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_024.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_032.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_048.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_064.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_128.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_256.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_512.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_016.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_024.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_032.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_048.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_064.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_128.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_256.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_dark_512.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_016.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_024.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_032.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_048.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_064.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_128.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_256.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_light_512.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_016.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_024.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_032.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_048.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_064.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_128.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_256.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_simple_text_512.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/png/vse_logo_sm.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/MacOSEmbeddingDemo01.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Abs.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Addition.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/ArcCosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/ArcSine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/ArcTangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Boolean.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Ceil.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Cosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Division.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Double.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/DoubleDistributed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/DoubleIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Equal.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Floor.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/FolderClosed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/FolderOpened.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Greater.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/GreaterOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Integer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/IntegerIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/ListBuilder.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Lower.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/LowerOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Max.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Min.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Multiplication.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Negative.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/NotEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Sine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Sqrt.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Subtraction.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Tangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_18/Viewer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Abs.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Addition.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/ArcCosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/ArcSine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/ArcTangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Boolean.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Ceil.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Cosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Division.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Double.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/DoubleDistributed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/DoubleIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Equal.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Floor.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/FolderClosed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/FolderOpened.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Greater.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/GreaterOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Integer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/IntegerIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/ListBuilder.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Lower.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/LowerOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Max.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Min.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Multiplication.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Negative.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/NotEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Sine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Sqrt.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Subtraction.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Tangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_36/Viewer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Abs.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Addition.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/ArcCosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/ArcSine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/ArcTangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Boolean.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Ceil.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Cosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Division.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Double.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/DoubleDistributed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/DoubleIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Equal.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Floor.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/FolderClosed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/FolderOpened.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Greater.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/GreaterOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Integer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/IntegerIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/ListBuilder.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Lower.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/LowerOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Max.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Min.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Multiplication.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Negative.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/NotEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Sine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Sqrt.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Subtraction.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Tangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_18/Viewer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Abs.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Addition.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/ArcCosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/ArcSine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/ArcTangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Boolean.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Ceil.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Cosine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Division.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Double.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/DoubleDistributed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/DoubleIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Equal.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Floor.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/FolderClosed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/FolderOpened.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Greater.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/GreaterOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Integer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/IntegerIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/ListBuilder.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Lower.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/LowerOrEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Max.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Min.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Multiplication.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Negative.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/NotEqual.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Sine.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Sqrt.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Subtraction.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Tangent.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/bmp_white_36/Viewer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Abs.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Addition.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/ArcCosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/ArcSine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/ArcTangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Boolean.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Ceil.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Cosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Division.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Double.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/DoubleDistributed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/DoubleIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Equal.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Floor.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/FolderClosed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/FolderOpened.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Greater.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/GreaterOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Integer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/IntegerIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/ListBuilder.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Lower.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/LowerOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Max.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Min.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Multiplication.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Negative.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/NotEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Sine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Sqrt.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Subtraction.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Tangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_18/Viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Abs.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Addition.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/ArcCosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/ArcSine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/ArcTangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Boolean.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Ceil.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Cosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Division.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Double.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/DoubleDistributed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/DoubleIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Equal.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Floor.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/FolderClosed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/FolderOpened.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Greater.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/GreaterOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Integer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/IntegerIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/ListBuilder.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Lower.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/LowerOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Max.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Min.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Multiplication.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Negative.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/NotEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Sine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Sqrt.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Subtraction.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Tangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_36/Viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Abs.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Addition.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/ArcCosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/ArcSine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/ArcTangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Boolean.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Ceil.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Cosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Division.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Double.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/DoubleDistributed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/DoubleIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Equal.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Floor.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/FolderClosed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/FolderOpened.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Greater.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/GreaterOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Integer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/IntegerIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/ListBuilder.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Lower.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/LowerOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Max.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Min.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Multiplication.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Negative.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/NotEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Sine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Sqrt.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Subtraction.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Tangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_18/Viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Abs.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Addition.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/ArcCosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/ArcSine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/ArcTangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Boolean.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Ceil.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Cosine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Division.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Double.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/DoubleDistributed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/DoubleIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Equal.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Floor.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/FolderClosed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/FolderOpened.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Greater.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/GreaterOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Integer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/IntegerIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/ListBuilder.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Lower.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/LowerOrEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Max.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Min.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Multiplication.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Negative.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/NotEqual.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Sine.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Sqrt.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Subtraction.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Tangent.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/NodeIcons/png_white_36/Viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Technical/Architecture.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Technical/NodeExample.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/WebEmbeddingDemo01.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/WindowsEmbeddingDemo01.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Abs.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Addition.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Boolean.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Ceil.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Division.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Double.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/DoubleDistributed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/DoubleIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Floor.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Integer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/IntegerIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/ListBuilder.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Multiplication.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Negative.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Sqrt.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Subtraction.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/icons/Viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Abs.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Addition.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Boolean.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Ceil.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Division.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Double.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/DoubleDistributed.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/DoubleIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Floor.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Integer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/IntegerIncremented.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/ListBuilder.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Multiplication.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Negative.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Sqrt.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Subtraction.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_canvas/Viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Abs.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Addition.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Boolean.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Ceil.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Division.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Double.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/DoubleDistributed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/DoubleIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Floor.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/FolderClosed.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/FolderOpened.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Integer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/IntegerIncremented.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/ListBuilder.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Multiplication.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Negative.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Sqrt.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Subtraction.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/node_tree/Viewer.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Copy.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Delete.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Group.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/New.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Open.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Paste.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Redo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Save.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Settings.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Undo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/disabled/Ungroup.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Copy.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Delete.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Group.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/New.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Open.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Paste.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Redo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Save.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Settings.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Undo.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/toolbar/enabled/Ungroup.bmp" />
+    <Image Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/icons/vse.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/resources.rc" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/CreateDevKit.py" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/CreatePackage.py" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/Documentation/Logo/font/OFL.txt" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/README.md" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_VersionInfo.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/Tools/CollectLocalizedStrings.py" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/Tools/GenerateIcons.py" />
+    <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/Tools/GenerateLogoPngs.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

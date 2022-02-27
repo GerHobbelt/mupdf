@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libfilesystem</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF38A587}</ProjectGuid>
-    <RootNamespace>libfilesystem</RootNamespace>
+    <ProjectName>libfyaml</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7D4AE2}</ProjectGuid>
+    <RootNamespace>libfyaml</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,7 +113,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,13 +124,13 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,14 +150,14 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,13 +179,13 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -196,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,14 +205,14 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFYAML;FYAML_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,26 +225,90 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/dir.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/du.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/exception.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/filesystem_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/fwd_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/impl_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/multi1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/multi2.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/filesystem.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/test/catch.hpp" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/README.md" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/cmake/config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/test/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/internal/libfyaml-parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-accel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-atom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-composer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-ctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-diag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-doc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-docbuilder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-docstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-emit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-walk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/tool/fy-tool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/src/xxhash/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/test/libfyaml-test-core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/test/libfyaml-test-emit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/test/libfyaml-test-meta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/test/libfyaml-test-private.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfyaml/test/libfyaml-test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/include/libfyaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-accel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-atom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-composer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-ctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-diag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-doc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-docbuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-docstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-emit-accum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-emit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-typelist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/lib/fy-walk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/valgrind/fy-valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfyaml/src/xxhash/xxhash.h" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/build-aux/shave-libtool.in" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/build-aux/shave.in" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/cmake/fyaml-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/doc/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/doc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/doc/intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/doc/libfyaml.rst" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/doc/man/fy-tool.rst" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/libfyaml.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/get-gpg-key-id-by-email.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/install-linuxdoc.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-check-errors.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-compare-dump.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-compare-examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-compare-parse.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-compare-scan.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-compare-testsuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-emit-check.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-kcachegrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-list-testsuite.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-massif.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/run-valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/scripts/show-desc.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libfyaml/test/Makefile.am" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

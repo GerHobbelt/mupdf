@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcld2-language-detect</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF22A260}</ProjectGuid>
+    <RootNamespace>libcld2-language-detect</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLD2_LANGUAGE_DETECT;CLD2_LANGUAGE_DETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_do_score.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_data_extractor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_data_loader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_data_tool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_cjk_compatible.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_deltaocta0122.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_deltaocta0527.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_deltaoctachrome.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_distinctocta0122.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_distinctocta0527.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_distinctoctachrome.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_octa2_dummy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_quad0122.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_quad0720.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_quadchrome_16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_generated_quadchrome_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_unittest_full.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld_generated_cjk_delta_bi_32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld_generated_cjk_delta_bi_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld_generated_cjk_uni_prop_80.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld_generated_score_quad_octa_0122.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld_generated_score_quad_octa_0122_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld_generated_score_quad_octa_1024_256.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld_generated_score_quad_octa_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cldutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cldutil_offline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cldutil_shared.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compact_lang_det.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compact_lang_det_hint_code.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compact_lang_det_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compact_lang_det_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/debug.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/debug_empty.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/fixunicodevalue.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/generated_distinct_bi_0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/generated_entities.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/generated_language.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/generated_ulscript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/getonescriptspan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/lang_script.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/offsetmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/scoreonescriptspan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/scoreutf8text.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/tote.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cld2-language-detect/internal/utf8statetable.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_data_extractor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2_dynamic_data_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cld2tablesummary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cldutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cldutil_offline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/cldutil_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compact_lang_det_hint_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compact_lang_det_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/fixunicodevalue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/generated_language.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/generated_ulscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/getonescriptspan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/integral_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/lang_script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/langspan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/offsetmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/scoreonescriptspan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/stringpiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/tote.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/unittest_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/utf8acceptinterchange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/utf8prop_lettermarkscriptnum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/utf8repl_lettermarklower.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/utf8scannot_lettermarkspecial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/internal/utf8statetable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/public/compact_lang_det.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cld2-language-detect/public/encodings.h" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/docs/evaluate_cld1_small_20110406.txt" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/docs/evaluate_cld2_large_20130720.txt" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/docs/evaluate_cld2_large_20140122.txt" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/docs/evaluate_cld2_small_20130715.txt" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/docs/evaluate_cld2_small_20140122.txt" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/docs/test_version.txt" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/internal/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compile_and_test_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compile_dynamic.sh" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compile_full.sh" />
+    <Text Include="../../thirdparty/owemdjee/cld2-language-detect/internal/compile_libs.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsmhasher</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF35B922}</ProjectGuid>
+    <RootNamespace>libsmhasher</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSMHASHER;SMHASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/AvalancheTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Bitslice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Bitvec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/City.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/CityTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/DifferentialTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/FarmTest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/HashMapTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Hashes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/HighwayHash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/KeysetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/MurmurHash1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/MurmurHash2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/MurmurHash3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_test_naive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/PMurHash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/SpeedTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Spooky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/SpookyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/SpookyTestV2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/SpookyV2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/SuperFastHash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/Types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/asconhashv12/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/asconhashv12/permutations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/asconhashv12/printstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/beamsplitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake2b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake2s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake3/blake3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake3/blake3_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake3/blake3_avx512.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake3/blake3_dispatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake3/blake3_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake3/blake3_portable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/blake3/blake3_sse41.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/chaskey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/clhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/cmetrohash64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/crc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/crc32-generated-constants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/crc32_hw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/crc32_hw1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/crc32c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/discohash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/farmhash-c-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/farmhash-c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/farmhash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/farsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/fasthash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/floppsyhash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/halfsiphash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/hasshe2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/jody_hash32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/jody_hash64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/lookup3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/md5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash128.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash128crc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash64crc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/mum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/opt_cmetrohash64_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/pearson_hash/pearson.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/pearson_hash/pearsonb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/pengyhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/rijndael-alg-fst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/rmd128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/rmd160.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/rmd256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/seahash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/sha1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/sha2/sha224.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/sha2/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/sha2/sha512_224.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/sha2/sha512_256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/sha3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/siphash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/siphash_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/siphash_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha0_ia32aes_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha0_ia32aes_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha0_ia32aes_noavx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/tifuhash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/tsip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/umash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/vmac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/wyhash_condom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/smhasher/xxhash.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/AvalancheTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/Bitvec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/City.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/CityCrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/DifferentialTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/HashMapTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/Hashes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/KeysetTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/MurmurHash1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/MurmurHash2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/MurmurHash3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_64_out_32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_common_naive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_naive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_naive_64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_test_naive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMP_Multilinear_test_speed_alt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/PMurHash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/Platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/Random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/SpeedTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/Spooky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/SpookyV2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/Stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/Types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/ahash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/ascon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/crypto_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/forceinline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/permutations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/printstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/round.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/asconhashv12/word.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/beamsplitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/blake3/blake3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/blake3/blake3_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/clhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/cmetrohash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/crc32c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/discohash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/farmhash-c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/farmhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/farsh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/fasthash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/fhtw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/floppsyhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/halftime-hash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/jody_hash32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/jody_hash64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/khash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/meow_hash_x64_aesni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash128crc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/metrohash/metrohash64crc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/metrohash/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/metrohash/sse2neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/mir-hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/mum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/o1hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/opt_cmetrohash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/meminfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/phmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/phmap_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/phmap_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/phmap_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/phmap_dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/phmap_fwd_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/phmap_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/pearson_hash/pearson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/pearson_hash/pearsonb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/pearson_hash/portable_endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/pengyhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/rijndael-alg-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/siphash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/siphash_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/sse2neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/t1ha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha0_ia32aes_a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha0_ia32aes_b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/t1ha/t1ha_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tabulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tifuhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_argchk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_cipher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_pk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_pkcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/tomcrypt_prng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/umash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/umash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/vmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/wyhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/wyhash32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/xxh3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/smhasher/xxhash.h" />
+    <Image Include="../../thirdparty/owemdjee/smhasher/doc/SMhasher-banner.png" />
+    <MASM Include="../../thirdparty/owemdjee/smhasher/falkhash.asm" />
+    <MASM Include="../../thirdparty/owemdjee/smhasher/fhtw.asm" />
+    <MASM Include="../../thirdparty/owemdjee/smhasher/os_dependent_stuff.asm" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/CMakeARM64Cross.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/CMakeARMCross.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/README.md" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/asconhashv12/README.md" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/blake3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/build32.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/crc32-pclmul_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/debug.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/BEBB4185.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/BadHash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/City128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/City32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/City64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/City64low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/City64noSeed.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/CityCrc128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Crap8.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV1A_Pippip_Yurii.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV1A_Totenschiff.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV1a.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV1a_YT.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FNV64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FarmHash128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FarmHash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FarmHash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/FastestHash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/GoodOAAT.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/HalfSipHash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/HighwayHash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/JenkinsOOAT.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/JenkinsOOAT_perl.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/MUM.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/MUMlow.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/MeowHash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/MeowHash32low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/MeowHash64low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/MicroOAAT.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur2A.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur2B.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur2C.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur3A.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur3C.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Murmur3F.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/MurmurOAAT.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/NOP_OAAT_read64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/PMPML_32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/PMPML_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/PMurHash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/SipHash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/SipHash13.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Spooky128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Spooky32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/Spooky64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/SpookyV2_128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/SpookyV2_32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/SpookyV2_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/TSip.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/VHASH_32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/VHASH_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/aesnihash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/ahash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/asconhashv12.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/asconhashv12_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/badseeds.log.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/beamsplitter.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/bernstein.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2b-160.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2b-224.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2b-256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2b-256_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2s-128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2s-160.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2s-224.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2s-256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake2s-256_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/blake3_c.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/chaskey.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/clhash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/cmetrohash64_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/cmetrohash64_1o.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/cmetrohash64_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc32_hw.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc32_hw1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc32_pclmul.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crc64_hw.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/crcutil.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/donothing128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/donothing32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/donothing64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/falkhash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/farmhash128_c.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/farmhash32_c.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/farmhash64_c.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/farsh128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/farsh256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/farsh32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/farsh64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/fasthash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/fasthash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/fibonacci.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/fletcher2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/fletcher4.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/floppsyhash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash512.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/halftime_hash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/hasshe2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/jodyhash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/jodyhash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/k-hash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/k-hash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/komihash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/lookup3.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/md5-128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/md5_32a.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash128_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash128_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash128crc_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash128crc_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash64_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash64_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash64crc_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/metrohash64crc_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/mirhash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/mirhash32low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/mirhashstrict.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/mirhashstrict32low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/multiply_shift.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/mx3.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/nmhash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/nmhash32x.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/o1hash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pair_multiply_shift.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pearsonbhash128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pearsonbhash256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pearsonbhash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pearsonhash128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pearsonhash256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pearsonhash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/pengyhash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/poly_1_mersenne.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/poly_2_mersenne.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/poly_3_mersenne.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/poly_4_mersenne.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/prvhash64_128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/prvhash64_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/prvhash64_64m.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/prvhash64s_128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/prvhash64s_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/rmd128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/rmd160.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/rmd256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sdbm.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/seahash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/seahash32low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha1-160.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha1_32a.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha1ni.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha1ni_32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha2-224.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha2-224_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha2-256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha2-256_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha2ni-256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha2ni-256_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha3-256.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sha3-256_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sumhash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/sumhash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/superfast.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha0_32be.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha0_32le.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha0_aes_avx1.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha0_aes_avx2.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha0_aes_noavx.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha1_64be.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha1_64le.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha2_atonce.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha2_atonce128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha2_stream.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/t1ha2_stream128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/tabulation.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/tabulation32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/tifuhash_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/umash128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/umash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/umash32_hi.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/umash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/wyhash.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/wyhash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/wyhash32low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/x17.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/xxHash32.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/xxHash64.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/xxh128.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/xxh128low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/xxh3.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/doc/xxh3low.txt" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/parallel_hashmap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/pearson_hash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/sanity.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/speed.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/speedall.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testall.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testextra.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testgood-but-poor.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testhashmaps.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testpar-good.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testpar.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testpar1.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testpar2.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testpoor-but-good.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-air.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-phone.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testspeed-ryzen3.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testspeed.sh" />
+    <Text Include="../../thirdparty/owemdjee/smhasher/testspeed32.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

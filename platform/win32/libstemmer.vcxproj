@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libfilesystem</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF38A587}</ProjectGuid>
-    <RootNamespace>libfilesystem</RootNamespace>
+    <ProjectName>libstemmer</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC3D48B}</ProjectGuid>
+    <RootNamespace>libstemmer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,7 +113,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,13 +124,13 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,14 +150,14 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,13 +179,13 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -196,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,14 +205,14 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFILESYSTEM;FILESYSTEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTEMMER;STEMMER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,26 +225,82 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/dir.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/examples/du.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/exception.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/filesystem_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/fwd_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/impl_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/multi1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/filesystem/test/multi2.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/filesystem.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_fwd.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/include/ghc/fs_std_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/filesystem/test/catch.hpp" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/README.md" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/cmake/config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/filesystem/test/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/examples/stemwords.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/libstemmer/libstemmer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/libstemmer/libstemmer_utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/runtime/api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/runtime/utilities.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_danish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_dutch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_english.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_finnish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_french.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_german.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_hungarian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_italian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_norwegian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_porter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_portuguese.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_spanish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_swedish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_2_romanian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_KOI8_R_russian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_danish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_dutch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_english.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_finnish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_french.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_german.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_hungarian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_italian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_norwegian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_porter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_portuguese.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_romanian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_russian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_spanish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_swedish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_turkish.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/include/libstemmer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/libstemmer/modules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/libstemmer/modules_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/runtime/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/runtime/header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_danish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_dutch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_english.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_finnish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_french.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_german.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_hungarian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_italian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_norwegian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_porter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_portuguese.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_spanish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_1_swedish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_ISO_8859_2_romanian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_KOI8_R_russian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_danish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_dutch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_english.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_finnish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_french.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_german.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_hungarian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_italian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_norwegian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_porter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_portuguese.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_romanian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_russian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_spanish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_swedish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libstemmer/src_c/stem_UTF_8_turkish.h" />
+    <Text Include="../../thirdparty/owemdjee/libstemmer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libstemmer/libstemmer/libstemmer_c.in" />
+    <Text Include="../../thirdparty/owemdjee/libstemmer/libstemmer/modules.txt" />
+    <Text Include="../../thirdparty/owemdjee/libstemmer/libstemmer/modules_utf8.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -133,6 +133,7 @@ const projectMap = {
     "libjpeg-xl-test": "jpeg-xl",
     "libcxxtest_catch2_2_gtest": "/cxxtest_catch_2_gtest",
     "otl-ml": "OptimizationTemplateLibrary",
+    "manticore": "manticoresearch",
 };
 
 for (const key in projectMap) {

@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>upscaledb</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6EDAB9}</ProjectGuid>
+    <RootNamespace>upscaledb</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_UPSCALEDB;UPSCALEDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/aes/aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/json/ConvertUTF.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/json/JSON_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/json/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/mongoose/mongoose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/gzio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/infback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/inffast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/inftrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/minigzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/trees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/uncompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/zutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/java/src/hamsterdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/client1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/db1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/db2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/db3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/db4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/db5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/db6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/env1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/env2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/env3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/samples/server1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/blob.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_check.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_cursor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_enum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_erase.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_find.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_insert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/btree_stats.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/changeset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/cursor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/db.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/device.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/env.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/extkeys.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/freelist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/freelist_statistics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/freelist_v2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/hamsterdb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/journal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/log.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/mem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/os_posix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/os_win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/page.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/protocol/protocol.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/remote.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/server/hamserver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/server/os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/txn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/txn_cursor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/src/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/tools/config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/tools/getopts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/tools/ham_dump.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/tools/ham_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/tools/ham_recover.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/tools/hamzilla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/tools/wsclean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/api110.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/approx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/bfc-sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/bfc-signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/bfc-testsuite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/btree_cursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/btree_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/btree_insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/btree_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/changeset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/cppapi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/cursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/duplicates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/empty_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/endian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/env.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/extkeys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/freelist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/hamsterdb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/journal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/os.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/page.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/partial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/recno.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/recovery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/remote.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/threading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/txn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/upscaledb/unittests/txn_cursor.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/aes/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/json/ConvertUTF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/json/JSON_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/mongoose/mongoose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/inffixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/zconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/zconf.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/include/ham/hamsterdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/include/ham/hamsterdb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/include/ham/hamsterdb_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/include/ham/hamsterdb_srv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/include/ham/hamsterdb_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/include/ham/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_CompareCallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_Const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_Cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_Database.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_DatabaseException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_DuplicateCompareCallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_Environment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_ErrorHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_License.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_Parameter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_PrefixCompareCallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_Transaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/java/src/de_crupp_hamsterdb_Version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/backend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/blob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/btree_cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/btree_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/btree_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/changeset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/endianswap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/errorinducer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/extkeys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/freelist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/freelist_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/freelist_v2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/hash-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/internal_fwd_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/journal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/journal_entries.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/packstart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/packstop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/page.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/protocol/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/rb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/serial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/server/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/txn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/txn_cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/src/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/tools/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/tools/getopts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/unittests/bfc-signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/unittests/bfc-testsuite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/unittests/hamster_fixture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/upscaledb/unittests/os.hpp" />
+    <Image Include="../../thirdparty/owemdjee/upscaledb/documentation/hamsterdb-main.jpg" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/3rdparty/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/3rdparty/aes/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/3rdparty/json/JSON_PARSER_README.htm" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/3rdparty/json/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/3rdparty/mongoose/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/3rdparty/zlib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/contrib/wince/README.TXT" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/include/ham/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/java/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/java/java/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/java/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/java/unittests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/samples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/src/protocol/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/src/server/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/compare.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/db1.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/env3-1-keynumeric.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/env3-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/env3-2-keynumeric-maxrec4.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/env3-2-keynumeric-recstring.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/env3-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/env3-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/env3.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/extkeys-keystring-maxkey3-maxrec2000.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/extkeys-keystring-maxkey3.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/extkeys-keystring-maxkey3000.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_dump/generate.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/compare.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/db1-0xf000-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/db1-0xf000.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/db1-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/db1.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3-1-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3-2-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3-3-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/env3.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/extkeys-0xf000-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/extkeys-0xf000.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/extkeys-f.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/extkeys.txt" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/ham_info/generate.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/prepare.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/tools/tests/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/unittests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/update_version.sh" />
+    <Text Include="../../thirdparty/owemdjee/upscaledb/win32/README.TXT" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

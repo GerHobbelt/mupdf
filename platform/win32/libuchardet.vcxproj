@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libuchardet</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0ED130}</ProjectGuid>
+    <RootNamespace>libuchardet</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/build-mac/uchardet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/script/header-template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/CharDistribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/JpCntx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangArabicModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangBulgarianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangCroatianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangCzechModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangDanishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangEnglishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangEsperantoModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangEstonianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangFinnishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangFrenchModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangGermanModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangGreekModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangHebrewModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangHindiModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangHungarianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangIrishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangItalianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangLatvianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangLithuanianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangMalteseModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangPolishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangPortugueseModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangRomanianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangRussianModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangSlovakModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangSloveneModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangSpanishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangSwedishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangThaiModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangTurkishModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/LangModels/LangVietnameseModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsBig5Prober.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsCJKDetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsCharSetProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsEUCJPProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsEUCKRProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsEUCTWProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsEscCharsetProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsEscSM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsGB2312Prober.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsHebrewProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsJohabProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsLanguageDetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsLatin1Prober.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsMBCSGroupProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsMBCSSM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsSBCSGroupProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsSBCharSetProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsSJISProber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsUTF8Prober.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/nsUniversalDetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/tools/uchardet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/src/uchardet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/uchardet/test/uchardet-tests.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/CharDistribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/JpCntx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsBig5Prober.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsCJKDetector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsCharSetProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsCodingStateMachine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsEUCJPProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsEUCKRProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsEUCTWProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsEscCharsetProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsGB2312Prober.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsHebrewProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsJohabProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsLanguageDetector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsLatin1Prober.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsMBCSGroupProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsPkgInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsSBCSGroupProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsSBCharSetProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsSJISProber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsUTF8Prober.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nsUniversalDetector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/nscore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/prmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/uchardet/src/uchardet.h" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/doc/README.maintainer" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/BuildLangModel.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/codepoints.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/db.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/ibm852.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-1.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-10.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-11.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-13.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-15.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-16.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-2.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-3.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-4.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-6.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-7.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-8.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/iso-8859-9.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/mac-centraleurope.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/tis-620.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/viscii.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/windows-1250.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/windows-1252.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/windows-1253.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/windows-1255.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/windows-1256.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/windows-1257.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/charsets/windows-1258.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/debug.sh" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/ar.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/cs.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/da.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/de.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/el.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/en.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/eo.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/es.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/et.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/fi.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/fr.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/ga.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/he.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/hi.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/hr.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/hu.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/it.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/ko.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/lt.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/lv.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/mt.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/pl.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/pt.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/ro.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/sk.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/sl.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/sv.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/th.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/tr.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/langs/vi.py" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/script/win32.sh" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/src/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ar/iso-8859-6.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ar/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ar/windows-1256.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/bg/windows-1251.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/cs/ibm852.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/cs/iso-8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/cs/mac-centraleurope.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/cs/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/cs/windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/da/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/da/iso-8859-15.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/da/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/da/windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/de/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/de/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/de/windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/el/iso-8859-7.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/el/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/el/windows-1253.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/en/ascii.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/eo/iso-8859-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/eo/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/es/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/es/iso-8859-15.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/es/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/es/windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/et/iso-8859-13.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/et/iso-8859-15.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/et/iso-8859-4.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/et/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/et/windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/et/windows-1257.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/fi/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/fi/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/fr/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/fr/iso-8859-15.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/fr/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/fr/windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ga/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ga/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ga/windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/he/iso-8859-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/he/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/he/windows-1255.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hi/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hr/ibm852.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hr/iso-8859-13.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hr/iso-8859-16.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hr/iso-8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hr/mac-centraleurope.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hr/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hr/windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hu/iso-8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hu/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/hu/windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/it/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/it/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ja/euc-jp.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ja/iso-2022-jp.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ja/shift_jis.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ja/utf-16be.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ja/utf-16le.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ja/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ko/iso-2022-kr.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ko/johab.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ko/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lt/iso-8859-10.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lt/iso-8859-13.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lt/iso-8859-4.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lt/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lv/iso-8859-10.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lv/iso-8859-13.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lv/iso-8859-4.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/lv/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/mt/iso-8859-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/mt/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pl/ibm852.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pl/iso-8859-13.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pl/iso-8859-16.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pl/iso-8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pl/mac-centraleurope.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pl/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pl/windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pt/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/pt/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ro/ibm852.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ro/iso-8859-16.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ro/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ro/windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ru/ibm855.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ru/ibm866.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ru/iso-8859-5.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ru/koi8-r.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ru/mac-cyrillic.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/ru/windows-1251.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sk/ibm852.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sk/iso-8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sk/mac-centraleurope.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sk/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sk/windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sl/ibm852.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sl/iso-8859-16.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sl/iso-8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sl/mac-centraleurope.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sl/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sl/windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sv/iso-8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sv/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/sv/windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/th/iso-8859-11.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/th/tis-620.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/th/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/tr/iso-8859-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/tr/iso-8859-9.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/tr/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/vi/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/vi/viscii.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/vi/windows-1258.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/zh/big5.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/zh/euc-tw.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/zh/gb18030.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/test/zh/utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/uchardet-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/uchardet/uchardet.pc.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
