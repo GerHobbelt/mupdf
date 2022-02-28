@@ -4,7 +4,7 @@
 
 The test code at least makes some important choices based on a `__cplusplus` version code check, which **fails in MSVC** unless you use the fix described by Microsoft here: [MSVC now correctly reports `__cplusplus` - C++ Team Blog (microsoft.com)](https://devblogs.microsoft.com/cppblog/msvc-now-correctly-reports-__cplusplus/) (April 2018)
 
-Quoting thee relevant chunk (emphasis in bold is mine):
+Quoting the relevant chunk (emphasis in bold is mine):
 
 > The MSVC compiler’s definition of the `__cplusplus` predefined macro leaps ahead 20 years in Visual Studio 2017 version 15.7 Preview 3. This macro has stubbornly remained at the value “199711L”, indicating (erroneously!) that the compiler conformed to the C++98 Standard. Now that [our conformance catch-up work is drawing to a close](https://devblogs.microsoft.com/vcblog//07/c-standards-conformance-from-microsoft) we’re updating the `__cplusplus` macro to reflect the true state of our implementation. The value of the `__cplusplus` macro doesn’t imply that we no longer have any conformance bugs. It’s just that the new value is much more accurate than always reporting “199711L”.
 > 
