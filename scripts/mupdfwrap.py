@@ -4626,7 +4626,6 @@ def make_function_wrapper_class_aware(
     decl_cpp = f'{fnname_wrapper}('
     num_out_params = 0
     comma = ''
-    #jlib.log( '{=fnname_wrapper}')
     debug = g_show_details( fnname_wrapper)
     for arg in get_args( tu, fn_cursor):
         if debug:
@@ -4680,13 +4679,14 @@ def make_function_wrapper_class_aware(
 
     return_cursor = None
     return_type = None
-    fn_h = declaration_text( fn_cursor.result_type, decl_h)
-    fn_cpp = declaration_text( fn_cursor.result_type, f'{decl_cpp}')
 
     if 0:
         pass
 
     else:
+        fn_h = declaration_text( fn_cursor.result_type, decl_h)
+        fn_cpp = declaration_text( fn_cursor.result_type, f'{decl_cpp}')
+
         # See whether we can convert return type to an instance of a wrapper
         # class.
         #
@@ -6071,7 +6071,7 @@ def class_write_method(
     have_used_this = False
     num_out_params = 0
     comma = ''
-    #debug = struct_name == 'pdf_document' and fnname == 'pdf_page_write'
+    debug = g_show_details( fnname)
     for arg in get_args( tu, fn_cursor):
         if debug:
             log( 'Looking at {struct_name=} {fnname=} {fnname_wrapper} {arg=}', 1)
@@ -6100,9 +6100,9 @@ def class_write_method(
                     log('cannot find {alt.spelling=} {arg.type.spelling=} {name=}')
             if not arg.out_param and not classextras.get( tu, arg.alt.type.spelling).pod:
                 const = 'const '
-            decl_h +=   f'{const}{rename.class_(arg.alt.type.spelling)}& '
-            decl_h += f'{arg.name}'
-            decl_cpp += f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
+            text = f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
+            decl_h += text
+            decl_cpp += text
         else:
             logx( '{arg.spelling=}')
             decl_text = declaration_text( arg.cursor.type, arg.name)
@@ -6162,7 +6162,11 @@ def class_write_method(
                     # Change return type to be instance of class wrapper.
                     return_type = rename.class_(return_cursor.spelling)
                     if g_show_details(return_cursor.type.spelling) or g_show_details(struct_name):
-                        log('{return_cursor.type.spelling=} {return_cursor.spelling=} {struct_name=} {return_extras.copyable=} {return_extras.constructor_raw=}')
+                        log('{return_cursor.type.spelling=}'
+                                ' {return_cursor.spelling=}'
+                                ' {struct_name=} {return_extras.copyable=}'
+                                ' {return_extras.constructor_raw=}'
+                                )
                     if return_extras.copyable and return_extras.constructor_raw:
                         fn_h = f'{return_type} {decl_h}'
                         fn_cpp = f'{return_type} {classname}::{decl_cpp}'
@@ -6266,10 +6270,33 @@ def class_write_method(
                 )
 
 
-def class_custom_method( tu, register_fn_use, struct_cursor, classname, extramethod, out_h, out_cpp):
+def class_custom_method(
+        tu,
+        register_fn_use,
+        struct_cursor,
+        classname,
+        extramethod,
+        out_h,
+        out_cpp,
+        ):
     '''
     Writes custom method as specified by <extramethod>.
+
+        tu
+            .
+        register_fn_use
+            Callable taking single <fnname> arg.
+        struct_cursor
+            Cursor for definition of MuPDF struct.
+        classname
+            Name of wrapper class for <struct_cursor>.
+        extramethod
+            An ExtraMethod or ExtraConstructor instance.
+        out_h
+        out_cpp
+            Where to write generated code.
     '''
+    assert isinstance( extramethod, ( ExtraMethod, ExtraConstructor)), f'{type(extramethod)}'
     is_constructor = False
     is_destructor = False
     is_begin_end = False
