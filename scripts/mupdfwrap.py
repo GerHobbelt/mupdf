@@ -4579,207 +4579,6 @@ def function_wrapper_class_aware_body(
     out_cpp.write( f'\n')
 
 
-def make_function_wrapper_class_aware(
-        tu,
-        fn_cursor,
-        fnname,
-        out_h,
-        out_cpp,
-        generated,
-        ):
-    '''
-    Writes a function that calls <fnname>, translating args and return to
-    wrapper classes as possible.
-
-    Also appends python and C# code to generated.swig_python and
-    generated.swig_csharp if <generated> is not None.
-
-        tu
-            .
-        fn_cursor
-        fnname
-            Name of fz_*() fn to wrap, e.g. fz_concat.
-        out_h
-        out_cpp
-            Where to write generated code.
-        generated
-            If not None and there are one or more out-params, we write
-            python code to generated.swig_python that overrides the default
-            SWIG-generated method to call our *_outparams_fn() alternative.
-    '''
-    assert fnname.startswith( ('fz_', 'pdf_'))
-
-    if fnname.endswith('_drop'):
-        # E.g. fz_concat_push_drop() is not safe (or necessary) for us because
-        # we need to manage reference counts ourselves.
-        #jlib.log('Ignoring because ends with "_drop": {fnname}')
-        return
-
-    fnname_wrapper = rename.function_class_aware( fnname)
-
-    #jlib.log( '{=fn_cursor.result_type.spelling fn_cursor.result_type.get_canonical().spelling}')
-    return_type_extras = classextras.get( tu, fn_cursor.result_type.get_canonical().spelling)
-    if return_type_extras and not return_type_extras.copyable:
-        jlib.log( 'Not generating {fnname_wrapper} because return type is not copyable: {fn_cursor.result_type.spelling}')
-        return
-
-    # Construct prototype fnname(args).
-    #
-    decl_h = f'{fnname_wrapper}('
-    decl_cpp = f'{fnname_wrapper}('
-    num_out_params = 0
-    comma = ''
-    debug = g_show_details( fnname_wrapper)
-    for arg in get_args( tu, fn_cursor):
-        if debug:
-            log( 'Looking at {struct_name=} {fnname=} {fnname_wrapper} {arg=}', 1)
-        decl_h += comma
-        decl_cpp += comma
-        if arg.out_param:
-            num_out_params += 1
-        if arg.alt:
-            # This parameter is a pointer to a struct that we wrap.
-            const = ''
-            arg_extras = classextras.get( tu, arg.alt.type.spelling)
-            assert arg_extras, jlib.log_text( '{=structname fnname arg.alt.type.spelling}')
-            if not arg.out_param and not arg_extras.pod:
-                const = 'const '
-            if arg_extras.pod == 'none':
-                jlib.log( 'Not wrapping because {arg=} wrapper has {extras.pod=}', 1)
-                return
-            text = f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
-            decl_h += text
-            decl_cpp += text
-        else:
-            logx( '{arg.spelling=}')
-            decl_text = declaration_text( arg.cursor.type, arg.name)
-            if arg.out_param:
-                decl_h += '\n'
-                decl_h += '            #ifdef SWIG\n'
-                decl_h += '                ' + declaration_text( arg.cursor.type, 'OUTPUT') + '\n'
-                decl_h += '            #else\n'
-                decl_h += '                ' + decl_text + '\n'
-                decl_h += '            #endif\n'
-                decl_h += '            '
-            else:
-                decl_h += decl_text
-            decl_cpp += decl_text
-        comma = ', '
-
-    decl_h += ')'
-    decl_cpp += ')'
-
-    comment = make_wrapper_comment( tu, fn_cursor, fnname, fnname_wrapper, indent='    ', is_method=True)
-
-    # If this is true, we explicitly construct a temporary from what the
-    # wrapped function returns.
-    #
-    wrap_return = None
-
-    warning_not_copyable = False
-    warning_no_raw_constructor = False
-
-    return_cursor = None
-    return_type = None
-
-    if 0:
-        pass
-
-    else:
-        fn_h = declaration_text( fn_cursor.result_type, decl_h)
-        fn_cpp = declaration_text( fn_cursor.result_type, f'{decl_cpp}')
-
-        # See whether we can convert return type to an instance of a wrapper
-        # class.
-        #
-        if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
-            t = fn_cursor.result_type.get_pointee().get_canonical()
-            return_cursor = find_struct( tu, t.spelling, require_definition=False)
-            if return_cursor:
-                return_extras = classextras.get( tu, return_cursor.spelling)
-                if return_extras:
-                    # Change return type to be instance of class wrapper.
-                    return_type = rename.class_(return_cursor.spelling)
-                    if g_show_details(return_cursor.type.spelling):
-                        log('{return_cursor.type.spelling=} {return_cursor.spelling=} {return_extras.copyable=} {return_extras.constructor_raw=}'
-                                ' {return_cursor.spelling=}'
-                                ' {struct_name=} {return_extras.copyable=}'
-                                ' {return_extras.constructor_raw=}'
-                                )
-                    if return_extras.copyable and return_extras.constructor_raw:
-                        fn_h = f'{return_type} {decl_h}'
-                        fn_cpp = f'{return_type} {decl_cpp}'
-                        wrap_return = 'pointer'
-                    else:
-                        if not return_extras.copyable:
-                            warning_not_copyable = True
-                        if not return_extras.constructor_raw:
-                            warning_no_raw_constructor = True
-        else:
-            # The fz_*() function returns by value. See whether we can convert
-            # its return type to an instance of a wrapper class.
-            #
-            # If so, we will use constructor that takes pointer to the fz_
-            # struct. C++ doesn't allow us to use address of temporary, so we
-            # generate code like this:
-            #
-            #   fz_quad_s ret = mupdf_snap_selection(...);
-            #   return Quad(&ret);
-            #
-            t = fn_cursor.result_type.get_canonical()
-            return_cursor = find_struct( tu, t.spelling)
-            if return_cursor:
-                tt = return_cursor.type.get_canonical()
-                if tt.kind == clang.cindex.TypeKind.ENUM:
-                    # For now, we return this type directly with no wrapping.
-                    pass
-                else:
-                    return_extras = classextras.get( tu, return_cursor.type.spelling)
-                    return_type = rename.class_(return_cursor.type.spelling)
-                    fn_h = f'{return_type} {decl_h}'
-                    fn_cpp = f'{return_type} {decl_cpp}'
-                    wrap_return = 'value'
-
-    if warning_not_copyable:
-        log( '*** warning: {decl_h}:'
-                ' Not able to return wrapper class {return_type}'
-                ' for {return_cursor.spelling}'
-                ' because {return_type} is not copyable.'
-                ,
-                level=1,
-                )
-    if warning_no_raw_constructor:
-        log( '*** warning: {decl_h}:'
-                ' Not able to return wrapper class {return_type}'
-                ' for {return_cursor.spelling}'
-                ' because {return_type} has no raw constructor.'
-                ,
-                level=1,
-                )
-
-    out_h.write( '\n')
-    out_h.write( f'    /** {comment} */\n')
-
-    # Copy any comment (indented) into class definition above method
-    # declaration.
-    if fn_cursor.raw_comment:
-        for line in fn_cursor.raw_comment.split( '\n'):
-            out_h.write( f'    {line}\n')
-
-    out_h.write( f'    FZ_FUNCTION {fn_h};\n')
-
-    function_wrapper_class_aware_body(
-            tu,
-            fnname,
-            out_cpp,
-            fn_cursor,
-            return_cursor,
-            wrap_return,
-            comment,
-            fn_cpp,
-            )
-
-
 def make_namespace_open( namespace, out):
     if namespace:
         out.write( '\n')
@@ -5350,7 +5149,7 @@ def make_function_wrappers(
                     temp_out_cpp,
                     generated,
                     )
-            class_write_method(
+            write_function_wrapper_class_aware(
                     tu,
                     register_fn_use=None,
                     struct_name=None,
@@ -5995,7 +5794,7 @@ def class_write_method_body(
     out_cpp.write( f'\n')
 
 
-def class_write_method(
+def write_function_wrapper_class_aware(
         tu,
         register_fn_use,
         fnname,
@@ -6085,8 +5884,8 @@ def class_write_method(
 
     #jlib.log( '{=fn_cursor.result_type.spelling fn_cursor.result_type.get_canonical().spelling}')
     return_type_extras = classextras.get( tu, fn_cursor.result_type.get_canonical().spelling)
-    if not class_name and return_type_extras and not return_type_extras.copyable:
-        jlib.log( 'Not generating {fnname_wrapper} because return type is not copyable: {fn_cursor.result_type.spelling}')
+    if ( return_type_extras and not return_type_extras.copyable):
+        jlib.log( 'Not generating class-aware wrapper for {fnname} because return type is not copyable: {fn_cursor.result_type.spelling}')
         return
 
     # Construct prototype fnname(args).
@@ -7136,7 +6935,7 @@ def class_wrapper(
         if g_show_details(fnname):
             jlib.log('Creating constructor for {=classname fnname}')
         try:
-            class_write_method(
+            write_function_wrapper_class_aware(
                     tu,
                     register_fn_use,
                     fnname,
@@ -7238,7 +7037,7 @@ def class_wrapper(
         out_h.write( '\n')
         out_h.write( '    /* == Static methods. */\n')
     for fnname in extras.method_wrappers_static:
-        class_write_method(
+        write_function_wrapper_class_aware(
                 tu,
                 register_fn_use,
                 fnname,
@@ -7260,7 +7059,7 @@ def class_wrapper(
         out_h.write( '\n')
     extras.method_wrappers.sort()
     for fnname in extras.method_wrappers:
-        class_write_method(
+        write_function_wrapper_class_aware(
                 tu,
                 register_fn_use,
                 fnname,
