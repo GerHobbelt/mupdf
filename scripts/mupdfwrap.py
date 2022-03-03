@@ -4337,7 +4337,7 @@ def make_wrapper_comment(
     return ret.getvalue()
 
 
-def make_function_wrapper(
+def function_wrapper(
         tu,
         cursor,
         fnname,
@@ -4461,122 +4461,6 @@ def make_function_wrapper(
                 fnname_wrapper,
                 generated,
                 )
-
-
-def function_wrapper_class_aware_body(
-            tu,
-            fnname,
-            out_cpp,
-            fn_cursor,
-            return_cursor,
-            wrap_return,
-            comment,
-            fn_cpp,
-            ):
-    out_cpp.write( f'\n')
-    out_cpp.write( f'/* {comment} */\n')
-
-    out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
-
-    out_cpp.write( f'{{\n')
-    return_void = (fn_cursor.result_type.spelling == 'void')
-
-    # Write trace code.
-    out_cpp.write( f'    if (s_trace) {{\n')
-    out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling mupdf::{rename.function(fnname)}()\\n";\n')
-    out_cpp.write( f'    }}\n')
-
-    def get_keep_drop(arg):
-        name = clip( arg.alt.type.spelling, 'struct ')
-        if name.startswith('fz_'):
-            prefix = 'fz'
-            name = name[3:]
-        elif name.startswith('pdf_'):
-            prefix = 'pdf'
-            name = name[4:]
-        else:
-            assert 0
-        return rename.function(f'{prefix}_keep_{name}'), rename.function(f'{prefix}_drop_{name}')
-
-    # Handle wrapper-class out-params - need to drop .m_internal and set to
-    # null.
-    for arg in get_args( tu, fn_cursor):
-        if arg.alt and arg.out_param:
-            if has_refs(tu, arg.alt.type):
-                keep_fn, drop_fn = get_keep_drop(arg)
-                out_cpp.write( f'    /* Out-param {arg.name}.m_internal will be overwritten. */\n')
-                out_cpp.write( f'    {drop_fn}({arg.name}.m_internal);\n')
-                out_cpp.write( f'    {arg.name}.m_internal = nullptr;\n')
-
-    if 0:
-        pass
-    elif wrap_return == 'value':
-        out_cpp.write( f'    {return_cursor.spelling} temp = mupdf::{rename.function(fnname)}(')
-    elif wrap_return == 'pointer':
-        out_cpp.write( f'    {return_cursor.spelling}* temp = mupdf::{rename.function(fnname)}(')
-    elif return_void:
-        out_cpp.write( f'    mupdf::{rename.function(fnname)}(')
-    else:
-        out_cpp.write( f'    auto ret = mupdf::{rename.function(fnname)}(')
-
-    sep = ''
-    for arg in get_args( tu, fn_cursor):
-        out_cpp.write( sep)
-        have_used_this = write_call_arg(
-                tu,
-                arg,
-                None,#arg_classname,
-                have_used_this=True,    # A hack to force write_call_arg() to not attempt to use 'this'.
-                out_cpp=out_cpp,
-                )
-        sep = ', '
-    out_cpp.write( f');\n')
-
-    if wrap_return == 'pointer' and has_refs( tu, return_cursor.type):
-        # This MuPDF function returns pointer to a struct which uses reference
-        # counting. If the function returns a borrowed reference, we need
-        # to increment its reference count before passing it to our wrapper
-        # class's constructor.
-        #
-        #jlib.log('Function returns pointer to {return_cursor=}')
-        return_struct_name = clip(return_cursor.spelling, 'struct ')
-        if return_struct_name.startswith('fz_'):
-            prefix = 'fz_'
-        elif return_struct_name.startswith('pdf_'):
-            prefix = 'pdf_'
-        else:
-            prefix = None
-        if prefix:
-            for i in ('new', 'create', 'find', 'load', 'open', 'keep', 'read'):
-                if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
-                    break
-            else:
-                # This function returns a borrowed reference.
-                suffix = return_struct_name[ len(prefix):]
-                keep_fn = f'{prefix}keep_{suffix}'
-                #jlib.log('Function assumed to return borrowed reference: {fnname=} => {return_struct_name=} {keep_fn=}')
-                out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
-
-    if wrap_return == 'value':
-        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(&temp);\n')
-    elif wrap_return == 'pointer':
-        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
-
-    # Handle wrapper-class out-params - need to keep arg.m_internal and set to
-    # null.
-    for arg in get_args( tu, fn_cursor):
-        if arg.alt and arg.out_param:
-            if has_refs(tu, arg.alt.type):
-                # Assume out-param is a borrowed reference.
-                keep_fn, drop_fn = get_keep_drop(arg)
-                out_cpp.write( f'    /* We assume that out-param {arg.name}.m_internal is a borrowed reference. */\n')
-                out_cpp.write( f'    {keep_fn}({arg.name}.m_internal);\n')
-
-    if not return_void:
-        out_cpp.write( f'    return ret;\n')
-
-    out_cpp.write( f'}}\n')
-    out_cpp.write( f'\n')
 
 
 def make_namespace_open( namespace, out):
@@ -5131,16 +5015,16 @@ def make_function_wrappers(
             jlib.log( 'Looking at {fnname}')
         fnname_wrapper = rename.function( fnname)
         # clang-6 appears not to be able to handle fn args that are themselves
-        # function pointers, so for now we allow make_function_wrapper() to
-        # fail, so we need to use temporary buffers, otherwise out_functions_h
-        # and out_functions_cpp can get partial text written.
+        # function pointers, so for now we allow function_wrapper() to fail,
+        # so we need to use temporary buffers, otherwise out_functions_h and
+        # out_functions_cpp can get partial text written.
         #
         temp_out_h = io.StringIO()
         temp_out_cpp = io.StringIO()
         temp_out_h2 = io.StringIO()
         temp_out_cpp2 = io.StringIO()
         try:
-            make_function_wrapper(
+            function_wrapper(
                     tu,
                     cursor,
                     fnname,
@@ -5149,7 +5033,7 @@ def make_function_wrappers(
                     temp_out_cpp,
                     generated,
                     )
-            write_function_wrapper_class_aware(
+            function_wrapper_class_aware(
                     tu,
                     register_fn_use=None,
                     struct_name=None,
@@ -5794,7 +5678,126 @@ def class_write_method_body(
     out_cpp.write( f'\n')
 
 
-def write_function_wrapper_class_aware(
+def function_wrapper_class_aware_body(
+            tu,
+            fnname,
+            out_cpp,
+            fn_cursor,
+            return_cursor,
+            wrap_return,
+            comment,
+            fn_cpp,
+            ):
+    '''
+    Writes code for body of wrapper function.
+    '''
+    out_cpp.write( f'\n')
+    out_cpp.write( f'/* {comment} */\n')
+
+    out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
+
+    out_cpp.write( f'{{\n')
+    return_void = (fn_cursor.result_type.spelling == 'void')
+
+    # Write trace code.
+    out_cpp.write( f'    if (s_trace) {{\n')
+    out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling mupdf::{rename.function(fnname)}()\\n";\n')
+    out_cpp.write( f'    }}\n')
+
+    def get_keep_drop(arg):
+        name = clip( arg.alt.type.spelling, 'struct ')
+        if name.startswith('fz_'):
+            prefix = 'fz'
+            name = name[3:]
+        elif name.startswith('pdf_'):
+            prefix = 'pdf'
+            name = name[4:]
+        else:
+            assert 0
+        return rename.function(f'{prefix}_keep_{name}'), rename.function(f'{prefix}_drop_{name}')
+
+    # Handle wrapper-class out-params - need to drop .m_internal and set to
+    # null.
+    for arg in get_args( tu, fn_cursor):
+        if arg.alt and arg.out_param:
+            if has_refs(tu, arg.alt.type):
+                keep_fn, drop_fn = get_keep_drop(arg)
+                out_cpp.write( f'    /* Out-param {arg.name}.m_internal will be overwritten. */\n')
+                out_cpp.write( f'    {drop_fn}({arg.name}.m_internal);\n')
+                out_cpp.write( f'    {arg.name}.m_internal = nullptr;\n')
+
+    if 0:
+        pass
+    elif wrap_return == 'value':
+        out_cpp.write( f'    {return_cursor.spelling} temp = mupdf::{rename.function(fnname)}(')
+    elif wrap_return == 'pointer':
+        out_cpp.write( f'    {return_cursor.spelling}* temp = mupdf::{rename.function(fnname)}(')
+    elif return_void:
+        out_cpp.write( f'    mupdf::{rename.function(fnname)}(')
+    else:
+        out_cpp.write( f'    auto ret = mupdf::{rename.function(fnname)}(')
+
+    sep = ''
+    for arg in get_args( tu, fn_cursor):
+        out_cpp.write( sep)
+        have_used_this = write_call_arg(
+                tu,
+                arg,
+                None,#arg_classname,
+                have_used_this=True,    # A hack to force write_call_arg() to not attempt to use 'this'.
+                out_cpp=out_cpp,
+                )
+        sep = ', '
+    out_cpp.write( f');\n')
+
+    if wrap_return == 'pointer' and has_refs( tu, return_cursor.type):
+        # This MuPDF function returns pointer to a struct which uses reference
+        # counting. If the function returns a borrowed reference, we need
+        # to increment its reference count before passing it to our wrapper
+        # class's constructor.
+        #
+        #jlib.log('Function returns pointer to {return_cursor=}')
+        return_struct_name = clip(return_cursor.spelling, 'struct ')
+        if return_struct_name.startswith('fz_'):
+            prefix = 'fz_'
+        elif return_struct_name.startswith('pdf_'):
+            prefix = 'pdf_'
+        else:
+            prefix = None
+        if prefix:
+            for i in ('new', 'create', 'find', 'load', 'open', 'keep', 'read'):
+                if fnname.startswith(f'fz_{i}_') or fnname.startswith(f'pdf_{i}_'):
+                    break
+            else:
+                # This function returns a borrowed reference.
+                suffix = return_struct_name[ len(prefix):]
+                keep_fn = f'{prefix}keep_{suffix}'
+                #jlib.log('Function assumed to return borrowed reference: {fnname=} => {return_struct_name=} {keep_fn=}')
+                out_cpp.write( f'    {rename.function_call(keep_fn)}(temp);\n')
+
+    if wrap_return == 'value':
+        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(&temp);\n')
+    elif wrap_return == 'pointer':
+        out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
+
+    # Handle wrapper-class out-params - need to keep arg.m_internal and set to
+    # null.
+    for arg in get_args( tu, fn_cursor):
+        if arg.alt and arg.out_param:
+            if has_refs(tu, arg.alt.type):
+                # Assume out-param is a borrowed reference.
+                keep_fn, drop_fn = get_keep_drop(arg)
+                out_cpp.write( f'    /* We assume that out-param {arg.name}.m_internal is a borrowed reference. */\n')
+                out_cpp.write( f'    {keep_fn}({arg.name}.m_internal);\n')
+
+    if not return_void:
+        out_cpp.write( f'    return ret;\n')
+
+    out_cpp.write( f'}}\n')
+    out_cpp.write( f'\n')
+
+
+def function_wrapper_class_aware(
         tu,
         register_fn_use,
         fnname,
@@ -6938,16 +6941,16 @@ def class_wrapper(
     num_constructors = len(constructor_fns)
     for fnname, cursor, duplicate_type in constructor_fns:
         # clang-6 appears not to be able to handle fn args that are themselves
-        # function pointers, so for now we allow make_function_wrapper() to
-        # fail, so we need to use temporary buffers, otherwise out_functions_h
-        # and out_functions_cpp can get partial text written.
+        # function pointers, so for now we allow function_wrapper() to fail,
+        # so we need to use temporary buffers, otherwise out_functions_h and
+        # out_functions_cpp can get partial text written.
         #
         temp_out_h = io.StringIO()
         temp_out_cpp = io.StringIO()
         if g_show_details(fnname):
             jlib.log('Creating constructor for {=classname fnname}')
         try:
-            write_function_wrapper_class_aware(
+            function_wrapper_class_aware(
                     tu,
                     register_fn_use,
                     fnname,
@@ -7049,7 +7052,7 @@ def class_wrapper(
         out_h.write( '\n')
         out_h.write( '    /* == Static methods. */\n')
     for fnname in extras.method_wrappers_static:
-        write_function_wrapper_class_aware(
+        function_wrapper_class_aware(
                 tu,
                 register_fn_use,
                 fnname,
@@ -7071,7 +7074,7 @@ def class_wrapper(
         out_h.write( '\n')
     extras.method_wrappers.sort()
     for fnname in extras.method_wrappers:
-        write_function_wrapper_class_aware(
+        function_wrapper_class_aware(
                 tu,
                 register_fn_use,
                 fnname,
