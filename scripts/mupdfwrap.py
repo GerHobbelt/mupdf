@@ -4610,6 +4610,8 @@ def make_function_wrapper_class_aware(
     assert fnname.startswith( ('fz_', 'pdf_'))
 
     if fnname.endswith('_drop'):
+        # E.g. fz_concat_push_drop() is not safe (or necessary) for us because
+        # we need to manage reference counts ourselves.
         #jlib.log('Ignoring because ends with "_drop": {fnname}')
         return
 
@@ -6059,6 +6061,12 @@ def class_write_method(
         fn_cursor = find_function( tu, fnname, method=True)
     if not fn_cursor:
         log( '*** ignoring {fnname=}')
+        return
+
+    if fnname.endswith('_drop'):
+        # E.g. fz_concat_push_drop() is not safe (or necessary) for us because
+        # we need to manage reference counts ourselves.
+        jlib.log('Ignoring because ends with "_drop": {fnname}')
         return
 
     # Construct prototype fnname(args).
