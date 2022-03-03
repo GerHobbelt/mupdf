@@ -5350,13 +5350,24 @@ def make_function_wrappers(
                     temp_out_cpp,
                     generated,
                     )
-            make_function_wrapper_class_aware(
+            if 0: make_function_wrapper_class_aware(
                     tu,
                     cursor,
                     fnname,
                     temp_out_h2,
                     temp_out_cpp2,
                     generated,
+                    )
+            class_write_method(
+                    tu,
+                    register_fn_use=None,
+                    struct_name=None,
+                    classname=None,
+                    fn_cursor=cursor,
+                    fnname=fnname,
+                    out_h=temp_out_h2,
+                    out_cpp=temp_out_cpp2,
+                    generated=generated,
                     )
         except Clang6FnArgsBug as e:
             #log( jlib.exception_info())
@@ -6052,7 +6063,8 @@ def class_write_method(
         debug
             Show extra diagnostics.
     '''
-    assert fnname not in omit_methods
+    if struct_name:
+        assert fnname not in omit_methods, jlib.log_text( '{=fnname}')
     if debug:
         log( '{classname=} {fnname=}')
     assert fnname.startswith( ('fz_', 'pdf_'))
@@ -6068,10 +6080,21 @@ def class_write_method(
         #jlib.log('Ignoring because ends with "_drop": {fnname}')
         return
 
+    if struct_name:
+        methodname = rename.method( struct_name, fnname)
+    else:
+        methodname = rename.function_class_aware( fnname)
+
+    #jlib.log( '{=fn_cursor.result_type.spelling fn_cursor.result_type.get_canonical().spelling}')
+    return_type_extras = classextras.get( tu, fn_cursor.result_type.get_canonical().spelling)
+    if not classname and return_type_extras and not return_type_extras.copyable:
+        jlib.log( 'Not generating {fnname_wrapper} because return type is not copyable: {fn_cursor.result_type.spelling}')
+        return
+
     # Construct prototype fnname(args).
     #
-    methodname = rename.method( struct_name, fnname)
     if constructor:
+        assert struct_name
         decl_h = f'{classname}('
         decl_cpp = f'{classname}('
     else:
@@ -6091,6 +6114,7 @@ def class_write_method(
         if arg.alt:
             # This parameter is a pointer to a struct that we wrap.
             if (1
+                    and struct_name
                     and not static
                     and not constructor
                     and rename.class_(clip( arg.alt.type.spelling, 'struct ')) == classname
@@ -6135,12 +6159,12 @@ def class_write_method(
     if constructor:
         comment = f'Constructor using {fnname}().'
     else:
-        comment = make_wrapper_comment( tu, fn_cursor, fnname, methodname, indent='    ', is_method=True)
+        comment = make_wrapper_comment( tu, fn_cursor, fnname, methodname, indent='    ', is_method=True if struct_name else True)
 
-    if not static and not constructor:
+    if struct_name and not static and not constructor:
         assert have_used_this, f'error: wrapper for {struct_name}: {fnname}() is not useful - does not have a {struct_name} arg.'
 
-    if not duplicate_type:
+    if struct_name and not duplicate_type:
         register_fn_use( fnname)
 
     # If this is true, we explicitly construct a temporary from what the
@@ -6154,11 +6178,15 @@ def class_write_method(
     return_cursor = None
     return_type = None
     if constructor:
+        assert struct_name
         fn_h = f'{decl_h}'
         fn_cpp = f'{classname}::{decl_cpp}'
     else:
         fn_h = declaration_text( fn_cursor.result_type, decl_h)
-        fn_cpp = declaration_text( fn_cursor.result_type, f'{classname}::{decl_cpp}')
+        if struct_name:
+            fn_cpp = declaration_text( fn_cursor.result_type, f'{classname}::{decl_cpp}')
+        else:
+            fn_cpp = declaration_text( fn_cursor.result_type, f'{decl_cpp}')
 
         # See whether we can convert return type to an instance of a wrapper
         # class.
@@ -6179,7 +6207,10 @@ def class_write_method(
                                 )
                     if return_extras.copyable and return_extras.constructor_raw:
                         fn_h = f'{return_type} {decl_h}'
-                        fn_cpp = f'{return_type} {classname}::{decl_cpp}'
+                        if struct_name:
+                            fn_cpp = f'{return_type} {classname}::{decl_cpp}'
+                        else:
+                            fn_cpp = f'{return_type} {decl_cpp}'
                         wrap_return = 'pointer'
                     else:
                         if not return_extras.copyable:
@@ -6208,7 +6239,10 @@ def class_write_method(
                     return_extras = classextras.get( tu, return_cursor.type.spelling)
                     return_type = rename.class_(return_cursor.type.spelling)
                     fn_h = f'{return_type} {decl_h}'
-                    fn_cpp = f'{return_type} {classname}::{decl_cpp}'
+                    if struct_name:
+                        fn_cpp = f'{return_type} {classname}::{decl_cpp}'
+                    else:
+                        fn_cpp = f'{return_type} {decl_cpp}'
                     wrap_return = 'value'
 
     if warning_not_copyable:
@@ -6241,43 +6275,57 @@ def class_write_method(
         out_h.write( f'    /* Disabled because same args as {duplicate_type}.\n')
 
     out_h.write( f'    FZ_FUNCTION {"static " if static else ""}{fn_h};\n')
-    if duplicate_type:
-        out_h.write( f'    */\n')
 
-    out_cpp.write( f'/* {comment} */\n')
-    if duplicate_type:
-        out_cpp.write( f'/* Disabled because same args as {duplicate_type}.\n')
+    if struct_name:
+        if duplicate_type:
+            out_h.write( f'    */\n')
 
-    out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
+        out_cpp.write( f'/* {comment} */\n')
+        if duplicate_type:
+            out_cpp.write( f'/* Disabled because same args as {duplicate_type}.\n')
 
-    class_write_method_body(
+        out_cpp.write( f'FZ_FUNCTION {fn_cpp}\n')
+
+        class_write_method_body(
+                tu,
+                struct_name,
+                classname,
+                fnname,
+                out_cpp,
+                static,
+                constructor,
+                extras,
+                struct_cursor,
+                fn_cursor,
+                return_cursor,
+                wrap_return,
+                )
+
+        if duplicate_type:
+            out_cpp.write( f'*/\n')
+
+        if generated and num_out_params:
+            make_python_class_method_outparam_override(
+                    tu,
+                    fn_cursor,
+                    fnname,
+                    generated.swig_python,
+                    struct_name,
+                    classname,
+                    return_type,
+                    )
+    else:
+        #out_h.write( f'    FZ_FUNCTION {fn_h};\n')
+        function_wrapper_class_aware_body(
             tu,
-            struct_name,
-            classname,
             fnname,
             out_cpp,
-            static,
-            constructor,
-            extras,
-            struct_cursor,
             fn_cursor,
             return_cursor,
             wrap_return,
+            comment,
+            fn_cpp,
             )
-
-    if duplicate_type:
-        out_cpp.write( f'*/\n')
-
-    if generated and num_out_params:
-        make_python_class_method_outparam_override(
-                tu,
-                fn_cursor,
-                fnname,
-                generated.swig_python,
-                struct_name,
-                classname,
-                return_type,
-                )
 
 
 def class_custom_method(
