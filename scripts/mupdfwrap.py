@@ -1034,6 +1034,8 @@ class Rename:
             logx( 'appending underscore to {ret=}')
             ret += '_'
         return ret
+    def function_class_aware( self, name):
+        return f'm{name}'
     def function_call( self, name):
         '''
         Name used by class methods when calling wrapper function - we call our
@@ -4581,7 +4583,6 @@ def make_function_wrapper_class_aware(
         tu,
         fn_cursor,
         fnname,
-        fnname_wrapper,
         out_h,
         out_cpp,
         generated,
@@ -4598,8 +4599,6 @@ def make_function_wrapper_class_aware(
         fn_cursor
         fnname
             Name of fz_*() fn to wrap, e.g. fz_concat.
-        fnname_wrapper
-            Name of generated function.
         out_h
         out_cpp
             Where to write generated code.
@@ -4613,6 +4612,8 @@ def make_function_wrapper_class_aware(
     if fnname.endswith('_drop'):
         #jlib.log('Ignoring because ends with "_drop": {fnname}')
         return
+
+    fnname_wrapper = rename.function_class_aware( fnname)
 
     #jlib.log( '{=fn_cursor.result_type.spelling fn_cursor.result_type.get_canonical().spelling}')
     return_type_extras = classextras.get( tu, fn_cursor.result_type.get_canonical().spelling)
@@ -5352,7 +5353,6 @@ def make_function_wrappers(
                     tu,
                     cursor,
                     fnname,
-                    f'm{fnname}',
                     temp_out_h2,
                     temp_out_cpp2,
                     generated,
