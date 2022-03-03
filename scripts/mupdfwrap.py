@@ -5812,7 +5812,7 @@ def write_function_wrapper_class_aware(
         debug=None,
         ):
     '''
-    Writes a method that calls <fnname>.
+    Writes a function or class method that calls <fnname>.
 
     Also appends python and C# code to generated.swig_python and
     generated.swig_csharp if <generated> is not None.
@@ -5828,7 +5828,7 @@ def write_function_wrapper_class_aware(
             Where to write generated code.
         struct_name
             If None, we generate class-aware wrapping function. Otherwise name
-            of struct such as 'fz_recft' and we create a method in the struct's
+            of struct such as 'fz_rect' and we create a method in the struct's
             wrapper class.
         class_name
             Ignored if struct_name is None.
@@ -5972,6 +5972,8 @@ def write_function_wrapper_class_aware(
     warning_not_copyable = False
     warning_no_raw_constructor = False
 
+    # Figure out return type for our generated function/method.
+    #
     return_cursor = None
     return_type = None
     if class_constructor:
@@ -5989,12 +5991,16 @@ def write_function_wrapper_class_aware(
         # class.
         #
         if fn_cursor.result_type.kind == clang.cindex.TypeKind.POINTER:
+            # Function returns a pointer.
             t = fn_cursor.result_type.get_pointee().get_canonical()
             return_cursor = find_struct( tu, t.spelling, require_definition=False)
             if return_cursor:
+                # Function returns a pointer to a struct.
                 return_extras = classextras.get( tu, return_cursor.spelling)
                 if return_extras:
-                    # Change return type to be instance of class wrapper.
+                    # Function returns a pointer to a struct for which we
+                    # generate a class wrapper, so change return type to be an
+                    # instance of the class wrapper.
                     return_type = rename.class_(return_cursor.spelling)
                     if g_show_details(return_cursor.type.spelling) or g_show_details(struct_name):
                         log('{return_cursor.type.spelling=}'
@@ -6112,7 +6118,6 @@ def write_function_wrapper_class_aware(
                     return_type,
                     )
     else:
-        #out_h.write( f'    FZ_FUNCTION {fn_h};\n')
         function_wrapper_class_aware_body(
             tu,
             fnname,
