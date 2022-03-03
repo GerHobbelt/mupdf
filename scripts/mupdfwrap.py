@@ -5956,7 +5956,7 @@ def write_function_wrapper_class_aware(
     if class_constructor:
         comment = f'Constructor using {fnname}().'
     else:
-        comment = make_wrapper_comment( tu, fn_cursor, fnname, methodname, indent='    ', is_method=True if struct_name else True)
+        comment = make_wrapper_comment( tu, fn_cursor, fnname, methodname, indent='    ', is_method=True if struct_name else False)
 
     if struct_name and not class_static and not class_constructor:
         assert have_used_this, f'error: wrapper for {struct_name}: {fnname}() is not useful - does not have a {struct_name} arg.'
