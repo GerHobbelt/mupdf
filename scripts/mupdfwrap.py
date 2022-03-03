@@ -4640,12 +4640,11 @@ def make_function_wrapper_class_aware(
         if arg.alt:
             # This parameter is a pointer to a struct that we wrap.
             const = ''
-            extras = classextras.get( tu, arg.alt.type.spelling)
-            if not arg.out_param:
-                assert extras, jlib.log_text( 'cannot find {alt.spelling=} {arg.type.spelling=} {name=}')
-                if not extras.pod:
-                    const = 'const '
-            if  extras.pod == 'none':
+            arg_extras = classextras.get( tu, arg.alt.type.spelling)
+            assert arg_extras, jlib.log_text( '{=structname fnname arg.alt.type.spelling}')
+            if not arg.out_param and not arg_extras.pod:
+                const = 'const '
+            if arg_extras.pod == 'none':
                 jlib.log( 'Not wrapping because {arg=} wrapper has {extras.pod=}', 1)
                 return
             text = f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
@@ -6066,7 +6065,7 @@ def class_write_method(
     if fnname.endswith('_drop'):
         # E.g. fz_concat_push_drop() is not safe (or necessary) for us because
         # we need to manage reference counts ourselves.
-        jlib.log('Ignoring because ends with "_drop": {fnname}')
+        #jlib.log('Ignoring because ends with "_drop": {fnname}')
         return
 
     # Construct prototype fnname(args).
@@ -6104,12 +6103,13 @@ def class_write_method(
                 continue
 
             const = ''
-            if not arg.out_param:
-                extras2 = classextras.get( tu, arg.alt.type.spelling)
-                if not extras2:
-                    log('cannot find {alt.spelling=} {arg.type.spelling=} {name=}')
-            if not arg.out_param and not classextras.get( tu, arg.alt.type.spelling).pod:
+            arg_extras = classextras.get( tu, arg.alt.type.spelling)
+            assert arg_extras, jlib.log_text( '{=structname fnname arg.alt.type.spelling}')
+            if not arg.out_param and not arg_extras.pod:
                 const = 'const '
+            if arg_extras.pod == 'none':
+                jlib.log( 'Not wrapping because {arg=} wrapper has {extras.pod=}', 1)
+                return
             text = f'{const}{rename.class_(arg.alt.type.spelling)}& {arg.name}'
             decl_h += text
             decl_cpp += text
