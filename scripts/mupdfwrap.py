@@ -5996,6 +5996,7 @@ def class_write_method(
         register_fn_use,
         struct_name,
         classname,
+        fn_cursor,
         fnname,
         out_h,
         out_cpp,
@@ -6054,7 +6055,8 @@ def class_write_method(
     if debug:
         log( '{classname=} {fnname=}')
     assert fnname.startswith( ('fz_', 'pdf_'))
-    fn_cursor = find_function( tu, fnname, method=True)
+    if not fn_cursor:
+        fn_cursor = find_function( tu, fnname, method=True)
     if not fn_cursor:
         log( '*** ignoring {fnname=}')
         return
@@ -7085,6 +7087,7 @@ def class_wrapper(
                     register_fn_use,
                     struct_name,
                     classname,
+                    cursor,
                     fnname,
                     temp_out_h,
                     temp_out_cpp,
@@ -7186,6 +7189,7 @@ def class_wrapper(
                 register_fn_use,
                 struct_name,
                 classname,
+                None, # fn_cursor
                 fnname,
                 out_h,
                 out_cpp,
@@ -7207,6 +7211,7 @@ def class_wrapper(
                 register_fn_use,
                 struct_name,
                 classname,
+                None, #fn_cursor
                 fnname,
                 out_h,
                 out_cpp,
