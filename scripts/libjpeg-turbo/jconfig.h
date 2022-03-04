@@ -16,16 +16,28 @@
 
 
 /* Support arithmetic encoding */
-#define C_ARITH_CODING_SUPPORTED
+#define C_ARITH_CODING_SUPPORTED  1
 
 /* Support arithmetic decoding */
-#define D_ARITH_CODING_SUPPORTED
+#define D_ARITH_CODING_SUPPORTED  1
 
 /* Support in-memory source/destination managers */
-#define MEM_SRCDST_SUPPORTED
+#define MEM_SRCDST_SUPPORTED  1
 
 /* Use accelerated SIMD routines. */
-#define WITH_SIMD
+#define WITH_SIMD  1
+
+/* Disable GETENV */
+#undef NO_GETENV
+/* Support 3DNow */
+
+/* Enable full tracing */
+#ifndef JPEGLIB_WITH_FULLTRACING
+#define WITH_FULLTRACING 1
+#endif
+
+/* Enable compressor part */
+#define JPEGLIB_ENABLE_COMPRESS 1
 
 /*
  * Define BITS_IN_JSAMPLE as either

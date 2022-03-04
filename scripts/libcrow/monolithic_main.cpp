@@ -41,6 +41,8 @@ static struct cmd_info
 	{ "ssl", crow_example_ssl_main },
 	{ "ws", crow_example_ws_main },
 	{ "mustache", crow_mustache_main },
+	{ "blueprint", crow_example_blueprint_main },
+	{ "middleware", crow_example_middleware_main },
 
 	{ "?", help },
 	{ "h", help },
