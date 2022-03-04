@@ -9707,10 +9707,10 @@ def build( build_dirs, swig, args):
                     mupdfcpp_so     = f'{build_dirs.dir_so}/libmupdfcpp.so'
 
                     if build_python:
-                        cpp_path = 'platform/python/mupdfcpp_swig.cpp'
+                        cpp_path = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp_swig.cpp'
                         out_so = f'{build_dirs.dir_so}/_mupdf.so'
                     elif build_csharp:
-                        cpp_path = 'platform/csharp/mupdfcpp_swig.cpp'
+                        cpp_path = f'{build_dirs.dir_mupdf}/platform/csharp/mupdfcpp_swig.cpp'
                         out_so = f'{build_dirs.dir_so}/mupdfcsharp.so'
 
                     # We use jlib.link_l_flags() to add -L options
