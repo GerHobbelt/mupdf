@@ -5568,6 +5568,31 @@ def class_write_method_body(
     out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling mupdf::{rename.function(fnname)}()\\n";\n')
     out_cpp.write( f'    }}\n')
 
+    def get_keep_drop(arg):
+        name = clip( arg.alt.type.spelling, 'struct ')
+        if name.startswith('fz_'):
+            prefix = 'fz'
+            name = name[3:]
+        elif name.startswith('pdf_'):
+            prefix = 'pdf'
+            name = name[4:]
+        else:
+            assert 0
+        return rename.function(f'{prefix}_keep_{name}'), rename.function(f'{prefix}_drop_{name}')
+
+    # Handle wrapper-class out-params - need to drop .m_internal and set to
+    # null.
+    #
+    # fixme: maybe instead simply call <arg.name>'s destructor directly?
+    #
+    for arg in get_args( tu, fn_cursor):
+        if arg.alt and arg.out_param:
+            if has_refs(tu, arg.alt.type):
+                keep_fn, drop_fn = get_keep_drop(arg)
+                out_cpp.write( f'    /* Out-param {arg.name}.m_internal will be overwritten. */\n')
+                out_cpp.write( f'    {drop_fn}({arg.name}.m_internal);\n')
+                out_cpp.write( f'    {arg.name}.m_internal = nullptr;\n')
+
     # Write function call.
     if constructor:
         if extras.pod:
@@ -5659,6 +5684,19 @@ def class_write_method_body(
         out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(&temp);\n')
     elif wrap_return == 'pointer':
         out_cpp.write( f'    auto ret = {rename.class_(return_cursor.spelling)}(temp);\n')
+
+    # Handle wrapper-class out-params - need to keep arg.m_internal and set to
+    # null.
+    for arg in get_args( tu, fn_cursor):
+        if arg.alt and arg.out_param:
+            if has_refs(tu, arg.alt.type):
+                # Assume out-param is a borrowed reference.
+                #
+                # fixme: maybe we should assume it returns a valid reference.
+                # i.e. this call to keep_*() is not correct?
+                keep_fn, drop_fn = get_keep_drop(arg)
+                out_cpp.write( f'    /* We assume that out-param {arg.name}.m_internal is a borrowed reference. */\n')
+                out_cpp.write( f'    {keep_fn}({arg.name}.m_internal);\n')
 
     if not static:
         if has_refs( tu, struct_cursor.type):
