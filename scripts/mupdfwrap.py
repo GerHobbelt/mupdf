@@ -4215,9 +4215,14 @@ def make_python_class_method_outparam_override(
         return_type,
         ):
     '''
-    Writes Python code to <out> that monkey-patches a class method to make it
-    call the underlying MuPDF function's Python wrapper, which will return
-    out-params in a tuple.
+    Writes Python code to <out> that monkey-patches Python function or method
+    to make it call the underlying MuPDF function's Python wrapper, which will
+    return out-params in a tuple.
+
+    This is necessary because the C++ API supports wrapper class out-params
+    by taking references to a dummy wrapper class instance, whose m_internal
+    is then changed to point to the out-param struct (with suitable calls to
+    keep/drop to manage the destruction of the dummy instance).
     '''
     # Underlying fn.
     main_name = rename.function(cursor.mangled_name)
@@ -4270,7 +4275,7 @@ def make_python_class_method_outparam_override(
         if is_pointer_to( arg.cursor.type, structname):
             continue
         out.write( ', ')
-        write_call_arg( tu, arg, classname, False, out, python=True)
+        write_call_arg( tu, arg, classname, have_used_this=False, out_cpp=out, python=True)
     out.write( ')\n')
 
     # return ret, a, b.
