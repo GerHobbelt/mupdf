@@ -6017,6 +6017,8 @@ def function_wrapper_class_aware(
         out_h.write( f'    */\n')
 
     if not struct_name:
+        # Use extra spacing between non-class functions. Class methods are
+        # grouped together.
         out_cpp.write( f'\n')
 
     out_cpp.write( f'/* {comment} */\n')
