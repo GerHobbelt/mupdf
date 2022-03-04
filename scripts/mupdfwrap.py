@@ -4229,13 +4229,19 @@ def make_python_class_method_outparam_override(
 
     # Define an internal Python function that will become the class method.
     #
-    out.write( f'def {name_new}( self')
+    out.write( f'def {name_new}(')
+    if structname:
+        out.write( ' self')
+        comma = ', '
+    else:
+        comma = ''
     for arg in get_args( tu, cursor):
         if arg.out_param:
             continue
         if is_pointer_to( arg.cursor.type, structname):
             continue
-        out.write(f', {arg.name_python}')
+        out.write(f'{comma}{arg.name_python}')
+        comma = ', '
     out.write('):\n')
     out.write( '    """\n')
     if structname:
