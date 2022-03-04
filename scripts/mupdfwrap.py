@@ -5698,7 +5698,7 @@ def class_write_method_body(
                 out_cpp.write( f'    /* We assume that out-param {arg.name}.m_internal is a borrowed reference. */\n')
                 out_cpp.write( f'    {keep_fn}({arg.name}.m_internal);\n')
 
-    if not static:
+    if struct_name and not static:
         if has_refs( tu, struct_cursor.type):
             # Write code that does runtime checking of reference counts.
             out_cpp.write( f'    if (s_check_refs)\n')
@@ -6127,9 +6127,12 @@ def function_wrapper_class_aware(
 
     out_h.write( f'    FZ_FUNCTION {"static " if class_static else ""}{fn_h};\n')
 
-    if struct_name:
+    if 1 or struct_name:
         if duplicate_type:
             out_h.write( f'    */\n')
+
+        if not struct_name:
+            out_cpp.write( f'\n')
 
         out_cpp.write( f'/* {comment} */\n')
         if duplicate_type:
@@ -6152,19 +6155,20 @@ def function_wrapper_class_aware(
                 wrap_return,
                 )
 
-        if duplicate_type:
-            out_cpp.write( f'*/\n')
+        if struct_name:
+            if duplicate_type:
+                out_cpp.write( f'*/\n')
 
-        if generated and num_out_params:
-            make_python_class_method_outparam_override(
-                    tu,
-                    fn_cursor,
-                    fnname,
-                    generated.swig_python,
-                    struct_name,
-                    class_name,
-                    return_type,
-                    )
+            if generated and num_out_params:
+                make_python_class_method_outparam_override(
+                        tu,
+                        fn_cursor,
+                        fnname,
+                        generated.swig_python,
+                        struct_name,
+                        class_name,
+                        return_type,
+                        )
     else:
         function_wrapper_class_aware_body(
             tu,
