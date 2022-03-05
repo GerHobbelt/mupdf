@@ -95,8 +95,10 @@ void fz_set_warning_callback(fz_context *ctx, fz_error_print_callback* print, vo
 
 void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, void** user)
 {
-	*user = ctx->warn.print_user;
-	*print = ctx->warn.print;
+	if (user)
+		*user = ctx->warn.print_user;
+	if (print)
+		*print = ctx->warn.print;
 }
 
 void fz_default_info_callback(void* user, const char* message)
@@ -127,8 +129,10 @@ void fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void*
 
 void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void** user)
 {
-	*user = ctx->info.print_user;
-	*print = ctx->info.print;
+	if (user)
+		*user = ctx->info.print_user;
+	if (print)
+		*print = ctx->info.print;
 }
 
 static inline int edit_bit(int user, int set)
@@ -302,8 +306,10 @@ void fz_set_error_callback(fz_context *ctx, fz_error_print_callback* print, void
 
 void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, void** user)
 {
-	*user = ctx->error.print_user;
-	*print = ctx->error.print;
+	if (user)
+		*user = ctx->error.print_user;
+	if (print)
+		*print = ctx->error.print;
 }
 
 /* When we first setjmp, state is set to 0. Whenever we throw, we add 2 to

@@ -340,7 +340,9 @@ void fz_set_error_callback(fz_context *ctx, fz_error_print_callback* print, void
 
 /**
 	Retrieve the currently set error callback, or NULL if none
-	has been set.
+	has been set. Optionally, if user is non-NULL, the user pointer
+	given when the warning callback was set is also passed back to
+	the caller.
 */
 void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
@@ -354,7 +356,9 @@ void fz_set_warning_callback(fz_context *ctx, fz_error_print_callback* print, vo
 
 /**
 	Retrieve the currently set warning callback, or NULL if none
-	has been set.
+	has been set. Optionally, if user is non-NULL, the user pointer
+	given when the warning callback was set is also passed back to
+	the caller.
 */
 void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
@@ -367,7 +371,9 @@ void fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void*
 
 /**
 	Retrieve the currently set info callback, or NULL if none
-	has been set.
+	has been set. Optionally, if user is non-NULL, the user pointer
+	given when the warning callback was set is also passed back to
+	the caller.
 */
 void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void** user);
 
