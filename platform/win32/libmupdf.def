@@ -492,6 +492,7 @@ EXPORTS
 	fz_set_global_context
 	fz_set_graphics_aa_level
 	fz_set_graphics_min_line_width
+	fz_set_graphics_sub_pix_quantizer
 	fz_set_info_callback
 	fz_set_text_aa_level
 	fz_set_use_document_css
@@ -1021,6 +1022,8 @@ EXPORTS
 	fz_strrcspn
 	fz_strsep
 	fz_strtof
+	fz_tolower
+	fz_toupper
 	fz_urldecode
 	fz_utflen
 	fz_add_layout_char
@@ -1453,6 +1456,8 @@ EXPORTS
 	pdf_has_unsaved_sigs
 	pdf_insert_page
 	pdf_invalidate_xfa
+	pdf_js_get_console
+	pdf_js_set_console
 	pdf_keep_document
 	pdf_keep_graft_map
 	pdf_layer_config_info
@@ -1608,6 +1613,7 @@ EXPORTS
 	pdf_close_processor
 	pdf_drop_processor
 	pdf_filter_xobject_instance
+	pdf_keep_processor
 	pdf_new_buffer_processor
 	pdf_new_filter_processor
 	pdf_new_mcid_processor
@@ -1928,6 +1934,7 @@ EXPORTS
 	pdf_mark_xref
 	pdf_metadata
 	pdf_new_local_xref
+	pdf_obj_is_incremental
 	pdf_open_contents_stream
 	pdf_open_inline_stream
 	pdf_open_raw_stream
@@ -3123,8 +3130,13 @@ EXPORTS
 	sqlite3_vsnprintf
 	sqlite3_vtab_collation
 	sqlite3_vtab_config
+	sqlite3_vtab_distinct
+	sqlite3_vtab_in
+	sqlite3_vtab_in_first
+	sqlite3_vtab_in_next
 	sqlite3_vtab_nochange
 	sqlite3_vtab_on_conflict
+	sqlite3_vtab_rhs_value
 	sqlite3_wal_autocheckpoint
 	sqlite3_wal_checkpoint
 	sqlite3_wal_checkpoint_v2
@@ -3585,7 +3597,6 @@ EXPORTS
 
 	xmlInitializeDict
 
-	__docbDefaultSAXHandler
 	__htmlDefaultSAXHandler
 	__oldXMLWDcompatibility
 	__xmlBufferAllocScheme
@@ -4021,15 +4032,23 @@ EXPORTS
 	qjs_mutex_lock
 	qjs_mutex_trylock
 	qjs_mutex_unlock
+	qjs_port_free
+	qjs_port_malloc
+	qjs_port_malloc_usable_size
+	qjs_port_realloc
 	qjs_realpath
 	qjs_thread_create
 	qjs_thread_join
 	qjs_usleep
 	JS_AddIntrinsicBaseObjects
+	JS_AddIntrinsicBigDecimal
+	JS_AddIntrinsicBigFloat
+	JS_AddIntrinsicBigInt
 	JS_AddIntrinsicDate
 	JS_AddIntrinsicEval
 	JS_AddIntrinsicJSON
 	JS_AddIntrinsicMapSet
+	JS_AddIntrinsicOperators
 	JS_AddIntrinsicPromise
 	JS_AddIntrinsicProxy
 	JS_AddIntrinsicRegExp
@@ -4057,6 +4076,7 @@ EXPORTS
 	JS_DumpMemoryUsage
 	JS_DupAtom
 	JS_DupContext
+	JS_EnableBignumExt
 	JS_EnqueueJob
 	JS_Enter
 	JS_Eval
@@ -4246,11 +4266,14 @@ EXPORTS
 	FIO_freeContext
 	FIO_freePreferences
 	FIO_listMultipleFiles
+	FIO_lz4Version
+	FIO_lzmaVersion
 	FIO_overwriteMode
 	FIO_setAdaptMax
 	FIO_setAdaptMin
 	FIO_setAdaptiveMode
 	FIO_setAllowBlockDevices
+	FIO_setAsyncIOFlag
 	FIO_setBlockSize
 	FIO_setChecksumFlag
 	FIO_setCompressionType
@@ -4279,6 +4302,26 @@ EXPORTS
 	FIO_setTargetCBlockSize
 	FIO_setTestMode
 	FIO_setUseRowMatchFinder
+	FIO_zlibVersion
+	AIO_ReadPool_closeFile
+	AIO_ReadPool_consumeAndRefill
+	AIO_ReadPool_consumeBytes
+	AIO_ReadPool_create
+	AIO_ReadPool_fillBuffer
+	AIO_ReadPool_free
+	AIO_ReadPool_getFile
+	AIO_ReadPool_setFile
+	AIO_WritePool_acquireJob
+	AIO_WritePool_closeFile
+	AIO_WritePool_create
+	AIO_WritePool_enqueueAndReacquireWriteJob
+	AIO_WritePool_free
+	AIO_WritePool_getFile
+	AIO_WritePool_releaseIoJob
+	AIO_WritePool_setFile
+	AIO_WritePool_sparseWriteEnd
+	AIO_supported
+
 	zlib_adler32_test_main
 	zlib_deflate_quick_bi_valid_test_main
 	zlib_deflate_quick_block_open_test_main
@@ -4346,10 +4389,12 @@ EXPORTS
 ; crow exports
 
 	crow_example_basic_main
+	crow_example_blueprint_main
 	crow_example_catch_all_main
 	crow_example_chat_main
 	crow_example_compression_main
 	crow_example_json_map_main
+	crow_example_middleware_main
 	crow_example_ssl_main
 	crow_example_static_file_main
 	crow_example_vs_main
@@ -4357,6 +4402,7 @@ EXPORTS
 	crow_example_ws_main
 	crow_hello_world_main
 	crow_mustache_main
+	crow_test_multi_file_main
 
 ; MarkDown exports
 

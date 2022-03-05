@@ -23,7 +23,9 @@ def collectExports(header):
 		data = re.sub(r"(?sm)PTW32_CDECL +", "", data, 0)
 		data = re.sub(r"(?sm)FGAPIENTRY +", "", data, 0)
 		data = re.sub(r"(?sm)^typedef\s+[^;]+;", "", data, 0)
-		return sorted(re.findall(r"(?sm)^\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?(\w+) *\(.*?\);", data))
+		flist = re.findall(r"(?sm)^\w+ *\*?\*? +(?:\w+ *\*?\*? +)*\*?\*?(\w+) *\(.*?\);", data)
+		print( "RAW DLL EXPORT DATA: processing file %s -->\n%s" % ( header, flist ) )
+		return sorted(flist)
 	except: # catch *all* exceptions
 		e = sys.exc_info()[0]
 		print( "Error: %s while processing file %s" % ( e, header ) )
@@ -313,7 +315,7 @@ def main():
 	libxml_exports = generateExports("thirdparty/owemdjee/libxml2/include/libxml", ["__xmlFree", "__xmlMalloc", "__xmlMallocAtomic", "__xmlMemStrdup", "__xmlRealloc", "xml_test_xmlreader_main"])
 	pthread_exports = generateExports("thirdparty/owemdjee/pthread-win32", ["_errno", "DWORD", "pthread_win32_set_terminate_np"])
 	zlib_exports = generateExports("scripts/zlib/zlib-ng.h", ["zng_deflateInit", "zng_inflateInit", "zng_deflateInit2", "zng_inflateInit2", "zng_inflateBackInit"])
-	quickjs_exports = generateExports("thirdparty/owemdjee/QuickJS/monolithic_examples.h") + generateQuickJSExports("thirdparty/owemdjee/QuickJS", ["JS_AddIntrinsicBigDecimal", "JS_AddIntrinsicBigFloat", "JS_AddIntrinsicBigInt", "JS_AddIntrinsicOperators", "JS_EnableBignumExt", "__js_printf_like", "JS_FreeValue", "JS_FreeValueRT", "qjs_port_malloc", "qjs_port_realloc", "qjs_port_free", "qjs_port_malloc_usable_size"])
+	quickjs_exports = generateExports("thirdparty/owemdjee/QuickJS/monolithic_examples.h") + generateQuickJSExports("thirdparty/owemdjee/QuickJS", ["__js_printf_like"])
 	markdown_exports = generateExports("thirdparty/owemdjee/upskirt-markdown/bin")
 	zstd_exports = generateExports("thirdparty/owemdjee/zstd/programs", ["zstd_fitblk_example_main", "zstd_mini_gzip_main", "zstd_zwrapbench_main"])
 	crow_exports = generateExports("thirdparty/owemdjee/crow/include/crow/monolithic_examples.h")
