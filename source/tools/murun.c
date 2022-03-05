@@ -2165,7 +2165,7 @@ static void js_proc_EX(fz_context *ctx, pdf_processor *proc)
 
 static pdf_processor *new_js_processor(fz_context *ctx, js_State *J)
 {
-	pdf_js_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+	pdf_js_processor *proc = (pdf_js_processor *)pdf_new_processor(ctx, sizeof *proc);
 
 	proc->super.close_processor = NULL;
 	proc->super.drop_processor = NULL;

@@ -2113,7 +2113,7 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 pdf_processor *
 pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie)
 {
-	pdf_run_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+	pdf_run_processor *proc = (pdf_run_processor *)pdf_new_processor(ctx, sizeof *proc);
 	{
 		proc->super.usage = usage;
 

@@ -262,7 +262,7 @@ pdf_drop_mcid_processor(fz_context *ctx, pdf_processor *proc)
 pdf_processor *
 pdf_new_mcid_processor(fz_context *ctx, pdf_mcid_table *table)
 {
-	pdf_mcid_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+	pdf_mcid_processor *proc = (pdf_mcid_processor *)pdf_new_processor(ctx, sizeof *proc);
 	{
 		proc->super.close_processor = pdf_close_mcid_processor;
 		proc->super.drop_processor = pdf_drop_mcid_processor;

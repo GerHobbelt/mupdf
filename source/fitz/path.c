@@ -174,7 +174,7 @@ int fz_packed_path_size(const fz_path *path)
 		return sizeof(fz_packed_path) + sizeof(float) * pack->coord_len + sizeof(uint8_t) * pack->cmd_len;
 	}
 	default:
-		assert("This never happens" == NULL);
+		assert(!"This never happens");
 		return 0;
 	}
 }
@@ -667,7 +667,7 @@ void fz_walk_path(fz_context *ctx, const fz_path *path, const fz_path_walker *pr
 		cmds = (uint8_t *)&coords[((fz_packed_path *)path)->coord_len];
 		break;
 	default:
-		assert("This never happens" == NULL);
+		assert(!"This never happens");
 		return;
 	}
 
@@ -1064,7 +1064,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				n = 0;
 				break;
 			default:
-				assert("Unknown path cmd" == NULL);
+				assert(!"Unknown path cmd");
 			}
 			while (n > 0)
 			{
@@ -1163,7 +1163,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				n = 0;
 				break;
 			default:
-				assert("Unknown path cmd" == NULL);
+				assert(!"Unknown path cmd");
 			}
 			while (n > 0)
 			{
@@ -1331,7 +1331,7 @@ fz_transform_path(fz_context *ctx, fz_path *path, fz_matrix ctm)
 				n = 0;
 				break;
 			default:
-				assert("Unknown path cmd" == NULL);
+				assert(!"Unknown path cmd");
 			}
 			while (n > 0)
 			{

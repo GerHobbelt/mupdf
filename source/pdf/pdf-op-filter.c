@@ -2063,7 +2063,7 @@ pdf_new_filter_processor(
 	fz_matrix transform,
 	pdf_filter_options *filter)
 {
-	pdf_filter_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+	pdf_filter_processor *proc = (pdf_filter_processor *)pdf_new_processor(ctx, sizeof *proc);
 	{
 		proc->super.close_processor = pdf_close_filter_processor;
 		proc->super.drop_processor = pdf_drop_filter_processor;

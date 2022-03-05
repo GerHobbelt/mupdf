@@ -666,7 +666,7 @@ fz_add_line_join(fz_context *ctx, sctx *s, float ax, float ay, float bx, float b
 		break;
 
 	default:
-		assert("Invalid line join" == NULL);
+		assert(!"Invalid line join");
 	}
 }
 
@@ -729,7 +729,7 @@ fz_add_line_cap(fz_context *ctx, sctx *s, float ax, float ay, float bx, float by
 	}
 
 	default:
-		assert("Invalid line cap" == NULL);
+		assert(!"Invalid line cap");
 	}
 }
 
