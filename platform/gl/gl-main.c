@@ -2113,9 +2113,9 @@ static void console_init(void)
 		FZ_VERSION,
 		JS_VERSION_MAJOR, JS_VERSION_MINOR, JS_VERSION_PATCH);
 
-	warning_callback = fz_warning_callback(ctx, &warning_user);
+	fz_get_warning_callback(ctx, &warning_callback, &warning_user);
 	fz_set_warning_callback(ctx, console_warn, NULL);
-	error_callback = fz_error_callback(ctx, &error_user);
+	fz_get_error_callback(ctx, &error_callback, &error_user);
 	fz_set_error_callback(ctx, console_err, NULL);
 }
 
