@@ -556,8 +556,7 @@ typedef void (fz_aa_sub_pix_quantizer)(float size, int *x, int *y);
 	1 for glyphs >= 8 points, 2 for glyphs >= 4 points, and 4 for all
 	others.
 */
-void
-fz_set_graphics_sub_pix_quantizer(fz_context *ctx, fz_aa_sub_pix_quantizer *fn);
+void fz_set_graphics_sub_pix_quantizer(fz_context *ctx, fz_aa_sub_pix_quantizer *fn);
 
 /**
 	Get the user stylesheet source text.
