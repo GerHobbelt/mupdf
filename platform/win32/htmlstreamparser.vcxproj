@@ -18,18 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="pthread_lib.2019.vcxproj">
-      <Project>{C431B5C5-FF25-4450-A13C-EA3123456789}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgflags.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffc19ff8}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libhypertextcpp</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF46B55D}</ProjectGuid>
-    <RootNamespace>libhypertextcpp</RootNamespace>
+    <ProjectName>htmlstreamparser</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF44FFA4}</ProjectGuid>
+    <RootNamespace>htmlstreamparser</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -60,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -87,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -118,10 +110,10 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -131,15 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/hypertextcpp/shared_lib_api/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;GOOGLE_GLOG_DLL_DECL=;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -158,16 +149,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/hypertextcpp/shared_lib_api/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;GOOGLE_GLOG_DLL_DECL=;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -178,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -188,15 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/hypertextcpp/shared_lib_api/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;GOOGLE_GLOG_DLL_DECL=;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -215,16 +204,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/hypertextcpp/shared_lib_api/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;GOOGLE_GLOG_DLL_DECL=;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHYPERTEXTCPP;HYPERTEXTCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_HTMLSTREAMPARSER;HTMLSTREAMPARSER_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -237,46 +225,20 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/codenode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/nameutils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/nodeextension.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/nodereader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/procedurenode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/sectionnode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/sharedlibtranspiler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/singleheadertranspiler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/streamreader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/tagnode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/textnode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/transpiler.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hypertextcpp/src/utils.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/shared_lib_api/include/hypertextcpp/itemplate.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/shared_lib_api/include/hypertextcpp/templateloader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/shared_lib_api/include/hypertextcpp/templateloadingerror.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/codenode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/errors.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/idocumentnode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/nameutils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/nodeextension.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/nodereader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/procedurenode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/sectionnode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/sharedlibtranspiler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/singleheadertranspiler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/streamreader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/streamreaderposition.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/tagnode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/textnode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/transpiler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/hypertextcpp/src/utils.h" />
-    <Image Include="../../thirdparty/owemdjee/hypertextcpp/doc/logo.png" />
-    <Text Include="../../thirdparty/owemdjee/hypertextcpp/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/hypertextcpp/LICENSE.md" />
-    <Text Include="../../thirdparty/owemdjee/hypertextcpp/README.md" />
-    <Text Include="../../thirdparty/owemdjee/hypertextcpp/shared_template/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/htmlstreamparser/src/htmlstreamparser.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/htmlstreamparser/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/htmlstreamparser/src/htmlstreamparser.h" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/htmlstreamparser/src/Makefile.in" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
