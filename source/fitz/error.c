@@ -87,10 +87,12 @@ void fz_default_warning_callback(void *user, const char *message)
 
 /* Warning context */
 
-void fz_set_warning_callback(fz_context *ctx, fz_error_print_callback* print, void *user)
+fz_error_print_callback* fz_set_warning_callback(fz_context *ctx, fz_error_print_callback* print, void *user)
 {
+	fz_error_print_callback* rv = ctx->warn.print;
 	ctx->warn.print_user = user;
 	ctx->warn.print = print ? print : fz_default_warning_callback;
+	return rv;
 }
 
 void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, void** user)
@@ -121,10 +123,12 @@ void fz_default_info_callback(void* user, const char* message)
 
 /* Warning context */
 
-void fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void* user)
+fz_error_print_callback* fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void* user)
 {
+	fz_error_print_callback* rv = ctx->info.print;
 	ctx->info.print_user = user;
 	ctx->info.print = print ? print : fz_default_info_callback;
+	return rv;
 }
 
 void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void** user)
@@ -298,10 +302,12 @@ void fz_error(fz_context* ctx, const char* fmt, ...)
 
 /* Error context */
 
-void fz_set_error_callback(fz_context *ctx, fz_error_print_callback* print, void *user)
+fz_error_print_callback* fz_set_error_callback(fz_context *ctx, fz_error_print_callback* print, void *user)
 {
+	fz_error_print_callback* rv = ctx->error.print;
 	ctx->error.print_user = user;
 	ctx->error.print = print ? print : fz_default_error_callback;
+	return rv;
 }
 
 void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, void** user)
