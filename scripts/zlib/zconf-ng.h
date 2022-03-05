@@ -242,6 +242,8 @@ typedef PTRDIFF_TYPE ptrdiff_t;
 
 #define X86_PCLMULQDQ_CRC   1
 
+#define X86_VPCLMULQDQ_CRC  1
+
 #if _M_IX86_FP > 0
 #define X86_SSE2            1
 #define X86_SSE2_CHUNKSET   1
