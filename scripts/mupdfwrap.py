@@ -5805,15 +5805,15 @@ def function_wrapper_class_aware(
         out_cpp
             Where to write generated code.
         struct_name
-            If None, we generate class-aware wrapping function. Otherwise name
+            If false, we generate class-aware wrapping function. Otherwise name
             of struct such as 'fz_rect' and we create a method in the struct's
             wrapper class.
         class_name
-            Ignored if struct_name is None.
+            Ignored if struct_name is false.
 
             Name of wrapper class, e.g. 'Rect'.
         class_static
-            Ignored if struct_name is None,
+            Ignored if struct_name is false.
 
             If true, we generate a static method.
 
