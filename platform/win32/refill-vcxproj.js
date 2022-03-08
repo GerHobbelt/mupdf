@@ -103,6 +103,13 @@ if (projname.endsWith("_examples")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
+if (projname.endsWith("_DLL")) {
+	let tst_projname = projname.replace(/_DLL$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
 // now things get a little hairier: we need to MAP to projectname to a submodule directory path...
 
 const projectMap = {

@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXWIDGETS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -132,7 +132,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXWIDGETS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -167,7 +167,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXWIDGETS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -203,7 +203,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXWIDGETS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -238,7 +238,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXWIDGETS;WXWIDGETS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -320,7 +320,9 @@
     <ClCompile Include="..\..\scripts\wxWidgets\jumbo-source7.cpp" />
     <ClCompile Include="..\..\scripts\wxWidgets\jumbo-source8.cpp" />
     <ClCompile Include="..\..\scripts\wxWidgets\jumbo-source9.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\wxWidgets\src\msw\dll_init.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/art/wxlogo_svg.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/arrimpl.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/listimpl.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/thrimpl.cpp" />
@@ -775,6 +777,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/nonownedwnd.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/notebook.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/notifmsg.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/overlay.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/pen.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/popupwin.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/gtk/print.cpp" />
@@ -1012,6 +1015,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/dir.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/dirdlg.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/msw/dll_init.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/dlmsw.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/dragimag.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/enhmeta.cpp" />
@@ -1484,6 +1488,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bmp.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bmpbt.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bmpcbox.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bookctrlbase.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bttn.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_cald.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_chckb.cpp" />
@@ -1584,7 +1589,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/art/tango/image_missing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/art/tango/list_add.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/art/tango/list_remove.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/art/tango/process_stop.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/art/tango/text_x_generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/art/tango/view_refresh.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/build/msw/packages/Microsoft.Web.WebView2.1.0.902-prerelease/build/native/include/WebView2.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/build/msw/packages/Microsoft.Web.WebView2.1.0.902-prerelease/build/native/include/WebView2EnvironmentOptions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/build/msw/packages/Microsoft.Web.WebView2.1.0.902-prerelease/build/native/include/WebView2Experimental.h" />
@@ -1699,6 +1706,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/dcsvg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/dde.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/debugheap.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/debugrpt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/defs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/desktopenv.h" />
@@ -1944,6 +1952,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/gtk/private.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/gtk/private/addremovectrl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/gtk/private/animate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/gtk/private/backend.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/gtk/private/dialogcount.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/gtk/private/error.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/gtk/private/event.h" />
@@ -2123,7 +2132,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/log.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/longlong.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/lzmastream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/maskededit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/math.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/matrix.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/mdi.h" />
@@ -2323,7 +2331,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/msw/private/keyboard.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/msw/private/metrics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/msw/private/msgdlg.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/msw/private/overlay.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/msw/private/paint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/msw/private/pipestream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/msw/private/sockmsw.h" />
@@ -2417,7 +2424,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/osx/cocoa/private.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/osx/cocoa/private/date.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/osx/cocoa/private/markuptoattr.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/osx/cocoa/private/overlay.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/osx/cocoa/private/textimpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/osx/cocoa/stdpaths.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/osx/colordlg.h" />
@@ -3001,6 +3007,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/xrc/xh_bmp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/xrc/xh_bmpbt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/xrc/xh_bmpcbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/xrc/xh_bookctrlbase.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/xrc/xh_bttn.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/xrc/xh_cald.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/include/wx/xrc/xh_chckb.h" />
@@ -3089,6 +3096,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/motif/mdi/lib/XsResizeOutline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/motif/xmcombo/combop.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/motif/xmcombo/xmcombo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/wm_message_id_decoder.inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/msw/wm_message_ids.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/regex/regcustom.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/regex/regerrs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/regex/regex.h" />
@@ -3158,9 +3167,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src/UniqueString.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src/ViewStyle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src/XPM.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxWidgets\include\wx\debugheap.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxWidgets\src\msw\wm_message_ids.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxWidgets\src\msw\wm_message_id_decoder.inc.h" />
     <Image Include="../../thirdparty/owemdjee/wxWidgets/art/wxwin.ico" />
     <Image Include="../../thirdparty/owemdjee/wxWidgets/art/wxwin16x16.png" />
     <Image Include="../../thirdparty/owemdjee/wxWidgets/art/wxwin32x32.png" />
@@ -3196,6 +3202,7 @@
     <Image Include="../../thirdparty/owemdjee/wxWidgets/src/osx/iphone/AppIcon.appiconset/wx-76.png" />
     <Image Include="../../thirdparty/owemdjee/wxWidgets/src/osx/iphone/AppIcon.appiconset/wx-76@2x.png" />
     <Image Include="../../thirdparty/owemdjee/wxWidgets/src/osx/iphone/AppIcon.appiconset/wx-83.5@2x.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/wxWidgets/src/msw/version.rc" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/README-GIT.md" />
@@ -3351,6 +3358,7 @@
     <Text Include="../../thirdparty/owemdjee/wxWidgets/build/tools/release.sh" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/configure.in" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/distrib/autopackage/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/distrib/autopackage/sample/minimal.bkl" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/distrib/autopackage/wxgtk.apspec.in" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/docs/base/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/docs/changes.txt" />
@@ -3449,6 +3457,7 @@
     <Text Include="../../thirdparty/owemdjee/wxWidgets/misc/languages/genlang.py" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/misc/languages/langtabl.txt" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/misc/languages/scripttabl.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/misc/scripts/bin2c.py" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/misc/scripts/check_mixed_eol.sh" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/misc/scripts/makeosxtags.sh" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/misc/scripts/makeunixtags.sh" />
@@ -3486,6 +3495,14 @@
     <Text Include="../../thirdparty/owemdjee/wxWidgets/src/osx/iphone/AppIcon.appiconset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/src/osx/iphone/Info.plist.in" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/src/regex/splice.sh" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/gen_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/gen_iface.py" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/stc.cpp.in" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/stc.h.in" />
+    <Text Include="../../thirdparty/owemdjee/wxWidgets/src/stc/stc.interface.h.in" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/version-script.in" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/wx-config-inplace.in" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/wx-config.in" />
@@ -3503,7 +3520,8 @@
     <None Include="mk_jumbo_source_files.js" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
