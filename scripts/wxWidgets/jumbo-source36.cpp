@@ -8,6 +8,12 @@
 
 
 //------------------------------------------------------------------------
+// xh_listc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listc.cpp"
+
+
+//------------------------------------------------------------------------
 // xh_mdi.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_mdi.cpp"
@@ -119,9 +125,3 @@
 // xh_stbox.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_stbox.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_stlin.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_stlin.cpp"

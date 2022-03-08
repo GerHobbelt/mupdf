@@ -68,6 +68,12 @@
 
 
 //------------------------------------------------------------------------
+// xh_bookctrlbase.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bookctrlbase.cpp"
+
+
+//------------------------------------------------------------------------
 // xh_bttn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_bttn.cpp"
@@ -119,9 +125,3 @@
 // xh_collpane.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_collpane.cpp"
-
-
-//------------------------------------------------------------------------
-// xh_combo.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_combo.cpp"

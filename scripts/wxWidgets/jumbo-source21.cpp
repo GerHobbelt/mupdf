@@ -58,6 +58,10 @@
 #  include "../../thirdparty/owemdjee/wxWidgets/src/dfb/overlay.cpp"
 #endif
 
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/overlay.cpp"
+#endif
+
 
 //------------------------------------------------------------------------
 // overlaycmn.cpp

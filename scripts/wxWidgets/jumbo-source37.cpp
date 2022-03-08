@@ -8,6 +8,12 @@
 
 
 //------------------------------------------------------------------------
+// xh_stlin.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_stlin.cpp"
+
+
+//------------------------------------------------------------------------
 // xh_sttxt.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_sttxt.cpp"
@@ -121,9 +127,3 @@
 // xtistrm.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/xtistrm.cpp"
-
-
-//------------------------------------------------------------------------
-// xtixml.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/xtixml.cpp"
