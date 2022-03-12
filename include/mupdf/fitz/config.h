@@ -59,9 +59,10 @@
 	By default all are enabled. To avoid building unwanted
 	ones, define FZ_ENABLE_..._OUTPUT to 0.
 */
-/* #define FZ_ENABLE_OCR_OUTPUT 1 */
-/* #define FZ_ENABLE_DOCX_OUTPUT 1 */
-/* #define FZ_ENABLE_ODT_OUTPUT 1 */
+#define FZ_ENABLE_OCR_OUTPUT 0
+#define FZ_ENABLE_DOCX_OUTPUT 0
+#define FZ_ENABLE_ODT_OUTPUT 0 
+#define FZ_ENABLE_PS_OUTPUT 0 
 
 /**
 	Choose whether to enable ICC color profiles.
@@ -74,7 +75,22 @@
 	issues with the third party libraries we support disabling
 	it with this flag.
 */
-/* #define FZ_ENABLE_JPX 1 */
+#define FZ_ENABLE_JPX 0
+
+/**
+	Choose whether to enable JPEG-XL en-/decoding.
+*/
+#define FZ_ENABLE_JPEGXL 0
+
+/**
+	Choose whether to enable TIFF en-/decoding.
+*/
+#define FZ_ENABLE_TIFF 0
+
+/**
+	Choose whether to enable WEBP en-/decoding.
+*/
+#define FZ_ENABLE_WEBP 0
 
 /**
 	Choose whether to enable JavaScript.
@@ -203,9 +219,25 @@
 #define FZ_ENABLE_DOCX_OUTPUT 1
 #endif /* FZ_ENABLE_DOCX_OUTPUT */
 
+#ifndef FZ_ENABLE_PS_OUTPUT
+#define FZ_ENABLE_PS_OUTPUT 1
+#endif /* FZ_ENABLE_PS_OUTPUT */
+
 #ifndef FZ_ENABLE_JPX
 #define FZ_ENABLE_JPX 1
 #endif /* FZ_ENABLE_JPX */
+
+#ifndef FZ_ENABLE_JPEGXL
+#define FZ_ENABLE_JPEEGXL 1
+#endif
+
+#ifndef FZ_ENABLE_TIFF
+#define FZ_ENABLE_TIFF 1
+#endif
+
+#ifndef FZ_ENABLE_WEBP
+#define FZ_ENABLE_WEBP 1
+#endif
 
 #ifndef FZ_ENABLE_JS
 #define FZ_ENABLE_JS 1

@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_TIFF
+
 #include "pixmap-imp.h"
 
 #include <limits.h>
@@ -1522,3 +1524,5 @@ fz_load_tiff_subimage_count(fz_context *ctx, const unsigned char *buf, size_t le
 
 	return subimage_count;
 }
+
+#endif

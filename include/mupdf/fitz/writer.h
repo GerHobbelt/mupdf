@@ -133,11 +133,16 @@ fz_document_writer *fz_new_svg_writer(fz_context *ctx, const char *path, const c
 fz_document_writer *fz_new_text_writer(fz_context *ctx, const char *format, const char *path, const char *options);
 fz_document_writer *fz_new_text_writer_with_output(fz_context *ctx, const char *format, fz_output *out, const char *options);
 
+#if FZ_ENABLE_ODT_OUTPUT
 fz_document_writer *fz_new_odt_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_odt_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
+#endif
+#if FZ_ENABLE_DOCX_OUTPUT
 fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_docx_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
+#endif
 
+#if FZ_ENABLE_PS_OUTPUT
 fz_document_writer *fz_new_ps_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_ps_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
 fz_document_writer *fz_new_pcl_writer(fz_context *ctx, const char *path, const char *options);
@@ -146,10 +151,14 @@ fz_document_writer *fz_new_pclm_writer(fz_context *ctx, const char *path, const 
 fz_document_writer *fz_new_pclm_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
 fz_document_writer *fz_new_pwg_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_pwg_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
+#endif
 
+#if FZ_ENABLE_CBZ
 fz_document_writer *fz_new_cbz_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_cbz_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
+#endif
 
+#if FZ_ENABLE_OCR_OUTPUT
 /**
 	Used to report progress of the OCR operation.
 
@@ -167,6 +176,7 @@ typedef int (fz_pdfocr_progress_fn)(fz_context *ctx, void *progress_arg, int pag
 fz_document_writer *fz_new_pdfocr_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_pdfocr_writer_with_output(fz_context *ctx, fz_output *out, const char *options);
 void fz_pdfocr_writer_set_progress(fz_context *ctx, fz_document_writer *writer, fz_pdfocr_progress_fn *progress, void *);
+#endif
 
 fz_document_writer *fz_new_png_pixmap_writer(fz_context *ctx, const char *path, const char *options);
 fz_document_writer *fz_new_pam_pixmap_writer(fz_context *ctx, const char *path, const char *options);

@@ -20,10 +20,12 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
+#include "mupdf/fitz.h"
+
+#if FZ_ENABLE_DOCX_OUTPUT
+
 #include "glyphbox.h"
 #include "extract.h"
-
-#include "mupdf/fitz.h"
 
 #include <assert.h>
 #include <errno.h>
@@ -674,3 +676,5 @@ fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *path, const 
 	}
 	return ret;
 }
+
+#endif

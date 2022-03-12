@@ -28,6 +28,8 @@
 #define PATH_MAX 4096
 #endif
 
+#if FZ_ENABLE_CBZ
+
 typedef struct
 {
 	fz_document_writer super;
@@ -125,6 +127,8 @@ fz_new_cbz_writer(fz_context *ctx, const char *path, const char *options)
 	}
 	return wri;
 }
+
+#endif
 
 /* generic image file output writer */
 

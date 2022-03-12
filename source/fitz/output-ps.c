@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_PS_OUTPUT
+
 #include "z-imp.h"
 
 typedef struct ps_band_writer_s
@@ -382,3 +384,5 @@ fz_new_ps_writer(fz_context *ctx, const char *path, const char *options)
 	fz_output *out = fz_new_output_with_path(ctx, path ? path : "out.ps", 0);
 	return fz_new_ps_writer_with_output(ctx, out, options);
 }
+
+#endif

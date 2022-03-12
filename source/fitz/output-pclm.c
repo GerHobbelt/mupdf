@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_PS_OUTPUT
+
 #include <zlib-ng.h>
 
 #include <string.h>
@@ -440,3 +442,5 @@ fz_new_pclm_writer(fz_context *ctx, const char *path, const char *options)
 	fz_output *out = fz_new_output_with_path(ctx, path ? path : "out.pclm", 0);
 	return fz_new_pclm_writer_with_output(ctx, out, options);
 }
+
+#endif

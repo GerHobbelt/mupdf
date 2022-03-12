@@ -742,7 +742,7 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 		tile = fz_load_png(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
 	case FZ_IMAGE_JPEGXL:
-#ifdef HAVE_JPEGXL
+#if defined(HAVE_JPEGXL) && FZ_ENABLE_JPEGXL
 		tile = fz_load_jpegxl(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "JpegXL not supported in this build");
@@ -754,21 +754,33 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 	case FZ_IMAGE_BMP:
 		tile = fz_load_bmp(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
+#if FZ_ENABLE_TIFF
 	case FZ_IMAGE_TIFF:
 		tile = fz_load_tiff(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "TIFF not supported in this build");
+#endif
 	case FZ_IMAGE_PNM:
 		tile = fz_load_pnm(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
 	case FZ_IMAGE_JXR:
 		tile = fz_load_jxr(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
+#if FZ_ENABLE_JPX
 	case FZ_IMAGE_JPX:
 		tile = fz_load_jpx(ctx, image->buffer->buffer->data, image->buffer->buffer->len, NULL);
 		break;
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Jpeg2000 not supported in this build");
+#endif
+#if FZ_ENABLE_WEBP
 	case FZ_IMAGE_WEBP:
 		tile = fz_load_webp(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "WEBP not supported in this build");
+#endif
 	case FZ_IMAGE_JPEG:
 		/* Scan JPEG stream and patch missing height values in header */
 		{
@@ -1282,14 +1294,18 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 	case FZ_IMAGE_PNM:
 		fz_load_pnm_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
 		break;
+#if FZ_ENABLE_JPX
 	case FZ_IMAGE_JPX:
 		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
 		break;
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Jpeg2000 (JPX) not supported in this build");
+#endif
 	case FZ_IMAGE_JPEG:
 		fz_load_jpeg_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JPEGXL:
-#ifdef HAVE_JPEGXL
+#if defined(HAVE_JPEGXL) && FZ_ENABLE_JPEGXL
 		fz_load_jpegxl_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "JpegXL not supported in this build");
@@ -1301,12 +1317,20 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 	case FZ_IMAGE_JXR:
 		fz_load_jxr_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
 		break;
+#if FZ_ENABLE_WEBP
 	case FZ_IMAGE_WEBP:
 		fz_load_webp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
 		break;
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "WEBP not supported in this build");
+#endif
+#if FZ_ENABLE_TIFF
 	case FZ_IMAGE_TIFF:
 		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
 		break;
+#else
+		fz_throw(ctx, FZ_ERROR_GENERIC, "TIFF not supported in this build");
+#endif
 	case FZ_IMAGE_GIF:
 		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
 		break;

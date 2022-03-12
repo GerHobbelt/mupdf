@@ -1,6 +1,6 @@
 #include "mupdf/fitz.h"
 
-#ifdef HAVE_WEBP
+#if defined(HAVE_WEBP) && FZ_ENABLE_WEBP
 
 #include <webp/decode.h>
 

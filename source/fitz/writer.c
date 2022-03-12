@@ -177,9 +177,10 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 		if (is_extension(format, "pdf"))
 			return fz_new_pdf_writer(ctx, path, options);
 #endif
+#if FZ_ENABLE_CBZ
 		if (is_extension(format, "cbz"))
 			return fz_new_cbz_writer(ctx, path, options);
-
+#endif
 		if (is_extension(format, "svg"))
 			return fz_new_svg_writer(ctx, path, options);
 
@@ -198,6 +199,7 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 		if (is_extension(format, "pkm"))
 			return fz_new_pkm_pixmap_writer(ctx, path, options);
 
+#if FZ_ENABLE_PS_OUTPUT
 		if (is_extension(format, "pcl"))
 			return fz_new_pcl_writer(ctx, path, options);
 		if (is_extension(format, "pclm"))
@@ -206,6 +208,7 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 			return fz_new_ps_writer(ctx, path, options);
 		if (is_extension(format, "pwg"))
 			return fz_new_pwg_writer(ctx, path, options);
+#endif
 
 		if (is_extension(format, "txt") || is_extension(format, "text"))
 			return fz_new_text_writer(ctx, "text", path, options);
@@ -237,15 +240,20 @@ fz_new_document_writer(fz_context *ctx, const char *path, const char *explicit_f
 fz_document_writer *
 fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *format, const char *options)
 {
+#if FZ_ENABLE_CBZ
 	if (is_extension(format, "cbz"))
 		return fz_new_cbz_writer_with_output(ctx, out, options);
+#endif
+#if FZ_ENABLE_OCR_OUTPUT
 	if (is_extension(format, "ocr"))
 		return fz_new_pdfocr_writer_with_output(ctx, out, options);
+#endif
 #if FZ_ENABLE_PDF
 	if (is_extension(format, "pdf"))
 		return fz_new_pdf_writer_with_output(ctx, out, options);
 #endif
 
+#if FZ_ENABLE_PS_OUTPUT
 	if (is_extension(format, "pcl"))
 		return fz_new_pcl_writer_with_output(ctx, out, options);
 	if (is_extension(format, "pclm"))
@@ -254,6 +262,7 @@ fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *
 		return fz_new_ps_writer_with_output(ctx, out, options);
 	if (is_extension(format, "pwg"))
 		return fz_new_pwg_writer_with_output(ctx, out, options);
+#endif
 
 	if (is_extension(format, "txt") || is_extension(format, "text"))
 		return fz_new_text_writer_with_output(ctx, "text", out, options);

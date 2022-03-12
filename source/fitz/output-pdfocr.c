@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_OCR_OUTPUT
+
 #include <zlib-ng.h> /* for compressBound() and compress() */
 
 #include <string.h>
@@ -1087,3 +1089,5 @@ fz_pdfocr_writer_set_progress(fz_context *ctx, fz_document_writer *writer, fz_pd
 	fz_pdfocr_band_writer_set_progress(ctx, wri->bander, progress, progress_arg);
 #endif
 }
+
+#endif

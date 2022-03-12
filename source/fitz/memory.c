@@ -178,7 +178,7 @@ char *
 fz_strdup(fz_context *ctx, const char *s)
 {
 	size_t len = strlen(s) + 1;
-	char *ns = fz_malloc(ctx, len);
+	char *ns = (char *)fz_malloc(ctx, len);
 	memcpy(ns, s, len);
 	return ns;
 }
