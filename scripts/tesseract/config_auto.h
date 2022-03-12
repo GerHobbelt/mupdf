@@ -8,6 +8,7 @@
 // defined: support image sizes > 32K*32K pixels.
 #define LARGE_IMAGES 1
 
+
 // https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?redirectedfrom=MSDN&view=msvc-160
 //
 //#define __AVX2__                         1

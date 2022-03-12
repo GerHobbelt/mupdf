@@ -127,6 +127,9 @@
  /* (You probably really don't want to do that except for measurement
   * purposes!) */
 
+/* To remove OCR/tesseract features, enable: */
+#define OCR_DISABLED
+
 /* ---------- DO NOT EDIT ANYTHING UNDER THIS LINE ---------- */
 
 #ifndef FZ_ENABLE_SPOT_RENDERING
