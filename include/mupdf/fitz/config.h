@@ -46,13 +46,13 @@
 	By default all are enabled. To avoid building unwanted
 	ones, define FZ_ENABLE_... to 0.
 */
-/* #define FZ_ENABLE_PDF 1 */
-/* #define FZ_ENABLE_XPS 1 */
-/* #define FZ_ENABLE_SVG 1 */
-/* #define FZ_ENABLE_CBZ 1 */
-/* #define FZ_ENABLE_IMG 1 */
-/* #define FZ_ENABLE_HTML 1 */
-/* #define FZ_ENABLE_EPUB 1 */
+#define FZ_ENABLE_PDF 0
+#define FZ_ENABLE_XPS 0
+#define FZ_ENABLE_SVG 0
+#define FZ_ENABLE_CBZ 0
+#define FZ_ENABLE_IMG 0
+#define FZ_ENABLE_HTML 0
+#define FZ_ENABLE_EPUB 0
 
 /**
 	Choose which document writers to include.
@@ -66,7 +66,7 @@
 /**
 	Choose whether to enable ICC color profiles.
 */
-/* #define FZ_ENABLE_ICC 1 */
+#define FZ_ENABLE_ICC 0
 
 /**
 	Choose whether to enable JPEG2000 decoding.
@@ -161,7 +161,7 @@
 #endif
 
 #ifndef FZ_ENABLE_PDF
-#define FZ_ENABLE_PDF 0
+#define FZ_ENABLE_PDF 1
 #endif /* FZ_ENABLE_PDF */
 
 #ifndef FZ_ENABLE_XPS
@@ -209,7 +209,7 @@
 #endif /* FZ_ENABLE_JS */
 
 #ifndef FZ_ENABLE_ICC
-#define FZ_ENABLE_ICC 0
+#define FZ_ENABLE_ICC 1
 #endif /* FZ_ENABLE_ICC */
 
 /* If Epub and HTML are both disabled, disable SIL fonts */
