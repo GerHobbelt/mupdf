@@ -122,6 +122,11 @@
 /* (You probably really don't want to do that except for measurement
  * purposes!) */
 
+ /* To skip *all* fonts, enable: */
+ #define FZ_ENABLE_BUILTIN_FONTS 0
+ /* (You probably really don't want to do that except for measurement
+  * purposes!) */
+
 /* ---------- DO NOT EDIT ANYTHING UNDER THIS LINE ---------- */
 
 #ifndef FZ_ENABLE_SPOT_RENDERING
@@ -211,6 +216,10 @@
 #if FZ_ENABLE_HTML == 0 && FZ_ENABLE_EPUB == 0
 #undef TOFU_SIL
 #define TOFU_SIL
+#endif
+
+#ifndef FZ_ENABLE_BUILTIN_FONTS
+#define FZ_ENABLE_BUILTIN_FONTS 1
 #endif
 
 #if !defined(HAVE_LEPTONICA) || !defined(HAVE_TESSERACT)

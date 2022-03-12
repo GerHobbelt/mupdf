@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <time.h>
 
+#if FZ_ENABLE_PDF
+
 struct info
 {
 	int page;
@@ -2497,3 +2499,13 @@ int pdfmetadump_main(int argc, const char** argv)
 	fz_drop_context(ctx);
 	return ret;
 }
+
+#else
+
+int pdfmetadump_main(int argc, const char** argv)
+{
+	fz_error(NULL, "PDFmetadump utility is not supported in this build (PDF support has been disabled).");
+	return EXIT_FAILURE;
+}
+
+#endif

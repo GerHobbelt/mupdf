@@ -269,7 +269,6 @@ static pdf_cmap *table[] = {
 pdf_cmap *
 pdf_load_builtin_cmap(fz_context *ctx, const char *name)
 {
-#if 0
 	int r = nelem(table)-1;
 	int l = 0;
 	while (l <= r)
@@ -283,7 +282,6 @@ pdf_load_builtin_cmap(fz_context *ctx, const char *name)
 		else
 			return table[m];
 	}
-#endif
 	return NULL;
 }
 
@@ -292,7 +290,6 @@ pdf_load_builtin_cmap(fz_context *ctx, const char *name)
 pdf_cmap *
 pdf_load_system_cmap(fz_context *ctx, const char *cmap_name)
 {
-#if 0
 	pdf_cmap *usecmap;
 	pdf_cmap *cmap;
 
@@ -309,7 +306,4 @@ pdf_load_system_cmap(fz_context *ctx, const char *cmap_name)
 	}
 
 	return cmap;
-#else
-	return NULL;
-#endif
 }

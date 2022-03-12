@@ -46,10 +46,13 @@
 	Define TOFU_BASE14 to skip the Base 14 fonts (warning: makes PDF unusable).
 */
 
+#if !FZ_ENABLE_BUILTIN_FONTS
+#define TOFU_CJK
 #define NOTO_SMALL
-#define NO_CJK
 #define TOFU
 #define TOFU_BASE14
+#define NOTO_TANGUT 0
+#endif
 
 #ifdef NOTO_SMALL
 #define TOFU_CJK_EXT
@@ -58,7 +61,7 @@
 #define TOFU_SIL
 #endif
 
-#ifdef NO_CJK
+#if defined(NO_CJK) && !defined(TOFU_CJK)
 #define TOFU_CJK
 #endif
 
@@ -176,6 +179,7 @@ const unsigned char *
 fz_lookup_cjk_font(fz_context *ctx, int ordering, int *size, int *subfont)
 {
 	*subfont = 0;
+#ifndef NO_CJK
 #ifndef TOFU_CJK
 #ifndef TOFU_CJK_EXT
 #ifndef TOFU_CJK_LANG
@@ -191,6 +195,9 @@ fz_lookup_cjk_font(fz_context *ctx, int ordering, int *size, int *subfont)
 #endif
 #else
 	RETURN(droid, DroidSansFallback_ttf);
+#endif
+#else
+	return *size = 0, NULL;
 #endif
 #else
 	return *size = 0, NULL;
@@ -235,6 +242,7 @@ fz_lookup_noto_font(fz_context *ctx, int script, int language, int *size, int *s
 #endif
 		break;
 
+#ifndef NO_CJK
 	case UCDN_SCRIPT_HANGUL:
 		return fz_lookup_cjk_font(ctx, FZ_ADOBE_KOREA, size, subfont);
 	case UCDN_SCRIPT_HIRAGANA:
@@ -253,6 +261,7 @@ fz_lookup_noto_font(fz_context *ctx, int script, int language, int *size, int *s
 		}
 
 	case UCDN_SCRIPT_BRAILLE: break; /* no dedicated font; fallback to NotoSansSymbols will cover this */
+#endif
 
 #ifndef TOFU_NOTO
 	case UCDN_SCRIPT_LATIN:

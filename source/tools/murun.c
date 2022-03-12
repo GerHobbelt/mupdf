@@ -732,6 +732,8 @@ static const char *string_from_line_ending(enum pdf_line_ending style)
 	}
 }
 
+#endif
+
 static const char *string_from_destination_type(fz_link_dest_type type)
 {
 	switch (type) {
@@ -746,8 +748,6 @@ static const char *string_from_destination_type(fz_link_dest_type type)
 	case FZ_LINK_DEST_FIT_BV: return "FitBV";
 	}
 }
-
-#endif
 
 static fz_linecap cap_from_string(const char *str)
 {
