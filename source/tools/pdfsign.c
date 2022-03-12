@@ -34,6 +34,9 @@
 #include <stdio.h>
 
 static fz_context *ctx = NULL;
+
+#if FZ_ENABLE_PDF
+
 static const char *infile = NULL;
 static const char *outfile = NULL;
 static const char *certificatefile = NULL;
@@ -387,3 +390,34 @@ int pdfsign_main(int argc, const char** argv)
 	fz_drop_context(ctx);
 	return EXIT_SUCCESS;
 }
+
+#else
+
+int pdfsign_main(int argc, const char** argv)
+{
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+	if (!ctx)
+	{
+		fz_error(ctx, "cannot initialise MuPDF context");
+		return EXIT_FAILURE;
+	}
+
+	fz_error(ctx, "PDFsign utility is not supported in this build (PDF support has been disabled).");
+
+	fz_flush_warnings(ctx);
+	fz_drop_context(ctx);
+	return EXIT_FAILURE;
+}
+
+#endif

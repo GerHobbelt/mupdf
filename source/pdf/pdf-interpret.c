@@ -1053,6 +1053,7 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 void
 pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie)
 {
+#if 0
 	pdf_csi csi;
 	pdf_lexbuf buf;
 	fz_stream *stm = NULL;
@@ -1084,6 +1085,7 @@ pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pd
 		proc->close_processor = NULL; /* aborted run, don't warn about unclosed processor */
 		fz_rethrow(ctx);
 	}
+#endif
 }
 
 /* Bug 702543: It looks like certain types of annotation are never

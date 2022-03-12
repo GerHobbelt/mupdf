@@ -427,6 +427,7 @@ static struct {
 
 static int usage(void)
 {
+#if FZ_ENABLE_PDF
 	// create a nice list of the annotation types for use in the usage help message:
 	char annot_type_list[500] = "";
 	size_t buflen = sizeof(annot_type_list);
@@ -453,6 +454,7 @@ static int usage(void)
 	assert(dst > annot_type_list);
 	dst[-1] = 0;   // nuke that last ','
 	assert(strlen(annot_type_list) <= sizeof(annot_type_list));
+#endif
 
 	fz_info(ctx,
 		"mudraw version " FZ_VERSION "\n"
@@ -565,8 +567,12 @@ static int usage(void)
 		"  -v    display the version of this application and terminate\n"
 		"\n"
 		"  pages  comma separated list of page numbers and ranges\n",
+#if FZ_ENABLE_PDF
 		annot_type_list
-	);
+#else
+		"..."
+#endif
+		);
 
 	return EXIT_FAILURE;
 }
@@ -2297,6 +2303,7 @@ parse_render_options(fz_context* ctx, fz_cookie* cookie, const char* spec)
 			cookie->run_mode |= FZ_RUN_CONTENT;
 		else if (fz_strieq(arg, "annotations"))
 			cookie->run_mode |= FZ_RUN_ANNOTATIONS;
+#if FZ_ENABLE_PDF
 		else if (fz_strieq(arg, "unknown"))
 			cookie->run_annotations_reject_mask[PDF_ANNOT_UNKNOWN + 1] = 1;
 		else
@@ -2309,6 +2316,12 @@ parse_render_options(fz_context* ctx, fz_cookie* cookie, const char* spec)
 			}
 			cookie->run_annotations_reject_mask[type + 1] = 1;
 		}
+#else
+		else
+		{
+			fz_error(ctx, "Unrecognized annotation type '%s' specified as part of the render filter. Treating it as UNKNOWN annotation type.\n", arg);
+		}
+#endif
 
 		arg += wlen + 1;    // <-- *this* is why we need TWO sentinels.
 		arg += strspn(arg, SEPS);

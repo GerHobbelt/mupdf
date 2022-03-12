@@ -23,6 +23,10 @@
 #ifndef MUPDF_PKCS7_OPENSSL_H
 #define MUPDF_PKCS7_OPENSSL_H
 
+#include "mupdf/fitz/config.h"
+
+#if FZ_ENABLE_PDF
+
 /* This an example pkcs7 implementation using openssl. These are the types of functions that you
  * will likely need to sign documents and check signatures within documents. In particular, to
  * sign a document, you need a function that derives a pdf_pkcs7_signer object from a certificate
@@ -41,5 +45,7 @@ pdf_pkcs7_distinguished_name *pkcs7_openssl_distinguished_name(fz_context *ctx, 
 pdf_pkcs7_signer *pkcs7_openssl_read_pfx(fz_context *ctx, const char *pfile, const char *pw);
 
 pdf_pkcs7_verifier *pkcs7_openssl_new_verifier(fz_context *ctx);
+
+#endif
 
 #endif

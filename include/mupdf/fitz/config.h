@@ -156,7 +156,7 @@
 #endif
 
 #ifndef FZ_ENABLE_PDF
-#define FZ_ENABLE_PDF 1
+#define FZ_ENABLE_PDF 0
 #endif /* FZ_ENABLE_PDF */
 
 #ifndef FZ_ENABLE_XPS
@@ -204,7 +204,7 @@
 #endif /* FZ_ENABLE_JS */
 
 #ifndef FZ_ENABLE_ICC
-#define FZ_ENABLE_ICC 1
+#define FZ_ENABLE_ICC 0
 #endif /* FZ_ENABLE_ICC */
 
 /* If Epub and HTML are both disabled, disable SIL fonts */

@@ -340,7 +340,7 @@ typedef struct
 	int errors;
 	int incomplete;
 	enum fz_run_flags run_mode;
-	char run_annotations_reject_mask[32];   // char acts as boolean value carrier: 0 = false, !0 = true
+	char run_annotations_reject_mask[32 /* PDF_ANNOT_UNKNOWN + 2 */ ];   // char acts as boolean value carrier: 0 = false, !0 = true
 
 	size_t max_nodes_per_page_render;		// 0: doesn't matter; > 0: abort page render when there's more nodes than this
 	float max_msecs_per_page_render;		// 0: doesn't matter; > 0: abort page render when time spent is more than this

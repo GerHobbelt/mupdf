@@ -995,6 +995,7 @@ static void xml_from_gumbo(fz_context *ctx, struct parser *parser, GumboNode *no
 fz_xml_doc *
 fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf)
 {
+#if 0
 	struct parser parser;
 	fz_xml_doc *xml = NULL;
 	fz_xml root, *node;
@@ -1080,4 +1081,7 @@ fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf)
 	}
 
 	return xml;
+#else
+	return NULL;
+#endif
 }

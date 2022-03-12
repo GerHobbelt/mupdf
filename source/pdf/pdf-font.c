@@ -1486,6 +1486,7 @@ pdf_make_width_table(fz_context *ctx, pdf_font_desc *fontdesc)
 pdf_font_desc *
 pdf_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict)
 {
+#if 0
 	pdf_obj *subtype;
 	pdf_obj *dfonts;
 	pdf_obj *charprocs;
@@ -1555,6 +1556,9 @@ pdf_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict)
 	}
 
 	return fontdesc;
+#else
+	return NULL;
+#endif
 }
 
 void

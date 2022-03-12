@@ -782,6 +782,8 @@ static enum pdf_line_ending line_ending_from_string(const char *str)
 	return PDF_ANNOT_LE_NONE;
 }
 
+#endif
+
 static fz_link_dest_type link_dest_type_from_string(const char *str)
 {
 	if (!strcmp(str, "XYZ")) return FZ_LINK_DEST_XYZ;
@@ -863,8 +865,6 @@ static void ffi_pushlinkdest(js_State *J, const fz_link_dest dest)
 		break;
 	}
 }
-
-#endif
 
 static void ffi_pushstroke(js_State *J, const fz_stroke_state *stroke)
 {
