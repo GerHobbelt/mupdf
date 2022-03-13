@@ -157,6 +157,7 @@ fz_drop_context(fz_context *ctx)
 	if (!ctx)
 		return;
 
+#if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	/* Other finalisation calls go here (in reverse order) */
 	fz_drop_document_handler_context(ctx);
 	fz_drop_glyph_cache_context(ctx);
@@ -165,6 +166,7 @@ fz_drop_context(fz_context *ctx)
 	fz_drop_tuning_context(ctx);
 	fz_drop_colorspace_context(ctx);
 	fz_drop_font_context(ctx);
+#endif
 
 	fz_flush_warnings(ctx);
 
@@ -242,6 +244,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	}
 
 	fz_init_error_context(ctx);
+#if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	fz_init_aa_context(ctx);
 
 	/* Now initialise sections that are shared */
@@ -261,6 +264,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		fz_drop_context(ctx);
 		return NULL;
 	}
+#endif
 	return ctx;
 }
 
@@ -284,6 +288,7 @@ fz_clone_context(fz_context *ctx)
 	/* Reset error context to initial state. */
 	fz_init_error_context(new_ctx);
 
+#if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	/* Then keep lock checking happy by keeping shared contexts with new context */
 	fz_keep_document_handler_context(new_ctx);
 	fz_keep_style_context(new_ctx);
@@ -292,6 +297,7 @@ fz_clone_context(fz_context *ctx)
 	fz_keep_colorspace_context(new_ctx);
 	fz_keep_store_context(new_ctx);
 	fz_keep_glyph_cache(new_ctx);
+#endif
 
 	return new_ctx;
 }

@@ -638,7 +638,7 @@ file_level_headers(fz_context *ctx, const char *filename)
 		fz_parse_pclm_options(ctx, &opts, "compression=flate");
 		bander = fz_new_pclm_band_writer(ctx, out, &opts);
 	}
-
+#if FZ_ENABLE_OCR_OUTPUT
 	else if (output_format == OUT_OCR_PDF)
 	{
 		char options[300];
@@ -652,6 +652,7 @@ file_level_headers(fz_context *ctx, const char *filename)
 		fz_parse_pdfocr_options(ctx, &opts, options);
 		bander = fz_new_pdfocr_band_writer(ctx, out, &opts);
 	}
+#endif
 }
 
 static void
@@ -3019,11 +3020,17 @@ int main(int argc, const char** argv)
 
 			fz_try(ctx)
 			{
+#if FZ_ENABLE_OCR_OUTPUT && !defined(OCR_DISABLED)
 				tess_api = ocr_init(ctx, ocr_language, ocr_datadir);
+#else
+				fz_throw(ctx, FZ_ERROR_GENERIC, "OCR not supported in this build");
+#endif
 			}
 			fz_always(ctx)
 			{
+#if FZ_ENABLE_OCR_OUTPUT && !defined(OCR_DISABLED)
 				ocr_fin(ctx, tess_api);
+#endif
 			}
 			fz_catch(ctx)
 			{
