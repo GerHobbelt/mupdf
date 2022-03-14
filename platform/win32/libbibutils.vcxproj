@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;../../thirdparty/owemdjee/bibutils/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,7 +149,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;../../thirdparty/owemdjee/bibutils/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -157,7 +157,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -178,14 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;../../thirdparty/owemdjee/bibutils/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -204,7 +204,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;../../thirdparty/owemdjee/bibutils/src/bin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -212,7 +212,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBUTILS;BIBUTILS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibutils/src/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -238,6 +238,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/measure_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/med2xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/modsclean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/monolithic-main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/nbib2xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/ris2xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/tomods.c" />
@@ -250,7 +251,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/xml2nbib.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/xml2ris.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/xml2wordbib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bldhash/hash_bu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bldhash/hash_marc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bldhash/uintlist.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/adsout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/append_easy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/bibcore.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/bibl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/biblatexin.c" />
@@ -273,6 +278,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/fields.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/gb18030.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/hash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/intlist.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/is_ws.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/isiin.c" />
@@ -288,7 +294,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/modsin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/modsout.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/modstypes.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/mycvout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/month.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/name.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/nbibin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/nbibout.c" />
@@ -315,9 +321,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/lib/xml_encoding.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/bibutils_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/buauth_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/doi_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/entities_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/fields_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/intlist_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/marcauth_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/slist_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/str_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/utf8_test.c" />
@@ -326,8 +335,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/args.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/bibprog.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/measure_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/tomods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bldhash/marc_auth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bldhash/uintlist.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/adsout_journals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/append_easy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/bibdefs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/bibformats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/bibl.h" />
@@ -345,6 +358,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/gb18030.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/gb18030_enumeration.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/intlist.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/is_ws.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/isitypes.h" />
@@ -355,6 +369,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/latex_parse.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/marc_auth.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/modstypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/month.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/name.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/nbibtypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/lib/notes.h" />
@@ -380,10 +395,37 @@
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/win32/include/dirent.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/win32/pch.h" />
     <Text Include="../../thirdparty/owemdjee/bibutils/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/Working.with.MODS.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/bib2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/bibdiff.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/biblatex2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/copac2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/cvt.js" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/end2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/endx2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version2/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version3/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version4/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version5/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version6/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/isi2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/markdown_syntax/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/med2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/modsclean.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/package.json" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/ris2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2ads.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2bib.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2end.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2isi.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2ris.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2wordbib.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/src/makedeb.sh" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/src/maketgz.sh" />
     <Text Include="../../thirdparty/owemdjee/bibutils/src/readme.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

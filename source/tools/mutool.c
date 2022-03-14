@@ -40,6 +40,7 @@
 #include "../../thirdparty/owemdjee/crow/include/crow/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/pcre/src/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/bibutils/src/bin/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -253,6 +254,45 @@ static struct {
 	{ jpegXL_render_hlg_main, "jpegXL_render_hlg", "jpegXL_render_hlg tool" },
 	{ jpegXL_texture_to_cube_main, "jpegXL_texture_to_cube", "jpegXL_texture_to_cube tool" },
 	{ jpegXL_add_noise_main, "jpegXL_add_noise", "jpegXL_add_noise tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ bibutils_bib2xml_main, "bib2xml", "bibutils::bib2xml tool" },
+	{ bibutils_bibdiff_main, "bibdiff", "bibutils::bibdiff tool" },
+	{ bibutils_biblatex2xml_main, "biblatex2xml", "bibutils::biblatex2xml tool" },
+	{ bibutils_copac2xml_main, "copac2xml", "bibutils::copac2xml tool" },
+	{ bibutils_ebi2xml_main, "ebi2xml", "bibutils::ebi2xml tool" },
+	{ bibutils_end2xml_main, "end2xml", "bibutils::end2xml tool" },
+	{ bibutils_endx2xml_main, "endx2xml", "bibutils::endx2xml tool" },
+	{ bibutils_isi2xml_main, "isi2xml", "bibutils::isi2xml tool" },
+	{ bibutils_med2xml_main, "med2xml", "bibutils::med2xml tool" },
+	{ bibutils_modsclean_main, "bibutils_modsclean", "bibutils::modsclean tool" },
+	{ bibutils_nbib2xml_main, "nbib2xml", "bibutils::nbib2xml tool" },
+	{ bibutils_ris2xml_main, "ris2xml", "bibutils::ris2xml tool" },
+	{ bibutils_wordbib2xml_main, "wordbib2xml", "bibutils::wordbib2xml tool" },
+	{ bibutils_xml2ads_main, "xml2ads", "bibutils::xml2ads tool" },
+	{ bibutils_xml2bib_main, "xml2bib", "bibutils::xml2bib tool" },
+	{ bibutils_xml2biblatex_main, "xml2biblatex", "bibutils::xml2biblatex tool" },
+	{ bibutils_xml2end_main, "xml2end", "bibutils::xml2end tool" },
+	{ bibutils_xml2isi_main, "xml2isi", "bibutils::xml2isi tool" },
+	{ bibutils_xml2nbib_main, "xml2nbib", "bibutils::xml2nbib tool" },
+	{ bibutils_xml2ris_main, "xml2ris", "bibutils::xml2ris tool" },
+	{ bibutils_xml2wordbib_main, "xml2wordbib", "bibutils::xml2wordbib tool" },
+
+	{ bibutils_hash_bu_main, "bibutils_hash_bu", "bibutils::hash_bu tool" },
+	{ bibutils_hash_marc_main, "bibutils_hash_marc", "bibutils::hash_marc tool" },
+
+	{ bibutils_buauth_test_main, "bibutils_buauth_test", "bibutils::buauth_test tool" },
+	{ bibutils_doi_test_main, "bibutils_doi_test", "bibutils::doi_test tool" },
+	{ bibutils_entities_test_main, "bibutils_entities_test", "bibutils::entities_test tool" },
+	{ bibutils_fields_test_main, "bibutils_fields_test", "bibutils::fields_test tool" },
+	{ bibutils_intlist_test_main, "bibutils_intlist_test", "bibutils::intlist_test tool" },
+	{ bibutils_marcauth_test_main, "bibutils_marcauth_test", "bibutils::marcauth_test tool" },
+	{ bibutils_slist_test_main, "bibutils_slist_test", "bibutils::slist_test tool" },
+	{ bibutils_str_test_main, "bibutils_str_test", "bibutils::str_test tool" },
+	{ bibutils_test_main, "bibutils_test", "bibutils::test tool" },
+	{ bibutils_utf8_test_main, "bibutils_utf8_test", "bibutils::utf8_test tool" },
+	{ bibutils_vplist_test_main, "bibutils_vplist_test", "bibutils::vplist_test tool" },
 #endif
 
 	{ report_version, "version", "report version of this build / tools" },

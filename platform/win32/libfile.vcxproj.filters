@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -13,27 +13,46 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
+    <Filter Include="Misc Files\doc">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
+    <Filter Include="Misc Files\fuzz">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Misc Files\magic">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\magic\Magdir">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\python">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\python\file_magic">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fuzz">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/file/fuzz/magic_fuzzer.c">
+      <Filter>Source Files\fuzz</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/file/src/apprentice.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -169,14 +188,69 @@
     <ClInclude Include="../../thirdparty/owemdjee/file/src/tar.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
+    <Text Include="../../thirdparty/owemdjee/file/Makefile.am">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/README.DEVELOPER">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/file/README.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/configure.ac">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/doc/Makefile.am">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/fuzz/build.sh">
+      <Filter>Misc Files\fuzz</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/libmagic.pc.in">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/file/magic/Magdir/mail.news">
       <Filter>Misc Files\magic\Magdir</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/file/magic/Makefile.am">
+      <Filter>Misc Files\magic</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/CHANGELOG.md">
+      <Filter>Misc Files\python</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/Makefile.am">
+      <Filter>Misc Files\python</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/file/python/README.md">
       <Filter>Misc Files\python</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/example.py">
+      <Filter>Misc Files\python</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/file_magic/__init__.py">
+      <Filter>Misc Files\python\file_magic</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/magic.py">
+      <Filter>Misc Files\python</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/setup.py">
+      <Filter>Misc Files\python</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/tests.py">
+      <Filter>Misc Files\python</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/python/threads.py">
+      <Filter>Misc Files\python</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/src/Makefile.am">
+      <Filter>Misc Files\src</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/src/magic.h.in">
+      <Filter>Misc Files\src</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/file/tests/Makefile.am">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>
+    
