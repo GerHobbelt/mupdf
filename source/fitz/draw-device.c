@@ -963,7 +963,6 @@ draw_glyph(unsigned char *colorbv, fz_pixmap *dst, fz_glyph *glyph,
 			fz_span_color_painter_t *fn;
 
 			fn = fz_get_span_color_painter(dst->n, da, colorbv, eop);
-			assert(fn || da == 0);
 			if (fn == NULL)
 				return;
 			while (h--)
@@ -978,7 +977,6 @@ draw_glyph(unsigned char *colorbv, fz_pixmap *dst, fz_glyph *glyph,
 			fz_span_painter_t *fn;
 
 			fn = fz_get_span_painter(da, 1, 0, 255, eop);
-			assert(fn);
 			if (fn == NULL)
 				return;
 			while (h--)
