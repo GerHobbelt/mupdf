@@ -1310,7 +1310,7 @@ void ui_label_with_scrollbar(char *text, int width, int height, int *scroll, int
 		if (ui_mouse_inside(area))
 		{
 			*scroll -= ui.scroll_y * ui.lineheight * 3;
-			if (ui.scroll_y)
+			if (ui.scroll_y != 0 && sticky)
 				*sticky = 0;
 		}
 		if (area.x1 - area.x0 >= 16)
