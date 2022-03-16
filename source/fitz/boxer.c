@@ -1,0 +1,190 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+
+#include "boxer.h"
+
+typedef struct {
+	int len;
+	int max;
+	boxer_rect_t list[1];
+} rectlist_t;
+
+struct boxer_s {
+	boxer_rect_t mediabox;
+	rectlist_t *list;
+};
+
+static rectlist_t *
+create_rectlist(int max)
+{
+	rectlist_t *list = malloc(sizeof(rectlist_t) + sizeof(boxer_rect_t)*(max-1));
+
+	if (list == NULL)
+		return NULL;
+	list->len = 0;
+	list->max = max;
+
+	return list;
+}
+
+/* Push box onto rectlist, unless it is completely enclosed by
+ * another box, or completely encloses others (in which case they
+ * are replaced by it). */
+static void
+rectlist_push(rectlist_t *list, boxer_rect_t *box)
+{
+	int i;
+	float box_area = (box->x1 - box->x0)*(box->y1 - box->y0);
+
+	for (i = 0; i < list->len; i++)
+	{
+		boxer_rect_t *r = &list->list[i];
+		float r_area = (r->x1 - r->x0)*(r->y1 - r->y0);
+		float r_fudge = 4, box_fudge = 4;
+
+#if 0
+		if (r_area > 10*box_area) {
+			/* r is much bigger than box. Allow box to be subsumed in r if box *almost* fits.*/
+			r_fudge = 16;
+		} else if (10*r_area < box_area) {
+			/* box is much bigger than r. Allow r to be subsumed in box if r *almost* fits. */
+			box_fudge = 16;
+		}
+#endif
+		if (r->x0 - r_fudge <= box->x0  && r->x1 + r_fudge >= box->x1 && r->y0 - r_fudge <= box->y0 && r->y1 + r_fudge >= box->y1)
+			return; /* box is enclosed! Nothing to do. */
+		if (r->x0 >= box->x0 - box_fudge && r->x1 <= box->x1 + box_fudge && r->y0 >= box->y0 - box_fudge && r->y1 <= box->y1 + box_fudge ) {
+			/* box encloses r. Ditch r. */
+			if (i < --list->len) {
+				memcpy(r, &list->list[list->len], sizeof(*r));
+				i--;
+			}
+		}
+	}
+
+	memcpy(&list->list[list->len++], box, sizeof(*box));
+}
+
+boxer_t *
+boxer_create(boxer_rect_t *mediabox)
+{
+	boxer_t *boxer = malloc(sizeof(*boxer));
+
+	memcpy(&boxer->mediabox, mediabox, sizeof(*mediabox));
+	boxer->list = create_rectlist(1);
+	rectlist_push(boxer->list, mediabox);
+
+	return boxer;
+}
+
+#define MIN(a,b) (a < b ? a : b)
+#define MAX(a,b) (a > b ? a : b)
+
+static void
+push_if_intersect_suitable(rectlist_t *dst, const boxer_rect_t *a, const boxer_rect_t *b)
+{
+	boxer_rect_t c;
+
+	/* Intersect a and b. */
+	c.x0 = MAX(a->x0, b->x0);
+	c.y0 = MAX(a->y0, b->y0);
+	c.x1 = MIN(a->x1, b->x1);
+	c.y1 = MIN(a->y1, b->y1);
+	/* If no intersection, nothing to push. */
+	if (c.x0 >= c.x1 || c.y0 >= c.y1)
+		return;
+
+	/* If the intersect is too narrow or too tall, ignore it.
+	 * We don't care about inter character spaces, for example. */
+#define THRESHOLD_1 12
+#define THRESHOLD_2 4
+	if (c.x0+THRESHOLD_1 >= c.x1 && c.y0+THRESHOLD_2 >= c.y1)
+		return;
+	if (c.x0+THRESHOLD_2 >= c.x1 && c.y0+THRESHOLD_1 >= c.y1)
+		return;
+
+	rectlist_push(dst, &c);
+}
+
+static void
+boxlist_feed_intersect(rectlist_t *dst, const rectlist_t *src, const boxer_rect_t *box)
+{
+	int i;
+
+	for (i = 0; i < src->len; i++)
+		push_if_intersect_suitable(dst, &src->list[i], box);
+}
+
+void boxer_feed(boxer_t *boxer, boxer_rect_t *bbox)
+{
+	boxer_rect_t box;
+	/* When we feed a box into a the boxer, we can never make
+	 * the list more than 4 times as long. */
+	rectlist_t *newlist = create_rectlist(boxer->list->len * 4);
+
+	/* Left (0,0) (x0,H) */
+	box.x0 = boxer->mediabox.x0;
+	box.y0 = boxer->mediabox.y0;
+	box.x1 = bbox->x0;
+	box.y1 = boxer->mediabox.y1;
+	boxlist_feed_intersect(newlist, boxer->list, &box);
+
+	/* Right (x1,0) (W,H) */
+	box.x0 = bbox->x1;
+	box.y0 = boxer->mediabox.y0;
+	box.x1 = boxer->mediabox.x1;
+	box.y1 = boxer->mediabox.y1;
+	boxlist_feed_intersect(newlist, boxer->list, &box);
+
+	/* Bottom (0,0) (W,y0) */
+	box.x0 = boxer->mediabox.x0;
+	box.y0 = boxer->mediabox.y0;
+	box.x1 = boxer->mediabox.x1;
+	box.y1 = bbox->y0;
+	boxlist_feed_intersect(newlist, boxer->list, &box);
+
+	/* Top (0,y1) (W,H) */
+	box.x0 = boxer->mediabox.x0;
+	box.y0 = bbox->y1;
+	box.x1 = boxer->mediabox.x1;
+	box.y1 = boxer->mediabox.y1;
+	boxlist_feed_intersect(newlist, boxer->list, &box);
+
+	free(boxer->list);
+	boxer->list = newlist;
+}
+
+static int
+compare_areas(const void *a_, const void *b_)
+{
+	const boxer_rect_t *a = (const boxer_rect_t *)a_;
+	const boxer_rect_t *b = (const boxer_rect_t *)b_;
+	float area_a = (a->x1-a->x0) * (a->y1-a->y0);
+	float area_b = (b->x1-b->x0) * (b->y1-b->y0);
+
+	if (area_a < area_b)
+		return 1;
+	else if (area_a > area_b)
+		return -1;
+	else
+		return 0;
+}
+
+void boxer_sort(boxer_t *boxer)
+{
+	qsort(boxer->list->list, boxer->list->len, sizeof(boxer_rect_t), compare_areas);
+}
+
+int boxer_results(boxer_t *boxer, boxer_rect_t **list)
+{
+	*list = boxer->list->list;
+	return boxer->list->len;
+}
+
+void boxer_destroy(boxer_t *boxer)
+{
+	if (boxer)
+		free(boxer->list);
+	free(boxer);
+}
