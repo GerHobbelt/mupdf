@@ -77,6 +77,7 @@ enum {
 	OUT_OCR_TEXT,
 	OUT_OCR_TRACE,
 	OUT_OCR_XHTML,
+	OUT_EMPTY_BOX,
 	OUT_PAM,
 	OUT_PBM,
 	OUT_PCL,
@@ -126,6 +127,7 @@ static const suffix_t suffix_table[] =
 	{ ".ocr.pdf", OUT_OCR_PDF, 0 },
 	{ ".ocr.trace", OUT_OCR_TRACE, 0 },
 	{ ".stext.json", OUT_STEXT_JSON, 0 },
+	{ ".emptybox", OUT_EMPTY_BOX, 0 },
 
 	/* And the 'single extension' ones go last. */
 	{ ".png", OUT_PNG, 0 },
@@ -216,6 +218,7 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_XHTML, CS_RGB, { CS_RGB } },
 	{ OUT_STEXT_XML, CS_RGB, { CS_RGB } },
 	{ OUT_STEXT_JSON, CS_RGB, { CS_RGB } },
+	{ OUT_EMPTY_BOX, CS_RGB, { CS_RGB } },
 	{ OUT_OCR_TEXT, CS_GRAY, { CS_GRAY } },
 	{ OUT_OCR_HTML, CS_GRAY, { CS_GRAY } },
 	{ OUT_OCR_XHTML, CS_GRAY, { CS_GRAY } },
@@ -790,7 +793,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	}
 
 	else if (output_format == OUT_TEXT || output_format == OUT_HTML || output_format == OUT_XHTML || output_format == OUT_STEXT_XML || output_format == OUT_STEXT_JSON ||
-		output_format == OUT_OCR_TEXT || output_format == OUT_OCR_HTML || output_format == OUT_OCR_XHTML || output_format == OUT_OCR_STEXT_XML || output_format == OUT_OCR_STEXT_JSON)
+		output_format == OUT_OCR_TEXT || output_format == OUT_OCR_HTML || output_format == OUT_OCR_XHTML || output_format == OUT_OCR_STEXT_XML || output_format == OUT_OCR_STEXT_JSON ||
+		output_format == OUT_EMPTY_BOX)
 	{
 		fz_stext_page *text = NULL;
 		float zoom;
@@ -866,6 +870,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else if (output_format == OUT_TEXT || output_format == OUT_OCR_TEXT)
 			{
 				fz_print_stext_page_as_text(ctx, out, text);
+				fz_write_printf(ctx, out, "\f\n");
+			}
+			else if (output_format == OUT_EMPTY_BOX)
+			{
+				fz_print_stext_page_as_empty_box(ctx, out, text);
 				fz_write_printf(ctx, out, "\f\n");
 			}
 		}

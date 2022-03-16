@@ -31,6 +31,8 @@
 // Text black color when converted from DeviceCMYK to RGB
 #define CMYK_BLACK 0x221f1f
 
+#include "boxer.h"
+
 static void fz_scale_stext_page(fz_context *ctx, fz_stext_page *page, float scale)
 {
 	fz_matrix m = fz_scale(scale, scale);
@@ -758,6 +760,66 @@ fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page
 			fz_write_string(ctx, out, "\n");
 		}
 	}
+}
+
+void
+fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page *page)
+{
+	fz_stext_block *block;
+	fz_stext_line *line;
+	//fz_stext_char *ch;
+	//char utf[10];
+	int i, n;
+	boxer_t *boxer;
+	boxer_rect_t *list;
+
+	boxer = boxer_create((boxer_rect_t *)&page->mediabox);
+
+	for (block = page->first_block; block; block = block->next)
+	{
+		if (block->type == FZ_STEXT_BLOCK_TEXT)
+		{
+			for (line = block->u.t.first_line; line; line = line->next)
+			{
+				boxer_feed(boxer, (boxer_rect_t *)&line->bbox);
+				//for (ch = line->first_char; ch; ch = ch->next)
+				//{
+				//	n = fz_runetochar(utf, ch->c);
+				//	for (i = 0; i < n; i++)
+				//		fz_write_byte(ctx, out, utf[i]);
+				//}
+				//fz_write_string(ctx, out, "\n");
+			}
+			//fz_write_string(ctx, out, "\n");
+		}
+	}
+
+	boxer_sort(boxer);
+	n = boxer_results(boxer, &list);
+#define WRITE_AS_PS
+
+	for (i = 0; i < n; i++) {
+#ifndef WRITE_AS_PS
+		fz_write_printf(ctx, out, "%g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
+#else
+		fz_write_printf(ctx, out, "%% %g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
+#endif
+	}
+
+
+#ifdef WRITE_AS_PS
+	fz_write_printf(ctx, out, "\n\n1 -1 scale 0 -%g translate\n", page->mediabox.y1-page->mediabox.y0);
+	for (i = 0; i < n; i++) {
+		fz_write_printf(ctx, out, "%g %g moveto\n%g %g lineto\n%g %g lineto\n%g %g lineto\nclosepath\nstroke\n\n",
+				list[i].x0, list[i].y0,
+				list[i].x0, list[i].y1,
+				list[i].x1, list[i].y1,
+				list[i].x1, list[i].y0);
+	}
+	fz_write_printf(ctx, out, "showpage\n");
+#endif
+
+	boxer_destroy(boxer);
 }
 
 /* Text output writer */
