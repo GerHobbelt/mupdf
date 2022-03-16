@@ -21,8 +21,25 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #ifndef FZ_CONFIG_H
-
 #define FZ_CONFIG_H
+
+#if !defined(BUILDING_MUPDF_MINIMAL_CORE)
+#  if defined(BUILDING_WXWIDGETS_MINIMAL_NO_GUI)
+#    define BUILDING_MUPDF_MINIMAL_CORE 1
+#  elif defined(BUILDING_WXWIDGETS_MINIMAL_WITH_GUI)
+#    define BUILDING_MUPDF_MINIMAL_CORE 1
+#  elif defined(BUILDING_WXWIDGETS_MINIMAL_WITH_AUI_GUI)
+#    define BUILDING_MUPDF_MINIMAL_CORE 1
+#  else
+#    define BUILDING_MUPDF_MINIMAL_CORE 0
+#  endif
+#else  // defined(BUILDING_MUPDF_MINIMAL_CORE)
+#  if BUILDING_MUPDF_MINIMAL_CORE != 0 && BUILDING_MUPDF_MINIMAL_CORE != 1
+#    define BUILDING_MUPDF_MINIMAL_CORE 1
+#  endif
+#endif
+
+#if BUILDING_MUPDF_MINIMAL_CORE
 
 /**
 	Enable the following for spot (and hence overprint/overprint
@@ -97,7 +114,7 @@
 	By default JavaScript is enabled both for mutool and PDF
 	interactivity.
 */
-/* #define FZ_ENABLE_JS 1 */
+#define FZ_ENABLE_JS 0
 
 /**
 	Choose which fonts to include.
@@ -145,6 +162,8 @@
 
 /* To remove OCR/tesseract features, enable: */
 #define OCR_DISABLED
+
+#endif
 
 /* ---------- DO NOT EDIT ANYTHING UNDER THIS LINE ---------- */
 
