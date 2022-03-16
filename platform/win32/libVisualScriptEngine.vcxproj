@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -123,14 +123,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeUIEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\BuiltInNodes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,7 +149,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeUIEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\BuiltInNodes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -157,7 +157,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -178,14 +178,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeUIEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\BuiltInNodes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -204,7 +204,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeUIEngine;..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\BuiltInNodes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -212,7 +212,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVISUALSCRIPTENGINE;VISUALSCRIPTENGINE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -236,8 +236,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UINodePanels.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_UnaryOperationNodes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_ViewerUINodes.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/EmbeddingTutorial/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/MacOSEmbeddingDemo/main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\EmbeddingTutorial\ET_main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\MacOSEmbeddingDemo\MOSED_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ConnectionInfo.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_ConnectionManager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngine/NE_Debug.cpp" />
@@ -323,7 +323,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/ValueCombinationTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/ValueTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/VersionTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeEngineTest/main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\NodeEngineTest\NET_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ClipboardHandler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ClipboardState.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/NodeUIEngine/NUIE_ConnectionInteractions.cpp" />
@@ -395,10 +395,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_ParameterDialog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_Toolbar.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsAppSupport/WAS_WindowsAppUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsEmbeddingDemo/main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\WindowsEmbeddingDemo\WED_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/AppUIEnvironment.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/Application.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/WindowsReferenceApp/main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\VisualScriptEngine\Sources\WindowsReferenceApp\WRA_main.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BasicUINode.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BinaryOperationNodes.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/VisualScriptEngine/Sources/BuiltInNodes/BI_BuiltInFeatures.hpp" />
@@ -1042,8 +1042,7 @@
     <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/Tools/GenerateIcons.py" />
     <Text Include="../../thirdparty/owemdjee/VisualScriptEngine/Tools/GenerateLogoPngs.py" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

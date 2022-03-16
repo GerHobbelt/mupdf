@@ -348,6 +348,10 @@ static inline size_t fz_available(fz_context *ctx, fz_stream *stm, size_t max)
 	if (stm->eof)
 		return 0;
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4611) // warning C4611: interaction between '_setjmp' and C++ object destruction is non-portable (compiling source file XYZ.cpp)
+#endif
 	fz_try(ctx)
 		c = stm->next(ctx, stm, max);
 	fz_catch(ctx)
@@ -357,6 +361,10 @@ static inline size_t fz_available(fz_context *ctx, fz_stream *stm, size_t max)
 		stm->error = 1;
 		c = EOF;
 	}
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+
 	if (c == EOF)
 	{
 		stm->eof = 1;

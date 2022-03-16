@@ -18,61 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\lz4\doc\lz4frame_manual.html" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\doc\lz4_Block_format.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\doc\lz4_Frame_format.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\doc\lz4_manual.html" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\examples\blockStreaming_doubleBuffer.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\examples\blockStreaming_lineByLine.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\examples\dictionaryRandomAccess.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\examples\README.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\examples\streaming_api_basics.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\lib\README.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\NEWS" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\programs\lz4.1" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\README.md" />
-    <None Include="..\..\thirdparty\owemdjee\lz4\tests\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\blockStreaming_doubleBuffer.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\blockStreaming_lineByLine.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\blockStreaming_ringBuffer.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\compress_functions.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\dictionaryRandomAccess.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\frameCompress.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\HCStreaming_ringBuffer.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\printVersion.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\examples\simple_buffer.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\lib\lz4.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\lib\lz4frame.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\lib\lz4hc.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\lib\xxhash.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\programs\bench.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\programs\datagen.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\programs\lz4cli.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\programs\lz4io.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\checkFrame.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\checkTag.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\datagencli.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\decompress-partial.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\frametest.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\fullbench.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\fuzzer.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\lz4\tests\roundTripTest.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\lib\lz4.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\lib\lz4frame.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\lib\lz4frame_static.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\lib\lz4hc.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\lib\xxhash.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\programs\bench.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\programs\datagen.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\programs\lz4io.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\programs\platform.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\lz4\programs\util.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>liblz4</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF50B44D}</ProjectGuid>
@@ -279,6 +224,50 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lz4/contrib/gen_manual/gen_manual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lz4/lib/lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lz4/lib/lz4frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lz4/lib/lz4hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lz4/lib/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lz4/programs/lz4cli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lz4/programs/lz4io.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/lib/lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/lib/lz4frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/lib/lz4frame_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/lib/lz4hc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/lib/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/programs/lz4io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/programs/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lz4/programs/util.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/lz4/build/VS2019/liblz4-dll/liblz4-dll.rc" />
+    <Text Include="../../thirdparty/owemdjee/lz4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/build/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/build/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lz4/build/cmake/lz4Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/lz4/contrib/djgpp/README.MD" />
+    <Text Include="../../thirdparty/owemdjee/lz4/contrib/gen_manual/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/contrib/gen_manual/gen-lz4-manual.sh" />
+    <Text Include="../../thirdparty/owemdjee/lz4/contrib/meson/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/contrib/meson/meson/GetLz4LibraryVersion.py" />
+    <Text Include="../../thirdparty/owemdjee/lz4/contrib/meson/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/lz4/contrib/snap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/doc/lz4_Block_format.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/doc/lz4_Frame_format.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/examples/blockStreaming_doubleBuffer.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/examples/blockStreaming_lineByLine.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/examples/dictionaryRandomAccess.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/examples/streaming_api_basics.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/lib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/lib/dll/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/lib/liblz4-dll.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/lz4/lib/liblz4.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/lz4/programs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/programs/lz4-exe.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/lz4/programs/lz4.1.md" />
+    <Text Include="../../thirdparty/owemdjee/lz4/tests/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

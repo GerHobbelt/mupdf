@@ -254,6 +254,10 @@ EXPORTS
 
 %(markdown_exports)s
 
+; MuPDF/Fitz default heap debug exports
+
+%(debugheap_exports)s
+
 ; monolithic tool exports
 
 	pngcrush_main
@@ -317,9 +321,10 @@ def main():
 	zlib_exports = generateExports("scripts/zlib/zlib-ng.h", ["zng_deflateInit", "zng_inflateInit", "zng_deflateInit2", "zng_inflateInit2", "zng_inflateBackInit"])
 	quickjs_exports = generateExports("thirdparty/owemdjee/QuickJS/monolithic_examples.h") + generateQuickJSExports("thirdparty/owemdjee/QuickJS", ["__js_printf_like"])
 	markdown_exports = generateExports("thirdparty/owemdjee/upskirt-markdown/bin")
-	zstd_exports = generateExports("thirdparty/owemdjee/zstd/programs", ["zstd_fitblk_example_main", "zstd_mini_gzip_main", "zstd_zwrapbench_main"])
+	zstd_exports = generateExports("thirdparty/owemdjee/zstd/programs", ["zstd_fitblk_example_main", "zstd_mini_gzip_main", "zstd_zwrapbench_main", "BMK_benchFunction", "BMK_benchTimedFn", "BMK_createTimedFnState", "BMK_extract_errorResult", "BMK_extract_runTime", "BMK_freeTimedFnState", "BMK_initStatic_timedFnState", "BMK_isCompleted_TimedFn", "BMK_isSuccessful_runOutcome", "BMK_resetTimedFnState", "BMK_benchFiles", "BMK_benchFilesAdvanced", "BMK_benchMem", "BMK_benchMemAdvanced", "BMK_extract_benchResult", "BMK_initAdvancedParams", "BMK_isSuccessful_benchOutcome", "BMK_syntheticTest", "RDG_genBuffer", "RDG_genStdout"])
 	crow_exports = generateExports("thirdparty/owemdjee/crow/include/crow/monolithic_examples.h")
 	mupdfdll_exports = generateExports("scripts/MuPDFLib/versions-api.h")
+	debugheap_exports = generateExports("include/mupdf/helpers/debugheap.h")
 
 	list = LIBMUPDF_DEF % locals()
 	# remove duplicate entries
