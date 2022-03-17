@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5EDCF4FD-0291-4FB9-8D96-458957CA5E3C}</ProjectGuid>
+    <RootNamespace>libzlib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/zlib/adler32.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_avx2.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_avx512.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_avx512_vnni.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_sse41.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_ssse3.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_avx.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_sse2.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/compare256_avx2.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/compare256_sse2.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_fold_pclmulqdq.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_fold_vpclmulqdq.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/insert_string_sse42.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/slide_hash_avx2.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/slide_hash_sse2.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/x86_features.c" />
+    <ClCompile Include="../../thirdparty/zlib/chunkset.c" />
+    <ClCompile Include="../../thirdparty/zlib/compare256.c" />
+    <ClCompile Include="../../thirdparty/zlib/compress.c" />
+    <ClCompile Include="../../thirdparty/zlib/cpu_features.c" />
+    <ClCompile Include="../../thirdparty/zlib/crc32.c" />
+    <ClCompile Include="../../thirdparty/zlib/crc32_comb.c" />
+    <ClCompile Include="../../thirdparty/zlib/crc32_fold.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate_fast.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate_huff.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate_medium.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate_quick.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate_rle.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate_slow.c" />
+    <ClCompile Include="../../thirdparty/zlib/deflate_stored.c" />
+    <ClCompile Include="../../thirdparty/zlib/functable.c" />
+    <ClCompile Include="../../thirdparty/zlib/gzlib.c" />
+    <ClCompile Include="../../thirdparty/zlib/gzread.c" />
+    <ClCompile Include="../../thirdparty/zlib/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/zlib/infback.c" />
+    <ClCompile Include="../../thirdparty/zlib/inffast.c" />
+    <ClCompile Include="../../thirdparty/zlib/inflate.c" />
+    <ClCompile Include="../../thirdparty/zlib/inftrees.c" />
+    <ClCompile Include="../../thirdparty/zlib/insert_string.c" />
+    <ClCompile Include="../../thirdparty/zlib/insert_string_roll.c" />
+    <ClCompile Include="../../thirdparty/zlib/slide_hash.c" />
+    <ClCompile Include="../../thirdparty/zlib/test/example.c" />
+    <ClCompile Include="../../thirdparty/zlib/test/infcover.c" />
+    <ClCompile Include="../../thirdparty/zlib/test/minideflate.c" />
+    <ClCompile Include="../../thirdparty/zlib/test/minigzip.c" />
+    <ClCompile Include="../../thirdparty/zlib/test/switchlevels.c" />
+    <ClCompile Include="../../thirdparty/zlib/tools/makecrct.c" />
+    <ClCompile Include="../../thirdparty/zlib/tools/makefixed.c" />
+    <ClCompile Include="../../thirdparty/zlib/tools/maketrees.c" />
+    <ClCompile Include="../../thirdparty/zlib/trees.c" />
+    <ClCompile Include="../../thirdparty/zlib/uncompr.c" />
+    <ClCompile Include="../../thirdparty/zlib/zutil.c" />
+    <ClInclude Include="../../thirdparty/zlib/adler32_p.h" />
+    <ClInclude Include="../../thirdparty/zlib/arch/x86/x86_features.h" />
+    <ClInclude Include="../../thirdparty/zlib/chunkset_tpl.h" />
+    <ClInclude Include="../../thirdparty/zlib/cpu_features.h" />
+    <ClInclude Include="../../thirdparty/zlib/crc32_comb_tbl.h" />
+    <ClInclude Include="../../thirdparty/zlib/crc32_fold.h" />
+    <ClInclude Include="../../thirdparty/zlib/crc32_p.h" />
+    <ClInclude Include="../../thirdparty/zlib/crc32_tbl.h" />
+    <ClInclude Include="../../thirdparty/zlib/deflate.h" />
+    <ClInclude Include="../../thirdparty/zlib/deflate_p.h" />
+    <ClInclude Include="../../thirdparty/zlib/fallback_builtins.h" />
+    <ClInclude Include="../../thirdparty/zlib/functable.h" />
+    <ClInclude Include="../../thirdparty/zlib/gzguts.h" />
+    <ClInclude Include="../../thirdparty/zlib/inffast.h" />
+    <ClInclude Include="../../thirdparty/zlib/inffixed_tbl.h" />
+    <ClInclude Include="../../thirdparty/zlib/inflate.h" />
+    <ClInclude Include="../../thirdparty/zlib/inflate_p.h" />
+    <ClInclude Include="../../thirdparty/zlib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/zlib/insert_string_tpl.h" />
+    <ClInclude Include="../../thirdparty/zlib/match_tpl.h" />
+    <ClInclude Include="../../thirdparty/zlib/trees.h" />
+    <ClInclude Include="../../thirdparty/zlib/trees_emit.h" />
+    <ClInclude Include="../../thirdparty/zlib/trees_tbl.h" />
+    <ClInclude Include="../../thirdparty/zlib/wx/zconf-ng.h" />
+    <ClInclude Include="../../thirdparty/zlib/wx/zconf.h" />
+    <ClInclude Include="../../thirdparty/zlib/wx/zlib-ng.h" />
+    <ClInclude Include="../../thirdparty/zlib/wx/zlib_name_mangling-ng.h" />
+    <ClInclude Include="../../thirdparty/zlib/zbuild.h" />
+    <ClInclude Include="../../thirdparty/zlib/zendian.h" />
+    <ClInclude Include="../../thirdparty/zlib/zutil.h" />
+    <ClInclude Include="../../thirdparty/zlib/zutil_p.h" />
+    <Text Include="../../thirdparty/zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/zlib/INDEX.md" />
+    <Text Include="../../thirdparty/zlib/LICENSE.md" />
+    <Text Include="../../thirdparty/zlib/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/PORTING.md" />
+    <Text Include="../../thirdparty/zlib/README.md" />
+    <Text Include="../../thirdparty/zlib/arch/arm/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/arch/generic/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/arch/power/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/arch/s390/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/arch/s390/README.md" />
+    <Text Include="../../thirdparty/zlib/arch/x86/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/doc/algorithm.txt" />
+    <Text Include="../../thirdparty/zlib/doc/rfc1950.txt" />
+    <Text Include="../../thirdparty/zlib/doc/rfc1951.txt" />
+    <Text Include="../../thirdparty/zlib/doc/rfc1952.txt" />
+    <Text Include="../../thirdparty/zlib/doc/txtvsbin.txt" />
+    <Text Include="../../thirdparty/zlib/gzread.c.in" />
+    <Text Include="../../thirdparty/zlib/run_cmake.sh" />
+    <Text Include="../../thirdparty/zlib/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/zlib/test/GH-361/test.txt" />
+    <Text Include="../../thirdparty/zlib/test/GH-751/test.txt" />
+    <Text Include="../../thirdparty/zlib/test/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/test/README.md" />
+    <Text Include="../../thirdparty/zlib/test/abicheck.md" />
+    <Text Include="../../thirdparty/zlib/test/abicheck.sh" />
+    <Text Include="../../thirdparty/zlib/test/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/zlib/test/benchmarks/README.md" />
+    <Text Include="../../thirdparty/zlib/test/data/lcet10.txt" />
+    <Text Include="../../thirdparty/zlib/test/pigz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/zlib/test/pkgcheck.sh" />
+    <Text Include="../../thirdparty/zlib/test/testCVEinputs.sh" />
+    <Text Include="../../thirdparty/zlib/win32/Makefile.msc" />
+    <Text Include="../../thirdparty/zlib/win32/zlib-ng.def.in" />
+    <Text Include="../../thirdparty/zlib/win32/zlib.def.in" />
+    <Text Include="../../thirdparty/zlib/win32/zlibcompat.def.in" />
+    <Text Include="../../thirdparty/zlib/zconf-ng.h.in" />
+    <Text Include="../../thirdparty/zlib/zconf.h.in" />
+    <Text Include="../../thirdparty/zlib/zlib-ng.h.in" />
+    <Text Include="../../thirdparty/zlib/zlib.h.in" />
+    <Text Include="../../thirdparty/zlib/zlib.pc.in" />
+    <Text Include="../../thirdparty/zlib/zlib_name_mangling-ng.h.in" />
+    <Text Include="../../thirdparty/zlib/zlib_name_mangling.h.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

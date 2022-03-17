@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5EDCF4FD-0291-4FB9-8D96-558957CA5E3C}</ProjectGuid>
+    <RootNamespace>libtiff</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/libtiff/contrib/addtiffo/addtiffo.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/addtiffo/tif_overview.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/addtiffo/tif_ovrcache.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_aux.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_close.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_codec.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_color.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_compress.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dir.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dirinfo.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dirread.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dirwrite.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dumpmode.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_error.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_extension.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_fax3.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_fax3sm.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_flush.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_getimage.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_jbig.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_jpeg.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_jpeg_12.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_lerc.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_luv.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_lzma.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_lzw.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_next.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_ojpeg.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_open.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_packbits.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_pixarlog.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_predict.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_print.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_read.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_stream.cxx" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_strip.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_swab.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_thunder.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_tile.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_version.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_warning.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_webp.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_win32.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_write.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_zip.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_zstd.c" />
+    <ClInclude Include="../../thirdparty/libtiff/archive/tools/rasterfile.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/addtiffo/tif_ovrcache.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/dbs/xtiff/patchlevel.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/dbs/xtiff/xtifficon.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/pds/tif_imageiter.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/stream/tiffstream.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/tags/xtiffio.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/tags/xtiffiop.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/t4.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tif_config.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tif_dir.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tif_fax3.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tif_predict.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tiff.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tiffconf.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tiffio.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tiffio.hxx" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tiffiop.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/tiffvers.h" />
+    <ClInclude Include="../../thirdparty/libtiff/libtiff/uvcode.h" />
+    <ClInclude Include="../../thirdparty/libtiff/placeholder.h" />
+    <ClInclude Include="../../thirdparty/libtiff/port/libport.h" />
+    <ClInclude Include="../../thirdparty/libtiff/port/libport_config.vc.h" />
+    <ClInclude Include="../../thirdparty/libtiff/test/ElapseTimer.hpp" />
+    <ClInclude Include="../../thirdparty/libtiff/test/test_arrays.h" />
+    <ClInclude Include="../../thirdparty/libtiff/test/tifftest.h" />
+    <ClInclude Include="../../thirdparty/libtiff/tools/rasterfile.h" />
+    <Image Include="../../thirdparty/libtiff/contrib/LibTIFF.NET/LibTIFF.NET.test/App.ico" />
+    <Image Include="../../thirdparty/libtiff/contrib/LibTIFF.NET/LibTIFF.NET/App.ico" />
+    <Image Include="../../thirdparty/libtiff/html/bigtiffpr_images/esri.png" />
+    <Image Include="../../thirdparty/libtiff/html/bigtiffpr_images/leica.png" />
+    <Image Include="../../thirdparty/libtiff/html/bigtiffpr_images/safe.png" />
+    <Image Include="../../thirdparty/libtiff/html/bigtiffpr_images/weogeo.png" />
+    <Image Include="../../thirdparty/libtiff/html/images/back.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/bali.jpg" />
+    <Image Include="../../thirdparty/libtiff/html/images/cat.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/cover.jpg" />
+    <Image Include="../../thirdparty/libtiff/html/images/cramps.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/dave.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/info.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/jello.jpg" />
+    <Image Include="../../thirdparty/libtiff/html/images/jim.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/note.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/oxford.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/quad.jpg" />
+    <Image Include="../../thirdparty/libtiff/html/images/ring.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/smallliz.jpg" />
+    <Image Include="../../thirdparty/libtiff/html/images/strike.gif" />
+    <Image Include="../../thirdparty/libtiff/html/images/warning.gif" />
+    <Image Include="../../thirdparty/libtiff/test/images/palette-1c-8b.bmp" />
+    <Image Include="../../thirdparty/libtiff/test/images/palette-1c-8b.gif" />
+    <Image Include="../../thirdparty/libtiff/test/images/rgb-3c-8b.bmp" />
+    <Text Include="../../thirdparty/libtiff/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/README.md" />
+    <Text Include="../../thirdparty/libtiff/README.vms" />
+    <Text Include="../../thirdparty/libtiff/autogen.sh" />
+    <Text Include="../../thirdparty/libtiff/build/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/build/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/build/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/config/ltmain.sh" />
+    <Text Include="../../thirdparty/libtiff/configure.ac" />
+    <Text Include="../../thirdparty/libtiff/contrib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/addtiffo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/addtiffo/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/addtiffo/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/xtiff/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/xtiff/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/test.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/mfs/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/mfs/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/oss-fuzz/build.sh" />
+    <Text Include="../../thirdparty/libtiff/contrib/pds/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/pds/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/ras/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/ras/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/stream/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/stream/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/tags/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/tags/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/README.Tiffile" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/README.tiff2dib" />
+    <Text Include="../../thirdparty/libtiff/html/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/html/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/html/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/html/images/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/html/images/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/html/images/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/html/man/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/html/man/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/html/man/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/libtiff-4.pc.in" />
+    <Text Include="../../thirdparty/libtiff/libtiff/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/libtiff/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/libtiff/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/libtiff/tif_config.h.cmake.in" />
+    <Text Include="../../thirdparty/libtiff/libtiff/tif_config.h.in" />
+    <Text Include="../../thirdparty/libtiff/libtiff/tiffconf.h.cmake.in" />
+    <Text Include="../../thirdparty/libtiff/libtiff/tiffconf.h.in" />
+    <Text Include="../../thirdparty/libtiff/libtiff/tiffvers.h.in" />
+    <Text Include="../../thirdparty/libtiff/man/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/man/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/man/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/port/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/port/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/port/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/port/libport_config.h.cmake.in" />
+    <Text Include="../../thirdparty/libtiff/port/libport_config.h.in" />
+    <Text Include="../../thirdparty/libtiff/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/test/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/test/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/test/bmp2tiff_palette.sh" />
+    <Text Include="../../thirdparty/libtiff/test/bmp2tiff_rgb.sh" />
+    <Text Include="../../thirdparty/libtiff/test/common.sh" />
+    <Text Include="../../thirdparty/libtiff/test/fax2tiff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/gif2tiff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/images/README.txt" />
+    <Text Include="../../thirdparty/libtiff/test/ppm2tiff_pbm.sh" />
+    <Text Include="../../thirdparty/libtiff/test/ppm2tiff_pgm.sh" />
+    <Text Include="../../thirdparty/libtiff/test/ppm2tiff_ppm.sh" />
+    <Text Include="../../thirdparty/libtiff/test/testdeflatelaststripextradata.sh" />
+    <Text Include="../../thirdparty/libtiff/test/testfax4.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-logluv-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-lzw-single-strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-minisblack-1c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-minisblack-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-minisblack-2c-8b-alpha.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-miniswhite-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-ojpeg_chewey_subsamp21_multi_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-ojpeg_zackthecat_subsamp22_single_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-palette-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-palette-1c-4b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-palette-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-quad-lzw-compat.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-quad-tile.jpg.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-quad-tile.jpg.t1iff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-rgb-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2bw-rgb-3c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2pdf.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2ps-EPS1.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2ps-PS1.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2ps-PS2.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2ps-PS3.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-logluv-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-lzw-single-strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-minisblack-1c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-minisblack-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-minisblack-2c-8b-alpha.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-miniswhite-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-ojpeg_chewey_subsamp21_multi_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-ojpeg_single_strip_no_rowsperstrip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-ojpeg_zackthecat_subsamp22_single_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-palette-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-palette-1c-4b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-palette-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-quad-lzw-compat.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-quad-tile.jpg.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-quad-tile.jpg.t1iff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-rgb-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiff2rgba-rgb-3c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-g3-1d-fill.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-g3-1d.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-g3-2d-fill.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-g3-2d.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-g3.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-g4.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-logluv.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-lzw-compat.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-lzw-scanline-decode.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-split-join.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-split.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcp-thumbnail.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-logluv-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-lzw-single-strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-minisblack-1c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-minisblack-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-minisblack-2c-8b-alpha.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-miniswhite-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-ojpeg_chewey_subsamp21_multi_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-ojpeg_zackthecat_subsamp22_single_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-palette-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-palette-1c-4b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-palette-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-quad-lzw-compat.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-quad-tile.jpg.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-quad-tile.jpg.t1iff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-rgb-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-R90-rgb-3c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-logluv-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-lzw-single-strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-minisblack-1c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-minisblack-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-minisblack-2c-8b-alpha.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-miniswhite-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-ojpeg_chewey_subsamp21_multi_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-ojpeg_zackthecat_subsamp22_single_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-palette-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-palette-1c-4b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-palette-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-quad-lzw-compat.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-quad-tile.jpg.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-quad-tile.jpg.t1iff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-rgb-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-doubleflip-rgb-3c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-logluv-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-lzw-single-strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-minisblack-1c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-minisblack-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-minisblack-2c-8b-alpha.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-miniswhite-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-ojpeg_chewey_subsamp21_multi_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-ojpeg_zackthecat_subsamp22_single_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-palette-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-palette-1c-4b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-palette-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-quad-lzw-compat.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-quad-tile.jpg.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-quad-tile.jpg.t1iff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-rgb-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extract-rgb-3c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-logluv-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-lzw-single-strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-minisblack-1c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-minisblack-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-minisblack-2c-8b-alpha.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-miniswhite-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-ojpeg_chewey_subsamp21_multi_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-ojpeg_zackthecat_subsamp22_single_strip.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-palette-1c-1b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-palette-1c-4b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-palette-1c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-quad-lzw-compat.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-quad-tile.jpg.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-quad-tile.jpg.t1iff.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-rgb-3c-16b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffcrop-extractz14-rgb-3c-8b.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffdump.sh" />
+    <Text Include="../../thirdparty/libtiff/test/tiffinfo.sh" />
+    <Text Include="../../thirdparty/libtiff/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/tools/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/tools/Makefile.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

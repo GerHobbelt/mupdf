@@ -128,7 +128,7 @@ static struct {
 	{ curl_main, "curl", "access/fetch a given URI" },
 
 #if defined(MUTOOL_EX)
-	{ mujs_main, "js", "basic REPL for MuJS JavaScript interpreter" },
+	{ mujs_example_main, "js", "basic REPL for MuJS JavaScript interpreter" },
 	{ mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
 #endif
 

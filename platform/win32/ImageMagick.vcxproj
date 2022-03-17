@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -130,7 +130,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -157,7 +157,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -185,7 +185,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -212,7 +212,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_IMAGEMAGICK;IMAGEMAGICK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -234,23 +234,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/piddle.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/shapes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/demo/zoom.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/crop_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_gradient_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_label_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_list.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_pattern_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_plasma_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_radial-gradient_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_utils.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_xc_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/enhance_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/huffman_decode_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/ping_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/rotate_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/travis.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Blob.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/BlobRef.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/CoderInfo.cpp" />
@@ -566,7 +549,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/mgk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/wand.c" />
     <ClCompile Include="../../thirdparty/owemdjee/ImageMagick/www/source/wand/sigmoidal-contrast.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/fuzz/encoder_format.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/Blob.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ImageMagick/Magick++/lib/Magick++/BlobRef.h" />
@@ -930,8 +912,7 @@
     <Text Include="../../thirdparty/owemdjee/ImageMagick/www/changelog.html" />
     <Text Include="../../thirdparty/owemdjee/ImageMagick/www/news.html" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
