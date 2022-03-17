@@ -762,6 +762,63 @@ fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page
 	}
 }
 
+#define WRITE_AS_PS
+
+static void
+gogo(fz_context *ctx, fz_output *out, boxer_t *big_boxer, int depth)
+{
+	boxer_rect_t margins;
+	boxer_t *boxer;
+	boxer_t *boxer1;
+	boxer_t *boxer2;
+	int i, n;
+	boxer_rect_t *list;
+
+	margins = boxer_margins(big_boxer);
+	fz_write_printf(ctx, out, "\n\n%% MARGINS %g %g %g %g\n", margins.x0, margins.y0, margins.x1, margins.y1);
+
+	boxer = boxer_subset(big_boxer, margins);
+
+	if (depth < 6 && boxer_subdivide(boxer, &boxer1, &boxer2)) {
+		gogo(ctx, out, boxer1, depth+1);
+		gogo(ctx, out, boxer2, depth+1);
+		boxer_destroy(boxer1);
+		boxer_destroy(boxer2);
+		return;
+	}
+
+	boxer_sort(boxer);
+	n = boxer_results(boxer, &list);
+
+	fz_write_printf(ctx, out, "% SUBDIVISION\n");
+	for (i = 0; i < n; i++) {
+#ifndef WRITE_AS_PS
+		fz_write_printf(ctx, out, "%g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
+#else
+		fz_write_printf(ctx, out, "%% %g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
+#endif
+	}
+
+#ifdef WRITE_AS_PS
+	fz_write_printf(ctx, out, "0 0 0 setrgbcolor\n");
+	for (i = 0; i < n; i++) {
+		fz_write_printf(ctx, out, "%g %g moveto\n%g %g lineto\n%g %g lineto\n%g %g lineto\nclosepath\nstroke\n\n",
+				list[i].x0, list[i].y0,
+				list[i].x0, list[i].y1,
+				list[i].x1, list[i].y1,
+				list[i].x1, list[i].y0);
+	}
+
+	fz_write_printf(ctx, out, "1 0 0 setrgbcolor\n");
+	fz_write_printf(ctx, out, "%g %g moveto\n%g %g lineto\n%g %g lineto\n%g %g lineto\nclosepath\nstroke\n\n",
+			margins.x0, margins.y0,
+			margins.x0, margins.y1,
+			margins.x1, margins.y1,
+			margins.x1, margins.y0);
+#endif
+	boxer_destroy(boxer);
+}
+
 void
 fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page *page)
 {
@@ -769,9 +826,7 @@ fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page 
 	fz_stext_line *line;
 	//fz_stext_char *ch;
 	//char utf[10];
-	int i, n;
 	boxer_t *boxer;
-	boxer_rect_t *list;
 
 	boxer = boxer_create((boxer_rect_t *)&page->mediabox);
 
@@ -794,32 +849,16 @@ fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page 
 		}
 	}
 
-	boxer_sort(boxer);
-	n = boxer_results(boxer, &list);
-#define WRITE_AS_PS
-
-	for (i = 0; i < n; i++) {
-#ifndef WRITE_AS_PS
-		fz_write_printf(ctx, out, "%g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
-#else
-		fz_write_printf(ctx, out, "%% %g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
-#endif
-	}
-
-
 #ifdef WRITE_AS_PS
 	fz_write_printf(ctx, out, "\n\n1 -1 scale 0 -%g translate\n", page->mediabox.y1-page->mediabox.y0);
-	for (i = 0; i < n; i++) {
-		fz_write_printf(ctx, out, "%g %g moveto\n%g %g lineto\n%g %g lineto\n%g %g lineto\nclosepath\nstroke\n\n",
-				list[i].x0, list[i].y0,
-				list[i].x0, list[i].y1,
-				list[i].x1, list[i].y1,
-				list[i].x1, list[i].y0);
-	}
-	fz_write_printf(ctx, out, "showpage\n");
 #endif
 
+	gogo(ctx, out, boxer, 0);
 	boxer_destroy(boxer);
+
+#ifdef WRITE_AS_PS
+	fz_write_printf(ctx, out, "showpage\n");
+#endif
 }
 
 /* Text output writer */

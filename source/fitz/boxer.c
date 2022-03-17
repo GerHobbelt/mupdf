@@ -66,13 +66,22 @@ rectlist_push(rectlist_t *list, boxer_rect_t *box)
 	memcpy(&list->list[list->len++], box, sizeof(*box));
 }
 
-boxer_t *
-boxer_create(boxer_rect_t *mediabox)
+static boxer_t *
+boxer_create_length(boxer_rect_t *mediabox, int len)
 {
 	boxer_t *boxer = malloc(sizeof(*boxer));
 
 	memcpy(&boxer->mediabox, mediabox, sizeof(*mediabox));
-	boxer->list = create_rectlist(1);
+	boxer->list = create_rectlist(len);
+
+	return boxer;
+}
+
+boxer_t *
+boxer_create(boxer_rect_t *mediabox)
+{
+	boxer_t *boxer = boxer_create_length(mediabox, 1);
+
 	rectlist_push(boxer->list, mediabox);
 
 	return boxer;
@@ -97,11 +106,8 @@ push_if_intersect_suitable(rectlist_t *dst, const boxer_rect_t *a, const boxer_r
 
 	/* If the intersect is too narrow or too tall, ignore it.
 	 * We don't care about inter character spaces, for example. */
-#define THRESHOLD_1 12
-#define THRESHOLD_2 4
-	if (c.x0+THRESHOLD_1 >= c.x1 && c.y0+THRESHOLD_2 >= c.y1)
-		return;
-	if (c.x0+THRESHOLD_2 >= c.x1 && c.y0+THRESHOLD_1 >= c.y1)
+#define THRESHOLD 4
+	if (c.x0 + THRESHOLD >= c.x1 || c.y0+THRESHOLD >= c.y1)
 		return;
 
 	rectlist_push(dst, &c);
@@ -187,4 +193,108 @@ void boxer_destroy(boxer_t *boxer)
 	if (boxer)
 		free(boxer->list);
 	free(boxer);
+}
+
+boxer_rect_t boxer_margins(boxer_t *boxer)
+{
+	rectlist_t *list = boxer->list;
+	int i;
+	boxer_rect_t margins = boxer->mediabox;
+
+	for (i = 0; i < list->len; i++)
+	{
+		boxer_rect_t *r = &list->list[i];
+		if (r->x0 <= margins.x0 && r->y0 <= margins.y0 && r->y1 >= margins.y1) {
+			margins.x0 = r->x1; /* Left Margin */
+		} else if (r->x1 >= margins.x1 && r->y0 <= margins.y0 && r->y1 >= margins.y1) {
+			margins.x1 = r->x0; /* Right Margin */
+		} else if (r->x0 <= margins.x0 && r->x1 >= margins.x1 && r->y0 <= margins.y0) {
+			margins.y0 = r->y1; /* Top Margin */
+		} else if (r->x0 <= margins.x0 && r->x1 >= margins.x1 && r->y1 >= margins.y1) {
+			margins.y1 = r->y0; /* Bottom Margin */
+		}
+	}
+
+	return margins;
+}
+
+boxer_t *boxer_subset(boxer_t *boxer, boxer_rect_t rect)
+{
+	boxer_t *new_boxer = boxer_create_length(&rect, boxer->list->len);
+	int i;
+
+	for (i = 0; i < boxer->list->len; i++) {
+		boxer_rect_t r = boxer->list->list[i];
+
+		r.x0 = MAX(r.x0, rect.x0);
+		r.y0 = MAX(r.y0, rect.y0);
+		r.x1 = MIN(r.x1, rect.x1);
+		r.y1 = MIN(r.y1, rect.y1);
+		if (r.x0 >= r.x1 || r.y0 >= r.y1)
+			continue;
+		rectlist_push(new_boxer->list, &r);
+	}
+
+	return new_boxer;
+}
+
+int boxer_subdivide(boxer_t *boxer, boxer_t **boxer1, boxer_t **boxer2)
+{
+	rectlist_t *list = boxer->list;
+	int num_h = 0, num_v = 0;
+	float max_h = 0, max_v = 0;
+	boxer_rect_t best_h, best_v;
+	int i;
+
+	*boxer1 = NULL;
+	*boxer2 = NULL;
+
+	for (i = 0; i < list->len; i++) {
+		boxer_rect_t r = boxer->list->list[i];
+
+		if (r.x0 <= boxer->mediabox.x0 && r.x1 >= boxer->mediabox.x1) {
+			/* Horizontal split */
+			float size = r.y1 - r.y0;
+			if (size > max_h) {
+				max_h = size;
+				best_h = r;
+			}
+			num_h++;
+		}
+		if (r.y0 <= boxer->mediabox.y0 && r.y1 >= boxer->mediabox.y1) {
+			/* Vertical split */
+			float size = r.x1 - r.x0;
+			if (size > max_v) {
+				max_v = size;
+				best_v = r;
+			}
+			num_v++;
+		}
+	}
+	printf("num_h=%d num_v=%d\n", num_h, num_v);
+	printf("max_h=%g max_v=%g\n", max_h, max_v);
+
+	if (max_h > max_v) {
+		boxer_rect_t r;
+		/* Split horizontally. */
+		r = boxer->mediabox;
+		r.y0 = best_h.y1;
+		*boxer1 = boxer_subset(boxer, r);
+		r = boxer->mediabox;
+		r.y1 = best_h.y0;
+		*boxer2 = boxer_subset(boxer, r);
+		return 1;
+	} else if (max_v > 0) {
+		boxer_rect_t r;
+		/* Split vertically. */
+		r = boxer->mediabox;
+		r.x0 = best_v.x1;
+		*boxer1 = boxer_subset(boxer, r);
+		r = boxer->mediabox;
+		r.x1 = best_v.x0;
+		*boxer2 = boxer_subset(boxer, r);
+		return 1;
+	}
+
+	return 0;
 }
