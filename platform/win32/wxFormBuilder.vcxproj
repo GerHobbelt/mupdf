@@ -145,7 +145,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -193,7 +193,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -242,7 +242,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -290,7 +290,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -326,6 +326,9 @@
   <ItemGroup>
     <ProjectReference Include="libboost-filesystem.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa68475}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib.vcxproj">
+      <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
     </ProjectReference>
     <ProjectReference Include="wxFormBuilder-tinyXML.vcxproj">
       <Project>{29f43d06-784e-4a45-b6ff-c5f03db2e9f2}</Project>
@@ -392,7 +395,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/palette.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/phppanel/phppanel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/pythonpanel/pythonpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/revision.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/title.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/version.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/wxfbevent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/wxfbmanager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxFormBuilder/src/rad/xrcpanel/xrcpanel.cpp" />
@@ -717,6 +722,9 @@
     <Xml Include="../../thirdparty/owemdjee/wxFormBuilder/resources/xml/default.xml" />
     <Xml Include="../../thirdparty/owemdjee/wxFormBuilder/resources/xml/icons.xml" />
     <Xml Include="../../thirdparty/owemdjee/wxFormBuilder/resources/xml/objtypes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\scripts\wxFormBuilder\copy-misc-files.cmd" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -14,6 +14,7 @@ IF NOT EXIST "%2" goto fail
 cd "%2"
 
 robocopy "%1/../../thirdparty/owemdjee/wxFormBuilder/output/" ./ *.* /S /DCOPY:DAT /W:0 /R:0
+robocopy "%1/../../thirdparty/owemdjee/wxFormBuilder/resources/" ./resources/ *.* /S /DCOPY:DAT /W:0 /R:0
 
 if not exist plugins (
 	mkdir plugins
