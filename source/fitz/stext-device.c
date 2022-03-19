@@ -630,6 +630,10 @@ fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_m
 		else
 			adv = 0;
 
+		/* Work-around for embedded fonts missing vertical mode advance widths. */
+		if (adv == 0 && span->wmode)
+			adv = 1;
+
 		fz_add_stext_char(ctx, dev, font,
 			span->items[i].ucs,
 			span->items[i].gid,
