@@ -162,7 +162,7 @@ fz_keep_glyph_cache(fz_context *ctx)
 	return ctx->glyph_cache;
 }
 
-void default_sub_pix_quantizer(float size, int *x, int *y)
+static void default_sub_pix_quantizer(float size, int *x, int *y)
 {
 	/* First, in the direction of movement (i.e. normally X). We
 	 * never need more than 4 subpixel positions for glyphs -
