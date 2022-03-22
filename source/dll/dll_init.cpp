@@ -149,7 +149,9 @@ static int __CRTDECL fz_debug_report_f(int reportType, char* message, int* retur
 				{
 					// abuse the MSVCRT debug output string buffer:
 					strcat(message, "--> ...");
+#if defined(_DEBUG)
 					_CrtDbgReport(reportType, NULL, 0, NULL, "%s\n", message);
+#endif
 
 					if (match->line != match->line2)
 					{
