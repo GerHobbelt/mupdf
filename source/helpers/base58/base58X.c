@@ -287,7 +287,7 @@ m; } console.log({ i, p, ppm, v: usable + (optimal == i ? ",OPTIMAL" : "") }); }
 > Incidentally, we picked base58 instead of base64 to ensure that all 'digits' are legible in almost all fonts out there:
 > no 'l' or 'i' while we use '1'. HOWEVER, we do accept O and o while using 0.
 >
-> Also note that 2^41 nicely fits within regular (non-bignum) integer arithmatic, also in JavaScript which can only
+> Also note that 2^41 nicely fits within regular (non-bignum) integer arithmetic, also in JavaScript which can only
 > do precise integer work up to 2^53 due to JS 'numbers' always being floating point (ES3/ES5).
 >
 > ---
@@ -295,10 +295,7 @@ m; } console.log({ i, p, ppm, v: usable + (optimal == i ? ",OPTIMAL" : "") }); }
 > If we also wish to discard O/o vs. 0, we would arrive at a base56 (10+23+23=56) system instead, which has a different
 > optimality point:
 >
->  { let optimal = -1; let opti_ppm = 1E9; for (let i = 1; Math.log(Math.pow(56,i))/Math.log(2) <= 1025; i++) { let p = Math.log(Math.pow(56,i))/Math.log(2); let
- d = p - Math.round(p); let ppm = Math.round(1E6 * d / p); if (d < 0) { d = p - Math.round(p - 1); p -= 1; ppm = Math.round(1E6 * d / p); } let usable = (ppm >=
- 0 ? "USABLE" : ""); if (opti_ppm > ppm && ppm >= 0) { optimal = i; opti_ppm = ppm; } console.log({ i, p, ppm, v: usable + (optimal == i ? ",OPTIMAL" : "") });
-}}
+>  { let base = 10+26+26; let optimal = -1; let opti_ppm = 1E9; for (let i = 1; Math.log(Math.pow(base, i)) / Math.log(2) <= 1025; i++) { let p = Math.log(Math.pow(base,i))/Math.log(2); let d = p - Math.round(p); let ppm = Math.round(1E6 * d / p); if (d < 0) { d = p - Math.round(p - 1); p -= 1; ppm = Math.round(1E6 * d / p); } let usable = (ppm >= 0 ? "USABLE" : ""); if (opti_ppm > ppm && ppm >= 0) { optimal = i; opti_ppm = ppm; } console.log({ i, base, p, ppm, v: usable + (optimal == i ? ",OPTIMAL" : "") }); }}
 { i: 1, p: 4.807354922057605, ppm: 167942, v: 'USABLE,OPTIMAL' }
 { i: 2, p: 10.61470984411521, ppm: 57911, v: 'USABLE,OPTIMAL' }
 { i: 3, p: 17.422064766172813, ppm: 24226, v: 'USABLE,OPTIMAL' }
@@ -373,6 +370,228 @@ m; } console.log({ i, p, ppm, v: usable + (optimal == i ? ",OPTIMAL" : "") }); }
 > AS GOOD as treating the entire number as a BigNum: both ways we can encode this bit series as a
 > 44 character long string! Without us having to resort to costly BigNum arithmetic because we can
 > safely work with 64-bit chunks as we chop the byte sequence into 41 bit segments!
+
+---
+
+## Revisiting BASE58X and reviewing the reasons why in light of a new potential optimum.
+
+Going even further, we investigate the optimal encoding output size (in characters) for any base
+from 10+23+23 (upper & lower, leaving out all o, i and l) to 10+26+26 (leaving out nothing,
+assuming the font used to display these hashes will make o, i and l easy to read vs. 1 and 0).
+We use this code:
+
+> { let optc = 1E6; for (let base = 10+23+23; base <= 10+27+27; base++) { let optimal = -1; let opti_ppm = 1E9; for (let i = 1; Math.log(Math.pow(base,i))/Math.log(2) <= 1025; i++) { let p = Math.log(Math.pow(base, i)) / Math.log(2); let d = p - Math.round(p); let ppm = Math.round(1E6 * d / p); if (d < 0) { d = p - Math.round(p - 1); p -= 1; ppm = Math.round(1E6 * d / p); } let usable = (ppm >= 0 ? "USABLE" : ""); if (opti_ppm > ppm && ppm >= 0) { optimal = i; opti_ppm = ppm; } let b = Math.floor(p); let w = Math.floor(256 / b); let r = 256 - w * b; let rc = Math.ceil(Math.log(Math.pow(2, r)) / Math.log(base)); let cc = w * i + rc; let show = (cc < optc) || (optimal == i); if (cc < optc) { optc = cc; } if (show) { console.log({ i, base, p, ppm, v: usable + (optimal == i ? ",OPTIMAL" : ""), b, w, r, rc, cc }); } }}}
+
+> (Note: we stripped out the records that are only potentially relevant if we were looking at encoding 
+> numbers with *more* than 256 binary digits, i.e. we show the *first* record with w=0 (NumberOfWords is zero) 
+> and remove the rest.)
+
+> b = number of bits fitting in this baseN numeric word (which has i characters in the encoded base)
+> w = number of full words used, *excluding* any short tail a.k.a. 'remainder'.
+> r = the remainder: the number of bits in the tail which still need to be encoded.
+> rc = number of base characters required to encode this tail/remainder.
+> cc = character count: the total number of base characters required to successfully encode a 256 bit number.
+>
+{ i: 1, base: 56, p: 4.807354922057605, ppm: 167942, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 56, p: 10.61470984411521, ppm: 57911, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 56, p: 17.422064766172813, ppm: 24226, v: 'USABLE,OPTIMAL', b: 17, w: 15, r: 1, rc: 1, cc: 46 }
+{ i: 4, base: 56, p: 23.22941968823042, ppm: 9876, v: 'USABLE,OPTIMAL', b: 23, w: 11, r: 3, rc: 1, cc: 45 }
+{ i: 5, base: 56, p: 29.03677461028802, ppm: 1266, v: 'USABLE,OPTIMAL', b: 29, w: 8, r: 24, rc: 5, cc: 45 }
+{ i: 31, base: 56, p: 180.02800258378574, ppm: 156, v: 'USABLE,OPTIMAL', b: 180, w: 1, r: 76, rc: 14, cc: 45 }
+{ i: 57, base: 56, p: 331.01923055728344, ppm: 58, v: 'USABLE,OPTIMAL', b: 331, w: 0, r: 256, rc: 45, cc: 45 }
+{ i: 1, base: 57, p: 4.832890014164742, ppm: 172338, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 57, p: 10.665780028329484, ppm: 62422, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 57, p: 17.498670042494226, ppm: 28498, v: 'USABLE,OPTIMAL', b: 17, w: 15, r: 1, rc: 1, cc: 46 }
+{ i: 4, base: 57, p: 23.33156005665897, ppm: 14211, v: 'USABLE,OPTIMAL', b: 23, w: 11, r: 3, rc: 1, cc: 45 }
+{ i: 5, base: 57, p: 29.164450070823708, ppm: 5639, v: 'USABLE,OPTIMAL', b: 29, w: 8, r: 24, rc: 5, cc: 45 }
+{ i: 11, base: 57, p: 64.16179015581216, ppm: 2522, v: 'USABLE,OPTIMAL', b: 64, w: 4, r: 0, rc: 0, cc: 44 }
+{ i: 17, base: 57, p: 99.15913024080061, ppm: 1605, v: 'USABLE,OPTIMAL', b: 99, w: 2, r: 58, rc: 10, cc: 44 }
+{ i: 23, base: 57, p: 134.15647032578906, ppm: 1166, v: 'USABLE,OPTIMAL', b: 134, w: 1, r: 122, rc: 21, cc: 44 }
+{ i: 29, base: 57, p: 169.1538104107775, ppm: 909, v: 'USABLE,OPTIMAL', b: 169, w: 1, r: 87, rc: 15, cc: 44 }
+{ i: 35, base: 57, p: 204.15115049576596, ppm: 740, v: 'USABLE,OPTIMAL', b: 204, w: 1, r: 52, rc: 9, cc: 44 }
+{ i: 41, base: 57, p: 239.1484905807544, ppm: 621, v: 'USABLE,OPTIMAL', b: 239, w: 1, r: 17, rc: 3, cc: 44 }
+{ i: 47, base: 57, p: 274.1458306657429, ppm: 532, v: 'USABLE,OPTIMAL', b: 274, w: 0, r: 256, rc: 44, cc: 44 }
+{ i: 1, base: 58, p: 4.857980995127572, ppm: 176613, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 58, p: 10.715961990255144, ppm: 66813, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 58, p: 16.57394298538272, ppm: 34629, v: 'USABLE,OPTIMAL', b: 16, w: 16, r: 0, rc: 0, cc: 48 }
+{ i: 4, base: 58, p: 23.431923980510287, ppm: 18433, v: 'USABLE,OPTIMAL', b: 23, w: 11, r: 3, rc: 1, cc: 45 }
+{ i: 5, base: 58, p: 29.289904975637864, ppm: 9898, v: 'USABLE,OPTIMAL', b: 29, w: 8, r: 24, rc: 5, cc: 45 }
+{ i: 6, base: 58, p: 35.14788597076544, ppm: 4208, v: 'USABLE,OPTIMAL', b: 35, w: 7, r: 11, rc: 2, cc: 44 }
+{ i: 7, base: 58, p: 41.005866965893006, ppm: 143, v: 'USABLE,OPTIMAL', b: 41, w: 6, r: 10, rc: 2, cc: 44 }
+{ i: 1, base: 59, p: 4.882643049361842, ppm: 180772, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 59, p: 10.765286098723683, ppm: 71088, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 59, p: 16.647929148085524, ppm: 38920, v: 'USABLE,OPTIMAL', b: 16, w: 16, r: 0, rc: 0, cc: 48 }
+{ i: 4, base: 59, p: 22.530572197447366, ppm: 23549, v: 'USABLE,OPTIMAL', b: 22, w: 11, r: 14, rc: 3, cc: 47 }
+{ i: 5, base: 59, p: 29.41321524680921, ppm: 14049, v: 'USABLE,OPTIMAL', b: 29, w: 8, r: 24, rc: 5, cc: 45 }
+{ i: 6, base: 59, p: 35.29585829617105, ppm: 8382, v: 'USABLE,OPTIMAL', b: 35, w: 7, r: 11, rc: 2, cc: 44 }
+{ i: 7, base: 59, p: 41.17850134553289, ppm: 4335, v: 'USABLE,OPTIMAL', b: 41, w: 6, r: 10, rc: 2, cc: 44 }
+{ i: 8, base: 59, p: 47.06114439489473, ppm: 1299, v: 'USABLE,OPTIMAL', b: 47, w: 5, r: 21, rc: 4, cc: 44 }
+{ i: 17, base: 59, p: 100.0049318391513, ppm: 49, v: 'USABLE,OPTIMAL', b: 100, w: 2, r: 56, rc: 10, cc: 44 }
+{ i: 1, base: 60, p: 4.906890595608519, ppm: 184820, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 60, p: 10.813781191217037, ppm: 75254, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 60, p: 16.720671786825555, ppm: 43101, v: 'USABLE,OPTIMAL', b: 16, w: 16, r: 0, rc: 0, cc: 48 }
+{ i: 4, base: 60, p: 22.627562382434075, ppm: 27734, v: 'USABLE,OPTIMAL', b: 22, w: 11, r: 14, rc: 3, cc: 47 }
+{ i: 5, base: 60, p: 28.534452978042594, ppm: 18730, v: 'USABLE,OPTIMAL', b: 28, w: 9, r: 4, rc: 1, cc: 46 }
+{ i: 6, base: 60, p: 35.44134357365111, ppm: 12453, v: 'USABLE,OPTIMAL', b: 35, w: 7, r: 11, rc: 2, cc: 44 }
+{ i: 7, base: 60, p: 41.348234169259634, ppm: 8422, v: 'USABLE,OPTIMAL', b: 41, w: 6, r: 10, rc: 2, cc: 44 }
+{ i: 8, base: 60, p: 47.25512476486815, ppm: 5399, v: 'USABLE,OPTIMAL', b: 47, w: 5, r: 21, rc: 4, cc: 44 }
+{ i: 9, base: 60, p: 53.16201536047667, ppm: 3048, v: 'USABLE,OPTIMAL', b: 53, w: 4, r: 44, rc: 8, cc: 44 }
+{ i: 10, base: 60, p: 59.06890595608519, ppm: 1167, v: 'USABLE,OPTIMAL', b: 59, w: 4, r: 20, rc: 4, cc: 44 }
+{ i: 21, base: 60, p: 124.0447025077789, ppm: 360, v: 'USABLE,OPTIMAL', b: 124, w: 2, r: 8, rc: 2, cc: 44 }
+{ i: 32, base: 60, p: 189.0204990594726, ppm: 108, v: 'USABLE,OPTIMAL', b: 189, w: 1, r: 67, rc: 12, cc: 44 }
+{ i: 75, base: 60, p: 443.0167946706389, ppm: 38, v: 'USABLE,OPTIMAL', b: 443, w: 0, r: 256, rc: 44, cc: 44 }
+{ i: 1, base: 61, p: 4.930737337562887, ppm: 188762, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 61, p: 10.861474675125773, ppm: 79315, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 61, p: 16.79221201268866, ppm: 47177, v: 'USABLE,OPTIMAL', b: 16, w: 16, r: 0, rc: 0, cc: 48 }
+{ i: 4, base: 61, p: 22.722949350251547, ppm: 31816, v: 'USABLE,OPTIMAL', b: 22, w: 11, r: 14, rc: 3, cc: 47 }
+{ i: 5, base: 61, p: 28.65368668781443, ppm: 22813, v: 'USABLE,OPTIMAL', b: 28, w: 9, r: 4, rc: 1, cc: 46 }
+{ i: 6, base: 61, p: 34.58442402537732, ppm: 16898, v: 'USABLE,OPTIMAL', b: 34, w: 7, r: 18, rc: 4, cc: 46 }
+{ i: 7, base: 61, p: 40.515161362940205, ppm: 12715, v: 'USABLE,OPTIMAL', b: 40, w: 6, r: 16, rc: 3, cc: 45 }
+{ i: 8, base: 61, p: 47.44589870050309, ppm: 9398, v: 'USABLE,OPTIMAL', b: 47, w: 5, r: 21, rc: 4, cc: 44 }
+{ i: 9, base: 61, p: 53.376636038065975, ppm: 7056, v: 'USABLE,OPTIMAL', b: 53, w: 4, r: 44, rc: 8, cc: 44 }
+{ i: 10, base: 61, p: 59.30737337562886, ppm: 5183, v: 'USABLE,OPTIMAL', b: 59, w: 4, r: 20, rc: 4, cc: 44 }
+{ i: 11, base: 61, p: 65.23811071319176, ppm: 3650, v: 'USABLE,OPTIMAL', b: 65, w: 3, r: 61, rc: 11, cc: 44 }
+{ i: 12, base: 61, p: 71.16884805075463, ppm: 2372, v: 'USABLE,OPTIMAL', b: 71, w: 3, r: 43, rc: 8, cc: 44 }
+{ i: 13, base: 61, p: 77.09958538831752, ppm: 1292, v: 'USABLE,OPTIMAL', b: 77, w: 3, r: 25, rc: 5, cc: 44 }
+{ i: 14, base: 61, p: 83.03032272588041, ppm: 365, v: 'USABLE,OPTIMAL', b: 83, w: 3, r: 7, rc: 2, cc: 44 }
+{ i: 43, base: 61, p: 255.0217055152041, ppm: 85, v: 'USABLE,OPTIMAL', b: 255, w: 1, r: 1, rc: 1, cc: 44 }
+{ i: 72, base: 61, p: 427.0130883045278, ppm: 31, v: 'USABLE,OPTIMAL', b: 427, w: 0, r: 256, rc: 44, cc: 44 }
+{ i: 1, base: 62, p: 4.954196310386876, ppm: 192604, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 62, p: 10.908392620773752, ppm: 83275, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 62, p: 16.862588931160627, ppm: 51154, v: 'USABLE,OPTIMAL', b: 16, w: 16, r: 0, rc: 0, cc: 48 }
+{ i: 4, base: 62, p: 22.816785241547503, ppm: 35798, v: 'USABLE,OPTIMAL', b: 22, w: 11, r: 14, rc: 3, cc: 47 }
+{ i: 5, base: 62, p: 28.77098155193438, ppm: 26797, v: 'USABLE,OPTIMAL', b: 28, w: 9, r: 4, rc: 1, cc: 46 }
+{ i: 6, base: 62, p: 34.72517786232125, ppm: 20883, v: 'USABLE,OPTIMAL', b: 34, w: 7, r: 18, rc: 4, cc: 46 }
+{ i: 7, base: 62, p: 40.67937417270813, ppm: 16701, v: 'USABLE,OPTIMAL', b: 40, w: 6, r: 16, rc: 3, cc: 45 }
+{ i: 8, base: 62, p: 46.633570483095006, ppm: 13586, v: 'USABLE,OPTIMAL', b: 46, w: 5, r: 26, rc: 5, cc: 45 }
+{ i: 9, base: 62, p: 52.587766793481876, ppm: 11177, v: 'USABLE,OPTIMAL', b: 52, w: 4, r: 48, rc: 9, cc: 45 }
+{ i: 10, base: 62, p: 58.54196310386876, ppm: 9258, v: 'USABLE,OPTIMAL', b: 58, w: 4, r: 24, rc: 5, cc: 45 }
+{ i: 11, base: 62, p: 65.49615941425563, ppm: 7575, v: 'USABLE,OPTIMAL', b: 65, w: 3, r: 61, rc: 11, cc: 44 }
+{ i: 12, base: 62, p: 71.4503557246425, ppm: 6303, v: 'USABLE,OPTIMAL', b: 71, w: 3, r: 43, rc: 8, cc: 44 }
+{ i: 13, base: 62, p: 77.40455203502938, ppm: 5226, v: 'USABLE,OPTIMAL', b: 77, w: 3, r: 25, rc: 5, cc: 44 }
+{ i: 14, base: 62, p: 83.35874834541626, ppm: 4304, v: 'USABLE,OPTIMAL', b: 83, w: 3, r: 7, rc: 2, cc: 44 }
+{ i: 15, base: 62, p: 89.31294465580312, ppm: 3504, v: 'USABLE,OPTIMAL', b: 89, w: 2, r: 78, rc: 14, cc: 44 }
+{ i: 16, base: 62, p: 95.26714096619001, ppm: 2804, v: 'USABLE,OPTIMAL', b: 95, w: 2, r: 66, rc: 12, cc: 44 }
+{ i: 17, base: 62, p: 101.22133727657689, ppm: 2187, v: 'USABLE,OPTIMAL', b: 101, w: 2, r: 54, rc: 10, cc: 44 }
+{ i: 18, base: 62, p: 107.17553358696375, ppm: 1638, v: 'USABLE,OPTIMAL', b: 107, w: 2, r: 42, rc: 8, cc: 44 }
+{ i: 19, base: 62, p: 113.12972989735063, ppm: 1147, v: 'USABLE,OPTIMAL', b: 113, w: 2, r: 30, rc: 6, cc: 44 }
+{ i: 20, base: 62, p: 119.08392620773752, ppm: 705, v: 'USABLE,OPTIMAL', b: 119, w: 2, r: 18, rc: 4, cc: 44 }
+{ i: 21, base: 62, p: 125.03812251812438, ppm: 305, v: 'USABLE,OPTIMAL', b: 125, w: 2, r: 6, rc: 2, cc: 44 }
+{ i: 43, base: 62, p: 256.03044134663566, ppm: 119, v: 'USABLE,OPTIMAL', b: 256, w: 1, r: 0, rc: 0, cc: 43 }
+{ i: 65, base: 62, p: 387.0227601751469, ppm: 59, v: 'USABLE,OPTIMAL', b: 387, w: 0, r: 256, rc: 43, cc: 43 }
+{ i: 1, base: 63, p: 4.977279923499917, ppm: 196348, v: 'USABLE,OPTIMAL', b: 4, w: 64, r: 0, rc: 0, cc: 64 }
+{ i: 2, base: 63, p: 10.954559846999834, ppm: 87138, v: 'USABLE,OPTIMAL', b: 10, w: 25, r: 6, rc: 2, cc: 52 }
+{ i: 3, base: 63, p: 16.93183977049975, ppm: 55035, v: 'USABLE,OPTIMAL', b: 16, w: 16, r: 0, rc: 0, cc: 48 }
+{ i: 4, base: 63, p: 22.909119693999667, ppm: 39684, v: 'USABLE,OPTIMAL', b: 22, w: 11, r: 14, rc: 3, cc: 47 }
+{ i: 5, base: 63, p: 28.886399617499585, ppm: 30686, v: 'USABLE,OPTIMAL', b: 28, w: 9, r: 4, rc: 1, cc: 46 }
+{ i: 6, base: 63, p: 34.8636795409995, ppm: 24773, v: 'USABLE,OPTIMAL', b: 34, w: 7, r: 18, rc: 4, cc: 46 }
+{ i: 7, base: 63, p: 40.84095946449941, ppm: 20591, v: 'USABLE,OPTIMAL', b: 40, w: 6, r: 16, rc: 3, cc: 45 }
+{ i: 8, base: 63, p: 46.818239387999334, ppm: 17477, v: 'USABLE,OPTIMAL', b: 46, w: 5, r: 26, rc: 5, cc: 45 }
+{ i: 9, base: 63, p: 52.795519311499255, ppm: 15068, v: 'USABLE,OPTIMAL', b: 52, w: 4, r: 48, rc: 9, cc: 45 }
+{ i: 10, base: 63, p: 58.77279923499917, ppm: 13149, v: 'USABLE,OPTIMAL', b: 58, w: 4, r: 24, rc: 5, cc: 45 }
+{ i: 11, base: 63, p: 64.75007915849908, ppm: 11584, v: 'USABLE,OPTIMAL', b: 64, w: 4, r: 0, rc: 0, cc: 44 }
+{ i: 12, base: 63, p: 70.727359081999, ppm: 10284, v: 'USABLE,OPTIMAL', b: 70, w: 3, r: 46, rc: 8, cc: 44 }
+{ i: 13, base: 63, p: 76.70463900549892, ppm: 9186, v: 'USABLE,OPTIMAL', b: 76, w: 3, r: 28, rc: 5, cc: 44 }
+{ i: 14, base: 63, p: 82.68191892899883, ppm: 8247, v: 'USABLE,OPTIMAL', b: 82, w: 3, r: 10, rc: 2, cc: 44 }
+{ i: 15, base: 63, p: 88.65919885249875, ppm: 7435, v: 'USABLE,OPTIMAL', b: 88, w: 2, r: 80, rc: 14, cc: 44 }
+{ i: 16, base: 63, p: 94.63647877599867, ppm: 6726, v: 'USABLE,OPTIMAL', b: 94, w: 2, r: 68, rc: 12, cc: 44 }
+{ i: 17, base: 63, p: 100.61375869949859, ppm: 6100, v: 'USABLE,OPTIMAL', b: 100, w: 2, r: 56, rc: 10, cc: 44 }
+{ i: 18, base: 63, p: 106.59103862299851, ppm: 5545, v: 'USABLE,OPTIMAL', b: 106, w: 2, r: 44, rc: 8, cc: 44 }
+{ i: 19, base: 63, p: 112.56831854649842, ppm: 5049, v: 'USABLE,OPTIMAL', b: 112, w: 2, r: 32, rc: 6, cc: 44 }
+{ i: 20, base: 63, p: 118.54559846999834, ppm: 4602, v: 'USABLE,OPTIMAL', b: 118, w: 2, r: 20, rc: 4, cc: 44 }
+{ i: 21, base: 63, p: 124.52287839349826, ppm: 4199, v: 'USABLE,OPTIMAL', b: 124, w: 2, r: 8, rc: 2, cc: 44 }
+{ i: 22, base: 63, p: 130.50015831699815, ppm: 3833, v: 'USABLE,OPTIMAL', b: 130, w: 1, r: 126, rc: 22, cc: 44 }
+{ i: 23, base: 63, p: 137.4774382404981, ppm: 3473, v: 'USABLE,OPTIMAL', b: 137, w: 1, r: 119, rc: 20, cc: 43 }
+{ i: 24, base: 63, p: 143.454718163998, ppm: 3170, v: 'USABLE,OPTIMAL', b: 143, w: 1, r: 113, rc: 19, cc: 43 }
+{ i: 25, base: 63, p: 149.4319980874979, ppm: 2891, v: 'USABLE,OPTIMAL', b: 149, w: 1, r: 107, rc: 18, cc: 43 }
+{ i: 26, base: 63, p: 155.40927801099784, ppm: 2634, v: 'USABLE,OPTIMAL', b: 155, w: 1, r: 101, rc: 17, cc: 43 }
+{ i: 27, base: 63, p: 161.38655793449774, ppm: 2395, v: 'USABLE,OPTIMAL', b: 161, w: 1, r: 95, rc: 16, cc: 43 }
+{ i: 28, base: 63, p: 167.36383785799765, ppm: 2174, v: 'USABLE,OPTIMAL', b: 167, w: 1, r: 89, rc: 15, cc: 43 }
+{ i: 29, base: 63, p: 173.3411177814976, ppm: 1968, v: 'USABLE,OPTIMAL', b: 173, w: 1, r: 83, rc: 14, cc: 43 }
+{ i: 30, base: 63, p: 179.3183977049975, ppm: 1776, v: 'USABLE,OPTIMAL', b: 179, w: 1, r: 77, rc: 13, cc: 43 }
+{ i: 31, base: 63, p: 185.2956776284974, ppm: 1596, v: 'USABLE,OPTIMAL', b: 185, w: 1, r: 71, rc: 12, cc: 43 }
+{ i: 32, base: 63, p: 191.27295755199734, ppm: 1427, v: 'USABLE,OPTIMAL', b: 191, w: 1, r: 65, rc: 11, cc: 43 }
+{ i: 33, base: 63, p: 197.25023747549724, ppm: 1269, v: 'USABLE,OPTIMAL', b: 197, w: 1, r: 59, rc: 10, cc: 43 }
+{ i: 34, base: 63, p: 203.22751739899718, ppm: 1120, v: 'USABLE,OPTIMAL', b: 203, w: 1, r: 53, rc: 9, cc: 43 }
+{ i: 35, base: 63, p: 209.2047973224971, ppm: 979, v: 'USABLE,OPTIMAL', b: 209, w: 1, r: 47, rc: 8, cc: 43 }
+{ i: 36, base: 63, p: 215.18207724599702, ppm: 846, v: 'USABLE,OPTIMAL', b: 215, w: 1, r: 41, rc: 7, cc: 43 }
+{ i: 37, base: 63, p: 221.1593571694969, ppm: 721, v: 'USABLE,OPTIMAL', b: 221, w: 1, r: 35, rc: 6, cc: 43 }
+{ i: 38, base: 63, p: 227.13663709299684, ppm: 602, v: 'USABLE,OPTIMAL', b: 227, w: 1, r: 29, rc: 5, cc: 43 }
+{ i: 39, base: 63, p: 233.11391701649674, ppm: 489, v: 'USABLE,OPTIMAL', b: 233, w: 1, r: 23, rc: 4, cc: 43 }
+{ i: 40, base: 63, p: 239.09119693999668, ppm: 381, v: 'USABLE,OPTIMAL', b: 239, w: 1, r: 17, rc: 3, cc: 43 }
+{ i: 41, base: 63, p: 245.06847686349658, ppm: 279, v: 'USABLE,OPTIMAL', b: 245, w: 1, r: 11, rc: 2, cc: 43 }
+{ i: 42, base: 63, p: 251.04575678699652, ppm: 182, v: 'USABLE,OPTIMAL', b: 251, w: 1, r: 5, rc: 1, cc: 43 }
+{ i: 43, base: 63, p: 257.0230367104964, ppm: 90, v: 'USABLE,OPTIMAL', b: 257, w: 0, r: 256, rc: 43, cc: 43 }
+{ i: 1, base: 64, p: 6, ppm: 0, v: 'USABLE,OPTIMAL', b: 6, w: 42, r: 4, rc: 1, cc: 43 }
+
+which tells us that we can do **1 character better** than our base58-producing 44 characters (at base=58, i=7 --> cc=44)
+iff we choose to use base62 or higher: the first to hit that spot is base=62, i=43:
+
+{ i: 43, base: 62, p: 256.03044134663566, ppm: 119, v: 'USABLE,OPTIMAL', b: 256, w: 1, r: 0, rc: 0, cc: 43 }
+
+Here w=1 and rc=0 (RemainingCharactersNeeded) tell us that we get this optimum result when we encode the 256-bit number
+(b=256, also visible in the raw p number, that's slightly higher than 256) as *a single BigNum*.
+
+Can we achieve encoding in 43 characters in any of the bases investigated iff we DO NOT wish to resort to any
+BigNum arithmetic? I.e. is there a cc=43 record with p < 64? 
+
+> WARNING: values like p=64.1617, i.e. slightly *above* 64, all mean we need to perform BigNum arithmetic in 
+> any 64-bit environment as the basic divisor then has a log2 power of (slightly) above 64.
+
+*Yes*, we can, but there's only *one* option then: base=64. At i=1, this record says we can then encode the entire
+256 bit number in 6-bit chunks, giving us 42 characters in the encoded base (w=42), leaving a left-over of 4 bits 
+(r=4), which costs 1 (rc=1) additional character in the encoding base, running up a grand total of 43 characters.
+
+### Do we care about 1 character less?
+
+Well, we started out looking for a minimal size encoding of 256 bit numbers, while using an encoding that MAY be
+relatively easy to read (and NOT make mistakes) by humans. Base58 is sub-optimal on that last condition as we still
+have o and O vs. 0 in there, but we originally decided base56 (which does not include these o and O characters) wasn't
+good enough as it takes 45 characters at best (base=56, i=4), while you CAN get 44 characters wide results when you only
+drop the O vs. 0 but keep the o (base=57, i=11): this, however, would mean we'ld still need to do BigNum work as
+p is above 64.
+
+Given that we revisited the above and did the more thorough check, wouldn't the same design decisions now mark BASE64 as 
+'even better'?
+
+After all, we realize that 'human reading' of these hashes is a rare occasion on the one hand, and the arithmetic
+required to encode the number becomes very much simpler (and potentially *faster*) as we now would use a power-of-2
+base (base=64) for our encoding, meaning and division and remainder operations become very cheap bit shift operations
+instead.
+
+However, base64 means we assume a 27(!) character alphabet and thus have to drop another of our original design criteria:
+the encoded hash SHOULD, at first glance, look like a 'word' to a human and a machine (technically, this criterion might
+be read as "*behaves as you'ld expect when using regex operators `\b` and `\w`*") as you'ld need *two* punctuation characters
+to arrive at an alphabet of 27 (base64 = 10+26+26 + 2). Which is a condition we don't wish to let go.
+
+Incidentally, do note that base58 is the first to hit the 44 character size mark without the need for BigNum arithmetic
+(p < 64); base59 and beyond also reach this cc number quickly, but base58 is preferred as it means we have the smallest
+required alphabet to produce this result.
+
+### Conclusion
+
+A slightly deeper and wider investigation suggests we could improve on our encoded size of 44 characters for a 256 bit
+binary number iff we were to accept a base64 encoding, which requires the use of two punctuation characters next to our
+usual alphanumeric alphabet set of 62 (10+26+26).
+
+While this would lead to a faster (and smaller) implementation of the encoder, compared to BASE58X, we do not wish 
+to venture there as the '*looks like a word*' criterion is deemed important enough to keep.
+
+Cost of calculus considerations include the assumption that the BASE58X encoding/decoding operation is not expected 
+to become a performance bottleneck under any circumstances, thus the benefit of switching to a base64 encoding is meager.
+(Where lots of hashes will be processed, e.g. in database queries, the encoding/decoding will not occur at all, as almost
+all those checks and comparisons are expected to be executed as *string comparisons* in the database itself. Reducing the
+string size from 44 down to 43 would also only gain us 1/44 ~ 2.3% performance gain as the theoretical upper bound: in 
+practice, several other actions are required alongside the comparison, swiftly reducing this gain. Which is therefor
+considered negligible.
+
+BASE64 might look good on paper, but given our design criteria, BASE58X remains the proper (optimal) choice for encoding
+binary numbers to alphanumeric 'words' with shortest possible string length.
+
+BASE58X is a very machine and SQL database (*STRING* / *VARCHAR* !) friendly encoding, human readable (with the appropriate fonts) 
+and does neither include *spaces* nor "punctuation", making it easy to transfer and process in all kinds of scripting languages 
+and comm protocols: the encoded number has only alphanumeric characters and thus can be regarded as a 'word' in regexes, 
+etc. -- the \w and \b regex operators would work as you'ld expect.
 */
 
 /** All alphanumeric characters except for "0", "I", "O", and "l" */
