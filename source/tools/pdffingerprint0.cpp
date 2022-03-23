@@ -5,12 +5,27 @@
 // where the SHA1 hash of the file contents were calculated, then converted to
 // a hexadecimal string representation.
 // The b0rk is in that hexadecimal transformation: when a byte in the original hash value
-// has a most significant ZERO nibble, that hex digit is lost, i.ee. 0A becomes 'A' instead of '0A'.
+// has a most significant ZERO nibble, that hex digit is lost, i.e. 0x0A becomes 'A' instead of '0A'.
 //
 // Consequently, Qiqqa fingerprint hashes have *variable length*.
 // As a (non-cryptographic) fingerprint it's still sort of okay, but its use is now
 // outmoded as I intend to store PDFs in a Qiqqa library which exhibit the SHA1 collision,
 // thus these PDFs will also have the same Qiqqa fingerprint yet be different in content.
+//
+// PDF collisions for SHA1B (SHA1-B0rked) have not been noticed in the wild, but then again
+// no-body has been looking for them and any actual collisions would have hidden under the
+// carpet of 'weird, rare, bug' while the rest of the application has plenty more issues
+// that are more prominent and obvious to diagnose.
+//
+// Theoretically, however, the B0rk results in a hash that's *halved* in size in worst case,
+// and thus birthday paradox collisions drop from 2^160/2 = 2^80 down to 2^80/2 = 2^40 ~ 1 in 1 trillion.
+// As this only happens for zero-upper-nibble hash bytes, the *average* drops less, but it's
+// the worst case that counts in risk analysis like this. See fingerprint1 for a new hash
+// which does not suffer from this issue, reduces the collision risk significantly (BLAKE3 @ 256 bit --> 2^128
+// rather than SHA1's 2^80) and, encoded as a string (e.g. database key column/field), only
+// increases the size cost by 10% (44 vs. 40 ASCII characters string length)
+// while at the same time making for a faster (BLAKE3+BASE58X is faster than SHA1+B0rk) and more
+// reliable fingerprint.
 //
 // The original Qiqqa fingerprint hash is coded here for backwards-compatible access to
 // Qiqqa metadata libraries from a C/C++/anything environment.

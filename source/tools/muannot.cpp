@@ -36,13 +36,11 @@ static fz_stream* datafeed = NULL;
 static void usage(void)
 {
 	fz_info(ctx,
-		"fingerprint0: produce a classic (SHA1B) Qiqqa fingerprint for the given PDF\n"
+		"muannot: PDF Annotations tool for Qiqqa: extract / inject annotations.\n"
 		"\n"
-		"Syntax: fingerprint0 [options] <file-to-fingerprint>\n"
+		"Syntax: muannot [options] <pdf-file-to-process>\n"
 		"\n"
 		"Options:\n"
-		"  -o [destination]\n"
-		"          specify a destination other than stdout for the calculated hash.\n"
 		"  -v      verbose (toggle)\n"
 		"\n"
 		"  -V      display the version of this application and terminate\n"
@@ -89,7 +87,7 @@ qiqqa_muannot_main(int argc, const char** argv)
 
 		case 'v': verbosity ^= 1; break;
 
-		case 'V': fz_info(ctx, "fingerprint0 version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "muannot version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
 
 		default: usage(); return EXIT_FAILURE;
 		}

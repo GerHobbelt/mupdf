@@ -6,11 +6,11 @@
 //
 // Qiqqa v2 fingerprint is meant to replace the classic fingerprint and should give us:
 // - a fast fingerprint
-// - a fingerprint which virtually guarantees unqiueness for large sets of files,
-//   including when those file sets contain specially carfed adverserial entries.
+// - a fingerprint which virtually guarantees uniqueness for large sets of files,
+//   including when those file sets contain specially crafted adversarial entries.
 //
 // (The second requirement excludes SHA1 and MD5 from the candidates as there are
-// known collisions, for PDF files, available in the wild.
+// known collisions, for PDF files, available in the wild.)
 //
 // The cryptographic hash we've selected for the job is BLAKE3, which is a *faster*
 // development based on BLAKE2 and further insights by its designers.
@@ -37,6 +37,19 @@
 #if defined(_WIN32)
 #include <windows.h>
 #endif
+
+
+
+// Tool config:
+// 
+// #define this one when you wish to include the test code as well; this will break the output of the tool though, as it will print more (and different) stuff than usual.
+//
+// Note: there's also the regular test rig for BASE58X: base58x_test, which tests the custom part following BLAKE3 more thoroughly.
+#if !defined(NDEBUG)
+#define FINGERPRINT1_TEST_VERIFY
+#endif
+
+
 
 #define LONGLINE 4096
 
@@ -173,12 +186,14 @@ qiqqa_fingerprint1_main(int argc, const char** argv)
 			// now encode the fingerprint in base58X:
 			char b58buf[120];
 			const char* b58X = EncodeBase58X(b58buf, sizeof(b58buf), hash, sizeof(hash) /* BLAKE3_OUT_LEN */);
+#if defined(FINGERPRINT1_TEST_VERIFY)
 			uint8_t b58rbuf[BLAKE3_OUT_LEN + 8];
 			size_t b58rsize = 0;
 			const uint8_t* b58R = DecodeBase58X(b58rbuf, sizeof(b58rbuf), &b58rsize, b58X);
 			uint8_t b58rbuf2[BLAKE3_OUT_LEN];
 			size_t b58r2size = 0;
 			const uint8_t* b58R2 = DecodeBase58X(b58rbuf2, sizeof(b58rbuf2), &b58r2size, b58X);
+#endif
 
 			// Print the hash as hexadecimal.
 			if (verbosity)
@@ -190,8 +205,8 @@ qiqqa_fingerprint1_main(int argc, const char** argv)
 				fz_write_printf(ctx, out, "%s\n", b58X);
 			}
 
-#if 1
-			//fz_write_printf(ctx, out, "base58X encodings: %s / %.0H / %.0H\n", b58X, b58R, b58rsize, b58R2, b58r2size);
+#if defined(FINGERPRINT1_TEST_VERIFY)
+			fz_write_printf(ctx, out, "base58X encodings: %s / %.0H / %.0H\n", b58X, b58R, b58rsize, b58R2, b58r2size);
 
 			// check our custom encoding: the mixing of big and little endian handling plus 3 different number bases (2^64, 2^41, 58^7)
 			// isn't stuff that's without its historical crap-ups, so I'd rather not add myself to that list of sad sacks...

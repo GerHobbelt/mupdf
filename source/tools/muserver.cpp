@@ -42,13 +42,11 @@ static fz_stream* datafeed = NULL;
 static void usage(void)
 {
 	fz_info(ctx,
-		"fingerprint0: produce a classic (SHA1B) Qiqqa fingerprint for the given PDF\n"
+		"muserver: Local web server for use as Qiqqa backend & generic (scripted?) access.\n"
 		"\n"
-		"Syntax: fingerprint0 [options] <file-to-fingerprint>\n"
+		"Syntax: muserver [options]\n"
 		"\n"
 		"Options:\n"
-		"  -o [destination]\n"
-		"          specify a destination other than stdout for the calculated hash.\n"
 		"  -v      verbose (toggle)\n"
 		"\n"
 		"  -V      display the version of this application and terminate\n"
@@ -95,7 +93,7 @@ qiqqa_muserver_main(int argc, const char** argv)
 
 		case 'v': verbosity ^= 1; break;
 
-		case 'V': fz_info(ctx, "fingerprint0 version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "muserver version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
 
 		default: usage(); return EXIT_FAILURE;
 		}
