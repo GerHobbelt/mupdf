@@ -9,7 +9,7 @@
 
 
 // base test size: maximum binary input size for all tests: W = width
-#define W     1024
+#define W     4096
 
 
 #if defined(_MSC_VER) && 01
@@ -301,12 +301,20 @@ int main(void)
 	// now test encode+decode for various binary input sizes.
 	for (i = 1; i < sizeof(bindstbuf); i++)
 	{
+#if 0
 		fprintf(stderr, "testing size: %u bytes input\n", i);
+#endif
 
 		size_t enclen_base = 0;
 
+#if defined(_DEBUG)
+#define M                 13
+#else
+#define M                 101
+#endif
+
 		// N random attempts per size; perform a lot more tests for 256bit (BLAKE3 hash size) inputs so we can run this test code in the profiler and get a bit of an idea about performance:
-		for (int n = (i == 256 / 8 ? 100 : 1) * 42; n > 0; n--)
+		for (int n = (i == 256 / 8 ? 1000 : 1) * M; n > 0; n--)
 		{
 			fill_bindstbuf_with_random(binsrcbuf, sizeof(binsrcbuf));
 
