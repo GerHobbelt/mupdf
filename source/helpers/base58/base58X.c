@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 
 // Derived from bitcoin code.
@@ -627,16 +628,17 @@ static inline uint64_t mk_b256_digit(uint8_t d, int pos)
 // Return a reference to the NUL-terminated string buffer when done or NULL on error.
 const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsize)
 {
-	if (!src || !dst || srcsize == 0 || dstsize < 8)
+	// sanity checks
+	if (!src || !dst || srcsize == 0 || dstsize == 0)
 		return NULL;
 
 	// Consume `src` in 41-bit chunks; pad last incomplete chunk with zero bits in MSBs.
-	// Treat every 41-bit chunk as a little endian binary number and decode that into 7 Base48X digits.
+	// Treat every 41-bit chunk as a little endian binary number and decode that into 7 Base58X digits.
 	char* rv = dst;
 	uint64_t prevbitsbuf = 0;
 	int bitpos = 0;
 
-	while (srcsize > 8)
+	while (srcsize >= 8)
 	{
 		uint64_t v;
 
@@ -661,102 +663,23 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 			v = prevbitsbuf | (word << bitpos);
 			// mask at 41 bits.
 			v &= N41_MASK;
-			// and store the remaining bits in the tempory buffer;
+			// and store the remaining bits in the temporary buffer;
 			prevbitsbuf = word >> (41 - bitpos);
 			bitpos += 64 - 41;
 		}
 		else
 		{
-			// tempory buffer is large enough to hold an entire 41-bit number:
+			// temporary buffer is large enough to hold an entire 41-bit number:
 			v = prevbitsbuf;
 			// mask at 41 bits.
 			v &= N41_MASK;
-			// and keep the remaining bits in the tempory buffer;
-			prevbitsbuf >>= 41;
-			bitpos -= 41;
-		}
-
-		// now translate this 41-bit number `v` to a 7-digit base58X string segment:
-		if (dstsize < 7)
-			return NULL; // dst buffer overflow
-		dst[6] = srcBase58[v % 58];
-		v /= 58;
-		dst[5] = srcBase58[v % 58];
-		v /= 58;
-		dst[4] = srcBase58[v % 58];
-		v /= 58;
-		dst[3] = srcBase58[v % 58];
-		v /= 58;
-		dst[2] = srcBase58[v % 58];
-		v /= 58;
-		dst[1] = srcBase58[v % 58];
-		v /= 58;
-		dst[0] = srcBase58[v % 58];
-		dstsize -= 7;
-		dst += 7;
-	}
-
-	// process the remainder of `src':
-	uint64_t last_legs_value = 0;
-	uint64_t last_legs_bitcount = 0;
-
-	while (srcsize > 0 || bitpos > 0)
-	{
-		uint64_t v;
-
-		if (bitpos < 41 && srcsize > 0)
-		{
-			// get 64 new bits: that the bits we've got plus some zero padding.
-			// little endian, arbitrary memory alignment, so decode the bytes into a binary 64-bit value here:
-			uint8_t src8[8];
-
-			memset(src8, 0, sizeof(src8));
-			memcpy(src8, src, srcsize);
-			uint64_t word =
-				mk_b256_digit(src8[0], 0) |
-				mk_b256_digit(src8[1], 1) |
-				mk_b256_digit(src8[2], 2) |
-				mk_b256_digit(src8[3], 3) |
-				mk_b256_digit(src8[4], 4) |
-				mk_b256_digit(src8[5], 5) |
-				mk_b256_digit(src8[6], 6) |
-				mk_b256_digit(src8[7], 7);
-			size_t feedbits = srcsize * 8;
-			srcsize = 0;
-
-			// merge with the bits we still have from the previous round.
-			// Those will be the least significant bits as we're working little endian here in 41-bit number land.
-			v = prevbitsbuf | (word << bitpos);
-			// mask at 41 bits.
-			v &= N41_MASK;
-			// and store the remaining bits in the tempory buffer;
-			prevbitsbuf = word >> (41 - bitpos);
-			bitpos += feedbits - 41;
-		}
-		else
-		{
-			// tempory buffer is large enough to hold an entire 41-bit number
-			// (or there's no more bits left to feed us at all)
-			v = prevbitsbuf;
-			// mask at 41 bits.
-			v &= N41_MASK;
-			// and keep the remaining bits in the tempory buffer;
-			// but before we do that, we quickly check if we're on our last legs,
-			// i.e. if we've reached the end and have only a few more bits to encode.
-			// We'll do that *outside* the loop as we won't need to print all those 7
-			// base58 digits, won't we?
-			if (bitpos < 41)
-			{
-				last_legs_value = v;
-				last_legs_bitcount = bitpos;
-				break;
-			}
+			// and keep the remaining bits in the temporary buffer;
 			prevbitsbuf >>= 41;
 			bitpos -= 41;
 		}
 
 		// now translate this 41-bit number `v` to a 7-digit base58X BIG ENDIAN string segment:
-		// (In our case, using BIG ENDIAN notation here makes the decoding logic logic simpler
+		// (In our case, using BIG ENDIAN notation here makes the decoding logic simpler
 		// and faster as we can then go through the string via `*src++ + boundary check`
 		// rather than having to first check if there's still 7 digits worth of string left
 		// before we decode those 7 digits in reverse order as we must do (old * 58 + digit) there.
@@ -774,25 +697,127 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 		v /= 58;
 		dst[1] = srcBase58[v % 58];
 		v /= 58;
-		dst[0] = srcBase58[v % 58];
+		assert(v < 58);
+		dst[0] = srcBase58[v];
+		dstsize -= 7;
+		dst += 7;
+	}
+
+	// process the remainder of `src':
+	uint64_t last_legs_value = 0;
+	uint64_t last_legs_bitcount = 0;
+
+	while (srcsize > 0 || bitpos > 0)
+	{
+		uint64_t v;
+
+		if (bitpos < 41)
+		{
+			if (srcsize > 0)
+			{
+				// get 64 new bits: that the bits we've got plus some zero padding.
+				// little endian, arbitrary memory alignment, so decode the bytes into a binary 64-bit value here:
+				uint8_t src8[8];
+
+				memset(src8, 0, sizeof(src8));
+				memcpy(src8, src, srcsize);
+				uint64_t word =
+					mk_b256_digit(src8[0], 0) |
+					mk_b256_digit(src8[1], 1) |
+					mk_b256_digit(src8[2], 2) |
+					mk_b256_digit(src8[3], 3) |
+					mk_b256_digit(src8[4], 4) |
+					mk_b256_digit(src8[5], 5) |
+					mk_b256_digit(src8[6], 6) |
+					mk_b256_digit(src8[7], 7);
+				size_t feedbits = srcsize * 8;
+				srcsize = 0;
+
+				// merge with the bits we still have from the previous round.
+				// Those will be the least significant bits as we're working little endian here in 41-bit number land.
+				v = prevbitsbuf | (word << bitpos);
+				// mask at 41 bits.
+				v &= N41_MASK;
+				// and store the remaining bits in the temporary buffer;
+				prevbitsbuf = word >> (41 - bitpos);
+				bitpos += feedbits - 41;
+				// before we go and treat v as a full (non-truncated) number,
+				// we quickly check if we're on our last legs, i.e. if we've reached the end
+				// and have only a few more bits to encode.
+				// We'll do that *outside* the loop as we won't need to print all those 7
+				// base58 digits, won't we?
+				if (bitpos < 0)
+				{
+					assert(prevbitsbuf == 0);
+					last_legs_value = v;
+					last_legs_bitcount = bitpos + 41;
+					assert(last_legs_bitcount >= 0);
+					break;
+				}
+			}
+			else
+			{
+				// we're on our last legs, i.e. we've reached the end and have only a few more bits to encode.
+				// We'll do that *outside* the loop as we won't need to print all those 7
+				// base58 digits, won't we?
+				last_legs_value = prevbitsbuf;
+				last_legs_bitcount = bitpos;
+				assert(last_legs_bitcount >= 0);
+				break;
+			}
+		}
+		else
+		{
+			// temporary buffer is large enough to hold an entire 41-bit number
+			// (or there's no more bits left to feed us at all)
+			v = prevbitsbuf;
+			// mask at 41 bits.
+			v &= N41_MASK;
+			// and keep the remaining bits in the temporary buffer
+			prevbitsbuf >>= 41;
+			bitpos -= 41;
+		}
+
+		// now translate this 41-bit number `v` to a 7-digit base58X BIG ENDIAN string segment:
+		// (In our case, using BIG ENDIAN notation here makes the decoding logic simpler
+		// and faster as we can then go through the string via `*src++ + boundary check`
+		// rather than having to first check if there's still 7 digits worth of string left
+		// before we decode those 7 digits in reverse order as we must do (old * 58 + digit) there.
+		if (dstsize < 7)
+			return NULL; // dst buffer overflow
+		dst[6] = srcBase58[v % 58];
+		v /= 58;
+		dst[5] = srcBase58[v % 58];
+		v /= 58;
+		dst[4] = srcBase58[v % 58];
+		v /= 58;
+		dst[3] = srcBase58[v % 58];
+		v /= 58;
+		dst[2] = srcBase58[v % 58];
+		v /= 58;
+		dst[1] = srcBase58[v % 58];
+		v /= 58;
+		assert(v < 58);
+		dst[0] = srcBase58[v];
 		dstsize -= 7;
 		dst += 7;
 	}
 
 	// We do not print all 7 base58 digits for the last few bits: this would otherwise produce a tail
-	// of useless, space-consuming '1' chracters we can do without.
+	// of useless, space-consuming '1' characters we can do without.
 	// Of course, this makes the decoder a tad more complicated too as now we must accept that
 	// the decoder MAY run into a truncated/partial base58 number at the end of its input.   :'-(
 	// The things we do for speed and space savings some times...   ;-D
 	if (last_legs_bitcount > 0)
 	{
-		// determine how many base58 digits we actually need to encode those remaining `last_legs_bitccount` bits:
-		uint64_t number_mask = ((uint64_t)1) << last_legs_bitcount;
+		// determine how many base58 digits we actually need to encode those remaining `last_legs_bitcount` bits:
+		uint64_t number_mask = (((uint64_t)1) << last_legs_bitcount) - 1;
 		char dst58buf[7];
 		int di = 0;
 
 		while (number_mask)
 		{
+			assert(di < 7);
 			dst58buf[di++] = srcBase58[last_legs_value % 58];
 			last_legs_value /= 58;
 			number_mask /= 58;
@@ -802,6 +827,8 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 		// reverse print those significant base58 digits to `dst` and we're done!
 		if (dstsize < di)
 			return NULL; // dst buffer overflow
+
+		dstsize -= di;
 		while (di > 0)
 		{
 			*dst++ = dst58buf[--di];
@@ -824,12 +851,18 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 // NOTE: The buffer MUST be 8 bytes larger to account for boundary effects during decoding.
 const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_ref, const char* src)
 {
-	if (!src || !dst || dstsize == 0)
+	// sanity init
+	if (targetsize_ref)
+		*targetsize_ref = 0;
+
+	// sanity checks; also do not accept empty inputs; any valid base58x inputs MUST have at least 2 base58x characters!
+	// (with only 1 base58x 'digit' you cannot encode 1 byte. You need at least 2 of those base58x digits to accomplish that!)
+	if (!src || !dst || dstsize == 0 || !targetsize_ref || !*src || !src[1])
 		return NULL;
 
 	// Consume `src` in 7-digit chunks; when the `src` is not sufficiently large
 	// for such a "41-bit encoded number", that's an error.
-	// Treat every 7-digit Base58X chunk as a little endian number and decode that into a 41-bit binary number.
+	// Treat every 7-digit Base58X chunk as a big endian number and decode that into a 41-bit binary number.
 	uint8_t* rv = dst;
 	uint64_t prevbitsbuf = 0;
 	int bitpos = 0;
@@ -842,15 +875,18 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 		// macros below.
 		last_legs_src = src;
 
+		// When there's not a *full* (non-truncated) BASE58X number available any more, we
+		// quit the loop and go process that tail.
+		if (!src[0] || !src[1] || !src[2] || !src[3] || !src[4] || !src[5] || !src[6])
+			break;
+
 		// get 7 new digits.
-		// little endian, arbitrary memory alignment
+		// big endian, arbitrary memory alignment
 		uint64_t word = 0;
 
 #define DECODE_MACRO(pos)					\
 		{									\
 			uint8_t c = *src++;				\
-			if (!c)   						\
-				break;	         			\
 			int d = mapBase58[c];			\
 			if (d < 0)						\
 				return NULL;				\
@@ -869,19 +905,19 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 		if (bitpos >= 64 - 41)  // ~ if bitpos + 41 >= 64, i.e. do we have enough for a 64bit word now?
 		{
 			// merge with the bits we still have from the previous round.
-			// Those will be the least significant bits as we're working little endian here in 64-bit number land.
+			// Those will be the least significant bits as we're working little endian here in 64-bit binary number land.
 			uint64_t v = prevbitsbuf | (word << bitpos);
-			// and store the remaining bits in the tempory buffer;
+			// and store the remaining bits in the temporary buffer;
 			prevbitsbuf = word >> (64 - bitpos);
 			bitpos += 41 - 64;
 
 			// now translate this 64-bit number `v` to an 8-byte buffer segment:
+			if (dstsize < 8)
+				return NULL; /* dst buffer overflow */
 
 #define PUT_MACRO()											\
 		{													\
 			uint8_t c = (uint8_t)v;							\
-			if (!dstsize)									\
-				return NULL; /* dst buffer overflow */		\
 			*dst++ = c;										\
 			v >>= 8;										\
 		}
@@ -898,7 +934,7 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 		}
 		else
 		{
-			// tempory buffer is not yet large enough to help deliver an entire 64-bit number on the next round:
+			// temporary buffer is not yet large enough to help deliver an entire 64-bit number on the next round:
 			prevbitsbuf |= (word << bitpos);
 			bitpos += 41;
 		}
@@ -911,15 +947,37 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 	// Hence we first recover the position we were in before we hit that
 	// possibly truncated last base58 number (or was it the NUL sentinel
 	// immediately anyway?)
+	//
+	// We MAY also run into the scenario where the original input was encoded
+	// entirely in 'full' BASE58X words and was a non-64bit binary number, i.e.
+	// bitpos may indicate we still have some bytes left to output.
 	src = last_legs_src;
-	if (*src)
+	if (*src || bitpos > 0)
 	{
 		// whoops! still a truncated base58 number to do then!
 		//
 		// get less than 7 new digits.
 		// They're little endian, arbitrary memory alignment
 		uint64_t word = 0;
-		uint64_t number_mask = 0;
+		// and make sure we account for those bits in our mask value too:
+		assert(bitpos < 64);
+
+		// to prevent overflow in `number_mask` and the tail-end fetch loop below, we dump as many
+		// 8 bit 'digits' of binary value as we can: we're working in a little endian setting
+		// there so it's safe to fill the intermediate buffer with those right now, so we can
+		// keep our bitpos value minimal.
+		while (bitpos >= 8)
+		{
+			uint8_t c = (uint8_t)prevbitsbuf;
+			if (!dstsize)
+				return NULL; /* dst buffer overflow */
+			*dst++ = c;
+			dstsize--;
+			prevbitsbuf >>= 8;
+			bitpos -= 8;
+		}
+
+		uint64_t number_mask = (((uint64_t)1) << bitpos) - 1;
 
 		while (*src)
 		{
@@ -931,6 +989,7 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 				return NULL;
 			word *= 58;
 			word += d;
+			assert(number_mask < (~((uint64_t)0) - 1) / 58);
 			number_mask *= 58;
 			number_mask += 57;   // this is kinda like saying `~0` in base 58!   :-)
 		}
@@ -938,24 +997,28 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 		// We *know* we won't have enough bits for a full 64-bit word, but that's okay now.
 		//
 		// merge with the bits we still have from the previous round.
-		// Those will be the least significant bits as we're working little endian here in 64-bit number land.
-		uint64_t v = prevbitsbuf | (word << bitpos);
-		// and make sure we account for those bits in our mask value too:
-		// (we CAN be a bit sneaky about it though: a LEFT-SHIFT suffices for this to work out fine)
-		number_mask <<= bitpos;
+		// Those will be the least significant bits as we're working little endian here in 64-bit binary number land.
+		prevbitsbuf |= (word << bitpos);
+		// Note: we already accounted for those bits in our mask value thanks to the initialization and continuous update in the loop above.
 
 		// now translate this 1..64-bit number `v` to an 8-byte buffer segment:
 
-		while (number_mask)
+		// do we still have a full byte worth of encoded data?
+		// When number_mask doesn't /span/ an entire byte, it means we're looking at the tail end bits of
+		// the decode and thus these are the extra bits that /seem/ to sit in the last encoded character, but
+		// ARE NOT part of the encoded original binary input. This is caused by the size disparity of binary bytes
+		// (1 unit = 2^8) vs. base58 'digits' (1 unit = 58).
+		while (number_mask >= 0xFF)
 		{
-			uint8_t c = (uint8_t)v;
+			uint8_t c = (uint8_t)prevbitsbuf;
 			if (!dstsize)
 				return NULL; /* dst buffer overflow */
 			*dst++ = c;
 			dstsize--;
-			v >>= 8;
+			prevbitsbuf >>= 8;
 			number_mask >>= 8;
 		}
+		assert(prevbitsbuf == 0 || src[-1] == 'z');  // this assert is correct, but it also fires in the test rig, when we feed this decoder all-Z inputs to decode: those things would carry surplus bits. Hence the weird src[-1] additional check in there.
 	}
 
 	*targetsize_ref = dst - rv;
