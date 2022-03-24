@@ -8,7 +8,7 @@
 //
 // or (using [bash for windows] from your [git for windows] rig:
 //
-//     for f in *.vcxproj ; do node ./patch-vcxproj.js $f ; done
+//     for f in *.vcxproj ; do node ./update-vcxproj.js $f ; done
 //
 // when you want to synchronize all your projects to have the same compiler/librarian/linker
 // settings throughout the entire Visual Studio solution.
