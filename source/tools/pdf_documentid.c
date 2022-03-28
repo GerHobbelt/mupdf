@@ -145,8 +145,7 @@ static void mu_drop_context(void)
 }
 
 
-int
-qiqqa_documentid62_main(int argc, const char** argv)
+int qiqqa_documentid62_main(int argc, const char** argv)
 {
 	int verbosity = 0;
 	int c;
