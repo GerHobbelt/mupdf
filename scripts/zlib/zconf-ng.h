@@ -221,8 +221,8 @@ typedef PTRDIFF_TYPE ptrdiff_t;
 //ARM_ACLE_CRC_HASH
 
 
-#define UNALIGNED64_OK   1
-#define UNALIGNED_OK     1
+//#define UNALIGNED64_OK   1
+//#define UNALIGNED_OK     1
 
 #define UNROLL_MORE    1
 

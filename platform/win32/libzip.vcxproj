@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,24 +111,24 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-            <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIP;ZIP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -147,7 +147,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIP;ZIP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -174,7 +174,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIP;ZIP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -202,7 +202,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIP;ZIP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -229,7 +229,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZIP;ZIP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libzip/lib;../../thirdparty/owemdjee/libzip/src;../../scripts/libzip;../../thirdparty/owemdjee/bzip2;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/xz-utils/src/liblzma/api;../../thirdparty/owemdjee/openssl/include;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/jpeginfo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -242,7 +242,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/developer-xcode/zip_err_str.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/examples/in-memory.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/examples/windows-open.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_add.c" />
@@ -310,8 +309,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_open.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_pkware.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_progress.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_random_unix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_random_uwp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_random_win32.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_rename.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/lib/zip_replace.c" />
@@ -378,16 +375,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/fopen_unchanged.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/fread.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/fseek.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/fuzz_main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/hole.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/liboverride-test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/liboverride.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/malloc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/nonrandomopen.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/nonrandomopentest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/source_hole.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/tryopen.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/zip_read_fuzzer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/regress/ziptool_regress.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/src/diff_output.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libzip/src/getopt.c" />
@@ -441,8 +431,7 @@
     <Text Include="../../thirdparty/owemdjee/libzip/vstudio/vsbuild.cmd" />
     <Text Include="../../thirdparty/owemdjee/libzip/vstudio/zlib/unpack_zlib_here.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

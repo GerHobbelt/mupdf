@@ -27,8 +27,8 @@
 /* #undef HAVE_FTELLO */
 /* #undef HAVE_GETPROGNAME */
 /* #undef HAVE_GNUTLS */
-#define HAVE_LIBBZ2 
-#define HAVE_LIBLZMA 
+//#define HAVE_LIBBZ2 
+//#define HAVE_LIBLZMA 
 #define HAVE_LIBZSTD 
 /* #undef HAVE_LOCALTIME_R */
 /* #undef HAVE_MBEDTLS */
@@ -57,7 +57,7 @@
 #undef HAVE_DLFCN_H
 #undef HAVE_ZLIB_H
 #define HAVE_ZLIB_NG_H
-#define HAVE_LZMA_H
+//#define HAVE_LZMA_H
 /* #undef WORDS_BIGENDIAN */
 #define HAVE_SHARED
 /* END DEFINES */

@@ -4,17 +4,17 @@
 #ifndef VIPS_VERSION_H
 #define VIPS_VERSION_H
 
-#define VIPS_VERSION		"@VIPS_VERSION@"
-#define VIPS_VERSION_STRING	"@VIPS_VERSION_STRING@"
-#define VIPS_MAJOR_VERSION	(@VIPS_MAJOR_VERSION@)
-#define VIPS_MINOR_VERSION	(@VIPS_MINOR_VERSION@)
-#define VIPS_MICRO_VERSION	(@VIPS_MICRO_VERSION@)
+#define VIPS_VERSION		"8.12"
+#define VIPS_VERSION_STRING	"8.12.0"
+#define VIPS_MAJOR_VERSION	(8)
+#define VIPS_MINOR_VERSION	(12)
+#define VIPS_MICRO_VERSION	(0)
 
 /* The ABI version, as used for library versioning.
  */
-#define VIPS_LIBRARY_CURRENT	(@LIBRARY_CURRENT@)
-#define VIPS_LIBRARY_REVISION	(@LIBRARY_REVISION@)
-#define VIPS_LIBRARY_AGE	(@LIBRARY_AGE@)
+#define VIPS_LIBRARY_CURRENT	(0x0801200)
+#define VIPS_LIBRARY_REVISION	(0x20220329)
+#define VIPS_LIBRARY_AGE	(0x0801200)
 
 #define VIPS_CONFIG		"@VIPS_CONFIG@"
 
@@ -30,7 +30,7 @@
 /* Not really anything to do with versions, but this is a handy place to put
  * it.
  */
-#define VIPS_EXEEXT "@VIPS_EXEEXT@"
-#define VIPS_ENABLE_DEPRECATED @VIPS_ENABLE_DEPRECATED@
+#define VIPS_EXEEXT ".exe"
+#define VIPS_ENABLE_DEPRECATED    0
 
 #endif /*VIPS_VERSION_H*/
