@@ -72,6 +72,7 @@ typedef struct fz_draw_device
 	fz_colorspace *proof_cs;
 	int flags;
 	int resolve_spots;
+	int overprint_possible;
 	int top;
 	fz_scale_cache *cache_x;
 	fz_scale_cache *cache_y;
@@ -506,7 +507,8 @@ resolve_color(fz_context *ctx,
 	float alpha,
 	fz_color_params color_params,
 	unsigned char *colorbv,
-	fz_pixmap *dest)
+	fz_pixmap *dest,
+	int overprint_possible)
 {
 	float colorfv[FZ_MAX_COLORS];
 	int i;
@@ -523,7 +525,7 @@ resolve_color(fz_context *ctx,
 	devgray = fz_colorspace_is_device_gray(ctx, colorspace);
 
 	/* We can only overprint when enabled, and when we are in a subtractive colorspace */
-	if (color_params.op == 0 || !fz_colorspace_is_subtractive(ctx, dest->colorspace))
+	if (color_params.op == 0 || !fz_colorspace_is_subtractive(ctx, dest->colorspace) || !overprint_possible)
 		op = NULL;
 
 	else if (devgray)
@@ -658,7 +660,7 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	if ((state->blendmode & FZ_BLEND_KNOCKOUT))
 		state = fz_knockout_begin(ctx, dev);
 
-	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
+	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 
 	fz_convert_rasterizer(ctx, rast, even_odd, state->dest, colorbv, eop);
 	if (state->shape)
@@ -721,7 +723,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	if ((state->blendmode & FZ_BLEND_KNOCKOUT))
 		state = fz_knockout_begin(ctx, dev);
 
-	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
+	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 
 #ifdef DUMP_GROUP_BLENDS
 	dump_spaces(dev->top, "");
@@ -1018,7 +1020,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	if ((state->blendmode & FZ_BLEND_KNOCKOUT))
 		state = fz_knockout_begin(ctx, dev);
 
-	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
+	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 	shapebv = 255;
 	shapebva = alpha * 255 + 0.5f;
 
@@ -1110,7 +1112,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 	if ((state->blendmode & FZ_BLEND_KNOCKOUT))
 		state = fz_knockout_begin(ctx, dev);
 
-	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
+	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 
 	for (span = text->head; span; span = span->next)
 	{
@@ -1495,7 +1497,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 			/* Disable OPM */
 			color_params.opm = 0;
 
-			eop = resolve_color(ctx, &op, shade->background, colorspace, alpha, color_params, colorbv, state->dest);
+			eop = resolve_color(ctx, &op, shade->background, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 
 			n = dest->n;
 			if (fz_overprint_required(eop))
@@ -1931,7 +1933,7 @@ fz_draw_fill_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 			}
 		}
 
-		eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest);
+		eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 
 		fz_paint_image_with_color(ctx, state->dest, &state->scissor, state->shape, state->group_alpha, pixmap, local_ctm, colorbv, !(devp->hints & FZ_DONT_INTERPOLATE_IMAGES), eop);
 
@@ -3059,6 +3061,8 @@ new_draw_device(fz_context *ctx, fz_matrix transform, fz_pixmap *dest, const fz_
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Spot rendering (and overprint/overprint simulation) not available in this build");
 #endif
+
+	dev->overprint_possible = (dest->seps != NULL);
 
 	fz_try(ctx)
 	{

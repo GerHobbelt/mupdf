@@ -127,6 +127,7 @@ fz_new_font(fz_context *ctx, const char *name, int use_glyph_bbox, int glyph_cou
 	font->glyph_count = glyph_count;
 
 	font->bbox_table = NULL;
+	font->use_glyph_bbox = use_glyph_bbox;
 
 	font->width_count = 0;
 	font->width_table = NULL;
@@ -1198,7 +1199,7 @@ get_gid_bbox(fz_context *ctx, fz_font *font, int gid)
 {
 	int i;
 
-	if (gid < 0 || gid >= font->glyph_count)
+	if (gid < 0 || gid >= font->glyph_count || !font->use_glyph_bbox)
 		return NULL;
 
 	if (font->bbox_table == NULL) {

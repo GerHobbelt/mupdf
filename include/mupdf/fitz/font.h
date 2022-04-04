@@ -707,6 +707,7 @@ struct fz_font
 
 	/* per glyph bounding box cache. */
 	fz_rect **bbox_table;
+	int use_glyph_bbox;
 
 	/* substitute metrics */
 	int width_count;
