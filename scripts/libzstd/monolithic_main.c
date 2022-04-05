@@ -45,19 +45,9 @@ static struct cmd_info
 	{ "zstd_mini_gzip", {.fa = zstd_mini_gzip_main } },
 	{ "zstd_zwrapbench", {.fa = zstd_zwrapbench_main } },
 #endif
-	{ "zlib_example", {.fa = zlib_example_main } },
-	{ "zlib_mini_deflate", {.fa = zlib_mini_deflate_main } },
-	{ "zlib_mini_gzip", {.fa = zlib_mini_gzip_main } },
-	{ "zlib_switchlevels", {.fa = zlib_switchlevels_main } },
-	{ "zlib_mk_crc32_tables", {.fa = zlib_mk_crc32_tables_main } },
 
-	{ "zlib_deflate_quick_bi_valid_test", {.f = zlib_deflate_quick_bi_valid_test_main } },
-	{ "zlib_deflate_quick_block_open_test", {.f = zlib_deflate_quick_block_open_test_main } },
-	{ "zlib_adler32_test", {.f = zlib_adler32_test_main } },
-	{ "zlib_hash_head_0_test", {.f = zlib_hash_head_0_test_main } },
-	{ "zlib_infcover_test", {.f = zlib_infcover_test_main } },
-	{ "zlib_mk_fixed_table", {.f = zlib_mk_fixed_table_main } },
-	{ "zlib_mk_trees_header", {.f = zlib_mk_trees_header_main } },
+	// These require the zstd_zlib_wrapper code to be included in the build:
+	{ "zlib_example", {.fa = zstd_zlib_example_main } },
 
 	{ "?", {.f = usage } },
 	{ "h", {.f = usage } },
