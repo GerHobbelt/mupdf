@@ -219,8 +219,8 @@ fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 	ctm.e -= block->u.i.image->w / 2;
 	ctm.f -= block->u.i.image->h / 2;
 
-	fz_write_printf(ctx, out, "<img style=\"position:absolute;transform:matrix(%g,%g,%g,%g,%g,%g)\" src=\"",
-		ctm.a, ctm.b, ctm.c, ctm.d, ctm.e, ctm.f);
+	fz_write_printf(ctx, out, "<img style=\"position:absolute;transform:matrix(%g,%g,%g,%g,%g,%g)\" data-mediabox=\"%R\" data-dimensions=\"%R\" src=\"",
+		ctm.a, ctm.b, ctm.c, ctm.d, ctm.e, ctm.f, &block->bbox, &mediabox);
 #else
 	/* Alternative version of the code that uses scaleX/Y and rotate
 	 * instead, but only copes with axis aligned cases. */
