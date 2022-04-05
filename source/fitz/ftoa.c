@@ -235,7 +235,7 @@ cached_power(int i)
 
 /* Returns buffer length. */
 static int
-digit_gen_mix_grisu2(diy_fp_t D_upper, diy_fp_t delta, char* buffer, int* K)
+digit_gen_mix_grisu2(diy_fp_t D_upper, diy_fp_t delta, char buffer[100], int* K)
 {
 	int kappa;
 	diy_fp_t one = {(uint64_t) 1 << -D_upper.e, D_upper.e};
@@ -276,7 +276,7 @@ digit_gen_mix_grisu2(diy_fp_t D_upper, diy_fp_t delta, char* buffer, int* K)
 	Assumes special cases (0, NaN, +Inf, -Inf) have been handled.
 */
 int
-fz_grisu(float v, char* buffer, int* K)
+fz_grisu(float v, char buffer[100], int* K)
 {
 	diy_fp_t w_lower, w_upper, D_upper, D_lower, c_mk, delta;
 	int length, mk, alpha = -DIY_SIGNIFICAND_SIZE + 4;

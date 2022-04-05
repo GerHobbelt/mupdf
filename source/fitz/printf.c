@@ -116,7 +116,7 @@ static void fmtfloat(struct fmtbuf *out, float f)
 	}
 }
 
-static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p)
+static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, int fmt)
 {
 	char buf[100];
 	char* s = buf;
@@ -124,19 +124,9 @@ static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p)
 		p = FMT_DEFAULT_FLOAT_PRECISION;
 	if (w < 0) // uninitialized value is INT_MIN but user may have passed bad negative width via '*' modifier either.
 		w = 0;
-	snprintf(buf, sizeof buf, "%*.*e", w, p, f);
-	while (*s)
-		fmtputc(out, *s++);
-}
-
-static void fmtfloat_f(struct fmtbuf *out, double f, int w, int p)
-{
-	char buf[100], *s = buf;
-	if (p == INT_MAX)
-		p = FMT_DEFAULT_FLOAT_PRECISION;
-	if (w < 0) // uninitialized value is INT_MIN but user may have passed bad negative width via '*' modifier either.
-		w = 0;
-	snprintf(buf, sizeof buf, "%*.*f", w, p, f);
+	char fmtstr[] = "%*.* ";
+	fmtstr[4] = fmt;
+	snprintf(buf, sizeof buf, fmtstr, w, p, f);
 	while (*s)
 		fmtputc(out, *s++);
 }
@@ -1111,20 +1101,17 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			case 'e':
-				if (j)
-					fmtputc(&out, '"');
-				fmtfloat_e(&out, va_arg(args, double), w, p);
-				if (j)
-					fmtputc(&out, '"');
-				break;
+			case 'E':
 			case 'f':
+			case 'F':
 				if (j)
 					fmtputc(&out, '"');
-				fmtfloat_f(&out, va_arg(args, double), w, p);
+				fmtfloat_e(&out, va_arg(args, double), w, p, c);
 				if (j)
 					fmtputc(&out, '"');
 				break;
 			case 'g':
+			case 'G':
 				if (j)
 					fmtputc(&out, '"');
 				fmtfloat(&out, va_arg(args, double));
@@ -1138,6 +1125,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				hexprefix = 1;
 				/* fallthrough */
 			case 'x':
+			case 'X':
 				if (j)
 					fmtputc(&out, '"');
 				if (hexprefix)
@@ -1145,6 +1133,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtputc(&out, '0');
 					fmtputc(&out, 'x');
 				}
+				// WARNING: non-standard behaviour: both %x and %X produce *UPPERCASE* hex!
 				if (bits == 64)
 				{
 					uint64_t i64 = va_arg(args, uint64_t);
@@ -1239,7 +1228,47 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 			}
 				break;
-			case 'Q': /* quoted string (with verbatim unicode) */
+
+			case 'S':
+			{
+				const wchar_t* str = va_arg(args, const wchar_t*);
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// discover how to best print the data buffer:
+				if (p < 0 && str && *str) {
+					fmt_print_buffer_optimally(ctx, &out, (const char*)(void*)str, (w >= 0 ? w : strlen((const char *)(void *)str)), -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE | FPBO_NO_CONTROL_ESCAPES);
+				}
+				else {
+					if (!str) {
+						str = L"(null)";
+						// override the clipping length, a.k.a. 'precision', now: make sure we always print the full "(null)".
+						if (p < 6) {
+							p = 6;
+						}
+					}
+					size_t slen = wcslen(str);
+					size_t cliplen = (p != INT_MAX ? p : slen);
+					while (cliplen > slen) {
+						fmtputc(&out, ' ');
+						cliplen--;
+					}
+					// only need to print string when it's not an empty string.
+					// Edge case example:   fz_printf("%.*s", 7, "")
+					while (cliplen-- > 0) {
+						wchar_t c = *str++;
+						if (c >= 0 && c < 128)
+							fmtputc(&out, c);
+						else {
+							char buf[10];
+							int i, n = fz_runetochar(buf, c);
+							for (i = 0; i < n; ++i)
+								fmtputc(&out, buf[i]);
+						}
+					}
+				}
+			}
+				break;
+
+			case 'Q': /* quoted string (with verbatim unicode in UTF8) */
 			{
 				const char* str = va_arg(args, const char*);
 				if (!str) str = "";

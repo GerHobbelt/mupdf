@@ -296,7 +296,13 @@ int fz_utflen(const char *s);
 */
 float fz_strtof(const char *s, char **es);
 
-int fz_grisu(float f, char *s, int *exp);
+/**
+	Compute decimal integer m, exp such that:
+		f = m * 10^exp
+		m is as short as possible without losing exactness
+	Assumes special cases (0, NaN, +Inf, -Inf) have been handled.
+*/
+int fz_grisu(float f, char s[100], int *exp);
 
 /**
 	Check and parse string into page ranges:
