@@ -310,28 +310,34 @@ void pdf_field_reset(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 	pdf_field_reset_imp(ctx, doc, field, NULL);
 }
 
-static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *array, pdf_obj *field, pdf_obj *fields, int exclude)
+static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *result, pdf_obj *formfields, int exclude, pdf_obj *fields, pdf_obj *field)
 {
 	pdf_obj *kids = pdf_dict_get(ctx, field, PDF_NAME(Kids));
-	const char *needle = pdf_field_name(ctx, field);
 	int i, n;
 
 	n = pdf_array_len(ctx, fields);
 	for (i = 0; i < n; i++)
-		if (!strcmp(needle, pdf_field_name(ctx, pdf_array_get(ctx, fields, i))))
+	{
+		pdf_obj *elem = pdf_array_get(ctx, fields, i);
+
+		if (pdf_is_string(ctx, elem))
+			elem = pdf_lookup_field(ctx, formfields, pdf_to_text_string(ctx, elem));
+
+		if (pdf_to_num(ctx, field) == pdf_to_num(ctx, elem))
 			break;
+	}
 
 	if ((exclude && i < n) || (!exclude && i == n))
 		return;
 
-	pdf_array_push(ctx, array, field);
+	pdf_array_push(ctx, result, field);
 
 	if (kids)
 	{
 		int i, n = pdf_array_len(ctx, kids);
 
 		for (i = 0; i < n; i++)
-			add_field_hierarchy_to_array(ctx, array, pdf_array_get(ctx, kids, i), fields, exclude);
+			add_field_hierarchy_to_array(ctx, result, formfields, exclude, fields, pdf_array_get(ctx, kids, i));
 	}
 }
 
@@ -344,23 +350,18 @@ static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *array, pdf_ob
 */
 static pdf_obj *specified_fields(fz_context *ctx, pdf_document *doc, pdf_obj *fields, int exclude)
 {
-	pdf_obj *form = pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(Fields), NULL);
+	pdf_obj *formfields = pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(Fields), NULL);
 	int i, n;
 	pdf_obj *result = pdf_new_array(ctx, doc, 0);
 
 	fz_try(ctx)
 	{
-		n = pdf_array_len(ctx, fields);
+		n = pdf_array_len(ctx, formfields);
 
 		for (i = 0; i < n; i++)
 		{
-			pdf_obj *field = pdf_array_get(ctx, fields, i);
-
-			if (pdf_is_string(ctx, field))
-				field = pdf_lookup_field(ctx, form, pdf_to_str_buf(ctx, field));
-
-			if (field)
-				add_field_hierarchy_to_array(ctx, result, field, fields, exclude);
+			pdf_obj *field = pdf_array_get(ctx, formfields, i);
+			add_field_hierarchy_to_array(ctx, result, formfields, exclude, fields, field);
 		}
 	}
 	fz_catch(ctx)
