@@ -239,6 +239,15 @@ public class PDFAnnotation
 	public native void eventFocus();
 	public native void eventBlur();
 
+	public void activate() {
+		eventEnter();
+		eventDown();
+		eventFocus();
+		eventUp();
+		eventExit();
+		eventBlur();
+	}
+
 	public native boolean update();
 
 	public native PDFObject getObject();
