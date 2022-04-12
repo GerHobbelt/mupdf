@@ -110,9 +110,21 @@ static void dev_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 				if (span->items[i].gid >= 0)
 					adv = fz_advance_glyph(ctx, span->font, span->items[i].gid, span->wmode);
 
+#if 0
 				/* BBox is bogus here. Analysis will fail. */
 				if (extract_add_char(dev->writer->extract, item->x, item->y, item->ucs, adv, 0 /*autosplit*/, item->x, item->y, item->x + adv, item->y + adv))
 					fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to add char");
+#else
+				if (extract_add_char(
+						dev->writer->extract,
+						item->x,
+						item->y,
+						item->ucs,
+						adv, 0 /*autosplit*/,
+						0, 0, 0, 0 /* bbox. */
+						))
+					fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to add char");
+#endif
 			}
 
 			if (extract_span_end(dev->writer->extract))
@@ -412,9 +424,14 @@ static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_
 	fz_var(dev);
 	fz_try(ctx)
 	{
+#if 0
 		/* BBox is bogus here. Analysis will fail. */
 		if (extract_page_begin(writer->extract, mediabox.x0, mediabox.y0, mediabox.x1, mediabox.y1))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin page");
+#else
+		if (extract_page_begin(writer->extract, 0, 0, 0, 0 /* mediabox */))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin page");
+#endif
 		dev = fz_new_derived_device(ctx, fz_docx_device);
 		dev->super.fill_text = dev_fill_text;
 		dev->super.stroke_text = dev_stroke_text;
