@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -108,6 +108,7 @@ PDF_MAKE_NAME("Ch", Ch)
 PDF_MAKE_NAME("Changes", Changes)
 PDF_MAKE_NAME("CheckSum", CheckSum)
 PDF_MAKE_NAME("CharProcs", CharProcs)
+PDF_MAKE_NAME("CheckSum", CheckSum)
 PDF_MAKE_NAME("Circle", Circle)
 PDF_MAKE_NAME("ClassMap", ClassMap)
 PDF_MAKE_NAME("ClosedArrow", ClosedArrow)
