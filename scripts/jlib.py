@@ -5,20 +5,29 @@ import io
 import os
 import platform
 import re
+import shlex
 import shutil
 import subprocess
 import sys
+import tarfile
 import textwrap
 import time
 import traceback
 import types
+import typing
 
 
-def place( frame_record):
+def place( frame_record=1):
     '''
     Useful debugging function - returns representation of source position of
     caller.
+
+    frame_record:
+        Integer number of frames up stack, or a FrameInfo (for example from
+        inspect.stack()).
     '''
+    if isinstance( frame_record, int):
+        frame_record = inspect.stack( context=0)[ frame_record+1]
     filename    = frame_record.filename
     line        = frame_record.lineno
     function    = frame_record.function
@@ -337,6 +346,8 @@ def log_levels_add( delta, filename_prefix, function_prefix):
     s_log_levels_items.sort( reverse=True)
 
 
+s_log_out = sys.stdout
+
 def log( text, level=0, caller=1, nv=True, out=None, raw=False):
     '''
     Writes log text, with special handling of {<expression>} items in <text>
@@ -376,7 +387,7 @@ def log( text, level=0, caller=1, nv=True, out=None, raw=False):
     str.format().
     '''
     if out is None:
-        out = sys.stdout
+        out = s_log_out
     level += g_log_delta
     if isinstance( caller, int):
         caller += 1
@@ -437,6 +448,23 @@ def logx( text, caller=1, nv=True, out=None):
     pass
 
 
+_log_interval_t0 = 0
+
+def log_interval( text, level=0, caller=1, nv=True, out=None, raw=False, interval=10):
+    '''
+    Like log() but outputs no more than one diagnostic every <interval>
+    seconds, and <text> can be a callable taking no args and returning a
+    string.
+    '''
+    global _log_interval_t0
+    t = time.time()
+    if t - _log_interval_t0 > interval:
+        _log_interval_t0 = t
+        if callable( text):
+            text = text()
+        log( text, level=level, caller=caller+1, nv=nv, out=out, raw=raw)
+
+
 def log_levels_add_env( name='JLIB_log_levels'):
     '''
     Added log levels encoded in an environmental variable.
@@ -457,6 +485,200 @@ def log_levels_add_env( name='JLIB_log_levels'):
             else:
                 assert 0
             log_levels_add( delta, filename, function)
+
+
+class TimingsItem:
+    '''
+    Helper for Timings class.
+    '''
+    def __init__( self, name):
+        self.name = name
+        self.children = dict()
+        self.t_begin = None
+        self.t = 0
+        self.n = 0
+    def begin( self, t):
+        assert self.t_begin is None
+        self.t_begin = t
+    def end( self, t):
+        assert self.t_begin is not None, f't_begin is None, .name={self.name}'
+        self.t += t - self.t_begin
+        self.n += 1
+        self.t_begin = None
+    def __str__( self):
+        return f'[name={self.name} t={self.t} n={self.n} t_begin={self.t_begin}]'
+    def __repr__( self):
+        return self.__str__()
+
+class Timings:
+    '''
+    Allows gathering of hierachical timing information. Can also generate useful
+    diagnostics.
+
+    Caller can generate a tree of TimingsItem items via our begin() and end() methods.
+
+    >>> ts = Timings()
+    >>> ts.begin('a')
+    >>> time.sleep(0.1)
+    >>> ts.begin('b')
+    >>> time.sleep(0.2)
+    >>> ts.begin('c')
+    >>> time.sleep(0.3)
+    >>> ts.end('c')
+    >>> ts.begin('c')
+    >>> time.sleep(0.3)
+    >>> ts.end('b') # will also end 'c'.
+    >>> ts.begin('d')
+    >>> ts.begin('e')
+    >>> time.sleep(0.1)
+    >>> ts.end_all()    # will end everything.
+    >>> print(ts)
+    Timings (in seconds):
+        1.0 a
+            0.8 b
+                0.6/2 c
+            0.1 d
+                0.1 e
+    <BLANKLINE>
+
+    One can also use as a context manager:
+    >>> ts = Timings()
+    >>> with ts( 'foo'):
+    ...     time.sleep(1)
+    ...     with ts( 'bar'):
+    ...         time.sleep(1)
+    >>> print( ts)
+    Timings (in seconds):
+        2.0 foo
+            1.0 bar
+    <BLANKLINE>
+
+    Must specify name, otherwise we assert-fail.
+    >>> with ts:
+    ...     pass
+    Traceback (most recent call last):
+    AssertionError: Must specify <name> etc when using "with ...".
+    '''
+    def __init__( self, name='', active=True):
+        '''
+        If <active> is False, returned instance does nothing.
+        '''
+        self.active = active
+        self.root_item = TimingsItem( name)
+        self.nest = [ self.root_item]
+        self.nest[0].begin( time.time())
+        self.name_max_len = 0
+        self.call_enter_state = None
+        self.call_enter_stack = []
+
+    def begin( self, name=None, text=None, level=0, t=None):
+        '''
+        Starts a new timing item as child of most recent in-progress timing
+        item.
+
+        name:
+            Used in final statistics. If None, we use jlib.place().
+        text:
+            If not None, this is output here with jlib.log().
+        level:
+            Verbosity. Added to g_verbose.
+        '''
+        if not self.active:
+            return
+        if t is None:
+            t = time.time()
+        if name is None:
+            name = place(2)
+        self.name_max_len = max( self.name_max_len, len(name))
+        leaf = self.nest[-1].children.setdefault( name, TimingsItem( name))
+        self.nest.append( leaf)
+        leaf.begin( t)
+        if text:
+            log( text, nv=0)
+
+    def end( self, name=None, t=None):
+        '''
+        Repeatedly ends the most recent item until we have ended item called
+        <name>. Ends just the most recent item if name is None.
+        '''
+        if not self.active:
+            return
+        if t is None:
+            t = time.time()
+        if name is None:
+            name = self.nest[-1].name
+        while self.nest:
+            leaf = self.nest.pop()
+            leaf.end( t)
+            if leaf.name == name:
+                break
+        else:
+            if name is not None:
+                log( f'*** Warning: cannot end timing item called {name} because not found.')
+
+    def end_all( self):
+        self.end( self.nest[0].name)
+
+    def mid( self, name=None):
+        '''
+        Ends current leaf item and starts a new item called <name>. Useful to
+        define multiple timing blocks at same level.
+        '''
+        if not self.active:
+            return
+        t = time.time()
+        if len( self.nest) > 1:
+            self.end( self.nest[-1].name, t)
+        self.begin( name, t=t)
+
+    def __enter__( self):
+        if not self.active:
+            return
+        assert self.call_enter_state, 'Must specify <name> etc when using "with ...".'
+        name, text, level = self.call_enter_state
+        self.begin( name, text, level)
+        self.call_enter_state = None
+        self.call_enter_stack.append( name)
+
+    def __exit__( self, type, value, traceback):
+        if not self.active:
+            return
+        assert not self.call_enter_state, f'self.call_enter_state is not false: {self.call_enter_state}'
+        name = self.call_enter_stack.pop()
+        self.end( name)
+
+    def __call__( self, name=None, text=None, level=0):
+        '''
+        Allow scoped timing.
+        '''
+        if not self.active:
+            return self
+        assert not self.call_enter_state, f'self.call_enter_state is not false: {self.call_enter_state}'
+        self.call_enter_state = ( name, text, level)
+        return self
+
+    def text( self, item, depth=0, precision=1):
+        '''
+        Returns text showing hierachical timing information.
+        '''
+        if not self.active:
+            return ''
+        if item is self.root_item and not item.name:
+            # Don't show top-level.
+            ret = ''
+        else:
+            tt = '  None' if item.t is None else f'{item.t:6.{precision}f}'
+            n = f'/{item.n}' if item.n >= 2 else ''
+            ret = f'{" " * 4 * depth} {tt}{n} {item.name}\n'
+            depth += 1
+        for _, timing2 in item.children.items():
+            ret += self.text( timing2, depth, precision)
+        return ret
+
+    def __str__( self):
+        ret = 'Timings (in seconds):\n'
+        ret += self.text( self.root_item, 0)
+        return ret
 
 
 def strpbrk( text, substrings):
@@ -522,14 +744,15 @@ def exception_info(
         traceback.print_exception()
 
     Install as system default with:
-        sys.excepthook = lambda type_, exception, traceback: exception_info( exception, chain='reverse')
+        sys.excepthook = lambda type_, exception, traceback: jlib.exception_info( exception)
 
     Returns None, or the generated text if <file> is 'return'.
 
     Args:
         exception_or_traceback:
-            None, an Exception or a types.TracebackType. If None we use current
-            exception from sys.exc_info(), otherwise the current backtrace from
+            None, a BaseException, a types.TracebackType or a list of
+            inspect.FrameInfo's. If None we use current exception from
+            sys.exc_info() if set, otherwise the current backtrace from
             inspect.stack().
         limit:
             As in traceback.* functions: None to show all frames, positive to
@@ -540,17 +763,17 @@ def exception_info(
             output, or sys.stderr if None. Special value 'return' makes us
             return our output as a string.
         chain:
-            As in traceback.* functions: if true we show chained exceptions as
-            described in PEP-3134. Special value 'because' reverses the usual
-            ordering, showing higher-level exceptions first and joining with
-            'Because:' text.
+            As in traceback.* functions: if true (the default) we show chained
+            exceptions as described in PEP-3134. Special value 'because'
+            reverses the usual ordering, showing higher-level exceptions first
+            and joining with 'Because:' text.
         outer:
             If true (the default) we also show an exception's outer frames
-            above the catch block (see below for details). We use outer=false
-            for chained exceptions to avoid duplication.
+            above the catch block (see next section for details). We use
+            outer=false internally for chained exceptions to avoid duplication.
         _filelinefn:
-            Internal only; used with doctest - makes us omit file:line:
-            information to allow simple comparison with expected output.
+            Internal only; makes us omit file:line: information to allow simple
+            doctest comparison with expected output.
 
     Differences from traceback.* functions:
 
@@ -563,7 +786,7 @@ def exception_info(
         Inclusion of outer frames:
             Unlike traceback.* functions, stack traces for exceptions include
             outer stack frames above the point at which an exception was caught
-            - frames from the top-level <module> or thread creation to the
+            - i.e. frames from the top-level <module> or thread creation to the
             catch block. [Search for 'sys.exc_info backtrace incomplete' for
             more details.]
 
@@ -576,94 +799,151 @@ def exception_info(
 
                 <file>:<line>:<fn>: <text>  [in root module.]
                 ...                         [... other frames]
-                <file>:<line>:<fn>: <text>  [the except: block where exception was caught.]
+                <file>:<line>:<fn>: <text>  [in except: block where exception was caught.]
                 ^except raise:              [marker line]
-                <file>:<line>:<fn>: <text>  [try: block.]
+                <file>:<line>:<fn>: <text>  [in try: block.]
                 ...                         [... other frames]
                 <file>:<line>:<fn>: <text>  [where the exception was raised.]
 
     Examples:
 
-        Define some nested function calls which raise and except and call
-        exception_info(). We use file=sys.stdout so we can check the output
+        In these examples we use file=sys.stdout so we can check the output
         with doctest, and set _filelinefn=0 so that the output can be matched
-        easily.
+        easily. We also use +ELLIPSIS and '...' to match arbitrary outer frames
+        from the doctest code itself.
 
-        >>> def a():
-        ...     b()
-        >>> def b():
-        ...     try:
-        ...         c()
-        ...     except Exception as e:
-        ...         exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
-        >>> def c():
-        ...     try:
-        ...         d()
-        ...     except Exception as e:
-        ...         raise Exception( 'c: d() failed') from e
-        >>> def d():
-        ...     e()
-        >>> def e():
-        ...     raise Exception('e(): deliberate error')
+        Basic handling of an exception:
 
-        We use +ELLIPSIS to allow '...' to match arbitrary outer frames from
-        the doctest code itself.
+            >>> def c():
+            ...     raise Exception( 'c() failed')
+            >>> def b():
+            ...     try:
+            ...         c()
+            ...     except Exception as e:
+            ...         exception_info( e, file=sys.stdout, _filelinefn=0)
+            >>> def a():
+            ...     b()
 
-        With chain=True (the default), we output low-level exceptions first,
-        matching the behaviour of traceback.* functions:
+            >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
+            Traceback (most recent call last):
+                ...
+                a(): b()
+                b(): exception_info( e, file=sys.stdout, _filelinefn=0)
+                ^except raise:
+                b(): c()
+                c(): raise Exception( 'c() failed')
+            Exception: c() failed
 
-        >>> g_chain = True
-        >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
-        Traceback (most recent call last):
-            c(): d()
-            d(): e()
-            e(): raise Exception('e(): deliberate error')
-        Exception: e(): deliberate error
-        <BLANKLINE>
-        The above exception was the direct cause of the following exception:
-        Traceback (most recent call last):
-            ...
-            <module>(): a() # doctest: +REPORT_UDIFF +ELLIPSIS
-            a(): b()
-            b(): exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
-            ^except raise:
-            b(): c()
-            c(): raise Exception( 'c: d() failed') from e
-        Exception: c: d() failed
+        Handling of chained exceptions:
 
+            >>> def e():
+            ...     raise Exception( 'e(): deliberate error')
+            >>> def d():
+            ...     e()
+            >>> def c():
+            ...     try:
+            ...         d()
+            ...     except Exception as e:
+            ...         raise Exception( 'c: d() failed') from e
+            >>> def b():
+            ...     try:
+            ...         c()
+            ...     except Exception as e:
+            ...         exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
+            >>> def a():
+            ...     b()
 
-        With chain='because', we output high-level exceptions first:
+            With chain=True (the default), we output low-level exceptions
+            first, matching the behaviour of traceback.* functions:
 
-        >>> g_chain = 'because'
-        >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
-        Traceback (most recent call last):
-            ...
-            <module>(): a() # doctest: +REPORT_UDIFF +ELLIPSIS
-            a(): b()
-            b(): exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
-            ^except raise:
-            b(): c()
-            c(): raise Exception( 'c: d() failed') from e
-        Exception: c: d() failed
-        <BLANKLINE>
-        Because:
-        Traceback (most recent call last):
-            c(): d()
-            d(): e()
-            e(): raise Exception('e(): deliberate error')
-        Exception: e(): deliberate error
+                >>> g_chain = True
+                >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
+                Traceback (most recent call last):
+                    c(): d()
+                    d(): e()
+                    e(): raise Exception( 'e(): deliberate error')
+                Exception: e(): deliberate error
+                <BLANKLINE>
+                The above exception was the direct cause of the following exception:
+                Traceback (most recent call last):
+                    ...
+                    <module>(): a() # doctest: +REPORT_UDIFF +ELLIPSIS
+                    a(): b()
+                    b(): exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
+                    ^except raise:
+                    b(): c()
+                    c(): raise Exception( 'c: d() failed') from e
+                Exception: c: d() failed
+
+            With chain='because', we output high-level exceptions first:
+                >>> g_chain = 'because'
+                >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
+                Traceback (most recent call last):
+                    ...
+                    <module>(): a() # doctest: +REPORT_UDIFF +ELLIPSIS
+                    a(): b()
+                    b(): exception_info( file=sys.stdout, chain=g_chain, _filelinefn=0)
+                    ^except raise:
+                    b(): c()
+                    c(): raise Exception( 'c: d() failed') from e
+                Exception: c: d() failed
+                <BLANKLINE>
+                Because:
+                Traceback (most recent call last):
+                    c(): d()
+                    d(): e()
+                    e(): raise Exception( 'e(): deliberate error')
+                Exception: e(): deliberate error
+
+        Show current backtrace by passing exception_or_traceback=None:
+            >>> def c():
+            ...     exception_info( None, file=sys.stdout, _filelinefn=0)
+            >>> def b():
+            ...     return c()
+            >>> def a():
+            ...     return b()
+
+            >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
+            Traceback (most recent call last):
+                ...
+                <module>(): a() # doctest: +REPORT_UDIFF +ELLIPSIS
+                a(): return b()
+                b(): return c()
+                c(): exception_info( None, file=sys.stdout, _filelinefn=0)
+
+        Show an exception's .__traceback__ backtrace:
+            >>> def c():
+            ...     raise Exception( 'foo') # raise
+            >>> def b():
+            ...     return c()  # call c
+            >>> def a():
+            ...     try:
+            ...         b() # call b
+            ...     except Exception as e:
+            ...         exception_info( e.__traceback__, file=sys.stdout, _filelinefn=0)
+
+            >>> a() # doctest: +REPORT_UDIFF +ELLIPSIS
+            Traceback (most recent call last):
+                ...
+                a(): b() # call b
+                b(): return c()  # call c
+                c(): raise Exception( 'foo') # raise
     '''
-    if isinstance( exception_or_traceback, types.TracebackType):
+    # Set exactly one of <exception> and <tb>.
+    #
+    if isinstance( exception_or_traceback, (types.TracebackType, inspect.FrameInfo)):
+        # Simple backtrace, no Exception information.
         exception = None
         tb = exception_or_traceback
     elif isinstance( exception_or_traceback, BaseException):
         exception = exception_or_traceback
-    elif exception_or_traceback:
-        assert 0, f'Unrecognised exception_or_traceback type: {type(exception_or_traceback)}'
-    else:
+        tb = None
+    elif exception_or_traceback is None:
+        # Show exception if available, else backtrace.
         _, exception, tb = sys.exc_info()
-        if not exception:
-            tb = inspect.stack()[1:]
+        tb = None if exception else inspect.stack()[1:]
+    else:
+        assert 0, f'Unrecognised exception_or_traceback type: {type(exception_or_traceback)}'
 
     if file == 'return':
         out = io.StringIO()
@@ -674,6 +954,7 @@ def exception_info(
         exception_info( exception, limit, out, chain, outer=False, _filelinefn=_filelinefn)
 
     if exception and chain and chain != 'because':
+        # Output current exception first.
         if exception.__cause__:
             do_chain( exception.__cause__)
             out.write( '\nThe above exception was the direct cause of the following exception:\n')
@@ -685,6 +966,7 @@ def exception_info(
 
     def output_frames( frames, reverse, limit):
         if reverse:
+            assert isinstance( frames, list)
             frames = reversed( frames)
         if limit is not None:
             frames = list( frames)
@@ -704,11 +986,17 @@ def exception_info(
     out.write( 'Traceback (most recent call last):\n')
     if exception:
         tb = exception.__traceback__
+        assert tb
         if outer:
             output_frames( inspect.getouterframes( tb.tb_frame), reverse=True, limit=limit)
             out.write( '    ^except raise:\n')
         output_frames( inspect.getinnerframes( tb), reverse=False, limit=None)
     else:
+        if not isinstance( tb, list):
+            inner = inspect.getinnerframes(tb)
+            outer = inspect.getouterframes(tb.tb_frame)
+            tb = outer + inner
+            tb.reverse()
         output_frames( tb, reverse=True, limit=limit)
 
     if exception:
@@ -717,6 +1005,7 @@ def exception_info(
             out.write( line)
 
     if exception and chain == 'because':
+        # Output current exception afterwards.
         if exception.__cause__:
             out.write( '\nBecause:\n')
             do_chain( exception.__cause__)
@@ -810,20 +1099,6 @@ class StreamPrefix:
 
     def flush( self):
         self.stream_flush()
-
-
-def debug( text):
-    if callable(text):
-        text = text()
-    print( text)
-
-debug_periodic_t0 = [0]
-def debug_periodic( text, override=0):
-    interval = 10
-    t = time.time()
-    if t - debug_periodic_t0[0] > interval or override:
-        debug_periodic_t0[0] = t
-        debug(text)
 
 
 def time_duration( seconds, verbose=False, s_format='%i'):
@@ -948,6 +1223,14 @@ def make_out_callable( out):
         ret.write = lambda text: out.write( text)
     return ret
 
+def _env_extra_text( env_extra):
+    ret = ''
+    if env_extra:
+        for n, v in env_extra.items():
+            assert isinstance( n, str), f'env_extra has non-string name {n!r}: {env_extra!r}'
+            assert isinstance( v, str), f'env_extra name={n!r} has non-string value {v!r}: {env_extra!r}'
+            ret += f'{n}={shlex.quote(v)} '
+    return ret
 
 def system(
         command,
@@ -970,7 +1253,7 @@ def system(
     the output and/or exit code, and whether to raise an exception if the
     command fails.
 
-    We also support the use of /usr/bin/time to gather rusage information.
+    Args:
 
         command:
             The command to run.
@@ -1059,9 +1342,9 @@ def system(
     >>> system('echo hello b', prefix='foo:', out='return', raise_errors=False)
     (0, 'foo:hello b\\nfoo:')
 
-    >>> system('echo hello c && false', prefix='foo:', out='return')
+    >>> system('echo hello c && false', prefix='foo:', out='return', env_extra=dict(FOO='bar qwerty'))
     Traceback (most recent call last):
-    Exception: Command failed: echo hello c && false
+    Exception: Command failed: FOO='bar qwerty' echo hello c && false
     Output was:
     foo:hello c
     foo:
@@ -1122,11 +1405,7 @@ def system(
         assert 0, f'Inconsistent out: {out}'
 
     if verbose:
-        env_text = ''
-        if env_extra:
-            for n, v in env_extra.items():
-                env_text += f' {n}={v}'
-        log(f'running:{env_text} {command}', nv=0, caller=caller+1)
+        log(f'running: {_env_extra_text(env_extra)}{command}', nv=0, caller=caller+1)
 
     env = None
     if env_extra:
@@ -1178,9 +1457,11 @@ def system(
     e = child.wait()
 
     if out_log:
+        global _log_text_line_start
         if not _log_text_line_start:
             # Terminate last incomplete line of log outputs.
             sys.stdout.write('\n')
+            _log_text_line_start = True
     if verbose:
         log(f'[returned e={e}]', nv=0, caller=caller+1)
 
@@ -1189,20 +1470,17 @@ def system(
 
     if raise_errors:
         if e:
-            env_string = ''
-            if env_extra:
-                for n, v in env_extra.items():
-                    env_string += f'{n}={v} '
+            message = f'Command failed: {_env_extra_text(env_extra)}{command}'
             if out_return is not None:
                 if not out_return.endswith('\n'):
                     out_return += '\n'
                 raise Exception(
-                        f'Command failed: {env_string}{command}\n'
-                        f'Output was:\n'
-                        f'{out_return}'
+                        message + '\n'
+                        + 'Output was:\n'
+                        + out_return
                         )
             else:
-                raise Exception( f'command failed: {env_string}{command}')
+                raise Exception( message)
         elif out_return is not None:
             return out_return
         else:
@@ -1272,7 +1550,16 @@ def get_gitfiles( directory, submodules=False):
 
     Otherwise we require that <directory>/jtest-git-files already exists.
     '''
-    if os.path.isdir( '%s/.git' % directory):
+    def is_within_git_checkout( d):
+        while 1:
+            #log( '{d=}')
+            if not d:
+                break
+            if os.path.isdir( f'{d}/.git'):
+                return True
+            d = os.path.dirname( d)
+
+    if is_within_git_checkout( directory):
         command = 'cd ' + directory + ' && git ls-files'
         if submodules:
             command += ' --recurse-submodules'
@@ -1406,13 +1693,28 @@ def get_filenames( paths):
             if filter_( name):
                 yield name
 
-def remove( path):
+def remove( path, backup=False):
     '''
     Removes file or directory, without raising exception if it doesn't exist.
+
+    path:
+        The path to remove.
+    backup:
+        If true, we rename any existing file/directory called <path> to
+        <path>-<datetime>.
 
     We assert-fail if the path still exists when we return, in case of
     permission problems etc.
     '''
+    if backup and os.path.exists( path):
+        datetime = date_time()
+        if platform.system() == 'Windows' or platform.system().startswith( 'CYGWIN'):
+            # os.rename() fails if destination contains colons, with:
+            #   [WinError87] The parameter is incorrect ...
+            datetime = datetime.replace( ':', '')
+        p = f'{path}-{datetime}'
+        log( 'Moving out of way: {path} => {p}')
+        os.rename( path, p)
     try:
         os.remove( path)
     except Exception:
@@ -1454,6 +1756,43 @@ def copy(src, dest, verbose=False):
     if dirname:
         os.makedirs( dirname, exist_ok=True)
     shutil.copy2( src, dest)
+
+
+def untar(path, mode='r:gz', prefix=None):
+    '''
+    Extracts tar file.
+
+    We fail if items in tar file have different top-level directory names, or
+    if tar file's top-level directory name already exists locally.
+
+    path:
+        The tar file.
+    mode:
+        As tarfile.open().
+    prefix:
+        If not None, we fail if tar file's top-level directory name is not
+        <prefix>.
+
+    Returns the directory name (which will be <prefix> if not None).
+    '''
+    with tarfile.open( path, mode) as t:
+        items = t.getnames()
+        assert items
+        item = items[0]
+        assert not item.startswith('.')
+        s = item.find('/')
+        if s == -1:
+            prefix_actual = item + '/'
+        else:
+            prefix_actual = item[:s+1]
+        if prefix:
+            assert prefix == prefix_actual, f'prefix={prefix} prefix_actual={prefix_actual}'
+        for item in items[1:]:
+            assert item.startswith( prefix_actual), f'prefix_actual={prefix_actual!r} != item={item!r}'
+        assert not os.path.exists( prefix_actual)
+        t.extractall()
+    return prefix_actual
+
 
 # Things for figuring out whether files need updating, using mtimes.
 #
@@ -1522,7 +1861,7 @@ def build(
     determinism of dependencies.
 
     Rebuilds <outfiles> by running <command> if we determine that any of them
-    are out of date.
+    are out of date, or if <comand> has changed.
 
     infiles:
         Names of files that are read by <command>. Can be a single filename. If
@@ -2401,6 +2740,8 @@ class Arg:
             for i, item in enumerate(self.syntax_items):
                 if i: text += ' '
                 text += item.text if item.literal else f'<{item.text}>'
+            if self.match_remaining:
+                text += ' ...'
             # Show flags, if any.
             extra = []
             if self.required:   extra.append('required')
@@ -2518,6 +2859,737 @@ class Arg:
         ret = f'\n'.join(paras)
         assert not ret.endswith('\n')
         return ret
+
+
+# Things for 'aargs' - automatic args, where we give an automatic command-line
+# api for functions.
+#
+
+def aargs_fn_args( fn, skip_first):
+    '''
+    Returns (args_optional, args_required), each a list of inspect.Parameter's.
+    '''
+    signature = inspect.signature( fn)
+    args_optional = []
+    args_required = []
+    for i, (_, p) in enumerate( signature.parameters.items()):
+        if i==0 and skip_first:
+            continue
+        if p.default is inspect.Parameter.empty:
+            args_required.append( p)
+        else:
+            args_optional.append( p)
+    return args_optional, args_required
+
+
+def linestrip( lines):
+    '''
+    Strips leading and trailing blank lines.
+    '''
+    for first, line in enumerate( lines):
+        if line.strip():
+            break
+    else:
+        return []
+    for last, line in enumerate( reversed( lines)):
+        if line.strip():
+            break
+    last = len( lines) - last
+    ret = lines[ first : last]
+    return ret
+
+
+def docstring_split( text):
+    '''
+    Splits <text> and returns ( summary, body).
+    '''
+    if not text:
+        return '', ''
+    text = textwrap.dedent( text)
+    lines = text.split( '\n')
+    lines = linestrip( lines)
+
+    # Summary ends with blank line or line ending with '.'.
+    for i, line in enumerate( lines):
+        if line.endswith( '.'):
+            summary = lines[ 0 : i+1]
+            body = lines[ i+1:]
+            break
+        if not line.strip():
+            summary = lines[ 0 : i]
+            body = lines[ i+1 :]
+            break
+    else:
+        summary = lines
+        body = []
+    summary = linestrip( summary)
+    body = linestrip( body)
+
+    def join( lines):
+        ret = ''
+        for line in lines:
+            ret += line + '\n'
+        return ret
+    summary = join( summary)
+    body = join( body)
+    return summary, body
+
+def docstring_get_split( x):
+    '''
+    Returns ( summary, body) for <x>'s docstring.
+    '''
+    if not x:
+        return '', ''
+    text = x.__doc__
+    return docstring_split( text)
+
+
+def aargs_fn_args( fn, skip_first):
+    '''
+    Returns (args_optional, args_required), each a list of inspect.Parameter's.
+    '''
+    signature = inspect.signature( fn)
+    args_optional = []
+    args_required = []
+    for i, (_, p) in enumerate( signature.parameters.items()):
+        if i==0 and skip_first:
+            continue
+        if p.default is inspect.Parameter.empty:
+            args_required.append( p)
+        else:
+            args_optional.append( p)
+    return args_optional, args_required
+
+
+def aargs_describe( out, name, fn, prefix='', skip_first=False, inline_types=False):
+    '''
+    Writes information about aargs command-line usage of a function.
+
+    Args:
+        out
+            Stream to which we write output.
+        name
+            Name of function.
+        fn
+            The function whose args we describe.
+        prefix
+            Prefix for all lines of output.
+        skip_first
+            If true we skip <fn>'s first arg; typically for class constructors'
+            <self> arg.
+        inline_types
+            If true we append :<type> to args in brief descriptions.
+
+    >>> class Remote:
+    ...     """
+    ...     A connection to a remote machine and directory.
+    ...     """
+    ...     def __init__( self, text, bar: float):
+    ...         """
+    ...         <ssh-params>[:<port>][:<remote-dir>][,<sync-directories>] bar
+    ...
+    ...         If no ':' we default to <remote-dir>='artifex-remote'.
+    ...         bar is ignored.
+    ...         """
+    >>> def fn( remote: Remote, foo: int=0, command: str=''):
+    ...     """
+    ...     fn summary.
+    ...
+    ...     fn details and
+    ...     more details.
+    ...     """
+    ...     pass
+    >>> out = io.StringIO()
+
+    >>> aargs_describe( sys.stdout, 'fn', fn, inline_types=True)    # doctest: +REPORT_NDIFF
+    fn [--foo <foo:int>] [--command <command:str>] <remote:Remote>
+        foo: An integer, default=0.
+        command: A string, default=''.
+        remote: A Remote.
+            A connection to a remote machine and directory.
+            Constructor is:
+                <text> <bar:float>
+                    text: Anything.
+                    bar: A float.
+    <BLANKLINE>
+                    <ssh-params>[:<port>][:<remote-dir>][,<sync-directories>] bar
+                    If no ':' we default to <remote-dir>='artifex-remote'.
+                    bar is ignored.
+    <BLANKLINE>
+        fn summary.
+        fn details and
+        more details.
+
+    >>> aargs_describe( sys.stdout, 'fn', fn, inline_types=False)   # doctest: +REPORT_NDIFF
+    fn [--foo <foo>] [--command <command>] <remote>
+        foo: An integer, default=0.
+        command: A string, default=''.
+        remote: A Remote.
+            A connection to a remote machine and directory.
+            Constructor is:
+                <text> <bar>
+                    text: Anything.
+                    bar: A float.
+    <BLANKLINE>
+                    <ssh-params>[:<port>][:<remote-dir>][,<sync-directories>] bar
+                    If no ':' we default to <remote-dir>='artifex-remote'.
+                    bar is ignored.
+    <BLANKLINE>
+        fn summary.
+        fn details and
+        more details.
+    '''
+    args_optional, args_required = aargs_fn_args( fn, skip_first)
+
+    def name_type( arg, optional, detailed=True):
+        '''
+        Writes <name> or <name:type>.
+        '''
+        if detailed and optional:
+            out.write( '[')
+            out.write( '--' if len( arg.name) >= 2 else '-')
+            out.write( f'{arg.name} ')
+        if detailed:
+            out.write( f'<')
+        out.write( f'{arg.name}')
+        if detailed and inline_types and arg.annotation is not inspect.Parameter.empty:
+            out.write( f':{arg.annotation.__name__}')
+        if detailed:
+            out.write( f'>')
+        if detailed and optional:
+            out.write( ']')
+
+    # Brief.
+    out.write( prefix)
+    if name:
+        out.write( f'{name} ')
+    sep = ''
+    for arg in args_optional + args_required:
+        out.write( sep)
+        name_type( arg, optional=arg.default is not inspect.Parameter.empty)
+        sep = ' '
+    out.write( '\n')
+
+    # Detailed
+    prefix1 = prefix + ' '*4
+    prefix2 = prefix + ' '*8
+    prefix3 = prefix + ' '*12
+    for arg in args_optional + args_required:
+        out.write( f'{prefix}    ')
+        name_type( arg, optional=False, detailed=False)
+        detailed = False
+        out.write( ': ')
+        if arg.annotation in ( inspect.Parameter.empty, typing.Any):
+            out.write( f'Anything')
+        elif arg.annotation is str:
+            out.write( f'A string')
+        elif arg.annotation is int:
+            out.write( f'An integer')
+        elif arg.annotation is float:
+            out.write( f'A float')
+        elif arg.annotation is bool:
+            out.write( f'A bool (one of: 0 false False 1 true True)')
+        else:
+            out.write( f'A {arg.annotation.__name__}')
+            detailed = True
+
+        if arg.default is not inspect.Parameter.empty:
+            out.write( f', default={arg.default!r}')
+        out.write( '.\n')
+        if detailed:
+            summary, body = docstring_get_split( arg.annotation)
+            out.write( textwrap.indent( summary, prefix2))
+            out.write( textwrap.indent( body, prefix2))
+            fn2 = getattr( arg.annotation, '__init__', None)
+            if fn2:
+                out.write( f'{prefix2}Constructor is:\n')
+                aargs_describe( out, None, fn2, prefix3, skip_first=True, inline_types=inline_types)
+
+    summary, body = docstring_get_split( fn)
+    if summary or body:
+        out.write( '\n')
+    out.write( textwrap.indent( summary, prefix1))
+    out.write( textwrap.indent( body, prefix1))
+
+
+
+def aargs_eval( argv, a, fn_or_class, fn_or_class_name):
+    '''
+    Attempts to call/create <fn_or_class>() with args derived from argv[a:].
+
+    We look at <fn_or_class>'s required and optional args (looking at the
+    __init__() constructor if it is a class), and match up with argv[a:] to
+    build up a (*args, **kwargs) suitable for passing to <fn_or_class>().
+
+    We first look to match optional args, for which we require an item in
+    argv[] called --<fn_arg.name>, or -<fn_arg.name> if <name> has length
+    1.
+
+    Then we match required args.
+
+    We then calculate value = fn_or_class( *args, **kwargs) and return <value>
+    along with information about how many items in argv[] we have consumed. If
+    <fn_or_class> is a function, <value> will be the returned value, otherwise
+    it is a class and <value> will be a new instance of this class.
+
+    For each of <fn_or_class>'s args that are annotated with a type, we call
+    ourselves recursively to create a temporary instance of this type from
+    argv[], and add this instance to our (*args, **kwargs).
+
+    We special case bool to match '0', 'false', 'False', '1', 'true', 'True'.
+
+    We don't yet support annotations that use typing.Union etc.
+
+    argv:
+        List of strings, or a string which is split using shlex.split().
+    a:
+        Index of starting position in argv.
+    fn_or_class:
+        A function, or a class type.
+    fn_or_class_name:
+        If not None we have additional behaviour suitable for top-level usage:
+            * We require that argv[a]==fn_or_class_name.
+
+            * On error we output usage information for <fn_or_class_name> using
+            aargs_describe().
+
+            * If we fail to parse at a '-h' or '--help' item in <argv>, we show
+            usage information for <fn> from nested doc strings and argument
+            annotations.
+
+    Returns ( error, aa, value):
+        error:
+            On success, None. Otherwise an Exception instance.
+        aa:
+            On success, the offset of next unused item in <argv>. Otherwise
+            (begin, end) of range in argv for which parsing failed.
+        value:
+            On sucess, the result of calling <fn_or_class> with the (*args,
+            **kwargs) derived from argv[a:aa]. Otherwise undefined.
+
+    Call fn with no args:
+
+        >>> def testfn0():
+        ...    return 'ok'
+        >>> aargs_eval( 'testfn0', 0, testfn0, 'testfn0')
+        (None, 1, 'ok')
+
+    Define class and fn that takes an instance of this class:
+
+        >>> class test_args_Remote:
+        ...     """
+        ...     Help for test_args_Remote.
+        ...     """
+        ...     def __init__( self, spec, bar:float):
+        ...         self.spec = spec
+        ...         self.bar = bar
+        ...     def __str__( self):
+        ...         return f'spec={self.spec} bar={self.bar}'
+        >>>
+
+        >>> def testfn( remote: test_args_Remote, f: int=0, command: str='', misc: typing.Any=None):
+        ...     """
+        ...     Help for testfn.
+        ...     """
+        ...     return f'remote={remote} f={f} command={command}'
+
+    No match because 'xyz' cannot be converted to float:
+
+        >>> e = aargs_eval( 'testfn --command qwerty machine:dir xyz pqr', 0, testfn, 'testfn')    # doctest: +REPORT_NDIFF +ELLIPSIS
+        Failed in ['xyz']: could not convert string to float: 'xyz'
+        Usage:
+            testfn [-f <f>] [--command <command>] [--misc <misc>] <remote>
+                f: An integer, default=0.
+                command: A string, default=''.
+                misc: Anything, default=None.
+                remote: A test_args_Remote.
+                    Help for test_args_Remote.
+                    Constructor is:
+                        <spec> <bar>
+                            spec: Anything.
+                            bar: A float.
+        <BLANKLINE>
+                Help for testfn.
+        <BLANKLINE>
+        Traceback (most recent call last):
+            ...
+        >>> e
+        (ValueError("could not convert string to float: 'xyz'"), (4, 5), None)
+
+    Not enough args.
+        >>> e = aargs_eval( 'testfn --command qwerty', 0, testfn, 'testfn')    # doctest: +REPORT_NDIFF +ELLIPSIS
+        Failed in []: Not enough args
+        Usage:
+            testfn [-f <f>] [--command <command>] [--misc <misc>] <remote>
+                f: An integer, default=0.
+                command: A string, default=''.
+                misc: Anything, default=None.
+                remote: A test_args_Remote.
+                    Help for test_args_Remote.
+                    Constructor is:
+                        <spec> <bar>
+                            spec: Anything.
+                            bar: A float.
+        <BLANKLINE>
+                Help for testfn.
+        <BLANKLINE>
+        Traceback (most recent call last):
+            ...
+        >>> e
+        (Exception('Not enough args'), (3, 3), None)
+
+        >>> e = aargs_eval( 'testfn --command', 0, testfn, 'testfn')   # doctest: +REPORT_NDIFF +ELLIPSIS
+        Failed in []: Not enough args
+        Usage:
+            testfn [-f <f>] [--command <command>] [--misc <misc>] <remote>
+                f: An integer, default=0.
+                command: A string, default=''.
+                misc: Anything, default=None.
+                remote: A test_args_Remote.
+                    Help for test_args_Remote.
+                    Constructor is:
+                        <spec> <bar>
+                            spec: Anything.
+                            bar: A float.
+        <BLANKLINE>
+                Help for testfn.
+        <BLANKLINE>
+        Traceback (most recent call last):
+            ...
+        >>> e
+        (Exception('Not enough args'), (2, 2), None)
+
+    Optional arg.
+        >>> aargs_eval( 'testfn --command qwerty machine:dir 1.2', 0, testfn, 'testfn')
+        (None, 5, 'remote=spec=machine:dir bar=1.2 f=0 command=qwerty')
+
+    No optional arg.
+        >>> aargs_eval( 'testfn machine:dir 1.2 pqr', 0, testfn, 'testfn')
+        (None, 3, 'remote=spec=machine:dir bar=1.2 f=0 command=')
+
+    Trailing args are left in place.
+        >>> aargs_eval( 'testfn --command qwerty machine:dir 1.2 pqr', 0, testfn, 'testfn')
+        (None, 5, 'remote=spec=machine:dir bar=1.2 f=0 command=qwerty')
+
+    Multiple optional args.
+        >>> aargs_eval( 'testfn --command qwerty -f 12345 machine:dir 1.2 pqr', 0, testfn, 'testfn')
+        (None, 7, 'remote=spec=machine:dir bar=1.2 f=12345 command=qwerty')
+
+    Detection of duplicate optional args.
+        >>> e = aargs_eval( 'testfn --command qwerty -f 12345 --command foo machine:dir', 0, testfn, 'testfn') # doctest: +REPORT_NDIFF +ELLIPSIS
+        Failed in ['--command']: Duplicate optional arg specified: '--command'
+        Usage:
+            testfn [-f <f>] [--command <command>] [--misc <misc>] <remote>
+                f: An integer, default=0.
+                command: A string, default=''.
+                misc: Anything, default=None.
+                remote: A test_args_Remote.
+                    Help for test_args_Remote.
+                    Constructor is:
+                        <spec> <bar>
+                            spec: Anything.
+                            bar: A float.
+        <BLANKLINE>
+                Help for testfn.
+        <BLANKLINE>
+        Traceback (most recent call last):
+            ...
+        >>> e
+        (Exception("Duplicate optional arg specified: '--command'"), (5, 6), None)
+
+    Help text:
+        >>> e = aargs_eval( 'testfn --command qwerty --help', 0, testfn, 'testfn') # doctest: +REPORT_NDIFF +ELLIPSIS
+        Usage:
+            testfn [-f <f>] [--command <command>] [--misc <misc>] <remote>
+                f: An integer, default=0.
+                command: A string, default=''.
+                misc: Anything, default=None.
+                remote: A test_args_Remote.
+                    Help for test_args_Remote.
+                    Constructor is:
+                        <spec> <bar>
+                            spec: Anything.
+                            bar: A float.
+        <BLANKLINE>
+                Help for testfn.
+        <BLANKLINE>
+        Traceback (most recent call last):
+            ...
+        >>> e
+        (Exception('Help requested'), (3, 4), None)
+    '''
+    a0 = a
+    #log( '{=argv a fn_or_class fn_or_class_name}')
+    def internal( argv, a, fn_or_class):
+        '''
+        Main functionality without <fn_or_class_name>.
+        '''
+        # Avoid recursion when no annotation or basic types.
+        if fn_or_class in ( typing.Any, inspect.Parameter.empty):
+            return None, a + 1, argv[ a]
+        elif fn_or_class in ( bool, str, int, float):
+            try:
+                if fn_or_class is bool:
+                    def fn_or_class( text):
+                        if text in ( '0', 'false', 'False'):
+                            return False
+                        elif text in ( '1', 'true', 'True'):
+                            return True
+                        else:
+                            raise Exception( f'Unrecognised bool value should be one of: 0, false, False, 1, true, True: {text!r}')
+                return None, a + 1, fn_or_class( argv[ a])
+            except Exception as error:
+                return error, ( a, a+1), None
+
+        # Use __init__() constructor if a class.
+        if isinstance( fn_or_class, type):
+            class_ = fn_or_class
+            fn = getattr( class_, '__init__')
+        else:
+            class_ = None
+            fn = fn_or_class
+
+        def handle_arg( argv, a, fn_arg, args, kwargs):
+            '''
+            Attempts to match <fn_arg> against argv[a:]; adds evaluated value to
+            <args> or <kwargs>, and returns (error, aa).
+            '''
+            if a < len( argv) and argv[ a] in ( '-h', '--help'):
+                try:
+                    raise Exception( 'Help requested')
+                except Exception as error:
+                    return error, ( a, a+1)
+            if a == len( argv):
+                try:
+                    raise Exception( 'Not enough args')
+                except Exception as e:
+                    error = e
+                return error, (a, a)
+            error, a, value = internal( argv, a, fn_arg.annotation)
+            if not error:
+                if fn_arg.default is not inspect.Parameter.empty:
+                    # <fn_arg> is optional.
+                    assert fn_arg.name not in kwargs
+                    kwargs[ fn_arg.name] = value
+                else:
+                    args.append( value)
+            return error, a
+
+        # First match all optional args.
+        fn_args_optional, fn_args_required = aargs_fn_args( fn, skip_first=class_)
+        args = list()
+        kwargs = dict()
+        while 1:
+            for fn_arg in fn_args_optional:
+                prefix = '--' if len( fn_arg.name) > 1 else '-'
+                if a >= len( argv) or argv[ a] != f'{prefix}{fn_arg.name}':
+                    # No match for this optional arg.
+                    continue
+                if fn_arg.name in kwargs:
+                    try:
+                        raise Exception( f'Duplicate optional arg specified: {argv[ a]!r}')
+                    except Exception as error:
+                        return error, ( a, a+1), None
+                error, a = handle_arg( argv, a + 1, fn_arg, args, kwargs)
+                if error:
+                    return error, a, None
+                else:   # <fn_arg> matches argv[ a+1 : aa].
+                    break
+            else:
+                break   # No item in <fn_args_optional> matched argv[a:].
+
+        # Now match required args.
+        for fn_arg in fn_args_required:
+            error, a = handle_arg( argv, a, fn_arg, args, kwargs)
+            if error:
+                return error, a, None
+
+        # Finally return the evaluated fn/class_ value.
+        try:
+            value = fn_or_class( *args, **kwargs)
+        except Exception as error:
+            # Indicate that failure involved all args we've used.
+            return error, (a0, a), None
+        return None, a, value
+
+    if isinstance( argv, str):
+        argv = shlex.split( argv)
+
+    error = None
+    if fn_or_class_name:
+        if a == len( argv):
+            try:
+                raise Exception( 'Not enough args')
+            except Exception as e:
+                error = e
+            a = (a, a),
+        elif argv[ a] != fn_or_class_name and argv[ a] != fn_or_class_name.replace( '_', '-'):
+            try:
+                raise Exception( f'No match for name={fn_or_class_name}.')
+            except Exception as e:
+                error = e
+            return error, (a, a+1), None
+        else:
+            a += 1
+
+    if not error:
+        error, a, value = internal( argv, a, fn_or_class)
+
+    if error:
+        #log( '{type(error)=}')
+        if fn_or_class_name:
+            # Show usage information on failure.
+            begin, end = a
+            out = sys.stdout
+            if begin < len( argv) and end == begin + 1 and argv[ begin] in ( '-h', '--help'):
+                pass
+            else:
+                args = argv[ a[0] : a[1]]
+                out.write( f'Failed in {args}: {error}\n')
+            out.write( 'Usage:\n')
+            aargs_describe( out, fn_or_class.__name__, fn_or_class, '    ')
+            if isinstance( error, Exception):
+                # We have already shown information about the exception, so
+                # just show the backtrace.
+                out.write( '\n')
+                exception_info( error.__traceback__, file=out)
+        elif isinstance( error, Exception):
+            out.write( '\n')
+            exception_info( error, file=out)
+
+    return error, a, value
+
+
+def aargs_get_fns( caller):
+    '''
+    Returns list of (name, fns) items for functions in the module specifed by
+    <caller> steps up in stack.
+    '''
+    fns = []
+    frame_record = inspect.stack()[ caller]
+    module = inspect.getmodule(frame_record.frame)
+    for name, fn,  in inspect.getmembers( module, inspect.isfunction):
+        fns.append( ( name, fn))
+    return fns
+
+
+def aargs_fns( argv, fns=None, caller=1, do_exit=True):
+    '''
+    Attempts to handle <argv> by calling matching functions in <fns>. Calls
+    sys.exit(1) on error.
+
+    Args:
+        argv:
+            List of strings, or a string which is split using shlex.split().
+        fns:
+            A list of (name, fn) pairs where <name> is function name and <fn>
+            is a callable. If None, we use all functions in caller's module.
+        caller:
+            Used for jlib.log() diagnostics.
+        do_exit:
+            If true (the default) we call sys.exit() with 0 or 1. Otherwise we
+            return None on success or 1 on failure. We don't raise exceptions.
+
+    Functions in <fns> should return something that evaluates as false on
+    success, else true to indicate failure. If they raise an exception, this is
+    treated as a failure to match <argv> with the required function parameters,
+    in which case we show usage information.
+
+    >>> def foo( r: int):
+    ...     if r < 0:
+    ...         raise Exception( f'r={r}')
+    ...     return r
+
+    If foo() returns 0, this is success; we return None.
+
+        >>> e = aargs_fns( 'foo 0'.split(), [('foo', foo)], do_exit=False)
+        >>> print( e)
+        None
+
+    If foo() returns 1, this is failure to handle the args.
+
+        >>> e = aargs_fns( 'foo 2'.split(), [('foo', foo)], do_exit=False)
+        Function foo() failed: 2
+        >>> print( e)
+        1
+
+    If foo() raises an exception we failed to parse argv and show usage
+    information:
+
+        >>> e = aargs_fns( 'foo -1'.split(), [('foo', foo)], do_exit=False) # # doctest: +REPORT_NDIFF +ELLIPSIS
+        Failed in ['foo', '-1']: r=-1
+        Usage:
+            foo <r>
+                r: An integer.
+        <BLANKLINE>
+        Traceback (most recent call last):
+            ...
+        >>> print( e)
+        1
+    '''
+    if isinstance( argv, str):
+        argv = shlex.split( argv)
+    out = sys.stdout
+    if fns is None:
+        fns = aargs_get_fns( caller+1)
+    a = 0
+    while 1:
+        if a == len( argv):
+            break
+        if argv[a] in ( '-h', '--help'):
+            out.write( 'Available commands are:\n')
+            out.write( '\n')
+            for name, fn in fns:
+                aargs_describe( out, name, fn, '    ')
+                out.write( '\n')
+            a += 1
+            continue
+        for name, fn in fns:
+            e, aa, value = aargs_eval( argv, a, fn, name)
+            #log( '{=e aa value}')
+            if e:
+                begin, end = aa
+                if begin == a and end == a+1:
+                    # argv[a] != name; this is not an error.
+                    pass
+                else:
+                    # Something raised an exception when evaluating arg(s). If
+                    # this happened in <fn>, then parsing succeeded but final
+                    # evaluation failed; we actually treat this as same as a
+                    # nested evaluation of an arg failing. If a function wishes
+                    # to indicate a failure that is not an arg-parsing failure,
+                    # it should return something that evaluates as true, not
+                    # raise an exception.
+                    #
+                    #log( 'name={name} failed {aa=}, a parse error; e={e}')
+                    if do_exit:
+                        sys.exit(1)
+                    return 1
+            else:
+                a = aa
+                if value:
+                    out.write( f'Function {name}() failed: {value}')
+                    if do_exit:
+                        sys.exit(1)
+                    return 1
+                break
+        else:
+            break
+    if a < len( argv):
+        out.write( f'Failed to find function matching argv[{a}]={argv[a]!r}\n')
+    if do_exit:
+        sys.exit( 0)
+
+
+def aargs_help( fns=None):
+    '''
+    Show help on all items in <fns>, or caller's module's functions if not
+    specified.
+    '''
+    if not fns:
+        fns = aargs_get_fns()
+    for name, fn in fns:
+        aargs_describe( sys.stdout, name, fn, prefix='    ')
 
 
 if __name__ == '__main__':
