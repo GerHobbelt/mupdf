@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -2266,6 +2266,33 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 	fz_save_accelerator(ctx, doc, absname);
 }
 
+static float humanize(size_t value, const char **unit)
+{
+	float result;
+	if (value >= 1024 * 1024 * 1024.0f)
+	{
+		*unit = "G";
+		result = value / (1024 * 1024 * 1024.0f);
+	}
+	else if (value >= 1024 * 1024.0f)
+	{
+		*unit = "M";
+		result = value / (1024 * 1024.0f);
+	}
+	else if (value >= 1024.0f)
+	{
+		*unit = "k";
+		result = value / 1024.0f;
+	}
+	else
+	{
+		*unit = "";
+		result = value;
+	}
+
+	return result;
+}
+
 /* Reduced quality sub pix quantizer, intended to match pdfium. */
 static void reduced_sub_pix_quantizer(float size, int *x, int *y)
 {
@@ -2391,7 +2418,17 @@ static void mu_drop_context(void)
 	{
 		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
 		{
-			fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+			float total, peak, current;
+			const char* total_unit;
+			const char* peak_unit;
+			const char* current_unit;
+
+			total = humanize(trace_info.total, &total_unit);
+			peak = humanize(trace_info.peak, &peak_unit);
+			current = humanize(trace_info.current, &current_unit);
+
+			fz_info(ctx, "Memory use total=%.2f%s peak=%.2f%s current=%.2f%s",
+				total, total_unit, peak, peak_unit, current, current_unit);
 			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
 
 			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!

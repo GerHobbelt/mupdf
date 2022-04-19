@@ -722,6 +722,33 @@ static void open_logfile(const char* scriptname)
 	logcfg.logfilepath = fz_strdup(ctx, logfilename_0);
 }
 
+static float humanize(size_t value, const char** unit)
+{
+	float result;
+	if (value >= 1024 * 1024 * 1024.0f)
+	{
+		*unit = "G";
+		result = value / (1024 * 1024 * 1024.0f);
+	}
+	else if (value >= 1024 * 1024.0f)
+	{
+		*unit = "M";
+		result = value / (1024 * 1024.0f);
+	}
+	else if (value >= 1024.0f)
+	{
+		*unit = "k";
+		result = value / 1024.0f;
+	}
+	else
+	{
+		*unit = "";
+		result = value;
+	}
+
+	return result;
+}
+
 static void mu_drop_context(void)
 {
 	if (showtime)
@@ -745,7 +772,17 @@ static void mu_drop_context(void)
 
 	if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
 	{
-		fz_info(ctx, "Memory use total=%zu peak=%zu current=%zu", trace_info.total, trace_info.peak, trace_info.current);
+		float total, peak, current;
+		const char* total_unit;
+		const char* peak_unit;
+		const char* current_unit;
+
+		total = humanize(trace_info.total, &total_unit);
+		peak = humanize(trace_info.peak, &peak_unit);
+		current = humanize(trace_info.current, &current_unit);
+
+		fz_info(ctx, "Memory use total=%.2f%s peak=%.2f%s current=%.2f%s",
+			total, total_unit, peak, peak_unit, current, current_unit);
 		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
 
 		// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
