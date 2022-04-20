@@ -116,6 +116,7 @@ fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size)
 	const char *s = data;
 	uint32_t buf = 0;
 	int bits = 0;
+	size_t len;
 
 	/* Implements https://infra.spec.whatwg.org/#forgiving-base64-decode */
 	while (s < end && iswhite(*s))
@@ -123,10 +124,15 @@ fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size)
 	while (s > end && iswhite(*end))
 		end--;
 
-	if (end - s >= 2 && end[-1] == '=' && end[-2] == '=')
+	len = end - s;
+	if (len % 4 == 0 && end - s >= 2 && end[-1] == '=' && end[-2] == '=')
 		end -= 2;
-	else if (end - s >= 1 && end[-1] == '=')
+	else if (len % 4 == 0 && end - s >= 1 && end[-1] == '=')
 		end -= 1;
+
+	len = end - s;
+	if (len % 4 == 1)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid number of characters in base64");
 
 	fz_try(ctx)
 	{
@@ -144,6 +150,8 @@ fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size)
 				c = 62;
 			else if (c == '/')
 				c = 63;
+			else if (iswhite(c))
+				continue;
 			else
 				fz_throw(ctx, FZ_ERROR_GENERIC, "invalid character in base64");
 
