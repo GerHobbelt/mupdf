@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -2620,6 +2620,76 @@ int mudraw_main(int argc, char **argv)
 		if (!errored) {
 			fprintf(stderr, "Rendering failed\n");
 			errored = 1;
+		}
+	}
+
+	{
+		const char *input[] = {
+			"",
+			"Zg==",
+			"Zm8=",
+			"Zm9v",
+			"Zm9vYg==",
+			"Zm9vYmE=",
+			"Zm9vYmFy",
+			"Z",
+			"Zg",
+			"Zg=",
+			"Zg======",
+			"Zg==Zg==",
+			"Zg==%",
+			"Z'g=",
+		};
+		size_t k;
+
+		for (k = 0; k < nelem(input); k++)
+		{
+			fz_buffer *buf = NULL;
+			size_t size, i;
+			unsigned char *data = NULL;
+			fz_buffer *out = fz_new_buffer(ctx, 0);
+			unsigned char *s;
+
+			fz_var(buf);
+
+			fz_warn(ctx, "<<<");
+
+			fz_append_printf(ctx, out, "input = '");
+			for (i = 0; i < strlen(input[k]); i++)
+				fz_append_byte(ctx, out, input[k][i]);
+			fz_append_printf(ctx, out, "' -> ");
+
+			fz_try(ctx)
+			{
+				buf = fz_new_buffer_from_base64(ctx, input[k], strlen(input[k]));
+
+				size = fz_buffer_storage(ctx, buf, &data);
+				fz_warn(ctx, "data = %p size = %zd", data, size);
+
+				fz_append_printf(ctx, out, "'");
+				for (i = 0; i < size; i++)
+					if (data[i] >= ' ' && data[i] <= '~')
+						fz_append_byte(ctx, out, data[i]);
+					else
+						fz_append_byte(ctx, out, '?');
+				fz_append_printf(ctx, out, "' == ");
+				for (i = 0; i < size; i++)
+				{
+					int m = data[i];
+					fz_append_printf(ctx, out, "0x%02x ", m);
+				}
+			}
+			fz_always(ctx)
+				fz_drop_buffer(ctx, buf);
+			fz_catch(ctx)
+				fz_append_printf(ctx, out, "ERROR");
+
+			fz_terminate_buffer(ctx, out);
+			(void) fz_buffer_storage(ctx, out, &s);
+			fz_warn(ctx, "%s", s);
+			fz_drop_buffer(ctx, out);
+
+			fz_warn(ctx, ">>>");
 		}
 	}
 
