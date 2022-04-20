@@ -119,6 +119,8 @@ fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size)
 				fz_append_bits(ctx, buf, 62, 6);
 			else if (c == '/')
 				fz_append_bits(ctx, buf, 63, 6);
+			else
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "Unrecognised base64 character: %i", c);
 		}
 	}
 	fz_catch(ctx)
