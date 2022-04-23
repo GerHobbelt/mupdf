@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -52,12 +52,7 @@ public class PDFPage extends Page
 	public PDFWidget activateWidgetAt(float pageX, float pageY) {
 		for (PDFWidget widget : getWidgets()) {
 			if (widget.getBounds().contains(pageX, pageY)) {
-				widget.eventEnter();
-				widget.eventDown();
-				widget.eventFocus();
-				widget.eventUp();
-				widget.eventExit();
-				widget.eventBlur();
+				widget.activate();
 				return widget;
 			}
 		}
