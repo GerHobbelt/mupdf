@@ -494,7 +494,8 @@ static int usage(void)
 		"  -r -  resolution in dpi (default: 72)\n"
 		"  -w -  page width (in pixels) (maximum width if -r is specified)\n"
 		"  -h -  page height (in pixels) (maximum height if -r is specified)\n"
-		"  -f    fit file to page if too large\n"
+		"  -f    fit file to page if too large: fit width and/or height exactly;\n"
+		"        ignore original aspect ratio\n"
 		"  -B -  maximum band height (pXm, pcl, pclm, ocr.pdf, ps, psd, muraw and png output\n"
 		"        only)\n"
 #ifndef DISABLE_MUTHREADS
