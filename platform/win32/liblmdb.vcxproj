@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,24 +111,32 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-            <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -140,14 +148,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/lmdb/include;../../thirdparty/owemdjee/lmdb/libraries/liblmdb;../../scripts/lmdb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -166,7 +174,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/lmdb/include;../../thirdparty/owemdjee/lmdb/libraries/liblmdb;../../scripts/lmdb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -174,7 +182,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -195,14 +203,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/lmdb/include;../../thirdparty/owemdjee/lmdb/libraries/liblmdb;../../scripts/lmdb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -221,7 +229,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/lmdb/include;../../thirdparty/owemdjee/lmdb/libraries/liblmdb;../../scripts/lmdb/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -229,7 +237,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLMDB;LMDB_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -242,32 +250,368 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/chacha8.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/crypto.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mdb.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mdb_copy.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mdb_drop.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mdb_dump.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mdb_load.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mdb_stat.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/midl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/module.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest5.c" />
     <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest6.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest_enc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest_enc2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/mtest_remap.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/chacha8.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/ucdata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/ucgendat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/ucpgba.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ure/ure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ure/urestubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/utbm/utbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/utbm/utbmstub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/base64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/detach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/entropy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/getpass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/getpeereid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/lockf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/memcmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/meter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/ntservice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/passfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/passwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/ptest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/sasl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/sockpair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/uuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/ldapmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/rewrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/rule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/session.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/subst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/var.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/xmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/tests/modules/mod-harness/config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/tests/modules/mod-harness/connection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lmdb/tests/modules/mod-harness/init.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/build/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPAddRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPAsynConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPAttrType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPAttributeList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPBindRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPCompareRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPConstraints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPControl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPControlSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPDeleteRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPEntry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPEntryList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPExtRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPExtResult.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPMessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPMessageQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPModDNRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPModList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPModification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPModifyRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPObjClass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPRebind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPRebindAuth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPReferenceList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPResult.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPSaslBindResult.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPSchema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPSearchReference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPSearchRequest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPSearchResult.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPSearchResults.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPUrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LDAPUrlList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LdifReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/LdifWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/SaslInteraction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/SaslInteractionHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/StringList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/TlsOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/ac/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/ldapc++/src/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/comp_match/asn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/comp_match/authorityKeyIdentifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/comp_match/certificate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/comp_match/componentlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/comp_match/crl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/nssov/nss-pam-ldapd/attrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/nssov/nss-pam-ldapd/nslcd-prot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/nssov/nss-pam-ldapd/nslcd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/nssov/nss-pam-ldapd/tio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/nssov/nssov.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/passwd/sha2/sha2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/ppm/ppm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/rbac/ldap_rbac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/contrib/slapd-modules/rbac/rbac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/doc/devel/variadic_debug/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/alloca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/bytes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/crypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/ctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/fdset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/localize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/stdarg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/stdlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/sysexits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/syslog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/termios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/unistd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ac/wait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/getopt-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lber_pvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_avl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_cdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_defaults.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_int_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_pvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_pvt_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_pvt_uc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_rq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldap_utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/ldif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lutil_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lutil_ldap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lutil_lockf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lutil_md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lutil_meter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/lutil_sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/openldap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/rewrite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/slapi-plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/include/sysexits-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblber/lber-int.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/lmdb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/midl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/ucdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/ucpgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/uctable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ure/ure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/utbm/utbm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/slapdmsg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/rewrite-int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/rewrite-map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/tests/modules/mod-harness/mod-harness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lmdb/tests/progs/slapd-common.h" />
+    <ClInclude Include="..\..\scripts\lmdb\include\ldap_config.h" />
+    <ClInclude Include="..\..\scripts\lmdb\include\ldap_features.h" />
+    <ClInclude Include="..\..\scripts\lmdb\include\portable.h" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/allmail-en.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/allusersgroup-en.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/config_dit.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/config_local.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/config_ref.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/config_repl.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/delta-syncrepl.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/dual_dc.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/intro_dctree.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/intro_tree.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/ldap-sync-refreshandpersist.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/ldap-sync-refreshonly.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/load-balancer-scenario.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/n-way-multi-provider.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/push-based-complete.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/push-based-standalone.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/refint.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/set-following-references.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/set-memberUid.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/set-recursivegroup.png" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/images/LDAPlogo.gif" />
+    <Image Include="../../thirdparty/owemdjee/lmdb/doc/guide/images/LDAPwww.gif" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/build/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/build/version.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/devel/lloadd/design.md" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/devel/utfconv.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/devel/variadic_debug/script.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-behera-ldap-password-policy-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-chu-ldap-csn-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-chu-ldap-ldapi-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-chu-ldap-xordered-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-haripriya-dynamicgroup-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-howard-rfc2307bis-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-ietf-ldapext-acl-model-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-ietf-ldapext-ldap-c-api-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-ietf-ldapext-ldapv3-dupent-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-ietf-ldapext-ldapv3-vlv-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-ietf-ldapext-locate-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-joslin-config-schema-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-lachman-laser-ldap-mail-routing-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-legg-ldap-acm-admin-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-legg-ldap-acm-bac-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-legg-ldap-admin-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-legg-ldap-transfer-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-masarati-ldap-deref-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-masarati-ldap-whatfailed-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-sermersheim-ldap-chaining-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-sermersheim-ldap-csn-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-sermersheim-ldap-distproc-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-sermersheim-ldap-subordinate-scope-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-stroeder-namedobject-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-vchu-ldap-pwd-policy-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-wahl-ldap-session-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-zeilenga-ldap-c-api-concurrency-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-zeilenga-ldap-noop-xx.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-zeilenga-ldap-relax.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/README.spellcheck" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/guide/admin/appendix-changes.sdf" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/guide/images/src/README.fonts" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/guide/release/autoconf-install.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/man/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/man/man1/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/man/man3/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/man/man5/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/man/man8/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2079.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2247.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2293.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2294.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2307.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2377.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2589.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2649.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2696.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2713.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2714.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2798.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2849.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2891.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc2926.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3045.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3062.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3088.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3112.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3296.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3663.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3671.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3672.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3673.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3687.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3698.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3703.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3712.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3727.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3829.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3866.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3876.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3909.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc3928.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4013.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4370.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4373.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4403.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4510.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4511.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4512.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4513.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4514.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4515.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4516.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4517.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4518.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4519.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4520.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4521.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4522.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4523.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4524.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4525.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4526.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4527.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4528.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4529.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4530.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4531.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4532.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc4533.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc5020.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc5805.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/doc/rfc/rfc6171.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/include/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblber/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblber/lber.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/sample-bdb.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblmdb/sample-mdb.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/CompositionExclusions.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/UnicodeData.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/MUTTUCData.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/api.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/bidiapi.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblunicode/ucdata/format.txt" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/liblutil/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/libraries/librewrite/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/data/tls/create-crt.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/modules/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/modules/mod-harness/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/progs/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/python/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/python/backends.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/python/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/python/overlays.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/python/slapd.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/python/syncrepl.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/run.in" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/conf.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/confdirsync.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/defines.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/gdb.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/grandchild_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/monitor_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/setup_kdc.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/startup_nis_ldap_server.sh" />
+    <Text Include="../../thirdparty/owemdjee/lmdb/tests/scripts/test081-totp.py" />
+    <Xml Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-behera-ldap-password-policy-xx.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-chu-ldap-kdc-schema-xx.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-chu-ldap-ldapi-xx.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-chu-ldap-xordered-xx.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-howard-rfc2307bis-xx.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-masarati-ldap-deref.xml" />
+    <Xml Include="../../thirdparty/owemdjee/lmdb/doc/drafts/draft-masarati-ldap-whatfailed.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
