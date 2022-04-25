@@ -17,6 +17,7 @@ EXPORTS
 	mudraw_main
 	mujs_example_main
 	mujs_prettyprint_main
+	mupdf_base64_test_main
 	muraster_main
 	murun_main
 	mutrace_main
@@ -31,15 +32,14 @@ EXPORTS
 	pdfshow_main
 	pdfsign_main
 	pdftagged_main
+	qiqqa_documentid62_main
 	qiqqa_fingerprint0_main
 	qiqqa_fingerprint1_main
-	qiqqa_documentid62_main
 	qiqqa_muannot_main
 	qiqqa_mucontent_main
 	qiqqa_muserver_main
 	sqlite_main
 	tesseract_main
-	mupdf_base64_test_main
 
 ; MuPDF ucdn exports
 
@@ -137,6 +137,8 @@ EXPORTS
 	curl_easy_send
 	curl_easy_setopt
 	curl_easy_upkeep
+	curl_easy_header
+	curl_easy_nextheader
 	curl_maprintf
 	curl_mfprintf
 	curl_mprintf
@@ -190,8 +192,6 @@ EXPORTS
 	fz_open_url
 
 ; helpers exports
-
-	LeptMsgSeverity           DATA
 
 	fz_get_cpu_core_count
 	fzPopHeapDbgPurpose
@@ -1063,6 +1063,7 @@ EXPORTS
 	fz_fopen_utf8
 	fz_free_argv
 	fz_remove_utf8
+	fz_stat_ctime
 	fz_stat_mtime
 	fz_utf8_from_wchar
 	fz_wchar_from_utf8
@@ -1258,8 +1259,10 @@ EXPORTS
 	pdf_annot_field_flags
 	pdf_annot_field_label
 	pdf_annot_field_value
+	pdf_annot_filespec
 	pdf_annot_flags
 	pdf_annot_has_author
+	pdf_annot_has_filespec
 	pdf_annot_has_icon_name
 	pdf_annot_has_ink_list
 	pdf_annot_has_interior_color
@@ -1311,10 +1314,12 @@ EXPORTS
 	pdf_delete_annot
 	pdf_dirty_annot
 	pdf_drop_annot
+	pdf_embedded_file_stream
 	pdf_first_annot
 	pdf_first_raw_annot
 	pdf_first_widget
 	pdf_format_link_uri
+	pdf_get_embedded_file_params
 	pdf_get_widget_editing_state
 	pdf_is_embedded_file
 	pdf_keep_annot
@@ -1322,6 +1327,7 @@ EXPORTS
 	pdf_layout_text_widget
 	pdf_line_ending_from_name
 	pdf_line_ending_from_string
+	pdf_load_embedded_file_contents
 	pdf_load_link_annots
 	pdf_load_name_tree
 	pdf_lookup_dest
@@ -1354,6 +1360,7 @@ EXPORTS
 	pdf_set_annot_creation_date
 	pdf_set_annot_default_appearance
 	pdf_set_annot_field_value
+	pdf_set_annot_filespec
 	pdf_set_annot_flags
 	pdf_set_annot_hot
 	pdf_set_annot_icon_name
@@ -1381,6 +1388,7 @@ EXPORTS
 	pdf_update_annot
 	pdf_update_appearance
 	pdf_update_page
+	pdf_verify_embedded_file_checksum
 	pdf_walk_tree
 	pdf_clean_file
 	pdf_add_codespace
@@ -1437,6 +1445,7 @@ EXPORTS
 	pdf_can_be_saved_incrementally
 	pdf_count_layer_config_ui
 	pdf_count_layer_configs
+	pdf_count_layers
 	pdf_create_document
 	pdf_delete_page
 	pdf_delete_page_range
@@ -1445,6 +1454,7 @@ EXPORTS
 	pdf_document_language
 	pdf_drop_document
 	pdf_drop_graft_map
+	pdf_enable_layer
 	pdf_format_write_options
 	pdf_graft_mapped_object
 	pdf_graft_mapped_page
@@ -1461,6 +1471,8 @@ EXPORTS
 	pdf_keep_graft_map
 	pdf_layer_config_info
 	pdf_layer_config_ui_info
+	pdf_layer_is_enabled
+	pdf_layer_name
 	pdf_load_journal
 	pdf_load_outline
 	pdf_lookup_metadata
@@ -2143,6 +2155,7 @@ EXPORTS
 	JxlDecoderSetImageOutBuffer
 	JxlDecoderSetInput
 	JxlDecoderSetJPEGBuffer
+	JxlDecoderSetMultithreadedImageOutCallback
 	JxlDecoderSetPreferredColorProfile
 	JxlDecoderSetPreviewOutBuffer
 	JxlDecoderSizeHintBasicInfo
@@ -4107,6 +4120,7 @@ EXPORTS
 	JS_GetPropertyStr
 	JS_GetPropertyUint32
 	JS_GetPrototype
+	JS_GetRawOpaque
 	JS_GetRuntime
 	JS_GetRuntimeOpaque
 	JS_GetScriptOrModuleName
@@ -4123,6 +4137,7 @@ EXPORTS
 	JS_IsInstanceOf
 	JS_IsJobPending
 	JS_IsLiveObject
+	JS_IsPromise
 	JS_IsRegisteredClass
 	JS_JSONStringify
 	JS_Leave
