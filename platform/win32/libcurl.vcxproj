@@ -125,6 +125,14 @@
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
             <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -405,6 +413,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/gopher.c" />
     <ClCompile Include="../../thirdparty/curl/lib/h2h3.c" />
     <ClCompile Include="../../thirdparty/curl/lib/hash.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/headers.c" />
     <ClCompile Include="../../thirdparty/curl/lib/hmac.c" />
     <ClCompile Include="../../thirdparty/curl/lib/hostasyn.c" />
     <ClCompile Include="../../thirdparty/curl/lib/hostip.c" />
@@ -488,6 +497,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/vauth/vauth.c" />
     <ClCompile Include="../../thirdparty/curl/lib/version.c" />
     <ClCompile Include="../../thirdparty/curl/lib/version_win32.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/msh3.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vquic/ngtcp2.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vquic/quiche.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vquic/vquic.c" />
@@ -556,6 +566,7 @@
     <ClInclude Include="../../thirdparty/curl/include/curl/curlbuild.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/curlver.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/easy.h" />
+    <ClInclude Include="../../thirdparty/curl/include/curl/header.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/mprintf.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/multi.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/options.h" />
@@ -630,6 +641,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/gopher.h" />
     <ClInclude Include="../../thirdparty/curl/lib/h2h3.h" />
     <ClInclude Include="../../thirdparty/curl/lib/hash.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/headers.h" />
     <ClInclude Include="../../thirdparty/curl/lib/hostip.h" />
     <ClInclude Include="../../thirdparty/curl/lib/hsts.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http.h" />
@@ -695,6 +707,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/vauth/ntlm.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vauth/vauth.h" />
     <ClInclude Include="../../thirdparty/curl/lib/version_win32.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/msh3.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vquic/ngtcp2.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vquic/quiche.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vquic/vquic.h" />
@@ -847,9 +860,9 @@
     <Text Include="../../thirdparty/curl/include/curl/Makefile.am" />
     <Text Include="../../thirdparty/curl/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/lib/Makefile.am" />
-    <Text Include="../../thirdparty/curl/lib/firefox-db2pem.sh" />
     <Text Include="../../thirdparty/curl/lib/libcurl.vers.in" />
     <Text Include="../../thirdparty/curl/libcurl.pc.in" />
+    <Text Include="../../thirdparty/curl/mlc_config.json" />
     <Text Include="../../thirdparty/curl/packages/Makefile.am" />
     <Text Include="../../thirdparty/curl/packages/OS400/README.OS400" />
     <Text Include="../../thirdparty/curl/packages/OS400/curl.inc.in" />
@@ -865,10 +878,12 @@
     <Text Include="../../thirdparty/curl/packages/vms/gnv_curl_configure.sh" />
     <Text Include="../../thirdparty/curl/packages/vms/make_gnv_curl_install.sh" />
     <Text Include="../../thirdparty/curl/packages/vms/pcsi_gnv_curl_file_list.txt" />
+    <Text Include="../../thirdparty/curl/projects/README.md" />
     <Text Include="../../thirdparty/curl/scripts/Makefile.am" />
     <Text Include="../../thirdparty/curl/scripts/contributors.sh" />
     <Text Include="../../thirdparty/curl/scripts/contrithanks.sh" />
     <Text Include="../../thirdparty/curl/scripts/coverage.sh" />
+    <Text Include="../../thirdparty/curl/scripts/firefox-db2pem.sh" />
     <Text Include="../../thirdparty/curl/scripts/installcheck.sh" />
     <Text Include="../../thirdparty/curl/scripts/log2changes.pl" />
     <Text Include="../../thirdparty/curl/scripts/zuul/before_script.sh" />

@@ -80,11 +80,19 @@ if (projname.endsWith("_tests")) {
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_demos")) {
 	let tst_projname = projname.replace(/_demos$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -94,11 +102,19 @@ if (projname.endsWith("_benchmark")) {
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_examples")) {
 	let tst_projname = projname.replace(/_examples$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -124,6 +140,7 @@ const projectMap = {
 	"libchm_io": "CHM-lib",
 	"libcli11-examples": " cli11/examples",
 	"libclipp_examples": "clipp/examples",
+	"libcurl_examples": "curl",
 	"libdjvu_io": "djvulibre",
 	"libdtldiff": "dtl-diff-template-library",
 	"libenkiTaskScheduler": "enkiTS-TaskScheduler",
@@ -161,6 +178,10 @@ for (const key in projectMap) {
 	let value = projectMap[key];
 	if (projname === key) {
 		testpath = `${scriptpath}/../../thirdparty/owemdjee/${value}`;
+
+		checkDirAndReportPlusExitOnSuccess(testpath);
+
+		testpath = `${scriptpath}/../../thirdparty/${value}`;
 
 		checkDirAndReportPlusExitOnSuccess(testpath);
 	}
