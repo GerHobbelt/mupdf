@@ -256,7 +256,6 @@ static struct {
 	{ jpegXL_pq_to_hlg_main, "jpegXL_pq_to_hlg", "jpegXL_pq_to_hlg tool" },
 	{ jpegXL_render_hlg_main, "jpegXL_render_hlg", "jpegXL_render_hlg tool" },
 	{ jpegXL_texture_to_cube_main, "jpegXL_texture_to_cube", "jpegXL_texture_to_cube tool" },
-	{ jpegXL_add_noise_main, "jpegXL_add_noise", "jpegXL_add_noise tool" },
 #endif
 
 #if defined(MUTOOL_EX)

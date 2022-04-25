@@ -39,7 +39,7 @@
 static fz_context *ctx = NULL;
 
 
-#if !defined(MUDRAW_STANDALONE) && defined(BUILD_MONOLITHIC)
+#if defined(BUILD_MONOLITHIC)
 #define main(cnt, arr)      mupdf_base64_test_main(cnt, arr)
 #endif
 
