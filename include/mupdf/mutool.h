@@ -29,6 +29,8 @@ int pdfsign_main(int argc, const char** argv);
 int pdftagged_main(int argc, const char** argv);
 int pdfmetadump_main(int argc, const char** argv);
 
+int mupdf_base64_test_main(int argc, const char** argv);
+
 int cmapdump_main(int argc, const char** argv);
 
 #if !defined(TESSERACT_STANDALONE) || defined(BUILD_MONOLITHIC)

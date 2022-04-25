@@ -101,6 +101,10 @@ static struct {
 #endif
 #endif
 #if defined(MUTOOL_EX)
+	{ mupdf_base64_test_main, "base64_test", "muPDF base64 fringe case tests" },
+#endif
+
+#if defined(MUTOOL_EX)
     { tesseract_main, "tesseract", "OCR given image or PDF" },
 #endif
 

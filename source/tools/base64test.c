@@ -40,7 +40,7 @@ static fz_context *ctx = NULL;
 
 
 #if !defined(MUDRAW_STANDALONE) && defined(BUILD_MONOLITHIC)
-#define main(cnt, arr)      mudraw_main(cnt, arr)
+#define main(cnt, arr)      mupdf_base64_test_main(cnt, arr)
 #endif
 
 int main(int argc, const char** argv)
@@ -48,14 +48,23 @@ int main(int argc, const char** argv)
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	ctx = NULL;
 
-	ctx = fz_new_context(NULL, NULL, max_store);
+	if (!fz_has_global_context())
+	{
+		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+	}
+
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 	if (!ctx)
 	{
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
-
-	gettime_once = 1;
 
 	{
 		const char *input[] = {
@@ -128,7 +137,7 @@ int main(int argc, const char** argv)
 	}
 
 	fz_flush_warnings(ctx);
-	mu_drop_context();
+	fz_drop_context(ctx);
 
 	return 0;
 }
