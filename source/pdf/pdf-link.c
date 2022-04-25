@@ -260,7 +260,7 @@ pdf_get_embedded_file_params(fz_context *ctx, pdf_obj *fs, pdf_embedded_file_par
 	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(Unix));
 	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(DOS));
 	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(Mac));
-	out->filename = pdf_to_text_string(ctx, filename);
+	out->filename = pdf_to_text_string(ctx, filename, NULL);
 
 	subtype = pdf_dict_get(ctx, file, PDF_NAME(Subtype));
 	if (!subtype)

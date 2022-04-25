@@ -136,6 +136,14 @@
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
             <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -292,7 +300,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/examples/jxlinfo.c" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/experimental/fast_lossless/fast_lossless.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_psd.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/apng_dec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/color_description.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/color_hints.cc" />
@@ -485,7 +492,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/experimental/fast_lossless/fast_lossless.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/experimental/fast_lossless/pam-input.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/codec_psd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/apng.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/color_description.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/color_hints.h" />
@@ -545,6 +551,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/printf_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/profiler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/sanitizer_definitions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/scope_guard.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/span.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/base/status.h" />
@@ -629,6 +636,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/encode_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/entropy_coder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/epf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/exif.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fake_parallel_runner_testonly.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_dct-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_dct.h" />
@@ -763,6 +771,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/ops/x86_128-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/ops/x86_256-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/ops/x86_512-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/print-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/print.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/targets.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/tests/hwy_gtest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/tests/test_util-inl.h" />
@@ -861,7 +871,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/skcms/skcms_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/skcms/src/Transform_inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/skcms/test_only.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/color_management/sRGB-D2700.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/vmaf/libvmaf/include/libvmaf/compute_vmaf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/vmaf/libvmaf/include/libvmaf/feature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/vmaf/libvmaf/include/libvmaf/libvmaf.h" />
@@ -974,84 +983,6 @@
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/IQA-optimization/IQA_pytorch/images/r1.png" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/IQA-optimization/images/r0.png" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/IQA-optimization/images/r1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/dots/ellipses.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_420.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_420_progr.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_422.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_440.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_444.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_444_1x2.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_asymmetric.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_gray.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon.png.im_q85_luma_subsample.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon_alpha.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/imagecompression.info/flower_foveon_cropped.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/animation_patches.gif" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/blending/cropped_traffic_light_frame-0.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/blending/cropped_traffic_light_frame-1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/blending/cropped_traffic_light_frame-2.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/blending/cropped_traffic_light_frame-3.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/grayscale_patches.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/jpeg_reconstruction/1x1_exif_xmp.jpg" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/spline_on_first_frame.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/jxl/traffic_light.gif" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/ccwn2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/ccwn3p08.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/ct1n0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/ctjn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/ctzn0g04.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/exif2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/g04n2c08.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/pngsuite/g10n3p04.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/DJI-FC6310-16bit_709_v4_krita.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/DJI-FC6310-16bit_srgb8_v4_krita.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/Google-Pixel2XL-16bit_acescg_g1_v4_krita.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/Google-Pixel2XL-16bit_srgb8_v4_krita.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/HUAWEI-EVA-L09-16bit_709_g1_dt.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/HUAWEI-EVA-L09-16bit_srgb8_dt.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/Nikon-D300-12bit_2020_g1_dt.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/Nikon-D300-12bit_srgb8_dt.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/Sony-DSC-RX1RM2-14bit_709_v4_krita.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/raw.pixls/Sony-DSC-RX1RM2-14bit_srgb8_v4_krita.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/500px/cvo9xd_keong_macan_grayscale.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/500px/cvo9xd_keong_macan_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/500px/tmshre_riaphotographs_alpha.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/500px/tmshre_riaphotographs_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/500px/u76c0g_bliznaca_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/Nikon-D3-14bit_2020_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/Nikon-D3-14bit_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/a2d1un_nkitzmiller_2020_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/a2d1un_nkitzmiller_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/cvo9xd_keong_macan_2020_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/cvo9xd_keong_macan_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/l1qnb5_nkitzmiller_2020_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/l1qnb5_nkitzmiller_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/phu1or_alfann24_2020_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/phu1or_alfann24_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/q3a0b3_d17ws_709_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/q3a0b3_d17ws_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/ra0ed45_alfann24_709_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/ra0ed45_alfann24_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/t0gho7_orlaustral_709_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/t0gho7_orlaustral_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/tmshre_riaphotographs_709_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/tmshre_riaphotographs_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/u76c0g_bliznaca_709_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/u76c0g_bliznaca_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/vgqcws_vin_709_g1.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wesaturate/64px/vgqcws_vin_srgb8.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/P3-sRGB-blue.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/P3-sRGB-color-bars.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/P3-sRGB-color-ring.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/P3-sRGB-green.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/P3-sRGB-red.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/R2020-sRGB-blue.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/R2020-sRGB-color-bars.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/R2020-sRGB-color-ring.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/R2020-sRGB-green.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/R2020-sRGB-red.png" />
-    <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/testdata/wide-gamut-tests/rgb-to-gbr-test.png" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/vmaf/resource/images/CI.png" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/vmaf/resource/images/phone_model.png" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/vmaf/resource/images/scatter_testing.png" />

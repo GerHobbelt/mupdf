@@ -197,7 +197,7 @@ populate_ui(fz_context *ctx, pdf_ocg_descriptor *desc, int fill, pdf_obj *order,
 			ui = get_ocg_ui(ctx, desc, fill++);
 			ui->depth = depth;
 			ui->ocg = -1;
-			ui->name = pdf_to_text_string(ctx, o);
+			ui->name = pdf_to_text_string(ctx, o, NULL);
 			ui->button_flags = PDF_LAYER_UI_LABEL;
 			ui->locked = 1;
 			continue;
