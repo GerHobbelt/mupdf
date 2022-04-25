@@ -780,6 +780,8 @@ fz_buffer *pdf_load_embedded_file_contents(fz_context *ctx, pdf_obj *fs);
 */
 int pdf_verify_embedded_file_checksum(fz_context *ctx, pdf_obj *fs);
 
+pdf_obj* pdf_embedded_file_stream(fz_context* ctx, pdf_obj* fs);
+
 char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *obj);
 char *pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *obj, int pagenum);
 pdf_obj *pdf_lookup_dest(fz_context *ctx, pdf_document *doc, pdf_obj *needle);

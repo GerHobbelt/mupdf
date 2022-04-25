@@ -25,6 +25,7 @@
 
 #include <string.h>
 
+
 static pdf_obj *
 resolve_dest_rec(fz_context *ctx, pdf_document *doc, pdf_obj *dest, int depth)
 {
@@ -226,7 +227,7 @@ pdf_parse_file_spec(fz_context *ctx, pdf_document *doc, pdf_obj *file_spec, pdf_
 	return uri;
 }
 
-static pdf_obj *
+pdf_obj *
 pdf_embedded_file_stream(fz_context *ctx, pdf_obj *fs)
 {
 	pdf_obj *ef = pdf_dict_get(ctx, fs, PDF_NAME(EF));

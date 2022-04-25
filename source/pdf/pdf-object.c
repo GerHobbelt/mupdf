@@ -3175,16 +3175,17 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 
 		fmt_dict(ctx, fmt, pdf_resolve_indirect(ctx, obj));
 
-		const char* ftype = pdf_embedded_file_type(ctx, obj);
-		const char* fname = NULL;
+		pdf_embedded_file_params fs_params = { NULL };
+
 		fz_buffer* fbuf = NULL;
 		unsigned char* fdata = NULL;
 		size_t fdatalen = 0;
 
 		fz_try(ctx)
 		{
-			fname = pdf_embedded_file_name(ctx, obj);
-			fbuf = pdf_load_embedded_file(ctx, obj);
+			pdf_get_embedded_file_params(ctx, obj, &fs_params);
+
+			fbuf = pdf_load_embedded_file_contents(ctx, obj);
 			if (fbuf)
 			{
 				fz_terminate_buffer(ctx, fbuf);
@@ -3192,7 +3193,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 				// fdata = fz_string_from_buffer(ctx, fbuf);
 			}
 
-			fmt_printf(ctx, fmt, "filename:%q type:%s length:%zu", fname, ftype, fdatalen);
+			fmt_printf(ctx, fmt, "filename:%q type:%s length:%zu", fs_params.filename, fs_params.mimetype, (size_t)fs_params.size);
 			fmt_sep(ctx, fmt);
 			int smart_mod = (fmt->flags & PDF_SMART_MOD_MASK);
 			if (smart_mod)
@@ -3231,7 +3232,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 
 		if (is_xml_metadata(ctx, obj))
 		{
-			char* data = NULL;
+			unsigned char* data = NULL;
 			fz_xml_doc* xml_doc = NULL;
 			fz_buffer* xml_buf = NULL;
 			fz_xml* xml_root = NULL;
@@ -3548,7 +3549,9 @@ int pdf_debug_obj_internal(fz_context *ctx, pdf_obj *obj, fz_output *out, int de
 	}
 	else if (pdf_is_embedded_file(ctx, obj))
 	{
-		fz_write_printf(ctx, out, "embedded_file:%s", pdf_embedded_file_name(ctx, obj));
+		pdf_embedded_file_params fs_params = { NULL };
+		pdf_get_embedded_file_params(ctx, obj, &fs_params);
+		fz_write_printf(ctx, out, "embedded_file:%s", fs_params.filename);
 	}
 	else if (pdf_is_indirect(ctx, obj))
 	{
@@ -3739,15 +3742,15 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	{
 		if (pdf_is_embedded_file(ctx, obj))
 		{
-			const char* ftype = pdf_embedded_file_type(ctx, obj);
-			const char* fname = pdf_embedded_file_name(ctx, obj);
+			pdf_embedded_file_params fs_params = { NULL };
+			pdf_get_embedded_file_params(ctx, obj, &fs_params);
 
 			fmt_indent(ctx, fmt);
 			fmt_printf(ctx, fmt, "%q: %s,\n", "IsEmbeddedFile", "true");
 			fmt_indent(ctx, fmt);
-			fmt_printf(ctx, fmt, "%q: %jq,\n", "EmbeddedFileType", ftype);
+			fmt_printf(ctx, fmt, "%q: %jq,\n", "EmbeddedFileType", fs_params.mimetype);
 			fmt_indent(ctx, fmt);
-			fmt_printf(ctx, fmt, "%q: %jq,\n", "EmbeddedFileName", fname);
+			fmt_printf(ctx, fmt, "%q: %jq,\n", "EmbeddedFileName", fs_params.filename);
 
 			pdf_obj* ci = pdf_dict_get(ctx, obj, PDF_NAME(CI));
 			pdf_obj* ci_index = pdf_dict_get(ctx, ci, PDF_NAME(Index));
@@ -3774,25 +3777,11 @@ static void fmt_dict_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 			}
 
 			pdf_obj* fparams = pdf_dict_get(ctx, file, PDF_NAME(Params));
-			pdf_obj* ct = pdf_dict_get(ctx, fparams, PDF_NAME(CreationDate));
-			if (ct) {
-				fmt_indent(ctx, fmt);
-				size_t dstrlen = 0;
-				const char* dstr = pdf_to_text_string(ctx, ct, &dstrlen);
-				fmt_printf(ctx, fmt, "%q: %.*jq,\n", "FileCreationDate", (int)dstrlen, dstr);
-			}
-			pdf_obj* mt = pdf_dict_get(ctx, fparams, PDF_NAME(ModDate));
-			if (mt) {
-				fmt_indent(ctx, fmt);
-				size_t dstrlen = 0;
-				const char* dstr = pdf_to_text_string(ctx, mt, &dstrlen);
-				fmt_printf(ctx, fmt, "%q: %.*jq,\n", "FileModDate", (int)dstrlen, dstr);
-			}
-			pdf_obj* fsiz = pdf_dict_get(ctx, fparams, PDF_NAME(Size));
-			if (fsiz) {
-				fmt_indent(ctx, fmt);
-				fmt_printf(ctx, fmt, "%q: %d,\n", "FileSize", pdf_to_int(ctx, fsiz));
-			}
+
+			fmt_printf(ctx, fmt, "%q: %jT,\n", "FileCreationDate", fs_params.created);
+			fmt_printf(ctx, fmt, "%q: %jT,\n", "FileModDate", fs_params.modified);
+			fmt_printf(ctx, fmt, "%q: %d,\n", "FileSize", fs_params.size);
+			
 			pdf_obj* fcrc = pdf_dict_get(ctx, fparams, PDF_NAME(CheckSum));
 			if (fcrc) {
 				fmt_indent(ctx, fmt);
@@ -4043,7 +4032,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 
 		if (is_xml_metadata(ctx, obj))
 		{
-			char* data = NULL;
+			unsigned char* data = NULL;
 			fz_xml_doc* xml_doc = NULL;
 			fz_buffer* xml_buf = NULL;
 			fz_xml* xml_root = NULL;
