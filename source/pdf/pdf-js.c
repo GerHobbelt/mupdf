@@ -22,6 +22,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "pdf-annot-imp.h"
 
 #if FZ_ENABLE_JS
 
