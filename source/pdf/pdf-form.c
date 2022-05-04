@@ -1130,12 +1130,12 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *upd
 				evt.willCommit = 1;
 				rc = pdf_annot_field_event_keystroke(ctx, doc, widget, &evt);
 				if (rc)
-					rc = pdf_set_annot_field_value(ctx, doc, widget, evt.newValue, 0);
+					rc = pdf_set_annot_field_value(ctx, doc, widget, evt.newValue);
 			}
 		}
 		else
 		{
-			rc = pdf_set_annot_field_value(ctx, doc, widget, update, 1);
+			rc = pdf_set_annot_field_value(ctx, doc, widget, update);
 		}
 	}
 	fz_always(ctx)
