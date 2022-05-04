@@ -640,11 +640,11 @@ enum pdf_widget_type pdf_widget_type(fz_context *ctx, pdf_annot *widget)
 	return ret;
 }
 
-static int set_validated_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int ignore_trigger_events)
+static int set_validated_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int is_being_edited)
 {
 	char *newtext = NULL;
 
-	if (!ignore_trigger_events)
+	if (!is_being_edited)
 	{
 		if (!pdf_field_event_validate(ctx, doc, field, text, &newtext))
 			return 0;
@@ -688,7 +688,7 @@ static int set_checkbox_value(fz_context *ctx, pdf_document *doc, pdf_obj *field
 	return 1;
 }
 
-int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int ignore_trigger_events)
+int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int is_being_edited)
 {
 	int accepted = 0;
 
@@ -697,7 +697,7 @@ int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, cons
 	case PDF_WIDGET_TYPE_TEXT:
 	case PDF_WIDGET_TYPE_COMBOBOX:
 	case PDF_WIDGET_TYPE_LISTBOX:
-		accepted = set_validated_field_value(ctx, doc, field, text, ignore_trigger_events);
+		accepted = set_validated_field_value(ctx, doc, field, text, is_being_edited);
 		break;
 
 	case PDF_WIDGET_TYPE_CHECKBOX:
@@ -711,7 +711,7 @@ int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, cons
 		break;
 	}
 
-	if (!ignore_trigger_events)
+	if (!is_being_edited)
 		doc->recalculate = 1;
 
 	return accepted;
@@ -1108,7 +1108,7 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *upd
 	fz_var(merged_value);
 	fz_try(ctx)
 	{
-		if (!widget->ignore_trigger_events)
+		if (!widget->is_being_edited)
 		{
 			evt.value = pdf_annot_field_value(ctx, widget);
 			evt.change = update;
@@ -1165,7 +1165,7 @@ int pdf_edit_text_field_value(fz_context *ctx, pdf_annot *widget, const char *va
 
 	fz_try(ctx)
 	{
-		if (!widget->ignore_trigger_events)
+		if (!widget->is_being_edited)
 		{
 			evt.value = value;
 			evt.change = change;
@@ -1953,12 +1953,12 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 
 void pdf_set_widget_editing_state(fz_context *ctx, pdf_annot *widget, int editing)
 {
-	widget->ignore_trigger_events = editing;
+	widget->is_being_edited = editing;
 }
 
 int pdf_get_widget_editing_state(fz_context *ctx, pdf_annot *widget)
 {
-	return widget->ignore_trigger_events;
+	return widget->is_being_edited;
 }
 
 static void pdf_execute_js_action(fz_context *ctx, pdf_document *doc, pdf_obj *target, const char *path, pdf_obj *js)

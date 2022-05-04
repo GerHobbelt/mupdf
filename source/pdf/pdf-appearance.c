@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1909,7 +1909,7 @@ pdf_write_widget_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf,
 		int ff = pdf_field_flags(ctx, annot->obj);
 		char *format = NULL;
 		const char *text = NULL;
-		if (!annot->ignore_trigger_events)
+		if (!annot->is_being_edited)
 		{
 			format = pdf_field_event_format(ctx, annot->page->doc, annot->obj);
 			if (format)

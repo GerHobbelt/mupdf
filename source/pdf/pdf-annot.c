@@ -2710,7 +2710,7 @@ int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_annot *ann
 	begin_annot_op(ctx, annot, "Set field value");
 
 	fz_try(ctx)
-		ret = pdf_set_field_value(ctx, doc, annot->obj, text, annot->ignore_trigger_events);
+		ret = pdf_set_field_value(ctx, doc, annot->obj, text, annot->is_being_edited);
 	fz_always(ctx)
 		end_annot_op(ctx, annot);
 	fz_catch(ctx)
