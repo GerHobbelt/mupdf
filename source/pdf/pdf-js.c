@@ -1097,6 +1097,31 @@ void pdf_js_event_init(pdf_js *js, pdf_obj *target, const char *value, int willC
 {
 	if (js)
 	{
+		/**
+		change="" set-by-mupdf documented
+		selEnd=-1 set-by-mupdf documented
+		selStart=-1 set-by-mupdf documented
+		value="3.145" set-by-mupdf documented
+		willCommit=false set-by-mupdf documented
+		target=Field set-by-mupdf documented
+		rc=true set-by-mupdf documented
+
+		targetName=price documented
+		source=null documented
+
+		commitKey=0
+		modifier=false
+		shift=false
+		silenceErrors=false
+		changeEx=""
+		keyDown=false
+		fieldFull=false
+		richChange=?
+		richChangeEx=?
+		richValue=?
+		name=Validate
+		type=Field
+		**/
 		js_getglobal(js->imp, "event");
 		{
 			js_pushboolean(js->imp, 1);
