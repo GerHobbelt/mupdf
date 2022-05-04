@@ -2703,14 +2703,14 @@ const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *widget)
 	return ret;
 }
 
-int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_annot *annot, const char *text, int ignore_trigger_events)
+int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_annot *annot, const char *text)
 {
 	int ret;
 
 	begin_annot_op(ctx, annot, "Set field value");
 
 	fz_try(ctx)
-		ret = pdf_set_field_value(ctx, doc, annot->obj, text, ignore_trigger_events);
+		ret = pdf_set_field_value(ctx, doc, annot->obj, text, annot->ignore_trigger_events);
 	fz_always(ctx)
 		end_annot_op(ctx, annot);
 	fz_catch(ctx)
