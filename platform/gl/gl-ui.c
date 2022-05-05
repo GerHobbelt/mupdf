@@ -431,6 +431,8 @@ void ui_init_dpi(float override_scale)
 	ui.padsize = 2 * ui.scale;
 }
 
+static int windowID = 0;
+
 void ui_init(int w, int h, const char *title)
 {
 #ifdef FREEGLUT
@@ -441,7 +443,7 @@ void ui_init(int w, int h, const char *title)
 	glutInitWarningFunc(on_warning);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	glutInitWindowSize(w, h);
-	glutCreateWindow(title);
+	windowID = glutCreateWindow(title);
 
 	glutTimerFunc(500, on_timer, 0);
 	glutReshapeFunc(on_reshape);
@@ -475,12 +477,14 @@ void ui_finish(void)
 	pdf_drop_annot(ctx, ui.selected_annot);
 	glDeleteLists(ui.overlay_list, 1);
 	ui_finish_fonts();
+	windowID = 0;
 	glutExit();
 }
 
 void ui_invalidate(void)
 {
-	glutPostRedisplay();
+	if (windowID)
+		glutPostRedisplay();
 }
 
 void ui_begin(void)
