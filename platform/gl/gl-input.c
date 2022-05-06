@@ -150,8 +150,9 @@ static void ui_input_paste(struct input *input, const char *buf)
 	if (input->widget)
 	{
 		char *newtext;
-		int selStart = input->p - input->text;
-		int selEnd = input->q - input->text;
+		int selStart = (input->p < input->q ? input->p : input->q) - input->text;
+		int selEnd = (input->p < input->q ? input->q : input->p) - input->text;
+
 		if (pdf_edit_text_field_value(ctx, input->widget, input->text, buf, &selStart, &selEnd, &newtext))
 		{
 			size_t len = strlen(newtext);
