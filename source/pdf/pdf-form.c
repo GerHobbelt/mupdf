@@ -1975,6 +1975,8 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 
 void pdf_set_widget_editing_state(fz_context *ctx, pdf_annot *widget, int editing)
 {
+	if (widget->ignore_trigger_events != editing)
+		pdf_set_annot_has_changed(ctx, widget);
 	widget->ignore_trigger_events = editing;
 }
 
