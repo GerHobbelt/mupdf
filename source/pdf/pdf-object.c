@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -980,7 +980,8 @@ int pdf_undoredo_state(fz_context *ctx, pdf_document *doc, int *steps)
 
 	if (ctx == NULL || doc == NULL || doc->journal == NULL)
 	{
-		*steps = 0;
+		if (steps)
+			*steps = 0;
 		return 0;
 	}
 
@@ -993,7 +994,8 @@ int pdf_undoredo_state(fz_context *ctx, pdf_document *doc, int *steps)
 			c = i;
 	}
 
-	*steps = i;
+	if (steps)
+		*steps = i;
 
 	return c;
 }

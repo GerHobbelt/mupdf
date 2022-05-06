@@ -121,7 +121,7 @@ FUN(PDFWidget_setValue)(JNIEnv *env, jobject self, jstring jval)
 
 	fz_var(accepted);
 	fz_try(ctx)
-		accepted = pdf_set_annot_field_value(ctx, pdf_annot_page(ctx, widget)->doc, pdf_annot_obj(ctx, widget), val);
+		accepted = pdf_set_annot_field_value(ctx, pdf_annot_page(ctx, widget)->doc, pdf_annot_obj(ctx, widget), (char *)val);
 	fz_always(ctx)
 		if (jval)
 			(*env)->ReleaseStringUTFChars(env, jval, val);
