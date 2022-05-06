@@ -125,13 +125,14 @@ fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size)
 		end--;
 
 	len = end - s;
-	if (len % 4 == 0 && end - s >= 2 && end[-1] == '=' && end[-2] == '=')
-		end -= 2;
-	else if (len % 4 == 0 && end - s >= 1 && end[-1] == '=')
-		end -= 1;
+	if (len > 0 && (len & 3) == 0)
+	{
+		if (end[-1] == '=') --end;
+		if (end[-1] == '=') --end;
+	}
 
 	len = end - s;
-	if (len % 4 == 1)
+	if ((len & 3) == 1)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid number of characters in base64");
 
 	fz_try(ctx)
