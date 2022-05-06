@@ -133,7 +133,7 @@ static void pdf_field_mark_dirty(fz_context *ctx, pdf_obj *field)
 		doc->resynth_required = 1;
 }
 
-static void update_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *obj, const char *text)
+static void update_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *obj, const char *text, int ignore_trigger_events)
 {
 	const char *old_text;
 	pdf_obj *grp;
@@ -148,9 +148,12 @@ static void update_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *obj,
 		obj = grp;
 
 	/* Only update if we change the actual value. */
-	old_text = pdf_dict_get_text_string(ctx, obj, PDF_NAME(V));
-	if (old_text && !strcmp(old_text, text))
-		return;
+	if (!ignore_trigger_events)
+	{
+		old_text = pdf_dict_get_text_string(ctx, obj, PDF_NAME(V));
+		if (old_text && !strcmp(old_text, text))
+			return;
+	}
 
 	pdf_dict_put_text_string(ctx, obj, PDF_NAME(V), text);
 
@@ -681,7 +684,7 @@ static int set_validated_field_value(fz_context *ctx, pdf_document *doc, pdf_obj
 			return 0;
 	}
 
-	update_field_value(ctx, doc, field, newtext ? newtext : text);
+	update_field_value(ctx, doc, field, newtext ? newtext : text, ignore_trigger_events);
 
 	fz_free(ctx, newtext);
 
@@ -712,10 +715,10 @@ static void update_checkbox_selector(fz_context *ctx, pdf_document *doc, pdf_obj
 	}
 }
 
-static int set_checkbox_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *val)
+static int set_checkbox_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *val, int ignore_trigger_events)
 {
 	update_checkbox_selector(ctx, doc, field, val);
-	update_field_value(ctx, doc, field, val);
+	update_field_value(ctx, doc, field, val, ignore_trigger_events);
 	return 1;
 }
 
@@ -733,11 +736,11 @@ int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, cons
 
 	case PDF_WIDGET_TYPE_CHECKBOX:
 	case PDF_WIDGET_TYPE_RADIOBUTTON:
-		accepted = set_checkbox_value(ctx, doc, field, text);
+		accepted = set_checkbox_value(ctx, doc, field, text, ignore_trigger_events);
 		break;
 
 	default:
-		update_field_value(ctx, doc, field, text);
+		update_field_value(ctx, doc, field, text, ignore_trigger_events);
 		accepted = 1;
 		break;
 	}
