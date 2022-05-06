@@ -653,7 +653,7 @@ int pdf_annot_field_flags(fz_context *ctx, pdf_annot *annot);
 const char *pdf_annot_field_value(fz_context *ctx, pdf_annot *annot);
 const char *pdf_annot_field_label(fz_context *ctx, pdf_annot *annot);
 
-int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_annot *annot, const char *text, int ignore_trigger_events);
+int pdf_set_annot_field_value(fz_context *ctx, pdf_document *doc, pdf_annot *annot, const char *text);
 
 /*
 	Recreate the appearance stream for an annotation, if necessary.

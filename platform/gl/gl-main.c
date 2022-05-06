@@ -2100,6 +2100,7 @@ gl_js_console_write(void *user, const char *message)
 			fz_append_byte(ctx, console_buffer, *p);
 		p++;
 	}
+	ui_invalidate();
 }
 
 static void
@@ -2131,6 +2132,7 @@ gl_js_console_clear(void *user)
 {
 	fz_resize_buffer(ctx, console_buffer, 0);
 	console_lines = 0;
+	ui_invalidate();
 }
 
 static void console_warn(void *user, const char *message)

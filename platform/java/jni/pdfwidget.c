@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -121,7 +121,7 @@ FUN(PDFWidget_setValue)(JNIEnv *env, jobject self, jstring jval)
 
 	fz_var(accepted);
 	fz_try(ctx)
-		accepted = pdf_set_field_value(ctx, pdf_annot_page(ctx, widget)->doc, pdf_annot_obj(ctx, widget), val, pdf_get_widget_editing_state(ctx, widget));
+		accepted = pdf_set_annot_field_value(ctx, pdf_annot_page(ctx, widget)->doc, pdf_annot_obj(ctx, widget), val);
 	fz_always(ctx)
 		if (jval)
 			(*env)->ReleaseStringUTFChars(env, jval, val);

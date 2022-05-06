@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -37,7 +37,7 @@ struct pdf_annot
 
 	int needs_new_ap; /* If set, then a resynthesis of this annotation has been requested. */
 	int has_new_ap; /* If set, then the appearance stream has changed since last queried. */
-	int ignore_trigger_events;
+	int is_being_edited;
 
 	pdf_annot *next;
 };
@@ -47,5 +47,7 @@ void pdf_drop_annots(fz_context *ctx, pdf_annot *annot_list);
 void pdf_drop_widgets(fz_context *ctx, pdf_annot *widget_list);
 
 void pdf_set_annot_has_changed(fz_context *ctx, pdf_annot *annot);
+
+int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int is_being_edited);
 
 #endif
