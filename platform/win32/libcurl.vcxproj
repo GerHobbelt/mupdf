@@ -133,6 +133,14 @@
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
             <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -280,6 +288,7 @@
     <ClCompile Include="../../thirdparty/curl/docs/examples/getredirect.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/getreferrer.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/ghiper.c" />
+    <ClCompile Include="../../thirdparty/curl/docs/examples/headerapi.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/hiperfifo.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/href_extractor.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/htmltidy.c" />
@@ -478,6 +487,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/system_win32.c" />
     <ClCompile Include="../../thirdparty/curl/lib/telnet.c" />
     <ClCompile Include="../../thirdparty/curl/lib/tftp.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/timediff.c" />
     <ClCompile Include="../../thirdparty/curl/lib/timeval.c" />
     <ClCompile Include="../../thirdparty/curl/lib/transfer.c" />
     <ClCompile Include="../../thirdparty/curl/lib/url.c" />
@@ -698,6 +708,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/system_win32.h" />
     <ClInclude Include="../../thirdparty/curl/lib/telnet.h" />
     <ClInclude Include="../../thirdparty/curl/lib/tftp.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/timediff.h" />
     <ClInclude Include="../../thirdparty/curl/lib/timeval.h" />
     <ClInclude Include="../../thirdparty/curl/lib/transfer.h" />
     <ClInclude Include="../../thirdparty/curl/lib/url.h" />
@@ -860,6 +871,7 @@
     <Text Include="../../thirdparty/curl/include/curl/Makefile.am" />
     <Text Include="../../thirdparty/curl/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/lib/Makefile.am" />
+    <Text Include="../../thirdparty/curl/lib/libcurl.plist.in" />
     <Text Include="../../thirdparty/curl/lib/libcurl.vers.in" />
     <Text Include="../../thirdparty/curl/libcurl.pc.in" />
     <Text Include="../../thirdparty/curl/mlc_config.json" />

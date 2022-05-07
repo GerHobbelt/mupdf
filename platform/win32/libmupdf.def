@@ -179,7 +179,6 @@ EXPORTS
 	Curl_now
 	Curl_timediff
 	Curl_timediff_us
-	curlx_mstotv
 
 	curlx_win32_open
 	curlx_win32_stat
@@ -1601,7 +1600,6 @@ EXPORTS
 	pdf_preview_signature_as_pixmap
 	pdf_reset_form
 	pdf_set_choice_field_value
-	pdf_set_field_value
 	pdf_set_text_field_value
 	pdf_sign_signature
 	pdf_sign_signature_with_appearance
@@ -1690,6 +1688,7 @@ EXPORTS
 	pdf_clean_obj
 	pdf_copy_array
 	pdf_copy_dict
+	pdf_cycle
 	pdf_debug_obj
 	pdf_debug_ref
 	pdf_deep_copy_obj
@@ -1741,6 +1740,7 @@ EXPORTS
 	pdf_dirty_obj
 	pdf_discard_journal
 	pdf_drop_journal
+	pdf_drop_mark_bits
 	pdf_drop_obj
 	pdf_enable_journal
 	pdf_end_operation
@@ -1760,6 +1760,8 @@ EXPORTS
 	pdf_is_string
 	pdf_keep_obj
 	pdf_load_stream_or_string_as_utf8
+	pdf_mark_bits_reset
+	pdf_mark_bits_set
 	pdf_mark_list_free
 	pdf_mark_list_init
 	pdf_mark_list_pop
@@ -1771,6 +1773,7 @@ EXPORTS
 	pdf_new_dict
 	pdf_new_indirect
 	pdf_new_int
+	pdf_new_mark_bits
 	pdf_new_matrix
 	pdf_new_name
 	pdf_new_real
@@ -2551,6 +2554,7 @@ EXPORTS
 	TIFFErrorExt
 	TIFFFdOpen
 	TIFFFieldDataType
+	TIFFFieldIsAnonymous
 	TIFFFieldName
 	TIFFFieldPassCount
 	TIFFFieldReadCount
@@ -2870,6 +2874,14 @@ EXPORTS
 	BrotliSharedDictionaryAttach
 	BrotliSharedDictionaryCreateInstance
 	BrotliSharedDictionaryDestroyInstance
+
+; libzopfli exports
+
+	zopfli_main
+
+; libzopflipng exports
+
+	zopflipng_main
 
 ; libSQLite3 exports
 

@@ -212,6 +212,14 @@ EXPORTS
 
 %(libbrotli2_exports)s
 
+; libzopfli exports
+
+%(libzopfli_exports)s
+
+; libzopflipng exports
+
+%(libzopflipng_exports)s
+
 ; libSQLite3 exports
 
 %(sqlite3_exports)s
@@ -312,6 +320,8 @@ def main():
 	libjpegXL2_exports = generateExports("thirdparty/owemdjee/jpeg-xl/lib/include/jxl", ["JxlEncoderAddBox", "JxlEncoderSetExtraChannelBuffer"])
 	libbrotli_exports = generateExports("thirdparty/owemdjee/brotli/c/include")
 	libbrotli2_exports = generateExports("thirdparty/owemdjee/brotli/c/include/brotli")
+	libzopfli_exports = generateExports("thirdparty/owemdjee/libzopfli/src/zopfli/monolithic_examples.h")
+	libzopflipng_exports = generateExports("thirdparty/owemdjee/libzopfli/src/zopflipng/monolithic_examples.h")
 	sqlite3_exports = generateExports("thirdparty/owemdjee/sqlite-amalgamation/sqlite3.h", ["sqlite3_activate_cerod"])
 	sqlite3_exports2 = generateExports("thirdparty/owemdjee/sqlite/monolithic_examples.h")
 	mujs_exports = generateExports("thirdparty/mujs/mujs.h")

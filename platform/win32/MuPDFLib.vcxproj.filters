@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-	
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -12,5 +11,22 @@
       <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\scripts\MuPDFLib\report-bundled-software-versions.c" />
+    <ClCompile Include="..\..\source\dll\dllmain.cpp" />
+    <ClCompile Include="..\..\source\dll\pch.cpp" />
+    <ClCompile Include="..\x11\curl_stream.c" />
+    <ClCompile Include="..\x11\prog_stream.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\scripts\MuPDFLib\versions-api.h" />
+    <ClInclude Include="..\..\source\dll\framework.h" />
+    <ClInclude Include="..\..\source\dll\pch.h" />
+    <ClInclude Include="..\x11\curl_stream.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\scripts\MuPDFLib\Makefile" />
+    <None Include="gen_libmupdf.def.py" />
+    <None Include="libmupdf.def" />
+  </ItemGroup>
 </Project>
-	

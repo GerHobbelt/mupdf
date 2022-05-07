@@ -41,6 +41,8 @@
 #include "../../thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/pcre/src/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/bibutils/src/bin/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libzopfli/src/zopfli/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libzopfli/src/zopflipng/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -191,7 +193,9 @@ static struct {
 	{ jpegturbo_wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
 	{ jpegturbo_djpeg_main, "djpeg", "djpeg tool" },
 	{ jpegturbo_cjpeg_main, "cjpeg", "cjpeg tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ cwebp_main, "cwebp", "cwebp tool" },
 	{ dwebp_main, "dwebp", "dwebp tool" },
 	{ gif2webp_main, "gif2webp", "gif2webp tool" },
@@ -204,7 +208,9 @@ static struct {
 	{ webp_quality_main, "webp_quality", "webp_quality tool" },
 	{ webpinfo_main, "webpinfo", "webpinfo tool" },
 	{ webpmux_main, "webpmux", "webpmux tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ pngcrush_main, "pngcrush", "pngcrush tool" },
 	{ pngmeta_main, "pngmeta", "pngmeta tool" },
 	{ pngzop_zlib_to_idat_main, "pngzop_zlib_to_idat", "pngzop_zlib_to_idat tool" },
@@ -233,8 +239,15 @@ static struct {
 #endif
 
 #if defined(MUTOOL_EX)
-	{ brotli_main, "brotli", "brotli tool" },
+	{ zopfli_main, "zopfli", "zopfli tool" },
+	{ zopflipng_main, "zopflipng", "zopflipng tool" },
+#endif
 
+#if defined(MUTOOL_EX)
+	{ brotli_main, "brotli", "brotli tool" },
+#endif
+
+#if defined(MUTOOL_EX)
 	{ jpegXL_decode_oneshot_main, "jxl_decode_oneshot", "jxl_decode_oneshot tool" },
 	{ jpegXL_encode_oneshot_main, "jxl_encode_oneshot", "jxl_encode_oneshot tool" },
 	{ jpegXL_info_main, "jxl_info", "jxl_info: jpegXL tool" },
@@ -280,10 +293,14 @@ static struct {
 	{ bibutils_xml2nbib_main, "xml2nbib", "bibutils::xml2nbib tool" },
 	{ bibutils_xml2ris_main, "xml2ris", "bibutils::xml2ris tool" },
 	{ bibutils_xml2wordbib_main, "xml2wordbib", "bibutils::xml2wordbib tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ bibutils_hash_bu_main, "bibutils_hash_bu", "bibutils::hash_bu tool" },
 	{ bibutils_hash_marc_main, "bibutils_hash_marc", "bibutils::hash_marc tool" },
+#endif
 
+#if defined(MUTOOL_EX)
 	{ bibutils_buauth_test_main, "bibutils_buauth_test", "bibutils::buauth_test tool" },
 	{ bibutils_doi_test_main, "bibutils_doi_test", "bibutils::doi_test tool" },
 	{ bibutils_entities_test_main, "bibutils_entities_test", "bibutils::entities_test tool" },
