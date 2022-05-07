@@ -43,40 +43,41 @@ static int usage(void)
 }
 
 static void
-pdf_tagged_text(fz_context *ctx, const char *text)
+pdf_tagged_text(fz_context *ctx, fz_output *out, const char *text)
 {
 	int c;
 	while ((c = *text++))
 	{
-		if (c == '<') { putchar('&'); putchar('l'); putchar('t'); putchar(';'); }
-		else if (c == '>') { putchar('&'); putchar('g'); putchar('t'); putchar(';'); }
-		else if (c == '&') { putchar('&'); putchar('a'); putchar('m'); putchar('p'); putchar(';'); }
-		else putchar(c);
+		if (c == '<') { fz_write_string(ctx, out, "&lt;"); }
+		else if (c == '>') { fz_write_string(ctx, out, "&gt;"); }
+		else if (c == '&') { fz_write_string(ctx, out, "&amp;"); }
+		else fz_write_byte(ctx, out, c);
 	}
 }
 
 static void
-pdf_tagged_mcid(fz_context *ctx, pdf_mcid_table *table, int mcid)
+pdf_tagged_mcid(fz_context *ctx, fz_output *out, pdf_mcid_table *table, int mcid)
 {
 	int i;
 	for (i = 0; i < table->len; ++i)
 		if (table->entry[i].mcid == mcid)
-			pdf_tagged_text(ctx, fz_string_from_buffer(ctx, table->entry[i].text));
+			pdf_tagged_text(ctx, out, fz_string_from_buffer(ctx, table->entry[i].text));
 }
 
 static const char *map_tag(const char *t)
 {
 	if (!strcmp(t, "Span")) return "span";
-	if (!strcmp(t, "P")) return "div";
+	if (!strcmp(t, "P")) return "p";
 	if (!strcmp(t, "Document")) return "body";
 	if (!strcmp(t, "Part")) return "div";
 	if (!strcmp(t, "Art")) return "article";
 	if (!strcmp(t, "Sect")) return "section";
+	if (!strcmp(t, "Link")) return "a";
 
-	if (!strcmp(t, "L")) return "div";
+	if (!strcmp(t, "L")) return "dl";
 	if (!strcmp(t, "LI")) return "div";
-	if (!strcmp(t, "Lbl")) return "span";
-	if (!strcmp(t, "LBody")) return "span";
+	if (!strcmp(t, "Lbl")) return "dt";
+	if (!strcmp(t, "LBody")) return "dd";
 
 	return t;
 }
@@ -88,6 +89,8 @@ static const char *map_att_key(const char *k)
 	if (!strcmp(k, "StartIndent")) return "margin-left";
 	if (!strcmp(k, "EndIndent")) return "margin-right";
 	if (!strcmp(k, "LineHeight")) return "font-size";
+	if (!strcmp(k, "SpaceBefore")) return "margin-top";
+	if (!strcmp(k, "SpaceAfter")) return "margin-bottom";
 	return k;
 }
 
@@ -97,7 +100,7 @@ static const char *map_att_val(const char *v)
 }
 
 static void
-pdf_tagged_att(fz_context *ctx, pdf_obj *atts)
+pdf_tagged_att(fz_context *ctx, fz_output *out, pdf_obj *atts)
 {
 	if (pdf_dict_get(ctx, atts, PDF_NAME(O)) == PDF_NAME(Layout))
 	{
@@ -110,35 +113,36 @@ pdf_tagged_att(fz_context *ctx, pdf_obj *atts)
 			{
 				const char *kk = map_att_key(pdf_to_name(ctx, k));
 				if (pdf_is_name(ctx, v))
-					printf("%s:%s;", kk, map_att_val(pdf_to_name(ctx, v)));
+					fz_write_printf(ctx, out, "%s:%s;", kk, map_att_val(pdf_to_name(ctx, v)));
 				else if (pdf_is_number(ctx, v))
-					printf("%s:%gpt;", kk, pdf_to_real(ctx, v));
+					fz_write_printf(ctx, out, "%s:%gpt;", kk, pdf_to_real(ctx, v));
 			}
 		}
 	}
 }
 
 static void
-pdf_tagged_st(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable, pdf_obj *role_map, pdf_obj *class_map, pdf_obj *page, pdf_obj *node)
+pdf_tagged_st(fz_context *ctx, fz_output *out, pdf_document *doc, pdf_mcid_table *ptable, pdf_obj *role_map, pdf_obj *class_map, pdf_obj *page, pdf_obj *node, int use_style)
 {
 	if (pdf_is_array(ctx, node))
 	{
 		int i, n = pdf_array_len(ctx, node);
 		for (i = 0; i < n; ++i)
-			pdf_tagged_st(ctx, doc, ptable, role_map, class_map, page, pdf_array_get(ctx, node, i));
+			pdf_tagged_st(ctx, out, doc, ptable, role_map, class_map, page, pdf_array_get(ctx, node, i), use_style);
 	}
 	else if (pdf_is_number(ctx, node))
 	{
 		int page_n = pdf_lookup_page_number(ctx, doc, page);
 		int mcid = pdf_to_int(ctx, node);
 		if (page_n >= 0)
-			pdf_tagged_mcid(ctx, &ptable[page_n], mcid);
+			pdf_tagged_mcid(ctx, out, &ptable[page_n], mcid);
 	}
 	else if (pdf_is_dict(ctx, node))
 	{
 		pdf_obj *type = pdf_dict_get(ctx, node, PDF_NAME(Type));
 		if (1) // type == NULL || type == PDF_NAME(StructElem))
 		{
+			const char *tag = NULL;
 			pdf_obj *s = pdf_dict_get(ctx, node, PDF_NAME(S));
 			pdf_obj *k = pdf_dict_get(ctx, node, PDF_NAME(K));
 			pdf_obj *at = pdf_dict_get(ctx, node, PDF_NAME(ActualText));
@@ -161,33 +165,36 @@ pdf_tagged_st(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable, pdf_ob
 			}
 
 			if (s)
+				tag = map_tag(pdf_to_name(ctx, s));
+
+			if (tag && (strcmp(tag, "span") || (use_style && (a || c))))
 			{
-				printf("<%s", map_tag(pdf_to_name(ctx, s)));
-				if (a || c)
+				fz_write_printf(ctx, out, "<%s", tag);
+				if (use_style && (a || c))
 				{
-					printf(" style=\"");
-					pdf_tagged_att(ctx, c);
-					pdf_tagged_att(ctx, a);
-					printf("\"");
+					fz_write_printf(ctx, out, " style=\"");
+					pdf_tagged_att(ctx, out, c);
+					pdf_tagged_att(ctx, out, a);
+					fz_write_printf(ctx, out, "\"");
 				}
-				printf(">");
+				fz_write_printf(ctx, out, ">");
 			}
 
 			if (pdf_is_string(ctx, at))
-				pdf_tagged_text(ctx, pdf_to_text_string(ctx, at, NULL));
+				pdf_tagged_text(ctx, out, pdf_to_text_string(ctx, at));
 
 			if (k)
-				pdf_tagged_st(ctx, doc, ptable, role_map, class_map, page, k);
+				pdf_tagged_st(ctx, out, doc, ptable, role_map, class_map, page, k, use_style);
 
-			if (s)
+			if (tag && (strcmp(tag, "span") || (use_style && (a || c))))
 			{
-				printf("</%s>", map_tag(pdf_to_name(ctx, s)));
+				fz_write_printf(ctx, out, "</%s>", tag);
 			}
 		}
 	}
 }
 
-static void pdf_tagged_pdf(fz_context *ctx, pdf_document *doc, pdf_mcid_table *ptable)
+void pdf_tagged_pdf(fz_context *ctx, fz_output *out, pdf_document *doc, pdf_mcid_table *ptable, int use_style)
 {
 	pdf_obj *trailer = pdf_trailer(ctx, doc);
 	pdf_obj *root = pdf_dict_get(ctx, trailer, PDF_NAME(Root));
@@ -195,23 +202,38 @@ static void pdf_tagged_pdf(fz_context *ctx, pdf_document *doc, pdf_mcid_table *p
 	pdf_obj *role_map = pdf_dict_get(ctx, stroot, PDF_NAME(RoleMap));
 	pdf_obj *class_map = pdf_dict_get(ctx, stroot, PDF_NAME(ClassMap));
 	pdf_obj *k = pdf_dict_get(ctx, stroot, PDF_NAME(K));
-	printf("<!DOCTYPE html><html>");
-	pdf_tagged_st(ctx, doc, ptable, role_map, class_map, NULL, k);
-	printf("</html>\n");
+	fz_write_string(ctx, out, "<!DOCTYPE html><html>");
+	fz_write_string(ctx, out, "<head>");
+	fz_write_string(ctx, out, "<style>");
+	if (use_style)
+		fz_write_string(ctx, out, "p{margin:0}");
+	fz_write_string(ctx, out, "table{border-collapse:collapse}");
+	fz_write_string(ctx, out, "th,td{border:1px solid black;padding:3px}");
+	fz_write_string(ctx, out, "</style>");
+	fz_write_string(ctx, out, "<meta charset=\"UTF-8\">");
+	fz_write_string(ctx, out, "</head>");
+	pdf_tagged_st(ctx, out, doc, ptable, role_map, class_map, NULL, k, use_style);
+	fz_write_string(ctx, out, "</html>\n");
 }
 
-int pdftagged_main(int argc, const char **argv)
+int pdftagged_main(int argc, char **argv)
 {
+	pdf_document *doc = NULL;
+	fz_context *ctx = NULL;
+
 	const char *infile;
 	const char *password = "";
 	pdf_mcid_table *mcid;
-	int c, i, k, n;
+	int rv = 1;
+	int c, i, n;
+	int use_style = 1;
 
-	while ((c = fz_getopt(argc, argv, "p:")) != -1)
+	while ((c = fz_getopt(argc, argv, "Xp:")) != -1)
 	{
 		switch (c)
 		{
 		case 'p': password = fz_optarg; break;
+		case 'X': use_style = 0; break;
 		default: return usage();
 		}
 	}
@@ -254,10 +276,14 @@ int pdftagged_main(int argc, const char **argv)
 			// for (k = 0; k < mcid[i].len; ++k) printf("MCID %d: %s\n", mcid[i].entry[k].mcid, fz_string_from_buffer(ctx, mcid[i].entry[k].text));
 		}
 
-		pdf_tagged_pdf(ctx, doc, mcid);
+		pdf_tagged_pdf(ctx, fz_stdout(ctx), doc, mcid, use_style);
+		
+		rv = 0;
 	}
 	fz_always(ctx)
+	{
 		pdf_drop_document(ctx, doc);
+	}
 	fz_catch(ctx)
 	{
 		fz_error(ctx, "error: %s", fz_caught_message(ctx));
@@ -265,5 +291,6 @@ int pdftagged_main(int argc, const char **argv)
 
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
-	return 0;
+	
+	return rv;
 }

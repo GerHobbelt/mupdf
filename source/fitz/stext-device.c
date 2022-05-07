@@ -108,17 +108,18 @@ typedef struct
 
 const char *fz_stext_options_usage =
 	"Text output options:\n"
-	"\tinhibit-spaces:       don't add spaces between gaps in the text\n"
-	"\tpreserve-images:      keep images in output\n"
-	"\tpreserve-ligatures:   do not expand ligatures into constituent characters\n"
-	"\tpreserve-whitespace:  do not convert all whitespace into space characters\n"
-	"\tpreserve-spans:       do not merge spans on the same line\n"
-	"\treference-images=no:  (default) output images as data URIs\n"
-	"\t                =yes: output image reference URI only\n"
-	"\treuse-images:        duplicate images share the same URI\n"
-	"\tdehyphenate:         attempt to join up hyphenated words\n"
-	"\tmediabox-clip=no:    include characters outside mediabox\n"
-	"\ttext-as-path:        (SVG: default) output text as curves\n"
+	"  inhibit-spaces:       don't add spaces between gaps in the text\n"
+	"  preserve-images:      keep images in output\n"
+	"  preserve-ligatures:   do not expand ligatures into constituent characters\n"
+	"  preserve-whitespace:  do not convert all whitespace into space characters\n"
+	"  preserve-spans:       do not merge spans on the same line\n"
+	"  reference-images=no:  (default) output images as data URIs\n"
+	"                  =yes: output image reference URI only\n"
+	"  reuse-images:        duplicate images share the same URI\n"
+	"  dehyphenate:         attempt to join up hyphenated words\n"
+	"  mediabox-clip=no:    include characters outside mediabox\n"
+	"  glyph-bbox:          use painted area of glyphs instead of font size for bounding boxes\n"
+	"  text-as-path:        (SVG: default) output text as curves\n"
     "\n";
 
 fz_stext_page *
@@ -218,7 +219,7 @@ add_line_to_block(fz_context *ctx, fz_stext_page *page, fz_stext_block *block, c
 }
 
 static fz_stext_char *
-add_char_to_line(fz_context *ctx, fz_stext_page *page, fz_stext_line *line, fz_matrix trm, fz_font *font, float size, int c, fz_point *p, fz_point *q, int color)
+add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_stext_line *line, fz_matrix trm, fz_font *font, float size, int c, int gid, fz_point *p, fz_point *q, int color)
 {
 	fz_stext_char *ch = fz_pool_alloc(ctx, page->pool, sizeof *line->first_char);
 	fz_point a, d;
@@ -237,27 +238,40 @@ add_char_to_line(fz_context *ctx, fz_stext_page *page, fz_stext_line *line, fz_m
 	ch->size = size;
 	ch->font = fz_keep_font(ctx, font);
 
-	if (line->wmode == 0)
+	if (dev->flags & FZ_STEXT_GLYPH_BBOX)
 	{
-		a.x = 0;
-		d.x = 0;
-		a.y = fz_font_ascender(ctx, font);
-		d.y = fz_font_descender(ctx, font);
+		ch->quad.ll = ch->quad.ul = ch->quad.ur = ch->quad.lr = ch->origin;
+		if (gid >= 0)
+		{
+			fz_rect bbox = fz_bound_glyph(ctx, font, gid, trm);
+			if (!fz_is_empty_rect(bbox))
+				ch->quad = fz_quad_from_rect(bbox);
+		}
 	}
 	else
 	{
-		a.x = 1;
-		d.x = 0;
-		a.y = 0;
-		d.y = 0;
-	}
-	a = fz_transform_vector(a, trm);
-	d = fz_transform_vector(d, trm);
+		if (line->wmode == 0)
+		{
+			a.x = 0;
+			d.x = 0;
+			a.y = fz_font_ascender(ctx, font);
+			d.y = fz_font_descender(ctx, font);
+		}
+		else
+		{
+			a.x = 1;
+			d.x = 0;
+			a.y = 0;
+			d.y = 0;
+		}
+		a = fz_transform_vector(a, trm);
+		d = fz_transform_vector(d, trm);
 
-	ch->quad.ll = fz_make_point(p->x + d.x, p->y + d.y);
-	ch->quad.ul = fz_make_point(p->x + a.x, p->y + a.y);
-	ch->quad.lr = fz_make_point(q->x + d.x, q->y + d.y);
-	ch->quad.ur = fz_make_point(q->x + a.x, q->y + a.y);
+		ch->quad.ll = fz_make_point(p->x + d.x, p->y + d.y);
+		ch->quad.ul = fz_make_point(p->x + a.x, p->y + a.y);
+		ch->quad.lr = fz_make_point(q->x + d.x, q->y + d.y);
+		ch->quad.ur = fz_make_point(q->x + a.x, q->y + a.y);
+	}
 
 	return ch;
 }
@@ -401,7 +415,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	if (cur_line && glyph < 0)
 	{
 		/* Don't advance pen or break lines for no-glyph characters in a cluster */
-		add_char_to_line(ctx, page, cur_line, trm, font, size, c, &dev->pen, &dev->pen, dev->color);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, -1, &dev->pen, &dev->pen, dev->color);
 		dev->lastchar = c;
 		return;
 	}
@@ -515,9 +529,9 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 
 	/* Add synthetic space */
 	if (add_space && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
-		add_char_to_line(ctx, page, cur_line, trm, font, size, ' ', &dev->pen, &p, dev->color);
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', -1, &dev->pen, &p, dev->color);
 
-	add_char_to_line(ctx, page, cur_line, trm, font, size, c, &p, &q, dev->color);
+	add_char_to_line(ctx, dev, page, cur_line, trm, font, size, c, glyph, &p, &q, dev->color);
 	dev->lastchar = c;
 	dev->pen = q;
 
@@ -738,6 +752,10 @@ fz_stext_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_m
 			adv = fz_advance_glyph(ctx, font, span->items[i].gid, span->wmode);
 		else
 			adv = 0;
+
+		/* Work-around for embedded fonts missing vertical mode advance widths. */
+		if (adv == 0 && span->wmode)
+			adv = 1;
 
 		fz_add_stext_char(ctx, dev, font,
 			span->items[i].ucs,
@@ -1010,6 +1028,12 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_SPANS;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_PRESERVE_SPANS;
+	}
+	if (fz_has_option(ctx, string, "glyph-bbox", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_GLYPH_BBOX;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_GLYPH_BBOX;
 	}
 	// default: enable MEDIABOX-CLIP:
 	opts->flags |= FZ_STEXT_MEDIABOX_CLIP;

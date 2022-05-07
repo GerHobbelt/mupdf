@@ -28,6 +28,8 @@
 
 #define TILE
 
+#define FIX_ACTUAL_TEXT_LENGTH_MISMATCH 0
+
 /*
  * Emit graphics calls to device.
  */
@@ -769,6 +771,20 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	if (pr->super.hidden)
 		dostroke = dofill = 0;
 
+	if (pr->actual_text_p)
+	{
+		if (*pr->actual_text_p)
+		{
+			fz_warn(ctx, "unused ActualText content remain (%s)", pr->actual_text_p);
+#if FIX_ACTUAL_TEXT_LENGTH_MISMATCH
+			// pdf_font_desc *fontdesc = gstate->text.font;
+			// fz_matrix trm;
+			// pdf_tos_make_trm(ctx, &pr->tos, &gstate->text, fontdesc, 0, &trm);
+			// fz_show_glyph(ctx, pr->tos.text, fontdesc->font, trm, -1, c, fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, FZ_LANG_UNSET);
+#endif
+		}
+	}
+
 	fz_try(ctx)
 	{
 		fz_rect tb = fz_transform_rect(pr->tos.text_bbox, gstate->ctm);
@@ -939,16 +955,19 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid)
 
 	if (pr->actual_text_p)
 	{
-		if (*pr->actual_text_p == 0)
+		if (*pr->actual_text_p)
 		{
-			/* swallow glyphs if the ActualText content has run out */
-			ucsbuf[0] = -1;
+			pr->actual_text_p += fz_chartorune_unsafe(ucsbuf, pr->actual_text_p);
 			ucslen = 1;
 		}
 		else
 		{
-			pr->actual_text_p += fz_chartorune_unsafe(ucsbuf, pr->actual_text_p);
+			fz_warn(ctx, "ActualText content length mismatch");
+#if FIX_ACTUAL_TEXT_LENGTH_MISMATCH
+			/* swallow glyphs if the ActualText content has run out */
+			ucsbuf[0] = -1;
 			ucslen = 1;
+#endif
 		}
 	}
 
@@ -2009,7 +2028,9 @@ static void pdf_run_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, p
 		if (pr->actual_text)
 		{
 			if (*pr->actual_text_p)
+			{
 				fz_warn(ctx, "interrupted ActualText content");
+			}
 			fz_free(ctx, pr->actual_text);
 			pr->actual_text = NULL;
 			pr->actual_text_p = NULL;
@@ -2028,7 +2049,7 @@ static void pdf_run_EMC(fz_context *ctx, pdf_processor *proc)
 	if (pr->actual_text)
 	{
 		if (*pr->actual_text_p != 0)
-			fz_warn(ctx, "more ActualText content than characters");
+			fz_warn(ctx, "ActualText content length mismatch: more ActualText content than characters");
 		fz_free(ctx, pr->actual_text);
 		pr->actual_text = NULL;
 		pr->actual_text_p = NULL;
