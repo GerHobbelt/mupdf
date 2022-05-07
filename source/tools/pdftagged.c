@@ -181,7 +181,7 @@ pdf_tagged_st(fz_context *ctx, fz_output *out, pdf_document *doc, pdf_mcid_table
 			}
 
 			if (pdf_is_string(ctx, at))
-				pdf_tagged_text(ctx, out, pdf_to_text_string(ctx, at));
+				pdf_tagged_text(ctx, out, pdf_to_text_string(ctx, at, NULL));
 
 			if (k)
 				pdf_tagged_st(ctx, out, doc, ptable, role_map, class_map, page, k, use_style);
@@ -216,7 +216,7 @@ void pdf_tagged_pdf(fz_context *ctx, fz_output *out, pdf_document *doc, pdf_mcid
 	fz_write_string(ctx, out, "</html>\n");
 }
 
-int pdftagged_main(int argc, char **argv)
+int pdftagged_main(int argc, const char **argv)
 {
 	pdf_document *doc = NULL;
 	fz_context *ctx = NULL;

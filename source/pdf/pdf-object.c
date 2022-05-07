@@ -1267,11 +1267,11 @@ pdf_add_journal_fragment(fz_context *ctx, pdf_document *doc, int parent, pdf_obj
 
 void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 {
-	int num, version, c, nis, pos;
+	int num, version, c, nis = 0, pos = 0;
 	pdf_obj *obj = NULL, *fingerprint_obj;
 	fz_buffer *buffer;
 	unsigned char digest[16];
-	int64_t file_size;
+	int64_t file_size = 0;
 	int digests_match = 0;
 	pdf_token tok;
 
@@ -3317,7 +3317,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 
 			fz_try(ctx)
 			{
-				data = pdf_new_utf8_from_pdf_stream_obj(ctx, obj, &datalen);
+				data = (unsigned char*)pdf_new_utf8_from_pdf_stream_obj(ctx, obj, &datalen);
 				// `data` will be freed when we drop xml_buf:
 				xml_buf = fz_new_buffer_from_data(ctx, data, datalen);
 
@@ -4119,7 +4119,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 
 			fz_try(ctx)
 			{
-				data = pdf_new_utf8_from_pdf_stream_obj(ctx, obj, &datalen);
+				data = (unsigned char*)pdf_new_utf8_from_pdf_stream_obj(ctx, obj, &datalen);
 				// `data` will be freed when we drop xml_buf:
 				xml_buf = fz_new_buffer_from_data(ctx, data, datalen);
 

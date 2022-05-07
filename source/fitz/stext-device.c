@@ -238,7 +238,7 @@ add_char_to_line(fz_context *ctx, fz_stext_device *dev, fz_stext_page *page, fz_
 	ch->size = size;
 	ch->font = fz_keep_font(ctx, font);
 
-	if (dev->flags & FZ_STEXT_GLYPH_BBOX)
+	if (dev->opts.flags & FZ_STEXT_GLYPH_BBOX)
 	{
 		ch->quad.ll = ch->quad.ul = ch->quad.ur = ch->quad.lr = ch->origin;
 		if (gid >= 0)

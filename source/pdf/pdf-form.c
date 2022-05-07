@@ -684,7 +684,7 @@ static int set_validated_field_value(fz_context *ctx, pdf_document *doc, pdf_obj
 			return 0;
 	}
 
-	update_field_value(ctx, doc, field, newtext ? newtext : text, ignore_trigger_events);
+	update_field_value(ctx, doc, field, newtext ? newtext : text, is_being_edited);
 
 	fz_free(ctx, newtext);
 
@@ -736,11 +736,11 @@ int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, cons
 
 	case PDF_WIDGET_TYPE_CHECKBOX:
 	case PDF_WIDGET_TYPE_RADIOBUTTON:
-		accepted = set_checkbox_value(ctx, doc, field, text, ignore_trigger_events);
+		accepted = set_checkbox_value(ctx, doc, field, text, is_being_edited);
 		break;
 
 	default:
-		update_field_value(ctx, doc, field, text, ignore_trigger_events);
+		update_field_value(ctx, doc, field, text, is_being_edited);
 		accepted = 1;
 		break;
 	}

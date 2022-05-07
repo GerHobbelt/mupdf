@@ -90,13 +90,13 @@ pdf_load_page_tree(fz_context *ctx, pdf_document *doc)
 	{
 		doc->rev_page_count = pdf_count_pages(ctx, doc);
 		doc->rev_page_map = Memento_label(fz_malloc_array(ctx, doc->rev_page_count, pdf_rev_page_map), "pdf_rev_page_map");
-		pdf_load_page_tree_imp(ctx, doc, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages"), 0, NULL);
+		int idx = pdf_load_page_tree_imp(ctx, doc, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages"), 0, NULL);
 		if (idx < doc->rev_page_count)
 		{
 			// something went horribly wrong in there:
 			if (idx > 0)
 			{
-				fz_warn(ctx, "page tree only partially loaded before an error occurred. Ignoring fast page tree.");
+				fz_warn(ctx, "page tree only partially loaded before an error occurred (page %d of %d). Ignoring fast page tree.", idx, doc->rev_page_count);
 			}
 			pdf_drop_page_tree(ctx, doc);
 		}
@@ -791,7 +791,7 @@ find_seps(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 	nameobj = pdf_array_get(ctx, obj, 0);
 	if (pdf_name_eq(ctx, nameobj, PDF_NAME(Separation)))
 	{
-		fz_colorspace *cs;
+		fz_colorspace *cs = NULL;
 		const char *name = pdf_to_name(ctx, pdf_array_get(ctx, obj, 1));
 
 		/* Skip 'special' colorants. */
@@ -864,7 +864,7 @@ find_devn(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 	m = pdf_array_len(ctx, arr);
 	for (j = 0; j < m; j++)
 	{
-		fz_colorspace *cs;
+		fz_colorspace *cs = NULL;
 		const char *name = pdf_to_name(ctx, pdf_array_get(ctx, arr, j));
 
 		/* Skip 'special' colorants. */

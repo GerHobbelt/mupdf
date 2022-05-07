@@ -323,6 +323,11 @@ int fz_skip_string(fz_context *ctx, fz_stream *stm, const char *str);
 */
 void fz_skip_space(fz_context *ctx, fz_stream *stm);
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4611) // warning C4611: interaction between '_setjmp' and C++ object destruction is non-portable (compiling source file XYZ.cpp)
+#endif
+
 /**
 	Ask how many bytes are available immediately from
 	a given stream.
@@ -348,10 +353,6 @@ static inline size_t fz_available(fz_context *ctx, fz_stream *stm, size_t max)
 	if (stm->eof)
 		return 0;
 
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4611) // warning C4611: interaction between '_setjmp' and C++ object destruction is non-portable (compiling source file XYZ.cpp)
-#endif
 	fz_try(ctx)
 		c = stm->next(ctx, stm, max);
 	fz_catch(ctx)
@@ -361,9 +362,6 @@ static inline size_t fz_available(fz_context *ctx, fz_stream *stm, size_t max)
 		stm->error = 1;
 		c = EOF;
 	}
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
 
 	if (c == EOF)
 	{
@@ -390,6 +388,7 @@ static inline int fz_read_byte(fz_context *ctx, fz_stream *stm)
 		return *stm->rp++;
 	if (stm->eof)
 		return EOF;
+
 	fz_try(ctx)
 		c = stm->next(ctx, stm, 1);
 	fz_catch(ctx)
@@ -399,6 +398,7 @@ static inline int fz_read_byte(fz_context *ctx, fz_stream *stm)
 		stm->error = 1;
 		c = EOF;
 	}
+
 	if (c == EOF)
 		stm->eof = 1;
 	return c;
@@ -433,6 +433,7 @@ static inline int fz_peek_byte(fz_context *ctx, fz_stream *stm)
 		stm->error = 1;
 		c = EOF;
 	}
+
 	if (c == EOF)
 		stm->eof = 1;
 	return c;
@@ -581,6 +582,10 @@ static inline int fz_is_eof_bits(fz_context *ctx, fz_stream *stm)
 {
 	return fz_is_eof(ctx, stm) && (stm->avail == 0 || stm->bits == EOF);
 }
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 
 /* Implementation details: subject to change. */
 
