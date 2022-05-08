@@ -2177,20 +2177,20 @@ static void do_buffer_log_output(const char* message)
 	}
 }
 
-static void error_print_callback(void* user, const char* message)
+static void error_print_callback(fz_context* ctx, void* user, const char* message)
 {
 	do_buffer_log_output(message);
 
 	if (orig_error_print)
-		orig_error_print(user, message);
+		orig_error_print(ctx, user, message);
 }
 
-static void warn_print_callback(void* user, const char* message)
+static void warn_print_callback(fz_context* ctx, void* user, const char* message)
 {
 	do_buffer_log_output(message);
 
 	if (orig_warn_print)
-		orig_warn_print(user, message);
+		orig_warn_print(ctx, user, message);
 }
 
 static void clear_observed_errors_logbuffers(fz_context* ctx)

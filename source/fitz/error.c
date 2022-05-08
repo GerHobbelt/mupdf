@@ -47,18 +47,76 @@
 
 static int quiet_mode = 0;
 
-void fz_default_error_callback(void *user, const char *message)
+int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char* s2, const char* s3)
 {
+	size_t l1 = s1 ? strlen(s1) : 0;
+	size_t l2 = s2 ? strlen(s2) : 0;
+	size_t l3 = s3 ? strlen(s3) : 0;
+	size_t required_size = 1;
+	required_size += l1;
+	required_size += l2;
+	required_size += l3;
+
+	if (required_size > dstsiz)
+		return 0;
+
+	dst[0] = 0;
+	if (l1)
+	{
+		strcpy(dst, s1);
+		dst += l1;
+	}
+	if (l2)
+	{
+		strcpy(dst, s2);
+		dst += l2;
+	}
+	if (l3)
+	{
+		strcpy(dst, s3);
+		dst += l3;
+	}
+
+	return (int)required_size;
+}
+
+void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
+{
+	char buf[2048];
+	assert(message != NULL);
+	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "error: ", message, "\n"))
+		buf[0] = 0;
+
 	if (!(quiet_mode & QUIET_ERROR))
 	{
+#if 1
+		if (buf[0])
+		{
+			fz_write_string(ctx, fz_stderr(ctx), buf);
+		}
+		else
+		{
+			fz_write_string(ctx, fz_stderr(ctx), "error: ");
+			fz_write_string(ctx, fz_stderr(ctx), message);
+			fz_write_string(ctx, fz_stderr(ctx), "\n");
+		}
+#else
 		fprintf(stderr, "error: %s\n", message);
+#endif
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		OutputDebugStringA("error: ");
-		OutputDebugStringA(message);
-		OutputDebugStringA("\n");
+		if (buf[0])
+		{
+			OutputDebugStringA(buf);
+		}
+		else
+		{
+			OutputDebugStringA("error: ");
+			OutputDebugStringA(message);
+			OutputDebugStringA("\n");
+		}
 	}
 #endif
 #ifdef USE_ANDROID_LOG
@@ -66,18 +124,43 @@ void fz_default_error_callback(void *user, const char *message)
 #endif
 }
 
-void fz_default_warning_callback(void *user, const char *message)
+void fz_default_warning_callback(fz_context* ctx, void *user, const char *message)
 {
+	char buf[2048];
+	assert(message != NULL);
+	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "warning: ", message, "\n"))
+		buf[0] = 0;
+
 	if (!(quiet_mode & QUIET_WARN))
 	{
+#if 1
+		if (buf[0])
+		{
+			fz_write_string(ctx, fz_stderr(ctx), buf);
+		}
+		else
+		{
+			fz_write_string(ctx, fz_stderr(ctx), "warning: ");
+			fz_write_string(ctx, fz_stderr(ctx), message);
+			fz_write_string(ctx, fz_stderr(ctx), "\n");
+		}
+#else
 		fprintf(stderr, "warning: %s\n", message);
+#endif
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		OutputDebugStringA("warning: ");
-		OutputDebugStringA(message);
-		OutputDebugStringA("\n");
+		if (buf[0])
+		{
+			OutputDebugStringA(buf);
+		}
+		else
+		{
+			OutputDebugStringA("warning: ");
+			OutputDebugStringA(message);
+			OutputDebugStringA("\n");
+		}
 	}
 #endif
 #ifdef USE_ANDROID_LOG
@@ -103,17 +186,41 @@ void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, v
 		*print = ctx->warn.print;
 }
 
-void fz_default_info_callback(void* user, const char* message)
+void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 {
+	char buf[2048];
+	assert(message != NULL);
+	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), message, "\n", NULL))
+		buf[0] = 0;
+
 	if (!(quiet_mode & QUIET_INFO))
 	{
+#if 1
+		if (buf[0])
+		{
+			fz_write_string(ctx, fz_stderr(ctx), buf);
+		}
+		else
+		{
+			fz_write_string(ctx, fz_stderr(ctx), message);
+			fz_write_string(ctx, fz_stderr(ctx), "\n");
+		}
+#else
 		fprintf(stderr, "%s\n", message);
+#endif
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
-	if (quiet_mode & QUIET_DEBUG)
+	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		OutputDebugStringA(message);
-		OutputDebugStringA("\n");
+		if (buf[0])
+		{
+			OutputDebugStringA(buf);
+		}
+		else
+		{
+			OutputDebugStringA(message);
+			OutputDebugStringA("\n");
+		}
 	}
 #endif
 #ifdef USE_ANDROID_LOG
@@ -150,13 +257,28 @@ static inline int edit_bit(int user, int set)
 
 void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_info)
 {
-	quiet_mode = edit_bit(quiet_error, QUIET_ERROR) | edit_bit(quiet_warn, QUIET_WARN) | edit_bit(quiet_info, QUIET_INFO);
+	// keep stdio unreachability + debug mode intact
+	quiet_mode &= ~(QUIET_ERROR | QUIET_WARN | QUIET_INFO);
+
+	quiet_mode |= edit_bit(quiet_error, QUIET_ERROR) | edit_bit(quiet_warn, QUIET_WARN) | edit_bit(quiet_info, QUIET_INFO);
 }
 
-void fz_enable_dbg_output(int severity)
+void fz_enable_dbg_output(void)
 {
-	quiet_mode |= (severity ? QUIET_STDIO_FATALITY : QUIET_DEBUG);
+	quiet_mode |= QUIET_DEBUG;
 }
+
+void fz_disable_dbg_output(void)
+{
+	// do NOT reset the stdio unreachability state
+	quiet_mode &= ~QUIET_DEBUG;
+}
+
+void fz_enable_dbg_output_on_stdio_unreachable(void)
+{
+	quiet_mode |= QUIET_STDIO_FATALITY;
+}
+
 
 void fz_var_imp(void *var)
 {
@@ -173,7 +295,7 @@ void fz_flush_warnings(fz_context *ctx)
 		char buf[50];
 		fz_snprintf(buf, sizeof buf, "... repeated %d times...", ctx->warn.count);
 		if (ctx->warn.print)
-			ctx->warn.print(ctx->warn.print_user, buf);
+			ctx->warn.print(ctx, ctx->warn.print_user, buf);
 	}
 	ctx->warn.message[0] = 0;
 	ctx->warn.count = 0;
@@ -220,21 +342,25 @@ void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 
 	if (!ctx)
 	{
-		fz_default_warning_callback(NULL, buf);
-		return;
-	}
-
-	if (!strcmp(buf, ctx->warn.message))
-	{
-		ctx->warn.count++;
+		fz_default_warning_callback(NULL, NULL, buf);
 	}
 	else
 	{
-		fz_flush_warnings(ctx);
-		if (ctx->warn.print)
-			ctx->warn.print(ctx->warn.print_user, buf);
-		strcpy(ctx->warn.message, buf);
-		ctx->warn.count = 1;
+		if (!strcmp(buf, ctx->warn.message))
+		{
+			ctx->warn.count++;
+		}
+		else
+		{
+			fz_flush_warnings(ctx);
+			if (ctx->warn.print)
+				ctx->warn.print(ctx, ctx->warn.print_user, buf);
+			else
+				fz_default_warning_callback(ctx, NULL, buf);
+
+			strcpy(ctx->warn.message, buf);
+			ctx->warn.count = 1;
+		}
 	}
 }
 
@@ -260,9 +386,9 @@ void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap)
 	}
 
 	if (ctx && ctx->info.print)
-		ctx->info.print(ctx->info.print_user, buf);
+		ctx->info.print(ctx, ctx->info.print_user, buf);
 	else
-		fz_default_info_callback(NULL, buf);
+		fz_default_info_callback(ctx, NULL, buf);
 }
 
 void fz_info(fz_context* ctx, const char* fmt, ...)
@@ -287,9 +413,9 @@ void fz_verror(fz_context* ctx, const char* fmt, va_list ap)
 	}
 
 	if (ctx && ctx->error.print)
-		ctx->error.print(ctx->error.print_user, buf);
+		ctx->error.print(ctx, ctx->error.print_user, buf);
 	else
-		fz_default_error_callback(NULL, buf);
+		fz_default_error_callback(ctx, NULL, buf);
 }
 
 void fz_error(fz_context* ctx, const char* fmt, ...)
@@ -361,7 +487,7 @@ FZ_NORETURN static void _throw(fz_context *ctx, int code)
 	{
 		fz_flush_warnings(ctx);
 		if (ctx->error.print)
-			ctx->error.print(ctx->error.print_user, "aborting process from uncaught error!");
+			ctx->error.print(ctx, ctx->error.print_user, "aborting process from uncaught error!");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -387,7 +513,7 @@ fz_jmp_buf *fz_push_try(fz_context *ctx)
 
 		fz_flush_warnings(ctx);
 		if (ctx->error.print)
-			ctx->error.print(ctx->error.print_user, ctx->error.message);
+			ctx->error.print(ctx, ctx->error.print_user, ctx->error.message);
 
 		/* We need to arrive in the always/catch block as if throw had taken place. */
 		ctx->error.top++;
@@ -456,16 +582,33 @@ const char *fz_caught_message(fz_context *ctx)
 /* coverity[+kill] */
 FZ_NORETURN void fz_vthrow(fz_context *ctx, int code, const char *fmt, va_list ap)
 {
-	fz_vsnprintf(ctx->error.message, sizeof(ctx->error.message), fmt, ap);
-
-	if (code != FZ_ERROR_ABORT && code != FZ_ERROR_TRYLATER)
+	if (!ctx->within_throw_call)
 	{
-		fz_flush_warnings(ctx);
-		if (ctx->error.print)
-			ctx->error.print(ctx->error.print_user, ctx->error.message);
-	}
+		ctx->within_throw_call = 1;
 
-	_throw(ctx, code);
+		fz_try(ctx)
+		{
+			fz_vsnprintf(ctx->error.message, sizeof(ctx->error.message), fmt, ap);
+
+			if (code != FZ_ERROR_ABORT && code != FZ_ERROR_TRYLATER)
+			{
+				fz_flush_warnings(ctx);
+				if (ctx->error.print)
+					ctx->error.print(ctx, ctx->error.print_user, ctx->error.message);
+			}
+		}
+		fz_always(ctx)
+		{
+			ctx->within_throw_call = 0;
+		}
+		fz_catch(ctx)
+		{
+			// ignore internal failures: those will occur when we cannot write to stderr,
+			// which is deemed a non-fatal problem.
+		}
+
+		_throw(ctx, code);
+	}
 }
 
 /* coverity[+kill] */

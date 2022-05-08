@@ -3066,8 +3066,8 @@ int main(int argc, const char** argv)
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
 
 #ifdef _WIN32
-	/* stderr goes nowhere. Get us a debug stream we have a chance
-	 * of seeing. */
+	// stderr goes nowhere.
+	// Get us a debug stream so we have a chance of seeing *independently* of stderr.
 	fz_set_stddbg(ctx, fz_stdods(ctx));
 #endif
 

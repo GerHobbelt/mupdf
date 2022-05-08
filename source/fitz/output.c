@@ -63,13 +63,17 @@ file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes)", strerror(errno), n, count);
 }
 
+#if defined(_WIN32) 
+
 static void
-stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
+stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 {
 	// Windows: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefile#pipes
 	// > "When writing to a non-blocking, byte-mode pipe handle with insufficient buffer space,
 	// > WriteFile returns TRUE with *lpNumberOfBytesWritten < nNumberOfBytesToWrite."
-#ifdef _WIN32
+
+	assert(channel == STD_OUTPUT_HANDLE || channel == STD_ERROR_HANDLE);
+
 	//fprintf(stderr, "stdout_write: %d bytes, %p\n", (int)count, buffer);
 	unsigned char* p = (unsigned char*)buffer;
 	size_t n = count;
@@ -79,7 +83,7 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 	// when a previous call to this function already discovered that the caller has aborted, don't even bother to try:
 	if (caller_is_aborted)
 	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to STDOUT: previous timeout while waiting for FileWrite() API signaled caller has aborted already.");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to %s: previous timeout while waiting for FileWrite() API signaled caller has aborted already.", (channel == STD_OUTPUT_HANDLE ? "STDOUT" : "STDERR"));
 	}
 	while (n > 0)
 	{
@@ -87,7 +91,7 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 		// Write the data to the pipe in chunks of limited size, so that we won't lock
 		// on a chunk. That's also why we size our chunks to HALF the known pipe nonblocking buffer size!
 		DWORD n_lim = min(PIPE_MAX_NONBLOCK_BUFFER_SIZE, n);
-		int rv = WriteFile(GetStdHandle(STD_OUTPUT_HANDLE), p, n_lim, &written, NULL);
+		int rv = WriteFile(GetStdHandle(channel), p, n_lim, &written, NULL);
 		int err = GetLastError();
 		//fprintf(stderr, "stdout_write:WriteFile: %d bytes, %p, %d written, rv:%d, err:%d\n", (int)n_lim, p, (int)written, rv, err);
 		n -= written;
@@ -115,7 +119,7 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 			//rv = WriteConsole(conout, p, min(256, n), &written, NULL);
 			//rv = CloseHandle(conout);
 			//if (!rv)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to STDOUT: %08x: %s (written %zu of %zu bytes)", err, errmsg, count - n, count);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to %s: %08x: %s (written %zu of %zu bytes)", (channel == STD_OUTPUT_HANDLE ? "STDOUT" : "STDERR"), err, errmsg, count - n, count);
 			//else
 			//{
 			//	n -= written;
@@ -132,13 +136,22 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 			else if (clock() - tick >= 15 * CLOCKS_PER_SEC)
 			{
 				caller_is_aborted = 1;
-				fz_enable_dbg_output(1);
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to STDOUT: timeout (15 seconds) while waiting for FileWrite() API to accept a byte to write (written %zu of %zu bytes)", count - n, count);
+				fz_enable_dbg_output_on_stdio_unreachable();
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot write to %s: timeout (15 seconds) while waiting for FileWrite() API to accept a byte to write (written %zu of %zu bytes)", (channel == STD_OUTPUT_HANDLE ? "STDOUT" : "STDERR"), count - n, count);
 			}
 			// Don't load the CPU for a while: we'll have to wait for the calling process to gobble the bytes buffered in the pipe before we can continue here.
 			SleepEx(2, TRUE);
 		}
 	}
+}
+
+#endif
+
+static void
+stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
+{
+#ifdef _WIN32
+	stdio_write(ctx, STD_OUTPUT_HANDLE, buffer, count);
 #else
 	file_write(ctx, stdout, buffer, count);
 #endif
@@ -160,7 +173,11 @@ fz_output *fz_stdout(fz_context *ctx)
 static void
 stderr_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 {
+#ifdef _WIN32
+	stdio_write(ctx, STD_ERROR_HANDLE, buffer, count);
+#else
 	file_write(ctx, stderr, buffer, count);
+#endif
 }
 
 static fz_output fz_stderr_global = {

@@ -29,6 +29,15 @@
 #include <stdio.h>
 #include <time.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
+#else
+#include <unistd.h>
+#endif
+
+
 struct fz_style_context
 {
 	int refs;
@@ -239,6 +248,42 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		ctx->error.print = fz_default_error_callback;
 		ctx->warn.print = fz_default_warning_callback;
 		ctx->info.print = fz_default_info_callback;
+
+#if defined(_WIN32)
+		/*
+		* Check if STDERR and STDOUT are writable at all: Windows GUI applications, for example,
+		* won't have those and errors and warnings would then be *silently lost*, unless we
+		* set the Quiet Mode to log all errors, warnings and info messages to the system debug channel
+		* as well, which is what `fz_enable_dbg_output_on_stdio_unreachable()` is for.
+		*/
+		{
+			HANDLE h1 = GetStdHandle(STD_ERROR_HANDLE);
+			int err1 = GetLastError();
+			HANDLE h2 = GetStdHandle(STD_OUTPUT_HANDLE);
+			int err2 = GetLastError();
+
+			// https://docs.microsoft.com/en-us/windows/console/getstdhandle:
+			//
+			//> If the function fails, the return value is INVALID_HANDLE_VALUE.
+			//> To get extended error information, call GetLastError.
+			//>
+			//> If an application does not have associated standard handles,
+			//> such as a service running on an interactive desktop, and
+			//> has not redirected them, the return value is NULL.
+			if (h1 == NULL || h2 == NULL ||
+				h1 == INVALID_HANDLE_VALUE || h2 == INVALID_HANDLE_VALUE ||
+				err1 == ERROR_INVALID_HANDLE || err2 == ERROR_INVALID_HANDLE)
+			{
+				fz_enable_dbg_output_on_stdio_unreachable();
+
+				// also shut up the stderr + stdio channels: those won't work anyway and will only cause trouble when used.
+				// 
+				// NOTE: these err/warn/info messages will still be shown via the system debug channel, thanks to
+				//`fz_enable_dbg_output_on_stdio_unreachable()`.
+				fz_default_error_warn_info_mode(1, 1, 1);
+			}
+		}
+#endif
 
 		fz_init_random_context(ctx);
 	}

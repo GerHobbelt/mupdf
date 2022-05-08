@@ -293,21 +293,21 @@ int fz_has_locking_support(fz_context* ctx);
 	error callback can be set back to this after it has been
 	overridden.
 */
-void fz_default_error_callback(void *user, const char *message);
+void fz_default_error_callback(fz_context* ctx, void *user, const char *message);
 
 /**
 	The default warning callback. Declared publicly just so that
 	the warning callback can be set back to this after it has been
 	overridden.
 */
-void fz_default_warning_callback(void *user, const char *message);
+void fz_default_warning_callback(fz_context* ctx, void *user, const char *message);
 
 /**
 	The default info callback. Declared publicly just so that
 	the info callback can be set back to this after it has been
 	overridden.
 */
-void fz_default_info_callback(void* user, const char* message);
+void fz_default_info_callback(fz_context* ctx, void* user, const char* message);
 
 /**
 	Sets default error/warn/info log callbacks to quiet mode.
@@ -318,7 +318,10 @@ void fz_default_info_callback(void* user, const char* message);
 */
 void fz_default_error_warn_info_mode(int quiet_error, int quiet_warn, int quiet_info);
 
-void fz_enable_dbg_output(int severity);
+void fz_disable_dbg_output(void);
+void fz_enable_dbg_output(void);
+
+void fz_enable_dbg_output_on_stdio_unreachable(void);
 
 /**
     The prototype of the error/warning/info callback.
@@ -327,7 +330,7 @@ void fz_enable_dbg_output(int severity);
 	The user pointer passed to fz_set_error_callback() / fz_set_warning_callback() / fz_set_info_callback() is passed
 	along with the error message.
 */
-typedef void fz_error_print_callback(void* user, const char* message);
+typedef void fz_error_print_callback(fz_context* ctx, void* user, const char* message);
 
 /**
 	Set the error callback. This will be called as part of the
@@ -735,14 +738,14 @@ typedef struct
 	// See fz_rethrow() code comments for the complete story:
 	int last_nonzero_errcode;
 	void *print_user;
-	void (*print)(void *user, const char *message);
+	fz_error_print_callback *print;
 	char message[4096];
 } fz_error_context;
 
 typedef struct
 {
 	void *print_user;
-	void (*print)(void *user, const char *message);
+	fz_error_print_callback *print;
 	int count;
 	char message[4096];
 } fz_warn_context;
@@ -750,7 +753,7 @@ typedef struct
 typedef struct
 {
 	void* print_user;
-	void (*print)(void* user, const char* message);
+	fz_error_print_callback *print;
 } fz_info_context;
 
 typedef struct
@@ -780,6 +783,7 @@ struct fz_context
 	int icc_enabled;
 #endif
 	int throw_on_repair;
+	int within_throw_call;
 
 	/* TODO: should these be unshared? */
 	fz_document_handler_context *handler;
