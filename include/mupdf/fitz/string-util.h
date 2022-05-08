@@ -26,6 +26,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* The Unicode character used to incoming character whose value is
  * unknown or unrepresentable. */
 #define FZ_REPLACEMENT_CHARACTER 0xFFFD
@@ -317,5 +321,9 @@ const char *fz_parse_page_range(fz_context *ctx, const char *s, int *a, int *b, 
 */
 int fz_tolower(int c);
 int fz_toupper(int c);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

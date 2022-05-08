@@ -26,6 +26,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Simple pool allocators.
 
@@ -64,5 +68,9 @@ size_t fz_pool_size(fz_context *ctx, fz_pool *pool);
 	the pool.
 */
 void fz_drop_pool(fz_context *ctx, fz_pool *pool);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -23,6 +23,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Implementation details: subject to change. */
 
 typedef enum
@@ -86,5 +90,9 @@ void fz_bidi_fragment_text(fz_context *ctx,
 			fz_bidi_fragment_fn *callback,
 			void *arg,
 	        fz_bidi_flags flags);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

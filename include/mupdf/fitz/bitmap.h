@@ -27,6 +27,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/pixmap.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Bitmaps have 1 bit per component. Only used for creating
 	halftoned versions of contone buffers, and saving out. Samples
@@ -164,5 +168,9 @@ fz_halftone *fz_keep_halftone(fz_context *ctx, fz_halftone *half);
 	Never throws exceptions.
 */
 void fz_drop_halftone(fz_context *ctx, fz_halftone *ht);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

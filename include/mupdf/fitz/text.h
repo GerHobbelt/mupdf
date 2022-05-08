@@ -29,6 +29,10 @@
 #include "mupdf/fitz/path.h"
 #include "mupdf/fitz/bidi.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Text buffer.
 
@@ -201,5 +205,9 @@ fz_text_language fz_text_language_from_string(const char *str);
 	No validation is carried out. See note above.
 */
 char *fz_string_from_text_language(char str[8], fz_text_language lang);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

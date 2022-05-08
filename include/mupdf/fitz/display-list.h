@@ -28,6 +28,10 @@
 #include "mupdf/fitz/geometry.h"
 #include "mupdf/fitz/device.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Display list device -- record and play back device commands.
 */
@@ -138,5 +142,9 @@ fz_image *fz_new_image_from_display_list(fz_context *ctx, float w, float h, fz_d
 	Returns true if empty, false otherwise.
 */
 int fz_display_list_is_empty(fz_context *ctx, const fz_display_list *list);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

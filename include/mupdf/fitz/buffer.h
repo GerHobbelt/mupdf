@@ -26,6 +26,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	fz_buffer is a wrapper around a dynamically allocated array of
 	bytes.
@@ -230,5 +234,9 @@ void fz_md5_buffer(fz_context *ctx, fz_buffer *buffer, unsigned char digest[16])
 	Returns length of stream.
 */
 size_t fz_buffer_extract(fz_context *ctx, fz_buffer *buf, unsigned char **data);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

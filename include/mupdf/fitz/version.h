@@ -41,5 +41,5 @@
 	FZ_VERSION_ELEMENT_STR(FZ_VERSION_PATCH) "."		\
 	FZ_VERSION_BUILD
 
-#endif
+#endif // FZ_VERSION
 #endif

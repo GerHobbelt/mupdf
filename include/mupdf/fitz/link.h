@@ -28,6 +28,10 @@
 #include "mupdf/fitz/geometry.h"
 #include "mupdf/fitz/types.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	fz_link is a list of interactive links on a page.
 
@@ -117,5 +121,9 @@ void fz_drop_link(fz_context *ctx, fz_link *link);
 	separates the scheme from the scheme specific parts in URIs).
 */
 int fz_is_external_link(fz_context *ctx, const char *uri);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

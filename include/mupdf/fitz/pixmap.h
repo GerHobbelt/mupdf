@@ -29,6 +29,10 @@
 #include "mupdf/fitz/store.h"
 #include "mupdf/fitz/separation.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Pixmaps represent a set of pixels for a 2 dimensional region of
 	a plane. Each pixel has n components per pixel. The components
@@ -471,5 +475,9 @@ fz_pixmap *fz_new_pixmap_from_color_and_mask(fz_context *ctx, fz_pixmap *color, 
 
 void
 fz_detect_document(fz_context* ctx, fz_point* points, const fz_pixmap* src);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

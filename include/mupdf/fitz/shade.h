@@ -30,6 +30,10 @@
 #include "mupdf/fitz/pixmap.h"
 #include "mupdf/fitz/compressed-buffer.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * The shading code uses gouraud shaded triangle meshes.
  */
@@ -227,5 +231,9 @@ void fz_process_shade(fz_context *ctx, fz_shade *shade, fz_matrix ctm, fz_rect s
 	shade: The reference to destroy.
 */
 void fz_drop_shade_imp(fz_context *ctx, fz_storable *shade);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

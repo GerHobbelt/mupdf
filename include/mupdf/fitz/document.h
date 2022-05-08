@@ -33,9 +33,18 @@
 #include "mupdf/fitz/outline.h"
 #include "mupdf/fitz/separation.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct fz_document_handler fz_document_handler;
 typedef struct fz_page fz_page;
 typedef intptr_t fz_bookmark;
+
+#ifdef __cplusplus
+}
+#endif
+
 
 /**
 	Simple constructor for fz_locations.
@@ -45,6 +54,12 @@ static inline fz_location fz_make_location(int chapter, int page)
 	fz_location loc = { chapter, page };
 	return loc;
 }
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 enum
 {
@@ -905,5 +920,9 @@ struct fz_document_handler
 	fz_document_open_accel_fn *open_accel;
 	fz_document_open_accel_with_stream_fn *open_accel_with_stream;
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

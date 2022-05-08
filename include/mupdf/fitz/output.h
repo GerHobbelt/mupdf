@@ -29,6 +29,10 @@
 #include "mupdf/fitz/string-util.h"
 #include "mupdf/fitz/stream.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Generic output streams - generalise between outputting to a
 	file, a buffer, etc.
@@ -522,5 +526,9 @@ fz_output *fz_new_ascii85_output(fz_context *ctx, fz_output *chain);
 fz_output *fz_new_rle_output(fz_context *ctx, fz_output *chain);
 fz_output *fz_new_arc4_output(fz_context *ctx, fz_output *chain, unsigned char *key, size_t keylen);
 fz_output *fz_new_deflate_output(fz_context *ctx, fz_output *chain, int effort, int raw);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

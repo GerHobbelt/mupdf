@@ -27,6 +27,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/geometry.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Vector path buffer.
  * It can be stroked and dashed, or be filled.
@@ -451,5 +455,9 @@ fz_stroke_state *fz_unshare_stroke_state_with_dash_len(fz_context *ctx, fz_strok
 	allocate.
 */
 fz_stroke_state *fz_clone_stroke_state(fz_context *ctx, fz_stroke_state *stroke);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

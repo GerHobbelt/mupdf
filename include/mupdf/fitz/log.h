@@ -26,6 +26,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/output.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	The functions in this file offer simple logging abilities.
 
@@ -57,5 +61,9 @@ void fz_log_module(fz_context *ctx, const char *module, const char* fmt, ...);
 	Caller should close/drop the output when finished with it.
 */
 fz_output *fz_new_log_for_module(fz_context *ctx, const char *module);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

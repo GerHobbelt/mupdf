@@ -29,6 +29,10 @@
 #include "mupdf/fitz/stream.h"
 #include "mupdf/fitz/filter.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Compression parameters used for buffers of compressed data;
 	typically for the source data for images.
@@ -157,5 +161,9 @@ enum
 	Never throws exceptions.
 */
 void fz_drop_compressed_buffer(fz_context *ctx, fz_compressed_buffer *buf);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

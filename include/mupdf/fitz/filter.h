@@ -29,6 +29,10 @@
 #include "mupdf/fitz/store.h"
 #include "mupdf/fitz/stream.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct fz_jbig2_globals fz_jbig2_globals;
 
 typedef struct
@@ -244,5 +248,9 @@ fz_stream *fz_open_sgilog32(fz_context *ctx, fz_stream *chain, int w);
 	Decodes lines of w pixels to 8bpp greyscale.
 */
 fz_stream *fz_open_thunder(fz_context *ctx, fz_stream *chain, int w);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

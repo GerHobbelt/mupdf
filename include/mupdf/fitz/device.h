@@ -31,6 +31,10 @@
 #include "mupdf/fitz/path.h"
 #include "mupdf/fitz/text.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	The different format handlers (pdf, xps etc) interpret pages to
 	a device. These devices can then process the stream of calls
@@ -509,5 +513,9 @@ fz_draw_options *fz_parse_draw_options(fz_context *ctx, fz_draw_options *options
 	pixmap: An out parameter containing the newly created pixmap.
 */
 fz_device *fz_new_draw_device_with_options(fz_context *ctx, const fz_draw_options *options, fz_rect mediabox, fz_pixmap **pixmap);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

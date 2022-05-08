@@ -23,6 +23,10 @@
 #ifndef MUPDF_FITZ_TYPES_H
 #define MUPDF_FITZ_TYPES_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct fz_document fz_document;
 
 /**
@@ -37,5 +41,9 @@ typedef struct
 	int chapter;
 	int page;
 } fz_location;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

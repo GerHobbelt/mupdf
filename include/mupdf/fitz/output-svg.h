@@ -28,6 +28,10 @@
 #include "mupdf/fitz/device.h"
 #include "mupdf/fitz/output.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum {
 	FZ_SVG_TEXT_AS_PATH = 0,
 	FZ_SVG_TEXT_AS_TEXT = 1,
@@ -60,5 +64,9 @@ fz_device *fz_new_svg_device(fz_context *ctx, fz_output *out, float page_width, 
 	id: ID parameter to keep generated IDs unique across SVG files.
 */
 fz_device *fz_new_svg_device_with_id(fz_context *ctx, fz_output *out, float page_width, float page_height, int text_format, int reuse_images, int *id);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

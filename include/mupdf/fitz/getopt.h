@@ -25,6 +25,10 @@
 
 #include "export.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Simple functions/variables for use in tools.
 */
@@ -36,5 +40,9 @@ FZ_DATA extern const char *fz_optarg;
     Reset the fz_getopt() internals for when you want to use it on yet another argv/argc set.
 */
 extern void fz_getopt_reset(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

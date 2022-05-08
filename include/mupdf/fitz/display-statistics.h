@@ -6,6 +6,10 @@
 #include "mupdf/fitz/geometry.h"
 #include "mupdf/fitz/device.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Display statistics device -- count the occurrence of the various drawing primitives and their aspects.
 */
@@ -90,5 +94,9 @@ void fz_clear_statistics(fz_context* ctx, fz_gathered_statistics* stats);
 	Obtain the gathered statistics.
 */
 void fz_extract_device_statistics(fz_context* ctx, fz_device* dev, fz_gathered_statistics* dst);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

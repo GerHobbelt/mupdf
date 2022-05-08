@@ -27,6 +27,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/color.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	A fz_separation structure holds details of a set of separations
 	(such as might be used on within a page of the document).
@@ -127,5 +131,9 @@ void fz_convert_separation_colors(fz_context *ctx, fz_colorspace *src_cs, const 
 	Get the equivalent separation color in a given colorspace.
 */
 void fz_separation_equivalent(fz_context *ctx, const fz_separations *seps, int idx, fz_colorspace *dst_cs, float *dst_color, fz_colorspace *prf, fz_color_params color_params);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

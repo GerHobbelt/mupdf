@@ -29,6 +29,10 @@
 #include "mupdf/fitz/document.h"
 #include "mupdf/fitz/device.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct fz_document_writer fz_document_writer;
 
 /**
@@ -272,6 +276,8 @@ fz_document_writer *fz_new_document_writer_of_size(fz_context *ctx, size_t size,
 		fz_document_writer_close_writer_fn *close,
 		fz_document_writer_drop_writer_fn *drop);
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -27,6 +27,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/store.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if FZ_ENABLE_ICC
 /**
 	Opaque type for an ICC Profile.
@@ -411,5 +415,9 @@ struct fz_colorspace
 };
 
 void fz_drop_colorspace_imp(fz_context *ctx, fz_storable *cs_);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

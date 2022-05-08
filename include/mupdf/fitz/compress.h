@@ -26,6 +26,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/buffer.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum
 {
 	FZ_DEFLATE_NONE = 0,
@@ -53,5 +57,9 @@ fz_buffer *fz_compress_ccitt_fax_g3(fz_context *ctx, const unsigned char *data, 
 	K=-1 and the number of columns.
 */
 fz_buffer *fz_compress_ccitt_fax_g4(fz_context *ctx, const unsigned char *data, int columns, int rows);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

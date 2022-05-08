@@ -27,6 +27,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/output.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define FZ_HASH_TABLE_KEY_LENGTH 48
 
 /**
@@ -122,5 +126,9 @@ typedef int (fz_hash_table_filter_fn)(fz_context *ctx, void *state, void *key, i
 	Does NOT free the value of the entry, so the caller is expected to take care of this.
 */
 void fz_hash_filter(fz_context *ctx, fz_hash_table *table, void *state, fz_hash_table_filter_fn *callback);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

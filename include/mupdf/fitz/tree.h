@@ -26,6 +26,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	AA-tree to look up things by strings.
 */
@@ -58,5 +62,9 @@ fz_tree *fz_tree_insert(fz_context *ctx, fz_tree *root, const char *key, void *v
 	dropfunc called on it.
 */
 void fz_drop_tree(fz_context *ctx, fz_tree *node, void (*dropfunc)(fz_context *ctx, void *value));
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

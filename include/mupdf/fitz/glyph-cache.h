@@ -29,6 +29,10 @@
 #include "mupdf/fitz/pixmap.h"
 #include "mupdf/fitz/device.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Purge all the glyphs from the cache.
 */
@@ -92,5 +96,9 @@ void fz_dump_glyph_cache_stats(fz_context *ctx);
 	should be considered "at risk" of removal from the API.
 */
 float fz_subpixel_adjust(fz_context *ctx, fz_matrix *ctm, fz_matrix *subpix_ctm, unsigned char *qe, unsigned char *qf);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

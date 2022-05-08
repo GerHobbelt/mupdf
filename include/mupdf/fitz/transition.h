@@ -26,6 +26,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/pixmap.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Transition support */
 enum {
 	FZ_TRANSITION_NONE = 0, /* aka 'R' or 'REPLACE' */
@@ -72,5 +76,9 @@ typedef struct
 	Note: Pixmaps must include alpha.
 */
 int fz_generate_transition(fz_context *ctx, fz_pixmap *tpix, fz_pixmap *opix, fz_pixmap *npix, int time, fz_transition *trans);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

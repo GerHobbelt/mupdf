@@ -34,6 +34,10 @@
 #include "mupdf/fitz/archive.h"
 #include "mupdf/fitz/display-list.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Create a display list.
 
@@ -143,5 +147,9 @@ fz_document *fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *o
 	transform, cookie: Passed to fz_run_page() internally.
 */
 fz_buffer *fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *format, const char *options, fz_matrix transform, fz_cookie *cookie);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

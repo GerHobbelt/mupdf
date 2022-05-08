@@ -27,6 +27,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/buffer.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	XML document model
 */
@@ -174,5 +178,9 @@ fz_xml *fz_xml_find_next_match(fz_xml *item, const char *tag, const char *att, c
 	Return NULL if none found.
 */
 fz_xml *fz_xml_find_down_match(fz_xml *item, const char *tag, const char *att, const char *match);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -28,6 +28,10 @@
 #include "mupdf/fitz/buffer.h"
 #include "mupdf/fitz/stream.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* PUBLIC API */
 
 /**
@@ -287,6 +291,8 @@ fz_archive *fz_new_archive_of_size(fz_context *ctx, fz_stream *file, int size);
 #define fz_new_derived_archive(C,F,M) \
 	((M*)Memento_label(fz_new_archive_of_size(C, F, sizeof(M)), #M))
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif

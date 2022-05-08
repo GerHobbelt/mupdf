@@ -42,6 +42,9 @@
 #include "export.h"
 
 #if defined(_MSC_VER) && (_MSC_VER < 1700) /* MSVC older than VS2012 */
+#ifdef __cplusplus
+extern "C" {
+#endif
 typedef signed char int8_t;
 typedef short int int16_t;
 typedef int int32_t;
@@ -50,6 +53,9 @@ typedef unsigned char uint8_t;
 typedef unsigned short int uint16_t;
 typedef unsigned int uint32_t;
 typedef unsigned __int64 uint64_t;
+#ifdef __cplusplus
+}
+#endif
 #ifndef INT64_MAX
 #define INT64_MAX 9223372036854775807i64
 #endif
@@ -97,6 +103,10 @@ typedef unsigned __int64 uint64_t;
 #endif
 #ifndef HAVE_SIGSETJMP
 #define HAVE_SIGSETJMP 0
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /**
@@ -161,7 +171,7 @@ static __inline int signbit(double x)
 #endif
 #define atoll _atoi64
 
-#endif
+#endif // _MSC_VER
 
 #if defined(_WIN32) || defined(_WIN64)
 
@@ -184,6 +194,10 @@ void fz_free_argv(int argc, const char** argv);
 
 int64_t fz_stat_ctime(const char *path);
 int64_t fz_stat_mtime(const char *path);
+
+#ifdef __cplusplus
+}
+#endif
 
 /* inline is standard in C++. For some compilers we can enable it within
  * C too. Some compilers think they know better than we do about when

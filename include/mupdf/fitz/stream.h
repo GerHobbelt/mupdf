@@ -27,6 +27,10 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/buffer.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Return true if the named file exists and is readable.
 */
@@ -323,6 +327,10 @@ int fz_skip_string(fz_context *ctx, fz_stream *stm, const char *str);
 */
 void fz_skip_space(fz_context *ctx, fz_stream *stm);
 
+#ifdef __cplusplus
+}
+#endif
+
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable: 4611) // warning C4611: interaction between '_setjmp' and C++ object destruction is non-portable (compiling source file XYZ.cpp)
@@ -587,6 +595,10 @@ static inline int fz_is_eof_bits(fz_context *ctx, fz_stream *stm)
 #pragma warning(pop)
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Implementation details: subject to change. */
 
 /**
@@ -594,5 +606,9 @@ static inline int fz_is_eof_bits(fz_context *ctx, fz_stream *stm)
 	when the stream is dropped.
 */
 fz_stream *fz_open_file_ptr_no_close(fz_context *ctx, FILE *file);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -29,6 +29,10 @@
 #include "mupdf/fitz/color.h"
 #include "mupdf/fitz/separation.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	fz_band_writer
 */
@@ -113,5 +117,8 @@ struct fz_band_writer
 fz_band_writer *fz_new_band_writer_of_size(fz_context *ctx, size_t size, fz_output *out);
 #define fz_new_band_writer(C,M,O) ((M *)Memento_label(fz_new_band_writer_of_size(ctx, sizeof(M), O), #M))
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -32,6 +32,10 @@
 #include "mupdf/fitz/stream.h"
 #include "mupdf/fitz/compressed-buffer.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Images are storable objects from which we can obtain fz_pixmaps.
 	These may be implemented as simple wrappers around a pixmap, or
@@ -423,5 +427,9 @@ int fz_load_jbig2_subimage_count(fz_context *ctx, const unsigned char *buf, size
 fz_pixmap *fz_load_jbig2_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
 int fz_load_bmp_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);
 fz_pixmap *fz_load_bmp_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

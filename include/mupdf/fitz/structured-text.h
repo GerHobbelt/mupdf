@@ -33,6 +33,10 @@
 #include "mupdf/fitz/device.h"
 #include "mupdf/fitz/pool.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Simple text layout (for use with annotation editing primarily).
 */
@@ -466,5 +470,8 @@ fz_device *fz_new_ocr_device(fz_context *ctx, fz_device *target, fz_matrix ctm, 
 
 fz_document *fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, const fz_stext_options *opts);
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif

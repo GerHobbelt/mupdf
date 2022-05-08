@@ -25,6 +25,10 @@
 
 #ifdef TRACK_USAGE
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct track_usage_data {
 	int count;
 	const char *function;
@@ -46,6 +50,10 @@ typedef struct track_usage_data {
 	} while (0)
 
 void track_usage(track_usage_data *data, const char *function, int line, const char *desc);
+
+#ifdef __cplusplus
+}
+#endif
 
 #else
 

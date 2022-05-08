@@ -28,6 +28,10 @@
 #include "mupdf/fitz/output.h"
 #include "mupdf/fitz/log.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Resource store
 
@@ -437,6 +441,10 @@ void fz_log_dump_store(fz_context* ctx, FZ_FORMAT_STRING(const char *fmt), ...) 
 #define FZ_LOG_STORE(...) do {} while (0)
 #define FZ_LOG_DUMP_STORE(...) do {} while (0)
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

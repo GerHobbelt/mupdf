@@ -33,6 +33,10 @@
 #include "mupdf/fitz/image.h"
 #include "mupdf/fitz/writer.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	PCL output
 */
@@ -498,5 +502,9 @@ fz_band_writer *fz_new_pwg_band_writer(fz_context *ctx, fz_output *out, const fz
 	Output the file header to a pwg stream, ready for pages to follow it.
 */
 void fz_write_pwg_file_header(fz_context *ctx, fz_output *out); /* for use by mudraw.c */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

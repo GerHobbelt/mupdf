@@ -30,6 +30,10 @@
 #include "mupdf/fitz/font.h"
 #include "mupdf/fitz/path.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 	Glyphs represent a run length encoded set of pixels for a 2
 	dimensional region of a plane.
@@ -77,5 +81,9 @@ void fz_drop_glyph(fz_context *ctx, fz_glyph *pix);
 	ensuring that it eventually gets dropped.
 */
 fz_path *fz_outline_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix ctm);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

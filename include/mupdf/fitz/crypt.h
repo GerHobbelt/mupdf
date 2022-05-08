@@ -25,6 +25,10 @@
 
 #include "mupdf/fitz/system.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* md5 digests */
 
 /**
@@ -265,6 +269,10 @@ int fz_aes_setkey_dec(fz_aes *ctx, const unsigned char *key, int keysize);
 void fz_aes_crypt_cbc(fz_aes *ctx, int mode, size_t length,
 	unsigned char iv[16],
 	const unsigned char *input,
-	unsigned char *output );
+	unsigned char *output);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

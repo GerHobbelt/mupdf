@@ -27,6 +27,10 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/geometry.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct fz_font_context fz_font_context;
 typedef struct fz_colorspace_context fz_colorspace_context;
 typedef struct fz_style_context fz_style_context;
@@ -799,6 +803,11 @@ struct fz_context
 };
 
 fz_context *fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks, size_t max_store, const char *version);
+
+#ifdef __cplusplus
+}
+#endif
+
 
 /**
 	Lock one of the user supplied mutexes.

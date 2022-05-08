@@ -29,6 +29,10 @@
 #include "mupdf/fitz/buffer.h"
 #include "mupdf/fitz/color.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* forward declaration for circular dependency */
 struct fz_device;
 
@@ -725,5 +729,9 @@ struct fz_font
 	int has_digest;
 	unsigned char digest[16];
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -70,6 +70,12 @@ static inline int fz_div255(int c, int a)
 */
 #define FZ_BLEND(SRC, DST, AMOUNT) ((((SRC)-(DST))*(AMOUNT) + ((DST)<<8))>>8)
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /**
 	Range checking atof
 */
@@ -84,6 +90,12 @@ int fz_atoi(const char *s);
 	64bit atoi that copes with NULL
 */
 int64_t fz_atoi64(const char *s);
+
+
+#ifdef __cplusplus
+}
+#endif
+
 
 /**
 	Some standard math functions, done as static inlines for speed.
@@ -162,6 +174,12 @@ static inline void *fz_clampp(void *p, void *min, void *max)
 
 #define DIV_BY_ZERO(a, b, min, max) (((a) < 0) ^ ((b) < 0) ? (min) : (max))
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /**
 	fz_point is a point in a two-dimensional space.
 */
@@ -169,6 +187,12 @@ typedef struct
 {
 	float x, y;
 } fz_point;
+
+
+#ifdef __cplusplus
+}
+#endif
+
 
 static inline fz_point fz_make_point(float x, float y)
 {
@@ -209,17 +233,35 @@ static inline fz_point fz_make_point(float x, float y)
 #define FZ_MIN_INF_RECT ((int)0x80000000)
 #define FZ_MAX_INF_RECT ((int)0x7fffff80)
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 typedef struct
 {
 	float x0, y0;
 	float x1, y1;
 } fz_rect;
 
+
+#ifdef __cplusplus
+}
+#endif
+
+
 static inline fz_rect fz_make_rect(float x0, float y0, float x1, float y1)
 {
 	fz_rect r = { x0, y0, x1, y1 };
 	return r;
 }
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 /**
 	fz_irect is a rectangle using integers instead of floats.
@@ -232,11 +274,24 @@ typedef struct
 	int x1, y1;
 } fz_irect;
 
+
+#ifdef __cplusplus
+}
+#endif
+
+
+
 static inline fz_irect fz_make_irect(int x0, int y0, int x1, int y1)
 {
 	fz_irect r = { x0, y0, x1, y1 };
 	return r;
 }
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 /**
 	A rectangle with sides of length one, i.e. a unit rectangle.
@@ -264,6 +319,12 @@ FZ_DATA extern const fz_irect fz_infinite_irect;
 */
 FZ_DATA extern const fz_rect fz_invalid_rect;
 FZ_DATA extern const fz_irect fz_invalid_irect;
+
+
+#ifdef __cplusplus
+}
+#endif
+
 
 /**
 	Check if rectangle is empty.
@@ -354,6 +415,12 @@ fz_irect_height(fz_irect r)
 	return (int)h;
 }
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /**
 	fz_matrix is a row-major 3x3 matrix used for representing
 	transformations of coordinates throughout MuPDF.
@@ -377,6 +444,12 @@ typedef struct
 */
 FZ_DATA extern const fz_matrix fz_identity;
 
+
+#ifdef __cplusplus
+}
+#endif
+
+
 static inline fz_matrix fz_make_matrix(float a, float b, float c, float d, float e, float f)
 {
 	fz_matrix m = { a, b, c, d, e, f };
@@ -387,6 +460,12 @@ static inline int fz_is_identity(fz_matrix m)
 {
 	return m.a == 1 && m.b == 0 && m.c == 0 && m.d == 1 && m.e == 0 && m.f == 0;
 }
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 /**
 	Multiply two matrices.
@@ -753,6 +832,12 @@ typedef struct
 	fz_point ul, ur, ll, lr;
 } fz_quad;
 
+
+#ifdef __cplusplus
+}
+#endif
+
+
 /**
 	Inline convenience construction function.
 */
@@ -770,6 +855,12 @@ static inline fz_quad fz_make_quad(
 	};
 	return q;
 }
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 /**
 	Convert a rect to a quad (losslessly).
@@ -829,5 +920,9 @@ int fz_is_quad_inside_rect(fz_quad needle, fz_rect haystack);
 	This may break down if quads are not 'well formed'.
 */
 int fz_is_quad_intersecting_quad(fz_quad a, fz_quad b);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

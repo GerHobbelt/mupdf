@@ -29,6 +29,10 @@
 #include "mupdf/fitz/link.h"
 #include "mupdf/fitz/output.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Outline */
 
 typedef struct {
@@ -225,5 +229,9 @@ struct fz_outline_iterator {
 	/* Common state */
 	fz_document *doc;
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
