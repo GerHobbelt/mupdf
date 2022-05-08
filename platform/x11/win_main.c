@@ -818,19 +818,20 @@ static void winblitsearch()
 
 static void winblit()
 {
-	int image_w = fz_pixmap_width(gapp.ctx, gapp.image);
-	int image_h = fz_pixmap_height(gapp.ctx, gapp.image);
-	int image_n = fz_pixmap_components(gapp.ctx, gapp.image);
-	unsigned char *samples = fz_pixmap_samples(gapp.ctx, gapp.image);
-	int x0 = gapp.panx;
-	int y0 = gapp.pany;
-	int x1 = gapp.panx + image_w;
-	int y1 = gapp.pany + image_h;
 	RECT r;
 	HBRUSH brush;
 
 	if (gapp.image)
 	{
+		int image_w = fz_pixmap_width(gapp.ctx, gapp.image);
+		int image_h = fz_pixmap_height(gapp.ctx, gapp.image);
+		int image_n = fz_pixmap_components(gapp.ctx, gapp.image);
+		unsigned char* samples = fz_pixmap_samples(gapp.ctx, gapp.image);
+		int x0 = gapp.panx;
+		int y0 = gapp.pany;
+		int x1 = gapp.panx + image_w;
+		int y1 = gapp.pany + image_h;
+
 		if (gapp.iscopying || justcopied)
 		{
 			pdfapp_invert(&gapp, gapp.selr);
@@ -846,10 +847,10 @@ static void winblit()
 		if (image_n == 2)
 		{
 			size_t i = image_w * (size_t)image_h;
-			unsigned char *color = malloc(i*4);
-			unsigned char *s = samples;
-			unsigned char *d = color;
-			for (; i > 0 ; i--)
+			unsigned char* color = malloc(i * 4);
+			unsigned char* s = samples;
+			unsigned char* d = color;
+			for (; i > 0; i--)
 			{
 				d[2] = d[1] = d[0] = *s++;
 				d[3] = *s++;
@@ -876,24 +877,36 @@ static void winblit()
 			pdfapp_invert(&gapp, gapp.selr);
 			justcopied = 1;
 		}
+
+		if (gapp.invert)
+			brush = (HBRUSH)GetStockObject(BLACK_BRUSH);
+		else
+			brush = bgbrush;
+
+		/* Grey background */
+		r.top = 0; r.bottom = gapp.winh;
+		r.left = 0; r.right = x0;
+		FillRect(hdc, &r, brush);
+		r.left = x1; r.right = gapp.winw;
+		FillRect(hdc, &r, brush);
+		r.left = 0; r.right = gapp.winw;
+		r.top = 0; r.bottom = y0;
+		FillRect(hdc, &r, brush);
+		r.top = y1; r.bottom = gapp.winh;
+		FillRect(hdc, &r, brush);
 	}
-
-	if (gapp.invert)
-		brush = (HBRUSH)GetStockObject(BLACK_BRUSH);
 	else
-		brush = bgbrush;
+	{
+		if (gapp.invert)
+			brush = (HBRUSH)GetStockObject(BLACK_BRUSH);
+		else
+			brush = bgbrush;
 
-	/* Grey background */
-	r.top = 0; r.bottom = gapp.winh;
-	r.left = 0; r.right = x0;
-	FillRect(hdc, &r, brush);
-	r.left = x1; r.right = gapp.winw;
-	FillRect(hdc, &r, brush);
-	r.left = 0; r.right = gapp.winw;
-	r.top = 0; r.bottom = y0;
-	FillRect(hdc, &r, brush);
-	r.top = y1; r.bottom = gapp.winh;
-	FillRect(hdc, &r, brush);
+		/* Grey background */
+		r.top = 0; r.bottom = gapp.winh;
+		r.left = 0; r.right = gapp.winw;
+		FillRect(hdc, &r, brush);
+	}
 
 	winblitsearch();
 }
@@ -1336,8 +1349,8 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 		return EXIT_FAILURE;
 	}
 
-	/* stderr goes nowhere. Get us a debug stream we have a chance
-	 * of seeing. */
+	// stderr goes nowhere.
+	// Get us a debug stream so we have a chance of seeing *independently* of stderr.
 	fz_set_stddbg(ctx, fz_stdods(ctx));
 
 	pdfapp_init(ctx, &gapp);
