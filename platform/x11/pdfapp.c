@@ -956,7 +956,12 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 			fz_always(app->ctx)
 				fz_drop_device(app->ctx, tdev);
 			fz_catch(app->ctx)
+			{
+				fz_error(app->ctx, "Failure when loading page %d / %d: %s",
+					app->pageno, app->pagecount, fz_caught_message(app->ctx));
+
 				fz_rethrow(app->ctx);
+			}
 		}
 	}
 
@@ -1024,7 +1029,12 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 		fz_always(app->ctx)
 			fz_drop_device(app->ctx, idev);
 		fz_catch(app->ctx)
+		{
 			cookie.errors++;
+
+			fz_error(app->ctx, "Failure when drawing page %d / %d @ %g dpi: %s",
+				app->pageno, app->pagecount, app->resolution, fz_caught_message(app->ctx));
+		}
 	}
 
 	if (transition && drawpage)
@@ -1088,7 +1098,11 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 	if (cookie.errors && app->errored == 0)
 	{
 		app->errored = 1;
-		pdfapp_warn(app, "Errors found on page. Page rendering may be incomplete.");
+
+		char msgbuf[512];
+		fz_snprintf(msgbuf, sizeof(msgbuf), "Errors found on page %d / %d. Page rendering may be incomplete.", 
+			app->pageno, app->pagecount);
+		pdfapp_warn(app, msgbuf);
 	}
 
 	fz_flush_warnings(app->ctx);
