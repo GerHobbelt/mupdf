@@ -1,6 +1,12 @@
 
 #include "pch.h"
 
+#include "mupdf/fitz/getopt.h"
+#include "mupdf/fitz/context.h"
+#include "mupdf/fitz/output.h"
+
+#include "../../source/fitz/tessocr.h"
+
 #define BUILD_MONOLITHIC_SINGLE_INSTANCE_NOW    1
 #include "../../thirdparty/tesseract/unittest/include_gunit.h"
 
@@ -51,29 +57,136 @@ namespace tesseract {
 
 	void run_tfloat_benchmark(void);
 	void run_tfloat_matrix_benchmark(void);
-
 }
+
+int tesseract_basicAPI_test_main(void);
+int tesseract_capi_test_main(void);
 
 
 using namespace tesseract;
 
+static inline bool streq(const char* s1, const char* s2)
+{
+	return strcmp(s1, s2) == 0;
+}
+
+static void usage(const char* name)
+{
+	const char* p = strrchr(name, '\\');
+	if (!p)
+		p = strrchr(name, '/');
+	if (!p)
+		p = name - 1;
+	p++;
+
+	fprintf(stderr, "%s [options]\n", p);
+	fprintf(stderr, "\nOptions:\n"
+		"-t   run unit tests\n"
+		"-b   run Basic API tests\n"
+		"-f   run tfloat benchmark\n"
+		"-m   run matrix benchmark\n");
+}
+
+
+static int tesstest_is_toplevel_ctx = 0;
+static fz_context* ctx = NULL;
+
+static void mu_drop_context(void)
+{
+	assert(!ctx || (ctx->error.top == ctx->error.stack_base));
+
+	if (tesstest_is_toplevel_ctx)
+	{
+		// as we registered a global context, we should clean the locks on it now
+		// so the atexit handler won't have to bother with it.
+		assert(fz_has_global_context());
+		ctx = fz_get_global_context();
+		fz_drop_context_locks(ctx);
+		ctx = NULL;
+
+		fz_drop_global_context();
+
+		tesstest_is_toplevel_ctx = 0;
+	}
+}
+
+
+
 int main(int argc, const char** argv)
 {
+	int c;
 	int rv = 0;
 
-	fprintf(stderr, "Running main() from %s\n", __FILE__);
-	InitGoogleTest(&argc, argv);
+	ctx = NULL;
+	tesstest_is_toplevel_ctx = 0;
 
-	TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
-	listeners.Append(new ExpectNFailuresListener(7));
+	if (!fz_has_global_context())
+	{
+		fz_locks_context* locks = NULL;
 
-	if (1)
-		run_tfloat_matrix_benchmark();
+		ctx = fz_new_context(NULL, locks, FZ_STORE_UNLIMITED);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF/Leptonica/Tesseract context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+
+		tesstest_is_toplevel_ctx = 1;
+	}
 	else
-		run_tfloat_benchmark();
-	exit(7);
+	{
+		ctx = fz_get_global_context();
+	}
+	atexit(mu_drop_context);
 
-	rv |= RUN_ALL_TESTS();
+	fz_getopt_reset();
+	while ((c = fz_getopt(argc, argv, "tfmb")) != -1)
+	{
+		switch (c)
+		{
+		default:
+			break;
 
-	return rv;
+		case 'b':
+			return tesseract_basicAPI_test_main();
+
+		case 'f':
+			run_tfloat_benchmark();
+			return EXIT_SUCCESS;
+
+		case 'm':
+			run_tfloat_matrix_benchmark();
+			return EXIT_SUCCESS;
+
+		case 't':
+			fz_info(ctx, "Running unit tests...\n");
+
+			if (streq(argv[fz_optind], "--"))
+				fz_optind++;
+			int sub_argc = argc - fz_optind + 1;
+			const char** sub_argv = argv + fz_optind - 1;
+			sub_argv[0] = argv[0];
+
+			InitGoogleTest(&sub_argc, sub_argv);
+
+			TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
+			listeners.Append(new ExpectNFailuresListener(7));
+
+			rv |= RUN_ALL_TESTS();
+
+#if 0
+			assert(fz_has_global_context());
+			ctx = fz_get_global_context();
+			fz_drop_context_locks(ctx);
+			fz_drop_global_context();
+#endif
+
+			return rv;
+		}
+	}
+
+	usage(argv[0]);
+
+	return EXIT_FAILURE;
 }
