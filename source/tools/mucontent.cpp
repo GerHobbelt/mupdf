@@ -10,6 +10,8 @@
 #define _CRTDBG_MAP_ALLOC
 #endif
 #include <crtdbg.h>
+
+#pragma message("TODO: implement this tool")
 #endif
 
 #include "mupdf/mutool.h"
@@ -106,7 +108,7 @@ qiqqa_mucontent_main(int argc, const char** argv)
 	}
 
 #ifdef _WIN32
-	// Get us a debug stream we have a chance of seeing *independently* of stderr.
+	// Get us a debug stream so we have a chance of seeing *independently* of stderr.
 	fz_set_stddbg(ctx, fz_stdods(ctx));
 #endif
 

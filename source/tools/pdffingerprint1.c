@@ -134,7 +134,7 @@ qiqqa_fingerprint1_main(int argc, const char** argv)
 	}
 
 #ifdef _WIN32
-	// Get us a debug stream we have a chance of seeing *independently* of stderr.
+	// Get us a debug stream so we have a chance of seeing *independently* of stderr.
 	fz_set_stddbg(ctx, fz_stdods(ctx));
 #endif
 
