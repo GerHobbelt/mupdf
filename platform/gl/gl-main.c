@@ -2056,8 +2056,8 @@ static int console_scroll = 0;
 static int console_sticky = 1;
 static int console_lines = 0;
 static struct readline console_readline;
-static void (*warning_callback)(void *, const char *) = NULL;
-static void (*error_callback)(void *, const char *) = NULL;
+static fz_error_print_callback *warning_callback = NULL;
+static fz_error_print_callback *error_callback = NULL;
 static void *warning_user = NULL;
 static void *error_user = NULL;
 
@@ -2135,20 +2135,20 @@ gl_js_console_clear(void *user)
 	ui_invalidate();
 }
 
-static void console_warn(void *user, const char *message)
+static void console_warn(fz_context *ctx, void *user, const char *message)
 {
 	gl_js_console_write(ctx, "\nwarning: ");
 	gl_js_console_write(ctx, message);
 	if (warning_callback)
-		warning_callback(warning_user, message);
+		warning_callback(ctx, warning_user, message);
 }
 
-static void console_err(void *user, const char *message)
+static void console_err(fz_context* ctx, void *user, const char *message)
 {
 	gl_js_console_write(ctx, "\nerror: ");
 	gl_js_console_write(ctx, message);
 	if (error_callback)
-		error_callback(error_user, message);
+		error_callback(ctx, error_user, message);
 }
 
 static void console_init(void)

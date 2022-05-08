@@ -887,7 +887,7 @@ static fz_output* stddbgchannel(void)
 }
 
 
-static void tst_error_callback(void* user, const char* message)
+static void tst_error_callback(fz_context* ctx, void* user, const char* message)
 {
 	struct logconfig* logcfg = (struct logconfig*)user;
 	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
@@ -902,7 +902,7 @@ static void tst_error_callback(void* user, const char* message)
 		fz_write_printf(ctx, dbg, "error: %s\n", message);
 }
 
-static void tst_warning_callback(void* user, const char* message)
+static void tst_warning_callback(fz_context* ctx, void* user, const char* message)
 {
 	struct logconfig* logcfg = (struct logconfig*)user;
 	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
@@ -920,7 +920,7 @@ static void tst_warning_callback(void* user, const char* message)
 	}
 }
 
-static void tst_info_callback(void* user, const char* message)
+static void tst_info_callback(fz_context* ctx, void* user, const char* message)
 {
 	struct logconfig* logcfg = (struct logconfig*)user;
 	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
@@ -938,7 +938,7 @@ static void tst_info_callback(void* user, const char* message)
 }
 
 int
-bulktest_main(int argc, const char *argv[])
+bulktest_main(int argc, const char **argv)
 {
 	int c;
 	int errored = 0;
