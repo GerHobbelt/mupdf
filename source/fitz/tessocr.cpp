@@ -144,8 +144,8 @@ tess_file_reader(const STRING& fname, GenericVector<char> *out)
 
 #endif
 
-static void
-set_leptonica_mem(fz_context *ctx)
+void
+ocr_set_leptonica_mem(fz_context *ctx)
 {
 	int die = 0;
 
@@ -158,8 +158,8 @@ set_leptonica_mem(fz_context *ctx)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Attempt to use Tesseract from 2 threads at once!");
 }
 
-static void
-clear_leptonica_mem(fz_context *ctx)
+void
+ocr_clear_leptonica_mem(fz_context *ctx)
 {
 	int die = 0;
 
@@ -176,7 +176,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 {
 	tesseract::TessBaseAPI *api;
 
-	set_leptonica_mem(ctx);
+	ocr_set_leptonica_mem(ctx);
 	setPixMemoryManager(leptonica_malloc, leptonica_free);
 #if defined(_DEBUG) && defined(_CRTDBG_REPORT_FLAG)
 	api = new (_CLIENT_BLOCK, __FILE__, __LINE__) tesseract::TessBaseAPI();
@@ -186,7 +186,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 
 	if (api == NULL)
 	{
-		clear_leptonica_mem(ctx);
+		ocr_clear_leptonica_mem(ctx);
 		setPixMemoryManager(malloc, free);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Tesseract initialisation failed");
 	}
@@ -204,7 +204,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 		&tess_file_reader))
 	{
 		delete api;
-		clear_leptonica_mem(ctx);
+		ocr_clear_leptonica_mem(ctx);
 		setPixMemoryManager(malloc, free);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Tesseract initialisation failed");
 	}
@@ -221,7 +221,7 @@ void ocr_fin(fz_context *ctx, void *api_)
 
 	api->End();
 	delete api;
-	clear_leptonica_mem(ctx);
+	ocr_clear_leptonica_mem(ctx);
 	setPixMemoryManager(malloc, free);
 }
 
