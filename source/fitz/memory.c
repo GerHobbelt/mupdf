@@ -55,6 +55,9 @@ do_scavenging_malloc(fz_context *ctx, size_t size)
 	void *p;
 	int phase = 0;
 
+	if (ctx == NULL)
+		return NULL;
+
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
 		p = ctx->alloc.malloc_(ctx->alloc.user, size);
@@ -74,6 +77,9 @@ do_scavenging_realloc(fz_context *ctx, void *p, size_t size)
 {
 	void *q;
 	int phase = 0;
+
+	if (ctx == NULL)
+		return NULL;
 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
@@ -168,6 +174,7 @@ fz_free(fz_context *ctx, const void *p)
 {
 	if (p)
 	{
+		assert(ctx != NULL);
 		fz_lock(ctx, FZ_LOCK_ALLOC);
 		ctx->alloc.free_(ctx->alloc.user, (void *)p);
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
@@ -179,7 +186,10 @@ fz_strdup(fz_context *ctx, const char *s)
 {
 	size_t len = strlen(s) + 1;
 	char *ns = (char *)fz_malloc(ctx, len);
-	memcpy(ns, s, len);
+	if (ns)
+	{
+		memcpy(ns, s, len);
+	}
 	return ns;
 }
 
