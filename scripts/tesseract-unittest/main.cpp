@@ -67,7 +67,7 @@ using namespace tesseract;
 
 static inline bool streq(const char* s1, const char* s2)
 {
-	return strcmp(s1, s2) == 0;
+	return s1 == s2 || (s1 && s2 && strcmp(s1, s2) == 0);
 }
 
 static void usage(const char* name)
@@ -101,6 +101,9 @@ static void mu_drop_context(void)
 		// so the atexit handler won't have to bother with it.
 		assert(fz_has_global_context());
 		ctx = fz_get_global_context();
+
+		ocr_clear_leptonica_mem(ctx);
+
 		fz_drop_context_locks(ctx);
 		ctx = NULL;
 
@@ -172,6 +175,8 @@ int main(int argc, const char** argv)
 
 			TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
 			listeners.Append(new ExpectNFailuresListener(7));
+
+			ocr_set_leptonica_mem(ctx);
 
 			rv |= RUN_ALL_TESTS();
 
