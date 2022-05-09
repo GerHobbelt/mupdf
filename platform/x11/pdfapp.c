@@ -528,6 +528,22 @@ void pdfapp_open_progressive(pdfapp_t *app, char *filename, int reload, int kbps
 			}
 			break;
 		}
+		{
+			fz_colorspace *oi = NULL;
+
+			/* Once document is open check for output intent colorspace */
+			oi = fz_document_output_intent(ctx, app->doc);
+			if (oi)
+			{
+				/* In this case, we want to render to the output intent
+				 * color space if the number of channels is the same */
+				if (fz_colorspace_n(ctx, oi) == fz_colorspace_n(ctx, app->colorspace))
+				{
+					fz_drop_colorspace(ctx, app->colorspace);
+					app->colorspace = fz_keep_colorspace(ctx, oi);
+				}
+			}
+		}
 	}
 	fz_catch(ctx)
 	{
