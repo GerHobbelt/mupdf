@@ -37,7 +37,7 @@ ifeq ($(OS),MACOS)
   SO := dylib
 else
   LDREMOVEUNREACH := -Wl,--gc-sections
-  ifeq ($(OS),MINGW)
+  ifneq (,$(findstring MINGW,$(OS)))
     SO := dll
     EXE := .exe
   else
@@ -133,9 +133,38 @@ ifneq "$(CLUSTER)" ""
   CFLAGS += -DCLUSTER
 endif
 
-ifeq ($(OS),MINGW)
+ifneq (,$(findstring MINGW,$(OS)))
   WINDRES := windres
   HAVE_WIN32 := yes
+
+  ifeq ($(shell pkg-config --exists freetype2 && echo yes),yes)
+	SYS_FREETYPE_CFLAGS := $(shell pkg-config --cflags freetype2)
+	SYS_FREETYPE_LIBS := $(shell pkg-config --libs freetype2)
+  endif
+  ifeq ($(shell pkg-config --exists gumbo && echo yes),yes)
+	SYS_GUMBO_CFLAGS := $(shell pkg-config --cflags gumbo)
+	SYS_GUMBO_LIBS := $(shell pkg-config --libs gumbo)
+  endif
+  ifeq ($(shell pkg-config --exists harfbuzz && echo yes),yes)
+	SYS_HARFBUZZ_CFLAGS := $(shell pkg-config --cflags harfbuzz)
+	SYS_HARFBUZZ_LIBS := $(shell pkg-config --libs harfbuzz)
+  endif
+  ifeq ($(shell pkg-config --exists libjpeg && echo yes),yes)
+	SYS_LIBJPEG_CFLAGS := $(shell pkg-config --cflags libjpeg)
+	SYS_LIBJPEG_LIBS := $(shell pkg-config --libs libjpeg)
+  endif
+  ifeq ($(shell pkg-config --exists libopenjp2 && echo yes),yes)
+	SYS_OPENJPEG_CFLAGS := $(shell pkg-config --cflags libopenjp2)
+	SYS_OPENJPEG_LIBS := $(shell pkg-config --libs libopenjp2)
+  endif
+  ifeq ($(shell pkg-config --exists zlib && echo yes),yes)
+	SYS_ZLIB_CFLAGS := $(shell pkg-config --cflags zlib)
+	SYS_ZLIB_LIBS := $(shell pkg-config --libs zlib)
+  endif
+  ifeq ($(shell pkg-config --exists curl && echo yes),yes)
+	SYS_ZLIB_CFLAGS := $(shell pkg-config --cflags curl)
+	SYS_ZLIB_LIBS := $(shell pkg-config --libs curl)
+  endif
 
 else ifeq ($(OS),MACOS)
   HAVE_GLUT := yes
@@ -252,7 +281,7 @@ ifeq "$(OS)" "wasm"
   HAVE_LIBCRYPTO=no
 endif
 
-ifeq "$(OS)" "mingw32-cross"
+ifeq "$(OS)" "MINGW32-cross"
   build_prefix += $(OS)/
   SO := dll
   EXE := .exe
@@ -264,7 +293,7 @@ ifeq "$(OS)" "mingw32-cross"
   HAVE_WIN32=yes
 endif
 
-ifeq "$(OS)" "mingw64-cross"
+ifeq "$(OS)" "MINGW64-cross"
   build_prefix += $(OS)/
   SO := dll
   EXE := .exe
