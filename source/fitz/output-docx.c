@@ -102,6 +102,7 @@ static void dev_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 			{
 				fz_text_item *item = &span->items[i];
 				float adv = 0;
+				fz_rect bounds;
 
 				if (dev->writer->mediabox_clip)
 					if (fz_glyph_entirely_outside_box(ctx, &ctm, span, item, &dev->writer->mediabox))
@@ -110,21 +111,12 @@ static void dev_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 				if (span->items[i].gid >= 0)
 					adv = fz_advance_glyph(ctx, span->font, span->items[i].gid, span->wmode);
 
-#if 0
-				/* BBox is bogus here. Analysis will fail. */
-				if (extract_add_char(dev->writer->extract, item->x, item->y, item->ucs, adv, 0 /*autosplit*/, item->x, item->y, item->x + adv, item->y + adv))
+				bounds = fz_bound_glyph(ctx, span->font, span->items[i].gid, span->trm);
+				bounds = fz_translate_rect(bounds, item->x, item->y);
+				bounds = fz_transform_rect(bounds, ctm);
+				if (extract_add_char(dev->writer->extract, item->x, item->y, item->ucs, adv, 0 /*autosplit*/,
+							bounds.x0, bounds.y0, bounds.x1, bounds.y1))
 					fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to add char");
-#else
-				if (extract_add_char(
-						dev->writer->extract,
-						item->x,
-						item->y,
-						item->ucs,
-						adv, 0 /*autosplit*/,
-						0, 0, 0, 0 /* bbox. */
-						))
-					fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to add char");
-#endif
 			}
 
 			if (extract_span_end(dev->writer->extract))
@@ -424,14 +416,8 @@ static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_
 	fz_var(dev);
 	fz_try(ctx)
 	{
-#if 0
-		/* BBox is bogus here. Analysis will fail. */
 		if (extract_page_begin(writer->extract, mediabox.x0, mediabox.y0, mediabox.x1, mediabox.y1))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin page");
-#else
-		if (extract_page_begin(writer->extract, 0, 0, 0, 0 /* mediabox */))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin page");
-#endif
 		dev = fz_new_derived_device(ctx, fz_docx_device);
 		dev->super.fill_text = dev_fill_text;
 		dev->super.stroke_text = dev_stroke_text;
@@ -626,6 +612,8 @@ static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_outpu
 		writer->rotation = get_bool_option(ctx, options, "rotation", 1);
 		writer->images = get_bool_option(ctx, options, "images", 1);
 		writer->mediabox_clip = get_bool_option(ctx, options, "mediabox-clip", 1);
+		if (extract_set_layout_analysis(writer->extract, get_bool_option(ctx, options, "analyse", 0)))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "extract_enable_analysis failed.");
 		{
 			const char* v;
 			if (fz_has_option(ctx, options, "tables-csv-format", &v))
