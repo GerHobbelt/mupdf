@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -22,6 +22,15 @@
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\shell.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\user_code.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_extensions1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_extensions2.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_extensions3.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_extensions4.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_extensions5.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_extensions6.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_extensions7.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_analyzer.c" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_checker.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_multiplex.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_osinst.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\kvtest.c" />
@@ -68,6 +77,43 @@
   <ItemGroup>
     <None Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\README.md" />
     <None Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3_config.h.in" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\build-all-msvc.bat" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\cg_anno.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\extract-sqlite3h.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\fragck.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\genfkey.test" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\GetFile.cs" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\GetTclKit.bat" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\merge-test.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkccode.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkctimec.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkmsvcmin.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkopcodec.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkopcodeh.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkopts.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkpragmatab.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkshellc.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkspeedsql.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mksqlite3c-noext.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mksqlite3c.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mksqlite3h.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mksqlite3internalh.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\mkvsix.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\omittest.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\opcodesum.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\Replace.cs" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\replace.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\restore_jrnl.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\soak1.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\spaceanal.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\speedtest.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\speedtest2.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\split-sqlite3c.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\sqltclsh.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\stack_usage.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\tserver_test.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\vdbe-compress.tcl" />
+    <None Include="..\..\thirdparty\owemdjee\sqlite\tool\vdbe_profile.tcl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libsqlite</ProjectName>
@@ -103,20 +149,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -130,7 +176,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -162,8 +208,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -948,7 +994,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/tool/warnings.sh" />
     <Text Include="../../thirdparty/owemdjee/sqlite/tsrc/shell.c.in" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
