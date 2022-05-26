@@ -84,21 +84,13 @@ def test(path):
     global g_test_n
     g_test_n += 1
 
-    # See notes in mupdfwrap.py:build_swig() about buffer_extract() and
+    # See notes in wrap/swig.py:build_swig() about buffer_extract() and
     # buffer_storage().
     #
-    assert getattr(mupdf.Buffer, 'buffer_storage_raw')
+    assert getattr(mupdf.Buffer, 'buffer_storage_raw', None) is None
     assert getattr(mupdf.Buffer, 'buffer_storage')
-    b = mupdf.Buffer()
-    try:
-        b.buffer_storage()
-    except Exception as e:
-        assert 'Buffer.buffer_storage() is not available' in str(e)
-    else:
-        assert 0, 'Expected exception from mupdf.Buffer.buffer_storage()'
-
-    assert getattr(mupdf.Buffer, 'buffer_extract_raw')
     assert getattr(mupdf.Buffer, 'buffer_extract')
+    assert getattr(mupdf.Buffer, 'buffer_extract_copy')
 
     # Test operations using functions:
     #
