@@ -165,6 +165,7 @@ class State:
         self.cygwin = self.os_name.startswith('CYGWIN')
         self.openbsd = self.os_name == 'OpenBSD'
         self.linux = self.os_name == 'Linux'
+        self.macos = self.os_name == 'Darwin'
         self.have_done_build_0 = False
 
         # Maps from <tu> to dict of fnname: cursor.
