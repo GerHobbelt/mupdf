@@ -450,8 +450,10 @@ Requirements:
 
 * Linux, Windows or OpenBSD.
 
-** Windows builds depend on hard-coded path for `devenv.com` in
-`+scripts/wrap/__main__.py+`.
+** Windows builds default to a hard-coded path for `devenv.com` in
+`+scripts/wrap/__main__.py+`. This can be overridded with `-b --devenv <devenv.com-location> ...`.
+
+** Windows builds require `py`, the Python launcher. This is an option when installing Python, called "Install launcher for all users (recommended)"; see https://docs.python.org/3/using/windows.html.
 
 * clang-python version 6 or later. [For example Debian `python-clang`, OpenBSD
 `py3-llvm`.]
