@@ -167,7 +167,9 @@ contain features that are not yet publicly available.
 
 * It is updated only intermittently.
 
-== Using the Python API
+== Example client code
+
+=== Using the Python API
 
 Minimal Python code that uses the `mupdf` module:
 
@@ -237,7 +239,7 @@ show_stext(document)
 ----
 ====
 
-== Basic PDF viewers written in Python and C#
+=== Basic PDF viewers written in Python and C#
 
 * `scripts/mupdfwrap_gui.py`
 * `scripts/mupdfwrap_gui.cs`
@@ -445,7 +447,9 @@ pointers and return `int` instead of `int8_t` to avoid SWIG getting confused.
 
 == Building the {cpp}, Python and C# MuPDF APIs
 
-=== General requirements
+=== Setup
+
+==== General requirements
 
 * Linux, Windows or OpenBSD.
 
@@ -456,19 +460,30 @@ pointers and return `int` instead of `int8_t` to avoid SWIG getting confused.
 * SWIG version 3 or 4.
 
 
-=== Windows setup
+==== Windows
 
-* Install Python using the Python Windows installer from the Python website:
-http://www.python.org/downloads
+Install Python using the Python Windows installer from the python.org website:
 
-** Don't use other installers such as the Microsoft Store Python package.
+* http://www.python.org/downloads
 
-** A default installation is sufficient.
+Notes about other Python installers:
 
-** If "Customize Installation" is chosen, make sure to include "py launcher" so
+* Don't use other installers such as the Microsoft Store Python package.
+
+* If Microsoft Store Python is already installed, leave it in place and install
+from python.org on top of it - uninstalling before running the python.org
+installer has been known to cause problems.
+
+Installing with the Python Windows installer from python.org:
+
+* A default installation is sufficient.
+
+* If "Customize Installation" is chosen, make sure to include "py launcher" so
 that the `py` command will be available.
 
-** Also see: https://docs.python.org/3/using/windows.html
+* Also see: https://docs.python.org/3/using/windows.html
+
+Other:
 
 * Run: `pip install libclang`
 
@@ -482,14 +497,22 @@ automatically download swig to local directory if not already present, and use
 it directly.
 
 
-=== Linux setup
+==== Linux
 
 (Debian-specific; similar packages exist on other distributions.)
 
 * `sudo apt install python3-dev swig python-clang`
 
+Notes:
 
-=== OpenBSD setup
+* One can do `pip install libclang` instead of installing the `python-clang`
+package in the above command.
+
+* `pip install clang` does not provide a usable Python interface onto the clang
+parser.
+
+
+==== OpenBSD
 
 * `sudo pkg_add python py3-llvm swig`
 
