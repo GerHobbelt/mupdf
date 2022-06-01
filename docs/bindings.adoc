@@ -142,8 +142,8 @@ print(rect) # Will output text such as: (x0=90.51 y0=160.65 x1=501.39 y1=215.6)
 ----
 
 ** This works for classes where the {cpp} API defines a `to_string()` method as described above.
-**** Python classes will have a `+__str__()+` method.
-**** C# classes will have a `ToString()` method.
+*** Python classes will have a `+__str__()+` method.
+*** C# classes will have a `ToString()` method.
 * Uses SWIG Director classes to allow C function pointers in MuPDF structs to call Python code.
 ** This has not been tested on C#.
 
@@ -158,12 +158,13 @@ The Python `mupdf` module is available on the https://pypi.org/[Python Package I
 == Doxygen/Pydoc API documentation
 
 Auto-generated documentation for the C, {cpp} and Python APIs is available at:
+https://ghostscript.com/~julian/mupdf-bindings/
 
-* https://ghostscript.com/~julian/mupdf-bindings/
+* All content is generated from the comments in MuPDF header files.
 
-Caveats:
+* This documentation is generated from an internal development tree, so may
+contain features that are not yet publicly available.
 
-* This documentation is generated from an internal development tree, so may contain features that are not yet publicly available.
 * It is updated only intermittently.
 
 == Using the Python API
@@ -464,7 +465,7 @@ http://www.python.org/downloads
 
 ** A default installation is sufficient.
 
-** If Customize Installation is chosen, make sure to include "py launcher" so
+** If "Customize Installation" is chosen, make sure to include "py launcher" so
 that the `py` command will be available.
 
 ** Also see: https://docs.python.org/3/using/windows.html
@@ -530,7 +531,7 @@ For more information:
 ==== Building the MuPDF shared library
 
 * On Unix, runs `make` on MuPDF's Makefile.
-* On Windows, runs `devenv.com` on Windows `.sln` and `.vcxproj` files in `platform/win32`.
+* On Windows, runs `devenv.com` on `.sln` and `.vcxproj` files within `platform/win32/`.
 
 ==== Generation of the {cpp} MuPDF API
 
@@ -665,9 +666,9 @@ the corresponding wrapper class.
 Args that are pointers to a MuPDF struct will be changed to take a reference to
 the corresponding wrapper class.
 
-In addition there will be a function call `mupdf:m<fnname>()` which provides
-exactly the same functionality, taking a reference to the wrapper class as an
-explicit first arg called `self`.
+In addition there will be a non-member function called `mupdf::m<fnname>()`
+which provides exactly the same functionality, taking a reference to the
+wrapper class as an explicit first arg called `self`.
 
 * These non-member functions are declared in:
 `mupdf/platform/c++/include/mupdf/classes2.h`
@@ -717,13 +718,13 @@ wrappers for the `mupdf::m*()` functions.
 
 Class wrappers for MuPDF structs default to having a `m_internal` member which
 points to an instance of the wrapped struct. This works well for MuPDF structs
-which support reference counting, because we can autmatically create copy
+which support reference counting, because we can automatically create copy
 constructors, `operator=` functions and destructors that call the associated
 `fz_keep_*()` and `fz_drop_*()` functions.
 
 However where a MuPDF struct does not support reference counting and contains
 simple data, it is not safe to copy a pointer to the struct, so the class
-wrapper will be a POD class, in one of two ways:
+wrapper will be a POD class. This is done in one of two ways:
 
 * `m_internal` is an instance of the MuPDF struct, not a pointer.
 
@@ -747,8 +748,11 @@ constructors do not have names).
 
 We cope with this in two ways:
 
-* Create a static method that returns a new instance of the wrapper class by
-value. However this scheme fails if the underlying struct is not copyable.
+* Create a static method that returns a new instance of the wrapper class
+by value.
+
+** This is not possible if the underlying MuPDF struct is not reference counted
+or trivially copyable.
 
 * Define an enum within the wrapper class, and provide a constructor that takes
 an instance of this enum to specify which MuPDF function to use.
@@ -765,10 +769,13 @@ sets `m_internal` to null.
 === Wrapper classes for MuPDF structs with function pointers.
 
 For MuPDF structs with function pointers, we provide a second wrapper class for
-use by Python bindings. This second wrapper class has a virtual method for each
-function pointer, which can be used as a SWIG Director class where overriding
-the virtual method in Python results in the Python method being called by MuPDF
-when calling the corresponding function pointer.
+use by Python bindings.
+
+* This second wrapper class has a virtual method for each function pointer, so
+it can be used as a SWIG Director class.
+
+* Overriding a virtual method in Python results in the Python method being
+called when MuPDF C code calls the corresponding function pointer.
 
 === Extra static methods
 
