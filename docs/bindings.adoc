@@ -442,29 +442,58 @@ pointers and return `int` instead of `int8_t` to avoid SWIG getting confused.
 * *2020-10-07*: Experimental release of {cpp} and Python bindings in MuPDF-1.18.0.
 
 
-== Building
+== Building the {cpp}, Python and C# MuPDF APIs
 
-=== Building the {cpp}, Python and C# MuPDF APIs directly
-
-Requirements:
+=== General requirements
 
 * Linux, Windows or OpenBSD.
 
-** Windows builds default to a hard-coded path for `devenv.com` in
-`+scripts/wrap/__main__.py+`. This can be overridded with `-b --devenv <devenv.com-location> ...`.
+* Python development libraries.
 
-** Windows builds require `py`, the Python launcher. This is an option when installing Python, called "Install launcher for all users (recommended)"; see https://docs.python.org/3/using/windows.html.
-
-* clang-python version 6 or later. [For example Debian `python-clang`, OpenBSD
-`py3-llvm`.]
-
-* python3-dev version 3.6 or later.
+* Python package `libclang` - a Python interface onto the libclang C/C++ parser.
 
 * SWIG version 3 or 4.
 
-For example on a Debian-based Linux distribution:
 
-* `sudo apt install clang clang-python python3-dev swig`
+=== Windows setup
+
+* Install Python using the Python Windows installer from the Python website:
+http://www.python.org/downloads
+
+** Don't use other installers such as the Microsoft Store Python package.
+
+** A default installation is sufficient.
+
+** If Customize Installation is chosen, make sure to include "py launcher" so
+that the `py` command will be available.
+
+** Also see: https://docs.python.org/3/using/windows.html
+
+* Run: `pip install libclang`
+
+* We look for `devenv.com` in some hard-coded locations, which can be overriden
+with:
+
+** `scripts/mupdfwrap.py -b --devenv <devenv.com-location> ...`
+
+* Run `scripts/mupdfwrap.py` with `--swig-windows-auto` so that we
+automatically download swig to local directory if not already present, and use
+it directly.
+
+
+=== Linux setup
+
+(Debian-specific; similar packages exist on other distributions.)
+
+* `sudo apt install python3-dev swig python-clang`
+
+
+=== OpenBSD setup
+
+* `sudo pkg_add python py3-llvm swig`
+
+
+=== Doing a build
 
 Build MuPDF shared library, {cpp} and Python MuPDF APIs, and run basic tests:
 
@@ -498,9 +527,10 @@ For more information:
 
 === How building the APIs works
 
-==== Building of MuPDF shared library:
+==== Building the MuPDF shared library
 
-* Runs `make` on MuPDF's Makefile.
+* On Unix, runs `make` on MuPDF's Makefile.
+* On Windows, runs `devenv.com` on Windows `.sln` and `.vcxproj` files in `platform/win32`.
 
 ==== Generation of the {cpp} MuPDF API
 
@@ -523,7 +553,8 @@ arbitrarily.
 
 ==== Generation of the Python and C# MuPDF APIs
 
-* Uses SWIG to parse the {cpp} headers and generate C++, Python and C# code.
+* Uses SWIG to parse the previously-generated {cpp} headers and generate C++,
+Python and C# code.
 
 * Defines some custom-written Python and C# functions and methods, e.g. so that
 out-params are returned as tuples.
