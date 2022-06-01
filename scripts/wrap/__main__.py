@@ -358,16 +358,28 @@ Tools required to build:
 
     Clang:
 
-        We work with clang-6 or clang-7, but clang-6 appears to not be able
-        to cope with function args that are themselves function pointers, so
-        wrappers for these fz_*() functions are ommited from the generated C++
-        code.
+        Clang versions:
 
-        On unix it seems that clang-python packages such as Debian's
-        python-clang and OpenBSD's py3-llvm require us to explicitly specify
-        the location of libclang. Alternatively on Linux one can use our --venv
-        option to run in a venv that has done 'pip install libclang', which
-        makes clang available directly as a Python module.
+            We work with clang-6 or clang-7, but clang-6 appears to not be
+            able to cope with function args that are themselves function
+            pointers, so wrappers for these fz_*() functions are ommited from
+            the generated C++ code.
+
+        Unix:
+
+            It seems that clang-python packages such as Debian's python-clang
+            and OpenBSD's py3-llvm require us to explicitly specify the
+            location of libclang, so we search in various locations.
+
+            Alternatively on Linux one can (perhaps in a venv) do:
+
+                pip install libclang
+
+            This makes clang available directly as a Python module.
+
+        On Windows, one must install clang-python with:
+
+            pip install libclang
 
     SWIG:
 
@@ -1028,7 +1040,18 @@ def build( build_dirs, swig_command, args):
     force_rebuild = False
     header_git = False
     state.state_.show_details = lambda name: False
-    devenv = f'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com'
+    devenv = 'devenv.com'
+    if state.state_.windows:
+        # Search for devenv.com in standard locations.
+        devenvs = (
+                'C:/Program Files (x86)/Microsoft Visual Studio/2019/Communityx/Common7/IDE/devenv.com',
+                'C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.com',
+                'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/devenv.com',
+                )
+        for path in devenvs:
+            if os.path.exists( path):
+                devenv = path
+                break
 
     jlib.log('{build_dirs.dir_so=}')
 
