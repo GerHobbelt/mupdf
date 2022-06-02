@@ -39,9 +39,9 @@ Code listings:
 
 == Overview
 
-Auto-generated {cpp}, Python and C# versions of the MuPDF API are available.
+Auto-generated {cpp}, Python and C# versions of the MuPDF C API are available.
 
-The APIs are currently a beta release and liable to change.
+These APIs are currently a beta release and liable to change.
 
 == The {cpp} MuPDF API
 
@@ -455,7 +455,7 @@ pointers and return `int` instead of `int8_t` to avoid SWIG getting confused.
 
 * Python development libraries.
 
-* Python package `libclang` - a Python interface onto the libclang C/C++ parser.
+* Python package `libclang` - a Python interface onto the libclang C/{cpp} parser.
 
 * SWIG version 3 or 4.
 
@@ -572,12 +572,12 @@ arbitrarily.
 
 * C header file comments are copied into the generated {cpp} header files.
 
-* Compile and link the generated C++ code to create shared libraries.
+* Compile and link the generated {cpp} code to create shared libraries.
 
 
 ==== Generation of the Python and C# MuPDF APIs
 
-* Uses SWIG to parse the previously-generated {cpp} headers and generate C++,
+* Uses SWIG to parse the previously-generated {cpp} headers and generate {cpp},
 Python and C# code.
 
 * Defines some custom-written Python and C# functions and methods, e.g. so that
@@ -585,7 +585,7 @@ out-params are returned as tuples.
 
 * If SWIG is version 4+, {cpp} comments are converted into Python doc-comments.
 
-* Compile and link the SWIG-generated C++ code to create shared libraries.
+* Compile and link the SWIG-generated {cpp} code to create shared libraries.
 
 
 === Building auto-generated MuPDF API documentation
@@ -705,7 +705,7 @@ wrapper class as an explicit first arg called `self`.
 
 * All {cpp} functions omit any `fz_context*` arg.
 
-* All {cpp} functions convert MuPDF exceptions into C++ exceptions.
+* All {cpp} functions convert MuPDF exceptions into {cpp} exceptions.
 
 Wrappers for a MuPDF function `fz_foo()` are available in multiple forms:
 
@@ -720,7 +720,7 @@ to low-level MuPDF structs that require explicit calls to `fz_keep_*()` and
 ** `mupdf::mfz_foo()`
 
 *** Args that take a pointer to a MuPDF struct instead take a reference to a
-corresponding C++ wrapper class instance.
+corresponding {cpp} wrapper class instance.
 
 * Class methods
 
@@ -731,7 +731,7 @@ member function of the wrapper class `mupdf::FooBar`:
 *** `mupdf::FooBar::foo()`
 
 *** Like `mupdf::mfz_foo()`, args that take a pointer to a MuPDF struct instead
-take a reference to a C++ wrapper class instance.
+take a reference to a {cpp} wrapper class instance.
 
 *** The auto-generated class member functions are actually implemented as thin
 wrappers for the `mupdf::m*()` functions.
@@ -789,16 +789,76 @@ default values.
 Where it is useful, non-POD wrapper classes can have a default constructor that
 sets `m_internal` to null.
 
-=== Wrapper classes for MuPDF structs with function pointers.
+
+=== Making MuPDF function pointers call Python code
 
 For MuPDF structs with function pointers, we provide a second wrapper class for
-use by Python bindings.
+use by the Python bindings.
+
+* The second wrapper class has a `2` suffix, for example `PdfFilterOptions2`.
 
 * This second wrapper class has a virtual method for each function pointer, so
-it can be used as a SWIG Director class.
+it can be used as a https://swig.org/Doc4.0/SWIGDocumentation.html#SWIGPlus_target_language_callbacks[SWIG Director class].
 
 * Overriding a virtual method in Python results in the Python method being
 called when MuPDF C code calls the corresponding function pointer.
+
+* One needs to activate the use of a Python method as a callback by calling the
+special method `use_virtual_<method-name>()`. [It might be possible in future
+to remove the need to do this.]
+
+* Callback args that are pointers to a MuPDF struct:
+
+** Where the underlying MuPDF function pointer has an arg that is a pointer to
+an MuPDF struct, unlike elsewhere in the MuPDF bindings we do not translate
+this into an instance of the corresponding wrapper class. Instead Python
+callbacks will see a SWIG representation of the low-level C pointer.
+
+** It is not safe to construct a Python wrapper class instance directly from
+such a SWIG representation of a C pointer, because it will break MuPDF's
+reference counting - Python/{cpp} constructors that take a raw pointer to a
+MuPDF struct do not call `fz_keep_*()` but the corresponding Python/{cpp}
+destructor will call `fz_drop_*()`.
+
+** It might be safe to create an wrapper class instance using an explicit call
+to `mupdf.keep_*()`, but this has not been tested.
+
+Here is an example PDF filter written in Python that removes alternating items:
+
+//[%collapsible]
+//====
+[source,python]
+----
+import mupdf
+
+def test_filter(path):
+    class MyFilter( mupdf.PdfFilterOptions2):
+        def __init__( self):
+            super().__init__()
+            self.use_virtual_text_filter()
+            self.recurse = 1
+            self.sanitize = 1
+            self.state = 1
+            self.ascii = True
+        def text_filter( self, ucsbuf, ucslen, trm, ctm, bbox):
+            print( f'text_filter(): ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
+            # Remove every other item.
+            self.state = 1 - self.state
+            return self.state
+
+    filter_ = MyFilter()
+
+    document = mupdf.PdfDocument(path)
+    for p in range(document.count_pages()):
+        page = document.load_page(p)
+        print( f'Running document.filter_page_contents on page {p}')
+        document.begin_operation('test filter')
+        document.filter_page_contents(page, filter_)
+        document.end_operation()
+
+    document.save_document('foo.pdf', mupdf.PdfWriteOptions())
+----
+//====
 
 === Extra static methods
 
