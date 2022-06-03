@@ -3387,7 +3387,7 @@ def refcount_check_code( out):
                     int n_prev = n;
                     assert( n >= 0);
                     n += delta;
-                    std::cerr << file << ":" << line << ":" << fn << "():"
+                    if (0) std::cerr << file << ":" << line << ":" << fn << "():"
                             // << " " << typeid(ClassWrapper).name() << ":"
                             << " this_=" << this_
                             << " this_->m_internal=" << this_->m_internal
