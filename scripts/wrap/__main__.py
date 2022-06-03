@@ -1044,7 +1044,7 @@ def build( build_dirs, swig_command, args):
     if state.state_.windows:
         # Search for devenv.com in standard locations.
         devenvs = (
-                'C:/Program Files (x86)/Microsoft Visual Studio/2019/Communityx/Common7/IDE/devenv.com',
+                'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.com',
                 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.com',
                 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/devenv.com',
                 )
@@ -2070,7 +2070,7 @@ def main2():
                 else:
                     jlib.log( 'running scripts/mupdfwrap_test.py ...')
                     script_py = os.path.relpath( f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_test.py')
-                    command = f'MUPDF_trace=0 MUPDF_check_refs=1 MUPDF_trace_exceptions=1 {command_prefix} {script_py}'
+                    command = f'MUPDF_trace=0 MUPDF_check_refs=0 MUPDF_trace_exceptions=1 {command_prefix} {script_py}'
                     with open( f'{build_dirs.dir_mupdf}/platform/python/mupdf_test.py.out.txt', 'w') as f:
                         jlib.system( command, env_extra=env_extra, out='log', verbose=1)
                         # Repeat with pdf_reference17.pdf if it exists.
