@@ -132,7 +132,10 @@ These each generate text such as: `(x0=90.51 y0=160.65 x1=501.39 y1=1215.6)`
 ** Automatic reference counting, so no need to call `fz_keep_*()` or `fz_drop_*()`, and we have value-semantics for class instances.
 ** Native Python and C# exceptions.
 * Output parameters are returned as tuples.
-* Allows implementation of mutool in Python - see `mupdf:scripts/mutool.py` and `mupdf:scripts/mutool_draw.py`.
+* Allows implementation of mutool in Python - see https://git.ghostscript.com/?p=mupdf.git;a=blob;f=mupdf:scripts/mutool.py[`mupdf:scripts/mutool.py`]
+and
+https://git.ghostscript.com/?p=mupdf.git;a=blob;f=mupdf:scripts/mutool_draw.py[`mupdf:scripts/mutool_draw.py`].
+
 * Provides text representation of simple 'POD' structs.
 +
 [source,python]
@@ -181,12 +184,12 @@ document = mupdf.Document('foo.pdf')
 
 A simple example Python test script (run by `scripts/mupdfwrap.py -t`) is:
 
-* `scripts/mupdfwrap_test.py`
+* https://git.ghostscript.com/?p=mupdf.git;a=blob;f=scripts/mupdfwrap_test.py[`scripts/mupdfwrap_test.py`]
 
 More detailed usage of the Python API can be found in:
 
-* `scripts/mutool.py`
-* `scripts/mutool_draw.py`
+* https://git.ghostscript.com/?p=mupdf.git;a=blob;f=scripts/mutool.py[`scripts/mutool.py`]
+* https://git.ghostscript.com/?p=mupdf.git;a=blob;f=scripts/mutool_draw.py[`scripts/mutool_draw.py`]
 
 
 .*Example Python code that shows all available information about a document's Stext blocks, lines and characters.*
@@ -241,8 +244,8 @@ show_stext(document)
 
 === Basic PDF viewers written in Python and C#
 
-* `scripts/mupdfwrap_gui.py`
-* `scripts/mupdfwrap_gui.cs`
+* https://git.ghostscript.com/?p=mupdf.git;a=blob;f=scripts/mupdfwrap_gui.py[`scripts/mupdfwrap_gui.py`]
+* https://git.ghostscript.com/?p=mupdf.git;a=blob;f=scripts/mupdfwrap_gui.cs[`scripts/mupdfwrap_gui.cs`]
 * Build and run with:
 ** `./scripts/mupdfwrap.py -b all --test-python-gui`
 ** `./scripts/mupdfwrap.py -b --csharp all --test-csharp-gui`
@@ -554,7 +557,7 @@ For more information:
 ==== Building the MuPDF shared library
 
 * On Unix, runs `make` on MuPDF's Makefile.
-* On Windows, runs `devenv.com` on `.sln` and `.vcxproj` files within `platform/win32/`.
+* On Windows, runs `devenv.com` on `.sln` and `.vcxproj` files within https://git.ghostscript.com/?p=mupdf.git;a=tree;f=platform/win32[`platform/win32/`].
 
 ==== Generation of the {cpp} MuPDF API
 
@@ -606,7 +609,6 @@ mupdf/docs/generated/
     c++/
     python/
 ```
-
 
 All content is ultimately generated from the MuPDF C header file comments.
 
