@@ -2760,8 +2760,9 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write(f'        return self->{cursor.spelling}(')
         sep = ''
         for i, arg_type in enumerate( fnptr_type.argument_types()):
-            if i < 2:
-                # Ignore first two args - (fz_context, {structname}*).
+            if i == 1:
+                # First two args are (fz_context, {structname}*). Ignore the
+                # second. We pass the fz_context to the virtual fn.
                 continue
             name = f'arg_{i}'
             out_cpp.write( f'{sep}{name}')
@@ -2811,8 +2812,8 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write(f'FZ_FUNCTION {fnptr_type.get_result().spelling} {classname}2::{cursor.spelling}(')
         sep = ''
         for i, arg_type in enumerate( fnptr_type.argument_types()):
-            if i < 2:
-                # Ignore first two args - (fz_context, {structname}*).
+            if i == 1:
+                # Ignore arg args - (fz_context, {structname}*).
                 continue
             name = f'arg_{i}'
             write(f'{sep}')
