@@ -841,9 +841,19 @@ called when MuPDF C code calls the corresponding function pointer.
 special method `use_virtual_<method-name>()`. [It might be possible in future
 to remove the need to do this.]
 
-* Callback args that are pointers to a MuPDF struct:
+* It may be possible to use similar techniques in C# but this has not been
+tested.
 
-** Where the underlying MuPDF function pointer has an arg that is a pointer to
+These Python callbacks have args that are more low-level than in the rest of
+the Python API:
+
+* Callbacks generally have a first arg that is a SWIG representation of a MuPDF
+`fz_context*`.
+
+** This is provided so that callbacks are able to call MuPDF C function
+pointers (which generally take a `fz_context *ctx` arg).
+
+* Where the underlying MuPDF function pointer has an arg that is a pointer to
 an MuPDF struct, unlike elsewhere in the MuPDF bindings we do not translate
 this into an instance of the corresponding wrapper class. Instead Python
 callbacks will see a SWIG representation of the low-level C pointer.
@@ -856,9 +866,6 @@ destructor will call `fz_drop_*()`.
 
 ** It might be safe to create an wrapper class instance using an explicit call
 to `mupdf.keep_*()`, but this has not been tested.
-
-* It may be possible to use similar techniques in C# but this has not been
-tested.
 
 Here is an example PDF filter written in Python that removes alternating items:
 
@@ -877,8 +884,8 @@ def test_filter(path):
             self.sanitize = 1
             self.state = 1
             self.ascii = True
-        def text_filter( self, ucsbuf, ucslen, trm, ctm, bbox):
-            print( f'text_filter(): ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
+        def text_filter( self, ctx, ucsbuf, ucslen, trm, ctm, bbox):
+            print( f'text_filter(): ctx={ctx} ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
             # Remove every other item.
             self.state = 1 - self.state
             return self.state
