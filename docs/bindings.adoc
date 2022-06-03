@@ -829,6 +829,12 @@ For example `Md5::md5_final2()`.
 For MuPDF structs with function pointers, we provide a second {cpp} wrapper
 class for use by the Python bindings.
 
+Limitations:
+
+* Problems have been seen on Windows when using these callbacks.
+
+Description:
+
 * The second wrapper class has a `2` suffix, for example `PdfFilterOptions2`.
 
 * This second wrapper class has a virtual method for each function pointer, so
@@ -852,6 +858,10 @@ the Python API:
 
 ** This is provided so that callbacks are able to call MuPDF C function
 pointers (which generally take a `fz_context *ctx` arg).
+
+** However as of 2022-06-03 if the C function throws a MuPDF exception, it
+will not be translated into a C++/Python exception, and so probably crash the
+process.
 
 * Where the underlying MuPDF function pointer has an arg that is a pointer to
 an MuPDF struct, unlike elsewhere in the MuPDF bindings we do not translate
