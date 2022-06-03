@@ -87,9 +87,9 @@ def test_filter(path):
             self.sanitize = 1
             self.state = 1
             self.ascii = True
-        def text_filter( self, ucsbuf, ucslen, trm, ctm, bbox):
+        def text_filter( self, ctx, ucsbuf, ucslen, trm, ctm, bbox):
             if 0:
-                print( f'text_filter(): ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
+                print( f'text_filter(): ctx={ctx} ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
             # Remove every other item.
             self.state = 1 - self.state
             return self.state
