@@ -790,10 +790,42 @@ Where it is useful, non-POD wrapper classes can have a default constructor that
 sets `m_internal` to null.
 
 
+=== Extra static methods
+
+Where relevant, wrapper class can have static methods that wrap selected MuPDF
+functions. For example `Matrix` does this for `fz_concat()`, `fz_scale()` etc,
+because these return the result by value rather than modifying a `fz_matrix`
+instance.
+
+
+=== Miscellaneous custom wrapper classes
+
+The wrapper for `fz_outline_item` does not contain a `fz_outline_item` by
+value or pointer. Instead it defines {cpp}-style member equivalents to
+``fz_outline_item``'s fields, to simplify usage from {cpp} and Python/C#.
+
+The fields are initialised from a `fz_outline_item` when the wrapper class
+is constructed. In this particular case there is no need to hold on to a
+`fz_outline_item`, and the use of `std::string` ensures that value semantics
+can work.
+
+
+== Python/C# bindings details
+
+=== Custom methods for use by Python/C# bindings
+
+Python and C# code does not easily handle functions that return raw data, for example
+as an `unsigned char*` that is not a zero-terminated string. Sometimes we provide a
+{cpp} method that returns a `std::vector` by value, so that Python and C# code can
+wrap it in a systematic way.
+
+For example `Md5::md5_final2()`.
+
+
 === Making MuPDF function pointers call Python code
 
-For MuPDF structs with function pointers, we provide a second wrapper class for
-use by the Python bindings.
+For MuPDF structs with function pointers, we provide a second {cpp} wrapper
+class for use by the Python bindings.
 
 * The second wrapper class has a `2` suffix, for example `PdfFilterOptions2`.
 
@@ -822,6 +854,9 @@ destructor will call `fz_drop_*()`.
 
 ** It might be safe to create an wrapper class instance using an explicit call
 to `mupdf.keep_*()`, but this has not been tested.
+
+* It may be possible to use similar techniques in C# but this has not been
+tested.
 
 Here is an example PDF filter written in Python that removes alternating items:
 
@@ -860,34 +895,6 @@ def test_filter(path):
 ----
 //====
 
-=== Extra static methods
-
-Where relevant, wrapper class can have static methods that wrap selected MuPDF
-functions. For example `Matrix` does this for `fz_concat()`, `fz_scale()` etc,
-because these return the result by value rather than modifying a `fz_matrix`
-instance.
-
-
-=== Custom methods for use by Python/C# bindings
-
-Python and C# code does not easily handle functions that return raw data, for example
-as an `unsigned char*` that is not a zero-terminated string. Sometimes we provide a
-{cpp} method that returns a `std::vector` by value, so that Python and C# code can
-wrap it in a systematic way.
-
-For example `Md5::md5_final2()`.
-
-
-=== Miscellaneous custom wrapper classes
-
-The wrapper for `fz_outline_item` does not contain a `fz_outline_item` by
-value or pointer. Instead it defines {cpp}-style member equivalents to
-``fz_outline_item``'s fields, to simplify usage from {cpp} and Python/C#.
-
-The fields are initialised from a `fz_outline_item` when the wrapper class
-is constructed. In this particular case there is no need to hold on to a
-`fz_outline_item`, and the use of `std::string` ensures that value semantics
-can work.
 
 
 == Artifex Licensing
