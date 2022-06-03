@@ -6,6 +6,7 @@ Simple tests of the Python MuPDF API.
 
 import inspect
 import os
+import platform
 import sys
 
 if os.environ.get('MUPDF_PYTHON') in ('swig', None):
@@ -73,6 +74,46 @@ def show_stext(document):
                                 + f')'
                             )
 
+
+def test_filter(path):
+    if platform.system() == 'Windows':
+        print( 'Not testing mupdf.PdfFilterOptions2 because known to fail on Windows.')
+        return
+    class MyFilter( mupdf.PdfFilterOptions2):
+        def __init__( self):
+            super().__init__()
+            self.use_virtual_text_filter()
+            self.recurse = 1
+            self.sanitize = 1
+            self.state = 1
+            self.ascii = True
+        def text_filter( self, ucsbuf, ucslen, trm, ctm, bbox):
+            if 0:
+                print( f'text_filter(): ucsbuf={ucsbuf} ucslen={ucslen} trm={trm} ctm={ctm} bbox={bbox}')
+            # Remove every other item.
+            self.state = 1 - self.state
+            return self.state
+    print( f'dir(MyFilter): {dir(MyFilter)}', file=sys.stderr)
+    print( f'dir(MyFilter.text_filter): {dir(MyFilter.text_filter)}', file=sys.stderr)
+
+    if 1:
+        import inspect
+        signature = inspect.signature( MyFilter.text_filter)
+        for n, param in signature.parameters.items():
+            print( f'    {n}: {param}', file=sys.stderr)
+    filter_ = MyFilter()
+    document = mupdf.PdfDocument(path)
+    for p in range(document.count_pages()):
+        page = document.load_page(p)
+        print( f'Running document.filter_page_contents on page {p}')
+        document.begin_operation('test filter')
+        document.filter_page_contents(page, filter_)
+        document.end_operation()
+
+    if 0:
+        document.save_document('foo.pdf', mupdf.PdfWriteOptions())
+
+
 def test(path):
     '''
     Runs various mupdf operations on <path>, which is assumed to be a file that
@@ -91,6 +132,10 @@ def test(path):
     assert getattr(mupdf.Buffer, 'buffer_storage')
     assert getattr(mupdf.Buffer, 'buffer_extract')
     assert getattr(mupdf.Buffer, 'buffer_extract_copy')
+
+    # Test SWIG Directory wrapping of pdf_filter_options:
+    #
+    test_filter(path)
 
     # Test operations using functions:
     #
