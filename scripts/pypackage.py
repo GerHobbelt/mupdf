@@ -76,6 +76,10 @@ def macos():
     s = platform.system()
     return s == 'Darwin'
 
+def openbsd():
+    s = platform.system()
+    return s == 'OpenBSD'
+
 
 def env_string_to_dict( text):
     '''
@@ -239,7 +243,7 @@ def check_wheel(wheel):
 
 def find_new_files(pattern, t):
     '''
-    Finds files matching <pattern> whose mtime is >= t.
+    Returns list of files matching <pattern> whose mtime is >= t.
     '''
     paths = glob.glob(pattern)
     paths_new = []
