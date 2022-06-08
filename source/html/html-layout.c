@@ -1816,7 +1816,7 @@ int fz_place_story(fz_context *ctx, fz_html_story *story, fz_rect where, fz_rect
 
 #ifndef NDEBUG
 	if (fz_atoi(getenv("FZ_DEBUG_HTML")))
-		fz_debug_html(ctx, story->tree.root);
+		fz_debug_html(ctx, fz_stddbg(ctx), story->tree.root);
 #endif
 
 	return story->restart_draw.end == NULL;
