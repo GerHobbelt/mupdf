@@ -323,8 +323,12 @@ pdf_open_raw_filter(fz_context *ctx, fz_stream *file_stm, pdf_document *doc, pdf
 		/* If we are called from pdf_open_stream_with_offset to parse a new format XRef section, then we
 		 * are about to read an XRef stream for an object that doesn't exist yet (because we're about to
 		 * read it!). We don't want to solidify the existing XRef as we do it, so call a special case
-		 * function to get the xref entry here. */
-		x = pdf_get_existing_xref_entry(ctx, doc, num);
+		 * function to get the xref entry here.
+		 *
+		 * UPDATE: see the "Some really hairy code here" comment and code chunk in pdf_get_xref_entry():
+		 * that's where we handle this special case now.
+		 */
+		x = pdf_get_xref_entry(ctx, doc, num);
 	}
 	if (x == NULL)
 	{

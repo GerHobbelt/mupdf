@@ -159,14 +159,12 @@ pdf_xref_entry *pdf_get_populating_xref_entry(fz_context *ctx, pdf_document *doc
 pdf_xref_entry *pdf_get_xref_entry(fz_context *ctx, pdf_document *doc, int i);
 
 /*
-	Used after (or while) loading a document to access entries.
+	Used after loading a document to access entries.
 
-	If the latest xref_section is empty (i.e. we are loading it)
-	then return NULL. Otherwise do the same as pdf_get_xref_entry.
+	If the requested xref_section is empty (i.e. we are loading it)
+	then throw an exception. Otherwise do the same as pdf_get_xref_entry.
 */
-pdf_xref_entry *pdf_get_existing_xref_entry(fz_context *ctx, pdf_document *doc, int i);
-
-#define pdf_get_xref_entry_no_null     pdf_get_existing_xref_entry
+pdf_xref_entry *pdf_get_xref_entry_no_null(fz_context *ctx, pdf_document *doc, int i);
 
 void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entries, int n);
 void pdf_forget_xref(fz_context *ctx, pdf_document *doc);

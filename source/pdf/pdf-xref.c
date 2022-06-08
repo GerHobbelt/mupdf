@@ -311,14 +311,6 @@ pdf_xref_entry *pdf_get_populating_xref_entry(fz_context *ctx, pdf_document *doc
 	return &sub->table[num-sub->start];
 }
 
-pdf_xref_entry *pdf_get_existing_xref_entry(fz_context *ctx, pdf_document *doc, int i)
-{
-	if (doc->xref_sections[doc->num_xref_sections-1].num_objects == 0)
-		return NULL;
-
-	return pdf_get_xref_entry(ctx, doc, i);
-}
-
 pdf_xref_entry *pdf_get_xref_entry(fz_context *ctx, pdf_document *doc, int i)
 {
 	pdf_xref *xref = NULL;
