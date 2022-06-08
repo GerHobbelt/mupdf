@@ -86,6 +86,17 @@ if (projname.endsWith("_tests")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
+if (projname.endsWith("_tools")) {
+	let tool_projname = projname.replace(/_tools$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tool_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tool_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
 if (projname.endsWith("_demos")) {
 	let tst_projname = projname.replace(/_demos$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
@@ -126,19 +137,33 @@ if (projname.endsWith("_DLL")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
+if (projname.startsWith("libboost-")) {
+	let tst_projname = projname.replace(/^libboost-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/boost/boost/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.startsWith("wxw-samples-")) {
+	let tst_projname = projname.replace(/^wxw-samples-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/${ tst_projname.replace(/-/, '/') }`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+
 // now things get a little hairier: we need to MAP to projectname to a submodule directory path...
 
 const projectMap = {
 	"cryptest": "cryptopp",
 	"cryptlib": "cryptopp",
-	"libarchive_tools": "libarchive",
 	"libatlas": "math-atlas",
 	"libblosc": "c-blosc2",
 	"libbtree": "cpp-btree",
 	"binlog_bread": "binlog",
 	"binlog_brecovery": "binlog",
 	"libchm_io": "CHM-lib",
-	"libcli11-examples": " cli11/examples",
+	"libcli11-examples": "cli11/examples",
 	"libclipp_examples": "clipp/examples",
 	"libcurl_examples": "curl",
 	"libdjvu_io": "djvulibre",
@@ -165,16 +190,61 @@ const projectMap = {
 	"libupskirt": "upskirt-markdown",
 	"libXMP-Toolkit": "XMP-Toolkit-SDK",
 	"qrencode-test": "libqrencode",
-    "libicu": "unicode-icu",
-    "libjansson": "json-jansson",
-    "libjpeg-xl-benchmark": "jpeg-xl",
-    "libjpeg-xl-test": "jpeg-xl",
-    "libcxxtest_catch2_2_gtest": "/cxxtest_catch_2_gtest",
-    "otl-ml": "OptimizationTemplateLibrary",
-    "manticore": "manticoresearch",
-    "libYAC": "YACLib",
-    "libhnsw": "hnswlib",
-    "libnms": "nmslib",
+	"libicu": "unicode-icu",
+	"libjansson": "json-jansson",
+	"libjpeg-xl-benchmark": "jpeg-xl",
+	"libjpeg-xl-test": "jpeg-xl",
+	"libcxxtest_catch2_2_gtest": "/cxxtest_catch_2_gtest",
+	"otl-ml": "OptimizationTemplateLibrary",
+	"manticore": "manticoresearch",
+	"libYAC": "YACLib",
+	"libhnsw": "hnswlib",
+	"libnms": "nmslib",
+	"libyaml-tests": "libyaml",
+	"uberlogger": "uberlog",
+	"uberlog_test": "uberlog",
+	"filesystem_tests_exception": "filesystem/test",
+	"filesystem_tests_fs": "filesystem/test",
+	"filesystem_tests_fwd": "filesystem/test",
+	"filesystem_tests_multifile": "filesystem/test",
+	"googletest-demos": "googletest/googletest/test",
+	"googlegtest-demos": "googletest/googletest/test",
+	"googlelog-unittest": "glog",
+	//googlemock-demos
+	//googletest-demo-invalid-param-name1
+	//googletest-demo-invalid-param-name2
+	//googletest-samples
+	"png-pmt-tools-lib": "pmt-png-tools",
+	"png-pmt-tools": "pmt-png-tools",
+	"tesseract-unittests": "tesseract/unittest",
+	"wxCharts-tests": "wxCharts/tests",
+	//wxFormBuilder-test-events
+	//wxFormBuilder-test
+	//wxFormBuilder-tinyXML
+	//wxFormBuilderPlugin-SDK
+	"wxFormBuilderPlugin-additional": "wxFormBuilder/plugins/additional",
+	"wxFormBuilderPlugin-common": "wxFormBuilder/plugins/common",
+	"wxFormBuilderPlugin-containers": "wxFormBuilder/plugins/containers",
+	"wxFormBuilderPlugin-forms": "wxFormBuilder/plugins/forms",
+	"wxFormBuilderPlugin-layout": "wxFormBuilder/plugins/layout",
+	"wxScintilla": "wxWidgets/src/stc/scintilla",
+	//wxw-build-bakefiles-wxpresets-sample
+	//wxw-misc-theme-test
+	//wxw-samples-aui-minimal-static-build
+	//wxw-samples-console-minimal-static-build
+	//wxw-samples-dll-exe
+	//wxw-samples-dll-test-exe
+	"wxw-samples-htmlbox": "wxWidgets/samples/htlbox",
+	"wxw-samples-maskedctrl": "wxWidgets\samples\maskededit",
+	//wxw-samples-minimal-static-build
+	//wxw-samples-propgrid-minimal-static-build
+	"wxw-tests-benchmarks": "wxWidgets/tests/benchmarks",
+	"wxw-tests": "wxWidgets/tests",
+	"wxw-utils-helpview-client": "wxWidgets/utils/helpview",
+	"wxw-utils-mk-ctable": "wxWidgets/misc/unictabl",
+	"zmq_examples": "libzmq",
+	"zmq_tests": "libzmq",
+	"zmq_tools": "libzmq",
 };
 
 for (const key in projectMap) {

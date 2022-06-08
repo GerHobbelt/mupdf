@@ -114,11 +114,20 @@ EtwExplorer
 EOT
 )
 
-for f in  $mylist  ; do
-  echo mknewproj $f
-done
+if false ; then 
+	for f in  $mylist  ; do
+	  mknewproj $f
+	done
+fi
 
-for f in  $myapplist  ; do
-  mknewAPPproj $f
+if false ; then
+	for f in  $myapplist  ; do
+	  mknewAPPproj $f
+	done
+fi
+
+for f in *.vcxproj ; do
+	echo "Updating $f..."
+	./refill-vcxproj.sh $f
 done
 
