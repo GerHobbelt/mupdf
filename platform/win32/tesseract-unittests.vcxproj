@@ -129,20 +129,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -156,7 +156,7 @@
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -188,7 +188,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
+</ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -197,15 +197,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
-    <ClCompile>
-      <Optimization>Custom</Optimization>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -227,7 +219,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT-UNITTESTS;TESSERACT-UNITTESTS_STATICLIB;GOOGLETEST_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -270,7 +262,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -315,7 +307,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -358,7 +350,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;__AVX2__;__AVX__;__FMA__;__SSE4_1__;CURL_STATICLIB;DISABLED_LEGACY_ENGINE;HAVE_AVX2;HAVE_AVX;HAVE_FMA;HAVE_LEPTONICA;HAVE_LIBCURL;HAVE_MUPDF;HAVE_SSE4_1;HAVE_TESSERACT;HAVE_TIFFIO_H;TESSERACT_DISABLE_DEBUG_FONTS;TESSERACT_IMAGEDATA_AS_PIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/tesseract/unittest;..\..\scripts\tesseract-unittest;..\..\include;..\..\scripts\tesseract;..\..\thirdparty\tesseract\include;..\..\thirdparty\tesseract\src\api;..\..\thirdparty\tesseract\src\arch;..\..\thirdparty\tesseract\src\ccmain;..\..\thirdparty\tesseract\src\ccstruct;..\..\thirdparty\tesseract\src\ccutil;..\..\thirdparty\tesseract\src\classify;..\..\thirdparty\tesseract\src\dict;..\..\thirdparty\tesseract\src\lstm;..\..\thirdparty\tesseract\src\textord;..\..\thirdparty\tesseract\src\viewer;..\..\thirdparty\tesseract\src\wordrec;..\..\thirdparty\tesseract\src\cutil;..\..\thirdparty/tesseract/src/training/unicharset;..\..\thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -483,7 +475,8 @@
     <None Include="..\..\thirdparty\tesseract\unittest\README.md" />
     <None Include="..\..\thirdparty\tesseract\unittest\tesseract_leaksanitizer.supp" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
