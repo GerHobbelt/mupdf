@@ -8,5 +8,5 @@
 # a vcxproj project file.
 # 
 
-node ./patch-vcxproj.js $1 tweak
+#node ./patch-vcxproj.js $1 tweak
 node ./update-vcxproj.js $1

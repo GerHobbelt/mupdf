@@ -128,6 +128,6 @@ fi
 
 for f in *.vcxproj ; do
 	echo "Updating $f..."
-	./refill-vcxproj.sh $f
+	./update-vcxproj.sh $f
 done
 
