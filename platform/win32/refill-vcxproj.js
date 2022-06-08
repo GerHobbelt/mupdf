@@ -172,6 +172,9 @@ const projectMap = {
     "libcxxtest_catch2_2_gtest": "/cxxtest_catch_2_gtest",
     "otl-ml": "OptimizationTemplateLibrary",
     "manticore": "manticoresearch",
+    "libYAC": "YACLib",
+    "libhnsw": "hnswlib",
+    "libnms": "nmslib",
 };
 
 for (const key in projectMap) {
