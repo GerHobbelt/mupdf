@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -165,6 +165,9 @@ pdf_xref_entry *pdf_get_xref_entry(fz_context *ctx, pdf_document *doc, int i);
 	then return NULL. Otherwise do the same as pdf_get_xref_entry.
 */
 pdf_xref_entry *pdf_get_existing_xref_entry(fz_context *ctx, pdf_document *doc, int i);
+
+#define pdf_get_xref_entry_no_null     pdf_get_existing_xref_entry
+
 void pdf_replace_xref(fz_context *ctx, pdf_document *doc, pdf_xref_entry *entries, int n);
 void pdf_forget_xref(fz_context *ctx, pdf_document *doc);
 pdf_xref_entry *pdf_get_incremental_xref_entry(fz_context *ctx, pdf_document *doc, int i);

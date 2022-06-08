@@ -242,7 +242,7 @@ generate: source/html/css-properties.h
 
 ifeq ($(shared),yes)
 MUPDF_LIB = $(OUT)/libmupdf.$(SO)
-ifneq (,$(findstring MINGW,$(OS)))
+ifeq ($(SO),dll)
 MUPDF_LIB_IMPORT = $(OUT)/libmupdf_$(SO).a
 LIBS_TO_INSTALL_IN_BIN = $(MUPDF_LIB)
 LIBS_TO_INSTALL_IN_LIB = $(MUPDF_LIB_IMPORT)
