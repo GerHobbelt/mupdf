@@ -23,6 +23,10 @@
 #ifndef SOURCE_HTML_IMP_H
 #define SOURCE_HTML_IMP_H
 
+#include "mupdf/fitz.h"
+
+#include "../fitz/xml-imp.h"
+
 typedef struct fz_html_font_face_s fz_html_font_face;
 typedef struct fz_html_font_set_s fz_html_font_set;
 typedef struct fz_html_s fz_html;
@@ -335,22 +339,34 @@ typedef struct {
 
 struct fz_html_story_s
 {
+	/* The user_css (or NULL) */
+	char *user_css;
+
+	/* The HTML story as XML nodes with a DOM */
+	fz_xml *dom;
+
 	/* The HTML tree of content. */
 	fz_html_tree tree;
+
 	/* The fontset for the content. */
 	fz_html_font_set *font_set;
+
 	/* restart_place holds the start position for the next place.
 	 * This is updated by draw. */
 	fz_html_restarter restart_place;
+
 	/* restart_draw holds the start position for the next draw.
 	 * This is updated by place. */
 	fz_html_restarter restart_draw;
+
 	/* complete is set true when all the story has been placed and
 	 * drawn. */
 	int complete;
+
 	/* The last bbox we laid out for. Used for making a clipping
 	 * rectangle. */
 	fz_rect bbox;
+
 	/* The default 'em' size. */
 	float em;
 };
@@ -477,5 +493,7 @@ void fz_debug_html(fz_context *ctx, fz_output *out, fz_html_box *box);
 fz_html *fz_store_html(fz_context *ctx, fz_html *html, void *doc, int chapter);
 fz_html *fz_find_html(fz_context *ctx, void *doc, int chapter);
 void fz_purge_stored_html(fz_context *ctx, void *doc);
+
+void fz_restartable_layout_html(fz_context *ctx, fz_html_box *box, float w, float h, float page_w, float page_h, float em, fz_html_restarter *restart);
 
 #endif

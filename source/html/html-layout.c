@@ -1416,6 +1416,7 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 		fz_rethrow(ctx);
 
 	return restartable_ended;
+;
 }
 
 static void draw_rect(fz_context *ctx, fz_device *dev, fz_matrix ctm, float page_top, fz_css_color color, float x0, float y0, float x1, float y1)
