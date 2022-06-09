@@ -152,7 +152,7 @@ static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 	/* Skip over the DOC object at the top. */
 	if (item->up == NULL)
 	{
-		fz_debug_xml(item->down, level);
+		xml_print_xml(out, item->down, level);
 		return;
 	}
 
