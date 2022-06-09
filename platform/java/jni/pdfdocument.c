@@ -73,11 +73,13 @@ static void event_cb(fz_context *ctx, pdf_document *pdf, pdf_doc_event *event, v
 			if (!jmessage || (*env)->ExceptionCheck(env))
 				fz_throw_java_and_detach_thread(ctx, env, detach);
 
-			jcheckboxmsg = (*env)->NewStringUTF(env, alert->message);
-			if (!jcheckboxmsg || (*env)->ExceptionCheck(env))
-				fz_throw_java_and_detach_thread(ctx, env, detach);
+			if (alert->has_check_box) {
+				jcheckboxmsg = (*env)->NewStringUTF(env, alert->check_box_message);
+				if (!jcheckboxmsg || (*env)->ExceptionCheck(env))
+					fz_throw_java_and_detach_thread(ctx, env, detach);
+			}
 
-			jalertresult = (*env)->CallObjectMethod(env, jlistener, mid_PDFDocument_JsEventListener_onAlert, jpdf, jtitle, jmessage, alert->icon_type, alert->button_group_type, jcheckboxmsg, alert->initially_checked);
+			jalertresult = (*env)->CallObjectMethod(env, jlistener, mid_PDFDocument_JsEventListener_onAlert, jpdf, jtitle, jmessage, alert->icon_type, alert->button_group_type, alert->has_check_box, jcheckboxmsg, alert->initially_checked);
 			if ((*env)->ExceptionCheck(env))
 				fz_throw_java_and_detach_thread(ctx, env, detach);
 

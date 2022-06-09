@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -728,29 +728,26 @@ close_rld(fz_context *ctx, void *state_)
 	fz_free(ctx, state);
 }
 
-static int
-next_rld_defused(fz_context *ctx, fz_stream *stm, size_t max)
-{
-	return EOF;
-}
-
 fz_stream *
 fz_open_rld(fz_context *ctx, fz_stream *chain)
 {
+	fz_stream *stm;
 	fz_rld *state = fz_malloc_struct(ctx, fz_rld);
 	state->chain = fz_keep_stream(ctx, chain);
 	state->run = 0;
 	state->n = 0;
 	state->c = 0;
 
+	stm = fz_new_stream(ctx, state, next_rld, close_rld);
+
 	/* Don't explode RLE compression bombs. */
-	if (chain->next == next_rld || chain->next == next_rld_defused)
+	if (chain->next == next_rld)
 	{
 		fz_warn(ctx, "RLE bomb defused");
-		return fz_new_stream(ctx, state, next_rld_defused, close_rld);
+		stm->eof = 1;
 	}
 
-	return fz_new_stream(ctx, state, next_rld, close_rld);
+	return stm;
 }
 
 /* RC4 Filter */
