@@ -826,7 +826,8 @@ fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byt
 				int k;
 
 				/* Calculate result_alpha */
-				int ra = ba - bahaa + haa;
+				int ra0 = ba - bahaa;
+				int ra = ra0 + haa;
 				if (bal)
 					bp[n] = ra;
 				if (ra != 0)
@@ -839,6 +840,8 @@ fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byt
 
 					int sg = (sp[0] * invsa + 128) >> 8;
 					int bg = (bp[0] * invba + 128) >> 8;
+					int rg;
+					int haa_neg_ba = fz_mul255(haa, 255-ba);
 
 					/* Uncomposite */
 					sg = (((sg - bg)*invha) >> 8) + bg;
@@ -850,25 +853,24 @@ fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byt
 					case FZ_BLEND_HUE:
 					case FZ_BLEND_SATURATION:
 					case FZ_BLEND_COLOR:
-						bp[0] = fz_mul255(ra, bg);
+						rg = bg;
 						break;
 					case FZ_BLEND_LUMINOSITY:
-						bp[0] = fz_mul255(ra, sg);
+						rg = sg;
 						break;
 					}
+					bp[0] = fz_mul255(ra0, bg) + fz_mul255(haa_neg_ba, sg) + fz_mul255(bahaa, rg);
 
 					/* Normal blend for spots */
 					for (k = first_spot; k < n; k++)
 					{
 						int sc = (sp[k] * invsa + 128) >> 8;
 						int bc = (bp[k] * invba + 128) >> 8;
-						int rc;
 
+						/* Uncomposite */
 						sc = (((sc - bc) * invha + 128) >> 8) + bc;
 						sc = fz_clampi(sc, 0, 255);
-						rc = bc + fz_mul255(sa, fz_mul255(255 - ba, sc) + fz_mul255(ba, sc) - bc);
-						rc = fz_clampi(rc, 0, 255);
-						bp[k] = fz_mul255(rc, ra);
+						bp[k] = fz_mul255(ra0, bc) + fz_mul255(haa_neg_ba, sc) + fz_mul255(bahaa, sc);
 					}
 				}
 			}
