@@ -45,6 +45,52 @@
 /* Enable the following to help debug graphics stack pushes/pops */
 #undef DUMP_STACK_CHANGES
 
+/*
+	More stuff that I forget every time:
+
+	Knockout blending: When we push a knockout group, (listed in the debug as
+	"Group begin (knockout):") we push a new entry on the stack, and copy the
+	current background to a new group.
+
+	+BG---+      +TMP--+
+	|     |      |     |
+	|     |  ->  |     |
+	|     |      |     |
+	+-----+      +-----+
+
+	When we then come to draw an object, we push a 'knockout worker' (confusingly
+	listed in the debug as "Knockout begin:"). Here we copy the ORIGINAL background
+	(BG) to DEST, and make an empty shape plane:
+
+	+BG---+      +TMP--+      +DEST-+  +SHAPE+
+	|     |      |     |      |     |  |     |
+	|     |      |     |  ->  |     |  |     |
+	|     |      |     |      |     |  |     |
+	+-----+      +-----+      +-----+  +-----+
+
+	We then draw our object into DEST and SHAPE:
+
+	+BG---+      +TMP--+      +DEST-+  +SHAPE+
+	|     |      |     |      |  /\ |  |  /\ |
+	|     |      |     |  ->  | / / |  | / / |
+	|     |      |     |      | \/  |  | \/  |
+	+-----+      +-----+      +-----+  +-----+
+
+	Then we pop our worker, ("Knockout end:") and copy the bits of DEST that SHAPE
+	says are marked, back into TMP.
+
+	+BG---+      +TMP--+      +DEST-+  +SHAPE+
+	|     |      |  /\ |      |  /\ |  |  /\ |
+	|     |      | / / | <-------+--------+/ |
+	|     |      | \/  |      | \/  |  | \/  |
+	+-----+      +-----+      +-----+  +-----+
+
+	We discard DEST and SHAPE. For each new object, we make new DEST/SHAPE, each
+	time from BG, and keep copying the altered parts back into TMP. Then finally
+	we finish the group ("Group end... (knockout)") by blending TMP over BG and
+	discarding TMP.
+*/
+
 enum {
 	FZ_DRAWDEV_FLAGS_TYPE3 = 1,
 };
