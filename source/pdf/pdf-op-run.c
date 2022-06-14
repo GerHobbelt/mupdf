@@ -94,6 +94,8 @@ struct pdf_run_processor
 
 	fz_default_colorspaces *default_cs;
 
+	int has_transparency;
+
 	/* path object state */
 	fz_path *path;
 	int clip;
@@ -2073,7 +2075,7 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 	gstate: The initial graphics state.
 */
 pdf_processor *
-pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie)
+pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie, int has_transparency)
 {
 	pdf_run_processor *proc = pdf_new_processor(ctx, sizeof *proc);
 	{
@@ -2219,6 +2221,8 @@ pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char
 	proc->tos.text_mode = 0;
 
 	proc->gtop = -1;
+
+	proc->has_transparency = has_transparency;
 
 	fz_try(ctx)
 	{

@@ -75,7 +75,7 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 
 		ctm = fz_concat(page_ctm, ctm);
 
-		proc = pdf_new_run_processor(ctx, dev, ctm, usage, NULL, default_cs, cookie);
+		proc = pdf_new_run_processor(ctx, dev, ctm, usage, NULL, default_cs, cookie, page->transparency);
 		pdf_process_annot(ctx, proc, annot, cookie);
 		pdf_close_processor(ctx, proc);
 	}
@@ -150,7 +150,7 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 			fz_begin_group(ctx, dev, mediabox, colorspace, 1, 0, 0, 1);
 		}
 
-		proc = pdf_new_run_processor(ctx, dev, ctm, usage, NULL, default_cs, cookie);
+		proc = pdf_new_run_processor(ctx, dev, ctm, usage, NULL, default_cs, cookie, page->transparency);
 		pdf_process_contents(ctx, proc, doc, resources, contents, cookie);
 		pdf_close_processor(ctx, proc);
 
@@ -368,11 +368,11 @@ pdf_run_page(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, fz_
 }
 
 void
-pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs)
+pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs, int has_transparency)
 {
 	pdf_processor *proc;
 
-	proc = pdf_new_run_processor(ctx, dev, ctm, "View", gstate, default_cs, NULL);
+	proc = pdf_new_run_processor(ctx, dev, ctm, "View", gstate, default_cs, NULL, has_transparency);
 	fz_try(ctx)
 	{
 		pdf_process_glyph(ctx, proc, doc, resources, contents);
