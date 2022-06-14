@@ -277,6 +277,10 @@ pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_ob
 	if (pdf_is_number(ctx, obj) && proc->op_gs_ca)
 		proc->op_gs_ca(ctx, proc, pdf_to_real(ctx, obj));
 
+	obj = pdf_dict_get(ctx, dict, PDF_NAME(TK));
+	if (pdf_is_bool(ctx, obj) && proc->op_gs_TK)
+		proc->op_gs_TK(ctx, proc, pdf_to_bool(ctx, obj));
+
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(BM));
 	if (pdf_is_array(ctx, obj))
 		obj = pdf_array_get(ctx, obj, 0);

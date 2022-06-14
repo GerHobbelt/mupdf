@@ -2214,6 +2214,7 @@ static pdf_processor *new_js_processor(fz_context *ctx, js_State *J)
 	proc->super.op_gs_BM = NULL;
 	proc->super.op_gs_CA = NULL;
 	proc->super.op_gs_ca = NULL;
+	proc->super.op_gs_TK = NULL;
 	proc->super.op_gs_SMask = NULL;
 
 	/* special graphics state */

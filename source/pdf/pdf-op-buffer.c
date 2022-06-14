@@ -834,6 +834,7 @@ pdf_new_output_processor(fz_context *ctx, fz_output *out, int ahxencode)
 		proc->super.op_gs_BM = NULL;
 		proc->super.op_gs_CA = NULL;
 		proc->super.op_gs_ca = NULL;
+		proc->super.op_gs_TK = NULL;
 		proc->super.op_gs_SMask = NULL;
 
 		/* special graphics state */
