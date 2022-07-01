@@ -19,34 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libcrow</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF84E35}</ProjectGuid>
-    <RootNamespace>libcrow</RootNamespace>
+    <ProjectName>crow_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF65882D}</ProjectGuid>
+    <RootNamespace>crow_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -122,7 +122,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -133,14 +133,14 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/asio/asio/include;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CROW_ENABLE_COMPRESSION;BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;CROW_ENABLE_COMPRESSION;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/boost/libs/asio/include/boost;../../thirdparty\owemdjee\boost;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -151,7 +151,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -160,15 +160,15 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/asio/asio/include;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CROW_ENABLE_COMPRESSION;BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;CROW_ENABLE_COMPRESSION;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/boost/libs/asio/include/boost;../../thirdparty\owemdjee\boost;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,7 +179,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -190,14 +190,14 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/asio/asio/include;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CROW_ENABLE_COMPRESSION;BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;CROW_ENABLE_COMPRESSION;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/boost/libs/asio/include/boost;../../thirdparty\owemdjee\boost;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -208,7 +208,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -217,15 +217,15 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/asio/asio/include;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CROW_ENABLE_COMPRESSION;BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;CROW_ENABLE_COMPRESSION;HAVE_MUPDF;BOOST_AUTO_LINK_DISABLED;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCROW;CROW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CROW_TESTS;CROW_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty\owemdjee\crow\include;../../thirdparty/owemdjee/boost/libs/asio/include/boost;../../thirdparty\owemdjee\boost;../../thirdparty\zlib;../../scripts/libcrow;..\..\scripts\zlib;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -238,25 +238,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_blueprint.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_catchall.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_chat.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_compression.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_json_map.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_middleware.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_static_file.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_vs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/example_with_all.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/helloworld.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/middlewares/example_cookies.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/middlewares/example_cors.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/monolithic_globals.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/ssl/example_ssl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/examples/websocket/example_ws.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/tests/multi_file/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/tests/multi_file/secondary.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/crow/tests/template/mustachetest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/crow/tests/ssl/ssltest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/crow/tests/unittest.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/crow/include/crow.h" />
     <ClInclude Include="../../thirdparty/owemdjee/crow/include/crow/TinySHA1.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/crow/include/crow/app.h" />
@@ -352,6 +335,14 @@
     <Text Include="../../thirdparty/owemdjee/crow/tests/template/test.py" />
     <Text Include="../../thirdparty/owemdjee/crow/tests/template/~lambdas.json" />
     <Text Include="../../thirdparty/owemdjee/crow/vcpkg.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcxxtest_catch2_2_gtest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2b8fc2}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

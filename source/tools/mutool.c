@@ -263,8 +263,6 @@ static struct {
 	{ jpegXL_from_tree_main, "jxl_from_tree", "jxl_from_tree tool" },
 	{ jpegXL_ssimulacra_main, "jxl_ssimulacra tool", "jxl_ssimulacra tool" },
 	{ jpegXL_xyb_range_main, "jxl_xyb_range", "jxl_xyb_range tool" },
-	{ jpegXL_C_test_main, "jxl_test", "jxl_C_test tool" },
-	{ jpegXL_tone_map_main, "jpegXL_tone_map", "jpegXL_tone_map tool" },
 	{ jpegXL_generate_LUT_template_main, "jpegXL_generate_LUT_template", "jpegXL_generate_LUT_template tool" },
 	{ jpegXL_pq_to_hlg_main, "jpegXL_pq_to_hlg", "jpegXL_pq_to_hlg tool" },
 	{ jpegXL_render_hlg_main, "jpegXL_render_hlg", "jpegXL_render_hlg tool" },
