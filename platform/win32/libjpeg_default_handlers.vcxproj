@@ -18,30 +18,34 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\scripts\libjpeg\default_handlers.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0B51171B-B10E-4EAC-8FFA-19226A85B785}</ProjectGuid>
-    <RootNamespace>wxw-samples-ribbon</RootNamespace>
+    <ProjectName>libjpeg_default_handlers</ProjectName>
+    <ProjectGuid>{5F615F91-DFF8-4F05-BF48-1222B72071A8}</ProjectGuid>
+    <RootNamespace>libjpeg_default_handlers</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -118,21 +122,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_RIBBON;WXW_SAMPLES_RIBBON_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_DEFAULT_HANDLERS;JPEG_DEFAULT_HANDLERS_STATICLIB;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-    </Link>
-    <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -140,40 +137,26 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_RIBBON;WXW_SAMPLES_RIBBON_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_DEFAULT_HANDLERS;JPEG_DEFAULT_HANDLERS_STATICLIB;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;HAVE_TESSERACT;HAVE_LEPTONICA;OPJ_STATIC;HAVE_LCMS2MT=1;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-    </Link>
-    <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_RIBBON;WXW_SAMPLES_RIBBON_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_DEFAULT_HANDLERS;JPEG_DEFAULT_HANDLERS_STATICLIB;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_TESSERACT;HAVE_LEPTONICA;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -182,60 +165,17 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_RIBBON;WXW_SAMPLES_RIBBON_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/libjpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_DEFAULT_HANDLERS;JPEG_DEFAULT_HANDLERS_STATICLIB;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;HAVE_TESSERACT;HAVE_LEPTONICA;OPJ_STATIC;HAVE_LCMS2MT=1;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-  </ItemDefinitionGroup>
-  <ItemGroup>
-    <ProjectReference Include="wxWidgets-dependencies-for-samples.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff1b237c}</Project>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
-  </ItemGroup>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/ribbondemo.cpp" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/Makefile.in" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/align_center.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/align_left.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/align_right.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/aui_style.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/auto_crop_selection.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/auto_crop_selection_small.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/circle.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/circle_small.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/colours.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/cross.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/empty.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/expand_selection_h.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/expand_selection_v.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/eye.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/fix_xpm.lua" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/hexagon.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/makefile.gcc" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/makefile.unx" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/makefile.vc" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/msw_style.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/position_left_small.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/position_top_small.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/ribbon.bkl" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/ribbon.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/selection_panel.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/square.xpm" />
-    <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/ribbon/triangle.xpm" />
-  </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

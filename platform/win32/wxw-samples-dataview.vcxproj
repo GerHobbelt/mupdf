@@ -197,23 +197,6 @@
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ProjectReference Include="libexpat.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff83ffca}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libpcre.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518f174b2ba}</Project>
-    </ProjectReference>
-    <ProjectReference Include="MuPDFLib.vcxproj">
-      <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="wxScintilla.vcxproj">
-      <Project>{a60d8644-5a13-4d23-8370-7518ffb10a63}</Project>
-    </ProjectReference>
-    <ProjectReference Include="wxWidgets.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffb10a63}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
@@ -228,6 +211,11 @@
     <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/dataview/makefile.vc" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/dataview/null.xpm" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/dataview/wx_small.xpm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="wxWidgets-dependencies-for-samples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1b237c}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
