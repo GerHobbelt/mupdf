@@ -191,8 +191,7 @@ static int parse(const char* source)
 
 		if (strncmp(source, cmd, cmd_len) == 0 && (sentinel == 0 || isspace(sentinel)))
 		{
-			fprintf(stderr, "\n--> exiting on user demand.\n");
-			return 999;
+			return quit();
 		}
 	}
 
