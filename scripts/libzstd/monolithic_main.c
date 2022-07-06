@@ -2,8 +2,6 @@
 #define BUILD_MONOLITHIC 1
 #include "programs/monolithic_examples.h"
 
-#include "monolithic_examples.h"
-
 #define USAGE_NAME   "zstd"
 
 #include "monolithic_main_internal_defs.h"

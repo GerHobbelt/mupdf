@@ -4,8 +4,6 @@
 #define BUILD_MONOLITHIC 1
 #include "libxml/monolithic_examples.h"
 
-#include "monolithic_examples.h"
-
 #define USAGE_NAME   "xml"
 
 #include "monolithic_main_internal_defs.h"
