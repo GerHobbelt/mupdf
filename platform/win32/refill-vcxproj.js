@@ -108,6 +108,17 @@ if (projname.endsWith("_demos")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
+if (projname.endsWith("_demo")) {
+	let tst_projname = projname.replace(/_demo$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
 if (projname.endsWith("_benchmark")) {
 	let tst_projname = projname.replace(/_benchmark$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;

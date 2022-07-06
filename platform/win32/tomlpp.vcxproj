@@ -26,46 +26,46 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,7 +120,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TOMLPP;TOMLPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -132,7 +132,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TOMLPP;TOMLPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -158,7 +158,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TOMLPP;TOMLPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -187,7 +187,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TOMLPP;TOMLPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -213,7 +213,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tomlpp/include;../../thirdparty/owemdjee/tomlpp/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TOMLPP;TOMLPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -235,237 +235,277 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/error_printer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/parse_benchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/simple_parser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/toml_generator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tomlpp/examples/toml_to_json_transcoder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/assignment.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/bases.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/constexpr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/constructors.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/emplace.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/extensions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/hash.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/in_place.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/issues.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/make_optional.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/noexcept.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/nullopt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/observers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/relops.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/tests/swap.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_burntsushi_invalid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_burntsushi_valid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_iarna_invalid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/conformance_iarna_valid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/impl_catch2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/impl_toml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_arrays.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_parse_result.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_tables.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/manipulating_values.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_arrays.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_booleans.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_comments.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_dates_and_times.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_floats.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_integers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_key_value_pairs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_spec_example.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_strings.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/parsing_tables.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/unicode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/user_feedback.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/using_iterators.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tomlpp/tests/windows_compat.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/examples/examples.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/catch.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/catch_with_main.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/external/clara.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_benchmark.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_benchmarking_all.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_chronometer.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_clock.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_constructor.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_environment.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_estimate.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_execution_plan.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_optimizer.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_outlier_classification.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/catch_sample_analysis.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_analyse.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_benchmark_function.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_complete_invoke.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_estimate_clock.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_measure.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_repeat.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_run_for_at_least.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_stats.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/benchmark/detail/catch_timing.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_approx.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_assertionhandler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_assertioninfo.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_assertionresult.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_capture.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_capture_matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_clara.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_commandline.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_compiler_capabilities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_config.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_config_uncaught_exceptions.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_console_colour.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_context.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_debug_console.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_debugger.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_decomposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_default_main.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_enforce.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_enum_values_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_errno_guard.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_exception_translator_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_external_interfaces.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_fatal_condition.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_generators.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_generators_generic.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_generators_specific.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_capture.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_config.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_enum_values_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_exception.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_generatortracker.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_registry_hub.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_reporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_runner.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_tag_alias_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_interfaces_testcase.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_leak_detector.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_list.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_matchers_exception.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_matchers_floating.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_matchers_generic.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_matchers_string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_matchers_vector.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_message.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_meta.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_objc.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_objc_arc.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_option.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_output_redirect.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_polyfills.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_preprocessor.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_random_number_generator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_reenable_warnings.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_reporter_registrars.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_reporter_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_result_type.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_run_context.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_section.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_section_info.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_session.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_singletons.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_startup_exception_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_stream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_string_manip.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_stringref.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_suppress_warnings.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_tag_alias.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_tag_alias_autoregistrar.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_tag_alias_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_test_case_info.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_test_case_registry_impl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_test_case_tracker.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_test_registry.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_test_spec.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_test_spec_parser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_text.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_timer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_to_string.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_tostring.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_totals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_uncaught_exceptions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_user_interfaces.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_version.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_wildcard_pattern.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_windows_h_proxy.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/internal/catch_xmlwriter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_automake.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_bases.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_compact.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_console.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_junit.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_listening.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_sonarqube.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_tap.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_teamcity.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/include/reporters/catch_reporter_xml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/projects/XCode/OCTest/OCTest/CatchOCTestCase.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/projects/XCode/OCTest/OCTest/TestObj.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/single_include/catch2/catch.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/single_include/catch2/catch_reporter_automake.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/single_include/catch2/catch_reporter_sonarqube.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/single_include/catch2/catch_reporter_tap.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/single_include/catch2/catch_reporter_teamcity.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/third_party/clara.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/include/tl/optional.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/array.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/array_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/at_path.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/date_time.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/default_formatter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/default_formatter_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/formatter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/formatter_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/forward_declarations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/header_end.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/header_start.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/json_formatter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/json_formatter_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/key.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/make_node.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/node.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/node_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/node_view.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/node_view_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/parse_error.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/parse_result.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/parser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/parser_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/preprocessor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/print_to_stream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/print_to_stream_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/simd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/source_region.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_except.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_initializer_list.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_new.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_optional.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_string_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_utility.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/std_vector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/table.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/table_impl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/toml_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/unicode_autogenerated.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/value.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/value_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/impl/yaml_formatter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/include/toml++/toml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/catch2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/leakproof.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/settings.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/tests.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/tloptional.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tomlpp/tests/unicode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tomlpp/toml.hpp" />
+    <Image Include="../../thirdparty/owemdjee/tomlpp/docs/images/banner_large.png" />
+    <Image Include="../../thirdparty/owemdjee/tomlpp/docs/images/banner_small.png" />
+    <Image Include="../../thirdparty/owemdjee/tomlpp/docs/images/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/tomlpp/docs/images/logo.png" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/tomlpp/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tomlpp/external/Catch2/docs/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/cmake/tomlplusplusConfig.cmake.meson.in" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/cmake/tomlplusplusConfigVersion.cmake.meson.in" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/tloptional/cmake/tl-optional-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-date-local-1.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-date-time-local-1.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-date-time-local-2.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-int-max.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-int-min.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-readme-example.toml" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-readme-example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-time-1.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-spec-tests/values/spec-time-2.json" />
     <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/gen-multi.py" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/invalid-encoder/array-mixed-types-ints-and-floats.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-hetergeneous.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-mixed-int-array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-mixed-int-float.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-mixed-int-string.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-mixed-string-table.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-nested-double.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-nested-inline-table.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-nested.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-nospaces.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-string-quote-comma-2.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-string-quote-comma.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-string-with-comma.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-strings.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array-table-array-string-backslash.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/hetergeneous.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/mixed-int-array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/mixed-int-float.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/mixed-int-string.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/mixed-string-table.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/nested-double.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/nested-inline-table.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/nested.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/nospaces.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/string-quote-comma-2.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/string-quote-comma.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/string-with-comma.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/strings.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/array/table-array-string-backslash.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/bool/bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment-at-eof.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment-at-eof2.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment-everywhere.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment-tricky.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment/at-eof.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment/at-eof2.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment/everywhere.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment/noeol.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/comment/tricky.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime-local-date.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime-local-time.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime-local.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime-timezone.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime/datetime.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime/local-date.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime/local-time.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime/local.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime/milliseconds.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/datetime/timezone.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/empty-file.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/example.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float-exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float-inf-and-nan.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float-long.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float-underscore.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float-zero.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float/exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float/float.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float/inf-and-nan.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float/long.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float/underscore.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/float/zero.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/implicit-and-explicit-after.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/implicit-and-explicit-before.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/implicit-groups.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table-array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table-bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table-empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table-end-in-bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table-key-dotted.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table-multiline.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table-nest.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/end-in-bool.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/inline-table.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/key-dotted.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/multiline.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/inline-table/nest.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer-literals.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer-long.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer-underscore.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer-zero.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer/integer.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer/literals.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer/long.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer/underscore.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/integer/zero.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-alphanum.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-case-sensitive.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-dotted.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-equals-nospace.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-escapes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-numeric.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-quoted-dots.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-space.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-special-chars.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key-special-word.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/alphanum.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/case-sensitive.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/dotted.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/equals-nospace.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/escapes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/numeric-dotted.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/numeric.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/quoted-dots.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/space.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/special-chars.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/key/special-word.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/multiline-string-quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/multiline-string.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/newline-crlf.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/newline-lf.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/raw-multiline-string.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/raw-string.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/spec-example-1-compact.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/spec-example-1.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-double-quote-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-escape-tricky.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-escaped-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-escapes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-nl.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-simple.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-unicode-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-unicode-literal.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string-with-pound.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/double-quote-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/escape-esc.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/escape-tricky.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/escaped-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/escapes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/multiline-escaped-crlf.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/multiline-quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/multiline.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/nl.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/raw-multiline.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/raw.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/simple.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/unicode-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/unicode-literal.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/string/with-pound.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-array-implicit.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-array-many.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-array-nest.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-array-one.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-array-table-array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-names.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-no-eol.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-sub-empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-whitespace.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-with-literal-string.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-with-pound.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-with-single-quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table-without-super.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/array-implicit.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/array-many.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/array-nest.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/array-one.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/array-table-array.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/keyword.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/names.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/no-eol.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/sub-empty.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/whitespace.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/with-literal-string.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/with-pound.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/with-single-quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/external/toml-test/tests/valid/table/without-super.json" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/toml-test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/tools/ci_single_header_check.py" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/tools/generate_conformance_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/tools/generate_single_header.py" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/tools/generate_windows_test_targets.py" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/tools/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/tools/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/tomlpp/util/register_git_remotes_recursive.sh" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ProjectReference Include="libtoml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe7b52d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
