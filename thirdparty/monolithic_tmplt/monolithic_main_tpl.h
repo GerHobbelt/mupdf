@@ -1,3 +1,8 @@
+//
+// Part 2 of the template code: the dispatcher
+//
+
+#pragma once
 
 #if 0
 
@@ -173,6 +178,24 @@ static int parse(const char* source)
 		}
 	}
 
+	// Check if thee user typed 'q' or 'x' to quit (as long as the dispatch table doesn't define those commands already):
+	static const char *quit_commands[] ={"q", "x" };
+	for (int i = 0; i < sizeof(quit_commands) / sizeof(quit_commands[0]); i++)
+	{
+		const char *cmd = quit_commands[i];
+		size_t cmd_len = strlen(cmd);
+		char sentinel = 0;
+
+		if (strlen(source) >= cmd_len)
+			sentinel = source[cmd_len];
+
+		if (strncmp(source, cmd, cmd_len) == 0 && (sentinel == 0 || isspace(sentinel)))
+		{
+			fprintf(stderr, "\n--> exiting on user demand.\n");
+			return 999;
+		}
+	}
+
 	fprintf(stderr, "Unknown command '%s'.\n\nUse 'h' or 'help' command to get a list of supported commands.\n", source);
 	return 6;
 }
@@ -237,13 +260,31 @@ static void trim(char* s)
 
 static int help(void)
 {
+	int has_q_command = 0;
+	int has_x_command = 0;
+
 	fprintf(stderr, "Commands:\n");
 	for (int i = 0; i < sizeof(commands) / sizeof(commands[0]); i++)
 	{
 		struct cmd_info el = commands[i];
 		fprintf(stderr, "  %s\n", el.cmd);
+
+		if (strcmp(el.cmd, "q") == 0)
+			has_q_command = 1;
+		if (strcmp(el.cmd, "x") == 0)
+			has_x_command = 1;
 	}
-	fprintf(stderr, "\n\nOr type Ctrl-C to quit.\n");
+
+	const char *extra_quit_msg = "";
+	if (!has_q_command)
+	{
+		extra_quit_msg = "or 'q' ";
+		if (!has_x_command)
+			extra_quit_msg = "or 'q' or 'x' ";
+	}
+	else if (!has_x_command)
+		extra_quit_msg = "or 'x' ";
+	fprintf(stderr, "\n\nOr type Ctrl-C %sto quit.\n", extra_quit_msg);
 
 	return 0;
 }

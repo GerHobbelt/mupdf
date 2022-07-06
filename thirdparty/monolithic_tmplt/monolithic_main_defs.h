@@ -1,3 +1,6 @@
+//
+// Example: core content of each `monolithic_examples.h` header file, which carries the declarations of the various `main()` functions we want to bundle in a monolithic build.
+//
 
 #pragma once
 

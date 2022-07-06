@@ -1,3 +1,6 @@
+//
+// Part 1 of the template code: core definitions
+//
 
 #pragma once
 
