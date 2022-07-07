@@ -257,7 +257,6 @@ static struct {
 	{ jpegXL_butteraugli_main, "jxl_butteraugli", "jxl_butteraugli tool" },
 	{ jpegXL_compress_main, "jxl_compress", "jxl_compress tool" },
 	{ jpegXL_cjpeg_hdr_main, "jxl_cjpeg_hdr", "jxl_cjpeg_hdr tool" },
-	{ jpegXL_conformance_main, "jxl_conformance", "jxl_conformance tool" },
 	{ jpegXL_decompress_main, "jxl_decompress", "jxl_decompress tool" },
 	{ jpegXL_dec_enc_main, "jxl_dec_enc", "jxl_dec_enc tool" },
 	{ jpegXL_from_tree_main, "jxl_from_tree", "jxl_from_tree tool" },
@@ -374,7 +373,7 @@ report_version(int argc, const char** argv)
 	}
 	else
 	{
-		printf("version [option]\n"
+		fprintf(stderr, "version [option]\n"
 			"\n"
 			"Option:\n"
 			"-f         full version, including 'Qiqqa-PDF-Tooling' bundle name as prefix\n"
@@ -387,6 +386,7 @@ report_version(int argc, const char** argv)
 			"\n"
 			"No option? Default behaviour is identical to `-f` mode.\n",
 			bn + 3);
+		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;
 }

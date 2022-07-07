@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -90,7 +90,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildBeforeTargets>ClCompile</CustomBuildBeforeTargets>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -122,7 +122,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -131,7 +131,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -291,15 +291,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/exr_dec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/gif_dec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/jpg_dec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/jxl.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/pgx_dec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/pnm_dec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/apng.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\lib\extras\enc\encode_extras.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/exr.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/jpg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/npy.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/pgx.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/pnm.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/hlg.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/packed_image_convert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/render_hdr.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/time.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/tone_mapping.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/ac_strategy.cc" />
@@ -326,7 +330,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_cache.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_context_map.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_external_image.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_file.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_frame.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group_border.cc" />
@@ -424,11 +427,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_blending.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_chroma_upsampling.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_epf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_from_linear.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_gaborish.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_noise.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_patches.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_splines.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_spot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_to_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_tone_mapping.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_upsampling.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_write.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_xyb.cc" />
@@ -441,6 +447,28 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner_internal.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/dirent.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/aligned_allocator.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\contrib\image\hwy_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_128a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_128d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_f32a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_f32d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_f64a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_f64d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_i16a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_i16d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_i32a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_i32d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_i64a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_i64d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_kv128a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_kv128d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_u16a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_u16d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_u32a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_u32d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_u64a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_u64d.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/per_target.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/print.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/targets.cc" />
@@ -453,11 +481,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_ng_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/codec_config.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/conformance/djxl_conformance.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/decode_and_encode.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_ng_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/hdr/display_to_hlg.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/hdr/generate_lut_template.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/hdr/pq_to_hlg.cc" />
@@ -483,16 +508,20 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/exr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/gif.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/jpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/jxl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/pgx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/pnm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/apng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/encode.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/exr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/jpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/npy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/pgx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/pnm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/hlg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/packed_image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/packed_image_convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/render_hdr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/time.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/tone_mapping.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/include/jxl/butteraugli.h" />
@@ -545,6 +574,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/butteraugli/butteraugli.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/chroma_from_luma.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/codec_in_out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/codec_y4m_testonly.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/coeff_order_fwd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/color_encoding_internal.h" />
@@ -555,6 +585,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_block-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_for_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_scales.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dct_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_ans.h" />
@@ -562,16 +593,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_cache.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_context_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_external_image.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_file.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_frame.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_group_border.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_huffman.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_modular.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_noise.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_params.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_patch_dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_tone_mapping-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_transforms_testonly.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/dec_xyb.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/decode_to_jpeg.h" />
@@ -618,6 +649,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/entropy_coder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/epf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/exif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fake_parallel_runner_testonly.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_dct-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_dct.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/fast_dct128-inl.h" />
@@ -641,6 +673,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_bundle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_metadata.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/image_test_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_data_writer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/jpeg/dec_jpeg_output_chunk.h" />
@@ -689,11 +722,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_blending.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_chroma_upsampling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_epf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_from_linear.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_gaborish.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_noise.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_patches.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_splines.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_spot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_to_linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_tone_mapping.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_upsampling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_write.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/render_pipeline/stage_xyb.h" />
@@ -723,7 +759,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/image/image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/math/math-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/algo-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/disabled_targets.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/result-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/shared-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/sorting_networks-inl.h" />
@@ -869,7 +904,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/codec_config.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/jni/org/jpeg/jpegxl/wrapper/decoder_jni.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/speed_stats.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.h" />
@@ -886,6 +920,7 @@
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/README.OSX.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/README.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/bash_test.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/ci.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/deps.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/api.txt" />
@@ -943,7 +978,6 @@
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/experimental/fast_lossless/build-android.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/experimental/fast_lossless/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/jpeg-xl/js-wasm-wrapper.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/README.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/libjxl.pc.in" />
@@ -985,6 +1019,7 @@
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/g3doc/impl_details.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/g3doc/quick_reference.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/g3doc/release_testing_process.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/README.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/libhwy-contrib.pc.in" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/libhwy-test.pc.in" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/libhwy.pc.in" />
@@ -1143,6 +1178,7 @@
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/ossfuzz-build.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/progressive_sizes.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/reference_zip.sh" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/roundtrip_test.sh" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/ssimulacra.txt" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/upscaling_coefficients/generate_upscaling_coefficients.py" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/upscaling_coefficients/upscaler_demo.py" />
@@ -1152,4 +1188,3 @@
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
