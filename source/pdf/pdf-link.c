@@ -577,7 +577,7 @@ pdf_load_link(fz_context *ctx, pdf_document *doc, pdf_obj *dict, int pagenum, fz
 		}
 
 		if (uri)
-			link = fz_new_link(ctx, bbox, count, quads, uri);
+			link = fz_new_derived_link(ctx, fz_link, bbox, count, quads, uri);
 	}
 	fz_always(ctx)
 	{

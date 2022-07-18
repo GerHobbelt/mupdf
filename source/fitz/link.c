@@ -26,19 +26,17 @@
 #include <math.h>
 
 fz_link *
-fz_new_link(fz_context *ctx, fz_rect bbox, int count, fz_quad *quads, const char *uri)
+fz_new_link_of_size(fz_context *ctx, int size, fz_rect rect, int count, fz_quad *quads, const char *uri)
 {
-	fz_link *link;
-
-	link = fz_malloc_struct(ctx, fz_link);
+	fz_link *link = Memento_label(fz_calloc(ctx, 1, size), "fz_link");
 	link->refs = 1;
-	link->rect = bbox;
+	link->rect = rect;
 
 	if (count == 0)
 	{
 		link->count = 1;
 		link->quads = fz_malloc(ctx, sizeof(fz_quad));
-		link->quads[0] = fz_quad_from_rect(bbox);
+		link->quads[0] = fz_quad_from_rect(rect);
 	}
 	else
 	{
@@ -46,9 +44,6 @@ fz_new_link(fz_context *ctx, fz_rect bbox, int count, fz_quad *quads, const char
 		link->quads = fz_malloc(ctx, count * sizeof(fz_quad));
 		memcpy(link->quads, quads, count * sizeof(fz_quad));
 	}
-
-	link->next = NULL;
-	link->uri = NULL;
 
 	fz_try(ctx)
 		link->uri = fz_strdup(ctx, uri);
@@ -73,6 +68,10 @@ fz_drop_link(fz_context *ctx, fz_link *link)
 	while (fz_drop_imp(ctx, link, &link->refs))
 	{
 		fz_link *next = link->next;
+
+		if (link->drop)
+			link->drop(ctx, link);
+
 		fz_free(ctx, link->quads);
 		fz_free(ctx, link->uri);
 		fz_free(ctx, link);
