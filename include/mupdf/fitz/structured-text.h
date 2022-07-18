@@ -287,8 +287,7 @@ void fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page 
 /**
 	Feed structured text to the empty box analyser, and output boxes to a plain-text file.
 */
-void
-fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page *page);
+void fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page *page);
 
 /**
 	Search for occurrence of 'needle' in text page.

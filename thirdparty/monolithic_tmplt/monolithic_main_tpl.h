@@ -113,11 +113,11 @@ static int xgetopt(int argc, const char** argv, const char* optstring)
 #include <readline/readline.h>
 #include <readline/history.h>
 #else
-void using_history(void) { }
-void add_history(const char* string) { }
-void rl_bind_key(int key, void (*fun)(void)) { }
-void rl_insert(void) { }
-char* readline(const char* prompt)
+static void using_history(void) { }
+static void add_history(const char* string) { }
+static void rl_bind_key(int key, void (*fun)(void)) { }
+static void rl_insert(void) { }
+static char* readline(const char* prompt)
 {
 	static char line[500], * p;
 	size_t n;

@@ -66,9 +66,11 @@ EXPORTS
 
 ; Tesseract OCR exports
 
+	ocr_clear_leptonica_mem
 	ocr_fin
 	ocr_init
 	ocr_recognise
+	ocr_set_leptonica_mem
 
 	tesseract_ambiguous_words_main
 	tesseract_classifier_tester_main
@@ -459,6 +461,7 @@ EXPORTS
 	fz_default_error_warn_info_mode
 	fz_default_info_callback
 	fz_default_warning_callback
+	fz_disable_dbg_output
 	fz_disable_icc
 	fz_do_always
 	fz_do_catch
@@ -467,6 +470,7 @@ EXPORTS
 	fz_drop_context_locks
 	fz_drop_global_context
 	fz_enable_dbg_output
+	fz_enable_dbg_output_on_stdio_unreachable
 	fz_enable_icc
 	fz_end_throw_on_repair
 	fz_error
@@ -963,6 +967,11 @@ EXPORTS
 	fz_store_item
 	fz_store_scavenge
 	fz_store_scavenge_external
+	fz_draw_story
+	fz_drop_html_story
+	fz_html_story_document
+	fz_new_html_story
+	fz_place_story
 	fz_drop_stream
 	fz_file_exists
 	fz_keep_stream
@@ -1048,6 +1057,7 @@ EXPORTS
 	fz_parse_stext_options
 	fz_print_stext_header_as_html
 	fz_print_stext_header_as_xhtml
+	fz_print_stext_page_as_empty_box
 	fz_print_stext_page_as_html
 	fz_print_stext_page_as_json
 	fz_print_stext_page_as_text
@@ -1213,7 +1223,27 @@ EXPORTS
 	fz_write_document
 	fz_debug_xml
 	fz_detach_xml
+	fz_dom_add_attribute
+	fz_dom_append_child
+	fz_dom_attribute
+	fz_dom_body
+	fz_dom_clone
+	fz_dom_create_element
+	fz_dom_create_text_node
+	fz_dom_document_element
+	fz_dom_find
+	fz_dom_find_next
+	fz_dom_first_child
+	fz_dom_get_attribute
+	fz_dom_insert_after
+	fz_dom_insert_before
+	fz_dom_next
+	fz_dom_parent
+	fz_dom_previous
+	fz_dom_remove
+	fz_dom_remove_attribute
 	fz_drop_xml
+	fz_keep_xml
 	fz_parse_xml
 	fz_parse_xml_from_html5
 	fz_xml_att
@@ -1221,10 +1251,12 @@ EXPORTS
 	fz_xml_att_eq
 	fz_xml_down
 	fz_xml_find
+	fz_xml_find_dfs
 	fz_xml_find_down
 	fz_xml_find_down_match
 	fz_xml_find_match
 	fz_xml_find_next
+	fz_xml_find_next_dfs
 	fz_xml_find_next_match
 	fz_xml_is_tag
 	fz_xml_next
@@ -1931,10 +1963,10 @@ EXPORTS
 	pdf_find_locked_fields_for_sig
 	pdf_find_version_for_obj
 	pdf_forget_xref
-	pdf_get_xref_entry_no_null
 	pdf_get_incremental_xref_entry
 	pdf_get_populating_xref_entry
 	pdf_get_xref_entry
+	pdf_get_xref_entry_no_null
 	pdf_is_field_locked
 	pdf_is_local_object
 	pdf_load_compressed_inline_image
@@ -2141,6 +2173,8 @@ EXPORTS
 	JxlDecoderGetExtraChannelName
 	JxlDecoderGetFrameHeader
 	JxlDecoderGetFrameName
+	JxlDecoderGetICCProfileSize
+	JxlDecoderGetIntendedDownsamplingRatio
 	JxlDecoderImageOutBufferSize
 	JxlDecoderPreviewOutBufferSize
 	JxlDecoderProcessInput
@@ -2153,6 +2187,7 @@ EXPORTS
 	JxlDecoderSetCoalescing
 	JxlDecoderSetDCOutBuffer
 	JxlDecoderSetDecompressBoxes
+	JxlDecoderSetDesiredIntensityTarget
 	JxlDecoderSetImageOutBuffer
 	JxlDecoderSetInput
 	JxlDecoderSetJPEGBuffer
@@ -2160,6 +2195,7 @@ EXPORTS
 	JxlDecoderSetPreferredColorProfile
 	JxlDecoderSetPreviewOutBuffer
 	JxlDecoderSizeHintBasicInfo
+	JxlDecoderSkipCurrentFrame
 	JxlDecoderSkipFrames
 	JxlDecoderSubscribeEvents
 	JxlDecoderVersion
@@ -2175,6 +2211,7 @@ EXPORTS
 	JxlEncoderDestroy
 	JxlEncoderFrameSettingsCreate
 	JxlEncoderFrameSettingsSetOption
+	JxlEncoderGetError
 	JxlEncoderGetRequiredCodestreamLevel
 	JxlEncoderInitBasicInfo
 	JxlEncoderInitBlendInfo
@@ -2968,6 +3005,7 @@ EXPORTS
 	sqlite3_db_filename
 	sqlite3_db_handle
 	sqlite3_db_mutex
+	sqlite3_db_name
 	sqlite3_db_readonly
 	sqlite3_db_release_memory
 	sqlite3_db_status
