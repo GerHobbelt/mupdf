@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -90,7 +90,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildBeforeTargets>ClCompile</CustomBuildBeforeTargets>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -122,7 +122,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
+</ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -131,7 +131,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -295,7 +295,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/pgx_dec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/dec/pnm_dec.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/apng.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\lib\extras\enc\encode_extras.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/encode_extras.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/exr.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/jpg.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/npy.cc" />
@@ -358,7 +358,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_dot_dictionary.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_entropy_coder.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_fast_heuristics.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_file.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_frame.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_group.cc" />
@@ -447,7 +446,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/threads/thread_parallel_runner_internal.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/dirent.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/aligned_allocator.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\jpeg-xl\third_party\highway\hwy\contrib\image\hwy_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/image/hwy_image.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_128a.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/sort/vqsort_128d.cc" />
@@ -476,9 +475,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box_list_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/butteraugli_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjpeg_hdr.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_ng_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/codec_config.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/decode_and_encode.cc" />
@@ -739,6 +736,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/simd_util-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/size_constraints.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/test_image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/test_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/testdata.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/toc.h" />
@@ -1184,7 +1182,8 @@
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/tools/upscaling_coefficients/upscaler_demo.py" />
     <Xml Include="../../thirdparty/owemdjee/jpeg-xl/plugins/mime/image-jxl.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
