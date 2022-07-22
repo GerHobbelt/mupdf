@@ -289,9 +289,13 @@ static void reset_form_field(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 	}
 }
 
-void pdf_field_reset(fz_context *ctx, pdf_document *doc, pdf_obj *field)
+void pdf_field_reset_imp(fz_context *ctx, pdf_document *doc, pdf_obj *field, pdf_cycle_list *cycle_up)
 {
+	pdf_cycle_list cycle;
 	pdf_obj *kids = pdf_dict_get(ctx, field, PDF_NAME(Kids));
+
+	if (pdf_cycle(ctx, &cycle, cycle_up, field))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in field hierarchy");
 
 	reset_form_field(ctx, doc, field);
 
@@ -300,8 +304,13 @@ void pdf_field_reset(fz_context *ctx, pdf_document *doc, pdf_obj *field)
 		int i, n = pdf_array_len(ctx, kids);
 
 		for (i = 0; i < n; i++)
-			pdf_field_reset(ctx, doc, pdf_array_get(ctx, kids, i));
+			pdf_field_reset_imp(ctx, doc, pdf_array_get(ctx, kids, i), &cycle);
 	}
+}
+
+void pdf_field_reset(fz_context *ctx, pdf_document *doc, pdf_obj *field)
+{
+	pdf_field_reset_imp(ctx, doc, field, NULL);
 }
 
 static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *array, pdf_obj *field, pdf_obj *fields, int exclude)
