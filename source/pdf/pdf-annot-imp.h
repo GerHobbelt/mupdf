@@ -42,6 +42,13 @@ struct pdf_annot
 	pdf_annot *next;
 };
 
+typedef struct
+{
+	fz_link super;
+	pdf_page *page;
+	pdf_obj *obj;
+} pdf_link;
+
 void pdf_load_annots(fz_context *ctx, pdf_page *page, pdf_obj *annots);
 void pdf_drop_annots(fz_context *ctx, pdf_annot *annot_list);
 void pdf_drop_widgets(fz_context *ctx, pdf_annot *widget_list);

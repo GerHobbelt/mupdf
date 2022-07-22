@@ -830,6 +830,11 @@ static void ffi_gc_fz_link(js_State *J, void *link)
 	fz_drop_link(ctx, link);
 }
 
+static fz_link *ffi_tolink(js_State *J, int idx)
+{
+	return js_touserdata(J, idx, "fz_link");
+}
+
 static void ffi_pushlink(js_State *J, fz_link *link)
 {
 	js_getregistry(J, "fz_link");
@@ -3318,16 +3323,52 @@ static void ffi_Page_createLink(js_State *J)
 	ffi_pushlink(J, link);
 }
 
+static void ffi_Page_deleteLink(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_page *page = ffi_topage(J, 0);
+	fz_link *link = ffi_tolink(J, 1);
+
+	fz_try(ctx)
+		fz_delete_link(ctx, page, link);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
 static void ffi_Link_get_bounds(js_State *J)
 {
 	fz_link *link = js_touserdata(J, 0, "fz_link");
 	ffi_pushrect(J, link->rect);
 }
 
+static void ffi_Link_set_bounds(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_link *link = js_touserdata(J, 0, "fz_link");
+	fz_rect rect = ffi_torect(J, 1);
+
+	fz_try(ctx)
+		fz_set_link_rect(ctx, link, rect);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
 static void ffi_Link_get_uri(js_State *J)
 {
 	fz_link *link = js_touserdata(J, 0, "fz_link");
 	js_pushstring(J, link->uri);
+}
+
+static void ffi_Link_set_uri(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_link *link = js_touserdata(J, 0, "fz_link");
+	const char *uri = js_tostring(J, 1);
+
+	fz_try(ctx)
+		fz_set_link_uri(ctx, link, uri);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_ColorSpace_getNumberOfComponents(js_State *J)
@@ -8291,14 +8332,15 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Page.search", ffi_Page_search, 0);
 		jsB_propfun(J, "Page.getLinks", ffi_Page_getLinks, 0);
 		jsB_propfun(J, "Page.createLink", ffi_Page_createLink, 2);
+		jsB_propfun(J, "Page.deleteLink", ffi_Page_deleteLink, 1);
 	}
 	js_setregistry(J, "fz_page");
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
 	{
-		jsB_propacc(J, "Link.bounds", ffi_Link_get_bounds, NULL);
-		jsB_propacc(J, "Link.uri", ffi_Link_get_uri, NULL);
+		jsB_propacc(J, "Link.bounds", ffi_Link_get_bounds, ffi_Link_set_bounds);
+		jsB_propacc(J, "Link.uri", ffi_Link_get_uri, ffi_Link_set_uri);
 	}
 	js_setregistry(J, "fz_link");
 

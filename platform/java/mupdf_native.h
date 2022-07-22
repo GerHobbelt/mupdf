@@ -1376,11 +1376,27 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Link_getBounds
 
 /*
  * Class:     com_artifex_mupdf_fitz_Link
+ * Method:    setBounds
+ * Signature: (Lcom/artifex/mupdf/fitz/Rect;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Link_setBounds
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Link
  * Method:    getURI
  * Signature: ()Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_com_artifex_mupdf_fitz_Link_getURI
   (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Link
+ * Method:    setURI
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Link_setURI
+  (JNIEnv *, jobject, jstring);
 
 #ifdef __cplusplus
 }
@@ -4189,6 +4205,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Page_getDocument
  */
 JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Page_createLink
   (JNIEnv *, jobject, jobject, jstring);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Page
+ * Method:    deleteLink
+ * Signature: (Lcom/artifex/mupdf/fitz/Link;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Page_deleteLink
+  (JNIEnv *, jobject, jobject);
 
 #ifdef __cplusplus
 }
