@@ -561,9 +561,9 @@ static void pdf_set_link_uri(fz_context *ctx, fz_link *link_, const char *uri)
 		fz_rethrow(ctx);
 }
 
-fz_link *pdf_new_link(fz_context *ctx, pdf_page *page, fz_rect rect, const char *uri, pdf_obj *obj)
+fz_link *pdf_new_link(fz_context *ctx, pdf_page *page, fz_rect rect, int count, fz_quad* quads, const char *uri, pdf_obj *obj)
 {
-	pdf_link *link = fz_new_derived_link(ctx, pdf_link, rect, uri);
+	pdf_link *link = fz_new_derived_link(ctx, pdf_link, rect, count, quads, uri);
 	link->super.drop = (fz_link_drop_link_fn*) pdf_drop_link_imp;
 	link->super.set_rect = pdf_set_link_rect;
 	link->super.set_uri = pdf_set_link_uri;
@@ -633,7 +633,7 @@ pdf_load_link(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_obj *dict,
 		}
 
 		if (uri)
-		link = (fz_link *) pdf_new_link(ctx, page, bbox, count, quads, uri, dict);
+			link = pdf_new_link(ctx, page, bbox, count, quads, uri, dict);
 	}
 	fz_always(ctx)
 	{

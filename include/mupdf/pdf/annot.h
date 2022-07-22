@@ -342,7 +342,7 @@ fz_matrix pdf_annot_transform(fz_context *ctx, pdf_annot *annot);
 /*
 	Create a new link object.
 */
-fz_link *pdf_new_link(fz_context *ctx, pdf_page *page, fz_rect rect, const char *uri, pdf_obj *obj);
+fz_link *pdf_new_link(fz_context *ctx, pdf_page *page, fz_rect rect, int count, fz_quad* quads, const char *uri, pdf_obj *obj);
 
 /*
 	create a new annotation of the specified type on the

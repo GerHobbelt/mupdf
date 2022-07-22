@@ -324,7 +324,7 @@ static void add_field_hierarchy_to_array(fz_context *ctx, pdf_obj *result, pdf_o
 		pdf_obj *elem = pdf_array_get(ctx, fields, i);
 
 		if (pdf_is_string(ctx, elem))
-			elem = pdf_lookup_field(ctx, formfields, pdf_to_text_string(ctx, elem));
+			elem = pdf_lookup_field(ctx, formfields, pdf_to_text_string(ctx, elem, NULL));
 
 		if (pdf_to_num(ctx, field) == pdf_to_num(ctx, elem))
 			break;

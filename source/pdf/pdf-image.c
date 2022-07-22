@@ -132,7 +132,7 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 		}
 
 		if (SIZE_MAX / n < h * ((size_t)w) * ((bpc+7)/8))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "image is too large (max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (n * (bpc+7.0))));
+			fz_throw(ctx, FZ_ERROR_GENERIC, "image is too large (max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (n * (bpc+7.0)))));
 
 		obj = pdf_dict_geta(ctx, dict, PDF_NAME(Decode), PDF_NAME(D));
 		if (obj)
