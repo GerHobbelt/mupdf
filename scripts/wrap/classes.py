@@ -1190,10 +1190,10 @@ classextras = ClassExtras(
                 virtual_fnptrs = (
                     lambda name: f'*(PathWalker2**) ((fz_path_walker*) {name} + 1)',
                     textwrap.dedent(
-                    f'''
-                    m_internal = (fz_path_walker*) mupdf::calloc(1, sizeof(*m_internal) + sizeof(PathWalker2*));
-                    *(PathWalker2**) (m_internal + 1) = this;
-                    '''),
+                        f'''
+                        m_internal = (fz_path_walker*) mupdf::calloc(1, sizeof(*m_internal) + sizeof(PathWalker2*));
+                        *(PathWalker2**) (m_internal + 1) = this;
+                        '''),
                     f'mupdf::free(m_internal);\n',
                     ),
                 ),
@@ -1698,6 +1698,9 @@ classextras = ClassExtras(
 
         pdf_filter_options = ClassExtra(
                 pod = 'inline',
+                # We don't need to allocate extra space, and because we are a
+                # POD class, we can simply let our default constructor run.
+                #
                 virtual_fnptrs = (
                         lambda name: f'(PdfFilterOptions2*) {name}',
                         f'this->opaque = this;\n'
