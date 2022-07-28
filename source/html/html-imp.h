@@ -339,14 +339,14 @@ typedef struct {
 
 struct fz_html_story_s
 {
+	/* The HTML tree of content. */
+	fz_html_tree tree;
+
 	/* The user_css (or NULL) */
 	char *user_css;
 
 	/* The HTML story as XML nodes with a DOM */
 	fz_xml *dom;
-
-	/* The HTML tree of content. */
-	fz_html_tree tree;
 
 	/* The fontset for the content. */
 	fz_html_font_set *font_set;
