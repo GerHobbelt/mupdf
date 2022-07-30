@@ -330,11 +330,11 @@ typedef void(*CustomPrefixCallback)(std::ostream& s, const LogMessageInfo& l, vo
 //         "program with --v=1 or more";
 //   VLOG_EVERY_N(1, 10)
 //      << "I'm printed every 10th occurrence, and when you run the program "
-//         "with --v=1 or more. Present occurence is " << google::COUNTER;
+//         "with --v=1 or more. Present occurrence is " << google::COUNTER;
 //   VLOG_IF_EVERY_N(1, (size > 1024), 10)
-//      << "I'm printed on every 10th occurence of case when size is more "
+//      << "I'm printed on every 10th occurrence of case when size is more "
 //         " than 1024, when you run the program with --v=1 or more. ";
-//         "Present occurence is " << google::COUNTER;
+//         "Present occurrence is " << google::COUNTER;
 //
 // The supported severity levels for macros that allow you to specify one
 // are (in increasing order of severity) INFO, WARNING, ERROR, and FATAL.
@@ -404,11 +404,11 @@ typedef void(*CustomPrefixCallback)(std::ostream& s, const LogMessageInfo& l, vo
 #define DECLARE_int32(name) \
   DECLARE_VARIABLE(google::int32, I, name, int32)
 
-#if !defined(DECLARE_uint32) && !defined(HAVE_LIBGFLAGS)
+#if !defined(DECLARE_uint32)
 // uint32 specialization
 #define DECLARE_uint32(name) \
   DECLARE_VARIABLE(google::uint32, U, name, uint32)
-#endif // !defined(DECLARE_uint32) && !defined(HAVE_LIBGFLAGS)
+#endif // !defined(DECLARE_uint32)
 
 // Special case for string, because we have to specify the namespace
 // std::string, which doesn't play nicely with our FLAG__namespace hackery.
@@ -434,6 +434,19 @@ DECLARE_bool(colorlogtostderr);
 // Log messages at a level >= this flag are automatically sent to
 // stderr in addition to log files.
 DECLARE_int32(stderrthreshold);
+
+// Set whether log messages go to stdout instead of logfiles
+DECLARE_bool(logtostdout);
+
+// Set whether log messages go to stdout in addition to logfiles.
+DECLARE_bool(alsologtostdout);
+
+// Set color messages logged to stdout (if supported by terminal).
+DECLARE_bool(colorlogtostdout);
+
+// Log messages at a level >= this flag are automatically sent to
+// stdout in addition to log files.
+DECLARE_int32(stdoutthreshold);
 
 // Set whether the log prefix should be prepended to each line of output.
 DECLARE_bool(log_prefix);
@@ -478,7 +491,7 @@ DECLARE_bool(log_utc_time);
 #undef DECLARE_VARIABLE
 #undef DECLARE_bool
 #undef DECLARE_int32
-#undef DECLARE_unt32
+#undef DECLARE_uint32
 #undef DECLARE_string
 #endif
 
