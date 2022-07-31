@@ -152,7 +152,7 @@
 	fallback whenever possible, at the expense of some
 	runtime as more processing is required to check.
 */
-/* #define MURASTER_CONFIG_GREY_FALLBACK 1 */
+#define MURASTER_CONFIG_GREY_FALLBACK 2
 
 /*
 	END OF CONFIGURATION SECTION
@@ -1230,9 +1230,9 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 				if (lowmemory)
 					fz_enable_device_hints(ctx, test_dev, FZ_NO_CACHE);
 				if (list)
-					fz_run_display_list(ctx, list, test_dev, &fz_identity, &fz_infinite_rect, &cookie);
+					fz_run_display_list(ctx, list, test_dev, fz_identity, fz_infinite_rect, &cookie);
 				else
-					fz_run_page(ctx, page, test_dev, &fz_identity, &cookie);
+					fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
 				fz_close_device(ctx, test_dev);
 			}
 			fz_always(ctx)
