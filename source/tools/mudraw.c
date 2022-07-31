@@ -2920,7 +2920,7 @@ int main(int argc, const char** argv)
 		fz_set_use_document_css(ctx, layout_use_doc_css);
 
 		/* Determine output type */
-		if (band_height < 0)
+		if (band_height <= 0)
 		{
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Bandheight must be > 0");
 		}
