@@ -371,7 +371,7 @@ my_getline(FILE *file, int *linecounter_ref)
 }
 
 static char *
-expand_template_variables(const char* line, int linecounter, int argc, const char** argv, int datalinecounter)
+expand_template_variables(const char* line, int linecounter, int argc, const char** argv, int datalinecounter, const char *scriptfilename, const char *dataspecfilename)
 {
 	if (line == NULL)
 		return NULL;
@@ -427,6 +427,44 @@ expand_template_variables(const char* line, int linecounter, int argc, const cha
 			d += l;
 			space -= l;
 		}
+		else if (strncmp(m, "dataspecdir", 11) == 0 || strncmp(m, "{dataspecdir}", 13) == 0)
+		{
+			size_t skip_dist = (strncmp(m, "dataspecdir", 11) == 0 ? 11 : 13);
+			// `%dataspecdir`: print the directory part of the (absolute) data spec file path `dataspecfilename`.
+			const char* path_end = strrchr(dataspecfilename, '/');
+			if (!path_end)
+				path_end = strrchr(dataspecfilename, '\\');
+			// do NOT include the terminating / path sep, UNLESS we're looking at the UNIX root directory itself:
+			if (path_end == dataspecfilename)
+				path_end++;
+			size_t pathlen = path_end - dataspecfilename;
+			if (pathlen >= space)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+			strncpy(d, dataspecfilename, pathlen);
+			d[pathlen] = 0;
+			s = m + skip_dist;
+			d += pathlen;
+			space -= pathlen;
+		}
+		else if (strncmp(m, "scriptdir", 9) == 0 || strncmp(m, "{scriptdir}", 11) == 0)
+		{
+			size_t skip_dist = (strncmp(m, "scriptdir", 9) == 0 ? 9 : 11);
+			// `%scriptdir`: print the directory part of the (absolute) script file path `scriptfilename`.
+			const char* path_end = strrchr(scriptfilename, '/');
+			if (!path_end)
+				path_end = strrchr(scriptfilename, '\\');
+			// do NOT include the terminating / path sep, UNLESS we're looking at the UNIX root directory itself:
+			if (path_end == scriptfilename)
+				path_end++;
+			size_t pathlen = path_end - scriptfilename;
+			if (pathlen >= space)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+			strncpy(d, scriptfilename, pathlen);
+			d[pathlen] = 0;
+			s = m + skip_dist;
+			d += pathlen;
+			space -= pathlen;
+		}
 		else if (!*m || !strchr("123456789", *m))
 		{
 			// when marker isn't immediately followed by a decimal number (without leading zeroes),
@@ -455,6 +493,7 @@ expand_template_variables(const char* line, int linecounter, int argc, const cha
 			space -= l;
 		}
 	}
+
 	return getline_buffer;
 }
 
@@ -1115,7 +1154,7 @@ bulktest_main(int argc, const char **argv)
 				if (script_is_template)
 				{
 					// process another line = record from the datafeed.
-					// skip comment and eempty lines in there...
+					// skip comment and empty lines in there...
 					char* dataline = NULL;
 					do
 					{
@@ -1140,10 +1179,7 @@ bulktest_main(int argc, const char **argv)
 					bool report_time = true;
 					char* line = my_getline(script, &linecounter);
 
-					if (script_is_template)
-					{
-						line = expand_template_variables(line, linecounter, template_argc, template_argv, datalinecounter);
-					}
+					line = expand_template_variables(line, linecounter, template_argc, template_argv, datalinecounter, scriptname, datafilename);
 
 					line_command = line;
 					rv = 0;
@@ -1290,23 +1326,6 @@ bulktest_main(int argc, const char **argv)
 						char path[LONGLINE];
 
 						unescape_string(path, line);
-
-						// expand dir macro {SCRIPTDIR} if it exists:
-						// this one is assumed to bee at the START of the path as it will represent an *absolute* path itself:
-						const char* m = strstr(path, "{SCRIPTDIR}");
-						if (m) {
-							char buf[LONGLINE];
-							char* l;
-							char* k;
-
-							strncpy(buf, scriptname, sizeof(buf));
-							k = strrchr(buf, '/');
-							l = strrchr(buf, '\\'); // Windows paths...
-							if (l > k) k = l;
-							if (k) *k = 0;
-							strncat(buf, m + 11, sizeof(buf));
-							strncpy(path, buf, sizeof(path));
-						}
 
 						fz_chdir(ctx, path);
 					}
