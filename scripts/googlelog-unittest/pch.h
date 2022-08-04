@@ -6,6 +6,7 @@
 #pragma once
 
 #include "gtest/gtest.h"
+#include <glog/logging.h>
 
 int run_all_tests_glog(void);
 

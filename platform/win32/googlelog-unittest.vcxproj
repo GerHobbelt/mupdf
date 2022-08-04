@@ -38,20 +38,20 @@
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
@@ -109,7 +109,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -141,7 +141,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -150,12 +150,12 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_OVERRIDE_FOREIGN_SEVERITIES;BUILD_MONOLITHIC;BUILDING_GLOG_TESTS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -178,10 +178,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <Optimization>Custom</Optimization>
-      <PreprocessorDefinitions>X64;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_OVERRIDE_FOREIGN_SEVERITIES;BUILD_MONOLITHIC;BUILDING_GLOG_TESTS;X64;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -206,9 +206,9 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_OVERRIDE_FOREIGN_SEVERITIES;BUILD_MONOLITHIC;BUILDING_GLOG_TESTS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -232,9 +232,9 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <PreprocessorDefinitions>X64;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLOG_OVERRIDE_FOREIGN_SEVERITIES;BUILD_MONOLITHIC;BUILDING_GLOG_TESTS;X64;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>.;../../scripts/libglog;../../thirdparty/owemdjee/glog/src;../../thirdparty/owemdjee/glog/src/windows;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/libgflags/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -256,8 +256,60 @@
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
   </Target>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_immediately_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_with_absolute_prefix_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_with_relative_prefix_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/demangle_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_custom_prefix_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest10.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/mock-log_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/signalhandler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/stacktrace_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/stl_logging_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/symbolize_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/utilities_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/windows/port.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/commandlineflags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/googleinit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/demangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/glog/log_severity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/glog/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/googletest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/mock-log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_generic-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_libunwind-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_powerpc-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_unwind-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_windows-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/stacktrace_x86-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/symbolize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/utilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/port.h" />
+    <Text Include="../../thirdparty/owemdjee/glog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glog/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/glog/glog-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/glog-modules.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/libglog.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/demangle_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/demangle_unittest.txt" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/glog/logging.h.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/glog/raw_logging.h.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/glog/stl_logging.h.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/glog/vlog_is_on.h.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/logging_striplog_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/package_config_unittest/working_config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glog/src/signalhandler_unittest.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

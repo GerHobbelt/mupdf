@@ -100,8 +100,7 @@
 //	 one needs to supply the exact --vmodule pattern that applied to them.
 //       (If no --vmodule pattern applied to them
 //       the value of FLAGS_v will continue to control them.)
-extern GOOGLE_GLOG_DLL_DECL int SetVLOGLevel(const char* module_pattern,
-                                             int log_level);
+extern GOOGLE_GLOG_DLL_DECL int SetVLOGLevel(const char* module_pattern, int log_level);
 
 // Various declarations needed for VLOG_IS_ON above: =========================
 

@@ -1451,7 +1451,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/apng.cc">
       <Filter>Source Files\lib\extras\enc</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/encode.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/encode_extras.cc">
       <Filter>Source Files\lib\extras\enc</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/extras/enc/exr.cc">
@@ -1583,7 +1583,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/compressed_dc.cc">
       <Filter>Source Files\lib\jxl</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve_separable5.cc">
+      <Filter>Source Files\lib\jxl</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve_separable7.cc">
+      <Filter>Source Files\lib\jxl</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve_slow.cc">
+      <Filter>Source Files\lib\jxl</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve_symmetric3.cc">
+      <Filter>Source Files\lib\jxl</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve_symmetric5.cc">
       <Filter>Source Files\lib\jxl</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/convolve_test.cc">
@@ -1707,9 +1719,6 @@
       <Filter>Source Files\lib\jxl</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_external_image_test.cc">
-      <Filter>Source Files\lib\jxl</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_fast_heuristics.cc">
       <Filter>Source Files\lib\jxl</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/enc_file.cc">
@@ -2849,7 +2858,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/dot/dot_test.cc">
       <Filter>Source Files\third_party\highway\hwy\contrib\dot</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/image/image.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/image/hwy_image.cc">
       <Filter>Source Files\third_party\highway\hwy\contrib\image</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/third_party/highway/hwy/contrib/image/image_test.cc">
@@ -3728,13 +3737,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjpeg_hdr.cc">
       <Filter>Source Files\tools</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_fuzzer.cc">
       <Filter>Source Files\tools</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_main.cc">
-      <Filter>Source Files\tools</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl_ng_main.cc">
       <Filter>Source Files\tools</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.cc">
@@ -3774,6 +3780,9 @@
       <Filter>Source Files\tools</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_fuzzer.cc">
+      <Filter>Source Files\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_fuzzer_test.cc">
       <Filter>Source Files\tools</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/jpeg-xl/tools/djxl_main.cc">
@@ -4608,6 +4617,9 @@
       <Filter>Header Files\lib\jxl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/splines.h">
+      <Filter>Header Files\lib\jxl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/test_image.h">
       <Filter>Header Files\lib\jxl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/lib/jxl/test_utils.h">
@@ -6049,9 +6061,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/box/box.h">
       <Filter>Header Files\tools\box</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cjxl.h">
-      <Filter>Header Files\tools</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/cmdline.h">
       <Filter>Header Files\tools</Filter>

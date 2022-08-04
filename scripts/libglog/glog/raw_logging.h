@@ -33,8 +33,8 @@
 // acquire any locks, and can therefore be used by low-level memory
 // allocation and synchronization code.
 
-#ifndef BASE_RAW_LOGGING_H_
-#define BASE_RAW_LOGGING_H_
+#ifndef GLOG_RAW_LOGGING_H
+#define GLOG_RAW_LOGGING_H
 
 #include <ctime>
 
@@ -133,7 +133,7 @@ namespace google {
 #define RAW_LOG_FATAL(...) \
   do { \
     google::RawLogStub__(0, __VA_ARGS__);        \
-    exit(1); \
+    exit(EXIT_FAILURE); \
   } while (0)
 #endif // STRIP_LOG <= 3
 
@@ -187,4 +187,4 @@ GOOGLE_GLOG_DLL_DECL void RawLog__(LogSeverity severity,
 
 }
 
-#endif  // BASE_RAW_LOGGING_H_
+#endif  // GLOG_RAW_LOGGING_H

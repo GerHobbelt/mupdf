@@ -1,4 +1,4 @@
-// Copyright (c) 1999, Google Inc.
+// Copyright (c) 2022, Google Inc.
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -133,6 +133,14 @@ typedef __int64 int64;
 typedef unsigned __int64 uint64;
 #else
 #error Do not know how to define a 32-bit integer quantity on your system
+#endif
+
+#if 1
+typedef ptrdiff_t ssize_t;
+#endif
+
+#if 1
+typedef int mode_t;
 #endif
 
 typedef double WallTime;
@@ -388,6 +396,32 @@ typedef void(*CustomPrefixCallback)(std::ostream& s, const LogMessageInfo& l, vo
 // synchronized.  Hence, use caution when comparing the low bits of
 // timestamps from different machines.
 
+#pragma push_macro("DECLARE_VARIABLE")
+#pragma push_macro("DECLARE_bool")
+#pragma push_macro("DECLARE_string")
+#pragma push_macro("DECLARE_int32")
+#pragma push_macro("DECLARE_uint32")
+
+#ifdef DECLARE_VARIABLE
+#undef DECLARE_VARIABLE
+#endif
+
+#ifdef DECLARE_bool
+#undef DECLARE_bool
+#endif
+
+#ifdef DECLARE_string
+#undef DECLARE_string
+#endif
+
+#ifdef DECLARE_int32
+#undef DECLARE_int32
+#endif
+
+#ifdef DECLARE_uint32
+#undef DECLARE_uint32
+#endif
+
 #ifndef DECLARE_VARIABLE
 #define MUST_UNDEF_GFLAGS_DECLARE_MACROS
 #define DECLARE_VARIABLE(type, shorttype, name, tn)                     \
@@ -422,19 +456,6 @@ typedef void(*CustomPrefixCallback)(std::ostream& s, const LogMessageInfo& l, vo
 // Set whether appending a timestamp to the log file name
 DECLARE_bool(timestamp_in_logfile_name);
 
-// Set whether log messages go to stderr instead of logfiles
-DECLARE_bool(logtostderr);
-
-// Set whether log messages go to stderr in addition to logfiles.
-DECLARE_bool(alsologtostderr);
-
-// Set color messages logged to stderr (if supported by terminal).
-DECLARE_bool(colorlogtostderr);
-
-// Log messages at a level >= this flag are automatically sent to
-// stderr in addition to log files.
-DECLARE_int32(stderrthreshold);
-
 // Set whether log messages go to stdout instead of logfiles
 DECLARE_bool(logtostdout);
 
@@ -448,8 +469,24 @@ DECLARE_bool(colorlogtostdout);
 // stdout in addition to log files.
 DECLARE_int32(stdoutthreshold);
 
+// Set whether log messages go to stderr instead of logfiles
+DECLARE_bool(logtostderr);
+
+// Set whether log messages go to stderr in addition to logfiles.
+DECLARE_bool(alsologtostderr);
+
+// Set color messages logged to stderr (if supported by terminal).
+DECLARE_bool(colorlogtostderr);
+
+// Log messages at a level >= this flag are automatically sent to
+// stderr in addition to log files.
+DECLARE_int32(stderrthreshold);
+
 // Set whether the log prefix should be prepended to each line of output.
 DECLARE_bool(log_prefix);
+
+// Set whether the year should be included in the log prefix.
+DECLARE_bool(log_year_in_prefix);
 
 // Log messages at a level <= this flag are buffered.
 // Log messages at a higher level are flushed immediately.
@@ -1847,8 +1884,7 @@ GOOGLE_GLOG_DLL_DECL void ReprintFatalMessage();
 // be racing with other writers, this approach has the potential to
 // lose very small amounts of data. For security, only follow symlinks
 // if the path is /proc/self/fd/*
-GOOGLE_GLOG_DLL_DECL void TruncateLogFile(const char *path,
-                                          uint64 limit, uint64 keep);
+GOOGLE_GLOG_DLL_DECL void TruncateLogFile(const char* path, uint64 limit, uint64 keep);
 
 // Truncate stdout and stderr if they are over the value specified by
 // --max_log_size; keep the final 1MB.  This function has the same
@@ -1966,11 +2002,8 @@ class GOOGLE_GLOG_DLL_DECL NullStreamFatal : public NullStream {
   NullStreamFatal(const char* file, int line, const CheckOpString& result) :
       NullStream(file, line, result) { }
   ~NullStreamFatal() {
-#if 0
-	  _exit(1);
-#else
 	  //throw std::runtime_error("NullStreamFatal: aborting");
-#endif
+      logging_fail();
   }
 };
 
@@ -2006,4 +2039,10 @@ GOOGLE_GLOG_DLL_DECL void InstallFailureWriter(
 #pragma pop_macro("GFLAGS_DLL_DECLARE_FLAG")
 #endif // defined(GLOG_GFLAGS_DLL_DECLARE_FLAG_WAS_DEFINED)
 
-#endif // _LOGGING_H_
+#pragma pop_macro("DECLARE_VARIABLE")
+#pragma pop_macro("DECLARE_bool")
+#pragma pop_macro("DECLARE_string")
+#pragma pop_macro("DECLARE_int32")
+#pragma pop_macro("DECLARE_uint32")
+
+#endif // GLOG_LOGGING_H

@@ -491,7 +491,7 @@ char_callback(fz_context *ctx, void *arg, int unicode,
 	fz_ocr_device *ocr = (fz_ocr_device *)arg;
 	fz_rect bbox = { word_bbox[0]-1, word_bbox[1]-1, word_bbox[2]+1, word_bbox[3]+1 };
 
-    // TODO: unicode == 0xFFFD (Bad = Runeerror) (?)
+    // TODO: unicode == 0xFFFD (Bad = RuneError) (?)
 
 	if (bbox.x0 != ocr->word_bbox.x0 ||
 		bbox.y0 != ocr->word_bbox.y0 ||

@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\scripts\googletest\googlemock-demos-main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\googletest\googlemock\test\gmock-matchers-arithmetic_test.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\googletest\googlemock\test\gmock-matchers-comparisons_test.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\googletest\googlemock\test\gmock-matchers-containers_test.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\googletest\googlemock\test\gmock-matchers-misc_test.cc" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googlemock/include/gmock/gmock-actions.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googlemock/include/gmock/gmock-cardinalities.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googlemock/include/gmock/gmock-function-mocker.h" />
@@ -37,7 +41,6 @@
     <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googlemock/test/gmock-cardinalities_test.cc" />
     <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googlemock/test/gmock-function-mocker_test.cc" />
     <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googlemock/test/gmock-internal-utils_test.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googlemock/test/gmock-matchers_test.cc" />
     <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googlemock/test/gmock-more-actions_test.cc" />
     <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googlemock/test/gmock-nice-strict_test.cc" />
     <ClCompile Include="..\..\thirdparty\owemdjee\googletest/googlemock/test/gmock-port_test.cc" />
@@ -75,6 +78,7 @@
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/src/gtest-internal-inl.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/test/googletest-param-test-test.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\googletest/googletest/test/gtest-typed-test_test.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\googletest\googlemock\test\gmock-matchers_test.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="libgoogletest.vcxproj">
@@ -115,20 +119,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -142,7 +146,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -174,7 +178,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -183,7 +187,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -341,8 +345,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
