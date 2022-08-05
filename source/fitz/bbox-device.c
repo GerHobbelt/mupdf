@@ -42,6 +42,8 @@ fz_bbox_add_rect(fz_context *ctx, fz_device *dev, fz_rect rect, int clip)
 {
 	fz_bbox_device *bdev = (fz_bbox_device*)dev;
 
+	assert(0 <= bdev->top);
+	assert(bdev->top <= STACK_SIZE);
 	if (0 < bdev->top && bdev->top <= STACK_SIZE)
 	{
 		rect = fz_intersect_rect(rect, bdev->stack[bdev->top-1]);
@@ -54,6 +56,7 @@ fz_bbox_add_rect(fz_context *ctx, fz_device *dev, fz_rect rect, int clip)
 	{
 		bdev->stack[bdev->top-1] = rect;
 	}
+	assert(bdev->top <= STACK_SIZE);
 }
 
 static void
