@@ -223,6 +223,7 @@ EXPORTS
 	fz_count_chapters
 	fz_count_pages
 	fz_create_link
+	fz_delete_link
 	fz_document_output_intent
 	fz_document_supports_accelerator
 	fz_drop_document
@@ -363,6 +364,8 @@ EXPORTS
 	fz_new_bitmap
 	fz_new_bitmap_from_pixmap
 	fz_new_bitmap_from_pixmap_band
+	fz_append_base64
+	fz_append_base64_buffer
 	fz_append_bits
 	fz_append_bits_pad
 	fz_append_buffer
@@ -792,6 +795,8 @@ EXPORTS
 	fz_make_link_dest_none
 	fz_make_link_dest_xyz
 	fz_new_link_of_size
+	fz_set_link_rect
+	fz_set_link_uri
 	fz_log
 	fz_log_module
 	fz_new_log_for_module
@@ -839,6 +844,7 @@ EXPORTS
 	fz_vsnprintf
 	fz_write_base64
 	fz_write_base64_buffer
+	fz_write_buffer
 	fz_write_byte
 	fz_write_char
 	fz_write_data
@@ -1090,6 +1096,8 @@ EXPORTS
 	fz_tree_insert
 	fz_tree_lookup
 
+	fz_append_image_as_data_uri
+	fz_append_pixmap_as_data_uri
 	fz_new_buffer_from_display_list
 	fz_new_buffer_from_page
 	fz_new_buffer_from_page_number
@@ -1343,6 +1351,7 @@ EXPORTS
 	pdf_create_annot_raw
 	pdf_create_link
 	pdf_delete_annot
+	pdf_delete_link
 	pdf_dirty_annot
 	pdf_drop_annot
 	pdf_embedded_file_stream
@@ -1368,6 +1377,7 @@ EXPORTS
 	pdf_new_action_from_link
 	pdf_new_destination_from_link
 	pdf_new_display_list_from_annot
+	pdf_new_link
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
 	pdf_next_annot
