@@ -2931,12 +2931,14 @@ int main(int argc, const char** argv)
 
 		fz_set_use_document_css(ctx, layout_use_doc_css);
 
-		/* Determine output type */
-		if (band_height <= 0)
+		/* band_height can be legally 0 when num_workers = 0 */
+		if (band_height < 0)
 		{
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Bandheight must be > 0");
 		}
+		assert(num_workers > 0 ? band_height != 0 : 1);
 
+		/* Determine output type */
 		output_format = OUT_PNG;
 		if (format)
 		{
