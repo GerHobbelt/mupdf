@@ -284,7 +284,7 @@ ps_write_band(fz_context *ctx, fz_band_writer *writer_, int stride, int band_sta
 		writer->stream.next_out = writer->output;
 		writer->stream.avail_out = writer->output_size <= UINT_MAX ? (uInt)writer->output_size : UINT_MAX;
 
-		err = deflate(&writer->stream, (finalband && remain == writer->stream.avail_in) ? Z_FINISH : Z_NO_FLUSH);
+		err = zng_deflate(&writer->stream, (finalband && remain == writer->stream.avail_in) ? Z_FINISH : Z_NO_FLUSH);
 		if (err != Z_OK && err != Z_STREAM_END)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "compression error %d", err);
 

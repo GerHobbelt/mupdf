@@ -340,7 +340,7 @@ static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_
 	size_t newbufsize;
 	int err;
 
-	newbufsize = n >= UINT_MAX ? UINT_MAX : deflateBound(&state->z, n);
+	newbufsize = n >= UINT_MAX ? UINT_MAX : zng_deflateBound(&state->z, n);
 	newbufsize = newbufsize >= UINT_MAX ? UINT_MAX : newbufsize;
 
 	if (state->buf == NULL)
