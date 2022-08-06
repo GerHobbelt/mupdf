@@ -2,7 +2,7 @@
 #ifndef GOOGLE_GLOG_DLL_DECL_H
 #define GOOGLE_GLOG_DLL_DECL_H
 
-#ifdef GLOG_STATIC_DEFINE
+#if defined(GLOG_STATIC_DEFINE) || !defined(GLOG_DYNAMIC_DEFINE)
 #  define GOOGLE_GLOG_DLL_DECL
 #  define GLOG_NO_EXPORT
 #else

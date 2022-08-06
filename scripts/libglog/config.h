@@ -199,6 +199,9 @@
 /* Check whether C++11 atomic is available */
 #define HAVE_CXX11_ATOMIC 1
 
+/* Check whether C++11 chrono is available */
+#define HAVE_CXX11_CHRONO 1
+
 /* Check whether C++11 nullptr_t is available */
 #define HAVE_CXX11_NULLPTR_T 1
 
@@ -222,6 +225,9 @@
 #define _START_GOOGLE_NAMESPACE_ namespace GOOGLE_NAMESPACE {
 
 #endif
+
+/* Replacement for deprecated syscall(SYS_gettid) on macOS. */
+#undef HAVE_PTHREAD_THREADID_NP 
 
 #define GLOG_NO_ABBREVIATED_SEVERITIES 1
 

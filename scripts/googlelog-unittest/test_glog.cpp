@@ -69,8 +69,6 @@ int run_all_tests_glog(void)
 	int lcl_argc;
 	const char** lcl_argv;
 	init_test_argv(lcl_argc, lcl_argv);
-	rv |= glog_package_config_unittest_main(lcl_argc, lcl_argv);
-	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_demangle_unittest_main(lcl_argc, lcl_argv);
 	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_logging_custom_prefix_unittest_main(lcl_argc, lcl_argv);
@@ -82,6 +80,19 @@ int run_all_tests_glog(void)
 	rv |= glog_symbolize_unittest_main(lcl_argc, lcl_argv);
 	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_utilities_unittest_main(lcl_argc, lcl_argv);
+
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_logging_striptest0_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_logging_striptest2_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_logging_striptest10_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_signalhandler_unittest_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_stacktrace_unittest_main(lcl_argc, lcl_argv);
+	init_test_argv(lcl_argc, lcl_argv);
+	rv |= glog_stl_logging_unittest_main(lcl_argc, lcl_argv);
 
 	return rv;
 }

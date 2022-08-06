@@ -65,17 +65,8 @@
 
 #include <glog/platform.h>
 
-#if 0
+#if 1
 #include <glog/export.h>
-#endif
-
-// Annoying stuff for windows -- makes sure clients can import these functions
-#ifndef GOOGLE_GLOG_DLL_DECL
-# if defined(_WIN32) && !defined(__CYGWIN__)
-#   define GOOGLE_GLOG_DLL_DECL  __declspec(dllimport)
-# else
-#   define GOOGLE_GLOG_DLL_DECL
-# endif
 #endif
 
 // We care a lot about number of bits things take up.  Unfortunately,
@@ -523,6 +514,9 @@ DECLARE_bool(stop_logging_if_full_disk);
 // Use UTC time for logging
 DECLARE_bool(log_utc_time);
 
+// max rolling file number; 0 disabled the feature
+DECLARE_int32(rolling_file_number);
+
 #ifdef MUST_UNDEF_GFLAGS_DECLARE_MACROS
 #undef MUST_UNDEF_GFLAGS_DECLARE_MACROS
 #undef DECLARE_VARIABLE
@@ -676,14 +670,15 @@ GOOGLE_GLOG_DLL_DECL bool IsGoogleLoggingInitialized();
 // Shutdown google's logging library.
 GOOGLE_GLOG_DLL_DECL void ShutdownGoogleLogging();
 
-#if defined(__GNUC__)
-typedef void (*logging_fail_func_t)() __attribute__((noreturn));
-#else
 typedef void (*logging_fail_func_t)();
-#endif
+
+extern GOOGLE_GLOG_DLL_DECL logging_fail_func_t g_logging_fail_func;
 
 // Install a function which will be called after LOG(FATAL).
 GOOGLE_GLOG_DLL_DECL void InstallFailureFunction(logging_fail_func_t fail_func);
+
+GOOGLE_GLOG_DLL_DECL logging_fail_func_t GetInstalledFailureFunction(void);
+GOOGLE_GLOG_DLL_DECL bool HasInstalledCustomFailureFunction(void);
 
 // Enable/Disable old log cleaner.
 GOOGLE_GLOG_DLL_DECL void EnableLogCleaner(unsigned int overdue_days);
@@ -1080,22 +1075,22 @@ PLOG_IF(FATAL, GOOGLE_PREDICT_BRANCH_NOT_TAKEN((invocation) == -1))    \
 #define LOG_PREVIOUS_TIME LOG_EVERY_N_VARNAME(previousTime_, __LINE__)
 
 #if defined(__has_feature)
-#define _GLOG_HAS_FEATURE(...) __has_feature(__VA_ARGS__)
+#  if __has_feature(thread_sanitizer)
+#    define GLOG_SANITIZE_THREAD 1
+#  endif
+#endif
+
+#if !defined(GLOG_SANITIZE_THREAD) && defined(__SANITIZE_THREAD__) && __SANITIZE_THREAD__
+#  define GLOG_SANITIZE_THREAD 1
+#endif
+
+#if defined(GLOG_SANITIZE_THREAD)
+#define GLOG_IFDEF_THREAD_SANITIZER(X) X
 #else
-#define _GLOG_HAS_FEATURE(...) 0
+#define GLOG_IFDEF_THREAD_SANITIZER(X)
 #endif
 
-#if _GLOG_HAS_FEATURE(thread_sanitizer) && defined(__SANITIZE_THREAD__) && __SANITIZE_THREAD__
-#define _GLOG_SANITIZE_THREAD 1
-#endif
-
-#if defined(_GLOG_SANITIZE_THREAD)
-#define _GLOG_IFDEF_THREAD_SANITIZER(X) X
-#else
-#define _GLOG_IFDEF_THREAD_SANITIZER(X)
-#endif
-
-#if defined(_GLOG_SANITIZE_THREAD)
+#if defined(GLOG_SANITIZE_THREAD)
 } // namespace google
 
 // We need to identify the static variables as "benign" races
@@ -1114,9 +1109,9 @@ namespace google {
 #define SOME_KIND_OF_LOG_EVERY_T(severity, seconds) \
   GLOG_CONSTEXPR std::chrono::nanoseconds LOG_TIME_PERIOD = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::duration<double>(seconds)); \
   static std::atomic<int64> LOG_PREVIOUS_TIME_RAW; \
-  _GLOG_IFDEF_THREAD_SANITIZER( \
+  GLOG_IFDEF_THREAD_SANITIZER( \
           AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_TIME_PERIOD, sizeof(int64), "")); \
-  _GLOG_IFDEF_THREAD_SANITIZER( \
+  GLOG_IFDEF_THREAD_SANITIZER( \
           AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_PREVIOUS_TIME_RAW, sizeof(int64), "")); \
   const auto LOG_CURRENT_TIME = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()); \
   const auto LOG_PREVIOUS_TIME = LOG_PREVIOUS_TIME_RAW.load(std::memory_order_relaxed); \
@@ -1159,9 +1154,9 @@ namespace google {
 
 #ifdef HAVE_CXX11_ATOMIC
 #define SOME_KIND_OF_LOG_EVERY_N(severity, n, what_to_do) \
-  static std::atomic<unsigned> LOG_OCCURRENCES(0), LOG_OCCURRENCES_MOD_N(0); \
-  _GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
-  _GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES_MOD_N, sizeof(int), "")); \
+  static std::atomic<unsigned int> LOG_OCCURRENCES(0), LOG_OCCURRENCES_MOD_N(0); \
+  GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
+  GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES_MOD_N, sizeof(int), "")); \
   ++LOG_OCCURRENCES; \
   if (++LOG_OCCURRENCES_MOD_N > n) LOG_OCCURRENCES_MOD_N -= n; \
   if (LOG_OCCURRENCES_MOD_N == 1) \
@@ -1170,9 +1165,9 @@ namespace google {
         &what_to_do).stream()
 
 #define SOME_KIND_OF_LOG_IF_EVERY_N(severity, condition, n, what_to_do) \
-  static std::atomic<unsigned> LOG_OCCURRENCES(0), LOG_OCCURRENCES_MOD_N(0); \
-  _GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
-  _GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES_MOD_N, sizeof(int), "")); \
+  static std::atomic<unsigned int> LOG_OCCURRENCES(0), LOG_OCCURRENCES_MOD_N(0); \
+  GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
+  GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES_MOD_N, sizeof(int), "")); \
   ++LOG_OCCURRENCES; \
   if ((condition) && \
       ((LOG_OCCURRENCES_MOD_N=(LOG_OCCURRENCES_MOD_N + 1) % n) == (1 % n))) \
@@ -1181,9 +1176,9 @@ namespace google {
                  &what_to_do).stream()
 
 #define SOME_KIND_OF_PLOG_EVERY_N(severity, n, what_to_do) \
-  static std::atomic<unsigned> LOG_OCCURRENCES(0), LOG_OCCURRENCES_MOD_N(0); \
-  _GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
-  _GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES_MOD_N, sizeof(int), "")); \
+  static std::atomic<unsigned int> LOG_OCCURRENCES(0), LOG_OCCURRENCES_MOD_N(0); \
+  GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
+  GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES_MOD_N, sizeof(int), "")); \
   ++LOG_OCCURRENCES; \
   if (++LOG_OCCURRENCES_MOD_N > n) LOG_OCCURRENCES_MOD_N -= n; \
   if (LOG_OCCURRENCES_MOD_N == 1) \
@@ -1192,8 +1187,8 @@ namespace google {
         &what_to_do).stream()
 
 #define SOME_KIND_OF_LOG_FIRST_N(severity, n, what_to_do) \
-  static std::atomic<unsigned> LOG_OCCURRENCES(0); \
-  _GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
+  static std::atomic<unsigned int> LOG_OCCURRENCES(0); \
+  GLOG_IFDEF_THREAD_SANITIZER(AnnotateBenignRaceSized(__FILE__, __LINE__, &LOG_OCCURRENCES, sizeof(int), "")); \
   if (LOG_OCCURRENCES <= n) \
     ++LOG_OCCURRENCES; \
   if (LOG_OCCURRENCES <= n) \
@@ -1249,7 +1244,7 @@ namespace google {
 #else
 
 #define SOME_KIND_OF_LOG_EVERY_N(severity, n, what_to_do) \
-  static unsigned LOG_OCCURRENCES = 0, LOG_OCCURRENCES_MOD_N = 0; \
+  static unsigned int LOG_OCCURRENCES = 0, LOG_OCCURRENCES_MOD_N = 0; \
   __sync_add_and_fetch(&LOG_OCCURRENCES, 1); \
   if (__sync_add_and_fetch(&LOG_OCCURRENCES_MOD_N, 1) > n) \
     __sync_sub_and_fetch(&LOG_OCCURRENCES_MOD_N, n); \
@@ -1259,7 +1254,7 @@ namespace google {
         &what_to_do).stream()
 
 #define SOME_KIND_OF_LOG_IF_EVERY_N(severity, condition, n, what_to_do) \
-  static unsigned LOG_OCCURRENCES = 0, LOG_OCCURRENCES_MOD_N = 0; \
+  static unsigned int LOG_OCCURRENCES = 0, LOG_OCCURRENCES_MOD_N = 0; \
   __sync_add_and_fetch(&LOG_OCCURRENCES, 1); \
   if ((condition) && \
       (__sync_add_and_fetch(&LOG_OCCURRENCES_MOD_N, 1) || true) && \
@@ -1270,7 +1265,7 @@ namespace google {
                  &what_to_do).stream()
 
 #define SOME_KIND_OF_PLOG_EVERY_N(severity, n, what_to_do) \
-  static unsigned LOG_OCCURRENCES = 0, LOG_OCCURRENCES_MOD_N = 0; \
+  static unsigned int LOG_OCCURRENCES = 0, LOG_OCCURRENCES_MOD_N = 0; \
   __sync_add_and_fetch(&LOG_OCCURRENCES, 1); \
   if (__sync_add_and_fetch(&LOG_OCCURRENCES_MOD_N, 1) > n) \
     __sync_sub_and_fetch(&LOG_OCCURRENCES_MOD_N, n); \
@@ -1280,7 +1275,7 @@ namespace google {
         &what_to_do).stream()
 
 #define SOME_KIND_OF_LOG_FIRST_N(severity, n, what_to_do) \
-  static unsigned LOG_OCCURRENCES = 0; \
+  static unsigned int LOG_OCCURRENCES = 0; \
   if (LOG_OCCURRENCES <= n) \
     __sync_add_and_fetch(&LOG_OCCURRENCES, 1); \
   if (LOG_OCCURRENCES <= n) \
@@ -1594,7 +1589,7 @@ public:
   // A special constructor used for check failures
   LogMessage(const char* file, int line, const CheckOpString& result);
 
-  __declspec(nothrow) void __FlushAndFailAtEnd() throw();
+  void __FlushAndFailAtEnd();
 
   ~LogMessage();
 
@@ -1613,7 +1608,7 @@ public:
   void SendToSyslogAndLog();  // Actually dispatch to syslog and the logs
 
   // Call abort() or similar to perform LOG(FATAL) crash.
-  static void __declspec(noreturn) Fail();
+  static void Fail();
 
   std::ostream& stream();
 
@@ -1664,8 +1659,9 @@ class GOOGLE_GLOG_DLL_DECL LogMessageFatal : public LogMessage {
  public:
   LogMessageFatal(const char* file, int line);
   LogMessageFatal(const char* file, int line, const CheckOpString& result);
-  /* __declspec(noreturn) */ ~LogMessageFatal();
-  __declspec(nothrow) void __FlushAndFailAtEnd();
+  ~LogMessageFatal();
+ protected:
+  __declspec(noreturn) void __FlushAndFailAtEnd();
 };
 
 // A non-macro interface to the log facility; (useful
@@ -1729,7 +1725,6 @@ GOOGLE_GLOG_DLL_DECL std::ostream& operator<<(std::ostream &os,
 // Derived class for PLOG*() above.
 class GOOGLE_GLOG_DLL_DECL ErrnoLogMessage : public LogMessage {
  public:
-
   ErrnoLogMessage(const char* file, int line, LogSeverity severity, uint64 ctr,
                   void (LogMessage::*send_method)());
 
@@ -1856,8 +1851,8 @@ GOOGLE_GLOG_DLL_DECL void SetEmailLogging(LogSeverity min_severity,
 
 // A simple function that sends email. dest is a commma-separated
 // list of addressess.  Thread-safe.
-GOOGLE_GLOG_DLL_DECL bool SendEmail(const char *dest,
-                                    const char *subject, const char *body);
+GOOGLE_GLOG_DLL_DECL bool SendEmail(const char *dest, const char *subject, 
+                           const char* body);
 
 GOOGLE_GLOG_DLL_DECL const std::vector<std::string>& GetLoggingDirectories();
 
@@ -1867,7 +1862,7 @@ GOOGLE_GLOG_DLL_DECL const std::vector<std::string>& GetLoggingDirectories();
 void TestOnly_ClearLoggingDirectoriesList();
 
 // Returns a set of existing temporary directories, which will be a
-// subset of the directories returned by GetLogginDirectories().
+// subset of the directories returned by GetLoggingDirectories().
 // Thread-safe.
 GOOGLE_GLOG_DLL_DECL void GetExistingTempDirectories(
     std::vector<std::string>* list);
@@ -1895,7 +1890,7 @@ GOOGLE_GLOG_DLL_DECL void TruncateStdoutStderr();
 // Thread-safe.
 GOOGLE_GLOG_DLL_DECL const char* GetLogSeverityName(LogSeverity severity);
 
-GOOGLE_GLOG_DLL_DECL __declspec(noreturn) void logging_fail();
+GOOGLE_GLOG_DLL_DECL void logging_fail();
 
 
 // ---------------------------------------------------------------------
@@ -2002,9 +1997,10 @@ class GOOGLE_GLOG_DLL_DECL NullStreamFatal : public NullStream {
   NullStreamFatal(const char* file, int line, const CheckOpString& result) :
       NullStream(file, line, result) { }
   ~NullStreamFatal() {
-	  //throw std::runtime_error("NullStreamFatal: aborting");
-      logging_fail();
+	  __Fail();
   }
+ protected:
+  void __Fail();
 };
 
 // Install a signal handler that will dump signal information and a stack
