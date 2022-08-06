@@ -370,181 +370,162 @@ my_getline(FILE *file, int *linecounter_ref)
 	return getline_buffer;
 }
 
-static char *
-expand_template_variables(const char* line, int linecounter, int argc, const char** argv, int datalinecounter, const char *scriptfilename, const char *dataspecfilename)
+static void
+expand_template_variables(fz_context* ctx, const char** argv, int linecounter, int varcount, const char** vars, int datalinecounter, const char *scriptfilename, const char *dataspecfilename)
 {
-	if (line == NULL)
-		return NULL;
-
-	char* d = getline_buffer;
-	int space = sizeof(getline_buffer) - 1;
-
-	// first copy `line` to internal buffer as it'll be pointing at getline_buffer
-	char src[LONGLINE];
-	strncpy(src, line, sizeof(src));
-	char* s = src;
-	const char marker = '%';
-
-	while (*s)
+	for (const char** a = argv; *a; a++)
 	{
-		char* m = strchr(s, marker);
-		if (!m)
-		{
-			strncpy(d, s, space);
-			break;
-		}
-		if (m > s)
-		{
-			size_t l = m - s;
-			if (l >= space)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
-			memcpy(d, s, l);
-			space -= l;
-			d += l;
-		}
-		m++;
-		// escape: double marker -> marker
-		if (*m == marker)
-		{
-			if (1 >= space)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+		const char* arg = *a;
 
-			*d++ = *m++;
-			space--;
-			s = m;
-		}
-		else if (strncmp(m, "datarow", 7) == 0 || strncmp(m, "{datarow}", 9) == 0)
-		{
-			size_t skip_dist = (strncmp(m, "datarow", 7) == 0 ? 7 : 9);
-			// `%datarow`: print the current dataline number.
-			char rowstr[40];
-			fz_snprintf(rowstr, 40, "%05d", datalinecounter);
-			if (strlen(rowstr) >= space)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
-			strncpy(d, rowstr, space);
-			s = m + skip_dist;
-			size_t l = strlen(d);
-			d += l;
-			space -= l;
-		}
-		else if (strncmp(m, "dataspecdir", 11) == 0 || strncmp(m, "{dataspecdir}", 13) == 0)
-		{
-			size_t skip_dist = (strncmp(m, "dataspecdir", 11) == 0 ? 11 : 13);
-			// `%dataspecdir`: print the directory part of the (absolute) data spec file path `dataspecfilename`.
-			const char* path_end = strrchr(dataspecfilename, '/');
-			if (!path_end)
-				path_end = strrchr(dataspecfilename, '\\');
-			// do NOT include the terminating / path sep, UNLESS we're looking at the UNIX root directory itself:
-			if (path_end == dataspecfilename)
-				path_end++;
-			size_t pathlen = path_end - dataspecfilename;
-			if (pathlen >= space)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
-			strncpy(d, dataspecfilename, pathlen);
-			d[pathlen] = 0;
-			s = m + skip_dist;
-			d += pathlen;
-			space -= pathlen;
-		}
-		else if (strncmp(m, "scriptdir", 9) == 0 || strncmp(m, "{scriptdir}", 11) == 0)
-		{
-			size_t skip_dist = (strncmp(m, "scriptdir", 9) == 0 ? 9 : 11);
-			// `%scriptdir`: print the directory part of the (absolute) script file path `scriptfilename`.
-			const char* path_end = strrchr(scriptfilename, '/');
-			if (!path_end)
-				path_end = strrchr(scriptfilename, '\\');
-			// do NOT include the terminating / path sep, UNLESS we're looking at the UNIX root directory itself:
-			if (path_end == scriptfilename)
-				path_end++;
-			size_t pathlen = path_end - scriptfilename;
-			if (pathlen >= space)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
-			strncpy(d, scriptfilename, pathlen);
-			d[pathlen] = 0;
-			s = m + skip_dist;
-			d += pathlen;
-			space -= pathlen;
-		}
-		else if (!*m || !strchr("123456789", *m))
-		{
-			// when marker isn't immediately followed by a decimal number (without leading zeroes),
-			// then it's not a template marker either. Copy marker verbatim.
-			if (1 >= space)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+		// first copy `line` to internal buffer as it'll be pointing at getline_buffer
+		int space = strlen(arg) + LONGLINE;
+		char* dst = fz_malloc(ctx, space + 1);
+		strncpy(dst, arg, space);
+		dst[space - 1] = 0;
+		dst[space] = 0;
+		const char* s = arg;
+		char* d = dst;
+		const char marker = '%';
+		int has_expansion = 0;
 
-			*d++ = marker;
-			space--;
-			s = m;
+		while (*s)
+		{
+			const char* m = strchr(s, marker);
+			if (!m)
+			{
+				strncpy(d, s, space);
+				break;
+			}
+			has_expansion = 1;
+			if (m > s)
+			{
+				size_t l = m - s;
+				if (l >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+				memcpy(d, s, l);
+				space -= l;
+				d += l;
+			}
+			m++;
+			// escape: double marker -> marker
+			if (*m == marker)
+			{
+				if (1 >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+
+				*d++ = *m++;
+				space--;
+				s = m;
+			}
+			else if (strncmp(m, "datarow", 7) == 0 || strncmp(m, "{datarow}", 9) == 0)
+			{
+				size_t skip_dist = (strncmp(m, "datarow", 7) == 0 ? 7 : 9);
+				// `%datarow`: print the current dataline number.
+				fz_snprintf(d, space, "%05d", datalinecounter);
+				if (strlen(d) >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+				s = m + skip_dist;
+				size_t l = strlen(d);
+				d += l;
+				space -= l;
+			}
+			else if (strncmp(m, "dataspecdir", 11) == 0 || strncmp(m, "{dataspecdir}", 13) == 0)
+			{
+				size_t skip_dist = (strncmp(m, "dataspecdir", 11) == 0 ? 11 : 13);
+				// `%dataspecdir`: print the directory part of the (absolute) data spec file path `dataspecfilename`.
+				const char* path_end = strrchr(dataspecfilename, '/');
+				if (!path_end)
+					path_end = strrchr(dataspecfilename, '\\');
+				// do NOT include the terminating / path sep, UNLESS we're looking at the UNIX root directory itself:
+				if (path_end == dataspecfilename)
+					path_end++;
+				else if (!path_end)
+					path_end = dataspecfilename;
+
+				size_t pathlen = path_end - dataspecfilename;
+				if (pathlen >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+				strncpy(d, dataspecfilename, pathlen);
+				d[pathlen] = 0;
+				s = m + skip_dist;
+				d += pathlen;
+				space -= pathlen;
+			}
+			else if (strncmp(m, "scriptdir", 9) == 0 || strncmp(m, "{scriptdir}", 11) == 0)
+			{
+				size_t skip_dist = (strncmp(m, "scriptdir", 9) == 0 ? 9 : 11);
+				// `%scriptdir`: print the directory part of the (absolute) script file path `scriptfilename`.
+				const char* path_end = strrchr(scriptfilename, '/');
+				if (!path_end)
+					path_end = strrchr(scriptfilename, '\\');
+				// do NOT include the terminating / path sep, UNLESS we're looking at the UNIX root directory itself:
+				if (path_end == scriptfilename)
+					path_end++;
+				else if (!path_end)
+					path_end = dataspecfilename;
+
+				size_t pathlen = path_end - scriptfilename;
+				if (pathlen >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+				strncpy(d, scriptfilename, pathlen);
+				d[pathlen] = 0;
+				s = m + skip_dist;
+				d += pathlen;
+				space -= pathlen;
+			}
+			else if (!*m || !strchr("123456789", *m))
+			{
+				// when marker isn't immediately followed by a decimal number (without leading zeroes),
+				// then it's not a template marker either. Copy marker verbatim.
+				if (1 >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+
+				*d++ = marker;
+				space--;
+                s = m;
+			}
+			else
+			{
+				char* e = NULL;
+				int param_index = (int)strtol(m, &e, 10);  // %NNN parameters are expected to range 1..argc
+				if (param_index <= 0 || param_index > varcount)
+				{
+					fz_throw(ctx, FZ_ERROR_GENERIC, "TEST: error at script line %d: script template parameter index %d is out of available range 1..%d.", linecounter, param_index, varcount);
+				}
+				const char* tpl_arg = vars[param_index - 1];
+				size_t l = strlen(tpl_arg);
+				if (l >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+				strncpy(d, tpl_arg, space);
+				s = e;
+				d += l;
+				space -= l;
+			}
+		}
+
+		if (!has_expansion)
+		{
+			fz_free(ctx, dst);
 		}
 		else
 		{
-			char* e = NULL;
-			int param_index = (int)strtol(m, &e, 10);  // %NNN parameters are expected to range 1..argc
-			if (param_index <= 0 || param_index > argc)
-			{
-				fz_throw(ctx, FZ_ERROR_GENERIC, "TEST: error at script line %d: script template parameter index %d is out of available range 1..%d.", linecounter, param_index, argc);
-			}
-			if (strlen(argv[param_index - 1]) >= space)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
-			strncpy(d, argv[param_index - 1], space);
-			s = e;
-			size_t l = strlen(d);
-			d += l;
-			space -= l;
+			fz_free(ctx, arg);
+			*a = dst;
 		}
 	}
-
-	return getline_buffer;
 }
 
 
 static int
-match(char **line, const char *match)
+match(const char *arg, const char *match)
 {
-	char *s = *line;
-
-	if (s == NULL)
+	if (arg == NULL || match == NULL)
 		return 0;
 
-	while (isspace(*(unsigned char *)s))
-		s++;
-
-	while (*s == *match)
-	{
-		if (*s == 0)
-		{
-			*line = s;
-			return 1;
-		}
-		s++;
-		match++;
-	}
-
-	if (*match != 0)
-		return 0;
-
-	/* We matched! Skip over any whitespace */
-	while (isspace(*(unsigned char *)s))
-		s++;
-
-	*line = s;
-
-	/* Trim whitespace off the end of the line */
-	/* Run to the end of the line */
-	while (*s)
-		s++;
-
-	/* Run back until we find where we started, or non whitespace */
-	while (s != *line && isspace((unsigned char)s[-1]))
-		s--;
-
-	/* Remove the suffix of whitespace */
-	*s = 0;
-
-	return 1;
+	return strcmp(arg, match) == 0;
 }
 
-static void unescape_string(char *d, const char *s)
+static int unescape_string(char *d, const char *s)
 {
 	char c;
 
@@ -564,11 +545,17 @@ static void unescape_string(char *d, const char *s)
 			case 't':
 				c = '\t';
 				break;
+			case '\\':
+				break;
+			default:
+				return 1;
 			}
 		}
 		*d++ = c;
 	}
 	*d = 0;
+
+	return 0;
 }
 
 // convert line to arguments, starting at start_index.
@@ -577,19 +564,18 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 	int count = 0;
 	size_t len = strlen(line);
 
-	// allocate supra worst-case number of start+end slots for line decoding
-	// PLUS enough space to store the (dequoted) argument strings themselves:
-	char** start = fz_malloc(ctx, (len + start_index) * sizeof(start[0]) + len + 2);
+	// allocate supra worst-case number of start+end+sentinel slots for line decoding
+	char** start = fz_malloc(ctx, (len + start_index + 1) * sizeof(start[0]));
 	*argv = start;
 	*argc = 0;
 
-	char* buf = (char*)&start[len];
+	char* buf = fz_malloc(ctx, len + 2);
 	strcpy(buf, line);
 	buf[len + 1] = 0;  // make sure there's a double NUL sentinel at the end.
 
 	for (; start_index > 0; start_index--)
 	{
-		start[count++] = "bulktest";
+		start[count++] = fz_strdup(ctx, "bulktest");
 	}
 
 	char* s = buf;
@@ -636,9 +622,13 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 			}
 			*e = 0;
 
-			unescape_string(buf, s + 1);
-			start[count++] = buf;
-			buf += strlen(buf) + 1;
+			char* buf2 = fz_malloc(ctx, (e - s) + 2);
+			if (unescape_string(buf2, s + 1))
+			{
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Invalid escape in line: %s", s);
+				return;
+			}
+			start[count++] = buf2;
 
 			s = e + 1;
 		}
@@ -649,20 +639,34 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 			while (*e && !isspace(*(unsigned char*)e))
 				e++;
 			*e = 0;
-			if (buf != s)
-				strcpy(buf, s);
-			start[count++] = buf;
-			buf += strlen(buf) + 1;
+			char *buf2 = fz_strdup(ctx, s);
+			start[count++] = buf2;
 
 			s = e;
 		}
 		s++;
 	}
 
+	fz_free(ctx, buf);
+
+	assert(count < (len + start_index + 1));
+
 	// end argv[] with a sentinel NULL:
 	start[count] = NULL;
 
 	*argc = count;
+}
+
+static void fz_free_argv_array(fz_context* ctx, const char** argv)
+{
+	if (!argv)
+		return;
+
+	for (const char** p = argv; *p; p++)
+	{
+		fz_free(ctx, *p);
+	}
+	fz_free(ctx, argv);
 }
 
 struct logconfig
@@ -1150,6 +1154,8 @@ bulktest_main(int argc, const char **argv)
 
 				const char** template_argv = NULL;
 				int template_argc = 0;
+				const char** argv = NULL;
+				int argc = 0;
 
 				if (script_is_template)
 				{
@@ -1179,13 +1185,6 @@ bulktest_main(int argc, const char **argv)
 					bool report_time = true;
 					char* line = my_getline(script, &linecounter);
 
-					line = expand_template_variables(line, linecounter, template_argc, template_argv, datalinecounter, scriptname, datafilename);
-
-					line_command = line;
-					rv = 0;
-
-					fflush(logcfg.logfile);
-
 					if (line == NULL)
 					{
 						if (ferror(script))
@@ -1194,6 +1193,47 @@ bulktest_main(int argc, const char **argv)
 						}
 						break;
 					}
+
+					fz_free_argv_array(ctx, argv);
+					argv = NULL;
+					argc = 0;
+					convert_string_to_argv(ctx, &argv, &argc, line, 0);
+
+					// skip empty lines
+					if (argc == 0)
+						continue;
+
+					expand_template_variables(ctx, argv, linecounter, template_argc, template_argv, datalinecounter, scriptname, datafilename);
+
+					// reformat command line, using the expanded arguments:
+					{
+						char* d = line;
+						for (int i = 0; i < argc; i++)
+						{
+							const char* a = argv[i];
+							if (a[strcspn(a, " \"")] != 0)
+							{
+								// arg needs escaping/quoting:
+								fz_snprintf(d, LONGLINE, "%Q", a);
+							}
+							else
+							{
+								strcpy(d, a);
+							}
+							d += strlen(d);
+							*d++ = ' ';
+							*d = 0;
+						}
+
+						if (argc > 0)
+							d[-1] = 0; // kill the trailing space in the reformatted line
+					}
+
+					line_command = line;
+					rv = 0;
+
+					fflush(logcfg.logfile);
+
 					if (verbosity)
 					{
 						fz_info(ctx, "L#%04d: %s", linecounter, line);
@@ -1212,30 +1252,43 @@ bulktest_main(int argc, const char **argv)
 
 					begin_time = Curl_now();
 
-					if (match(&line, "%"))
+					if (match(argv[0], "%"))
 					{
 						/* Comment */
 						report_time = false;
 					}
-					else if (match(&line, "IF"))
+					else if (match(argv[0], "IF"))
 					{
-						int condition = strtol(line, &line, 10);
-						int maxdepth = sizeof(skip_if_block) / sizeof(skip_if_block[0]);
-
-						if (if_level >= maxdepth)
+						if (argc != 2)
 						{
-							fz_error(ctx, "ERR: IF statements nested too deep (more than %d levels) at line %d.", maxdepth, linecounter);
+							fz_error(ctx, "script error: IF <ARG>: missing or multiple arguments at line %d: %s", linecounter, line);
 							errored++;
 						}
 						else
 						{
-							skip_if_block[if_level++] = !condition;
+							int condition = atoi(argv[1]);
+							int maxdepth = sizeof(skip_if_block) / sizeof(skip_if_block[0]);
+
+							if (if_level >= maxdepth)
+							{
+								fz_error(ctx, "ERR: IF statements nested too deep (more than %d levels) at line %d.", maxdepth, linecounter);
+								errored++;
+							}
+							else
+							{
+								skip_if_block[if_level++] = !condition;
+							}
 						}
 						report_time = false;
 					}
-					else if (match(&line, "ELSE"))
+					else if (match(argv[0], "ELSE"))
 					{
-						if (if_level < 0)
+						if (argc != 1)
+						{
+							fz_error(ctx, "script error: ELSE never uses arguments. Error at line %d: %s", linecounter, line);
+							errored++;
+						}
+						else if (if_level < 0)
 						{
 							fz_error(ctx, "ERR: unmatched superfluous ELSE statement at line %d.", linecounter);
 							errored++;
@@ -1246,30 +1299,45 @@ bulktest_main(int argc, const char **argv)
 						}
 						report_time = false;
 					}
-					else if (match(&line, "ENDIF"))
+					else if (match(argv[0], "ENDIF"))
 					{
-						if_level--;
-						if (if_level < 0)
+						if (argc != 1)
 						{
-							if_level = 0;
-
-							fz_error(ctx, "ERR: unmatched superfluous ENDIF statement at line %d.", linecounter);
+							fz_error(ctx, "script error: ENDIF never uses arguments. Error at line %d: %s", linecounter, line);
 							errored++;
+						}
+						else
+						{
+							if_level--;
+							if (if_level < 0)
+							{
+								if_level = 0;
+
+								fz_error(ctx, "ERR: unmatched superfluous ENDIF statement at line %d.", linecounter);
+								errored++;
+							}
 						}
 						report_time = false;
 					}
-					else if (match(&line, "LABEL:"))
+					else if (match(argv[0], "LABEL:"))
 					{
-						// Just a jump-to point in the script: if we don't have a pending 'skip-to' instruction
-						// we hop over this one and continue.
-						if (*skip_to_label)
+						if (argc != 2)
 						{
-							char label[LONGLINE];
-							unescape_string(label, line);
-							if (!strcmp(label, skip_to_label))
+							fz_error(ctx, "script error: LABEL: <TAG> missing or multiple arguments. Error at line %d: %s", linecounter, line);
+							errored++;
+						}
+						else
+						{
+							// Just a jump-to point in the script: if we don't have a pending 'skip-to' instruction
+							// we hop over this one and continue.
+							if (*skip_to_label)
 							{
-								*skip_to_label = 0;
-								fz_info(ctx, "SKIP TO LABEL found. Going back to work.\n");
+								const char* label = argv[1];
+								if (!strcmp(label, skip_to_label))
+								{
+									*skip_to_label = 0;
+									fz_info(ctx, "SKIP TO LABEL found. Going back to work.\n");
+								}
 							}
 						}
 						report_time = false;
@@ -1282,95 +1350,101 @@ bulktest_main(int argc, const char **argv)
 					}
 					else if (skip_to_datalinecounter > datalinecounter)
 					{
-						// skip rest of script as we're skipping to dataline X
+						// skip rest of script as we're skipping to *dataline* X
 						fz_info(ctx, "SKIPPING TO DATALINE: %d (currently at dataline %d)\n", skip_to_datalinecounter, datalinecounter);
 						report_time = false;
 						break;
 					}
-					else if (match(&line, "SKIP_TO_LABEL"))
+					else if (match(argv[0], "SKIP_TO_LABEL"))
 					{
-						// Specify a label that SHOULD appear further down the script.
-						// Skip all commands until we've hit that label.
-						unescape_string(skip_to_label, line);
-						fz_info(ctx, "Skip to label %s\n", skip_to_label);
-						report_time = false;
-					}
-					else if (match(&line, "SKIP_UNTIL_DATALINE"))
-					{
-						// Specify a data linenumber that SHOULD be reached before we do anything further in this script.
-						skip_to_datalinecounter = atoi(line);
-						// Do we have some skipping to do? If so, mention this command, otherwise plain ignore it.
-						if (skip_to_datalinecounter > datalinecounter)
+						if (argc != 2)
 						{
-							fz_info(ctx, "Skip to data line %d\n", skip_to_datalinecounter);
-						}
-
-						report_time = false;
-					}
-					else if (match(&line, "ECHO"))
-					{
-						char buf[LONGLINE];
-						if (strlen(line) < sizeof(buf))
-						{
-							unescape_string(buf, line);
-							fz_info(ctx, "::ECHO: %s\n", buf);
+							fz_error(ctx, "script error: SKIP_TO_LABEL <TAG> missing or too many arguments. Error at line %d: %s", linecounter, line);
+							errored++;
 						}
 						else
 						{
-							fz_error(ctx, "::ECHO:ERROR: not printing buffer-overflowing line\n");
+							// Specify a label that SHOULD appear further down the script.
+							// Skip all commands until we've hit that label.
+							strncpy(skip_to_label, argv[1], sizeof(skip_to_label));
+							fz_info(ctx, "Skip to label %s\n", skip_to_label);
 						}
 						report_time = false;
 					}
-					else if (match(&line, "CD"))
+					else if (match(argv[0], "SKIP_UNTIL_DATALINE"))
 					{
-						char path[LONGLINE];
-
-						unescape_string(path, line);
-
-						fz_chdir(ctx, path);
+						if (argc != 2)
+						{
+							fz_error(ctx, "script error: SKIP_UNTIL_DATALINE <N>: missing or too many arguments. Error at line %d: %s", linecounter, line);
+							errored++;
+						}
+						else
+						{
+							// Specify a data linenumber that SHOULD be reached before we do anything further in this script.
+							skip_to_datalinecounter = atoi(argv[1]);
+							// Do we have some skipping to do? If so, mention this command, otherwise plain ignore it.
+							if (skip_to_datalinecounter > datalinecounter)
+							{
+								fz_info(ctx, "Skip to data line %d\n", skip_to_datalinecounter);
+							}
+						}
+						report_time = false;
 					}
-					else if (match(&line, "MUTOOL"))
+					else if (match(argv[0], "ECHO"))
 					{
-						const char** argv = NULL;
-						int argc = 0;
-						convert_string_to_argv(ctx, &argv, &argc, line, 0);
-						rv = mutool_main(argc, argv);
+						// Use the new, reformatted line for this...
+						fz_info(ctx, "::ECHO: %s\n", line + 5);
+						report_time = false;
+					}
+					else if (match(argv[0], "CD"))
+					{
+						if (argc != 2)
+						{
+							fz_error(ctx, "script error: CD <PATH>: requires a single argument. Error at line %d: %s", linecounter, line);
+							errored++;
+						}
+						else
+						{
+							fz_chdir(ctx, argv[1]);
+							if (verbosity)
+							{
+								fz_info(ctx, "OK: CD %s", argv[1]);
+							}
+						}
+					}
+					else if (match(argv[0], "MUTOOL"))
+					{
+						rv = mutool_main(argc - 1, argv + 1);
 						if (rv != EXIT_SUCCESS)
 						{
 							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
 							errored++;
-							if (errored > 99) errored = 99;
 						}
 						else if (verbosity)
 						{
 							fz_info(ctx, "OK: MUTOOL command: %s", line);
 						}
-						fz_free(ctx, (void*)argv);
 
 						flush_active_logfile_hard();
 					}
-					else if (match(&line, "BULKTEST"))
+					else if (match(argv[0], "BULKTEST"))
 					{
-						const char** argv = NULL;
-						int argc = 0;
-						convert_string_to_argv(ctx, &argv, &argc, line, 1);  // result: argv[0] = NULL but that's OK
-
 						// Ah! Before we go in and recurse on ourselves, we need to do a bit of housekeeping:
 						// we must keep the active logfile around (as it surely will be replaced in the recursive call!)
 						// so we keep a temporary local copy:
 						struct logconfig parent_logcfg = logcfg;
 						close_active_logfile();
 
-						// We also need to keep a local copy of some otheers, so we can restore them as well:
+						// We also need to keep a local copy of some others, so we can restore them as well:
 						int parent_showtime = showtime;
 						int parent_showmemory = showmemory;
 						struct timing parent_timing = timing;
 						struct trace_info parent_trace_info = trace_info;
 						fz_context* parent_ctx = ctx;
 
-						rv = bulktest_main(argc, argv);
+						rv = bulktest_main(argc - 1, argv + 1);
 
-						// recover our own stored-away settings, but keep the heap memory tracee sequence number continuous:
+						// recover our own stored-away settings, but keep the heap memory trace sequence number continuous:
 						{
 							int seqnr = trace_info.sequence_number;
 							trace_info = parent_trace_info;
@@ -1387,15 +1461,13 @@ bulktest_main(int argc, const char **argv)
 
 						if (rv != EXIT_SUCCESS)
 						{
-							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							fz_error(ctx, "ERR: error executing MUTOOL command at script line %d.", linecounter);
 							errored++;
-							if (errored > 99) errored = 99;
 						}
 						else if (verbosity)
 						{
 							fz_info(ctx, "OK: MUTOOL command: %s", line);
 						}
-						fz_free(ctx, (void*)argv);
 
 						flush_active_logfile_hard();
 					}
@@ -1433,7 +1505,11 @@ bulktest_main(int argc, const char **argv)
 					}
 				} while (!feof(script));
 
-				fz_free(ctx, (void *)template_argv);
+				fz_free_argv_array(ctx, argv);
+				argv = NULL;
+				argc = 0;
+
+				fz_free_argv_array(ctx, template_argv);
 			} while (script_is_template);
 
 			if (datafeed)

@@ -1343,7 +1343,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 						fz_throw(ctx, FZ_ERROR_GENERIC, "worker %d failed to render band %d", w->num, band);
 				}
 				else
+				{
 					drawband(ctx, page, list, ctm, tbounds, cookie, band * band_height, pix, &bit);
+				}
 
 				if (bander && (pix || bit))
 					fz_write_band(ctx, bander, bit ? bit->stride : pix->stride, drawheight, bit ? bit->samples : pix->samples);
@@ -2385,7 +2387,8 @@ parse_render_options(fz_context* ctx, fz_cookie* cookie, const char* spec)
 		return;
 
 	memcpy(buf, spec, len + 1);
-	buf[len + 2] = 0;  // second sentinel, reqd for the strcspn() loop below
+	assert(buf[len] == 0);
+	buf[len + 1] = 0;  // second sentinel, reqd for the strcspn() loop below
 
 	char* arg = buf;
 	while (*arg)
@@ -2615,6 +2618,39 @@ int main(int argc, const char** argv)
 	bgprint.active = 0;			/* set by -P */
 	num_workers = 0;
 
+	if (!fz_has_global_context())
+	{
+		fz_locks_context* locks = NULL;
+
+#ifndef DISABLE_MUTHREADS
+		locks = init_mudraw_locks();
+		if (locks == NULL)
+		{
+			fz_error(ctx, "mutex initialisation failed");
+			return EXIT_FAILURE;
+		}
+#endif
+
+		ctx = fz_new_context(alloc_ctx, locks, max_store);
+		if (!ctx)
+		{
+			fz_error(ctx, "cannot initialise MuPDF context");
+			return EXIT_FAILURE;
+		}
+		fz_set_global_context(ctx);
+
+		mudraw_is_toplevel_ctx = 1;
+	}
+	else
+	{
+		// caller of mudraw_main() has set global CTX.
+		//
+		// check if that CTX has locking, because if it has none,
+		// then we CANNOT use bands or threads!
+		ctx = fz_get_global_context();
+	}
+	atexit(mu_drop_context);
+
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
 	{
@@ -2783,46 +2819,18 @@ int main(int argc, const char** argv)
 	if (lowmemory)
 		max_store = 1;
 
-	if (!fz_has_global_context())
+	assert(fz_has_global_context());
+
+	// check if global CTX has locking, because if it has none,
+	// then we CANNOT use bands or threads!
+	ctx = fz_get_global_context();
+	if (!fz_has_locking_support(ctx))
 	{
-		fz_locks_context* locks = NULL;
-
-#ifndef DISABLE_MUTHREADS
-		locks = init_mudraw_locks();
-		if (locks == NULL)
-		{
-			fz_error(ctx, "mutex initialisation failed");
-			return EXIT_FAILURE;
-		}
-#endif
-
-		ctx = fz_new_context(alloc_ctx, locks, max_store);
-		if (!ctx)
-		{
-			fz_error(ctx, "cannot initialise MuPDF context");
-			return EXIT_FAILURE;
-		}
-		fz_set_global_context(ctx);
-		ctx = NULL;
-
-		mudraw_is_toplevel_ctx = 1;
+		fz_error(ctx, "cannot use multiple threads without locking support. Falling back to single thread processing.");
+		num_workers = 0;
+		bgprint.active = 0;
+		band_height = 0;
 	}
-	else
-	{
-		// caller of mudraw_main() has set global CTX.
-		//
-		// check if that CTX has locking, because if it has none,
-		// then we CANNOT use bands or threads!
-		ctx = fz_get_global_context();
-		if (!fz_has_locking_support(ctx))
-		{
-			fz_error(ctx, "cannot use multiple threads without locking support. Falling back to single thread processing.");
-			num_workers = 0;
-			bgprint.active = 0;
-			band_height = 0;
-		}
-	}
-	atexit(mu_drop_context);
 
 	ctx = fz_new_context(NULL, NULL, max_store);
 	if (!ctx)
