@@ -1171,7 +1171,7 @@ int pdfinfo_main(int argc, const char** argv)
 	ctx = NULL;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "AFISPUXyMo:p:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "FISPXyMo:p:h")) != -1)
 	{
 		switch (c)
 		{
