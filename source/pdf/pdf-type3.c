@@ -24,9 +24,9 @@
 #include "mupdf/pdf.h"
 
 static void
-pdf_run_glyph_func(fz_context *ctx, void *doc, void *rdb, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs)
+pdf_run_glyph_func(fz_context *ctx, void *doc, void *rdb, fz_buffer *contents, fz_device *dev, fz_matrix ctm, void *gstate, fz_default_colorspaces *default_cs, int has_transparency)
 {
-	pdf_run_glyph(ctx, doc, (pdf_obj *)rdb, contents, dev, ctm, gstate, default_cs);
+	pdf_run_glyph(ctx, doc, (pdf_obj *)rdb, contents, dev, ctm, gstate, default_cs, has_transparency);
 }
 
 static void
@@ -172,6 +172,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 			pdf_keep_obj(ctx, font->t3resources);
 		if (!font->t3resources)
 			fz_warn(ctx, "no resource dictionary for type 3 font!");
+		font->t3transparency = pdf_resources_use_blending(ctx, font->t3resources, NULL);
 
 		font->t3doc = doc;
 		font->t3run = pdf_run_glyph_func;

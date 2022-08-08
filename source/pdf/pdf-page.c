@@ -505,8 +505,6 @@ enum
 	PDF_FLAGS_MEMO_OP = 1
 };
 
-static int pdf_resources_use_blending(fz_context *ctx, pdf_obj *rdb, pdf_cycle_list *cycle_up);
-
 static int
 pdf_extgstate_uses_blending(fz_context *ctx, pdf_obj *dict)
 {
@@ -542,7 +540,7 @@ pdf_xobject_uses_blending(fz_context *ctx, pdf_obj *dict, pdf_cycle_list *cycle_
 	return pdf_resources_use_blending(ctx, obj, &cycle);
 }
 
-static int
+int
 pdf_resources_use_blending(fz_context *ctx, pdf_obj *rdb, pdf_cycle_list *cycle_up)
 {
 	pdf_cycle_list cycle;

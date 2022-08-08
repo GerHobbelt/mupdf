@@ -40,7 +40,7 @@
 #define ATTEMPT_KNOCKOUT_AND_ISOLATED
 
 /* Enable the following to help debug group blending. */
-#undef DUMP_GROUP_BLENDS
+#define DUMP_GROUP_BLENDS
 
 /* Enable the following to help debug graphics stack pushes/pops */
 #undef DUMP_STACK_CHANGES
@@ -1064,9 +1064,6 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	if (colorspace == NULL && model != NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "color destination requires source color");
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT))
-		state = fz_knockout_begin(ctx, dev);
-
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 	shapebv = 255;
 	shapebva = alpha * 255 + 0.5f;
@@ -1088,6 +1085,9 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 			tm.e = span->items[i].x;
 			tm.f = span->items[i].y;
 			trm = fz_concat(tm, ctm);
+
+			if (state->blendmode & FZ_BLEND_KNOCKOUT)
+				state = fz_knockout_begin(ctx, dev);
 
 			glyph = fz_render_glyph(ctx, span->font, gid, &trm, model, &state->scissor, state->dest->alpha, fz_rasterizer_text_aa_level(rast));
 			if (glyph)
@@ -1126,11 +1126,12 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 					fz_warn(ctx, "cannot render glyph");
 				}
 			}
+
+			if (state->blendmode & FZ_BLEND_KNOCKOUT)
+				fz_knockout_end(ctx, dev);
 		}
 	}
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT))
-		fz_knockout_end(ctx, dev);
 }
 
 static void

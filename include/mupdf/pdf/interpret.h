@@ -54,6 +54,7 @@ struct pdf_processor
 	void (*op_gs_BM)(fz_context *ctx, pdf_processor *proc, const char *blendmode);
 	void (*op_gs_ca)(fz_context *ctx, pdf_processor *proc, float alpha);
 	void (*op_gs_CA)(fz_context *ctx, pdf_processor *proc, float alpha);
+	void (*op_gs_TK)(fz_context *ctx, pdf_processor *proc, int tk);
 	void (*op_gs_SMask)(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, pdf_obj *page_resources, float *bc, int luminosity);
 	void (*op_gs_end)(fz_context *ctx, pdf_processor *proc);
 
@@ -189,7 +190,7 @@ typedef struct
 
 /* Functions to set up pdf_process structures */
 
-pdf_processor *pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie);
+pdf_processor *pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie, int has_transparency);
 
 /*
 	Create an MCID extraction processor.
@@ -343,6 +344,7 @@ typedef struct
 	fz_matrix tlm;
 	fz_matrix tm;
 	int text_mode;
+	int tk_group_pushed;
 
 	int cid;
 	int gid;

@@ -111,4 +111,6 @@ int pdf_xobject_knockout(fz_context *ctx, pdf_obj *xobj);
 int pdf_xobject_transparency(fz_context *ctx, pdf_obj *xobj);
 fz_colorspace *pdf_xobject_colorspace(fz_context *ctx, pdf_obj *xobj);
 
+int pdf_resources_use_blending(fz_context *ctx, pdf_obj *rdb, pdf_cycle_list *cycle_up);
+
 #endif

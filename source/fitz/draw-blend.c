@@ -364,8 +364,8 @@ fz_blend_separable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, 
 				/* Process colorants */
 				for (k = 0; k < first_spot; k++)
 				{
-					int sc = (sp[k] * invsa) >> 8;
-					int bc = (bp[k] * invba) >> 8;
+					int sc = (sp[k] * invsa + 128) >> 8;
+					int bc = (bp[k] * invba + 128) >> 8;
 					int rc;
 
 					if (complement)
@@ -402,8 +402,8 @@ fz_blend_separable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, 
 				/* spots */
 				for (; k < n1; k++)
 				{
-					int sc = 255 - ((sp[k] * invsa) >> 8);
-					int bc = 255 - ((bp[k] * invba) >> 8);
+					int sc = 255 - ((sp[k] * invsa + 128) >> 8);
+					int bc = 255 - ((bp[k] * invba + 128) >> 8);
 					int rc;
 
 					switch (blendmode)
@@ -468,13 +468,13 @@ fz_blend_nonseparable_gray(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTR
 				case FZ_BLEND_SATURATION:
 				case FZ_BLEND_COLOR:
 				{
-					int bg = (bp[0] * invba) >> 8;
+					int bg = (bp[0] * invba + 128) >> 8;
 					bp[0] = fz_mul255(255 - sa, bp[0]) + fz_mul255(255 - ba, sp[0]) + fz_mul255(saba, bg);
 					break;
 				}
 				case FZ_BLEND_LUMINOSITY:
 				{
-					int sg = (sp[0] * invsa) >> 8;
+					int sg = (sp[0] * invsa + 128) >> 8;
 					bp[0] = fz_mul255(255 - sa, bp[0]) + fz_mul255(255 - ba, sp[0]) + fz_mul255(saba, sg);
 					break;
 				}
@@ -483,7 +483,7 @@ fz_blend_nonseparable_gray(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTR
 				/* Normal blend for spots */
 				for (k = first_spot; k < n; k++)
 				{
-					int sc = (sp[k] * invsa) >> 8;
+					int sc = (sp[k] * invsa + 128) >> 8;
 					bp[k] = fz_mul255(255 - sa, bp[k]) + fz_mul255(255 - ba, sp[k]) + fz_mul255(saba, sc);
 				}
 				if (bal)
@@ -522,13 +522,13 @@ fz_blend_nonseparable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT s
 				int invsa = 255 * 256 / sa;
 				int invba = 255 * 256 / ba;
 
-				int sr = (sp[0] * invsa) >> 8;
-				int sg = (sp[1] * invsa) >> 8;
-				int sb = (sp[2] * invsa) >> 8;
+				int sr = (sp[0] * invsa + 128) >> 8;
+				int sg = (sp[1] * invsa + 128) >> 8;
+				int sb = (sp[2] * invsa + 128) >> 8;
 
-				int br = (bp[0] * invba) >> 8;
-				int bg = (bp[1] * invba) >> 8;
-				int bb = (bp[2] * invba) >> 8;
+				int br = (bp[0] * invba + 128) >> 8;
+				int bg = (bp[1] * invba + 128) >> 8;
+				int bb = (bp[2] * invba + 128) >> 8;
 
 				/* CMYK */
 				if (complement)
@@ -576,10 +576,10 @@ fz_blend_nonseparable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT s
 					case FZ_BLEND_HUE:
 					case FZ_BLEND_SATURATION:
 					case FZ_BLEND_COLOR:
-						k = (bp[3] * invba) >> 8;
+						k = (bp[3] * invba + 128) >> 8;
 						break;
 					case FZ_BLEND_LUMINOSITY:
-						k = (sp[3] * invsa) >> 8;
+						k = (sp[3] * invsa + 128) >> 8;
 						break;
 					}
 					bp[3] = fz_mul255(255 - sa, bp[3]) + fz_mul255(255 - ba, sp[3]) + fz_mul255(saba, k);
@@ -597,7 +597,7 @@ fz_blend_nonseparable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT s
 				/* Normal blend for spots */
 				for (k = first_spot; k < n; k++)
 				{
-					int sc = (sp[k] * invsa) >> 8;
+					int sc = (sp[k] * invsa + 128) >> 8;
 					bp[k] = fz_mul255(255 - sa, bp[k]) + fz_mul255(255 - ba, sp[k]) + fz_mul255(saba, sc);
 				}
 			}
@@ -655,7 +655,7 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 				/* Just copy pixels (allowing for change in
 				 * premultiplied alphas) */
 				for (k = 0; k < n1; k++)
-					bp[k] = fz_mul255((sp[k] * invsa) >> 8, haa);
+					bp[k] = fz_mul255((sp[k] * invsa + 128) >> 8, haa);
 				if (bal)
 					bp[n1] = haa;
 				break;
@@ -692,8 +692,8 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 			for (k = 0; k < first_spot; k++)
 			{
 				/* Read pixels (and convert to non-premultiplied form) */
-				int sc = (sp[k] * invsa) >> 8;
-				int bc = (bp[k] * invba) >> 8;
+				int sc = (sp[k] * invsa + 128) >> 8;
+				int bc = (bp[k] * invba + 128) >> 8;
 				int rc;
 
 				if (complement)
@@ -703,7 +703,7 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 				}
 
 				/* Uncomposite (see above) */
-				sc = sc + (((sc-bc) * scale)>>8);
+				sc = sc + (((sc-bc) * scale + 128)>>8);
 				sc = fz_clampi(sc, 0, 255);
 
 				switch (blendmode)
@@ -760,7 +760,7 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 				int bc = 255 - ((bp[k] * invba + 128) >> 8);
 				int rc;
 
-				sc = sc + (((sc-bc) * scale)>>8);
+				sc = sc + (((sc-bc) * scale + 128)>>8);
 
 				/* Non-white preserving use Normal */
 				switch (blendmode)
@@ -826,7 +826,8 @@ fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byt
 				int k;
 
 				/* Calculate result_alpha */
-				int ra = ba - bahaa + haa;
+				int ra0 = ba - bahaa;
+				int ra = ra0 + haa;
 				if (bal)
 					bp[n] = ra;
 				if (ra != 0)
@@ -837,8 +838,10 @@ fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byt
 					int invsa = sa ? 255 * 256 / sa : 0;
 					int invba = ba ? 255 * 256 / ba : 0;
 
-					int sg = (sp[0] * invsa) >> 8;
-					int bg = (bp[0] * invba) >> 8;
+					int sg = (sp[0] * invsa + 128) >> 8;
+					int bg = (bp[0] * invba + 128) >> 8;
+					int rg;
+					int haa_neg_ba = fz_mul255(haa, 255-ba);
 
 					/* Uncomposite */
 					sg = (((sg - bg)*invha) >> 8) + bg;
@@ -850,25 +853,24 @@ fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byt
 					case FZ_BLEND_HUE:
 					case FZ_BLEND_SATURATION:
 					case FZ_BLEND_COLOR:
-						bp[0] = fz_mul255(ra, bg);
+						rg = bg;
 						break;
 					case FZ_BLEND_LUMINOSITY:
-						bp[0] = fz_mul255(ra, sg);
+						rg = sg;
 						break;
 					}
+					bp[0] = fz_mul255(ra0, bg) + fz_mul255(haa_neg_ba, sg) + fz_mul255(bahaa, rg);
 
 					/* Normal blend for spots */
 					for (k = first_spot; k < n; k++)
 					{
 						int sc = (sp[k] * invsa + 128) >> 8;
 						int bc = (bp[k] * invba + 128) >> 8;
-						int rc;
 
+						/* Uncomposite */
 						sc = (((sc - bc) * invha + 128) >> 8) + bc;
 						sc = fz_clampi(sc, 0, 255);
-						rc = bc + fz_mul255(sa, fz_mul255(255 - ba, sc) + fz_mul255(ba, sc) - bc);
-						rc = fz_clampi(rc, 0, 255);
-						bp[k] = fz_mul255(rc, ra);
+						bp[k] = fz_mul255(ra0, bc) + fz_mul255(haa_neg_ba, sc) + fz_mul255(bahaa, sc);
 					}
 				}
 			}
@@ -926,13 +928,13 @@ fz_blend_nonseparable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * F
 					int invsa = sa ? 255 * 256 / sa : 0;
 					int invba = ba ? 255 * 256 / ba : 0;
 
-					int sr = (sp[0] * invsa) >> 8;
-					int sg = (sp[1] * invsa) >> 8;
-					int sb = (sp[2] * invsa) >> 8;
+					int sr = (sp[0] * invsa + 128) >> 8;
+					int sg = (sp[1] * invsa + 128) >> 8;
+					int sb = (sp[2] * invsa + 128) >> 8;
 
-					int br = (bp[0] * invba) >> 8;
-					int bg = (bp[1] * invba) >> 8;
-					int bb = (bp[2] * invba) >> 8;
+					int br = (bp[0] * invba + 128) >> 8;
+					int bg = (bp[1] * invba + 128) >> 8;
+					int bb = (bp[2] * invba + 128) >> 8;
 
 					if (complement)
 					{
@@ -1015,8 +1017,8 @@ fz_blend_nonseparable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * F
 						rg = ra - rg;
 						rb = ra - rb;
 
-						sk = sa ? (sp[3] * invsa) >> 8 : 255;
-						bk = ba ? (bp[3] * invba) >> 8 : 255;
+						sk = sa ? (sp[3] * invsa + 128) >> 8 : 255;
+						bk = ba ? (bp[3] * invba + 128) >> 8 : 255;
 
 						bk = fz_clampi(bk, 0, 255);
 						sk = fz_clampi(sk, 0, 255);
@@ -1292,17 +1294,17 @@ fz_blend_knockout(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, i
 			}
 			else
 			{
-				int hasa = fz_mul255(ha, sa);
+				//int hasa = fz_mul255(ha, sa);
 				/* ugh, division to get non-premul components */
 				int invsa = sa ? 255 * 256 / sa : 0;
 				int invba = ba ? 255 * 256 / ba : 0;
-				int ra = hasa + fz_mul255(255-ha, ba);
+				int ra = ha + fz_mul255(255-ha, ba);
 
 				/* Process colorants + spots */
 				for (k = 0; k < n1; k++)
 				{
-					int sc = (sp[k] * invsa) >> 8;
-					int bc = (bp[k] * invba) >> 8;
+					int sc = (sp[k] * invsa + 128) >> 8;
+					int bc = (bp[k] * invba + 128) >> 8;
 					int rc = fz_mul255(255 - ha, bc) + fz_mul255(ha, sc);
 
 					bp[k] = fz_mul255(ra, rc);

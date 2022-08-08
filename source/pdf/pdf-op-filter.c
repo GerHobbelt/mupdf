@@ -1080,6 +1080,14 @@ pdf_filter_gs_ca(fz_context *ctx, pdf_processor *proc, float alpha)
 }
 
 static void
+pdf_filter_gs_TK(fz_context *ctx, pdf_processor *proc, int tk)
+{
+	pdf_filter_processor *p = (pdf_filter_processor*)proc;
+	if (p->chain->op_gs_TK)
+		p->chain->op_gs_TK(ctx, p->chain, tk);
+}
+
+static void
 pdf_filter_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, pdf_obj *page_resources, float *bc, int luminosity)
 {
 	pdf_filter_processor *p = (pdf_filter_processor*)proc;
@@ -2083,6 +2091,7 @@ pdf_new_filter_processor(
 		proc->super.op_gs_BM = pdf_filter_gs_BM;
 		proc->super.op_gs_CA = pdf_filter_gs_CA;
 		proc->super.op_gs_ca = pdf_filter_gs_ca;
+		proc->super.op_gs_TK = pdf_filter_gs_TK;
 		proc->super.op_gs_SMask = pdf_filter_gs_SMask;
 
 		/* special graphics state */
