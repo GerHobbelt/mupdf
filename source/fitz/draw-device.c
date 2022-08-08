@@ -40,7 +40,7 @@
 #define ATTEMPT_KNOCKOUT_AND_ISOLATED
 
 /* Enable the following to help debug group blending. */
-#define DUMP_GROUP_BLENDS
+#undef DUMP_GROUP_BLENDS
 
 /* Enable the following to help debug graphics stack pushes/pops */
 #undef DUMP_STACK_CHANGES
