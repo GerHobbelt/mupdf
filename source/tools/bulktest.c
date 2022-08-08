@@ -905,6 +905,10 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char *messag
 			{
 				fprintf(stderr, "\n%s", message + 8);
 			}
+			else if (!strncmp(message, "::SKIPPED: ", 11))
+			{
+				fprintf(stderr, "\n%s", message + 2);
+			}
 			else if (strstr(message, "*!*"))
 			{
 				fprintf(stderr, "*!*");
@@ -980,6 +984,135 @@ static void tst_info_callback(fz_context* ctx, void* user, const char* message)
 	}
 }
 
+struct range
+{
+	int first;
+	int last;
+};
+
+static struct range* decode_numbers_rangespec(const char* spec)
+{
+	int n_ranges = 0;
+	const char* range = spec;
+	int spage, epage;
+	const int pagecount = 1E9; // better looking heuristic than INT_MAX
+	struct range* rv = NULL;
+
+	if (range)
+	{
+		while ((range = fz_parse_page_range(ctx, range, &spage, &epage, pagecount)))
+		{
+			n_ranges++;
+		}
+		rv = fz_malloc(ctx, (n_ranges + 1) * sizeof(*rv));
+
+		range = spec;
+		int i = 0;
+		while ((range = fz_parse_page_range(ctx, range, &spage, &epage, pagecount)))
+		{
+			rv[i].first = fz_maxi(0, spage);
+			rv[i].last = fz_maxi(0, epage);
+			i++;
+		}
+		// sentinel:
+		rv[i].first = -1;
+		rv[i].last = -1;
+	}
+	return rv;
+}
+
+static const char* test_fail_reason[] = {
+	"PASS",
+	/* 1 */ "empty line",
+	/* 2 */ "rejected by match regex",
+	/* 3 */ "rejected by ignore-match regex",
+	/* 4 */ "rejected by match-ranges (line number range spec)",
+	/* 5 */ "rejected by ignore-ranges (line number range spec)",
+};
+
+static int test_dataline_against_matchspecs(const char *line, int linenumber, const char *match_re, const char *ignore_match_re, const struct range *match_ranges_spec, const struct range* ignore_match_ranges_spec)
+{
+	if (!line || !*line)
+		return 1;
+
+	int rejected = 0;
+
+	if (match_re && *match_re)
+	{
+		rejected = (strstr(line, match_re) ? 0 : 2);
+	}
+	if (!rejected && ignore_match_re && *ignore_match_re)
+	{
+		int ignore = !!strstr(line, ignore_match_re);
+		if (ignore)
+			rejected = 3;
+	}
+	if (!rejected && match_ranges_spec && match_ranges_spec[0].first != -1)
+	{
+		int hit = 4;
+		for (; match_ranges_spec[0].first; match_ranges_spec++)
+		{
+			if (match_ranges_spec[0].first <= linenumber && match_ranges_spec[0].last >= linenumber)
+			{
+				hit = 0;
+				break;
+			}
+		}
+		rejected = hit;
+	}
+	if (!rejected && ignore_match_ranges_spec && ignore_match_ranges_spec[0].first != -1)
+	{
+		int hit = 0;
+		for (; ignore_match_ranges_spec[0].first; ignore_match_ranges_spec++)
+		{
+			if (ignore_match_ranges_spec[0].first <= linenumber && ignore_match_ranges_spec[0].last >= linenumber)
+			{
+				hit = 1;
+				break;
+			}
+		}
+		if (hit)
+			rejected = 5;
+	}
+	return rejected;
+}
+
+static const char* rangespec2str(char* buf, size_t bufsiz, const struct range* spec)
+{
+	if (!spec || spec->first == -1)
+		return "-";
+
+	buf[0] = 0;
+	char* d = buf;
+	for (; spec->first != -1; spec++)
+	{
+		if (bufsiz < 10)
+		{
+			strcpy(d, "...");
+			break;
+		}
+
+		if (spec->first == spec->last)
+			fz_snprintf(d, bufsiz, "%d,", spec->first);
+		else
+			fz_snprintf(d, bufsiz, "%d-%d,", spec->first, spec->last);
+		size_t l = strlen(d);
+		d += l;
+		bufsiz -= l;
+	}
+	if (d > buf && d[-1] == ',')
+		d[-1] = 0;
+	return buf;
+}
+
+static const char* match_regex2str(const char* re)
+{
+	if (!re || !*re)
+		return "-";
+	return re;
+}
+
+
 int
 bulktest_main(int argc, const char **argv)
 {
@@ -994,6 +1127,10 @@ bulktest_main(int argc, const char **argv)
 	fz_locks_context *locks = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
 	int lowmemory = 0;
+	const char *match_regex = NULL;
+	const char* ignore_match_regex = NULL;
+	const char* match_numbers_s = NULL;
+	const char* ignore_match_numbers_s = NULL;
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
@@ -1007,7 +1144,7 @@ bulktest_main(int argc, const char **argv)
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "TLvqVm:s:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "TLvqVm:s:x:n:X:N:h")) != -1)
 	{
 		switch(c)
 		{
@@ -1024,6 +1161,23 @@ bulktest_main(int argc, const char **argv)
 			else trace_info.mem_limit = fz_atoi64(fz_optarg);
 			break;
 		case 'L': lowmemory = 1; break;
+
+		case 'x':
+			// expect a regex to match
+			match_regex = fz_optarg;
+			break;
+		case 'X':
+			// expect a regex to to *skip* (i.e. ignore)
+			ignore_match_regex = fz_optarg;
+			break;
+		case 'n':
+			// expect one or more line numbers and/or ranges to match
+			match_numbers_s = fz_optarg;
+			break;
+		case 'N':
+			// expect one or more line numbers and/or ranges to *skip* (i.e. ignore)
+			ignore_match_numbers_s = fz_optarg;
+			break;
 
 		case 'V': fz_info(ctx, "bulktest version %s", FZ_VERSION); return EXIT_FAILURE;
 
@@ -1089,6 +1243,8 @@ bulktest_main(int argc, const char **argv)
 	FILE* datafeed = NULL;
 	const char* scriptname = NULL;
 	const char* datafilename = NULL;
+	const struct range* match_test_numbers_ranges = NULL;
+	const struct range* ignore_match_test_numbers_ranges = NULL;
 
 	fz_try(ctx)
 	{
@@ -1096,6 +1252,31 @@ bulktest_main(int argc, const char **argv)
 		int skip_to_datalinecounter = 0;
 
 		timing.start_time = Curl_now();
+
+		// page the match & ignore test number ranges, if any were specified:
+		// 
+		// (NOTE: we don't mind about the '~n' format (n-from-end) supported by the API we use:
+		// we accept we'll be getting some odd behaviour as we DO NOT count the number of lines
+		// in our input test file(s). This is hacky testcode, after all.)
+		//
+		match_test_numbers_ranges = decode_numbers_rangespec(match_numbers_s);
+		ignore_match_test_numbers_ranges = decode_numbers_rangespec(ignore_match_numbers_s);
+
+		if (match_regex || ignore_match_regex || match_test_numbers_ranges || ignore_match_test_numbers_ranges)
+		{
+			char numbuf1[LONGLINE];
+			char numbuf2[LONGLINE];
+			fz_info(ctx, "Using a RESTRICTED DATA SET:\n"
+				"- ACCEPT: regex: %s\n"
+				"          line numbers: %s\n"
+				"- IGNORE: regex: %s\n"
+				"          line numbers: %s\n"
+				"-----------------------------------------------------------------------------------\n\n\n",
+				match_regex2str(match_regex),
+				rangespec2str(numbuf1, sizeof(numbuf1), match_test_numbers_ranges),
+				match_regex2str(ignore_match_regex),
+				rangespec2str(numbuf2, sizeof(numbuf2), ignore_match_test_numbers_ranges));
+		}
 
 		// fz_optind is a global that may change by recursive calls to this main. Keep a local copy and use that instead:
 		int optind = fz_optind;
@@ -1167,9 +1348,18 @@ bulktest_main(int argc, const char **argv)
 						dataline = my_getline(datafeed, &datalinecounter);
 						if (!dataline)
 							break;		// EOF
+						const char* dataline_for_reporting = dataline;
 						size_t pos = strcspn(dataline, " \t\r\n#%");  // comment lines in datafeeds start with # or %
 						if (dataline[pos] == 0 || strchr("#%", dataline[pos]))
 							dataline = NULL;  // discard
+						// also check against any user-specified match/ignore rules:
+						int reject = test_dataline_against_matchspecs(dataline, datalinecounter, match_regex, ignore_match_regex, match_test_numbers_ranges, ignore_match_test_numbers_ranges);
+						if (reject)
+						{
+							dataline = NULL;  // discard
+							size_t len = strlen(dataline_for_reporting);
+							fz_info(ctx, "::SKIPPED: (reason: %s):: #%04d: %.*s%s\n", test_fail_reason[reject], datalinecounter, (len > 45 ? 40 : len), dataline_for_reporting, (len > 45 ? "..." : ""));
+						}
 					} while (!dataline || skip_to_datalinecounter > datalinecounter);
 
 					// when we've reached the end of the datafeed, it's time to check if there's another datafile waiting for us...
