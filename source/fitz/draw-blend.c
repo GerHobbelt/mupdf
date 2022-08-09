@@ -27,7 +27,7 @@
 
 #include <string.h>
 #include <math.h>
-#include <assert.h>
+#include "mupdf/assert.h"
 
 /* PDF 1.4 blend modes. These are slow. */
 
@@ -1274,6 +1274,142 @@ fz_blend_pixmap(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap * FZ_RES
 #endif
 }
 
+#if 0
+
+// this code assumes there's a sentinel waiting for us at the end of the hp[] array...
+static inline size_t
+fz_mem_find_nonzero_byte(const byte* hp)
+{
+	size_t zlen;
+
+	if (*hp)
+	{
+		ASSERT(hp[0] != 0);
+		return 0;
+	}
+	size_t to_alignment = (-(((ptrdiff_t)hp) & 0x7) & 0x7);
+
+	for (zlen = 0; zlen < to_alignment; zlen++)
+	{
+		if (hp[zlen])
+		{
+			ASSERT(hp[zlen] != 0);
+			return zlen;
+		}
+	}
+	const byte * np = (hp + zlen);
+
+	// the next U64 has a non-zero byte:
+	while (!hp[zlen])
+	{
+		zlen++;
+	}
+	ASSERT(hp[zlen] != 0);
+	return zlen;
+}
+
+static inline void
+fz_blend_knockout(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n1, int w, const byte * FZ_RESTRICT hp)
+{
+	int k;
+	const int spal = n1 + sal;
+	const int bpal = n1 + bal;
+
+	// plug in sentinel:
+	byte oe = hp[w - 1];
+	((byte *)hp)[w - 1] = 0x01;
+
+	size_t zlen;
+	do
+	{
+		zlen = fz_mem_find_nonzero_byte(hp);
+
+		ASSERT(hp[zlen] != 0);
+		hp += zlen;
+		w -= zlen;
+		sp += zlen * spal;
+		bp += zlen * bpal;
+
+		int ha = *hp++;
+		ASSERT(ha != 0);
+
+		// check for and unplug sentinel:
+		if (w == 1)
+		{
+			((byte *)hp)[w - 1] = oe;
+			ha = oe;
+			if (ha == 0)
+			{
+				// when the very last byte of input is NUL, we're done already!
+				return;
+			}
+		}
+
+		// in rendered images, there's quite often a run of non-zero bytes,
+		// so we shortcut the outer zero-skipping scan: that's the purpose of
+		// this inner loop.
+		do
+		{
+			int sa = (sal ? sp[n1] : 255);
+			int ba = (bal ? bp[n1] : 255);
+			if (ba == 0 && ha == 0xFF)
+			{
+				memcpy(bp, sp, n1);
+				if (bal)
+					bp[n1] = sa;
+			}
+			else
+			{
+				//int hasa = fz_mul255(ha, sa);
+				/* ugh, division to get non-premul components */
+				int invsa = sa ? 255 * 256 / sa : 0;
+				int invba = ba ? 255 * 256 / ba : 0;
+				int ra = ha + fz_mul255(255-ha, ba);
+
+				/* Process colorants + spots */
+				for (k = 0; k < n1; k++)
+				{
+					int sc = (sp[k] * invsa + 128) >> 8;
+					int bc = (bp[k] * invba + 128) >> 8;
+					int rc = fz_mul255(255 - ha, bc) + fz_mul255(ha, sc);
+
+					bp[k] = fz_mul255(ra, rc);
+				}
+
+				if (bal)
+					bp[k] = ra;
+			}
+
+			sp += spal;
+			bp += bpal;
+			w--;
+
+			// check for and unplug sentinel:
+			if (w <= 1)
+			{
+				ASSERT(w >= 0);
+				if (!w)
+					return;
+
+				((byte*)hp)[w - 1] = oe;
+				ha = oe;
+				if (ha == 0)
+				{
+					// when the very last byte of input is NUL, we're done already!
+					return;
+				}
+				continue;
+			}
+			ha = *hp++;
+		}
+		while (ha != 0);
+		hp--;
+	}
+	while (w);
+}
+
+#else
+
 static inline void
 fz_blend_knockout(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n1, int w, const byte * FZ_RESTRICT hp)
 {
@@ -1319,6 +1455,8 @@ fz_blend_knockout(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, i
 	}
 	while (--w);
 }
+
+#endif
 
 void
 fz_blend_pixmap_knockout(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap * FZ_RESTRICT src, const fz_pixmap * FZ_RESTRICT shape)
