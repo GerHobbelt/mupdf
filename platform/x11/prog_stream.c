@@ -28,11 +28,11 @@
 #endif
 
 #include "mupdf/fitz.h"
+#include "mupdf/assert.h"
 
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
 
 #include "curl_stream.h"
 #include "timeval.h"
@@ -272,11 +272,11 @@ fz_open_file_progressive(fz_context *ctx, const char *name, int kbps, void (*on_
 {
 	FILE *f;
 #ifdef _WIN32
-	f = fz_fopen_utf8(name, "rb");
+	f = fz_fopen_utf8(ctx, name, "rb");
 #else
 	f = fopen(name, "rb");
 #endif
 	if (f == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s", name);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, strerror(errno));
 	return fz_open_file_ptr_progressive(ctx, f, kbps, on_data, opaque);
 }

@@ -26,6 +26,7 @@
 #endif
 
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <errno.h>
@@ -36,13 +37,14 @@ fz_file_exists(fz_context *ctx, const char *path)
 {
 	FILE *file;
 #ifdef _WIN32
-	file = fz_fopen_utf8(path, "rb");
+	file = fz_fopen_utf8(ctx, path, "rb");
 #else
 	file = fopen(path, "rb");
 #endif
+	int e = !!file;
 	if (file)
 		fclose(file);
-	return !!file;
+	return e;
 }
 
 fz_stream *
@@ -179,7 +181,7 @@ fz_open_file(fz_context *ctx, const char *name)
 {
 	FILE *file;
 #ifdef _WIN32
-	file = fz_fopen_utf8(name, "rb");
+	file = fz_fopen_utf8(ctx, name, "rb");
 #else
 	file = fopen(name, "rb");
 #endif

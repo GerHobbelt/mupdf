@@ -382,7 +382,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 
 	/* If <append> is false, we use fopen()'s 'x' flag to force an error if
 	 * some other process creates the file immediately after we have removed
-	 * it - this avoids vulnerability where a less-privilege process can create
+	 * it - this avoids vulnerability where a less-privileged process can create
 	 * a link and get us to overwrite a different file. See:
 	 * 	https://bugs.ghostscript.com/show_bug.cgi?id=701797
 	 * 	http://www.open-std.org/jtc1/sc22//WG14/www/docs/n1339.pdf
@@ -391,19 +391,19 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	/* Ensure we create a brand new file. We don't want to clobber our old file. */
 	if (!append)
 	{
-		if (fz_remove_utf8(filename) < 0)
+		if (fz_remove_utf8(ctx, filename) < 0)
 			if (errno != ENOENT)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot remove file '%s': %s", filename, strerror(errno));
 	}
 #if defined(__MINGW32__) || defined(__MINGW64__)
-	file = fz_fopen_utf8(filename, append ? "rb+" : "wb+"); /* 'x' flag not suported. */
+	file = fz_fopen_utf8(ctx, filename, append ? "rb+" : "wb+"); /* 'x' flag not supported. */
 #else
-	file = fz_fopen_utf8(filename, append ? "rb+" : "wb+x");
+	file = fz_fopen_utf8(ctx, filename, append ? "rb+" : "wb+x");
 #endif
 	if (append)
 	{
 		if (file == NULL)
-			file = fz_fopen_utf8(filename, "wb+");
+			file = fz_fopen_utf8(ctx, filename, "wb+");
 		else
 			fseek(file, 0, SEEK_END);
 	}

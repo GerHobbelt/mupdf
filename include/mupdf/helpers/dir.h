@@ -18,6 +18,14 @@ extern "C" {
 
 int fz_chdir(fz_context* ctx, const char* path);
 
+FILE *fz_fopen_utf8(fz_context *ctx, const char *name, const char *mode);
+int fz_remove_utf8(fz_context *ctx, const char *name);
+int fz_mkdirp_utf8(fz_context *ctx, const char* name);
+
+int64_t fz_stat_ctime(const char *path);
+int64_t fz_stat_mtime(const char *path);
+
+
 /**
   Create directory for given *file* path, so that a subsequent file-create action will not fail due to the given path not existing.
 

@@ -506,8 +506,8 @@ static void open_attachment_dialog(void)
 				filename = fz_path_basename(attach_filename);
 
 				contents = fz_read_file(ctx, attach_filename);
-				created = fz_stat_ctime(attach_filename);
-				modified = fz_stat_mtime(attach_filename);
+				created = fz_stat_ctime(ctx, attach_filename);
+				modified = fz_stat_mtime(ctx, attach_filename);
 
 				fs = pdf_add_embedded_file(ctx, pdf, filename, NULL, contents,
 					created, modified, 0);

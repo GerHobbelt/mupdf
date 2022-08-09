@@ -63,6 +63,7 @@ typedef unsigned __int64 uint64_t;
 #include <stdint.h> /* needed for int64_t */
 #endif
 
+#include "mupdf/assert.h"
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"
 
@@ -178,10 +179,6 @@ static __inline int signbit(double x)
 char *fz_utf8_from_wchar(const wchar_t *s);
 wchar_t *fz_wchar_from_utf8(const char *s);
 
-/* really a FILE* but we don't want to include stdio.h here */
-void *fz_fopen_utf8(const char *name, const char *mode);
-int fz_remove_utf8(const char *name);
-
 char **fz_argv_from_wargv(int argc, const wchar_t **wargv);
 void fz_free_argv(int argc, const char** argv);
 
@@ -191,9 +188,6 @@ void fz_free_argv(int argc, const char** argv);
 #ifndef S_ISDIR
 #define S_ISDIR(mode) ((mode) & S_IFDIR)
 #endif
-
-int64_t fz_stat_ctime(const char *path);
-int64_t fz_stat_mtime(const char *path);
 
 #ifdef __cplusplus
 }
