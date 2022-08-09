@@ -19,53 +19,53 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libfmt</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAF3A53}</ProjectGuid>
-    <RootNamespace>libfmt</RootNamespace>
+    <ProjectName>fmt_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF84FD40}</ProjectGuid>
+    <RootNamespace>fmt_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,9 +120,9 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -132,14 +132,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,7 +150,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -158,15 +158,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -177,7 +177,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -187,14 +187,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -205,7 +205,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -213,15 +213,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFMT;FMT_STATICLIB;BUILDING_LIBCHM_IO;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -234,9 +234,39 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/fmt.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/format.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/os.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\test\add-subdirectory-test\basic-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/args-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/assert-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/chrono-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/color-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/compile-fp-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/compile-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/core-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/cuda-test/cpp14.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/enforce-checks-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/find-package-test/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/format-impl-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/format-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/gtest-extra-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/gtest-extra.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/gtest/gmock-gtest-all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/header-only-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/module-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/noexception-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/os-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/ostream-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/posix-mock-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/printf-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/ranges-odr-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/ranges-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/scan-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/static-export-test/library.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\test\static-export-test\export-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/std-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/test-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/unicode-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/xchar-test.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/fmt/include/fmt/args.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmt/include/fmt/chrono.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmt/include/fmt/color.h" />
@@ -250,6 +280,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/fmt/include/fmt/ranges.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmt/include/fmt/std.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fmt/include/fmt/xchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/gtest-extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/gtest/gmock/gmock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/gtest/gtest/gtest-spi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/gtest/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/mock-allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/posix-mock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/test-assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/util.h" />
     <Text Include="../../thirdparty/owemdjee/fmt/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/fmt/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/fmt/ChangeLog.rst" />
@@ -276,10 +315,24 @@
     <Text Include="../../thirdparty/owemdjee/fmt/support/rst2md.py" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/rtd/conf.py" />
     <Text Include="../../thirdparty/owemdjee/fmt/support/rtd/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/add-subdirectory-test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/compile-error-test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/cuda-test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/find-package-test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/fuzzing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/fuzzing/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/fuzzing/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/gtest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fmt/test/static-export-test/CMakeLists.txt" />
     <Xml Include="../../thirdparty/owemdjee/fmt/support/AndroidManifest.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
