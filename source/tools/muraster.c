@@ -169,6 +169,7 @@
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/assert.h"
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
@@ -1421,7 +1422,7 @@ static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t olds
 }
 
 static void *
-trace_malloc(void *arg, size_t size)
+trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p;
@@ -1433,7 +1434,7 @@ trace_malloc(void *arg, size_t size)
 		return hit_memory_limit(info, 1, 0, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 1, 0, size);
-	p = malloc(size + sizeof(trace_header));
+	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
@@ -1476,7 +1477,7 @@ trace_free(void *arg, void *p_)
 }
 
 static void *
-trace_realloc(void *arg, void *p_, size_t size)
+trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
@@ -1489,7 +1490,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 
 	if (p_ == NULL)
-		return trace_malloc(arg, size);
+		return trace_malloc(arg, size   FZDBG_PASS);
 	if (size > SIZE_MAX - sizeof(trace_header))
 		return NULL;
 	oldsize = p[-1].size;
@@ -1513,7 +1514,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 	else
 	{
-		p = realloc(&p[-1], size + sizeof(trace_header));
+		p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
 		if (p == NULL)
 			return NULL;
 		info->current += size - oldsize;

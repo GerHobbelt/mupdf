@@ -447,6 +447,7 @@ static fz_context* ctx = NULL;
 
 static void mu_drop_context(void)
 {
+	assert(fz_has_global_context());
 	assert(!ctx || (ctx->error.top == ctx->error.stack_base));
 
 	if (mutool_is_toplevel_ctx)

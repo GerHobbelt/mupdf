@@ -27,7 +27,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <stdlib.h>
 #include <stdio.h>
 

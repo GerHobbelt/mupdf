@@ -231,7 +231,10 @@ qiqqa_fingerprint0_main(int argc, const char** argv)
 			datafeed = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		if (datafilename)
+			fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		else
+			fz_error(ctx, "Failure during tool startup: %s", fz_caught_message(ctx));
 
 		errored = 1;
 	}

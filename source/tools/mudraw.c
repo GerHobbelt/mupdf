@@ -35,6 +35,7 @@
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/assert.h"
 
 #if FZ_ENABLE_PDF
 #include "mupdf/pdf.h" /* for pdf output */
@@ -1838,7 +1839,7 @@ static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t olds
 }
 
 static void *
-trace_malloc(void *arg, size_t size)
+trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p;
@@ -1850,7 +1851,7 @@ trace_malloc(void *arg, size_t size)
 		return hit_memory_limit(info, 1, 0, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 1, 0, size);
-	p = malloc(size + sizeof(trace_header));
+	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
@@ -1893,7 +1894,7 @@ trace_free(void *arg, void *p_)
 }
 
 static void *
-trace_realloc(void *arg, void *p_, size_t size)
+trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	trace_header *p = (trace_header *)p_;
@@ -1906,7 +1907,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 
 	if (p_ == NULL)
-		return trace_malloc(arg, size);
+		return trace_malloc(arg, size   FZDBG_PASS);
 	if (size > SIZE_MAX - sizeof(trace_header))
 		return NULL;
 	oldsize = p[-1].size;
@@ -1930,7 +1931,7 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 	else
 	{
-		p = realloc(&p[-1], size + sizeof(trace_header));
+		p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
 		if (p == NULL)
 			return NULL;
 		info->current += size - oldsize;
@@ -2240,12 +2241,15 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 		// make sure we produce a unique, non-existing image file path:
 		do
 		{
-			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "png");
+			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, (buf ? NULL : "ILLEGAL-ZERO-SIZED"), "png");
 			img_seqnum++;
 		} while (fz_file_exists(ctx, image_path));
 
 		fz_write_string(ctx, out, image_path);
-		fz_save_buffer(ctx, buf, image_path);
+		if (buf)
+		{
+			fz_save_buffer(ctx, buf, image_path);
+		}
 	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, buf);
@@ -2463,6 +2467,8 @@ static void mu_drop_context(void)
 			const char* total_unit;
 			const char* peak_unit;
 			const char* current_unit;
+
+			ASSERT(ctx != NULL);
 
 			total = humanize(trace_info.total, &total_unit);
 			peak = humanize(trace_info.peak, &peak_unit);
@@ -3277,7 +3283,7 @@ int main(int argc, const char** argv)
 						{
 							/* Accelerator data is out of date */
 #ifdef _WIN32
-							fz_remove_utf8(accelpath);
+							fz_remove_utf8(ctx, accelpath);
 #else
 							remove(accelpath);
 #endif

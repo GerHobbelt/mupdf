@@ -29,15 +29,12 @@
 
 #include "mupdf/fitz.h"
 
-#include <sys/stat.h>
-
 #ifdef _WIN32
 
 #include <stdio.h>
-#include <errno.h>
+#include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-#include <sys/stat.h>
 
 
 char *
@@ -87,51 +84,6 @@ fz_wchar_from_utf8(const char *s)
 	return r;
 }
 
-void *
-fz_fopen_utf8(const char *name, const char *mode)
-{
-	wchar_t *wname, *wmode;
-	FILE *file;
-
-	wname = fz_wchar_from_utf8(name);
-	if (wname == NULL)
-	{
-		return NULL;
-	}
-
-	wmode = fz_wchar_from_utf8(mode);
-	if (wmode == NULL)
-	{
-		free(wname);
-		return NULL;
-	}
-
-	file = _wfopen(wname, wmode);
-
-	free(wname);
-	free(wmode);
-	return file;
-}
-
-int
-fz_remove_utf8(const char *name)
-{
-	wchar_t *wname;
-	int n;
-
-	wname = fz_wchar_from_utf8(name);
-	if (wname == NULL)
-	{
-		errno = ENOMEM;
-		return -1;
-	}
-
-	n = _wremove(wname);
-
-	free(wname);
-	return n;
-}
-
 /*
 Return NULL on (out of memory) error.
 */
@@ -168,66 +120,6 @@ fz_free_argv(int argc, const char** argv)
 	for (i = 0; i < argc; i++)
 		free((void *)argv[i]);
 	free((void *)argv);
-}
-
-int64_t
-fz_stat_ctime(const char *path)
-{
-	struct _stat info;
-	wchar_t *wpath;
-
-	wpath = fz_wchar_from_utf8(path);
-	if (wpath == NULL)
-		return 0;
-
-	if (_wstat(wpath, &info) < 0) {
-		free(wpath);
-		return 0;
-	}
-
-	free(wpath);
-	return info.st_ctime;
-}
-
-int64_t
-fz_stat_mtime(const char *path)
-{
-	struct _stat info;
-	wchar_t *wpath;
-
-	wpath = fz_wchar_from_utf8(path);
-	if (wpath == NULL)
-		return 0;
-
-	if (_wstat(wpath, &info) < 0) {
-		free(wpath);
-		return 0;
-	}
-
-	free(wpath);
-	return info.st_mtime;
-}
-
-#else
-
-#include <sys/stat.h>
-
-int64_t
-fz_stat_ctime(const char *path)
-{
-	struct stat info;
-	if (stat(path, &info) < 0)
-		return 0;
-	return info.st_ctime;
-}
-
-int64_t
-fz_stat_mtime(const char *path)
-{
-	struct stat info;
-	if (stat(path, &info) < 0)
-		return 0;
-	return info.st_mtime;
 }
 
 #endif /* _WIN32 */

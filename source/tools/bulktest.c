@@ -10,6 +10,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/assert.h"
 
 #ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
@@ -43,6 +44,8 @@ static fz_context* ctx = NULL;
 #ifndef DISABLE_MUTHREADS
 
 static mu_mutex mutexes[FZ_LOCK_MAX];
+static mu_mutex heap_debug_mutex;
+static int heap_debug_mutex_is_initialized;
 
 static void mudraw_lock(void *user, int lock)
 {
@@ -65,6 +68,8 @@ static void fin_mudraw_locks(void)
 
 	for (i = 0; i < FZ_LOCK_MAX; i++)
 		mu_destroy_mutex(&mutexes[i]);
+	heap_debug_mutex_is_initialized = 0;
+	mu_destroy_mutex(&heap_debug_mutex);
 }
 
 static fz_locks_context *init_mudraw_locks(void)
@@ -74,6 +79,8 @@ static fz_locks_context *init_mudraw_locks(void)
 
 	for (i = 0; i < FZ_LOCK_MAX; i++)
 		failed |= mu_create_mutex(&mutexes[i]);
+	failed |= mu_create_mutex(&heap_debug_mutex);
+	heap_debug_mutex_is_initialized = !failed;
 
 	if (failed)
 	{
@@ -103,16 +110,25 @@ struct timing {
 
 static struct timing timing;
 
-typedef struct
+// Note: this allocated block' header must stick to the alignment agreement of the system/RTL: 128 bits (32 bytes) on x86 at least.
+// It is also handy to stick to that alignment rule for other SEE/AVX/NEON platforms' ease of use.
+typedef
+#if defined(_MSC_VER)
+__declspec(align(32))
+#else 
+__attribute__((aligned(32))
+#endif
+struct trace_header
 {
 	size_t size;
 	size_t seqnum;
-#if defined(_M_IA64) || defined(_M_AMD64) || defined(_WIN64)
 	size_t magic;
-	size_t align128;
-#else
-	size_t magic;
-#endif
+
+	// heap debugging:
+	int origin_line;
+	const char* origin_file;
+	struct trace_header* prev;
+	struct trace_header* next;
 } trace_header;
 
 struct trace_info
@@ -124,6 +140,9 @@ struct trace_info
 	size_t allocs;
 	size_t mem_limit;
 	size_t alloc_limit;
+
+	// heap debugging:
+	struct trace_header* last;
 };
 
 static struct trace_info trace_info = { 1 };
@@ -142,6 +161,7 @@ static void *hit_limit(void *val)
 
 static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
+	ASSERT(info == &trace_info);
 	if (is_malloc)
 		fz_error(ctx, "Memory limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->mem_limit, size, info->current);
 	else
@@ -152,6 +172,7 @@ static void *hit_memory_limit(struct trace_info *info, int is_malloc, size_t old
 
 static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t oldsize, size_t size)
 {
+	ASSERT(info == &trace_info);
 	if (is_malloc)
 		fz_error(ctx, "Allocation limit (%zu) hit upon malloc(%zu) when %zu already allocated.", info->alloc_limit, size, info->current);
 	else
@@ -160,9 +181,10 @@ static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t olds
 }
 
 static void *
-trace_malloc(void *arg, size_t size)
+trace_malloc(void *arg, size_t size, const char *srcfile, int srcline)
 {
 	struct trace_info *info = (struct trace_info *) arg;
+	ASSERT(info == &trace_info);
 	trace_header *p;
 	if (size == 0)
 		return NULL;
@@ -172,12 +194,28 @@ trace_malloc(void *arg, size_t size)
 		return hit_memory_limit(info, 1, 0, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 1, 0, size);
-	p = malloc(size + sizeof(trace_header));
+	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, srcfile, srcline);
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
 	p[0].magic = 0xEAD;
 	p[0].seqnum = info->sequence_number++;
+	p[0].origin_file = srcfile;
+	p[0].origin_line = srcline;
+
+	if (heap_debug_mutex_is_initialized)
+		mu_lock_mutex(&heap_debug_mutex);
+	if (info->last)
+	{
+		ASSERT(info->last->next == NULL);
+		info->last->next = p;
+	}
+	p[0].prev = info->last;
+	p[0].next = NULL;
+	info->last = p;
+	if (heap_debug_mutex_is_initialized)
+		mu_unlock_mutex(&heap_debug_mutex);
+
 	info->current += size;
 	info->total += size;
 	if (info->current > info->peak)
@@ -190,6 +228,7 @@ static void
 trace_free(void *arg, void *p_)
 {
 	struct trace_info *info = (struct trace_info *) arg;
+	ASSERT(info == &trace_info);
 	trace_header *p = (trace_header *)p_;
 
 	if (p_ == NULL)
@@ -204,22 +243,51 @@ trace_free(void *arg, void *p_)
 		p[-1].magic++;
 		rotten = 1;
 	}
+
 	if (rotten)
 	{
 		fz_error(ctx, "*!* corrupted heap record! %p", &p[-1]);
 	}
 	else
 	{
+		if (heap_debug_mutex_is_initialized)
+			mu_lock_mutex(&heap_debug_mutex);
+		struct trace_header* next = p[-1].next;
+		struct trace_header* prev = p[-1].prev;
+		if (next)
+		{
+			ASSERT(next->prev == &p[-1]);
+		}
+		if (prev)
+		{
+			ASSERT(prev->next == &p[-1]);
+		}
+		if (next)
+		{
+			next->prev = prev;
+		}
+		if (prev)
+		{
+			prev->next = next;
+		}
+		if (info->last == &p[-1])
+		{
+			ASSERT(next == NULL);
+			info->last = prev;
+		}
+		if (heap_debug_mutex_is_initialized)
+			mu_unlock_mutex(&heap_debug_mutex);
+
 		free(&p[-1]);
 	}
 }
 
 static void *
-trace_realloc(void *arg, void *p_, size_t size)
+trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline)
 {
 	struct trace_info *info = (struct trace_info *) arg;
+	ASSERT(info == &trace_info);
 	trace_header *p = (trace_header *)p_;
-	size_t oldsize;
 
 	if (size == 0)
 	{
@@ -228,17 +296,17 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 
 	if (p_ == NULL)
-		return trace_malloc(arg, size);
+		return trace_malloc(arg, size, srcfile, srcline);
+
 	if (size > SIZE_MAX - sizeof(trace_header))
 		return NULL;
-	oldsize = p[-1].size;
-	if (info->mem_limit > 0 && size > info->mem_limit - info->current + oldsize)
-		return hit_memory_limit(info, 0, oldsize, size);
+
+	if (info->mem_limit > 0 && size > info->mem_limit - info->current + p[-1].size)
+		return hit_memory_limit(info, 0, p[-1].size, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
-		return hit_alloc_limit(info, 0, oldsize, size);
+		return hit_alloc_limit(info, 0, p[-1].size, size);
 
 	int rotten = 0;
-	oldsize = p[-1].size;
 	if (p[-1].magic != 0xEAD)
 	{
 		fz_error(ctx, "*!* double free! %d", (int)(p[-1].magic - 0xEAD));
@@ -252,19 +320,92 @@ trace_realloc(void *arg, void *p_, size_t size)
 	}
 	else
 	{
-		p = realloc(&p[-1], size + sizeof(trace_header));
+		trace_header old = p[-1];
+		trace_header* old_p = &p[-1];
+		p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, srcfile, srcline);
 		if (p == NULL)
 			return NULL;
-		info->current += size - oldsize;
-		if (size > oldsize)
-			info->total += size - oldsize;
+		info->current += size - old.size;
+		if (size > old.size)
+			info->total += size - old.size;
 		if (info->current > info->peak)
 			info->peak = info->current;
+		p[0].origin_file = srcfile;
+		p[0].origin_line = srcline;
 		p[0].size = size;
 		info->allocs++;
+
+		if (heap_debug_mutex_is_initialized)
+			mu_lock_mutex(&heap_debug_mutex);
+		if (old.next)
+		{
+			ASSERT(old.next->prev == old_p);
+		}
+		if (old.prev)
+		{
+			ASSERT(old.prev->next == old_p);
+		}
+		if (old.next)
+		{
+			old.next->prev = p;
+		}
+		if (old.prev)
+		{
+			old.prev->next = p;
+		}
+		if (info->last == old_p)
+		{
+			ASSERT(old.next == NULL);
+			info->last = p;
+		}
+		if (heap_debug_mutex_is_initialized)
+			mu_unlock_mutex(&heap_debug_mutex);
+
 		return &p[1];
 	}
 }
+
+static size_t
+trace_snapshot(void)
+{
+	return trace_info.sequence_number;
+}
+
+static void
+trace_report_pending_allocations_since(size_t snapshot_id)
+{
+	if (heap_debug_mutex_is_initialized)
+		mu_lock_mutex(&heap_debug_mutex);
+
+	trace_header* p = trace_info.last;
+	ASSERT(p->next == NULL);
+	int hits = 0;
+	while (p && p->seqnum >= snapshot_id)
+	{
+		fprintf(stderr, "\nLEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
+		hits++;
+		
+		p = p->prev;
+	}
+	if (!hits)
+	{
+		//fprintf(stderr, "\nNo leaks found.\n");
+	}
+	else
+	{
+		fprintf(stderr, "\n");
+	}
+
+	if (heap_debug_mutex_is_initialized)
+		mu_unlock_mutex(&heap_debug_mutex);
+}
+
+typedef size_t fz_trace_snapshot_f(void);
+typedef void fz_trace_report_pending_allocations_since_f(size_t snapshot_id);
+
+extern __declspec(dllimport) fz_trace_snapshot_f* fz_trace_snapshot;
+extern __declspec(dllimport) fz_trace_report_pending_allocations_since_f* fz_trace_report_pending_allocations_since;
+
 
 static const char *prefix = NULL;
 static int verbosity = 0;
@@ -649,7 +790,7 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
 
 	fz_free(ctx, buf);
 
-	assert(count < (len + start_index + 1));
+	ASSERT(count < (len + start_index + 1));
 
 	// end argv[] with a sentinel NULL:
 	start[count] = NULL;
@@ -794,54 +935,61 @@ static float humanize(size_t value, const char** unit)
 
 static void mu_drop_context(void)
 {
-	if (showtime)
+	if (!ctx && fz_has_global_context())
 	{
-		timediff_t duration = Curl_timediff(Curl_now(), timing.start_time);
-
-		if (timing.count > 0)
+		ASSERT(!"Should never get here.");
+		ctx = fz_get_global_context();
+	}
+	if (ctx)
+	{
+		if (showtime)
 		{
-			fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands",
-				timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
-			fz_info(ctx, "fastest command line %d: %lldms (%s)", timing.minscriptline, timing.min / 1000, timing.mincommand);
-			fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+			timediff_t duration = Curl_timediff(Curl_now(), timing.start_time);
 
-			// reset timing after reporting: this atexit handler MAY be invoked multiple times!
-			memclr(&timing, sizeof(timing));
+			if (timing.count > 0)
+			{
+				fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands",
+					timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
+				fz_info(ctx, "fastest command line %d: %lldms (%s)", timing.minscriptline, timing.min / 1000, timing.mincommand);
+				fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+
+				// reset timing after reporting: this atexit handler MAY be invoked multiple times!
+				memclr(&timing, sizeof(timing));
+			}
+
+			fz_dump_lock_times(ctx, duration);
+		}
+		showtime = 0;
+
+		if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
+		{
+			float total, peak, current;
+			const char* total_unit;
+			const char* peak_unit;
+			const char* current_unit;
+
+			total = humanize(trace_info.total, &total_unit);
+			peak = humanize(trace_info.peak, &peak_unit);
+			current = humanize(trace_info.current, &current_unit);
+
+			fz_info(ctx, "Memory use total=%.2f%s peak=%.2f%s current=%.2f%s",
+				total, total_unit, peak, peak_unit, current, current_unit);
+			fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
+
+			// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
+			clear_trace_info();
 		}
 
-		fz_dump_lock_times(ctx, duration);
+		close_active_logfile();
+		fz_free(ctx, logcfg.logfilepath);
+		logcfg.logfilepath = NULL;
+
+		fz_free(ctx, timing.mincommand);
+		fz_free(ctx, timing.maxcommand);
+		timing.mincommand = NULL;
+		timing.maxcommand = NULL;
 	}
-	showtime = 0;
-
-	if (trace_info.allocs && (trace_info.mem_limit || trace_info.alloc_limit || showmemory))
-	{
-		float total, peak, current;
-		const char* total_unit;
-		const char* peak_unit;
-		const char* current_unit;
-
-		total = humanize(trace_info.total, &total_unit);
-		peak = humanize(trace_info.peak, &peak_unit);
-		current = humanize(trace_info.current, &current_unit);
-
-		fz_info(ctx, "Memory use total=%.2f%s peak=%.2f%s current=%.2f%s",
-			total, total_unit, peak, peak_unit, current, current_unit);
-		fz_info(ctx, "Allocations total=%zu", trace_info.allocs);
-
-		// reset heap tracing after reporting: this atexit handler MAY be invoked multiple times!
-		clear_trace_info();
-	}
-
-	close_active_logfile();
-	fz_free(ctx, logcfg.logfilepath);
-	logcfg.logfilepath = NULL;
-
-	fz_free(ctx, timing.mincommand);
-	fz_free(ctx, timing.maxcommand);
-	timing.mincommand = NULL;
-	timing.maxcommand = NULL;
-
-	assert(!ctx || (ctx->error.top == ctx->error.stack_base));
+	ASSERT(!ctx || (ctx->error.top == ctx->error.stack_base));
 
 	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
 	ctx = NULL;
@@ -1116,6 +1264,11 @@ static const char* match_regex2str(const char* re)
 int
 bulktest_main(int argc, const char **argv)
 {
+	fz_trace_snapshot = &trace_snapshot;
+	fz_trace_report_pending_allocations_since = &trace_report_pending_allocations_since;
+
+	ASSERT(1 != 0);
+
 	int c;
 	int errored = 0;
 	int script_is_template = 0;

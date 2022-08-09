@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 
 struct pdf_graft_map
 {

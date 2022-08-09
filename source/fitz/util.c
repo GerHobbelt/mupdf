@@ -525,8 +525,15 @@ fz_write_image_as_data_uri(fz_context *ctx, fz_output *out, fz_image *image)
 	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params);
 	fz_try(ctx)
 	{
-		fz_write_string(ctx, out, "data:image/png;base64,");
-		fz_write_base64_buffer(ctx, out, buf, 1);
+		if (buf)
+		{
+			fz_write_string(ctx, out, "data:image/png;base64,");
+			fz_write_base64_buffer(ctx, out, buf, 1);
+		}
+		else
+		{
+			fz_write_string(ctx, out, "(ILLEGAL-ZERO-SIZED)");
+		}
 	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, buf);
@@ -562,8 +569,15 @@ fz_append_image_as_data_uri(fz_context *ctx, fz_buffer *out, fz_image *image)
 	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params);
 	fz_try(ctx)
 	{
-		fz_append_string(ctx, out, "data:image/png;base64,");
-		fz_append_base64_buffer(ctx, out, buf, 1);
+		if (buf)
+		{
+			fz_append_string(ctx, out, "data:image/png;base64,");
+			fz_append_base64_buffer(ctx, out, buf, 1);
+		}
+		else
+		{
+			fz_append_string(ctx, out, "(ILLEGAL-ZERO-SIZED)");
+		}
 	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, buf);
@@ -577,8 +591,15 @@ fz_write_pixmap_as_data_uri(fz_context *ctx, fz_output *out, fz_pixmap *pixmap)
 	fz_buffer *buf = fz_new_buffer_from_pixmap_as_png(ctx, pixmap, fz_default_color_params);
 	fz_try(ctx)
 	{
-		fz_write_string(ctx, out, "data:image/png;base64,");
-		fz_write_base64_buffer(ctx, out, buf, 1);
+		if (buf)
+		{
+			fz_write_string(ctx, out, "data:image/png;base64,");
+			fz_write_base64_buffer(ctx, out, buf, 1);
+		}
+		else
+		{
+			fz_write_string(ctx, out, "(ILLEGAL-ZERO-SIZED)");
+		}
 	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, buf);
@@ -592,8 +613,15 @@ fz_append_pixmap_as_data_uri(fz_context *ctx, fz_buffer *out, fz_pixmap *pixmap)
 	fz_buffer *buf = fz_new_buffer_from_pixmap_as_png(ctx, pixmap, fz_default_color_params);
 	fz_try(ctx)
 	{
-		fz_append_string(ctx, out, "data:image/png;base64,");
-		fz_append_base64_buffer(ctx, out, buf, 1);
+		if (buf)
+		{
+			fz_append_string(ctx, out, "data:image/png;base64,");
+			fz_append_base64_buffer(ctx, out, buf, 1);
+		}
+		else
+		{
+			fz_append_string(ctx, out, "(ILLEGAL-ZERO-SIZED)");
+		}
 	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, buf);

@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 #include "pdf-annot-imp.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <limits.h>
 #include <string.h>
 

@@ -27,7 +27,7 @@
 
 #include <zlib-ng.h>
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <limits.h>
 #include <string.h>
 

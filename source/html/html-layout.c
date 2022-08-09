@@ -29,7 +29,7 @@
 #include <ft2build.h>
 
 #include <math.h>
-#include <assert.h>
+#include "mupdf/assert.h"
 
 #undef DEBUG_HARFBUZZ
 

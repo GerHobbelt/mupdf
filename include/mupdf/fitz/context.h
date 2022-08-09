@@ -31,6 +31,31 @@
 extern "C" {
 #endif
 
+/*
+* Macros to assist location tracing of allocated heap memory in debug builds a la MSVC crtdbg API:
+*/
+#if defined(DEBUG) || defined(_DEBUG) || defined(FZ_HEAP_TRACING)
+
+// for function prototypes:
+#define FZDBG_DECL_ARGS				, const char *trace_srcfile, int trace_srcline
+// for passing these through into function calls
+#define FZDBG_PASS					, trace_srcfile, trace_srcline
+// for those places where we wish to start the trace and invoke the heap alloc functions:
+#define FZDBG_THIS_POS()			, __FILE__, __LINE__
+// for the benefit of expanded macros which themselves don't accept our irregular approach:
+#define FZDBG_DECL_THIS_POS()		static const char *trace_srcfile = __FILE__; static const int trace_srcline = __LINE__
+
+#define FZDBG_HAS_TRACING 1
+
+#else
+
+#define FZDBG_DECL_ARGS     
+#define FZDBG_PASS			
+#define FZDBG_THIS_POS()		
+#define FZDBG_DECL_THIS_POS()		(void)0
+
+#endif
+
 typedef struct fz_font_context fz_font_context;
 typedef struct fz_colorspace_context fz_colorspace_context;
 typedef struct fz_style_context fz_style_context;
@@ -48,9 +73,9 @@ typedef struct fz_context fz_context;
 typedef struct
 {
 	void *user;
-	void *(*malloc_)(void *, size_t);
-	void *(*realloc_)(void *, void *, size_t);
-	void (*free_)(void *, void *);
+	void *(*malloc_)(void *user, size_t size   FZDBG_DECL_ARGS);
+	void *(*realloc_)(void *user, void *old_ptr, size_t size   FZDBG_DECL_ARGS);
+	void (*free_)(void *user, void *old_ptr);
 } fz_alloc_context;
 
 /**
@@ -204,7 +229,11 @@ enum {
 
 	May return NULL.
 */
-#define fz_new_context(alloc, locks, max_store) fz_new_context_imp(alloc, locks, max_store, FZ_VERSION)
+fz_context *fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks, size_t max_store, const char *version);
+static inline fz_context *fz_new_context(const fz_alloc_context *alloc, const fz_locks_context *locks, size_t max_store)
+{
+	return fz_new_context_imp(alloc, locks, max_store, FZ_VERSION);
+}
 
 /**
 	Make a clone of an existing context.
@@ -260,6 +289,8 @@ void fz_drop_context_locks(fz_context* ctx);
 	Use this for access to error, warning and info log channels, for example.
 */
 fz_context* fz_get_global_context(void);
+
+fz_context* __fz_get_RAW_global_context(void);
 
 /**
 	Set the global context to a given context.
@@ -650,7 +681,11 @@ void fz_disable_icc(fz_context *ctx);
 
 	Throws exception in the event of failure to allocate.
 */
-void *fz_malloc(fz_context *ctx, size_t size);
+void *fz_malloc(fz_context *ctx, size_t size   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_malloc(ctx, size)					\
+	fz_malloc(ctx, size, __FILE__, __LINE__)
+#endif
 
 /**
 	Allocate array of memory of count entries of size bytes.
@@ -658,7 +693,11 @@ void *fz_malloc(fz_context *ctx, size_t size);
 
 	Throws exception in the event of failure to allocate.
 */
-void *fz_calloc(fz_context *ctx, size_t count, size_t size);
+void *fz_calloc(fz_context *ctx, size_t count, size_t size   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_calloc(ctx, count, size)					\
+	fz_calloc(ctx, count, size, __FILE__, __LINE__)
+#endif
 
 /**
 	Reallocates a block of memory to given size. Existing contents
@@ -671,7 +710,11 @@ void *fz_calloc(fz_context *ctx, size_t count, size_t size);
 
 	Throws exception in the event of failure to allocate.
 */
-void *fz_realloc(fz_context *ctx, void *p, size_t size);
+void *fz_realloc(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_realloc(ctx, old, size)					\
+	fz_realloc(ctx, old, size, __FILE__, __LINE__)
+#endif
 
 /**
 	Free a previously allocated block of memory.
@@ -686,24 +729,40 @@ void fz_free(fz_context *ctx, const void *p);
 	fz_malloc equivalent that returns NULL rather than throwing
 	exceptions.
 */
-void *fz_malloc_no_throw(fz_context *ctx, size_t size);
+void *fz_malloc_no_throw(fz_context *ctx, size_t size   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_malloc_no_throw(ctx, size)					\
+	fz_malloc_no_throw(ctx, size, __FILE__, __LINE__)
+#endif
 
 /**
 	fz_calloc equivalent that returns NULL rather than throwing
 	exceptions.
 */
-void *fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size);
+void *fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_calloc_no_throw(ctx, count, size)					\
+	fz_calloc_no_throw(ctx, count, size, __FILE__, __LINE__)
+#endif
 
 /**
 	fz_realloc equivalent that returns NULL rather than throwing
 	exceptions.
 */
-void *fz_realloc_no_throw(fz_context *ctx, void *p, size_t size);
+void *fz_realloc_no_throw(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_realloc_no_throw(ctx, old, size)					\
+	fz_realloc_no_throw(ctx, old, size, __FILE__, __LINE__)
+#endif
 
 /**
 	Portable strdup implementation, using fz allocators.
 */
-char *fz_strdup(fz_context *ctx, const char *s);
+char *fz_strdup(fz_context *ctx, const char *s   FZDBG_DECL_ARGS);
+#if defined(FZDBG_HAS_TRACING)
+#define fz_strdup(ctx, str)					\
+	fz_strdup(ctx, str, __FILE__, __LINE__)
+#endif
 
 /**
 	Fill block with len bytes of pseudo-randomness.

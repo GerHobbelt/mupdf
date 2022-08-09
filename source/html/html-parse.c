@@ -26,7 +26,7 @@
 
 #include <string.h>
 #include <stdio.h>
-#include <assert.h>
+#include "mupdf/assert.h"
 
 enum { T, R, B, L };
 

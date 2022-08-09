@@ -10,6 +10,13 @@
 #include <errno.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <time.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <sys/stat.h>
+
 
 /**
  * Normalize a given path, i.e. resolve the ./ and ../ directories that may be part of it.
@@ -456,17 +463,84 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 }
 
 
+#if defined(_WIN32)
+
+static wchar_t* fz_UNC_wfullpath_from_name(const char* name)
+{
+	wchar_t* d, * r;
+	size_t len = fz_maxi(4096, strlen(name) + 100);
+	int c;
+	r = d = malloc(len * 2 * sizeof(wchar_t));
+	if (!r)
+		return NULL;
+
+	const char* s = name;
+	d = r + len;
+	while (*s) {
+		s += fz_chartorune_unsafe(&c, s);
+		/* Truncating c to a wchar_t can be problematic if c
+			* is 0x10000. */
+		if (c >= 0x10000)
+			c = FZ_REPLACEMENT_CHARACTER;
+		*d++ = c;
+	}
+	*d = 0;
+	ASSERT(d - r < 2 * len);
+
+	wcscpy(r, L"\\\\?\\");
+	d = _wfullpath(r + 4, r + len, len - 4);
+	if (!d)
+	{
+		const char* msg = strerror(errno);
+		free(r);
+		errno = ENOMEM;
+		return NULL;
+	}
+	// in the unlucky case, where _wfullpath() expanded to a path already including the UNC prefix,
+	// we need to drop the prefix we already set up:
+	if (!wcsncmp(r + 4, L"\\\\?\\", 4))
+	{
+		// overlapping move:
+		memmove(r, r + 4, len);
+	}
+	return r;
+}
+
+#endif
+
 int fz_chdir(fz_context* ctx, const char *path)
 {
 #ifdef _MSC_VER
-	if (_chdir(path))
+	wchar_t* wname;
+
+	wname = fz_UNC_wfullpath_from_name(path);
+	if (wname == NULL)
+	{
+		return errno || ENOMEM;
+	}
+
+	// remove trailing / dir separator, if any...
+	size_t len = wcslen(wname);
+	if (wname[len - 1] == '\\')
+	{
+		if (wname[len - 2] != ':')
+			wname[len - 1] = 0;
+	}
+
+	if (_wchdir(wname))
 #else
 	if (chdir(path))
 #endif
 	{
+		int e = errno;
+
+#ifdef _MSC_VER
+		free(wname);
+#endif
+
 		if (ctx)
 		{
-			switch (errno)
+			switch (e)
 			{
 			case ENOENT:
 				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Unable to locate the directory: %s", path);
@@ -475,14 +549,59 @@ int fz_chdir(fz_context* ctx, const char *path)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Invalid buffer.");
 				break;
 			default:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Unknown error %d.", (int)errno);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Unknown error %d: %s.", (int)e, strerror(e));
 				break;
 			}
 		}
 		return errno;
 	}
+
+#ifdef _MSC_VER
+	free(wname);
+#endif
+
 	return E_OK;
 }
+
+#if defined(_WIN32)
+
+void fz_mkdir_for_file(fz_context* ctx, const char* path)
+{
+	char* buf = fz_strdup(ctx, path);
+
+	if (!buf)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_mkdir_for_file: out of memory.");
+
+	// unixify MSDOS path:
+	char* e = strchr(buf, '\\');
+	while (e)
+	{
+		*e = '/';
+		e = strchr(e, '\\');
+	}
+	e = strrchr(buf, '/');
+
+	if (e)
+	{
+		// strip off the *filename*: keep the (nested?) path intact for recursive mkdir:
+		*e = 0;
+
+		int rv = fz_mkdirp_utf8(ctx, buf);
+		if (rv)
+		{
+			rv = errno;
+			if (rv != EEXIST)
+			{
+				const char* errmsg = strerror(rv);
+				fz_info(ctx, "mkdirp --> mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
+			}
+		}
+	}
+
+	fz_free(ctx, buf);
+}
+
+#else
 
 void fz_mkdir_for_file(fz_context* ctx, const char* path)
 {
@@ -516,10 +635,215 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 				continue;
 			}
 			// just bluntly attempt to create the directory: we don't care if it fails.
-			mkdir(buf);
+			int rv = mkdir(buf);
+			if (rv)
+			{
+				rv = errno;
+				if (rv != EEXIST)
+				{
+					const char* errmsg = strerror(rv);
+					fz_info(ctx, "mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
+				}
+			}
 			*e = '/';
 		}
-		mkdir(buf);
+		{
+			int rv = mkdir(buf);
+			if (rv)
+			{
+				rv = errno;
+				if (rv != EEXIST)
+				{
+					const char* errmsg = strerror(rv);
+					fz_info(ctx, "mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
+				}
+			}
+		}
 	}
 	fz_free(ctx, buf);
 }
+
+#endif
+
+
+
+#if defined(_WIN32)
+
+int64_t
+fz_stat_ctime(const char* path)
+{
+	struct _stat info;
+	wchar_t* wpath;
+
+	wpath = fz_UNC_wfullpath_from_name(path);
+	if (wpath == NULL)
+		return 0;
+
+	int n = _wstat(wpath, &info);
+	int e = errno;
+	if (n < 0) {
+		free(wpath);
+		errno = e;
+		return 0;
+	}
+
+	free(wpath);
+	return info.st_ctime;
+}
+
+int64_t
+fz_stat_mtime(const char* path)
+{
+	struct _stat info;
+	wchar_t* wpath;
+
+	wpath = fz_UNC_wfullpath_from_name(path);
+	if (wpath == NULL)
+		return 0;
+
+	int n = _wstat(wpath, &info);
+	int e = errno;
+	if (n < 0) {
+		free(wpath);
+		errno = e;
+		return 0;
+	}
+
+	free(wpath);
+	errno = e;
+	return info.st_mtime;
+}
+
+#else
+
+int64_t
+fz_stat_ctime(const char* path)
+{
+	struct stat info;
+	if (stat(path, &info) < 0)
+		return 0;
+	return info.st_ctime;
+}
+
+int64_t
+fz_stat_mtime(const char* path)
+{
+	struct stat info;
+	if (stat(path, &info) < 0)
+		return 0;
+	return info.st_mtime;
+}
+
+#endif /* _WIN32 */
+
+
+#if defined(_WIN32)
+
+FILE *
+fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
+{
+	wchar_t* wname, * wmode;
+	FILE* file;
+
+	wname = fz_UNC_wfullpath_from_name(name);
+	if (wname == NULL)
+	{
+		return NULL;
+	}
+
+	wmode = fz_wchar_from_utf8(mode);
+	if (wmode == NULL)
+	{
+		free(wname);
+		errno = ENOMEM;
+		return NULL;
+	}
+
+	file = _wfopen(wname, wmode);
+	int e = errno;
+
+	free(wname);
+	free(wmode);
+
+	errno = e;
+	return file;
+}
+
+int
+fz_remove_utf8(fz_context* ctx, const char* name)
+{
+	wchar_t* wname;
+	int n;
+
+	wname = fz_UNC_wfullpath_from_name(name);
+	if (wname == NULL)
+	{
+		errno = ENOMEM;
+		return -1;
+	}
+
+	n = _wremove(wname);
+	int e = errno;
+
+	free(wname);
+
+	errno = e;
+	return n;
+}
+
+int
+fz_mkdirp_utf8(fz_context* ctx, const char* name)
+{
+	wchar_t* wname;
+
+	wname = fz_UNC_wfullpath_from_name(name);
+	if (wname == NULL)
+	{
+		errno = ENOMEM;
+		return -1;
+	}
+
+	// as this is now an UNC path, we can only mkdir beyond the drive letter:
+	wchar_t* p = wname + 4;
+	wchar_t* q = wcschr(p, ':');
+	if (!q)
+		q = p;
+	wchar_t* d = wcschr(q, '\\'); // drive rootdir
+	if (d)
+		d = wcschr(d + 1, '\\'); // first path level
+	if (d == NULL)
+	{
+		free(wname);
+		errno = ENOMEM;
+		return -1;
+	}
+
+	for(;;)
+	{
+		wchar_t c = *d;
+		*d = 0;
+
+		int n = _wmkdir(wname);
+		int e = errno;
+		if (n && e != EEXIST)
+		{
+			free(wname);
+			errno = e;
+			return -1;
+		}
+		*d = c;
+		// did we reach the end of the *original* path spec?
+		if (!c)
+			break;
+		q = wcschr(d + 1, '\\');
+		if (q)
+			d = q;
+		else
+			d += wcslen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
+	}
+
+	free(wname);
+	return 0;
+}
+
+#endif

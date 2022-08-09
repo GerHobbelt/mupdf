@@ -50,7 +50,7 @@
  */
 
 static void *
-do_scavenging_malloc(fz_context *ctx, size_t size)
+do_scavenging_malloc(fz_context *ctx, size_t size   FZDBG_DECL_ARGS)
 {
 	void *p;
 	int phase = 0;
@@ -60,7 +60,7 @@ do_scavenging_malloc(fz_context *ctx, size_t size)
 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
-		p = ctx->alloc.malloc_(ctx->alloc.user, size);
+		p = ctx->alloc.malloc_(ctx->alloc.user, size   FZDBG_PASS);
 		if (p != NULL)
 		{
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
@@ -73,7 +73,7 @@ do_scavenging_malloc(fz_context *ctx, size_t size)
 }
 
 static void *
-do_scavenging_realloc(fz_context *ctx, void *p, size_t size)
+do_scavenging_realloc(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS)
 {
 	void *q;
 	int phase = 0;
@@ -83,7 +83,7 @@ do_scavenging_realloc(fz_context *ctx, void *p, size_t size)
 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	do {
-		q = ctx->alloc.realloc_(ctx->alloc.user, p, size);
+		q = ctx->alloc.realloc_(ctx->alloc.user, p, size   FZDBG_PASS);
 		if (q != NULL)
 		{
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
@@ -95,78 +95,84 @@ do_scavenging_realloc(fz_context *ctx, void *p, size_t size)
 	return NULL;
 }
 
+#undef fz_malloc
 void *
-fz_malloc(fz_context *ctx, size_t size)
+fz_malloc(fz_context *ctx, size_t size   FZDBG_DECL_ARGS)
 {
 	void *p;
 	if (size == 0)
 		return NULL;
-	p = do_scavenging_malloc(ctx, size);
+	p = do_scavenging_malloc(ctx, size   FZDBG_PASS);
 	if (!p)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "malloc of %zu bytes failed", size);
 	return p;
 }
 
+#undef fz_malloc_no_throw
 void *
-fz_malloc_no_throw(fz_context *ctx, size_t size)
+fz_malloc_no_throw(fz_context *ctx, size_t size   FZDBG_DECL_ARGS)
 {
 	if (size == 0)
 		return NULL;
-	return do_scavenging_malloc(ctx, size);
+	return do_scavenging_malloc(ctx, size   FZDBG_PASS);
 }
 
+#undef fz_calloc
 void *
-fz_calloc(fz_context *ctx, size_t count, size_t size)
+fz_calloc(fz_context *ctx, size_t count, size_t size   FZDBG_DECL_ARGS)
 {
 	void *p;
 	if (count == 0 || size == 0)
 		return NULL;
 	if (count > SIZE_MAX / size)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "calloc (%zu x %zu bytes) failed (size_t overflow)", count, size);
-	p = do_scavenging_malloc(ctx, count * size);
+	p = do_scavenging_malloc(ctx, count * size   FZDBG_PASS);
 	if (!p)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "calloc (%zu x %zu bytes) failed", count, size);
 	memset(p, 0, count*size);
 	return p;
 }
 
+#undef fz_calloc_no_throw
 void *
-fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size)
+fz_calloc_no_throw(fz_context *ctx, size_t count, size_t size   FZDBG_DECL_ARGS)
 {
 	void *p;
 	if (count == 0 || size == 0)
 		return NULL;
 	if (count > SIZE_MAX / size)
 		return NULL;
-	p = do_scavenging_malloc(ctx, count * size);
+	p = do_scavenging_malloc(ctx, count * size   FZDBG_PASS);
 	if (p)
 		memset(p, 0, count * size);
 	return p;
 }
 
+#undef fz_realloc
 void *
-fz_realloc(fz_context *ctx, void *p, size_t size)
+fz_realloc(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS)
 {
 	if (size == 0)
 	{
 		fz_free(ctx, p);
 		return NULL;
 	}
-	p = do_scavenging_realloc(ctx, p, size);
+	p = do_scavenging_realloc(ctx, p, size   FZDBG_PASS);
 	if (!p)
 		fz_throw(ctx, FZ_ERROR_MEMORY, "realloc (%zu bytes) failed", size);
 	return p;
 }
 
+#undef fz_realloc_no_throw
 void *
-fz_realloc_no_throw(fz_context *ctx, void *p, size_t size)
+fz_realloc_no_throw(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS)
 {
 	if (size == 0)
 	{
 		fz_free(ctx, p);
 		return NULL;
 	}
-	return do_scavenging_realloc(ctx, p, size);
+	return do_scavenging_realloc(ctx, p, size   FZDBG_PASS);
 }
 
 void
@@ -181,11 +187,12 @@ fz_free(fz_context *ctx, const void *p)
 	}
 }
 
+#undef fz_strdup
 char *
-fz_strdup(fz_context *ctx, const char *s)
+fz_strdup(fz_context *ctx, const char *s   FZDBG_DECL_ARGS)
 {
 	size_t len = strlen(s) + 1;
-	char *ns = (char *)fz_malloc(ctx, len);
+	char *ns = (char *)fz_malloc(ctx, len   FZDBG_PASS);
 	if (ns)
 	{
 		memcpy(ns, s, len);
@@ -194,15 +201,15 @@ fz_strdup(fz_context *ctx, const char *s)
 }
 
 static void *
-fz_malloc_default(void *opaque, size_t size)
+fz_malloc_default(void *opaque, size_t size   FZDBG_DECL_ARGS)
 {
-	return malloc(size);
+	return _malloc_dbg(size, _NORMAL_BLOCK   FZDBG_PASS);
 }
 
 static void *
-fz_realloc_default(void *opaque, void *old, size_t size)
+fz_realloc_default(void *opaque, void *old, size_t size   FZDBG_DECL_ARGS)
 {
-	return realloc(old, size);
+	return _realloc_dbg(old, size, _NORMAL_BLOCK   FZDBG_PASS);
 }
 
 static void
