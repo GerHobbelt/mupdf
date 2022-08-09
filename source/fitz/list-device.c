@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <string.h>
 #include <time.h>
 

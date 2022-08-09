@@ -28,7 +28,7 @@
 
 #include <string.h>
 #include <math.h>
-#include <assert.h>
+#include "mupdf/assert.h"
 
 /* TODO: here or public? */
 static int

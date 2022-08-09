@@ -413,6 +413,7 @@ png_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, i
 	{
 		if (drop)
 			fz_drop_pixmap(ctx, pix);
+#pragma message("TODO: throw exception in strict mode. Also check out 'ignore_errors' in mudraw tool and link this to that setting.")
 		return NULL;
 	}
 

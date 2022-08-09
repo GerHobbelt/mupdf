@@ -22,7 +22,7 @@
 
 #include "mupdf/fitz.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <errno.h>
 #include <float.h>
 

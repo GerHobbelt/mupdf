@@ -1,6 +1,7 @@
 
 #include "pch.h"
 
+#include "mupdf/assert.h"
 #include "mupdf/helpers/debugheap.h"
 
 
@@ -211,7 +212,8 @@ static int EnableMemLeakChecking(void)
 	// memory which may be used to simulate low-memory condition)
 
 	//_CrtSetBreakAlloc(744);  /* Break at memalloc{744}, or 'watch' _crtBreakAlloc */
-	const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
 	flags |= desired_flags;
 	_CrtSetDbgFlag(flags);
@@ -233,4 +235,50 @@ static int EnableMemLeakChecking(void)
 static int fz_memleak_checking_is_set_up = EnableMemLeakChecking();
 
 #endif // __VISUALC__
+
+static int hits = 0;
+
+int fz_report_failed_assertion(const char *expression, const char *srcfile, int srcline)
+{
+	if (!hits)
+	{
+		hits++;
+		fprintf(stderr, "Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
+		char buf[2048];
+		snprintf(buf, sizeof(buf), "Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
+		buf[sizeof(buf) - 1] = 0;
+		OutputDebugStringA(buf);
+		// CAN we throw an exception and handle it that way?
+
+		fz_context* ctx = __fz_get_RAW_global_context();
+		if (ctx && ctx->error.top > ctx->error.stack_base)
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "EXCEPTION: %s", buf);
+		}
+		else
+		{
+			exit(77);
+		}
+	}
+	else
+	{
+		OutputDebugStringA("Assertion hit in atexit() handler on the rebound:");
+		char buf[2048];
+		snprintf(buf, sizeof(buf), "Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
+		buf[sizeof(buf) - 1] = 0;
+		OutputDebugStringA(buf);
+	}
+	abort();
+	return 0;
+}
+
+int fz_report_failed_assertion_and_continue(const char *expression, const char *srcfile, int srcline)
+{
+	fprintf(stderr, "Soft Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
+	char buf[2048];
+	snprintf(buf, sizeof(buf), "Soft Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
+	buf[sizeof(buf) - 1] = 0;
+	OutputDebugStringA(buf);
+	return 0;
+}
 

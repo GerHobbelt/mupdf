@@ -25,7 +25,7 @@
 
 #include <math.h>
 #include <float.h>
-#include <assert.h>
+#include "mupdf/assert.h"
 
 #define MAX_DEPTH 8
 

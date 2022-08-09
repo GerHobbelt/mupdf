@@ -9,7 +9,7 @@
 
 #include "mupdf/fitz.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <string.h>
 #include <time.h>
 

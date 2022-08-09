@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 #include "utf.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <string.h>
 
 #undef DEBUG_OCR

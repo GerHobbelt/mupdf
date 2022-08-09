@@ -29,7 +29,7 @@
 
 #include "hb.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 
 /* Harfbuzz has some major design flaws (for our usage
  * at least).

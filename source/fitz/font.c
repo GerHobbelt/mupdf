@@ -32,7 +32,7 @@
 #include "hb.h"
 #include "hb-ft.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 
 #include FT_FREETYPE_H
 #include FT_ADVANCES_H

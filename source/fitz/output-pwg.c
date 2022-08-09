@@ -24,7 +24,7 @@
 
 #if FZ_ENABLE_PS_OUTPUT
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <string.h>
 
 typedef struct {

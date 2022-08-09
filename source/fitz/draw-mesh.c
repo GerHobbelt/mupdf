@@ -26,7 +26,7 @@
 #include "draw-imp.h"
 #include "pixmap-imp.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <math.h>
 
 enum { MAXN = 2 + FZ_MAX_COLORS };

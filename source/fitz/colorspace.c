@@ -24,7 +24,7 @@
 
 #include "color-imp.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <math.h>
 #include <string.h>
 

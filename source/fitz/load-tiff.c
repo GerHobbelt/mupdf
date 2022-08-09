@@ -27,7 +27,7 @@
 #include "pixmap-imp.h"
 
 #include <limits.h>
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <string.h>
 
 /*

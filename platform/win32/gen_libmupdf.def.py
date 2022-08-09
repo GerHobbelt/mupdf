@@ -164,6 +164,9 @@ EXPORTS
 
 	jpeg_cust_mem_init
 
+	fz_report_failed_assertion
+	fz_report_failed_assertion_and_continue
+
 %(fitz_exports)s
 
 ; MuPDF exports

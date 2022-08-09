@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 
 #include <string.h>
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <float.h>
 #include <math.h>
 
