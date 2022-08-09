@@ -989,7 +989,8 @@ static void mu_drop_context(void)
 		timing.mincommand = NULL;
 		timing.maxcommand = NULL;
 	}
-	ASSERT(!ctx || (ctx->error.top == ctx->error.stack_base));
+
+	ASSERT_AND_CONTINUE(!ctx || (ctx->error.top == ctx->error.stack_base));
 
 	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
 	ctx = NULL;

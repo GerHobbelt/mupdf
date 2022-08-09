@@ -1671,7 +1671,7 @@ static void mu_drop_context(void)
 		}
 	}
 
-	assert(!ctx || (ctx->error.top == ctx->error.stack_base));
+	ASSERT_AND_CONTINUE(!ctx || (ctx->error.top == ctx->error.stack_base));
 
 	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
 	ctx = NULL;
@@ -1681,7 +1681,7 @@ static void mu_drop_context(void)
 	{
 		// as we registered a global context, we should clean the locks on it now
 		// so the atexit handler won't have to bother with it.
-		assert(fz_has_global_context());
+		ASSERT_AND_CONTINUE(fz_has_global_context());
 		ctx = fz_get_global_context();
 		fz_drop_context_locks(ctx);
 		ctx = NULL;
