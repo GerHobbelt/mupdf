@@ -568,6 +568,12 @@ svg_dev_data_text(fz_context *ctx, fz_buffer *out, int c)
 			fz_append_string(ctx, out, "&amp;");
 		else if (c == '"')
 			fz_append_string(ctx, out, "&quot;");
+		if (c == '<')
+			fz_append_string(ctx, out, "&lt;");
+		else if (c == '>')
+			fz_append_string(ctx, out, "&gt;");
+		else if (c == '\'')
+			fz_append_string(ctx, out, "&apos;"); 
 		else if (c >= 32 && c < 127)
 			fz_append_byte(ctx, out, c);
 		else
