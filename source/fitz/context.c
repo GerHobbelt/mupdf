@@ -24,7 +24,7 @@
 
 #include "context-imp.h"
 
-#include <assert.h>
+#include "mupdf/assert.h"
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
@@ -160,6 +160,8 @@ fz_drop_context_locks(fz_context *ctx)
 	ctx->locks = fz_locks_default;
 }
 
+static fz_context* global_ctx = NULL;
+
 void
 fz_drop_context(fz_context *ctx)
 {
@@ -183,6 +185,12 @@ fz_drop_context(fz_context *ctx)
 
 	/* Free the context itself */
 	ctx->alloc.free_(ctx->alloc.user, ctx);
+
+	// fixup for when this happens to be the *global context*:
+	if (global_ctx == ctx)
+	{
+		global_ctx = NULL;
+	}
 }
 
 static void
@@ -221,7 +229,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 	if (!locks)
 		locks = global_default_ctx ? &global_default_ctx->locks : &fz_locks_default;
 
-	ctx = (fz_context *)Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)), "fz_context");
+	ctx = (fz_context *)Memento_label(alloc->malloc_(alloc->user, sizeof(fz_context)   FZDBG_THIS_POS()), "fz_context");
 	if (!ctx)
 	{
 		fz_error(NULL, "cannot create context (phase 1)");
@@ -323,7 +331,7 @@ fz_clone_context(fz_context *ctx)
 	if (ctx == NULL || (ctx->locks.lock == fz_locks_default.lock && ctx->locks.unlock == fz_locks_default.unlock))
 		return NULL;
 
-	new_ctx = (fz_context *)ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context));
+	new_ctx = (fz_context *)ctx->alloc.malloc_(ctx->alloc.user, sizeof(fz_context)   FZDBG_THIS_POS());
 	if (!new_ctx)
 		return NULL;
 
@@ -361,14 +369,17 @@ void *fz_user_context(fz_context *ctx)
 	return ctx->user;
 }
 
-static fz_context *global_ctx = NULL;
-
 fz_context* fz_get_global_context(void)
 {
 	if (!global_ctx)
 	{
 		fz_set_global_context(fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED));
 	}
+	return global_ctx;
+}
+
+fz_context* __fz_get_RAW_global_context(void)
+{
 	return global_ctx;
 }
 
