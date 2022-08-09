@@ -123,6 +123,7 @@ void pdf_set_annot_hot(fz_context *ctx, pdf_annot *annot, int hot)
 	old = annot->is_hot;
 	annot->is_hot = !!hot;
 	if (old != annot->is_hot)
+		// TODO: only set changed if the annot has a different appearance for rollover
 		pdf_set_annot_has_changed(ctx, annot);
 }
 
