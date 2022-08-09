@@ -33,12 +33,12 @@
 #endif
 
 #ifdef HAVE_LCMS2MT
-#define GLOINIT cmsContext glo = (cmsContext)ctx->colorspace->icc_instance;
+#define GLOINIT() cmsContext glo = (cmsContext)ctx->colorspace->icc_instance
 #define GLO glo,
 #include "lcms2mt.h"
 #include "lcms2mt_plugin.h"
 #else
-#define GLOINIT
+#define GLOINIT()	(void)0
 #define GLO
 #include "lcms2.h"
 #endif
@@ -232,7 +232,7 @@ void fz_drop_icc_context(fz_context *ctx)
 
 fz_icc_profile *fz_new_icc_profile(fz_context *ctx, unsigned char *data, size_t size)
 {
-	GLOINIT
+	GLOINIT();
 	fz_icc_profile *profile;
 	profile = (fz_icc_profile *)cmsOpenProfileFromMem(GLO data, (cmsUInt32Number)size);
 	if (profile == NULL)
@@ -242,7 +242,7 @@ fz_icc_profile *fz_new_icc_profile(fz_context *ctx, unsigned char *data, size_t 
 
 int fz_icc_profile_is_lab(fz_context *ctx, fz_icc_profile *profile)
 {
-	GLOINIT
+	GLOINIT();
 	if (profile == NULL)
 		return 0;
 	return (cmsGetColorSpace(GLO profile) == cmsSigLabData);
@@ -250,14 +250,14 @@ int fz_icc_profile_is_lab(fz_context *ctx, fz_icc_profile *profile)
 
 void fz_drop_icc_profile(fz_context *ctx, fz_icc_profile *profile)
 {
-	GLOINIT
+	GLOINIT();
 	if (profile)
 		cmsCloseProfile(GLO profile);
 }
 
 void fz_icc_profile_name(fz_context *ctx, fz_icc_profile *profile, char *name, size_t size)
 {
-	GLOINIT
+	GLOINIT();
 	cmsMLU *descMLU;
 	descMLU = cmsReadTag(GLO profile, cmsSigProfileDescriptionTag);
 	name[0] = 0;
@@ -266,13 +266,13 @@ void fz_icc_profile_name(fz_context *ctx, fz_icc_profile *profile, char *name, s
 
 int fz_icc_profile_components(fz_context *ctx, fz_icc_profile *profile)
 {
-	GLOINIT
+	GLOINIT();
 	return cmsChannelsOf(GLO cmsGetColorSpace(GLO profile));
 }
 
 void fz_drop_icc_link_imp(fz_context *ctx, fz_storable *storable)
 {
-	GLOINIT
+	GLOINIT();
 	fz_icc_link *link = (fz_icc_link*)storable;
 	cmsDeleteTransform(GLO link->handle);
 	fz_free(ctx, link);
@@ -293,7 +293,7 @@ fz_new_icc_link(fz_context *ctx,
 	int copy_spots,
 	int premult)
 {
-	GLOINIT
+	GLOINIT();
 	cmsHPROFILE src_pro = src->u.icc.profile;
 	cmsHPROFILE dst_pro = dst->u.icc.profile;
 	cmsHPROFILE prf_pro = prf ? prf->u.icc.profile : NULL;
@@ -417,7 +417,7 @@ fz_new_icc_link(fz_context *ctx,
 void
 fz_icc_transform_color(fz_context *ctx, fz_color_converter *cc, const float *src, float *dst)
 {
-	GLOINIT
+	GLOINIT();
 #if LCMS_USE_FLOAT
 	cmsDoTransform(GLO cc->link->handle, src, dst, 1);
 #else
@@ -446,7 +446,7 @@ fz_icc_transform_color(fz_context *ctx, fz_color_converter *cc, const float *src
 void
 fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src, fz_pixmap *dst, int copy_spots)
 {
-	GLOINIT
+	GLOINIT();
 	int cmm_num_src, cmm_num_dst, cmm_extras;
 	unsigned char *inputpos, *outputpos, *buffer;
 	int ss = src->stride;
