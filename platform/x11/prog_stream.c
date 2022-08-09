@@ -36,6 +36,7 @@
 
 #include "curl_stream.h"
 #include "timeval.h"
+#include "mupdf/helpers/dir.h"
 
 #ifdef _WIN32
 #include <windows.h>
