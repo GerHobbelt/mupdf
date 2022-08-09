@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,7 +120,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -250,7 +250,7 @@
     <ClCompile Include="../../thirdparty/curl/docs/examples/evhiperfifo.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/externalsocket.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/fileupload.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/fopen.c" />
+    <ClCompile Include="..\..\thirdparty\curl\docs\examples\fopen_demo.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/ftp-wildcard.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/ftpget.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/ftpgetinfo.c" />
@@ -390,6 +390,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/escape.c" />
     <ClCompile Include="../../thirdparty/curl/lib/file.c" />
     <ClCompile Include="../../thirdparty/curl/lib/fileinfo.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/fopen.c" />
     <ClCompile Include="../../thirdparty/curl/lib/formdata.c" />
     <ClCompile Include="../../thirdparty/curl/lib/ftp.c" />
     <ClCompile Include="../../thirdparty/curl/lib/ftplistparser.c" />
@@ -615,11 +616,13 @@
     <ClInclude Include="../../thirdparty/curl/lib/doh.h" />
     <ClInclude Include="../../thirdparty/curl/lib/dotdot.h" />
     <ClInclude Include="../../thirdparty/curl/lib/dynbuf.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/easy_lock.h" />
     <ClInclude Include="../../thirdparty/curl/lib/easyif.h" />
     <ClInclude Include="../../thirdparty/curl/lib/easyoptions.h" />
     <ClInclude Include="../../thirdparty/curl/lib/escape.h" />
     <ClInclude Include="../../thirdparty/curl/lib/file.h" />
     <ClInclude Include="../../thirdparty/curl/lib/fileinfo.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/fopen.h" />
     <ClInclude Include="../../thirdparty/curl/lib/formdata.h" />
     <ClInclude Include="../../thirdparty/curl/lib/ftp.h" />
     <ClInclude Include="../../thirdparty/curl/lib/ftplistparser.h" />
@@ -699,7 +702,6 @@
     <ClInclude Include="../../thirdparty/curl/lib/vquic/quiche.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vquic/vquic.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vssh/ssh.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/vssh/wolfssh.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/bearssl.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/gskit.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/gtls.h" />
@@ -783,6 +785,12 @@
     <Text Include="../../thirdparty/curl/CMake/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/curl/CMake/curl-config.cmake.in" />
     <Text Include="../../thirdparty/curl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/curl/LICENSES/BSD-3-Clause.txt" />
+    <Text Include="../../thirdparty/curl/LICENSES/BSD-4-Clause-UC.txt" />
+    <Text Include="../../thirdparty/curl/LICENSES/GPL-3.0-or-later.txt" />
+    <Text Include="../../thirdparty/curl/LICENSES/ISC.txt" />
+    <Text Include="../../thirdparty/curl/LICENSES/LicenseRef-OpenEvidence.txt" />
+    <Text Include="../../thirdparty/curl/LICENSES/curl.txt" />
     <Text Include="../../thirdparty/curl/Makefile.am" />
     <Text Include="../../thirdparty/curl/README.md" />
     <Text Include="../../thirdparty/curl/SECURITY.md" />
@@ -878,7 +886,6 @@
     <Text Include="../../thirdparty/curl/scripts/zuul/script.sh" />
     <Text Include="../../thirdparty/curl/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/src/Makefile.am" />
-    <Text Include="../../thirdparty/curl/src/macos/MACINSTALL.TXT" />
     <Text Include="../../thirdparty/curl/tests/CI.md" />
     <Text Include="../../thirdparty/curl/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/FILEFORMAT.md" />
@@ -891,6 +898,7 @@
     <Text Include="../../thirdparty/curl/tests/data/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/data/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/dictserver.py" />
+    <Text Include="../../thirdparty/curl/tests/fuzz/README.md" />
     <Text Include="../../thirdparty/curl/tests/fuzz/download_fuzzer.sh" />
     <Text Include="../../thirdparty/curl/tests/libtest/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/libtest/Makefile.am" />
@@ -907,8 +915,7 @@
     <Text Include="../../thirdparty/curl/winbuild/README.md" />
     <Text Include="../../thirdparty/curl/winbuild/makedebug.cmd" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
