@@ -118,7 +118,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
       <SDLCheck>false</SDLCheck>
@@ -126,7 +126,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>Async</ExceptionHandling>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <FloatingPointExceptions>false</FloatingPointExceptions>
@@ -358,6 +358,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/arch/dotproductsse.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrix.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixavx2.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixavx512vnni.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixneon.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixsse.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/simddetect.cpp" />
@@ -506,6 +507,7 @@
     <ClInclude Include="../../thirdparty/tesseract/src/lstm/tfnetwork.pb.cc" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/weightmatrix.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/opencl/openclwrapper.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/svpaint.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/tesseract.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/textord/alignedblob.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/textord/baselinedetect.cpp" />
@@ -594,7 +596,6 @@
     <ClCompile Include="../../thirdparty/tesseract/src/training/wordlist2dawg.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/viewer/scrollview.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/viewer/svmnode.cpp" />
-    <ClCompile Include="../../thirdparty/tesseract/src/svpaint.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/viewer/svutil.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/associate.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/chop.cpp" />
@@ -615,6 +616,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/tface.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/wordclass.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/wordrec.cpp" />
+    <ClInclude Include="../../thirdparty/tesseract/sw.cpp" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/baseapi.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/capi.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/capi_training_tools.h" />

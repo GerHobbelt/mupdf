@@ -13,7 +13,7 @@
 //
 //#define __AVX2__                         1
 //#define __AVX__                          1
-#if _M_IX86_FP > 0
+#if defined(_M_IX86_FP) && (_M_IX86_FP > 0)
 #define __FMA__                          1
 #define __SSE4_1__                       1
 #endif
