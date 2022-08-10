@@ -158,7 +158,7 @@ char *pdfapp_version(pdfapp_t *app)
 {
 	return
 		"MuPDF " FZ_VERSION "\n"
-		"Copyright 2006-2020 Artifex Software, Inc.\n";
+		"Copyright 2006-2022 Artifex Software, Inc.\n";
 }
 
 char *pdfapp_usage(pdfapp_t *app)

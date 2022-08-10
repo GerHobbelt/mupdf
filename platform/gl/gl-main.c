@@ -809,7 +809,7 @@ static int document_shown_as_dirty = 0;
 void update_title(void)
 {
 	char buf[256];
-	const char *title;
+	const char *title = "MuPDF/GL";
 	const char *extra = "";
 	size_t n;
 
