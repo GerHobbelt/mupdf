@@ -2030,3 +2030,170 @@ fz_story_warnings(fz_context *ctx, fz_story *story)
 
 	return (const char *)data;
 }
+
+
+/* Copies fz_story_element_position and page number into a
+fz_story_tocwrite_item, using fz_strdup() for strings. */
+static void tocwrite_item_set(fz_context *ctx, fz_story_tocwrite_item *item, const fz_story_element_position *element, int page_num)
+{
+	item->element = *element;
+	item->element.id = NULL;
+	item->element.text = NULL;
+	if (element->id) item->element.id = fz_strdup(ctx, element->id);
+	if (element->text) item->element.text = fz_strdup(ctx, element->text);
+	item->page_num = page_num;
+}
+
+static void tocwrite_items_clear(fz_context *ctx, fz_story_tocwrite_items *items)
+{
+	int i;
+	/* tocwrite_item_set() will have used fz_strdup() for strings, so free them
+	first: */
+	for (i=0; i<items->num; ++i)
+	{
+		fz_free(ctx, (void*) items->items[i].element.id);
+		fz_free(ctx, (void*) items->items[i].element.text);
+	}
+	fz_free(ctx, items->items);
+	items->items = NULL;
+	items->num = 0;
+}
+
+/* State for use by tocwrite_callback(). */
+typedef struct
+{
+	fz_story_tocwrite_items toc;
+	int page_num;
+} tocwrite_state;
+
+
+static void tocwrite_callback(fz_context *ctx, void* arg, const fz_story_element_position *element)
+{
+	tocwrite_state* state = arg;
+	fz_story_tocwrite_items* items = &state->toc;
+	/* Append <element> plus state->page_num to items->items[]. */
+	items->items = fz_realloc(ctx, items->items, sizeof(*items->items) * (items->num + 1));
+	tocwrite_item_set(ctx, &items->items[items->num], element, state->page_num);
+	items->num += 1;
+}
+
+static int buffers_identical(fz_context *ctx, fz_buffer *a, fz_buffer *b)
+{
+	size_t a_len;
+	size_t b_len;
+	unsigned char* a_data;
+	unsigned char* b_data;
+	a_len = fz_buffer_storage(ctx, a, &a_data);
+	b_len = fz_buffer_storage(ctx, b, &b_data);
+	return a_len == b_len && !memcmp(a_data, b_data, a_len);
+}
+
+void fz_story_tocwrite(fz_context *ctx, fz_document_writer *writer, fz_story_tocwrite_rectfn rectfn, fz_story_tocwrite_contentfn contentfn, const char *user_css, float em, void *ref)
+{
+	tocwrite_state  state = {0};
+	fz_story *story = NULL;
+	fz_buffer *content = NULL;
+	fz_buffer *content_prev = NULL;
+	int stable = 0;
+
+	state.toc.items = NULL;
+	state.toc.num = 0;
+
+	fz_var(state);
+	fz_var(story);
+	fz_var(content);
+
+	fz_try(ctx)
+	{
+		content = fz_new_buffer(ctx, 0 /*capacity*/);
+		content_prev = fz_new_buffer(ctx, 0 /*capacity*/);
+
+		/* Iterate until stable. */
+		for(;;)
+		{
+			fz_device *dev = NULL;
+			fz_rect filled = {0};
+			int rect_num = 0;
+			state.page_num = 0;
+
+			/* Move <content> to <content_prev> and make <content>
+			contain new html from contentfn(). */
+			{
+				fz_buffer *content_tmp = content;
+				content = content_prev;
+				content_prev = content_tmp;
+			}
+			fz_clear_buffer(ctx, content);
+			contentfn(ctx, ref, &state.toc, content);
+
+			if (buffers_identical(ctx, content, content_prev))
+			{
+				/* Content is unchanged, so this is the last iteration and we
+				will use <writer> not NULL. */
+				stable = 1;
+			}
+
+			/* Create story from new content. */
+			fz_drop_story(ctx, story);
+			story = NULL;
+			story = fz_new_story(ctx, content, user_css, em);
+
+			/* Layout the story, gathering toc information as we go. */
+			tocwrite_items_clear(ctx, &state.toc);
+			for(;;)
+			{
+				fz_matrix ctm = fz_identity;
+				fz_rect rect;
+				fz_rect mediabox;
+				int newpage;
+				int more;
+
+				newpage = rectfn(ctx, ref, rect_num, filled, &rect, &ctm, &mediabox);
+				rect_num += 1;
+				if (newpage)
+					state.page_num += 1;
+
+				more = fz_place_story(ctx, story, rect, &filled);
+
+				/* Add items to state.toc. */
+				fz_story_positions(ctx, story, tocwrite_callback, &state /*ref*/);
+
+				if (stable)
+				{
+					if (newpage)
+					{
+						if (dev)
+							fz_end_page(ctx, writer);
+						dev = fz_begin_page(ctx, writer, mediabox);
+					}
+					assert(dev);
+					fz_draw_story(ctx, story, dev, ctm);
+				}
+				else
+				{
+					fz_draw_story(ctx, story, NULL, ctm);
+				}
+				if (!more)
+					break;
+			}
+
+			if (stable)
+			{
+				if (dev)
+					fz_end_page(ctx, writer);
+				break;
+			}
+		}
+	}
+	fz_always(ctx)
+	{
+		fz_drop_story(ctx, story);
+		fz_drop_buffer(ctx, content);
+		fz_drop_buffer(ctx, content_prev);
+		tocwrite_items_clear(ctx, &state.toc);
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
+}

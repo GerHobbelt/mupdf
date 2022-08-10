@@ -207,11 +207,101 @@ const char *festival_template =
 	"<ul>"
 	"</body></html";
 
+
+static int toc_rectfn(fz_context *ctx, void *ref, int num, fz_rect filled, fz_rect *rect, fz_matrix *ctm, fz_rect *mediabox)
+{
+	if (num == 0)
+	{
+		rect->x0 = 100;
+		rect->y0 = 200;
+		rect->x1 = 175;
+		rect->y1 = 300;
+	}
+	else
+	{
+		rect->x0 = 10;
+		rect->y0 = 50;
+		rect->x1 = 290;
+		rect->y1 = 350;
+	}
+	mediabox->x0 = 0;
+	mediabox->y0 = 0;
+	mediabox->x1 = 300;
+	mediabox->y1 = 400;
+	return 1;
+}
+
+static void toc_contentfn(fz_context *ctx, void *ref, fz_story_tocwrite_items *items, fz_buffer *buffer)
+{
+	int i;
+	fz_append_string(ctx, buffer,
+			"<!DOCTYPE html>\n"
+			"<style>\n"
+			"#a { margin: 30px; }\n"
+			"#b { margin: 20px; }\n"
+			"#c { margin: 5px; }\n"
+			"#a { border: 1px solid red; }\n"
+			"#b { border: 1px solid green; }\n"
+			"#c { border: 1px solid blue; }\n"
+			"</style>\n"
+			"<body>\n"
+			"<h2>Contents</h2>\n"
+			"<ol>\n"
+			);
+	for (i=0; i<items->num; ++i)
+	{
+		fz_story_tocwrite_item* item = &items->items[i];
+
+		fz_append_printf(ctx, buffer,
+				"    <li>page=%i depth=%i heading=%i id='%s' rect=(%f %f %f %f) text='%s' open_close=%i\n",
+				item->page_num,
+				item->element.depth,
+				item->element.heading,
+				(item->element.id) ? item->element.id : "",
+				item->element.rect.x0,
+				item->element.rect.y0,
+				item->element.rect.x1,
+				item->element.rect.y1,
+				(item->element.text) ? item->element.text : "",
+				item->element.open_close
+				);
+	}
+	fz_append_string(ctx, buffer, "</ol>\n");
+	fz_append_string(ctx, buffer,
+			"<h1>Section the first</h1>\n"
+			"<p>Blah.\n"
+			"<h1>Section the second</h1>\n"
+			"<p>Blah blah.\n"
+			"<h2>Subsection</h2>\n"
+			"<p>Blah blah blah.\n"
+			"<p>Blah blah blah.\n"
+			"<p>Blah blah blah.\n"
+			"<h1>Section the third</h1>\n"
+			"<p>Blah blah.\n"
+			"</body>\n"
+			);
+	{
+		const char* data = fz_string_from_buffer(ctx, buffer);
+		printf( "======== Html content: ========\n");
+		printf( "%s", data);
+		printf( "========\n");
+	}
+}
+
+
+static void test_tocwrite(fz_context *ctx)
+{
+	fz_document_writer *writer = fz_new_pdf_writer(ctx, "out_toc.pdf", "");
+	fz_story_tocwrite(ctx, writer, toc_rectfn, toc_contentfn, "" /*user_css*/, 11 /*em*/, NULL /*ref*/);
+	fz_close_document_writer(ctx, writer);
+	fz_drop_document_writer(ctx, writer);
+}
+
 int main(int argc, const char *argv[])
 {
 	fz_context *ctx;
 	fz_document_writer *writer = NULL;
-	fz_html_story *story = NULL;
+	fz_story *story = NULL;
 	fz_buffer *buf = NULL;
 	fz_device *dev = NULL;
 	fz_rect mediabox = { 0, 0, 512, 640 };
@@ -237,7 +327,7 @@ int main(int argc, const char *argv[])
 
 		buf = fz_new_buffer_from_copied_data(ctx, snark, strlen(snark)+1);
 
-		story = fz_new_html_story(ctx, buf, "", 11);
+		story = fz_new_story(ctx, buf, "", 11);
 
 		do
 		{
@@ -263,7 +353,7 @@ int main(int argc, const char *argv[])
 	}
 	fz_always(ctx)
 	{
-		fz_drop_html_story(ctx, story);
+		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, buf);
 		fz_drop_document_writer(ctx, writer);
 	}
@@ -284,9 +374,9 @@ int main(int argc, const char *argv[])
 
 		writer = fz_new_pdf_writer(ctx, "out2.pdf", "");
 
-		story = fz_new_html_story(ctx, NULL, "", 11);
+		story = fz_new_story(ctx, NULL, "", 11);
 
-		dom = fz_html_story_document(ctx, story);
+		dom = fz_story_document(ctx, story);
 
 		body = fz_dom_body(ctx, dom);
 
@@ -320,7 +410,7 @@ int main(int argc, const char *argv[])
 	}
 	fz_always(ctx)
 	{
-		fz_drop_html_story(ctx, story);
+		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, buf);
 		fz_drop_document_writer(ctx, writer);
 	}
@@ -343,9 +433,9 @@ int main(int argc, const char *argv[])
 		writer = fz_new_pdf_writer(ctx, "out3.pdf", "");
 
 		buf = fz_new_buffer_from_copied_data(ctx, festival_template, strlen(festival_template)+1);
-		story = fz_new_html_story(ctx, buf, "", 11);
+		story = fz_new_story(ctx, buf, "", 11);
 
-		dom = fz_html_story_document(ctx, story);
+		dom = fz_story_document(ctx, story);
 
 		body = fz_dom_body(ctx, dom);
 
@@ -404,7 +494,7 @@ int main(int argc, const char *argv[])
 	}
 	fz_always(ctx)
 	{
-		fz_drop_html_story(ctx, story);
+		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, buf);
 		fz_drop_document_writer(ctx, writer);
 	}
@@ -412,6 +502,8 @@ int main(int argc, const char *argv[])
 	{
 		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
 	}
+
+	test_tocwrite(ctx);
 
 	fz_drop_context(ctx);
 
