@@ -2483,7 +2483,7 @@ static void mu_drop_context(void)
 		}
 	}
 
-	// NOTE: this assert fires when you run `mutool draw` (and probably other tools as well) and hit Ctrl+C
+	// WARNING: this assert fires when you run `mutool draw` (and probably other tools as well) and hit Ctrl+C
 	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
 	// and the assert fires due to (ctx->error.top != ctx->error.stack).
 	//
