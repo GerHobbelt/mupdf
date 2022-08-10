@@ -1482,34 +1482,39 @@ def build( build_dirs, swig_command, args):
                         jlib.log( 'Compiling/linking mupdf2')
                         cpp2_path = f'{build_dirs.dir_mupdf}/platform/python/mupdfcpp2_swig.cpp'
                         out2_so = f'{build_dirs.dir_so}/_mupdf2.so'
-                        command = ( textwrap.dedent(
-                                f'''
-                                c++
-                                    -o {out2_so}
-                                    {build_dirs.cpp_flags}
-                                    -fPIC
-                                    --shared
-                                    -I {include1}
-                                    -I {include2}
-                                    {include3}
-                                    {cpp2_path}
-                                    {jlib.link_l_flags( [mupdf_so, mupdfcpp_so])}
-                                    -Wno-deprecated-declarations
-                                ''').strip().replace( '\n', ' \\\n').strip()
-                        )
-                        infiles = [
-                                cpp2_path,
-                                include1,
-                                include2,
-                                mupdf_so,
-                                mupdfcpp_so,
-                                ]
-                        jlib.build(
-                                infiles,
-                                out2_so,
-                                command,
-                                force_rebuild,
-                                )
+                        if jlib.filesize( cpp2_path):
+                            jlib.log( 'Compiling/linking mupdf2')
+                            command = ( textwrap.dedent(
+                                    f'''
+                                    c++
+                                        -o {out2_so}
+                                        {build_dirs.cpp_flags}
+                                        -fPIC
+                                        --shared
+                                        -I {include1}
+                                        -I {include2}
+                                        {include3}
+                                        {cpp2_path}
+                                        {jlib.link_l_flags( [mupdf_so, mupdfcpp_so])}
+                                        -Wno-deprecated-declarations
+                                    ''').strip().replace( '\n', ' \\\n').strip()
+                            )
+                            infiles = [
+                                    cpp2_path,
+                                    include1,
+                                    include2,
+                                    mupdf_so,
+                                    mupdfcpp_so,
+                                    ]
+                            jlib.build(
+                                    infiles,
+                                    out2_so,
+                                    command,
+                                    force_rebuild,
+                                    )
+                        else:
+                            jlib.remove( out2_so)
+                            jlib.remove( f'{out2_so}.cmd')
 
                     command = ( textwrap.dedent(
                             f'''

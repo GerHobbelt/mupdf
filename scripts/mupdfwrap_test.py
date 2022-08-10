@@ -37,22 +37,6 @@ g_test_n = 0
 
 g_mupdf_root = os.path.abspath('%s/../..' % __file__)
 
-if 1:
-    b0 = b'asdfg'
-    b1 = mupdf.Buffer.new_buffer_from_copied_data(b0)
-    b2 = b1.buffer_extract()
-    log(f'b0={b0} b1={b1} b2={b2}')
-    assert(b2 == b0)
-
-if 1:
-    b0 = b'asdfg'
-    b1 = mupdf.Buffer.new_buffer_from_copied_data(b0)
-    size, data = b1.buffer_storage_raw()
-    log(f'size={size} data={data}')
-    b2 = mupdf.raw_to_python_bytes( data, size)
-    assert b2 == b0
-    log(f'b1={b1}')
-
 
 def show_stext(document):
     '''

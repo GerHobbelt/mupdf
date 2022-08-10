@@ -334,6 +334,92 @@ def build_swig(
                 }}
                 void* user;
             }};
+
+            void Pixmap_set_alpha_helper(
+                int balen,
+                int n,
+                int data_len,
+                int zero_out,
+                unsigned char* data,
+                fz_pixmap* pix,
+                int premultiply,
+                int bground,
+                const std::vector<int>& colors,
+                const std::vector<int>& bgcolor
+                )
+            {{
+                int i = 0;
+                int j = 0;
+                int k = 0;
+                int data_fix = 255;
+                while (i < balen) {{
+                    unsigned char alpha = data[k];
+                    if (zero_out) {{
+                        for (j = i; j < i+n; j++) {{
+                            if (pix->samples[j] != (unsigned char) colors[j - i]) {{
+                                data_fix = 255;
+                                break;
+                            }} else {{
+                                data_fix = 0;
+                            }}
+                        }}
+                    }}
+                    if (data_len) {{
+                        if (data_fix == 0) {{
+                            pix->samples[i+n] = 0;
+                        }} else {{
+                            pix->samples[i+n] = alpha;
+                        }}
+                        if (premultiply && !bground) {{
+                            for (j = i; j < i+n; j++) {{
+                                pix->samples[j] = fz_mul255(pix->samples[j], alpha);
+                            }}
+                        }} else if (bground) {{
+                            for (j = i; j < i+n; j++) {{
+                                int m = (unsigned char) bgcolor[j - i];
+                                pix->samples[j] = m + fz_mul255((pix->samples[j] - m), alpha);
+                            }}
+                        }}
+                    }} else {{
+                        pix->samples[i+n] = data_fix;
+                    }}
+                    i += n+1;
+                    k += 1;
+                }}
+            }}
+
+            void page_merge_helper(
+                    mupdf::PdfObj& old_annots,
+                    mupdf::PdfGraftMap& graft_map,
+                    mupdf::PdfDocument& doc_des,
+                    mupdf::PdfObj& new_annots,
+                    int n
+                    )
+            {{
+                for ( int i=0; i<n; ++i)
+                {{
+                    mupdf::PdfObj o = mupdf::mpdf_array_get( old_annots, i);
+                    if (mupdf::mpdf_dict_gets( o, "IRT").m_internal)
+                        continue;
+                    mupdf::PdfObj subtype = mupdf::mpdf_dict_get( o, PDF_NAME(Subtype));
+                    if ( mupdf::mpdf_name_eq( subtype, PDF_NAME(Link)))
+                        continue;
+                    if ( mupdf::mpdf_name_eq( subtype, PDF_NAME(Popup)))
+                        continue;
+                    if ( mupdf::mpdf_name_eq( subtype, PDF_NAME(Widget)))
+                    {{
+                        /* fixme: C++ API doesn't yet wrap fz_warn() - it
+                        excludes all variadic fns. */
+                        //mupdf::mfz_warn( "skipping widget annotation");
+                        continue;
+                    }}
+                    mupdf::mpdf_dict_del( o, PDF_NAME(Popup));
+                    mupdf::mpdf_dict_del( o, PDF_NAME(P));
+                    mupdf::PdfObj copy_o = mupdf::mpdf_graft_mapped_object( graft_map, o);
+                    mupdf::PdfObj annot = mupdf::mpdf_new_indirect( doc_des, mupdf::mpdf_to_num( copy_o), 0);
+                    mupdf::mpdf_array_push( new_annots, annot);
+                }}
+            }}
             ''')
 
     common += generated.swig_cpp
@@ -854,111 +940,30 @@ def build_swig(
         text += '%}\n'
 
     text2_code = textwrap.dedent( '''
-                void Pixmap_set_alpha_helper(
-                    int balen,
-                    int n,
-                    int data_len,
-                    int zero_out,
-                    unsigned char* data,
-                    fz_pixmap* pix,
-                    int premultiply,
-                    int bground,
-                    const std::vector<int>& colors,
-                    const std::vector<int>& bgcolor
-                    )
-                {
-                    int i = 0;
-                    int j = 0;
-                    int k = 0;
-                    int data_fix = 255;
-                    while (i < balen) {
-                        unsigned char alpha = data[k];
-                        if (zero_out) {
-                            for (j = i; j < i+n; j++) {
-                                if (pix->samples[j] != (unsigned char) colors[j - i]) {
-                                    data_fix = 255;
-                                    break;
-                                } else {
-                                    data_fix = 0;
-                                }
-                            }
-                        }
-                        if (data_len) {
-                            if (data_fix == 0) {
-                                pix->samples[i+n] = 0;
-                            } else {
-                                pix->samples[i+n] = alpha;
-                            }
-                            if (premultiply && !bground) {
-                                for (j = i; j < i+n; j++) {
-                                    pix->samples[j] = fz_mul255(pix->samples[j], alpha);
-                                }
-                            } else if (bground) {
-                                for (j = i; j < i+n; j++) {
-                                    int m = (unsigned char) bgcolor[j - i];
-                                    pix->samples[j] = m + fz_mul255((pix->samples[j] - m), alpha);
-                                }
-                            }
-                        } else {
-                            pix->samples[i+n] = data_fix;
-                        }
-                        i += n+1;
-                        k += 1;
-                    }
-                }
-
-                void page_merge_helper(
-                        mupdf::PdfObj& old_annots,
-                        mupdf::PdfGraftMap& graft_map,
-                        mupdf::PdfDocument& doc_des,
-                        mupdf::PdfObj& new_annots,
-                        int n
-                        )
-                {
-                    for ( int i=0; i<n; ++i)
-                    {
-                        mupdf::PdfObj o = mupdf::mpdf_array_get( old_annots, i);
-                        if (mupdf::mpdf_dict_gets( o, "IRT").m_internal)
-                            continue;
-                        mupdf::PdfObj subtype = mupdf::mpdf_dict_get( o, PDF_NAME(Subtype));
-                        if ( mupdf::mpdf_name_eq( subtype, PDF_NAME(Link)))
-                            continue;
-                        if ( mupdf::mpdf_name_eq( subtype, PDF_NAME(Popup)))
-                            continue;
-                        if ( mupdf::mpdf_name_eq( subtype, PDF_NAME(Widget)))
-                        {
-                            /* fixme: C++ API doesn't yet wrap fz_warn() - it
-                            excludes all variadic fns. */
-                            //mupdf::mfz_warn( "skipping widget annotation");
-                            continue;
-                        }
-                        mupdf::mpdf_dict_del( o, PDF_NAME(Popup));
-                        mupdf::mpdf_dict_del( o, PDF_NAME(P));
-                        mupdf::PdfObj copy_o = mupdf::mpdf_graft_mapped_object( graft_map, o);
-                        mupdf::PdfObj annot = mupdf::mpdf_new_indirect( doc_des, mupdf::mpdf_to_num( copy_o), 0);
-                        mupdf::mpdf_array_push( new_annots, annot);
-                    }
-                }
             ''')
-    text2 = textwrap.dedent( f'''
-            %{{
-                #include "mupdf/fitz.h"
-                #include "mupdf/classes.h"
-                #include "mupdf/classes2.h"
-                #include <vector>
+
+    if text2_code.strip():
+        text2 = textwrap.dedent( f'''
+                %{{
+                    #include "mupdf/fitz.h"
+                    #include "mupdf/classes.h"
+                    #include "mupdf/classes2.h"
+                    #include <vector>
+
+                    {text2_code}
+                %}}
+
+                %include std_vector.i
+
+                namespace std
+                {{
+                    %template(vectori) vector<int>;
+                }};
 
                 {text2_code}
-            %}}
-
-            %include std_vector.i
-
-            namespace std
-            {{
-                %template(vectori) vector<int>;
-            }};
-
-            {text2_code}
-            ''')
+                ''')
+    else:
+        text2 = ''
 
     if 1:   # lgtm [py/constant-conditional-expression]
         # This is a horrible hack to avoid swig failing because
@@ -997,7 +1002,10 @@ def build_swig(
     os.makedirs( f'{build_dirs.dir_mupdf}/platform/{language}', exist_ok=True)
     os.makedirs( f'{build_dirs.dir_so}', exist_ok=True)
     util.update_file_regress( text, swig_i, check_regress)
-    util.update_file_regress( text2, swig2_i, check_regress)
+    if text2:
+        util.update_file_regress( text2, swig2_i, check_regress)
+    else:
+        jlib.update_file( '', swig2_i)
 
     # Try to disable some unhelpful SWIG warnings;. unfortunately this doesn't
     # seem to have any effect.
@@ -1106,17 +1114,20 @@ def build_swig(
                 f.write( swig_py_content)
             os.rename( swig_py_tmp, swig_py)
 
-
-        # Make mupdf2, for mupdfpy optimisations.
-        jlib.log( 'Running SWIG to generate mupdf2 .cpp')
-        command = make_command( 'mupdf2', swig2_cpp, swig2_i)
-        rebuilt = jlib.build(
-                (swig2_i, include1, include2),
-                (swig2_cpp, swig2_py),
-                command,
-                force_rebuild,
-                )
-        modify_py( rebuilt, swig2_py, do_enums=False)
+        if text2:
+            # Make mupdf2, for mupdfpy optimisations.
+            jlib.log( 'Running SWIG to generate mupdf2 .cpp')
+            command = make_command( 'mupdf2', swig2_cpp, swig2_i)
+            rebuilt = jlib.build(
+                    (swig2_i, include1, include2),
+                    (swig2_cpp, swig2_py),
+                    command,
+                    force_rebuild,
+                    )
+            modify_py( rebuilt, swig2_py, do_enums=False)
+        else:
+            jlib.update_file( '', swig2_cpp)
+            jlib.remove( swig2_py)
 
         # Make main mupdf .so.
         command = make_command( 'mupdf', swig_cpp, swig_i)

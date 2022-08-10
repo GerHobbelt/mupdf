@@ -231,12 +231,12 @@ def make_fncall( tu, cursor, return_type, fncall, out):
         return 's_trace > 1'
 
     out.write( f'    if ({varname_enable()}) {{\n')
-    out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling {cursor.mangled_name}():"')
+    out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling {cursor.mangled_name}():";\n')
     for arg in parse.get_args( tu, cursor, include_fz_context=True):
         if parse.is_pointer_to( arg.cursor.type, 'fz_context'):
-            out.write( f' << " auto_ctx=" << internal_stream_if({varname_enable()}, auto_ctx)')
+            out.write( f'        if ({varname_enable()}) std::cerr << " auto_ctx=" << auto_ctx;\n')
         elif arg.out_param:
-            out.write( f' << " {arg.name}=" << internal_stream_if( {varname_enable()}, (void*) {arg.name})')
+            out.write( f'        if ({varname_enable()}) std::cerr << " {arg.name}=" << (void*) {arg.name};\n')
         elif arg.alt:
             # If not a pod, there will not be an operator<<, so just show
             # the address of this arg.
@@ -245,26 +245,23 @@ def make_fncall( tu, cursor, return_type, fncall, out):
             assert extras.pod != 'none' \
                     'Cannot pass wrapper for {type_.spelling} as arg because pod is "none" so we cannot recover struct.'
             if extras.pod:
-                out.write( f' << " {arg.name}=" << {arg.name}')
+                out.write( f'        std::cerr << " {arg.name}=" << {arg.name};\n')
             elif arg.cursor.type.kind == state.clang.cindex.TypeKind.POINTER:
-                out.write( f' << " {arg.name}=" << internal_stream_if( {varname_enable()}, {arg.name})')
+                out.write( f'        if ({varname_enable()}) std::cerr << " {arg.name}=" << {arg.name};\n')
             else:
-                out.write( f' << " &{arg.name}=" << &{arg.name}')
+                out.write( f'        std::cerr << " &{arg.name}=" << &{arg.name};\n')
         elif parse.is_pointer_to(arg.cursor.type, 'char') and arg.cursor.type.get_pointee().get_canonical().is_const_qualified():
             # 'const char*' is assumed to be zero-terminated string. But we
             # need to protect against trying to write nullptr because this
             # appears to kill std::cerr on Linux.
-            out.write( ';\n')
             out.write( f'        if ({arg.name}) std::cerr << " {arg.name}=\'" << {arg.name} << "\'";\n')
             out.write( f'        else std::cerr << " {arg.name}:null";\n')
-            out.write( f'        std::cerr')
-            #out.write( f' << " {arg.name}=" << {arg.name}')
         elif arg.cursor.type.kind == state.clang.cindex.TypeKind.POINTER:
-            # Don't assume 'char*' is a zero-terminated string.
-            out.write( f' << " {arg.name}=" << internal_stream_if( {varname_enable()}, (void*) {arg.name})')
+            # Don't assume non-const 'char*' is a zero-terminated string.
+            out.write( f'        if ({varname_enable()}) std::cerr << " {arg.name}=" << (void*) {arg.name};\n')
         else:
-            out.write( f' << " {arg.name}=" << {arg.name}')
-    out.write( f' << "\\n";\n')
+            out.write( f'        std::cerr << " {arg.name}=" << {arg.name};\n')
+    out.write( f'        std::cerr << "\\n";\n')
     out.write( f'    }}\n')
 
     # Now output the function call.

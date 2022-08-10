@@ -30,7 +30,7 @@ class Package:
     PEP-517 backend and/or minimal setup.py support for use with a legacy
     (pre-PEP-517) pip.
 
-    A PEP-517 backend can be implemented with:
+    A PEP-517 backend can be implemented with::
 
         import pipcl
         import subprocess
@@ -50,7 +50,7 @@ class Package:
         def build_sdist(sdist_directory, config_settings=None):
             return p.build_sdist(sdist_directory, config_settings)
 
-    Work as a setup.py script by appending:
+    Work as a setup.py script by appending::
 
         import sys
         if __name__ == '__main__':
@@ -81,62 +81,62 @@ class Package:
             root_dir = None,
             ):
         '''
-        name
+        name:
             A string, the name of the Python package.
-        version
+        version:
             A string containing only 0-9 and '.'.
         root:
             Root of package, defaults to current directory.
-        summary
+        summary:
             A string.
-        description
+        description:
             A string.
-        classifiers
+        classifiers:
             A list of strings.
-        url_home
-        url_source
-        url_docs
-        url_tracker
-        url_changelog
+        url_home:
+        url_source:
+        url_docs:
+        url_tracker:
+        url_changelog:
             A string containing a URL.
-        keywords
+        keywords:
             A string containing space-separated keywords.
-        platform
+        platform:
             A string, used in metainfo.
-        license
+        license:
             License text.
-        license_files
+        license_files:
             List of string names of license files.
-        fn_build
+        fn_build:
             A function taking no args that builds the package.
 
             Should return a list of items; each item should be a tuple of two
-            strings (from_, to_) or a single string <path> which is treated as
-            the tuple (path, path).
+            strings `(from_, to_)` or a single string `path` which is treated
+            as the tuple `(path, path)`.
 
-            <from_> should be the path to a file; if a relative path it is
-            assumed to be relative to <root>. <to_> identifies what the file
+            `from_` should be the path to a file; if a relative path it is
+            assumed to be relative to `root`. `to_` identifies what the file
             should be called within a wheel or when installing.
 
             If we are building a wheel (e.g. 'bdist_wheel' in the argv passed
-            to self.handle_argv() or PEP-517 pip calls self.build_wheel()), we
-            copy file <from_> to <to_> inside the wheel archive.
+            to `self.handle_argv()` or PEP-517 pip calls `self.build_wheel()`),
+            we copy file `from_` to `to_` inside the wheel archive.
 
-            If we are installing (e.g. 'install' command in the argv passed to
-            self.handle_argv()), we copy <from_> to <sitepackages>/<to_>, where
-            <sitepackages> is the first item in site.getsitepackages()[] that
-            exists.
-        fn_clean
-            A function taking a single arg <all_> that cleans generated files.
-            <all_> is true iff --all is in argv.
+            If we are installing (e.g. 'install' command in the argv
+            passed to `self.handle_argv()`), we copy `from_` to
+            `sitepackages`/`to_`, where `sitepackages` is the first item in
+            `site.getsitepackages()[]` that exists.
+        fn_clean:
+            A function taking a single arg `all_` that cleans generated files.
+            `all_` is true iff '--all' is in argv.
 
             For safety and convenience, can also returns a list of
             files/directory paths to be deleted. Relative paths are interpreted
-            as relative to <root>. Paths are asserted to be within <root>.
-        fn_sdist
-            A function taking no args that returns a list of paths, e.g.
-            using pipcl.git_items(), for files that should be copied into the
-            sdist. Relative paths are interpreted as relative to <root>. It is
+            as relative to `root`. Paths are asserted to be within `root`.
+        fn_sdist:
+            A function taking no args that returns a list of paths, e.g. using
+            `pipcl.git_items()`, for files that should be copied into the
+            sdist. Relative paths are interpreted as relative to `root`. It is
             an error if a path does not exist or is not a file.
         '''
         self.name = name
@@ -164,11 +164,11 @@ class Package:
 
     def build_wheel(self, wheel_directory, config_settings=None, metadata_directory=None):
         '''
-        Helper for implementing a PEP-517 backend's build_wheel() function.
+        Helper for implementing a PEP-517 backend's `build_wheel()` function.
 
-        Also called by handle_argv() to handle the 'bdist_wheel' command.
+        Also called by `handle_argv()` to handle the 'bdist_wheel' command.
 
-        Returns leafname of generated wheel within <wheel_directory>.
+        Returns leafname of generated wheel within `wheel_directory`.
         '''
         _log('build_wheel():'
                 f' wheel_directory={wheel_directory}'
@@ -247,14 +247,14 @@ class Package:
 
     def build_sdist(self, sdist_directory, config_settings=None):
         '''
-        Helper for implementing a PEP-517 backend's build_sdist() function.
+        Helper for implementing a PEP-517 backend's `build_sdist()` function.
 
         [Though as of 2021-03-24 pip doesn't actually seem to ever call the
-        backend's build_sdist() function?]
+        backend's `build_sdist()` function?]
 
-        Also called by handle_argv() to handle the 'sdist' command.
+        Also called by `handle_argv()` to handle the 'sdist' command.
 
-        Returns leafname of generated archive within <sdist_directory>.
+        Returns leafname of generated archive within `sdist_directory`.
         '''
         paths = []
         if self.fn_sdist:
@@ -263,8 +263,8 @@ class Package:
         manifest = []
         def add(tar, name, contents):
             '''
-            Adds item called <name> to tarfile.TarInfo <tar>, containing
-            <contents>. If contents is a string, it is encoded using utf8.
+            Adds item called `name` to `tarfile.TarInfo` `tar`, containing
+            `contents`. If contents is a string, it is encoded using utf8.
             '''
             if isinstance(contents, str):
                 contents = contents.encode('utf8')
@@ -324,7 +324,7 @@ class Package:
 
     def argv_clean(self, all_):
         '''
-        Called by handle_argv().
+        Called by `handle_argv()`.
         '''
         if not self.fn_clean:
             return
@@ -344,7 +344,7 @@ class Package:
 
     def argv_install(self, record_path):
         '''
-        Called by handle_argv().
+        Called by `handle_argv()`.
         '''
         items = []
         if self.fn_build:
@@ -382,8 +382,8 @@ class Package:
 
     def argv_dist_info(self, egg_base):
         '''
-        Called by handle_argv(). There doesn't seem to be any documentation
-        for 'setup.py dist_info', but it appears to be like egg_info except it
+        Called by `handle_argv()`. There doesn't seem to be any documentation
+        for 'setup.py dist_info', but it appears to be like 'egg_info' except it
         writes to a slightly different directory.
         '''
         self._write_info(f'{egg_base}/{self.name}.dist-info')
@@ -391,7 +391,7 @@ class Package:
 
     def argv_egg_info(self, egg_base):
         '''
-        Called by handle_argv().
+        Called by `handle_argv()`.
         '''
         if egg_base is None:
             egg_base = '.'
@@ -400,8 +400,8 @@ class Package:
 
     def _write_info(self, dirpath=None):
         '''
-        Writes egg/dist info to files in directory <dirpath> or self.root_sep
-        if None.
+        Writes egg/dist info to files in directory `dirpath` or `self.root_sep`
+        if `None`.
         '''
         if dirpath is None:
             dirpath = self.root_sep
@@ -425,7 +425,7 @@ class Package:
     def handle_argv(self, argv):
         '''
         Handles old-style (pre PEP-517) command line passed by old releases of pip to a
-        setup.py script.
+        `setup.py` script.
 
         We only handle those args that seem to be used by pre-PEP-517 pip.
         '''
@@ -572,8 +572,8 @@ class Package:
 
     def _metainfo(self):
         '''
-        Returns text for .egg-info/PKG-INFO file, or PKG-INFO in an sdist
-        tar.gz file, or ...dist-info/METADATA in a wheel.
+        Returns text for `.egg-info/PKG-INFO` file, or `PKG-INFO` in an sdist
+        `.tar.gz` file, or `...dist-info/METADATA` in a wheel.
         '''
         # 2021-04-30: Have been unable to get multiline content working on
         # test.pypi.org so we currently put the description as the body after
@@ -617,14 +617,14 @@ class Package:
 
     def _path_relative_to_root(self, path):
         '''
-        Returns (path_abs, path_rel), where <path_abs> is absolute path and
-        <path_rel> is relative to self.root_sep.
+        Returns `(path_abs, path_rel)`, where `path_abs` is absolute path and
+        `path_rel` is relative to `self.root_sep`.
 
-        Interprets <path> as relative to self.root_sep if not absolute.
+        Interprets `path` as relative to `self.root_sep` if not absolute.
 
-        We use os.path.realpath() to resolve any links.
+        We use `os.path.realpath()` to resolve any links.
 
-        Assert-fails if path is not within self.root_sep.
+        Assert-fails if `path` is not within `self.root_sep`.
         '''
         if os.path.isabs(path):
             p = path
@@ -637,17 +637,17 @@ class Package:
 
     def _fromto(self, p):
         '''
-        Returns ((from_abs, from_rel), (to_abs, to_rel)).
+        Returns `((from_abs, from_rel), (to_abs, to_rel))`.
 
-        If <p> is a string we convert to (p, p). Otherwise we assert that
-        <p> is a tuple of two strings. Non-absolute paths are assumed to be
-        relative to self.root_sep.
+        If `p` is a string we convert to `(p, p)`. Otherwise we assert that
+        `p` is a tuple of two strings. Non-absolute paths are assumed to be
+        relative to `self.root_sep`.
 
-        from_abs and to_abs are absolute paths, asserted to be within
-        self.root_sep.
+        `from_abs` and `to_abs` are absolute paths, asserted to be within
+        `self.root_sep`.
 
-        from_rel and to_rel are derived from the _abs paths and are relative to
-        self.root_sep.
+        `from_rel` and `to_rel` are derived from the `_abs` paths and are
+        `relative to self.root_sep`.
         '''
         ret = None
         if isinstance(p, str):
@@ -666,12 +666,12 @@ class Package:
 
 def git_items( directory, submodules=False):
     '''
-    Helper for pipcl.Package's fn_sdist() callback.
+    Helper for `pipcl.Package`'s `fn_sdist()` callback.
 
-    Returns list of paths for all files known to git within <directory>. Each
-    path is relative to <directory>.
+    Returns list of paths for all files known to git within `directory`. Each
+    path is relative to `directory`.
 
-    <directory> must be somewhere within a git checkout.
+    `directory` must be somewhere within a git checkout.
 
     We run a 'git ls-files' command internally.
     '''
@@ -696,7 +696,7 @@ def git_items( directory, submodules=False):
 
 def parse_pkg_info(path):
     '''
-    Parses a PKJG-INFO file, each line is '<key>: <value>\n'. Returns a dict.
+    Parses a `PKJG-INFO` file, each line is `<key>: <value>\n`. Returns a dict.
     '''
     ret = dict()
     with open(path) as f:

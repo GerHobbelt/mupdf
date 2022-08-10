@@ -1670,6 +1670,14 @@ def mtime( filename, default=0):
     except OSError:
         return default
 
+
+def filesize( filename, default=0):
+    try:
+        return os.path.getsize( filename)
+    except OSError:
+        return default
+
+
 def get_filenames( paths):
     '''
     Yields each file in <paths>, walking any directories.
