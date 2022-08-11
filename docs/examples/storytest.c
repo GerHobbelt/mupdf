@@ -256,11 +256,12 @@ static void toc_contentfn(fz_context *ctx, void *ref, const fz_write_story_posit
 		fz_write_story_position *position = &positions->positions[i];
 
 		fz_append_printf(ctx, buffer,
-				"	<li>page=%i depth=%i heading=%i id='%s' rect=(%f %f %f %f) text='<b>%s</b>' open_close=%i\n",
+				"	<li>page=%i depth=%i heading=%i id='%s' href='%s' rect=(%f %f %f %f) text='<b>%s</b>' open_close=%i\n",
 				position->page_num,
 				position->element.depth,
 				position->element.heading,
 				(position->element.id) ? position->element.id : "",
+				(position->element.href) ? position->element.href : "",
 				position->element.rect.x0,
 				position->element.rect.y0,
 				position->element.rect.x1,
@@ -271,15 +272,15 @@ static void toc_contentfn(fz_context *ctx, void *ref, const fz_write_story_posit
 	}
 	fz_append_string(ctx, buffer, "</ol>\n");
 	fz_append_string(ctx, buffer,
-			"<h1>Section the first</h1>\n"
+			"<h1><a href=\"first\">Section the first</a></h1>\n"
 			"<p>Blah.\n"
-			"<h1>Section the second</h1>\n"
+			"<h1><a href=\"second\">Section the second</a></h1>\n"
 			"<p>Blah blah.\n"
 			"<h2>Subsection</h2>\n"
 			"<p>Blah blah blah.\n"
 			"<p>Blah blah blah.\n"
 			"<p>Blah blah blah.\n"
-			"<h1>Section the third</h1>\n"
+			"<h1><a href=\"third\">Section the third</a></h1>\n"
 			"<p>Blah blah.\n"
 			"</body>\n"
 			);
