@@ -253,7 +253,7 @@ static void toc_contentfn(fz_context *ctx, void *ref, fz_story_tocwrite_items *i
 		fz_story_tocwrite_item* item = &items->items[i];
 
 		fz_append_printf(ctx, buffer,
-				"    <li>page=%i depth=%i heading=%i id='%s' rect=(%f %f %f %f) text='%s' open_close=%i\n",
+				"    <li>page=%i depth=%i heading=%i id='%s' rect=(%f %f %f %f) text='<b>%s</b>' open_close=%i\n",
 				item->page_num,
 				item->element.depth,
 				item->element.heading,
@@ -319,6 +319,79 @@ int main(int argc, const char *argv[])
 	fz_var(story);
 	fz_var(buf);
 	fz_var(dev);
+
+
+	fz_try(ctx)
+	{
+		writer = fz_new_pdf_writer(ctx, "out0.pdf", "");
+		const char* html =
+				"<!DOCTYPE html>\n"
+				"<style>\n"
+				"#a { margin: 30px; }\n"
+				"#b { margin: 20px; }\n"
+				"#c { margin: 5px; }\n"
+				"#a { border: 1px solid red; }\n"
+				"#b { border: 1px solid green; }\n"
+				"#c { border: 1px solid blue; }\n"
+				"</style>\n"
+				"<body style=\"background-color: #f8f\">\n"
+				"<h2 style=\"overflow-wrap: break-word;\">Contents</h2>\n"
+				"<ol>\n"
+				"    <li>page=1 depth=1 heading=2 id='' rect=(111.000000 213.695007 164.000000 233.495010) text='<b>Contents</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=1 id='' rect=(21.000000 302.339996 279.000000 328.739990) text='<b>Section the first</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=1 id='' rect=(21.000000 371.419983 279.000000 397.819977) text='<b>Section the second</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=2 id='' rect=(21.000000 439.454987 279.000000 459.254974) text='<b>Subsection</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=1 id='' rect=(21.000000 549.289978 279.000000 575.690002) text='<b>Section the third</b>' open_close=3\n"
+				"</ol>\n"
+				"<h1>Section the first</h1>\n"
+				"<p>Blah.\n"
+				"<h1>Section the second</h1>\n"
+				"<p>Blah blah.\n"
+				"<h2>Subsection</h2>\n"
+				"<p>Blah blah blah.\n"
+				"<p>Blah blah blah.\n"
+				"<p>Blah blah blah.\n"
+				"<h1>Section the third</h1>\n"
+				"<p style=\"overflow-wrap:break-word\">This WordIs<span style=\"color:red\">ExtremelyImprobablyStupidlyMonumentallyActually</span>QuiteLong, but it is wrapped.\n"
+				"<p>This WordIs<span style=\"color:red\">ExtremelyImprobablyStupidlyMonumentallyActually</span>QuiteLong, and it's not wrapped.\n"
+				"</body>\n"
+				;
+		buf = fz_new_buffer_from_copied_data(ctx, html, strlen(html)+1);
+
+		story = fz_new_story(ctx, buf, "", 11);
+
+		int i=0;
+		do
+		{
+			fz_rect mediabox = {0, 0, 300, 400};
+			fz_rect where0 = {100, 200, 175, 300};
+			fz_rect where1 = {10, 50, 290, 350};
+			fz_rect filled;
+			i += 1;
+
+			dev = fz_begin_page(ctx, writer, mediabox);
+
+			more = fz_place_story(ctx, story, (i==1) ? where0 : where1, &filled);
+
+			fz_draw_story(ctx, story, dev, fz_identity);
+
+			fz_end_page(ctx, writer);
+		}
+		while (more);
+
+		fz_close_document_writer(ctx, writer);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_story(ctx, story);
+		fz_drop_buffer(ctx, buf);
+		fz_drop_document_writer(ctx, writer);
+	}
+	fz_catch(ctx)
+	{
+		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
+	}
+
 
 	/* First one made with precooked content. */
 	fz_try(ctx)
