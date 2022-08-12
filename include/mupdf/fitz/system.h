@@ -325,6 +325,14 @@ void fz_free_argv(int argc, const char** argv);
 #endif
 #endif
 
+#ifndef PATH_MAX
+#define PATH_MAX 2048
+#endif
+
+#ifndef LONGLINE
+#define LONGLINE 4096
+#endif
+
 #ifdef CLUSTER
 /* Include this first so our defines don't clash with the system
  * definitions */

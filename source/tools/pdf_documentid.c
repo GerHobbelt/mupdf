@@ -31,9 +31,6 @@
 
 
 
-#define LONGLINE 4096
-
-
 static inline void memclr(void* ptr, size_t size)
 {
 	memset(ptr, 0, size);

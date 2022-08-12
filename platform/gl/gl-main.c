@@ -37,10 +37,6 @@
 
 #include "mujs.h"
 
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
-
 #ifndef _WIN32
 #include <unistd.h> /* for getcwd */
 #include <spawn.h> /* for posix_spawn */

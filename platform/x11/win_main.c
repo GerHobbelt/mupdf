@@ -51,12 +51,6 @@
 #define WM_MOUSEWHEEL 0x020A
 #endif
 
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
-
-#define MIN(x,y) ((x) < (y) ? (x) : (y))
-
 #define ID_ABOUT		0x1000
 #define ID_DOCINFO	0x1001
 
@@ -260,7 +254,7 @@ int wingetcertpath(pdfapp_t *app, char *buf, int len)
 	ofn.Flags = OFN_FILEMUSTEXIST;
 	if (GetOpenFileNameW(&ofn))
 	{
-		int code = WideCharToMultiByte(CP_UTF8, 0, twbuf, -1, buf, MIN(PATH_MAX, len), NULL, NULL);
+		int code = WideCharToMultiByte(CP_UTF8, 0, twbuf, -1, buf, fz_mini(PATH_MAX, len), NULL, NULL);
 		if (code == 0)
 		{
 			pdfapp_error(app, "cannot convert filename to utf-8");
@@ -292,7 +286,7 @@ int wingetsavepath(pdfapp_t *app, char *buf, int len)
 	ofn.Flags = OFN_HIDEREADONLY;
 	if (GetSaveFileName(&ofn))
 	{
-		int code = WideCharToMultiByte(CP_UTF8, 0, twbuf, -1, buf, MIN(PATH_MAX, len), NULL, NULL);
+		int code = WideCharToMultiByte(CP_UTF8, 0, twbuf, -1, buf, fz_mini(PATH_MAX, len), NULL, NULL);
 		if (code == 0)
 		{
 			pdfapp_error(app, "cannot convert filename to utf-8");
