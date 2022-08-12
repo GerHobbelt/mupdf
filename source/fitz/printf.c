@@ -56,6 +56,7 @@ struct fmtbuf
 	fz_context *ctx;
 	void *user;
 	void (*emit)(fz_context *ctx, void *user, int c);
+	//void (*emit_block)(fz_context* ctx, void* user, const char *block, size_t size);
 };
 
 static inline void fmtputc(struct fmtbuf *out, int c)
@@ -66,7 +67,13 @@ static inline void fmtputc(struct fmtbuf *out, int c)
 static inline void fmtputs(struct fmtbuf* out, const char *s)
 {
 	while (*s)
-		fmtputc(out, *s++);
+		fmtputc(out, (unsigned char)(*s++));
+}
+
+static inline void fmtputsn(struct fmtbuf* out, const char* s, size_t len)
+{
+	while (*s && len--)
+		fmtputc(out, (unsigned char)(*s++));
 }
 
 /*
@@ -119,7 +126,6 @@ static void fmtfloat(struct fmtbuf *out, float f)
 static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, int fmt)
 {
 	char buf[100];
-	char* s = buf;
 	if (p == INT_MAX)
 		p = FMT_DEFAULT_FLOAT_PRECISION;
 	if (w < 0) // uninitialized value is INT_MIN but user may have passed bad negative width via '*' modifier either.
@@ -127,8 +133,7 @@ static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, int fmt)
 	char fmtstr[] = "%*.* ";
 	fmtstr[4] = fmt;
 	snprintf(buf, sizeof buf, fmtstr, w, p, f);
-	while (*s)
-		fmtputc(out, *s++);
+	fmtputs(out, buf);
 }
 
 static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, int base)
@@ -225,7 +230,7 @@ static void fmtint64(struct fmtbuf *out, int64_t value, int s, int z, int w, int
 
 static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int eq, int verbatim, int no_hex_unicode_only)
 {
-	int i, n, c;
+	int n, c;
 	fmtputc(out, sq);
 	while (slen > 0) {
 		n = fz_chartorune(&c, s, slen);
@@ -250,8 +255,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int
 					// output \uFFFD + hex-encoded bad char:
 					char buf[10];
 					int l = fz_runetochar(buf, c);
-					for (i = 0; i < l; ++i)
-						fmtputc(out, buf[i]);
+					fmtputsn(out, buf, l);
 
 					c = (unsigned char)s[0];
 					if (!no_hex_unicode_only) {
@@ -269,8 +273,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int
 				}
 				if (verbatim)
 				{
-					for (i = 0; i < n; ++i)
-						fmtputc(out, (unsigned char)s[i]);
+					fmtputsn(out, s, n);
 				}
 				else if (c < 0x10000)
 				{
@@ -591,8 +594,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 							}
 							else if (mode & FPBO_VERBATIM_UNICODE)
 							{
-								for (i = 0; i < n; ++i)
-									fmtputc(fmt, (unsigned char)data[i]);
+								fmtputsn(fmt, data, n);
 							}
 							else if (c < 0x10000)
 							{
@@ -776,8 +778,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 					// output \uFFFD + hex-encoded bad char:
 					char buf[10];
 					int l = fz_runetochar(buf, c);
-					for (i = 0; i < l; ++i)
-						fmtputc(fmt, buf[i]);
+					fmtputsn(fmt, buf, l);
 
 					c = (unsigned char)data[0];
 					if ((mode & FPBO_JSON_MODE) || !(flags & PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX)) {
@@ -795,8 +796,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 				}
 				else if (mode & FPBO_VERBATIM_UNICODE)
 				{
-					for (i = 0; i < n; ++i)
-						fmtputc(fmt, (unsigned char)data[i]);
+					fmtputsn(fmt, data, n);
 				}
 				else if (c < 0x10000)
 				{
@@ -1056,8 +1056,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					if (j)
 						fmtquote(&out, str, strlen(str), '"', '"', 0, 0);
 					else
-						while ((c = *str++) != 0)
-							fmtputc(&out, c);
+						fmtputs(&out, str);
 				}
 				break;
 
@@ -1084,9 +1083,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtputc(&out, c);
 				else {
 					char buf[10];
-					int i, n = fz_runetochar(buf, c);
-					for (i=0; i < n; ++i)
-						fmtputc(&out, buf[i]);
+					int n = fz_runetochar(buf, c);
+					fmtputsn(&out, buf, n);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1217,14 +1215,14 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					size_t slen = strlen(str);
 					size_t cliplen = (p != INT_MAX ? p : slen);
 					while (cliplen > slen) {
-						fmtputc(&out, ' ');
-						cliplen--;
+						size_t wlen = fz_mini(32, cliplen - slen);
+						//              12345678901234567890123456789012
+						fmtputsn(&out, "                                ", wlen);
+						cliplen -= wlen;
 					}
 					// only need to print string when it's not an empty string.
 					// Edge case example:   fz_printf("%.*s", 7, "")
-					while (cliplen-- > 0) {
-						fmtputc(&out, *str++);
-					}
+					fmtputsn(&out, str, cliplen);
 				}
 			}
 				break;
@@ -1248,8 +1246,10 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					size_t slen = wcslen(str);
 					size_t cliplen = (p != INT_MAX ? p : slen);
 					while (cliplen > slen) {
-						fmtputc(&out, ' ');
-						cliplen--;
+						size_t wlen = fz_mini(32, cliplen - slen);
+						//              12345678901234567890123456789012
+						fmtputsn(&out, "                                ", wlen);
+						cliplen -= wlen;
 					}
 					// only need to print string when it's not an empty string.
 					// Edge case example:   fz_printf("%.*s", 7, "")
@@ -1259,9 +1259,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 							fmtputc(&out, c);
 						else {
 							char buf[10];
-							int i, n = fz_runetochar(buf, c);
-							for (i = 0; i < n; ++i)
-								fmtputc(&out, buf[i]);
+							int n = fz_runetochar(buf, c);
+							fmtputsn(&out, buf, n);
 						}
 					}
 				}
