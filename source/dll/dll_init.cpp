@@ -236,24 +236,44 @@ static int fz_memleak_checking_is_set_up = EnableMemLeakChecking();
 
 #endif // __VISUALC__
 
+static void attempt_to_write_message_to_console_and_debug_channel(const char *prefix, const char *postfix, const char *expression, const char *srcfile, int srcline)
+{
+#if !defined(_WIN32)
+	fprintf(stderr, "%sAssertion failed%s: %s --> %s::%d\n", prefix, postfix, expression, srcfile, srcline);
+#else
+	char buf[LONGLINE+300];
+	snprintf(buf, sizeof(buf), "%sAssertion failed%s: %s --> %s::%d\n", prefix, postfix, expression, srcfile, srcline);
+	buf[sizeof(buf) - 1] = 0;
+	OutputDebugStringA(buf);
+
+	HANDLE stdOut = GetStdHandle(STD_ERROR_HANDLE);
+	if (stdOut != NULL && stdOut != INVALID_HANDLE_VALUE)
+	{
+		DWORD written = 0;
+		WriteConsoleA(stdOut, buf, strlen(buf), &written, NULL);
+	}
+#endif
+}
+
 static int hits = 0;
+
+// NOTE/WARNING: fz_report_failed_assertion() et al CANNOT use any of the fz_error/warn/info
+// functions as that COULD potentially cause an infinite recursion as some assertions are
+// located in those functions.
+// Hence we use standard RTL fprintf and MSWindows OutputDebugString APIs directly instead.
 
 int fz_report_failed_assertion(const char *expression, const char *srcfile, int srcline)
 {
 	if (!hits)
 	{
 		hits++;
-		fprintf(stderr, "Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
-		char buf[2048];
-		snprintf(buf, sizeof(buf), "Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
-		buf[sizeof(buf) - 1] = 0;
-		OutputDebugStringA(buf);
-		// CAN we throw an exception and handle it that way?
+		attempt_to_write_message_to_console_and_debug_channel("", "", expression, srcfile, srcline);
 
+		// CAN we throw an exception and handle it that way? If the exception stack is filled and alive, we can /try/:
 		fz_context* ctx = __fz_get_RAW_global_context();
 		if (ctx && ctx->error.top > ctx->error.stack_base)
 		{
-			fz_throw(ctx, FZ_ERROR_GENERIC, "EXCEPTION: %s", buf);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "EXCEPTION: Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
 		}
 		else
 		{
@@ -262,11 +282,7 @@ int fz_report_failed_assertion(const char *expression, const char *srcfile, int 
 	}
 	else
 	{
-		OutputDebugStringA("Assertion hit in atexit() handler on the rebound:");
-		char buf[2048];
-		snprintf(buf, sizeof(buf), "Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
-		buf[sizeof(buf) - 1] = 0;
-		OutputDebugStringA(buf);
+		attempt_to_write_message_to_console_and_debug_channel("", " in atexit() handler on the rebound", expression, srcfile, srcline);
 	}
 	abort();
 	return 0;
@@ -274,11 +290,7 @@ int fz_report_failed_assertion(const char *expression, const char *srcfile, int 
 
 int fz_report_failed_assertion_and_continue(const char *expression, const char *srcfile, int srcline)
 {
-	fprintf(stderr, "Soft Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
-	char buf[2048];
-	snprintf(buf, sizeof(buf), "Soft Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
-	buf[sizeof(buf) - 1] = 0;
-	OutputDebugStringA(buf);
+	attempt_to_write_message_to_console_and_debug_channel("Soft ", "", expression, srcfile, srcline);
 	return 0;
 }
 
