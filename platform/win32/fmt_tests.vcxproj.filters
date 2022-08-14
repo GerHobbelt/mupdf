@@ -87,6 +87,9 @@
     <Filter Include="Resource Files\doc\_static\fonts">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0023}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
     </Filter>
@@ -99,6 +102,9 @@
     <Filter Include="Source Files\test\find-package-test">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\test\fuzzing">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\test\gtest">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
     </Filter>
@@ -107,7 +113,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\test\add-subdirectory-test\basic-main.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/fmt.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/format.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/os.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/add-subdirectory-test/basic-main.cc">
       <Filter>Source Files\test\add-subdirectory-test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/args-test.cc">
@@ -134,6 +149,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/cuda-test/cpp14.cc">
       <Filter>Source Files\test\cuda-test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/detect-stdfs.cc">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/enforce-checks-test.cc">
       <Filter>Source Files\test</Filter>
     </ClCompile>
@@ -145,6 +163,27 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/format-test.cc">
       <Filter>Source Files\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/fuzzing/chrono-duration.cc">
+      <Filter>Source Files\test\fuzzing</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/fuzzing/chrono-timepoint.cc">
+      <Filter>Source Files\test\fuzzing</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/fuzzing/float.cc">
+      <Filter>Source Files\test\fuzzing</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/fuzzing/main.cc">
+      <Filter>Source Files\test\fuzzing</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/fuzzing/named-arg.cc">
+      <Filter>Source Files\test\fuzzing</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/fuzzing/one-arg.cc">
+      <Filter>Source Files\test\fuzzing</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/fuzzing/two-args.cc">
+      <Filter>Source Files\test\fuzzing</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/gtest-extra-test.cc">
       <Filter>Source Files\test</Filter>
@@ -185,10 +224,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/scan-test.cc">
       <Filter>Source Files\test</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/static-export-test/library.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/static-export-test/export-main.cc">
       <Filter>Source Files\test\static-export-test</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\test\static-export-test\export-main.cc">
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/static-export-test/library.cc">
       <Filter>Source Files\test\static-export-test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/std-test.cc">
@@ -245,6 +284,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/fmt/include/fmt/xchar.h">
       <Filter>Header Files\include\fmt</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/fmt/test/fuzzing/fuzzer-common.h">
+      <Filter>Header Files\test\fuzzing</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/fmt/test/gtest-extra.h">
       <Filter>Header Files\test</Filter>
     </ClInclude>
@@ -272,6 +314,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/fmt/test/util.h">
       <Filter>Header Files\test</Filter>
     </ClInclude>
+    <Font Include="../../thirdparty/owemdjee/fmt/doc/_static/fonts/glyphicons-halflings-regular.ttf">
+      <Filter>Resource Files\doc\_static\fonts</Filter>
+    </Font>
     <Text Include="../../thirdparty/owemdjee/fmt/CMakeLists.txt">
       <Filter>Misc Files</Filter>
     </Text>
@@ -289,6 +334,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/fmt/doc/CMakeLists.txt">
       <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/fmt/doc/_static/bootstrap.min.js">
+      <Filter>Misc Files\doc\_static</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/fmt/doc/api.rst">
       <Filter>Misc Files\doc</Filter>
@@ -385,3 +433,4 @@
     </Xml>
   </ItemGroup>
 </Project>
+    
