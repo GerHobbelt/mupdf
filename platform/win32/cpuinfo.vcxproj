@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,7 +120,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPUINFO;CPUINFO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -132,7 +132,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/cpuinfo/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -158,7 +158,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/cpuinfo/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -187,7 +187,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/cpuinfo/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -213,7 +213,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../scripts/gbenchmark/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/cpuinfo/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -234,51 +234,51 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/bench/get-current.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/bench/init.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\bench\bench-get-current.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\bench\bench-init.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/src/clog.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/test/clog.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/api.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/android/properties.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/cache.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\arm\arm-cache.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/aarch32-isa.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/aarch64-isa.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/chipset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/clusters.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/cpuinfo.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/hwcap.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\arm\linux\arm-linux-cpuinfo.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\arm\linux\arm-hwcap.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\arm\linux\arm-linux-init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/midr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/mach/init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\arm\mach\arm-mach-init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/tlb.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/uarch.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\arm\arm-uarch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/cache.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/emscripten/init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\emscripten\em-init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/cpulist.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/mockfile.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/multiline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/processors.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/smallfile.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/mach/topology.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\mach\mach-topology.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/cache/descriptor.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/cache/deterministic.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/cache/init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\cache\x86-cache-init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/info.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\x86-init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/isa.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/linux/cpuinfo.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/linux/init.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/mach/init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\linux\x86-linux-cpuinfo.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\linux\x86-linux-init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\mach\x86-mach-init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/mockcpuid.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/name.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/topology.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/uarch.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\x86-topology.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\x86-uarch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/vendor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/windows/init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\src\x86\windows\x86-win-init.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/arm-cache.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/get-current.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/init.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\test\test-get-current.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\cpuinfo\test\test-init.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/alcatel-revvl.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/alldocube-iwork8.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/atm7029b-tablet.cc" />
@@ -479,8 +479,7 @@
     <Text Include="../../thirdparty/owemdjee/cpuinfo/README.md" />
     <Text Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/README.md" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
