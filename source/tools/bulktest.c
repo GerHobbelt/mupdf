@@ -106,6 +106,7 @@ struct timing {
 	const char* maxcommand;
 };
 
+static time_t start_timestamp;
 static struct timing timing;
 
 // Note: this allocated block' header must stick to the alignment agreement of the system/RTL: 128 bits (32 bytes) on x86 at least.
@@ -556,9 +557,25 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 				space--;
 				s = m;
 			}
+			else if (strncmp(m, "datetime", 8) == 0 || strncmp(m, "{datetime}", 10) == 0)
+			{
+				size_t skip_dist = 8 + (m[0] == '{' ? 2 : 0);
+				// `%datetime`: print a short version of the date+time when bulktest was started.
+				// Useful when you want to produce a clean, fresh output/dump directory tree for
+				// every bulktest run.
+				struct tm timeinfo;
+				timeinfo = *localtime(&start_timestamp);
+				strftime(d, space, "%Y%M%d-%H%M%S", &timeinfo);
+				if (strlen(d) >= space)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "out of template expansion buffer space.");
+				s = m + skip_dist;
+				size_t l = strlen(d);
+				d += l;
+				space -= l;
+			}
 			else if (strncmp(m, "datarow", 7) == 0 || strncmp(m, "{datarow}", 9) == 0)
 			{
-				size_t skip_dist = (strncmp(m, "datarow", 7) == 0 ? 7 : 9);
+				size_t skip_dist = 7 + (m[0] == '{' ? 2 : 0);
 				// `%datarow`: print the current dataline number.
 				fz_snprintf(d, space, "%05d", datalinecounter);
 				if (strlen(d) >= space)
@@ -570,7 +587,7 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 			}
 			else if (strncmp(m, "dataspecdir", 11) == 0 || strncmp(m, "{dataspecdir}", 13) == 0)
 			{
-				size_t skip_dist = (strncmp(m, "dataspecdir", 11) == 0 ? 11 : 13);
+				size_t skip_dist = 11 + (m[0] == '{' ? 2 : 0);
 				// `%dataspecdir`: print the directory part of the (absolute) data spec file path `dataspecfilename`.
 				const char* path_end = strrchr(dataspecfilename, '/');
 				if (!path_end)
@@ -592,7 +609,7 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 			}
 			else if (strncmp(m, "scriptdir", 9) == 0 || strncmp(m, "{scriptdir}", 11) == 0)
 			{
-				size_t skip_dist = (strncmp(m, "scriptdir", 9) == 0 ? 9 : 11);
+				size_t skip_dist = 9 + (m[0] == '{' ? 2 : 0);
 				// `%scriptdir`: print the directory part of the (absolute) script file path `scriptfilename`.
 				const char* path_end = strrchr(scriptfilename, '/');
 				if (!path_end)
@@ -1287,6 +1304,8 @@ bulktest_main(int argc, const char **argv)
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
 
+	time(&start_timestamp);
+
 	showtime = 0;
 	showmemory = 0;
 
@@ -1441,7 +1460,7 @@ bulktest_main(int argc, const char **argv)
 				scriptname = NULL;
 
 				// load a script
-				const char *p = argv[optind++];
+				const char* p = argv[optind++];
 
 				close_active_logfile();
 
@@ -1465,7 +1484,7 @@ bulktest_main(int argc, const char **argv)
 				datafilename = NULL;
 
 				// load a datafile if we already have a script AND we're in "template mode".
-				const char *p = argv[optind++];
+				const char* p = argv[optind++];
 
 				datafilename = mk_absolute_path(ctx, p);
 
@@ -1515,7 +1534,7 @@ bulktest_main(int argc, const char **argv)
 					} while (!dataline || skip_to_datalinecounter > datalinecounter);
 
 					// when we've reached the end of the datafeed, it's time to check if there's another datafile waiting for us...
-					if (!dataline /* ~ feof(datafeed) */ )
+					if (!dataline /* ~ feof(datafeed) */)
 						break;
 
 					// parse datafeed line (record)
@@ -1757,6 +1776,36 @@ bulktest_main(int argc, const char **argv)
 					else if (match(argv[0], "MUTOOL"))
 					{
 						rv = mutool_main(argc - 1, argv + 1);
+						if (rv != EXIT_SUCCESS)
+						{
+							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							errored++;
+						}
+						else if (verbosity)
+						{
+							fz_info(ctx, "OK: MUTOOL command: %s", line);
+						}
+
+						flush_active_logfile_hard();
+					}
+					else if (match(argv[0], "MUSERVE"))
+					{
+						rv = 1;
+						if (rv != EXIT_SUCCESS)
+						{
+							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							errored++;
+						}
+						else if (verbosity)
+						{
+							fz_info(ctx, "OK: MUTOOL command: %s", line);
+						}
+
+						flush_active_logfile_hard();
+					}
+					else if (match(argv[0], "STOPSERVE"))
+					{
+						rv = 1;
 						if (rv != EXIT_SUCCESS)
 						{
 							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
