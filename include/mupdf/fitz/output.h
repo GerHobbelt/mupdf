@@ -336,6 +336,41 @@ void fz_write_base64_buffer(fz_context *ctx, fz_output *out, fz_buffer *data, in
 */
 extern const char* fz_hex_digits;
 
+struct fz_fmtbuf;
+
+struct fz_fmtbuf_core
+{
+	void (*emit)(struct fz_fmtbuf *out, int c);
+	void (*emit_block)(struct fz_fmtbuf *out, const char *block, size_t size);
+};
+
+// This struct can be redefined in derivatives, ...
+struct fz_fmtbuf_user
+{
+	// ..., however, this member MUST always be the first one present in this application-specific (derivative) struct.
+	fz_context *ctx;
+
+	// optional application-specific data follows:
+	void *ptr;
+};
+
+struct fz_fmtbuf
+{
+	struct fz_fmtbuf_core core;
+	struct fz_fmtbuf_user user;
+};
+
+static inline struct fz_fmtbuf *fz_init_fmtbuf_core(struct fz_fmtbuf *dst,
+	fz_context *ctx,
+	void (*emit)(fz_context *ctx, void *user, int c),
+	void (*emit_block)(fz_context* ctx, void* user, const char *block, size_t size))
+{
+	dst->core.ctx = ctx;
+	dst->core.emit = emit;
+	dst->core.emit_block = emit_block;
+	return dst;
+}
+
 /**
 	Our customised 'printf'-like string formatter.
 	Takes `%c`, `%d`, `%i`, `%s`, `%u`, `%x` as usual.
@@ -472,7 +507,7 @@ extern const char* fz_hex_digits;
 	emit: A function pointer called to emit output bytes as the
 	string is being formatted.
 */
-void fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void *user, int c), const char *fmt, va_list args);
+void fz_format_string(fz_context *ctx, struct fz_fmtbuf *emitter, const char *fmt, va_list args);
 
 /**
 	A vsnprintf work-alike, using our custom formatter.

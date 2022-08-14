@@ -51,36 +51,26 @@ const char *fz_hex_digits = "0123456789ABCDEF";
 
 #define FMT_DEFAULT_FLOAT_PRECISION		6
 
-struct fmtbuf
-{
-	fz_context *ctx;
-	void *user;
-	void (*emit)(fz_context *ctx, void *user, int c);
-	//void (*emit_block)(fz_context* ctx, void* user, const char *block, size_t size);
-};
-
-static inline void fmtputc(struct fmtbuf *out, int c)
+static inline void fmtputc(struct fz_fmtbuf *out, int c)
 {
 	out->emit(out->ctx, out->user, c);
 }
 
-static inline void fmtputs(struct fmtbuf* out, const char *s)
+static inline void fmtputsn(struct fz_fmtbuf* out, const char* s, size_t len)
 {
-	while (*s)
-		fmtputc(out, (unsigned char)(*s++));
+	out->emit_block(out->ctx, out->user, s, len);
 }
 
-static inline void fmtputsn(struct fmtbuf* out, const char* s, size_t len)
+static inline void fmtputs(struct fz_fmtbuf* out, const char *s)
 {
-	while (*s && len--)
-		fmtputc(out, (unsigned char)(*s++));
+	fmtputsn(out, s, strlen(s));
 }
 
 /*
  * Convert float to shortest possible string that won't lose precision, except:
  * NaN to 0, +Inf to FLT_MAX, -Inf to -FLT_MAX.
  */
-static void fmtfloat(struct fmtbuf *out, float f)
+static void fmtfloat(struct fz_fmtbuf *out, float f)
 {
 	char digits[100];
 	char* s = digits;
@@ -123,7 +113,7 @@ static void fmtfloat(struct fmtbuf *out, float f)
 	}
 }
 
-static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, int fmt)
+static void fmtfloat_e(struct fz_fmtbuf *out, double f, int w, int p, int fmt)
 {
 	char buf[100];
 	if (p == INT_MAX)
@@ -136,7 +126,7 @@ static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, int fmt)
 	fmtputs(out, buf);
 }
 
-static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, int base)
+static void fmtuint32(struct fz_fmtbuf *out, unsigned int a, int s, int z, int w, int base)
 {
 	char buf[100];
 	int i;
@@ -160,7 +150,7 @@ static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, i
 		fmtputc(out, buf[--i]);
 }
 
-static void fmtuint64(struct fmtbuf *out, uint64_t a, int s, int z, int w, int base)
+static void fmtuint64(struct fz_fmtbuf *out, uint64_t a, int s, int z, int w, int base)
 {
 	char buf[100];
 	int i;
@@ -184,7 +174,7 @@ static void fmtuint64(struct fmtbuf *out, uint64_t a, int s, int z, int w, int b
 		fmtputc(out, buf[--i]);
 }
 
-static void fmtint32(struct fmtbuf *out, int value, int s, int z, int w, int base)
+static void fmtint32(struct fz_fmtbuf *out, int value, int s, int z, int w, int base)
 {
 	unsigned int a;
 
@@ -206,7 +196,7 @@ static void fmtint32(struct fmtbuf *out, int value, int s, int z, int w, int bas
 	fmtuint32(out, a, s, z, w, base);
 }
 
-static void fmtint64(struct fmtbuf *out, int64_t value, int s, int z, int w, int base)
+static void fmtint64(struct fz_fmtbuf *out, int64_t value, int s, int z, int w, int base)
 {
 	uint64_t a;
 
@@ -228,7 +218,7 @@ static void fmtint64(struct fmtbuf *out, int64_t value, int s, int z, int w, int
 	fmtuint64(out, a, s, z, w, base);
 }
 
-static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int eq, int verbatim, int no_hex_unicode_only)
+static void fmtquote(struct fz_fmtbuf *out, const char *s, size_t slen, int sq, int eq, int verbatim, int no_hex_unicode_only)
 {
 	int n, c;
 	fmtputc(out, sq);
@@ -314,7 +304,7 @@ static void fmtquote(struct fmtbuf *out, const char *s, size_t slen, int sq, int
 	fmtputc(out, eq);
 }
 
-static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
+static void fmtquote_pdf(struct fz_fmtbuf *out, const char *s, int sq, int eq)
 {
 	int c;
 	fmtputc(out, sq);
@@ -352,7 +342,7 @@ static void fmtquote_pdf(struct fmtbuf *out, const char *s, int sq, int eq)
 	fmtputc(out, eq);
 }
 
-static void fmtname(struct fmtbuf *out, const char *s)
+static void fmtname(struct fz_fmtbuf *out, const char *s)
 {
 	int c;
 	fmtputc(out, '/');
@@ -371,7 +361,7 @@ static void fmtname(struct fmtbuf *out, const char *s)
 #define FPBO_VERBATIM_UNICODE		0x0002
 #define FPBO_NO_CONTROL_ESCAPES		0x0004
 
-static void fmt_print_buffer_as_hex(struct fmtbuf* out, const char* data, size_t datalen, int p, int mode)
+static void fmt_print_buffer_as_hex(struct fz_fmtbuf* out, const char* data, size_t datalen, int p, int mode)
 {
 	if (!data)
 		fmtputs(out, "(null)");
@@ -410,7 +400,7 @@ static void fmt_print_buffer_as_hex(struct fmtbuf* out, const char* data, size_t
 
 	The results from that analysis will determine how the data is printed exactly: as a HEX DUMP or a more-or-less sane STRING.
 */
-static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, const char* data, size_t datalen, int flags, int mode)
+static void fmt_print_buffer_optimally(fz_context* ctx, struct fz_fmtbuf* fmt, const char* data, size_t datalen, int flags, int mode)
 {
 	// Step 1: Content Analysis
 	//
@@ -858,16 +848,11 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 }
 
 void
-fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void *user, int c), const char *fmt, va_list args)
+fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_list args)
 {
-	struct fmtbuf out;
 	int c, s, z, p, w, l, j, hexprefix;
 	const char *comma;
 	size_t bits;
-
-	out.ctx = ctx;
-	out.user = user;
-	out.emit = emit;
 
 	while ((c = *fmt++) != 0)
 	{

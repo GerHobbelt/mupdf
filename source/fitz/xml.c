@@ -104,25 +104,25 @@ struct parser
 #endif
 };
 
-struct fmtbuf
+// application-specific derivative of struct fz_fmtbuf:
+struct xml_fmtbuf
 {
-	fz_context* ctx;
-	void* user;
-	void (*emit)(fz_context* ctx, void* user, int c);
+	struct fz_fmtbuf_core core;
+	struct fz_fmtbuf_user user;
 };
 
-static inline void xml_putc(struct fmtbuf* out, int c)
+static inline void xml_putc(struct xml_fmtbuf* out, int c)
 {
-	out->emit(out->ctx, out->user, c);
+	out->core.emit(out, c);
 }
 
-static inline void xml_puts(struct fmtbuf* out, const char* s)
+static inline void xml_puts(struct xml_fmtbuf* out, const char* s)
 {
 	while (*s)
 		xml_putc(out, *s++);
 }
 
-static inline void xml_indent(struct fmtbuf* out, int n)
+static inline void xml_indent(struct xml_fmtbuf* out, int n)
 {
 	while (n--) {
 		xml_putc(out, ' ');
@@ -130,22 +130,24 @@ static inline void xml_indent(struct fmtbuf* out, int n)
 	}
 }
 
-static void xml_printf_emit(fz_context* ctx, void *user, int c)
+static void xml_printf_emit(struct fz_fmtbuf* _out, int c)
 {
-	struct fmtbuf* out = (struct fmtbuf *)user;
+	struct xml_fmtbuf* out = (struct xml_fmtbuf *)_out;
 	xml_putc(out, c);
 }
 
-static inline void xml_printf(struct fmtbuf* out, const char* s, ...)
+static inline void xml_printf(struct xml_fmtbuf* out, const char* s, ...)
 {
-	va_list ap;
+	struct fz_fmtbuf emitter;
+	emitter.user.ptr = out;
 
+	va_list ap;
 	va_start(ap, s);
-	fz_format_string(out->ctx, out, xml_printf_emit, s, ap);
+	fz_format_string(out, fz_init_fmtbuf_core(&emitter, ctx, xml_printf_emit, xml_printf_emit_block), s, ap);
 	va_end(ap);
 }
 
-static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
+static void xml_print_xml(struct xml_fmtbuf* out, fz_xml *item, int level)
 {
 	const char *s;
 
@@ -221,10 +223,10 @@ static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 
 void fz_debug_xml(fz_context* ctx, void* user, void (*emit)(fz_context* ctx, void* user, int c), fz_xml* item, int level)
 {
-	struct fmtbuf out;
+	struct xml_fmtbuf out;
 
-	out.ctx = ctx;
-	out.user = user;
+	out.user.ctx = ctx;
+	out.user.ptr = user;
 	out.emit = emit;
 
 	xml_print_xml(&out, item, level);

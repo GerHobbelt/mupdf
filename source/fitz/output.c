@@ -537,18 +537,30 @@ fz_write_emit(fz_context *ctx, void *out, int c)
 	fz_write_byte(ctx, (fz_output *)out, c);
 }
 
+static void
+fz_write_emit_block(fz_context* ctx, void* out, const char* block, size_t size)
+{
+	while (size-- > 0)
+		fz_write_byte(ctx, (fz_output*)out, *block++);
+}
+
 void
 fz_write_vprintf(fz_context *ctx, fz_output *out, const char *fmt, va_list args)
 {
-	fz_format_string(ctx, out, fz_write_emit, fmt, args);
+	struct fz_fmtbuf emitter;
+	emitter.user.ptr = out;
+	fz_format_string(ctx, fz_init_fmtbuf_core(&emitter, ctx, fz_write_emit, fz_write_emit_block), fmt, args);
 }
 
 void
 fz_write_printf(fz_context *ctx, fz_output *out, const char *fmt, ...)
 {
+	struct fz_fmtbuf emitter;
+	emitter.user.ptr = out;
+
 	va_list args;
 	va_start(args, fmt);
-	fz_format_string(ctx, out, fz_write_emit, fmt, args);
+	fz_format_string(ctx, fz_init_fmtbuf_core(&emitter, ctx, fz_write_emit, fz_write_emit_block), fmt, args);
 	va_end(args);
 }
 

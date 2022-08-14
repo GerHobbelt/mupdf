@@ -448,19 +448,30 @@ static void fz_append_emit(fz_context *ctx, void *buffer, int c)
 	fz_append_byte(ctx, (fz_buffer *)buffer, c);
 }
 
+static void fz_append_emit_block(fz_context* ctx, void* buffer, const char* block, size_t size)
+{
+	while (size--)
+		fz_append_byte(ctx, (fz_buffer*)buffer, *block++);
+}
+
 void
 fz_append_printf(fz_context *ctx, fz_buffer *buffer, const char *fmt, ...)
 {
+	struct fz_fmtbuf emitter;
+	emitter.user.ptr = buffer;
+
 	va_list args;
 	va_start(args, fmt);
-	fz_format_string(ctx, buffer, fz_append_emit, fmt, args);
+	fz_format_string(ctx, fz_init_fmtbuf_core(&emitter, ctx, fz_append_emit, fz_append_emit_block), fmt, args);
 	va_end(args);
 }
 
 void
 fz_append_vprintf(fz_context *ctx, fz_buffer *buffer, const char *fmt, va_list args)
 {
-	fz_format_string(ctx, buffer, fz_append_emit, fmt, args);
+	struct fz_fmtbuf emitter;
+	emitter.user.ptr = buffer;
+	fz_format_string(ctx, fz_init_fmtbuf_core(&emitter, ctx, fz_append_emit, fz_append_emit_block), fmt, args);
 }
 
 void
