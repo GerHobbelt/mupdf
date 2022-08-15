@@ -201,7 +201,7 @@ stdods_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 	// Such last effort error messages will invariably be short-ish.
 	// Besides, using a bit of stack for smaller messages reduces heap alloc+free
 	// call overhead.
-	char stkbuf[512];
+	char stkbuf[LONGLINE + 1];
 	char* buf = stkbuf;
 	if (count > sizeof(stkbuf) - 1)
 		buf = fz_malloc(ctx, count+1);
@@ -322,7 +322,7 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 		out->write = write;
 		out->close = close;
 		out->drop = drop;
-		if (bufsiz > 0)
+		if (bufsiz > 1)
 		{
 			out->bp = Memento_label(fz_malloc(ctx, bufsiz), "output_buf");
 			out->wp = out->bp;
@@ -337,6 +337,39 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 		fz_rethrow(ctx);
 	}
 	return out;
+}
+
+int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
+{
+	if (out->bp == NULL)
+	{
+		if (bufsiz > 1)
+		{
+			out->bp = Memento_label(fz_malloc(ctx, bufsiz), "output_buf");
+			out->wp = out->bp;
+			out->ep = out->bp + bufsiz;
+		}
+		return 0;
+	}
+	else if (out->bp != NULL)
+	{
+		if (bufsiz != out->ep - out->bp)
+		{
+			fz_flush_output(ctx, out);
+			assert(out->wp == out->bp);
+			fz_free(ctx, out->bp);
+			out->bp = NULL;
+
+			if (bufsiz > 1)
+			{
+				out->bp = Memento_label(fz_malloc(ctx, bufsiz), "output_buf");
+				out->wp = out->bp;
+				out->ep = out->bp + bufsiz;
+			}
+		}
+		return 0;
+	}
+	return 1;
 }
 
 static void null_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)

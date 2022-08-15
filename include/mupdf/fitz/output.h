@@ -182,6 +182,14 @@ fz_output *fz_new_output_with_path(fz_context *, const char *filename, int appen
 fz_output *fz_new_output_with_buffer(fz_context *ctx, fz_buffer *buf);
 
 /**
+	Set a buffer for an output which hasn't got any yet. This is usually the case
+	with predefined outputs: fz_stderr and fz_stdods.
+
+	Return 0 on success, 1 on failure to (re)set the buffer.
+*/
+int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz);
+
+/**
 	Retrieve an fz_output that directs to stdout.
 
 	Optionally may be fz_dropped when finished with.
