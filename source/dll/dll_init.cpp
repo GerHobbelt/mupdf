@@ -7,6 +7,8 @@
 
 #if defined(_MSC_VER)
 
+#if defined(FZDBG_HAS_TRACING)
+
 #pragma init_seg(compiler)
 
 static struct memPurposeRange
@@ -233,6 +235,8 @@ static int EnableMemLeakChecking(void)
 }
 
 static int fz_memleak_checking_is_set_up = EnableMemLeakChecking();
+
+#endif
 
 #endif // __VISUALC__
 

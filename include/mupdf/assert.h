@@ -27,6 +27,8 @@
 extern "C" {
 #endif
 
+#if !defined(NO_ASSERTIONS)
+
 #define assert(expression) (void)(                                          \
             (!!(expression)) ||                                             \
             fz_report_failed_assertion(#expression, __FILE__, __LINE__)		\
@@ -42,6 +44,18 @@ extern "C" {
 
 int fz_report_failed_assertion(const char *expression, const char *srcfile, int srcline);
 int fz_report_failed_assertion_and_continue(const char *expression, const char *srcfile, int srcline);
+
+#else
+
+#pragma message("You are compiling a binary with assertions removed. Be aware that this MAY only be a good thing for high quality, previously tested, production binaries that must produce the highest possible throughput. Cave canem!")
+
+#define assert(expression)				((void)0)
+
+#define ASSERT(expression)				((void)0)
+
+#define ASSERT_AND_CONTINUE(expression) ((void)0)
+
+#endif
 
 #ifdef __cplusplus
 }
