@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <math.h>
 #if defined(_WIN32)
 #include <windows.h>
 #endif
@@ -123,9 +124,12 @@ struct trace_header
 	size_t seqnum;
 	size_t magic;
 
+#if defined(FZDBG_HAS_TRACING)
 	// heap debugging:
 	int origin_line;
 	const char* origin_file;
+#endif
+
 	struct trace_header* prev;
 	struct trace_header* next;
 } trace_header;
@@ -180,7 +184,7 @@ static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t olds
 }
 
 static void *
-trace_malloc(void *arg, size_t size, const char *srcfile, int srcline)
+trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	ASSERT(info == &trace_info);
@@ -193,14 +197,20 @@ trace_malloc(void *arg, size_t size, const char *srcfile, int srcline)
 		return hit_memory_limit(info, 1, 0, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 1, 0, size);
-	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, srcfile, srcline);
+#if defined(FZDBG_HAS_TRACING) && defined(_NORMAL_BLOCK)
+	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
+#else
+	p = malloc(size + sizeof(trace_header));
+#endif
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
 	p[0].magic = 0xEAD;
 	p[0].seqnum = info->sequence_number++;
-	p[0].origin_file = srcfile;
-	p[0].origin_line = srcline;
+#if defined(FZDBG_HAS_TRACING)
+	p[0].origin_file = trace_srcfile;
+	p[0].origin_line = trace_srcline;
+#endif
 
 	if (heap_debug_mutex_is_initialized)
 		mu_lock_mutex(&heap_debug_mutex);
@@ -282,7 +292,7 @@ trace_free(void *arg, void *p_)
 }
 
 static void *
-trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline)
+trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	ASSERT(info == &trace_info);
@@ -295,7 +305,7 @@ trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline
 	}
 
 	if (p_ == NULL)
-		return trace_malloc(arg, size, srcfile, srcline);
+		return trace_malloc(arg, size   FZDBG_PASS);
 
 	if (size > SIZE_MAX - sizeof(trace_header))
 		return NULL;
@@ -321,7 +331,11 @@ trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline
 	{
 		trace_header old = p[-1];
 		trace_header* old_p = &p[-1];
-		p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, srcfile, srcline);
+#if defined(FZDBG_HAS_TRACING) && defined(_NORMAL_BLOCK)
+		p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
+#else
+		p = realloc(&p[-1], size + sizeof(trace_header));
+#endif
 		if (p == NULL)
 			return NULL;
 		info->current += size - old.size;
@@ -329,8 +343,10 @@ trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline
 			info->total += size - old.size;
 		if (info->current > info->peak)
 			info->peak = info->current;
-		p[0].origin_file = srcfile;
-		p[0].origin_line = srcline;
+#if defined(FZDBG_HAS_TRACING)
+		p[0].origin_file = trace_srcfile;
+		p[0].origin_line = trace_srcline;
+#endif
 		p[0].size = size;
 		info->allocs++;
 
@@ -381,7 +397,11 @@ trace_report_pending_allocations_since(size_t snapshot_id)
 	int hits = 0;
 	while (p && p->seqnum >= snapshot_id)
 	{
+#if defined(FZDBG_HAS_TRACING)
 		fprintf(stderr, "\nLEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
+#else
+		fprintf(stderr, "\nLEAK? #%zu (size: %zu)", p->seqnum, p->size);
+#endif
 		hits++;
 		
 		p = p->prev;
@@ -1064,7 +1084,7 @@ static void mu_drop_context_at_exit(void)
 	mu_drop_context();
 }
 
-static void show_progress_on_stderr(struct logconfig* logcfg, const char *message)
+static void show_progress_on_stderr(struct logconfig* logcfg, const char* message)
 {
 	if (!logcfg->quiet)
 	{
@@ -1073,7 +1093,11 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char *messag
 		// show progress on stderr, while we log the real data to logfile:
 		if (logfile != stderr)
 		{
-			if (!strncmp(message, "OK:", 3))
+			if (!strncmp(message, ":L#0", 4))
+			{
+				return; // don't show progress for simple 'this line was just read' log messages.
+			}
+			else if (!strncmp(message, "OK:", 3))
 			{
 				//fprintf(stderr, u8"✅");
 				fprintf(stderr, "#");
@@ -1090,6 +1114,10 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char *messag
 			else if (!strncmp(message, "::SKIPPED: ", 11))
 			{
 				fprintf(stderr, "\n%s", message + 2);
+			}
+			else if (!strncmp(message, "SKIP-DUE-TO-RANDOM-SAMPLING: ", 29))
+			{
+				fprintf(stderr, "^");
 			}
 			else if (strstr(message, "*!*"))
 			{
@@ -1112,6 +1140,7 @@ static fz_output* stddbgchannel(void)
 	{
 		return NULL;
 	}
+	int rc = fz_set_output_buffer(ctx, dbg, 160 /* LONGLINE is too much here, just try to buffer about 2 regular lines of text... */);
 	return dbg;
 }
 
@@ -1318,6 +1347,7 @@ bulktest_main(int argc, const char **argv)
 	const char* ignore_match_regex = NULL;
 	const char* match_numbers_s = NULL;
 	const char* ignore_match_numbers_s = NULL;
+	float random_exec_perunage = 1.0;
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
@@ -1333,7 +1363,7 @@ bulktest_main(int argc, const char **argv)
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "TLvqVm:s:x:n:X:N:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "TLvqVm:r:s:x:n:X:N:h")) != -1)
 	{
 		switch(c)
 		{
@@ -1350,6 +1380,19 @@ bulktest_main(int argc, const char **argv)
 			else trace_info.mem_limit = fz_atoi64(fz_optarg);
 			break;
 		case 'L': lowmemory = 1; break;
+
+		case 'r':
+			// expect a percentage / perunage
+			char pct = 0;
+			int pc = sscanf(fz_optarg, "%f%c", &random_exec_perunage, &pct);
+			if (pct == '%')
+				random_exec_perunage /= 100;
+			// sanity check/limiter @ 1%
+			if (random_exec_perunage < 0.0)
+				random_exec_perunage = 0.0;
+			else if (random_exec_perunage > 1.0)
+				random_exec_perunage = 1.0;
+			break;
 
 		case 'x':
 			// expect a regex to match
@@ -1424,6 +1467,11 @@ bulktest_main(int argc, const char **argv)
 	{
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
+	}
+
+	if (random_exec_perunage < 1.0)
+	{
+		fprintf(stderr, "random_exec_percentage: %.1f%%\n", random_exec_perunage * 100);
 	}
 
 	int linecounter = 0;
@@ -1615,7 +1663,7 @@ bulktest_main(int argc, const char **argv)
 
 					if (verbosity)
 					{
-						fz_info(ctx, "L#%04d: %s", linecounter, line);
+						fz_info(ctx, ":L#%05u: %s", linecounter, line);
 					}
 
 					// check if this statement is obscured by an outer IF/ENDIF condition
@@ -1793,18 +1841,29 @@ bulktest_main(int argc, const char **argv)
 					}
 					else if (match(argv[0], "MUTOOL"))
 					{
-						rv = mutool_main(argc - 1, argv + 1);
-						if (rv != EXIT_SUCCESS)
+						// decide whether to execute this command:
+						int chance = rand() % 1009;  // 1009 is prime and close to 1000
+						float m = random_exec_perunage * 1009 + chance;
+						int c = lroundf(m);
+						if (c < 1009)
 						{
-							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
-							errored++;
+							fz_info(ctx, "SKIP-DUE-TO-RANDOM-SAMPLING: MUTOOL command: %s", line);
 						}
-						else if (verbosity)
+						else
 						{
-							fz_info(ctx, "OK: MUTOOL command: %s", line);
-						}
+							rv = mutool_main(argc - 1, argv + 1);
+							if (rv != EXIT_SUCCESS)
+							{
+								fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+								errored++;
+							}
+							else if (verbosity)
+							{
+								fz_info(ctx, "OK: MUTOOL command: %s", line);
+							}
 
-						flush_active_logfile_hard();
+							flush_active_logfile_hard();
+						}
 					}
 					else if (match(argv[0], "MUSERVE"))
 					{
@@ -1890,7 +1949,7 @@ bulktest_main(int argc, const char **argv)
 					{
 						struct curltime now = Curl_now();
 						timediff_t diff = Curl_timediff(now, begin_time);
-						fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+						fz_info(ctx, ">L#%05u> T:%03dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 
 						if (showtime)
 						{
@@ -1950,12 +2009,12 @@ bulktest_main(int argc, const char **argv)
 
 		struct curltime now = Curl_now();
 
-		fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+		fz_info(ctx, "!L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 
 		// also log to stderr if we haven't already:
 		if (logcfg.logfile)
 		{
-			fprintf(stderr, "\nL#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+			fprintf(stderr, "\n!L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 		}
 
 		errored += 100;

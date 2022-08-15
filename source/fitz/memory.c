@@ -203,13 +203,21 @@ fz_strdup(fz_context *ctx, const char *s   FZDBG_DECL_ARGS)
 static void *
 fz_malloc_default(void *opaque, size_t size   FZDBG_DECL_ARGS)
 {
+#if defined(FZDBG_HAS_TRACING) && defined(_NORMAL_BLOCK)
 	return _malloc_dbg(size, _NORMAL_BLOCK   FZDBG_PASS);
+#else
+	return malloc(size);
+#endif
 }
 
 static void *
 fz_realloc_default(void *opaque, void *old, size_t size   FZDBG_DECL_ARGS)
 {
+#if defined(FZDBG_HAS_TRACING) && defined(_NORMAL_BLOCK)
 	return _realloc_dbg(old, size, _NORMAL_BLOCK   FZDBG_PASS);
+#else
+	return realloc(old, size);
+#endif
 }
 
 static void
