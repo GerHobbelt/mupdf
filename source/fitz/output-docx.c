@@ -198,6 +198,7 @@ static void dev_fill_image(fz_context *ctx, fz_device *dev_, fz_image *img, fz_m
 			else if (compressed->params.type == FZ_IMAGE_PNG) type = "png";
 			else if (compressed->params.type == FZ_IMAGE_PNM) type = "pnm";
 			else if (compressed->params.type == FZ_IMAGE_TIFF) type = "tiff";
+			else if (compressed->params.type == FZ_IMAGE_WEBP) type = "webp";
 
 			if (type)
 			{
