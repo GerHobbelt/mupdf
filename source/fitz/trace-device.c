@@ -350,7 +350,7 @@ fz_trace_fill_image(fz_context *ctx, fz_device *dev_, fz_image *image, fz_matrix
 	if (image->colorspace)
 		fz_write_printf(ctx, out, " colorspace=\"%s\"", fz_colorspace_name(ctx, image->colorspace));
 	fz_trace_color_params(ctx, out, color_params);
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, " width=\"%d\" height=\"%d\"", image->w, image->h);
 	fz_write_printf(ctx, out, "/>\n");
 }
@@ -362,7 +362,7 @@ fz_trace_fill_shade(fz_context *ctx, fz_device *dev_, fz_shade *shade, fz_matrix
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<fill_shade alpha=\"%g\"", alpha);
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, " pattern_matrix=%jM", &shade->matrix);
 	fz_write_printf(ctx, out, " colorspace=\"%s\"", fz_colorspace_name(ctx, shade->colorspace));
 	fz_trace_color_params(ctx, out, color_params);
@@ -425,7 +425,7 @@ fz_trace_fill_image_mask(fz_context *ctx, fz_device *dev_, fz_image *image, fz_m
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<fill_image_mask");
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_trace_color(ctx, out, colorspace, color, alpha);
 	fz_trace_color_params(ctx, out, color_params);
 	fz_write_printf(ctx, out, " width=\"%d\" height=\"%d\"", image->w, image->h);
@@ -439,7 +439,7 @@ fz_trace_clip_image_mask(fz_context *ctx, fz_device *dev_, fz_image *image, fz_m
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<clip_image_mask");
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, " width=\"%d\" height=\"%d\"", image->w, image->h);
 	fz_write_printf(ctx, out, "/>\n");
 	dev->depth++;
@@ -512,7 +512,7 @@ fz_trace_begin_tile(fz_context *ctx, fz_device *dev_, fz_rect area, fz_rect view
 	fz_write_printf(ctx, out, " area=%jR", &area);
 	fz_write_printf(ctx, out, " view=%jR", &view);
 	fz_write_printf(ctx, out, " xstep=\"%g\" ystep=\"%g\"", xstep, ystep);
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	dev->depth++;
 	return 0;
