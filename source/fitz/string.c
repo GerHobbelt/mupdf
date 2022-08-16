@@ -221,12 +221,17 @@ fz_dirname(char *dir, const char *path, size_t n)
 const char *
 fz_basename(const char *path)
 {
-	const char *name = strrchr(path, '/');
-	if (!name)
-		name = strrchr(path, '\\');
-	if (!name)
-		return path;
-	return name + 1;
+	const char *name1 = strrchr(path, '/');
+	const char* name2 = strrchr(path, '\\');
+	if (!name1)
+		name1 = path;
+	else
+		name1++;
+	if (!name2)
+		name2 = path;
+	else
+		name2++;
+	return (name2 > name1 ? name2 : name1);
 }
 
 #ifdef _WIN32
