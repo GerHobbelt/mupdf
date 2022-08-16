@@ -840,13 +840,10 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 		fz_write_printf(ctx, out, "Mediaboxes (%d):\n", glo->dims);
 		for (i = 0; i < glo->dims; i++)
 		{
-			fz_write_printf(ctx, out, PAGE_FMT_zu "[ %g %g %g %g ]\n",
+			fz_write_printf(ctx, out, PAGE_FMT_zu "[ %R ]\n",
 				glo->dim[i].page,
 				pdf_to_num(ctx, glo->dim[i].pageref),
-				glo->dim[i].u.dim.bbox->x0,
-				glo->dim[i].u.dim.bbox->y0,
-				glo->dim[i].u.dim.bbox->x1,
-				glo->dim[i].u.dim.bbox->y1);
+				glo->dim[i].u.dim.bbox);
 		}
 		fz_write_printf(ctx, out, "\n");
 	}

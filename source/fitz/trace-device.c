@@ -36,9 +36,9 @@ static void fz_trace_indent(fz_context *ctx, fz_output *out, int depth)
 }
 
 static void
-fz_trace_matrix(fz_context *ctx, fz_output *out, fz_matrix ctm)
+fz_trace_matrix(fz_context *ctx, fz_output *out, const fz_matrix *ctm)
 {
-	fz_write_printf(ctx, out, " transform=\"%g %g %g %g %g %g\"", ctm.a, ctm.b, ctm.c, ctm.d, ctm.e, ctm.f);
+	fz_write_printf(ctx, out, " transform=%jM", ctm);
 }
 
 static void
@@ -70,7 +70,7 @@ fz_trace_text_span(fz_context *ctx, fz_output *out, fz_text_span *span, int dept
 	int i;
 	fz_trace_indent(ctx, out, depth);
 	fz_write_printf(ctx, out, "<span font=\"%s\" wmode=\"%d\" bidi=\"%d\"", fz_font_name(ctx, span->font), span->wmode, span->bidi_level);
-	fz_write_printf(ctx, out, " trm=\"%g %g %g %g\">\n", span->trm.a, span->trm.b, span->trm.c, span->trm.d);
+	fz_write_printf(ctx, out, " trm=%jM>\n", &span->trm);
 	for (i = 0; i < span->len; i++)
 	{
 		int ucs = span->items[i].ucs;
@@ -187,7 +187,7 @@ fz_trace_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 		fz_write_printf(ctx, out, " winding=\"nonzero\"");
 	fz_trace_color(ctx, out, colorspace, color, alpha);
 	fz_trace_color_params(ctx, out, color_params);
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_path(ctx, dev, path);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -219,7 +219,7 @@ fz_trace_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path, cons
 
 	fz_trace_color(ctx, out, colorspace, color, alpha);
 	fz_trace_color_params(ctx, out, color_params);
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 
 	fz_trace_path(ctx, dev, path);
@@ -239,7 +239,7 @@ fz_trace_clip_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 		fz_write_printf(ctx, out, " winding=\"eofill\"");
 	else
 		fz_write_printf(ctx, out, " winding=\"nonzero\"");
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_path(ctx, dev, path);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -254,7 +254,7 @@ fz_trace_clip_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<clip_stroke_path");
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_path(ctx, dev, path);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -272,7 +272,7 @@ fz_trace_fill_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_mat
 	fz_write_printf(ctx, out, "<fill_text");
 	fz_trace_color(ctx, out, colorspace, color, alpha);
 	fz_trace_color_params(ctx, out, color_params);
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_text(ctx, out, text, dev->depth+1);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -289,7 +289,7 @@ fz_trace_stroke_text(fz_context *ctx, fz_device *dev_, const fz_text *text, cons
 	fz_write_printf(ctx, out, "<stroke_text");
 	fz_trace_color(ctx, out, colorspace, color, alpha);
 	fz_trace_color_params(ctx, out, color_params);
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_text(ctx, out, text, dev->depth+1);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -303,7 +303,7 @@ fz_trace_clip_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_mat
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<clip_text");
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_text(ctx, out, text, dev->depth+1);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -318,7 +318,7 @@ fz_trace_clip_stroke_text(fz_context *ctx, fz_device *dev_, const fz_text *text,
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<clip_stroke_text");
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_text(ctx, out, text, dev->depth+1);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -333,7 +333,7 @@ fz_trace_ignore_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<ignore_text");
-	fz_trace_matrix(ctx, out, ctm);
+	fz_trace_matrix(ctx, out, &ctm);
 	fz_write_printf(ctx, out, ">\n");
 	fz_trace_text(ctx, out, text, dev->depth+1);
 	fz_trace_indent(ctx, out, dev->depth);
@@ -363,13 +363,7 @@ fz_trace_fill_shade(fz_context *ctx, fz_device *dev_, fz_shade *shade, fz_matrix
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<fill_shade alpha=\"%g\"", alpha);
 	fz_trace_matrix(ctx, out, ctm);
-	fz_write_printf(ctx, out, " pattern_matrix=\"%g %g %g %g %g %g\"",
-		shade->matrix.a,
-		shade->matrix.b,
-		shade->matrix.c,
-		shade->matrix.d,
-		shade->matrix.e,
-		shade->matrix.f);
+	fz_write_printf(ctx, out, " pattern_matrix=%jM", &shade->matrix);
 	fz_write_printf(ctx, out, " colorspace=\"%s\"", fz_colorspace_name(ctx, shade->colorspace));
 	fz_trace_color_params(ctx, out, color_params);
 	// TODO: use_background and background
@@ -378,13 +372,7 @@ fz_trace_fill_shade(fz_context *ctx, fz_device *dev_, fz_shade *shade, fz_matrix
 	{
 	case FZ_FUNCTION_BASED:
 		fz_write_printf(ctx, out, " type=\"function\"");
-		fz_write_printf(ctx, out, " function_matrix=\"%g %g %g %g %g %g\"",
-			shade->u.f.matrix.a,
-			shade->u.f.matrix.b,
-			shade->u.f.matrix.c,
-			shade->u.f.matrix.d,
-			shade->u.f.matrix.e,
-			shade->u.f.matrix.f);
+		fz_write_printf(ctx, out, " function_matrix=%jM", &shade->u.f.matrix);
 		fz_write_printf(ctx, out, " domain=\"%g %g %g %g\"",
 			shade->u.f.domain[0][0],
 			shade->u.f.domain[0][1],
@@ -473,8 +461,8 @@ fz_trace_begin_mask(fz_context *ctx, fz_device *dev_, fz_rect bbox, int luminosi
 	fz_trace_device *dev = (fz_trace_device*)dev_;
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
-	fz_write_printf(ctx, out, "<clip_mask bbox=\"%g %g %g %g\" s=\"%s\"",
-		bbox.x0, bbox.y0, bbox.x1, bbox.y1,
+	fz_write_printf(ctx, out, "<clip_mask bbox=%jR s=\"%s\"",
+		&bbox,
 		luminosity ? "luminosity" : "alpha");
 	fz_trace_color_params(ctx, out, color_params);
 	fz_write_printf(ctx, out, ">\n");
@@ -498,8 +486,8 @@ fz_trace_begin_group(fz_context *ctx, fz_device *dev_, fz_rect bbox, fz_colorspa
 	fz_trace_device *dev = (fz_trace_device*)dev_;
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
-	fz_write_printf(ctx, out, "<group bbox=\"%g %g %g %g\" isolated=\"%d\" knockout=\"%d\" blendmode=\"%s\" alpha=\"%g\">\n",
-		bbox.x0, bbox.y0, bbox.x1, bbox.y1,
+	fz_write_printf(ctx, out, "<group bbox=%jR isolated=\"%d\" knockout=\"%d\" blendmode=\"%s\" alpha=\"%g\">\n",
+		&bbox,
 		isolated, knockout, fz_blendmode_name(blendmode), alpha);
 	dev->depth++;
 }
@@ -521,8 +509,8 @@ fz_trace_begin_tile(fz_context *ctx, fz_device *dev_, fz_rect area, fz_rect view
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<tile id=\"%d\"", id);
-	fz_write_printf(ctx, out, " area=\"%g %g %g %g\"", area.x0, area.y0, area.x1, area.y1);
-	fz_write_printf(ctx, out, " view=\"%g %g %g %g\"", view.x0, view.y0, view.x1, view.y1);
+	fz_write_printf(ctx, out, " area=%jR", &area);
+	fz_write_printf(ctx, out, " view=%jR", &view);
 	fz_write_printf(ctx, out, " xstep=\"%g\" ystep=\"%g\"", xstep, ystep);
 	fz_trace_matrix(ctx, out, ctm);
 	fz_write_printf(ctx, out, ">\n");

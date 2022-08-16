@@ -102,16 +102,7 @@ static int s_write_attribute_char(fz_context *ctx, fz_output *out, const char *i
 
 static int s_write_attribute_matrix(fz_context *ctx, fz_output *out, const char *id, const fz_matrix *matrix)
 {
-	fz_write_printf(ctx, out,
-		" %s=\"%g %g %g %g %g %g\"",
-		id,
-		matrix->a,
-		matrix->b,
-		matrix->c,
-		matrix->d,
-		matrix->e,
-		matrix->f
-		);
+	fz_write_printf(ctx, out, " %s=%jM", id, matrix);
 	return 0;
 }
 
