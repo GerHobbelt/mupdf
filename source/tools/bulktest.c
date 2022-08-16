@@ -24,6 +24,7 @@
 #include <math.h>
 #if defined(_WIN32)
 #include <windows.h>
+#include <intrin.h>
 #endif
 
 int mutool_main(int argc, const char** argv);
@@ -1084,7 +1085,13 @@ static void mu_drop_context_at_exit(void)
 	mu_drop_context();
 }
 
-static void show_progress_on_stderr(struct logconfig* logcfg, const char* message)
+typedef enum progress_msg_level {
+	PML_INFO,
+	PML_WARNING,
+	PML_ERROR,
+} progress_msg_level_t;
+
+static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level_t level, const char* message)
 {
 	if (!logcfg->quiet)
 	{
@@ -1093,7 +1100,7 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char* messag
 		// show progress on stderr, while we log the real data to logfile:
 		if (logfile != stderr)
 		{
-			if (!strncmp(message, ":L#0", 4))
+			if (!strncmp(message, "\n:L#0", 5))
 			{
 				return; // don't show progress for simple 'this line was just read' log messages.
 			}
@@ -1115,7 +1122,7 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char* messag
 			{
 				fprintf(stderr, "\n%s", message + 2);
 			}
-			else if (!strncmp(message, "SKIP-DUE-TO-RANDOM-SAMPLING: ", 29))
+			else if (!strncmp(message, "::SKIP-DUE-TO-RANDOM-SAMPLING: ", 31))
 			{
 				fprintf(stderr, "^");
 			}
@@ -1125,7 +1132,100 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char* messag
 			}
 			else
 			{
-				fprintf(stderr, ".");
+				switch (level)
+				{
+				case PML_ERROR:
+					fprintf(stderr, "?");
+					break;
+
+				case PML_WARNING:
+					fprintf(stderr, "w");
+					break;
+
+				default:
+					{
+						// time-based reduction of progress output:
+						// the first filter is RDTSC based and *fast*, reducing the progress update rate to something around 1/10th of a second,
+						// give or take some CPU clock rate fluctuations, etc.
+						// the inner, second, filter is clock()-based and thus quite a bit slower, yet more accurate. Here we filter the
+						// incoming rate of ~ msgs per second down to once every third of a second, 10 per sec to 3 per sec.
+						static uint64_t prev_rtcnt = 0;
+						static uint64_t offset = (uint64_t)(1E6);
+						uint64_t t = __rdtsc();
+						if (t > prev_rtcnt + offset)
+						{
+							// RDTSC and clock() must be collected together; for offset correction, we cannot use `prev_rtcnt` as that one will
+							// have updated in the meantime, where this code chunk was then skipped, resulting in (t - prev_rtcnt) measuring
+							// quite a different time interval then we do here using clock(), hence we need to track the matching RDTSC
+							// value for proper offset correction calculus:
+							static uint64_t prev_rtcnt_on_clock = 0;
+							static clock_t prev_time = 0;
+							clock_t t2 = clock();
+							if (t2 > prev_time + 0.33 * CLOCKS_PER_SEC)
+							{
+								fprintf(stderr, ".");
+							}
+							if (/* t2 < prev_time + 0.1f * CLOCKS_PER_SEC && */ prev_time != 0 && prev_rtcnt != 0)
+							{
+								// apparently, `offset` is small enough to land us here again *within* 1/10rd of a second: adjust `offset`!
+								uint64_t clockdelta = t2 - prev_time;
+								uint64_t delta = (t - prev_rtcnt_on_clock);
+								// slowly grow the offset towards the proper value; when we measure across tiny clock() intervals,
+								// extrapolating to 0.1 second (~ 100 clock()s on most hardware) is overzealous and highly
+								// inaccurate. So we limit the extrapolation factor to 2, thus growing the offset slowly towards
+								// a proper value. We don't loose much performance with this either, i.e. this is very low extra overhead.
+								//
+								// Another, additional, measure to improve accuracy of the calculus is to ignore any delta frames
+								// which last least than 20 clock() ticks: that way, we'll have a 5% or better accuracy.
+								if (clockdelta >= 20)
+								{
+									uint64_t dt = delta * fz_min(2, (0.1f * CLOCKS_PER_SEC) / clockdelta);
+									if (dt > offset)
+									{
+										// also limit the offset increase angle to prevent crazy changes due to unknown CPU gas bubbles. ;-)
+										//
+										// Note: I was wandering for a bit why those 'crazy jumps' occurred, but they happen, of course,
+										// when you're debugging the codebase: while you, the human, check your debugger screens, the timers
+										// keep ticking and thus your next time delta will be way off from usual reality, resulting in
+										// sometimes *insane* `dt` value jumps in here.
+										// By limiting the increase rate, we prevent that artifact from badly impacting our progress time delta
+										// filters above.
+										offset = fz_min(5 * offset, dt);
+									}
+
+									prev_time = t2;
+									prev_rtcnt_on_clock = t;
+								}
+								if (clockdelta > 300)
+								{
+									static int f = 0;
+									if (!f)
+									{
+										f = 1;
+										fz_info(ctx, "[clock delta: %d]\n", (int)clockdelta);
+										f = 0;
+									}
+								}
+							}
+							else
+							{
+								prev_time = t2;
+								prev_rtcnt_on_clock = t;
+							}
+						}
+						else
+						{
+							// slowly decrease the timing offset: this compensates for CPU clock variations, when
+							// the CPU clock rate slows down: then the previously determined `offset` value won't be suitable any more.
+							//
+							// As this path will execute quite often, we don't want any particular (and costly!) time measurement calls
+							// in here, but simply apply some quick math to slowly decrease the offset.
+							offset = offset * 0.9;
+						}
+						prev_rtcnt = t;
+					}
+					break;
+				}
 			}
 		}
 	}
@@ -1151,7 +1251,7 @@ static void tst_error_callback(fz_context* ctx, void* user, const char* message)
 	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
 
 	// show progress on stderr, while we log the real data to logfile:
-	show_progress_on_stderr(logcfg, message);
+	show_progress_on_stderr(logcfg, PML_ERROR, message);
 	fprintf(logfile, "error: %s\n", message);
 	fflush(logfile);
 
@@ -1168,7 +1268,7 @@ static void tst_warning_callback(fz_context* ctx, void* user, const char* messag
 	if (!logcfg->quiet)
 	{
 		// show progress on stderr, while we log the real data to logfile:
-		show_progress_on_stderr(logcfg, message);
+		show_progress_on_stderr(logcfg, PML_WARNING, message);
 		fprintf(logfile, "warning: %s\n", message);
 		fflush(logfile);
 
@@ -1186,7 +1286,7 @@ static void tst_info_callback(fz_context* ctx, void* user, const char* message)
 	if (!logcfg->quiet)
 	{
 		// show progress on stderr, while we log the real data to logfile:
-		show_progress_on_stderr(logcfg, message);
+		show_progress_on_stderr(logcfg, PML_INFO, message);
 		fprintf(logfile, "%s\n", message);
 
 		fz_output* dbg = stddbgchannel();
@@ -1234,7 +1334,7 @@ static struct range* decode_numbers_rangespec(const char* spec)
 
 static const char* test_fail_reason[] = {
 	"PASS",
-	/* 1 */ "empty line",
+	/* 1 */ "empty line or comment",
 	/* 2 */ "rejected by match regex",
 	/* 3 */ "rejected by ignore-match regex",
 	/* 4 */ "rejected by match-ranges (line number range spec)",
@@ -1368,8 +1468,8 @@ bulktest_main(int argc, const char **argv)
 		switch(c)
 		{
 		case 'T': script_is_template = 1; break;
-		case 'q': logcfg.quiet = 1; break;
-		case 'v': verbosity ^= 1; break;
+		case 'q': logcfg.quiet = 1; verbosity = 0; break;
+		case 'v': logcfg.quiet = 0; verbosity++; break;
 		case 's':
 			if (strchr(fz_optarg, 't')) ++showtime;
 			if (strchr(fz_optarg, 'm')) ++showmemory;
@@ -1441,6 +1541,9 @@ bulktest_main(int argc, const char **argv)
 
 	if (!fz_has_global_context())
 	{
+		fz_enable_dbg_output();
+		fz_enable_dbg_output_on_stdio_unreachable();
+
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
 		if (!ctx)
 		{
@@ -1609,7 +1712,14 @@ bulktest_main(int argc, const char **argv)
 
 				do
 				{
-					bool report_time = true;
+					enum {
+						RPT_NOTHING = 0,
+						RPT_A_SKIPPED_COMMAND,
+						RPT_A_SIMPLE_CONTROLFLOW_COMMAND,
+						RPT_A_SIMPLE_USERINFO_COMMAND,
+						RPT_A_SIMPLE_COMMAND,
+						RPT_AN_IMPORTANT_TEST_COMMAND
+					} report_time = RPT_NOTHING;
 					char* line = my_getline(script, &linecounter);
 
 					if (line == NULL)
@@ -1661,9 +1771,9 @@ bulktest_main(int argc, const char **argv)
 
 					fflush(logcfg.logfile);
 
-					if (verbosity)
+					if (verbosity >= 1)
 					{
-						fz_info(ctx, ":L#%05u: %s", linecounter, line);
+						fz_info(ctx, "\n:L#%05u: %s", linecounter, line);
 					}
 
 					// check if this statement is obscured by an outer IF/ENDIF condition
@@ -1682,7 +1792,7 @@ bulktest_main(int argc, const char **argv)
 					if (match(argv[0], "%"))
 					{
 						/* Comment */
-						report_time = false;
+						report_time = RPT_NOTHING;
 					}
 					else if (match(argv[0], "IF"))
 					{
@@ -1706,7 +1816,7 @@ bulktest_main(int argc, const char **argv)
 								skip_if_block[if_level++] = !condition;
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "ELSE"))
 					{
@@ -1724,7 +1834,7 @@ bulktest_main(int argc, const char **argv)
 						{
 							skip_if_block[if_level - 1] = !skip_if_block[if_level - 1];
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "ENDIF"))
 					{
@@ -1744,7 +1854,7 @@ bulktest_main(int argc, const char **argv)
 								errored++;
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "LABEL:"))
 					{
@@ -1767,19 +1877,19 @@ bulktest_main(int argc, const char **argv)
 								}
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (*skip_to_label || skip_this_statement)
 					{
 						// skip command as we're skipping to label X / out of an IF/ELSE/ENDIF conditional block
 						fz_info(ctx, "SKIPPING: %s\n", line);
-						report_time = false;
+						report_time = RPT_A_SKIPPED_COMMAND;
 					}
 					else if (skip_to_datalinecounter > datalinecounter)
 					{
 						// skip rest of script as we're skipping to *dataline* X
 						fz_info(ctx, "SKIPPING TO DATALINE: %d (currently at dataline %d)\n", skip_to_datalinecounter, datalinecounter);
-						report_time = false;
+						report_time = RPT_A_SKIPPED_COMMAND;
 						break;
 					}
 					else if (match(argv[0], "SKIP_TO_LABEL"))
@@ -1796,7 +1906,7 @@ bulktest_main(int argc, const char **argv)
 							strncpy(skip_to_label, argv[1], sizeof(skip_to_label));
 							fz_info(ctx, "Skip to label %s\n", skip_to_label);
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "SKIP_UNTIL_DATALINE"))
 					{
@@ -1815,13 +1925,13 @@ bulktest_main(int argc, const char **argv)
 								fz_info(ctx, "Skip to data line %d\n", skip_to_datalinecounter);
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "ECHO"))
 					{
 						// Use the new, reformatted line for this...
 						fz_info(ctx, "::ECHO: %s\n", line + 5);
-						report_time = false;
+						report_time = RPT_A_SIMPLE_USERINFO_COMMAND;
 					}
 					else if (match(argv[0], "CD"))
 					{
@@ -1833,11 +1943,12 @@ bulktest_main(int argc, const char **argv)
 						else
 						{
 							fz_chdir(ctx, argv[1]);
-							if (verbosity)
+							if (verbosity >= 1)
 							{
 								fz_info(ctx, "OK: CD %s", argv[1]);
 							}
 						}
+						report_time = RPT_A_SIMPLE_COMMAND;
 					}
 					else if (match(argv[0], "MUTOOL"))
 					{
@@ -1847,7 +1958,8 @@ bulktest_main(int argc, const char **argv)
 						int c = lroundf(m);
 						if (c < 1009)
 						{
-							fz_info(ctx, "SKIP-DUE-TO-RANDOM-SAMPLING: MUTOOL command: %s", line);
+							fz_info(ctx, "::SKIP-DUE-TO-RANDOM-SAMPLING: MUTOOL command: %s", line);
+							report_time = RPT_A_SKIPPED_COMMAND;
 						}
 						else
 						{
@@ -1857,10 +1969,12 @@ bulktest_main(int argc, const char **argv)
 								fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
 								errored++;
 							}
-							else if (verbosity)
+							else if (verbosity >= 1)
 							{
 								fz_info(ctx, "OK: MUTOOL command: %s", line);
 							}
+
+							report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
 
 							flush_active_logfile_hard();
 						}
@@ -1873,10 +1987,12 @@ bulktest_main(int argc, const char **argv)
 							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
 							errored++;
 						}
-						else if (verbosity)
+						else if (verbosity >= 1)
 						{
 							fz_info(ctx, "OK: MUTOOL command: %s", line);
 						}
+
+						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
 
 						flush_active_logfile_hard();
 					}
@@ -1888,10 +2004,12 @@ bulktest_main(int argc, const char **argv)
 							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
 							errored++;
 						}
-						else if (verbosity)
+						else if (verbosity >= 1)
 						{
 							fz_info(ctx, "OK: MUTOOL command: %s", line);
 						}
+
+						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
 
 						flush_active_logfile_hard();
 					}
@@ -1929,13 +2047,15 @@ bulktest_main(int argc, const char **argv)
 
 						if (rv != EXIT_SUCCESS)
 						{
-							fz_error(ctx, "ERR: error executing MUTOOL command at script line %d.", linecounter);
+							fz_error(ctx, "ERR: error executing BULKTEST command at script line %d.", linecounter);
 							errored++;
 						}
-						else if (verbosity)
+						else if (verbosity >= 1)
 						{
-							fz_info(ctx, "OK: MUTOOL command: %s", line);
+							fz_info(ctx, "OK: BULKTEST command: %s", line);
 						}
+
+						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
 
 						flush_active_logfile_hard();
 					}
@@ -1945,11 +2065,11 @@ bulktest_main(int argc, const char **argv)
 						fz_throw(ctx, FZ_ERROR_GENERIC, "Ignoring line with UNSUPPORTED script statement:\n    %s", line);
 					}
 
-					if (report_time)
+					if (report_time >= RPT_AN_IMPORTANT_TEST_COMMAND)
 					{
 						struct curltime now = Curl_now();
 						timediff_t diff = Curl_timediff(now, begin_time);
-						fz_info(ctx, ">L#%05u> T:%03dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+						fz_info(ctx, ">L#%05u> T:%dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
 
 						if (showtime)
 						{
