@@ -137,25 +137,14 @@ error_callback(void* data, const char* msg, Jbig2Severity severity, uint32_t seg
 	if (seg_idx != JBIG2_UNKNOWN_SEGMENT_NUMBER)
 		fz_snprintf(idxbuf, sizeof idxbuf, " (segment 0x%02x)", seg_idx);
 
-	/*
-	typedef enum {
-		JBIG2_SEVERITY_DEBUG,
-		JBIG2_SEVERITY_INFO,
-		JBIG2_SEVERITY_WARNING,
-		JBIG2_SEVERITY_FATAL
-	} Jbig2Severity;
-	*/
-	static const char* severity_name[] = {
-		"debug",
-		"warning",
-		"info",
-		"error"
-	};
-	ASSERT(JBIG2_SEVERITY_DEBUG == 0);
-	ASSERT(JBIG2_SEVERITY_FATAL == 3);
-	ASSERT(severity <= JBIG2_SEVERITY_FATAL);
-	ASSERT(severity >= JBIG2_SEVERITY_DEBUG);
-	fz_error(ctx, "jbig2dec %s: %s%s", severity_name[severity], msg, idxbuf);
+	if (severity == JBIG2_SEVERITY_FATAL)
+		fz_error(ctx, "jbig2dec error: %s%s", msg, idxbuf);
+	else if (severity == JBIG2_SEVERITY_WARNING)
+		fz_warn(ctx, "jbig2dec warning: %s%s", msg, idxbuf);
+	else if (severity == JBIG2_SEVERITY_INFO)
+		fz_info(ctx, "jbig2dec info: %s%s", msg, idxbuf);
+	else
+		fz_info(ctx, "jbig2dec debug: %s%s", msg, idxbuf);
 }
 
 static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size)
