@@ -39,6 +39,8 @@
 
 #include <string.h>
 
+#undef OUT   // MSWin fix
+
 /*
  * The basic MD5 functions.
  *

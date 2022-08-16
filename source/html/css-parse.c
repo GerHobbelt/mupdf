@@ -27,6 +27,9 @@
 
 #include "css-properties.h"
 
+// MSWin fix
+#define accept   css_accept_char
+
 struct lexbuf
 {
 	fz_context *ctx;

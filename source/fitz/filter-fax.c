@@ -25,6 +25,8 @@
 #include <string.h>
 #include <limits.h>
 
+#undef ERROR  // MSWin fix
+
 /* Fax G3/G4 decoder */
 
 /* TODO: uncompressed */

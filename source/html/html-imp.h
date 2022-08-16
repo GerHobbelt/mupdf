@@ -27,6 +27,14 @@
 
 #include "../fitz/xml-imp.h"
 
+// MSWin fix
+#undef TA_LEFT
+#undef TA_RIGHT
+#undef TA_CENTER
+#undef TA_JUSTIFY
+#undef BS_NONE
+#undef BS_SOLID 
+
 typedef struct fz_html_font_face_s fz_html_font_face;
 typedef struct fz_html_font_set_s fz_html_font_set;
 typedef struct fz_html_s fz_html;
