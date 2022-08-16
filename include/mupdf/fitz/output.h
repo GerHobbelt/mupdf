@@ -435,16 +435,16 @@ extern const char* fz_hex_digits;
 	string value using `%q` or `%Q` will render as an empty string instead of `null`: if you need
 	to print `null` values, you must do so explicitly.
 
-	`%M` outputs a `fz_matrix*` as a series of `%g` values.
+	`%M` outputs a `fz_matrix *` as a series of 6 `%g` values: `.a .b .c .d .e .f`.
 
-	`%R` outputs a `fz_rect*` as a series of `%g` values.
+	`%R` outputs a `fz_rect *` as a series of 4 `%g` values: `.x0 .y0 .x1 .y1`.
 
-	`%P` outputs a `fz_point*` as a series of `%g` values.
+	`%P` outputs a `fz_point *` as a series of 2 `%g` values: `.x .y`.
 
-	`%Z` outputs a `fz_quad*` as a series of `%g` values.
+	`%Z` outputs a `fz_quad *` as a series of 8 `%g` values: `.ul.x .ul.y .ur.x .ur.y .ll.x .ll.y .lr.x .lr.y`.
 
 	The `,` comma modifier for `%M`/`%R`/`%P`/`%Z` will print a comma+space separator
-	between the values instead of only a space.
+	between the values instead of only the default single space.
 
 	`%T` outputs an `in64_t` as time (`time_t`, UTC) using the strftime() format: "D:%Y-%m-%d %H:%M:%S UTC".
 	Invalid/unparseable timestamps will print as `(invalid)`.
