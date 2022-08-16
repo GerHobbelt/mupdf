@@ -83,7 +83,7 @@ int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char
 
 void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 {
-	char buf[2048];
+	char buf[LONGLINE];
 	assert(message != NULL);
 	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "error: ", message, "\n"))
 		buf[0] = 0;
@@ -127,14 +127,13 @@ void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 
 void fz_default_warning_callback(fz_context* ctx, void *user, const char *message)
 {
-	char buf[2048];
+	char buf[LONGLINE];
 	assert(message != NULL);
 	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "warning: ", message, "\n"))
 		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_WARN))
 	{
-#if 1
 		if (buf[0])
 		{
 			fz_write_string(ctx, fz_stderr(ctx), buf);
@@ -145,9 +144,6 @@ void fz_default_warning_callback(fz_context* ctx, void *user, const char *messag
 			fz_write_string(ctx, fz_stderr(ctx), message);
 			fz_write_string(ctx, fz_stderr(ctx), "\n");
 		}
-#else
-		fprintf(stderr, "warning: %s\n", message);
-#endif
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
@@ -189,7 +185,7 @@ void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, v
 
 void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 {
-	char buf[2048];
+	char buf[LONGLINE];
 	assert(message != NULL);
 	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), message, "\n", NULL))
 		buf[0] = 0;
@@ -332,14 +328,14 @@ static void prepare_message(char* buf, size_t bufsize, const char* fmt, va_list 
 
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 {
-	char buf[sizeof ctx->warn.message];
-
-	prepmsg(buf, fmt, ap);
-
 	if (!ctx && fz_has_global_context())
 	{
 		ctx = fz_get_global_context();
 	}
+
+	char buf[sizeof ctx->warn.message];
+
+	prepmsg(buf, fmt, ap);
 
 	if (!ctx)
 	{
@@ -375,16 +371,16 @@ void fz_warn(fz_context *ctx, const char *fmt, ...)
 
 void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap)
 {
-	char buf[4096];
-
-	fz_flush_warnings(ctx);
-
-	prepmsg(buf, fmt, ap);
-
 	if (!ctx && fz_has_global_context())
 	{
 		ctx = fz_get_global_context();
 	}
+
+	char buf[sizeof ctx->warn.message];
+
+	fz_flush_warnings(ctx);
+
+	prepmsg(buf, fmt, ap);
 
 	if (ctx && ctx->info.print)
 		ctx->info.print(ctx, ctx->info.print_user, buf);
@@ -402,16 +398,16 @@ void fz_info(fz_context* ctx, const char* fmt, ...)
 
 void fz_verror(fz_context* ctx, const char* fmt, va_list ap)
 {
-	char buf[4096];
-
-	fz_flush_warnings(ctx);
-
-	prepmsg(buf, fmt, ap);
-
 	if (!ctx && fz_has_global_context())
 	{
 		ctx = fz_get_global_context();
 	}
+
+	char buf[sizeof ctx->error.message];
+
+	fz_flush_warnings(ctx);
+
+	prepmsg(buf, fmt, ap);
 
 	if (ctx && ctx->error.print)
 		ctx->error.print(ctx, ctx->error.print_user, buf);
