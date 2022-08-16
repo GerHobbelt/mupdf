@@ -802,7 +802,7 @@ typedef struct
 	int last_nonzero_errcode;
 	void *print_user;
 	fz_error_print_callback *print;
-	char message[4096];
+	char message[LONGLINE];
 } fz_error_context;
 
 typedef struct
@@ -810,7 +810,7 @@ typedef struct
 	void *print_user;
 	fz_error_print_callback *print;
 	int count;
-	char message[4096];
+	char message[LONGLINE];
 } fz_warn_context;
 
 typedef struct
