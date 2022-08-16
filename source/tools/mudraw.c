@@ -77,7 +77,7 @@
 
 /* Enable for helpful threading debug */
 #if 01
-#define DEBUG_THREADS(code) do { code; } while (0)
+#define DEBUG_THREADS(code) do { if (verbosity >= 2) { code; } } while (0)
 #else
 #define DEBUG_THREADS(code) do { } while (0)
 #endif
@@ -371,7 +371,7 @@ static int kill = 0;
 static int band_height = 0;
 static int lowmemory = 0;
 
-static int quiet = 0;
+static int verbosity = 1;
 static int errored = 0;
 static fz_colorspace *colorspace = NULL;
 static fz_colorspace *oi = NULL;
@@ -483,6 +483,7 @@ static int usage(void)
 		"    bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
 		"\n"
 		"  -q    be quiet (don't print progress messages)\n"
+		"  -v    verbose ~ not quiet (repeat to increase the chattiness of the application)\n"
 		"  -s -  show extra information:\n"
 		"    m - show memory use\n"
 		"    t - show timings\n"
@@ -1487,7 +1488,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			timing.total += diff + interptime;
 			timing.count ++;
 
-			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)", interptime, diff, diff + interptime);
+			fz_info(ctx, " pagenum=%d :: %dms (interpretation) %dms (rendering) %dms (total)", pagenum, interptime, diff, diff + interptime);
 		}
 		else
 		{
@@ -1506,7 +1507,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			timing.total += diff;
 			timing.count ++;
 
-			fz_info(ctx, " %dms (total)", diff);
+			fz_info(ctx, " pagenum=%d :: %dms (total)", pagenum, diff);
 		}
 	}
 
@@ -1693,8 +1694,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		}
 		else if (bgprint.active)
 		{
-			if (!quiet || showfeatures || showtime || showmd5)
-				fz_info(ctx, "page %s %d%s", filename, pagenum, features);
+			if (verbosity >= 1 || showfeatures || showtime || showmd5)
+				fz_info(ctx, "page %d file %s features: %s", pagenum, filename, features);
 
 			bgprint.started = 1;
 			bgprint.page = page;
@@ -1715,8 +1716,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	}
 	else
 	{
-		if (!quiet || showfeatures || showtime || showmd5)
-			fz_info(ctx, "page %s %d%s", filename, pagenum, features);
+		if (verbosity >= 1 || showfeatures || showtime || showmd5)
+			fz_info(ctx, "page %d file %s features %s", pagenum, filename, features);
 		fz_try(ctx)
 			dodrawpage(ctx, page, list, pagenum, &cookie, start, 0, filename, 0, seps);
 		fz_always(ctx)
@@ -2581,7 +2582,7 @@ int main(int argc, const char** argv)
 	lowmemory = 0;
 
 	kill = 0;
-	quiet = 0;
+	verbosity = 1;
 	errored = 0;
 	colorspace = NULL;
 	oi = NULL;
@@ -2654,13 +2655,14 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
 	{
 		switch (c)
 		{
 		default: return usage();
 
-		case 'q': quiet = 1; fz_default_error_warn_info_mode(1, 1, 1); break;
+		case 'q': verbosity = 0; fz_default_error_warn_info_mode(1, 1, 1); break;
+		case 'v': verbosity++; fz_default_error_warn_info_mode(0, 0, 0); break;
 
 		case 'p': password = fz_optarg; break;
 
@@ -2770,7 +2772,7 @@ int main(int argc, const char** argv)
 		case 'a': useaccel = 0; break;
 		case 'x': txtdraw_options = fz_optarg; break;
 
-		case 'v': fz_info(ctx, "mudraw version %s", FZ_VERSION); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "mudraw version %s", FZ_VERSION); return EXIT_FAILURE;
 		}
 	}
 
@@ -2784,7 +2786,7 @@ int main(int argc, const char** argv)
 	{
 		// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
 #if 0
-		quiet = 1; /* automatically be quiet if printing to stdout */
+		verbosity = 0; /* automatically be quiet if printing to stdout */
 		fz_default_error_warn_info_mode(1, 1, 1);
 #endif
 
@@ -3207,7 +3209,7 @@ int main(int argc, const char** argv)
 		}
 
 		// report output format in verbose mode:
-		if (!quiet)
+		if (verbosity >= 1)
 		{
 			int i;
 			const char* fmtstr = ".???";

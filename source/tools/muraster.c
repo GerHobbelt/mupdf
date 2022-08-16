@@ -259,7 +259,7 @@
 
 /* Enable for helpful threading debug */
 #if 01
-#define DEBUG_THREADS(code) do { code; } while (0)
+#define DEBUG_THREADS(code) do { if (verbosity >= 2) { code; } } while (0)
 #else
 #define DEBUG_THREADS(code) do { } while (0)
 #endif
@@ -439,7 +439,7 @@ static int min_band_height;
 static size_t max_band_memory;
 static int lowmemory = 0;
 
-static int quiet = 0;
+static int verbosity = 1;
 static int errored = 0;
 static fz_colorspace *colorspace;
 static const char *filename;
@@ -545,6 +545,7 @@ static int usage(void)
 		"    png, pam, pbm, pgm, pkm, ppm\n"
 		"\n"
 		"  -q    be quiet (don't print progress messages)\n"
+		"  -v    verbose (repeat to increase the chattiness of the application)\n"
 		"  -s -  show extra information:\n"
 		"    m   show memory use\n"
 		"    t   show timings\n"
@@ -586,7 +587,7 @@ static int usage(void)
 		"    NNN    set memory limit to NNN bytes (same as 'sNNN' above)\n"
 		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
 		"\n"
-		"  -v    display the version of this application and terminate\n"
+		"  -V    display the version of this application and terminate\n"
 		"\n"
 		"  pages  comma separated list of page numbers and ranges\n"
 	);
@@ -1742,7 +1743,7 @@ int main(int argc, const char** argv)
 
 	lowmemory = 0;
 
-	quiet = 0;
+	verbosity = 1;
 	errored = 0;
 	files = 0;
 
@@ -1764,13 +1765,14 @@ int main(int argc, const char** argv)
 	res_specified = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvPl:Nm:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvVPl:Nm:h")) != -1)
 	{
 		switch (c)
 		{
 		default: return usage();
 
-		case 'q': quiet = 1; fz_default_error_warn_info_mode(1, 1, 1); break;
+		case 'q': verbosity = 0; fz_default_error_warn_info_mode(1, 1, 1); break;
+		case 'v': verbosity++; fz_default_error_warn_info_mode(0, 0, 0); break;
 
 		case 'p': password = fz_optarg; break;
 
@@ -1831,7 +1833,7 @@ int main(int argc, const char** argv)
 			fz_warn(ctx, "Threads not enabled in this build");
 			break;
 #endif
-		case 'v': fz_info(ctx, "muraster version %s", FZ_VERSION); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "muraster version %s", FZ_VERSION); return EXIT_FAILURE;
 		}
 	}
 
@@ -2019,7 +2021,7 @@ int main(int argc, const char** argv)
 		{
 			// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
 #if 0
-			quiet = 1; /* automatically be quiet if printing to stdout */
+			verbosity = 0; /* automatically be quiet if printing to stdout */
 			fz_default_error_warn_info_mode(1, 1, 1);
 #endif
 

@@ -49,12 +49,12 @@ static int usage(void)
 {
 	fz_info(ctx,
 		"usage: mutool sign [options] input.pdf [signature object numbers]\n"
-		"\t-p -\tpassword\n"
-		"\t-v \tverify signature\n"
-		"\t-c \tclear signatures\n"
-		"\t-s -\tsign signatures using certificate file\n"
-		"\t-P -\tcertificate password\n"
-		"\t-o -\toutput file name\n"
+		"  -p -  password\n"
+		"  -v    verify signature\n"
+		"  -c    clear signatures\n"
+		"  -s -  sign signatures using certificate file\n"
+		"  -P -  certificate password\n"
+		"  -o -  output file name\n"
 	);
 
 	return EXIT_FAILURE;

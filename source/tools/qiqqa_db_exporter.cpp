@@ -48,7 +48,9 @@ static void usage(void)
 		"Syntax: muserver [options]\n"
 		"\n"
 		"Options:\n"
-		"  -v      verbose (toggle)\n"
+		"  -o F    output to specified file path F (default was stdout otherwise)\n"
+		"  -v      verbose (repeat to increase the chattiness of the application)\n"
+		"  -q      quiet ~ not verbose at all\n"
 		"\n"
 		"  -V      display the version of this application and terminate\n"
 	);
@@ -86,13 +88,15 @@ qiqqa_db_exporter_main(int argc, const char** argv)
 	}
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:vV")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:qvV")) != -1)
 	{
 		switch (c)
 		{
 		case 'o': output = fz_optarg; break;
 
-		case 'v': verbosity ^= 1; break;
+		case 'q': verbosity = 0; break;
+
+		case 'v': verbosity++; break;
 
 		case 'V': fz_info(ctx, "muserver version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
 
