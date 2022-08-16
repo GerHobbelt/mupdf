@@ -136,6 +136,22 @@ struct fz_secondary_outputs
 	fz_drop_secondary_fn* drop;
 };
 
+/*
+	fz_output::flags bits:
+
+	- FZOF_IS_INSIDE_PRINTF_LOCK: this flag is used internally to ensure fz_write_printf() et al do NOT cause a deadlock while they invoke fz_write_byte() et al as part of their process.
+	  Meanwhile, the user will observe a lock granularity **per written message** this way, instead of merely **per character / message-segment**, which makes for garbled
+	  log output, for example.
+	- FZOF_IS_INSIDE_LOCK: set when inside the critical section protecting the `fz_output` buffer (`bp`, `ep`, `wp` members)
+
+*/
+typedef enum fz_output_flags
+{
+	FZOF_NONE = 0,
+	FZOF_IS_INSIDE_LOCK = 0x0001,
+	FZOF_IS_INSIDE_PRINTF_LOCK = 0x0002
+} fz_output_flags_t;
+
 struct fz_output
 {
 	void *state;
@@ -148,6 +164,8 @@ struct fz_output
 	fz_truncate_fn *truncate;
 	char *bp, *wp, *ep;
 	mu_mutex buf_mutex;
+	mu_mutex printf_mutex;
+	fz_output_flags_t flags;
 	struct fz_secondary_outputs secondary;
 };
 

@@ -41,6 +41,36 @@
 #include <unistd.h>
 #endif
 
+static inline void
+fzoutput_lock(fz_output* out)
+{
+	mu_lock_mutex(&out->buf_mutex);
+	out->flags |= FZOF_IS_INSIDE_LOCK;
+}
+
+static inline void
+fzoutput_unlock(fz_output* out)
+{
+	ASSERT(out->flags & FZOF_IS_INSIDE_LOCK);
+	out->flags &= ~FZOF_IS_INSIDE_LOCK;
+	mu_unlock_mutex(&out->buf_mutex);
+}
+
+static inline void
+printf_lock(fz_output* out)
+{
+	mu_lock_mutex(&out->printf_mutex);
+	out->flags |= FZOF_IS_INSIDE_PRINTF_LOCK;
+}
+
+static inline void
+printf_unlock(fz_output* out)
+{
+	ASSERT(out->flags & FZOF_IS_INSIDE_PRINTF_LOCK);
+	out->flags &= ~FZOF_IS_INSIDE_PRINTF_LOCK;
+	mu_unlock_mutex(&out->printf_mutex);
+}
+
 static void
 file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 {
@@ -323,6 +353,8 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 		out->close = close;
 		out->drop = drop;
 		mu_create_mutex(&out->buf_mutex);
+		mu_create_mutex(&out->printf_mutex);
+		ASSERT(out->flags == FZOF_NONE);
 		ASSERT(out->bp == NULL);
 		if (bufsiz > 1)
 		{
@@ -335,6 +367,7 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 	{
 		if (drop)
 			drop(ctx, state);
+		mu_destroy_mutex(&out->printf_mutex);
 		mu_destroy_mutex(&out->buf_mutex);
 		fz_free(ctx, out->bp);
 		fz_free(ctx, out);
@@ -360,10 +393,13 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 	// if so, create the buffer mutex after the fact.
 	if (mu_mutex_is_zeroed(&out->buf_mutex))
 	{
+		ASSERT(mu_mutex_is_zeroed(&out->printf_mutex));
+		ASSERT((out->flags & (FZOF_IS_INSIDE_LOCK | FZOF_IS_INSIDE_PRINTF_LOCK)) == 0);
 		mu_create_mutex(&out->buf_mutex);
+		mu_create_mutex(&out->printf_mutex);
 	}
 
-	mu_lock_mutex(&out->buf_mutex);
+	fzoutput_lock(out);
 	if (out->bp == NULL)
 	{
 		rv = 0;
@@ -395,7 +431,7 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 			}
 		}
 	}
-	mu_unlock_mutex(&out->buf_mutex);
+	fzoutput_unlock(out);
 	return rv;
 }
 
@@ -533,12 +569,10 @@ fz_close_output(fz_context *ctx, fz_output *out)
 {
 	if (out == NULL)
 		return;
-	mu_lock_mutex(&out->buf_mutex);
-	fz_flush_output_no_lock(ctx, out);
+	fz_flush_output(ctx, out);
 	if (out->close)
 		out->close(ctx, out->state);
 	out->close = NULL;
-	mu_unlock_mutex(&out->buf_mutex);
 }
 
 void
@@ -548,10 +582,25 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 	{
 		if (out->close)
 			fz_warn(ctx, "dropping unclosed output");
+		// when we encounter a HELD LOCK, we release it before dropping it.
+		// This can (theoretically at least, we haven't observed this in practice YET) happen
+		// when custom userland code in a callback executed from inside a `fz_output` critical section
+		// throws an exception.
+		// We (**by design**) did not wrap those lock+unlock protected critical sections
+		// around here with the regular fz_try/fz_always wrappers, because we wanted to produce
+		// an *absolute minimal overhead* thread-safety net around each `fz_output` instance.
+		//
+		// Consequently, we can expect the need for cleanup here when this code is executed
+		// from a fz_catch() section anywhere in the application.
+		if (out->flags & FZOF_IS_INSIDE_PRINTF_LOCK)
+			printf_unlock(out);
+		if (out->flags & FZOF_IS_INSIDE_LOCK)
+			fzoutput_unlock(out);
+		mu_destroy_mutex(&out->printf_mutex);
+		mu_destroy_mutex(&out->buf_mutex);
 		if (out->drop)
 			out->drop(ctx, out->state);
 		fz_free(ctx, out->bp);
-		mu_destroy_mutex(&out->buf_mutex);
 
 		if (out != &fz_stdout_global && out != &fz_stderr_global && out != &fz_stdods_global)
 			fz_free(ctx, out);
@@ -564,10 +613,8 @@ fz_seek_output(fz_context* ctx, fz_output* out, int64_t off, int whence)
 	if (out->seek == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot seek in unseekable output stream");
 
-	mu_lock_mutex(&out->buf_mutex);
 	fz_flush_output(ctx, out);
 	out->seek(ctx, out->state, off, whence);
-	mu_unlock_mutex(&out->buf_mutex);
 }
 
 int64_t
@@ -576,11 +623,11 @@ fz_tell_output(fz_context *ctx, fz_output *out)
 	if (out->tell == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot tell in untellable output stream");
 
-	mu_lock_mutex(&out->buf_mutex);
 	int64_t pos = out->tell(ctx, out->state);
+	fzoutput_lock(out);
 	if (out->bp)
 		pos += (out->wp - out->bp);
-	mu_unlock_mutex(&out->buf_mutex);
+	fzoutput_unlock(out);
 	return pos;
 }
 
@@ -611,7 +658,13 @@ fz_write_emit(fz_context *ctx, void *out, int c)
 void
 fz_write_vprintf(fz_context *ctx, fz_output *out, const char *fmt, va_list args)
 {
+	// Note: can't use the fzoutput_lock() critical section for these, as they will
+	// be calling the lower level APIs (buffered I/O) internally, and quite legally so.
+	//
+	// That's why we need two mutexes per `fz_output` instance.
+	printf_lock(out);
 	fz_format_string(ctx, out, fz_write_emit, fmt, args);
+	printf_unlock(out);
 }
 
 void
@@ -619,16 +672,18 @@ fz_write_printf(fz_context *ctx, fz_output *out, const char *fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
+	printf_lock(out);
 	fz_format_string(ctx, out, fz_write_emit, fmt, args);
+	printf_unlock(out);
 	va_end(args);
 }
 
 void
 fz_flush_output(fz_context *ctx, fz_output *out)
 {
-	mu_lock_mutex(&out->buf_mutex);
+	fzoutput_lock(out);
 	fz_flush_output_no_lock(ctx, out);
-	mu_unlock_mutex(&out->buf_mutex);
+	fzoutput_unlock(out);
 }
 
 void
@@ -644,9 +699,9 @@ fz_flush_output_no_lock(fz_context* ctx, fz_output* out)
 void
 fz_write_byte(fz_context *ctx, fz_output *out, unsigned char x)
 {
-	mu_lock_mutex(&out->buf_mutex);
+	fzoutput_lock(out);
 	fz_write_byte_no_lock(ctx, out, x);
-	mu_unlock_mutex(&out->buf_mutex);
+	fzoutput_unlock(out);
 }
 
 void
@@ -680,7 +735,7 @@ fz_write_data(fz_context *ctx, fz_output *out, const void *data_, size_t size)
 {
 	const char *data = (const char *)data_;
 
-	mu_lock_mutex(&out->buf_mutex);
+	fzoutput_lock(out);
 	if (out->bp)
 	{
 		if (size >= (size_t) (out->ep - out->bp)) /* too large for buffer */
@@ -711,7 +766,7 @@ fz_write_data(fz_context *ctx, fz_output *out, const void *data_, size_t size)
 	{
 		out->write(ctx, out->state, data, size);
 	}
-	mu_unlock_mutex(&out->buf_mutex);
+	fzoutput_unlock(out);
 }
 
 void
@@ -826,7 +881,7 @@ fz_write_base64(fz_context *ctx, fz_output *out, const unsigned char *data, size
 {
 	static const char set[65] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	size_t i;
-	mu_lock_mutex(&out->buf_mutex);
+	fzoutput_lock(out);
 	for (i = 0; i + 3 <= size; i += 3)
 	{
 		int c = data[i];
@@ -856,7 +911,7 @@ fz_write_base64(fz_context *ctx, fz_output *out, const unsigned char *data, size
 		fz_write_byte_no_lock(ctx, out, '=');
 		fz_write_byte_no_lock(ctx, out, '=');
 	}
-	mu_unlock_mutex(&out->buf_mutex);
+	fzoutput_unlock(out);
 }
 
 void
