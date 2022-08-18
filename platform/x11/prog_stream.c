@@ -272,11 +272,7 @@ fz_stream *
 fz_open_file_progressive(fz_context *ctx, const char *name, int kbps, void (*on_data)(void*,int), void *opaque)
 {
 	FILE *f;
-#ifdef _WIN32
 	f = fz_fopen_utf8(ctx, name, "rb");
-#else
-	f = fopen(name, "rb");
-#endif
 	if (f == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, strerror(errno));
 	return fz_open_file_ptr_progressive(ctx, f, kbps, on_data, opaque);

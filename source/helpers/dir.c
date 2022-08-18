@@ -825,7 +825,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 
 		int n = _wmkdir(wname);
 		int e = errno;
-		if (n && e != EEXIST)
+		if (n && e != EEXIST && e != EACCES)
 		{
 			free(wname);
 			errno = e;
@@ -840,6 +840,88 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 			d = q;
 		else
 			d += wcslen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
+	}
+
+	free(wname);
+	return 0;
+}
+
+#else
+
+FILE*
+fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
+{
+	if (name == NULL)
+	{
+		errno = EINVAL;
+		return NULL;
+	}
+
+	if (mode == NULL)
+	{
+		errno = EINVAL;
+		return NULL;
+	}
+
+	return fopen(name, mode);
+}
+
+int
+fz_remove_utf8(fz_context* ctx, const char* name)
+{
+	if (name == NULL)
+	{
+		errno = EINVAL;
+		return -1;
+	}
+
+	return remove(name);
+}
+
+int
+fz_mkdirp_utf8(fz_context* ctx, const char* name)
+{
+	char* pname;
+
+	pname = fz_strdup_no_throw(ctx, name);
+	if (pname == NULL)
+	{
+		errno = ENOMEM;
+		return -1;
+	}
+
+	// we can only mkdir beyond the (optional) root directory:
+	char* p = pname + 1;
+	char* d = strchr(p, '/'); // drive rootdir
+	if (d == NULL)
+	{
+		// file directly in root directory of the system is ok (but otherwise questionable...?!)
+		free(pname);
+		return 0;
+	}
+
+	for (;;)
+	{
+		char c = *d;
+		*d = 0;
+
+		int n = mkdir(pname);
+		int e = errno;
+		if (n && e != EEXIST && e != EACCES)
+		{
+			free(pname);
+			errno = e;
+			return -1;
+		}
+		*d = c;
+		// did we reach the end of the *original* path spec?
+		if (!c)
+			break;
+		q = strchr(d + 1, '/');
+		if (q)
+			d = q;
+		else
+			d += strlen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
 	}
 
 	free(wname);

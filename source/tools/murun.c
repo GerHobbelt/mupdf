@@ -22,6 +22,7 @@
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #if FZ_ENABLE_PDF
 #include "mupdf/pdf.h"
@@ -146,7 +147,7 @@ static void jsB_read(js_State *J)
 	long n;
 	size_t t;
 
-	f = fopen(filename, "rb");
+	f = fz_fopen_utf8(ctx, filename, "rb");
 	if (!f) {
 		js_error(J, "cannot open file: '%s'", filename);
 	}
