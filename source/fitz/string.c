@@ -178,6 +178,25 @@ fz_strlcat(char *dst, const char *src, size_t siz)
 	return dlen + (s - src);	/* count does not include NUL */
 }
 
+void
+fz_strncpy_s(char* dst, const char* src, size_t dstsiz)
+{
+	if (dstsiz == 0)
+		fz_throw(fz_get_global_ctx(), FZ_ERROR_GENERIC, "fz_strncpy_s::dstsiz == 0: zero-length destination buffer specified.");
+
+	// use strnlen() as this function can legally be passed a non-NUL-terminated `src`!
+	size_t srclen = strnlen(src, dstsiz);
+	if (srclen == dstsiz)
+	{
+		memmove(dst, src, dstsiz - 1);
+		dst[dstsiz - 1] = 0;
+	}
+	else
+	{
+		// len(src) < dstsiz: can safely use strcpy()
+		strcpy(dst, src);
+	}
+}
 
 size_t
 fz_strrcspn(const char* str, const char* set)
