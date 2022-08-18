@@ -77,9 +77,13 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	character in `replacement_single`. When `replacement_single` is shorter than `set`, any of the later `set` members
 	will be replaced by the last `replacement_single` character.
 
+	When `start_at_offset` is not zero (i.e. start-of-string), only the part of the path at & following the
+	`start_at_offset` position is sanitized. It is assumed that the non-zero offset ALWAYS points past any critical
+	UNC or MSWindows Drive designation parts of the path.
+
 	Overwrites the `path` string in place.
 */
-char* fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence);
+char* fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence, size_t start_at_offset);
 
 #ifdef __cplusplus
 }

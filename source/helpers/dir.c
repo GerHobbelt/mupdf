@@ -244,10 +244,14 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	character in `replacement_single`. When `replacement_single` is shorter than `set`, any of the later `set` members
 	will be replaced by the last `replacement_single` character.
 
+	When `start_at_offset` is not zero (i.e. start-of-string), only the part of the path at & following the
+	`start_at_offset` position is sanitized. It is assumed that the non-zero offset ALWAYS points past any critical
+	UNC or MSWindows Drive designation parts of the path.
+
 	Overwrites the `path` string in place.
 */
 char*
-fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence)
+fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence, size_t start_at_offset)
 {
 	if (!path)
 		return NULL;
@@ -274,51 +278,71 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 		}
 	}
 
-	char* p;
-	char* d;
+	char* rv_path = path;
+
+	if (start_at_offset)
+	{
+		size_t l = strlen(path);
+		if (l <= start_at_offset)
+		{
+			// nothing to process!
+			return path;
+		}
+
+		path += start_at_offset;
+	}
 
 	// UNIXify:
-	for (p = path; *p; ++p)
-		if (*p == '\\')
-			*p = '/';
+	char* e = strchr(path, '\\');
+	while (e)
+	{
+		*e = '/';
+		e = strchr(e, '\\');
+	}
+
+	char* p;
+	char* d;
 
 	d = p = path;
 
 	// check if path is a UNC path. It may legally start with `\\.\` or `\\?\` before a Windows drive/share+COLON:
-	if (*p == '/' && p[1] == '/')
+	if (start_at_offset != 0)
 	{
-		p += 2;
-		// scan legal domain name:
-		if (strchr(".?", *p) && p[1] == '/' && p[2] != '/')
+		if (*p == '/' && p[1] == '/')
 		{
-			p += 2;    // skip the legal UNC `//./` or `//?/` path starter.
-		}
-		else
-		{
-			d = p;
-			while (isalnum(*p) || strchr("_-$", *p))
-				p++;
-			if (p > d && *p == '/' && p[1] != '/')
-				p++;
+			p += 2;
+			// scan legal domain name:
+			if (strchr(".?", *p) && p[1] == '/' && p[2] != '/')
+			{
+				p += 2;    // skip the legal UNC `//./` or `//?/` path starter.
+			}
 			else
 			{
-				// no legal UNC domain name, hence no UNC at all:
-				p = path;
+				d = p;
+				while (isalnum(*p) || strchr("_-$", *p))
+					p++;
+				if (p > d && *p == '/' && p[1] != '/')
+					p++;
+				else
+				{
+					// no legal UNC domain name, hence no UNC at all:
+					p = path;
+				}
 			}
 		}
-	}
-	// check if path is a (possibly UNC'd) Windows Drive/Share designator: letter(s)+COLON:
-	d = p;
-	while (isalnum(*p))
-		p++;
-	if (p > d && *p == ':')
-	{
-		p++;
-		// while users can specify relative paths within drives, e.g. `C:path`, they CANNOT do so when this is a UNC path.
-		if (*p != '/' && d > path)
+		// check if path is a (possibly UNC'd) Windows Drive/Share designator: letter(s)+COLON:
+		d = p;
+		while (isalnum(*p))
+			p++;
+		if (p > d && *p == ':')
 		{
-			// not a legal UNC path after all
-			p = path;
+			p++;
+			// while users can specify relative paths within drives, e.g. `C:path`, they CANNOT do so when this is a UNC path.
+			if (*p != '/' && d > path)
+			{
+				// not a legal UNC path after all
+				p = path;
+			}
 		}
 	}
 
@@ -427,7 +451,7 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 			*d++ = '_';
 			repl_seq_count++;
 		}
-		else if (strchr("`\"*@=|;?", c))
+		else if (strchr("`\"*@=|;?:", c))
 		{
 			// replace NTFS-illegal character path characters.
 			// replace some shell-scripting-risky character path characters.
@@ -459,7 +483,7 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 	// and print the sentinel
 	*d = 0;
 
-	return path;
+	return rv_path;
 }
 
 

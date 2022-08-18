@@ -2860,7 +2860,7 @@ int main(int argc, const char** argv)
 			size_t l = fz_strrcspn(output, "./\\:");
 			char* tpl = fz_asprintf(ctx, "%.*s", (int)l, output);
 			// and any `%d` regular page format specifiers removed (replaced!) as well!
-			tpl = fz_sanitize_path_ex(tpl, "f%#^$!", "_", 0);
+			tpl = fz_sanitize_path_ex(tpl, "f%#^$!", "_", 0, 0);
 			stext_options.reference_image_path_template = tpl;
 
 			fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, &output_format);

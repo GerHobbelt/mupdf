@@ -530,6 +530,15 @@ static void map_path_to_dest(char* dst, size_t dstsiz, const char* inpath)
 {
 	char srcpath[PATH_MAX];
 
+#if 0
+	// deal with 'specials' too:
+	if (!strcmp(inpath, "/dev/null") || !fz_strcasecmp(inpath, "nul:") || !strcmp(inpath, "/dev/stdout"))
+	{
+		fz_strncpy_s(dst, inpath, dstsiz);
+		return;
+	}
+#endif
+
 	if (!fz_realpath(inpath, srcpath))
 	{
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process file path to a sane absolute path: %s", inpath);
@@ -618,9 +627,11 @@ static void map_path_to_dest(char* dst, size_t dstsiz, const char* inpath)
 		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
 		size_t common_prefix_length = prefix_end - common_prefix;
 		char* remaining_inpath_part = srcpath + common_prefix_length;
+#if 0
 		for (char* p = remaining_inpath_part; *p; p++)
 			if (strchr(":?", *p))
 				*p = '_';
+#endif
 
 		char appendedpath[PATH_MAX];
 		int rv = fz_snprintf(appendedpath, sizeof(appendedpath), "%s/%s%s", output_path_mapping_spec.abs_target_path, dotdot, remaining_inpath_part);
@@ -629,6 +640,9 @@ static void map_path_to_dest(char* dst, size_t dstsiz, const char* inpath)
 			appendedpath[sizeof(appendedpath) - 1] = 0;
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot map file path to a sane sized absolute path: dstsize: %zu, srcpath: %s, dstpath: %s", dstsiz, srcpath, appendedpath);
 		}
+
+		// sanitize the appended part: lingering drive colons, wildcards, etc. will be replaced by _:
+		fz_sanitize_path_ex(appendedpath, "^$!", "_", 0, strlen(output_path_mapping_spec.abs_target_path));
 
 		ASSERT(dstsiz >= PATH_MAX);
 		strncpy(dst, appendedpath, dstsiz);
