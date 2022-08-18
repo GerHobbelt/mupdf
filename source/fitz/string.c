@@ -224,21 +224,64 @@ fz_strrcspn(const char* str, const char* set)
 void
 fz_dirname(char *dir, const char *path, size_t n)
 {
-	size_t i;
-
 	if (!path || !path[0])
 	{
-		fz_strlcpy(dir, ".", n);
+		fz_strncpy_s(NULL, dir, ".", n);
 		return;
 	}
 
-	fz_strlcpy(dir, path, n);
+	fz_strncpy_s(NULL, dir, path, n);
+	char* p = (char *)fz_basename(dir);
+	*p = 0;
+	// trim off trailing '/', unless it's a root directory:
+	if (p == dir)
+	{
+		fz_strncpy_s(NULL, dir, ".", n);
+		return;
+	}
 
-	i = strlen(dir);
-	for(; dir[i] == '/'; --i) if (!i) { fz_strlcpy(dir, "/", n); return; }
-	for(; dir[i] != '/'; --i) if (!i) { fz_strlcpy(dir, ".", n); return; }
-	for(; dir[i] == '/'; --i) if (!i) { fz_strlcpy(dir, "/", n); return; }
-	dir[i+1] = 0;
+
+	if (p[-1] == '/' || p[-1] == '\\')
+	{
+		p--;
+		if (p > dir)
+		{
+			if (p[-1] == ':' && (dir + 2 == p || dir + 6 == p))
+			{
+				// root dir in classic MSwindows path, e.g. C:\ (or UNC prefixed: //?/C:/
+				return;
+			}
+			if (strchr("/\\", dir[0]) != NULL && strchr("/\\", dir[1]) != NULL)
+			{
+				// UNC prefix: skip 'server' part and 'share' part to get to the root dir:
+				char* e = dir + 2;
+				e = strpbrk(e, "/\\");
+				if (e)
+				{
+					e = strpbrk(e + 1, "/\\");
+					if (e)
+					{
+						// we've observed a legal UNC path; if we don't get here, it's not a legal UNC path for sure!
+						const char* root = e;
+						if (p == root)
+						{
+							return;
+						}
+						*p = 0;
+						return;
+					}
+				}
+				// when we get here, it's in illegal/incomplete UNC path. Treat as a slightly b0rked UNIX path instead...
+			}
+
+			// not a UNIX root dir
+			*p = 0;
+			return;
+		}
+		// UNIX root dir
+		return;
+	}
+	ASSERT(!"Should never get here");
 }
 
 const char *
