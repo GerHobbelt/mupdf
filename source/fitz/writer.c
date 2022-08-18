@@ -78,22 +78,22 @@ fz_copy_option(fz_context *ctx, const char *val, char *dest, size_t maxlen)
 	const char *e = val;
 	size_t len, len2;
 
-	if (val == NULL) {
+	if (val == NULL || !*val) {
 		if (maxlen)
 			*dest = 0;
 		return 0;
 	}
 
-	while (*e != ',' && *e != 0)
-		e++;
+	e = strchr(e, ',');
+	if (!e)
+		e = val + strlen(val);
 
 	len = e-val;
 	len2 = len+1; /* Allow for terminator */
-	if (len > maxlen)
-		len = maxlen;
+	if (len >= maxlen)
+		len = maxlen - 1;
 	memcpy(dest, val, len);
-	if (len < maxlen)
-		memset(dest+len, 0, maxlen-len);
+	dest[len] = 0;
 
 	return len2 >= maxlen ? len2 - maxlen : 0;
 }
