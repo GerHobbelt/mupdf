@@ -500,6 +500,141 @@ mk_absolute_path(fz_context* ctx, const char* filepath)
 	return fz_strdup(ctx, q);
 }
 
+static struct target_path_mapping
+{
+	// the absolute path (sans trailing '/') to map any output paths TO:
+	// (Note: this path is EMPTY when this mapping feature has been disabled.)
+	char abs_target_path[PATH_MAX];
+	// the absolute 'current working directory' (at the time of mapping construction), i.e.
+	// the part of the SOURCE PATH that will be REPLACED by the abs_target_path:
+	// (when the SOURCE PATH is located outside this 'working dir', it is prefixed
+	// by the abs_target_path and used in its entirety to ensure discernibility
+	// during analysis.
+	char abs_cwd_as_mapping_source[PATH_MAX];
+} output_path_mapping_spec;
+
+static char* find_next_dirsep(char* p)
+{
+	if (!*p)
+		return p;
+
+	char* e = strchr(p + 1, '/');
+	if (!e)
+	{
+		e = p + strlen(p);
+	}
+	return e;
+}
+
+static void map_path_to_dest(char* dst, size_t dstsiz, const char* inpath)
+{
+	char srcpath[PATH_MAX];
+
+	if (!fz_realpath(inpath, srcpath))
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process file path to a sane absolute path: %s", inpath);
+	}
+
+	// did the user request output file path mapping?
+	if (!output_path_mapping_spec.abs_target_path[0])
+	{
+		ASSERT(dstsiz >= PATH_MAX);
+		strncpy(dst, srcpath, dstsiz);
+	}
+	else
+	{
+		// TODO: cope with UNC paths mixed & mashed with classic paths.
+
+		// First we find the common prefix.
+		// Then we check how many path parts are left over from the CWD.
+		// each left-over part is represented by a single _
+		// concat those into the first part to be appended.
+		// append the remainder of the source path then, cleaning it up
+		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
+		// This is your mapped destination path, guaranteed to be positioned
+		// WITHIN the given target path (which is prefixed to the generated
+		// RELATIVE path!)
+		//
+		// Example:
+		// given
+		//   CWD = 	  C:/a/b/c
+		//   TARGET = T:/t
+		// we then get for these inputs:
+		//   C:/a/b/c/d1  -> d1        (leftover: <nil>)     -> d1             -> T:/t/d1
+		//   C:/a/b/d     -> d         (leftover: c)         -> _/c            -> T:/t/_/c
+		//   C:/a/e/f     -> e/f       (leftover: b/c)       -> __/e/f         -> T:/t/__/e/f
+		//   C:/x/y/z     -> x/y/z     (leftover: a/b/c)     -> ___/x/y/z      -> T:/t/___/x/y/z
+		//   D:/a/b/c     -> D:/a/b/c  (leftover: C:/a/b/c)  -> ____/D:/a/b/c  -> T:/t/____/D_/a/b/c
+		//   C:/a         ->           (leftover: b/c)       -> __             -> T:/t/__
+		//   C:/a/b       ->           (leftover: c)         -> _              -> T:/t/_
+		//   C:/x         -> x         (leftover: a/b/c)     -> ___/x          -> T:/t/___/x
+		//   D:/a         -> D:/a      (leftover: C:/a/b/c)  -> ____/D:/a      -> T:/t/____/D_/a
+		// thus every position in the directory tree *anywhere in the system* gets encoded to its own
+		// unique subdirectory path within the "target path" directory tree -- of course, ASSUMING
+		// you don't have any underscore-only leading directories in any of (relative) paths you feed
+		// this mapper... ;-)
+		char common_prefix[PATH_MAX];
+		char* sep = common_prefix;
+		char* prefix_end = common_prefix;
+
+		strncpy(common_prefix, output_path_mapping_spec.abs_cwd_as_mapping_source, PATH_MAX);
+
+		do
+		{
+			sep = find_next_dirsep(sep);
+			// match common prefix:
+			size_t cpfxlen = sep - common_prefix;
+			if (strncmp(common_prefix, srcpath, cpfxlen) != 0)
+			{
+				// failed to match; the common prefix is our previous match length.
+				break;
+			}
+			// check edge case: srcpath has a longer part name at the end of the match,
+			// e.g. `b` vs. `bb`: `/a/b[/...]` vs. `/a/b[b/...]`
+			if (*sep == 0 && srcpath[cpfxlen] != '/')
+			{
+				// failed to match; the common prefix is our previous match length.
+				break;
+			}
+			prefix_end = sep;
+		} while (*sep);
+
+		// count the path parts left over from the CWD:
+		char dotdot[PATH_MAX] = "";
+		int ddpos = 0;
+
+		// each left-over part is represented by a single _
+		while (*sep)
+		{
+			dotdot[ddpos++] = '_';
+			sep = find_next_dirsep(sep);
+		}
+
+		if (ddpos > 0)
+			dotdot[ddpos++] = '/';
+		dotdot[ddpos] = 0;
+
+		// append the remainder of the source path then, cleaning it up
+		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
+		size_t common_prefix_length = prefix_end - common_prefix;
+		char* remaining_inpath_part = srcpath + common_prefix_length;
+		for (char* p = remaining_inpath_part; *p; p++)
+			if (strchr(":?", *p))
+				*p = '_';
+
+		char appendedpath[PATH_MAX];
+		int rv = fz_snprintf(appendedpath, sizeof(appendedpath), "%s/%s%s", output_path_mapping_spec.abs_target_path, dotdot, remaining_inpath_part);
+		if (rv <= 0 || rv >= dstsiz)
+		{
+			appendedpath[sizeof(appendedpath) - 1] = 0;
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot map file path to a sane sized absolute path: dstsize: %zu, srcpath: %s, dstpath: %s", dstsiz, srcpath, appendedpath);
+		}
+
+		ASSERT(dstsiz >= PATH_MAX);
+		strncpy(dst, appendedpath, dstsiz);
+	}
+}
+
 // Get a line of text from file.
 // Return NULL at EOF. Return a reference to a static buffer containing a string value otherwise.
 static char *
@@ -902,7 +1037,7 @@ static void flush_active_logfile_hard(void)
 		// logfiles are cut up into ~20MB chunks:
 		if (file_size < 20000000)
 		{
-			logcfg.logfile = fopen(logcfg.logfilepath, "a");
+			logcfg.logfile = fz_fopen_utf8(ctx, logcfg.logfilepath, "a");
 		}
 		else
 		{
@@ -928,15 +1063,15 @@ static void flush_active_logfile_hard(void)
 				}
 			}
 
-			logcfg.logfile = fopen(logcfg.logfilepath, "w");
+			logcfg.logfile = fz_fopen_utf8(ctx, logcfg.logfilepath, "w");
 		}
 	}
 }
 
 static void open_logfile(const char* scriptname)
 {
-	char logfilename[LONGLINE];
-	char logfilename_0[LONGLINE];
+	char logfilename[PATH_MAX];
+	char logfilename_0[PATH_MAX];
 
 	fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
 	strncpy(logfilename_0, logfilename, sizeof(logfilename_0));
@@ -956,7 +1091,9 @@ static void open_logfile(const char* scriptname)
 		}
 	}
 
-	logcfg.logfile = fopen(logfilename_0, "w");
+	fz_mkdir_for_file(ctx, logfilename_0);
+
+	logcfg.logfile = fz_fopen_utf8(ctx, logfilename_0, "w");
 	logcfg.logfilepath = fz_strdup(ctx, logfilename_0);
 }
 
@@ -1448,6 +1585,7 @@ bulktest_main(int argc, const char **argv)
 	const char* match_numbers_s = NULL;
 	const char* ignore_match_numbers_s = NULL;
 	float random_exec_perunage = 1.0;
+	const char* forced_output_basedir = NULL;
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
@@ -1463,7 +1601,7 @@ bulktest_main(int argc, const char **argv)
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "TLvqVm:r:s:x:n:X:N:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "TLvqVm:r:s:x:n:X:N:O:h")) != -1)
 	{
 		switch(c)
 		{
@@ -1509,6 +1647,10 @@ bulktest_main(int argc, const char **argv)
 		case 'N':
 			// expect one or more line numbers and/or ranges to *skip* (i.e. ignore)
 			ignore_match_numbers_s = fz_optarg;
+			break;
+		case 'O':
+			// output files must use this basedir: map current working directory onto it; absolute paths get mapped as if they were relative.
+			forced_output_basedir = fz_optarg;
 			break;
 
 		case 'V': fz_info(ctx, "bulktest version %s", FZ_VERSION); return EXIT_FAILURE;
@@ -1572,16 +1714,29 @@ bulktest_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
-	if (random_exec_perunage < 1.0)
+	if (!getcwd(output_path_mapping_spec.abs_cwd_as_mapping_source, sizeof(output_path_mapping_spec.abs_cwd_as_mapping_source)))
 	{
-		fprintf(stderr, "random_exec_percentage: %.1f%%\n", random_exec_perunage * 100);
+		fz_error(ctx, "cannot initialise bulktest::cwd: %s; path(s) too long?", strerror(errno));
+		return EXIT_FAILURE;
+	}
+	// when no output mapping/override was specified, don't use any:
+	if (!forced_output_basedir)
+	{
+		output_path_mapping_spec.abs_target_path[0] = 0;
+	}
+	// same 'realpath' treatment for both sides of the mapping:
+	else if (!fz_realpath(forced_output_basedir, output_path_mapping_spec.abs_target_path) ||
+		!fz_realpath(output_path_mapping_spec.abs_cwd_as_mapping_source, output_path_mapping_spec.abs_cwd_as_mapping_source))
+	{
+		fz_error(ctx, "cannot initialise bulktest::output_path_mapping spec; path(s) too long?");
+		return EXIT_FAILURE;
 	}
 
 	int linecounter = 0;
 	int datalinecounter = 0;
 	FILE* script = NULL;
 	FILE* datafeed = NULL;
-	const char* scriptname = NULL;
+	char scriptname[PATH_MAX] = "";
 	const char* datafilename = NULL;
 	const struct range* match_test_numbers_ranges = NULL;
 	const struct range* ignore_match_test_numbers_ranges = NULL;
@@ -1623,21 +1778,30 @@ bulktest_main(int argc, const char **argv)
 
 		while (optind < argc)
 		{
-			if (!scriptname || !script_is_template)
+			if (!scriptname[0] || !script_is_template)
 			{
-				fz_free(ctx, scriptname);
-				scriptname = NULL;
+				scriptname[0] = 0;
 
 				// load a script
 				const char* p = argv[optind++];
 
 				close_active_logfile();
 
-				scriptname = mk_absolute_path(ctx, p);
+				map_path_to_dest(scriptname, sizeof(scriptname), p);
 
 				open_logfile(scriptname);
 
-				script = fopen(scriptname, "rb");
+				if (random_exec_perunage < 1.0)
+				{
+					fz_info(ctx, "bulktest: using random_exec_percentage: %.1f%%\n", random_exec_perunage * 100);
+				}
+
+				if (!fz_realpath(p, scriptname))
+				{
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process script file path to a sane absolute path: %s", p);
+				}
+
+				script = fz_fopen_utf8(ctx, scriptname, "rb");
 				if (script == NULL)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
 				linecounter = 0;
@@ -1654,10 +1818,15 @@ bulktest_main(int argc, const char **argv)
 
 				// load a datafile if we already have a script AND we're in "template mode".
 				const char* p = argv[optind++];
+				char abspathbuf[PATH_MAX];
 
-				datafilename = mk_absolute_path(ctx, p);
+				if (!fz_realpath(p, abspathbuf))
+				{
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process bulktest data file path to a sane absolute path: %s", p);
+				}
+				datafilename = fz_strdup(ctx, abspathbuf);
 
-				datafeed = fopen(datafilename, "rb");
+				datafeed = fz_fopen_utf8(ctx, datafilename, "rb");
 				if (datafeed == NULL)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
 				datalinecounter = 0;
@@ -2140,8 +2309,7 @@ bulktest_main(int argc, const char **argv)
 		errored += 100;
 	}
 
-	fz_free(ctx, scriptname);
-	scriptname = NULL;
+	scriptname[0] = 0;
 	fz_free(ctx, datafilename);
 	datafilename = NULL;
 
