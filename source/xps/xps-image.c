@@ -67,7 +67,7 @@ xps_find_image_brush_source_part(fz_context *ctx, xps_document *doc, char *base_
 		image_name = NULL;
 		profile_name = NULL;
 
-		fz_strlcpy(buf, image_source_att, sizeof buf);
+		fz_strncpy_s(ctx, buf, image_source_att, sizeof buf);
 		p = strchr(buf, ' ');
 		if (p)
 		{

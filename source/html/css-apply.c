@@ -696,7 +696,7 @@ fz_add_css_font_face(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, co
 	is_italic = is_italic_from_font_style(style);
 	is_small_caps = !strcmp(variant, "small-caps");
 
-	fz_strlcpy(path, base_uri, sizeof path);
+	fz_strncpy_s(ctx, path, base_uri, sizeof path);
 	fz_strlcat(path, "/", sizeof path);
 	fz_strlcat(path, src, sizeof path);
 	fz_urldecode(path);

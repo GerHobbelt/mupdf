@@ -284,7 +284,7 @@ svg_parse_color(fz_context *ctx, svg_document *doc, const char *str, float *rgb)
 	else
 	{
 		char keyword[50], *p;
-		fz_strlcpy(keyword, str, sizeof keyword);
+		fz_strncpy_s(ctx, keyword, str, sizeof keyword);
 		p = keyword;
 		while (*p && *p >= 'a' && *p <= 'z')
 			++p;
@@ -318,7 +318,7 @@ svg_parse_color_from_style_string(fz_context *ctx, svg_document *doc, const char
 	char buf[100], *e;
 	while (*p && svg_is_whitespace(*p))
 		++p;
-	fz_strlcpy(buf, p, sizeof buf);
+	fz_strncpy_s(ctx, buf, p, sizeof buf);
 	e = strchr(buf, ';');
 	if (e)
 		*e = 0;

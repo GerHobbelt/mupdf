@@ -770,7 +770,7 @@ static void pdf_docenc_from_utf8(char *password, const char *utf8, int n)
 static void pdf_saslprep_from_utf8(char *password, const char *utf8, int n)
 {
 	/* TODO: stringprep with SALSprep profile */
-	fz_strlcpy(password, utf8, n);
+	fz_strncpy_s(NULL, password, utf8, n);
 }
 
 int

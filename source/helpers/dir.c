@@ -556,7 +556,7 @@ char* fz_mk_relative_path(fz_context* ctx, char* dst, size_t dstsiz, const char*
 			*d++ = '.';
 			*d++ = '.';
 			*d++ = '/';
-			sep = strstr(sep + 1, "\\/");
+			sep = strpbrk(sep + 1, "\\/");
 		} while (sep);
 		*d++ = '.';
 		*d++ = '.';

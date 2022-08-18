@@ -1117,7 +1117,7 @@ svg_parse_font_attributes(fz_context *ctx, svg_document *doc, fz_xml *node, svg_
 	char *text_anchor_att = fz_xml_att(node, "text-anchor");
 
 	if (font_family_att)
-		fz_strlcpy(buf, font_family_att, buf_size);
+		fz_strncpy_s(ctx, buf, font_family_att, buf_size);
 	else
 		svg_parse_string_from_style(ctx, doc, style_att, "font-family", buf, buf_size, state->font_family);
 	state->font_family = buf;
@@ -1327,7 +1327,7 @@ svg_run_image(fz_context *ctx, fz_device *dev, svg_document *doc, fz_xml *root, 
 		fz_var(buf);
 		fz_var(img);
 
-		fz_strlcpy(path, doc->base_uri, sizeof path);
+		fz_strncpy_s(ctx, path, doc->base_uri, sizeof path);
 		fz_strlcat(path, "/", sizeof path);
 		fz_strlcat(path, href_att, sizeof path);
 		fz_urldecode(path);

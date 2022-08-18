@@ -435,7 +435,7 @@ static void sig_sign_dialog(void)
 			{
 				if (ui_button("Sign"))
 				{
-					fz_strlcpy(cert_filename, filename, sizeof cert_filename);
+					fz_strncpy_s(ctx, cert_filename, filename, sizeof cert_filename);
 					ui_init_open_file(".", cert_file_filter);
 					ui.dialog = cert_file_dialog;
 				}

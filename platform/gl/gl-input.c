@@ -413,7 +413,7 @@ static int ui_input_key(struct input *input, int multiline)
 
 void ui_input_init(struct input *input, const char *text)
 {
-	fz_strlcpy(input->text, text, sizeof input->text);
+	fz_strncpy_s(ctx, input->text, text, sizeof input->text);
 	input->end = input->text + strlen(input->text);
 	input->p = input->text;
 	input->q = input->end;
@@ -604,13 +604,13 @@ const char *ui_readline(struct readline *readline, int width)
 			memmove(readline->history, readline->history + 1, (UI_READLINE_SIZE - 1) * sizeof(char *));
 			readline->history[UI_READLINE_SIZE - 1] = tmp;
 
-			fz_strlcpy(readline->history[UI_READLINE_SIZE - 1], readline->input.text, UI_INPUT_SIZE);
+			fz_strncpy_s(ctx, readline->history[UI_READLINE_SIZE - 1], readline->input.text, UI_INPUT_SIZE);
 			accepted = readline->history[UI_READLINE_SIZE - 1];
 			readline->current = UI_READLINE_SIZE;
 		}
 		else
 		{
-			fz_strlcpy(readline->history[readline->used], readline->input.text, UI_INPUT_SIZE);
+			fz_strncpy_s(ctx, readline->history[readline->used], readline->input.text, UI_INPUT_SIZE);
 			accepted = readline->history[readline->used];
 			readline->used++;
 			readline->current = readline->used;

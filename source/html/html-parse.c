@@ -473,7 +473,7 @@ static fz_image *load_html_image(fz_context *ctx, fz_archive *zip, const char *b
 			buf = fz_new_buffer_from_base64(ctx, src+22, 0);
 		else
 		{
-			fz_strlcpy(path, base_uri, sizeof path);
+			fz_strncpy_s(ctx, path, base_uri, sizeof path);
 			fz_strlcat(path, "/", sizeof path);
 			fz_strlcat(path, src, sizeof path);
 			fz_urldecode(path);
@@ -1061,7 +1061,7 @@ html_load_css_link(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, cons
 
 	fz_var(buf);
 
-	fz_strlcpy(path, base_uri, sizeof path);
+	fz_strncpy_s(ctx, path, base_uri, sizeof path);
 	fz_strlcat(path, "/", sizeof path);
 	fz_strlcat(path, href, sizeof path);
 	fz_urldecode(path);

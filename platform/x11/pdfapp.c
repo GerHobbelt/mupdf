@@ -9,6 +9,7 @@
 #include "pdfapp.h"
 #include "curl_stream.h"
 #include "mupdf/helpers/pkcs7-openssl.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <limits.h>
@@ -237,7 +238,7 @@ void pdfapp_invert(pdfapp_t *app, fz_rect rect)
 void pdfapp_reloadfile(pdfapp_t *app)
 {
 	char filename[PATH_MAX];
-	fz_strlcpy(filename, app->docpath, PATH_MAX);
+	fz_strncpy_s(app->ctx, filename, app->docpath, PATH_MAX);
 	pdfapp_close(app);
 	pdfapp_open(app, filename, 1);
 }
@@ -445,11 +446,7 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 				else
 				{
 					/* Accelerator data is out of date */
-#ifdef _WIN32
-					fz_remove_utf8(accelpath);
-#else
-					remove(accelpath);
-#endif
+					fz_remove_utf8(ctx, accelpath);
 					accel = NULL; /* In case we have jumped up from below */
 				}
 			}
@@ -685,7 +682,7 @@ static int pdfapp_save(pdfapp_t *app)
 			if (written)
 			{
 				char buf2[PATH_MAX];
-				fz_strlcpy(buf2, app->docpath, PATH_MAX);
+				fz_strncpy_s(app->ctx, buf2, app->docpath, PATH_MAX);
 				pdfapp_close(app);
 				winreplacefile(app, buf, buf2);
 				pdfapp_open(app, buf2, 1);
@@ -983,13 +980,13 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 		len = MAX_TITLE-strlen(buf2);
 		if (strlen(app->doctitle) >= len)
 		{
-			fz_strlcpy(buf, app->doctitle, len-3);
+			fz_strncpy_s(app->ctx, buf, app->doctitle, len-3);
 			fz_strlcat(buf, "...", MAX_TITLE);
 			fz_strlcat(buf, buf2, MAX_TITLE);
 		}
 		else
 		{
-			fz_strlcpy(buf, app->doctitle, MAX_TITLE);
+			fz_strncpy_s(app->ctx, buf, app->doctitle, MAX_TITLE);
 			fz_strlcat(buf, buf2, MAX_TITLE);
 		}
 		wintitle(app, buf);

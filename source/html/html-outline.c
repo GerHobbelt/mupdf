@@ -102,12 +102,12 @@ static fz_link *load_link_flow(fz_context *ctx, fz_html_flow *flow, fz_link *hea
 			{
 				if (href[0] == '#')
 				{
-					fz_strlcpy(path, file, sizeof path);
+					fz_strncpy_s(ctx, path, file, sizeof path);
 					fz_strlcat(path, href, sizeof path);
 				}
 				else
 				{
-					fz_strlcpy(path, dir, sizeof path);
+					fz_strncpy_s(ctx, path, dir, sizeof path);
 					fz_strlcat(path, "/", sizeof path);
 					fz_strlcat(path, href, sizeof path);
 				}

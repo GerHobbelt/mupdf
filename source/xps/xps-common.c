@@ -44,7 +44,7 @@ xps_lookup_alternate_content(fz_context *ctx, xps_document *doc, fz_xml *node)
 		{
 			char list[64];
 			char *next = list, *item;
-			fz_strlcpy(list, fz_xml_att(node, "Requires"), sizeof(list));
+			fz_strncpy_s(ctx, list, fz_xml_att(node, "Requires"), sizeof(list));
 			while ((item = fz_strsep(&next, " \t\r\n")) != NULL && (!*item || !strcmp(item, "xps")));
 			if (!item)
 				return fz_xml_down(node);
@@ -307,7 +307,7 @@ xps_parse_color(fz_context *ctx, xps_document *doc, char *base_uri, char *string
 	else if (strstr(string, "ContextColor ") == string)
 	{
 		/* Crack the string for profile name and sample values */
-		fz_strlcpy(buf, string, sizeof buf);
+		fz_strncpy_s(ctx, buf, string, sizeof buf);
 
 		profile = strchr(buf, ' ');
 		if (!profile)

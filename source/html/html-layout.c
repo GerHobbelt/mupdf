@@ -1474,7 +1474,7 @@ static void format_roman_number(fz_context *ctx, char *buf, int size, int n, con
 	int C = (n / 100) % 10;
 	int M = (n / 1000);
 
-	fz_strlcpy(buf, "", size);
+	fz_strncpy_s(ctx, buf, "", size);
 	while (M--)
 		fz_strlcat(buf, sym_m, size);
 	fz_strlcat(buf, sym[2][C], size);
@@ -1515,7 +1515,7 @@ static void format_list_number(fz_context *ctx, int type, int x, char *buf, int 
 {
 	switch (type)
 	{
-	case LST_NONE: fz_strlcpy(buf, "", size); break;
+	case LST_NONE: fz_strncpy_s(ctx, buf, "", size); break;
 	case LST_DISC: fz_snprintf(buf, size, "%C  ", 0x2022); break; /* U+2022 BULLET */
 	case LST_CIRCLE: fz_snprintf(buf, size, "%C  ", 0x25CB); break; /* U+25CB WHITE CIRCLE */
 	case LST_SQUARE: fz_snprintf(buf, size, "%C  ", 0x25A0); break; /* U+25A0 BLACK SQUARE */

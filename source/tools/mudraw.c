@@ -3304,11 +3304,7 @@ int main(int argc, const char** argv)
 						else
 						{
 							/* Accelerator data is out of date */
-#ifdef _WIN32
 							fz_remove_utf8(ctx, accelpath);
-#else
-							remove(accelpath);
-#endif
 							accel = NULL; /* In case we have jumped up from below */
 						}
 					}

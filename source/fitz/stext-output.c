@@ -104,7 +104,7 @@ font_family_name(fz_context *ctx, fz_font *font, char *buf, int size, int is_mon
 {
 	const char *name = html_clean_font_name(font_full_name(ctx, font));
 	char *s;
-	fz_strlcpy(buf, name, size);
+	fz_strncpy_s(ctx, buf, name, size);
 	s = strrchr(buf, '-');
 	if (s)
 		*s = 0;

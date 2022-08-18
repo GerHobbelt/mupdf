@@ -1597,7 +1597,7 @@ pdf_filter_CS(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorsp
 {
 	pdf_filter_processor *p = (pdf_filter_processor*)proc;
 	filter_gstate *gstate = gstate_to_update(ctx, p);
-	fz_strlcpy(gstate->pending.CS.name, name, sizeof gstate->pending.CS.name);
+	fz_strncpy_s(ctx, gstate->pending.CS.name, name, sizeof gstate->pending.CS.name);
 	gstate->pending.CS.cs = cs;
 	copy_resource(ctx, p, PDF_NAME(ColorSpace), name);
 	set_default_cs_values(&gstate->pending.SC, name, cs);
@@ -1608,7 +1608,7 @@ pdf_filter_cs(fz_context *ctx, pdf_processor *proc, const char *name, fz_colorsp
 {
 	pdf_filter_processor *p = (pdf_filter_processor*)proc;
 	filter_gstate *gstate = gstate_to_update(ctx, p);
-	fz_strlcpy(gstate->pending.cs.name, name, sizeof gstate->pending.cs.name);
+	fz_strncpy_s(ctx, gstate->pending.cs.name, name, sizeof gstate->pending.cs.name);
 	gstate->pending.cs.cs = cs;
 	copy_resource(ctx, p, PDF_NAME(ColorSpace), name);
 	set_default_cs_values(&gstate->pending.sc, name, cs);
@@ -1620,7 +1620,7 @@ pdf_filter_SC_pattern(fz_context *ctx, pdf_processor *proc, const char *name, pd
 	pdf_filter_processor *p = (pdf_filter_processor*)proc;
 	filter_gstate *gstate = gstate_to_update(ctx, p);
 	int i;
-	fz_strlcpy(gstate->pending.SC.name, name, sizeof gstate->pending.SC.name);
+	fz_strncpy_s(ctx, gstate->pending.SC.name, name, sizeof gstate->pending.SC.name);
 	gstate->pending.SC.pat = pat;
 	gstate->pending.SC.shd = NULL;
 	gstate->pending.SC.n = n;
@@ -1635,7 +1635,7 @@ pdf_filter_sc_pattern(fz_context *ctx, pdf_processor *proc, const char *name, pd
 	pdf_filter_processor *p = (pdf_filter_processor*)proc;
 	filter_gstate *gstate = gstate_to_update(ctx, p);
 	int i;
-	fz_strlcpy(gstate->pending.sc.name, name, sizeof gstate->pending.sc.name);
+	fz_strncpy_s(ctx, gstate->pending.sc.name, name, sizeof gstate->pending.sc.name);
 	gstate->pending.sc.pat = pat;
 	gstate->pending.sc.shd = NULL;
 	gstate->pending.sc.n = n;
@@ -1649,7 +1649,7 @@ pdf_filter_SC_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_s
 {
 	pdf_filter_processor *p = (pdf_filter_processor*)proc;
 	filter_gstate *gstate = gstate_to_update(ctx, p);
-	fz_strlcpy(gstate->pending.SC.name, name, sizeof gstate->pending.SC.name);
+	fz_strncpy_s(ctx, gstate->pending.SC.name, name, sizeof gstate->pending.SC.name);
 	gstate->pending.SC.pat = NULL;
 	gstate->pending.SC.shd = shade;
 	gstate->pending.SC.n = 0;
@@ -1661,7 +1661,7 @@ pdf_filter_sc_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_s
 {
 	pdf_filter_processor *p = (pdf_filter_processor*)proc;
 	filter_gstate *gstate = gstate_to_update(ctx, p);
-	fz_strlcpy(gstate->pending.sc.name, name, sizeof gstate->pending.sc.name);
+	fz_strncpy_s(ctx, gstate->pending.sc.name, name, sizeof gstate->pending.sc.name);
 	gstate->pending.sc.pat = NULL;
 	gstate->pending.sc.shd = shade;
 	gstate->pending.sc.n = 0;

@@ -7864,12 +7864,12 @@ static void ffi_PDFWidget_getSignatory(js_State *J)
 		if (dn)
 		{
 			char *s = pdf_signature_format_distinguished_name(ctx, dn);
-			fz_strlcpy(buf, s, sizeof buf);
+			fz_strncpy_s(ctx, buf, s, sizeof buf);
 			fz_free(ctx, s);
 		}
 		else
 		{
-			fz_strlcpy(buf, "Signature information missing.", sizeof buf);
+			fz_strncpy_s(ctx, buf, "Signature information missing.", sizeof buf);
 		}
 	}
 	fz_always(ctx)

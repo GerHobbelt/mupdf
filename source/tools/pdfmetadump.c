@@ -1160,13 +1160,13 @@ printinfo(fz_context* ctx, globals* glo)
 					cs[3 + len + 1] = '\0';
 				}
 				if (strstr(cs, "ICC"))
-					fz_strlcpy(cs, "ICC", 4);
+					fz_strncpy_s(ctx, cs, "ICC", 4);
 				if (strstr(cs, "Indexed"))
-					fz_strlcpy(cs, "Idx", 4);
+					fz_strncpy_s(ctx, cs, "Idx", 4);
 				if (strstr(cs, "Pattern"))
-					fz_strlcpy(cs, "Pat", 4);
+					fz_strncpy_s(ctx, cs, "Pat", 4);
 				if (strstr(cs, "Separation"))
-					fz_strlcpy(cs, "Sep", 4);
+					fz_strncpy_s(ctx, cs, "Sep", 4);
 			}
 			if (glo->image[i].u.image.altcs)
 			{
@@ -1179,13 +1179,13 @@ printinfo(fz_context* ctx, globals* glo)
 					altcs[3 + len + 1] = '\0';
 				}
 				if (strstr(altcs, "ICC"))
-					fz_strlcpy(altcs, "ICC", 4);
+					fz_strncpy_s(ctx, altcs, "ICC", 4);
 				if (strstr(altcs, "Indexed"))
-					fz_strlcpy(altcs, "Idx", 4);
+					fz_strncpy_s(ctx, altcs, "Idx", 4);
 				if (strstr(altcs, "Pattern"))
-					fz_strlcpy(altcs, "Pat", 4);
+					fz_strncpy_s(ctx, altcs, "Pat", 4);
 				if (strstr(altcs, "Separation"))
-					fz_strlcpy(altcs, "Sep", 4);
+					fz_strncpy_s(ctx, altcs, "Sep", 4);
 			}
 
 			write_item_int(ctx, out, "ImageWidth", pdf_to_int(ctx, glo->image[i].u.image.width));
@@ -1898,11 +1898,11 @@ printtail(fz_context* ctx, globals* glo, const fz_gathered_statistics* stats)
 		char buf[256];
 
 		if (n == 0)
-			fz_strlcpy(buf, "Change history seems valid.", sizeof(buf));
+			fz_strncpy_s(ctx, buf, "Change history seems valid.", sizeof(buf));
 		else if (n == 1)
-			fz_strlcpy(buf, "Invalid changes made to the document in the last update.", sizeof(buf));
+			fz_strncpy_s(ctx, buf, "Invalid changes made to the document in the last update.", sizeof(buf));
 		else if (n == 2)
-			fz_strlcpy(buf, "Invalid changes made to the document in the penultimate update.", sizeof(buf));
+			fz_strncpy_s(ctx, buf, "Invalid changes made to the document in the penultimate update.", sizeof(buf));
 		else
 			fz_snprintf(buf, sizeof(buf), "Invalid changes made to the document %d updates ago.", n);
 		write_item(ctx, out, "ChangeHistoryValidation", buf);
@@ -1969,13 +1969,13 @@ printtail(fz_context* ctx, globals* glo, const fz_gathered_statistics* stats)
 
 		if (updates == 0)
 		{
-			fz_strlcpy(buf, "No updates since document creation", sizeof(buf));
+			fz_strncpy_s(ctx, buf, "No updates since document creation", sizeof(buf));
 		}
 		else
 		{
 			int n = pdf_validate_change_history(ctx, doc);
 			if (n == 0)
-				fz_strlcpy(buf, "Document changes conform to permissions", sizeof(buf));
+				fz_strncpy_s(ctx, buf, "Document changes conform to permissions", sizeof(buf));
 			else
 				fz_snprintf(buf, sizeof(buf), "Document permissions violated %d updates ago", n);
 		}

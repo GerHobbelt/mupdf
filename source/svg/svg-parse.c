@@ -307,7 +307,7 @@ svg_parse_enum_from_style(fz_context *ctx, svg_document *doc, const char *style,
 				p += n + 1;
 				while (*p && svg_is_whitespace(*p))
 					++p;
-				fz_strlcpy(buf, p, sizeof buf);
+				fz_strncpy_s(ctx, buf, p, sizeof buf);
 				end = strchr(buf, ';');
 				if (end)
 					*end = 0;
@@ -341,12 +341,12 @@ svg_parse_string_from_style(fz_context *ctx, svg_document *doc, const char *styl
 				quote = *p;
 				if (quote == '\'' || quote == '"')
 				{
-					fz_strlcpy(buf, p+1, buf_size);
+					fz_strncpy_s(ctx, buf, p+1, buf_size);
 					end = strchr(buf, quote);
 				}
 				else
 				{
-					fz_strlcpy(buf, p, buf_size);
+					fz_strncpy_s(ctx, buf, p, buf_size);
 					end = strchr(buf, ';');
 				}
 				if (end)
@@ -355,6 +355,6 @@ svg_parse_string_from_style(fz_context *ctx, svg_document *doc, const char *styl
 			}
 		}
 	}
-	fz_strlcpy(buf, value, buf_size);
+	fz_strncpy_s(ctx, buf, value, buf_size);
 	return buf;
 }

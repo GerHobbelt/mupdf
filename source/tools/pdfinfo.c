@@ -920,13 +920,13 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 					cs[3 + len + 1] = '\0';
 				}
 				if (strstr(cs, "ICC"))
-					fz_strlcpy(cs, "ICC", 4);
+					fz_strncpy_s(ctx, cs, "ICC", 4);
 				if (strstr(cs, "Indexed"))
-					fz_strlcpy(cs, "Idx", 4);
+					fz_strncpy_s(ctx, cs, "Idx", 4);
 				if (strstr(cs, "Pattern"))
-					fz_strlcpy(cs, "Pat", 4);
+					fz_strncpy_s(ctx, cs, "Pat", 4);
 				if (strstr(cs, "Separation"))
-					fz_strlcpy(cs, "Sep", 4);
+					fz_strncpy_s(ctx, cs, "Sep", 4);
 			}
 			if (glo->image[i].u.image.altcs)
 			{
@@ -939,13 +939,13 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 					altcs[3 + len + 1] = '\0';
 				}
 				if (strstr(altcs, "ICC"))
-					fz_strlcpy(altcs, "ICC", 4);
+					fz_strncpy_s(ctx, altcs, "ICC", 4);
 				if (strstr(altcs, "Indexed"))
-					fz_strlcpy(altcs, "Idx", 4);
+					fz_strncpy_s(ctx, altcs, "Idx", 4);
 				if (strstr(altcs, "Pattern"))
-					fz_strlcpy(altcs, "Pat", 4);
+					fz_strncpy_s(ctx, altcs, "Pat", 4);
 				if (strstr(altcs, "Separation"))
-					fz_strlcpy(altcs, "Sep", 4);
+					fz_strncpy_s(ctx, altcs, "Sep", 4);
 			}
 
 			fz_write_printf(ctx, out, " ] %dx%d %dbpc %s%s%s (%d 0 R)\n",

@@ -466,7 +466,7 @@ static void showpath(char* path, pdf_obj* obj)
 					{
 						if (path)
 						{
-							fz_strlcpy(buf, path, sizeof buf);
+							fz_strncpy_s(ctx, buf, path, sizeof buf);
 							showpath(buf, pdf_array_get(ctx, obj, i));
 						}
 						else
@@ -480,7 +480,7 @@ static void showpath(char* path, pdf_obj* obj)
 					{
 						if (path)
 						{
-							fz_strlcpy(buf, path, sizeof buf);
+							fz_strncpy_s(ctx, buf, path, sizeof buf);
 							showpath(buf, pdf_dict_get_val(ctx, obj, i));
 						}
 						else
@@ -532,7 +532,7 @@ static void showpathpage(char* path)
 				{
 					if (path)
 					{
-						fz_strlcpy(buf, path, sizeof buf);
+						fz_strncpy_s(ctx, buf, path, sizeof buf);
 						showpath(buf, pdf_lookup_page_obj(ctx, doc, i));
 					}
 					else
@@ -562,7 +562,7 @@ static void showpathroot(const char* path)
 	char buf[PDF_XPATH_SIZE];
 	char* list = buf;
 	char* part;
-	fz_strlcpy(buf, path, sizeof buf);
+	fz_strncpy_s(ctx, buf, path, sizeof buf);
 	part = fz_strsep(&list, SEP);
 	if (part && part[0])
 	{

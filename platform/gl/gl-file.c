@@ -122,7 +122,7 @@ static void load_dir(const char *path)
 			fc.files[fc.count].is_dir = ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
 			if (fc.files[fc.count].is_dir || !fc.filter || fc.filter(buf))
 			{
-				fz_strlcpy(fc.files[fc.count].name, buf, FILENAME_MAX);
+				fz_strncpy_s(ctx, fc.files[fc.count].name, buf, FILENAME_MAX);
 				++fc.count;
 			}
 		}
@@ -227,7 +227,7 @@ static void load_dir(const char *path)
 	{
 		ensure_one_more_file();
 		fc.files[fc.count].is_dir = 1;
-		fz_strlcpy(fc.files[fc.count].name, "..", FILENAME_MAX);
+		fz_strncpy_s(ctx, fc.files[fc.count].name, "..", FILENAME_MAX);
 		++fc.count;
 	}
 	else
@@ -242,7 +242,7 @@ static void load_dir(const char *path)
 			fc.files[fc.count].is_dir = fz_is_directory(ctx, buf);
 			if (fc.files[fc.count].is_dir || !fc.filter || fc.filter(buf))
 			{
-				fz_strlcpy(fc.files[fc.count].name, dp->d_name, FILENAME_MAX);
+				fz_strncpy_s(ctx, fc.files[fc.count].name, dp->d_name, FILENAME_MAX);
 				++fc.count;
 			}
 		}
@@ -288,7 +288,7 @@ static int has_dir(const char *home, const char *user, int i, char dir[PATH_MAX]
 	}
 	else
 	{
-		fz_strlcpy(dir, subdir, PATH_MAX);
+		fz_strncpy_s(ctx, dir, subdir, PATH_MAX);
 		fz_snprintf(vis, PATH_MAX, "%C %s", icon, subdir);
 	}
 	return fz_is_directory(ctx, dir);
@@ -408,7 +408,7 @@ void ui_init_save_file(const char *path, int (*filter)(const char *fn))
 {
 	char dir[PATH_MAX], *p;
 	fc.filter = filter;
-	fz_strlcpy(dir, path, sizeof dir);
+	fz_strncpy_s(ctx, dir, path, sizeof dir);
 	for (p=dir; *p; ++p)
 		if (*p == '\\') *p = '/';
 	fz_cleanname(dir);
@@ -433,7 +433,7 @@ static void bump_file_version(int dir)
 	char buf[PATH_MAX], *p, *n;
 	char base[PATH_MAX], out[PATH_MAX];
 	int x;
-	fz_strlcpy(buf, fc.input_file.text, sizeof buf);
+	fz_strncpy_s(ctx, buf, fc.input_file.text, sizeof buf);
 	p = strrchr(buf, '.');
 	if (p)
 	{

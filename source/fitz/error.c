@@ -506,7 +506,7 @@ fz_jmp_buf *fz_push_try(fz_context *ctx)
 	 */
 	if (ctx->error.top + 2 >= ctx->error.stack_base + nelem(ctx->error.__stack) - (FZ_JMPBUF_ALIGN + sizeof(ctx->error.stack_base[0]) - 1) / sizeof(ctx->error.stack_base[0]))
 	{
-		fz_strlcpy(ctx->error.message, "exception stack overflow!", sizeof ctx->error.message);
+		fz_strncpy_s(ctx, ctx->error.message, "exception stack overflow!", sizeof ctx->error.message);
 
 		fz_flush_warnings(ctx);
 		if (ctx->error.print)

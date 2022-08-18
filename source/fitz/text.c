@@ -271,9 +271,9 @@ char *fz_string_from_text_language(char str[8], fz_text_language lang)
 		return NULL;
 
 	if (lang == FZ_LANG_zh_Hant)
-		fz_strlcpy(str, "zh-Hant", 8);
+		fz_strncpy_s(NULL, str, "zh-Hant", 8);
 	else if (lang == FZ_LANG_zh_Hans)
-		fz_strlcpy(str, "zh-Hans", 8);
+		fz_strncpy_s(NULL, str, "zh-Hans", 8);
 	else
 	{
 		c = lang % 27;
