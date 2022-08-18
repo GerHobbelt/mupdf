@@ -615,7 +615,7 @@ void
 fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
 {
 	// hacky first run, not cf. spec:
-	fz_snprintf(dstpath, size, "%s", fmt);
+	fz_strncpy_s(ctx, dstpath, fmt, size);
 	size_t dstlen = size - strlen(dstpath);
 	char* dst = dstpath + strlen(dstpath);
 	if (chapter)
