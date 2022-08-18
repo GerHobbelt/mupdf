@@ -163,6 +163,7 @@ struct fz_output
 	fz_stream_from_output_fn *as_stream;
 	fz_truncate_fn *truncate;
 	char *bp, *wp, *ep;
+	char *filepath;
 	mu_mutex buf_mutex;
 	mu_mutex printf_mutex;
 	fz_output_flags_t flags;

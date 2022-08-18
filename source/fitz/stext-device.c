@@ -26,6 +26,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
+#include "mupdf/helpers/dir.h"
 
 #include "glyphbox.h"
 
@@ -1001,7 +1002,9 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 			opts->flags |= FZ_STEXT_REFERENCE_IMAGES;
 			if (!fz_option_eq(val, "yes"))
 			{
-				opts->reference_image_path_template = fz_strdup(ctx, val);
+				char pathbuf[PATH_MAX];
+				fz_copy_option(ctx, val, pathbuf, sizeof(pathbuf));
+				opts->reference_image_path_template = fz_strdup(ctx, pathbuf);
 			}
 		}
 	}
@@ -1057,7 +1060,9 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 			opts->flags |= FZ_STEXT_EXTERNAL_STYLES;
 			if (!fz_option_eq(val, "yes"))
 			{
-				opts->external_styles_path_template = fz_strdup(ctx, val);
+				char pathbuf[PATH_MAX];
+				fz_copy_option(ctx, val, pathbuf, sizeof(pathbuf));
+				opts->external_styles_path_template = fz_strdup(ctx, pathbuf);
 			}
 		}
 	}

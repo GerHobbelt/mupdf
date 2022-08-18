@@ -47,23 +47,44 @@ void fz_normalize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, c
 		len = strlen(dstpath);
 	}
 
-	// See if we have a Windows drive/share as part of the path: keep that one intact!
-	char* start = dstpath;
-	char* p = strchr(dstpath, ':');
-	if (p) {
-		start = p + 1;
-	}
-
 	// unixify MSDOS path:
-	char* e = strchr(start, '\\');
+	char* e = strchr(dstpath, '\\');
 	while (e)
 	{
 		*e = '/';
 		e = strchr(e, '\\');
 	}
 
+	int can_have_mswin_drive_letter = 1;
+
+	// Sanitize the *entire* path, including the Windows Drive/Share part:
+	e = dstpath;
+	if (e[0] == '/' && e[1] == '/' && strchr(".?", e[2]) != NULL && e[3] == '/')
+	{
+		// skip //?/ and //./ UNC leaders
+		e += 4;
+	}
+	else if (e[0] == '/' && e[1] == '/')
+	{
+		// skip //<server>... UNC path starter (which cannot contain Windows drive letters as-is)
+		e += 2;
+		can_have_mswin_drive_letter = 0;
+	}
+
+	if (can_have_mswin_drive_letter)
+	{
+		// See if we have a Windows drive as part of the path: keep that one intact!
+		if (isalpha(e[0]) && e[1] == ':')
+		{
+			*e = toupper(e[0]);
+			e += 2;
+		}
+	}
+
+	char *start = e;
+
 	// now find ./ and ../ directories and resolve each, if possible:
-	p = start;
+	char *p = start;
 	e = strchr(*p ? p + 1 : p, '/');  // skip root /, if it (may) exist
 	while (e)
 	{
@@ -162,13 +183,13 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	// as we normalize a path, it can only become *shorter* (or equal in length).
 	// Thus we copy the source path to the buffer verbatim first.
 	if (!dstpath)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_normalize_path: dstpath cannot be NULL.");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_sanitize_path: dstpath cannot be NULL.");
 	// copy source path, if it isn't already in the work buffer:
 	size_t len;
 	if (path) {
 		len = strlen(path);
 		if (dstpath_bufsize < len + 1)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "fz_normalize_path: buffer overrun.");
+			fz_throw(ctx, FZ_ERROR_GENERIC, "fz_sanitize_path: buffer overrun.");
 		if (path != dstpath)
 			memmove(dstpath, path, len + 1);
 	}
@@ -176,15 +197,8 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 		len = strlen(dstpath);
 	}
 
-	// See if we have a Windows drive/share as part of the path: keep that one intact!
-	char* start = dstpath;
-	char* p = strchr(dstpath, ':');
-	if (p) {
-		start = p + 1;
-	}
-
-	// unixify MSDOS path:
-	char* e = strchr(start, '\\');
+	// unixify MSDOS/MSWIN/UNC path:
+	char* e = strchr(dstpath, '\\');
 	while (e)
 	{
 		*e = '/';
@@ -192,7 +206,15 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	}
 
 	// Sanitize the *entire* path, including the Windows Drive/Share part:
-	for (e = dstpath; *e; e++) {
+	e = dstpath;
+	if (e[0] == '/' && e[1] == '/' && strchr(".?", e[2]) != NULL && e[3] == '/')
+		// skip //?/ and //./ UNC leaders
+		e += 4;
+	else if (e[0] == '/' && e[1] == '/')
+		// skip //<server>... UNC path starter (which cannot contain Windows drive letters as-is)
+		e += 2;
+
+	for ( ; *e; e++) {
 		int c = *e;
 		if (c > 0x7F || c < 0) {
 			// 0x80 and higher character codes: UTF8
@@ -306,7 +328,7 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 	d = p = path;
 
 	// check if path is a UNC path. It may legally start with `\\.\` or `\\?\` before a Windows drive/share+COLON:
-	if (start_at_offset != 0)
+	if (start_at_offset == 0)
 	{
 		if (*p == '/' && p[1] == '/')
 		{
@@ -486,6 +508,135 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 	return rv_path;
 }
 
+// Note:
+// both abspaths are assumed to be FILES (not directories): the filename
+// at the end of `relative_to_abspath` therefor is not considered; only the
+// directory part of that path is compared against.
+char* fz_mk_relative_path(fz_context* ctx, char* dst, size_t dstsiz, const char* abspath, const char* relative_to_abspath)
+{
+	// tactic:
+	// - determine common prefix
+	// - see what's left and walk up that dirchain, producing '..' elements.
+	// - construct the relative path by merging all.
+	// When the prefix length is zero or down to drive-root directory (MS Windows)
+	// there's not much 'relative' to walk and the result therefor is the abs.path
+	// itself.
+	size_t len_of_cmp_dirpath = fz_strrcspn(relative_to_abspath, ":/\\");
+	size_t len_of_cmp_drivespec = fz_strrcspn(relative_to_abspath, "?:") + 1;   // Match UNC and classic paths both
+	size_t common_prefix_len = 0;
+
+	for (size_t pos = 0; pos < len_of_cmp_dirpath + 1; pos++)
+	{
+		char c1 = abspath[pos];
+		char c2 = relative_to_abspath[pos];
+
+		// check for MSWin vs. UNIXy directory separator style mashups before ringing the bell:
+		if (c1 == '\\')
+			c1 = '/';
+		if (c2 == '\\')
+			c2 = '/';
+		if (c1 != c2)
+			break;
+
+		// when we have a match and it's a directory '/', we have a preliminary common_prefix:
+		if (c1 == '/')
+		{
+			common_prefix_len = pos;
+		}
+	}
+
+	char dotdot[PATH_MAX] = "";
+	char* d = dotdot;
+	// find out how many segments we have to walk up the dirtree:
+	if (relative_to_abspath[common_prefix_len] && len_of_cmp_dirpath > common_prefix_len)
+	{
+		const char* sep = relative_to_abspath + common_prefix_len;
+		do
+		{
+			*d++ = '.';
+			*d++ = '.';
+			*d++ = '/';
+			sep = strstr(sep + 1, "\\/");
+		} while (sep);
+		*d++ = '.';
+		*d++ = '.';
+		*d++ = '/';
+		*d = 0;
+		ASSERT((d - dotdot) < sizeof(dotdot));
+	}
+	// is this a 'sensible' common prefix, i.e. one where both paths are on the same drive?
+	// (We're okay with having to walk the chain all the way back to the drive/root-directory, though...)
+	if (common_prefix_len >= len_of_cmp_drivespec)
+	{
+		const char* remainder = abspath + common_prefix_len;
+		if (remainder[0])
+		{
+			// skip initial '/'
+			remainder++;
+		}
+		// when, despite assumptions, we happen to be looking at the fringe case where `abspath` was
+		// a subpath (parent) of `relative_to_abspath`, then we wish to output without a trailing '/'
+		// anyway, i.e. a path that only consists of '..' directory elements:
+		if (!remainder[0])
+		{
+			if (d != dotdot)
+			{
+				// end on a '.', not a '/':
+				d[-1] = 0;
+			}
+		}
+		fz_snprintf(dst, dstsiz, "%s%s", dotdot, remainder);
+	}
+	else
+	{
+		fz_strncpy_s(ctx, dst, abspath, dstsiz);
+	}
+	return dst;
+}
+
+void fz_mk_absolute_path_using_absolute_base(fz_context* ctx, char* dst, size_t dstsiz, const char* source_path, const char* abs_optional_base_file_path)
+{
+	ASSERT(source_path);
+	ASSERT(abs_optional_base_file_path);
+
+	if (fz_is_absolute_path(source_path))
+	{
+		fz_strncpy_s(ctx, dst, source_path, dstsiz);
+		fz_normalize_path(ctx, dst, dstsiz, dst);
+		fz_sanitize_path(ctx, dst, dstsiz, dst);
+		return;
+	}
+
+	// relative paths are assumed relative to the *base file path*:
+	//
+	// NOTE: the 'base file path' is assumed to be a FILE path, NOT a DIRECTORY, so we need to get rid of that
+	// 'useless' base filename: we do that by appending a '../' element and have the sanitizer deal with it
+	// afterwards: the '../' will eat the preceding element, which, in this case, will be the 'base file name'.
+	fz_snprintf(dst, dstsiz, "%s/../%s", abs_optional_base_file_path, source_path);
+	fz_normalize_path(ctx, dst, dstsiz, dst);
+	fz_sanitize_path(ctx, dst, dstsiz, dst);
+
+#if 0 // as abs_optional_base_path is already to be absolute and sanitized, we don't need fz_realpath() in here
+	char abspath[PATH_MAX];
+	if (!fz_realpath(dst, abspath))
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process relative (based) file path to a sane absolute path: rel.path: %q, abs.base: %q, dst: %q", source_path, abs_optional_base_file_path, dst);
+	}
+	fz_normalize_path(ctx, abspath, sizeof(abspath), abspath);
+	fz_sanitize_path(ctx, abspath, sizeof(abspath), abspath);
+	fz_strncpy_s(ctx, dst, abspath, dstsiz);
+#endif
+}
+
+int fz_is_absolute_path(const char* path)
+{
+	// anything absolute is either a UNIX root directory '/', an UNC path or prefix '//yadayada' or a classic MSWindows drive letter.
+	return (path && (
+		(path[0] == '/') ||
+		(path[0] == '\\') ||
+		(isalpha(path[0]) && path[1] == ':' && strchr("/\\", path[2]) != NULL)
+		));
+}
 
 #if defined(_WIN32)
 

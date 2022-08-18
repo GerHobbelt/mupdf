@@ -512,6 +512,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	out->tell = file_tell;
 	out->as_stream = file_as_stream;
 	out->truncate = file_truncate;
+	out->filepath = fz_strdup(ctx, filename);
 
 	return out;
 }
@@ -589,6 +590,7 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 		if (out->drop)
 			out->drop(ctx, out->state);
 		fz_free(ctx, out->bp);
+		fz_free(ctx, out->filepath);
 
 		if (out != &fz_stdout_global && out != &fz_stderr_global && out != &fz_stdods_global)
 			fz_free(ctx, out);

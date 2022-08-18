@@ -1664,6 +1664,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			out = NULL;
 		}
 		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
+		fz_normalize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
+		fz_sanitize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
 
 		if (output_format == OUT_PDF)
 		{
@@ -2193,6 +2195,7 @@ static int img_seqnum = 1;
 static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options)
 {
 	char image_path[PATH_MAX];
+	char relative_asset_path[PATH_MAX];
 
 	fz_image* image = block->u.i.image;
 
@@ -2207,13 +2210,17 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 		if (type == FZ_COLORSPACE_GRAY || type == FZ_COLORSPACE_RGB)
 		{
 			// make sure we produce a unique, non-existing image file path:
+			char tplpath[PATH_MAX];
+			fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
 			do
 			{
-				fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "jpg");
+				fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, NULL, "jpg");
 				img_seqnum++;
 			} while (fz_file_exists(ctx, image_path));
 
-			fz_write_string(ctx, out, image_path);
+			fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
+
+			fz_write_string(ctx, out, relative_asset_path);
 			fz_save_buffer(ctx, cbuf->buffer, image_path);
 			return;
 		}
@@ -2221,13 +2228,17 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 	if (cbuf && cbuf->params.type == FZ_IMAGE_PNG)
 	{
 		// make sure we produce a unique, non-existing image file path:
+		char tplpath[PATH_MAX];
+		fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
 		do
 		{
-			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "png");
+			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, NULL, "png");
 			img_seqnum++;
 		} while (fz_file_exists(ctx, image_path));
 
-		fz_write_string(ctx, out, image_path);
+		fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
+
+		fz_write_string(ctx, out, relative_asset_path);
 		fz_save_buffer(ctx, cbuf->buffer, image_path);
 		return;
 	}
@@ -2236,13 +2247,17 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 	fz_try(ctx)
 	{
 		// make sure we produce a unique, non-existing image file path:
+		char tplpath[PATH_MAX];
+		fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
 		do
 		{
-			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, (buf ? NULL : "ILLEGAL-ZERO-SIZED"), "png");
+			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, (buf ? NULL : "ILLEGAL-ZERO-SIZED"), "png");
 			img_seqnum++;
 		} while (fz_file_exists(ctx, image_path));
 
-		fz_write_string(ctx, out, image_path);
+		fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
+
+		fz_write_string(ctx, out, relative_asset_path);
 		if (buf)
 		{
 			fz_save_buffer(ctx, buf, image_path);
@@ -2856,15 +2871,24 @@ int main(int argc, const char** argv)
 		// set up a default graphics output file path template when none has been provided by the CLI/user already:
 		if (!stext_options.reference_image_path_template)
 		{
-			// produce a path template which has the filename extension already stripped off:
+			// produce a path template which has the filename extension already generalized:
 			size_t l = fz_strrcspn(output, "./\\:");
-			char* tpl = fz_asprintf(ctx, "%.*s", (int)l, output);
-			// and any `%d` regular page format specifiers removed (replaced!) as well!
-			tpl = fz_sanitize_path_ex(tpl, "f%#^$!", "_", 0, 0);
-			stext_options.reference_image_path_template = tpl;
+			char pathbuf[PATH_MAX];
+			fz_strncpy_s(ctx, pathbuf, output, fz_mini(l + 1, sizeof(pathbuf)));
 
-			fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, &output_format);
+			char tplpath[PATH_MAX];
+			if (!fz_realpath(pathbuf, tplpath))
+			{
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process images' path template to a sane absolute path: %s", pathbuf);
+			}
+			fz_normalize_path(ctx, tplpath, sizeof tplpath, tplpath);
+			fz_sanitize_path(ctx, tplpath, sizeof tplpath, tplpath);
+
+			// and any `%d` regular page format specifiers removed (replaced!) as well!
+			fz_sanitize_path_ex(tplpath, "f%#^$!", "_", 0, 0);
+			stext_options.reference_image_path_template = fz_strdup(ctx, tplpath);
 		}
+		fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, &output_format);
 
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);

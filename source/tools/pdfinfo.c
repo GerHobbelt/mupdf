@@ -28,6 +28,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -1225,6 +1226,8 @@ int pdfinfo_main(int argc, const char** argv)
 			{
 				char fbuf[4096];
 				fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
+				fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
+				fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
 				out = fz_new_output_with_path(ctx, fbuf, 0);
 			}
 
