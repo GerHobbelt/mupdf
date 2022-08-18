@@ -817,6 +817,49 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 				d += pathlen;
 				space -= pathlen;
 			}
+			else if (strncmp(m, "remap", 5) == 0 || strncmp(m, "{remap", 6) == 0)
+			{
+				// format: %{remap(arg)}, where (){}<>[] pairs are accepted as arg delims.
+				//
+				// remap the given path to the target path, IFF the bulktest user specified
+				// a path remapping should be applied.
+				size_t skip_dist = 5 + (m[0] == '{' ? 1 : 0);
+
+				s = m + skip_dist;
+				char delim = *s++;
+				static const char start_delims[] = "({<[";
+				static const char end_delims[] =   ")}>]";
+				const char* delim_pos = strchr(start_delims, delim);
+				if (!delim_pos)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "missing start delimiter: %remap template function expects at brace-delimited argument. Faulty line snippet: %q (as part of %q)", m, arg);
+				size_t pos = delim_pos - start_delims;
+				char end_delim = end_delims[pos];
+				delim_pos = strchr(s, end_delim);
+				if (!delim_pos)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "missing end delimiter: %remap template function expects at brace-delimited argument. Faulty line snippet: %q (as part of %q)", s, arg);
+				char remap_arg[PATH_MAX];
+				fz_strncpy_s(ctx, remap_arg, s, fz_mini(delim_pos - s, sizeof(remap_arg)));
+				// %remap itself should also be terminated when it was written as "%{remap":
+				if (m[0] == '{')
+				{
+					if (delim_pos[1] != '}')
+						fz_throw(ctx, FZ_ERROR_GENERIC, "%{remap} command not properly delineated: missing closing curly brace '}'. Faulty line snippet: %q (as part of %q)", s, arg);
+					s = delim_pos + 2;
+				}
+				else
+				{
+					s = delim_pos + 12;
+				}
+
+				char target_path[PATH_MAX];
+				map_path_to_dest(target_path, sizeof(target_path), remap_arg);
+
+				strncpy(d, target_path, space);
+
+				size_t l = strlen(d);
+				d += l;
+				space -= l;
+			}
 			else if (!*m || !strchr("123456789", *m))
 			{
 				// when marker isn't immediately followed by a decimal number (without leading zeroes),
