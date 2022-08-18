@@ -848,7 +848,7 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 				}
 				else
 				{
-					s = delim_pos + 12;
+					s = delim_pos + 1;
 				}
 
 				char target_path[PATH_MAX];
