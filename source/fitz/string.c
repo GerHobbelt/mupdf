@@ -179,10 +179,14 @@ fz_strlcat(char *dst, const char *src, size_t siz)
 }
 
 void
-fz_strncpy_s(char* dst, const char* src, size_t dstsiz)
+fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
 {
 	if (dstsiz == 0)
-		fz_throw(fz_get_global_ctx(), FZ_ERROR_GENERIC, "fz_strncpy_s::dstsiz == 0: zero-length destination buffer specified.");
+	{
+		if (!ctx)
+			ctx = fz_get_global_context();
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_strncpy_s::dstsiz == 0: zero-length destination buffer specified.");
+	}
 
 	// use strnlen() as this function can legally be passed a non-NUL-terminated `src`!
 	size_t srclen = strnlen(src, dstsiz);
@@ -194,7 +198,7 @@ fz_strncpy_s(char* dst, const char* src, size_t dstsiz)
 	else
 	{
 		// len(src) < dstsiz: can safely use strcpy()
-		strcpy(dst, src);
+		memmove(dst, src, srclen + 1);		// allow overlapping copy & include sentinel
 	}
 }
 

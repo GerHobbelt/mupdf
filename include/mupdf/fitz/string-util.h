@@ -137,7 +137,7 @@ size_t fz_strlcat(char *dst, const char *src, size_t n);
 		B0RK_B0RK_B0RK_report_clipped_src();
 	```
 */
-void fz_strncpy_s(char* dst, const char* src, size_t dstsiz);
+void fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz);
 
 /**
 	Find the start of the first occurrence of the substring needle in haystack.
