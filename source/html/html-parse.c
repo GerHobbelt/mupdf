@@ -1653,6 +1653,13 @@ fz_new_story(fz_context *ctx, fz_buffer *buf, const char *user_css, float em)
 {
 	fz_story *story = fz_new_derived_html_tree(ctx, fz_story, fz_drop_story_imp);
 	warning_save saved = { 0 };
+	fz_buffer *local_buffer = NULL;
+
+	if (buf == NULL)
+	{
+		local_buffer = fz_new_buffer(ctx, 0);
+		buf = local_buffer;
+	}
 
 	fz_var(saved);
 
@@ -1668,6 +1675,7 @@ fz_new_story(fz_context *ctx, fz_buffer *buf, const char *user_css, float em)
 	fz_always(ctx)
 	{
 		restore_warnings(ctx, &saved);
+		fz_drop_buffer(ctx, local_buffer);
 	}
 	fz_catch(ctx)
 	{
