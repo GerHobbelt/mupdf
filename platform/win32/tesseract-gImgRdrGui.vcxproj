@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>tesseract-gImgRdrGui</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA74CF0}</ProjectGuid>
+    <RootNamespace>tesseract-gImgRdrGui</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TESSERACT_GIMGRDRGUI;TESSERACT_GIMGRDRGUI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/common/CCITTFax4Encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/common/PaperSize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Acquirer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/ConfigSettings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/CrashHandler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/DisplayRenderer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Displayer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/DisplayerToolSelect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/DjVuDocument.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/FileDialogs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/FileTreeModel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/FontComboBox.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/MainWindow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/OutputBuffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/OutputEditorText.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/RecognitionMenu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Recognizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/SearchReplaceFrame.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/SourceManager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/SubstitutionsManager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/TessdataManager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/DisplayerToolHOCR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRBatchExportDialog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRDocument.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCROdtExporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRPdfExportWidget.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRPdfExporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRSpellChecker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRTextExporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/OutputEditorHOCR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/XmlUtils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/wip_proofreadwidget/HOCRProofReadWidget.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/scanner/ScannerSane.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/scanner/ScannerTwain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Acquirer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/ConfigSettings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/CrashHandler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/DisplayRenderer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Displayer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/DisplayerToolSelect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/DjVuDocument.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/FileDialogs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/FileTreeModel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/MainWindow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/OutputEditor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/OutputEditorText.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/OutputTextEdit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/RecognitionMenu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Recognizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Scanner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/SearchReplaceFrame.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/SourceManager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/SubstitutionsManager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/TessdataManager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/DisplayerToolHOCR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRBatchExportDialog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRDocument.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCROdtExporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRPdfExportWidget.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRPdfExporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRProofReadWidget.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRSpellChecker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRTextExporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/OutputEditorHOCR.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/scanner/ScannerSane.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/scanner/ScannerTwain.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/common/CCITTFax4Encoder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/common/LangTables.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/common/PaperSize.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Acquirer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Application.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Config.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/ConfigSettings.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/CrashHandler.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/DisplayRenderer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Displayer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/DisplayerToolSelect.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/DjVuDocument.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/FileDialogs.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/FileTreeModel.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/FontComboBox.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Geometry.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Image.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/MainWindow.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/OutputBuffer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/OutputEditor.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/OutputEditorText.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/RecognitionMenu.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Recognizer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Scanner.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/SearchReplaceFrame.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/SourceManager.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/SubstitutionsManager.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/TessdataManager.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/Utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/common.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/DisplayerToolHOCR.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRBatchExportDialog.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRDocument.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCROdtExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRPdfExportWidget.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRPdfExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRSpellChecker.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/HOCRTextExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/OutputEditorHOCR.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/XmlUtils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/hocr/wip_proofreadwidget/HOCRProofReadWidget.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/scanner/ScannerSane.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/src/scanner/ScannerTwain.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Acquirer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Config.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/ConfigSettings.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/CrashHandler.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/DisplayRenderer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Displayer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/DisplayerToolSelect.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/DjVuDocument.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/FileDialogs.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/FileTreeModel.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/MainWindow.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/OutputEditor.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/OutputEditorText.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/OutputTextEdit.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/RecognitionMenu.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Recognizer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Scanner.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/SearchReplaceFrame.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/SourceManager.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/SubstitutionsManager.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/TessdataManager.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Ui_MainWindow.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Ui_OutputEditorText.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/Utils.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/common.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/DisplayerToolHOCR.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRBatchExportDialog.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRDocument.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCROdtExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRPdfExportWidget.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRPdfExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRProofReadWidget.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRSpellChecker.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/HOCRTextExporter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/OutputEditorHOCR.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/hocr/Ui_OutputEditorHOCR.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/scanner/ScannerSane.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/src/scanner/ScannerTwain.hh" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/128x128/gimagereader.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/256x256/gimagereader.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/48x48/gimagereader.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/angle.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/autolayout.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/brightness.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/collapse.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/contrast.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/controls.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/expand.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/filtering.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/ins_append.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/ins_cursor.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/ins_hocr_append.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/ins_hocr_before.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/ins_hocr_replace.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/ins_replace.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/item_block.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/item_halftone.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/item_line.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/item_page.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/item_par.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/item_word.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/landscape.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/page.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/portrait.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/proofread.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/resolution.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/rotate_page.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/rotate_pages.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/select.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/stripcrlf.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/thumbnail.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/icons/wconf.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/img/gimagereader.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gimagereader.ico" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/action-unavailable-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/document-new-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/document-open-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/document-print-preview-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/document-save-as-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/document-save-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/edit-clear-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/edit-copy-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/edit-delete-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/edit-find-replace-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/edit-paste-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/edit-redo-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/edit-undo-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/error-correct-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/focus-windows-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/go-down-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/go-up-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/insert-text-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/list-add-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/list-remove-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/object-rotate-left-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/object-rotate-right-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/object-select-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/pan-down-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/pan-end-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/pan-start-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/pan-up-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/tab-new-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/view-refresh-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/window-close-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/window-maximize-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/window-minimize-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/window-restore-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/zoom-fit-best-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/zoom-in-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/zoom-original-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/actions/zoom-out-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/apps/help-contents-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/apps/text-editor-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/categories/applications-system-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/devices/camera-photo-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/devices/scanner-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/mimetypes/x-office-document-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/places/user-trash-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/status/dialog-error-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/status/dialog-information-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/status/dialog-question-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/status/dialog-warning-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/status/folder-open-symbolic.symbolic.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gtk_skel/share/icons/hicolor/16x16/status/image-missing.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/dialog-cancel.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/dialog-close.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/dialog-ok.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-edit.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-export.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-open-recent.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-open.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-preview.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-properties.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-save-as.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/document-save.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/edit-clear.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/edit-copy.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/edit-delete.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/edit-find-replace.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/edit-paste.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/edit-redo.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/edit-undo.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/go-down.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/go-up.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/help-about.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/help-contents.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/help-hint.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/insert-image.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/insert-text.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/list-add.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/list-remove.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/object-order-front.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/object-rotate-left.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/object-rotate-right.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/view-refresh.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/window-close.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/zoom-fit-best.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/zoom-in.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/zoom-original.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/actions/zoom-out.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/apps/accessories-text-editor.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/categories/applications-education-language.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/categories/preferences-system.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/devices/camera-photo.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/devices/scanner.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/emblems/emblem-important.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/mimetypes/application-pdf.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/mimetypes/text-plain.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/mimetypes/x-office-document.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/16x16/places/user-trash.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/dialog-cancel.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/dialog-close.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/dialog-ok.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-edit.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-export.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-open-recent.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-open.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-preview.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-properties.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-save-as.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/document-save.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/edit-clear.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/edit-copy.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/edit-delete.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/edit-find-replace.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/edit-paste.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/edit-redo.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/edit-undo.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/go-down.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/go-up.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/help-about.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/help-contents.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/help-hint.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/insert-image.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/insert-text.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/list-add.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/list-remove.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/object-rotate-left.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/object-rotate-right.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/view-refresh.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/window-close.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/zoom-fit-best.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/zoom-in.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/zoom-original.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/actions/zoom-out.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/apps/accessories-text-editor.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/categories/applications-education-language.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/categories/preferences-system.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/devices/camera-photo.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/devices/scanner.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/emblems/emblem-important.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/mimetypes/application-pdf.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/mimetypes/text-plain.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/mimetypes/x-office-document.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/icons/hicolor/22x22/places/user-trash.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/application-pdf.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/applications-education-language.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/dialog-cancel.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/dialog-close.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/dialog-ok.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/document-edit.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/document-export.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/document-preview.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/folder-open.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/help-hint.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/object-order-front.png" />
+    <Image Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/qt/data/extra-theme-icons/text-plain.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/gimagereader-icon.rc" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/README_docs.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/gimagereader.appdata.xml.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/gimagereader.desktop.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/manual-cs.html.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/manual-ru.html.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/data/manual.html.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/1_Installation.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/1_Installation.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/1_Installation.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/2_Usage.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/2_Usage.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/2_Usage.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/3_Add_language.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/3_Add_language.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/3_Add_language.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/4_Add_dictionary.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/4_Add_dictionary.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/4_Add_dictionary.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/5_Options.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/5_Options.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/5_Options.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/6_Contribute.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/6_Contribute.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/6_Contribute.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/7_Translate.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/7_Translate.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/7_Translate.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/8_Issue_tracker.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/8_Issue_tracker.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/8_Issue_tracker.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/FAQ.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/FAQ.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/News.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/News.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/News.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/index.he.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/docs/index.sl.md" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/formatSourceFiles.sh" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/data/uigen.py" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/debian/changelog.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/gimagereader.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/copyicons.sh" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/makeinstaller.sh" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/mingwdeps.sh" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/myspell/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/packaging/win32/skel/share/tessdata/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/updateTranslations.sh" />
+    <Xml Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/data/gimagereader.gresource.xml" />
+    <Xml Include="../../thirdparty/owemdjee/tesseract-gImgRdrGui/gtk/data/org.gnome.gimagereader.gschema.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
