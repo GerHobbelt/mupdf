@@ -1,65 +1,48 @@
 #!/bin/bash
 
 REV=$(git describe --tags)
-O=mupdf-$REV-source
+STEM=mupdf-$REV-source
 
-echo git archive $O.tar
-git archive --format=tar --prefix=$O/ HEAD > $O.tar
+echo git archive $STEM.tar
+git archive --format=tar --prefix=$STEM/ -o $STEM.tar HEAD
 
-git submodule | while read R P T
-do
-	M=$(basename $P)
-	echo git archive $O.$M.tar
+rm -f submodule*.tar
 
-	# Remove bloat from bundled thirdparty libraries.
-	case $M in
-	harfbuzz)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD \
-			| tar --wildcards --delete '*/test/*' \
-			> $O.$M.tar
-		;;
-	leptonica)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD \
-			| tar --wildcards --delete '*/prog/*' \
-			> $O.$M.tar
-		;;
-	gumbo-parser)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD \
-			| tar --wildcards --delete '*/benchmarks/*' \
-			> $O.$M.tar
-		;;
-	zlib)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD \
-			| tar --wildcards --delete '*/contrib/*' \
-			> $O.$M.tar
-		;;
-	lcms2)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD \
-			| tar --wildcards --delete '*/testbed/*' --delete '*/plugins/*' \
-			> $O.$M.tar
-		;;
-	extract)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD \
-			| tar --wildcards --delete '*/test/*' \
-			> $O.$M.tar
-		;;
-	curl)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD \
-			| tar --wildcards --delete '*/tests/*' \
-			> $O.$M.tar
-		;;
-	*)
-		git archive --format=tar --remote=$P --prefix=$O/$P/ HEAD > $O.$M.tar
-		;;
-	esac
+AUTOCONF="*/configure */autogen.sh */aclocal.m4 */ltmain.sh */m4"
 
-	tar Af $O.tar $O.$M.tar
-	rm -f $O.$M.tar
-done
+function make_submodule_archive {
+	# Make tarballs for submodules, stripped of unneccessary files.
+	echo git archive submodule-$1.tar
+	git archive --format=tar --remote=thirdparty/$1 --prefix=$STEM/thirdparty/$1/ -o submodule-$1.tar HEAD
+	tar f submodule-$1.tar --wildcards --delete $AUTOCONF 2>/dev/null
+	for DIR in $2
+	do
+		tar f submodule-$1.tar --wildcards --delete "*/$DIR"
+	done
+	tar Af $STEM.tar submodule-$1.tar
+	#rm -f submodule-$1.tar
+}
 
-echo gzip $O.tar
-pigz -f -k -11 $O.tar
-echo lzip $O.tar
-plzip -9 -f -k $O.tar
-echo zstd $O.tar
-zstd -q -T0 -19 -f -k $O.tar
+make_submodule_archive curl "tests src scripts winbuild plan9 packages projects"
+make_submodule_archive extract "test"
+make_submodule_archive freeglut "android blackberry progs"
+make_submodule_archive freetype "builds subprojects tests"
+make_submodule_archive gumbo-parser "benchmarks examples python tests visualc"
+make_submodule_archive harfbuzz "test perf util subprojects"
+make_submodule_archive jbig2dec
+make_submodule_archive lcms2 "Lib Projects plugins testbed utils"
+make_submodule_archive leptonica "prog"
+make_submodule_archive libjpeg "libjpeg/test* libjpeg/make*"
+make_submodule_archive mujs
+make_submodule_archive openjpeg
+make_submodule_archive tesseract "java tessdata unittest src/training"
+make_submodule_archive zlib "amiga contrib examples msdos nintendods old os400 qnx test watcom win32"
+
+# Most common
+echo gzip $STEM.tar
+gzip -f -k -9 $STEM.tar
+#pigz -f -k -11 $STEM.tar
+
+# Smallest size
+echo lzip $STEM.tar
+plzip -9 -f -k $STEM.tar
