@@ -250,6 +250,16 @@ char *fz_realpath(const char *path, char *buf)
 	for (i=0; buf[i]; ++i)
 		if (buf[i] == '\\')
 			buf[i] = '/';
+	// remove the trailing '/' when it is superfluous; GetFullPathNameW() doesn't do that.
+	size_t len = strlen(buf);
+	if (len > 1 && buf[len - 1] == '/')
+	{
+		// superfluous when it's not part of a UNC //?/ prefix, and not preceded by a drive letter.
+		if (buf[len - 2] != ':' && buf[len - 2] != '?')
+		{
+			buf[len - 1] = 0;
+		}
+	}
 	return buf;
 }
 
@@ -257,7 +267,21 @@ char *fz_realpath(const char *path, char *buf)
 
 char *fz_realpath(const char *path, char *buf)
 {
-	return realpath(path, buf);
+	if (!realpath(path, buf))
+		return NULL;
+
+	// remove the trailing '/' when it is superfluous; realpath() doesn't do that.
+	size_t len = strlen(buf);
+	if (len > 1 && buf[len - 1] == '/')
+	{
+		// superfluous when it's not part of a UNC //?/ prefix, and not the root directory;
+		// the latter is impossible because len >= 2 when we get here: .
+		if (buf[len - 2] != ':' && buf[len - 2] != '?')
+		{
+			buf[len - 1] = 0;
+		}
+	}
+	return buf;
 }
 
 #endif
