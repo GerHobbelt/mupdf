@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,7 +120,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -132,14 +132,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libq/libs/p/include;../../thirdparty/owemdjee/libq/libs/q/include;../../thirdparty/owemdjee/libq/libs/q-test/include;./../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libq/libs/p/include;../../thirdparty/owemdjee/libq/libs/q/include;../../thirdparty/owemdjee/libq/libs/q-test/include;./../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -166,7 +166,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -187,14 +187,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libq/libs/p/include;../../thirdparty/owemdjee/libq/libs/q/include;../../thirdparty/owemdjee/libq/libs/q-test/include;./../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libq/libs/p/include;../../thirdparty/owemdjee/libq/libs/q/include;../../thirdparty/owemdjee/libq/libs/q-test/include;./../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -221,7 +221,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQ;Q_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -234,75 +234,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/codegear/gtest_all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/codegear/gtest_link.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample10_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample1_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample2_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample3_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample4.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample4_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample5_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample6_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample7_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample8_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample9_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-death-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-filepath.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-port.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-printers.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-test-part.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-typed-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-death-test_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-death-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-filepath_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-linked_ptr_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-listener_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-message_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-options_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-param-test2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-param-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-port_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-printers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-test-part_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-tuple_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-typed-test2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-typed-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-unittest-api_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_all_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_break_on_failure_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_catch_exceptions_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_color_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_env_var_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_environment_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_filter_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_help_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_list_tests_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_main_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_no_test_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_output_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_pred_impl_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_premature_exit_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_prod_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_repeat_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_shuffle_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_sole_header_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_stress_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_throw_on_failure_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_throw_on_failure_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_uninitialized_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_outfile1_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_outfile2_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest_xml_output_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/production.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Samples/FrameworkSample/widget.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Samples/FrameworkSample/widget_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/libq/libs/p/src/env.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libq/libs/p/src/process.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libq/libs/q-test/src/dummy.cpp" />
@@ -365,40 +296,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/promises.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/expect/spy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libq/tests/qtest/src/main.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-death-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-message.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-param-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-spi.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-test-part.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest-typed-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest_pred_impl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/gtest_prod.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/custom/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/custom/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/custom/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-death-test-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-filepath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-linked_ptr.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-param-util-generated.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-param-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-port-arch.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-tuple.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/include/gtest/internal/gtest-type-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/prime_tables.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample1.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample3-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/samples/sample4.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/src/gtest-internal-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-param-test_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/gtest-typed-test_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/test/production.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libq/3rdparty/gtest-1.8.0/xcode/Samples/FrameworkSample/widget.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/env.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/klv.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libq/libs/p/include/p/pp.hpp" />
@@ -563,8 +460,7 @@
     <Text Include="../../thirdparty/owemdjee/libq/tests/q/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libq/tests/qtest/CMakeLists.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
