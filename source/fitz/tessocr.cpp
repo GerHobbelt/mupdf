@@ -1,4 +1,6 @@
 #include "mupdf/fitz/config.h"
+#include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #ifndef OCR_DISABLED
 
@@ -14,6 +16,9 @@
 #include "tesseract/baseapi.h"
 #include "tesseract/capi.h"          // for ETEXT_DESC
 
+#define DEBUG_ALLOCS   1
+
+
 extern "C" {
 
 #include "allheaders.h"
@@ -24,12 +29,15 @@ extern "C" {
  * we have to use a nasty global here. */
 static fz_context *leptonica_mem = NULL;
 
+#ifdef DEBUG_ALLOCS
+static int event = 0;
+#endif
+
 void *leptonica_malloc(size_t size)
 {
 	void *ret = Memento_label(fz_malloc_no_throw(leptonica_mem, size), "leptonica_malloc");
 #ifdef DEBUG_ALLOCS
-	fz_error(NULL, "%d LEPTONICA_MALLOC(%p) %d -> %p\n", event++, leptonica_mem, (int)size, ret);
-	fflush(stderr);
+	fz_error(leptonica_mem, "%d LEPTONICA_MALLOC(%p) %d -> %p\n", event++, leptonica_mem, (int)size, ret);
 #endif
 	return ret;
 }
@@ -37,8 +45,7 @@ void *leptonica_malloc(size_t size)
 void leptonica_free(void *ptr)
 {
 #ifdef DEBUG_ALLOCS
-	fz_error("%d LEPTONICA_FREE(%p) %p\n", event++, leptonica_mem, ptr);
-	fflush(stderr);
+	fz_error(leptonica_mem, "%d LEPTONICA_FREE(%p) %p\n", event++, leptonica_mem, ptr);
 #endif
 	fz_free(leptonica_mem, ptr);
 }
@@ -50,8 +57,7 @@ void *leptonica_calloc(size_t numelm, size_t elemsize)
 	if (ret)
 		memset(ret, 0, numelm * elemsize);
 #ifdef DEBUG_ALLOCS
-	fz_error("%d LEPTONICA_CALLOC %d,%d -> %p\n", event++, (int)numelm, (int)elemsize, ret);
-	fflush(stderr);
+	fz_error(leptonica_mem, "%d LEPTONICA_CALLOC %d,%d -> %p\n", event++, (int)numelm, (int)elemsize, ret);
 #endif
 	return ret;
 }
@@ -62,8 +68,7 @@ void *leptonica_realloc(void *ptr, size_t blocksize)
 	void *ret = fz_realloc_no_throw(leptonica_mem, ptr, blocksize);
 
 #ifdef DEBUG_ALLOCS
-	fz_error("%d LEPTONICA_REALLOC %p,%d -> %p\n", event++, ptr, (int)blocksize, ret);
-	fflush(stderr);
+	fz_error(leptonica_mem, "%d LEPTONICA_REALLOC %p,%d -> %p\n", event++, ptr, (int)blocksize, ret);
 #endif
 	return ret;
 }
@@ -74,7 +79,7 @@ static bool
 load_file(const char* filename, std::vector<char>* data)
 {
 	bool result = false;
-	FILE *fp = fopen(filename, "rb");
+	FILE *fp = fz_fopen_utf8(leptonica_mem, filename, "rb");
 	if (fp == NULL)
 		return false;
 
@@ -112,7 +117,7 @@ static bool
 load_file(const char* filename, GenericVector<char>* data)
 {
 	bool result = false;
-	FILE *fp = fopen(filename, "rb");
+	FILE *fp = fz_fopen_utf8(ctx, filename, "rb");
 	if (fp == NULL)
 		return false;
 
