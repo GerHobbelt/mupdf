@@ -627,11 +627,9 @@ static void map_path_to_dest(char* dst, size_t dstsiz, const char* inpath)
 		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
 		size_t common_prefix_length = prefix_end - common_prefix;
 		char* remaining_inpath_part = srcpath + common_prefix_length;
-#if 0
-		for (char* p = remaining_inpath_part; *p; p++)
-			if (strchr(":?", *p))
-				*p = '_';
-#endif
+		// skip leading '/' separators in remaining_inpath_part as they will only clutter the output
+		while (*remaining_inpath_part == '/')
+			remaining_inpath_part++;
 
 		char appendedpath[PATH_MAX];
 		int rv = fz_snprintf(appendedpath, sizeof(appendedpath), "%s/%s%s", output_path_mapping_spec.abs_target_path, dotdot, remaining_inpath_part);
@@ -838,7 +836,8 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 				if (!delim_pos)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "missing end delimiter: %remap template function expects at brace-delimited argument. Faulty line snippet: %q (as part of %q)", s, arg);
 				char remap_arg[PATH_MAX];
-				fz_strncpy_s(ctx, remap_arg, s, fz_mini(delim_pos - s, sizeof(remap_arg)));
+				// amount to copy: (delim_pos - s) chars, +1 for the enforced NUL sentinel:
+				fz_strncpy_s(ctx, remap_arg, s, fz_mini((delim_pos - s) + 1, sizeof(remap_arg)));
 				// %remap itself should also be terminated when it was written as "%{remap":
 				if (m[0] == '{')
 				{
@@ -1845,12 +1844,49 @@ bulktest_main(int argc, const char **argv)
 				close_active_logfile();
 
 				map_path_to_dest(scriptname, sizeof(scriptname), p);
+				// extra: we want all bulktest logfiles to be dumped straight into the remap target path, if remapping was turned on.
+				// in that case, we want the entire remapped path to be visible in the logfile name, so we can easily match
+				// logfiles to target path subtrees (and the generated output files there-in).
+				//
+				// As we are guaranteed to now have a path pointing INSIDE the target base path, we can simply use length of
+				// base path as the starting point for this next transformation:
+				if (output_path_mapping_spec.abs_target_path[0])
+				{
+					size_t offset = strlen(output_path_mapping_spec.abs_target_path);
 
+					// replace all '/' with '.' to produce a filename representing the mapped path yet will be dumped in the base dir itself for quick & easy access:
+					char* p = scriptname + offset;
+					ASSERT(*p == '/');
+					p = strchr(p + 1, '/');
+					while (p)
+					{
+						*p = '.';
+						p = strchr(p + 1, '/');
+					}
+				}
+					
 				open_logfile(scriptname);
 
 				if (random_exec_perunage < 1.0)
 				{
 					fz_info(ctx, "bulktest: using random_exec_percentage: %.1f%%\n", random_exec_perunage * 100);
+				}
+
+				// report test run restrictions to every logfile we produce:
+				if (match_regex || ignore_match_regex || match_test_numbers_ranges || ignore_match_test_numbers_ranges)
+				{
+					char numbuf1[LONGLINE];
+					char numbuf2[LONGLINE];
+					fz_info(ctx, "Using a RESTRICTED DATA SET:\n"
+						"- ACCEPT: regex: %s\n"
+						"          line numbers: %s\n"
+						"- IGNORE: regex: %s\n"
+						"          line numbers: %s\n"
+						"-----------------------------------------------------------------------------------\n\n\n",
+						match_regex2str(match_regex),
+						rangespec2str(numbuf1, sizeof(numbuf1), match_test_numbers_ranges),
+						match_regex2str(ignore_match_regex),
+						rangespec2str(numbuf2, sizeof(numbuf2), ignore_match_test_numbers_ranges));
 				}
 
 				if (!fz_realpath(p, scriptname))
@@ -2296,6 +2332,14 @@ bulktest_main(int argc, const char **argv)
 						struct curltime now = Curl_now();
 						timediff_t diff = Curl_timediff(now, begin_time);
 						fz_info(ctx, ">L#%05u> T:%dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+						if (diff >= 2000)
+						{
+							fz_info(ctx, ">L#%05u> T:%dms **NOTICABLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, (rv ? "ERR" : "OK"), line_command);
+							if (diff >= 30000)
+							{
+								fz_info(ctx, ">L#%05u> T:%dms **LETHARGICALLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, (rv ? "ERR" : "OK"), line_command);
+							}
+						}
 
 						if (showtime)
 						{
