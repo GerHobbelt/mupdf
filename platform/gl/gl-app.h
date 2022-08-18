@@ -30,12 +30,14 @@
 #endif
 #include <crtdbg.h>
 #endif
+#include <winsock2.h>  // prevent windows.h from loading winsock.h and causing compile-time havoc due to a zillion redefinition warnings
 #include <windows.h>
 
 void win_install(void);
 #endif
 
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 #include "mupdf/ucdn.h"
 #include "mupdf/pdf.h" /* for pdf specifics and forms */
 
