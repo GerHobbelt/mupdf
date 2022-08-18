@@ -837,9 +837,8 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 		d = wcschr(d + 1, '\\'); // first path level
 	if (d == NULL)
 	{
-		free(wname);
-		errno = ENOMEM;
-		return -1;
+		// apparently, there's only one directory name above the drive letter specified. We still need to mkdir that one, though.
+		d = q + wcslen(q);
 	}
 
 	for(;;)
@@ -919,9 +918,8 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 	char* d = strchr(p, '/'); // drive rootdir
 	if (d == NULL)
 	{
-		// file directly in root directory of the system is ok (but otherwise questionable...?!)
-		free(pname);
-		return 0;
+		// apparently, there's only one directory name above the drive letter specified. We still need to mkdir that one, though.
+		d = p + strlen(p);
 	}
 
 	for (;;)
