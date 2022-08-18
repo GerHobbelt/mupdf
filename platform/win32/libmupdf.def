@@ -4,8 +4,6 @@ LIBRARY MuPDFLib
 
 EXPORTS
 
-	fz_set_output_buffer
-
 ; MuPDF tool exports
 
 	cmapdump_main
@@ -197,11 +195,18 @@ EXPORTS
 ; helpers exports
 
 	fz_get_cpu_core_count
+	fzPopHeapDbgPurpose
+	fzPushHeapDbgPurpose
 	fz_chdir
+	fz_fopen_utf8
 	fz_mkdir_for_file
+	fz_mkdirp_utf8
 	fz_normalize_path
+	fz_remove_utf8
 	fz_sanitize_path
 	fz_sanitize_path_ex
+	fz_stat_ctime
+	fz_stat_mtime
 
 	mu_create_mutex
 	mu_create_semaphore
@@ -210,9 +215,11 @@ EXPORTS
 	mu_destroy_semaphore
 	mu_destroy_thread
 	mu_lock_mutex
+	mu_mutex_is_zeroed
 	mu_trigger_semaphore
 	mu_unlock_mutex
 	mu_wait_semaphore
+	mu_zero_mutex
 
 ; Fitz Documents exports
 
@@ -457,6 +464,7 @@ EXPORTS
 	fz_open_image_decomp_stream_from_buffer
 	fz_recognize_image_format
 
+	__fz_get_RAW_global_context
 	fz_aa_level
 	fz_calloc
 	fz_calloc_no_throw
@@ -484,7 +492,6 @@ EXPORTS
 	fz_free
 	fz_get_error_callback
 	fz_get_global_context
-	__fz_get_RAW_global_context
 	fz_get_info_callback
 	fz_get_warning_callback
 	fz_graphics_aa_level
@@ -824,6 +831,7 @@ EXPORTS
 	fz_close_output
 	fz_drop_output
 	fz_flush_output
+	fz_flush_output_no_lock
 	fz_format_string
 	fz_new_arc4_output
 	fz_new_ascii85_output
@@ -836,6 +844,7 @@ EXPORTS
 	fz_output_supports_stream
 	fz_save_buffer
 	fz_seek_output
+	fz_set_output_buffer
 	fz_set_stddbg
 	fz_snprintf
 	fz_stddbg
@@ -850,6 +859,7 @@ EXPORTS
 	fz_write_base64_buffer
 	fz_write_buffer
 	fz_write_byte
+	fz_write_byte_no_lock
 	fz_write_char
 	fz_write_data
 	fz_write_float_be
@@ -1019,6 +1029,7 @@ EXPORTS
 	fz_skip_space
 	fz_skip_string
 	fz_tell
+	fz_basename
 	fz_chartorune
 	fz_chartorune_unsafe
 	fz_cleanname
@@ -1040,6 +1051,7 @@ EXPORTS
 	fz_strlcat
 	fz_strlcpy
 	fz_strncasecmp
+	fz_strncpy_s
 	fz_strnlen
 	fz_strrcspn
 	fz_strsep
@@ -1079,11 +1091,7 @@ EXPORTS
 	fz_set_stext_options_images_handler
 	fz_snap_selection
 	fz_argv_from_wargv
-	fz_fopen_utf8
 	fz_free_argv
-	fz_remove_utf8
-	fz_stat_ctime
-	fz_stat_mtime
 	fz_utf8_from_wchar
 	fz_wchar_from_utf8
 	fz_bound_text
@@ -1321,6 +1329,7 @@ EXPORTS
 	pdf_annot_ink_list_stroke_vertex
 	pdf_annot_interior_color
 	pdf_annot_is_open
+	pdf_annot_is_standard_stamp
 	pdf_annot_language
 	pdf_annot_line
 	pdf_annot_line_end_style
@@ -1424,6 +1433,7 @@ EXPORTS
 	pdf_set_annot_quadding
 	pdf_set_annot_rect
 	pdf_set_annot_resynthesised
+	pdf_set_annot_stamp_image
 	pdf_set_annot_vertex
 	pdf_set_annot_vertices
 	pdf_set_widget_editing_state
@@ -2644,6 +2654,7 @@ EXPORTS
 	TIFFGetVersion
 	TIFFGetWriteProc
 	TIFFIsBigEndian
+	TIFFIsBigTIFF
 	TIFFIsByteSwapped
 	TIFFIsCODECConfigured
 	TIFFIsMSB2LSB
@@ -3338,8 +3349,10 @@ EXPORTS
 	js_instanceof
 	js_isarray
 	js_isboolean
+	js_isbooleanobject
 	js_iscallable
 	js_iscoercible
+	js_isdateobject
 	js_isdefined
 	js_iserror
 	js_isnull
