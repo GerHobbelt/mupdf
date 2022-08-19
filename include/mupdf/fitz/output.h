@@ -148,8 +148,9 @@ struct fz_secondary_outputs
 typedef enum fz_output_flags
 {
 	FZOF_NONE = 0,
-	FZOF_IS_INSIDE_LOCK = 0x0001,
-	FZOF_IS_INSIDE_PRINTF_LOCK = 0x0002
+	FZOF_HAS_LOCKS = 0x0001,
+	FZOF_IS_INSIDE_LOCK = 0x0002,
+	FZOF_IS_INSIDE_PRINTF_LOCK = 0x0004
 } fz_output_flags_t;
 
 struct fz_output
