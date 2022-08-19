@@ -46,6 +46,12 @@ fz_get_option(fz_context *ctx, const char **key, const char **val, const char *o
 		while (*opts != 0 && *opts != ',')
 			++opts;
 	}
+	else if (strncmp(*key, "no-", 3) == 0 && key[3] != 0)
+	{
+		// support 'no-<key>' as equivalent to '<key>=no':
+		*val = "no";
+		*key += 3;
+	}
 	else
 	{
 		*val = "yes";

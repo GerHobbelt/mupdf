@@ -108,8 +108,8 @@ fz_new_svg_writer(fz_context *ctx, const char *path, const char *args)
 			else if (fz_option_eq(val, "path"))
 				wri->text_format = FZ_SVG_TEXT_AS_PATH;
 		}
-		if (fz_has_option(ctx, args, "no-reuse-images", &val))
-			if (fz_option_eq(val, "yes"))
+		if (fz_has_option(ctx, args, "reuse-images", &val))
+			if (fz_option_eq(val, "no"))
 				wri->reuse_images = 0;
 		wri->path = fz_strdup(ctx, path ? path : "out-%04d.svg");
 	}
