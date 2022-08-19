@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -141,8 +141,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\writer.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\xml.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\zip.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\base58\base58X.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\cpu_core_count.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\dir.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\fz_assert.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\heap_debugging.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\html\css-apply.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\html\css-parse.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\html\epub-doc.c" />
@@ -316,6 +319,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\fitz\ucdn_db.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\fitz\unicodedata_db.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\fitz\z-imp.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\helpers\base58\base58X.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\pdf\annotation-icons.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\pdf\pdf-annot-imp.h" />
   </ItemGroup>

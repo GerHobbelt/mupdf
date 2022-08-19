@@ -167,6 +167,8 @@ EXPORTS
 	fz_report_failed_assertion
 	fz_report_failed_assertion_and_continue
 
+	jbig2_set_error_log_prefilter_level
+
 %(fitz_exports)s
 
 ; MuPDF exports
@@ -294,7 +296,7 @@ def main():
 	more_formats = []
 	form_exports = []
 	misc_exports = ["fz_valgrind_pixmap", "track_usage", "fz_error_print_callback"]
-	sign_exports = []
+	sign_exports = ["from"]
 	pkcs7_ignores = ["pkcs7_openssl_check_digest", "pkcs7_openssl_check_certificate", "pkcs7_openssl_distinguished_name"]
 	office_exports = collectExports("include/mupdf/helpers/mu-office-lib.h")
 

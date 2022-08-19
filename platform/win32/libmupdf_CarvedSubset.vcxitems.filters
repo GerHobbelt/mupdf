@@ -40,6 +40,9 @@
     <Filter Include="ocr">
       <UniqueIdentifier>{c4b05fdf-53b9-489f-9af4-cb076b2e2887}</UniqueIdentifier>
     </Filter>
+    <Filter Include="helpers">
+      <UniqueIdentifier>{8ced4c3a-486b-4862-8589-4b808d083114}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\cbz\mucbz.c">
@@ -630,7 +633,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\statistics-device.c">
       <Filter>fitz</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\output-pdfocr.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\output-muraw.c">
       <Filter>fitz</Filter>
     </ClCompile>
@@ -642,6 +644,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\pdf\pdf-op-mcid.c">
       <Filter>pdf</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\output-pdfocr.c">
+      <Filter>ocr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\fz_assert.c">
+      <Filter>helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\heap_debugging.cpp">
+      <Filter>helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\helpers\base58\base58X.c">
+      <Filter>helpers</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\source\fitz\output-pdfocr.c">
       <Filter>ocr</Filter>
@@ -933,9 +947,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\include\mupdf\fitz\display-statistics.h">
       <Filter>!include\fitz</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\include\mupdf\pdf\layer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\fitz\html-tags.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\fitz\unicodedata_db.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\include\mupdf\fitz\export.h">
       <Filter>!include\fitz</Filter>
     </ClInclude>
@@ -944,6 +955,18 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\include\mupdf\helpers\debugheap.h">
       <Filter>!include\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\helpers\base58\base58X.h">
+      <Filter>helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\fitz\unicodedata_db.h">
+      <Filter>fitz</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\include\mupdf\pdf\layer.h">
+      <Filter>pdf</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\source\fitz\html-tags.h">
+      <Filter>fitz</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

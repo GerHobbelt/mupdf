@@ -16,6 +16,8 @@
 #include "mupdf/helpers/mu-threads.h"
 #endif
 
+#include "jbig2.h"
+
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -1776,6 +1778,9 @@ bulktest_main(int argc, const char **argv)
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
+
+	// shut up JBig2Dec (which can be very verbose) unless we've dialed up our own verbosity levels:
+	jbig2_set_error_log_prefilter_level(JBIG2_SEVERITY_FATAL - verbosity);
 
 	if (!getcwd(output_path_mapping_spec.abs_cwd_as_mapping_source, sizeof(output_path_mapping_spec.abs_cwd_as_mapping_source)))
 	{
