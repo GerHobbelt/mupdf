@@ -1996,6 +1996,35 @@ bulktest_main(int argc, const char **argv)
 					fz_free_argv_array(ctx, argv);
 					argv = NULL;
 					argc = 0;
+
+					// ignore comments.
+					//
+					// comments start with '% ' (note the extra ' ' SPACE char in there!), '# ' or '// '
+					for (char* comment_start = strpbrk(line, "%#/"); comment_start; comment_start = strpbrk(comment_start + 1, "%#/"))
+					{
+						switch (comment_start[0])
+						{
+						case '%':
+						case '#':
+							// accept on line by itself, i.e. followed by NUL, otherwise we require a whitespace to follow it, for otherwise it could be a script macro or other important bit!
+							if (!comment_start[1] || isspace(comment_start[1]))
+							{
+								comment_start[0] = 0;
+								comment_start[1] = 0;
+							}
+							break;
+
+						case '/':
+							// no additional whitespace after required...
+							if (comment_start[1] == '/')
+							{
+								comment_start[0] = 0;
+								comment_start[1] = 0;
+							}
+							break;
+						}
+					}
+
 					convert_string_to_argv(ctx, &argv, &argc, line, 0);
 
 					// skip empty lines
