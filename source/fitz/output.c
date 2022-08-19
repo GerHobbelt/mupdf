@@ -44,31 +44,43 @@
 static inline void
 fzoutput_lock(fz_output* out)
 {
-	mu_lock_mutex(&out->buf_mutex);
-	out->flags |= FZOF_IS_INSIDE_LOCK;
+	if (out->flags & FZOF_HAS_LOCKS)
+	{
+		mu_lock_mutex(&out->buf_mutex);
+		out->flags |= FZOF_IS_INSIDE_LOCK;
+	}
 }
 
 static inline void
 fzoutput_unlock(fz_output* out)
 {
-	ASSERT(out->flags & FZOF_IS_INSIDE_LOCK);
-	out->flags &= ~FZOF_IS_INSIDE_LOCK;
-	mu_unlock_mutex(&out->buf_mutex);
+	if (out->flags & FZOF_HAS_LOCKS)
+	{
+		ASSERT(out->flags & FZOF_IS_INSIDE_LOCK);
+		out->flags &= ~FZOF_IS_INSIDE_LOCK;
+		mu_unlock_mutex(&out->buf_mutex);
+	}
 }
 
 static inline void
 printf_lock(fz_output* out)
 {
-	mu_lock_mutex(&out->printf_mutex);
-	out->flags |= FZOF_IS_INSIDE_PRINTF_LOCK;
+	if (out->flags & FZOF_HAS_LOCKS)
+	{
+		mu_lock_mutex(&out->printf_mutex);
+		out->flags |= FZOF_IS_INSIDE_PRINTF_LOCK;
+	}
 }
 
 static inline void
 printf_unlock(fz_output* out)
 {
-	ASSERT(out->flags & FZOF_IS_INSIDE_PRINTF_LOCK);
-	out->flags &= ~FZOF_IS_INSIDE_PRINTF_LOCK;
-	mu_unlock_mutex(&out->printf_mutex);
+	if (out->flags & FZOF_HAS_LOCKS)
+	{
+		ASSERT(out->flags & FZOF_IS_INSIDE_PRINTF_LOCK);
+		out->flags &= ~FZOF_IS_INSIDE_PRINTF_LOCK;
+		mu_unlock_mutex(&out->printf_mutex);
+	}
 }
 
 static void
@@ -355,6 +367,7 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 		mu_create_mutex(&out->buf_mutex);
 		mu_create_mutex(&out->printf_mutex);
 		ASSERT(out->flags == FZOF_NONE);
+		out->flags = FZOF_HAS_LOCKS;
 		ASSERT(out->bp == NULL);
 		if (bufsiz > 1)
 		{
@@ -367,8 +380,12 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 	{
 		if (drop)
 			drop(ctx, state);
-		mu_destroy_mutex(&out->printf_mutex);
-		mu_destroy_mutex(&out->buf_mutex);
+		if (out->flags & FZOF_HAS_LOCKS)
+		{
+			mu_destroy_mutex(&out->printf_mutex);
+			mu_destroy_mutex(&out->buf_mutex);
+		}
+		out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
 		fz_free(ctx, out->bp);
 		fz_free(ctx, out);
 		fz_rethrow(ctx);
@@ -391,8 +408,9 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 
 	// are we looking at an fz_output which was NOT created using the fz_new_output() API?
 	// if so, create the buffer mutex after the fact.
-	if (mu_mutex_is_zeroed(&out->buf_mutex))
+	if (!out->flags & FZOF_HAS_LOCKS)
 	{
+		ASSERT(mu_mutex_is_zeroed(&out->buf_mutex));
 		ASSERT(mu_mutex_is_zeroed(&out->printf_mutex));
 		ASSERT((out->flags & (FZOF_IS_INSIDE_LOCK | FZOF_IS_INSIDE_PRINTF_LOCK)) == 0);
 		mu_create_mutex(&out->buf_mutex);
@@ -571,22 +589,26 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 	{
 		if (out->close)
 			fz_warn(ctx, "dropping unclosed output");
-		// when we encounter a HELD LOCK, we release it before dropping it.
-		// This can (theoretically at least, we haven't observed this in practice YET) happen
-		// when custom userland code in a callback executed from inside a `fz_output` critical section
-		// throws an exception.
-		// We (**by design**) did not wrap those lock+unlock protected critical sections
-		// around here with the regular fz_try/fz_always wrappers, because we wanted to produce
-		// an *absolute minimal overhead* thread-safety net around each `fz_output` instance.
-		//
-		// Consequently, we can expect the need for cleanup here when this code is executed
-		// from a fz_catch() section anywhere in the application.
-		if (out->flags & FZOF_IS_INSIDE_PRINTF_LOCK)
-			printf_unlock(out);
-		if (out->flags & FZOF_IS_INSIDE_LOCK)
-			fzoutput_unlock(out);
-		mu_destroy_mutex(&out->printf_mutex);
-		mu_destroy_mutex(&out->buf_mutex);
+		if (out->flags & FZOF_HAS_LOCKS)
+		{
+			// when we encounter a HELD LOCK, we release it before dropping it.
+			// This can (theoretically at least, we haven't observed this in practice YET) happen
+			// when custom userland code in a callback executed from inside a `fz_output` critical section
+			// throws an exception.
+			// We (**by design**) did not wrap those lock+unlock protected critical sections
+			// around here with the regular fz_try/fz_always wrappers, because we wanted to produce
+			// an *absolute minimal overhead* thread-safety net around each `fz_output` instance.
+			//
+			// Consequently, we can expect the need for cleanup here when this code is executed
+			// from a fz_catch() section anywhere in the application.
+			if (out->flags & FZOF_IS_INSIDE_PRINTF_LOCK)
+				printf_unlock(out);
+			if (out->flags & FZOF_IS_INSIDE_LOCK)
+				fzoutput_unlock(out);
+			mu_destroy_mutex(&out->printf_mutex);
+			mu_destroy_mutex(&out->buf_mutex);
+		}
+		out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
 		if (out->drop)
 			out->drop(ctx, out->state);
 		fz_free(ctx, out->bp);
