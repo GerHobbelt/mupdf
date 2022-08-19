@@ -166,6 +166,7 @@ enum
 	PRO_MARGIN_RIGHT,
 	PRO_MARGIN_TOP,
 	PRO_ORPHANS,
+	PRO_OVERFLOW_WRAP,
 	PRO_PADDING_BOTTOM,
 	PRO_PADDING_LEFT,
 	PRO_PADDING_RIGHT,
@@ -238,6 +239,12 @@ enum {
 	LST_ARMENIAN, LST_GEORGIAN,
 };
 
+enum {
+	OVERFLOW_WRAP_NORMAL = 0,
+	OVERFLOW_WRAP_BREAK_WORD = 1
+	/* We do not support 'anywhere'. */
+};
+
 enum { N_NUMBER='u', N_LENGTH='p', N_SCALE='m', N_PERCENT='%', N_AUTO='a', N_UNDEFINED='x' };
 
 struct fz_css_number_s
@@ -271,9 +278,10 @@ struct fz_css_style_s
 	unsigned int border_style_2 : 1;
 	unsigned int border_style_3 : 1;
 	unsigned int small_caps : 1;
+	unsigned int overflow_wrap : 1;
 	/* Ensure the extra bits in the bitfield are copied
 	 * on structure copies. */
-	unsigned int blank : 6;
+	unsigned int blank : 5;
 	fz_css_number line_height;
 	fz_css_number leading;
 	fz_css_color background_color;
@@ -348,9 +356,9 @@ typedef struct {
 	fz_html_box *potential;
 } fz_html_restarter;
 
-struct fz_html_story_s
+struct fz_story_s
 {
-	/* fz_html_story is derived from fz_html_tree, so must start with */
+	/* fz_story is derived from fz_html_tree, so must start with */
 	/* that. Argubly 'tree' should be called 'super'. */
 	fz_html_tree tree;
 
@@ -381,6 +389,12 @@ struct fz_html_story_s
 
 	/* The default 'em' size. */
 	float em;
+
+	/* Collected parsing warnings. */
+	fz_buffer *warnings;
+
+	/* Rectangle layout count. */
+	int rect_count;
 };
 
 struct fz_html_box_s
@@ -506,6 +520,8 @@ fz_html *fz_store_html(fz_context *ctx, fz_html *html, void *doc, int chapter);
 fz_html *fz_find_html(fz_context *ctx, void *doc, int chapter);
 void fz_purge_stored_html(fz_context *ctx, void *doc);
 
-void fz_restartable_layout_html(fz_context *ctx, fz_html_box *box, float w, float h, float page_w, float page_h, float em, fz_html_restarter *restart);
+void fz_restartable_layout_html(fz_context *ctx, fz_html_tree *tree, float w, float h, float page_w, float page_h, float em, fz_html_restarter *restart);
+
+fz_html_flow *fz_html_split_flow(fz_context *ctx, fz_pool *pool, fz_html_flow *flow, size_t offset);
 
 #endif

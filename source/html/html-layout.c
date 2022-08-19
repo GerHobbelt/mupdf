@@ -355,6 +355,60 @@ static void measure_string(fz_context *ctx, fz_html_flow *node, hb_buffer_t *hb_
 	}
 }
 
+static unsigned int measure_string_to_fit(fz_context *ctx, const char *s, fz_html_flow *node, hb_buffer_t *hb_buf, float max_w)
+{
+	string_walker walker;
+	unsigned int i;
+	float em;
+	float line_w;
+	uint32_t min;
+	int fragment_offset;
+	const char *t;
+	float node_w;
+
+	node_w = 0;
+	em = node->box->em;
+
+	line_w = 0;
+	fragment_offset = 0;
+	init_string_walker(ctx, &walker, hb_buf, node->bidi_level & 1, node->box->style->font, node->script, node->markup_lang, node->box->style->small_caps, s);
+	while (walk_string(&walker))
+	{
+		for (i = 0; i < walker.glyph_count; i++)
+		{
+			line_w += walker.glyph_pos[i].x_advance * em / walker.scale;
+			if (line_w > max_w)
+				goto split;
+			node_w = line_w;
+		}
+		fragment_offset = walker.end - s;
+	}
+
+	/* This indicates that the whole string fitted. That should never be possible
+	 * as we'd never have called this function in that case! */
+	assert("Spanish Inquisition!" == NULL);
+
+	return 0;
+
+split:
+	/* Nothing fitted. Exit here. Don't update the node width. */
+	if (i == 0)
+		return 0;
+
+	/* Find min, the byte offset of the smallest cluster seen after
+	 * where we need to split the string to fit. That's the split point. */
+	min = walker.glyph_info[i].cluster;
+	for (i++; i < walker.glyph_count; i++)
+		if (walker.glyph_info[i].cluster < min)
+			min = walker.glyph_info[i].cluster;
+
+	/* Update the width of the node for when we split it.*/
+	node->w = node_w;
+
+	/* So return the offset in bytes at which to split. */
+	return min + fragment_offset;
+}
+
 static float measure_line(fz_html_flow *node, fz_html_flow *end, float *baseline, float *vert_adv)
 {
 	float max_a = 0, max_d = 0, h = node->h;
@@ -579,6 +633,47 @@ static void layout_flow_inline(fz_context *ctx, fz_html_box *box, fz_html_box *t
 	}
 }
 
+typedef struct
+{
+	fz_pool *pool;
+	float page_h;
+	hb_buffer_t *hb_buf;
+	fz_html_restarter *restart;
+} layout_data;
+
+static fz_html_flow *
+break_node(fz_context *ctx, fz_html_flow *node, layout_data *ld, float w)
+{
+	const char *s = get_node_text(ctx, node);
+	float orig_w = node->w;
+	unsigned int split_pos;
+	fz_html_flow *new_node;
+
+	/* Only break nodes if overflow_wrap is set to break-word. */
+	if (node->box->style->overflow_wrap != OVERFLOW_WRAP_BREAK_WORD)
+		return NULL;
+
+	split_pos = measure_string_to_fit(ctx, s, node, ld->hb_buf, w);
+	if (split_pos == 0)
+	{
+		/* No sensible chunk fitted - we can't split, but this should
+		 * be a candidate for breaking. */
+		return node;
+	}
+
+	new_node = fz_html_split_flow(ctx, ld->pool, node, split_pos);
+	new_node->type = FLOW_WORD;
+	new_node->h = node->h;
+	new_node->expand = node->expand;
+	new_node->script = node->script;
+	new_node->markup_lang = node->markup_lang;
+	new_node->bidi_level = node->bidi_level;
+	new_node->breaks_line = node->breaks_line;
+	measure_string(ctx, new_node, ld->hb_buf);
+
+	return new_node;
+}
+
 /*
 	Layout a BOX_FLOW.
 
@@ -589,12 +684,13 @@ static void layout_flow_inline(fz_context *ctx, fz_html_box *box, fz_html_box *t
 	hb_buf: The Harfbuzz buffer.
 	restart: NULL, or a restart record.
 */
-static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, float page_h, hb_buffer_t *hb_buf, fz_html_restarter *restart)
+static void layout_flow(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_html_box *top)
 {
 	fz_html_flow *node, *line, *candidate;
 	fz_html_flow *start_flow = NULL;
 	float line_w, candidate_w, indent, break_w, nonbreak_w;
 	int line_align, align;
+	fz_html_restarter *restart = ld->restart;
 
 	float em = box->em = fz_from_css_number(box->style->font_size, top->em, top->em, top->em);
 	indent = box->is_first_flow ? fz_from_css_number(top->style->text_indent, em, top->w, 0) : 0;
@@ -650,7 +746,7 @@ static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, flo
 
 			find_accumulated_margins(ctx, box, &margin_w, &margin_h);
 			max_w = top->w - margin_w;
-			max_h = page_h - margin_h;
+			max_h = ld->page_h - margin_h;
 
 			/* NOTE: We ignore the image DPI here, since most images in EPUB files have bogus values. */
 			node->w = node->content.image->w * 72 / 96;
@@ -660,7 +756,7 @@ static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, flo
 			if (node->box->style->width.unit != N_AUTO)
 				node->w = fz_from_css_number(node->box->style->width, top->em, top->w - margin_w, node->w);
 			if (node->box->style->height.unit != N_AUTO)
-				node->h = fz_from_css_number(node->box->style->height, top->em, page_h - margin_h, node->h);
+				node->h = fz_from_css_number(node->box->style->height, top->em, ld->page_h - margin_h, node->h);
 			if (node->box->style->width.unit == N_AUTO && node->box->style->height.unit != N_AUTO)
 				node->w = node->h * aspect;
 			if (node->box->style->width.unit != N_AUTO && node->box->style->height.unit == N_AUTO)
@@ -678,7 +774,7 @@ static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, flo
 		}
 		else
 		{
-			measure_string(ctx, node, hb_buf);
+			measure_string(ctx, node, ld->hb_buf);
 		}
 	}
 
@@ -712,6 +808,12 @@ static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, flo
 		{
 		default:
 		case FLOW_WORD:
+			if (node->w > box->w - line_w && !candidate)
+			{
+				candidate = break_node(ctx, node, ld, box->w - line_w);
+			}
+			nonbreak_w = break_w = node->w;
+			break;
 		case FLOW_IMAGE:
 			nonbreak_w = break_w = node->w;
 			break;
@@ -745,18 +847,21 @@ static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, flo
 
 		/* The current node either does not fit or we saw a hard break. */
 		/* Break the line if we have a candidate break point. */
-		if (node->type == FLOW_BREAK || (line_w + nonbreak_w > box->w && candidate))
+		line_w += nonbreak_w;
+		if (node->type == FLOW_BREAK || (line_w > box->w && candidate))
 		{
+			fz_html_flow *break_at = (candidate->type == FLOW_WORD ? candidate : candidate->next);
+
 			candidate->breaks_line = 1;
 			if (candidate->type == FLOW_BREAK)
 				line_align = (align == TA_JUSTIFY) ? TA_LEFT : align;
 			else
 				line_align = align;
-			if (flush_line(ctx, box, page_h, box->w, candidate_w, line_align, indent, line, candidate->next, restart))
+			if (flush_line(ctx, box, ld->page_h, box->w, candidate_w, line_align, indent, line, break_at, restart))
 				return;
 
-			line = candidate->next;
-			node = candidate->next;
+			line = break_at;
+			node = break_at;
 			candidate = NULL;
 			candidate_w = 0;
 			indent = 0;
@@ -764,7 +869,6 @@ static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, flo
 		}
 		else
 		{
-			line_w += nonbreak_w;
 			node = node->next;
 		}
 	}
@@ -772,7 +876,7 @@ static void layout_flow(fz_context *ctx, fz_html_box *box, fz_html_box *top, flo
 	if (line)
 	{
 		line_align = (align == TA_JUSTIFY) ? TA_LEFT : align;
-		flush_line(ctx, box, page_h, box->w, line_w, line_align, indent, line, NULL, restart);
+		flush_line(ctx, box, ld->page_h, box->w, line_w, line_align, indent, line, NULL, restart);
 	}
 }
 
@@ -797,8 +901,8 @@ static int layout_block_page_break(fz_context *ctx, float *yp, float page_h, flo
 	return 0;
 }
 
-static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top_x, float *top_b, float top_w,
-		float page_h, float vertical, hb_buffer_t *hb_buf, fz_html_restarter *restart);
+static float layout_block(fz_context *ctx, layout_data *ld, fz_html_box *box, float em, float top_x, float *top_b, float top_w,
+		float vertical);
 
 /*
 	Layout a table.
@@ -810,10 +914,11 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 	hb_buf: Harfbuzz buffer.
 	restart: NULL, or a restart record.
 */
-static void layout_table(fz_context *ctx, fz_html_box *box, fz_html_box *top, float page_h, hb_buffer_t *hb_buf, fz_html_restarter *restart)
+static void layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_html_box *top)
 {
 	fz_html_box *row, *cell, *child;
 	int col, ncol = 0;
+	fz_html_restarter *restart = ld->restart;
 
 	if (restart && restart->start == box)
 	{
@@ -869,9 +974,9 @@ static void layout_table(fz_context *ctx, fz_html_box *box, fz_html_box *top, fl
 			for (child = cell->down; child; child = child->next)
 			{
 				if (child->type == BOX_BLOCK)
-					layout_block(ctx, child, cell->em, cell->x, &cell->b, cell->w, page_h, 0, hb_buf, restart);
+					layout_block(ctx, ld, child, cell->em, cell->x, &cell->b, cell->w, 0);
 				else if (child->type == BOX_FLOW)
-					layout_flow(ctx, child, cell, page_h, hb_buf, restart);
+					layout_flow(ctx, ld, child, cell);
 				cell->b = child->b;
 
 				/* If we've reached an endpoint, stop looping. */
@@ -920,12 +1025,12 @@ advance_for_spacing(float start_b, float spacing, float page_h, int *eop)
 	hb_buf: Harfbuzz buffer.
 	restart: NULL, or a restart record.
 */
-static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top_x, float *top_b, float top_w,
-		float page_h, float vertical, hb_buffer_t *hb_buf, fz_html_restarter *restart)
+static float layout_block(fz_context *ctx, layout_data *ld, fz_html_box *box, float em, float top_x, float *top_b, float top_w, float vertical)
 {
 	fz_html_box *child;
 	float auto_width;
 	int first;
+	fz_html_restarter *restart = ld->restart;
 
 	const fz_css_style *style = box->style;
 	float *margin = box->margin;
@@ -974,7 +1079,7 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 
 	/* TODO: remove 'vertical' margin adjustments across automatic page breaks */
 
-	if (layout_block_page_break(ctx, top_b, page_h, vertical, style->page_break_before))
+	if (layout_block_page_break(ctx, top_b, ld->page_h, vertical, style->page_break_before))
 		vertical = 0;
 
 	/* Position the left of this box relative to the supplied 'top' positions. */
@@ -1003,7 +1108,8 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 	/* Important to remember that box->{x,y,w,b} are the coordinates of the content. The
 	 * margin/border/paddings are all outside this. */
 	box->y = *top_b;
-	if (restart && restart->start != NULL) {
+	if (restart && restart->start != NULL)
+	{
 		/* We're still skipping, so any child should inherit 0 vertical margin from
 		 * us. */
 		vertical = 0;
@@ -1011,7 +1117,7 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 	else
 	{
 		/* We're not skipping, so add in the spacings to the top edge of our box. */
-		box->y = advance_for_spacing(box->y, margin[T] + border[T] + padding[T], page_h, &eop);
+		box->y = advance_for_spacing(box->y, margin[T] + border[T] + padding[T], ld->page_h, &eop);
 		if (eop)
 		{
 			box->b = box->y;
@@ -1048,11 +1154,11 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 		if (child->type == BOX_BLOCK)
 		{
 			assert(fz_html_box_has_boxes(child));
-			vertical = layout_block(ctx, child, em, box->x, &box->b, box->w, page_h, vertical, hb_buf, restart);
+			vertical = layout_block(ctx, ld, child, em, box->x, &box->b, box->w, vertical);
 			if (first)
 			{
 				/* If we're skipping, then we take no notice of the child's margins. */
-				if (!restart || restart->start == NULL)
+				if (!ld->restart || ld->restart->start == NULL)
 				{
 					/* If we have a border or padding, then leave everything alone. */
 					if (border[T] == 0 && padding[T] == 0)
@@ -1068,20 +1174,20 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 			/* Unless we're still skipping, the base of our box must now be at least as
 			 * far down as the child, plus the childs spacing. */
 			if (!restart || restart->start == NULL)
-				box->b = advance_for_spacing(child->b, child->padding[B] + child->border[B] + child->margin[B], page_h, &eop);
+				box->b = advance_for_spacing(child->b, child->padding[B] + child->border[B] + child->margin[B], ld->page_h, &eop);
 		}
 		else if (child->type == BOX_TABLE)
 		{
 			assert(fz_html_box_has_boxes(child));
-			layout_table(ctx, child, box, page_h, hb_buf, restart);
+			layout_table(ctx, ld, child, box);
 			first = 0;
 			/* If we're skipping, then take no notice of the child's margins. */
 			if (!restart || restart->start == NULL)
-				box->b = advance_for_spacing(child->b, child->padding[B] + child->border[B] + child->margin[B], page_h, &eop);
+				box->b = advance_for_spacing(child->b, child->padding[B] + child->border[B] + child->margin[B], ld->page_h, &eop);
 		}
 		else if (child->type == BOX_FLOW)
 		{
-			layout_flow(ctx, child, box, page_h, hb_buf, restart);
+			layout_flow(ctx, ld, child, box);
 			if (child->b > child->y)
 			{
 				if (!restart || restart->start == NULL)
@@ -1116,7 +1222,7 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 		vertical = 0;
 	}
 
-	if (layout_block_page_break(ctx, &box->b, page_h, 0, style->page_break_after))
+	if (layout_block_page_break(ctx, &box->b, ld->page_h, 0, style->page_break_after))
 	{
 		vertical = 0;
 		margin[B] = 0;
@@ -1147,12 +1253,13 @@ static float layout_block(fz_context *ctx, fz_html_box *box, float em, float top
 }
 
 void
-fz_restartable_layout_html(fz_context *ctx, fz_html_box *box, float w, float h, float page_w, float page_h, float em, fz_html_restarter *restart)
+fz_restartable_layout_html(fz_context *ctx, fz_html_tree *tree, float w, float h, float page_w, float page_h, float em, fz_html_restarter *restart)
 {
-	hb_buffer_t *hb_buf = NULL;
 	int unlocked = 0;
+	layout_data ld = { 0 };
+	fz_html_box *box = tree->root;
 
-	fz_var(hb_buf);
+	fz_var(ld.hb_buf);
 	fz_var(unlocked);
 
 	fz_hb_lock(ctx);
@@ -1160,7 +1267,7 @@ fz_restartable_layout_html(fz_context *ctx, fz_html_box *box, float w, float h, 
 	fz_try(ctx)
 	{
 		Memento_startLeaking(); /* HarfBuzz leaks harmlessly */
-		hb_buf = hb_buffer_create();
+		ld.hb_buf = hb_buffer_create();
 		Memento_stopLeaking(); /* HarfBuzz leaks harmlessly */
 		unlocked = 1;
 		fz_hb_unlock(ctx);
@@ -1169,6 +1276,9 @@ fz_restartable_layout_html(fz_context *ctx, fz_html_box *box, float w, float h, 
 		box->w = page_w;
 		box->b = box->y;
 
+		ld.restart = restart;
+		ld.page_h = page_h;
+		ld.pool = tree->pool;
 		if (restart)
 			restart->potential = NULL;
 
@@ -1177,10 +1287,10 @@ fz_restartable_layout_html(fz_context *ctx, fz_html_box *box, float w, float h, 
 			switch (box->down->type)
 			{
 			case BOX_BLOCK:
-				layout_block(ctx, box->down, box->em, box->x, &box->b, box->w, page_h, 0, hb_buf, restart);
+				layout_block(ctx, &ld, box->down, em, box->x, &box->b, box->w, 0);
 				break;
 			case BOX_FLOW:
-				layout_flow(ctx, box->down, box, page_h, hb_buf, restart);
+				layout_flow(ctx, &ld, box->down, box);
 				break;
 			}
 			box->b = box->down->b;
@@ -1190,7 +1300,7 @@ fz_restartable_layout_html(fz_context *ctx, fz_html_box *box, float w, float h, 
 	{
 		if (unlocked)
 			fz_hb_lock(ctx);
-		hb_buffer_destroy(hb_buf);
+		hb_buffer_destroy(ld.hb_buf);
 		fz_hb_unlock(ctx);
 	}
 	fz_catch(ctx)
@@ -1227,7 +1337,7 @@ fz_layout_html(fz_context *ctx, fz_html *html, float w, float h, float em)
 		html->page_h = 0;
 	}
 
-	fz_restartable_layout_html(ctx, html->tree.root, w, h, html->page_w, html->page_h, em, NULL);
+	fz_restartable_layout_html(ctx, &html->tree, w, h, html->page_w, html->page_h, em, NULL);
 
 	if (h == 0)
 		html->page_h = html->tree.root->b;
@@ -1692,19 +1802,27 @@ static int draw_block_box(fz_context *ctx, fz_html_box *box, float page_top, flo
 	/* Are we skipping? */
 	skipping = (restart && restart->start != NULL);
 
-	/* Only draw the content if it's visible (never visible if skipping) */
-	if (box->style->visibility == V_VISIBLE && !skipping)
+	/* Only draw the content if it's visible */
+	if (box->style->visibility == V_VISIBLE)
 	{
 		int suppress;
-		draw_rect(ctx, dev, ctm, page_top, box->style->background_color, x0, y0, x1, y1);
 
-		/* Draw a selection of borders. */
-		/* If we are restarting, don't do the bottom one yet. */
-		suppress = restart ? (1<<B) : 0;
-		do_borders(ctx, dev, ctm, page_top, box, suppress);
+		/* We draw the background rectangle regardless if we are skipping or not, because
+		 * we might find the end-of-skip point inside this box. If there is no content
+		 * then the box height will be 0, so nothing will be drawn. */
+		if (y1 > y0)
+			draw_rect(ctx, dev, ctm, page_top, box->style->background_color, x0, y0, x1, y1);
 
-		if (box->list_item)
-			draw_list_mark(ctx, box, page_top, page_bot, dev, ctm, box->list_item);
+		if (!skipping)
+		{
+			/* Draw a selection of borders. */
+			/* If we are restarting, don't do the bottom one yet. */
+			suppress = restart ? (1<<B) : 0;
+			do_borders(ctx, dev, ctm, page_top, box, suppress);
+
+			if (box->list_item)
+				draw_list_mark(ctx, box, page_top, page_bot, dev, ctm, box->list_item);
+		}
 	}
 
 	for (child = box->down; child; child = child->next)
@@ -1791,7 +1909,7 @@ fz_draw_html(fz_context *ctx, fz_device *dev, fz_matrix ctm, fz_html *html, int 
 	fz_draw_restarted_html(ctx, dev, ctm, html->tree.root->down, page_top, page_bot, NULL);
 }
 
-void fz_draw_story(fz_context *ctx, fz_html_story *story, fz_device *dev, fz_matrix ctm)
+void fz_draw_story(fz_context *ctx, fz_story *story, fz_device *dev, fz_matrix ctm)
 {
 	float page_top, page_bot;
 	fz_html_box *b;
@@ -1806,30 +1924,310 @@ void fz_draw_story(fz_context *ctx, fz_html_story *story, fz_device *dev, fz_mat
 	page_top = b->y - b->margin[T] - b->border[T] - b->padding[T];
 	page_bot = b->b + b->margin[B] + b->border[B] + b->padding[B];
 
-	clip = fz_new_path(ctx);
-	fz_try(ctx)
+	if (dev)
 	{
-		fz_moveto(ctx, clip, bbox.x0, bbox.y0);
-		fz_lineto(ctx, clip, bbox.x1, bbox.y0);
-		fz_lineto(ctx, clip, bbox.x1, bbox.y1);
-		fz_lineto(ctx, clip, bbox.x0, bbox.y1);
-		fz_closepath(ctx, clip);
-		fz_clip_path(ctx, dev, clip, 0, ctm, bbox);
+		clip = fz_new_path(ctx);
+		fz_try(ctx)
+		{
+			fz_moveto(ctx, clip, bbox.x0, bbox.y0);
+			fz_lineto(ctx, clip, bbox.x1, bbox.y0);
+			fz_lineto(ctx, clip, bbox.x1, bbox.y1);
+			fz_lineto(ctx, clip, bbox.x0, bbox.y1);
+			fz_closepath(ctx, clip);
+			fz_clip_path(ctx, dev, clip, 0, ctm, bbox);
+		}
+		fz_always(ctx)
+			fz_drop_path(ctx, clip);
+		fz_catch(ctx)
+			fz_rethrow(ctx);
 	}
-	fz_always(ctx)
-		fz_drop_path(ctx, clip);
-	fz_catch(ctx)
-		fz_rethrow(ctx);
 
 	story->restart_place = story->restart_draw;
-	fz_draw_restarted_html(ctx, dev, ctm, story->tree.root->down, 0, page_bot+page_top, &story->restart_place);
+	if (dev)
+		fz_draw_restarted_html(ctx, dev, ctm, story->tree.root->down, 0, page_bot+page_top, &story->restart_place);
 	story->restart_place.start = story->restart_draw.end;
 	story->restart_place.start_flow = story->restart_draw.end_flow;
 	story->restart_place.end = NULL;
 	story->restart_place.end_flow = NULL;
+	story->rect_count++;
 
 	if (story->restart_place.start == NULL)
 		story->complete = 1;
 
-	fz_pop_clip(ctx, dev);
+	if (dev)
+		fz_pop_clip(ctx, dev);
+}
+
+void fz_reset_story(fz_context *ctx, fz_story *story)
+{
+	if (story == NULL)
+		return;
+
+	story->restart_place.start = NULL;
+	story->restart_place.start_flow = NULL;
+	story->restart_place.end = NULL;
+	story->restart_place.end_flow = NULL;
+	story->restart_draw.start = NULL;
+	story->restart_draw.start_flow = NULL;
+	story->restart_draw.end = NULL;
+	story->restart_draw.end_flow = NULL;
+	story->rect_count = 0;
+}
+
+static char *
+gather_text(fz_context *ctx, fz_html_box *box)
+{
+	fz_html_flow *node;
+	char *text = NULL;
+
+	fz_var(text);
+
+	fz_try(ctx)
+	{
+		for (node = box->flow_head; node; node = node->next)
+		{
+			const fz_css_style *style = node->box->style;
+
+			if (node->type == FLOW_WORD || node->type == FLOW_SPACE || node->type == FLOW_SHYPHEN)
+			{
+				const char *s;
+
+				if (node->type == FLOW_SPACE && node->breaks_line)
+					continue;
+				if (node->type == FLOW_SHYPHEN && !node->breaks_line)
+					continue;
+				if (style->visibility != V_VISIBLE)
+					continue;
+
+				s = get_node_text(ctx, node);
+
+				if (text)
+				{
+					size_t newsize = strlen(text) + strlen(s) + 1;
+					text = fz_realloc(ctx, text, newsize);
+					strcat(text, s);
+				}
+				else
+				{
+					text = fz_strdup(ctx, s);
+				}
+			}
+			else if (node->type == FLOW_IMAGE)
+			{
+			}
+		}
+
+	}
+	fz_catch(ctx)
+	{
+		fz_free(ctx, text);
+		fz_rethrow(ctx);
+	}
+
+	return text;
+}
+
+static int enumerate_box(fz_context *ctx, fz_html_box *box, float page_top, float page_bot, fz_story_position_callback *cb, void *arg, int depth, int rect_num, fz_html_restarter *restart);
+
+static int enumerate_block_box(fz_context *ctx, fz_html_box *box, float page_top, float page_bot, fz_story_position_callback *cb, void *arg, int depth, int rect_num, fz_html_restarter *restart)
+{
+	fz_html_box *child;
+	float y0, y1;
+
+	float *padding = box->padding;
+	int stopped = 0;
+	int skipping;
+	fz_story_element_position pos;
+
+	assert(fz_html_box_has_boxes(box));
+	y0 = box->y - padding[T];
+	y1 = box->b + padding[B];
+
+	if (y0 > page_bot || y1 < page_top)
+		return 0;
+
+	/* If we're skipping, is this the place we should restart? */
+	if (restart)
+	{
+		if (restart->start == box)
+			restart->start = NULL;
+		if (restart->end == box)
+			return 1;
+	}
+
+	if (restart && restart->end == box)
+		return 1;
+
+	/* Are we skipping? */
+	skipping = (restart && restart->start != NULL);
+
+	if (box->style->visibility == V_VISIBLE && !skipping)
+	{
+		if (box->heading || box->id != NULL)
+		{
+			/* We have a box worthy of a callback. */
+			char *text = NULL;
+			pos.text = NULL;
+			if (box->heading)
+				pos.text = text = gather_text(ctx, box->down);
+			pos.depth = depth;
+			pos.heading = box->heading;
+			pos.open_close = 1;
+			pos.id = box->id;
+			pos.rect.x0 = box->x;
+			pos.rect.y0 = box->y;
+			pos.rect.x1 = box->x + box->w;
+			pos.rect.y1 = box->b;
+			pos.rectangle_num = rect_num;
+			fz_try(ctx)
+				cb(ctx, arg, &pos);
+			fz_always(ctx)
+				fz_free(ctx, text);
+			fz_catch(ctx)
+				fz_rethrow(ctx);
+			pos.text = NULL;
+		}
+	}
+
+	for (child = box->down; child; child = child->next)
+	{
+		if (enumerate_box(ctx, child, page_top, page_bot, cb, arg, depth+1, rect_num, restart))
+		{
+			stopped = 1;
+			break;
+		}
+	}
+
+	if (box->style->visibility == V_VISIBLE && !skipping)
+	{
+		if (box->heading || box->id != NULL)
+		{
+			/* We have a box worthy of a callback that needs closing. */
+			pos.open_close = 2;
+			pos.rectangle_num = rect_num;
+			cb(ctx, arg, &pos);
+		}
+	}
+
+	return stopped;
+}
+
+static int enumerate_flow_box(fz_context *ctx, fz_html_box *box, float page_top, float page_bot, fz_story_position_callback *cb, void *arg, int depth, int rect_num, fz_html_restarter *restart)
+{
+	fz_html_flow *node;
+	int restartable_ended = 0;
+
+	/* FIXME: HB_DIRECTION_TTB? */
+
+	if (restart && restart->start != NULL && restart->start != box)
+		return 0;
+
+	for (node = box->flow_head; node; node = node->next)
+	{
+		const fz_css_style *style = node->box->style;
+
+		if (restart)
+		{
+			if (restart->start_flow != NULL)
+			{
+				if (restart->start_flow != node)
+					continue;
+				restart->start = NULL;
+				restart->start_flow = NULL;
+			}
+
+			if (restart->end == box && restart->end_flow == node)
+			{
+				restartable_ended = 1;
+				break;
+			}
+		}
+
+		if (node->type == FLOW_IMAGE)
+		{
+			if (node->y >= page_bot || node->y + node->h <= page_top)
+				continue;
+		}
+		else
+		{
+			if (node->y > page_bot || node->y < page_top)
+				continue;
+		}
+
+		if (node->box && node->box->id)
+		{
+			/* We have a node to callback for. */
+			fz_story_element_position pos;
+
+			pos.text = NULL;
+			pos.depth = depth;
+			pos.heading = 0;
+			pos.open_close = 1 | 2;
+			pos.id = node->box->id;
+			pos.rect.x0 = node->x;
+			pos.rect.y0 = node->y;
+			pos.rect.x1 = node->x + node->w;
+			pos.rect.y1 = node->y + node->h;
+			pos.rectangle_num = rect_num;
+			cb(ctx, arg, &pos);
+		}
+
+		if (node->type == FLOW_WORD || node->type == FLOW_SPACE || node->type == FLOW_SHYPHEN)
+		{
+		}
+		else if (node->type == FLOW_IMAGE)
+		{
+			if (style->visibility == V_VISIBLE)
+			{
+				/* FIXME: Maybe callback for images? */
+			}
+		}
+	}
+
+	return restartable_ended;
+}
+
+static int enumerate_box(fz_context *ctx, fz_html_box *box, float page_top, float page_bot, fz_story_position_callback *cb, void *arg, int depth, int rect_num, fz_html_restarter *restart)
+{
+	switch (box->type)
+	{
+	case BOX_TABLE:
+	case BOX_TABLE_ROW:
+	case BOX_TABLE_CELL:
+	case BOX_BLOCK:
+		if (restart && restart->end == box)
+			return 1;
+		if (enumerate_block_box(ctx, box, page_top, page_bot, cb, arg, depth, rect_num, restart))
+			return 1;
+		break;
+	case BOX_FLOW:
+		if (enumerate_flow_box(ctx, box, page_top, page_bot, cb, arg, depth, rect_num, restart))
+			return 1;
+		break;
+	}
+
+	return 0;
+}
+
+void fz_story_positions(fz_context *ctx, fz_story *story, fz_story_position_callback *cb, void *arg)
+{
+	float page_top, page_bot;
+	fz_html_box *b;
+	fz_html_restarter restart;
+	fz_html_box *box;
+	fz_html_box *top;
+
+	if (story == NULL || story->complete)
+		return;
+
+	b = story->tree.root;
+	page_top = b->y - b->margin[T] - b->border[T] - b->padding[T];
+	page_bot = b->b + b->margin[B] + b->border[B] + b->padding[B];
+	top = story->tree.root->down;
+
+	restart = story->restart_draw;
+
+	for (box = top->down; box; box = box->next)
+		if (enumerate_box(ctx, box, page_top, page_bot, cb, arg, 0, story->rect_count+1, &restart))
+			break;
 }
