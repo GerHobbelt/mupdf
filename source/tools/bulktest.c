@@ -656,28 +656,38 @@ my_getline(FILE *file, int *linecounter_ref)
 	char *d = getline_buffer;
 	int space = sizeof(getline_buffer)-1;
 
+	if (linecounter_ref[0] >= 154)
+		c = 11;
+
+	*d = 0;
+
 	/* Skip over any prefix of whitespace */
 	do
 	{
 		c = fgetc(file);
 		if (c == '\n')
 			(*linecounter_ref)++;
+		// abort on EOF, error or when you encounter an illegal NUL byte in the script
+		if (c <= 0)
+			return NULL;
 	}
-	while (c > 0 && isspace(c));
-
-	// abort on EOF, error or when you encounter an illegal NUL byte in the script
-	if (c <= 0)
-		return NULL;
+	while (isspace(c));
 
 	/* Read the line in */
 	do
 	{
 		*d++ = (char)c;
+		--space;
+		if (!space)
+			break;
 		c = fgetc(file);
-		if (c == '\n')
+		// replace TAB with SPACE
+		if (c == '\t')
+			c = ' ';
+		else if (c == '\n' || c <= 0)
 			(*linecounter_ref)++;
 	}
-	while (c >= 32 && --space);
+	while (c >= 32);
 
 	/* If we ran out of space, skip the rest of the line */
 	if (space == 0)
@@ -1997,6 +2007,11 @@ bulktest_main(int argc, const char **argv)
 					argv = NULL;
 					argc = 0;
 
+					if (linecounter == 161)
+					{
+						int i = 2;
+					}
+
 					// ignore comments.
 					//
 					// comments start with '% ' (note the extra ' ' SPACE char in there!), '# ' or '// '
@@ -2009,6 +2024,11 @@ bulktest_main(int argc, const char **argv)
 							// accept on line by itself, i.e. followed by NUL, otherwise we require a whitespace to follow it, for otherwise it could be a script macro or other important bit!
 							if (!comment_start[1] || isspace(comment_start[1]))
 							{
+								if (verbosity >= 1)
+								{
+									fz_info(ctx, "\n::L#%05u: COMMENT %s", linecounter, line);
+								}
+
 								comment_start[0] = 0;
 								comment_start[1] = 0;
 							}
@@ -2018,6 +2038,11 @@ bulktest_main(int argc, const char **argv)
 							// no additional whitespace after required...
 							if (comment_start[1] == '/')
 							{
+								if (verbosity >= 1)
+								{
+									fz_info(ctx, "\n::L#%05u: COMMENT %s", linecounter, line);
+								}
+
 								comment_start[0] = 0;
 								comment_start[1] = 0;
 							}
@@ -2080,12 +2105,7 @@ bulktest_main(int argc, const char **argv)
 
 					begin_time = Curl_now();
 
-					if (match(argv[0], "%"))
-					{
-						/* Comment */
-						report_time = RPT_NOTHING;
-					}
-					else if (match(argv[0], "IF"))
+					if (match(argv[0], "IF"))
 					{
 						if (argc != 2)
 						{
