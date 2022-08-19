@@ -48,7 +48,7 @@
 
 typedef struct fz_story_s fz_story;
 
-/*
+/**
 	Create a text story using styled html.
 
 	Passing a NULL buffer will be treated as an empty document.
@@ -56,7 +56,7 @@ typedef struct fz_story_s fz_story;
 */
 fz_story *fz_new_story(fz_context *ctx, fz_buffer *buf, const char *user_css, float em);
 
-/*
+/**
 	Retrieve the warnings given from parsing this story.
 
 	If there are warnings, this will be returned as a NULL terminated
@@ -71,7 +71,7 @@ fz_story *fz_new_story(fz_context *ctx, fz_buffer *buf, const char *user_css, fl
 */
 const char *fz_story_warnings(fz_context *ctx, fz_story *story);
 
-/*
+/**
 	Place (or continue placing) a story into the supplied rectangle
 	'where', updating 'filled' with the actual area that was used.
 	Returns zero if all the content fitted, non-zero if there is
@@ -92,7 +92,7 @@ const char *fz_story_warnings(fz_context *ctx, fz_story *story);
 */
 int fz_place_story(fz_context *ctx, fz_story *story, fz_rect where, fz_rect *filled);
 
-/*
+/**
 	Draw the placed story to the given device.
 
 	This moves the point at which subsequent calls to fz_place_story
@@ -100,18 +100,18 @@ int fz_place_story(fz_context *ctx, fz_story *story, fz_rect where, fz_rect *fil
 */
 void fz_draw_story(fz_context *ctx, fz_story *story, fz_device *dev, fz_matrix ctm);
 
-/*
+/**
 	Reset the position within the story at which the next layout call
 	will continue to the start of the story.
 */
 void fz_reset_story(fz_context *ctx, fz_story *story);
 
-/*
+/**
 	Drop the html story.
 */
 void fz_drop_story(fz_context *ctx, fz_story *story);
 
-/*
+/**
 	Get a borrowed reference to the DOM document pointer for this
 	story. Do not destroy this reference, it will be destroyed
 	when the story is laid out.
@@ -186,7 +186,7 @@ typedef struct
 
 typedef void (fz_story_position_callback)(fz_context *ctx, void *arg, const fz_story_element_position *);
 
-/*
+/**
 	Enumerate the positions for key blocks in the story.
 
 	This will cause the supplied function to be called with details of each
@@ -210,7 +210,8 @@ typedef struct
    int num;
 } fz_story_tocwrite_items;
 
-/* Callback type for fz_story_tocwrite().
+/**
+Callback type for fz_story_tocwrite().
 
 Should set *rect to rect number <num>. If this is on a new page, should also
 set <mediabox> and return 1, otherwise return 0.
@@ -231,7 +232,8 @@ mediabox:
 */
 typedef int (*fz_story_tocwrite_rectfn)(fz_context *ctx, void *ref, int num, fz_rect filled, fz_rect *rect, fz_matrix *ctm, fz_rect *mediabox);
 
-/* Callback type for fz_story_tocwrite().
+/**
+Callback type for fz_story_tocwrite().
 
 Should populate the supplied buffer with html content for use with
 fz_new_story(). This may include extra content derived from the
@@ -246,7 +248,8 @@ buffer:
 */
 typedef void (*fz_story_tocwrite_contentfn)(fz_context *ctx, void *ref, fz_story_tocwrite_items *items, fz_buffer *buffer);
 
-/* Does iterative layout of html content to a fz_document_writer. For example
+/**
+Does iterative layout of html content to a fz_document_writer. For example
 this allows one to add a table of contents section while ensuring that page
 numbers are patched up until stable.
 
@@ -273,7 +276,8 @@ em:
 ref:
 	Passed to rectfn() and contentfn().
 
-Passes <ref> to rectfn() and contentfn(). */
+Passes <ref> to rectfn() and contentfn().
+*/
 void fz_story_tocwrite(fz_context *ctx, fz_document_writer *writer, fz_story_tocwrite_rectfn rectfn, fz_story_tocwrite_contentfn contentfn, const char *user_css, float em, void *ref);
 
 #endif
