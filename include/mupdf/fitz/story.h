@@ -194,4 +194,86 @@ typedef void (fz_story_position_callback)(fz_context *ctx, void *arg, const fz_s
 */
 void fz_story_positions(fz_context *ctx, fz_story *story, fz_story_position_callback *cb, void *arg);
 
+
+/* A fz_story_element_position plus page number information. */
+typedef struct
+{
+	fz_story_element_position element;
+	int page_num;
+} fz_story_tocwrite_item;
+
+/* A set of fz_story_tocwrite_item items, for passing to a
+fz_story_tocwrite_contentfn(). */
+typedef struct
+{
+   fz_story_tocwrite_item *items;
+   int num;
+} fz_story_tocwrite_items;
+
+/* Callback type for fz_story_tocwrite().
+
+Should set *rect to rect number <num>. If this is on a new page, should also
+set <mediabox> and return 1, otherwise return 0.
+
+ref:
+	As passed to fz_story_tocwrite().
+num:
+	The rect number. Will typically increment by one each time, being reset to
+	zero when fz_story_tocwrite() starts a new iteration.
+filled:
+	From earlier internal call to fz_place_story().
+rect:
+	Out param.
+ctm:
+	Out param, defaults to fz_identity.
+mediabox:
+	Out param, only used if we return 1.
+*/
+typedef int (*fz_story_tocwrite_rectfn)(fz_context *ctx, void *ref, int num, fz_rect filled, fz_rect *rect, fz_matrix *ctm, fz_rect *mediabox);
+
+/* Callback type for fz_story_tocwrite().
+
+Should populate the supplied buffer with html content for use with
+fz_new_story(). This may include extra content derived from the
+fz_story_tocwrite_items *items arg, for example a table of contents.
+
+ref:
+	As passed to fz_story_tocwrite().
+items:
+	Information from previous iteration.
+buffer:
+	Where to write the new content. Will be initially empty.
+*/
+typedef void (*fz_story_tocwrite_contentfn)(fz_context *ctx, void *ref, fz_story_tocwrite_items *items, fz_buffer *buffer);
+
+/* Does iterative layout of html content to a fz_document_writer. For example
+this allows one to add a table of contents section while ensuring that page
+numbers are patched up until stable.
+
+Repeatedly creates new story from (contentfn(), user_css, em) and lays it out
+into rects returned by rectfn(), writing to a dummy writer, while gathering
+fz_story_element_position information to be passed to the next call of
+contentfn().
+
+When the html from contentfn() becomes unchanged, we do a final iteration which
+uses <writer>.
+
+writer:
+	Where to write in the final iteration.
+rectfn:
+	Should return information about the rect to be used in the next internal
+	call to fz_place_story().
+contentfn:
+	Should return html content for use with fz_new_story(), possibly
+	including extra content such as a table-of-contents.
+user_css:
+	Used in internal calls to fz_new_story().
+em:
+	Used in internal calls to fz_new_story().
+ref:
+	Passed to rectfn() and contentfn().
+
+Passes <ref> to rectfn() and contentfn(). */
+void fz_story_tocwrite(fz_context *ctx, fz_document_writer *writer, fz_story_tocwrite_rectfn rectfn, fz_story_tocwrite_contentfn contentfn, const char *user_css, float em, void *ref);
+
 #endif
