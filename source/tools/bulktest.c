@@ -656,9 +656,6 @@ my_getline(FILE *file, int *linecounter_ref)
 	char *d = getline_buffer;
 	int space = sizeof(getline_buffer)-1;
 
-	if (linecounter_ref[0] >= 154)
-		c = 11;
-
 	*d = 0;
 
 	/* Skip over any prefix of whitespace */
@@ -2006,11 +2003,6 @@ bulktest_main(int argc, const char **argv)
 					fz_free_argv_array(ctx, argv);
 					argv = NULL;
 					argc = 0;
-
-					if (linecounter == 161)
-					{
-						int i = 2;
-					}
 
 					// ignore comments.
 					//
