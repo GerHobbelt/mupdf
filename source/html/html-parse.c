@@ -1608,17 +1608,17 @@ fz_parse_html_imp(fz_context *ctx,
 typedef struct
 {
 	int saved;
-	fz_warning_cb *old;
+	fz_error_print_callback *old;
 	void *arg;
 	fz_buffer *buffer;
 	fz_context *ctx;
 } warning_save;
 
 static void
-warn_to_buffer(void *user, const char *message)
+warn_to_buffer(fz_context* ctx, void* user, const char* message)
 {
 	warning_save *save = (warning_save *)user;
-	fz_context *ctx = save->ctx;
+	ASSERT(ctx == save->ctx);
 
 	fz_try(ctx)
 	{
@@ -1635,7 +1635,7 @@ static void
 redirect_warnings_to_buffer(fz_context *ctx, fz_buffer *buf, warning_save *save)
 {
 	save->saved = 1;
-	save->old = fz_warning_callback(ctx, &save->arg);
+	fz_get_warning_callback(ctx, &save->old, &save->arg);
 	save->buffer = buf;
 	save->ctx = ctx;
 

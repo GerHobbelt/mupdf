@@ -363,7 +363,6 @@ static unsigned int measure_string_to_fit(fz_context *ctx, const char *s, fz_htm
 	float line_w;
 	uint32_t min;
 	int fragment_offset;
-	const char *t;
 	float node_w;
 
 	node_w = 0;
@@ -386,7 +385,7 @@ static unsigned int measure_string_to_fit(fz_context *ctx, const char *s, fz_htm
 
 	/* This indicates that the whole string fitted. That should never be possible
 	 * as we'd never have called this function in that case! */
-	assert("Spanish Inquisition!" == NULL);
+	assert(!"Spanish Inquisition!");
 
 	return 0;
 
