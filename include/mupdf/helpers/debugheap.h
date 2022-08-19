@@ -51,18 +51,15 @@ int fzPopHeapDbgPurpose(int related_dummy, int l);
 #endif
 
 #define FZ_HEAPDBG_TRACKER_SECTION_START_MARKER(prefix)												\
-static int prefix ## HEAPDBG_SECTION_START = fzPushHeapDbgPurpose(__FILE__, __LINE__);
+static int prefix ## HEAPDBG_SECTION_START = fzPushHeapDbgPurpose(__FILE__, __LINE__)
 
 #define FZ_HEAPDBG_TRACKER_SECTION_END_MARKER(prefix)												\
-static int prefix ## HEAPDBG_SECTION_END = fzPopHeapDbgPurpose(prefix ## HEAPDBG_SECTION_START, __LINE__);
+static int prefix ## HEAPDBG_SECTION_END = fzPopHeapDbgPurpose(prefix ## HEAPDBG_SECTION_START, __LINE__)
 
 #else
 
 #define FZ_HEAPDBG_TRACKER_SECTION_START_MARKER(prefix)  /**/
 #define FZ_HEAPDBG_TRACKER_SECTION_END_MARKER(prefix)    /**/
-
-#define fzPushHeapDbgPurpose(s, l)               0
-#define fzPopHeapDbgPurpose(related_dummy, l)    0
 
 #endif
 

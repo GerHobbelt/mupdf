@@ -236,6 +236,18 @@ static int EnableMemLeakChecking(void)
 
 static int fz_memleak_checking_is_set_up = EnableMemLeakChecking();
 
+#else
+
+// just satisfy the linker, using the build-mode agnostic .DEF file for the DLL container:
+
+extern "C" void fzPushHeapDbgPurpose(void)
+{
+}
+
+extern "C" void fzPopHeapDbgPurpose(void)
+{
+}
+
 #endif
 
 #endif // __VISUALC__
