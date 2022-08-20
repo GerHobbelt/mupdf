@@ -165,6 +165,8 @@ static fz_context* global_ctx = NULL;
 void
 fz_drop_context(fz_context *ctx)
 {
+	fz_flush_all_std_logging_channels(ctx);
+
 	if (!ctx)
 		return;
 

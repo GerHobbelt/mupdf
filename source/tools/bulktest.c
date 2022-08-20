@@ -38,6 +38,21 @@ static inline void memclr(void* ptr, size_t size)
 
 static fz_context* ctx = NULL;
 
+static const char* match_regex = NULL;
+static const char* ignore_match_regex = NULL;
+static const char* match_numbers_s = NULL;
+static const char* ignore_match_numbers_s = NULL;
+static float random_exec_perunage = 1.0;
+
+struct range
+{
+	int first;
+	int last;
+};
+
+static const struct range* match_test_numbers_ranges = NULL;
+static const struct range* ignore_match_test_numbers_ranges = NULL;
+
 /*
 	In the presence of pthreads or Windows threads, we can offer
 	a multi-threaded option. In the absence of such we degrade
@@ -910,6 +925,40 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 	}
 }
 
+static const char* rangespec2str(char* buf, size_t bufsiz, const struct range* spec)
+{
+	if (!spec || spec->first == -1)
+		return "-";
+
+	buf[0] = 0;
+	char* d = buf;
+	for (; spec->first != -1; spec++)
+	{
+		if (bufsiz < 10)
+		{
+			strcpy(d, "...");
+			break;
+		}
+
+		if (spec->first == spec->last)
+			fz_snprintf(d, bufsiz, "%d,", spec->first);
+		else
+			fz_snprintf(d, bufsiz, "%d-%d,", spec->first, spec->last);
+		size_t l = strlen(d);
+		d += l;
+		bufsiz -= l;
+	}
+	if (d > buf && d[-1] == ',')
+		d[-1] = 0;
+	return buf;
+}
+
+static const char* match_regex2str(const char* re)
+{
+	if (!re || !*re)
+		return "-";
+	return re;
+}
 
 static int
 match(const char *arg, const char *match)
@@ -1116,19 +1165,42 @@ static void flush_active_logfile_hard(void)
 			while (fz_file_exists(ctx, logfilename))
 			{
 				// rename old logfile:
-				fz_snprintf(logfilename, sizeof(logfilename), "%s.%04d.log", basename, count++);
+				fz_snprintf(logfilename, sizeof(logfilename), "%s.C-%04d.log", basename, count++);
 			}
-			if (strcmp(logcfg.logfilepath, logfilename))
-			{
+			ASSERT(strcmp(logcfg.logfilepath, logfilename));
+			
 				(void)rename(logcfg.logfilepath, logfilename);
 				int errcode = errno;
 				if (fz_file_exists(ctx, logcfg.logfilepath))
 				{
 					fz_throw(ctx, FZ_ERROR_GENERIC, "%s: failed to rename old logfile %q to %q.", errcode ? strerror(errcode) : "Unknown rename error", logfilename, logcfg.logfilepath);
 				}
-			}
 
 			logcfg.logfile = fz_fopen_utf8(ctx, logcfg.logfilepath, "w");
+
+			fz_info(ctx, "bulktest: logfile rotated. Previous logging at %q.\n", logfilename);
+
+			// report test run restrictions to every logfile we produce:
+			if (random_exec_perunage < 1.0)
+			{
+				fz_info(ctx, "bulktest: using random_exec_percentage: %.1f%%\n", random_exec_perunage * 100);
+			}
+
+			if (match_regex || ignore_match_regex || match_test_numbers_ranges || ignore_match_test_numbers_ranges)
+			{
+				char numbuf1[LONGLINE];
+				char numbuf2[LONGLINE];
+				fz_info(ctx, "Using a RESTRICTED DATA SET:\n"
+					"- ACCEPT: regex: %s\n"
+					"          line numbers: %s\n"
+					"- IGNORE: regex: %s\n"
+					"          line numbers: %s\n"
+					"-----------------------------------------------------------------------------------\n\n\n",
+					match_regex2str(match_regex),
+					rangespec2str(numbuf1, sizeof(numbuf1), match_test_numbers_ranges),
+					match_regex2str(ignore_match_regex),
+					rangespec2str(numbuf2, sizeof(numbuf2), ignore_match_test_numbers_ranges));
+			}
 		}
 	}
 }
@@ -1497,12 +1569,6 @@ static void tst_info_callback(fz_context* ctx, void* user, const char* message)
 	}
 }
 
-struct range
-{
-	int first;
-	int last;
-};
-
 static struct range* decode_numbers_rangespec(const char* spec)
 {
 	int n_ranges = 0;
@@ -1590,49 +1656,12 @@ static int test_dataline_against_matchspecs(const char *line, int linenumber, co
 	return rejected;
 }
 
-static const char* rangespec2str(char* buf, size_t bufsiz, const struct range* spec)
-{
-	if (!spec || spec->first == -1)
-		return "-";
-
-	buf[0] = 0;
-	char* d = buf;
-	for (; spec->first != -1; spec++)
-	{
-		if (bufsiz < 10)
-		{
-			strcpy(d, "...");
-			break;
-		}
-
-		if (spec->first == spec->last)
-			fz_snprintf(d, bufsiz, "%d,", spec->first);
-		else
-			fz_snprintf(d, bufsiz, "%d-%d,", spec->first, spec->last);
-		size_t l = strlen(d);
-		d += l;
-		bufsiz -= l;
-	}
-	if (d > buf && d[-1] == ',')
-		d[-1] = 0;
-	return buf;
-}
-
-static const char* match_regex2str(const char* re)
-{
-	if (!re || !*re)
-		return "-";
-	return re;
-}
-
 
 int
 bulktest_main(int argc, const char **argv)
 {
 	fz_trace_snapshot = &trace_snapshot;
 	fz_trace_report_pending_allocations_since = &trace_report_pending_allocations_since;
-
-	ASSERT(1 != 0);
 
 	int c;
 	int errored = 0;
@@ -1645,12 +1674,13 @@ bulktest_main(int argc, const char **argv)
 	fz_locks_context *locks = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
 	int lowmemory = 0;
-	const char *match_regex = NULL;
-	const char* ignore_match_regex = NULL;
-	const char* match_numbers_s = NULL;
-	const char* ignore_match_numbers_s = NULL;
-	float random_exec_perunage = 1.0;
 	const char* forced_output_basedir = NULL;
+
+	match_regex = NULL;
+	ignore_match_regex = NULL;
+	match_numbers_s = NULL;
+	ignore_match_numbers_s = NULL;
+	random_exec_perunage = 1.0;
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
@@ -1806,8 +1836,9 @@ bulktest_main(int argc, const char **argv)
 	FILE* datafeed = NULL;
 	char scriptname[PATH_MAX] = "";
 	const char* datafilename = NULL;
-	const struct range* match_test_numbers_ranges = NULL;
-	const struct range* ignore_match_test_numbers_ranges = NULL;
+
+	match_test_numbers_ranges = NULL;
+	ignore_match_test_numbers_ranges = NULL;
 
 	fz_try(ctx)
 	{

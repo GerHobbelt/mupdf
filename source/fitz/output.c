@@ -701,11 +701,11 @@ fz_flush_output(fz_context *ctx, fz_output *out)
 void
 fz_flush_output_no_lock(fz_context* ctx, fz_output* out)
 {
-	if (out->wp > out->bp)
+	if (out->bp && out->wp > out->bp)
 	{
 		out->write(ctx, out->state, out->bp, out->wp - out->bp);
-		out->wp = out->bp;
 	}
+	out->wp = out->bp;
 }
 
 void
