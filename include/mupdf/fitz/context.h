@@ -130,6 +130,15 @@ enum
 void fz_flush_warnings(fz_context *ctx);
 
 /**
+	Flush all standard logging channels: fz_stdout(), fz_stderr() and fz_stdods()
+
+	This is invoked when an exception is thrown and when a fz_context is dropped:
+	those are considered important enough events to merit flushing all buffers
+	and ensuring the latest intel has been sent/saved.
+*/
+void fz_flush_all_std_logging_channels(fz_context* ctx);
+
+/**
 	Locking functions
 
 	MuPDF is kept deliberately free of any knowledge of particular
