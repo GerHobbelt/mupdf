@@ -49,6 +49,16 @@ typedef struct
 	unsigned char buffer[4096];
 } fz_jbig2d;
 
+static inline void fz_lock_jbig2(fz_context* ctx)
+{
+	fz_lock(ctx, FZ_LOCK_JBIG2, __FILE__, __LINE__);
+}
+
+static inline void fz_unlock_jbig2(fz_context* ctx)
+{
+	fz_unlock(ctx, FZ_LOCK_JBIG2);
+}
+
 fz_jbig2_globals *
 fz_keep_jbig2_globals(fz_context *ctx, fz_jbig2_globals *globals)
 {
@@ -69,12 +79,26 @@ static void
 close_jbig2d(fz_context *ctx, void *state_)
 {
 	fz_jbig2d *state = state_;
-	if (state->page)
-		jbig2_release_page(state->ctx, state->page);
-	fz_drop_jbig2_globals(ctx, state->gctx);
-	jbig2_ctx_free(state->ctx);
-	fz_drop_stream(ctx, state->chain);
-	fz_free(ctx, state);
+	fz_try(ctx)
+	{
+		fz_lock_jbig2(ctx);
+
+		if (state->page)
+			jbig2_release_page(state->ctx, state->page);
+		fz_drop_jbig2_globals(ctx, state->gctx);
+		jbig2_ctx_free(state->ctx);
+	}
+	fz_always(ctx)
+	{
+		fz_unlock_jbig2(ctx);
+
+		fz_drop_stream(ctx, state->chain);
+		fz_free(ctx, state);
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
 }
 
 static int
@@ -95,22 +119,35 @@ next_jbig2d(fz_context *ctx, fz_stream *stm, size_t len)
 
 	if (!state->page)
 	{
-		while (1)
+		fz_try(ctx)
 		{
-			n = fz_read(ctx, state->chain, tmp, sizeof tmp);
-			if (n == 0)
-				break;
+			fz_lock_jbig2(ctx);
 
-			if (jbig2_data_in(state->ctx, tmp, n) < 0)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot decode jbig2 image");
+			while (1)
+			{
+				n = fz_read(ctx, state->chain, tmp, sizeof tmp);
+				if (n == 0)
+					break;
+
+				if (jbig2_data_in(state->ctx, tmp, n) < 0)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot decode jbig2 image");
+			}
+
+			if (jbig2_complete_page(state->ctx) < 0)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot complete jbig2 image");
+
+			state->page = jbig2_page_out(state->ctx);
+			if (!state->page)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "no jbig2 image decoded");
 		}
-
-		if (jbig2_complete_page(state->ctx) < 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot complete jbig2 image");
-
-		state->page = jbig2_page_out(state->ctx);
-		if (!state->page)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "no jbig2 image decoded");
+		fz_always(ctx)
+		{
+			fz_unlock_jbig2(ctx);
+		}
+		fz_catch(ctx)
+		{
+			fz_rethrow(ctx);
+		}
 	}
 
 	s = state->page->data;
@@ -183,24 +220,37 @@ fz_load_jbig2_globals(fz_context *ctx, fz_buffer *buf)
 	globals->alloc.alloc.free_ = fz_jbig2_free;
 	globals->alloc.alloc.realloc_ = fz_jbig2_realloc;
 
-	jctx = jbig2_ctx_new((Jbig2Allocator *) &globals->alloc, JBIG2_OPTIONS_EMBEDDED, NULL, error_callback, ctx);
-	if (!jctx)
+	fz_try(ctx)
 	{
-		fz_free(ctx, globals);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot allocate jbig2 globals context");
-	}
+		fz_lock_jbig2(ctx);
 
-	if (jbig2_data_in(jctx, buf->data, buf->len) < 0)
+		jctx = jbig2_ctx_new((Jbig2Allocator*)&globals->alloc, JBIG2_OPTIONS_EMBEDDED, NULL, error_callback, ctx);
+		if (!jctx)
+		{
+			fz_free(ctx, globals);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot allocate jbig2 globals context");
+		}
+
+		if (jbig2_data_in(jctx, buf->data, buf->len) < 0)
+		{
+			jbig2_global_ctx_free(jbig2_make_global_ctx(jctx));
+			fz_free(ctx, globals);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot decode jbig2 globals");
+		}
+
+		FZ_INIT_STORABLE(globals, 1, fz_drop_jbig2_globals_imp);
+		globals->gctx = jbig2_make_global_ctx(jctx);
+
+		globals->data = fz_keep_buffer(ctx, buf);
+	}
+	fz_always(ctx)
 	{
-		jbig2_global_ctx_free(jbig2_make_global_ctx(jctx));
-		fz_free(ctx, globals);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot decode jbig2 globals");
+		fz_unlock_jbig2(ctx);
 	}
-
-	FZ_INIT_STORABLE(globals, 1, fz_drop_jbig2_globals_imp);
-	globals->gctx = jbig2_make_global_ctx(jctx);
-
-	globals->data = fz_keep_buffer(ctx, buf);
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
 
 	return globals;
 }
