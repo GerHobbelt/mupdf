@@ -1549,6 +1549,16 @@ pdf_check_linear(fz_context *ctx, pdf_document *doc)
 
 	fz_var(dict);
 
+	// to help diagnose problems, we should temporarily downgrade all error reports (exceptions thrown)
+	// to WARN level, as this function is merely checking for linear mode and we EXPECT parse errors
+	// to occur in here for NON-LINEAR PDF files.
+	// Those perceived parse errors only become *real* parse errors once they recur elsewhere in
+	// the PDF load phase, e.g. pdf_load_xref() in pdf_init_document().
+	fz_error_print_callback *old_err_f = ctx->error.print;
+	void* old_error_user_ptr = ctx->error.print_user;
+	ctx->error.print = ctx->warn.print;
+	ctx->error.print_user = ctx->warn.print_user;
+
 	fz_try(ctx)
 	{
 		dict = pdf_parse_ind_obj(ctx, doc, doc->file, &num, &gen, &stmofs, NULL);
@@ -1562,7 +1572,13 @@ pdf_check_linear(fz_context *ctx, pdf_document *doc)
 		doc->has_linearization_object = 1;
 	}
 	fz_always(ctx)
+	{
+		// and revert the error reporting back to the usual ERROR level:
+		ctx->error.print = old_err_f;
+		ctx->error.print_user = old_error_user_ptr;
+
 		pdf_drop_obj(ctx, dict);
+	}
 	fz_catch(ctx)
 	{
 		/* Silently swallow this error. */
@@ -2926,7 +2942,7 @@ pdf_open_document_with_stream(fz_context *ctx, fz_stream *file)
 		/* fz_drop_document may clobber our error code/message so we have to stash them temporarily. */
 		char message[256];
 		int caught = fz_caught(ctx);
-		fz_strlcpy(message, fz_caught_message(ctx), sizeof message);
+		fz_strncpy_s(ctx, message, fz_caught_message(ctx), sizeof message);
 		fz_drop_document(ctx, &doc->super);
 		fz_throw(ctx, caught, "%s", message);
 	}

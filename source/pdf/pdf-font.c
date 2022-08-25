@@ -1069,7 +1069,7 @@ hail_mary_cmp_key(fz_context *ctx, void *k0, void *k1)
 static void
 hail_mary_format_key(fz_context *ctx, char *s, size_t n, void *key_)
 {
-	fz_strlcpy(s, "(hail mary font)", n);
+	fz_strncpy_s(ctx, s, "(hail mary font)", n);
 }
 
 static int hail_mary_store_key; /* Dummy */
@@ -1149,7 +1149,7 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 			else
 			{
 				fz_warn(ctx, "CIDFont is missing CIDSystemInfo dictionary; assuming Adobe-Identity");
-				fz_strlcpy(collection, "Adobe-Identity", sizeof collection);
+				fz_strncpy_s(ctx, collection, "Adobe-Identity", sizeof collection);
 			}
 		}
 

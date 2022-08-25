@@ -111,7 +111,7 @@ svg_open_document_with_xml(fz_context *ctx, fz_xml_doc *xmldoc, fz_xml *xml, con
 
 	doc->idmap = NULL;
 	if (base_uri)
-		fz_strlcpy(doc->base_uri, base_uri, sizeof doc->base_uri);
+		fz_strncpy_s(ctx, doc->base_uri, base_uri, sizeof doc->base_uri);
 	doc->xml = NULL;
 	doc->root = xml;
 	doc->zip = zip;
@@ -144,7 +144,7 @@ svg_open_document_with_buffer(fz_context *ctx, fz_buffer *buf, const char *base_
 
 	doc->idmap = NULL;
 	if (base_uri)
-		fz_strlcpy(doc->base_uri, base_uri, sizeof doc->base_uri);
+		fz_strncpy_s(ctx, doc->base_uri, base_uri, sizeof doc->base_uri);
 	doc->zip = zip;
 
 	fz_try(ctx)

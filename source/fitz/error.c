@@ -83,7 +83,7 @@ int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char
 
 void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 {
-	char buf[2048];
+	char buf[LONGLINE];
 	assert(message != NULL);
 	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "error: ", message, "\n"))
 		buf[0] = 0;
@@ -127,14 +127,13 @@ void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 
 void fz_default_warning_callback(fz_context* ctx, void *user, const char *message)
 {
-	char buf[2048];
+	char buf[LONGLINE];
 	assert(message != NULL);
 	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "warning: ", message, "\n"))
 		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_WARN))
 	{
-#if 1
 		if (buf[0])
 		{
 			fz_write_string(ctx, fz_stderr(ctx), buf);
@@ -145,9 +144,6 @@ void fz_default_warning_callback(fz_context* ctx, void *user, const char *messag
 			fz_write_string(ctx, fz_stderr(ctx), message);
 			fz_write_string(ctx, fz_stderr(ctx), "\n");
 		}
-#else
-		fprintf(stderr, "warning: %s\n", message);
-#endif
 	}
 #ifdef USE_OUTPUT_DEBUG_STRING
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
@@ -189,7 +185,7 @@ void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, v
 
 void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 {
-	char buf[2048];
+	char buf[LONGLINE];
 	assert(message != NULL);
 	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), message, "\n", NULL))
 		buf[0] = 0;
@@ -289,6 +285,10 @@ void fz_var_imp(void *var)
 void fz_flush_warnings(fz_context *ctx)
 {
 	if (!ctx)
+	{
+		ctx = __fz_get_RAW_global_context();
+	}
+	if (!ctx)
 		return;
 
 	if (ctx->warn.count > 1)
@@ -300,6 +300,38 @@ void fz_flush_warnings(fz_context *ctx)
 	}
 	ctx->warn.message[0] = 0;
 	ctx->warn.count = 0;
+}
+
+void fz_flush_all_std_logging_channels(fz_context* ctx)
+{
+	if (!ctx)
+	{
+		ctx = __fz_get_RAW_global_context();
+	}
+	if (!ctx)
+		return;
+
+	fz_flush_warnings(ctx);
+
+	// sequence in anticipation of spurious failures: we attempt to save all
+	// log data as much as possible:
+	//
+	// - error
+	// - debug (for up to date diagnostics
+	// - stdout
+	// and then, just in case one or more of the above had anything to yak on the way out:
+	// - error
+	// - debug (for up to date diagnostics
+	fz_output* channel = fz_stderr(ctx);
+	fz_flush_output(ctx, channel);
+	channel = fz_stdods(ctx);
+	fz_flush_output(ctx, channel);
+	channel = fz_stdout(ctx);
+	fz_flush_output(ctx, channel);
+	channel = fz_stderr(ctx);
+	fz_flush_output(ctx, channel);
+	channel = fz_stdods(ctx);
+	fz_flush_output(ctx, channel);
 }
 
 static void prepare_message(char* buf, size_t bufsize, const char* fmt, va_list ap)
@@ -332,14 +364,14 @@ static void prepare_message(char* buf, size_t bufsize, const char* fmt, va_list 
 
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 {
+	if (!ctx)
+	{
+		ctx = __fz_get_RAW_global_context();
+	}
+
 	char buf[sizeof ctx->warn.message];
 
 	prepmsg(buf, fmt, ap);
-
-	if (!ctx && fz_has_global_context())
-	{
-		ctx = fz_get_global_context();
-	}
 
 	if (!ctx)
 	{
@@ -375,16 +407,16 @@ void fz_warn(fz_context *ctx, const char *fmt, ...)
 
 void fz_vinfo(fz_context* ctx, const char* fmt, va_list ap)
 {
-	char buf[4096];
-
-	fz_flush_warnings(ctx);
-
-	prepmsg(buf, fmt, ap);
-
 	if (!ctx && fz_has_global_context())
 	{
 		ctx = fz_get_global_context();
 	}
+
+	char buf[sizeof ctx->warn.message];
+
+	fz_flush_warnings(ctx);
+
+	prepmsg(buf, fmt, ap);
 
 	if (ctx && ctx->info.print)
 		ctx->info.print(ctx, ctx->info.print_user, buf);
@@ -402,16 +434,16 @@ void fz_info(fz_context* ctx, const char* fmt, ...)
 
 void fz_verror(fz_context* ctx, const char* fmt, va_list ap)
 {
-	char buf[4096];
-
-	fz_flush_warnings(ctx);
-
-	prepmsg(buf, fmt, ap);
-
 	if (!ctx && fz_has_global_context())
 	{
 		ctx = fz_get_global_context();
 	}
+
+	char buf[sizeof ctx->error.message];
+
+	fz_flush_warnings(ctx);
+
+	prepmsg(buf, fmt, ap);
 
 	if (ctx && ctx->error.print)
 		ctx->error.print(ctx, ctx->error.print_user, buf);
@@ -482,13 +514,16 @@ FZ_NORETURN static void _throw(fz_context *ctx, int code)
 		if (ctx->error.top->code != FZ_ERROR_NONE)
 			fz_warn(ctx, "clobbering previous error code and message (throw in always block?)");
 		ctx->error.top->code = code;
+		fz_flush_all_std_logging_channels(ctx);
 		fz_longjmp(ctx->error.top->buffer, 1);
 	}
 	else
 	{
+		ASSERT(ctx->error.top == ctx->error.stack_base);
 		fz_flush_warnings(ctx);
 		if (ctx->error.print)
 			ctx->error.print(ctx, ctx->error.print_user, "aborting process from uncaught error!");
+		fz_flush_all_std_logging_channels(ctx);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -510,7 +545,7 @@ fz_jmp_buf *fz_push_try(fz_context *ctx)
 	 */
 	if (ctx->error.top + 2 >= ctx->error.stack_base + nelem(ctx->error.__stack) - (FZ_JMPBUF_ALIGN + sizeof(ctx->error.stack_base[0]) - 1) / sizeof(ctx->error.stack_base[0]))
 	{
-		fz_strlcpy(ctx->error.message, "exception stack overflow!", sizeof ctx->error.message);
+		fz_strncpy_s(ctx, ctx->error.message, "exception stack overflow!", sizeof ctx->error.message);
 
 		fz_flush_warnings(ctx);
 		if (ctx->error.print)
@@ -581,34 +616,70 @@ const char *fz_caught_message(fz_context *ctx)
 }
 
 /* coverity[+kill] */
-FZ_NORETURN void fz_vthrow(fz_context *ctx, int code, const char *fmt, va_list ap)
+FZ_NORETURN void fz_vthrow(fz_context* ctx, int code, const char* fmt, va_list ap)
 {
-	if (!ctx->within_throw_call)
+	if (ctx)
 	{
-		ctx->within_throw_call = 1;
-
-		fz_try(ctx)
+		if (!ctx->within_throw_call)
 		{
-			fz_vsnprintf(ctx->error.message, sizeof(ctx->error.message), fmt, ap);
+			ctx->within_throw_call = 1;
 
-			if (code != FZ_ERROR_ABORT && code != FZ_ERROR_TRYLATER)
+			fz_try(ctx)
 			{
-				fz_flush_warnings(ctx);
-				if (ctx->error.print)
-					ctx->error.print(ctx, ctx->error.print_user, ctx->error.message);
+				fz_vsnprintf(ctx->error.message, sizeof(ctx->error.message), fmt, ap);
+
+				if (code != FZ_ERROR_ABORT && code != FZ_ERROR_TRYLATER)
+				{
+					fz_flush_warnings(ctx);
+					if (ctx->error.print)
+						ctx->error.print(ctx, ctx->error.print_user, ctx->error.message);
+				}
 			}
+			fz_always(ctx)
+			{
+				ctx->within_throw_call = 0;
+			}
+			fz_catch(ctx)
+			{
+				// ignore internal failures: those will occur when we cannot write to stderr,
+				// which is deemed a non-fatal problem.
+			}
+
+			_throw(ctx, code);
 		}
-		fz_always(ctx)
+	}
+	else
+	{
+		static int within_throw_call = 0;
+
+		within_throw_call++;
+
+		ASSERT(ctx == NULL);
+		fz_flush_all_std_logging_channels(ctx);
+
+		fz_output* err = fz_stderr(ctx);
+		fz_output* dbg = fz_stdods(ctx);
+
+		if (within_throw_call == 1)
 		{
-			ctx->within_throw_call = 0;
-		}
-		fz_catch(ctx)
-		{
-			// ignore internal failures: those will occur when we cannot write to stderr,
-			// which is deemed a non-fatal problem.
+			char msgbuf[LONGLINE];
+			fz_vsnprintf(msgbuf, sizeof(msgbuf), fmt, ap);
+
+			fz_write_string(ctx, err, msgbuf);
+			if (dbg != err)
+				fz_write_string(ctx, dbg, msgbuf);
 		}
 
-		_throw(ctx, code);
+		const char* fatal_msg = "\nERROR:FATAL: Application code throws an fz_throw() exception without a valid context! Aborting process from uncaught error!\n";
+		fz_write_string(ctx, err, fatal_msg);
+		if (dbg != err)
+			fz_write_string(ctx, dbg, fatal_msg);
+
+		fz_flush_all_std_logging_channels(ctx);
+
+		within_throw_call--;
+
+		exit(EXIT_FAILURE);
 	}
 }
 

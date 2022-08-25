@@ -16,13 +16,19 @@
 #include "mupdf/helpers/mu-threads.h"
 #endif
 
+#include "jbig2.h"
+
+#include "plf_nanotimer_c_api.h"
+
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <math.h>
 #if defined(_WIN32)
 #include <windows.h>
+#include <intrin.h>
 #endif
 
 int mutool_main(int argc, const char** argv);
@@ -33,6 +39,21 @@ static inline void memclr(void* ptr, size_t size)
 }
 
 static fz_context* ctx = NULL;
+
+static const char* match_regex = NULL;
+static const char* ignore_match_regex = NULL;
+static const char* match_numbers_s = NULL;
+static const char* ignore_match_numbers_s = NULL;
+static float random_exec_perunage = 1.0;
+
+struct range
+{
+	int first;
+	int last;
+};
+
+static const struct range* match_test_numbers_ranges = NULL;
+static const struct range* ignore_match_test_numbers_ranges = NULL;
 
 /*
 	In the presence of pthreads or Windows threads, we can offer
@@ -123,9 +144,12 @@ struct trace_header
 	size_t seqnum;
 	size_t magic;
 
+#if defined(FZDBG_HAS_TRACING)
 	// heap debugging:
 	int origin_line;
 	const char* origin_file;
+#endif
+
 	struct trace_header* prev;
 	struct trace_header* next;
 } trace_header;
@@ -180,7 +204,7 @@ static void *hit_alloc_limit(struct trace_info *info, int is_malloc, size_t olds
 }
 
 static void *
-trace_malloc(void *arg, size_t size, const char *srcfile, int srcline)
+trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	ASSERT(info == &trace_info);
@@ -193,14 +217,20 @@ trace_malloc(void *arg, size_t size, const char *srcfile, int srcline)
 		return hit_memory_limit(info, 1, 0, size);
 	if (info->alloc_limit > 0 && info->allocs > info->alloc_limit)
 		return hit_alloc_limit(info, 1, 0, size);
-	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, srcfile, srcline);
+#if defined(FZDBG_HAS_TRACING) && defined(_NORMAL_BLOCK)
+	p = _malloc_dbg(size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
+#else
+	p = malloc(size + sizeof(trace_header));
+#endif
 	if (p == NULL)
 		return NULL;
 	p[0].size = size;
 	p[0].magic = 0xEAD;
 	p[0].seqnum = info->sequence_number++;
-	p[0].origin_file = srcfile;
-	p[0].origin_line = srcline;
+#if defined(FZDBG_HAS_TRACING)
+	p[0].origin_file = trace_srcfile;
+	p[0].origin_line = trace_srcline;
+#endif
 
 	if (heap_debug_mutex_is_initialized)
 		mu_lock_mutex(&heap_debug_mutex);
@@ -282,7 +312,7 @@ trace_free(void *arg, void *p_)
 }
 
 static void *
-trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline)
+trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
 {
 	struct trace_info *info = (struct trace_info *) arg;
 	ASSERT(info == &trace_info);
@@ -295,7 +325,7 @@ trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline
 	}
 
 	if (p_ == NULL)
-		return trace_malloc(arg, size, srcfile, srcline);
+		return trace_malloc(arg, size   FZDBG_PASS);
 
 	if (size > SIZE_MAX - sizeof(trace_header))
 		return NULL;
@@ -321,7 +351,11 @@ trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline
 	{
 		trace_header old = p[-1];
 		trace_header* old_p = &p[-1];
-		p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, srcfile, srcline);
+#if defined(FZDBG_HAS_TRACING) && defined(_NORMAL_BLOCK)
+		p = _realloc_dbg(&p[-1], size + sizeof(trace_header), _NORMAL_BLOCK, trace_srcfile, trace_srcline);
+#else
+		p = realloc(&p[-1], size + sizeof(trace_header));
+#endif
 		if (p == NULL)
 			return NULL;
 		info->current += size - old.size;
@@ -329,8 +363,10 @@ trace_realloc(void *arg, void *p_, size_t size, const char* srcfile, int srcline
 			info->total += size - old.size;
 		if (info->current > info->peak)
 			info->peak = info->current;
-		p[0].origin_file = srcfile;
-		p[0].origin_line = srcline;
+#if defined(FZDBG_HAS_TRACING)
+		p[0].origin_file = trace_srcfile;
+		p[0].origin_line = trace_srcline;
+#endif
 		p[0].size = size;
 		info->allocs++;
 
@@ -381,7 +417,11 @@ trace_report_pending_allocations_since(size_t snapshot_id)
 	int hits = 0;
 	while (p && p->seqnum >= snapshot_id)
 	{
+#if defined(FZDBG_HAS_TRACING)
 		fprintf(stderr, "\nLEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
+#else
+		fprintf(stderr, "\nLEAK? #%zu (size: %zu)", p->seqnum, p->size);
+#endif
 		hits++;
 		
 		p = p->prev;
@@ -437,6 +477,24 @@ static void usage(void)
 		"    NNN   set memory limit to NNN bytes (same as 'sNNN' above)\n"
 		"  -L      low memory mode (avoid caching, clear objects after each page)\n"
 		"\n"
+		"  -n LLL  restrict the test to only the specified tests at lines LLL, where\n"
+		"          LLL is any set of comma-separated line specifications:\n"
+		"            nnn     : the line number nnn\n"
+		"            mmm-nnn : the lines numbers mmm up to and including nnn\n"
+		"            'N'     : a literal 'N' represents 'the maximum line number',\n"
+		"                      which is assumed to be 1,000,000\n"
+		"          Example: '-n 4,10-31,110-N'\n"
+		"  -N LLL  the inverse of '-n': /exclude/ the lines in the NNN spec from\n"
+		"          the test run.\n"
+		"          Note: '-N' is applied after '-n'. Hence, f.e. '-n 5-10 -N 8-10'\n"
+		"          will only run the tests for lines 5-7.\n"
+		"  -x RRR  restrict the test to only those test lines which match one of\n"
+		"          the phrases ('regexes') in the RRR set.\n"
+		"          Example: '-x dried-frog-pills' will only execute the tests for\n"
+		"          any file path that includes 'dried-frog-pills', e.g.\n"
+		"          'research/dried-frog-pills/effectiveness.pdf', and will skip\n"
+		"          all non-matching lines, e.g. 'research/frog/disect1.pdf'\n"
+		"\n"
 		"  -V      display the version of this application and terminate\n"
 		"\n"
 		"\nscriptfile contains a list of commands:\n"
@@ -461,6 +519,153 @@ mk_absolute_path(fz_context* ctx, const char* filepath)
 	return fz_strdup(ctx, q);
 }
 
+static struct target_path_mapping
+{
+	// the absolute path (sans trailing '/') to map any output paths TO:
+	// (Note: this path is EMPTY when this mapping feature has been disabled.)
+	char abs_target_path[PATH_MAX];
+	// the absolute 'current working directory' (at the time of mapping construction), i.e.
+	// the part of the SOURCE PATH that will be REPLACED by the abs_target_path:
+	// (when the SOURCE PATH is located outside this 'working dir', it is prefixed
+	// by the abs_target_path and used in its entirety to ensure discernibility
+	// during analysis.
+	char abs_cwd_as_mapping_source[PATH_MAX];
+} output_path_mapping_spec;
+
+static char* find_next_dirsep(char* p)
+{
+	if (!*p)
+		return p;
+
+	char* e = strchr(p + 1, '/');
+	if (!e)
+	{
+		e = p + strlen(p);
+	}
+	return e;
+}
+
+static void map_path_to_dest(char* dst, size_t dstsiz, const char* inpath)
+{
+	char srcpath[PATH_MAX];
+
+#if 0
+	// deal with 'specials' too:
+	if (!strcmp(inpath, "/dev/null") || !fz_strcasecmp(inpath, "nul:") || !strcmp(inpath, "/dev/stdout"))
+	{
+		fz_strncpy_s(dst, inpath, dstsiz);
+		return;
+	}
+#endif
+
+	if (!fz_realpath(inpath, srcpath))
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process file path to a sane absolute path: %s", inpath);
+	}
+
+	// did the user request output file path mapping?
+	if (!output_path_mapping_spec.abs_target_path[0])
+	{
+		ASSERT(dstsiz >= PATH_MAX);
+		strncpy(dst, srcpath, dstsiz);
+	}
+	else
+	{
+		// TODO: cope with UNC paths mixed & mashed with classic paths.
+
+		// First we find the common prefix.
+		// Then we check how many path parts are left over from the CWD.
+		// each left-over part is represented by a single _
+		// concat those into the first part to be appended.
+		// append the remainder of the source path then, cleaning it up
+		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
+		// This is your mapped destination path, guaranteed to be positioned
+		// WITHIN the given target path (which is prefixed to the generated
+		// RELATIVE path!)
+		//
+		// Example:
+		// given
+		//   CWD = 	  C:/a/b/c
+		//   TARGET = T:/t
+		// we then get for these inputs:
+		//   C:/a/b/c/d1  -> d1        (leftover: <nil>)     -> d1             -> T:/t/d1
+		//   C:/a/b/d     -> d         (leftover: c)         -> _/c            -> T:/t/_/c
+		//   C:/a/e/f     -> e/f       (leftover: b/c)       -> __/e/f         -> T:/t/__/e/f
+		//   C:/x/y/z     -> x/y/z     (leftover: a/b/c)     -> ___/x/y/z      -> T:/t/___/x/y/z
+		//   D:/a/b/c     -> D:/a/b/c  (leftover: C:/a/b/c)  -> ____/D:/a/b/c  -> T:/t/____/D_/a/b/c
+		//   C:/a         ->           (leftover: b/c)       -> __             -> T:/t/__
+		//   C:/a/b       ->           (leftover: c)         -> _              -> T:/t/_
+		//   C:/x         -> x         (leftover: a/b/c)     -> ___/x          -> T:/t/___/x
+		//   D:/a         -> D:/a      (leftover: C:/a/b/c)  -> ____/D:/a      -> T:/t/____/D_/a
+		// thus every position in the directory tree *anywhere in the system* gets encoded to its own
+		// unique subdirectory path within the "target path" directory tree -- of course, ASSUMING
+		// you don't have any underscore-only leading directories in any of (relative) paths you feed
+		// this mapper... ;-)
+		char common_prefix[PATH_MAX];
+		char* sep = common_prefix;
+		char* prefix_end = common_prefix;
+
+		strncpy(common_prefix, output_path_mapping_spec.abs_cwd_as_mapping_source, PATH_MAX);
+
+		do
+		{
+			sep = find_next_dirsep(sep);
+			// match common prefix:
+			size_t cpfxlen = sep - common_prefix;
+			if (strncmp(common_prefix, srcpath, cpfxlen) != 0)
+			{
+				// failed to match; the common prefix is our previous match length.
+				break;
+			}
+			// check edge case: srcpath has a longer part name at the end of the match,
+			// e.g. `b` vs. `bb`: `/a/b[/...]` vs. `/a/b[b/...]`
+			if (*sep == 0 && srcpath[cpfxlen] != '/')
+			{
+				// failed to match; the common prefix is our previous match length.
+				break;
+			}
+			prefix_end = sep;
+		} while (*sep);
+
+		// count the path parts left over from the CWD:
+		char dotdot[PATH_MAX] = "";
+		int ddpos = 0;
+
+		// each left-over part is represented by a single _
+		while (*sep)
+		{
+			dotdot[ddpos++] = '_';
+			sep = find_next_dirsep(sep);
+		}
+
+		if (ddpos > 0)
+			dotdot[ddpos++] = '/';
+		dotdot[ddpos] = 0;
+
+		// append the remainder of the source path then, cleaning it up
+		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
+		size_t common_prefix_length = prefix_end - common_prefix;
+		char* remaining_inpath_part = srcpath + common_prefix_length;
+		// skip leading '/' separators in remaining_inpath_part as they will only clutter the output
+		while (*remaining_inpath_part == '/')
+			remaining_inpath_part++;
+
+		char appendedpath[PATH_MAX];
+		int rv = fz_snprintf(appendedpath, sizeof(appendedpath), "%s/%s%s", output_path_mapping_spec.abs_target_path, dotdot, remaining_inpath_part);
+		if (rv <= 0 || rv >= dstsiz)
+		{
+			appendedpath[sizeof(appendedpath) - 1] = 0;
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot map file path to a sane sized absolute path: dstsize: %zu, srcpath: %s, dstpath: %s", dstsiz, srcpath, appendedpath);
+		}
+
+		// sanitize the appended part: lingering drive colons, wildcards, etc. will be replaced by _:
+		fz_sanitize_path_ex(appendedpath, "^$!", "_", 0, strlen(output_path_mapping_spec.abs_target_path));
+
+		ASSERT(dstsiz >= PATH_MAX);
+		strncpy(dst, appendedpath, dstsiz);
+	}
+}
+
 // Get a line of text from file.
 // Return NULL at EOF. Return a reference to a static buffer containing a string value otherwise.
 static char *
@@ -470,28 +675,35 @@ my_getline(FILE *file, int *linecounter_ref)
 	char *d = getline_buffer;
 	int space = sizeof(getline_buffer)-1;
 
+	*d = 0;
+
 	/* Skip over any prefix of whitespace */
 	do
 	{
 		c = fgetc(file);
 		if (c == '\n')
 			(*linecounter_ref)++;
+		// abort on EOF, error or when you encounter an illegal NUL byte in the script
+		if (c <= 0)
+			return NULL;
 	}
-	while (c > 0 && isspace(c));
-
-	// abort on EOF, error or when you encounter an illegal NUL byte in the script
-	if (c <= 0)
-		return NULL;
+	while (isspace(c));
 
 	/* Read the line in */
 	do
 	{
 		*d++ = (char)c;
+		--space;
+		if (!space)
+			break;
 		c = fgetc(file);
-		if (c == '\n')
+		// replace TAB with SPACE
+		if (c == '\t')
+			c = ' ';
+		else if (c == '\n' || c <= 0)
 			(*linecounter_ref)++;
 	}
-	while (c >= 32 && --space);
+	while (c >= 32);
 
 	/* If we ran out of space, skip the rest of the line */
 	if (space == 0)
@@ -629,6 +841,50 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 				d += pathlen;
 				space -= pathlen;
 			}
+			else if (strncmp(m, "remap", 5) == 0 || strncmp(m, "{remap", 6) == 0)
+			{
+				// format: %{remap(arg)}, where (){}<>[] pairs are accepted as arg delims.
+				//
+				// remap the given path to the target path, IFF the bulktest user specified
+				// a path remapping should be applied.
+				size_t skip_dist = 5 + (m[0] == '{' ? 1 : 0);
+
+				s = m + skip_dist;
+				char delim = *s++;
+				static const char start_delims[] = "({<[";
+				static const char end_delims[] =   ")}>]";
+				const char* delim_pos = strchr(start_delims, delim);
+				if (!delim_pos)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "missing start delimiter: %remap template function expects at brace-delimited argument. Faulty line snippet: %q (as part of %q)", m, arg);
+				size_t pos = delim_pos - start_delims;
+				char end_delim = end_delims[pos];
+				delim_pos = strchr(s, end_delim);
+				if (!delim_pos)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "missing end delimiter: %remap template function expects at brace-delimited argument. Faulty line snippet: %q (as part of %q)", s, arg);
+				char remap_arg[PATH_MAX];
+				// amount to copy: (delim_pos - s) chars, +1 for the enforced NUL sentinel:
+				fz_strncpy_s(ctx, remap_arg, s, fz_mini((delim_pos - s) + 1, sizeof(remap_arg)));
+				// %remap itself should also be terminated when it was written as "%{remap":
+				if (m[0] == '{')
+				{
+					if (delim_pos[1] != '}')
+						fz_throw(ctx, FZ_ERROR_GENERIC, "%{remap} command not properly delineated: missing closing curly brace '}'. Faulty line snippet: %q (as part of %q)", s, arg);
+					s = delim_pos + 2;
+				}
+				else
+				{
+					s = delim_pos + 1;
+				}
+
+				char target_path[PATH_MAX];
+				map_path_to_dest(target_path, sizeof(target_path), remap_arg);
+
+				strncpy(d, target_path, space);
+
+				size_t l = strlen(d);
+				d += l;
+				space -= l;
+			}
 			else if (!*m || !strchr("123456789", *m))
 			{
 				// when marker isn't immediately followed by a decimal number (without leading zeroes),
@@ -671,6 +927,40 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 	}
 }
 
+static const char* rangespec2str(char* buf, size_t bufsiz, const struct range* spec)
+{
+	if (!spec || spec->first == -1)
+		return "-";
+
+	buf[0] = 0;
+	char* d = buf;
+	for (; spec->first != -1; spec++)
+	{
+		if (bufsiz < 10)
+		{
+			strcpy(d, "...");
+			break;
+		}
+
+		if (spec->first == spec->last)
+			fz_snprintf(d, bufsiz, "%d,", spec->first);
+		else
+			fz_snprintf(d, bufsiz, "%d-%d,", spec->first, spec->last);
+		size_t l = strlen(d);
+		d += l;
+		bufsiz -= l;
+	}
+	if (d > buf && d[-1] == ',')
+		d[-1] = 0;
+	return buf;
+}
+
+static const char* match_regex2str(const char* re)
+{
+	if (!re || !*re)
+		return "-";
+	return re;
+}
 
 static int
 match(const char *arg, const char *match)
@@ -863,7 +1153,7 @@ static void flush_active_logfile_hard(void)
 		// logfiles are cut up into ~20MB chunks:
 		if (file_size < 20000000)
 		{
-			logcfg.logfile = fopen(logcfg.logfilepath, "a");
+			logcfg.logfile = fz_fopen_utf8(ctx, logcfg.logfilepath, "a");
 		}
 		else
 		{
@@ -877,27 +1167,50 @@ static void flush_active_logfile_hard(void)
 			while (fz_file_exists(ctx, logfilename))
 			{
 				// rename old logfile:
-				fz_snprintf(logfilename, sizeof(logfilename), "%s.%04d.log", basename, count++);
+				fz_snprintf(logfilename, sizeof(logfilename), "%s.C-%04d.log", basename, count++);
 			}
-			if (strcmp(logcfg.logfilepath, logfilename))
-			{
+			ASSERT(strcmp(logcfg.logfilepath, logfilename));
+			
 				(void)rename(logcfg.logfilepath, logfilename);
 				int errcode = errno;
 				if (fz_file_exists(ctx, logcfg.logfilepath))
 				{
 					fz_throw(ctx, FZ_ERROR_GENERIC, "%s: failed to rename old logfile %q to %q.", errcode ? strerror(errcode) : "Unknown rename error", logfilename, logcfg.logfilepath);
 				}
+
+			logcfg.logfile = fz_fopen_utf8(ctx, logcfg.logfilepath, "w");
+
+			fz_info(ctx, "bulktest: logfile rotated. Previous logging at %q.\n", logfilename);
+
+			// report test run restrictions to every logfile we produce:
+			if (random_exec_perunage < 1.0)
+			{
+				fz_info(ctx, "bulktest: using random_exec_percentage: %.1f%%\n", random_exec_perunage * 100);
 			}
 
-			logcfg.logfile = fopen(logcfg.logfilepath, "w");
+			if (match_regex || ignore_match_regex || match_test_numbers_ranges || ignore_match_test_numbers_ranges)
+			{
+				char numbuf1[LONGLINE];
+				char numbuf2[LONGLINE];
+				fz_info(ctx, "Using a RESTRICTED DATA SET:\n"
+					"- ACCEPT: regex: %s\n"
+					"          line numbers: %s\n"
+					"- IGNORE: regex: %s\n"
+					"          line numbers: %s\n"
+					"-----------------------------------------------------------------------------------\n\n\n",
+					match_regex2str(match_regex),
+					rangespec2str(numbuf1, sizeof(numbuf1), match_test_numbers_ranges),
+					match_regex2str(ignore_match_regex),
+					rangespec2str(numbuf2, sizeof(numbuf2), ignore_match_test_numbers_ranges));
+			}
 		}
 	}
 }
 
 static void open_logfile(const char* scriptname)
 {
-	char logfilename[LONGLINE];
-	char logfilename_0[LONGLINE];
+	char logfilename[PATH_MAX];
+	char logfilename_0[PATH_MAX];
 
 	fz_snprintf(logfilename, sizeof(logfilename), "%s.log", scriptname);
 	strncpy(logfilename_0, logfilename, sizeof(logfilename_0));
@@ -917,7 +1230,9 @@ static void open_logfile(const char* scriptname)
 		}
 	}
 
-	logcfg.logfile = fopen(logfilename_0, "w");
+	fz_mkdir_for_file(ctx, logfilename_0);
+
+	logcfg.logfile = fz_fopen_utf8(ctx, logfilename_0, "w");
 	logcfg.logfilepath = fz_strdup(ctx, logfilename_0);
 }
 
@@ -1046,7 +1361,13 @@ static void mu_drop_context_at_exit(void)
 	mu_drop_context();
 }
 
-static void show_progress_on_stderr(struct logconfig* logcfg, const char *message)
+typedef enum progress_msg_level {
+	PML_INFO,
+	PML_WARNING,
+	PML_ERROR,
+} progress_msg_level_t;
+
+static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level_t level, const char* message)
 {
 	if (!logcfg->quiet)
 	{
@@ -1055,7 +1376,11 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char *messag
 		// show progress on stderr, while we log the real data to logfile:
 		if (logfile != stderr)
 		{
-			if (!strncmp(message, "OK:", 3))
+			if (!strncmp(message, "\n:L#0", 5))
+			{
+				return; // don't show progress for simple 'this line was just read' log messages.
+			}
+			else if (!strncmp(message, "OK:", 3))
 			{
 				//fprintf(stderr, u8"✅");
 				fprintf(stderr, "#");
@@ -1073,13 +1398,124 @@ static void show_progress_on_stderr(struct logconfig* logcfg, const char *messag
 			{
 				fprintf(stderr, "\n%s", message + 2);
 			}
+			else if (!strncmp(message, "::SKIP-DUE-TO-RANDOM-SAMPLING: ", 31))
+			{
+				fprintf(stderr, "^");
+			}
 			else if (strstr(message, "*!*"))
 			{
 				fprintf(stderr, "*!*");
 			}
 			else
 			{
-				fprintf(stderr, ".");
+				switch (level)
+				{
+				case PML_ERROR:
+					fprintf(stderr, "?");
+					break;
+
+				case PML_WARNING:
+					fprintf(stderr, "w");
+					break;
+
+				default:
+					{
+						// time-based reduction of progress output:
+						// the first filter is RDTSC based and *fast*, reducing the progress update rate to something around 1/10th of a second,
+						// give or take some CPU clock rate fluctuations, etc.
+						// the inner, second, filter is clock()-based and thus quite a bit slower, yet more accurate. Here we filter the
+						// incoming rate of ~ msgs per second down to once every third of a second, 10 per sec to 3 per sec.
+						static uint64_t prev_rtcnt = 0;
+						static uint64_t offset = 1E6;
+						uint64_t t = __rdtsc();
+						if (t > prev_rtcnt + offset)
+						{
+							// RDTSC and clock() must be collected together; for offset correction, we cannot use `prev_rtcnt` as that one will
+							// have updated in the meantime, where this code chunk was then skipped, resulting in (t - prev_rtcnt) measuring
+							// quite a different time interval then we do here using clock(), hence we need to track the matching RDTSC
+							// value for proper offset correction calculus:
+							static uint64_t prev_rtcnt_on_clock = 0;
+
+							static nanotimer_data_t prev_t = { 0 };
+							nanotimer_data_t new_t = { 0 };
+							nanotimer_start(&new_t);
+							double t_delta = nanotimer_get_elapsed_us(&prev_t);
+
+							// Stage 1:
+							// 
+							// adjust ("tune") your RDTSC count offset to a poll period of about 0.1 seconds, i.e. to visit
+							// this section about once every 100 msecs.
+							if (t_delta > 0 && prev_rtcnt != 0)
+							{
+								// apparently, `offset` is small enough to land us here again *within* 1/10rd of a second: adjust `offset`!
+								uint64_t clockdelta = (t - prev_rtcnt_on_clock);
+								// slowly grow the offset towards the proper value; when we measure across tiny clock() intervals,
+								// extrapolating to 0.1 second (~ 100 clock()s on most hardware) is overzealous and highly
+								// inaccurate. So we limit the extrapolation factor to 2, thus growing the offset slowly towards
+								// a proper value. We don't loose much performance with this either, i.e. this is very low extra overhead.
+								//
+								// Another, additional, measure to improve accuracy of the calculus is to ignore any delta frames
+								// which last least than 20 clock() ticks: that way, we'll have a 5% or better accuracy.
+								if (clockdelta >= 20)
+								{
+									double dt = clockdelta / t_delta;   // --> RDTSC count per microsecond
+									dt *= 0.1 * 1E6;                    // --> RDTSC ticks count for 0.1 second (100 0000 microseconds)
+									if (dt > offset)
+									{
+										// also limit the offset increase angle to prevent crazy changes due to unknown CPU gas bubbles. ;-)
+										//
+										// Note: I was wandering for a bit why those 'crazy jumps' occurred, but they happen, of course,
+										// when you're debugging the codebase: while you, the human, check your debugger screens, the timers
+										// keep ticking and thus your next time delta will be way off from usual reality, resulting in
+										// sometimes *insane* `dt` value jumps in here.
+										// By limiting the increase rate, we prevent that artifact from badly impacting our progress time delta
+										// filters above.
+										offset = fz_min(5 * offset, dt);
+										//fprintf(stderr, "+");
+									}
+
+									prev_t = new_t;
+									prev_rtcnt_on_clock = t;
+								}
+							}
+							else
+							{
+								prev_t = new_t;
+								prev_rtcnt_on_clock = t;
+							}
+
+							// Stage 2:
+							//
+							// As we're now in this "once per 100msec" section, we know we can do relatively costly
+							// things, such as measuring the time (as done above) and print porogress.
+							// We do the later at most 3 times per second:
+							static double pdelta = 0;
+							static uint32_t tocks = 0;
+							pdelta += t_delta;
+							tocks++;
+
+							if (tocks >= 3 || pdelta > 0.33 * 1E6)
+							{
+								//fprintf(stderr, ".%d%d", tocks, pdelta > 0.33 * 1E6);
+								fprintf(stderr, ".");
+								tocks = 0;
+								pdelta = 0;
+							}
+						}
+						else
+						{
+							// slowly decrease the timing offset: this compensates for CPU clock variations, when
+							// the CPU clock rate slows down: then the previously determined `offset` value won't be suitable any more.
+							//
+							// As this path will execute quite often, we don't want any particular (and costly!) time measurement calls
+							// in here, but simply apply some quick math to slowly decrease the offset.
+							offset = offset * 0.8f;
+							//fprintf(stderr, "-");
+						}
+						prev_rtcnt = t;
+					}
+					break;
+				}
 			}
 		}
 	}
@@ -1094,6 +1530,7 @@ static fz_output* stddbgchannel(void)
 	{
 		return NULL;
 	}
+	int rc = fz_set_output_buffer(ctx, dbg, 160 /* LONGLINE is too much here, just try to buffer about 2 regular lines of text... */);
 	return dbg;
 }
 
@@ -1104,7 +1541,7 @@ static void tst_error_callback(fz_context* ctx, void* user, const char* message)
 	FILE* logfile = (logcfg && logcfg->logfile) ? logcfg->logfile : stderr;
 
 	// show progress on stderr, while we log the real data to logfile:
-	show_progress_on_stderr(logcfg, message);
+	show_progress_on_stderr(logcfg, PML_ERROR, message);
 	fprintf(logfile, "error: %s\n", message);
 	fflush(logfile);
 
@@ -1121,7 +1558,7 @@ static void tst_warning_callback(fz_context* ctx, void* user, const char* messag
 	if (!logcfg->quiet)
 	{
 		// show progress on stderr, while we log the real data to logfile:
-		show_progress_on_stderr(logcfg, message);
+		show_progress_on_stderr(logcfg, PML_WARNING, message);
 		fprintf(logfile, "warning: %s\n", message);
 		fflush(logfile);
 
@@ -1139,7 +1576,7 @@ static void tst_info_callback(fz_context* ctx, void* user, const char* message)
 	if (!logcfg->quiet)
 	{
 		// show progress on stderr, while we log the real data to logfile:
-		show_progress_on_stderr(logcfg, message);
+		show_progress_on_stderr(logcfg, PML_INFO, message);
 		fprintf(logfile, "%s\n", message);
 
 		fz_output* dbg = stddbgchannel();
@@ -1147,12 +1584,6 @@ static void tst_info_callback(fz_context* ctx, void* user, const char* message)
 			fz_write_printf(ctx, dbg, "%s\n", message);
 	}
 }
-
-struct range
-{
-	int first;
-	int last;
-};
 
 static struct range* decode_numbers_rangespec(const char* spec)
 {
@@ -1187,7 +1618,7 @@ static struct range* decode_numbers_rangespec(const char* spec)
 
 static const char* test_fail_reason[] = {
 	"PASS",
-	/* 1 */ "empty line",
+	/* 1 */ "empty line or comment",
 	/* 2 */ "rejected by match regex",
 	/* 3 */ "rejected by ignore-match regex",
 	/* 4 */ "rejected by match-ranges (line number range spec)",
@@ -1241,49 +1672,12 @@ static int test_dataline_against_matchspecs(const char *line, int linenumber, co
 	return rejected;
 }
 
-static const char* rangespec2str(char* buf, size_t bufsiz, const struct range* spec)
-{
-	if (!spec || spec->first == -1)
-		return "-";
-
-	buf[0] = 0;
-	char* d = buf;
-	for (; spec->first != -1; spec++)
-	{
-		if (bufsiz < 10)
-		{
-			strcpy(d, "...");
-			break;
-		}
-
-		if (spec->first == spec->last)
-			fz_snprintf(d, bufsiz, "%d,", spec->first);
-		else
-			fz_snprintf(d, bufsiz, "%d-%d,", spec->first, spec->last);
-		size_t l = strlen(d);
-		d += l;
-		bufsiz -= l;
-	}
-	if (d > buf && d[-1] == ',')
-		d[-1] = 0;
-	return buf;
-}
-
-static const char* match_regex2str(const char* re)
-{
-	if (!re || !*re)
-		return "-";
-	return re;
-}
-
 
 int
 bulktest_main(int argc, const char **argv)
 {
 	fz_trace_snapshot = &trace_snapshot;
 	fz_trace_report_pending_allocations_since = &trace_report_pending_allocations_since;
-
-	ASSERT(1 != 0);
 
 	int c;
 	int errored = 0;
@@ -1296,10 +1690,13 @@ bulktest_main(int argc, const char **argv)
 	fz_locks_context *locks = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
 	int lowmemory = 0;
-	const char *match_regex = NULL;
-	const char* ignore_match_regex = NULL;
-	const char* match_numbers_s = NULL;
-	const char* ignore_match_numbers_s = NULL;
+	const char* forced_output_basedir = NULL;
+
+	match_regex = NULL;
+	ignore_match_regex = NULL;
+	match_numbers_s = NULL;
+	ignore_match_numbers_s = NULL;
+	random_exec_perunage = 1.0;
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	bulktest_is_toplevel_ctx = 0;
@@ -1315,13 +1712,13 @@ bulktest_main(int argc, const char **argv)
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "TLvqVm:s:x:n:X:N:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "TLvqVm:r:s:x:n:X:N:O:h")) != -1)
 	{
 		switch(c)
 		{
 		case 'T': script_is_template = 1; break;
-		case 'q': logcfg.quiet = 1; break;
-		case 'v': verbosity ^= 1; break;
+		case 'q': logcfg.quiet = 1; verbosity = 0; break;
+		case 'v': logcfg.quiet = 0; verbosity++; break;
 		case 's':
 			if (strchr(fz_optarg, 't')) ++showtime;
 			if (strchr(fz_optarg, 'm')) ++showmemory;
@@ -1332,6 +1729,19 @@ bulktest_main(int argc, const char **argv)
 			else trace_info.mem_limit = fz_atoi64(fz_optarg);
 			break;
 		case 'L': lowmemory = 1; break;
+
+		case 'r':
+			// expect a percentage / perunage
+			char pct = 0;
+			int pc = sscanf(fz_optarg, "%f%c", &random_exec_perunage, &pct);
+			if (pct == '%')
+				random_exec_perunage /= 100;
+			// sanity check/limiter @ 1%
+			if (random_exec_perunage < 0.0)
+				random_exec_perunage = 0.0;
+			else if (random_exec_perunage > 1.0)
+				random_exec_perunage = 1.0;
+			break;
 
 		case 'x':
 			// expect a regex to match
@@ -1348,6 +1758,10 @@ bulktest_main(int argc, const char **argv)
 		case 'N':
 			// expect one or more line numbers and/or ranges to *skip* (i.e. ignore)
 			ignore_match_numbers_s = fz_optarg;
+			break;
+		case 'O':
+			// output files must use this basedir: map current working directory onto it; absolute paths get mapped as if they were relative.
+			forced_output_basedir = fz_optarg;
 			break;
 
 		case 'V': fz_info(ctx, "bulktest version %s", FZ_VERSION); return EXIT_FAILURE;
@@ -1380,6 +1794,9 @@ bulktest_main(int argc, const char **argv)
 
 	if (!fz_has_global_context())
 	{
+		fz_enable_dbg_output();
+		fz_enable_dbg_output_on_stdio_unreachable();
+
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
 		if (!ctx)
 		{
@@ -1408,14 +1825,36 @@ bulktest_main(int argc, const char **argv)
 		return EXIT_FAILURE;
 	}
 
+	// shut up JBig2Dec (which can be very verbose) unless we've dialed up our own verbosity levels:
+	jbig2_set_error_log_prefilter_level(JBIG2_SEVERITY_FATAL - verbosity);
+
+	if (!getcwd(output_path_mapping_spec.abs_cwd_as_mapping_source, sizeof(output_path_mapping_spec.abs_cwd_as_mapping_source)))
+	{
+		fz_error(ctx, "cannot initialise bulktest::cwd: %s; path(s) too long?", strerror(errno));
+		return EXIT_FAILURE;
+	}
+	// when no output mapping/override was specified, don't use any:
+	if (!forced_output_basedir)
+	{
+		output_path_mapping_spec.abs_target_path[0] = 0;
+	}
+	// same 'realpath' treatment for both sides of the mapping:
+	else if (!fz_realpath(forced_output_basedir, output_path_mapping_spec.abs_target_path) ||
+		!fz_realpath(output_path_mapping_spec.abs_cwd_as_mapping_source, output_path_mapping_spec.abs_cwd_as_mapping_source))
+	{
+		fz_error(ctx, "cannot initialise bulktest::output_path_mapping spec; path(s) too long?");
+		return EXIT_FAILURE;
+	}
+
 	int linecounter = 0;
 	int datalinecounter = 0;
 	FILE* script = NULL;
 	FILE* datafeed = NULL;
-	const char* scriptname = NULL;
+	char scriptname[PATH_MAX] = "";
 	const char* datafilename = NULL;
-	const struct range* match_test_numbers_ranges = NULL;
-	const struct range* ignore_match_test_numbers_ranges = NULL;
+
+	match_test_numbers_ranges = NULL;
+	ignore_match_test_numbers_ranges = NULL;
 
 	fz_try(ctx)
 	{
@@ -1454,21 +1893,67 @@ bulktest_main(int argc, const char **argv)
 
 		while (optind < argc)
 		{
-			if (!scriptname || !script_is_template)
+			if (!scriptname[0] || !script_is_template)
 			{
-				fz_free(ctx, scriptname);
-				scriptname = NULL;
+				scriptname[0] = 0;
 
 				// load a script
 				const char* p = argv[optind++];
 
 				close_active_logfile();
 
-				scriptname = mk_absolute_path(ctx, p);
+				map_path_to_dest(scriptname, sizeof(scriptname), p);
+				// extra: we want all bulktest logfiles to be dumped straight into the remap target path, if remapping was turned on.
+				// in that case, we want the entire remapped path to be visible in the logfile name, so we can easily match
+				// logfiles to target path subtrees (and the generated output files there-in).
+				//
+				// As we are guaranteed to now have a path pointing INSIDE the target base path, we can simply use length of
+				// base path as the starting point for this next transformation:
+				if (output_path_mapping_spec.abs_target_path[0])
+				{
+					size_t offset = strlen(output_path_mapping_spec.abs_target_path);
 
+					// replace all '/' with '.' to produce a filename representing the mapped path yet will be dumped in the base dir itself for quick & easy access:
+					char* p = scriptname + offset;
+					ASSERT(*p == '/');
+					p = strchr(p + 1, '/');
+					while (p)
+					{
+						*p = '.';
+						p = strchr(p + 1, '/');
+					}
+				}
+					
 				open_logfile(scriptname);
 
-				script = fopen(scriptname, "rb");
+				if (random_exec_perunage < 1.0)
+				{
+					fz_info(ctx, "bulktest: using random_exec_percentage: %.1f%%\n", random_exec_perunage * 100);
+				}
+
+				// report test run restrictions to every logfile we produce:
+				if (match_regex || ignore_match_regex || match_test_numbers_ranges || ignore_match_test_numbers_ranges)
+				{
+					char numbuf1[LONGLINE];
+					char numbuf2[LONGLINE];
+					fz_info(ctx, "Using a RESTRICTED DATA SET:\n"
+						"- ACCEPT: regex: %s\n"
+						"          line numbers: %s\n"
+						"- IGNORE: regex: %s\n"
+						"          line numbers: %s\n"
+						"-----------------------------------------------------------------------------------\n\n\n",
+						match_regex2str(match_regex),
+						rangespec2str(numbuf1, sizeof(numbuf1), match_test_numbers_ranges),
+						match_regex2str(ignore_match_regex),
+						rangespec2str(numbuf2, sizeof(numbuf2), ignore_match_test_numbers_ranges));
+				}
+
+				if (!fz_realpath(p, scriptname))
+				{
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process script file path to a sane absolute path: %s", p);
+				}
+
+				script = fz_fopen_utf8(ctx, scriptname, "rb");
 				if (script == NULL)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open script: %s", scriptname);
 				linecounter = 0;
@@ -1485,10 +1970,15 @@ bulktest_main(int argc, const char **argv)
 
 				// load a datafile if we already have a script AND we're in "template mode".
 				const char* p = argv[optind++];
+				char abspathbuf[PATH_MAX];
 
-				datafilename = mk_absolute_path(ctx, p);
+				if (!fz_realpath(p, abspathbuf))
+				{
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process bulktest data file path to a sane absolute path: %s", p);
+				}
+				datafilename = fz_strdup(ctx, abspathbuf);
 
-				datafeed = fopen(datafilename, "rb");
+				datafeed = fz_fopen_utf8(ctx, datafilename, "rb");
 				if (datafeed == NULL)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
 				datalinecounter = 0;
@@ -1543,7 +2033,14 @@ bulktest_main(int argc, const char **argv)
 
 				do
 				{
-					bool report_time = true;
+					enum {
+						RPT_NOTHING = 0,
+						RPT_A_SKIPPED_COMMAND,
+						RPT_A_SIMPLE_CONTROLFLOW_COMMAND,
+						RPT_A_SIMPLE_USERINFO_COMMAND,
+						RPT_A_SIMPLE_COMMAND,
+						RPT_AN_IMPORTANT_TEST_COMMAND
+					} report_time = RPT_NOTHING;
 					char* line = my_getline(script, &linecounter);
 
 					if (line == NULL)
@@ -1558,6 +2055,45 @@ bulktest_main(int argc, const char **argv)
 					fz_free_argv_array(ctx, argv);
 					argv = NULL;
 					argc = 0;
+
+					// ignore comments.
+					//
+					// comments start with '% ' (note the extra ' ' SPACE char in there!), '# ' or '// '
+					for (char* comment_start = strpbrk(line, "%#/"); comment_start; comment_start = strpbrk(comment_start + 1, "%#/"))
+					{
+						switch (comment_start[0])
+						{
+						case '%':
+						case '#':
+							// accept on line by itself, i.e. followed by NUL, otherwise we require a whitespace to follow it, for otherwise it could be a script macro or other important bit!
+							if (!comment_start[1] || isspace(comment_start[1]))
+							{
+								if (verbosity >= 1)
+								{
+									fz_info(ctx, "\n::L#%05u: COMMENT %s", linecounter, line);
+								}
+
+								comment_start[0] = 0;
+								comment_start[1] = 0;
+							}
+							break;
+
+						case '/':
+							// no additional whitespace after required...
+							if (comment_start[1] == '/')
+							{
+								if (verbosity >= 1)
+								{
+									fz_info(ctx, "\n::L#%05u: COMMENT %s", linecounter, line);
+								}
+
+								comment_start[0] = 0;
+								comment_start[1] = 0;
+							}
+							break;
+						}
+					}
+
 					convert_string_to_argv(ctx, &argv, &argc, line, 0);
 
 					// skip empty lines
@@ -1595,9 +2131,9 @@ bulktest_main(int argc, const char **argv)
 
 					fflush(logcfg.logfile);
 
-					if (verbosity)
+					if (verbosity >= 1)
 					{
-						fz_info(ctx, "L#%04d: %s", linecounter, line);
+						fz_info(ctx, "\n:L#%05u: %s", linecounter, line);
 					}
 
 					// check if this statement is obscured by an outer IF/ENDIF condition
@@ -1613,12 +2149,7 @@ bulktest_main(int argc, const char **argv)
 
 					begin_time = Curl_now();
 
-					if (match(argv[0], "%"))
-					{
-						/* Comment */
-						report_time = false;
-					}
-					else if (match(argv[0], "IF"))
+					if (match(argv[0], "IF"))
 					{
 						if (argc != 2)
 						{
@@ -1640,7 +2171,7 @@ bulktest_main(int argc, const char **argv)
 								skip_if_block[if_level++] = !condition;
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "ELSE"))
 					{
@@ -1658,7 +2189,7 @@ bulktest_main(int argc, const char **argv)
 						{
 							skip_if_block[if_level - 1] = !skip_if_block[if_level - 1];
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "ENDIF"))
 					{
@@ -1678,7 +2209,7 @@ bulktest_main(int argc, const char **argv)
 								errored++;
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "LABEL:"))
 					{
@@ -1701,19 +2232,19 @@ bulktest_main(int argc, const char **argv)
 								}
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (*skip_to_label || skip_this_statement)
 					{
 						// skip command as we're skipping to label X / out of an IF/ELSE/ENDIF conditional block
 						fz_info(ctx, "SKIPPING: %s\n", line);
-						report_time = false;
+						report_time = RPT_A_SKIPPED_COMMAND;
 					}
 					else if (skip_to_datalinecounter > datalinecounter)
 					{
 						// skip rest of script as we're skipping to *dataline* X
 						fz_info(ctx, "SKIPPING TO DATALINE: %d (currently at dataline %d)\n", skip_to_datalinecounter, datalinecounter);
-						report_time = false;
+						report_time = RPT_A_SKIPPED_COMMAND;
 						break;
 					}
 					else if (match(argv[0], "SKIP_TO_LABEL"))
@@ -1730,7 +2261,7 @@ bulktest_main(int argc, const char **argv)
 							strncpy(skip_to_label, argv[1], sizeof(skip_to_label));
 							fz_info(ctx, "Skip to label %s\n", skip_to_label);
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "SKIP_UNTIL_DATALINE"))
 					{
@@ -1749,13 +2280,13 @@ bulktest_main(int argc, const char **argv)
 								fz_info(ctx, "Skip to data line %d\n", skip_to_datalinecounter);
 							}
 						}
-						report_time = false;
+						report_time = RPT_A_SIMPLE_CONTROLFLOW_COMMAND;
 					}
 					else if (match(argv[0], "ECHO"))
 					{
 						// Use the new, reformatted line for this...
 						fz_info(ctx, "::ECHO: %s\n", line + 5);
-						report_time = false;
+						report_time = RPT_A_SIMPLE_USERINFO_COMMAND;
 					}
 					else if (match(argv[0], "CD"))
 					{
@@ -1767,24 +2298,73 @@ bulktest_main(int argc, const char **argv)
 						else
 						{
 							fz_chdir(ctx, argv[1]);
-							if (verbosity)
+							if (verbosity >= 1)
 							{
 								fz_info(ctx, "OK: CD %s", argv[1]);
 							}
 						}
+						report_time = RPT_A_SIMPLE_COMMAND;
 					}
 					else if (match(argv[0], "MUTOOL"))
 					{
-						rv = mutool_main(argc - 1, argv + 1);
+						// decide whether to execute this command:
+						int chance = rand() % 1009;  // 1009 is prime and close to 1000
+						float m = random_exec_perunage * 1009 + chance;
+						int c = lroundf(m);
+						if (c < 1009)
+						{
+							fz_info(ctx, "::SKIP-DUE-TO-RANDOM-SAMPLING: MUTOOL command: %s", line);
+							report_time = RPT_A_SKIPPED_COMMAND;
+						}
+						else
+						{
+							rv = mutool_main(argc - 1, argv + 1);
+							if (rv != EXIT_SUCCESS)
+							{
+								fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+								errored++;
+							}
+							else if (verbosity >= 1)
+							{
+								fz_info(ctx, "OK: MUTOOL command: %s", line);
+							}
+
+							report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
+
+							flush_active_logfile_hard();
+						}
+					}
+					else if (match(argv[0], "MUSERVE"))
+					{
+						rv = 1;
 						if (rv != EXIT_SUCCESS)
 						{
 							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
 							errored++;
 						}
-						else if (verbosity)
+						else if (verbosity >= 1)
 						{
 							fz_info(ctx, "OK: MUTOOL command: %s", line);
 						}
+
+						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
+
+						flush_active_logfile_hard();
+					}
+					else if (match(argv[0], "STOPSERVE"))
+					{
+						rv = 1;
+						if (rv != EXIT_SUCCESS)
+						{
+							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							errored++;
+						}
+						else if (verbosity >= 1)
+						{
+							fz_info(ctx, "OK: MUTOOL command: %s", line);
+						}
+
+						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
 
 						flush_active_logfile_hard();
 					}
@@ -1852,13 +2432,15 @@ bulktest_main(int argc, const char **argv)
 
 						if (rv != EXIT_SUCCESS)
 						{
-							fz_error(ctx, "ERR: error executing MUTOOL command at script line %d.", linecounter);
+							fz_error(ctx, "ERR: error executing BULKTEST command at script line %d.", linecounter);
 							errored++;
 						}
-						else if (verbosity)
+						else if (verbosity >= 1)
 						{
-							fz_info(ctx, "OK: MUTOOL command: %s", line);
+							fz_info(ctx, "OK: BULKTEST command: %s", line);
 						}
+
+						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
 
 						flush_active_logfile_hard();
 					}
@@ -1868,11 +2450,19 @@ bulktest_main(int argc, const char **argv)
 						fz_throw(ctx, FZ_ERROR_GENERIC, "Ignoring line with UNSUPPORTED script statement:\n    %s", line);
 					}
 
-					if (report_time)
+					if (report_time >= RPT_AN_IMPORTANT_TEST_COMMAND)
 					{
 						struct curltime now = Curl_now();
 						timediff_t diff = Curl_timediff(now, begin_time);
-						fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+						fz_info(ctx, ">L#%05u> T:%dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+						if (diff >= 2000)
+						{
+							fz_info(ctx, ">L#%05u> T:%dms **NOTICABLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, (rv ? "ERR" : "OK"), line_command);
+							if (diff >= 30000)
+							{
+								fz_info(ctx, ">L#%05u> T:%dms **LETHARGICALLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, (rv ? "ERR" : "OK"), line_command);
+							}
+						}
 
 						if (showtime)
 						{
@@ -1932,19 +2522,18 @@ bulktest_main(int argc, const char **argv)
 
 		struct curltime now = Curl_now();
 
-		fz_info(ctx, "L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+		fz_info(ctx, "!L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 
 		// also log to stderr if we haven't already:
 		if (logcfg.logfile)
 		{
-			fprintf(stderr, "\nL#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
+			fprintf(stderr, "\n!L#%05u> T:%03dms D:%0.3lfs FAIL error: exception thrown in script file '%s' at line '%s': %s\n", linecounter, (int)Curl_timediff(now, begin_time), (double)Curl_timediff(now, timing.start_time) / 1E3, scriptname, (line_command ? line_command : "%--no-line--"), fz_caught_message(ctx));
 		}
 
 		errored += 100;
 	}
 
-	fz_free(ctx, scriptname);
-	scriptname = NULL;
+	scriptname[0] = 0;
 	fz_free(ctx, datafilename);
 	datafilename = NULL;
 

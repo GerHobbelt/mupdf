@@ -7,18 +7,18 @@
 typedef struct {
 	int len;
 	int max;
-	boxer_rect_t list[1];
+	fz_rect list[1];
 } rectlist_t;
 
 struct boxer_s {
-	boxer_rect_t mediabox;
+	fz_rect mediabox;
 	rectlist_t *list;
 };
 
 static rectlist_t *
 create_rectlist(int max)
 {
-	rectlist_t *list = malloc(sizeof(rectlist_t) + sizeof(boxer_rect_t)*(max-1));
+	rectlist_t *list = malloc(sizeof(rectlist_t) + sizeof(fz_rect)*(max-1));
 
 	if (list == NULL)
 		return NULL;
@@ -32,14 +32,14 @@ create_rectlist(int max)
  * another box, or completely encloses others (in which case they
  * are replaced by it). */
 static void
-rectlist_push(rectlist_t *list, boxer_rect_t *box)
+rectlist_push(rectlist_t *list, const fz_rect *box)
 {
 	int i;
 	float box_area = (box->x1 - box->x0)*(box->y1 - box->y0);
 
 	for (i = 0; i < list->len; i++)
 	{
-		boxer_rect_t *r = &list->list[i];
+		fz_rect *r = &list->list[i];
 		float r_area = (r->x1 - r->x0)*(r->y1 - r->y0);
 		float r_fudge = 4, box_fudge = 4;
 
@@ -57,17 +57,17 @@ rectlist_push(rectlist_t *list, boxer_rect_t *box)
 		if (r->x0 >= box->x0 - box_fudge && r->x1 <= box->x1 + box_fudge && r->y0 >= box->y0 - box_fudge && r->y1 <= box->y1 + box_fudge ) {
 			/* box encloses r. Ditch r. */
 			if (i < --list->len) {
-				memcpy(r, &list->list[list->len], sizeof(*r));
+				*r = list->list[list->len];
 				i--;
 			}
 		}
 	}
 
-	memcpy(&list->list[list->len++], box, sizeof(*box));
+	list->list[list->len++] = *box;
 }
 
 static boxer_t *
-boxer_create_length(boxer_rect_t *mediabox, int len)
+boxer_create_length(const fz_rect *mediabox, int len)
 {
 	boxer_t *boxer = malloc(sizeof(*boxer));
 
@@ -78,7 +78,7 @@ boxer_create_length(boxer_rect_t *mediabox, int len)
 }
 
 boxer_t *
-boxer_create(boxer_rect_t *mediabox)
+boxer_create(const fz_rect *mediabox)
 {
 	boxer_t *boxer = boxer_create_length(mediabox, 1);
 
@@ -91,9 +91,9 @@ boxer_create(boxer_rect_t *mediabox)
 #define MAX(a,b) (a > b ? a : b)
 
 static void
-push_if_intersect_suitable(rectlist_t *dst, const boxer_rect_t *a, const boxer_rect_t *b)
+push_if_intersect_suitable(rectlist_t *dst, const fz_rect *a, const fz_rect *b)
 {
-	boxer_rect_t c;
+	fz_rect c;
 
 	/* Intersect a and b. */
 	c.x0 = MAX(a->x0, b->x0);
@@ -114,7 +114,7 @@ push_if_intersect_suitable(rectlist_t *dst, const boxer_rect_t *a, const boxer_r
 }
 
 static void
-boxlist_feed_intersect(rectlist_t *dst, const rectlist_t *src, const boxer_rect_t *box)
+boxlist_feed_intersect(rectlist_t *dst, const rectlist_t *src, const fz_rect *box)
 {
 	int i;
 
@@ -122,9 +122,9 @@ boxlist_feed_intersect(rectlist_t *dst, const rectlist_t *src, const boxer_rect_
 		push_if_intersect_suitable(dst, &src->list[i], box);
 }
 
-void boxer_feed(boxer_t *boxer, boxer_rect_t *bbox)
+void boxer_feed(boxer_t *boxer, const fz_rect *bbox)
 {
-	boxer_rect_t box;
+	fz_rect box;
 	/* When we feed a box into a the boxer, we can never make
 	 * the list more than 4 times as long. */
 	rectlist_t *newlist = create_rectlist(boxer->list->len * 4);
@@ -164,8 +164,8 @@ void boxer_feed(boxer_t *boxer, boxer_rect_t *bbox)
 static int
 compare_areas(const void *a_, const void *b_)
 {
-	const boxer_rect_t *a = (const boxer_rect_t *)a_;
-	const boxer_rect_t *b = (const boxer_rect_t *)b_;
+	const fz_rect *a = (const fz_rect *)a_;
+	const fz_rect *b = (const fz_rect *)b_;
 	float area_a = (a->x1-a->x0) * (a->y1-a->y0);
 	float area_b = (b->x1-b->x0) * (b->y1-b->y0);
 
@@ -179,10 +179,10 @@ compare_areas(const void *a_, const void *b_)
 
 void boxer_sort(boxer_t *boxer)
 {
-	qsort(boxer->list->list, boxer->list->len, sizeof(boxer_rect_t), compare_areas);
+	qsort(boxer->list->list, boxer->list->len, sizeof(boxer->list->list[0]), compare_areas);
 }
 
-int boxer_results(boxer_t *boxer, boxer_rect_t **list)
+int boxer_results(boxer_t *boxer, fz_rect **list)
 {
 	*list = boxer->list->list;
 	return boxer->list->len;
@@ -195,15 +195,15 @@ void boxer_destroy(boxer_t *boxer)
 	free(boxer);
 }
 
-boxer_rect_t boxer_margins(boxer_t *boxer)
+fz_rect boxer_margins(const boxer_t *boxer)
 {
 	rectlist_t *list = boxer->list;
 	int i;
-	boxer_rect_t margins = boxer->mediabox;
+	fz_rect margins = boxer->mediabox;
 
 	for (i = 0; i < list->len; i++)
 	{
-		boxer_rect_t *r = &list->list[i];
+		fz_rect *r = &list->list[i];
 		if (r->x0 <= margins.x0 && r->y0 <= margins.y0 && r->y1 >= margins.y1) {
 			margins.x0 = r->x1; /* Left Margin */
 		} else if (r->x1 >= margins.x1 && r->y0 <= margins.y0 && r->y1 >= margins.y1) {
@@ -218,18 +218,18 @@ boxer_rect_t boxer_margins(boxer_t *boxer)
 	return margins;
 }
 
-boxer_t *boxer_subset(boxer_t *boxer, boxer_rect_t rect)
+boxer_t *boxer_subset(const boxer_t *boxer, const fz_rect *rect)
 {
-	boxer_t *new_boxer = boxer_create_length(&rect, boxer->list->len);
+	boxer_t *new_boxer = boxer_create_length(rect, boxer->list->len);
 	int i;
 
 	for (i = 0; i < boxer->list->len; i++) {
-		boxer_rect_t r = boxer->list->list[i];
+		fz_rect r = boxer->list->list[i];
 
-		r.x0 = MAX(r.x0, rect.x0);
-		r.y0 = MAX(r.y0, rect.y0);
-		r.x1 = MIN(r.x1, rect.x1);
-		r.y1 = MIN(r.y1, rect.y1);
+		r.x0 = MAX(r.x0, rect->x0);
+		r.y0 = MAX(r.y0, rect->y0);
+		r.x1 = MIN(r.x1, rect->x1);
+		r.y1 = MIN(r.y1, rect->y1);
 		if (r.x0 >= r.x1 || r.y0 >= r.y1)
 			continue;
 		rectlist_push(new_boxer->list, &r);
@@ -238,19 +238,19 @@ boxer_t *boxer_subset(boxer_t *boxer, boxer_rect_t rect)
 	return new_boxer;
 }
 
-int boxer_subdivide(boxer_t *boxer, boxer_t **boxer1, boxer_t **boxer2)
+int boxer_subdivide(const boxer_t *boxer, boxer_t **boxer1, boxer_t **boxer2)
 {
 	rectlist_t *list = boxer->list;
 	int num_h = 0, num_v = 0;
 	float max_h = 0, max_v = 0;
-	boxer_rect_t best_h, best_v;
+	fz_rect best_h, best_v;
 	int i;
 
 	*boxer1 = NULL;
 	*boxer2 = NULL;
 
 	for (i = 0; i < list->len; i++) {
-		boxer_rect_t r = boxer->list->list[i];
+		fz_rect r = boxer->list->list[i];
 
 		if (r.x0 <= boxer->mediabox.x0 && r.x1 >= boxer->mediabox.x1) {
 			/* Horizontal split */
@@ -275,24 +275,24 @@ int boxer_subdivide(boxer_t *boxer, boxer_t **boxer1, boxer_t **boxer2)
 	printf("max_h=%g max_v=%g\n", max_h, max_v);
 
 	if (max_h > max_v) {
-		boxer_rect_t r;
+		fz_rect r;
 		/* Split horizontally. */
 		r = boxer->mediabox;
 		r.y0 = best_h.y1;
-		*boxer1 = boxer_subset(boxer, r);
+		*boxer1 = boxer_subset(boxer, &r);
 		r = boxer->mediabox;
 		r.y1 = best_h.y0;
-		*boxer2 = boxer_subset(boxer, r);
+		*boxer2 = boxer_subset(boxer, &r);
 		return 1;
 	} else if (max_v > 0) {
-		boxer_rect_t r;
+		fz_rect r;
 		/* Split vertically. */
 		r = boxer->mediabox;
 		r.x0 = best_v.x1;
-		*boxer1 = boxer_subset(boxer, r);
+		*boxer1 = boxer_subset(boxer, &r);
 		r = boxer->mediabox;
 		r.x1 = best_v.x0;
-		*boxer2 = boxer_subset(boxer, r);
+		*boxer2 = boxer_subset(boxer, &r);
 		return 1;
 	}
 

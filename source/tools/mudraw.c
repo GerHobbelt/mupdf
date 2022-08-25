@@ -77,7 +77,7 @@
 
 /* Enable for helpful threading debug */
 #if 01
-#define DEBUG_THREADS(code) do { code; } while (0)
+#define DEBUG_THREADS(code) do { if (verbosity >= 2) { code; } } while (0)
 #else
 #define DEBUG_THREADS(code) do { } while (0)
 #endif
@@ -371,7 +371,7 @@ static int kill = 0;
 static int band_height = 0;
 static int lowmemory = 0;
 
-static int quiet = 0;
+static int verbosity = 1;
 static int errored = 0;
 static fz_colorspace *colorspace = NULL;
 static fz_colorspace *oi = NULL;
@@ -483,6 +483,7 @@ static int usage(void)
 		"    bitmap-wrapped-as-pdf: pclm, ocr.pdf\n"
 		"\n"
 		"  -q    be quiet (don't print progress messages)\n"
+		"  -v    verbose ~ not quiet (repeat to increase the chattiness of the application)\n"
 		"  -s -  show extra information:\n"
 		"    m - show memory use\n"
 		"    t - show timings\n"
@@ -1487,7 +1488,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			timing.total += diff + interptime;
 			timing.count ++;
 
-			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)", interptime, diff, diff + interptime);
+			fz_info(ctx, " pagenum=%d :: %dms (interpretation) %dms (rendering) %dms (total)", pagenum, interptime, diff, diff + interptime);
 		}
 		else
 		{
@@ -1506,7 +1507,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			timing.total += diff;
 			timing.count ++;
 
-			fz_info(ctx, " %dms (total)", diff);
+			fz_info(ctx, " pagenum=%d :: %dms (total)", pagenum, diff);
 		}
 	}
 
@@ -1663,6 +1664,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			out = NULL;
 		}
 		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
+		fz_normalize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
+		fz_sanitize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
 
 		if (output_format == OUT_PDF)
 		{
@@ -1693,8 +1696,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		}
 		else if (bgprint.active)
 		{
-			if (!quiet || showfeatures || showtime || showmd5)
-				fz_info(ctx, "page %s %d%s", filename, pagenum, features);
+			if (verbosity >= 1 || showfeatures || showtime || showmd5)
+				fz_info(ctx, "page %d file %s features: %s", pagenum, filename, features);
 
 			bgprint.started = 1;
 			bgprint.page = page;
@@ -1715,8 +1718,8 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	}
 	else
 	{
-		if (!quiet || showfeatures || showtime || showmd5)
-			fz_info(ctx, "page %s %d%s", filename, pagenum, features);
+		if (verbosity >= 1 || showfeatures || showtime || showmd5)
+			fz_info(ctx, "page %d file %s features %s", pagenum, filename, features);
 		fz_try(ctx)
 			dodrawpage(ctx, page, list, pagenum, &cookie, start, 0, filename, 0, seps);
 		fz_always(ctx)
@@ -2192,6 +2195,7 @@ static int img_seqnum = 1;
 static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options)
 {
 	char image_path[PATH_MAX];
+	char relative_asset_path[PATH_MAX];
 
 	fz_image* image = block->u.i.image;
 
@@ -2206,13 +2210,17 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 		if (type == FZ_COLORSPACE_GRAY || type == FZ_COLORSPACE_RGB)
 		{
 			// make sure we produce a unique, non-existing image file path:
+			char tplpath[PATH_MAX];
+			fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
 			do
 			{
-				fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "jpg");
+				fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, NULL, "jpg");
 				img_seqnum++;
 			} while (fz_file_exists(ctx, image_path));
 
-			fz_write_string(ctx, out, image_path);
+			fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
+
+			fz_write_string(ctx, out, relative_asset_path);
 			fz_save_buffer(ctx, cbuf->buffer, image_path);
 			return;
 		}
@@ -2220,13 +2228,17 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 	if (cbuf && cbuf->params.type == FZ_IMAGE_PNG)
 	{
 		// make sure we produce a unique, non-existing image file path:
+		char tplpath[PATH_MAX];
+		fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
 		do
 		{
-			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, NULL, "png");
+			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, NULL, "png");
 			img_seqnum++;
 		} while (fz_file_exists(ctx, image_path));
 
-		fz_write_string(ctx, out, image_path);
+		fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
+
+		fz_write_string(ctx, out, relative_asset_path);
 		fz_save_buffer(ctx, cbuf->buffer, image_path);
 		return;
 	}
@@ -2235,13 +2247,17 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 	fz_try(ctx)
 	{
 		// make sure we produce a unique, non-existing image file path:
+		char tplpath[PATH_MAX];
+		fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
 		do
 		{
-			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), options->reference_image_path_template, 0, pagenum, img_seqnum, (buf ? NULL : "ILLEGAL-ZERO-SIZED"), "png");
+			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, (buf ? NULL : "ILLEGAL-ZERO-SIZED"), "png");
 			img_seqnum++;
 		} while (fz_file_exists(ctx, image_path));
 
-		fz_write_string(ctx, out, image_path);
+		fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
+
+		fz_write_string(ctx, out, relative_asset_path);
 		if (buf)
 		{
 			fz_save_buffer(ctx, buf, image_path);
@@ -2581,7 +2597,7 @@ int main(int argc, const char** argv)
 	lowmemory = 0;
 
 	kill = 0;
-	quiet = 0;
+	verbosity = 1;
 	errored = 0;
 	colorspace = NULL;
 	oi = NULL;
@@ -2654,13 +2670,14 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
 	{
 		switch (c)
 		{
 		default: return usage();
 
-		case 'q': quiet = 1; fz_default_error_warn_info_mode(1, 1, 1); break;
+		case 'q': verbosity = 0; fz_default_error_warn_info_mode(1, 1, 1); break;
+		case 'v': verbosity++; fz_default_error_warn_info_mode(0, 0, 0); break;
 
 		case 'p': password = fz_optarg; break;
 
@@ -2770,7 +2787,7 @@ int main(int argc, const char** argv)
 		case 'a': useaccel = 0; break;
 		case 'x': txtdraw_options = fz_optarg; break;
 
-		case 'v': fz_info(ctx, "mudraw version %s", FZ_VERSION); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "mudraw version %s", FZ_VERSION); return EXIT_FAILURE;
 		}
 	}
 
@@ -2784,7 +2801,7 @@ int main(int argc, const char** argv)
 	{
 		// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
 #if 0
-		quiet = 1; /* automatically be quiet if printing to stdout */
+		verbosity = 0; /* automatically be quiet if printing to stdout */
 		fz_default_error_warn_info_mode(1, 1, 1);
 #endif
 
@@ -2854,15 +2871,24 @@ int main(int argc, const char** argv)
 		// set up a default graphics output file path template when none has been provided by the CLI/user already:
 		if (!stext_options.reference_image_path_template)
 		{
-			// produce a path template which has the filename extension already stripped off:
+			// produce a path template which has the filename extension already generalized:
 			size_t l = fz_strrcspn(output, "./\\:");
-			char* tpl = fz_asprintf(ctx, "%.*s", (int)l, output);
-			// and any `%d` regular page format specifiers removed (replaced!) as well!
-			tpl = fz_sanitize_path_ex(tpl, "f%#^$!", "_", 0);
-			stext_options.reference_image_path_template = tpl;
+			char pathbuf[PATH_MAX];
+			fz_strncpy_s(ctx, pathbuf, output, fz_mini(l + 1, sizeof(pathbuf)));
 
-			fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, &output_format);
+			char tplpath[PATH_MAX];
+			if (!fz_realpath(pathbuf, tplpath))
+			{
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process images' path template to a sane absolute path: %s", pathbuf);
+			}
+			fz_normalize_path(ctx, tplpath, sizeof tplpath, tplpath);
+			fz_sanitize_path(ctx, tplpath, sizeof tplpath, tplpath);
+
+			// and any `%d` regular page format specifiers removed (replaced!) as well!
+			fz_sanitize_path_ex(tplpath, "f%#^$!", "_", 0, 0);
+			stext_options.reference_image_path_template = fz_strdup(ctx, tplpath);
 		}
+		fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, &output_format);
 
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
@@ -3207,7 +3233,7 @@ int main(int argc, const char** argv)
 		}
 
 		// report output format in verbose mode:
-		if (!quiet)
+		if (verbosity >= 1)
 		{
 			int i;
 			const char* fmtstr = ".???";
@@ -3278,11 +3304,7 @@ int main(int argc, const char** argv)
 						else
 						{
 							/* Accelerator data is out of date */
-#ifdef _WIN32
 							fz_remove_utf8(ctx, accelpath);
-#else
-							remove(accelpath);
-#endif
 							accel = NULL; /* In case we have jumped up from below */
 						}
 					}

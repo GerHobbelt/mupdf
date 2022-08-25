@@ -916,13 +916,13 @@ void load_page(void)
 					if (dn)
 					{
 						char *s = pdf_signature_format_distinguished_name(ctx, dn);
-						fz_strlcpy(buf, s, sizeof buf);
+						fz_strncpy_s(ctx, buf, s, sizeof buf);
 						fz_free(ctx, s);
 						pdf_signature_drop_distinguished_name(ctx, dn);
 					}
 					else
 					{
-						fz_strlcpy(buf, "Signature information missing.", sizeof buf);
+						fz_strncpy_s(ctx, buf, "Signature information missing.", sizeof buf);
 					}
 					signatory = &buf[0];
 					pdf_drop_verifier(ctx, verifier);
@@ -1671,7 +1671,7 @@ reload_or_start_journalling(void)
 {
 	char journal[PATH_MAX];
 
-	fz_strlcpy(journal, filename, sizeof(journal));
+	fz_strncpy_s(ctx, journal, filename, sizeof(journal));
 	fz_strlcat(journal, ".journal", sizeof(journal));
 
 	fz_try(ctx)
@@ -1742,11 +1742,7 @@ static void load_document(void)
 		else
 		{
 			/* Accelerator data is out of date */
-#ifdef _WIN32
-			fz_remove_utf8(accelpath);
-#else
-			remove(accelpath);
-#endif
+			fz_remove_utf8(ctx, accelpath);
 			accel = NULL; /* In case we have jumped up from below */
 		}
 	}
@@ -1887,7 +1883,7 @@ static void reflow_document(void)
 	fz_catch(ctx)
 		outline = NULL;
 
-	fz_strlcpy(buf, filename, sizeof buf);
+	fz_strncpy_s(ctx, buf, filename, sizeof buf);
 	fz_snprintf(filename, sizeof filename, "%s.xhtml", buf);
 
 	load_history();
@@ -3095,7 +3091,7 @@ int main(int argc, const char** argv)
 
 	if (fz_optind < argc)
 	{
-		fz_strlcpy(filename, argv[fz_optind++], sizeof filename);
+		fz_strncpy_s(ctx, filename, argv[fz_optind++], sizeof filename);
 		if (fz_optind < argc)
 			anchor = argv[fz_optind++];
 		if (fz_optind < argc)

@@ -182,7 +182,7 @@ typedef struct
 	int compress;
 	int strip_height;
 	char language[256];
-	char datadir[1024];
+	char datadir[PATH_MAX];
 
 	/* Updated as we move through the job */
 	int page_count;

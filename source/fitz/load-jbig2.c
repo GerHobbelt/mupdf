@@ -40,6 +40,16 @@ struct fz_jbig2_allocator
 	fz_context *ctx;
 };
 
+static void fz_lock_jbig2(fz_context* ctx)
+{
+	fz_lock(ctx, FZ_LOCK_JBIG2);
+}
+
+static void fz_unlock_jbig2(fz_context* ctx)
+{
+	fz_unlock(ctx, FZ_LOCK_JBIG2);
+}
+
 static void
 error_callback(void* data, const char* msg, Jbig2Severity severity, uint32_t seg_idx)
 {
@@ -103,6 +113,8 @@ jbig2_read_image(fz_context *ctx, struct info *jbig2, const unsigned char *buf, 
 
 	fz_try(ctx)
 	{
+		fz_lock_jbig2(ctx);
+
 		jctx = jbig2_ctx_new((Jbig2Allocator *) &allocator, JBIG2_OPTIONS_NONE, NULL, error_callback, ctx);
 		if (jctx == NULL)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create jbig2 context");
@@ -162,6 +174,8 @@ jbig2_read_image(fz_context *ctx, struct info *jbig2, const unsigned char *buf, 
 	{
 		jbig2_release_page(jctx, page);
 		jbig2_ctx_free(jctx);
+
+		fz_unlock_jbig2(ctx);
 	}
 	fz_catch(ctx)
 	{

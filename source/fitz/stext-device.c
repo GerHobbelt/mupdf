@@ -26,6 +26,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
+#include "mupdf/helpers/dir.h"
 
 #include "glyphbox.h"
 
@@ -110,16 +111,23 @@ const char *fz_stext_options_usage =
 	"Text output options:\n"
 	"  inhibit-spaces:       don't add spaces between gaps in the text\n"
 	"  preserve-images:      keep images in output\n"
+	"  reference-images[=filepath_template]\n"
+	"                        store images in separate files and reference these\n"
+	"                        from the generated text file. (Uses a default\n"
+	"                        path template when used without argument or when '=yes')\n"
 	"  preserve-ligatures:   do not expand ligatures into constituent characters\n"
 	"  preserve-whitespace:  do not convert all whitespace into space characters\n"
 	"  preserve-spans:       do not merge spans on the same line\n"
 	"  reference-images=no:  (default) output images as data URIs\n"
 	"                  =yes: output image reference URI only\n"
-	"  reuse-images:        duplicate images share the same URI\n"
-	"  dehyphenate:         attempt to join up hyphenated words\n"
-	"  mediabox-clip=no:    include characters outside mediabox\n"
-	"  glyph-bbox:          use painted area of glyphs instead of font size for bounding boxes\n"
-	"  text-as-path:        (SVG: default) output text as curves\n"
+	"  reuse-images:         duplicate images share the same URI\n"
+	"  dehyphenate:          attempt to join up hyphenated words\n"
+	"  mediabox-clip=no:     include characters outside mediabox\n"
+	"  glyph-bbox:           use painted area of glyphs instead of font size for bounding boxes\n"
+	"  text-as-path:         (SVG: default) output text as curves\n"
+	"  external-styles       store the CSS page styles in a separate file instead of inlining\n"
+	"  resolution=<scale>    render and position everything at the specified scale\n"
+	"                        (HTML base resolution is 96ppi)\n"
     "\n";
 
 fz_stext_page *
@@ -1001,7 +1009,9 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 			opts->flags |= FZ_STEXT_REFERENCE_IMAGES;
 			if (!fz_option_eq(val, "yes"))
 			{
-				opts->reference_image_path_template = fz_strdup(ctx, val);
+				char pathbuf[PATH_MAX];
+				fz_copy_option(ctx, val, pathbuf, sizeof(pathbuf));
+				opts->reference_image_path_template = fz_strdup(ctx, pathbuf);
 			}
 		}
 	}
@@ -1057,7 +1067,9 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 			opts->flags |= FZ_STEXT_EXTERNAL_STYLES;
 			if (!fz_option_eq(val, "yes"))
 			{
-				opts->external_styles_path_template = fz_strdup(ctx, val);
+				char pathbuf[PATH_MAX];
+				fz_copy_option(ctx, val, pathbuf, sizeof(pathbuf));
+				opts->external_styles_path_template = fz_strdup(ctx, pathbuf);
 			}
 		}
 	}

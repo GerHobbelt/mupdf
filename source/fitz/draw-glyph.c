@@ -498,8 +498,16 @@ void
 fz_dump_glyph_cache_stats(fz_context *ctx)
 {
 	fz_glyph_cache *cache = ctx->glyph_cache;
-	fz_info(ctx, "Glyph Cache Size: %zu\n", cache->total);
+	// Only print these values when the values are non-zero: only print these when there's something interesting to report at least.
+	if (cache->total
 #ifndef NDEBUG
-	fz_info(ctx, "Glyph Cache Evictions: %d (%zu bytes)\n", cache->num_evictions, cache->evicted);
+		|| cache->num_evictions || cache->evicted
 #endif
+		)
+	{
+		fz_info(ctx, "Glyph Cache Size: %zu\n", cache->total);
+#ifndef NDEBUG
+		fz_info(ctx, "Glyph Cache Evictions: %d (%zu bytes)\n", cache->num_evictions, cache->evicted);
+#endif
+	}
 }

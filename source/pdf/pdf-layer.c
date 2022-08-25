@@ -650,7 +650,7 @@ pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const ch
 	if (pdf_cycle(ctx, &cycle, cycle_up, ocg))
 		return 0;
 
-	fz_strlcpy(event_state, usage, sizeof event_state);
+	fz_strncpy_s(ctx, event_state, usage, sizeof event_state);
 	fz_strlcat(event_state, "State", sizeof event_state);
 
 	type = pdf_dict_get(ctx, ocg, PDF_NAME(Type));

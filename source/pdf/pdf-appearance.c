@@ -638,16 +638,16 @@ pdf_write_highlight_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 			mquad[UR].x = quad[UR].x + v.x + v.y;
 			mquad[UR].y = quad[UR].y + v.y - v.x;
 
-			fz_append_printf(ctx, buf, "%g %g m\n", quad[LL].x, quad[LL].y);
-			fz_append_printf(ctx, buf, "%g %g %g %g %g %g c\n",
-				mquad[LL].x, mquad[LL].y,
-				mquad[UL].x, mquad[UL].y,
-				quad[UL].x, quad[UL].y);
-			fz_append_printf(ctx, buf, "%g %g l\n", quad[UR].x, quad[UR].y);
-			fz_append_printf(ctx, buf, "%g %g %g %g %g %g c\n",
-				mquad[UR].x, mquad[UR].y,
-				mquad[LR].x, mquad[LR].y,
-				quad[LR].x, quad[LR].y);
+			fz_append_printf(ctx, buf, "%P m\n", &quad[LL]);
+			fz_append_printf(ctx, buf, "%P %P %P c\n",
+				&mquad[LL],
+				&mquad[UL],
+				&quad[UL]);
+			fz_append_printf(ctx, buf, "%P l\n", &quad[UR]);
+			fz_append_printf(ctx, buf, "%P %P %P c\n",
+				&mquad[UR],
+				&mquad[LR],
+				&quad[LR]);
 			fz_append_printf(ctx, buf, "f\n");
 
 			union_quad(rect, quad, h/16);
@@ -683,8 +683,8 @@ pdf_write_underline_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 			b = lerp_point(quad[LR], quad[UR], 1/7.0f);
 
 			fz_append_printf(ctx, buf, "%g w\n", h/16);
-			fz_append_printf(ctx, buf, "%g %g m\n", a.x, a.y);
-			fz_append_printf(ctx, buf, "%g %g l\n", b.x, b.y);
+			fz_append_printf(ctx, buf, "%P m\n", &a);
+			fz_append_printf(ctx, buf, "%P l\n", &b);
 			fz_append_printf(ctx, buf, "S\n");
 
 			union_quad(rect, quad, h/16);
@@ -718,8 +718,8 @@ pdf_write_strike_out_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *bu
 			b = lerp_point(quad[LR], quad[UR], 3/7.0f);
 
 			fz_append_printf(ctx, buf, "%g w\n", h/16);
-			fz_append_printf(ctx, buf, "%g %g m\n", a.x, a.y);
-			fz_append_printf(ctx, buf, "%g %g l\n", b.x, b.y);
+			fz_append_printf(ctx, buf, "%P m\n", &a);
+			fz_append_printf(ctx, buf, "%P l\n", &b);
 			fz_append_printf(ctx, buf, "S\n");
 
 			union_quad(rect, quad, h/16);
@@ -753,7 +753,7 @@ pdf_write_squiggly_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf,
 			x = 0;
 
 			fz_append_printf(ctx, buf, "%g w\n", h/16);
-			fz_append_printf(ctx, buf, "%g %g m\n", quad[LL].x, quad[LL].y);
+			fz_append_printf(ctx, buf, "%P m\n", &quad[LL]);
 			while (x < w)
 			{
 				x += h/7;
@@ -762,10 +762,10 @@ pdf_write_squiggly_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf,
 				{
 					b = lerp_point(quad[UL], quad[UR], x/w);
 					c = lerp_point(a, b, 1/7.0f);
-					fz_append_printf(ctx, buf, "%g %g l\n", c.x, c.y);
+					fz_append_printf(ctx, buf, "%P l\n", &c);
 				}
 				else
-					fz_append_printf(ctx, buf, "%g %g l\n", a.x, a.y);
+					fz_append_printf(ctx, buf, "%P l\n", &a);
 				up = !up;
 			}
 			fz_append_printf(ctx, buf, "S\n");

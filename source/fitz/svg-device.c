@@ -313,8 +313,10 @@ svg_font_family(fz_context *ctx, char buf[], int size, const char *name)
 {
 	/* Remove "ABCDEF+" prefix and "-Bold" suffix. */
 	const char *p = strchr(name, '+');
-	if (p) fz_strlcpy(buf, p+1, size);
-	else fz_strlcpy(buf, name, size);
+	if (p) 
+		fz_strncpy_s(ctx, buf, p+1, size);
+	else 
+		fz_strncpy_s(ctx, buf, name, size);
 	char *q = strrchr(buf, '-');
 	if (q) *q = 0;
 }

@@ -24,6 +24,7 @@
 
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
+typedef int tool_f_cpp();
 
 static int help(void);
 static int quit(void);
@@ -36,7 +37,8 @@ struct cmd_info
     {
         tool_f* f;
         tool_fa* fa;
-    } f;
+		tool_f_cpp* fpp;
+	} f;
 };
 
 #define MONOLITHIC_CMD_TABLE_START()	\

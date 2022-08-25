@@ -77,9 +77,72 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	character in `replacement_single`. When `replacement_single` is shorter than `set`, any of the later `set` members
 	will be replaced by the last `replacement_single` character.
 
+	When `start_at_offset` is not zero (i.e. start-of-string), only the part of the path at & following the
+	`start_at_offset` position is sanitized. It is assumed that the non-zero offset ALWAYS points past any critical
+	UNC or MSWindows Drive designation parts of the path.
+
 	Overwrites the `path` string in place.
 */
-char* fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence);
+char* fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence, size_t start_at_offset);
+
+/**
+	Produce a relative path in `dst` for the given absolute path `abspath`, when considered relative to absolute path `relative_to_abspath`.
+
+	Relative paths MAY include leading '../' elements, but DOES NOT include a (superfluous) './' element.
+
+	When the `abspath` is not sensibly relative (e.g. when it points to a different drive on MSWindows), then the result of this call
+	will be a copy of the absolute path itself.
+
+	CAVEATS:
+	- both input paths are assumed to be normalized.
+	- both input paths are assumed to be absolute.
+	- both input paths are either both in UNC form ('//?/Drive:/path/file') or both in classic form ('Drive:/path/file')
+	- both input paths are assumed to point to **files** and are treated as such: the last element (the filename itself)
+	  is never considered as part of the 'common prefix'.
+	- path comparison is done in case-sensitive fashion, even on MSWindows/NTFS, which is a case-insensitive file system.
+	  Usually this is not a problem, IFF the sources of both path originate from the same or very similar processing routes
+	  through the code OR when normalization includes ensuring each path element is in **canonical case**: that will work
+	  for *any* file-system, including case-insensitive file systems such as NTFS or VFAT/FAT/FAT32.
+
+	Returns `dst` when done.
+*/
+char* fz_mk_relative_path(fz_context* ctx, char* dst, size_t dstsiz, const char* abspath, const char* relative_to_abspath);
+
+/**
+	Produce an absolute path in `dst`, based on the (relative or absolute) `source_path`. When `source_path` is a
+	*relative path*, it is assumed to be relative to the 'base', represented by the 'base file path' `abs_optional_base_file_path'.
+
+	Use this function to produce an absolute path for any relative pathed file, relative to **another file**:
+	the 'base file path' `abs_optional_base_file_path` is assumed to be a FILE path, NOT a DIRECTORY, so we need to get rid of that
+	'useless' base filename: we do that by appending a '../' element and have the internal path sanitizer deal with it
+	afterwards: the '../' will eat the preceding element, which, in this case, will be the 'base file name'.
+
+	When `source_path` is an absolute path, it remains unchanged (apart from sanitization and normalization).
+
+	ALL produced paths have been normalized and sanitized.
+
+	Examples:
+
+	source_path = a/b/c.fil
+	abs_optional_base_file_path = C:/d/e/f.txt
+	fz_mk_absolute_path_using_absolute_base --> C:/d/e/a/b/c.fil
+
+	source_path = C:/a/b/c.fil
+	abs_optional_base_file_path = C:/d/e/f.txt
+	fz_mk_absolute_path_using_absolute_base --> C:/a/b/c.fil
+
+	source_path = ../.b0rk.//fil...
+	abs_optional_base_file_path = C:/d/e/f.txt
+	fz_mk_absolute_path_using_absolute_base --> C:/d/e/../.b0rk.//fil... -> C:/d/.b0rk_/fil___
+*/
+void fz_mk_absolute_path_using_absolute_base(fz_context* ctx, char* dst, size_t dstsiz, const char* source_path, const char* abs_optional_base_file_path);
+
+/**
+	Return TRUE when the given path is an absolute path.
+
+	Anything else will return FALSE.
+*/
+int fz_is_absolute_path(const char* path);
 
 #ifdef __cplusplus
 }

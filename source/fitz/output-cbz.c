@@ -21,6 +21,7 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #include <limits.h>
 
@@ -162,6 +163,8 @@ pixmap_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 		fz_close_device(ctx, dev);
 		wri->count += 1;
 		fz_format_output_path(ctx, path, sizeof path, wri->path, wri->count);
+		fz_normalize_path(ctx, path, sizeof path, path);
+		fz_sanitize_path(ctx, path, sizeof path, path);
 		wri->save(ctx, wri->pixmap, path);
 	}
 	fz_always(ctx)

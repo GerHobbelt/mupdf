@@ -18,6 +18,9 @@ EXPORTS
 	mujs_example_main
 	mujs_prettyprint_main
 	mupdf_base64_test_main
+	mupdf_example_main
+	mupdf_multithreaded_example_main
+	mupdf_storytest_main
 	muraster_main
 	murun_main
 	mutrace_main
@@ -198,10 +201,18 @@ EXPORTS
 	fzPopHeapDbgPurpose
 	fzPushHeapDbgPurpose
 	fz_chdir
+	fz_fopen_utf8
+	fz_is_absolute_path
+	fz_mk_absolute_path_using_absolute_base
+	fz_mk_relative_path
 	fz_mkdir_for_file
+	fz_mkdirp_utf8
 	fz_normalize_path
+	fz_remove_utf8
 	fz_sanitize_path
 	fz_sanitize_path_ex
+	fz_stat_ctime
+	fz_stat_mtime
 
 	mu_create_mutex
 	mu_create_semaphore
@@ -210,9 +221,11 @@ EXPORTS
 	mu_destroy_semaphore
 	mu_destroy_thread
 	mu_lock_mutex
+	mu_mutex_is_zeroed
 	mu_trigger_semaphore
 	mu_unlock_mutex
 	mu_wait_semaphore
+	mu_zero_mutex
 
 ; Fitz Documents exports
 
@@ -328,6 +341,8 @@ EXPORTS
 	fz_report_failed_assertion
 	fz_report_failed_assertion_and_continue
 
+	jbig2_set_error_log_prefilter_level
+
 	fz_archive_format
 	fz_close_zip_writer
 	fz_count_archive_entries
@@ -339,6 +354,7 @@ EXPORTS
 	fz_is_zip_archive
 	fz_list_archive_entry
 	fz_new_archive_of_size
+	fz_new_tree_archive
 	fz_new_zip_writer
 	fz_new_zip_writer_with_output
 	fz_open_archive
@@ -457,6 +473,7 @@ EXPORTS
 	fz_open_image_decomp_stream_from_buffer
 	fz_recognize_image_format
 
+	__fz_get_RAW_global_context
 	fz_aa_level
 	fz_calloc
 	fz_calloc_no_throw
@@ -480,11 +497,11 @@ EXPORTS
 	fz_enable_icc
 	fz_end_throw_on_repair
 	fz_error
+	fz_flush_all_std_logging_channels
 	fz_flush_warnings
 	fz_free
 	fz_get_error_callback
 	fz_get_global_context
-	__fz_get_RAW_global_context
 	fz_get_info_callback
 	fz_get_warning_callback
 	fz_graphics_aa_level
@@ -824,6 +841,7 @@ EXPORTS
 	fz_close_output
 	fz_drop_output
 	fz_flush_output
+	fz_flush_output_no_lock
 	fz_format_string
 	fz_new_arc4_output
 	fz_new_ascii85_output
@@ -836,6 +854,7 @@ EXPORTS
 	fz_output_supports_stream
 	fz_save_buffer
 	fz_seek_output
+	fz_set_output_buffer
 	fz_set_stddbg
 	fz_snprintf
 	fz_stddbg
@@ -850,6 +869,7 @@ EXPORTS
 	fz_write_base64_buffer
 	fz_write_buffer
 	fz_write_byte
+	fz_write_byte_no_lock
 	fz_write_char
 	fz_write_data
 	fz_write_float_be
@@ -977,11 +997,17 @@ EXPORTS
 	fz_store_item
 	fz_store_scavenge
 	fz_store_scavenge_external
+	fz_write_stabilized_story
+	fz_write_story
 	fz_draw_story
-	fz_drop_html_story
-	fz_html_story_document
-	fz_new_html_story
+	fz_drop_story
+	fz_new_story
 	fz_place_story
+	fz_reset_story
+	fz_story_document
+	fz_story_positions
+	fz_story_tocwrite
+	fz_story_warnings
 	fz_drop_stream
 	fz_file_exists
 	fz_keep_stream
@@ -1019,6 +1045,7 @@ EXPORTS
 	fz_skip_space
 	fz_skip_string
 	fz_tell
+	fz_basename
 	fz_chartorune
 	fz_chartorune_unsafe
 	fz_cleanname
@@ -1040,6 +1067,7 @@ EXPORTS
 	fz_strlcat
 	fz_strlcpy
 	fz_strncasecmp
+	fz_strncpy_s
 	fz_strnlen
 	fz_strrcspn
 	fz_strsep
@@ -1079,11 +1107,7 @@ EXPORTS
 	fz_set_stext_options_images_handler
 	fz_snap_selection
 	fz_argv_from_wargv
-	fz_fopen_utf8
 	fz_free_argv
-	fz_remove_utf8
-	fz_stat_ctime
-	fz_stat_mtime
 	fz_utf8_from_wchar
 	fz_wchar_from_utf8
 	fz_bound_text
@@ -1258,6 +1282,7 @@ EXPORTS
 	fz_keep_xml
 	fz_parse_xml
 	fz_parse_xml_from_html5
+	fz_xml_add_att
 	fz_xml_att
 	fz_xml_att_alt
 	fz_xml_att_eq
@@ -1321,6 +1346,7 @@ EXPORTS
 	pdf_annot_ink_list_stroke_vertex
 	pdf_annot_interior_color
 	pdf_annot_is_open
+	pdf_annot_is_standard_stamp
 	pdf_annot_language
 	pdf_annot_line
 	pdf_annot_line_end_style
@@ -1424,6 +1450,7 @@ EXPORTS
 	pdf_set_annot_quadding
 	pdf_set_annot_rect
 	pdf_set_annot_resynthesised
+	pdf_set_annot_stamp_image
 	pdf_set_annot_vertex
 	pdf_set_annot_vertices
 	pdf_set_widget_editing_state
@@ -2644,6 +2671,7 @@ EXPORTS
 	TIFFGetVersion
 	TIFFGetWriteProc
 	TIFFIsBigEndian
+	TIFFIsBigTIFF
 	TIFFIsByteSwapped
 	TIFFIsCODECConfigured
 	TIFFIsMSB2LSB
@@ -3338,8 +3366,10 @@ EXPORTS
 	js_instanceof
 	js_isarray
 	js_isboolean
+	js_isbooleanobject
 	js_iscallable
 	js_iscoercible
+	js_isdateobject
 	js_isdefined
 	js_iserror
 	js_isnull
@@ -4161,6 +4191,7 @@ EXPORTS
 	JS_FreeAtomRT
 	JS_FreeCString
 	JS_FreeContext
+	JS_FreeModules
 	JS_FreeRuntime
 	JS_GetAnyOpaque
 	JS_GetArrayBuffer
@@ -4290,6 +4321,7 @@ EXPORTS
 	JS_WriteObject2
 	__JS_FreeValue
 	__JS_FreeValueRT
+	qjs_assert
 	qjs_free
 	qjs_free_rt
 	qjs_malloc

@@ -227,7 +227,7 @@ xps_lookup_font(fz_context *ctx, xps_document *doc, char *base_uri, char *font_u
 	}
 
 	/* Make a new part name for font with style simulation applied */
-	fz_strlcpy(fakename, partname, sizeof fakename);
+	fz_strncpy_s(ctx, fakename, partname, sizeof fakename);
 	if (style_att)
 	{
 		if (!strcmp(style_att, "BoldSimulation"))

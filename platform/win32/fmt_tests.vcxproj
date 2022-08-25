@@ -139,7 +139,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -166,7 +166,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -194,7 +194,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -221,7 +221,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FMT_TESTS;FMT_TESTS_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -234,7 +234,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\test\add-subdirectory-test\basic-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/fmt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/src/os.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/add-subdirectory-test/basic-main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/args-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/assert-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/chrono-test.cc" />
@@ -260,8 +263,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/ranges-odr-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/ranges-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/scan-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/fmt/test/static-export-test/export-main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/static-export-test/library.cc" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\fmt\test\static-export-test\export-main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/std-test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/test-main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/fmt/test/unicode-test.cc" />

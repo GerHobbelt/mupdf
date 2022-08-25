@@ -96,8 +96,10 @@ int fz_option_eq(const char *a, const char *b);
 	bytes.
 
 	Returns the number of bytes (including terminator) that did not
-	fit. If val is maxlen or greater bytes in size, it will be left
-	unterminated.
+	fit.
+
+	`dest` will always be NUL-terminated, unless `maxlen == 0` in which'
+	case this would constitute a buffer overflow.
 */
 size_t fz_copy_option(fz_context *ctx, const char *val, char *dest, size_t maxlen);
 

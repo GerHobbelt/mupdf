@@ -21,6 +21,7 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/helpers/mu-threads.h"
+#include "mupdf/assert.h"
 
 #ifdef DISABLE_MUTHREADS
 
@@ -39,12 +40,14 @@ void mu_destroy_semaphore(mu_semaphore *sem)
 
 int mu_trigger_semaphore(mu_semaphore *sem)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 	return 1;
 }
 
 int mu_wait_semaphore(mu_semaphore *sem)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 	return 1;
 }
@@ -67,13 +70,23 @@ void mu_destroy_mutex(mu_mutex *mutex)
 {
 }
 
+void mu_zero_mutex(mu_mutex *mutex)
+{
+}
+
+int mu_mutex_is_zeroed(const mu_mutex* mutex)
+{
+}
+
 void mu_lock_mutex(mu_mutex *mutex)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 }
 
 void mu_unlock_mutex(mu_mutex *mutex)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 }
 
@@ -131,6 +144,7 @@ int mu_create_thread(mu_thread *th, mu_thread_fn *fn, void *arg)
 
 void mu_destroy_thread(mu_thread *th)
 {
+	ASSERT(th != NULL);
 	if (th->handle == NULL)
 		return;
 	/* We can't sensibly handle this failing */
@@ -149,10 +163,21 @@ const static CRITICAL_SECTION empty = { 0 };
 
 void mu_destroy_mutex(mu_mutex *mutex)
 {
-	if (memcmp(&mutex->mutex, &empty, sizeof(empty)) == 0)
+	if (mu_mutex_is_zeroed(mutex))
 		return;
 	DeleteCriticalSection(&mutex->mutex);
 	mutex->mutex = empty;
+}
+
+void mu_zero_mutex(mu_mutex *mutex)
+{
+	ASSERT(mutex != NULL);
+	mutex->mutex = empty;
+}
+
+int mu_mutex_is_zeroed(const mu_mutex* mutex)
+{
+	return (memcmp(&mutex->mutex, &empty, sizeof(empty)) == 0);
 }
 
 void mu_lock_mutex(mu_mutex *mutex)
@@ -277,15 +302,26 @@ int mu_create_mutex(mu_mutex *mutex)
 	return pthread_mutex_init(&mutex->mutex, NULL);
 }
 
+static const mu_mutex empty; /* static objects are always initialized to zero */
+
 void mu_destroy_mutex(mu_mutex *mutex)
 {
-	const static mu_mutex empty; /* static objects are always initialized to zero */
-
-	if (memcmp(mutex, &empty, sizeof(empty)) == 0)
+	if (mu_mutex_is_zeroed(mutex))
 		return;
 
 	(void)pthread_mutex_destroy(&mutex->mutex);
+	mu_zero_mutex(mutex);
+}
+
+void mu_zero_mutex(mu_mutex *mutex)
+{
+	ASSERT(mutex != NULL);
 	*mutex = empty;
+}
+
+int mu_mutex_is_zeroed(const mu_mutex* mutex)
+{
+	return (memcmp(mutex, &empty, sizeof(empty)) == 0);
 }
 
 void mu_lock_mutex(mu_mutex *mutex)

@@ -178,37 +178,38 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         }
         return true;
 
-    case '.s':
-    case '.lua':
-    case '.py':
-    case '.sh':
-    case '.cmd':
-    case '.ps1':
-    case '.txt':
-    case '.rtf':
-    case '.xml':
-    case '.csv':
-    case '.json':
-    case '.y':
-    case '.l':
-    case '.md':
-    case '.rst':
-    case '.gcc':
-    case '.unx':
-    case '.in':
     case '.ac':
     case '.am':
     case '.bkl':
-    case '.vc':
-    case '.msc':
+    case '.cmd':
     case '.cppcode':
-    case '.phpcode':
-    case '.luacode':
-    case '.pythoncode':
-    case '.jscode':
+    case '.csv':
+    case '.gcc':
     case '.htcpp':
+    case '.in':
     case '.js':
+    case '.jscode':
+    case '.json':
+    case '.l':
+    case '.lua':
+    case '.luacode':
+    case '.md':
+    case '.msc':
+    case '.phpcode':
+    case '.p1':
+    case '.ps1':
+    case '.py':
+    case '.pythoncode':
+    case '.rst':
+    case '.rtf':
+    case '.s':
+    case '.sh':
     case '.ts':
+    case '.txt':
+    case '.unx':
+    case '.vc':
+    case '.xml':
+    case '.y':
         filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {

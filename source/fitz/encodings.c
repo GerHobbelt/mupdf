@@ -93,7 +93,7 @@ fz_unicode_from_glyph_name(const char *name)
 	int r = nelem(single_name_list) - 1;
 	int code = 0;
 
-	fz_strlcpy(buf, name, sizeof buf);
+	fz_strncpy_s(NULL, buf, name, sizeof buf);
 
 	/* kill anything after first period and underscore */
 	p = strchr(buf, '.');

@@ -46,7 +46,7 @@ xps_rels_for_part(fz_context *ctx, xps_document *doc, char *buf, char *name, int
 	char *p, *basename;
 	p = strrchr(name, '/');
 	basename = p ? p + 1 : name;
-	fz_strlcpy(buf, name, buflen);
+	fz_strncpy_s(ctx, buf, name, buflen);
 	p = strrchr(buf, '/');
 	if (p) *p = 0;
 	fz_strlcat(buf, "/_rels/", buflen);
@@ -304,7 +304,7 @@ xps_parse_metadata(fz_context *ctx, xps_document *doc, xps_part *part, xps_fixdo
 	char *s;
 
 	/* Save directory name part */
-	fz_strlcpy(buf, part->name, sizeof buf);
+	fz_strncpy_s(ctx, buf, part->name, sizeof buf);
 	s = strrchr(buf, '/');
 	if (s)
 		s[0] = 0;

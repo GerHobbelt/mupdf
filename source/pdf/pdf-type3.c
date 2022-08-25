@@ -69,9 +69,9 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 	{
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Name));
 		if (pdf_is_name(ctx, obj))
-			fz_strlcpy(buf, pdf_to_name(ctx, obj), sizeof buf);
+			fz_strncpy_s(ctx, buf, pdf_to_name(ctx, obj), sizeof buf);
 		else
-			fz_strlcpy(buf, "Unnamed-T3", sizeof buf);
+			fz_strncpy_s(ctx, buf, "Unnamed-T3", sizeof buf);
 
 		fontdesc = pdf_new_font_desc(ctx);
 

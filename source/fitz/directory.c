@@ -47,8 +47,8 @@ static void drop_directory(fz_context *ctx, fz_archive *arch)
 static fz_stream *open_dir_entry(fz_context *ctx, fz_archive *arch, const char *name)
 {
 	fz_directory *dir = (fz_directory *) arch;
-	char path[2048];
-	fz_strlcpy(path, dir->path, sizeof path);
+	char path[PATH_MAX + 1];
+	fz_strncpy_s(ctx, path, dir->path, sizeof path);
 	fz_strlcat(path, "/", sizeof path);
 	fz_strlcat(path, name, sizeof path);
 	return fz_open_file(ctx, path);
@@ -57,8 +57,8 @@ static fz_stream *open_dir_entry(fz_context *ctx, fz_archive *arch, const char *
 static fz_buffer *read_dir_entry(fz_context *ctx, fz_archive *arch, const char *name)
 {
 	fz_directory *dir = (fz_directory *) arch;
-	char path[2048];
-	fz_strlcpy(path, dir->path, sizeof path);
+	char path[PATH_MAX + 1];
+	fz_strncpy_s(ctx, path, dir->path, sizeof path);
 	fz_strlcat(path, "/", sizeof path);
 	fz_strlcat(path, name, sizeof path);
 	return fz_read_file(ctx, path);
@@ -67,8 +67,8 @@ static fz_buffer *read_dir_entry(fz_context *ctx, fz_archive *arch, const char *
 static int has_dir_entry(fz_context *ctx, fz_archive *arch, const char *name)
 {
 	fz_directory *dir = (fz_directory *) arch;
-	char path[2048];
-	fz_strlcpy(path, dir->path, sizeof path);
+	char path[PATH_MAX + 1];
+	fz_strncpy_s(ctx, path, dir->path, sizeof path);
 	fz_strlcat(path, "/", sizeof path);
 	fz_strlcat(path, name, sizeof path);
 	return fz_file_exists(ctx, path);

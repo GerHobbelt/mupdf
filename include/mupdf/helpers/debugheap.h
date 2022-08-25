@@ -20,8 +20,8 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#ifndef __FZ_HEELPER_DEBUGHEAP_H__
-#define __FZ_HEELPER_DEBUGHEAP_H__
+#ifndef __FZ_HELPER_DEBUGHEAP_H__
+#define __FZ_HELPER_DEBUGHEAP_H__
 
 
 #if defined(_MSC_VER)
@@ -36,6 +36,8 @@
 
 #endif
 
+
+#if defined(_DEBUG) || !defined(NDEBUG)
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,5 +55,12 @@ static int prefix ## HEAPDBG_SECTION_START = fzPushHeapDbgPurpose(__FILE__, __LI
 
 #define FZ_HEAPDBG_TRACKER_SECTION_END_MARKER(prefix)												\
 static int prefix ## HEAPDBG_SECTION_END = fzPopHeapDbgPurpose(prefix ## HEAPDBG_SECTION_START, __LINE__);
+
+#else
+
+#define FZ_HEAPDBG_TRACKER_SECTION_START_MARKER(prefix)  /**/
+#define FZ_HEAPDBG_TRACKER_SECTION_END_MARKER(prefix)    /**/
+
+#endif
 
 #endif

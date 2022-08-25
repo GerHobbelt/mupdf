@@ -359,7 +359,7 @@ xps_parse_fixed_page(fz_context *ctx, xps_document *doc, fz_matrix ctm, xps_page
 	fz_rect area;
 	char *s;
 
-	fz_strlcpy(base_uri, page->fix->name, sizeof base_uri);
+	fz_strncpy_s(ctx, base_uri, page->fix->name, sizeof base_uri);
 	s = strrchr(base_uri, '/');
 	if (s)
 		s[1] = 0;

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -100,8 +100,8 @@ static fz_html *epub_get_laid_out_html(fz_context *ctx, epub_document *doc, epub
 
 static int count_laid_out_pages(fz_html *html)
 {
-	if (html->tree.root->b > 0)
-		return ceilf(html->tree.root->b / html->page_h);
+	if (html->tree.root->s.layout.b > 0)
+		return ceilf(html->tree.root->s.layout.b / html->page_h);
 	return 1;
 }
 
@@ -590,7 +590,7 @@ path_from_idref(char *path, fz_xml *manifest, const char *base_uri, const char *
 		path[0] = 0;
 		return NULL;
 	}
-	fz_strlcpy(path, base_uri, n);
+	fz_strncpy_s(NULL, path, base_uri, n);
 	fz_strlcat(path, "/", n);
 	fz_strlcat(path, rel_path, n);
 	return fz_cleanname(fz_urldecode(path));
@@ -612,7 +612,7 @@ epub_parse_ncx_imp(fz_context *ctx, epub_document *doc, fz_xml *node, char *base
 		char *content = fz_xml_att(fz_xml_find_down(node, "content"), "src");
 		if (text && content)
 		{
-			fz_strlcpy(path, base_uri, sizeof path);
+			fz_strncpy_s(ctx, path, base_uri, sizeof path);
 			fz_strlcat(path, "/", sizeof path);
 			fz_strlcat(path, content, sizeof path);
 			fz_urldecode(path);
@@ -892,11 +892,11 @@ epub_open_accel_document(fz_context *ctx, const char *filename, const char *acce
 		if (strstr(filename, "META-INF/container.xml") || strstr(filename, "META-INF\\container.xml"))
 		{
 			char dirname[2048], *p;
-			fz_strlcpy(dirname, filename, sizeof dirname);
+			fz_strncpy_s(ctx, dirname, filename, sizeof dirname);
 			p = strstr(dirname, "META-INF");
 			*p = 0;
 			if (!dirname[0])
-				fz_strlcpy(dirname, ".", sizeof dirname);
+				fz_strncpy_s(ctx, dirname, ".", sizeof dirname);
 			doc = epub_init(ctx, fz_open_directory(ctx, dirname), afile);
 		}
 		else

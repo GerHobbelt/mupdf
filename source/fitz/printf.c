@@ -395,7 +395,7 @@ static void fmt_print_buffer_as_hex(struct fz_fmtbuf* out, const char* data, siz
 
 /*
 	When this function is called (inside printf()) we assume that the incoming data has already been converted to the UTF8 'codepage'
-	if any such conversion was applicable. (We assume it was, and has been done, as we are treating the data as STRING data here,
+	if any such conversion was applicable. We assume it was, and has been done, as we are treating the data as STRING data here,
 	unless proven otherwise by the analysis which will be performed first.
 
 	The results from that analysis will determine how the data is printed exactly: as a HEX DUMP or a more-or-less sane STRING.
@@ -943,13 +943,13 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (c == 0)
 					break;
 			}
-			if (c == 't') {
+			else if (c == 't') {
 				c = *fmt++;
 				bits = sizeof(ptrdiff_t) * 8;
 				if (c == 0)
 					break;
 			}
-			if (c == 'z') {
+			else if (c == 'z') {
 				c = *fmt++;
 				bits = sizeof(size_t) * 8;
 				if (c == 0)
@@ -963,6 +963,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				fmtputc(&out, '%');
 				fmtputc(&out, c);
 				break;
+
 			case '%':
 				fmtputc(&out, '%');
 				break;
@@ -982,6 +983,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (j)
 					fmtputc(&out, '"');
 				break;
+
 			case 'R':
 				if (j)
 					fmtputc(&out, '"');
@@ -995,6 +997,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (j)
 					fmtputc(&out, '"');
 				break;
+
 			case 'P':
 				if (j)
 					fmtputc(&out, '"');
@@ -1006,6 +1009,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (j)
 					fmtputc(&out, '"');
 				break;
+
 			case 'Z':
 				if (j)
 					fmtputc(&out, '"');
@@ -1046,19 +1050,19 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				break;
 
 			case 'H':
-			{
-				const char *ptr = (const char *)va_arg(args, void*);
-				size_t seglen = va_arg(args, size_t);
-				// when precision has been specified, but is NEGATIVE, than this is a special mode:
-				// discover how to best print the data buffer:
-				if (p < 0) {
-					fmt_print_buffer_optimally(ctx, &out, ptr, seglen, -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE);
+				{
+					const char *ptr = (const char *)va_arg(args, void*);
+					size_t seglen = va_arg(args, size_t);
+					// when precision has been specified, but is NEGATIVE, than this is a special mode:
+					// discover how to best print the data buffer:
+					if (p < 0) {
+						fmt_print_buffer_optimally(ctx, &out, ptr, seglen, -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE);
+					}
+					else {
+						fmt_print_buffer_as_hex(&out, ptr, seglen, p, (j ? FPBO_JSON_MODE : 0));
+					}
 				}
-				else {
-					fmt_print_buffer_as_hex(&out, ptr, seglen, p, (j ? FPBO_JSON_MODE : 0));
-				}
-			}
-			break;
+				break;
 
 			case 'C': /* unicode char */
 				c = va_arg(args, int);
@@ -1074,6 +1078,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (j)
 					fmtputc(&out, '"');
 				break;
+
 			case 'c':
 				c = va_arg(args, int);
 				if (j)
@@ -1093,6 +1098,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (j)
 					fmtputc(&out, '"');
 				break;
+
 			case 'g':
 			case 'G':
 				if (j)
@@ -1130,6 +1136,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (j)
 					fmtputc(&out, '"');
 				break;
+
 			case 'd':
 			case 'i':
 				if (j)
@@ -1147,6 +1154,7 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				if (j)
 					fmtputc(&out, '"');
 				break;
+
 			case 'u':
 				if (j)
 					fmtputc(&out, '"');
@@ -1182,123 +1190,127 @@ fz_format_string(fz_context *ctx, struct fz_fmtbuf* out, const char *fmt, va_lis
 				break;
 
 			case 's':
-			{
-				const char* str = va_arg(args, const char*);
-				// when precision has been specified, but is NEGATIVE, than this is a special mode:
-				// discover how to best print the data buffer:
-				if (p < 0 && str && *str) {
-					fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE | FPBO_NO_CONTROL_ESCAPES);
-				}
-				else {
-					if (!str) {
-						str = "(null)";
-						// override the clipping length, a.k.a. 'precision', now: make sure we always print the full "(null)".
-						if (p < 6) {
-							p = 6;
+				{
+					const char* str = va_arg(args, const char*);
+					// when precision has been specified, but is NEGATIVE, than this is a special mode:
+					// discover how to best print the data buffer:
+					if (p < 0 && str && *str) {
+						fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE | FPBO_NO_CONTROL_ESCAPES);
+					}
+					else {
+						if (!str) {
+							str = "(null)";
+							// override the clipping length, a.k.a. 'precision', now: make sure we always print the full "(null)".
+							if (p < 6) {
+								p = 6;
+							}
 						}
+						size_t slen = strlen(str);
+						size_t cliplen = (p != INT_MAX ? p : slen);
+						while (cliplen > slen) {
+							size_t wlen = fz_mini(32, cliplen - slen);
+							//              12345678901234567890123456789012
+							fmtputsn(&out, "                                ", wlen);
+							cliplen -= wlen;
+						}
+						// only need to print string when it's not an empty string.
+						// Edge case example:   fz_printf("%.*s", 7, "")
+						fmtputsn(&out, str, cliplen);
 					}
-					size_t slen = strlen(str);
-					size_t cliplen = (p != INT_MAX ? p : slen);
-					while (cliplen > slen) {
-						size_t wlen = fz_mini(32, cliplen - slen);
-						//              12345678901234567890123456789012
-						fmtputsn(&out, "                                ", wlen);
-						cliplen -= wlen;
-					}
-					// only need to print string when it's not an empty string.
-					// Edge case example:   fz_printf("%.*s", 7, "")
-					fmtputsn(&out, str, cliplen);
 				}
-			}
 				break;
 
 			case 'S':
-			{
-				const wchar_t* str = va_arg(args, const wchar_t*);
-				// when precision has been specified, but is NEGATIVE, than this is a special mode:
-				// discover how to best print the data buffer:
-				if (p < 0 && str && *str) {
-					fmt_print_buffer_optimally(ctx, &out, (const char*)(void*)str, (w >= 0 ? w : strlen((const char *)(void *)str)), -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE | FPBO_NO_CONTROL_ESCAPES);
-				}
-				else {
-					if (!str) {
-						str = L"(null)";
-						// override the clipping length, a.k.a. 'precision', now: make sure we always print the full "(null)".
-						if (p < 6) {
-							p = 6;
+				{
+					const wchar_t* str = va_arg(args, const wchar_t*);
+					// when precision has been specified, but is NEGATIVE, than this is a special mode:
+					// discover how to best print the data buffer:
+					if (p < 0 && str && *str) {
+						fmt_print_buffer_optimally(ctx, &out, (const char*)(void*)str, (w >= 0 ? w : strlen((const char *)(void *)str)), -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE | FPBO_NO_CONTROL_ESCAPES);
+					}
+					else {
+						if (!str) {
+							str = L"(null)";
+							// override the clipping length, a.k.a. 'precision', now: make sure we always print the full "(null)".
+							if (p < 6) {
+								p = 6;
+							}
+						}
+						size_t slen = wcslen(str);
+						size_t cliplen = (p != INT_MAX ? p : slen);
+						while (cliplen > slen) {
+							size_t wlen = fz_mini(32, cliplen - slen);
+							//              12345678901234567890123456789012
+							fmtputsn(&out, "                                ", wlen);
+							cliplen -= wlen;
+						}
+						// only need to print string when it's not an empty string.
+						// Edge case example:   fz_printf("%.*s", 7, "")
+						while (cliplen-- > 0) {
+							wchar_t c = *str++;
+							if (c >= 0 && c < 128)
+								fmtputc(&out, c);
+							else {
+								char buf[10];
+								int n = fz_runetochar(buf, c);
+								fmtputsn(&out, buf, n);
+							}
 						}
 					}
-					size_t slen = wcslen(str);
-					size_t cliplen = (p != INT_MAX ? p : slen);
-					while (cliplen > slen) {
-						size_t wlen = fz_mini(32, cliplen - slen);
-						//              12345678901234567890123456789012
-						fmtputsn(&out, "                                ", wlen);
-						cliplen -= wlen;
-					}
-					// only need to print string when it's not an empty string.
-					// Edge case example:   fz_printf("%.*s", 7, "")
-					while (cliplen-- > 0) {
-						wchar_t c = *str++;
-						if (c >= 0 && c < 128)
-							fmtputc(&out, c);
-						else {
-							char buf[10];
-							int n = fz_runetochar(buf, c);
-							fmtputsn(&out, buf, n);
-						}
-					}
 				}
-			}
 				break;
 
 			case 'Q': /* quoted string (with verbatim unicode in UTF8) */
-			{
-				const char* str = va_arg(args, const char*);
-				if (!str) str = "";
-				// when precision has been specified, but is NEGATIVE, than this is a special mode:
-				// discover how to best print the data buffer:
-				if (p < 0) {
-					fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, FPBO_JSON_MODE | FPBO_VERBATIM_UNICODE);
+				{
+					const char* str = va_arg(args, const char*);
+					if (!str) str = "";
+					// when precision has been specified, but is NEGATIVE, than this is a special mode:
+					// discover how to best print the data buffer:
+					if (p < 0) {
+						fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, FPBO_JSON_MODE | FPBO_VERBATIM_UNICODE);
+					}
+					else {
+						fmtquote(&out, str, (p != INT_MAX ? p : strlen(str)), '"', '"', 1, j);
+					}
 				}
-				else {
-					fmtquote(&out, str, (p != INT_MAX ? p : strlen(str)), '"', '"', 1, j);
-				}
-			}
 				break;
+
 			case 'q': /* quoted string */
-			{
-				const char* str = va_arg(args, const char*);
-				if (!str) str = "";
-				// when precision has been specified, but is NEGATIVE, than this is a special mode:
-				// discover how to best print the data buffer:
-				if (p < 0) {
-					fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, FPBO_JSON_MODE);
+				{
+					const char* str = va_arg(args, const char*);
+					if (!str) str = "";
+					// when precision has been specified, but is NEGATIVE, than this is a special mode:
+					// discover how to best print the data buffer:
+					if (p < 0) {
+						fmt_print_buffer_optimally(ctx, &out, str, (w >= 0 ? w : strlen(str)), -p, FPBO_JSON_MODE);
+					}
+					else {
+						if (p == INT_MAX)
+							p = -1;
+						fmtquote(&out, str, (p > 0 ? p : strlen(str)), '"', '"', 0, j);
+					}
 				}
-				else {
-					if (p == INT_MAX)
-						p = -1;
-					fmtquote(&out, str, (p > 0 ? p : strlen(str)), '"', '"', 0, j);
-				}
-			}
 				break;
+
 			case '(': /* pdf string */
-			{
-				const char* str = va_arg(args, const char*);
-				if (!str) str = "";
-				fmtquote_pdf(&out, str, '(', ')');
-			}
+				{
+					const char* str = va_arg(args, const char*);
+					if (!str) str = "";
+					fmtquote_pdf(&out, str, '(', ')');
+				}
 				break;
+
 			case 'n': /* pdf name */
-			{
-				const char* str = va_arg(args, const char*);
-				if (j)
-					fmtputc(&out, '"');
-				if (!str) str = "";
-				fmtname(&out, str);
-				if (j)
-					fmtputc(&out, '"');
-			}
+				{
+					const char* str = va_arg(args, const char*);
+					if (j)
+						fmtputc(&out, '"');
+					if (!str)
+						str = "";
+					fmtname(&out, str);
+					if (j)
+						fmtputc(&out, '"');
+				}
 				break;
 			}
 		}

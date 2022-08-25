@@ -104,7 +104,7 @@ font_family_name(fz_context *ctx, fz_font *font, char *buf, int size, int is_mon
 {
 	const char *name = html_clean_font_name(font_full_name(ctx, font));
 	char *s;
-	fz_strlcpy(buf, name, size);
+	fz_strncpy_s(ctx, buf, name, size);
 	s = strrchr(buf, '-');
 	if (s)
 		*s = 0;
@@ -838,17 +838,17 @@ fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page *page
 static void
 gogo(fz_context *ctx, fz_output *out, boxer_t *big_boxer, int depth)
 {
-	boxer_rect_t margins;
+	fz_rect margins;
 	boxer_t *boxer;
 	boxer_t *boxer1;
 	boxer_t *boxer2;
 	int i, n;
-	boxer_rect_t *list;
+	fz_rect *list;
 
 	margins = boxer_margins(big_boxer);
-	fz_write_printf(ctx, out, "\n\n%% MARGINS %g %g %g %g\n", margins.x0, margins.y0, margins.x1, margins.y1);
+	fz_write_printf(ctx, out, "\n\n%% MARGINS %R\n", &margins);
 
-	boxer = boxer_subset(big_boxer, margins);
+	boxer = boxer_subset(big_boxer, &margins);
 
 	if (depth < 6 && boxer_subdivide(boxer, &boxer1, &boxer2)) {
 		gogo(ctx, out, boxer1, depth+1);
@@ -864,9 +864,9 @@ gogo(fz_context *ctx, fz_output *out, boxer_t *big_boxer, int depth)
 	fz_write_printf(ctx, out, "% SUBDIVISION\n");
 	for (i = 0; i < n; i++) {
 #ifndef WRITE_AS_PS
-		fz_write_printf(ctx, out, "%g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
+		fz_write_printf(ctx, out, "%R\n", &list[i]);
 #else
-		fz_write_printf(ctx, out, "%% %g %g %g %g\n", list[i].x0, list[i].y0, list[i].x1, list[i].y1);
+		fz_write_printf(ctx, out, "%% %R\n", &list[i]);
 #endif
 	}
 
@@ -899,7 +899,7 @@ fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page 
 	//char utf[10];
 	boxer_t *boxer;
 
-	boxer = boxer_create((boxer_rect_t *)&page->mediabox);
+	boxer = boxer_create(&page->mediabox);
 
 	for (block = page->first_block; block; block = block->next)
 	{
@@ -907,7 +907,7 @@ fz_print_stext_page_as_empty_box(fz_context *ctx, fz_output *out, fz_stext_page 
 		{
 			for (line = block->u.t.first_line; line; line = line->next)
 			{
-				boxer_feed(boxer, (boxer_rect_t *)&line->bbox);
+				boxer_feed(boxer, &line->bbox);
 				//for (ch = line->first_char; ch; ch = ch->next)
 				//{
 				//	n = fz_runetochar(utf, ch->c);

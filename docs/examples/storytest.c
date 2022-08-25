@@ -1,10 +1,11 @@
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
 #include <string.h>
 #include <memory.h>
 
-const char snark[] =
+static const char snark[] =
 	"<!DOCTYPE html>"
 	"<style>"
 	"#a { margin: 30px; }"
@@ -192,7 +193,7 @@ static const film_t films[] =
 	}
 };
 
-const char *festival_template =
+static const char *festival_template =
 	"<html><head><title>Why do we have a title? Why not?</title></head>"
 	"<body><h1 style=\"text-align:center\">Hook Norton Film Festival</h1>"
 	"<ol>"
@@ -207,11 +208,143 @@ const char *festival_template =
 	"<ul>"
 	"</body></html";
 
-int main(int argc, const char *argv[])
+
+static int toc_rectfn(fz_context *ctx, void *ref, int num, fz_rect filled, fz_rect *rect, fz_matrix *ctm, fz_rect *mediabox)
+{
+	if (num == 0)
+	{
+		rect->x0 = 100;
+		rect->y0 = 200;
+		rect->x1 = 175;
+		rect->y1 = 300;
+	}
+	else
+	{
+		rect->x0 = 10;
+		rect->y0 = 50;
+		rect->x1 = 290;
+		rect->y1 = 350;
+	}
+	mediabox->x0 = 0;
+	mediabox->y0 = 0;
+	mediabox->x1 = 300;
+	mediabox->y1 = 400;
+	return 1;
+}
+
+static void toc_contentfn(fz_context *ctx, void *ref, const fz_write_story_positions *positions, fz_buffer *buffer)
+{
+	int i;
+	fz_append_string(ctx, buffer,
+			"<!DOCTYPE html>\n"
+			"<style>\n"
+			"#a { margin: 30px; }\n"
+			"#b { margin: 20px; }\n"
+			"#c { margin: 5px; }\n"
+			"#a { border: 1px solid red; }\n"
+			"#b { border: 1px solid green; }\n"
+			"#c { border: 1px solid blue; }\n"
+			"</style>\n"
+			"<body>\n"
+			"<h2>Contents</h2>\n"
+			"<ol>\n"
+			);
+	for (i=0; i<positions->num; ++i)
+	{
+		fz_write_story_position *position = &positions->positions[i];
+
+		fz_append_printf(ctx, buffer,
+				"	<li>page=%i depth=%i heading=%i id='%s' rect=(%f %f %f %f) text='<b>%s</b>' open_close=%i\n",
+				position->page_num,
+				position->element.depth,
+				position->element.heading,
+				(position->element.id) ? position->element.id : "",
+				position->element.rect.x0,
+				position->element.rect.y0,
+				position->element.rect.x1,
+				position->element.rect.y1,
+				(position->element.text) ? position->element.text : "",
+				position->element.open_close
+				);
+	}
+	fz_append_string(ctx, buffer, "</ol>\n");
+	fz_append_string(ctx, buffer,
+			"<h1>Section the first</h1>\n"
+			"<p>Blah.\n"
+			"<h1>Section the second</h1>\n"
+			"<p>Blah blah.\n"
+			"<h2>Subsection</h2>\n"
+			"<p>Blah blah blah.\n"
+			"<p>Blah blah blah.\n"
+			"<p>Blah blah blah.\n"
+			"<h1>Section the third</h1>\n"
+			"<p>Blah blah.\n"
+			"</body>\n"
+			);
+	{
+		const char *data = fz_string_from_buffer(ctx, buffer);
+		printf( "======== Html content: ========\n");
+		printf( "%s", data);
+		printf( "========\n");
+	}
+}
+
+static void toc_pagefn(fz_context *ctx, void *ref, int page_num, fz_rect mediabox, fz_device *dev, int after)
+{
+	fz_path *path = fz_new_path(ctx);
+	fz_matrix ctm = fz_identity;
+	printf("toc_pagefn(): ref=%p page_num=%i dev=%p after=%i\n", ref, page_num, dev, after);
+	if (after)
+	{
+		float rgb[3] = { 0.75, 0.25, 0.125};
+		fz_moveto(ctx, path, 50, 50);
+		fz_lineto(ctx, path, 100, 200);
+		fz_lineto(ctx, path, 50, 200);
+		fz_closepath(ctx, path);
+		fz_fill_path(ctx, dev, path, 0, ctm, fz_device_rgb(ctx), rgb, 0.9 /*alpha*/, fz_default_color_params);
+		fz_drop_path(ctx, path);
+	}
+	else
+	{
+		float rgb[3] = { 0.125, 0.25, 0.75};
+		fz_moveto(ctx, path, 50, 50);
+		fz_lineto(ctx, path, 50, 200);
+		fz_lineto(ctx, path, 100, 50);
+		fz_closepath(ctx, path);
+		fz_fill_path(ctx, dev, path, 0, ctm, fz_device_rgb(ctx), rgb, 0.9 /*alpha*/, fz_default_color_params);
+		fz_drop_path(ctx, path);
+	}
+}
+
+static void test_write_stabilized_story(fz_context *ctx)
+{
+	fz_document_writer *writer = fz_new_pdf_writer(ctx, "out_toc.pdf", "");
+	fz_write_stabilized_story(
+			ctx,
+			writer,
+			"" /*user_css*/,
+			11 /*em*/,
+			toc_contentfn,
+			NULL /*contentfn_ref*/,
+			toc_rectfn,
+			NULL /*rectfn_ref*/,
+			toc_pagefn /*pagefn*/,
+			NULL /*pagefn_ref*/
+			);
+	fz_close_document_writer(ctx, writer);
+	fz_drop_document_writer(ctx, writer);
+}
+
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      mupdf_storytest_main(cnt, arr)
+#endif
+
+int main(int argc, const char **argv)
 {
 	fz_context *ctx;
 	fz_document_writer *writer = NULL;
-	fz_html_story *story = NULL;
+	fz_story *story = NULL;
 	fz_buffer *buf = NULL;
 	fz_device *dev = NULL;
 	fz_rect mediabox = { 0, 0, 512, 640 };
@@ -230,6 +363,79 @@ int main(int argc, const char *argv[])
 	fz_var(buf);
 	fz_var(dev);
 
+
+	fz_try(ctx)
+	{
+		writer = fz_new_pdf_writer(ctx, "out0.pdf", "");
+		const char* html =
+				"<!DOCTYPE html>\n"
+				"<style>\n"
+				"#a { margin: 30px; }\n"
+				"#b { margin: 20px; }\n"
+				"#c { margin: 5px; }\n"
+				"#a { border: 1px solid red; }\n"
+				"#b { border: 1px solid green; }\n"
+				"#c { border: 1px solid blue; }\n"
+				"</style>\n"
+				"<body style=\"background-color: #f8f\">\n"
+				"<h2 style=\"overflow-wrap: break-word;\">Contents</h2>\n"
+				"<ol>\n"
+				"    <li>page=1 depth=1 heading=2 id='' rect=(111.000000 213.695007 164.000000 233.495010) text='<b>Contents</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=1 id='' rect=(21.000000 302.339996 279.000000 328.739990) text='<b>Section the first</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=1 id='' rect=(21.000000 371.419983 279.000000 397.819977) text='<b>Section the second</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=2 id='' rect=(21.000000 439.454987 279.000000 459.254974) text='<b>Subsection</b>' open_close=3\n"
+				"    <li>page=2 depth=1 heading=1 id='' rect=(21.000000 549.289978 279.000000 575.690002) text='<b>Section the third</b>' open_close=3\n"
+				"</ol>\n"
+				"<h1>Section the first</h1>\n"
+				"<p>Blah.\n"
+				"<h1>Section the second</h1>\n"
+				"<p>Blah blah.\n"
+				"<h2>Subsection</h2>\n"
+				"<p>Blah blah blah.\n"
+				"<p>Blah blah blah.\n"
+				"<p>Blah blah blah.\n"
+				"<h1>Section the third</h1>\n"
+				"<p style=\"overflow-wrap:break-word\">This WordIs<span style=\"color:red\">ExtremelyImprobablyStupidlyMonumentallyActually</span>QuiteLong, but it is wrapped.\n"
+				"<p>This WordIs<span style=\"color:red\">ExtremelyImprobablyStupidlyMonumentallyActually</span>QuiteLong, and it's not wrapped.\n"
+				"</body>\n"
+				;
+		buf = fz_new_buffer_from_copied_data(ctx, html, strlen(html)+1);
+
+		story = fz_new_story(ctx, buf, "", 11);
+
+		int i=0;
+		do
+		{
+			fz_rect mediabox = {0, 0, 300, 400};
+			fz_rect where0 = {100, 200, 175, 300};
+			fz_rect where1 = {10, 50, 290, 350};
+			fz_rect filled;
+			i += 1;
+
+			dev = fz_begin_page(ctx, writer, mediabox);
+
+			more = fz_place_story(ctx, story, (i==1) ? where0 : where1, &filled);
+
+			fz_draw_story(ctx, story, dev, fz_identity);
+
+			fz_end_page(ctx, writer);
+		}
+		while (more);
+
+		fz_close_document_writer(ctx, writer);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_story(ctx, story);
+		fz_drop_buffer(ctx, buf);
+		fz_drop_document_writer(ctx, writer);
+	}
+	fz_catch(ctx)
+	{
+		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
+	}
+
+
 	/* First one made with precooked content. */
 	fz_try(ctx)
 	{
@@ -237,7 +443,7 @@ int main(int argc, const char *argv[])
 
 		buf = fz_new_buffer_from_copied_data(ctx, snark, strlen(snark)+1);
 
-		story = fz_new_html_story(ctx, buf, "", 11);
+		story = fz_new_story(ctx, buf, "", 11);
 
 		do
 		{
@@ -263,7 +469,7 @@ int main(int argc, const char *argv[])
 	}
 	fz_always(ctx)
 	{
-		fz_drop_html_story(ctx, story);
+		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, buf);
 		fz_drop_document_writer(ctx, writer);
 	}
@@ -284,9 +490,9 @@ int main(int argc, const char *argv[])
 
 		writer = fz_new_pdf_writer(ctx, "out2.pdf", "");
 
-		story = fz_new_html_story(ctx, NULL, "", 11);
+		story = fz_new_story(ctx, NULL, "", 11);
 
-		dom = fz_html_story_document(ctx, story);
+		dom = fz_story_document(ctx, story);
 
 		body = fz_dom_body(ctx, dom);
 
@@ -320,7 +526,7 @@ int main(int argc, const char *argv[])
 	}
 	fz_always(ctx)
 	{
-		fz_drop_html_story(ctx, story);
+		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, buf);
 		fz_drop_document_writer(ctx, writer);
 	}
@@ -343,9 +549,9 @@ int main(int argc, const char *argv[])
 		writer = fz_new_pdf_writer(ctx, "out3.pdf", "");
 
 		buf = fz_new_buffer_from_copied_data(ctx, festival_template, strlen(festival_template)+1);
-		story = fz_new_html_story(ctx, buf, "", 11);
+		story = fz_new_story(ctx, buf, "", 11);
 
-		dom = fz_html_story_document(ctx, story);
+		dom = fz_story_document(ctx, story);
 
 		body = fz_dom_body(ctx, dom);
 
@@ -404,7 +610,7 @@ int main(int argc, const char *argv[])
 	}
 	fz_always(ctx)
 	{
-		fz_drop_html_story(ctx, story);
+		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, buf);
 		fz_drop_document_writer(ctx, writer);
 	}
@@ -412,6 +618,8 @@ int main(int argc, const char *argv[])
 	{
 		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
 	}
+
+	test_write_stabilized_story(ctx);
 
 	fz_drop_context(ctx);
 

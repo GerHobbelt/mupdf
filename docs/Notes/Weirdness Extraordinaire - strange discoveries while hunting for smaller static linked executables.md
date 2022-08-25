@@ -1,6 +1,6 @@
 # Weirdness Extraordinaire :: strange discoveries while hunting for smaller static linked executables
 
-## When /LTCG (Link-Time Code Generation) actually fixed a weird non-really-a-cycle dependency
+## When /LTCG (Link-Time Code Generation) actually fixed a weird not-really-a-cycle dependency
 
 This was found while looking what we could / should do to make statically linked binaries **smaller**: we started with `wxw-samples-console` as that one *should*, at least in principle[^1], produce a rather small sort of "hello world" kind of binary.
 

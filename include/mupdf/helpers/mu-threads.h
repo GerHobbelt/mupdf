@@ -177,6 +177,21 @@ int mu_create_mutex(mu_mutex *mutex);
 void mu_destroy_mutex(mu_mutex *mutex);
 
 /*
+	Set the mutex variable to Zero/NULL.
+	This initializes the mutex variable to a known (invalid) state,
+	same as setting a pointer to NULL.
+	This is done after a mutex is destroyed or before a mutex is
+	initialized (mu_create_mutex/mu_destroy_mutex) when those
+	calls are expected to be *optional*.
+*/
+void mu_zero_mutex(mu_mutex *mutex);
+
+/*
+	Return TRUE when the referenced mutex has not been created yet.
+*/
+int mu_mutex_is_zeroed(const mu_mutex *mutex);
+
+/*
 	Lock a mutex.
 
 	mutex: Mutex to lock.
@@ -215,6 +230,9 @@ struct mu_mutex
 };
 
 #elif MU_THREAD_IMPL_TYPE == 1
+
+// MSWin fix: make sure we include winsock2.h *before* windows.h implicitly includes the antique winsock.h and causes all kinds of weird errors at compile time:
+#include <winsock2.h>
 
 #include <windows.h>
 

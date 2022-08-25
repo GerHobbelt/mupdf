@@ -85,7 +85,7 @@ pdf_parse_cmap_name(fz_context *ctx, pdf_cmap *cmap, fz_stream *file, pdf_lexbuf
 	tok = pdf_lex(ctx, file, buf);
 
 	if (tok == PDF_TOK_NAME)
-		fz_strlcpy(cmap->cmap_name, buf->scratch, sizeof(cmap->cmap_name));
+		fz_strncpy_s(ctx, cmap->cmap_name, buf->scratch, sizeof(cmap->cmap_name));
 	else
 		fz_warn(ctx, "expected name after CMapName in cmap");
 }
@@ -398,7 +398,7 @@ pdf_load_cmap(fz_context *ctx, fz_stream *file)
 				else if (!strcmp(buf.scratch, "WMode"))
 					pdf_parse_wmode(ctx, cmap, file, &buf);
 				else
-					fz_strlcpy(key, buf.scratch, sizeof key);
+					fz_strncpy_s(ctx, key, buf.scratch, sizeof key);
 			}
 
 			else if (tok == PDF_TOK_KEYWORD)
@@ -407,7 +407,7 @@ pdf_load_cmap(fz_context *ctx, fz_stream *file)
 					break;
 
 				else if (is_keyword(tok, &buf, "usecmap"))
-					fz_strlcpy(cmap->usecmap_name, key, sizeof(cmap->usecmap_name));
+					fz_strncpy_s(ctx, cmap->usecmap_name, key, sizeof(cmap->usecmap_name));
 
 				else if (is_keyword(tok, &buf, "begincodespacerange"))
 					pdf_parse_codespace_range(ctx, cmap, file, &buf);

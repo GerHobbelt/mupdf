@@ -93,6 +93,53 @@ size_t fz_strlcpy(char *dst, const char *src, size_t n);
 size_t fz_strlcat(char *dst, const char *src, size_t n);
 
 /**
+	Copy `src` string to limited-length `dst`. "Safe string copy to limited-length buffer."
+
+	This is similar to regular RTL strncpy() with these differences:
+
+	- `fz_strncpy_s()` DOES NOT pad `dst` with extra NUL bytes
+	  after the string-sentinel (NUL).
+	- no more than `dstsiz` characters in `src` will be accessed
+	  at any time, hence you can legally feed this function a
+	  non-NUL-terminated `src` string, IFF the legal-filled
+	  length of `src` is AT LEAST `dstsiz` characters.
+	  This feature implies that this function can also be used
+	  to extract strings from known-width/fixed-width fields
+	  in otherwise arbitrary binary input.
+	- `src` and `dst` may overlap.
+	- `dst` is guaranteed to be NUL-terminated.
+	- a zero-length `dstsiz` will throw an exception as that is
+	  considered an illegal input parameter value.
+	  If your code chances feeding this function a zero-length
+	  `dstsiz`, check for that condition beforehand if you do
+	  not wish the exception to be thrown.
+
+	Almost no-one needs this, but in case you need to detect
+	whether this function DID limit the copy size to `dstsiz-1`,
+	you can achieve this by first setting `dst[dstsiz - 1]` to
+	an arbitrary non-zero value before you invoke this function,
+	then on return from this call check if that byte value
+	has been altered to become NUL: that means the function used
+	all of `dstsiz` and can be construed as 'clipped copy' IFF
+	you chose your `dstsiz` appropriately, e.g.:
+
+	```
+	// input is expected to never be longer than 20 chars:
+	char buf[20 + 2];          // !!! +2: +1 for regular NUL sentinel, +1 for 'overflow detect'
+
+	// mark the end byte:
+	buf[sizeof(buf)-1] = 1;    
+
+	fz_strncpy_s(buf, src, sizeof(buf));
+
+	// check the end byte
+	if (!buf[sizeof(buf)-1])   
+		B0RK_B0RK_B0RK_report_clipped_src();
+	```
+*/
+void fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz);
+
+/**
 	Find the start of the first occurrence of the substring needle in haystack.
 */
 void *fz_memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen);

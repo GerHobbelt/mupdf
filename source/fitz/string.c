@@ -178,6 +178,29 @@ fz_strlcat(char *dst, const char *src, size_t siz)
 	return dlen + (s - src);	/* count does not include NUL */
 }
 
+void
+fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
+{
+	if (dstsiz == 0)
+	{
+		if (!ctx)
+			ctx = fz_get_global_context();
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_strncpy_s::dstsiz == 0: zero-length destination buffer specified.");
+	}
+
+	// use strnlen() as this function can legally be passed a non-NUL-terminated `src`!
+	size_t srclen = strnlen(src, dstsiz);
+	if (srclen == dstsiz)
+	{
+		memmove(dst, src, dstsiz - 1);
+		dst[dstsiz - 1] = 0;
+	}
+	else
+	{
+		// len(src) < dstsiz: can safely use strcpy()
+		memmove(dst, src, srclen + 1);		// allow overlapping copy & include sentinel
+	}
+}
 
 size_t
 fz_strrcspn(const char* str, const char* set)
@@ -201,32 +224,80 @@ fz_strrcspn(const char* str, const char* set)
 void
 fz_dirname(char *dir, const char *path, size_t n)
 {
-	size_t i;
-
 	if (!path || !path[0])
 	{
-		fz_strlcpy(dir, ".", n);
+		fz_strncpy_s(NULL, dir, ".", n);
 		return;
 	}
 
-	fz_strlcpy(dir, path, n);
+	fz_strncpy_s(NULL, dir, path, n);
+	char* p = (char *)fz_basename(dir);
+	*p = 0;
+	// trim off trailing '/', unless it's a root directory:
+	if (p == dir)
+	{
+		fz_strncpy_s(NULL, dir, ".", n);
+		return;
+	}
 
-	i = strlen(dir);
-	for(; dir[i] == '/'; --i) if (!i) { fz_strlcpy(dir, "/", n); return; }
-	for(; dir[i] != '/'; --i) if (!i) { fz_strlcpy(dir, ".", n); return; }
-	for(; dir[i] == '/'; --i) if (!i) { fz_strlcpy(dir, "/", n); return; }
-	dir[i+1] = 0;
+
+	if (p[-1] == '/' || p[-1] == '\\')
+	{
+		p--;
+		if (p > dir)
+		{
+			if (p[-1] == ':' && (dir + 2 == p || dir + 6 == p))
+			{
+				// root dir in classic MSwindows path, e.g. C:\ (or UNC prefixed: //?/C:/
+				return;
+			}
+			if (strchr("/\\", dir[0]) != NULL && strchr("/\\", dir[1]) != NULL)
+			{
+				// UNC prefix: skip 'server' part and 'share' part to get to the root dir:
+				char* e = dir + 2;
+				e = strpbrk(e, "/\\");
+				if (e)
+				{
+					e = strpbrk(e + 1, "/\\");
+					if (e)
+					{
+						// we've observed a legal UNC path; if we don't get here, it's not a legal UNC path for sure!
+						const char* root = e;
+						if (p == root)
+						{
+							return;
+						}
+						*p = 0;
+						return;
+					}
+				}
+				// when we get here, it's in illegal/incomplete UNC path. Treat as a slightly b0rked UNIX path instead...
+			}
+
+			// not a UNIX root dir
+			*p = 0;
+			return;
+		}
+		// UNIX root dir
+		return;
+	}
+	ASSERT(!"Should never get here");
 }
 
 const char *
 fz_basename(const char *path)
 {
-	const char *name = strrchr(path, '/');
-	if (!name)
-		name = strrchr(path, '\\');
-	if (!name)
-		return path;
-	return name + 1;
+	const char *name1 = strrchr(path, '/');
+	const char* name2 = strrchr(path, '\\');
+	if (!name1)
+		name1 = path;
+	else
+		name1++;
+	if (!name2)
+		name2 = path;
+	else
+		name2++;
+	return (name2 > name1 ? name2 : name1);
 }
 
 #ifdef _WIN32
@@ -245,6 +316,16 @@ char *fz_realpath(const char *path, char *buf)
 	for (i=0; buf[i]; ++i)
 		if (buf[i] == '\\')
 			buf[i] = '/';
+	// remove the trailing '/' when it is superfluous; GetFullPathNameW() doesn't do that.
+	size_t len = strlen(buf);
+	if (len > 1 && buf[len - 1] == '/')
+	{
+		// superfluous when it's not part of a UNC //?/ prefix, and not preceded by a drive letter.
+		if (buf[len - 2] != ':' && buf[len - 2] != '?')
+		{
+			buf[len - 1] = 0;
+		}
+	}
 	return buf;
 }
 
@@ -252,7 +333,21 @@ char *fz_realpath(const char *path, char *buf)
 
 char *fz_realpath(const char *path, char *buf)
 {
-	return realpath(path, buf);
+	if (!realpath(path, buf))
+		return NULL;
+
+	// remove the trailing '/' when it is superfluous; realpath() doesn't do that.
+	size_t len = strlen(buf);
+	if (len > 1 && buf[len - 1] == '/')
+	{
+		// superfluous when it's not part of a UNC //?/ prefix, and not the root directory;
+		// the latter is impossible because len >= 2 when we get here: .
+		if (buf[len - 2] != ':' && buf[len - 2] != '?')
+		{
+			buf[len - 1] = 0;
+		}
+	}
+	return buf;
 }
 
 #endif
@@ -563,7 +658,7 @@ void
 fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
 {
 	// hacky first run, not cf. spec:
-	fz_snprintf(dstpath, size, "%s", fmt);
+	fz_strncpy_s(ctx, dstpath, fmt, size);
 	size_t dstlen = size - strlen(dstpath);
 	char* dst = dstpath + strlen(dstpath);
 	if (chapter)

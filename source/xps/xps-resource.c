@@ -53,7 +53,7 @@ xps_parse_resource_reference(fz_context *ctx, xps_document *doc, xps_resource *d
 	if (strstr(att, "{StaticResource ") != att)
 		return NULL;
 
-	fz_strlcpy(name, att + 16, sizeof name);
+	fz_strncpy_s(ctx, name, att + 16, sizeof name);
 	s = strrchr(name, '}');
 	if (s)
 		*s = 0;
@@ -98,7 +98,7 @@ xps_parse_remote_resource_dictionary(fz_context *ctx, xps_document *doc, char *b
 		if (!fz_xml_is_tag(fz_xml_root(xml), "ResourceDictionary"))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "expected ResourceDictionary element");
 
-		fz_strlcpy(part_uri, part_name, sizeof part_uri);
+		fz_strncpy_s(ctx, part_uri, part_name, sizeof part_uri);
 		s = strrchr(part_uri, '/');
 		if (s)
 			s[1] = 0;

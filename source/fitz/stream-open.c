@@ -36,11 +36,7 @@ int
 fz_file_exists(fz_context *ctx, const char *path)
 {
 	FILE *file;
-#ifdef _WIN32
 	file = fz_fopen_utf8(ctx, path, "rb");
-#else
-	file = fopen(path, "rb");
-#endif
 	int e = !!file;
 	if (file)
 		fclose(file);
@@ -180,11 +176,7 @@ fz_stream *
 fz_open_file(fz_context *ctx, const char *name)
 {
 	FILE *file;
-#ifdef _WIN32
 	file = fz_fopen_utf8(ctx, name, "rb");
-#else
-	file = fopen(name, "rb");
-#endif
 	if (file == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, strerror(errno));
 	return fz_open_file_ptr(ctx, file);

@@ -74,7 +74,8 @@ static void usage(void)
 		"Options:\n"
 		"  -o [destination]\n"
 		"          specify a destination other than stdout for the calculated hash.\n"
-		"  -v      verbose (toggle)\n"
+		"  -v      verbose (repeat to increase the chattiness of the application)\n"
+		"  -q      quiet ~ not verbose at all\n"
 		"\n"
 		"  -V      display the version of this application and terminate\n"
 	);
@@ -112,13 +113,15 @@ qiqqa_fingerprint0_main(int argc, const char** argv)
 	}
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:vV")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:qvV")) != -1)
 	{
 		switch (c)
 		{
 		case 'o': output = fz_optarg; break;
 
-		case 'v': verbosity ^= 1; break;
+		case 'q': verbosity = 0; break;
+
+		case 'v': verbosity++; break;
 
 		case 'V': fz_info(ctx, "fingerprint0 version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
 

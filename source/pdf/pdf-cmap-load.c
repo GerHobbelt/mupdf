@@ -94,9 +94,9 @@ pdf_new_identity_cmap(fz_context *ctx, int wmode, int bytes)
 	{
 		unsigned int high = (1 << (bytes * 8)) - 1;
 		if (wmode)
-			fz_strlcpy(cmap->cmap_name, "Identity-V", sizeof cmap->cmap_name);
+			fz_strncpy_s(ctx, cmap->cmap_name, "Identity-V", sizeof cmap->cmap_name);
 		else
-			fz_strlcpy(cmap->cmap_name, "Identity-H", sizeof cmap->cmap_name);
+			fz_strncpy_s(ctx, cmap->cmap_name, "Identity-H", sizeof cmap->cmap_name);
 		pdf_add_codespace(ctx, cmap, 0, high, bytes);
 		pdf_map_range_to_range(ctx, cmap, 0, high, 0);
 		pdf_sort_cmap(ctx, cmap);

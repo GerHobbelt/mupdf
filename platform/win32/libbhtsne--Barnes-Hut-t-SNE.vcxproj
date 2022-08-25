@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>cpu_features</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF828F34}</ProjectGuid>
-    <RootNamespace>cpu_features</RootNamespace>
+    <ProjectName>libbhtsne--Barnes-Hut-t-SNE</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF622D18}</ProjectGuid>
+    <RootNamespace>libbhtsne--Barnes-Hut-t-SNE</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -122,7 +122,7 @@
   </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -132,14 +132,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,7 +150,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -158,15 +158,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -177,7 +177,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -187,14 +187,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -205,7 +205,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -213,15 +213,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CPU_FEATURES;CPU_FEATURES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBHTSNE__BARNES_HUT_T_SNE;BHTSNE__BARNES_HUT_T_SNE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpu_features/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+              <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -234,32 +234,15 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/cpu_features/ci/sample/main.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpu_features_cache_info.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpu_features_macros.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_aarch64.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_arm.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_mips.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_ppc.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/cpuinfo_x86.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/bit_utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/cpuid_x86.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/filesystem.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/hwcaps.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/stack_line_reader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/include/internal/string_view.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/ndk_compat/cpu-features.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/test/filesystem_for_testing.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/cpu_features/test/hwcaps_for_testing.h" />
-    <Text Include="../../thirdparty/owemdjee/cpu_features/README.md" />
-    <Text Include="../../thirdparty/owemdjee/cpu_features/ci/README.md" />
-    <Text Include="../../thirdparty/owemdjee/cpu_features/cmake/README.md" />
-    <Text Include="../../thirdparty/owemdjee/cpu_features/ndk_compat/README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libcpu_features.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff828f32}</Project>
-    </ProjectReference>
+    <ClCompile Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/sptree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/tsne.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/tsne_main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/sptree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/tsne.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/vptree.h" />
+    <Text Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bhtsne--Barnes-Hut-t-SNE/bhtsne.py" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -554,11 +554,7 @@ debug_word(fz_context *ctx, word_record *word)
 {
 	int i;
 
-	fz_write_printf(ctx, fz_stdout(ctx), "   %g %g %g %g:",
-			word->bbox.x0,
-			word->bbox.y0,
-			word->bbox.x1,
-			word->bbox.y1);
+	fz_write_printf(ctx, fz_stdout(ctx), "   %R:", &word->bbox);
 
 	for (i = 0; i < word->n; i++)
 	{

@@ -609,7 +609,7 @@ int pdf_check_signature(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_docum
 
 	if (pdf_xref_obj_is_unsaved_signature(doc, signature))
 	{
-		fz_strlcpy(ebuf, "Signed but document yet to be saved.", ebufsize);
+		fz_strncpy_s(ctx, ebuf, "Signed but document yet to be saved.", ebufsize);
 		if (ebufsize > 0)
 			ebuf[ebufsize-1] = 0;
 		return 0;
@@ -626,7 +626,7 @@ int pdf_check_signature(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_docum
 			if (err == PDF_SIGNATURE_ERROR_OKAY)
 				err = pdf_check_certificate(ctx, verifier, doc, signature);
 
-			fz_strlcpy(ebuf, pdf_signature_error_description(err), ebufsize);
+			fz_strncpy_s(ctx, ebuf, pdf_signature_error_description(err), ebufsize);
 			res = (err == PDF_SIGNATURE_ERROR_OKAY);
 
 			switch (err)
@@ -660,13 +660,13 @@ int pdf_check_signature(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_docum
 		else
 		{
 			res = 0;
-			fz_strlcpy(ebuf, "Not signed.", ebufsize);
+			fz_strncpy_s(ctx, ebuf, "Not signed.", ebufsize);
 		}
 	}
 	fz_catch(ctx)
 	{
 		res = 0;
-		fz_strlcpy(ebuf, fz_caught_message(ctx), ebufsize);
+		fz_strncpy_s(ctx, ebuf, fz_caught_message(ctx), ebufsize);
 	}
 
 	if (ebufsize > 0)

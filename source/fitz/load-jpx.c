@@ -212,7 +212,7 @@ static void fz_opj_error_callback(const char *msg, void *client_data)
 	fz_context *ctx = (fz_context *)client_data;
 	char buf[200];
 	size_t n;
-	fz_strlcpy(buf, msg, sizeof buf);
+	fz_strncpy_s(ctx, buf, msg, sizeof buf);
 	n = strlen(buf);
 	if (n > 0 && buf[n-1] == '\n')
 		buf[n-1] = 0;
@@ -224,7 +224,7 @@ static void fz_opj_warning_callback(const char *msg, void *client_data)
 	fz_context *ctx = (fz_context *)client_data;
 	char buf[200];
 	size_t n;
-	fz_strlcpy(buf, msg, sizeof buf);
+	fz_strncpy_s(ctx, buf, msg, sizeof buf);
 	n = strlen(buf);
 	if (n > 0 && buf[n-1] == '\n')
 		buf[n-1] = 0;

@@ -294,7 +294,7 @@ int wingetsavepath(pdfapp_t *app, char *buf, int len)
 		}
 
 		wcscpy(wbuf, twbuf);
-		fz_strlcpy(filename, buf, sizeof filename);
+		fz_strncpy_s(app->ctx, filename, buf, sizeof filename);
 		return 1;
 	}
 	else
@@ -497,7 +497,7 @@ char *wintextinput(pdfapp_t *app, char *inittext, int retry)
 {
 	int code;
 	td_retry = retry;
-	fz_strlcpy(td_textinput, inittext ? inittext : "", sizeof td_textinput);
+	fz_strncpy_s(app->ctx, td_textinput, inittext ? inittext : "", sizeof td_textinput);
 	code = DialogBoxW(NULL, L"IDD_DLOGTEXT", hwndframe, dlogtextproc);
 	if (code <= 0)
 		pdfapp_error(app, "cannot create text input dialog");
@@ -1392,7 +1392,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
 	if (fz_optind < argc)
 	{
-		fz_strlcpy(filename, argv[fz_optind++], sizeof(filename));
+		fz_strncpy_s(gapp.ctx, filename, argv[fz_optind++], sizeof(filename));
 	}
 	else
 	{

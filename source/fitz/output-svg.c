@@ -21,6 +21,7 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #include <limits.h>
 
@@ -55,6 +56,8 @@ svg_begin_page(fz_context *ctx, fz_document_writer *wri_, fz_rect mediabox)
 	wri->count += 1;
 
 	fz_format_output_path(ctx, path, sizeof path, wri->path, wri->count);
+	fz_normalize_path(ctx, path, sizeof path, path);
+	fz_sanitize_path(ctx, path, sizeof path, path);
 	wri->out = fz_new_output_with_path(ctx, path, 0);
 	return fz_new_svg_device_with_id(ctx, wri->out, w, h, wri->text_format, wri->reuse_images, &wri->id);
 }
@@ -105,8 +108,8 @@ fz_new_svg_writer(fz_context *ctx, const char *path, const char *args)
 			else if (fz_option_eq(val, "path"))
 				wri->text_format = FZ_SVG_TEXT_AS_PATH;
 		}
-		if (fz_has_option(ctx, args, "no-reuse-images", &val))
-			if (fz_option_eq(val, "yes"))
+		if (fz_has_option(ctx, args, "reuse-images", &val))
+			if (fz_option_eq(val, "no"))
 				wri->reuse_images = 0;
 		wri->path = fz_strdup(ctx, path ? path : "out-%04d.svg");
 	}

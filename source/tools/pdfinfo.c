@@ -28,6 +28,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -840,13 +841,10 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 		fz_write_printf(ctx, out, "Mediaboxes (%d):\n", glo->dims);
 		for (i = 0; i < glo->dims; i++)
 		{
-			fz_write_printf(ctx, out, PAGE_FMT_zu "[ %g %g %g %g ]\n",
+			fz_write_printf(ctx, out, PAGE_FMT_zu "[ %R ]\n",
 				glo->dim[i].page,
 				pdf_to_num(ctx, glo->dim[i].pageref),
-				glo->dim[i].u.dim.bbox->x0,
-				glo->dim[i].u.dim.bbox->y0,
-				glo->dim[i].u.dim.bbox->x1,
-				glo->dim[i].u.dim.bbox->y1);
+				glo->dim[i].u.dim.bbox);
 		}
 		fz_write_printf(ctx, out, "\n");
 	}
@@ -922,13 +920,13 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 					cs[3 + len + 1] = '\0';
 				}
 				if (strstr(cs, "ICC"))
-					fz_strlcpy(cs, "ICC", 4);
+					fz_strncpy_s(ctx, cs, "ICC", 4);
 				if (strstr(cs, "Indexed"))
-					fz_strlcpy(cs, "Idx", 4);
+					fz_strncpy_s(ctx, cs, "Idx", 4);
 				if (strstr(cs, "Pattern"))
-					fz_strlcpy(cs, "Pat", 4);
+					fz_strncpy_s(ctx, cs, "Pat", 4);
 				if (strstr(cs, "Separation"))
-					fz_strlcpy(cs, "Sep", 4);
+					fz_strncpy_s(ctx, cs, "Sep", 4);
 			}
 			if (glo->image[i].u.image.altcs)
 			{
@@ -941,13 +939,13 @@ printinfo(fz_context* ctx, globals* glo, int show, int page)
 					altcs[3 + len + 1] = '\0';
 				}
 				if (strstr(altcs, "ICC"))
-					fz_strlcpy(altcs, "ICC", 4);
+					fz_strncpy_s(ctx, altcs, "ICC", 4);
 				if (strstr(altcs, "Indexed"))
-					fz_strlcpy(altcs, "Idx", 4);
+					fz_strncpy_s(ctx, altcs, "Idx", 4);
 				if (strstr(altcs, "Pattern"))
-					fz_strlcpy(altcs, "Pat", 4);
+					fz_strncpy_s(ctx, altcs, "Pat", 4);
 				if (strstr(altcs, "Separation"))
-					fz_strlcpy(altcs, "Sep", 4);
+					fz_strncpy_s(ctx, altcs, "Sep", 4);
 			}
 
 			fz_write_printf(ctx, out, " ] %dx%d %dbpc %s%s%s (%d 0 R)\n",
@@ -1228,6 +1226,8 @@ int pdfinfo_main(int argc, const char** argv)
 			{
 				char fbuf[4096];
 				fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
+				fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
+				fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
 				out = fz_new_output_with_path(ctx, fbuf, 0);
 			}
 

@@ -170,7 +170,7 @@ xps_resolve_url(fz_context *ctx, xps_document *doc, char *output, char *base_uri
 
 	if (p != path || path[0] == '/')
 	{
-		fz_strlcpy(output, path, output_size);
+		fz_strncpy_s(ctx, output, path, output_size);
 	}
 	else
 	{

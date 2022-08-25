@@ -30,6 +30,11 @@
 #include "mupdf/assert.h"
 #include <string.h>
 
+// MSwin fix
+#undef TBYTE
+#define TBYTE TIFFBYTE
+
+
 /*
  * TIFF image loader. Should be enough to support TIFF files in XPS.
  * Baseline TIFF 6.0 plus CMYK, LZW, Flate and JPEG support.

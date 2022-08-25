@@ -28,6 +28,7 @@
 #include "mupdf/fitz/buffer.h"
 #include "mupdf/fitz/string-util.h"
 #include "mupdf/fitz/stream.h"
+#include "mupdf/helpers/mu-threads.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -135,6 +136,23 @@ struct fz_secondary_outputs
 	fz_drop_secondary_fn* drop;
 };
 
+/*
+	fz_output::flags bits:
+
+	- FZOF_IS_INSIDE_PRINTF_LOCK: this flag is used internally to ensure fz_write_printf() et al do NOT cause a deadlock while they invoke fz_write_byte() et al as part of their process.
+	  Meanwhile, the user will observe a lock granularity **per written message** this way, instead of merely **per character / message-segment**, which makes for garbled
+	  log output, for example.
+	- FZOF_IS_INSIDE_LOCK: set when inside the critical section protecting the `fz_output` buffer (`bp`, `ep`, `wp` members)
+
+*/
+typedef enum fz_output_flags
+{
+	FZOF_NONE = 0,
+	FZOF_HAS_LOCKS = 0x0001,
+	FZOF_IS_INSIDE_LOCK = 0x0002,
+	FZOF_IS_INSIDE_PRINTF_LOCK = 0x0004
+} fz_output_flags_t;
+
 struct fz_output
 {
 	void *state;
@@ -146,6 +164,10 @@ struct fz_output
 	fz_stream_from_output_fn *as_stream;
 	fz_truncate_fn *truncate;
 	char *bp, *wp, *ep;
+	char *filepath;
+	mu_mutex buf_mutex;
+	mu_mutex printf_mutex;
+	fz_output_flags_t flags;
 	struct fz_secondary_outputs secondary;
 };
 
@@ -180,6 +202,14 @@ fz_output *fz_new_output_with_path(fz_context *, const char *filename, int appen
 	buf: The buffer to append to.
 */
 fz_output *fz_new_output_with_buffer(fz_context *ctx, fz_buffer *buf);
+
+/**
+	Set a buffer for an output which hasn't got any yet. This is usually the case
+	with predefined outputs: fz_stderr and fz_stdods.
+
+	Return 0 on success, 1 on failure to (re)set the buffer.
+*/
+int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz);
 
 /**
 	Retrieve an fz_output that directs to stdout.
@@ -250,6 +280,7 @@ int64_t fz_tell_output(fz_context *ctx, fz_output *out);
 	Flush unwritten data.
 */
 void fz_flush_output(fz_context *ctx, fz_output *out);
+void fz_flush_output_no_lock(fz_context *ctx, fz_output *out);
 
 /**
 	Flush pending output and close an output stream.
@@ -311,6 +342,7 @@ void fz_write_uint16_be(fz_context *ctx, fz_output *out, unsigned int x);
 void fz_write_uint16_le(fz_context *ctx, fz_output *out, unsigned int x);
 void fz_write_char(fz_context *ctx, fz_output *out, char x);
 void fz_write_byte(fz_context *ctx, fz_output *out, unsigned char x);
+void fz_write_byte_no_lock(fz_context *ctx, fz_output *out, unsigned char x);
 void fz_write_float_be(fz_context *ctx, fz_output *out, float f);
 void fz_write_float_le(fz_context *ctx, fz_output *out, float f);
 
@@ -400,8 +432,7 @@ static inline struct fz_fmtbuf *fz_init_fmtbuf_core(struct fz_fmtbuf *dst,
 
 	These modifiers may be mixed (e.g. `%-+*.*f`).
 
-	`%g` output in "as short as possible hopefully lossless
-	non-exponent" form, see `fz_ftoa` for specifics.
+	`%g` output in "as short as possible hopefully lossless	non-exponent" form, see `fz_ftoa` for specifics.
 	`%g` ignores all size/sign/precision modifiers.
 
 	`%f` and `%e` output as usual.
@@ -425,6 +456,7 @@ static inline struct fz_fmtbuf *fz_init_fmtbuf_core(struct fz_fmtbuf *dst,
 	value (smaller than 6) will be disabled to ensure the entire string `(null)` makes it
 	into the output, e.g. `%2.2s` of `"foobar"` will print `"fo"`, but given the value `NULL`,
 	it will print `"(null)"`, disregarding the size & precision `2` values in that format spec.
+
 	When precision has been specified, but is NEGATIVE, than this is a special mode:
 	the code will discover how to best print the data buffer, using the `-p` negated value
 	as a `PDF_PRINT_JSON_***` flags value (see above), while Unicode codepoints in the byte buffer
@@ -432,6 +464,7 @@ static inline struct fz_fmtbuf *fz_init_fmtbuf_core(struct fz_fmtbuf *dst,
 	the 'usual whitespace' (`\r`, `\n`, `\t`, `\f`, `\b`) will be printed verbatim.
 	When non-negative, the precision value is treated as usual for `%s`, hence it serves as
 	a length limiting ("clipping") value.
+
 	A note about the `j` modifier: when the precision is not negative, i.e. we're using `%s`
 	as usual and *not* as a fancy (hex)dumper of arbitrary string content, then the `j`
 	modifier is *ignored*: you should use `%q` and `%Q` instead to print JSON strings, as those
@@ -439,18 +472,18 @@ static inline struct fz_fmtbuf *fz_init_fmtbuf_core(struct fz_fmtbuf *dst,
 	string value using `%q` or `%Q` will render as an empty string instead of `null`: if you need
 	to print `null` values, you must do so explicitly.
 
-	`%M` outputs a `fz_matrix*` as a series of `%g` values.
+	`%M` outputs a `fz_matrix *` as a series of 6 `%g` values: `.a .b .c .d .e .f`.
 
-	`%R` outputs a `fz_rect*` as a series of `%g` values.
+	`%R` outputs a `fz_rect *` as a series of 4 `%g` values: `.x0 .y0 .x1 .y1`.
 
-	`%P` outputs a `fz_point*` as a series of `%g` values.
+	`%P` outputs a `fz_point *` as a series of 2 `%g` values: `.x .y`.
 
-	`%Z` outputs a `fz_quad*` as a series of `%g` values.
+	`%Z` outputs a `fz_quad *` as a series of 8 `%g` values: `.ul.x .ul.y .ur.x .ur.y .ll.x .ll.y .lr.x .lr.y`.
 
 	The `,` comma modifier for `%M`/`%R`/`%P`/`%Z` will print a comma+space separator
-	between the values instead of only a space.
+	between the values instead of only the default single space.
 
-	`%T` outputs an `in64_t` as time (`time_t`, UTC).
+	`%T` outputs an `in64_t` as time (`time_t`, UTC) using the strftime() format: "D:%Y-%m-%d %H:%M:%S UTC".
 	Invalid/unparseable timestamps will print as `(invalid)`.
 
 	`%H` outputs a byte buffer in hex. (argument passed as `void*` pointer + `size_t` length).
@@ -498,6 +531,17 @@ static inline struct fz_fmtbuf *fz_init_fmtbuf_core(struct fz_fmtbuf *dst,
 	`%ll{d,i,u,x,B}` is treated as synonymous to %l{d,i,u,x,B}.
 	`%t{d,i,u,x,B}` indicates that the value is a `ptrdiff_t`.
 	`%z{d,i,u,x,B}` indicates that the value is a `size_t`.
+
+	The expected order of the modifiers is:
+	- any of the { '-', '+', ' ', '0' } modifiers, in any order and any number of occurrences
+	  (f.e., while the second `+` is useless, `%++d` is considered a valid format spec)
+	- '<width>': either '*' or a non-negative decimal number, e.g. `5` in `%5d`
+	- '.<precision>': a literal '.' dot, followed by either '*' or a non-negative decimal number, e.g. `5` in `%1.5f`
+	- ',' for comma-separated values, where applicable (`%R`, `%M`, `%P`, `%Z` formats)
+	- 'j' for JSON-compliant output.
+	  DO NOTE that numeric formats are quoted too when the `j` modifier was specified, e.g. `%jd` will print `"125"`.
+	- '<size>': one of 'l' , 'll', 't', 'z'. Both 'l' and 'll' expect an `int64_t` compatible-sized type, 't' maps
+	  to your system's `ptrdiff_t` type and `z` maps to your system's `size_t` type.
 
 	Unrecognized `%` commands will be copied verbatim, *but without
 	any recognized modifiers*. E.g. `%5K` will print `%K`.

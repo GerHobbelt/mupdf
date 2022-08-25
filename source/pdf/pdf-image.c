@@ -552,6 +552,7 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 			switch (cp->type)
 			{
 			default:
+				fz_warn(ctx, "unknown compressed pdf image type %d", cp->type);
 				goto unknown_compression;
 			case FZ_IMAGE_RAW:
 				break;
@@ -570,8 +571,10 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 					cp->u.jbig2.globals,
 					cp->u.jbig2.embedded,
 					1);
-				if (!buffer)
+				if (!buffer) {
+					fz_warn(ctx, "invalid compressed pdf JBIG2 image? Could not create pixel stream the usual way.");
 					goto unknown_compression;
+				}
 				pdf_dict_put(ctx, imobj, PDF_NAME(Filter), PDF_NAME(JBIG2Decode));
 				break;
 			case FZ_IMAGE_FAX:

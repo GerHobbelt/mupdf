@@ -130,7 +130,7 @@ parse_inline_image(fz_context *ctx, pdf_csi *csi, fz_stream *stm, char *csname, 
 		{
 			cs = pdf_dict_get(ctx, obj, PDF_NAME(CS));
 			if (!pdf_is_indirect(ctx, cs) && pdf_is_name(ctx, cs))
-				fz_strlcpy(csname, pdf_to_name(ctx, cs), cslen);
+				fz_strncpy_s(ctx, csname, pdf_to_name(ctx, cs), cslen);
 			else
 				csname[0] = 0;
 		}
@@ -940,7 +940,7 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 						csi->obj = pdf_new_name(ctx, buf->scratch);
 					}
 					else
-						fz_strlcpy(csi->name, buf->scratch, sizeof(csi->name));
+						fz_strncpy_s(ctx, csi->name, buf->scratch, sizeof(csi->name));
 					break;
 
 				case PDF_TOK_INT:

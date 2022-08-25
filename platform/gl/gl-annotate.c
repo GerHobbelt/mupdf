@@ -179,10 +179,10 @@ static void save_pdf_options(void)
 		ui_spacer();
 		ui_label("User password:");
 		if (ui_input(&upwinput, 32, 1) >= UI_INPUT_EDIT)
-			fz_strlcpy(save_opts.upwd_utf8, upwinput.text, nelem(save_opts.upwd_utf8));
+			fz_strncpy_s(ctx, save_opts.upwd_utf8, upwinput.text, nelem(save_opts.upwd_utf8));
 		ui_label("Owner password:");
 		if (ui_input(&opwinput, 32, 1) >= UI_INPUT_EDIT)
-			fz_strlcpy(save_opts.opwd_utf8, opwinput.text, nelem(save_opts.opwd_utf8));
+			fz_strncpy_s(ctx, save_opts.opwd_utf8, opwinput.text, nelem(save_opts.opwd_utf8));
 	}
 }
 
@@ -341,7 +341,7 @@ static int step_high_security_save(int cancel)
 		fz_close_document_writer(ctx, hss_state.writer);
 		fz_drop_document_writer(ctx, hss_state.writer);
 		hss_state.writer = NULL;
-		fz_strlcpy(filename, save_filename, PATH_MAX);
+		fz_strncpy_s(ctx, filename, save_filename, PATH_MAX);
 		reload_document();
 		return -1;
 	}
@@ -410,13 +410,9 @@ static void do_save_pdf_dialog(int for_signing)
 				else
 				{
 					pdf_save_document(ctx, pdf, save_filename, &save_opts);
-					fz_strlcpy(filename, save_filename, PATH_MAX);
+					fz_strncpy_s(ctx, filename, save_filename, PATH_MAX);
 					fz_strlcat(save_filename, ".journal", PATH_MAX);
-#ifdef _WIN32
-					fz_remove_utf8(save_filename);
-#else
-					remove(save_filename);
-#endif
+					fz_remove_utf8(ctx, save_filename);
 					reload_document();
 				}
 			}
@@ -502,8 +498,8 @@ static void open_attachment_dialog(void)
 				filename = fz_path_basename(attach_filename);
 
 				contents = fz_read_file(ctx, attach_filename);
-				created = fz_stat_ctime(ctx, attach_filename);
-				modified = fz_stat_mtime(ctx, attach_filename);
+				created = fz_stat_ctime(attach_filename);
+				modified = fz_stat_mtime(attach_filename);
 
 				fs = pdf_add_embedded_file(ctx, pdf, filename, NULL, contents,
 					created, modified, 0);
