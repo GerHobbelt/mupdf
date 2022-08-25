@@ -1933,11 +1933,11 @@ fz_debug_html_box(fz_context *ctx, fz_output *out, fz_html_box *box, int level)
 		}
 
 		if (box->down)
-			fz_debug_html_box(ctx, box->down, level + 1);
+			fz_debug_html_box(ctx, out, box->down, level + 1);
 		if (box->type == BOX_FLOW) {
 			indent(level+1);
 			fz_write_printf(ctx, out, "flow\n");
-			fz_debug_html_flow(ctx, box->u.flow.head, level + 2);
+			fz_debug_html_flow(ctx, out, box->u.flow.head, level + 2);
 		}
 
 		box = box->next;
