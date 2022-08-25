@@ -726,14 +726,14 @@ void fz_rethrow_if(fz_context *ctx, int err)
 
 void fz_start_throw_on_repair(fz_context *ctx)
 {
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	ctx->throw_on_repair++;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 }
 
 void fz_end_throw_on_repair(fz_context *ctx)
 {
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	ctx->throw_on_repair--;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 }

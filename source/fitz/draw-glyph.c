@@ -131,7 +131,7 @@ do_purge(fz_context *ctx)
 void
 fz_purge_glyph_cache(fz_context *ctx)
 {
-	fz_lock(ctx, FZ_LOCK_GLYPHCACHE);
+	fz_lock(ctx, FZ_LOCK_GLYPHCACHE, __FILE__, __LINE__);
 	do_purge(ctx);
 	fz_unlock(ctx, FZ_LOCK_GLYPHCACHE);
 }
@@ -142,7 +142,7 @@ fz_drop_glyph_cache_context(fz_context *ctx)
 	if (!ctx || !ctx->glyph_cache)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_GLYPHCACHE);
+	fz_lock(ctx, FZ_LOCK_GLYPHCACHE, __FILE__, __LINE__);
 	ctx->glyph_cache->refs--;
 	if (ctx->glyph_cache->refs == 0)
 	{
@@ -156,7 +156,7 @@ fz_drop_glyph_cache_context(fz_context *ctx)
 fz_glyph_cache *
 fz_keep_glyph_cache(fz_context *ctx)
 {
-	fz_lock(ctx, FZ_LOCK_GLYPHCACHE);
+	fz_lock(ctx, FZ_LOCK_GLYPHCACHE, __FILE__, __LINE__);
 	ctx->glyph_cache->refs++;
 	fz_unlock(ctx, FZ_LOCK_GLYPHCACHE);
 	return ctx->glyph_cache;
@@ -340,7 +340,7 @@ fz_render_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix *ctm, fz_colo
 	key.aa = aa;
 
 	hash = do_hash((unsigned char *)&key, sizeof(key)) % GLYPH_HASH_LEN;
-	fz_lock(ctx, FZ_LOCK_GLYPHCACHE);
+	fz_lock(ctx, FZ_LOCK_GLYPHCACHE, __FILE__, __LINE__);
 	entry = cache->entry[hash];
 	while (entry)
 	{
@@ -378,7 +378,7 @@ fz_render_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix *ctm, fz_colo
 			fz_unlock(ctx, FZ_LOCK_GLYPHCACHE);
 			locked = 0;
 			val = fz_render_t3_glyph(ctx, font, gid, subpix_ctm, model, scissor, aa);
-			fz_lock(ctx, FZ_LOCK_GLYPHCACHE);
+			fz_lock(ctx, FZ_LOCK_GLYPHCACHE, __FILE__, __LINE__);
 			locked = 1; //-V519
 		}
 		else

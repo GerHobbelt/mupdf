@@ -113,7 +113,7 @@ static fz_context *get_opj_context(void)
 
 void opj_lock(fz_context *ctx)
 {
-	fz_lock(ctx, FZ_LOCK_JPX);
+	fz_lock(ctx, FZ_LOCK_JPX, __FILE__, __LINE__);
 
 	set_opj_context(ctx);
 }

@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8156C20C-DD56-4200-B4A6-40C056EB0A45}</ProjectGuid>
-    <RootNamespace>bulktest</RootNamespace>
+    <ProjectGuid>{00112979-815B-4F64-BC9D-2190783F6293}</ProjectGuid>
+    <RootNamespace>thread-pool_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,9 +73,6 @@
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
-  <PropertyGroup>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <ItemDefinitionGroup>
     <ClCompile>
@@ -121,26 +118,26 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;_CRTDBG_MAP_ALLOC;MUTOOL_AS_BULKTEST_CMD;WIN32;_DEBUG;FT2_BUILD_LIBRARY;OPJ_STATIC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THREAD_POOL_TESTS;THREAD_POOL_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;CLIPP_CLIPP_WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ForceFileOutput>
+      </ForceFileOutput>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/clipp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
-    <Bscmake>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -148,45 +145,49 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;_CRTDBG_MAP_ALLOC;MUTOOL_AS_BULKTEST_CMD;WIN64;_DEBUG;FT2_BUILD_LIBRARY;OPJ_STATIC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THREAD_POOL_TESTS;THREAD_POOL_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;CLIPP_CLIPP_WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ForceFileOutput>
+      </ForceFileOutput>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/clipp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THREAD_POOL_TESTS;THREAD_POOL_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;CLIPP_CLIPP_WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;MUTOOL_AS_BULKTEST_CMD;_UNICODE;UNICODE;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ForceFileOutput>
+      </ForceFileOutput>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/clipp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -196,70 +197,36 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THREAD_POOL_TESTS;THREAD_POOL_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;CLIPP_CLIPP_WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>FZ_DLL_CLIENT;HAVE_CURL;MUTOOL_AS_BULKTEST_CMD;_UNICODE;UNICODE;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ForceFileOutput>
+      </ForceFileOutput>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/clipp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\tools\bulktest.c" />
-    <ClInclude Include="..\..\source\tools\mutool.c" />
-    <ClCompile Include="..\..\source\tools\mutool_ex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\thread-pool\monolithic_main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="libbibutils.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff09284b}</Project>
+    <ClInclude Include="..\..\thirdparty\owemdjee\thread-pool\monolithic_examples.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="thread-pool.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff88fb8f}</Project>
     </ProjectReference>
-    <ProjectReference Include="MuPDFLib.vcxproj">
-      <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\! Tools And Scripts.md" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\all_pdf_files.info-test.bulktest" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\all_pdf_files.info-test.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\all_pdf_files.lst" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\all_pdf_files_on_drive_W.info-test.bulktest" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\all_pdf_files_on_drive_W.info-test.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\all_pdf_files_on_drive_W.lst" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\basic_test_pdf_files.info-test.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\bulktest.bulktest" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\crashing_pdf_files.bulktest" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\crashing_pdf_files.info-test.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\crashing_pdf_files.lst" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\mk_mupdf_mujstest_script.js" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\mk_mupdf_mujstest_script.sh" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\mupdf_test_files_in_dev_drive_Z.info-test.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\mupdf_test_files_in_dev_drive_Z.lst" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\package.json" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\README.md" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\set-up-directory-junctions-to-qiqqa-base-dir.bat" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\specials-for-debugging.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\split_large_files_in_repo.sh" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\text_extract_pdf_files.bulktest" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\text_extract_pdf_files.info-test.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\text_extract_spec_pdf_files.lst" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\unicode_spec_pdf_files.bulktest" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\unicode_spec_pdf_files.info-test.tsv" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\unicode_spec_pdf_files.lst" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\unsplit_large_files_in_repo.sh" />
-    <None Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\update_gitignore_for_large_files.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Y:\Qiqqa\Qiqqa-Test-DrvE\evil-base\mupdf_mujstest_script.failure-notes.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

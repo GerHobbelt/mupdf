@@ -837,6 +837,7 @@ fz_find_icc_link(fz_context *ctx,
 	key.bgr = (dst->type == FZ_COLORSPACE_BGR);
 
 	link = fz_find_item(ctx, fz_drop_icc_link_imp, &key, &fz_link_store_type);
+	ASSERT_AND_CONTINUE(link != (fz_icc_link *)0xddddddddddddddddULL);
 	if (!link)
 	{
 		new_key = fz_malloc_struct(ctx, fz_link_key);

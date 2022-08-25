@@ -582,7 +582,7 @@ fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number)
 
 	/* Protect modifications to the page list to cope with
 	 * destruction of pages on other threads. */
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	for (page = doc->open; page; page = page->next)
 		if (page->chapter == chapter && page->number == number)
 		{
@@ -601,7 +601,7 @@ fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number)
 		/* Insert new page at the head of the list of open pages. */
 		if (!page->incomplete)
 		{
-			fz_lock(ctx, FZ_LOCK_ALLOC);
+			fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 			if ((page->next = doc->open) != NULL)
 				doc->open->prev = &page->next;
 			doc->open = page;
@@ -700,7 +700,7 @@ fz_drop_page(fz_context *ctx, fz_page *page)
 	if (page && fz_drop_imp(ctx, page, &page->refs))
 	{
 		/* Remove page from the list of open pages */
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		if (page->next != NULL)
 			page->next->prev = page->prev;
 		if (page->prev != NULL)
@@ -795,7 +795,7 @@ fz_process_opened_pages(fz_context *ctx, fz_document *doc, fz_process_opened_pag
 	{
 		/* We can only walk the page list while the alloc lock is taken, so gymnastics are required. */
 		/* Loop invariant: at any point where we might throw, kept != NULL iff we are unlocked. */
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		for (page = doc->open; ret == NULL && page != NULL; page = page->next)
 		{
 			/* Keep an extra reference to the page so that no other thread can remove it. */
@@ -812,7 +812,7 @@ fz_process_opened_pages(fz_context *ctx, fz_document *doc, fz_process_opened_pag
 			 * for dropping later. */
 			dropme = kept;
 			kept = NULL;
-			fz_lock(ctx, FZ_LOCK_ALLOC);
+			fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		}
 		/* unlock (and final drop of dropme) happens in the always. */
 	}

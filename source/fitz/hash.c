@@ -169,7 +169,7 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 		fz_unlock(ctx, table->lock);
 	newents = fz_malloc_no_throw(ctx, newsize * sizeof (fz_hash_entry));
 	if (table->lock == FZ_LOCK_ALLOC)
-		fz_lock(ctx, table->lock);
+		fz_lock(ctx, table->lock, __FILE__, __LINE__);
 	if (table->lock >= 0)
 	{
 		if (table->size >= newsize)
@@ -179,7 +179,7 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 				fz_unlock(ctx, table->lock);
 			fz_free(ctx, newents);
 			if (table->lock == FZ_LOCK_ALLOC)
-				fz_lock(ctx, table->lock);
+				fz_lock(ctx, table->lock, __FILE__, __LINE__);
 			return;
 		}
 	}
@@ -202,7 +202,7 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 		fz_unlock(ctx, table->lock);
 	fz_free(ctx, oldents);
 	if (table->lock == FZ_LOCK_ALLOC)
-		fz_lock(ctx, table->lock);
+		fz_lock(ctx, table->lock, __FILE__, __LINE__);
 }
 
 void *

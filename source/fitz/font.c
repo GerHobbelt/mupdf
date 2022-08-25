@@ -209,7 +209,7 @@ fz_drop_font(fz_context *ctx, fz_font *font)
 
 	if (font->ft_face)
 	{
-		fz_lock(ctx, FZ_LOCK_FREETYPE);
+		fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 		fterr = FT_Done_Face((FT_Face)font->ft_face);
 		fz_unlock(ctx, FZ_LOCK_FREETYPE);
 		if (fterr)
@@ -611,7 +611,7 @@ fz_keep_freetype(fz_context *ctx)
 	int maj, min, pat;
 	fz_font_context *fct = ctx->font;
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 	if (fct->ftlib)
 	{
 		fct->ftlib_refs++;
@@ -649,7 +649,7 @@ fz_drop_freetype(fz_context *ctx)
 	int fterr;
 	fz_font_context *fct = ctx->font;
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 	if (--fct->ftlib_refs == 0)
 	{
 		fterr = FT_Done_Library(fct->ftlib);
@@ -672,7 +672,7 @@ fz_new_font_from_buffer(fz_context *ctx, const char *name, fz_buffer *buffer, in
 
 	fz_keep_freetype(ctx);
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 	fterr = FT_New_Memory_Face(ctx->font->ftlib, buffer->data, (FT_Long)buffer->len, index, &face);
 	fz_unlock(ctx, FZ_LOCK_FREETYPE);
 	if (fterr)
@@ -708,7 +708,7 @@ fz_new_font_from_buffer(fz_context *ctx, const char *name, fz_buffer *buffer, in
 		font = fz_new_font(ctx, name, use_glyph_bbox, face->num_glyphs);
 	fz_catch(ctx)
 	{
-		fz_lock(ctx, FZ_LOCK_FREETYPE);
+		fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 		fterr = FT_Done_Face(face);
 		fz_unlock(ctx, FZ_LOCK_FREETYPE);
 		if (fterr)
@@ -880,7 +880,7 @@ fz_adjust_ft_glyph_width(fz_context *ctx, fz_font *font, int gid, fz_matrix *trm
 		float subw;
 		float realw;
 
-		fz_lock(ctx, FZ_LOCK_FREETYPE);
+		fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 		fterr = FT_Get_Advance(font->ft_face, gid, FT_LOAD_NO_SCALE | FT_LOAD_NO_HINTING | FT_LOAD_IGNORE_TRANSFORM, &adv);
 		fz_unlock(ctx, FZ_LOCK_FREETYPE);
 		if (fterr && fterr != FT_Err_Invalid_Argument)
@@ -936,7 +936,7 @@ do_ft_render_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix trm, int a
 	if (font->flags.fake_italic)
 		trm = fz_pre_shear(trm, SHEAR, 0);
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 
 	if (aa == 0)
 	{
@@ -1097,7 +1097,7 @@ do_render_ft_stroked_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix tr
 	v.x = trm.e * 64;
 	v.y = trm.f * 64;
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 	fterr = FT_Set_Char_Size(face, 65536, 65536, 72, 72); /* should be 64, 64 */
 	if (fterr)
 	{
@@ -1248,7 +1248,7 @@ fz_bound_ft_glyph(fz_context *ctx, fz_font *font, int gid)
 	v.x = trm.e * 65536;
 	v.y = trm.f * 65536;
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 	/* Set the char size to scale=face->units_per_EM to effectively give
 	 * us unscaled results. This avoids quantisation. We then apply the
 	 * scale ourselves below. */
@@ -1370,7 +1370,7 @@ fz_outline_ft_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix trm)
 	if (font->flags.fake_italic)
 		trm = fz_pre_shear(trm, SHEAR, 0);
 
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 
 	fterr = FT_Set_Char_Size(face, scale, scale, 72, 72);
 	if (fterr)
@@ -1740,7 +1740,7 @@ fz_advance_ft_glyph_aux(fz_context *ctx, fz_font *font, int gid, int wmode, int 
 	if (wmode)
 		mask |= FT_LOAD_VERTICAL_LAYOUT;
 	if (!locked)
-		fz_lock(ctx, FZ_LOCK_FREETYPE);
+		fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 	fterr = FT_Get_Advance(font->ft_face, gid, mask, &adv);
 	if (!locked)
 		fz_unlock(ctx, FZ_LOCK_FREETYPE);
@@ -1803,7 +1803,7 @@ fz_advance_glyph(fz_context *ctx, fz_font *font, int gid, int wmode)
 		{
 			float f;
 			int block = gid>>8;
-			fz_lock(ctx, FZ_LOCK_FREETYPE);
+			fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 			if (!font->advance_cache)
 			{
 				int n = (font->glyph_count+255)/256;

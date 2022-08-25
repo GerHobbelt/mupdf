@@ -36,6 +36,9 @@
 
 #include "timeval.h"
 
+#include "plf_nanotimer_c_api.h"
+
+
 /* Enable FITZ_DEBUG_LOCKING_TIMES below if you want to check the times
  * for which locks are held too. */
 #ifdef FITZ_DEBUG_LOCKING
@@ -58,7 +61,7 @@ do_scavenging_malloc(fz_context *ctx, size_t size   FZDBG_DECL_ARGS)
 	if (ctx == NULL)
 		return NULL;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC   FZDBG_PASS);
 	do {
 		p = ctx->alloc.malloc_(ctx->alloc.user, size   FZDBG_PASS);
 		if (p != NULL)
@@ -81,7 +84,7 @@ do_scavenging_realloc(fz_context *ctx, void *p, size_t size   FZDBG_DECL_ARGS)
 	if (ctx == NULL)
 		return NULL;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	do {
 		q = ctx->alloc.realloc_(ctx->alloc.user, p, size   FZDBG_PASS);
 		if (q != NULL)
@@ -181,7 +184,7 @@ fz_free(fz_context *ctx, const void *p)
 	if (p)
 	{
 		assert(ctx != NULL);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		ctx->alloc.free_(ctx->alloc.user, (void *)p);
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
 	}
@@ -258,13 +261,16 @@ enum
 	FZ_LOCK_DEBUG_CONTEXT_MAX = 100
 };
 
-fz_context *fz_lock_debug_contexts[FZ_LOCK_DEBUG_CONTEXT_MAX];
-int fz_locks_debug[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX];
+static fz_context *fz_lock_debug_contexts[FZ_LOCK_DEBUG_CONTEXT_MAX];
+static int fz_locks_debug[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX];
 
 #ifdef FITZ_DEBUG_LOCKING_TIMES
 
-static int fz_lock_time[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
-static struct curltime fz_lock_taken[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
+static double fz_lock_time[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
+static nanotimer_data_t fz_lock_taken[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { { 0 } } };
+
+static const char* fz_locks_debug_srcfile[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
+static unsigned int fz_locks_debug_srcline[FZ_LOCK_DEBUG_CONTEXT_MAX][FZ_LOCK_MAX] = { { 0 } };
 
 /* We implement our own millisecond clock, as clock() cannot be trusted
  * when threads are involved. */
@@ -275,14 +281,14 @@ void fz_dump_lock_times(fz_context* ctx, int total_program_time_ms)
 
 	for (j = 0; j < FZ_LOCK_MAX; j++)
 	{
-		int total = 0;
+		double total = 0;
 		for (i = 0; i < FZ_LOCK_DEBUG_CONTEXT_MAX; i++)
 		{
 			total += fz_lock_time[i][j];
 		}
-		fz_info(ctx, "Lock %d held for %g seconds (%g%%)\n", j, total / 1000.0f, 100.0f * total / max(1.0f, total_program_time_ms));
+		fz_info(ctx, "Lock %d held for %g seconds (%g%%)\n", j, total / 1000.0, 100.0 * total / max(1.0, total_program_time_ms));
 	}
-	fz_info(ctx, "Total program time %g seconds\n", total_program_time_ms / 1000.0f);
+	fz_info(ctx, "Total program time %g seconds\n", total_program_time_ms / 1000.0);
 }
 
 #endif
@@ -351,12 +357,32 @@ fz_assert_lock_not_held(fz_context *ctx, int lock)
 		fz_error(ctx, "Lock %d held when not expected", lock);
 }
 
-void fz_lock_debug_lock(fz_context *ctx, int lock)
+void fz_lock_debug_lock_start_timer_assist(fz_context* ctx, int lock)
+{
+	int idx;
+
+#if 0
+	if (ctx->locks.lock != fz_lock_default)
+		return;
+#endif
+
+	idx = find_context(ctx);
+	if (idx < 0)
+		return;
+
+#ifdef FITZ_DEBUG_LOCKING_TIMES
+	nanotimer_start(&fz_lock_taken[idx][lock]);
+#endif
+}
+
+void fz_lock_debug_attempt_lock(fz_context* ctx, int lock)
 {
 	int i, idx;
 
+#if 0
 	if (ctx->locks.lock != fz_lock_default)
 		return;
+#endif
 
 	idx = find_context(ctx);
 	if (idx < 0)
@@ -366,25 +392,52 @@ void fz_lock_debug_lock(fz_context *ctx, int lock)
 	{
 		fz_error(ctx, "Attempt to take lock %d when held already!", lock);
 	}
-	for (i = lock-1; i >= 0; i--)
+	for (i = lock - 1; i >= 0; i--)
 	{
 		if (fz_locks_debug[idx][i] != 0)
 		{
 			fz_error(ctx, "Lock ordering violation: Attempt to take lock %d when %d held already!", lock, i);
 		}
 	}
-	fz_locks_debug[idx][lock] = 1;
-#ifdef FITZ_DEBUG_LOCKING_TIMES
-	fz_lock_taken[idx][lock] = Curl_now();
+}
+
+void fz_lock_debug_lock_obtained(fz_context *ctx, int lock, const char *srcfile, unsigned int srcline)
+{
+	int i, idx;
+
+#if 0
+	if (ctx->locks.lock != fz_lock_default)
+		return;
 #endif
+
+	idx = find_context(ctx);
+	if (idx < 0)
+		return;
+
+	if (fz_locks_debug[idx][lock] != 0)
+	{
+		fz_error(ctx, "Obtained lock %d when held already!", lock);
+	}
+	for (i = lock-1; i >= 0; i--)
+	{
+		if (fz_locks_debug[idx][i] != 0)
+		{
+			fz_error(ctx, "Lock ordering violation: obtained lock %d when %d held already!", lock, i);
+		}
+	}
+	fz_locks_debug[idx][lock] = 1;
+	fz_locks_debug_srcfile[idx][lock] = srcfile;
+	fz_locks_debug_srcline[idx][lock] = srcline;
 }
 
 void fz_lock_debug_unlock(fz_context *ctx, int lock)
 {
 	int idx;
 
+#if 0
 	if (ctx->locks.lock != fz_lock_default)
 		return;
+#endif
 
 	idx = find_context(ctx);
 	if (idx < 0)
@@ -395,8 +448,10 @@ void fz_lock_debug_unlock(fz_context *ctx, int lock)
 		fz_error(ctx, "Attempt to release lock %d when not held!", lock);
 	}
 	fz_locks_debug[idx][lock] = 0;
+	fz_locks_debug_srcfile[idx][lock] = 0;
+	fz_locks_debug_srcline[idx][lock] = 0;
 #ifdef FITZ_DEBUG_LOCKING_TIMES
-	fz_lock_time[idx][lock] += Curl_timediff(Curl_now(), fz_lock_taken[idx][lock]);
+	fz_lock_time[idx][lock] += nanotimer_get_elapsed_ms(&fz_lock_taken[idx][lock]);
 #endif
 }
 

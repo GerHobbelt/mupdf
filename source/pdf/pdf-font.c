@@ -871,7 +871,7 @@ pdf_load_simple_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 		for (i = 0; i < 256; i++)
 			etable[i] = ft_char_index(face, i);
 
-		fz_lock(ctx, FZ_LOCK_FREETYPE);
+		fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 		has_lock = 1;
 
 		/* built-in and substitute fonts may be a different type than what the document expects */

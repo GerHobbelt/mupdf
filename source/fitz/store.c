@@ -191,7 +191,7 @@ void fz_drop_key_storable(fz_context *ctx, const fz_key_storable *sc)
 	if (s == NULL)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	assert(s->storable.refs != 0);
 	if (s->storable.refs > 0)
 	{
@@ -234,7 +234,7 @@ void *fz_keep_key_storable_key(fz_context *ctx, const fz_key_storable *sc)
 	if (s == NULL)
 		return NULL;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	if (s->storable.refs > 0)
 	{
 		(void)Memento_takeRef(s);
@@ -255,7 +255,7 @@ void fz_drop_key_storable_key(fz_context *ctx, const fz_key_storable *sc)
 	if (s == NULL)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	assert(s->store_key_refs > 0 && s->storable.refs >= s->store_key_refs);
 	(void)Memento_dropRef(s);
 	drop = --s->storable.refs == 0;
@@ -309,7 +309,7 @@ evict(fz_context *ctx, fz_item *item)
 	/* Always drops the key and drop the item */
 	item->type->drop_key(ctx, item->key);
 	fz_free(ctx, item);
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 }
 
 static size_t
@@ -402,7 +402,7 @@ ensure_space(fz_context *ctx, size_t tofree)
 		/* Always drops the key and drop the item */
 		item->type->drop_key(ctx, item->key);
 		fz_free(ctx, item);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	}
 
 	return count;
@@ -462,7 +462,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 	}
 
 	type->keep_key(ctx, key);
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 
 	/* Fill out the item. To start with, we always set item->next == item
 	 * and item->prev == item. This is so that we can spot items that have
@@ -537,7 +537,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 				if (store->needs_reaping)
 				{
 					do_reap(ctx); /* Drops alloc lock */
-					fz_lock(ctx, FZ_LOCK_ALLOC);
+					fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 				}
 				size = store->size + itemsize;
 				if (size <= store->max)
@@ -593,7 +593,7 @@ fz_find_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_store_
 		use_hash = type->make_hash_key(ctx, &hash, key);
 	}
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	if (use_hash)
 	{
 		/* We can find objects keyed on indirected objects quickly */
@@ -644,7 +644,7 @@ fz_remove_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_stor
 		use_hash = type->make_hash_key(ctx, &hash, key);
 	}
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	if (use_hash)
 	{
 		/* We can find objects keyed on indirect objects quickly */
@@ -696,7 +696,7 @@ fz_empty_store(fz_context *ctx)
 	if (store == NULL)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	/* Run through all the items in the store */
 	while (store->head)
 		evict(ctx, store->head); /* Drops then retakes lock */
@@ -735,7 +735,7 @@ fz_debug_store_item(fz_context *ctx, void *state, void *key_, int keylen, void *
 	fz_output *out = (fz_output *)state;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 	item->type->format_key(ctx, buf, sizeof buf, item->key);
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	fz_write_printf(ctx, out, "STORE\thash[");
 	for (i=0; i < keylen; ++i)
 		fz_write_printf(ctx, out,"%02x", key[i]);
@@ -762,7 +762,7 @@ fz_debug_store_locked(fz_context *ctx, fz_output *out)
 		}
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
 		item->type->format_key(ctx, buf, sizeof buf, item->key);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		fz_write_printf(ctx, out, "STORE\tstore[*][refs=%d][size=%d] key=%s val=%p\n",
 				item->val->refs, (int)item->size, buf, (void *)item->val);
 		list_total += item->size;
@@ -783,7 +783,7 @@ fz_debug_store_locked(fz_context *ctx, fz_output *out)
 void
 fz_debug_store(fz_context *ctx, fz_output *out)
 {
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	fz_debug_store_locked(ctx, out);
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 }
@@ -875,7 +875,7 @@ fz_drop_storable(fz_context *ctx, const fz_storable *sc)
 	if (s == NULL)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	/* Drop the ref, and leave num as being the number of
 	 * refs left (-1 meaning, "statically allocated"). */
 	if (s->refs > 0)
@@ -910,7 +910,7 @@ int fz_store_scavenge_external(fz_context *ctx, size_t size, int *phase)
 {
 	int ret;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	ret = fz_store_scavenge(ctx, size, phase);
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 
@@ -989,7 +989,7 @@ fz_shrink_store(fz_context *ctx, unsigned int percent)
 #ifdef DEBUG_SCAVENGING
 	fz_write_printf(ctx, fz_stdout(ctx), "fz_shrink_store: %zu\n", store->size/(1024*1024));
 #endif
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 
 	new_size = (size_t)(((uint64_t)store->size * percent) / 100);
 	if (store->size > new_size)
@@ -1013,7 +1013,7 @@ void fz_filter_store(fz_context *ctx, fz_store_filter_fn *fn, void *arg, const f
 	if (store == NULL)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 
 	/* Filter the items */
 	remove = NULL;
@@ -1079,7 +1079,7 @@ void fz_defer_reap_start(fz_context *ctx)
 	if (ctx->store == NULL)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	ctx->store->defer_reap_count++;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 }
@@ -1091,7 +1091,7 @@ void fz_defer_reap_end(fz_context *ctx)
 	if (ctx->store == NULL)
 		return;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	--ctx->store->defer_reap_count;
 	reap = ctx->store->defer_reap_count == 0 && ctx->store->needs_reaping;
 	if (reap)

@@ -171,6 +171,7 @@ enum {
 	FZ_LOCK_FREETYPE,
 	FZ_LOCK_GLYPHCACHE,
 	FZ_LOCK_JPX,
+	FZ_LOCK_JBIG2,
 	FZ_LOCK_MAX
 };
 
@@ -182,16 +183,20 @@ enum {
 
 void fz_assert_lock_held(fz_context *ctx, int lock);
 void fz_assert_lock_not_held(fz_context *ctx, int lock);
-void fz_lock_debug_lock(fz_context *ctx, int lock);
+void fz_lock_debug_attempt_lock(fz_context *ctx, int lock);
+void fz_lock_debug_lock_obtained(fz_context *ctx, int lock, const char *srcfile, unsigned int srcline);
 void fz_lock_debug_unlock(fz_context *ctx, int lock);
+void fz_lock_debug_lock_start_timer_assist(fz_context *ctx, int lock);
 void fz_dump_lock_times(fz_context* ctx, int total_program_time_ms);
 
 #else
 
 #define fz_assert_lock_held(A,B) do { } while (0)
 #define fz_assert_lock_not_held(A,B) do { } while (0)
-#define fz_lock_debug_lock(A,B) do { } while (0)
+#define fz_lock_debug_attempt_lock(A,B) do { } while (0)
+#define fz_lock_debug_lock_obtained(A,B) do { } while (0)
 #define fz_lock_debug_unlock(A,B) do { } while (0)
+#define fz_lock_debug_lock_start_timer_assist(A,B) do { } while (0)
 #define fz_dump_lock_times(C,T) do { } while (0)
 
 #endif /* !FITZ_DEBUG_LOCKING */
@@ -881,10 +886,12 @@ fz_context *fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_con
 	Lock one of the user supplied mutexes.
 */
 static inline void
-fz_lock(fz_context *ctx, int lock)
+fz_lock(fz_context *ctx, int lock, const char *srcfile, unsigned int srcline)
 {
-	fz_lock_debug_lock(ctx, lock);
+	fz_lock_debug_lock_start_timer_assist(ctx, lock);
+	fz_lock_debug_attempt_lock(ctx, lock);
 	ctx->locks.lock(ctx->locks.user, lock);
+	fz_lock_debug_lock_obtained(ctx, lock, srcfile, srcline);
 }
 
 /**
@@ -905,7 +912,7 @@ fz_keep_imp(fz_context *ctx, void *p, int *refs)
 	if (p)
 	{
 		(void)Memento_checkIntPointerOrNull(refs);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		if (*refs > 0)
 		{
 			(void)Memento_takeRef(p);
@@ -937,7 +944,7 @@ fz_keep_imp8(fz_context *ctx, void *p, int8_t *refs)
 	if (p)
 	{
 		(void)Memento_checkBytePointerOrNull(refs);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		if (*refs > 0)
 		{
 			(void)Memento_takeRef(p);
@@ -954,7 +961,7 @@ fz_keep_imp16(fz_context *ctx, void *p, int16_t *refs)
 	if (p)
 	{
 		(void)Memento_checkShortPointerOrNull(refs);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		if (*refs > 0)
 		{
 			(void)Memento_takeRef(p);
@@ -972,7 +979,7 @@ fz_drop_imp(fz_context *ctx, void *p, int *refs)
 	{
 		int drop;
 		(void)Memento_checkIntPointerOrNull(refs);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		if (*refs > 0)
 		{
 			(void)Memento_dropIntRef(p);
@@ -993,7 +1000,7 @@ fz_drop_imp8(fz_context *ctx, void *p, int8_t *refs)
 	{
 		int drop;
 		(void)Memento_checkBytePointerOrNull(refs);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		if (*refs > 0)
 		{
 			(void)Memento_dropByteRef(p);
@@ -1014,7 +1021,7 @@ fz_drop_imp16(fz_context *ctx, void *p, int16_t *refs)
 	{
 		int drop;
 		(void)Memento_checkShortPointerOrNull(refs);
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		if (*refs > 0)
 		{
 			(void)Memento_dropShortRef(p);

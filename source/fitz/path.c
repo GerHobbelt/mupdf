@@ -1459,7 +1459,7 @@ fz_unshare_stroke_state_with_dash_len(fz_context *ctx, fz_stroke_state *shared, 
 	int single, unsize, shsize, shlen;
 	fz_stroke_state *unshared;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	single = (shared->refs == 1);
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 

@@ -154,7 +154,7 @@ ocr_set_leptonica_mem(fz_context *ctx)
 {
 	int die = 0;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	die = (leptonica_mem != NULL);
 	if (!die)
 		leptonica_mem = ctx;
@@ -168,7 +168,7 @@ ocr_clear_leptonica_mem(fz_context *ctx)
 {
 	int die = 0;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	die = (leptonica_mem == NULL);
 	if (!die)
 		leptonica_mem = NULL;

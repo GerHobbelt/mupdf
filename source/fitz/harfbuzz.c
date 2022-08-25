@@ -136,7 +136,7 @@ static fz_context *get_hb_context(void)
 
 void fz_hb_lock(fz_context *ctx)
 {
-	fz_lock(ctx, FZ_LOCK_FREETYPE);
+	fz_lock(ctx, FZ_LOCK_FREETYPE, __FILE__, __LINE__);
 
 	set_hb_context(ctx);
 }

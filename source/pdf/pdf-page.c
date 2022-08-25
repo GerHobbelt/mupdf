@@ -90,7 +90,7 @@ pdf_load_page_tree(fz_context *ctx, pdf_document *doc)
 	int refs;
 
 	/* Atomically increment the number of times we've been told to load. */
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	refs = doc->page_map_nesting++;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 
@@ -126,7 +126,7 @@ pdf_load_page_tree(fz_context *ctx, pdf_document *doc)
 		doc->rev_page_map = NULL;
 		fz_free(ctx, doc->fwd_page_map);
 		doc->fwd_page_map = NULL;
-		fz_lock(ctx, FZ_LOCK_ALLOC);
+		fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 		doc->page_map_nesting--;
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
 		fz_rethrow(ctx);
@@ -138,7 +138,7 @@ pdf_drop_page_tree(fz_context *ctx, pdf_document *doc)
 {
 	int refs;
 
-	fz_lock(ctx, FZ_LOCK_ALLOC);
+	fz_lock(ctx, FZ_LOCK_ALLOC, __FILE__, __LINE__);
 	refs = --doc->page_map_nesting;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 	if (refs != 0)
