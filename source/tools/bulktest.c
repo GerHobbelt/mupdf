@@ -18,6 +18,8 @@
 
 #include "jbig2.h"
 
+#include "plf_nanotimer_c_api.h"
+
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -1424,7 +1426,7 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
 						// the inner, second, filter is clock()-based and thus quite a bit slower, yet more accurate. Here we filter the
 						// incoming rate of ~ msgs per second down to once every third of a second, 10 per sec to 3 per sec.
 						static uint64_t prev_rtcnt = 0;
-						static uint64_t offset = (uint64_t)(1E6);
+						static uint64_t offset = 1E6;
 						uint64_t t = __rdtsc();
 						if (t > prev_rtcnt + offset)
 						{
@@ -1433,17 +1435,20 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
 							// quite a different time interval then we do here using clock(), hence we need to track the matching RDTSC
 							// value for proper offset correction calculus:
 							static uint64_t prev_rtcnt_on_clock = 0;
-							static clock_t prev_time = 0;
-							clock_t t2 = clock();
-							if (t2 > prev_time + 0.33 * CLOCKS_PER_SEC)
-							{
-								fprintf(stderr, ".");
-							}
-							if (/* t2 < prev_time + 0.1f * CLOCKS_PER_SEC && */ prev_time != 0 && prev_rtcnt != 0)
+
+							static nanotimer_data_t prev_t = { 0 };
+							nanotimer_data_t new_t = { 0 };
+							nanotimer_start(&new_t);
+							double t_delta = nanotimer_get_elapsed_us(&prev_t);
+
+							// Stage 1:
+							// 
+							// adjust ("tune") your RDTSC count offset to a poll period of about 0.1 seconds, i.e. to visit
+							// this section about once every 100 msecs.
+							if (t_delta > 0 && prev_rtcnt != 0)
 							{
 								// apparently, `offset` is small enough to land us here again *within* 1/10rd of a second: adjust `offset`!
-								uint64_t clockdelta = t2 - prev_time;
-								uint64_t delta = (t - prev_rtcnt_on_clock);
+								uint64_t clockdelta = (t - prev_rtcnt_on_clock);
 								// slowly grow the offset towards the proper value; when we measure across tiny clock() intervals,
 								// extrapolating to 0.1 second (~ 100 clock()s on most hardware) is overzealous and highly
 								// inaccurate. So we limit the extrapolation factor to 2, thus growing the offset slowly towards
@@ -1453,7 +1458,8 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
 								// which last least than 20 clock() ticks: that way, we'll have a 5% or better accuracy.
 								if (clockdelta >= 20)
 								{
-									uint64_t dt = delta * fz_min(2, (0.1f * CLOCKS_PER_SEC) / clockdelta);
+									double dt = clockdelta / t_delta;   // --> RDTSC count per microsecond
+									dt *= 0.1 * 1E6;                    // --> RDTSC ticks count for 0.1 second (100 0000 microseconds)
 									if (dt > offset)
 									{
 										// also limit the offset increase angle to prevent crazy changes due to unknown CPU gas bubbles. ;-)
@@ -1465,26 +1471,35 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
 										// By limiting the increase rate, we prevent that artifact from badly impacting our progress time delta
 										// filters above.
 										offset = fz_min(5 * offset, dt);
+										//fprintf(stderr, "+");
 									}
 
-									prev_time = t2;
+									prev_t = new_t;
 									prev_rtcnt_on_clock = t;
-								}
-								if (clockdelta > 300)
-								{
-									static int f = 0;
-									if (!f)
-									{
-										f = 1;
-										fz_info(ctx, "[clock delta: %d]\n", (int)clockdelta);
-										f = 0;
-									}
 								}
 							}
 							else
 							{
-								prev_time = t2;
+								prev_t = new_t;
 								prev_rtcnt_on_clock = t;
+							}
+
+							// Stage 2:
+							//
+							// As we're now in this "once per 100msec" section, we know we can do relatively costly
+							// things, such as measuring the time (as done above) and print porogress.
+							// We do the later at most 3 times per second:
+							static double pdelta = 0;
+							static uint32_t tocks = 0;
+							pdelta += t_delta;
+							tocks++;
+
+							if (tocks >= 3 || pdelta > 0.33 * 1E6)
+							{
+								//fprintf(stderr, ".%d%d", tocks, pdelta > 0.33 * 1E6);
+								fprintf(stderr, ".");
+								tocks = 0;
+								pdelta = 0;
 							}
 						}
 						else
@@ -1494,7 +1509,8 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
 							//
 							// As this path will execute quite often, we don't want any particular (and costly!) time measurement calls
 							// in here, but simply apply some quick math to slowly decrease the offset.
-							offset = offset * 0.9;
+							offset = offset * 0.8f;
+							//fprintf(stderr, "-");
 						}
 						prev_rtcnt = t;
 					}
