@@ -88,6 +88,7 @@ static JavaVM *jvm = NULL;
 /* All the cached classes/mids/fids we need. */
 
 static jclass cls_AlertResult;
+static jclass cls_Archive;
 static jclass cls_ArrayOfQuad;
 static jclass cls_Buffer;
 static jclass cls_ColorSpace;
@@ -163,6 +164,7 @@ static jclass cls_UnsupportedOperationException;
 
 static jfieldID fid_AlertResult_buttonPressed;
 static jfieldID fid_AlertResult_checkboxChecked;
+static jfieldID fid_Archive_pointer;
 static jfieldID fid_Buffer_pointer;
 static jfieldID fid_ColorSpace_pointer;
 static jfieldID fid_Context_Version_major;
@@ -267,6 +269,7 @@ static jfieldID fid_TextWidgetLineLayout_x;
 static jfieldID fid_TextWidgetLineLayout_y;
 static jfieldID fid_Text_pointer;
 
+static jmethodID mid_Archive_init;
 static jmethodID mid_Buffer_init;
 static jmethodID mid_ColorSpace_fromPointer;
 static jmethodID mid_ColorSpace_init;
@@ -793,6 +796,10 @@ static int find_fids(JNIEnv *env)
 
 	/* MuPDF classes */
 
+	cls_Archive = get_class(&err, env, PKG"Archive");
+	mid_Archive_init = get_method(&err, env, "<init>", "(J)V");
+	fid_Archive_pointer = get_field(&err, env, "pointer", "J");
+
 	cls_Buffer = get_class(&err, env, PKG"Buffer");
 	mid_Buffer_init = get_method(&err, env, "<init>", "(J)V");
 	fid_Buffer_pointer = get_field(&err, env, "pointer", "J");
@@ -1157,6 +1164,7 @@ static void jni_detach_thread(jboolean detach)
 static void lose_fids(JNIEnv *env)
 {
 	(*env)->DeleteGlobalRef(env, cls_AlertResult);
+	(*env)->DeleteGlobalRef(env, cls_Archive);
 	(*env)->DeleteGlobalRef(env, cls_ArrayOfQuad);
 	(*env)->DeleteGlobalRef(env, cls_Buffer);
 	(*env)->DeleteGlobalRef(env, cls_ColorSpace);
@@ -1275,6 +1283,7 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved)
 #include "jni/device.c"
 #include "jni/nativedevice.c"
 
+#include "jni/archive.c"
 #include "jni/buffer.c"
 #include "jni/colorspace.c"
 #include "jni/cookie.c"

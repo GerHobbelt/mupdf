@@ -1091,6 +1091,12 @@ static fz_link_dest from_LinkDestination(JNIEnv *env, jobject jdest)
 
 /* Conversion functions: Java to C. None of these throw java exceptions. */
 
+static inline fz_archive *from_Archive_safe(JNIEnv *env, jobject jobj)
+{
+	if (!jobj) return NULL;
+	return CAST(fz_archive *, (*env)->GetLongField(env, jobj, fid_Archive_pointer));
+}
+
 static inline fz_buffer *from_Buffer_safe(JNIEnv *env, jobject jobj)
 {
 	if (!jobj) return NULL;
