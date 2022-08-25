@@ -118,7 +118,7 @@ static void dev_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 					adv = fz_advance_glyph(ctx, span->font, span->items[i].gid, span->wmode);
 
 				bounds = fz_bound_glyph(ctx, span->font, span->items[i].gid, combined);
-				if (extract_add_char(dev->writer->extract, combined.e, combined.f, item->ucs, adv, 0 /*autosplit*/,
+				if (extract_add_char(dev->writer->extract, combined.e, combined.f, item->ucs, adv,
 							bounds.x0, bounds.y0, bounds.x1, bounds.y1))
 					fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to add char");
 			}
