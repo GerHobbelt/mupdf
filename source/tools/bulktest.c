@@ -929,12 +929,12 @@ expand_template_variables(fz_context* ctx, const char** argv, int linecounter, i
 
 static const char* rangespec2str(char* buf, size_t bufsiz, const struct range* spec)
 {
-	if (!spec || spec->first == -1)
+	if (!spec || spec->first <= 0)
 		return "-";
 
 	buf[0] = 0;
 	char* d = buf;
-	for (; spec->first != -1; spec++)
+	for (; spec->first > 0; spec++)
 	{
 		if (bufsiz < 10)
 		{
@@ -1605,8 +1605,10 @@ static struct range* decode_numbers_rangespec(const char* spec)
 		int i = 0;
 		while ((range = fz_parse_page_range(ctx, range, &spage, &epage, pagecount)))
 		{
-			rv[i].first = fz_maxi(0, spage);
-			rv[i].last = fz_maxi(0, epage);
+			ASSERT(spage >= 1);
+			ASSERT(epage >= 1);
+			rv[i].first = spage;
+			rv[i].last = epage;
 			i++;
 		}
 		// sentinel:
@@ -1642,10 +1644,10 @@ static int test_dataline_against_matchspecs(const char *line, int linenumber, co
 		if (ignore)
 			rejected = 3;
 	}
-	if (!rejected && match_ranges_spec && match_ranges_spec[0].first != -1)
+	if (!rejected && match_ranges_spec && match_ranges_spec[0].first > 0)
 	{
 		int hit = 4;
-		for (; match_ranges_spec[0].first; match_ranges_spec++)
+		for (; match_ranges_spec[0].first > 0; match_ranges_spec++)
 		{
 			if (match_ranges_spec[0].first <= linenumber && match_ranges_spec[0].last >= linenumber)
 			{
@@ -1655,10 +1657,10 @@ static int test_dataline_against_matchspecs(const char *line, int linenumber, co
 		}
 		rejected = hit;
 	}
-	if (!rejected && ignore_match_ranges_spec && ignore_match_ranges_spec[0].first != -1)
+	if (!rejected && ignore_match_ranges_spec && ignore_match_ranges_spec[0].first > 0)
 	{
 		int hit = 0;
-		for (; ignore_match_ranges_spec[0].first; ignore_match_ranges_spec++)
+		for (; ignore_match_ranges_spec[0].first > 0; ignore_match_ranges_spec++)
 		{
 			if (ignore_match_ranges_spec[0].first <= linenumber && ignore_match_ranges_spec[0].last >= linenumber)
 			{
