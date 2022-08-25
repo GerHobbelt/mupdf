@@ -39,6 +39,7 @@ depending on your environment.
 #include <crtdbg.h>
 #endif
 
+#include <mupdf/mutool.h>
 #include <mupdf/fitz.h>
 #include <mupdf/helpers/mu-threads.h>
 
@@ -47,7 +48,7 @@ depending on your environment.
 
 // A convenience function for dying abruptly on pthread errors.
 
-void
+static void
 fail(char *msg)
 {
 	fprintf(stderr, "%s\n", msg);
@@ -89,7 +90,7 @@ struct data {
 // pointer to an instance of the data structure described above and
 // renders the display list into the pixmap before exiting.
 
-void
+static void
 renderer(void *data)
 {
 	int pagenumber = ((struct data *) data)->pagenumber;
@@ -130,19 +131,23 @@ renderer(void *data)
 // argument that can be used to transfer some state, in this case a
 // pointer to the array of mutexes.
 
-void lock_mutex(void *user, int lock)
+static void lock_mutex(void *user, int lock)
 {
 	mu_mutex *mutex = (mu_mutex *) user;
 
 	mu_lock_mutex(&mutex[lock]);
 }
 
-void unlock_mutex(void *user, int lock)
+static void unlock_mutex(void *user, int lock)
 {
 	mu_mutex *mutex = (mu_mutex *) user;
 
 	mu_unlock_mutex(&mutex[lock]);
 }
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      mupdf_multithreaded_example_main(cnt, arr)
+#endif
 
 int main(int argc, const char** argv)
 {

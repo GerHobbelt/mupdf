@@ -16,10 +16,15 @@ gcc -I/usr/local/include -o example \
 ./example document.pdf 1 100 0 > page1.ppm
 */
 
+#include <mupdf/mutool.h>
 #include <mupdf/fitz.h>
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      mupdf_example_main(cnt, arr)
+#endif
 
 int main(int argc, const char** argv)
 {

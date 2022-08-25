@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -209,7 +209,7 @@ struct fz_css_match_s
 	fz_css_value *value[NUM_PROPERTIES];
 };
 
-enum { DIS_NONE, DIS_BLOCK, DIS_INLINE, DIS_LIST_ITEM, DIS_INLINE_BLOCK, DIS_TABLE, DIS_TABLE_ROW, DIS_TABLE_CELL };
+enum { DIS_NONE, DIS_BLOCK, DIS_INLINE, DIS_LIST_ITEM, DIS_INLINE_BLOCK, DIS_TABLE, DIS_TABLE_GROUP, DIS_TABLE_ROW, DIS_TABLE_CELL };
 enum { POS_STATIC, POS_RELATIVE, POS_ABSOLUTE, POS_FIXED };
 enum { TA_LEFT, TA_RIGHT, TA_CENTER, TA_JUSTIFY };
 enum { VA_BASELINE, VA_SUB, VA_SUPER, VA_TOP, VA_BOTTOM, VA_TEXT_TOP, VA_TEXT_BOTTOM };
@@ -299,12 +299,12 @@ struct fz_css_style_splay_s {
 
 enum
 {
-	BOX_BLOCK,	/* block-level: contains block, break, flow, and table boxes */
-	BOX_FLOW,	/* block-level: contains only inline boxes */
-	BOX_INLINE,	/* inline-level: contains only inline boxes */
-	BOX_TABLE,	/* table: contains table-row */
-	BOX_TABLE_ROW,	/* table-row: contains table-cell */
-	BOX_TABLE_CELL,	/* table-cell: contains block */
+	BOX_BLOCK,		/* block-level: contains block, break, flow, and table boxes */
+	BOX_FLOW,		/* block-level: contains only inline boxes */
+	BOX_INLINE,		/* inline-level: contains only inline boxes */
+	BOX_TABLE,		/* table: contains table-row */
+	BOX_TABLE_ROW,		/* table-row: contains table-cell */
+	BOX_TABLE_CELL,		/* table-cell: contains block */
 };
 
 typedef struct
@@ -404,20 +404,42 @@ struct fz_html_box_s
 	unsigned int markup_dir : 2;
 	unsigned int heading : 3; /* h1..h6 */
 	unsigned int list_item : 23;
-	float x, y, w, b; /* content */
-	float em;
-	/* During construction, 'next' plays double duty; as well
-	 * as its normal meaning of 'next sibling', the last sibling
-	 * has next meaning "the last of my children". We correct
-	 * this as a post-processing pass after construction. */
+
 	fz_html_box *up, *down, *next;
-	fz_html_flow *flow_head, **flow_tail;
-	char *id, *href;
+
+#ifndef NDEBUG
+	const char *tag;
+#endif
+	const char *id, *href;
 	const fz_css_style *style;
-	/* Only BOX_{BLOCK,TABLE,TABLE_ROW,TABLE_CELL} actually use the following */
-	float padding[4];
-	float margin[4];
-	float border[4];
+
+	union {
+		/* Only needed during build stage */
+		struct {
+			fz_html_box *last_child;
+			fz_html_flow **flow_tail;
+		} build;
+
+		/* Only needed during layout */
+		struct {
+			float x, y, w, b; /* content */
+			float em;
+		} layout;
+	} s;
+
+	union {
+		/* Only BOX_FLOW use the following */
+		struct {
+			fz_html_flow *head;
+		} flow;
+
+		/* Only BOX_{BLOCK,TABLE,TABLE_ROW,TABLE_CELL} use the following */
+		struct {
+			float padding[4];
+			float margin[4];
+			float border[4];
+		} block;
+	} u;
 };
 
 static inline int
@@ -503,6 +525,7 @@ void fz_add_css_font_faces(fz_context *ctx, fz_html_font_set *set, fz_archive *z
 fz_html *fz_parse_fb2(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
 fz_html *fz_parse_html5(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
 fz_html *fz_parse_xhtml(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
+fz_html *fz_parse_mobi(fz_context *ctx, fz_html_font_set *htx, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css);
 
 void fz_layout_html(fz_context *ctx, fz_html *html, float w, float h, float em);
 void fz_draw_html(fz_context *ctx, fz_device *dev, fz_matrix ctm, fz_html *html, int page);
@@ -520,8 +543,10 @@ fz_html *fz_store_html(fz_context *ctx, fz_html *html, void *doc, int chapter);
 fz_html *fz_find_html(fz_context *ctx, void *doc, int chapter);
 void fz_purge_stored_html(fz_context *ctx, void *doc);
 
-void fz_restartable_layout_html(fz_context *ctx, fz_html_tree *tree, float w, float h, float page_w, float page_h, float em, fz_html_restarter *restart);
+void fz_restartable_layout_html(fz_context *ctx, fz_html_tree *tree, float start_x, float start_y, float page_w, float page_h, float em, fz_html_restarter *restart);
 
 fz_html_flow *fz_html_split_flow(fz_context *ctx, fz_pool *pool, fz_html_flow *flow, size_t offset);
+
+fz_archive *fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi);
 
 #endif

@@ -388,6 +388,7 @@ void fz_lock_debug_attempt_lock(fz_context* ctx, int lock)
 	if (idx < 0)
 		return;
 
+#if 0
 	if (fz_locks_debug[idx][lock] != 0)
 	{
 		fz_error(ctx, "Attempt to take lock %d when held already!", lock);

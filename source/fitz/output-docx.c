@@ -75,9 +75,11 @@ static void dev_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 		{
 			int i;
 			fz_matrix combined, trm;
+			fz_rect bbox;
 
 			combined = fz_concat(span->trm, ctm);
 
+			bbox = span->font->bbox;
 			if (extract_span_begin(
 					dev->writer->extract,
 					span->font->name,
@@ -88,14 +90,10 @@ static void dev_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 					combined.b,
 					combined.c,
 					combined.d,
-					combined.e,
-					combined.f,
-					span->trm.a,
-					span->trm.b,
-					span->trm.c,
-					span->trm.d,
-					span->trm.e,
-					span->trm.f))
+					bbox.x0,
+					bbox.y0,
+					bbox.x1,
+					bbox.y1))
 			{
 				fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin span");
 			}
@@ -120,7 +118,7 @@ static void dev_text(fz_context *ctx, fz_device *dev_, const fz_text *text, fz_m
 					adv = fz_advance_glyph(ctx, span->font, span->items[i].gid, span->wmode);
 
 				bounds = fz_bound_glyph(ctx, span->font, span->items[i].gid, combined);
-				if (extract_add_char(dev->writer->extract, combined.e, combined.f, item->ucs, adv, 0 /*autosplit*/,
+				if (extract_add_char(dev->writer->extract, combined.e, combined.f, item->ucs, adv,
 							bounds.x0, bounds.y0, bounds.x1, bounds.y1))
 					fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to add char");
 			}

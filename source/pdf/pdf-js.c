@@ -974,7 +974,7 @@ static void preload_helpers(pdf_js *js)
 "Date.now = function() { return 298252800000; }\n"
 "Date.UTC = function() { return 298252800000; }\n"
 "Date.parse = MuPDFOldDate.parse;\n"
-"Math.random = function() { return (Math.random.seed = Math.random.seed * 200105 % 34359738337) / 34359738337; }\n"
+"Math.random = function() { return (Math.random.seed = Math.random.seed * 48271 % 2147483647) / 2147483647; }\n"
 "Math.random.seed = 217;\n"
 	);
 #endif
