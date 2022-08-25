@@ -27,6 +27,7 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/buffer.h"
 #include "mupdf/fitz/device.h"
+#include "mupdf/fitz/writer.h"
 #include "mupdf/fitz/xml.h"
 
 /*
