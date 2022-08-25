@@ -40,12 +40,14 @@ void mu_destroy_semaphore(mu_semaphore *sem)
 
 int mu_trigger_semaphore(mu_semaphore *sem)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 	return 1;
 }
 
 int mu_wait_semaphore(mu_semaphore *sem)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 	return 1;
 }
@@ -78,11 +80,13 @@ int mu_mutex_is_zeroed(const mu_mutex* mutex)
 
 void mu_lock_mutex(mu_mutex *mutex)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 }
 
 void mu_unlock_mutex(mu_mutex *mutex)
 {
+	ASSERT(!"Should never get here!");
 	abort();
 }
 
