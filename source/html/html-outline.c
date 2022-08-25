@@ -140,8 +140,8 @@ static fz_link *load_link_box(fz_context *ctx, fz_html_box *box, fz_link *head, 
 {
 	while (box)
 	{
-		if (box->flow_head)
-			head = load_link_flow(ctx, box->flow_head, head, page, page_h, dir, file);
+		if (box->type == BOX_FLOW)
+			head = load_link_flow(ctx, box->u.flow.head, head, page, page_h, dir, file);
 		if (box->down)
 			head = load_link_box(ctx, box->down, head, page, page_h, dir, file);
 		box = box->next;
@@ -184,7 +184,7 @@ find_first_content(fz_html_box *box)
 	while (box)
 	{
 		if (box->type == BOX_FLOW)
-			return box->flow_head;
+			return box->u.flow.head;
 		box = box->down;
 	}
 	return NULL;
@@ -213,11 +213,11 @@ find_box_target(fz_html_box *box, const char *id)
 			fz_html_flow *flow = find_first_content(box);
 			if (flow)
 				return flow->y;
-			return box->y;
+			return box->s.layout.y;
 		}
 		if (box->type == BOX_FLOW)
 		{
-			y = find_flow_target(box->flow_head, id);
+			y = find_flow_target(box->u.flow.head, id);
 			if (y >= 0)
 				return y;
 		}
@@ -258,9 +258,9 @@ make_box_bookmark(fz_context *ctx, fz_html_box *box, float y)
 	{
 		if (box->type == BOX_FLOW)
 		{
-			if (box->y >= y)
+			if (box->s.layout.y >= y)
 			{
-				mark = make_flow_bookmark(ctx, box->flow_head, y);
+				mark = make_flow_bookmark(ctx, box->u.flow.head, y);
 				if (mark)
 					return mark;
 			}
@@ -301,7 +301,7 @@ lookup_box_bookmark(fz_context *ctx, fz_html_box *box, fz_html_flow *mark)
 	{
 		if (box->type == BOX_FLOW)
 		{
-			if (lookup_flow_bookmark(ctx, box->flow_head, mark))
+			if (lookup_flow_bookmark(ctx, box->u.flow.head, mark))
 				return 1;
 		}
 		else
@@ -361,7 +361,8 @@ cat_html_box(fz_context *ctx, fz_buffer *cat, fz_html_box *box)
 {
 	while (box)
 	{
-		cat_html_flow(ctx, cat, box->flow_head);
+		if (box->type == BOX_FLOW)
+			cat_html_flow(ctx, cat, box->u.flow.head);
 		cat_html_box(ctx, cat, box->down);
 		box = box->next;
 	}
@@ -375,7 +376,7 @@ cat_html_text(fz_context *ctx, struct outline_parser *x, fz_html_box *box)
 	else
 		fz_clear_buffer(ctx, x->cat);
 
-	cat_html_flow(ctx, x->cat, box->flow_head);
+	cat_html_flow(ctx, x->cat, box->u.flow.head);
 	cat_html_box(ctx, x->cat, box->down);
 
 	return fz_string_from_buffer(ctx, x->cat);
