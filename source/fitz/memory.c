@@ -388,6 +388,7 @@ void fz_lock_debug_attempt_lock(fz_context* ctx, int lock)
 	if (idx < 0)
 		return;
 
+#if 0
 	if (fz_locks_debug[idx][lock] != 0)
 	{
 		fz_error(ctx, "Attempt to take lock %d when held already!", lock);
@@ -399,6 +400,7 @@ void fz_lock_debug_attempt_lock(fz_context* ctx, int lock)
 			fz_error(ctx, "Lock ordering violation: Attempt to take lock %d when %d held already!", lock, i);
 		}
 	}
+#endif
 }
 
 void fz_lock_debug_lock_obtained(fz_context *ctx, int lock)
