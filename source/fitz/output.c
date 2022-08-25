@@ -609,6 +609,8 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 			mu_destroy_mutex(&out->buf_mutex);
 		}
 		out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
+		if (out->drop)
+			out->drop(ctx, out->state);
 		fz_free(ctx, out->bp);
 		fz_free(ctx, out->filepath);
 
