@@ -42,7 +42,7 @@ struct fz_jbig2_allocator
 
 static void fz_lock_jbig2(fz_context* ctx)
 {
-	fz_lock(ctx, FZ_LOCK_JBIG2, __FILE__, __LINE__);
+	fz_lock(ctx, FZ_LOCK_JBIG2);
 }
 
 static void fz_unlock_jbig2(fz_context* ctx)
