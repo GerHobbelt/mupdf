@@ -231,7 +231,7 @@ static int toc_rectfn(fz_context *ctx, void *ref, int num, fz_rect filled, fz_re
 	return 1;
 }
 
-static void toc_contentfn(fz_context *ctx, void *ref, fz_story_tocwrite_items *items, fz_buffer *buffer)
+static void toc_contentfn(fz_context *ctx, void *ref, const fz_write_story_positions *positions, fz_buffer *buffer)
 {
 	int i;
 	fz_append_string(ctx, buffer,
@@ -248,22 +248,22 @@ static void toc_contentfn(fz_context *ctx, void *ref, fz_story_tocwrite_items *i
 			"<h2>Contents</h2>\n"
 			"<ol>\n"
 			);
-	for (i=0; i<items->num; ++i)
+	for (i=0; i<positions->num; ++i)
 	{
-		fz_story_tocwrite_item* item = &items->items[i];
+		fz_write_story_position *position = &positions->positions[i];
 
 		fz_append_printf(ctx, buffer,
-				"    <li>page=%i depth=%i heading=%i id='%s' rect=(%f %f %f %f) text='<b>%s</b>' open_close=%i\n",
-				item->page_num,
-				item->element.depth,
-				item->element.heading,
-				(item->element.id) ? item->element.id : "",
-				item->element.rect.x0,
-				item->element.rect.y0,
-				item->element.rect.x1,
-				item->element.rect.y1,
-				(item->element.text) ? item->element.text : "",
-				item->element.open_close
+				"	<li>page=%i depth=%i heading=%i id='%s' rect=(%f %f %f %f) text='<b>%s</b>' open_close=%i\n",
+				position->page_num,
+				position->element.depth,
+				position->element.heading,
+				(position->element.id) ? position->element.id : "",
+				position->element.rect.x0,
+				position->element.rect.y0,
+				position->element.rect.x1,
+				position->element.rect.y1,
+				(position->element.text) ? position->element.text : "",
+				position->element.open_close
 				);
 	}
 	fz_append_string(ctx, buffer, "</ol>\n");
@@ -281,18 +281,55 @@ static void toc_contentfn(fz_context *ctx, void *ref, fz_story_tocwrite_items *i
 			"</body>\n"
 			);
 	{
-		const char* data = fz_string_from_buffer(ctx, buffer);
+		const char *data = fz_string_from_buffer(ctx, buffer);
 		printf( "======== Html content: ========\n");
 		printf( "%s", data);
 		printf( "========\n");
 	}
 }
 
+static void toc_pagefn(fz_context *ctx, void *ref, int page_num, fz_rect mediabox, fz_device *dev, int after)
+{
+	fz_path *path = fz_new_path(ctx);
+	fz_matrix ctm = fz_identity;
+	printf("toc_pagefn(): ref=%p page_num=%i dev=%p after=%i\n", ref, page_num, dev, after);
+	if (after)
+	{
+		float rgb[3] = { 0.75, 0.25, 0.125};
+		fz_moveto(ctx, path, 50, 50);
+		fz_lineto(ctx, path, 100, 200);
+		fz_lineto(ctx, path, 50, 200);
+		fz_closepath(ctx, path);
+		fz_fill_path(ctx, dev, path, 0, ctm, fz_device_rgb(ctx), rgb, 0.9 /*alpha*/, fz_default_color_params);
+		fz_drop_path(ctx, path);
+	}
+	else
+	{
+		float rgb[3] = { 0.125, 0.25, 0.75};
+		fz_moveto(ctx, path, 50, 50);
+		fz_lineto(ctx, path, 50, 200);
+		fz_lineto(ctx, path, 100, 50);
+		fz_closepath(ctx, path);
+		fz_fill_path(ctx, dev, path, 0, ctm, fz_device_rgb(ctx), rgb, 0.9 /*alpha*/, fz_default_color_params);
+		fz_drop_path(ctx, path);
+	}
+}
 
-static void test_tocwrite(fz_context *ctx)
+static void test_write_stabilized_story(fz_context *ctx)
 {
 	fz_document_writer *writer = fz_new_pdf_writer(ctx, "out_toc.pdf", "");
-	fz_story_tocwrite(ctx, writer, toc_rectfn, toc_contentfn, "" /*user_css*/, 11 /*em*/, NULL /*ref*/);
+	fz_write_stabilized_story(
+			ctx,
+			writer,
+			"" /*user_css*/,
+			11 /*em*/,
+			toc_contentfn,
+			NULL /*contentfn_ref*/,
+			toc_rectfn,
+			NULL /*rectfn_ref*/,
+			toc_pagefn /*pagefn*/,
+			NULL /*pagefn_ref*/
+			);
 	fz_close_document_writer(ctx, writer);
 	fz_drop_document_writer(ctx, writer);
 }
@@ -576,7 +613,7 @@ int main(int argc, const char *argv[])
 		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
 	}
 
-	test_tocwrite(ctx);
+	test_write_stabilized_story(ctx);
 
 	fz_drop_context(ctx);
 
