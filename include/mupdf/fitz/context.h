@@ -82,6 +82,7 @@ typedef struct
 	Exception macro definitions. Just treat these as a black box -
 	pay no attention to the man behind the curtain.
 */
+#ifndef FZ_TRY_CATCH_USE_CPP_CONSTRUCT
 
 #define fz_var(var) fz_var_imp((void *)&(var))
 #define fz_try(ctx) if (!fz_setjmp(*fz_push_try(ctx))) if (fz_do_try(ctx)) do
@@ -91,6 +92,41 @@ typedef struct
 FZ_NORETURN void fz_vthrow(fz_context *ctx, int errcode, const char *fmt, va_list ap);
 FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, const char *fmt, ...);
 FZ_NORETURN void fz_rethrow(fz_context *ctx);
+
+#else
+
+#define fz_var(var) __noop(var)
+
+#define fz_try(ctx) try {																	\
+						std::exception __current_exception{no_exception};					\
+						try {																\
+							do
+
+#define fz_always(ctx)																		\
+							while (0);														\
+						}																	\
+						catch (...) {														\
+							{																\
+								std::exception_ptr p = std::current_exception();			\
+								__current_exception = store_exception(ctx, p);				\
+							}																\
+						}																	\
+						do
+
+#define fz_catch(ctx)	while (0);															\
+						if (__current_exception != no_exception)							\
+							throw __current_exception;										\
+					}																		\
+					catch (const std::exception &__current_exception) {						\
+						if (1)
+
+FZ_NORETURN void fz_vthrow(fz_context *ctx, int errcode, const char *fmt, va_list ap);
+FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, const char *fmt, ...);
+
+#define fz_rethrow(ctx)					throw[;]
+
+#endif
+
 void fz_verror(fz_context* ctx, const char* fmt, va_list ap);
 void fz_error(fz_context* ctx, const char* fmt, ...);
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap);
