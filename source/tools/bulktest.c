@@ -2368,6 +2368,36 @@ bulktest_main(int argc, const char **argv)
 
 						flush_active_logfile_hard();
 					}
+					else if (match(argv[0], "MUSERVE"))
+					{
+						rv = 1;
+						if (rv != EXIT_SUCCESS)
+						{
+							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							errored++;
+						}
+						else if (verbosity)
+						{
+							fz_info(ctx, "OK: MUTOOL command: %s", line);
+						}
+
+						flush_active_logfile_hard();
+					}
+					else if (match(argv[0], "STOPSERVE"))
+					{
+						rv = 1;
+						if (rv != EXIT_SUCCESS)
+						{
+							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							errored++;
+						}
+						else if (verbosity)
+						{
+							fz_info(ctx, "OK: MUTOOL command: %s", line);
+						}
+
+						flush_active_logfile_hard();
+					}
 					else if (match(argv[0], "BULKTEST"))
 					{
 						// Ah! Before we go in and recurse on ourselves, we need to do a bit of housekeeping:
