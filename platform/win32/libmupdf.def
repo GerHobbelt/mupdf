@@ -18,6 +18,9 @@ EXPORTS
 	mujs_example_main
 	mujs_prettyprint_main
 	mupdf_base64_test_main
+	mupdf_example_main
+	mupdf_multithreaded_example_main
+	mupdf_storytest_main
 	muraster_main
 	murun_main
 	mutrace_main
@@ -351,6 +354,7 @@ EXPORTS
 	fz_is_zip_archive
 	fz_list_archive_entry
 	fz_new_archive_of_size
+	fz_new_tree_archive
 	fz_new_zip_writer
 	fz_new_zip_writer_with_output
 	fz_open_archive
@@ -493,6 +497,7 @@ EXPORTS
 	fz_enable_icc
 	fz_end_throw_on_repair
 	fz_error
+	fz_flush_all_std_logging_channels
 	fz_flush_warnings
 	fz_free
 	fz_get_error_callback
@@ -992,6 +997,8 @@ EXPORTS
 	fz_store_item
 	fz_store_scavenge
 	fz_store_scavenge_external
+	fz_write_stabilized_story
+	fz_write_story
 	fz_draw_story
 	fz_drop_story
 	fz_new_story
@@ -1275,6 +1282,7 @@ EXPORTS
 	fz_keep_xml
 	fz_parse_xml
 	fz_parse_xml_from_html5
+	fz_xml_add_att
 	fz_xml_att
 	fz_xml_att_alt
 	fz_xml_att_eq
@@ -4183,6 +4191,7 @@ EXPORTS
 	JS_FreeAtomRT
 	JS_FreeCString
 	JS_FreeContext
+	JS_FreeModules
 	JS_FreeRuntime
 	JS_GetAnyOpaque
 	JS_GetArrayBuffer
@@ -4312,6 +4321,7 @@ EXPORTS
 	JS_WriteObject2
 	__JS_FreeValue
 	__JS_FreeValueRT
+	qjs_assert
 	qjs_free
 	qjs_free_rt
 	qjs_malloc

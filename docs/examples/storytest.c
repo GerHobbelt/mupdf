@@ -1,10 +1,11 @@
+#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
 #include <string.h>
 #include <memory.h>
 
-const char snark[] =
+static const char snark[] =
 	"<!DOCTYPE html>"
 	"<style>"
 	"#a { margin: 30px; }"
@@ -192,7 +193,7 @@ static const film_t films[] =
 	}
 };
 
-const char *festival_template =
+static const char *festival_template =
 	"<html><head><title>Why do we have a title? Why not?</title></head>"
 	"<body><h1 style=\"text-align:center\">Hook Norton Film Festival</h1>"
 	"<ol>"
@@ -334,7 +335,12 @@ static void test_write_stabilized_story(fz_context *ctx)
 	fz_drop_document_writer(ctx, writer);
 }
 
-int main(int argc, const char *argv[])
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      mupdf_storytest_main(cnt, arr)
+#endif
+
+int main(int argc, const char **argv)
 {
 	fz_context *ctx;
 	fz_document_writer *writer = NULL;

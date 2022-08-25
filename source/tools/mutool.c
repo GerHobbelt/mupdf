@@ -104,6 +104,9 @@ static struct {
 #endif
 #if defined(MUTOOL_EX)
 	{ mupdf_base64_test_main, "base64_test", "muPDF base64 fringe case tests" },
+	{ mupdf_example_main, "example", "muPDF docs::example: render a single page and print the result as a PPM to stdout" },
+	{ mupdf_multithreaded_example_main, "multithreaded_example", "muPDF multi-threaded rendering of all pages in a document to PNG images" },
+	{ mupdf_storytest_main, "story_test", "muPDF fz_story showcase for converting HTML input to a PDF file" },
 #endif
 
 #if defined(MUTOOL_EX)
