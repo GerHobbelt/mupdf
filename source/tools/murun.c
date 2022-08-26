@@ -4523,6 +4523,8 @@ static void ffi_new_Story(js_State *J)
 
 	fz_try(ctx)
 		story = fz_new_story(ctx, contents, user_css, em, archive);
+	fz_always(ctx)
+		fz_drop_buffer(ctx, contents);
 	fz_catch(ctx)
 		rethrow(J);
 
