@@ -18,6 +18,9 @@ var snark =
 	+"C"
 	+"</div>"
 	+"</div>"
+	+"<div style=\"text-align:center;\"><IMG width=\"300\" src=\"docs/examples/SnarkFront.svg\"></div>"
+	+"<H1>The hunting of the Snark</H1>"
+	+"<div style=\"text-align:center\"><IMG width=\"30\" src=\"docs/examples/huntingofthesnark.png\"></div>"
 	+"<p>\"Just the place for a Snark!\" the Bellman cried,<br>"
 	+"As he landed his crew with care;<br>"
 	+"Supporting each man on the top of the tide<br>"
@@ -198,10 +201,11 @@ var margin = 10;
 
 /* First one made with precooked content. */
 {
+	var dir = new Archive.openDirectory(".");
 	var writer = new DocumentWriter("out.pdf", "PDF", "");
 	var buf = new Buffer(snark.length);
 	buf.write(snark);
-	var story = new Story(buf, "", 11);
+	var story = new Story(buf, "", 11, dir);
 	var placed;
 
 	do

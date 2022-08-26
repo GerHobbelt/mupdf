@@ -236,6 +236,12 @@ struct event_cb_data
 
 /* destructors */
 
+static void ffi_gc_fz_archive(js_State *J, void *archive)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_drop_archive(ctx, archive);
+}
+
 static void ffi_gc_fz_buffer(js_State *J, void *buf)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -1010,6 +1016,12 @@ static int is_number(const char *key, int *idx)
 	return *end == 0;
 }
 
+static void ffi_pusharchive(js_State *J, fz_archive *archive)
+{
+	js_getregistry(J, "fz_archive");
+	js_newuserdata(J, "fz_archive", archive, ffi_gc_fz_archive);
+}
+
 static int ffi_buffer_has(js_State *J, void *buf_, const char *key)
 {
 	fz_buffer *buf = buf_;
@@ -1052,6 +1064,11 @@ static void ffi_pushbuffer(js_State *J, fz_buffer *buf)
 	js_newuserdatax(J, "fz_buffer", buf,
 			ffi_buffer_has, ffi_buffer_put, NULL,
 			ffi_gc_fz_buffer);
+}
+
+static fz_archive *ffi_toarchive(js_State *J, int idx)
+{
+	return js_touserdata(J, idx, "fz_archive");
 }
 
 #if FZ_ENABLE_PDF
@@ -2645,6 +2662,41 @@ static void ffi_setUserCSS(js_State *J)
 		fz_set_use_document_css(ctx, use_doc_css);
 	} fz_catch(ctx)
 		rethrow(J);
+}
+
+static void ffi_Archive_openDirectory(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	const char *directory = js_tostring(J, 1);
+	fz_archive *archive = NULL;
+
+	fz_try(ctx)
+		archive = fz_open_directory(ctx, directory);
+	fz_catch(ctx)
+		rethrow(J);
+
+	ffi_pusharchive(J, archive);
+}
+
+static void ffi_Archive_open(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	const char *path = js_tostring(J, 1);
+	fz_archive *archive = NULL;
+
+	fz_try(ctx)
+		archive = fz_open_archive(ctx, path);
+	fz_catch(ctx)
+		rethrow(J);
+
+	ffi_pusharchive(J, archive);
+}
+
+/* Dummy constructor */
+static void ffi_new_Archive(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	ffi_pusharchive(J, NULL);
 }
 
 static void ffi_new_Buffer(js_State *J)
@@ -4466,11 +4518,11 @@ static void ffi_new_Story(js_State *J)
 	fz_buffer *contents = ffi_tobuffer(J, 1);
 	const char *user_css = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
 	double em = js_tonumber(J, 3);
+	fz_archive *archive = js_iscoercible(J, 4) ? ffi_toarchive(J, 4) : NULL;
 	fz_story *story = NULL;
 
-	/* TODO Fix archive. */
 	fz_try(ctx)
-		story = fz_new_story(ctx, contents, user_css, em, NULL);
+		story = fz_new_story(ctx, contents, user_css, em, archive);
 	fz_catch(ctx)
 		rethrow(J);
 
@@ -8245,6 +8297,10 @@ int murun_main(int argc, const char** argv)
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
+	js_setregistry(J, "fz_archive");
+
+	js_getregistry(J, "Userdata");
+	js_newobjectx(J);
 	{
 		jsB_propfun(J, "Buffer.writeByte", ffi_Buffer_writeByte, 1);
 		jsB_propfun(J, "Buffer.writeRune", ffi_Buffer_writeRune, 1);
@@ -8802,6 +8858,7 @@ int murun_main(int argc, const char** argv)
 
 	js_pushglobal(J);
 	{
+		jsB_propcon(J, "fz_archive", "Archive", ffi_new_Archive, 1);
 #if FZ_ENABLE_PDF
 		jsB_propcon(J, "pdf_document", "PDFDocument", ffi_new_PDFDocument, 1);
 #endif
@@ -8817,7 +8874,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propcon(J, "fz_device", "DrawDevice", ffi_new_DrawDevice, 2);
 		jsB_propcon(J, "fz_device", "DisplayListDevice", ffi_new_DisplayListDevice, 1);
 		jsB_propcon(J, "fz_document_writer", "DocumentWriter", ffi_new_DocumentWriter, 3);
-		jsB_propcon(J, "fz_story", "Story", ffi_new_Story, 3);
+		jsB_propcon(J, "fz_story", "Story", ffi_new_Story, 4);
 #if FZ_ENABLE_PDF
 		jsB_propcon(J, "pdf_pkcs7_signer", "PDFPKCS7Signer", ffi_new_PDFPKCS7Signer, 2);
 #endif
@@ -8837,6 +8894,14 @@ int murun_main(int argc, const char** argv)
 		js_defproperty(J, -2, "DeviceCMYK", JS_DONTENUM | JS_READONLY | JS_DONTCONF);
 
 		jsB_propfun(J, "setUserCSS", ffi_setUserCSS, 2);
+	}
+
+	{
+		js_getglobal(J, "Archive");
+		js_newcfunction(J, ffi_Archive_openDirectory, "Archive.openDirectory", 1);
+		js_setproperty(J, -2, "openDirectory");
+		js_newcfunction(J, ffi_Archive_open, "Archive.open", 1);
+		js_setproperty(J, -2, "open");
 	}
 
 	/* re-implement matrix math in javascript */
