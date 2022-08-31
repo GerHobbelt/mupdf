@@ -6,43 +6,39 @@ STEM=mupdf-$REV-source
 echo git archive $STEM.tar
 git archive --format=tar --prefix=$STEM/ -o $STEM.tar HEAD
 
-rm -f submodule*.tar
-
-AUTOCONF="*/configure */autogen.sh */aclocal.m4 */ltmain.sh */m4"
-
 function make_submodule_archive {
 	# Make tarballs for submodules, stripped of unneccessary files.
-	echo git archive submodule-$1.tar
-	git archive --format=tar --remote=thirdparty/$1 --prefix=$STEM/thirdparty/$1/ -o submodule-$1.tar HEAD
-	tar f submodule-$1.tar --wildcards --delete $AUTOCONF 2>/dev/null
-	for DIR in $2
+	M=$1
+	shift
+	echo git archive submodule-$M.tar
+	git archive --format=tar --remote=thirdparty/$M --prefix=$STEM/thirdparty/$M/ -o submodule-$M.tar HEAD
+	for DIR in $*
 	do
-		tar f submodule-$1.tar --wildcards --delete "*/$DIR"
+		tar f submodule-$M.tar --wildcards --delete "*/$DIR"
 	done
-	tar Af $STEM.tar submodule-$1.tar
-	#rm -f submodule-$1.tar
+	tar Af $STEM.tar submodule-$M.tar
+	rm -f submodule-$M.tar
 }
 
-make_submodule_archive curl "tests src scripts winbuild plan9 packages projects"
-make_submodule_archive extract "test"
-make_submodule_archive freeglut "android blackberry progs"
-make_submodule_archive freetype "builds subprojects tests"
-make_submodule_archive gumbo-parser "benchmarks examples python tests visualc"
-make_submodule_archive harfbuzz "test perf util subprojects"
+# Remove test files from thirdparty source archives.
+
+make_submodule_archive curl		tests
+make_submodule_archive extract		test
+make_submodule_archive freeglut
+make_submodule_archive freetype		tests
+make_submodule_archive gumbo-parser	benchmarks tests
+make_submodule_archive harfbuzz		test perf
 make_submodule_archive jbig2dec
-make_submodule_archive lcms2 "Lib Projects plugins testbed utils"
-make_submodule_archive leptonica "prog"
-make_submodule_archive libjpeg "libjpeg/test* libjpeg/make*"
+make_submodule_archive lcms2		testbed plugins/fast_float
+make_submodule_archive leptonica	prog
+make_submodule_archive libjpeg		libjpeg/test*
 make_submodule_archive mujs
 make_submodule_archive openjpeg
-make_submodule_archive tesseract "java tessdata unittest src/training"
-make_submodule_archive zlib "amiga contrib examples msdos nintendods old os400 qnx test watcom win32"
+make_submodule_archive tesseract	unittest
+make_submodule_archive zlib		test contrib
 
-# Most common
 echo gzip $STEM.tar
-gzip -f -k -9 $STEM.tar
-#pigz -f -k -11 $STEM.tar
+pigz -f -k -11 $STEM.tar
 
-# Smallest size
 echo lzip $STEM.tar
 plzip -9 -f -k $STEM.tar

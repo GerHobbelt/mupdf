@@ -566,6 +566,7 @@ static void fz_drop_story_imp(fz_context *ctx, fz_storable *stor)
 	fz_drop_xml(ctx, story->dom);
 	fz_drop_html_box(ctx, story->tree.root);
 	fz_drop_buffer(ctx, story->warnings);
+	fz_drop_archive(ctx, story->zip);
 	/* The pool must be the last thing dropped. */
 	fz_drop_pool(ctx, story->tree.pool);
 }
@@ -665,11 +666,8 @@ static void append_box(fz_context *ctx, fz_html_box *parent, fz_html_box *child)
 
 static fz_html_box *find_block_context(fz_context *ctx, fz_html_box *box)
 {
-	fz_html_box *look = box;
-	while (look->type != BOX_BLOCK && look->type != BOX_TABLE_CELL)
-		look = look->up;
-	if (look)
-		return look;
+	while (box->type != BOX_BLOCK && box->type != BOX_TABLE_CELL)
+		box = box->up;
 	return box;
 }
 
@@ -1767,7 +1765,7 @@ restore_warnings(fz_context *ctx, warning_save *save)
 }
 
 fz_story *
-fz_new_story(fz_context *ctx, fz_buffer *buf, const char *user_css, float em)
+fz_new_story(fz_context *ctx, fz_buffer *buf, const char *user_css, float em, fz_archive *zip)
 {
 	fz_story *story = fz_new_derived_html_tree(ctx, fz_story, fz_drop_story_imp);
 	warning_save saved = { 0 };
@@ -1779,10 +1777,12 @@ fz_new_story(fz_context *ctx, fz_buffer *buf, const char *user_css, float em)
 		buf = local_buffer;
 	}
 
+	fz_var(local_buffer);
 	fz_var(saved);
 
 	fz_try(ctx)
 	{
+		story->zip = fz_keep_archive(ctx, zip);
 		story->font_set = fz_new_html_font_set(ctx);
 		story->em = em;
 		story->user_css = user_css ? fz_strdup(ctx, user_css) : NULL;
@@ -2083,7 +2083,7 @@ convert_to_boxes(fz_context *ctx, fz_story *story)
 	fz_try(ctx)
 	{
 		redirect_warnings_to_buffer(ctx, story->warnings, &saved);
-		xml_to_boxes(ctx, story->font_set, NULL, ".", story->user_css, story->dom, &story->tree, NULL, 0, 0);
+		xml_to_boxes(ctx, story->font_set, story->zip, ".", story->user_css, story->dom, &story->tree, NULL, 0, 0);
 		fz_drop_xml(ctx, story->dom);
 		story->dom = NULL;
 	}

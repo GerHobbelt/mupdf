@@ -24,6 +24,9 @@ static const char snark[] =
 	"C"
 	"</div>"
 	"</div>"
+	"<div style=\"text-align:center;\"><IMG width=\"300\" src=\"docs/examples/SnarkFront.svg\"></div>"
+	"<H1>The hunting of the Snark</H1>"
+	"<div style=\"text-align:center\"><IMG width=\"30\" src=\"docs/examples/huntingofthesnark.png\"></div>"
 	"<p>\"Just the place for a Snark!\" the Bellman cried,<br>"
 	"As he landed his crew with care;<br>"
 	"Supporting each man on the top of the tide<br>"
@@ -329,7 +332,8 @@ static void test_write_stabilized_story(fz_context *ctx)
 			toc_rectfn,
 			NULL /*rectfn_ref*/,
 			toc_pagefn /*pagefn*/,
-			NULL /*pagefn_ref*/
+			NULL /*pagefn_ref*/,
+			NULL /* archive */
 			);
 	fz_close_document_writer(ctx, writer);
 	fz_drop_document_writer(ctx, writer);
@@ -347,6 +351,7 @@ int main(int argc, const char **argv)
 	fz_story *story = NULL;
 	fz_buffer *buf = NULL;
 	fz_device *dev = NULL;
+	fz_archive *archive = NULL;
 	fz_rect mediabox = { 0, 0, 512, 640 };
 	float margin = 10;
 	int more;
@@ -362,6 +367,7 @@ int main(int argc, const char **argv)
 	fz_var(story);
 	fz_var(buf);
 	fz_var(dev);
+	fz_var(archive);
 
 
 	fz_try(ctx)
@@ -443,7 +449,9 @@ int main(int argc, const char **argv)
 
 		buf = fz_new_buffer_from_copied_data(ctx, snark, strlen(snark)+1);
 
-		story = fz_new_story(ctx, buf, "", 11);
+		archive = fz_open_directory(ctx, ".");
+
+		story = fz_new_story(ctx, buf, "", 11, archive);
 
 		do
 		{
@@ -472,6 +480,7 @@ int main(int argc, const char **argv)
 		fz_drop_story(ctx, story);
 		fz_drop_buffer(ctx, buf);
 		fz_drop_document_writer(ctx, writer);
+		fz_drop_archive(ctx, archive);
 	}
 	fz_catch(ctx)
 	{
@@ -490,7 +499,7 @@ int main(int argc, const char **argv)
 
 		writer = fz_new_pdf_writer(ctx, "out2.pdf", "");
 
-		story = fz_new_story(ctx, NULL, "", 11);
+		story = fz_new_story(ctx, NULL, "", 11, NULL);
 
 		dom = fz_story_document(ctx, story);
 
@@ -549,7 +558,7 @@ int main(int argc, const char **argv)
 		writer = fz_new_pdf_writer(ctx, "out3.pdf", "");
 
 		buf = fz_new_buffer_from_copied_data(ctx, festival_template, strlen(festival_template)+1);
-		story = fz_new_story(ctx, buf, "", 11);
+		story = fz_new_story(ctx, buf, "", 11, NULL);
 
 		dom = fz_story_document(ctx, story);
 

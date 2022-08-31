@@ -27,6 +27,7 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/buffer.h"
 #include "mupdf/fitz/stream.h"
+#include "mupdf/fitz/tree.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -86,12 +87,18 @@ fz_archive *fz_open_directory(fz_context *ctx, const char *path);
 int fz_is_directory(fz_context *ctx, const char *path);
 
 /**
-	Drop the reference to an archive.
+	Drop a reference to an archive.
 
 	Closes and releases any memory or filehandles associated
 	with the archive.
 */
 void fz_drop_archive(fz_context *ctx, fz_archive *arch);
+
+/**
+	Keep a reference to an archive.
+*/
+fz_archive *
+fz_keep_archive(fz_context *ctx, fz_archive *arch);
 
 /**
 	Return a pointer to a string describing the format of the
@@ -277,6 +284,8 @@ fz_archive *fz_new_tree_archive(fz_context *ctx, fz_tree *tree);
 
 struct fz_archive
 {
+	int refs;
+
 	fz_stream *file;
 	const char *format;
 

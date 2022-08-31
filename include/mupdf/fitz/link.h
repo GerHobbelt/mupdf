@@ -68,8 +68,8 @@ typedef struct fz_link
 	int count;
 	fz_quad *quads;
 	char *uri;
-	fz_link_set_rect_fn *set_rect;
-	fz_link_set_uri_fn *set_uri;
+	fz_link_set_rect_fn *set_rect_fn;
+	fz_link_set_uri_fn *set_uri_fn;
 	fz_link_drop_link_fn *drop;
 } fz_link;
 
