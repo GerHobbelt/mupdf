@@ -1493,6 +1493,7 @@ fz_convert_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst,
 				 * fz_icc_transform_pixmap will have to do it by steam. */
 				int premult = src->alpha && (sx == dx) && effectively_copying_spots;
 				link = fz_find_icc_link(ctx, ss, sx, ds, dx, prf, params, 0, effectively_copying_spots, premult);
+				ASSERT((void*)link != (void*)0xddddddddddddddddULL);
 				fz_icc_transform_pixmap(ctx, link, src, dst, effectively_copying_spots);
 			}
 			fz_catch(ctx)

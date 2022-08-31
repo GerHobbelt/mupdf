@@ -622,6 +622,7 @@ fz_find_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_store_
 			item->val->refs++;
 		}
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
+		ASSERT((void*)item->val != (void*)0xddddddddddddddddULL);
 		return (void *)item->val;
 	}
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
