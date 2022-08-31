@@ -2264,7 +2264,7 @@ void fz_story_tocwrite(fz_context *ctx, fz_document_writer *writer, fz_story_toc
 			/* Create story from new content. */
 			fz_drop_story(ctx, story);
 			story = NULL;
-			story = fz_new_story(ctx, content, user_css, em);
+			story = fz_new_story(ctx, content, user_css, em, NULL);
 
 			/* Layout the story, gathering toc information as we go. */
 			tocwrite_items_clear(ctx, &state.toc);

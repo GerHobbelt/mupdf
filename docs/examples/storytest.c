@@ -407,7 +407,7 @@ int main(int argc, const char **argv)
 				;
 		buf = fz_new_buffer_from_copied_data(ctx, html, strlen(html)+1);
 
-		story = fz_new_story(ctx, buf, "", 11);
+		story = fz_new_story(ctx, buf, "", 11, NULL);
 
 		int i=0;
 		do
