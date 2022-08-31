@@ -2283,7 +2283,8 @@ static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname,
 	if (!fz_is_directory(ctx, tmpdir))
 		tmpdir = "/tmp";
 
-	if (absname[0] == '/' || absname[0] == '\\')
+	// strip off absolute path & UNC / path prefixes '//./' and '//?/':
+	while (absname[0] == '/' || absname[0] == '\\' || absname[0] == '?' || absname[0] == '?')
 		++absname;
 
 	s = absname;
