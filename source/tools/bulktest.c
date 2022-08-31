@@ -1376,7 +1376,7 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
 		// show progress on stderr, while we log the real data to logfile:
 		if (logfile != stderr)
 		{
-			if (!strncmp(message, "\n:L#0", 5))
+			if (!strncmp(message, ":L#0", 4))
 			{
 				return; // don't show progress for simple 'this line was just read' log messages.
 			}
@@ -2033,6 +2033,11 @@ bulktest_main(int argc, const char **argv)
 					convert_string_to_argv(ctx, &template_argv, &template_argc, dataline, 0);
 				}
 
+				if (verbosity >= 1)
+				{
+					fz_info(ctx, "\n");
+				}
+
 				do
 				{
 					enum {
@@ -2070,9 +2075,9 @@ bulktest_main(int argc, const char **argv)
 							// accept on line by itself, i.e. followed by NUL, otherwise we require a whitespace to follow it, for otherwise it could be a script macro or other important bit!
 							if (!comment_start[1] || isspace(comment_start[1]))
 							{
-								if (verbosity >= 1)
+								if (verbosity > 1)
 								{
-									fz_info(ctx, "\n::L#%05u: COMMENT %s", linecounter, line);
+									fz_info(ctx, ":L#%05u: COMMENT %s", linecounter, line);
 								}
 
 								comment_start[0] = 0;
@@ -2084,9 +2089,9 @@ bulktest_main(int argc, const char **argv)
 							// no additional whitespace after required...
 							if (comment_start[1] == '/')
 							{
-								if (verbosity >= 1)
+								if (verbosity > 1)
 								{
-									fz_info(ctx, "\n::L#%05u: COMMENT %s", linecounter, line);
+									fz_info(ctx, ":L#%05u: COMMENT %s", linecounter, line);
 								}
 
 								comment_start[0] = 0;
@@ -2135,7 +2140,7 @@ bulktest_main(int argc, const char **argv)
 
 					if (verbosity >= 1)
 					{
-						fz_info(ctx, "\n:L#%05u: %s", linecounter, line);
+						fz_info(ctx, ":L#%05u: %s", linecounter, line);
 					}
 
 					// check if this statement is obscured by an outer IF/ENDIF condition
@@ -2290,6 +2295,16 @@ bulktest_main(int argc, const char **argv)
 						fz_info(ctx, "::ECHO: %s\n", line + 5);
 						report_time = RPT_A_SIMPLE_USERINFO_COMMAND;
 					}
+					// `:` at start of line is *soft* ECHO, i.e. LOG but do not ECHO to screen/stdout:
+					else if (match(argv[0], ":"))
+					{
+						// Halt! Only log this line when we haven't already, due to the verbosity level!
+						if (verbosity < 1)
+						{
+							fz_info(ctx, "::%s\n", line);
+						}
+						report_time = RPT_A_SIMPLE_USERINFO_COMMAND;
+					}
 					else if (match(argv[0], "CD"))
 					{
 						if (argc != 2)
@@ -2341,12 +2356,12 @@ bulktest_main(int argc, const char **argv)
 						rv = 1;
 						if (rv != EXIT_SUCCESS)
 						{
-							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							fz_error(ctx, "ERR: error executing MUSERVE command: %s", line);
 							errored++;
 						}
 						else if (verbosity >= 1)
 						{
-							fz_info(ctx, "OK: MUTOOL command: %s", line);
+							fz_info(ctx, "OK: MUSERVE command: %s", line);
 						}
 
 						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
@@ -2358,45 +2373,15 @@ bulktest_main(int argc, const char **argv)
 						rv = 1;
 						if (rv != EXIT_SUCCESS)
 						{
-							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+							fz_error(ctx, "ERR: error executing STOPSERVE command: %s", line);
 							errored++;
 						}
 						else if (verbosity >= 1)
 						{
-							fz_info(ctx, "OK: MUTOOL command: %s", line);
+							fz_info(ctx, "OK: STOPSERVE command: %s", line);
 						}
 
 						report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
-
-						flush_active_logfile_hard();
-					}
-					else if (match(argv[0], "MUSERVE"))
-					{
-						rv = 1;
-						if (rv != EXIT_SUCCESS)
-						{
-							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
-							errored++;
-						}
-						else if (verbosity)
-						{
-							fz_info(ctx, "OK: MUTOOL command: %s", line);
-						}
-
-						flush_active_logfile_hard();
-					}
-					else if (match(argv[0], "STOPSERVE"))
-					{
-						rv = 1;
-						if (rv != EXIT_SUCCESS)
-						{
-							fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
-							errored++;
-						}
-						else if (verbosity)
-						{
-							fz_info(ctx, "OK: MUTOOL command: %s", line);
-						}
 
 						flush_active_logfile_hard();
 					}
