@@ -289,13 +289,23 @@ fz_dirname(char *dir, const char *path, size_t n)
 char *fz_realpath(const char *path, char *buf)
 {
 	wchar_t wpath[PATH_MAX];
-	wchar_t wbuf[PATH_MAX];
+	wchar_t wbuf[PATH_MAX + 4];
 	int i;
 	if (!MultiByteToWideChar(CP_UTF8, 0, path, -1, wpath, PATH_MAX))
 		return NULL;
-	if (!GetFullPathNameW(wpath, PATH_MAX, wbuf, NULL))
+	if (!GetFullPathNameW(wpath, PATH_MAX, wbuf + 4, NULL))
 		return NULL;
-	if (!WideCharToMultiByte(CP_UTF8, 0, wbuf, -1, buf, PATH_MAX, NULL, NULL))
+	const wchar_t* fp = wbuf + 4;
+	// Is full path an UNC path already? If not, make it so:
+	if (wbuf[4] != '\\' && wbuf[4] != '/')
+	{
+		wbuf[0] = '\\';
+		wbuf[1] = '\\';
+		wbuf[2] = '?';
+		wbuf[3] = '\\';
+		fp = wbuf;
+	}
+	if (!WideCharToMultiByte(CP_UTF8, 0, fp, -1, buf, PATH_MAX, NULL, NULL))
 		return NULL;
 	for (i=0; buf[i]; ++i)
 		if (buf[i] == '\\')
