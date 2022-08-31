@@ -492,7 +492,7 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 		}
 
 		app->docpath = fz_strdup(ctx, filename);
-		app->doctitle = fz_strdup(ctx, fz_path_basename(filename));
+		app->doctitle = fz_strdup(ctx, fz_basename(filename));
 
 		fz_layout_document(app->ctx, app->doc, app->layout_w, app->layout_h, app->layout_em);
 
@@ -623,7 +623,7 @@ void pdfapp_close(pdfapp_t *app)
 static int gen_tmp_file(char *buf, int len)
 {
 	int i;
-	char *name = (char *)fz_path_basename(buf);
+	char *name = (char *)fz_basename(buf);
 	len -= name - buf;
 
 	for (i = 0; i < 10000; i++)

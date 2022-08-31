@@ -811,7 +811,7 @@ void update_title(void)
 
 	int nc = fz_count_chapters(ctx, doc);
 
-	title = fz_path_basename(filename);
+	title = fz_basename(filename);
 
 	document_shown_as_dirty = pdf && pdf_has_unsaved_changes(ctx, pdf);
 	if (document_shown_as_dirty)

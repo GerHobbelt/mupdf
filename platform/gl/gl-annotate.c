@@ -495,7 +495,7 @@ static void open_attachment_dialog(void)
 				const char *filename;
 				pdf_obj *fs;
 
-				filename = fz_path_basename(attach_filename);
+				filename = fz_basename(attach_filename);
 
 				contents = fz_read_file(ctx, attach_filename);
 				created = fz_stat_ctime(attach_filename);

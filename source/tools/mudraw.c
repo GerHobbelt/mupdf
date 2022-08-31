@@ -633,7 +633,7 @@ file_level_headers(fz_context *ctx, const char *filename)
 		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
 		|| output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
 	{
-		fz_write_printf(ctx, out, "<document name=\"%s\">\n", fz_path_basename(filename));
+		fz_write_printf(ctx, out, "<document name=\"%s\">\n", fz_basename(filename));
 	}
 	else if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "{%q:%q,%q:[", "file", filename, "pages");

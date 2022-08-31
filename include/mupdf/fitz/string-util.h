@@ -150,11 +150,6 @@ void *fz_memmem(const void *haystack, size_t haystacklen, const void *needle, si
 void fz_dirname(char *dir, const char *path, size_t dirsize);
 
 /**
-	Find the filename component in a path.
-*/
-const char *fz_basename(const char *path);
-
-/**
 	decode url escapes.
 */
 char *fz_urldecode(char *url);
@@ -235,7 +230,7 @@ void fz_format_output_path_ex(fz_context* ctx, char* path, size_t size, const ch
 
     Returns pointer to basename part in the input string.
 */
-const char* fz_path_basename(const char* path);
+const char* fz_basename(const char* path);
 
 /**
 	rewrite path to the shortest string that names the same path.

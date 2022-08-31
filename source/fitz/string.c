@@ -284,22 +284,6 @@ fz_dirname(char *dir, const char *path, size_t n)
 	ASSERT(!"Should never get here");
 }
 
-const char *
-fz_basename(const char *path)
-{
-	const char *name1 = strrchr(path, '/');
-	const char* name2 = strrchr(path, '\\');
-	if (!name1)
-		name1 = path;
-	else
-		name1++;
-	if (!name2)
-		name2 = path;
-	else
-		name2++;
-	return (name2 > name1 ? name2 : name1);
-}
-
 #ifdef _WIN32
 
 char *fz_realpath(const char *path, char *buf)
@@ -440,7 +424,7 @@ int fz_has_percent_d(const char* s)
 // Skip directory/(Windows)drive separators.
 //
 // Returns pointer to basename part in the input string.
-const char* fz_path_basename(const char* path)
+const char* fz_basename(const char* path)
 {
 	size_t i;
 	size_t len = strlen(path);
@@ -562,7 +546,7 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 
 			if (!done && page != 0)
 			{
-				p = fz_path_basename(s);
+				p = fz_basename(s);
 				p = strrchr(p, '.');
 				// jump to end if no file extension found
 				if (!p)

@@ -541,7 +541,7 @@ int mutool_main(int argc, const char** argv)
 
 	if (argc > 0)
 	{
-		start = fz_path_basename(argv[0]);
+		start = fz_basename(argv[0]);
 		end = start + strlen(start);
 		if ((end-4 >= start) && (end[-4] == '.') && (end[-3] == 'e') && (end[-2] == 'x') && (end[-1] == 'e'))
 			end = end-4;
