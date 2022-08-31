@@ -640,45 +640,38 @@ int fz_is_absolute_path(const char* path)
 
 #if defined(_WIN32)
 
-static wchar_t* fz_UNC_wfullpath_from_name(const char* name)
+static int fz_UNC_wfullpath_from_name(wchar_t dstbuf[PATH_MAX], const char* path)
 {
-	wchar_t* d, * r;
-	size_t len = fz_maxi(4096, strlen(name) + 100);
-	int c;
-	r = d = malloc(len * 2 * sizeof(wchar_t));
-	if (!r)
-		return NULL;
+	wchar_t wpath[PATH_MAX];
+	wchar_t wbuf[PATH_MAX + 4];
 
-	const char* s = name;
-	d = r + len;
-	while (*s) {
-		s += fz_chartorune_unsafe(&c, s);
-		/* Truncating c to a wchar_t can be problematic if c
-			* is 0x10000. */
-		if (c >= 0x10000)
-			c = FZ_REPLACEMENT_CHARACTER;
-		*d++ = c;
-	}
-	*d = 0;
-	ASSERT(d - r < 2 * len);
-
-	wcscpy(r, L"\\\\?\\");
-	d = _wfullpath(r + 4, r + len, len - 4);
-	if (!d)
+	if (!MultiByteToWideChar(CP_UTF8, 0, path, -1, wpath, PATH_MAX))
 	{
-		const char* msg = strerror(errno);
-		free(r);
-		errno = ENOMEM;
-		return NULL;
+		DWORD ec = GetLastError();
+		errno = ENAMETOOLONG;
+		return ec;
 	}
-	// in the unlucky case, where _wfullpath() expanded to a path already including the UNC prefix,
-	// we need to drop the prefix we already set up:
-	if (!wcsncmp(r + 4, L"\\\\?\\", 4))
+	if (!GetFullPathNameW(wpath, PATH_MAX, wbuf + 4, NULL))
 	{
-		// overlapping move:
-		memmove(r, r + 4, len);
+		DWORD ec = GetLastError();
+		errno = ENAMETOOLONG;
+		return ec;
 	}
-	return r;
+	const wchar_t* fp = wbuf + 4;
+	// Is full path an UNC path already? If not, make it so:
+	if (wbuf[4] != '\\' && wbuf[4] != '/')
+	{
+		wbuf[0] = '\\';
+		wbuf[1] = '\\';
+		wbuf[2] = '?';
+		wbuf[3] = '\\';
+		wcsncpy(dstbuf, wbuf, PATH_MAX);
+	}
+	else
+	{
+		wcsncpy(dstbuf, wbuf + 4, PATH_MAX);
+	}
+	return E_OK;
 }
 
 #endif
@@ -686,10 +679,9 @@ static wchar_t* fz_UNC_wfullpath_from_name(const char* name)
 int fz_chdir(fz_context* ctx, const char *path)
 {
 #ifdef _MSC_VER
-	wchar_t* wname;
+	wchar_t wname[PATH_MAX];
 
-	wname = fz_UNC_wfullpath_from_name(path);
-	if (wname == NULL)
+	if (fz_UNC_wfullpath_from_name(wname, path))
 	{
 		return errno || ENOMEM;
 	}
@@ -709,10 +701,6 @@ int fz_chdir(fz_context* ctx, const char *path)
 	{
 		int e = errno;
 
-#ifdef _MSC_VER
-		free(wname);
-#endif
-
 		if (ctx)
 		{
 			switch (e)
@@ -730,10 +718,6 @@ int fz_chdir(fz_context* ctx, const char *path)
 		}
 		return errno;
 	}
-
-#ifdef _MSC_VER
-	free(wname);
-#endif
 
 	return E_OK;
 }
@@ -848,21 +832,18 @@ int64_t
 fz_stat_ctime(const char* path)
 {
 	struct _stat info;
-	wchar_t* wpath;
+	wchar_t wpath[PATH_MAX];
 
-	wpath = fz_UNC_wfullpath_from_name(path);
-	if (wpath == NULL)
+	if (fz_UNC_wfullpath_from_name(wpath, path))
 		return 0;
 
 	int n = _wstat(wpath, &info);
 	int e = errno;
 	if (n < 0) {
-		free(wpath);
 		errno = e;
 		return 0;
 	}
 
-	free(wpath);
 	return info.st_ctime;
 }
 
@@ -870,22 +851,18 @@ int64_t
 fz_stat_mtime(const char* path)
 {
 	struct _stat info;
-	wchar_t* wpath;
+	wchar_t wpath[PATH_MAX];
 
-	wpath = fz_UNC_wfullpath_from_name(path);
-	if (wpath == NULL)
+	if (fz_UNC_wfullpath_from_name(wpath, path))
 		return 0;
 
 	int n = _wstat(wpath, &info);
 	int e = errno;
 	if (n < 0) {
-		free(wpath);
 		errno = e;
 		return 0;
 	}
 
-	free(wpath);
-	errno = e;
 	return info.st_mtime;
 }
 
@@ -917,11 +894,11 @@ fz_stat_mtime(const char* path)
 FILE *
 fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 {
-	wchar_t* wname, * wmode;
+	wchar_t wname[PATH_MAX];
+	wchar_t *wmode;
 	FILE* file;
 
-	wname = fz_UNC_wfullpath_from_name(name);
-	if (wname == NULL)
+	if (fz_UNC_wfullpath_from_name(wname, name))
 	{
 		return NULL;
 	}
@@ -929,7 +906,6 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	wmode = fz_wchar_from_utf8(mode);
 	if (wmode == NULL)
 	{
-		free(wname);
 		errno = ENOMEM;
 		return NULL;
 	}
@@ -937,7 +913,6 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	file = _wfopen(wname, wmode);
 	int e = errno;
 
-	free(wname);
 	free(wmode);
 
 	errno = e;
@@ -947,34 +922,26 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 int
 fz_remove_utf8(fz_context* ctx, const char* name)
 {
-	wchar_t* wname;
+	wchar_t wname[PATH_MAX];
 	int n;
 
-	wname = fz_UNC_wfullpath_from_name(name);
-	if (wname == NULL)
+	if (fz_UNC_wfullpath_from_name(wname, name))
 	{
-		errno = ENOMEM;
 		return -1;
 	}
 
 	n = _wremove(wname);
-	int e = errno;
 
-	free(wname);
-
-	errno = e;
 	return n;
 }
 
 int
 fz_mkdirp_utf8(fz_context* ctx, const char* name)
 {
-	wchar_t* wname;
+	wchar_t wname[PATH_MAX];
 
-	wname = fz_UNC_wfullpath_from_name(name);
-	if (wname == NULL)
+	if (fz_UNC_wfullpath_from_name(wname, name))
 	{
-		errno = ENOMEM;
 		return -1;
 	}
 
@@ -1001,8 +968,6 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 		int e = errno;
 		if (n && e != EEXIST && e != EACCES)
 		{
-			free(wname);
-			errno = e;
 			return -1;
 		}
 		*d = c;
@@ -1016,7 +981,6 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 			d += wcslen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
 	}
 
-	free(wname);
 	return 0;
 }
 
