@@ -31,6 +31,8 @@
 #include <intrin.h>
 #endif
 
+#define countof(e)   (sizeof(e) / sizeof((e)[0]))
+
 int mutool_main(int argc, const char** argv);
 
 static inline void memclr(void* ptr, size_t size)
@@ -519,7 +521,7 @@ mk_absolute_path(fz_context* ctx, const char* filepath)
 	return fz_strdup(ctx, q);
 }
 
-static struct target_path_mapping
+struct target_path_mapping
 {
 	// the absolute path (sans trailing '/') to map any output paths TO:
 	// (Note: this path is EMPTY when this mapping feature has been disabled.)
@@ -530,14 +532,22 @@ static struct target_path_mapping
 	// by the abs_target_path and used in its entirety to ensure discernibility
 	// during analysis.
 	char abs_cwd_as_mapping_source[PATH_MAX];
-} output_path_mapping_spec;
+};
 
-static char* find_next_dirsep(char* p)
+// map these paths:
+// - current working directory --> .
+// - executable's path --> EXE
+// - test data file path --> DATA-nn
+// - test script file path --> SCRIPT
+// ...
+static struct target_path_mapping output_path_mapping_spec[10];
+
+static const char* find_next_dirsep(const char* p)
 {
 	if (!*p)
 		return p;
 
-	char* e = strchr(p + 1, '/');
+	const char* e = strchr(p + 1, '/');
 	if (!e)
 	{
 		e = p + strlen(p);
@@ -564,105 +574,117 @@ static void map_path_to_dest(char* dst, size_t dstsiz, const char* inpath)
 	}
 
 	// did the user request output file path mapping?
-	if (!output_path_mapping_spec.abs_target_path[0])
+	if (!output_path_mapping_spec[0].abs_target_path[0])
 	{
 		ASSERT(dstsiz >= PATH_MAX);
 		strncpy(dst, srcpath, dstsiz);
 	}
 	else
 	{
-		// TODO: cope with UNC paths mixed & mashed with classic paths.
-
-		// First we find the common prefix.
-		// Then we check how many path parts are left over from the CWD.
-		// each left-over part is represented by a single _
-		// concat those into the first part to be appended.
-		// append the remainder of the source path then, cleaning it up
-		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
-		// This is your mapped destination path, guaranteed to be positioned
-		// WITHIN the given target path (which is prefixed to the generated
-		// RELATIVE path!)
-		//
-		// Example:
-		// given
-		//   CWD = 	  C:/a/b/c
-		//   TARGET = T:/t
-		// we then get for these inputs:
-		//   C:/a/b/c/d1  -> d1        (leftover: <nil>)     -> d1             -> T:/t/d1
-		//   C:/a/b/d     -> d         (leftover: c)         -> _/c            -> T:/t/_/c
-		//   C:/a/e/f     -> e/f       (leftover: b/c)       -> __/e/f         -> T:/t/__/e/f
-		//   C:/x/y/z     -> x/y/z     (leftover: a/b/c)     -> ___/x/y/z      -> T:/t/___/x/y/z
-		//   D:/a/b/c     -> D:/a/b/c  (leftover: C:/a/b/c)  -> ____/D:/a/b/c  -> T:/t/____/D_/a/b/c
-		//   C:/a         ->           (leftover: b/c)       -> __             -> T:/t/__
-		//   C:/a/b       ->           (leftover: c)         -> _              -> T:/t/_
-		//   C:/x         -> x         (leftover: a/b/c)     -> ___/x          -> T:/t/___/x
-		//   D:/a         -> D:/a      (leftover: C:/a/b/c)  -> ____/D:/a      -> T:/t/____/D_/a
-		// thus every position in the directory tree *anywhere in the system* gets encoded to its own
-		// unique subdirectory path within the "target path" directory tree -- of course, ASSUMING
-		// you don't have any underscore-only leading directories in any of (relative) paths you feed
-		// this mapper... ;-)
-		char common_prefix[PATH_MAX];
-		char* sep = common_prefix;
-		char* prefix_end = common_prefix;
-
-		strncpy(common_prefix, output_path_mapping_spec.abs_cwd_as_mapping_source, PATH_MAX);
-
-		do
-		{
-			sep = find_next_dirsep(sep);
-			// match common prefix:
-			size_t cpfxlen = sep - common_prefix;
-			if (strncmp(common_prefix, srcpath, cpfxlen) != 0)
-			{
-				// failed to match; the common prefix is our previous match length.
-				break;
-			}
-			// check edge case: srcpath has a longer part name at the end of the match,
-			// e.g. `b` vs. `bb`: `/a/b[/...]` vs. `/a/b[b/...]`
-			if (*sep == 0 && srcpath[cpfxlen] != '/')
-			{
-				// failed to match; the common prefix is our previous match length.
-				break;
-			}
-			prefix_end = sep;
-		} while (*sep);
-
-		// count the path parts left over from the CWD:
-		char dotdot[PATH_MAX] = "";
-		int ddpos = 0;
-
-		// each left-over part is represented by a single _
-		while (*sep)
-		{
-			dotdot[ddpos++] = '_';
-			sep = find_next_dirsep(sep);
-		}
-
-		if (ddpos > 0)
-			dotdot[ddpos++] = '/';
-		dotdot[ddpos] = 0;
-
-		// append the remainder of the source path then, cleaning it up
-		// to get rid of drive colons and other 'illegal' chars, replacing them with _.
-		size_t common_prefix_length = prefix_end - common_prefix;
-		char* remaining_inpath_part = srcpath + common_prefix_length;
-		// skip leading '/' separators in remaining_inpath_part as they will only clutter the output
-		while (*remaining_inpath_part == '/')
-			remaining_inpath_part++;
-
-		char appendedpath[PATH_MAX];
-		int rv = fz_snprintf(appendedpath, sizeof(appendedpath), "%s/%s%s", output_path_mapping_spec.abs_target_path, dotdot, remaining_inpath_part);
-		if (rv <= 0 || rv >= dstsiz)
-		{
-			appendedpath[sizeof(appendedpath) - 1] = 0;
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot map file path to a sane sized absolute path: dstsize: %zu, srcpath: %s, dstpath: %s", dstsiz, srcpath, appendedpath);
-		}
-
-		// sanitize the appended part: lingering drive colons, wildcards, etc. will be replaced by _:
-		fz_sanitize_path_ex(appendedpath, "^$!", "_", 0, strlen(output_path_mapping_spec.abs_target_path));
-
 		ASSERT(dstsiz >= PATH_MAX);
-		strncpy(dst, appendedpath, dstsiz);
+		ASSERT(dst != NULL);
+		*dst = 0;
+		size_t dst_len = 0;
+
+		// find the best = shortest mapping:
+		for (int idx = 0; idx < countof(output_path_mapping_spec) && output_path_mapping_spec[idx].abs_target_path[0]; idx++)
+		{
+			// TODO: cope with UNC paths mixed & mashed with classic paths.
+
+			// First we find the common prefix.
+			// Then we check how many path parts are left over from the CWD.
+			// each left-over part is represented by a single _
+			// concat those into the first part to be appended.
+			// append the remainder of the source path then, cleaning it up
+			// to get rid of drive colons and other 'illegal' chars, replacing them with _.
+			// This is your mapped destination path, guaranteed to be positioned
+			// WITHIN the given target path (which is prefixed to the generated
+			// RELATIVE path!)
+			//
+			// Example:
+			// given
+			//   CWD = 	  C:/a/b/c
+			//   TARGET = T:/t
+			// we then get for these inputs:
+			//   C:/a/b/c/d1  -> d1        (leftover: <nil>)     -> d1             -> T:/t/d1
+			//   C:/a/b/d     -> d         (leftover: c)         -> _/c            -> T:/t/_/c
+			//   C:/a/e/f     -> e/f       (leftover: b/c)       -> __/e/f         -> T:/t/__/e/f
+			//   C:/x/y/z     -> x/y/z     (leftover: a/b/c)     -> ___/x/y/z      -> T:/t/___/x/y/z
+			//   D:/a/b/c     -> D:/a/b/c  (leftover: C:/a/b/c)  -> ____/D:/a/b/c  -> T:/t/____/D_/a/b/c
+			//   C:/a         ->           (leftover: b/c)       -> __             -> T:/t/__
+			//   C:/a/b       ->           (leftover: c)         -> _              -> T:/t/_
+			//   C:/x         -> x         (leftover: a/b/c)     -> ___/x          -> T:/t/___/x
+			//   D:/a         -> D:/a      (leftover: C:/a/b/c)  -> ____/D:/a      -> T:/t/____/D_/a
+			// thus every position in the directory tree *anywhere in the system* gets encoded to its own
+			// unique subdirectory path within the "target path" directory tree -- of course, ASSUMING
+			// you don't have any underscore-only leading directories in any of (relative) paths you feed
+			// this mapper... ;-)
+			const char* common_prefix = output_path_mapping_spec[idx].abs_cwd_as_mapping_source;
+			const char* sep = common_prefix;
+			const char* prefix_end = common_prefix;
+
+			do
+			{
+				sep = find_next_dirsep(sep);
+				// match common prefix:
+				size_t cpfxlen = sep - common_prefix;
+				if (strncmp(common_prefix, srcpath, cpfxlen) != 0)
+				{
+					// failed to match; the common prefix is our previous match length.
+					break;
+				}
+				// check edge case: srcpath has a longer part name at the end of the match,
+				// e.g. `b` vs. `bb`: `/a/b[/...]` vs. `/a/b[b/...]`
+				if (*sep == 0 && srcpath[cpfxlen] != '/')
+				{
+					// failed to match; the common prefix is our previous match length.
+					break;
+				}
+				prefix_end = sep;
+			} while (*sep);
+
+			// count the path parts left over from the CWD:
+			char dotdot[PATH_MAX] = "";
+			int ddpos = 0;
+
+			// each left-over part is represented by a single _
+			while (*sep)
+			{
+				dotdot[ddpos++] = '_';
+				sep = find_next_dirsep(sep);
+			}
+
+			if (ddpos > 0)
+				dotdot[ddpos++] = '/';
+			dotdot[ddpos] = 0;
+
+			// append the remainder of the source path then, cleaning it up
+			// to get rid of drive colons and other 'illegal' chars, replacing them with _.
+			size_t common_prefix_length = prefix_end - common_prefix;
+			const char* remaining_inpath_part = srcpath + common_prefix_length;
+			// skip leading '/' separators in remaining_inpath_part as they will only clutter the output
+			while (*remaining_inpath_part == '/')
+				remaining_inpath_part++;
+
+			char appendedpath[PATH_MAX];
+			int rv = fz_snprintf(appendedpath, sizeof(appendedpath), "%s/%s%s", output_path_mapping_spec[idx].abs_target_path, dotdot, remaining_inpath_part);
+			if (rv <= 0 || rv >= dstsiz)
+			{
+				appendedpath[sizeof(appendedpath) - 1] = 0;
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot map file path to a sane sized absolute path: dstsize: %zu, srcpath: %s, dstpath: %s", dstsiz, srcpath, appendedpath);
+			}
+
+			// sanitize the appended part: lingering drive colons, wildcards, etc. will be replaced by _:
+			fz_sanitize_path_ex(appendedpath, "^$!", "_", 0, strlen(output_path_mapping_spec[idx].abs_target_path));
+
+			if (dst_len == 0 || dst_len > strlen(appendedpath))
+			{
+				ASSERT(dstsiz >= PATH_MAX);
+				strncpy(dst, appendedpath, dstsiz);
+				dst[dstsiz - 1] = 0;
+				dst_len = strlen(appendedpath);
+			}
+		}
 	}
 }
 
@@ -1830,22 +1852,110 @@ bulktest_main(int argc, const char **argv)
 	// shut up JBig2Dec (which can be very verbose) unless we've dialed up our own verbosity levels:
 	jbig2_set_error_log_prefilter_level(JBIG2_SEVERITY_FATAL - verbosity);
 
-	if (!getcwd(output_path_mapping_spec.abs_cwd_as_mapping_source, sizeof(output_path_mapping_spec.abs_cwd_as_mapping_source)))
 	{
-		fz_error(ctx, "cannot initialise bulktest::cwd: %s; path(s) too long?", strerror(errno));
-		return EXIT_FAILURE;
-	}
-	// when no output mapping/override was specified, don't use any:
-	if (!forced_output_basedir)
-	{
-		output_path_mapping_spec.abs_target_path[0] = 0;
-	}
-	// same 'realpath' treatment for both sides of the mapping:
-	else if (!fz_realpath(forced_output_basedir, output_path_mapping_spec.abs_target_path) ||
-		!fz_realpath(output_path_mapping_spec.abs_cwd_as_mapping_source, output_path_mapping_spec.abs_cwd_as_mapping_source))
-	{
-		fz_error(ctx, "cannot initialise bulktest::output_path_mapping spec; path(s) too long?");
-		return EXIT_FAILURE;
+		if (!getcwd(output_path_mapping_spec[0].abs_cwd_as_mapping_source, sizeof(output_path_mapping_spec[0].abs_cwd_as_mapping_source)))
+		{
+			fz_error(ctx, "cannot initialise bulktest::cwd: %s; path(s) too long?", strerror(errno));
+			return EXIT_FAILURE;
+		}
+		// when no output mapping/override was specified, don't use any:
+		if (!forced_output_basedir)
+		{
+			output_path_mapping_spec[0].abs_target_path[0] = 0;
+		}
+		// same 'realpath' treatment for both sides of the mapping:
+		else if (!fz_realpath(forced_output_basedir, output_path_mapping_spec[0].abs_target_path) ||
+			!fz_realpath(output_path_mapping_spec[0].abs_cwd_as_mapping_source, output_path_mapping_spec[0].abs_cwd_as_mapping_source))
+		{
+			fz_error(ctx, "cannot initialise bulktest::output_path_mapping spec; path(s) too long?");
+			return EXIT_FAILURE;
+		}
+
+		for (int i = 1; i < countof(output_path_mapping_spec); i++)
+		{
+			memcpy(&output_path_mapping_spec[i], &output_path_mapping_spec[0], sizeof(output_path_mapping_spec[0]));
+		}
+
+		int optind = fz_optind + 1;
+		int datafile_count = argc - optind;
+		int idx;
+
+		for (idx = 1; optind < argc && idx < countof(output_path_mapping_spec) - 2; idx++)
+		{
+			const char* p = argv[optind++];
+
+			if (!fz_realpath(p, output_path_mapping_spec[idx].abs_cwd_as_mapping_source))
+			{
+				fz_error(ctx, "cannot initialise bulktest::output_path_mapping spec; path(s) too long?");
+				return EXIT_FAILURE;
+			}
+			// nuke the filename + trailing '/' to make this a [source] path directory: 
+			char* dst = (char*)fz_basename(output_path_mapping_spec[idx].abs_cwd_as_mapping_source);
+			ASSERT(dst[-1] == '/' || dst[-1] == '\\');
+			dst[-1] = 0;
+
+			// now pad the destination path:
+			dst = output_path_mapping_spec[idx].abs_target_path;
+			size_t l = strlen(dst);
+			dst += l;
+			if (datafile_count > 1)
+				fz_snprintf(dst, sizeof(output_path_mapping_spec[idx].abs_target_path) - l, "/DATA-%02d", idx);
+			else
+				fz_strlcpy(dst, "/DATA", sizeof(output_path_mapping_spec[idx].abs_target_path) - l);
+		}
+
+		optind = fz_optind;
+
+		ASSERT(idx < countof(output_path_mapping_spec));
+		if (optind < argc)
+		{
+			const char* p = argv[optind];
+
+			if (!fz_realpath(p, output_path_mapping_spec[idx].abs_cwd_as_mapping_source))
+			{
+				fz_error(ctx, "cannot initialise bulktest::output_path_mapping spec; path(s) too long?");
+				return EXIT_FAILURE;
+			}
+			// nuke the filename + trailing '/' to make this a [source] path directory: 
+			char* dst = (char*)fz_basename(output_path_mapping_spec[idx].abs_cwd_as_mapping_source);
+			ASSERT(dst[-1] == '/' || dst[-1] == '\\');
+			dst[-1] = 0;
+
+			// now pad the destination path:
+			// 
+			// NOTE: pad ("__SCRIPT__" must be equal or longer than the longest "DATA-%02d" pad for the mapping code to successfully
+			// pick the desired shortest mapping path! Hence the extra underscores surrounding SCRIPT here.
+			fz_strlcat(output_path_mapping_spec[idx].abs_target_path, "/__SCRIPT__", sizeof(output_path_mapping_spec[idx].abs_target_path));
+		}
+
+		idx++;
+
+		ASSERT(idx < countof(output_path_mapping_spec));
+		{
+			const char* p = argv[0];
+
+			if (!fz_realpath(p, output_path_mapping_spec[idx].abs_cwd_as_mapping_source))
+			{
+				fz_error(ctx, "cannot initialise bulktest::output_path_mapping spec; path(s) too long?");
+				return EXIT_FAILURE;
+			}
+			// nuke the filename + trailing '/' to make this a [source] path directory: 
+			char* dst = (char*)fz_basename(output_path_mapping_spec[idx].abs_cwd_as_mapping_source);
+			ASSERT(dst[-1] == '/' || dst[-1] == '\\');
+			dst[-1] = 0;
+
+			// now pad the destination path:
+			// 
+			// NOTE: pad ("EXECUTABLE" must be equal or longer than the longest "DATA-%02d" or "__SCRIPT__" pad for the mapping code to successfully
+			// pick the desired shortest mapping path! Hence the "EXECUTABLE" name instead of simply "EXE" or "__EXE__" here.
+			fz_strlcat(output_path_mapping_spec[idx].abs_target_path, "/EXECUTABLE", sizeof(output_path_mapping_spec[idx].abs_target_path));
+		}
+
+		// clean the remainder of the slots:
+		for (idx++; idx < countof(output_path_mapping_spec); idx++)
+		{
+			memset(&output_path_mapping_spec[idx], 0, sizeof(output_path_mapping_spec[idx]));
+		}
 	}
 
 	int linecounter = 0;
@@ -1911,9 +2021,9 @@ bulktest_main(int argc, const char **argv)
 				//
 				// As we are guaranteed to now have a path pointing INSIDE the target base path, we can simply use length of
 				// base path as the starting point for this next transformation:
-				if (output_path_mapping_spec.abs_target_path[0])
+				if (output_path_mapping_spec[0].abs_target_path[0])
 				{
-					size_t offset = strlen(output_path_mapping_spec.abs_target_path);
+					size_t offset = strlen(output_path_mapping_spec[0].abs_target_path);
 
 					// replace all '/' with '.' to produce a filename representing the mapped path yet will be dumped in the base dir itself for quick & easy access:
 					char* p = scriptname + offset;
