@@ -845,6 +845,8 @@ fz_find_icc_link(fz_context *ctx,
 		{
 			link = fz_new_icc_link(ctx, src, src_extras, dst, dst_extras, prf, rend, format, copy_spots, premult);
 			old_link = fz_store_item(ctx, new_key, link, 1000, &fz_link_store_type);
+			ASSERT((void*)link != (void*)0xddddddddddddddddULL);
+			ASSERT((void*)old_link != (void*)0xddddddddddddddddULL);
 			if (old_link)
 			{
 				/* Found one while adding! Perhaps from another thread? */
@@ -862,6 +864,7 @@ fz_find_icc_link(fz_context *ctx,
 			fz_rethrow(ctx);
 		}
 	}
+	ASSERT((void*)link != (void*)0xddddddddddddddddULL);
 	return link;
 }
 
