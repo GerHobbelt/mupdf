@@ -40,6 +40,9 @@ static inline void memclr(void* ptr, size_t size)
 	memset(ptr, 0, size);
 }
 
+static void should_I_wait_for_key(void);
+static int running_in_profiler_wait_for_my_key = 0;
+
 static fz_context* ctx = NULL;
 
 static const char* match_regex = NULL;
@@ -125,6 +128,7 @@ struct timing {
 	timediff_t total;
 	timediff_t min, max;
 	int minscriptline, maxscriptline;
+    int mindataline, maxdataline;
 	const char* mincommand;
 	const char* maxcommand;
 };
@@ -1301,9 +1305,9 @@ static void mu_drop_context(void)
 			if (timing.count > 0)
 			{
 				fz_info(ctx, "total %lldms / %d commands for an average of %lldms in %d commands",
-					timing.total / 1000, timing.count, timing.total / (1000 * timing.count), timing.count);
-				fz_info(ctx, "fastest command line %d: %lldms (%s)", timing.minscriptline, timing.min / 1000, timing.mincommand);
-				fz_info(ctx, "slowest command line %d: %lldms (%s)", timing.maxscriptline, timing.max / 1000, timing.maxcommand);
+                    timing.total, timing.count, timing.total / timing.count, timing.count);
+                fz_info(ctx, "fastest command line %d (dataline: %d): %lldms (%s)", timing.minscriptline, timing.mindataline, timing.min, timing.mincommand);
+                fz_info(ctx, "slowest command line %d (dataline: %d): %lldms (%s)", timing.maxscriptline, timing.maxdataline, timing.max, timing.maxcommand);
 
 				// reset timing after reporting: this atexit handler MAY be invoked multiple times!
 				memclr(&timing, sizeof(timing));
@@ -1432,6 +1436,10 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
 			{
 				fprintf(stderr, "\n%s", message + 2);
 			}
+            else if (!strncmp(message, "...also skipped ", 16))
+            {
+                fprintf(stderr, "s");
+            }
 			else if (!strncmp(message, "::SKIP-DUE-TO-RANDOM-SAMPLING: ", 31))
 			{
 				fprintf(stderr, "^");
@@ -1748,10 +1756,11 @@ bulktest_main(int argc, const char **argv)
 	timing.min = 1 << 30;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "TLvqVm:r:s:x:n:X:N:O:h")) != -1)
+    while ((c = fz_getopt(argc, argv, "BTLvqVm:r:s:x:n:X:N:O:h")) != -1)
 	{
 		switch(c)
 		{
+        case 'B': running_in_profiler_wait_for_my_key = 2; break;
 		case 'T': script_is_template = 1; break;
 		case 'q': logcfg.quiet = 1; verbosity = 0; break;
 		case 'v': logcfg.quiet = 0; verbosity++; break;
@@ -1805,6 +1814,8 @@ bulktest_main(int argc, const char **argv)
 		default: usage(); return EXIT_FAILURE;
 		}
 	}
+
+    should_I_wait_for_key();
 
 	if (fz_optind == argc)
 	{
@@ -2136,22 +2147,45 @@ bulktest_main(int argc, const char **argv)
 					// process another line = record from the datafeed.
 					// skip comment and empty lines in there...
 					char* dataline = NULL;
+                    int last_skipped = 0;
+                    int last_reject = 0;
+
 					do
 					{
 						dataline = my_getline(datafeed, &datalinecounter);
 						if (!dataline)
 							break;		// EOF
 						const char* dataline_for_reporting = dataline;
-						size_t pos = strcspn(dataline, " \t\r\n#%");  // comment lines in datafeeds start with # or %
-						if (dataline[pos] == 0 || strchr("#%", dataline[pos]))
-							dataline = NULL;  // discard
+                        size_t pos = strspn(dataline, " \t\r\n");
+                        // comment lines in datafeeds start with # or %
+                        if (dataline[pos] == 0 || strchr("#%", dataline[pos]))
+                        {
+                            // % CANNOT introduce a macro in a DATA LINE, so we're safe to just nuke any of these lines:
+                            dataline = NULL;  // discard
+                        }
 						// also check against any user-specified match/ignore rules:
 						int reject = test_dataline_against_matchspecs(dataline, datalinecounter, match_regex, ignore_match_regex, match_test_numbers_ranges, ignore_match_test_numbers_ranges);
 						if (reject)
 						{
 							dataline = NULL;  // discard
 							size_t len = strlen(dataline_for_reporting);
-							fz_info(ctx, "::SKIPPED: (reason: %s):: #%04d: %.*s%s\n", test_fail_reason[reject], datalinecounter, (len > 45 ? 40 : len), dataline_for_reporting, (len > 45 ? "..." : ""));
+                            char last_skipped_msg[LONGLINE];
+                            fz_snprintf(last_skipped_msg, sizeof(last_skipped_msg), "(reason: %s):: #%04d: %.*s%s", test_fail_reason[reject], datalinecounter, (len > 45 ? 40 : len), dataline_for_reporting, (len > 45 ? "..." : ""));
+                            if (!last_skipped || last_reject != reject)
+                            {
+                                fz_info(ctx, "::SKIPPED: %s\n", last_skipped_msg);
+                                last_skipped = 1;
+                                last_reject = reject;
+                            }
+                            else
+                            {
+                                fz_info(ctx, "...also skipped %s\n", last_skipped_msg);
+                                last_skipped++;
+                            }
+                        }
+                        else
+                        {
+                            last_skipped = 0;
 						}
 					} while (!dataline || skip_to_datalinecounter > datalinecounter);
 
@@ -2589,6 +2623,7 @@ bulktest_main(int argc, const char **argv)
 								fz_free(ctx, timing.mincommand);
 								timing.mincommand = fz_strdup(ctx, line_command);
 								timing.minscriptline = linecounter;
+                                timing.mindataline = datalinecounter;
 							}
 							if (diff > timing.max)
 							{
@@ -2596,6 +2631,7 @@ bulktest_main(int argc, const char **argv)
 								fz_free(ctx, timing.maxcommand);
 								timing.maxcommand = fz_strdup(ctx, line_command);
 								timing.maxscriptline = linecounter;
+                                timing.maxdataline = datalinecounter;
 							}
 							timing.total += diff;
 							timing.count++;
@@ -2657,11 +2693,35 @@ bulktest_main(int argc, const char **argv)
 	fz_flush_warnings(ctx);
 	mu_drop_context();
 
+    should_I_wait_for_key();
 	return errored;
 }
+
+
+#include <conio.h>
+
+static void should_I_wait_for_key(void)
+{
+    if (running_in_profiler_wait_for_my_key--)
+    {
+        if (running_in_profiler_wait_for_my_key)
+            fprintf(stderr, "\n\nWaiting for your keypress to start the run...\n\n");
+        else
+            fprintf(stderr, "\n\nWaiting for keypress to terminate...\n\n");
+
+        // flush keyboard buffer:
+        while (kbhit())
+            getch();
+
+        // now wait...
+        getch();
+    }
+}
+
 
 int
 main(int argc, const char** argv)
 {
+    atexit(should_I_wait_for_key);
 	return bulktest_main(argc, argv);
 }
