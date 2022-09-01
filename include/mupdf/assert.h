@@ -47,12 +47,12 @@ extern "C" {
 #define VERIFY_AND_CONTINUE_EQ(expr1, expr2) 												\
             fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
 #define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 												\
-			fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
+            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
 
 #define VERIFY_EQ(expr1, expr2) 												\
             fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
 #define ASSERT_EQ(expr1, expr2) 												\
-			fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
+            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
 
 
 int fz_report_failed_assertion(const char *expression, const char *srcfile, int srcline);
