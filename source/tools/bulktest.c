@@ -1750,6 +1750,8 @@ bulktest_main(int argc, const char **argv)
     showtime = 0;
     showmemory = 0;
 
+    running_in_profiler_wait_for_my_key = 0;
+
     clear_trace_info();
     memclr(&logcfg, sizeof logcfg);
     memclr(&timing, sizeof(timing));
@@ -2702,7 +2704,7 @@ bulktest_main(int argc, const char **argv)
 
 static void should_I_wait_for_key(void)
 {
-    if (running_in_profiler_wait_for_my_key--)
+    if (running_in_profiler_wait_for_my_key-- > 0)
     {
         if (running_in_profiler_wait_for_my_key)
             fprintf(stderr, "\n\nWaiting for your keypress to start the run...\n\n");
