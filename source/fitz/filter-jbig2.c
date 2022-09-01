@@ -84,7 +84,9 @@ close_jbig2d(fz_context *ctx, void *state_)
 		fz_lock_jbig2(ctx);
 
 		if (state->page)
+		{
 			jbig2_release_page(state->ctx, state->page);
+		}
 		fz_drop_jbig2_globals(ctx, state->gctx);
 		jbig2_ctx_free(state->ctx);
 	}
