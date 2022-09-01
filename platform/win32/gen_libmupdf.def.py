@@ -169,6 +169,11 @@ EXPORTS
 
 	jbig2_set_error_log_prefilter_level
 
+	jbig2dec_main
+	jbig2dec_arith_test_main
+	jbig2dec_huffman_test_main
+	jbig2dec_pbm2png_main
+
 %(fitz_exports)s
 
 ; MuPDF exports

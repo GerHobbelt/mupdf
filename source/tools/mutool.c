@@ -43,6 +43,7 @@
 #include "../../thirdparty/owemdjee/bibutils/src/bin/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libzopfli/src/zopfli/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libzopfli/src/zopflipng/monolithic_examples.h"
+#include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -196,6 +197,13 @@ static struct {
 	{ jpegturbo_wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
 	{ jpegturbo_djpeg_main, "djpeg", "djpeg tool" },
 	{ jpegturbo_cjpeg_main, "cjpeg", "cjpeg tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ jbig2dec_main, "jbig2dec", "jbig2dec tool" },
+	{ jbig2dec_arith_test_main, "jbig2_arith_test", "jbig2dec test" },
+	{ jbig2dec_huffman_test_main, "jbig2_huffman_test", "jbig2dec test" },
+	{ jbig2dec_pbm2png_main, "jbig2dec_pbm2png", "jbig2dec_pbm2png tool" },
 #endif
 
 #if defined(MUTOOL_EX)
