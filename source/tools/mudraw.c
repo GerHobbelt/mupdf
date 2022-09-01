@@ -2590,7 +2590,7 @@ int main(int argc, const char** argv)
 	pdfoutpath = NULL;
 #endif
 
-	no_icc = 1;
+	no_icc = 0;
 	ignore_errors = 0;
 	uselist = 1;
 	alphabits_text = 8;
