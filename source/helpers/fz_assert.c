@@ -61,3 +61,22 @@ int fz_report_failed_assertion_and_continue(const char *expression, const char *
 	return 0;
 }
 
+void fz_check_and_report_failed_assertion_and_continue(int expr1, int expr2, const char* expr1_str, const char* expr2_str, const char* srcfile, int srcline, int contin)
+{
+	if (expr1 == expr2)
+		return;
+
+	char buf[LONGLINE];
+	snprintf(buf, sizeof(buf), "%s == %s (because %d != %d)", expr1_str, expr2_str, expr1, expr2);
+	buf[sizeof(buf) - 1] = 0;
+
+	if (!contin)
+	{
+		fz_report_failed_assertion(buf, srcfile, srcline);
+	}
+	else
+	{
+		fz_report_failed_assertion_and_continue(buf, srcfile, srcline);
+	}
+}
+

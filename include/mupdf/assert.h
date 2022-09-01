@@ -44,9 +44,20 @@ extern "C" {
 #define VERIFY(expression)              ASSERT(expression)
 #define VERIFY_AND_CONTINUE(expression) ASSERT_AND_CONTINUE(expression)
 
+#define VERIFY_AND_CONTINUE_EQ(expr1, expr2) 												\
+            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
+#define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 												\
+			fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
+
+#define VERIFY_EQ(expr1, expr2) 												\
+            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
+#define ASSERT_EQ(expr1, expr2) 												\
+			fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
+
 
 int fz_report_failed_assertion(const char *expression, const char *srcfile, int srcline);
 int fz_report_failed_assertion_and_continue(const char *expression, const char *srcfile, int srcline);
+void fz_check_and_report_failed_assertion_and_continue(int expr1, int expr2, const char *expr1_str, const char *expr2_str, const char *srcfile, int srcline, int contin);
 
 #else
 
@@ -59,6 +70,14 @@ int fz_report_failed_assertion_and_continue(const char *expression, const char *
 
 #define VERIFY(expression)              expression
 #define VERIFY_AND_CONTINUE(expression) expression
+
+#define VERIFY_AND_CONTINUE_EQ(expr1, expr2) 												\
+            (void)((expr1) == (expr2))
+#define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 		
+
+#define VERIFY_EQ(expr1, expr2) 												\
+            (void)((expr1) == (expr2))
+#define ASSERT_EQ(expr1, expr2) 		
 
 #endif
 
