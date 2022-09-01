@@ -578,7 +578,7 @@ pdf_load_link(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_obj *dict,
 	pdf_obj *action;
 	pdf_obj *obj;
 	fz_rect bbox;
-	char *uri;
+	char *uri = NULL;
 	fz_link *link = NULL;
 	int count = 0;
 	fz_quad *quads = NULL;
