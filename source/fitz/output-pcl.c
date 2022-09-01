@@ -237,22 +237,23 @@ static void copy_opts(fz_pcl_options *dst, const fz_pcl_options *src)
 
 const char *fz_pcl_write_options_usage =
 	"PCL output options:\n"
-	"\tcolorspace=mono: render 1-bit black and white page\n"
-	"\tcolorspace=rgb: render full color page\n"
-	"\tpreset=generic|ljet4|dj500|fs600|lj|lj2|lj3|lj3d|lj4|lj4pl|lj4d|lp2563b|oce9050\n"
-	"\tspacing=0: No vertical spacing capability\n"
-	"\tspacing=1: PCL 3 spacing (<ESC>*p+<n>Y)\n"
-	"\tspacing=2: PCL 4 spacing (<ESC>*b<n>Y)\n"
-	"\tspacing=3: PCL 5 spacing (<ESC>*b<n>Y and clear seed row)\n"
-	"\tmode2: Enable mode 2 graphics compression\n"
-	"\tmode3: Enable mode 3 graphics compression\n"
-	"\teog_reset: End of graphics (<ESC>*rB) resets all parameters\n"
-	"\thas_duplex: Duplex supported (<ESC>&l<duplex>S)\n"
-	"\thas_papersize: Papersize setting supported (<ESC>&l<sizecode>A)\n"
-	"\thas_copies: Number of copies supported (<ESC>&l<copies>X)\n"
-	"\tis_ljet4pjl: Disable/Enable HP 4PJL model-specific output\n"
-	"\tis_oce9050: Disable/Enable Oce 9050 model-specific output\n"
+	"  colorspace=mono: render 1-bit black and white page\n"
+	"  colorspace=rgb: render full color page\n"
+	"  preset=generic|ljet4|dj500|fs600|lj|lj2|lj3|lj3d|lj4|lj4pl|lj4d|lp2563b|oce9050\n"
+	"  spacing=0: No vertical spacing capability\n"
+	"  spacing=1: PCL 3 spacing (<ESC>*p+<n>Y)\n"
+	"  spacing=2: PCL 4 spacing (<ESC>*b<n>Y)\n"
+	"  spacing=3: PCL 5 spacing (<ESC>*b<n>Y and clear seed row)\n"
+	"  mode2: Enable mode 2 graphics compression\n"
+	"  mode3: Enable mode 3 graphics compression\n"
+	"  eog_reset: End of graphics (<ESC>*rB) resets all parameters\n"
+	"  has_duplex: Duplex supported (<ESC>&l<duplex>S)\n"
+	"  has_papersize: Papersize setting supported (<ESC>&l<sizecode>A)\n"
+	"  has_copies: Number of copies supported (<ESC>&l<copies>X)\n"
+	"  is_ljet4pjl: Disable/Enable HP 4PJL model-specific output\n"
+	"  is_oce9050: Disable/Enable Oce 9050 model-specific output\n"
 	"\n";
+
 
 void fz_pcl_preset(fz_context *ctx, fz_pcl_options *opts, const char *preset)
 {

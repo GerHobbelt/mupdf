@@ -41,11 +41,11 @@ const char *fz_pdfocr_write_options_usage = "";
 
 const char *fz_pdfocr_write_options_usage =
 	"PDFOCR output options:\n"
-	"\tcompression=none: No compression (default)\n"
-	"\tcompression=flate: Flate compression\n"
-	"\tstrip-height=N: Strip height (default 0=fullpage)\n"
-	"\tocr-language=<lang>: OCR language (default=eng)\n"
-	"\tocr-datadir=<datadir>: OCR data path (default=rely on TESSDATA_PREFIX)\n"
+	"  compression=none: No compression (default)\n"
+	"  compression=flate: Flate compression\n"
+	"  strip-height=N: Strip height (default 0=fullpage)\n"
+	"  ocr-language=<lang>: OCR language (default=eng)\n"
+	"  ocr-datadir=<datadir>: OCR data path (default=rely on TESSDATA_PREFIX)\n"
 	"\n";
 
 static const char funky_font[] =

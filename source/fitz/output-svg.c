@@ -38,9 +38,9 @@ typedef struct
 
 const char *fz_svg_write_options_usage =
 	"SVG output options:\n"
-	"\ttext=text: Emit text as <text> elements (inaccurate fonts).\n"
-	"\ttext=path: Emit text as <path> elements (accurate fonts).\n"
-	"\tno-reuse-images: Do not reuse images using <symbol> definitions.\n"
+	"  text=text: Emit text as <text> elements (inaccurate fonts).\n"
+	"  text=path: Emit text as <path> elements (accurate fonts).\n"
+	"  no-reuse-images: Do not reuse images using <symbol> definitions.\n"
 	"\n"
 	;
 

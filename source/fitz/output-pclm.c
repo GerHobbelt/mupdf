@@ -31,9 +31,9 @@
 
 const char *fz_pclm_write_options_usage =
 	"PCLm output options:\n"
-	"\tcompression=none: No compression (default)\n"
-	"\tcompression=flate: Flate compression\n"
-	"\tstrip-height=N: Strip height (default 16)\n"
+	"  compression=none: No compression (default)\n"
+	"  compression=flate: Flate compression\n"
+	"  strip-height=N: Strip height (default 16)\n"
 	"\n";
 
 fz_pclm_options *
