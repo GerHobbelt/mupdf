@@ -453,30 +453,44 @@ static fz_locks_context* init_mudraw_locks(void)
 
 #endif
 
-static int mutool_is_toplevel_ctx = 0;
-static fz_context* ctx = NULL;
+static int tool_is_toplevel_ctx = 0;
+
+static fz_context *ctx = NULL;
 
 static void mu_drop_context(void)
 {
-	ASSERT_AND_CONTINUE(fz_has_global_context());
-	ASSERT_AND_CONTINUE(!ctx || (ctx->error.top == ctx->error.stack_base));
+	// WARNING: as we point `ctx` at the GLOBAL context in the app init phase, it MAY already be an INVALID
+	// pointer reference by now!
+	// 
+	// WARNING: this assert fires when you run `mutool raster` (and probably other tools as well) and hit Ctrl+C
+	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
+	// and the assert fires due to (ctx->error.top != ctx->error.stack).
+	//
+	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
+	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
+	// is obvious, I suppose...
+	ASSERT_AND_CONTINUE(!ctx || !fz_has_global_context() || (ctx->error.top == ctx->error.stack_base));
 
-	if (mutool_is_toplevel_ctx)
+	if (tool_is_toplevel_ctx)
 	{
 		// as we registered a global context, we should clean the locks on it now
 		// so the atexit handler won't have to bother with it.
 		ASSERT_AND_CONTINUE(fz_has_global_context());
 		ctx = fz_get_global_context();
 		fz_drop_context_locks(ctx);
-		ctx = NULL;
+	}
 
+	ctx = NULL;
+
+	if (tool_is_toplevel_ctx)
+	{
 		fz_drop_global_context();
 
 #ifndef DISABLE_MUTHREADS
 		fin_mudraw_locks();
 #endif /* DISABLE_MUTHREADS */
 
-		mutool_is_toplevel_ctx = 0;
+		tool_is_toplevel_ctx = 0;
 	}
 }
 
@@ -507,11 +521,14 @@ int mutool_main(int argc, const char** argv)
 	char buf[64];
 	int i;
 
-	ctx = NULL;
-	mutool_is_toplevel_ctx = 0;
+	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
+	//ctx = NULL;
+	//mutool_is_toplevel_ctx = 0;
 
 	if (!fz_has_global_context())
 	{
+		ASSERT(ctx == NULL);
+		
 		fz_locks_context* locks = NULL;
 
 #ifndef DISABLE_MUTHREADS
@@ -531,7 +548,7 @@ int mutool_main(int argc, const char** argv)
 		}
 		fz_set_global_context(ctx);
 
-		mutool_is_toplevel_ctx = 1;
+		tool_is_toplevel_ctx = 1;
 	}
 	else
 	{

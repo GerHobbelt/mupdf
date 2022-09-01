@@ -901,7 +901,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 			timing.total += diff + interptime;
 			timing.count ++;
 
-			fz_info(ctx, " %dms (interpretation) %dms (rendering) %dms (total)", interptime, diff, diff + interptime);
+			fz_info(ctx, " pagenum=%d :: %dms (interpretation) %dms (rendering) %dms (total)", pagenum, interptime, diff, diff + interptime);
 		}
 		else
 		{
@@ -920,7 +920,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 			timing.total += diff;
 			timing.count ++;
 
-			fz_info(ctx, " %dms (total)", diff);
+			fz_info(ctx, " pagenum=%d :: %dms (total)", pagenum, diff);
 		}
 	}
 
@@ -1367,10 +1367,30 @@ static void drawrange(fz_context *ctx, fz_document *doc, const char *range)
 	{
 		if (spage < epage)
 			for (page = spage; page <= epage; page++)
-				drawpage(ctx, doc, page);
+			{
+				fz_try(ctx)
+					drawpage(ctx, doc, page);
+				fz_catch(ctx)
+				{
+					if (ignore_errors)
+						fz_warn(ctx, "ignoring error on page %d in '%s'", page, filename);
+					else
+						fz_rethrow(ctx);
+				}
+			}
 		else
 			for (page = spage; page >= epage; page--)
-				drawpage(ctx, doc, page);
+			{
+				fz_try(ctx)
+					drawpage(ctx, doc, page);
+				fz_catch(ctx)
+				{
+					if (ignore_errors)
+						fz_warn(ctx, "ignoring error on page %d in '%s'", page, filename);
+					else
+						fz_rethrow(ctx);
+				}
+			}
 	}
 }
 
@@ -1660,6 +1680,8 @@ static void mu_drop_context(void)
 			const char* peak_unit;
 			const char* current_unit;
 
+			ASSERT(ctx != NULL);
+
 			total = humanize(trace_info.total, &total_unit);
 			peak = humanize(trace_info.peak, &peak_unit);
 			current = humanize(trace_info.current, &current_unit);
@@ -1673,10 +1695,23 @@ static void mu_drop_context(void)
 		}
 	}
 
-	ASSERT_AND_CONTINUE(!ctx || (ctx->error.top == ctx->error.stack_base));
+	// WARNING: as we point `ctx` at the GLOBAL context in the app init phase, it MAY already be an INVALID
+	// pointer reference by now!
+	// 
+	// WARNING: this assert fires when you run `mutool raster` (and probably other tools as well) and hit Ctrl+C
+	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
+	// and the assert fires due to (ctx->error.top != ctx->error.stack).
+	//
+	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
+	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
+	// is obvious, I suppose...
+	ASSERT_AND_CONTINUE(!ctx || !fz_has_global_context() || (ctx->error.top == ctx->error.stack_base));
 
-	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
-	ctx = NULL;
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
+		ctx = NULL;
+	}
 
 	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
 	if (muraster_is_toplevel_ctx)
@@ -1684,8 +1719,11 @@ static void mu_drop_context(void)
 		// as we registered a global context, we should clean the locks on it now
 		// so the atexit handler won't have to bother with it.
 		ASSERT_AND_CONTINUE(fz_has_global_context());
-		ctx = fz_get_global_context();
-		fz_drop_context_locks(ctx);
+		if (fz_has_global_context())
+		{
+			ctx = fz_get_global_context();
+			fz_drop_context_locks(ctx);
+		}
 		ctx = NULL;
 
 		fz_drop_global_context();
@@ -1715,10 +1753,10 @@ int main(int argc, const char** argv)
 	fz_var(doc);
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
-	muraster_is_toplevel_ctx = 0;
+	//mudraw_is_toplevel_ctx = 0;
+	//ctx = NULL;
 	output = NULL;
 	out = NULL;
-	ctx = NULL;
 
 	rotation = -1;
 	width = 0;
@@ -1873,6 +1911,8 @@ int main(int argc, const char** argv)
 
 	if (!fz_has_global_context())
 	{
+		ASSERT(ctx == NULL);
+		
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
 		if (!ctx)
 		{
@@ -1884,6 +1924,12 @@ int main(int argc, const char** argv)
 		muraster_is_toplevel_ctx = 1;
 	}
 	atexit(mu_drop_context);
+
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // drop our previous context IFF this happens to be a re-run in monolithic mode.
+		ctx = NULL;
+	}
 
 	ctx = fz_new_context(NULL, NULL, max_store);
 	if (!ctx)
@@ -1969,7 +2015,7 @@ int main(int argc, const char** argv)
 
 			for (i = 0; i < (int)nelem(suffix_table); i++)
 			{
-				if (!strcmp(format, suffix_table[i].suffix+1))
+				if (!stricmp(format, suffix_table[i].suffix+1))
 				{
 					output_format = suffix_table[i].format;
 					output_cs = suffix_table[i].cs;

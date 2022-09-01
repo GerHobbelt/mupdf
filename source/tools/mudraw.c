@@ -2496,17 +2496,23 @@ static void mu_drop_context(void)
 		}
 	}
 
-	// WARNING: this assert fires when you run `mutool draw` (and probably other tools as well) and hit Ctrl+C
+	// WARNING: as we point `ctx` at the GLOBAL context in the app init phase, it MAY already be an INVALID
+	// pointer reference by now!
+	// 
+	// WARNING: this assert fires when you run `mutool raster` (and probably other tools as well) and hit Ctrl+C
 	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
 	// and the assert fires due to (ctx->error.top != ctx->error.stack).
 	//
 	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
 	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
 	// is obvious, I suppose...
-	ASSERT_AND_CONTINUE(!ctx || (ctx->error.top == ctx->error.stack_base));
+	ASSERT_AND_CONTINUE(!ctx || !fz_has_global_context() || (ctx->error.top == ctx->error.stack_base));
 
-	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
-	ctx = NULL;
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
+		ctx = NULL;
+	}
 
 	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
 	if (mudraw_is_toplevel_ctx)
@@ -2514,8 +2520,11 @@ static void mu_drop_context(void)
 		// as we registered a global context, we should clean the locks on it now
 		// so the atexit handler won't have to bother with it.
 		ASSERT_AND_CONTINUE(fz_has_global_context());
-		ctx = fz_get_global_context();
-		fz_drop_context_locks(ctx);
+		if (fz_has_global_context())
+		{
+			ctx = fz_get_global_context();
+			fz_drop_context_locks(ctx);
+		}
 		ctx = NULL;
 
 		fz_drop_global_context();
@@ -2545,8 +2554,8 @@ int main(int argc, const char** argv)
 	fz_var(doc);
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
-	mudraw_is_toplevel_ctx = 0;
-	ctx = NULL;
+	//mudraw_is_toplevel_ctx = 0;
+	//ctx = NULL;
 	output = NULL;
 	out = NULL;
 	output_pagenum = 0;
@@ -2640,6 +2649,8 @@ int main(int argc, const char** argv)
 	if (!fz_has_global_context())
 	{
 		fz_locks_context* locks = NULL;
+		
+		ASSERT(ctx == NULL);
 
 #ifndef DISABLE_MUTHREADS
 		locks = init_mudraw_locks();
@@ -2660,7 +2671,7 @@ int main(int argc, const char** argv)
 
 		mudraw_is_toplevel_ctx = 1;
 	}
-	else
+	else if (!ctx)
 	{
 		// caller of mudraw_main() has set global CTX.
 		//
@@ -2839,17 +2850,23 @@ int main(int argc, const char** argv)
 	if (lowmemory)
 		max_store = 1;
 
-	assert(fz_has_global_context());
+	ASSERT(fz_has_global_context());
 
 	// check if global CTX has locking, because if it has none,
 	// then we CANNOT use bands or threads!
-	ctx = fz_get_global_context();
+	ASSERT(ctx != NULL);
 	if (!fz_has_locking_support(ctx))
 	{
 		fz_error(ctx, "cannot use multiple threads without locking support. Falling back to single thread processing.");
 		num_workers = 0;
 		bgprint.active = 0;
 		band_height = 0;
+	}
+
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // drop our previous context IFF this happens to be a re-run in monolithic mode.
+		ctx = NULL;
 	}
 
 	ctx = fz_new_context(NULL, NULL, max_store);

@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
-static fz_context* ctx = NULL;
+static fz_context *ctx = NULL;
 
 static void
 clean(char *p)
@@ -25,6 +25,27 @@ static void usage(void)
 	fz_info(ctx, "usage: mutool cmapdump [lots of cmap files] > out.c");
 }
 
+static void mu_drop_context(void)
+{
+	// WARNING: as we point `ctx` at the GLOBAL context in the app init phase, it MAY already be an INVALID
+	// pointer reference by now!
+	// 
+	// WARNING: this assert fires when you run `mutool raster` (and probably other tools as well) and hit Ctrl+C
+	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
+	// and the assert fires due to (ctx->error.top != ctx->error.stack).
+	//
+	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
+	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
+	// is obvious, I suppose...
+	ASSERT_AND_CONTINUE(!ctx || !fz_has_global_context() || (ctx->error.top == ctx->error.stack_base));
+
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
+	}
+	ctx = NULL;
+}
+
 int
 cmapdump_main(int argc, const char** argv)
 {
@@ -33,7 +54,7 @@ cmapdump_main(int argc, const char** argv)
 	char name[256];
 	int k, c;
 
-	ctx = NULL;
+	//ctx = NULL;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "h")) != -1)
@@ -50,8 +71,11 @@ cmapdump_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
+	ASSERT(fz_has_global_context());
 	if (!fz_has_global_context())
 	{
+		ASSERT(ctx == NULL);
+		
 		ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
 		if (!ctx)
 		{
@@ -59,6 +83,13 @@ cmapdump_main(int argc, const char** argv)
 			return EXIT_FAILURE;
 		}
 		fz_set_global_context(ctx);
+	}
+	atexit(mu_drop_context);
+
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // drop our previous context IFF this happens to be a re-run in monolithic mode.
+		ctx = NULL;
 	}
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
@@ -176,6 +207,6 @@ cmapdump_main(int argc, const char** argv)
 
 	fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
-	fz_drop_context(ctx);
+	mu_drop_context();
 	return EXIT_SUCCESS;
 }

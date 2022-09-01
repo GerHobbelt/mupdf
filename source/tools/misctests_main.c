@@ -1,5 +1,5 @@
 /*
- * curl_tool -- our incantation of the ubiquitous curl tool
+ * misc_tests_tool
  */
 
 #include "../dll/pch.h"

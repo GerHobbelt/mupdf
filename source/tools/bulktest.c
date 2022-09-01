@@ -1342,10 +1342,23 @@ static void mu_drop_context(void)
 		timing.maxcommand = NULL;
 	}
 
-	ASSERT_AND_CONTINUE(!ctx || (ctx->error.top == ctx->error.stack_base));
+	// WARNING: as we point `ctx` at the GLOBAL context in the app init phase, it MAY already be an INVALID
+	// pointer reference by now!
+	// 
+	// WARNING: this assert fires when you run `mutool raster` (and probably other tools as well) and hit Ctrl+C
+	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
+	// and the assert fires due to (ctx->error.top != ctx->error.stack).
+	//
+	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
+	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
+	// is obvious, I suppose...
+	ASSERT_AND_CONTINUE(!ctx || !fz_has_global_context() || (ctx->error.top == ctx->error.stack_base));
 
-	fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
-	ctx = NULL;
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // also done here for those rare exit() calls inside the library code.
+		ctx = NULL;
+	}
 
 	// nuke the locks last as they are still used by the heap free ('drop') calls in the lines just above!
 	if (bulktest_is_toplevel_ctx)
@@ -1359,8 +1372,8 @@ static void mu_drop_context(void)
 		if (fz_has_global_context())
 		{
 			ctx = fz_get_global_context();
+			fz_drop_context_locks(ctx);
 		}
-		fz_drop_context_locks(ctx);
 
 		ctx = NULL;
 
@@ -1377,9 +1390,8 @@ static void mu_drop_context(void)
 static void mu_drop_context_at_exit(void)
 {
 	// we're aborting/exiting the application.
-	// One thing's for sure anyhow: we are NOT in a recursive call anymore, so we can/MUST say:
-	bulktest_is_toplevel_ctx = 1;
-	// and then go and clean up as best we can:
+	// 
+	// clean up as best we can:
 	mu_drop_context();
 }
 
@@ -1722,8 +1734,8 @@ bulktest_main(int argc, const char **argv)
 	ignore_match_numbers_s = NULL;
 	random_exec_perunage = 1.0;
 
-	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
-	bulktest_is_toplevel_ctx = 0;
+    // reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
+    //bulktest_is_toplevel_ctx = 0;
 
 	time(&start_timestamp);
 
@@ -1821,6 +1833,8 @@ bulktest_main(int argc, const char **argv)
 		fz_enable_dbg_output();
 		fz_enable_dbg_output_on_stdio_unreachable();
 
+		ASSERT(ctx == NULL);
+
 		ctx = fz_new_context(alloc_ctx, locks, max_store);
 		if (!ctx)
 		{
@@ -1841,6 +1855,12 @@ bulktest_main(int argc, const char **argv)
 		bulktest_is_toplevel_ctx = 1;
 	}
 	atexit(mu_drop_context_at_exit);
+
+	if (ctx != __fz_get_RAW_global_context())
+	{
+		fz_drop_context(ctx); // drop our previous context IFF this happens to be a re-run in monolithic mode.
+		ctx = NULL;
+	}
 
 	ctx = fz_new_context(NULL, NULL, max_store);
 	if (!ctx)

@@ -88,14 +88,25 @@ static void usage(const char* name)
 }
 
 
-static int tesstest_is_toplevel_ctx = 0;
+static int tool_is_toplevel_ctx = 0;
+
 static fz_context* ctx = NULL;
 
 static void mu_drop_context(void)
 {
-	ASSERT_AND_CONTINUE(!ctx || (ctx->error.top == ctx->error.stack_base));
+	// WARNING: as we point `ctx` at the GLOBAL context in the app init phase, it MAY already be an INVALID
+	// pointer reference by now!
+	// 
+	// WARNING: this assert fires when you run `mutool raster` (and probably other tools as well) and hit Ctrl+C
+	// to ABORT/INTERRUPT the running application: the MSVC RTL calls this function in the atexit() handler
+	// and the assert fires due to (ctx->error.top != ctx->error.stack).
+	//
+	// We are okay with that, as that scenario is an immediate abort anyway and the OS will be responsible
+	// for cleaning up. That our fz_try/throw/catch exception stack hasn't been properly rewound at such times
+	// is obvious, I suppose...
+	ASSERT_AND_CONTINUE(!ctx || !fz_has_global_context() || (ctx->error.top == ctx->error.stack_base));
 
-	if (tesstest_is_toplevel_ctx)
+	if (tool_is_toplevel_ctx)
 	{
 		// as we registered a global context, we should clean the locks on it now
 		// so the atexit handler won't have to bother with it.
@@ -109,7 +120,11 @@ static void mu_drop_context(void)
 
 		fz_drop_global_context();
 
-		tesstest_is_toplevel_ctx = 0;
+		tool_is_toplevel_ctx = 0;
+	}
+	else
+	{
+		ctx = NULL;
 	}
 }
 
@@ -120,8 +135,8 @@ int main(int argc, const char** argv)
 	int c;
 	int rv = 0;
 
-	ctx = NULL;
-	tesstest_is_toplevel_ctx = 0;
+	//tool_is_toplevel_ctx = 0;
+	//ctx = NULL;
 
 	if (!fz_has_global_context())
 	{
@@ -135,7 +150,7 @@ int main(int argc, const char** argv)
 		}
 		fz_set_global_context(ctx);
 
-		tesstest_is_toplevel_ctx = 1;
+		tool_is_toplevel_ctx = 1;
 	}
 	else
 	{
