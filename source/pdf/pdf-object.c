@@ -3344,9 +3344,6 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 				fmt_putc(ctx, fmt, '\n');
 				fmt_indent(ctx, fmt);
 				fmt_putc(ctx, fmt, ')');
-
-
-
 				fmt_putc(ctx, fmt, '\n');
 				fmt_indent(ctx, fmt);
 				fmt_putc(ctx, fmt, '(');
