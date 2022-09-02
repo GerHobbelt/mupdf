@@ -3192,7 +3192,8 @@ static void fmt_dict(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 			{
 				fmt->flags &= ~PDF_PRINT_RESOLVE_ALL_INDIRECT;
 			}
-			else {
+			else
+			{
 				if (!(fmt->flags & PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW))
 				{
 					// make sure "less than sane" keys are printed as hexdumped STRING any way!
@@ -3299,6 +3300,9 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 			const char* errmsg = fz_caught_message(ctx);
 			fmt_printf(ctx, fmt, "error: %q", errmsg);
 			fmt_sep(ctx, fmt);
+
+			fz_error(ctx, "cannot process embedded file. filename:%q type:%s length:%zu error: %s", fs_params.filename, fs_params.mimetype, (size_t)fs_params.size, errmsg);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process embedded file. filename:%q type:%s length:%zu error: %s", fs_params.filename, fs_params.mimetype, (size_t)fs_params.size, errmsg);
 		}
 		fmt_putc(ctx, fmt, ')');
 	}
@@ -3370,6 +3374,9 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 				const char* errmsg = fz_caught_message(ctx);
 				fmt_printf(ctx, fmt, "error: %q", errmsg);
 				fmt_sep(ctx, fmt);
+
+				fz_error(ctx, "cannot process XML metadata. %s", errmsg);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot process XML metadata. %s", errmsg);
 			}
 		}
 		else
@@ -3498,6 +3505,8 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 	else
 	{
 		fmt_puts(ctx, fmt, "<unknown object>");
+
+		fz_throw(ctx, FZ_ERROR_GENERIC, "does not know/support unknown object (kind: %s (%p)", pdf_objkindstr(obj), obj);
 	}
 }
 
@@ -4168,7 +4177,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 							else
 							{
 								// don't bother trying to parse this as HTML. Fail and keep it short.
-								fz_warn(ctx, "cannot parse stream data as XML");
+								fz_error(ctx, "cannot parse stream data as XML");
 								fz_rethrow(ctx);
 							}
 						}
@@ -4197,12 +4206,12 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 					else
 					{
 						fmt_backpedal_to(ctx, fmt, ',');
+					}
 
 						if (!xml_root)
 						{
 							fz_throw(ctx, FZ_ERROR_GENERIC, "syntax error in XML; unable to parse content as XML");
 						}
-					}
 				}
 				else
 				{
@@ -4333,7 +4342,9 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	}
 	else 
 	{
-		fmt_printf(ctx, fmt, "{ %q: %q }", "type", "<unknown object>");
+		fmt_printf(ctx, fmt, "{ %q: %q, %q: %q, %q: %jp }", "type", "<unknown object>", "kind", pdf_objkindstr(obj), "raw", obj);
+
+		fz_throw(ctx, FZ_ERROR_GENERIC, "does not know/support unknown object (kind: %s (%p)", pdf_objkindstr(obj), obj);
 	}
 }
 
