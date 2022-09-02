@@ -661,7 +661,7 @@ pdf_load_stream_number(fz_context *ctx, pdf_document *doc, int num)
 static fz_buffer *
 pdf_load_stream_number_no_cycle(fz_context *ctx, pdf_document *doc, int num, pdf_cycle_list *cycle)
 {
-	return pdf_load_image_stream(ctx, doc, num, NULL, NULL, cycle);
+	return pdf_load_image_stream(ctx, doc, num, NULL, NULL, cycle, 0);
 }
 
 fz_compressed_buffer *
