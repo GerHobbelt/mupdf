@@ -373,7 +373,9 @@ extern const char* fz_hex_digits;
 
 /**
 	Our customised 'printf'-like string formatter.
-	Takes `%c`, `%d`, `%i`, `%s`, `%u`, `%x` as usual.
+	Takes `%c`, `%d`, `%i`, `%s`, `%u`, `%x` as usual and supports most POSIX printf()
+	features. Where it differs is with the extra formatters (e.g. `%H`), the extra
+	modifiers (e.g. `j`) and the handling of *negative* precision values.
 
 	Most usual modifiers are supported:
 	zero-padding integers (e.g.	`%02d`, `%03u`, `%04x`, etc),
@@ -386,11 +388,14 @@ extern const char* fz_hex_digits;
 	(e.g. `%.2f`) and dynamic precision (e.g. `%.*f`), where the latter
 	expects an extra `int` type argument, as usual.
 
-	Precision is applied to floating point values (`%e` and `%f`), strings (`%s`)
+	Precision is applied to floating point values (`%e` and `%f`), strings (`%s` and `%S`)
 	(e.g. `%.3s`, `%.*s`) and `%H`, `%Q`, `%q`.
 
+	Also note that `%c` and `%C` have a special	'repeat mode' which is controlled through
+	using negative precision: see further below.
+
 	*Negative* values for precision can be specified using the dynamic modifier (e.g. `%.*s`)
-	and have special meaning for `%s` and when using the `j` (JSON) modifier:
+	and have special meaning for both `%s` and `%S` and whether or not you use the `j` (JSON) modifier:
 	when the `j` (JSON) modifier is used, then a *negative precision* will be interpreted
 	as the *negate* of the `PDF_PRINT_JSON_***` flags, including `PDF_PRINT_JSON_DEPTH_LEVEL`.
 	This allows for a powerful shorthand where we use `fz_format_string()` as a powerful
@@ -400,7 +405,7 @@ extern const char* fz_hex_digits;
 
 	These modifiers may be mixed (e.g. `%-+*.*f`).
 
-	`%g` output in "as short as possible hopefully lossless	non-exponent" form, see `fz_ftoa` for specifics.
+	`%g` outputs in "as short as possible hopefully lossless non-exponent" form, see `fz_ftoa` for specifics.
 	`%g` ignores all size/sign/precision modifiers.
 
 	`%f` and `%e` output as usual.
@@ -414,8 +419,14 @@ extern const char* fz_hex_digits;
 	`%B` prints an unsigned integer number as *binary* value, e.g. `%B` of `13` will print `1101`.
 
 	`%C` outputs a utf8 encoded int, i.e. output a Unicode codepoint verbatim.
+	When precision has been specified, but is NEGATIVE, than this is a special mode:
+	the Unicode codepoint is copied verbatim `ABS(p)` times into the output; otherwise
+	it is -- of course -- copied only once.
 
 	`%c` outputs a character encoded in a single byte. (Argument type is `int`, though).
+	When precision has been specified, but is NEGATIVE, than this is a special mode:
+	the character (byte) is copied verbatim `ABS(p)` times into the output; otherwise
+	it is -- of course -- copied only once.
 
 	`%p` output as usual: a '0x'-prefixed hex representation of the `void*` pointer.
 
@@ -431,12 +442,12 @@ extern const char* fz_hex_digits;
 	will be output verbatim (i.e. no `\uXXXX` Unicode escapes, not even in JSON mode!). Also
 	the 'usual whitespace' (`\r`, `\n`, `\t`, `\f`, `\b`) will be printed verbatim.
 	When non-negative, the precision value is treated as usual for `%s`, hence it serves as
-	a length limiting ("clipping") value.
+	a length limiting ("clipping") value, as usual.
 
 	A note about the `j` modifier: when the precision is not negative, i.e. we're using `%s`
 	as usual and *not* as a fancy (hex)dumper of arbitrary string content, then the `j`
 	modifier is *ignored*: you should use `%q` and `%Q` instead to print JSON strings, as those
-	will include the required escaping of some characters. Do note that printing a `NULL`
+	will include the required escaping of some characters (quotes, most importantly). Do note that printing a `NULL`
 	string value using `%q` or `%Q` will render as an empty string instead of `null`: if you need
 	to print `null` values, you must do so explicitly.
 
@@ -459,8 +470,10 @@ extern const char* fz_hex_digits;
 	the code will discover how to best print the data buffer, using the `-p` negated value
 	as a `PDF_PRINT_JSON_***` flags value (see above), while Unicode Codepoints in the byte buffer
 	will be output verbatim (i.e. no `\uXXXX` Unicode escapes, not even in JSON mode!).
-	When non-negative, the precision value is treated as a `PDF_PRINT_JSON_***` flags value
-	WITHOUT the verbatim copying of any Unicode Codepoints in the byte buffer.
+
+	When precision is non-negative, its value is treated as a `PDF_PRINT_JSON_***` flags value
+	WITHOUT the verbatim copying of any Unicode Codepoints in the byte buffer, hence Unicode
+	characters outside the ASCII printable range will then be `\uXXXX` escaped in the output.
 
 	`%n` outputs a `const char *` string value as a PDF name (with appropriate escaping).
 
@@ -470,7 +483,7 @@ extern const char* fz_hex_digits;
 	`%Q` outputs a string value as a loosely JSON-compliant quoted string
 	with all Unicode codepoints output verbatim (UTF8 encoded).
 	Do note that printing a `NULL` string value using `%Q` will render as an empty string instead of `null`:
-	if you need	to print `null` values, you must do so explicitly.
+	if you need	to print `null` values, you must do so explicitly or use `%s` instead.
 	Illegal Unicode UTF8 sequences in the input string value will be output as a set of the INVALID CHARACTER `\uFFFD` plus a
 	single illegal byte escaped as hex `\xNN` or Unicode `\u00NN` value.
 	The `j` modifier specifies that `%Q` will never output `\xNN` hex escape codes but always use `\u00NN` Unicode escapes
@@ -479,7 +492,7 @@ extern const char* fz_hex_digits;
 	`%q` outputs a string value as a fully JSON-compliant quoted string
 	with all non-ASCII-printable Unicode codepoints output as `\uNNNN`/`\uNNNNNN` escapes.
 	Do note that printing a `NULL` string value using `%q` will render as an empty string instead of `null`:
-	if you need	to print `null` values, you must do so explicitly.
+	if you need	to print `null` values, you must do so explicitly or use `%s` instead.
 	Illegal Unicode UTF8 sequences in the input string value will be output as a set of the INVALID CHARACTER `\uFFFD` plus a
 	single illegal byte escaped as hex `\xNN` or Unicode `\u00NN` value.
 	The `j` modifier specifies that `%q` will never output `\xNN` hex escape codes but always use `\u00NN` Unicode escapes

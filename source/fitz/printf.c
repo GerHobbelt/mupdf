@@ -987,7 +987,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (j)
 					fmtputc(&out, '"');
 				{
-					fz_matrix *matrix = va_arg(args, fz_matrix*);
+					fz_matrix* matrix = va_arg(args, fz_matrix*);
 					fmtfloat(&out, matrix->a); fmtputs(&out, comma);
 					fmtfloat(&out, matrix->b); fmtputs(&out, comma);
 					fmtfloat(&out, matrix->c); fmtputs(&out, comma);
@@ -1003,7 +1003,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (j)
 					fmtputc(&out, '"');
 				{
-					fz_rect *rect = va_arg(args, fz_rect*);
+					fz_rect* rect = va_arg(args, fz_rect*);
 					fmtfloat(&out, rect->x0); fmtputs(&out, comma);
 					fmtfloat(&out, rect->y0); fmtputs(&out, comma);
 					fmtfloat(&out, rect->x1); fmtputs(&out, comma);
@@ -1017,7 +1017,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (j)
 					fmtputc(&out, '"');
 				{
-					fz_point *point = va_arg(args, fz_point*);
+					fz_point* point = va_arg(args, fz_point*);
 					fmtfloat(&out, point->x); fmtputs(&out, comma);
 					fmtfloat(&out, point->y);
 				}
@@ -1029,7 +1029,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				if (j)
 					fmtputc(&out, '"');
 				{
-					fz_quad *quad = va_arg(args, fz_quad*);
+					fz_quad* quad = va_arg(args, fz_quad*);
 					fmtfloat(&out, quad->ul.x); fmtputs(&out, comma);
 					fmtfloat(&out, quad->ul.y); fmtputs(&out, comma);
 					fmtfloat(&out, quad->ur.x); fmtputs(&out, comma);
@@ -1044,54 +1044,72 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				break;
 
 			case 'T':
-				{
-					int64_t tv = va_arg(args, int64_t);
-					char sbuf[40];
-					time_t secs = tv;
+			{
+				int64_t tv = va_arg(args, int64_t);
+				char sbuf[40];
+				time_t secs = tv;
 #ifdef _POSIX_SOURCE
-					struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
+				struct tm tmbuf, * tm = gmtime_r(&secs, &tmbuf);
 #else
-					struct tm* tm = gmtime(&secs);
+				struct tm* tm = gmtime(&secs);
 #endif
 
-					const char *str = sbuf;
-					if (tv < 0 || !tm || !strftime(sbuf, nelem(sbuf), "D:%Y-%m-%d %H:%M:%S UTC", tm))
-						str = "(invalid)";
-					if (j)
-						fmtquote(&out, str, strlen(str), '"', '"', 0, 0);
-					else
-						while ((c = *str++) != 0)
-							fmtputc(&out, c);
-				}
-				break;
+				const char* str = sbuf;
+				if (tv < 0 || !tm || !strftime(sbuf, nelem(sbuf), "D:%Y-%m-%d %H:%M:%S UTC", tm))
+					str = "(invalid)";
+				if (j)
+					fmtquote(&out, str, strlen(str), '"', '"', 0, 0);
+				else
+					while ((c = *str++) != 0)
+						fmtputc(&out, c);
+			}
+			break;
 
 			case 'H':
-				{
-					const char *ptr = (const char *)va_arg(args, void*);
-					size_t seglen = va_arg(args, size_t);
-					// when precision has been specified, but is NEGATIVE, than this is a special mode:
-					// discover how to best print the data buffer:
-					if (p < 0) {
-						fmt_print_buffer_optimally(ctx, &out, ptr, seglen, -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE);
-					}
-					else {
-						fmt_print_buffer_as_hex(&out, ptr, seglen, p, (j ? FPBO_JSON_MODE : 0));
-					}
+			{
+				const char* ptr = (const char*)va_arg(args, void*);
+				size_t seglen = va_arg(args, size_t);
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// discover how to best print the data buffer:
+				if (p < 0) {
+					fmt_print_buffer_optimally(ctx, &out, ptr, seglen, -p, (j ? FPBO_JSON_MODE : 0) | FPBO_VERBATIM_UNICODE);
 				}
-				break;
+				else {
+					fmt_print_buffer_as_hex(&out, ptr, seglen, p, (j ? FPBO_JSON_MODE : 0));
+				}
+			}
+			break;
 
 			case 'C': /* unicode char */
 				c = va_arg(args, int);
 				if (j)
 					fmtputc(&out, '"');
+
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// repeat the character ABS(p) times:
+				if (p < 0)
+					p = -p;
+				else
+					p = 1;
+
 				if (c >= 0 && c < 128)
-					fmtputc(&out, c);
-				else {
+				{
+					while (p-- > 0)
+					{
+						fmtputc(&out, c);
+					}
+				}
+				else
+				{
 					char buf[10];
 					int i, n = fz_runetochar(buf, c);
-					for (i=0; i < n; ++i)
-						fmtputc(&out, buf[i]);
+					while (p-- > 0)
+					{
+						for (i = 0; i < n; ++i)
+							fmtputc(&out, buf[i]);
+					}
 				}
+
 				if (j)
 					fmtputc(&out, '"');
 				break;
@@ -1100,7 +1118,19 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				c = va_arg(args, int);
 				if (j)
 					fmtputc(&out, '"');
-				fmtputc(&out, c);
+
+				// when precision has been specified, but is NEGATIVE, than this is a special mode:
+				// repeat the character ABS(p) times:
+				if (p < 0)
+					p = -p;
+				else
+					p = 1;
+
+				while (p-- > 0)
+				{
+					fmtputc(&out, c);
+				}
+
 				if (j)
 					fmtputc(&out, '"');
 				break;
