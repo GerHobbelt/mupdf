@@ -28,7 +28,7 @@
 #endif
 
 #include "mupdf/fitz.h"
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 #include <errno.h>
 #include <stdio.h>

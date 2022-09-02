@@ -24,7 +24,7 @@
 
 #include "pixmap-imp.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <string.h>
 
 #if FZ_ENABLE_JPX

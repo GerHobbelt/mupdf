@@ -26,7 +26,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 static const char *border_width_kw[] = {
 	"medium",

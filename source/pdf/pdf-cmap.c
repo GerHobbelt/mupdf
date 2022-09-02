@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <string.h>
 
 #undef CHECK_SPLAY

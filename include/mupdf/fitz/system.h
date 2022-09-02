@@ -63,7 +63,7 @@ typedef unsigned __int64 uint64_t;
 #include <stdint.h> /* needed for int64_t */
 #endif
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"
 

@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 
 #include <string.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 /*
 	Simple hashtable with open addressing linear probe.

@@ -25,7 +25,7 @@
 #include "color-imp.h"
 #include "pixmap-imp.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <string.h>
 
 struct fz_separations

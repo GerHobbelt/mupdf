@@ -25,7 +25,7 @@
 #include "color-imp.h"
 #include "pixmap-imp.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <limits.h>
 #include <string.h>
 #include <math.h>

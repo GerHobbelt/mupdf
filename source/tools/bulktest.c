@@ -10,7 +10,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include "mupdf/helpers/mu-threads.h"
 
 #include "jbig2.h"

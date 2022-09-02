@@ -24,7 +24,7 @@
 
 #include <string.h>
 #include <limits.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 /* Enumerate marked selection */
 

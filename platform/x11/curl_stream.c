@@ -30,7 +30,7 @@
 #include "mupdf/fitz.h"
 #include "curl_stream.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <string.h>
 #include <ctype.h>
 

@@ -27,7 +27,7 @@
 #include "glyphbox.h"
 #include "extract.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <errno.h>
 #include <string.h>
 

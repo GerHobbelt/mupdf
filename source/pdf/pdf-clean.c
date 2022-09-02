@@ -24,7 +24,7 @@
 #include "pdf-annot-imp.h"
 
 #include <string.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 static void
 pdf_filter_xobject(fz_context *ctx, pdf_document *doc, pdf_obj *xobj, pdf_obj *page_res, pdf_filter_options *filter, pdf_cycle_list *cycle_up);

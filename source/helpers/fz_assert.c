@@ -1,6 +1,6 @@
 
 #include "mupdf/fitz.h"
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 #if defined(_WIN32)
 #include <Windows.h>

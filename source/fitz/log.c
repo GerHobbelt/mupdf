@@ -22,7 +22,7 @@
 
 #include "mupdf/fitz.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>

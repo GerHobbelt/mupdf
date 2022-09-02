@@ -27,7 +27,7 @@
 
 #include <string.h>
 #include <math.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 /* PDF 1.4 blend modes. These are slow. */
 

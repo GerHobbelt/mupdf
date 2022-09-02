@@ -35,7 +35,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/mutool.h"
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 #if FZ_ENABLE_PDF
 #include "mupdf/pdf.h" /* for pdf output */

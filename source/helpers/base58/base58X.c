@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 
 // Derived from bitcoin code.

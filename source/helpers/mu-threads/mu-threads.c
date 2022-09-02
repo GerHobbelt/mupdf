@@ -22,7 +22,7 @@
 
 #include "mupdf/fitz/config.h"
 #include "mupdf/helpers/mu-threads.h"
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 #ifdef DISABLE_MUTHREADS
 

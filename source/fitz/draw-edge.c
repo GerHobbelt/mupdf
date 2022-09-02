@@ -23,7 +23,7 @@
 #include "mupdf/fitz.h"
 #include "draw-imp.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <limits.h>
 #include <math.h>
 #include <stdlib.h>

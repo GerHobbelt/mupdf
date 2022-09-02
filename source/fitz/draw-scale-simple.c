@@ -39,7 +39,7 @@ intermediate results rather than ints.
 
 #include <math.h>
 #include <string.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <limits.h>
 
 /* Do we special case handling of single pixel high/wide images? The

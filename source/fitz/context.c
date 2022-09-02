@@ -24,7 +24,7 @@
 
 #include "context-imp.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 #include <string.h>
 #include <stdio.h>
 #include <time.h>

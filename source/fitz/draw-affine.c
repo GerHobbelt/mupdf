@@ -25,7 +25,7 @@
 
 #include <math.h>
 #include <float.h>
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 /* Number of fraction bits for fixed point math */
 #define PREC 14

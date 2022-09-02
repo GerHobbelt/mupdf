@@ -37,7 +37,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
 #include "bidi-imp.h" /* standard bidi code interface */
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 /*
  * Macros...

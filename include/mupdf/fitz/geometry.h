@@ -25,7 +25,7 @@
 
 #include "mupdf/fitz/system.h"
 
-#include "mupdf/assert.h"
+#include "mupdf/assertions.h"
 
 /**
 	Multiply scaled two integers in the 0..255 range
