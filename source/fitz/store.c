@@ -501,6 +501,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			 * to the existing one, and drop our current one. */
 			fz_warn(ctx, "found duplicate %s in the store", type->name);
 			touch(store, existing);
+			ASSERT(existing->val->refs > 0);
 			if (existing->val->refs > 0)
 			{
 				(void)Memento_takeRef(existing->val);

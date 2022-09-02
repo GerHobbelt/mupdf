@@ -843,7 +843,10 @@ fz_find_icc_link(fz_context *ctx,
 		memcpy(new_key, &key, sizeof (fz_link_key));
 		fz_try(ctx)
 		{
+			static int cnt = 0;
+			cnt++;
 			link = fz_new_icc_link(ctx, src, src_extras, dst, dst_extras, prf, rend, format, copy_spots, premult);
+			ASSERT((void*)link != (void*)0xddddddddddddddddULL);
 			old_link = fz_store_item(ctx, new_key, link, 1000, &fz_link_store_type);
 			ASSERT((void*)link != (void*)0xddddddddddddddddULL);
 			ASSERT((void*)old_link != (void*)0xddddddddddddddddULL);
