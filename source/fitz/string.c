@@ -281,7 +281,7 @@ fz_dirname(char *dir, const char *path, size_t n)
 		// UNIX root dir
 		return;
 	}
-	ASSERT(!"Should never get here");
+	ASSERT0(!"Should never get here");
 }
 
 #ifdef _WIN32

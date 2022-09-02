@@ -583,8 +583,8 @@ static int get_bool_option(fz_context *ctx, const char *options, const char *nam
 static void *s_realloc_fn(void *state, void *prev, size_t size)
 {
 	fz_docx_writer *writer = state;
-	assert(writer);
-	assert(writer->ctx);
+	ASSERT0(writer);
+	ASSERT0(writer->ctx);
 	return fz_realloc_no_throw(writer->ctx, prev, size);
 }
 

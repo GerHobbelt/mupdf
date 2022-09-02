@@ -178,7 +178,7 @@ move_to_root(cmap_splay *tree, unsigned int x)
 			else
 			{
 				/* Case 3 - reflected */
-				assert(tree[y].right == x);
+				ASSERT0(tree[y].right == x);
 				tree[y].right = tree[x].left;
 				if (tree[y].right != EMPTY)
 					tree[tree[y].right].parent = y;
@@ -194,7 +194,7 @@ move_to_root(cmap_splay *tree, unsigned int x)
 				tree[zp].left = x;
 			else
 			{
-				assert(tree[zp].right == z);
+				ASSERT0(tree[zp].right == z);
 				tree[zp].right = x;
 			}
 		}
@@ -217,7 +217,7 @@ move_to_root(cmap_splay *tree, unsigned int x)
 			else
 			{
 				/* Case 2 - reflected */
-				assert(tree[z].right == y);
+				ASSERT0(tree[z].right == y);
 				tree[z].parent = x;
 				tree[z].right = tree[x].left;
 				if (tree[z].right != EMPTY)
@@ -227,7 +227,7 @@ move_to_root(cmap_splay *tree, unsigned int x)
 		}
 		else
 		{
-			assert(tree[y].right == x);
+			ASSERT0(tree[y].right == x);
 			tree[y].right = tree[x].left;
 			if (tree[y].right != EMPTY)
 				tree[tree[y].right].parent = y;
@@ -244,7 +244,7 @@ move_to_root(cmap_splay *tree, unsigned int x)
 			else
 			{
 				/* Case 1 - reflected */
-				assert(tree[z].right == y);
+				ASSERT0(tree[z].right == y);
 				tree[z].parent = y;
 				tree[z].right = tree[y].left;
 				if (tree[z].right != EMPTY)
@@ -261,7 +261,7 @@ static unsigned int delete_node(pdf_cmap *cmap, unsigned int current)
 	unsigned int parent;
 	unsigned int replacement;
 
-	assert(current != EMPTY);
+	ASSERT0(current != EMPTY);
 
 	parent = tree[current].parent;
 	if (tree[current].right == EMPTY)
@@ -276,7 +276,7 @@ static unsigned int delete_node(pdf_cmap *cmap, unsigned int current)
 		}
 		else
 		{
-			assert(tree[parent].right == current);
+			ASSERT0(tree[parent].right == current);
 			replacement = tree[parent].right = tree[current].left;
 		}
 		if (replacement != EMPTY)
@@ -296,7 +296,7 @@ static unsigned int delete_node(pdf_cmap *cmap, unsigned int current)
 		}
 		else
 		{
-			assert(tree[parent].right == current);
+			ASSERT0(tree[parent].right == current);
 			replacement = tree[parent].right = tree[current].right;
 		}
 		if (replacement != EMPTY)
@@ -337,7 +337,7 @@ static unsigned int delete_node(pdf_cmap *cmap, unsigned int current)
 			tree[parent].left = replacement;
 		else
 		{
-			assert(tree[parent].right == current);
+			ASSERT0(tree[parent].right == current);
 			tree[parent].right = replacement;
 		}
 		tree[replacement].left = tree[current].left;
@@ -362,17 +362,17 @@ static unsigned int delete_node(pdf_cmap *cmap, unsigned int current)
 			tree[parent].left = current;
 		else
 		{
-			assert(tree[parent].right == (unsigned int) cmap->tlen);
+			ASSERT0(tree[parent].right == (unsigned int) cmap->tlen);
 			tree[parent].right = current;
 		}
 		if (tree[current].left != EMPTY)
 		{
-			assert(tree[tree[current].left].parent == (unsigned int) cmap->tlen);
+			ASSERT0(tree[tree[current].left].parent == (unsigned int) cmap->tlen);
 			tree[tree[current].left].parent = current;
 		}
 		if (tree[current].right != EMPTY)
 		{
-			assert(tree[tree[current].right].parent == (unsigned int) cmap->tlen);
+			ASSERT0(tree[tree[current].right].parent == (unsigned int) cmap->tlen);
 			tree[tree[current].right].parent = current;
 		}
 	}
@@ -406,9 +406,9 @@ dump_splay(cmap_splay *tree, unsigned int node, int depth, const char *pre)
 	else
 		fz_info(ctx, ">%d", tree[node].right);
 	fz_info(ctx, "(%x,%x,%x,%d)\n", tree[node].low, tree[node].high, tree[node].out, tree[node].many);
-	assert(tree[node].parent == EMPTY || depth);
-	assert(tree[node].left == EMPTY || tree[tree[node].left].parent == node);
-	assert(tree[node].right == EMPTY || tree[tree[node].right].parent == node);
+	ASSERT0(tree[node].parent == EMPTY || depth);
+	ASSERT0(tree[node].left == EMPTY || tree[tree[node].left].parent == node);
+	ASSERT0(tree[node].right == EMPTY || tree[tree[node].right].parent == node);
 	dump_splay(tree, tree[node].left, depth+1, "L");
 	dump_splay(tree, tree[node].right, depth+1, "R");
 }
@@ -455,7 +455,7 @@ static void walk_splay(cmap_splay *tree, unsigned int node, void (*fn)(cmap_spla
 					from = LEFT;
 				else
 				{
-					assert(tree[parent].right == node);
+					ASSERT0(tree[parent].right == node);
 					from = RIGHT;
 				}
 				node = parent;
@@ -483,13 +483,13 @@ do_check(cmap_splay *node, void *arg)
 {
 	cmap_splay *tree = arg;
 	unsigned int num = node - tree;
-	assert(!node->many || node->low == node->high);
-	assert(node->low <= node->high);
-	assert((node->left == EMPTY) || (tree[node->left].parent == num &&
+	ASSERT0(!node->many || node->low == node->high);
+	ASSERT0(node->low <= node->high);
+	ASSERT0((node->left == EMPTY) || (tree[node->left].parent == num &&
 		tree[node->left].high < node->low));
-	assert(node->right == EMPTY || (tree[node->right].parent == num &&
+	ASSERT0(node->right == EMPTY || (tree[node->right].parent == num &&
 		node->high < tree[node->right].low));
-	assert(!tree_has_overlap(tree, num, node->low, node->high));
+	ASSERT0(!tree_has_overlap(tree, num, node->low, node->high));
 }
 
 static void
@@ -497,7 +497,7 @@ check_splay(cmap_splay *tree, unsigned int node, int depth)
 {
 	if (node == EMPTY)
 		return;
-	assert(tree[node].parent == EMPTY);
+	ASSERT0(tree[node].parent == EMPTY);
 	walk_splay(tree, node, do_check, tree);
 }
 #endif
@@ -587,7 +587,7 @@ add_range(fz_context *ctx, pdf_cmap *cmap, unsigned int low, unsigned int high, 
 				{
 					/* case 4, reduces to case 5 */
 					tree[current].high = low - 1;
-					assert(tree[current].low <= tree[current].high);
+					ASSERT0(tree[current].low <= tree[current].high);
 				}
 				else if (tree[current].low < low && high < tree[current].high)
 				{
@@ -675,7 +675,7 @@ add_range(fz_context *ctx, pdf_cmap *cmap, unsigned int low, unsigned int high, 
 		tree[current].left = cmap->tlen-1;
 	else
 	{
-		assert(tree[current].high < low);
+		ASSERT0(tree[current].high < low);
 		tree[current].right = cmap->tlen-1;
 	}
 	move_to_root(tree, cmap->tlen-1);
@@ -767,7 +767,7 @@ copy_node_types(cmap_splay *node, void *arg)
 
 	if (node->many)
 	{
-		assert(node->low == node->high);
+		ASSERT0(node->low == node->high);
 		cmap->mranges[cmap->mlen].low = node->low;
 		cmap->mranges[cmap->mlen].out = node->out;
 		cmap->mlen++;

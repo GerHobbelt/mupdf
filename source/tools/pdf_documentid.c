@@ -39,8 +39,8 @@ static inline void memclr(void* ptr, size_t size)
 
 inline static int64_t fold_hash_to_documentid62_aligned64(const uint64_t* hash, int hash_length /* BLAKE3_OUT_LEN */)
 {
-	assert(hash_length == BLAKE3_OUT_LEN);
-	assert(BLAKE3_OUT_LEN == 32);
+	ASSERT0(hash_length == BLAKE3_OUT_LEN);
+	ASSERT0(BLAKE3_OUT_LEN == 32);
 
 	// phase 1: fold all qwords in the source hash as-is, using XOR: that's 32/8 == 4 qwords' worth
 	uint64_t folded = hash[0]
@@ -90,7 +90,7 @@ inline static int64_t fold_hash_to_documentid62_aligned64(const uint64_t* hash, 
 
 inline static int64_t fold_hash_to_documentid62_unaligned(const uint8_t* hash, int hash_length /* BLAKE3_OUT_LEN */)
 {
-	assert(hash_length == BLAKE3_OUT_LEN);
+	ASSERT0(hash_length == BLAKE3_OUT_LEN);
 	uint64_t hbuf[BLAKE3_OUT_LEN / 8];
 
 	memcpy(hbuf, hash, BLAKE3_OUT_LEN);

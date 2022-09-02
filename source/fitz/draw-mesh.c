@@ -142,7 +142,7 @@ fz_paint_triangle(fz_pixmap *pix, float *v[3], int n, fz_irect bbox)
 	/* Magic! Ensure that mid/top/bot are all different */
 	mid = 3^top^bot;
 
-	assert(top != bot && top != mid && mid != bot);
+	ASSERT0(top != bot && top != mid && mid != bot);
 
 	minx = fz_maxi(bbox.x0, pix->x);
 	maxx = fz_mini(bbox.x1, pix->x + pix->w);

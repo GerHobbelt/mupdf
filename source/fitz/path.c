@@ -174,7 +174,7 @@ int fz_packed_path_size(const fz_path *path)
 		return sizeof(fz_packed_path) + sizeof(float) * pack->coord_len + sizeof(uint8_t) * pack->cmd_len;
 	}
 	default:
-		assert(!"This never happens");
+		ASSERT0(!"This never happens");
 		return 0;
 	}
 }

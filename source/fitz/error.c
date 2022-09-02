@@ -57,7 +57,7 @@ int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char
 	required_size += l2;
 	required_size += l3;
 
-	ASSERT(required_size <= dstsiz);
+	ASSERT0(required_size <= dstsiz);
 	if (required_size > dstsiz)
 		return 0;
 

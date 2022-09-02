@@ -697,7 +697,7 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 		v /= 58;
 		dst[1] = srcBase58[v % 58];
 		v /= 58;
-		assert(v < 58);
+		ASSERT0(v < 58);
 		dst[0] = srcBase58[v];
 		dstsize -= 7;
 		dst += 7;
@@ -748,10 +748,10 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 				// base58 digits, won't we?
 				if (bitpos < 0)
 				{
-					assert(prevbitsbuf == 0);
+					ASSERT0(prevbitsbuf == 0);
 					last_legs_value = v;
 					last_legs_bitcount = bitpos + 41;
-					assert(last_legs_bitcount >= 0);
+					ASSERT0(last_legs_bitcount >= 0);
 					break;
 				}
 			}
@@ -762,7 +762,7 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 				// base58 digits, won't we?
 				last_legs_value = prevbitsbuf;
 				last_legs_bitcount = bitpos;
-				assert(last_legs_bitcount >= 0);
+				ASSERT0(last_legs_bitcount >= 0);
 				break;
 			}
 		}
@@ -797,7 +797,7 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 		v /= 58;
 		dst[1] = srcBase58[v % 58];
 		v /= 58;
-		assert(v < 58);
+		ASSERT0(v < 58);
 		dst[0] = srcBase58[v];
 		dstsize -= 7;
 		dst += 7;
@@ -817,7 +817,7 @@ const char* EncodeBase58X(char* dst, size_t dstsize, uint8_t* src, size_t srcsiz
 
 		while (number_mask)
 		{
-			assert(di < 7);
+			ASSERT0(di < 7);
 			dst58buf[di++] = srcBase58[last_legs_value % 58];
 			last_legs_value /= 58;
 			number_mask /= 58;
@@ -960,7 +960,7 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 		// They're little endian, arbitrary memory alignment
 		uint64_t word = 0;
 		// and make sure we account for those bits in our mask value too:
-		assert(bitpos < 64);
+		ASSERT0(bitpos < 64);
 
 		// to prevent overflow in `number_mask` and the tail-end fetch loop below, we dump as many
 		// 8 bit 'digits' of binary value as we can: we're working in a little endian setting
@@ -989,7 +989,7 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 				return NULL;
 			word *= 58;
 			word += d;
-			assert(number_mask < (~((uint64_t)0) - 1) / 58);
+			ASSERT0(number_mask < (~((uint64_t)0) - 1) / 58);
 			number_mask *= 58;
 			number_mask += 57;   // this is kinda like saying `~0` in base 58!   :-)
 		}
@@ -1018,7 +1018,7 @@ const uint8_t* DecodeBase58X(uint8_t* dst, size_t dstsize, size_t* targetsize_re
 			prevbitsbuf >>= 8;
 			number_mask >>= 8;
 		}
-		assert(prevbitsbuf == 0 || src[-1] == 'z');  // this assert is correct, but it also fires in the test rig, when we feed this decoder all-Z inputs to decode: those things would carry surplus bits. Hence the weird src[-1] additional check in there.
+		ASSERT0(prevbitsbuf == 0 || src[-1] == 'z');  // this assert is correct, but it also fires in the test rig, when we feed this decoder all-Z inputs to decode: those things would carry surplus bits. Hence the weird src[-1] additional check in there.
 	}
 
 	*targetsize_ref = dst - rv;

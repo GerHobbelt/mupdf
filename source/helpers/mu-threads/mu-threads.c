@@ -149,7 +149,7 @@ int mu_create_thread(mu_thread *th, mu_thread_fn *fn, void *arg)
 
 void mu_destroy_thread(mu_thread *th)
 {
-	ASSERT(th != NULL);
+	ASSERT0(th != NULL);
 	if (th->handle == NULL)
 		return;
 	/* We can't sensibly handle this failing */
@@ -176,7 +176,7 @@ void mu_destroy_mutex(mu_mutex *mutex)
 
 void mu_zero_mutex(mu_mutex *mutex)
 {
-	ASSERT(mutex != NULL);
+	ASSERT0(mutex != NULL);
 	mutex->mutex = empty;
 }
 

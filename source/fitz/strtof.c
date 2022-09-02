@@ -71,7 +71,7 @@ strtof_multiply(strtof_fp_t x, strtof_fp_t y)
 	uint64_t tmp;
 	strtof_fp_t res;
 
-	assert(x.f & y.f & 0x80000000);
+	ASSERT0(x.f & y.f & 0x80000000);
 
 	res.e = x.e + y.e + 32;
 	tmp = (uint64_t) x.f * y.f;
@@ -140,7 +140,7 @@ static strtof_fp_t
 strtof_cached_power(int i)
 {
 	strtof_fp_t result;
-	assert (i >= 0 && i <= 54);
+	ASSERT0(i >= 0 && i <= 54);
 	result.f = strtof_powers_ten[i];
 	result.e = strtof_powers_ten_e[i];
 	return result;
@@ -211,7 +211,7 @@ diy_to_float(strtof_fp_t x, int negative)
 		uint32_t n;
 	} tmp;
 
-	assert(x.f & 0x80000000);
+	ASSERT0(x.f & 0x80000000);
 
 	/* We have 2^32 - 2^7 = 0xffffff80.  */
 	if (x.e > 96 || (x.e == 96 && x.f >= 0xffffff80))

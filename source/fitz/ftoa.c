@@ -69,7 +69,7 @@ static diy_fp_t
 minus(diy_fp_t x, diy_fp_t y)
 {
 	diy_fp_t result = {x.f - y.f, x.e};
-	assert(x.e == y.e && x.f >= y.f);
+	ASSERT0(x.e == y.e && x.f >= y.f);
 	return result;
 }
 
@@ -227,7 +227,7 @@ cached_power(int i)
 {
 	diy_fp_t result;
 
-	assert (i >= -37 && i <= 46);
+	ASSERT0(i >= -37 && i <= 46);
 	result.f = powers_ten[i + 37];
 	result.e = powers_ten_e[i + 37];
 	return result;

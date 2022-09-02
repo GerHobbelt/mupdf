@@ -272,7 +272,7 @@ init_weights(fz_weights *weights, int j)
 	int index;
 
 	j -= weights->patch_l;
-	assert(weights->count == j-1);
+	ASSERT0(weights->count == j-1);
 	weights->count++;
 	weights->new_line = 1;
 	if (j == 0)
@@ -352,10 +352,10 @@ add_weight(fz_weights *weights, int j, int i, fz_scale_filter *filter,
 		{
 			weights->index[index+len-1] = 0;
 		}
-		assert(len-1 == i-min);
+		ASSERT0(len-1 == i-min);
 		weights->index[index+i-min] = weight;
 		weights->index[index-1] = len;
-		assert(len <= weights->max_len);
+		ASSERT0(len <= weights->max_len);
 	}
 	else
 	{
@@ -378,8 +378,8 @@ reorder_weights(fz_weights *weights, int j, int src_w)
 	memcpy(&weights->index[tmp], &weights->index[idx], sizeof(int)*len);
 
 	/* Pad out if required */
-	assert(len <= max);
-	assert(min+len <= src_w);
+	ASSERT0(len <= max);
+	ASSERT0(min+len <= src_w);
 	off = 0;
 	if (len < max)
 	{
@@ -1034,7 +1034,7 @@ scale_row_to_temp1(unsigned char * FZ_RESTRICT dst, const unsigned char * FZ_RES
 	int len, i;
 	const unsigned char *min;
 
-	assert(weights->n == 1);
+	ASSERT0(weights->n == 1);
 	if (weights->flip)
 	{
 		dst += weights->count;
@@ -1073,7 +1073,7 @@ scale_row_to_temp2(unsigned char * FZ_RESTRICT dst, const unsigned char * FZ_RES
 	int len, i;
 	const unsigned char *min;
 
-	assert(weights->n == 2);
+	ASSERT0(weights->n == 2);
 	if (weights->flip)
 	{
 		dst += 2*weights->count;
@@ -1118,7 +1118,7 @@ scale_row_to_temp3(unsigned char * FZ_RESTRICT dst, const unsigned char * FZ_RES
 	int len, i;
 	const unsigned char *min;
 
-	assert(weights->n == 3);
+	ASSERT0(weights->n == 3);
 	if (weights->flip)
 	{
 		dst += 3*weights->count;
@@ -1171,7 +1171,7 @@ scale_row_to_temp4(unsigned char * FZ_RESTRICT dst, const unsigned char * FZ_RES
 	int len, i;
 	const unsigned char *min;
 
-	assert(weights->n == 4);
+	ASSERT0(weights->n == 4);
 	if (weights->flip)
 	{
 		dst += 4*weights->count;

@@ -132,7 +132,7 @@ static void make_ht_line(unsigned char *buf, fz_halftone *ht, int x, int y, int 
 		if (py < 0)
 			py += th;
 
-		assert(tile->n == 1);
+		ASSERT0(tile->n == 1);
 
 		/* Left hand section; from x to tile width */
 		tbase = tile->samples + (unsigned int)(py * tw);

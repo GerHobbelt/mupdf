@@ -463,7 +463,7 @@ size_t fz_bidi_resolve_explicit(fz_bidi_level level, fz_bidi_chartype dir, fz_bi
 	int nLastValid = n_nest;
 
 	// check input values
-	assert(n_nest >= 0 && level >= 0 && level <= BIDI_LEVEL_MAX);
+	ASSERT0(n_nest >= 0 && level >= 0 && level <= BIDI_LEVEL_MAX);
 
 	// process the text
 	for (ich = 0; ich < cch; ich++)
@@ -934,7 +934,7 @@ void fz_bidi_resolve_neutrals(fz_bidi_level baselevel, fz_bidi_chartype *pcls, c
 			continue;
 		}
 
-		assert(pcls[ich] < 5); // "Only N, L, R, AN, EN are allowed"
+		ASSERT0(pcls[ich] < 5); // "Only N, L, R, AN, EN are allowed"
 		cls = pcls[ich];
 
 		action = action_neutrals[state][cls];
@@ -1008,8 +1008,8 @@ void fz_bidi_resolve_implicit(const fz_bidi_chartype *pcls, fz_bidi_level *pleve
 		{
 			continue;
 		}
-		assert(pcls[ich] > 0); // "No Neutrals allowed to survive here."
-		assert(pcls[ich] < 5); // "Out of range."
+		ASSERT0(pcls[ich] > 0); // "No Neutrals allowed to survive here."
+		ASSERT0(pcls[ich] < 5); // "Out of range."
 		plevel[ich] += add_level[odd(plevel[ich])][pcls[ich] - 1];
 	}
 }

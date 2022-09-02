@@ -31,32 +31,36 @@ extern "C" {
 
 typedef struct fz_context fz_context;
 
+#ifndef CTX
+#define CTX   ctx
+#endif
+
 // --------------------------------------------------------------------------------------------------------------------------------------
 
 #define assert(expression) (void)(							                        \
             (!!(expression)) ||						                                \
-            fz_report_failed_assertion(ctx, #expression, __FILE__, __LINE__)		\
+            fz_report_failed_assertion(CTX, #expression, __FILE__, __LINE__)		\
         )
 
 #define ASSERT(expression) assert(expression)
 
 #define ASSERT_AND_CONTINUE(expression) (void)(													\
             (!!(expression)) ||																	\
-            fz_report_failed_assertion_and_continue(ctx, #expression, __FILE__, __LINE__)		\
+            fz_report_failed_assertion_and_continue(CTX, #expression, __FILE__, __LINE__)		\
         )
 
 #define VERIFY(expression)              ASSERT(expression)
 #define VERIFY_AND_CONTINUE(expression) ASSERT_AND_CONTINUE(expression)
 
 #define VERIFY_AND_CONTINUE_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
+            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
 #define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
+            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
 
 #define VERIFY_EQ(expr1, expr2) 															\
-            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
+            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
 #define ASSERT_EQ(expr1, expr2) 															\
-            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
+            fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -65,7 +69,7 @@ typedef struct fz_context fz_context;
             fz_report_failed_assertion(NULL, #expression, __FILE__, __LINE__)		\
         )
 
-#define ASSERT0(expression) assert(expression)
+#define ASSERT0(expression) assert0(expression)
 
 #define ASSERT_AND_CONTINUE0(expression) (void)(													\
             (!!(expression)) ||																	\

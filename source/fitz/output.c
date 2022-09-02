@@ -58,7 +58,7 @@ fzoutput_unlock(fz_output* out)
 {
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
-		ASSERT(out->flags & FZOF_IS_INSIDE_LOCK);
+		ASSERT0(out->flags & FZOF_IS_INSIDE_LOCK);
 		out->flags &= ~FZOF_IS_INSIDE_LOCK;
 #ifndef DISABLE_MUTHREADS
 		mu_unlock_mutex(&out->buf_mutex);
@@ -83,7 +83,7 @@ printf_unlock(fz_output* out)
 {
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
-		ASSERT(out->flags & FZOF_IS_INSIDE_PRINTF_LOCK);
+		ASSERT0(out->flags & FZOF_IS_INSIDE_PRINTF_LOCK);
 		out->flags &= ~FZOF_IS_INSIDE_PRINTF_LOCK;
 #ifndef DISABLE_MUTHREADS
 		mu_unlock_mutex(&out->printf_mutex);

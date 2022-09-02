@@ -467,7 +467,7 @@ cursor_output(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 				if (debugging_scan_converter)
 					fprintf(stderr, "row: %x: %x->%x %c\n", iy, cr->left, cr->right, (cr->d^rev) == DIRN_UP ? '^' : (cr->d^rev) == DIRN_DOWN ? 'v' : '-');
 #endif
-				assert(count <= (eb->index[iy+1] - eb->index[iy] - 1)/2);
+				ASSERT0(count <= (eb->index[iy+1] - eb->index[iy] - 1)/2);
 				row[2 * count - 1] = (cr->left&~1) | (cr->d ^ rev);
 				row[2 * count] = cr->right;
 			}
@@ -485,7 +485,7 @@ cursor_output_inrange(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 
 	rev &= 1; /* Edge label 0 is forwards, 1 and 2 are reverse */
 
-	assert(iy >= 0 && iy < eb->super.clip.y1 - eb->super.clip.y0);
+	ASSERT0(iy >= 0 && iy < eb->super.clip.y1 - eb->super.clip.y0);
 	if (cr->can_save) {
 		/* Save it for later in case we join up */
 		cr->save_left = cr->left;
@@ -495,7 +495,7 @@ cursor_output_inrange(fz_edgebuffer * FZ_RESTRICT eb, int rev, int iy)
 		cr->saved = 1;
 	} else {
 		/* Enter it into the table */
-		assert(cr->d != DIRN_UNSET);
+		ASSERT0(cr->d != DIRN_UNSET);
 
 		row = &eb->table[eb->index[iy]];
 		*row = count = (*row)+1; /* Increment the count */
@@ -538,7 +538,7 @@ cursor_never_step_vertical(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fi
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 
-	assert(fixed2int(cr->y+dy) == fixed2int(cr->y));
+	ASSERT0(fixed2int(cr->y+dy) == fixed2int(cr->y));
 
 	cr->y += dy;
 }
@@ -551,7 +551,7 @@ cursor_never_step_left(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed 
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 
-	assert(fixed2int(cr->y+dy) == fixed2int(cr->y));
+	ASSERT0(fixed2int(cr->y+dy) == fixed2int(cr->y));
 
 	if (x < cr->left)
 		cr->left = x;
@@ -566,7 +566,7 @@ cursor_never_step_right(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed dy, fixed
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 
-	assert(fixed2int(cr->y+dy) == fixed2int(cr->y));
+	ASSERT0(fixed2int(cr->y+dy) == fixed2int(cr->y));
 
 	if (x > cr->right)
 		cr->right = x;
@@ -635,7 +635,7 @@ static inline void cursor_init(fz_edgebuffer * FZ_RESTRICT eb, int rev, fixed y,
 {
 	cursor_t * FZ_RESTRICT cr = &eb->cursor[rev];
 
-	assert(y >= int2fixed(eb->super.clip.y0) && y <= int2fixed(eb->super.clip.y1));
+	ASSERT0(y >= int2fixed(eb->super.clip.y0) && y <= int2fixed(eb->super.clip.y1));
 
 	cr->y = y;
 	cr->left = x;
@@ -715,7 +715,7 @@ static inline int dirns_merge(int d0, int d1)
 {
 	if (d0 == DIRN_UNSET)
 		return d1;
-	assert(dirns_match(d0, d1));
+	ASSERT0(dirns_match(d0, d1));
 	return d0;
 }
 
@@ -730,7 +730,7 @@ cursor_flush(fz_edgebuffer * FZ_RESTRICT eb)
 
 	if (cr0->unset)
 	{
-		assert(cr1->unset && cr2->unset);
+		ASSERT0(cr1->unset && cr2->unset);
 		return;
 	}
 
@@ -738,7 +738,7 @@ cursor_flush(fz_edgebuffer * FZ_RESTRICT eb)
 	iy1 = fixed2int(cr1->y) - base;
 	if (!cr2->unset)
 	{
-		assert(!cr1->unset);
+		ASSERT0(!cr1->unset);
 		iy2 = fixed2int(cr2->y) - base;
 		/* Try to merge the end of cursor 0 with the end of cursor 1 */
 		if (iy0 == iy1 && dirns_match(cr0->d, dirn_flip(cr1->d)))

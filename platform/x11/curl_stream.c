@@ -126,14 +126,14 @@ static void
 lock(curlstate *state)
 {
 	WaitForSingleObject(state->mutex, INFINITE);
-	assert(locked == 0);
+	assert0(locked == 0);
 	locked = 1;
 }
 
 static void
 unlock(curlstate *state)
 {
-	assert(locked == 1);
+	assert0(locked == 1);
 	locked = 0;
 	ReleaseMutex(state->mutex);
 }
@@ -317,7 +317,7 @@ static void fetch_chunk(struct curlstate *state)
 	}
 
 	/* Find the next block to fetch */
-	assert((state->next_fill_start & (BLOCK_SHIFT-1)) == 0);
+	assert0((state->next_fill_start & (BLOCK_SHIFT-1)) == 0);
 	block = state->next_fill_start>>BLOCK_SHIFT;
 	if (state->content_length > 0)
 	{

@@ -1240,9 +1240,9 @@ template_span_with_mask_3_general(byte * FZ_RESTRICT dp, const byte * FZ_RESTRIC
 			d0 = (((d0<<8) + (s0-d0)*ma)>>8) & mask;
 			d1 = ((d1<<8) + (s1-d1)*ma) & ~mask;
 			d0 |= d1;
-			assert((d0>>24) >= (d0 & 0xff));
-			assert((d0>>24) >= ((d0>>8) & 0xff));
-			assert((d0>>24) >= ((d0>>16) & 0xff));
+			ASSERT0((d0>>24) >= (d0 & 0xff));
+			ASSERT0((d0>>24) >= ((d0>>8) & 0xff));
+			ASSERT0((d0>>24) >= ((d0>>16) & 0xff));
 			*(uint32_t *)dp = d0;
 			sp += 4;
 			dp += 4;
@@ -1439,7 +1439,7 @@ fz_get_span_mask_painter(int a, int n)
 	switch(n)
 	{
 		case 0:
-			/* assert(a); */
+			/* ASSERT0(a); */
 			return paint_span_with_mask_0_a;
 		case 1:
 			if (a)
@@ -2299,7 +2299,7 @@ fz_paint_pixmap_with_bbox(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ_REST
 	int x, y, w, h, n, da, sa;
 	fz_span_painter_t *fn;
 
-	assert(dst->n - dst->alpha == src->n - src->alpha);
+	ASSERT0(dst->n - dst->alpha == src->n - src->alpha);
 
 	if (alpha == 0)
 		return;
@@ -2350,7 +2350,7 @@ fz_paint_pixmap(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ_RESTRICT src, 
 		// fz_error(ctx, "fz_paint_pixmap - FIXME\n");
 		return;
 	}
-	assert(dst->n - dst->alpha == src->n - src->alpha);
+	ASSERT0(dst->n - dst->alpha == src->n - src->alpha);
 
 	bbox = fz_intersect_irect(fz_pixmap_bbox_no_ctx(src), fz_pixmap_bbox_no_ctx(dst));
 	x = bbox.x0;
@@ -2422,7 +2422,7 @@ fz_paint_pixmap_alpha(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ_RESTRICT
 	if (alpha == 0)
 		return;
 
-	assert(dst->n == 1 && dst->alpha == 1 && src->n >= 1 && src->alpha == 1);
+	ASSERT0(dst->n == 1 && dst->alpha == 1 && src->n >= 1 && src->alpha == 1);
 
 	bbox = fz_intersect_irect(fz_pixmap_bbox_no_ctx(src), fz_pixmap_bbox_no_ctx(dst));
 	x = bbox.x0;
@@ -2470,7 +2470,7 @@ fz_paint_pixmap_with_overprint(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ
 		// fz_error(ctx, "fz_paint_pixmap_with_overprint - FIXME\n");
 		return;
 	}
-	assert(dst->n - dst->alpha == src->n - src->alpha);
+	ASSERT0(dst->n - dst->alpha == src->n - src->alpha);
 
 	bbox = fz_intersect_irect(fz_pixmap_bbox_no_ctx(src), fz_pixmap_bbox_no_ctx(dst));
 	x = bbox.x0;
@@ -2508,8 +2508,8 @@ fz_paint_pixmap_with_mask(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ_REST
 	int x, y, w, h, n, sa, da;
 	fz_span_mask_painter_t *fn;
 
-	assert(dst->n == src->n);
-	assert(msk->n == 1);
+	ASSERT0(dst->n == src->n);
+	ASSERT0(msk->n == 1);
 
 	bbox = fz_pixmap_bbox_no_ctx(dst);
 	bbox = fz_intersect_irect(bbox, fz_pixmap_bbox_no_ctx(src));
@@ -2530,7 +2530,7 @@ fz_paint_pixmap_with_mask(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ_REST
 	da = dst->alpha;
 
 	/* sa == da, or something has gone very wrong! */
-	assert(sa == da);
+	ASSERT0(sa == da);
 
 	n -= sa;
 	fn = fz_get_span_mask_painter(da, n);
@@ -3011,7 +3011,7 @@ fz_paint_glyph(const unsigned char * FZ_RESTRICT colorbv, fz_pixmap * FZ_RESTRIC
 	int n = dst->n - dst->alpha;
 	if (dst->colorspace)
 	{
-		assert(n > 0);
+		ASSERT0(n > 0);
 		if (colorbv[n] == 255)
 			fz_paint_glyph_solid(colorbv, n, dst->stride, dp, dst->alpha, glyph, w, h, skip_x, skip_y, eop);
 		else if (colorbv[n] != 0)
@@ -3019,7 +3019,7 @@ fz_paint_glyph(const unsigned char * FZ_RESTRICT colorbv, fz_pixmap * FZ_RESTRIC
 	}
 	else
 	{
-		assert(dst->alpha && dst->n == 1 && dst->colorspace == NULL && !fz_overprint_required(eop));
+		ASSERT0(dst->alpha && dst->n == 1 && dst->colorspace == NULL && !fz_overprint_required(eop));
 		if (colorbv == NULL || colorbv[0] == 255)
 			fz_paint_glyph_mask(dst->stride, dp, dst->alpha, glyph, w, h, skip_x, skip_y);
 		else
