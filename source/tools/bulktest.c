@@ -236,11 +236,11 @@ trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
 #endif
 
 #ifndef DISABLE_MUTHREADS
-	if (heap_debug_mutex_is_initialized)
+    if (heap_debug_mutex_is_initialized)
         mu_lock_mutex(&heap_debug_mutex);
 #endif
 
-	if (info->last)
+    if (info->last)
     {
         ASSERT(info->last->next == NULL);
         info->last->next = p;
@@ -250,7 +250,7 @@ trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
     info->last = p;
 
 #ifndef DISABLE_MUTHREADS
-	if (heap_debug_mutex_is_initialized)
+    if (heap_debug_mutex_is_initialized)
         mu_unlock_mutex(&heap_debug_mutex);
 #endif
 
@@ -289,11 +289,11 @@ trace_free(void *arg, void *p_)
     else
     {
 #ifndef DISABLE_MUTHREADS
-		if (heap_debug_mutex_is_initialized)
+        if (heap_debug_mutex_is_initialized)
             mu_lock_mutex(&heap_debug_mutex);
 #endif
 
-		struct trace_header* next = p[-1].next;
+        struct trace_header* next = p[-1].next;
         struct trace_header* prev = p[-1].prev;
         if (next)
         {
@@ -318,7 +318,7 @@ trace_free(void *arg, void *p_)
         }
 
 #ifndef DISABLE_MUTHREADS
-		if (heap_debug_mutex_is_initialized)
+        if (heap_debug_mutex_is_initialized)
             mu_unlock_mutex(&heap_debug_mutex);
 #endif
 
@@ -386,11 +386,11 @@ trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
         info->allocs++;
 
 #ifndef DISABLE_MUTHREADS
-		if (heap_debug_mutex_is_initialized)
+        if (heap_debug_mutex_is_initialized)
             mu_lock_mutex(&heap_debug_mutex);
 #endif
 
-		if (old.next)
+        if (old.next)
         {
             ASSERT(old.next->prev == old_p);
         }
@@ -413,7 +413,7 @@ trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
         }
 
 #ifndef DISABLE_MUTHREADS
-		if (heap_debug_mutex_is_initialized)
+        if (heap_debug_mutex_is_initialized)
             mu_unlock_mutex(&heap_debug_mutex);
 #endif
 
@@ -428,10 +428,10 @@ trace_snapshot(void)
 }
 
 static void
-trace_report_pending_allocations_since(size_t snapshot_id)
+trace_report_pending_allocations_since(size_t snapshot_id, int use_fzerror)
 {
 #ifndef DISABLE_MUTHREADS
-	if (heap_debug_mutex_is_initialized)
+    if (heap_debug_mutex_is_initialized)
         mu_lock_mutex(&heap_debug_mutex);
 #endif
 
@@ -440,12 +440,23 @@ trace_report_pending_allocations_since(size_t snapshot_id)
     int hits = 0;
     while (p && p->seqnum >= snapshot_id)
     {
+		if (use_fzerror)
+		{
 #if defined(FZDBG_HAS_TRACING)
-        fprintf(stderr, "\nLEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
+			fz_error(ctx, "LEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
 #else
-        fprintf(stderr, "\nLEAK? #%zu (size: %zu)", p->seqnum, p->size);
+			fz_error(ctx, "LEAK? #%zu (size: %zu)", p->seqnum, p->size);
 #endif
-        hits++;
+		}
+		else
+		{
+#if defined(FZDBG_HAS_TRACING)
+			fprintf(stderr, "\nLEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
+#else
+			fprintf(stderr, "\nLEAK? #%zu (size: %zu)", p->seqnum, p->size);
+#endif
+		}
+		hits++;
 
         p = p->prev;
     }
@@ -455,13 +466,20 @@ trace_report_pending_allocations_since(size_t snapshot_id)
     }
     else
     {
-        fprintf(stderr, "\n");
-    }
+		if (!use_fzerror)
+			fprintf(stderr, "\n");
+	}
 
 #ifndef DISABLE_MUTHREADS
-	if (heap_debug_mutex_is_initialized)
+    if (heap_debug_mutex_is_initialized)
         mu_unlock_mutex(&heap_debug_mutex);
 #endif
+}
+
+static void
+g_trace_report_pending_allocations_since(size_t snapshot_id)
+{
+	trace_report_pending_allocations_since(snapshot_id, 0); 
 }
 
 typedef size_t fz_trace_snapshot_f(void);
@@ -1740,7 +1758,7 @@ int
 bulktest_main(int argc, const char **argv)
 {
     fz_trace_snapshot = &trace_snapshot;
-    fz_trace_report_pending_allocations_since = &trace_report_pending_allocations_since;
+    fz_trace_report_pending_allocations_since = &g_trace_report_pending_allocations_since;
 
     int c;
     int errored = 0;
@@ -2339,6 +2357,11 @@ bulktest_main(int argc, const char **argv)
                         }
                     }
 
+                    size_t memory_consumed = 0;
+                    size_t memory_allocations = 0;
+                    size_t memory_leaked = 0;
+					size_t memory_snapshot_id = trace_snapshot();
+
                     begin_time = Curl_now();
 
                     if (match(argv[0], "IF"))
@@ -2520,6 +2543,9 @@ bulktest_main(int argc, const char **argv)
                         }
                         else
                         {
+                            struct trace_info prev_trace_info = trace_info;
+                            trace_info.peak = 0;
+
                             rv = mutool_main(argc - 1, argv + 1);
                             if (rv != EXIT_SUCCESS)
                             {
@@ -2530,6 +2556,10 @@ bulktest_main(int argc, const char **argv)
                             {
                                 fz_info(ctx, "OK: MUTOOL command: %s", line);
                             }
+
+                            memory_consumed = trace_info.peak - prev_trace_info.current;
+                            memory_allocations = trace_info.allocs - prev_trace_info.allocs;
+                            memory_leaked = trace_info.current - prev_trace_info.current;
 
                             report_time = RPT_AN_IMPORTANT_TEST_COMMAND;
 
@@ -2626,13 +2656,34 @@ bulktest_main(int argc, const char **argv)
                     {
                         struct curltime now = Curl_now();
                         timediff_t diff = Curl_timediff(now, begin_time);
-                        fz_info(ctx, ">L#%05u> T:%dms D:%0.3lfs %s %s", linecounter, (int)diff, (double)Curl_timediff(now, timing.start_time) / 1E3, (rv ? "ERR" : "OK"), line_command);
+
+                        char memreport[100] = "";
+                        if (memory_consumed || memory_leaked)
+                        {
+                            float used, leaked;
+                            const char* used_unit;
+                            const char* leaked_unit;
+
+                            used = humanize(memory_consumed, &used_unit);
+                            leaked = humanize(memory_leaked, &leaked_unit);
+
+                            fz_snprintf(memreport, sizeof(memreport), "USED:%.2f%sb ", used, used_unit);
+                            if (memory_leaked)
+                            {
+								trace_report_pending_allocations_since(memory_snapshot_id, 1);
+
+                                size_t l = strlen(memreport);
+                                fz_snprintf(memreport + l, sizeof(memreport) - l, "LEAKED:%.2f%sb ", leaked, leaked_unit);
+                            }
+                        }
+
+                        fz_info(ctx, ">L#%05u> T:%dms %s%s %s", linecounter, (int)diff, memreport, (rv ? "ERR" : "OK"), line_command);
                         if (diff >= 2000)
                         {
-                            fz_info(ctx, ">L#%05u> T:%dms **NOTICABLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, (rv ? "ERR" : "OK"), line_command);
+                            fz_info(ctx, ">L#%05u> T:%dms %s**NOTICABLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, memreport, (rv ? "ERR" : "OK"), line_command);
                             if (diff >= 30000)
                             {
-                                fz_info(ctx, ">L#%05u> T:%dms **LETHARGICALLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, (rv ? "ERR" : "OK"), line_command);
+                                fz_info(ctx, ">L#%05u> T:%dms %s**LETHARGICALLY SLOW COMMAND**:: %s %s", linecounter, (int)diff, memreport, (rv ? "ERR" : "OK"), line_command);
                             }
                         }
 
