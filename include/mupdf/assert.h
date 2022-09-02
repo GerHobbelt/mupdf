@@ -29,35 +29,67 @@ extern "C" {
 
 #if !defined(NO_ASSERTIONS)
 
-#define assert(expression) (void)(                                          \
-            (!!(expression)) ||                                             \
-            fz_report_failed_assertion(#expression, __FILE__, __LINE__)		\
+typedef struct fz_context fz_context;
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+#define assert(expression) (void)(							                        \
+            (!!(expression)) ||						                                \
+            fz_report_failed_assertion(ctx, #expression, __FILE__, __LINE__)		\
         )
 
 #define ASSERT(expression) assert(expression)
 
-#define ASSERT_AND_CONTINUE(expression) (void)(												\
-            (!!(expression)) ||																\
-            fz_report_failed_assertion_and_continue(#expression, __FILE__, __LINE__)		\
+#define ASSERT_AND_CONTINUE(expression) (void)(													\
+            (!!(expression)) ||																	\
+            fz_report_failed_assertion_and_continue(ctx, #expression, __FILE__, __LINE__)		\
         )
 
 #define VERIFY(expression)              ASSERT(expression)
 #define VERIFY_AND_CONTINUE(expression) ASSERT_AND_CONTINUE(expression)
 
 #define VERIFY_AND_CONTINUE_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
+            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
 #define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
+            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
 
-#define VERIFY_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
-#define ASSERT_EQ(expr1, expr2) 												\
-            fz_check_and_report_failed_assertion_and_continue(expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
+#define VERIFY_EQ(expr1, expr2) 															\
+            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
+#define ASSERT_EQ(expr1, expr2) 															\
+            fz_check_and_report_failed_assertion_and_continue(ctx, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
 
+// --------------------------------------------------------------------------------------------------------------------------------------
 
-int fz_report_failed_assertion(const char *expression, const char *srcfile, int srcline);
-int fz_report_failed_assertion_and_continue(const char *expression, const char *srcfile, int srcline);
-void fz_check_and_report_failed_assertion_and_continue(int expr1, int expr2, const char *expr1_str, const char *expr2_str, const char *srcfile, int srcline, int contin);
+#define assert0(expression) (void)(							                        \
+            (!!(expression)) ||						                                \
+            fz_report_failed_assertion(NULL, #expression, __FILE__, __LINE__)		\
+        )
+
+#define ASSERT0(expression) assert(expression)
+
+#define ASSERT_AND_CONTINUE0(expression) (void)(													\
+            (!!(expression)) ||																	\
+            fz_report_failed_assertion_and_continue(NULL, #expression, __FILE__, __LINE__)		\
+        )
+
+#define VERIFY0(expression)              ASSERT0(expression)
+#define VERIFY_AND_CONTINUE0(expression) ASSERT_AND_CONTINUE0(expression)
+
+#define VERIFY_AND_CONTINUE_EQ0(expr1, expr2) 												\
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)		
+#define ASSERT_AND_CONTINUE_EQ0(expr1, expr2) 												\
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
+
+#define VERIFY_EQ0(expr1, expr2) 															\
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
+#define ASSERT_EQ0(expr1, expr2) 															\
+            fz_check_and_report_failed_assertion_and_continue(NULL, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+int fz_report_failed_assertion(fz_context *ctx, const char *expression, const char *srcfile, int srcline);
+int fz_report_failed_assertion_and_continue(fz_context *ctx, const char *expression, const char *srcfile, int srcline);
+void fz_check_and_report_failed_assertion_and_continue(fz_context *ctx, int expr1, int expr2, const char *expr1_str, const char *expr2_str, const char *srcfile, int srcline, int contin);
 
 #else
 
@@ -75,7 +107,7 @@ void fz_check_and_report_failed_assertion_and_continue(int expr1, int expr2, con
             (void)((expr1) == (expr2))
 #define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 		
 
-#define VERIFY_EQ(expr1, expr2) 												\
+#define VERIFY_EQ(expr1, expr2) 															\
             (void)((expr1) == (expr2))
 #define ASSERT_EQ(expr1, expr2) 		
 

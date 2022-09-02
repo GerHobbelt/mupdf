@@ -92,6 +92,8 @@ fz_keep_storable(fz_context *ctx, const fz_storable *sc)
 	 * sanely throughout the code. */
 	fz_storable *s = (fz_storable *)sc;
 
+	ASSERT(!s || s->refs > 0);
+	ASSERT(!s || s->refs < 100000);
 	return fz_keep_imp(ctx, s, &s->refs);
 }
 
@@ -154,6 +156,8 @@ do_reap(fz_context *ctx)
 		}
 
 		/* Store whether to drop this value or not in 'prev' */
+		ASSERT(item->val->refs > 0);
+		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
 			(void)Memento_dropRef(item->val);
 		item->prev = (item->val->refs > 0 && --item->val->refs == 0) ? item : NULL;
@@ -290,6 +294,8 @@ evict(fz_context *ctx, fz_item *item)
 		store->head = item->next;
 
 	/* Drop a reference to the value (freeing if required) */
+	ASSERT(item->val->refs > 0);
+	ASSERT(item->val->refs < 100000);
 	if (item->val->refs > 0)
 		(void)Memento_dropRef(item->val);
 	drop = (item->val->refs > 0 && --item->val->refs == 0);
@@ -327,6 +333,8 @@ ensure_space(fz_context *ctx, size_t tofree)
 	count = 0;
 	for (item = store->tail; item; item = item->prev)
 	{
+		ASSERT(item->val->refs > 0);
+		ASSERT(item->val->refs < 100000);
 		if (item->val->refs == 1)
 		{
 			count += item->size;
@@ -346,6 +354,8 @@ ensure_space(fz_context *ctx, size_t tofree)
 	for (item = store->tail; item; item = prev)
 	{
 		prev = item->prev;
+		ASSERT(item->val->refs > 0);
+		ASSERT(item->val->refs < 100000);
 		if (item->val->refs != 1)
 			continue;
 
@@ -391,6 +401,8 @@ ensure_space(fz_context *ctx, size_t tofree)
 		to_be_freed = to_be_freed->next;
 
 		/* Drop a reference to the value (freeing if required) */
+		ASSERT(item->val->refs > 0);
+		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
 			(void)Memento_dropRef(item->val);
 		drop = (item->val->refs > 0 && --item->val->refs == 0);
@@ -439,6 +451,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 	fz_item *item = NULL;
 	size_t size;
 	fz_storable *val = (fz_storable *)val_;
+	ASSERT((void*)val != (void*)0xddddddddddddddddULL);
 	fz_store *store = ctx->store;
 	fz_store_hash hash = { NULL };
 	int use_hash = 0;
@@ -483,8 +496,19 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 
 		fz_try(ctx)
 		{
-			/* May drop and retake the lock */
-			existing = fz_hash_insert(ctx, store->hash, &hash, item);
+			existing = fz_hash_find(ctx, store->hash, &hash);
+			if (!existing)
+			{
+				/* May drop and retake the lock */
+				existing = fz_hash_insert(ctx, store->hash, &hash, item);
+				ASSERT(existing == NULL);
+			}
+			else
+			{
+				ASSERT(existing->val->refs > 0);
+				ASSERT(existing->val->refs < 100000);   // sanity check
+				ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
+			}
 		}
 		fz_catch(ctx)
 		{
@@ -497,24 +521,34 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 		}
 		if (existing)
 		{
+			ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
+
 			/* There was one there already! Take a new reference
 			 * to the existing one, and drop our current one. */
 			fz_warn(ctx, "found duplicate %s in the store", type->name);
 			touch(store, existing);
+			ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
 			ASSERT(existing->val->refs > 0);
+			ASSERT(existing->val->refs < 100000);   // sanity check
 			if (existing->val->refs > 0)
 			{
 				(void)Memento_takeRef(existing->val);
 				existing->val->refs++;
 			}
+			void* rv = existing->val;
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
+			ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
 			fz_free(ctx, item);
+			ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
 			type->drop_key(ctx, key);
-			return existing->val;
+			ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
+			return rv;
 		}
 	}
 
 	/* Now bump the ref */
+	ASSERT(val->refs > 0);
+	ASSERT(val->refs < 100000);
 	if (val->refs > 0)
 	{
 		(void)Memento_takeRef(val);
@@ -617,6 +651,8 @@ fz_find_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_store_
 		 * store being full. */
 		touch(store, item);
 		/* And bump the refcount before returning */
+		ASSERT(item->val->refs > 0);
+		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
 		{
 			(void)Memento_takeRef(item->val);
@@ -677,8 +713,12 @@ fz_remove_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_stor
 			else
 				store->head = item->next;
 		}
+		ASSERT(item->val->refs > 0);
+		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
+		{
 			(void)Memento_dropRef(item->val);
+		}
 		dodrop = (item->val->refs > 0 && --item->val->refs == 0);
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
 		if (dodrop)
@@ -687,7 +727,9 @@ fz_remove_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_stor
 		fz_free(ctx, item);
 	}
 	else
+	{
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
+	}
 }
 
 void

@@ -33,7 +33,7 @@ static int hits = 0;
 // located in those functions.
 // Hence we use standard RTL fprintf and MSWindows OutputDebugString APIs directly instead.
 
-int fz_report_failed_assertion(const char *expression, const char *srcfile, int srcline)
+int fz_report_failed_assertion(fz_context* ctx, const char *expression, const char *srcfile, int srcline)
 {
 	if (!hits)
 	{
@@ -41,7 +41,8 @@ int fz_report_failed_assertion(const char *expression, const char *srcfile, int 
 		attempt_to_write_message_to_console_and_debug_channel("", "", expression, srcfile, srcline);
 
 		// CAN we throw an exception and handle it that way? If the exception stack is filled and alive, we can /try/:
-		fz_context* ctx = __fz_get_RAW_global_context();
+		if (!ctx)
+			ctx = __fz_get_RAW_global_context();
 		if (ctx && ctx->error.top > ctx->error.stack_base)
 		{
 			fz_throw(ctx, FZ_ERROR_GENERIC, "EXCEPTION: Assertion failed: %s --> %s::%d\n", expression, srcfile, srcline);
@@ -59,13 +60,13 @@ int fz_report_failed_assertion(const char *expression, const char *srcfile, int 
 	return 0;
 }
 
-int fz_report_failed_assertion_and_continue(const char *expression, const char *srcfile, int srcline)
+int fz_report_failed_assertion_and_continue(fz_context* ctx, const char *expression, const char *srcfile, int srcline)
 {
 	attempt_to_write_message_to_console_and_debug_channel("Soft ", "", expression, srcfile, srcline);
 	return 0;
 }
 
-void fz_check_and_report_failed_assertion_and_continue(int expr1, int expr2, const char* expr1_str, const char* expr2_str, const char* srcfile, int srcline, int contin)
+void fz_check_and_report_failed_assertion_and_continue(fz_context* ctx, int expr1, int expr2, const char* expr1_str, const char* expr2_str, const char* srcfile, int srcline, int contin)
 {
 	if (expr1 == expr2)
 		return;
@@ -76,11 +77,11 @@ void fz_check_and_report_failed_assertion_and_continue(int expr1, int expr2, con
 
 	if (!contin)
 	{
-		fz_report_failed_assertion(buf, srcfile, srcline);
+		fz_report_failed_assertion(ctx, buf, srcfile, srcline);
 	}
 	else
 	{
-		fz_report_failed_assertion_and_continue(buf, srcfile, srcline);
+		fz_report_failed_assertion_and_continue(ctx, buf, srcfile, srcline);
 	}
 }
 
