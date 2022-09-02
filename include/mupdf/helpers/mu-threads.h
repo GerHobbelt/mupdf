@@ -34,15 +34,17 @@
 	calling functions.
 
 	To build this library on a platform with no threading,
-	define DISABLE_MUTHREADS (or extend the ifdeffery below
+	define DISABLE_MUTHREADS (or extend the #ifdef-fery below
 	so that it does so).
 
 	To build this library on a platform that uses a
 	threading model other than windows threads or pthreads,
-	extend the #ifdeffery below to set MUTHREAD_IMPL_TYPE
+	extend the #ifdef-fery below to set MUTHREAD_IMPL_TYPE
 	to an unused value, and modify mu-threads.c
 	appropriately.
 */
+
+#include "mupdf/fitz/config.h"
 
 #if !defined(DISABLE_MUTHREADS)
 #if defined(_WIN32) || defined(_WIN64)
@@ -53,6 +55,8 @@
 #define DISABLE_MUTHREADS
 #endif
 #endif
+
+#if !defined(DISABLE_MUTHREADS)
 
 /*
 	Types
@@ -211,7 +215,11 @@ void mu_unlock_mutex(mu_mutex *mutex);
 	helper module should need to look below here.
 */
 
-#ifdef DISABLE_MUTHREADS
+#endif
+
+#if defined(DISABLE_MUTHREADS)
+
+#if 0
 
 /* Null implementation */
 struct mu_semaphore
@@ -228,6 +236,8 @@ struct mu_mutex
 {
 	int dummy;
 };
+
+#endif
 
 #elif MU_THREAD_IMPL_TYPE == 1
 

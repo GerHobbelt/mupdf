@@ -46,7 +46,9 @@ fzoutput_lock(fz_output* out)
 {
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
+#ifndef DISABLE_MUTHREADS
 		mu_lock_mutex(&out->buf_mutex);
+#endif
 		out->flags |= FZOF_IS_INSIDE_LOCK;
 	}
 }
@@ -58,7 +60,9 @@ fzoutput_unlock(fz_output* out)
 	{
 		ASSERT(out->flags & FZOF_IS_INSIDE_LOCK);
 		out->flags &= ~FZOF_IS_INSIDE_LOCK;
+#ifndef DISABLE_MUTHREADS
 		mu_unlock_mutex(&out->buf_mutex);
+#endif
 	}
 }
 
@@ -67,7 +71,9 @@ printf_lock(fz_output* out)
 {
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
+#ifndef DISABLE_MUTHREADS
 		mu_lock_mutex(&out->printf_mutex);
+#endif
 		out->flags |= FZOF_IS_INSIDE_PRINTF_LOCK;
 	}
 }
@@ -79,7 +85,9 @@ printf_unlock(fz_output* out)
 	{
 		ASSERT(out->flags & FZOF_IS_INSIDE_PRINTF_LOCK);
 		out->flags &= ~FZOF_IS_INSIDE_PRINTF_LOCK;
+#ifndef DISABLE_MUTHREADS
 		mu_unlock_mutex(&out->printf_mutex);
+#endif
 	}
 }
 
@@ -364,8 +372,10 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 		out->write = write;
 		out->close = close;
 		out->drop = drop;
+#ifndef DISABLE_MUTHREADS
 		mu_create_mutex(&out->buf_mutex);
 		mu_create_mutex(&out->printf_mutex);
+#endif
 		ASSERT(out->flags == FZOF_NONE);
 		out->flags = FZOF_HAS_LOCKS;
 		ASSERT(out->bp == NULL);
@@ -380,11 +390,14 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 	{
 		if (drop)
 			drop(ctx, state);
+
+#ifndef DISABLE_MUTHREADS
 		if (out->flags & FZOF_HAS_LOCKS)
 		{
 			mu_destroy_mutex(&out->printf_mutex);
 			mu_destroy_mutex(&out->buf_mutex);
 		}
+#endif
 		out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
 		fz_free(ctx, out->bp);
 		fz_free(ctx, out);
@@ -410,11 +423,16 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 	// if so, create the buffer mutex after the fact.
 	if (!out->flags & FZOF_HAS_LOCKS)
 	{
+#ifndef DISABLE_MUTHREADS
 		ASSERT(mu_mutex_is_zeroed(&out->buf_mutex));
 		ASSERT(mu_mutex_is_zeroed(&out->printf_mutex));
+#endif
 		ASSERT((out->flags & (FZOF_IS_INSIDE_LOCK | FZOF_IS_INSIDE_PRINTF_LOCK)) == 0);
+
+#ifndef DISABLE_MUTHREADS
 		mu_create_mutex(&out->buf_mutex);
 		mu_create_mutex(&out->printf_mutex);
+#endif
 	}
 
 	fzoutput_lock(out);
@@ -589,6 +607,8 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 	{
 		if (out->close)
 			fz_warn(ctx, "dropping unclosed output");
+
+#ifndef DISABLE_MUTHREADS
 		if (out->flags & FZOF_HAS_LOCKS)
 		{
 			// when we encounter a HELD LOCK, we release it before dropping it.
@@ -608,6 +628,7 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 			mu_destroy_mutex(&out->printf_mutex);
 			mu_destroy_mutex(&out->buf_mutex);
 		}
+#endif
 		out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
 		if (out->drop)
 			out->drop(ctx, out->state);

@@ -20,12 +20,15 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
+#include "mupdf/fitz/config.h"
 #include "mupdf/helpers/mu-threads.h"
 #include "mupdf/assert.h"
 
 #ifdef DISABLE_MUTHREADS
 
 #include <stdlib.h>
+
+#if 0
 
 /* Null implementation. Just error out. */
 
@@ -89,6 +92,8 @@ void mu_unlock_mutex(mu_mutex *mutex)
 	ASSERT(!"Should never get here!");
 	abort();
 }
+
+#endif
 
 #elif MU_THREAD_IMPL_TYPE == 1
 

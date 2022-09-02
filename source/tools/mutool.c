@@ -24,8 +24,9 @@
  * mutool -- swiss army knife of pdf manipulation tools
  */
 
-#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/mutool.h"
+#include "mupdf/helpers/mu-threads.h"
 
 #define BUILD_MONOLITHIC 1
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
@@ -47,10 +48,6 @@
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
-
-#ifndef DISABLE_MUTHREADS
-#include "mupdf/helpers/mu-threads.h"
-#endif
 
 #include <string.h>
 #include <stdio.h>

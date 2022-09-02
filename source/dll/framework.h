@@ -17,9 +17,7 @@
 #include "mupdf/pdf.h" /* for pdf output */
 #endif
 
-#ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
-#endif
 
 #include "mupdf/helpers/pkcs7-openssl.h"
 

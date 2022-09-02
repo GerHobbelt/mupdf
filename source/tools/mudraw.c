@@ -33,18 +33,16 @@
 
 #include "timeval.h"
 
-#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/mutool.h"
 #include "mupdf/assert.h"
 
 #if FZ_ENABLE_PDF
 #include "mupdf/pdf.h" /* for pdf output */
 #endif
 
-#ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
 #include "mupdf/helpers/cpu.h"
-#endif
 
 #include "mupdf/helpers/dir.h"
 

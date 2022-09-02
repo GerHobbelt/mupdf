@@ -282,4 +282,6 @@
 #endif
 #endif
 
+#define DISABLE_MUTHREADS 1
+
 #endif /* FZ_CONFIG_H */

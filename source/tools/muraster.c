@@ -167,14 +167,11 @@
 
 #include "timeval.h"
 
-#include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/mutool.h"
 #include "mupdf/helpers/dir.h"
 #include "mupdf/assert.h"
-
-#ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
-#endif
 
 #include <string.h>
 #include <stdlib.h>
@@ -1287,7 +1284,9 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		}
 		bgprint.started = 1;
 		bgprint.solo = 1;
+#ifndef DISABLE_MUTHREADS
 		mu_trigger_semaphore(&bgprint.start);
+#endif
 		status = wait_for_bgprint_to_finish();
 		if (status != 0)
 		{
@@ -1348,7 +1347,9 @@ finish_bgprint(fz_context *ctx)
 	}
 	bgprint.started = 1;
 	bgprint.solo = 1;
+#ifndef DISABLE_MUTHREADS
 	mu_trigger_semaphore(&bgprint.start);
+#endif
 	status = wait_for_bgprint_to_finish();
 	if (status != 0)
 	{

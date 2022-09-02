@@ -24,6 +24,7 @@
 #define MUPDF_FITZ_OUTPUT_H
 
 #include "mupdf/fitz/system.h"
+#include "mupdf/fitz/config.h"
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/buffer.h"
 #include "mupdf/fitz/string-util.h"
@@ -165,8 +166,10 @@ struct fz_output
 	fz_truncate_fn *truncate;
 	char *bp, *wp, *ep;
 	char *filepath;
+#if !defined(DISABLE_MUTHREADS)
 	mu_mutex buf_mutex;
 	mu_mutex printf_mutex;
+#endif
 	fz_output_flags_t flags;
 	struct fz_secondary_outputs secondary;
 };

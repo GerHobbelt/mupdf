@@ -3,8 +3,19 @@
 #include "mupdf/assert.h"
 #include "mupdf/helpers/debugheap.h"
 
+#include <string.h>
+#include <stdlib.h>
 
 #if defined(_MSC_VER)
+
+#include <crtdbg.h>
+
+#ifndef TRUE
+#define TRUE (1)
+#endif
+#ifndef FALSE
+#define FALSE (0)
+#endif
 
 #if defined(FZDBG_HAS_TRACING)
 

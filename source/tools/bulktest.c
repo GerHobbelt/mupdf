@@ -11,10 +11,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
 #include "mupdf/assert.h"
-
-#ifndef DISABLE_MUTHREADS
 #include "mupdf/helpers/mu-threads.h"
-#endif
 
 #include "jbig2.h"
 
@@ -238,9 +235,12 @@ trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
     p[0].origin_line = trace_srcline;
 #endif
 
-    if (heap_debug_mutex_is_initialized)
+#ifndef DISABLE_MUTHREADS
+	if (heap_debug_mutex_is_initialized)
         mu_lock_mutex(&heap_debug_mutex);
-    if (info->last)
+#endif
+
+	if (info->last)
     {
         ASSERT(info->last->next == NULL);
         info->last->next = p;
@@ -248,8 +248,11 @@ trace_malloc(void *arg, size_t size   FZDBG_DECL_ARGS)
     p[0].prev = info->last;
     p[0].next = NULL;
     info->last = p;
-    if (heap_debug_mutex_is_initialized)
+
+#ifndef DISABLE_MUTHREADS
+	if (heap_debug_mutex_is_initialized)
         mu_unlock_mutex(&heap_debug_mutex);
+#endif
 
     info->current += size;
     info->total += size;
@@ -285,9 +288,12 @@ trace_free(void *arg, void *p_)
     }
     else
     {
-        if (heap_debug_mutex_is_initialized)
+#ifndef DISABLE_MUTHREADS
+		if (heap_debug_mutex_is_initialized)
             mu_lock_mutex(&heap_debug_mutex);
-        struct trace_header* next = p[-1].next;
+#endif
+
+		struct trace_header* next = p[-1].next;
         struct trace_header* prev = p[-1].prev;
         if (next)
         {
@@ -310,8 +316,11 @@ trace_free(void *arg, void *p_)
             ASSERT(next == NULL);
             info->last = prev;
         }
-        if (heap_debug_mutex_is_initialized)
+
+#ifndef DISABLE_MUTHREADS
+		if (heap_debug_mutex_is_initialized)
             mu_unlock_mutex(&heap_debug_mutex);
+#endif
 
         free(&p[-1]);
     }
@@ -376,9 +385,12 @@ trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
         p[0].size = size;
         info->allocs++;
 
-        if (heap_debug_mutex_is_initialized)
+#ifndef DISABLE_MUTHREADS
+		if (heap_debug_mutex_is_initialized)
             mu_lock_mutex(&heap_debug_mutex);
-        if (old.next)
+#endif
+
+		if (old.next)
         {
             ASSERT(old.next->prev == old_p);
         }
@@ -399,8 +411,11 @@ trace_realloc(void *arg, void *p_, size_t size   FZDBG_DECL_ARGS)
             ASSERT(old.next == NULL);
             info->last = p;
         }
-        if (heap_debug_mutex_is_initialized)
+
+#ifndef DISABLE_MUTHREADS
+		if (heap_debug_mutex_is_initialized)
             mu_unlock_mutex(&heap_debug_mutex);
+#endif
 
         return &p[1];
     }
@@ -415,8 +430,10 @@ trace_snapshot(void)
 static void
 trace_report_pending_allocations_since(size_t snapshot_id)
 {
-    if (heap_debug_mutex_is_initialized)
+#ifndef DISABLE_MUTHREADS
+	if (heap_debug_mutex_is_initialized)
         mu_lock_mutex(&heap_debug_mutex);
+#endif
 
     trace_header* p = trace_info.last;
     ASSERT(p->next == NULL);
@@ -441,8 +458,10 @@ trace_report_pending_allocations_since(size_t snapshot_id)
         fprintf(stderr, "\n");
     }
 
-    if (heap_debug_mutex_is_initialized)
+#ifndef DISABLE_MUTHREADS
+	if (heap_debug_mutex_is_initialized)
         mu_unlock_mutex(&heap_debug_mutex);
+#endif
 }
 
 typedef size_t fz_trace_snapshot_f(void);

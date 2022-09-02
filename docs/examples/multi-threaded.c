@@ -46,6 +46,8 @@ depending on your environment.
 #include <stdio.h>
 #include <stdlib.h>
 
+#if !defined(DISABLE_MUTHREADS)
+
 // A convenience function for dying abruptly on pthread errors.
 
 static void
@@ -312,3 +314,17 @@ int main(int argc, const char** argv)
 
 	return 0;
 }
+
+#else
+
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      mupdf_multithreaded_example_main(cnt, arr)
+#endif
+
+int main(int argc, const char** argv)
+{
+	fprintf(stderr, "%s: this tool is not supported in this build (multithreading has been disabled)\n", argv[0]);
+	return 1;
+}
+
+#endif
