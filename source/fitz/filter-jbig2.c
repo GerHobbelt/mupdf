@@ -27,7 +27,6 @@
 typedef struct
 {
 	Jbig2Allocator alloc;
-	fz_context *ctx;
 } fz_jbig2_allocators;
 
 struct fz_jbig2_globals
@@ -51,12 +50,12 @@ typedef struct
 
 static inline void fz_lock_jbig2(fz_context* ctx)
 {
-	fz_lock(ctx, FZ_LOCK_JBIG2);
+	//fz_lock(ctx, FZ_LOCK_JBIG2);
 }
 
 static inline void fz_unlock_jbig2(fz_context* ctx)
 {
-	fz_unlock(ctx, FZ_LOCK_JBIG2);
+	//fz_unlock(ctx, FZ_LOCK_JBIG2);
 }
 
 fz_jbig2_globals *
@@ -188,19 +187,19 @@ error_callback(void* data, const char* msg, Jbig2Severity severity, uint32_t seg
 
 static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size)
 {
-	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->ctx;
+	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
 	return Memento_label(fz_malloc_no_throw(ctx, size), "jbig2_alloc");
 }
 
 static void fz_jbig2_free(Jbig2Allocator *allocator, void *p)
 {
-	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->ctx;
+	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
 	fz_free(ctx, p);
 }
 
 static void *fz_jbig2_realloc(Jbig2Allocator *allocator, void *p, size_t size)
 {
-	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->ctx;
+	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
 	if (size == 0)
 	{
 		fz_free(ctx, p);
@@ -217,7 +216,7 @@ fz_load_jbig2_globals(fz_context *ctx, fz_buffer *buf)
 	fz_jbig2_globals *globals = fz_malloc_struct(ctx, fz_jbig2_globals);
 	Jbig2Ctx *jctx;
 
-	globals->alloc.ctx = ctx;
+	globals->alloc.alloc.user_context = ctx;
 	globals->alloc.alloc.alloc_ = fz_jbig2_alloc;
 	globals->alloc.alloc.free_ = fz_jbig2_free;
 	globals->alloc.alloc.realloc_ = fz_jbig2_realloc;
@@ -258,13 +257,26 @@ fz_load_jbig2_globals(fz_context *ctx, fz_buffer *buf)
 }
 
 void
-fz_drop_jbig2_globals_imp(fz_context *ctx, fz_storable *globals_)
+fz_drop_jbig2_globals_imp(fz_context* ctx, fz_storable* globals_)
 {
-	fz_jbig2_globals *globals = (fz_jbig2_globals *)globals_;
-	globals->alloc.ctx = ctx;
-	jbig2_global_ctx_free(globals->gctx);
-	fz_drop_buffer(ctx, globals->data);
-	fz_free(ctx, globals);
+	fz_try(ctx)
+	{
+		fz_lock_jbig2(ctx);
+
+		fz_jbig2_globals* globals = (fz_jbig2_globals*)globals_;
+		globals->alloc.alloc.user_context = ctx;
+		jbig2_global_ctx_free(globals->gctx);
+		fz_drop_buffer(ctx, globals->data);
+		fz_free(ctx, globals);
+	}
+	fz_always(ctx)
+	{
+		fz_unlock_jbig2(ctx);
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
 }
 
 fz_stream *
@@ -277,7 +289,7 @@ fz_open_jbig2d(fz_context *ctx, fz_stream *chain, fz_jbig2_globals *globals, int
 
 	state = fz_malloc_struct(ctx, fz_jbig2d);
 	state->gctx = fz_keep_jbig2_globals(ctx, globals);
-	state->alloc.ctx = ctx;
+	state->alloc.alloc.user_context = ctx;
 	state->alloc.alloc.alloc_ = fz_jbig2_alloc;
 	state->alloc.alloc.free_ = fz_jbig2_free;
 	state->alloc.alloc.realloc_ = fz_jbig2_realloc;

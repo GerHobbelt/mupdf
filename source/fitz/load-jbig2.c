@@ -37,17 +37,16 @@ struct info
 struct fz_jbig2_allocator
 {
 	Jbig2Allocator super;
-	fz_context *ctx;
 };
 
-static void fz_lock_jbig2(fz_context* ctx)
+static inline void fz_lock_jbig2(fz_context* ctx)
 {
-	fz_lock(ctx, FZ_LOCK_JBIG2);
+	//fz_lock(ctx, FZ_LOCK_JBIG2);
 }
 
-static void fz_unlock_jbig2(fz_context* ctx)
+static inline void fz_unlock_jbig2(fz_context* ctx)
 {
-	fz_unlock(ctx, FZ_LOCK_JBIG2);
+	//fz_unlock(ctx, FZ_LOCK_JBIG2);
 }
 
 static void
@@ -71,19 +70,19 @@ error_callback(void* data, const char* msg, Jbig2Severity severity, uint32_t seg
 
 static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size)
 {
-	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->ctx;
+	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->super.user_context;
 	return fz_malloc_no_throw(ctx, size);
 }
 
 static void fz_jbig2_free(Jbig2Allocator *allocator, void *p)
 {
-	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->ctx;
+	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->super.user_context;
 	fz_free(ctx, p);
 }
 
 static void *fz_jbig2_realloc(Jbig2Allocator *allocator, void *p, size_t size)
 {
-	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->ctx;
+	fz_context *ctx = ((struct fz_jbig2_allocator *) allocator)->super.user_context;
 	if (size == 0)
 	{
 		fz_free(ctx, p);
@@ -105,7 +104,7 @@ jbig2_read_image(fz_context *ctx, struct info *jbig2, const unsigned char *buf, 
 	allocator.super.alloc_ = fz_jbig2_alloc;
 	allocator.super.free_ = fz_jbig2_free;
 	allocator.super.realloc_ = fz_jbig2_realloc;
-	allocator.ctx = ctx;
+	allocator.super.user_context = ctx;
 
 	fz_var(jctx);
 	fz_var(page);
