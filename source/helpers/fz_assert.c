@@ -2,6 +2,10 @@
 #include "mupdf/fitz.h"
 #include "mupdf/assert.h"
 
+#if defined(_WIN32)
+#include <Windows.h>
+#endif
+
 
 static void attempt_to_write_message_to_console_and_debug_channel(const char *prefix, const char *postfix, const char *expression, const char *srcfile, int srcline)
 {
