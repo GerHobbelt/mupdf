@@ -3225,7 +3225,7 @@ const char *fz_pdf_write_options_usage =
 	"  regenerate-id:     (default yes) regenerate document id\n"
 	"  appearance[=yes|all]:\n"
 	"                     yes: regenerate pages. all: also regenerate annotations.\n"
-    "\n";
+	"\n";
 
 pdf_write_options *
 pdf_parse_write_options(fz_context *ctx, pdf_write_options *opts, const char *args)

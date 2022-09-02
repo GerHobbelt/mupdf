@@ -2871,8 +2871,8 @@ static inline void fmt_putc(fz_context *ctx, struct fmt *fmt, int c)
 /**
 	Wind back up to and including the given character in the produced output.
 
-    This RESETS the separator inject flag, but
-    attempts to keep your column index intact by reconstruction.
+	This RESETS the separator inject flag, but
+	attempts to keep your column index intact by reconstruction.
 */
 static inline void fmt_backpedal_to(fz_context* ctx, struct fmt* fmt, int character)
 {
@@ -3421,7 +3421,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 					smart_mod = -smart_mod;
 				else
 					smart_mod = 1;
-				// use format 'precision' to clip string at given length: no NUL sentinel needed that way!
+				// see fmt_printf %H spec: format 'precision' is used to pass options, while %H itself expects a pointer + length arg combo: no NUL sentinel needed that way!
 				fmt_printf(ctx, fmt, "%.*H", smart_mod, data, datalen);
 			}
 		}

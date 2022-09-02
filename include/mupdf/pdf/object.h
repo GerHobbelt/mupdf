@@ -272,7 +272,7 @@ int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 //   PURE_HEX then results in an unadorned hexdump. This makes for a cleaner display of 'binary content'
 //   then the alternative in this situation, which is a hexdump adorned with any legible characters
 //   placed between braces, e.g. "65(a) 66(b)" instead of "65 66" for input snippet "ab" (in the case
-//   of ILLEGAL_UNICODE_AS_HEX) or a hedump followed by a `strings`-alike stripped ('massaged') output
+//   of ILLEGAL_UNICODE_AS_HEX) or a hexdump followed by a `strings`-alike stripped ('massaged') output
 //   of the legible characters only (in the case of HEX_PLUS_RAW): when the input is 'binary data'
 //   those 'legible bits' are meaningless anyway.
 
