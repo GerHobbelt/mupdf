@@ -84,7 +84,7 @@ static const pdf_range cmap_90msp_RKSJ_V_ranges[] = {
 };
 
 static pdf_cmap cmap_90msp_RKSJ_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "90msp-RKSJ-V",
 	/* usecmap */ "90msp-RKSJ-H", NULL,
 	/* wmode */ 1,

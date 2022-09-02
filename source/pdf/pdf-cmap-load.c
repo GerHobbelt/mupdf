@@ -273,6 +273,13 @@ pdf_load_builtin_cmap(fz_context *ctx, const char *name)
 {
 	int r = nelem(table)-1;
 	int l = 0;
+#ifndef NDEBUG
+	// check we've got everyone in the table properly coded with the magic -42 refcount: catch coding glitches in the future.
+	for (int i = l; i <= r; i++)
+	{
+		ASSERT0(table[i]->storable.refs == -42);
+	}
+#endif
 	while (l <= r)
 	{
 		int m = (l + r) >> 1;

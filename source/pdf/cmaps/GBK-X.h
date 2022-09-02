@@ -4075,7 +4075,7 @@ static const pdf_range cmap_GBK_X_ranges[] = {
 };
 
 static pdf_cmap cmap_GBK_X = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "GBK-X",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

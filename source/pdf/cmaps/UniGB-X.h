@@ -13776,7 +13776,7 @@ static const pdf_range cmap_UniGB_X_ranges[] = {
 };
 
 static pdf_cmap cmap_UniGB_X = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniGB-X",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

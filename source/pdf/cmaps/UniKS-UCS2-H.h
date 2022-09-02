@@ -3,7 +3,7 @@
 /* UniKS-UCS2-H */
 
 static pdf_cmap cmap_UniKS_UCS2_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniKS-UCS2-H",
 	/* usecmap */ "UniKS-X", NULL,
 	/* wmode */ 0,

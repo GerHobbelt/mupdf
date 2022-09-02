@@ -79,7 +79,7 @@ static const pdf_xrange cmap_UniGB_UTF16_H_xranges[] = {
 };
 
 static pdf_cmap cmap_UniGB_UTF16_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniGB-UTF16-H",
 	/* usecmap */ "UniGB-X", NULL,
 	/* wmode */ 0,

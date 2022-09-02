@@ -5502,7 +5502,7 @@ static const pdf_xrange cmap_UniJIS_UTF16_H_xranges[] = {
 };
 
 static pdf_cmap cmap_UniJIS_UTF16_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniJIS-UTF16-H",
 	/* usecmap */ "UniJIS-X", NULL,
 	/* wmode */ 0,

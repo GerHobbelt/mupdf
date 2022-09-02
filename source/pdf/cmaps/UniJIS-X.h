@@ -8490,7 +8490,7 @@ static const pdf_range cmap_UniJIS_X_ranges[] = {
 };
 
 static pdf_cmap cmap_UniJIS_X = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniJIS-X",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

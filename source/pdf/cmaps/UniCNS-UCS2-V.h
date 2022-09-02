@@ -19,7 +19,7 @@ static const pdf_range cmap_UniCNS_UCS2_V_ranges[] = {
 };
 
 static pdf_cmap cmap_UniCNS_UCS2_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniCNS-UCS2-V",
 	/* usecmap */ "UniCNS-UCS2-H", NULL,
 	/* wmode */ 1,

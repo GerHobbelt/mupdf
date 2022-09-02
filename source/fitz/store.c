@@ -92,7 +92,7 @@ fz_keep_storable(fz_context *ctx, const fz_storable *sc)
 	 * sanely throughout the code. */
 	fz_storable *s = (fz_storable *)sc;
 
-	ASSERT(!s || s->refs > 0);
+	ASSERT(!s || s->refs > 0 || s->refs == -42);
 	ASSERT(!s || s->refs < 100000);
 	return fz_keep_imp(ctx, s, &s->refs);
 }

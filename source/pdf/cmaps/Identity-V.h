@@ -3,7 +3,7 @@
 /* Identity-V */
 
 static pdf_cmap cmap_Identity_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "Identity-V",
 	/* usecmap */ "Identity-H", NULL,
 	/* wmode */ 1,

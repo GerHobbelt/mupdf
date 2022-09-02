@@ -205,7 +205,7 @@ static const pdf_range cmap_UniJIS_UCS2_HW_V_ranges[] = {
 };
 
 static pdf_cmap cmap_UniJIS_UCS2_HW_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniJIS-UCS2-HW-V",
 	/* usecmap */ "UniJIS-UCS2-H", NULL,
 	/* wmode */ 1,

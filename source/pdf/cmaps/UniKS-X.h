@@ -8375,7 +8375,7 @@ static const pdf_range cmap_UniKS_X_ranges[] = {
 };
 
 static pdf_cmap cmap_UniKS_X = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniKS-X",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

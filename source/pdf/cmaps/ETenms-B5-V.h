@@ -24,7 +24,7 @@ static const pdf_range cmap_ETenms_B5_V_ranges[] = {
 };
 
 static pdf_cmap cmap_ETenms_B5_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "ETenms-B5-V",
 	/* usecmap */ "ETenms-B5-H", NULL,
 	/* wmode */ 1,

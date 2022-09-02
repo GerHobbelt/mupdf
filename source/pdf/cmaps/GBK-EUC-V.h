@@ -26,7 +26,7 @@ static const pdf_range cmap_GBK_EUC_V_ranges[] = {
 };
 
 static pdf_cmap cmap_GBK_EUC_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "GBK-EUC-V",
 	/* usecmap */ "GBK-EUC-H", NULL,
 	/* wmode */ 1,

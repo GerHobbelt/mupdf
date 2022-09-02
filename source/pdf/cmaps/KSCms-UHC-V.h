@@ -22,7 +22,7 @@ static const pdf_range cmap_KSCms_UHC_V_ranges[] = {
 };
 
 static pdf_cmap cmap_KSCms_UHC_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "KSCms-UHC-V",
 	/* usecmap */ "KSCms-UHC-H", NULL,
 	/* wmode */ 1,

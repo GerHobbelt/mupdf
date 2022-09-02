@@ -47,7 +47,7 @@ static const pdf_range cmap_GBK2K_V_ranges[] = {
 };
 
 static pdf_cmap cmap_GBK2K_V = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "GBK2K-V",
 	/* usecmap */ "GBK2K-H", NULL,
 	/* wmode */ 1,

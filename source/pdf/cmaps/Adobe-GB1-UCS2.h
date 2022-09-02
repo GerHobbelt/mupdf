@@ -13717,7 +13717,7 @@ static const pdf_xrange cmap_Adobe_GB1_UCS2_xranges[] = {
 };
 
 static pdf_cmap cmap_Adobe_GB1_UCS2 = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "Adobe-GB1-UCS2",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

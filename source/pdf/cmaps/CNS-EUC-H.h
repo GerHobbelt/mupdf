@@ -404,7 +404,7 @@ static const pdf_xrange cmap_CNS_EUC_H_xranges[] = {
 };
 
 static pdf_cmap cmap_CNS_EUC_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "CNS-EUC-H",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

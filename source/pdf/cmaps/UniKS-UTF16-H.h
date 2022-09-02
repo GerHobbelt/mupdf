@@ -168,7 +168,7 @@ static const pdf_range cmap_UniKS_UTF16_H_ranges[] = {
 };
 
 static pdf_cmap cmap_UniKS_UTF16_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniKS-UTF16-H",
 	/* usecmap */ "UniKS-X", NULL,
 	/* wmode */ 0,

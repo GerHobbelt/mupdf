@@ -8,7 +8,7 @@ static const pdf_range cmap_UniGB_UCS2_H_ranges[] = {
 };
 
 static pdf_cmap cmap_UniGB_UCS2_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniGB-UCS2-H",
 	/* usecmap */ "UniGB-X", NULL,
 	/* wmode */ 0,

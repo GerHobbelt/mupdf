@@ -96,7 +96,7 @@ static const pdf_range cmap_GB_EUC_H_ranges[] = {
 };
 
 static pdf_cmap cmap_GB_EUC_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "GB-EUC-H",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

@@ -3424,7 +3424,7 @@ static const pdf_xrange cmap_UniCNS_UTF16_H_xranges[] = {
 };
 
 static pdf_cmap cmap_UniCNS_UTF16_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "UniCNS-UTF16-H",
 	/* usecmap */ "UniCNS-X", NULL,
 	/* wmode */ 0,

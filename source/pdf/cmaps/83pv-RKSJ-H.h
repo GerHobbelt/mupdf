@@ -228,7 +228,7 @@ static const pdf_range cmap_83pv_RKSJ_H_ranges[] = {
 };
 
 static pdf_cmap cmap_83pv_RKSJ_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "83pv-RKSJ-H",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,

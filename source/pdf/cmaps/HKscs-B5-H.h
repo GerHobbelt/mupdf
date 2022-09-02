@@ -1218,7 +1218,7 @@ static const pdf_range cmap_HKscs_B5_H_ranges[] = {
 };
 
 static pdf_cmap cmap_HKscs_B5_H = {
-	{ -1, pdf_drop_cmap_imp },
+	{ -42, pdf_drop_cmap_imp },
 	/* cmapname */ "HKscs-B5-H",
 	/* usecmap */ "", NULL,
 	/* wmode */ 0,
