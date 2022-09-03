@@ -510,6 +510,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 				/* May drop and retake the lock */
 				existing = fz_hash_insert(ctx, store->hash, &hash, item);
 				ASSERT(existing == NULL);
+				ASSERT(item == fz_hash_find(ctx, store->hash, &hash));
 
 				// now that we have our lock back, we can revert that do-not-drop refcount increase:
 				item->val->refs -= 666;
@@ -530,6 +531,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			type->drop_key(ctx, key);
 			return NULL;
 		}
+
 		if (existing)
 		{
 			/* There was one there already! Take a new reference
@@ -544,6 +546,8 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 				(void)Memento_takeRef(existing->val);
 				existing->val->refs++;
 			}
+			ASSERT(existing->val->refs > 1);
+			ASSERT(existing->val->refs < 100000);
 			// Copying the to-be-used data pointer to a local partly 'fixed' the race condition
 			// crashes before we fixed it properly by temporarily upping the refcount above
 			// while we attempt to insert it into the hash (*a non-atomic operation*!)
@@ -567,6 +571,9 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 		(void)Memento_takeRef(val);
 		val->refs++;
 	}
+	ASSERT(item->val == val);
+	ASSERT(item->val->refs > 1);
+	ASSERT(item->val->refs < 100000);   // sanity check
 
 	/* If we haven't got an infinite store, check for space within it */
 	if (store->max != FZ_STORE_UNLIMITED)
@@ -586,6 +593,17 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 				{
 					do_reap(ctx); /* Drops alloc lock */
 					fz_lock(ctx, FZ_LOCK_ALLOC);
+					if (use_hash)
+					{
+						fz_item* existing = fz_hash_find(ctx, store->hash, &hash);
+						ASSERT(existing == item);
+						if (existing)
+						{
+							ASSERT(existing->val == val);
+							ASSERT(val->refs > 1);
+							ASSERT(val->refs < 100000);   // sanity check
+						}
+					}
 				}
 				size = store->size + itemsize;
 				if (size <= store->max)
@@ -594,6 +612,17 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 				/* ensure_space may drop, then retake the lock */
 				saved = ensure_space(ctx, size - store->max);
 				size -= saved;
+				if (use_hash)
+				{
+					fz_item* existing = fz_hash_find(ctx, store->hash, &hash);
+					ASSERT(existing == item);
+					if (existing)
+					{
+						ASSERT(existing->val == val);
+						ASSERT(val->refs > 1);
+						ASSERT(val->refs < 100000);   // sanity check
+					}
+				}
 				if (saved == 0)
 				{
 					/* Failed to free any space. */
