@@ -172,6 +172,7 @@
 #include "mupdf/helpers/dir.h"
 #include "mupdf/assertions.h"
 #include "mupdf/helpers/mu-threads.h"
+#include "mupdf/helpers/cpu.h"
 
 #include <string.h>
 #include <stdlib.h>
