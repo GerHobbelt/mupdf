@@ -1252,7 +1252,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 								p = 6;
 							}
 						}
-						size_t slen = strlen(str);
+						size_t slen = strnlen(str, p);
 						size_t cliplen = (p != INT_MAX ? p : slen);
 						while (cliplen > slen) {
 							fmtputc(&out, ' ');
@@ -1283,7 +1283,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 								p = 6;
 							}
 						}
-						size_t slen = wcslen(str);
+						size_t slen = wcsnlen(str, p);
 						size_t cliplen = (p != INT_MAX ? p : slen);
 						while (cliplen > slen) {
 							fmtputc(&out, ' ');
