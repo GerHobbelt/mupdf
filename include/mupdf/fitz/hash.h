@@ -78,6 +78,27 @@ fz_hash_table *fz_new_hash_table(fz_context *ctx, int initialsize, int keylen, i
 void fz_drop_hash_table(fz_context *ctx, fz_hash_table *table);
 
 /**
+	Announce and ensure the table has sufficient storage for `count`
+	items more.
+
+	This function is useful when you will be inserting items in large
+	batches, thus reducing the number of hash table resize operations
+	and consequent rehashing (re-inserting) of items already stored
+	in the hash file before this call.
+
+	Returns 1 if this call broke atomicity (assuming you use a lock)
+	when all of these conditions are TRUE:
+
+	1. you created the hash table with the lock/mutex set to FZ_STORE_ALLOC.
+	2. fz_hash_ensure_space() has decided (based on internal heuristics)
+	   to resize (grow) the hash table.
+
+	Return 0 when atomicity was NOT broken by this call, i.e. when the
+	complete set of conditions above did not apply to this call.
+*/
+int fz_hash_ensure_space(fz_context* ctx, fz_hash_table* table, int count);
+
+/**
 	Search for a matching hash within the table, and return the
 	associated value.
 */
@@ -92,6 +113,13 @@ void *fz_hash_find(fz_context *ctx, fz_hash_table *table, const void *key);
 
 	If no existing entry with the same key is found, ownership of
 	val passes in, key is copied, and NULL is returned.
+
+	WARNING: when the hash table lock is set to use the FZ_STORE_ALLOC
+	mutex, then this operation is *potentially NON-ATOMIC*: the lock
+	will be temporarily dropped (and re-taken) when the hash table must
+	grow to accomodate the new item. The grow decision is heuristics-based
+	(80% fill ratio at the moment) hence you MUST assume it can happen
+	with any `fz_hash_insert()` call.
 */
 void *fz_hash_insert(fz_context *ctx, fz_hash_table *table, const void *key, void *val);
 

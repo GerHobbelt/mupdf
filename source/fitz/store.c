@@ -496,12 +496,23 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 
 		fz_try(ctx)
 		{
+			// we DO NOT want to break atomicity for the usual scenario here, hence
+			// we check if our item already exists in the store (cheap) before
+			// breaking atomicity during the fz_hash_insert() attempt below.
 			existing = fz_hash_find(ctx, store->hash, &hash);
 			if (!existing)
 			{
+				// Perform gymnastics similar to that in fz_process_opened_pages():
+				// keep an extra reference to the item so that no other thread can remove it
+				// during intermission time (i.e. dropped lock period) inside fz_hash_insert().
+				item->val->refs += 666;  // use a magic value for ease of debugging/diagnostics of suspicions.
+
 				/* May drop and retake the lock */
 				existing = fz_hash_insert(ctx, store->hash, &hash, item);
 				ASSERT(existing == NULL);
+
+				// now that we have our lock back, we can revert that do-not-drop refcount increase:
+				item->val->refs -= 666;
 			}
 			else
 			{
@@ -521,8 +532,6 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 		}
 		if (existing)
 		{
-			ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
-
 			/* There was one there already! Take a new reference
 			 * to the existing one, and drop our current one. */
 			fz_warn(ctx, "found duplicate %s in the store", type->name);
@@ -535,6 +544,9 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 				(void)Memento_takeRef(existing->val);
 				existing->val->refs++;
 			}
+			// Copying the to-be-used data pointer to a local partly 'fixed' the race condition
+			// crashes before we fixed it properly by temporarily upping the refcount above
+			// while we attempt to insert it into the hash (*a non-atomic operation*!)
 			void* rv = existing->val;
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
 			ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
@@ -542,6 +554,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
 			type->drop_key(ctx, key);
 			ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
+			ASSERT_AND_CONTINUE(existing->val == rv);
 			return rv;
 		}
 	}

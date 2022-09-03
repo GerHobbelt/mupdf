@@ -42,8 +42,8 @@ typedef struct
 struct fz_hash_table
 {
 	int keylen;
-	int size;
-	int load;
+	int size; // number of slots available
+	int load; // number of slots filled
 	int lock; /* -1 or the lock used to protect this hash table */
 	fz_hash_table_drop_fn *drop_val;
 	fz_hash_entry *ents;
@@ -69,6 +69,9 @@ fz_hash_table *
 fz_new_hash_table(fz_context *ctx, int initialsize, int keylen, int lock, fz_hash_table_drop_fn *drop_val)
 {
 	fz_hash_table *table;
+
+	if (initialsize < 16)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "initial hash table size (%d) too small", initialsize);
 
 	if (keylen > FZ_HASH_TABLE_KEY_LENGTH)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "hash table key length too large");
@@ -149,8 +152,15 @@ do_hash_insert(fz_context *ctx, fz_hash_table *table, const void *key, void *val
 }
 
 /* Entered with the lock taken, held throughout and at exit, UNLESS the lock
- * is the alloc lock in which case it may be momentarily dropped. */
-static void
+ * is the alloc lock in which case it may be momentarily dropped.
+ *
+ * Returns 1 when lock was dropped (and thus atomicity of the operation broken),
+ * 0 when the atomicity was upheld.
+ *
+ * Note that the hash table can only grow: any request to shrink the table
+ * is rejected. (You can *drop* a hash table, of course, but not through this function.)
+ */
+static int
 fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 {
 	fz_hash_entry *oldents = table->ents;
@@ -158,12 +168,10 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 	int oldsize = table->size;
 	int oldload = table->load;
 	int i;
+	int atomicity_broken = (table->lock == FZ_LOCK_ALLOC);
 
-	if (newsize < oldload * 8 / 10)
-	{
-		fz_warn(ctx, "assert: resize hash too small");
-		return;
-	}
+	// as size increases at with a factor of 2 always, this condition will never fail as we'll have a theoretical worst-case fill ratio of <= 50% vs. newsize:
+	ASSERT(newsize > oldload * 10 / 8);
 
 	if (table->lock == FZ_LOCK_ALLOC)
 		fz_unlock(ctx, table->lock);
@@ -180,7 +188,7 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 			fz_free(ctx, newents);
 			if (table->lock == FZ_LOCK_ALLOC)
 				fz_lock(ctx, table->lock);
-			return;
+			return atomicity_broken;
 		}
 	}
 	if (newents == NULL)
@@ -203,6 +211,8 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 	fz_free(ctx, oldents);
 	if (table->lock == FZ_LOCK_ALLOC)
 		fz_lock(ctx, table->lock);
+
+	return atomicity_broken;
 }
 
 void *
@@ -227,11 +237,26 @@ fz_hash_find(fz_context *ctx, fz_hash_table *table, const void *key)
 	}
 }
 
+int
+fz_hash_ensure_space(fz_context* ctx, fz_hash_table* table, int count)
+{
+	if (table->load + count > (table->size * 8) / 10)
+	{
+		int newsize = table->size * 2;
+
+		while (table->load + count > (newsize * 8) / 10)
+			newsize *= 2;
+
+		// drops lock temporarily.
+		return fz_resize_hash(ctx, table, newsize);
+	}
+	return 0;
+}
+
 void *
 fz_hash_insert(fz_context *ctx, fz_hash_table *table, const void *key, void *val)
 {
-	if (table->load > table->size * 8 / 10)
-		fz_resize_hash(ctx, table, table->size * 2);
+	fz_hash_ensure_space(ctx, table, 1);
 	return do_hash_insert(ctx, table, key, val);
 }
 
