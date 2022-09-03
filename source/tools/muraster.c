@@ -362,11 +362,7 @@ static fz_locks_context *init_muraster_locks(void)
 #elif defined(DISABLE_MUTHREADS)
 #define NUM_RENDER_THREADS 0
 #else
-#define NUM_RENDER_THREADS 3
-#endif
-
-#if defined(DISABLE_MUTHREADS) && NUM_RENDER_THREADS != 0
-#error "Can't have MURASTER_CONFIG_RENDER_THREADS > 0 without having a threading library!"
+#define NUM_RENDER_THREADS     num_workers = max(3, fz_get_cpu_core_count())
 #endif
 
 #ifdef MURASTER_CONFIG_BGPRINT
