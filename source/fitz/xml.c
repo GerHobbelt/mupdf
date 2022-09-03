@@ -1125,7 +1125,7 @@ static void xml_from_gumbo(fz_context *ctx, struct parser *parser, GumboNode *no
 }
 
 fz_xml *
-fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf)
+fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf, int dont_throw_on_error)
 {
 	struct parser parser;
 	fz_xml *xml = NULL;
@@ -1192,7 +1192,9 @@ fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf)
 				const char* errmsg = *errmsgs++;
 				fz_error(ctx, "HTML parser error: %s.\n", errmsg);
 			} while (*errmsgs);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to parse buffer as HTML");
+
+			if (!dont_throw_on_error)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to parse buffer as HTML");
 		}
 
 		xml_from_gumbo(ctx, &parser, soup->root);

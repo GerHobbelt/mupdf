@@ -3332,7 +3332,7 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 					if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
 					{
 						fz_warn(ctx, "syntax error in XML; retrying using HTML5 parser");
-						xml_doc = fz_parse_xml_from_html5(ctx, xml_buf);
+						xml_doc = fz_parse_xml_from_html5(ctx, xml_buf, FALSE);
 					}
 					else
 						fz_rethrow(ctx);
@@ -4097,6 +4097,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 	{
 		int restricted = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP);
 		int restricted_is_active = (fmt->flags & PDF_PRINT_LIMITED_ARRAY_DUMP_IS_ACTIVE);
+		int recover = (fmt->flags & PDF_DO_NOT_THROW_ON_CONTENT_PARSE_FAULTS);
 
 		if (restricted_is_active)
 		{
@@ -4162,23 +4163,62 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 					{
 						if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
 						{
-							if (!restricted)
+							char ex_msg[LONGLINE];
+							fz_strlcpy(ex_msg, fz_caught_message(ctx), sizeof(ex_msg));
+
+							fz_warn(ctx, "syntax error in XML stream data content: %s; retrying using HTML5 parser.", ex_msg);
+							fz_try(ctx)
 							{
-								fz_warn(ctx, "syntax error in XML; retrying using HTML5 parser");
-								fz_try(ctx)
-								{
-									xml_doc = fz_parse_xml_from_html5(ctx, xml_buf);
-								}
-								fz_catch(ctx)
-								{
-									fz_rethrow(ctx);
-								}
+								xml_doc = fz_parse_xml_from_html5(ctx, xml_buf, FALSE);
 							}
-							else
+							fz_catch(ctx)
 							{
-								// don't bother trying to parse this as HTML. Fail and keep it short.
-								fz_error(ctx, "cannot parse stream data as XML");
-								fz_rethrow(ctx);
+								if (recover)
+								{
+									// dump the raw data into the error channel, then attempt recovery as best we can:
+									fz_error(ctx, "syntax error in XML stream data content: %s. Will attempt recovery. Raw data dump:\n", ex_msg);
+									fz_error(ctx, "%.*c\n", -80, '=');
+
+									fz_terminate_buffer(ctx, xml_buf);
+									unsigned char* string_value;
+									size_t string_length = fz_buffer_storage(ctx, xml_buf, &string_value);
+
+									// TBD: test for UTF16 (BE/LE?) and convert to UTF8
+									
+									// now go and nuke any embedded NUL bytes: replace them by SPACE.
+									size_t i;
+									for (i = 0; i < string_length; i++)
+									{
+										if (string_value[i] == 0)
+											string_value[i] = ' ';
+									}
+									ASSERT_AND_CONTINUE_EQ(strlen(string_value), string_length);
+
+									// trim whitespace at end:
+									i = string_length;
+									while (i > 0)
+									{
+										i--;
+										if (isspace(string_value[i]))
+											string_value[i] = 0;
+									}
+
+									fz_error(ctx, "%s\n", string_value);
+									fz_error(ctx, "%.*c\n", -80, '=');
+
+									fz_try(ctx)
+									{
+										xml_doc = fz_parse_xml_from_html5(ctx, xml_buf, TRUE);
+									}
+									fz_catch(ctx)
+									{
+										i++;
+										i--;
+									}
+								}
+
+								if (!xml_doc)
+									fz_throw(ctx, FZ_ERROR_GENERIC, "unable to parse XML stream data: %s", ex_msg);
 							}
 						}
 						else
@@ -4186,6 +4226,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 							fz_rethrow(ctx);
 						}
 					}
+
 					xml_root = fz_xml_root(xml_doc);
 
 					if (!restricted_is_active && (!restricted || (datalen < fmt->restricted_size_limit / 4)))
@@ -4208,10 +4249,10 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 						fmt_backpedal_to(ctx, fmt, ',');
 					}
 
-						if (!xml_root)
-						{
-							fz_throw(ctx, FZ_ERROR_GENERIC, "syntax error in XML; unable to parse content as XML");
-						}
+					if (!xml_root)
+					{
+						fz_throw(ctx, FZ_ERROR_GENERIC, "syntax error in XML stream data; unable to parse content as XML");
+					}
 				}
 				else
 				{

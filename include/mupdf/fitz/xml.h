@@ -52,7 +52,7 @@ fz_xml *fz_parse_xml(fz_context *ctx, fz_buffer *buf, int preserve_white);
 	Parse the contents of a buffer into a tree of XML nodes,
 	using the HTML5 parsing algorithm.
 */
-fz_xml *fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf);
+fz_xml *fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf, int dont_throw_on_error);
 
 /**
 	Add a reference to the XML.

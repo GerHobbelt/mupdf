@@ -280,7 +280,7 @@ int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 #define PDF_PRINT_JSON_ILLEGAL_UNICODE_AS_HEX			0x2000		// 'smart' hexdump with charcodes intermingled
 #define PDF_PRINT_JSON_BINARY_DATA_AS_PURE_HEX			0x4000		// when analyzed as 'probably binary': hexdump only, no characters
 
-#define PDF_PRINT_REPORT_PARSE_FAULTS                   0x8000		// keep fmt_obj()-internal error reports for reporting afterwards.
+#define PDF_DO_NOT_THROW_ON_CONTENT_PARSE_FAULTS        0x8000		// do not throw() but output attempted recovery into stream. keep an error count in `fmt` options struct for reporting afterwards.
 
 // the maximum number of nested dictionaries and arrays to resolve in the output
 #define PDF_PRINT_JSON_DEPTH_LEVEL(n)					((n) & 0x7F)

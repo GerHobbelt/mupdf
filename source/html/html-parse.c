@@ -1395,7 +1395,7 @@ parse_to_xml(fz_context *ctx, fz_buffer *buf, int try_xml, int try_html5)
 			if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
 			{
 				fz_warn(ctx, "syntax error in XHTML; retrying using HTML5 parser");
-				xml = fz_parse_xml_from_html5(ctx, buf);
+				xml = fz_parse_xml_from_html5(ctx, buf, FALSE);
 			}
 			else
 				fz_rethrow(ctx);
@@ -1406,7 +1406,7 @@ parse_to_xml(fz_context *ctx, fz_buffer *buf, int try_xml, int try_html5)
 	else
 	{
 		assert(try_html5);
-		xml = fz_parse_xml_from_html5(ctx, buf);
+		xml = fz_parse_xml_from_html5(ctx, buf, FALSE);
 	}
 
 	return xml;

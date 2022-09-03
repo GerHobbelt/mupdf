@@ -422,7 +422,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		if (obj)
 		{
 			write_item_starter(ctx, out, "Metadata");
-			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_LIMITED_ARRAY_DUMP);
+			pdf_print_obj_to_json(ctx, out, obj, PRINT_OBJ_TO_JSON_FLAGS | PDF_PRINT_LIMITED_ARRAY_DUMP | PDF_DO_NOT_THROW_ON_CONTENT_PARSE_FAULTS);
 		}
 
 		if (!has_password_troubles)
