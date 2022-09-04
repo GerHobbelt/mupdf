@@ -27,6 +27,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifndef DEBUG_SCAVENGING
+#if !defined(NDEBUG)
+#define DEBUG_SCAVENGING 1
+#else
+#define DEBUG_SCAVENGING 0
+#endif
+#endif
+
 typedef struct fz_item
 {
 	void *key;
@@ -156,8 +164,6 @@ do_reap(fz_context *ctx)
 		}
 
 		/* Store whether to drop this value or not in 'prev' */
-		ASSERT(item->val->refs > 0);
-		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
 			(void)Memento_dropRef(item->val);
 		item->prev = (item->val->refs > 0 && --item->val->refs == 0) ? item : NULL;
@@ -297,8 +303,6 @@ evict(fz_context *ctx, fz_item *item)
 		store->head = item->next;
 
 	/* Drop a reference to the value (freeing if required) */
-	ASSERT(item->val->refs > 0);
-	ASSERT(item->val->refs < 100000);
 	if (item->val->refs > 0)
 		(void)Memento_dropRef(item->val);
 	drop = (item->val->refs > 0 && --item->val->refs == 0);
@@ -339,8 +343,6 @@ ensure_space(fz_context *ctx, size_t tofree)
 	count = 0;
 	for (item = store->tail; item; item = item->prev)
 	{
-		ASSERT(item->val->refs > 0);
-		ASSERT(item->val->refs < 100000);
 		if (item->val->refs == 1)
 		{
 			count += item->size;
@@ -360,8 +362,6 @@ ensure_space(fz_context *ctx, size_t tofree)
 	for (item = store->tail; item; item = prev)
 	{
 		prev = item->prev;
-		ASSERT(item->val->refs > 0);
-		ASSERT(item->val->refs < 100000);
 		if (item->val->refs != 1)
 			continue;
 
@@ -407,8 +407,6 @@ ensure_space(fz_context *ctx, size_t tofree)
 		to_be_freed = to_be_freed->next;
 
 		/* Drop a reference to the value (freeing if required) */
-		ASSERT(item->val->refs > 0);
-		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
 			(void)Memento_dropRef(item->val);
 		drop = (item->val->refs > 0 && --item->val->refs == 0);
@@ -494,8 +492,6 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 	item->prev = item;
 	item->type = type;
 
-	int which_path_did_i_take = 0;
-
 	/* If we can index it fast, put it into the hash table. This serves
 	 * to check whether we have one there already. */
 	if (use_hash)
@@ -505,36 +501,39 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 		fz_try(ctx)
 		{
 			ASSERT(item->val->refs >= 1);
+			
 			// we DO NOT want to break atomicity for the usual scenario here, hence
 			// we check if our item already exists in the store (cheap) before
 			// breaking atomicity during the fz_hash_insert() attempt below.
-			existing = fz_hash_find(ctx, store->hash, &hash);
-			if (!existing)
-			{
-				which_path_did_i_take = 1;
-				// Perform gymnastics similar to that in fz_process_opened_pages():
-				// keep an extra reference to the item so that no other thread can remove it
-				// during intermission time (i.e. dropped lock period) inside fz_hash_insert().
-				item->val->refs += 666;  // use a magic value for ease of debugging/diagnostics of suspicions.
-				ASSERT(item->val->refs >= 667);
+			
+			//existing = fz_hash_find(ctx, store->hash, &hash);
+			//if (!existing)
+			//{
+			//	which_path_did_i_take = 1;
+			
+			// Perform gymnastics similar to that in fz_process_opened_pages():
+			// keep an extra reference to the item so that no other thread can remove it
+			// during intermission time (i.e. dropped lock period) inside fz_hash_insert().
+			item->val->refs += 666;  // use a magic value for ease of debugging/diagnostics of suspicions.
+			ASSERT(item->val->refs >= 667);
 
-				/* May drop and retake the lock */
-				existing = fz_hash_insert(ctx, store->hash, &hash, item);
-				ASSERT(item->val->refs >= 667);
-				ASSERT(existing == NULL);
-				ASSERT(item == fz_hash_find(ctx, store->hash, &hash));
+			/* May drop and retake the lock */
+			existing = fz_hash_insert(ctx, store->hash, &hash, item);
+			ASSERT(item->val->refs >= 667);
+			//ASSERT(existing == NULL);
+			//ASSERT(item == fz_hash_find(ctx, store->hash, &hash));
 
-				// now that we have our lock back, we can revert that do-not-drop refcount increase:
-				item->val->refs -= 666;
-				ASSERT(item->val->refs >= 1);
-			}
-			else
-			{
-				which_path_did_i_take = 2;
-				ASSERT(existing->val->refs > 0);
-				ASSERT(existing->val->refs < 100000);   // sanity check
-				ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
-			}
+			// now that we have our lock back, we can revert that do-not-drop refcount increase:
+			item->val->refs -= 666;
+			ASSERT(item->val->refs >= 1);
+			//}
+			//else
+			//{
+			//	which_path_did_i_take = 2;
+			//	ASSERT(existing->val->refs > 0);
+			//	ASSERT(existing->val->refs < 100000);   // sanity check
+			//	ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
+			//}
 		}
 		fz_catch(ctx)
 		{
@@ -553,16 +552,17 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			fz_warn(ctx, "found duplicate %s in the store", type->name);
 			touch(store, existing);
 			ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
-			ASSERT(existing->val->refs > 0);
-			ASSERT(existing->val->refs < 100000);   // sanity check
+			//ASSERT(existing->val->refs > 0);
+			//ASSERT(existing->val->refs < 100000);   // sanity check
 			if (existing->val->refs > 0)
 			{
-				which_path_did_i_take |= 4;
+				//which_path_did_i_take |= 4;
 				(void)Memento_takeRef(existing->val);
 				existing->val->refs++;
 			}
-			ASSERT(existing->val->refs > 1);
-			ASSERT(existing->val->refs < 100000);
+			//ASSERT(existing->val->refs > 1);
+			//ASSERT(existing->val->refs < 100000);
+			
 			// Copying the to-be-used data pointer to a local partly 'fixed' the race condition
 			// crashes before we fixed it 'properly' by temporarily upping the refcount above
 			// while we attempt to insert it into the hash (*a non-atomic operation*!)
@@ -671,23 +671,18 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			//ASSERT_AND_CONTINUE(existing->val == rv);
 			ASSERT_AND_CONTINUE(exist_copy.val == rv);
 
-			ASSERT(rv->refs > 0);
-			ASSERT(rv->refs < 100000);   // sanity check
+			//ASSERT(rv->refs > 0);
+			//ASSERT(rv->refs < 100000);   // sanity check
 			return rv;
 		}
 	}
 
 	/* Now bump the ref */
-	ASSERT(val->refs > 0);
-	ASSERT(val->refs < 100000);
 	if (val->refs > 0)
 	{
 		(void)Memento_takeRef(val);
 		val->refs++;
 	}
-	ASSERT(item->val == val);
-	ASSERT(item->val->refs > 1);
-	ASSERT(item->val->refs < 100000);   // sanity check
 
 	/* If we haven't got an infinite store, check for space within it */
 	if (store->max != FZ_STORE_UNLIMITED)
@@ -714,8 +709,6 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 						if (existing)
 						{
 							ASSERT(existing->val == val);
-							ASSERT(val->refs > 1);
-							ASSERT(val->refs < 100000);   // sanity check
 						}
 					}
 				}
@@ -733,8 +726,6 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 					if (existing)
 					{
 						ASSERT(existing->val == val);
-						ASSERT(val->refs > 1);
-						ASSERT(val->refs < 100000);   // sanity check
 					}
 				}
 				if (saved == 0)
@@ -807,8 +798,6 @@ fz_find_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_store_
 		 * store being full. */
 		touch(store, item);
 		/* And bump the refcount before returning */
-		ASSERT(item->val->refs > 0);
-		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
 		{
 			(void)Memento_takeRef(item->val);
@@ -869,12 +858,8 @@ fz_remove_item(fz_context *ctx, fz_store_drop_fn *drop, void *key, const fz_stor
 			else
 				store->head = item->next;
 		}
-		ASSERT(item->val->refs > 0);
-		ASSERT(item->val->refs < 100000);
 		if (item->val->refs > 0)
-		{
 			(void)Memento_dropRef(item->val);
-		}
 		dodrop = (item->val->refs > 0 && --item->val->refs == 0);
 		fz_unlock(ctx, FZ_LOCK_ALLOC);
 		if (dodrop)
@@ -1126,7 +1111,7 @@ int fz_store_scavenge(fz_context *ctx, size_t size, int *phase)
 	if (store == NULL)
 		return 0;
 
-#ifdef DEBUG_SCAVENGING
+#if DEBUG_SCAVENGING
 	fz_write_printf(ctx, fz_stdout(ctx), "Scavenging: store=%zu size=%zu phase=%d\n", store->size, size, *phase);
 	fz_debug_store_locked(ctx, fz_stdout(ctx));
 	Memento_stats();
@@ -1154,7 +1139,7 @@ int fz_store_scavenge(fz_context *ctx, size_t size, int *phase)
 
 		if (scavenge(ctx, tofree))
 		{
-#ifdef DEBUG_SCAVENGING
+#if DEBUG_SCAVENGING
 			fz_write_printf(ctx, fz_stdout(ctx), "scavenged: store=%zu\n", store->size);
 			fz_debug_store(ctx, fz_stdout(ctx));
 			Memento_stats();
@@ -1164,7 +1149,7 @@ int fz_store_scavenge(fz_context *ctx, size_t size, int *phase)
 	}
 	while (max > 0);
 
-#ifdef DEBUG_SCAVENGING
+#if DEBUG_SCAVENGING
 	fz_write_printf(ctx, fz_stdout(ctx), "scavenging failed\n");
 	fz_debug_store(ctx, fz_stdout(ctx));
 	Memento_listBlocks();
@@ -1186,7 +1171,7 @@ fz_shrink_store(fz_context *ctx, unsigned int percent)
 	if (store == NULL)
 		return 0;
 
-#ifdef DEBUG_SCAVENGING
+#if DEBUG_SCAVENGING
 	fz_write_printf(ctx, fz_stdout(ctx), "fz_shrink_store: %zu\n", store->size/(1024*1024));
 #endif
 	fz_lock(ctx, FZ_LOCK_ALLOC);
@@ -1197,7 +1182,7 @@ fz_shrink_store(fz_context *ctx, unsigned int percent)
 
 	success = (store->size <= new_size) ? 1 : 0;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
-#ifdef DEBUG_SCAVENGING
+#if DEBUG_SCAVENGING
 	fz_write_printf(ctx, fz_stdout(ctx), "fz_shrink_store after: %zu\n", store->size/(1024*1024));
 #endif
 
