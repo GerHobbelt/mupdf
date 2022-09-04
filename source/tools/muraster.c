@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2004-2021 Artifex Software, Inc.
+﻿// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -363,7 +363,7 @@ static fz_locks_context *init_muraster_locks(void)
 #elif defined(DISABLE_MUTHREADS)
 #define NUM_RENDER_THREADS 0
 #else
-#define NUM_RENDER_THREADS     num_workers = max(3, fz_get_cpu_core_count())
+#define NUM_RENDER_THREADS     fz_get_cpu_core_count()
 #endif
 
 #ifdef MURASTER_CONFIG_BGPRINT
@@ -429,6 +429,7 @@ static int no_icc = 0;
 static int ignore_errors = 0;
 static int alphabits_text = 8;
 static int alphabits_graphics = 8;
+static int subpix_preset = 0;
 
 static int min_band_height;
 static size_t max_band_memory;
@@ -540,10 +541,10 @@ static int usage(void)
 		"    png, pam, pbm, pgm, pkm, ppm\n"
 		"\n"
 		"  -q    be quiet (don't print progress messages)\n"
-		"  -v    verbose (repeat to increase the chattiness of the application)\n"
+		"  -v    verbose ~ not quiet (repeat to increase the chattiness of the application)\n"
 		"  -s -  show extra information:\n"
-		"    m   show memory use\n"
-		"    t   show timings\n"
+		"     m      show memory use\n"
+		"     t      show timings\n"
 		"\n"
 		"  -R {auto,0,90,180,270}\n"
 		"        rotate clockwise (default: auto)\n"
@@ -554,7 +555,14 @@ static int usage(void)
 		"  -B -  minimum band height (e.g. 32)\n"
 		"  -M -  max band memory (e.g. 655360)\n"
 #ifndef DISABLE_MUTHREADS
-		"  -T -  number of threads to use for rendering\n"
+		"  -T -  number of threads to use for rendering (banded mode only), where number arg\n"
+		"        is one of:\n"
+		"     N      equals the number of (virtual) CPU cores on this machine\n"   
+		"     *      = N\n"   
+		"     4      or any other positive integer number\n"   
+		"     50%    or any other percentage of N\n"
+		"     -2     or any other negative integer: so many less than N. (Hence keeps\n"
+		"            cores free for independent tasks.\n"
 #else
 		"  -T -  number of threads to use for rendering (disabled in this non-threading\n"
 		"        build)\n"
@@ -571,8 +579,11 @@ static int usage(void)
 		"  -U -  file name of user stylesheet for EPUB layout\n"
 		"  -X    disable document styles for EPUB layout\n"
 		"\n"
-		"  -A -  number of bits of antialiasing (0 to 8)\n"
-		"  -A -/-  number of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"  -A -  number of bits of anti-aliasing (0 to 8)\n"
+		"  -A -/-  number of bits of anti-aliasing (0 to 8) (graphics, text)\n"
+		"  -A -/-/-  number of bits of antialiasing (0 to 8) (graphics, text)\n"
+		"            subpix preset: 0 = default, 1 = reduced\n"
+		"  -J -  set PNG output compression level: 0 (none), 1 (fast)..9 (best)\n"
 		"\n"
 		"  -m -  specify custom memory limits:\n"
 		"    sNNN   set memory limit to NNN bytes: the application will not be allowed\n"
@@ -1667,6 +1678,13 @@ static float humanize(size_t value, const char** unit)
 	return result;
 }
 
+/* Reduced quality sub pix quantizer, intended to match pdfium. */
+static void reduced_sub_pix_quantizer(float size, int *x, int *y)
+{
+	*x = 3;
+	*y = 1;
+}
+
 static void mu_drop_context(void)
 {
 	if (muraster_is_toplevel_ctx)
@@ -1777,6 +1795,7 @@ int main(int argc, const char** argv)
 	ignore_errors = 0;
 	alphabits_text = 8;
 	alphabits_graphics = 8;
+	subpix_preset = 0;
 
 	lowmemory = 0;
 
@@ -1802,7 +1821,7 @@ int main(int argc, const char** argv)
 	res_specified = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvVPl:Nm:h")) != -1)
+	while ((c = fz_getopt(argc, argv, "p:o:F:R:r:w:h:fB:M:s:A:iW:H:S:T:U:XLvVPl:Nm:hJ:")) != -1)
 	{
 		switch (c)
 		{
@@ -1823,6 +1842,7 @@ int main(int argc, const char** argv)
 		case 'f': fit = 1; break;
 		case 'B': min_band_height = atoi(fz_optarg); break;
 		case 'M': max_band_memory = atoi(fz_optarg); break;
+		case 'J': fz_default_png_compression_level(fz_atoi(fz_optarg)); break;
 
 		case 'W': layout_w = fz_atof(fz_optarg); break;
 		case 'H': layout_h = fz_atof(fz_optarg); break;
@@ -1841,7 +1861,14 @@ int main(int argc, const char** argv)
 			alphabits_graphics = atoi(fz_optarg);
 			sep = strchr(fz_optarg, '/');
 			if (sep)
+			{
 				alphabits_text = atoi(sep+1);
+				sep = strchr(sep+1, '/');
+				if (sep)
+				{
+					subpix_preset = atoi(sep+1);
+				}
+			}
 			else
 				alphabits_text = alphabits_graphics;
 			break;
@@ -1852,7 +1879,8 @@ int main(int argc, const char** argv)
 
 		case 'T':
 #ifndef DISABLE_MUTHREADS
-			num_workers = atoi(fz_optarg); break;
+			num_workers = fz_parse_pool_threadcount_preference(fz_optarg, 0, 0, 0);
+			break;
 #else
 			fz_warn(ctx, "Threads not enabled in this build");
 			break;
@@ -1865,7 +1893,10 @@ int main(int argc, const char** argv)
 		case 'L': lowmemory = 1; break;
 		case 'P':
 #ifndef DISABLE_MUTHREADS
-			bgprint.active = 1; break;
+			bgprint.active = 1;
+			if (!num_workers)
+				num_workers = fz_maxi(2, fz_get_cpu_core_count());
+			break;
 #else
 			fz_warn(ctx, "Threads not enabled in this build");
 			break;
@@ -1941,6 +1972,8 @@ int main(int argc, const char** argv)
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
 		fz_set_graphics_min_line_width(ctx, min_line_width);
+		if (subpix_preset)
+			fz_set_graphics_sub_pix_quantizer(ctx, reduced_sub_pix_quantizer);
 		if (no_icc)
 			fz_disable_icc(ctx);
 		else

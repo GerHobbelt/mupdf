@@ -483,10 +483,10 @@ static int usage(void)
 		"  -q    be quiet (don't print progress messages)\n"
 		"  -v    verbose ~ not quiet (repeat to increase the chattiness of the application)\n"
 		"  -s -  show extra information:\n"
-		"    m - show memory use\n"
-		"    t - show timings\n"
-		"    f - show page features\n"
-		"    5 - show md5 checksum of rendered image\n"
+		"     m      show memory use\n"
+		"     t      show timings\n"
+		"     f      show page features\n"
+		"     5      show md5 checksum of rendered image\n"
 		"\n"
 		"  -R {auto,0,90,180,270}\n"
 		"        rotate clockwise (default: auto)\n"
@@ -498,10 +498,22 @@ static int usage(void)
 		"  -B -  maximum band height (pXm, pcl, pclm, ocr.pdf, ps, psd, muraw and png output\n"
 		"        only)\n"
 #ifndef DISABLE_MUTHREADS
-		"  -T -  number of threads to use for rendering (banded mode only)\n"
+		"  -T -  number of threads to use for rendering (banded mode only), where number arg\n"
+		"        is one of:\n"
+		"     N      equals the number of (virtual) CPU cores on this machine\n"   
+		"     *      = N\n"   
+		"     4      or any other positive integer number\n"   
+		"     50%    or any other percentage of N\n"
+		"     -2     or any other negative integer: so many less than N. (Hence keeps\n"
+		"            cores free for independent tasks.\n"
 #else
 		"  -T -  number of threads to use for rendering (disabled in this non-threading\n"
 		"        build)\n"
+#endif
+#ifndef DISABLE_MUTHREADS
+		"  -P    parallel interpretation/rendering\n"
+#else
+		"  -P    parallel interpretation/rendering (disabled in this non-threading build)\n"
 #endif
 		"\n"
 		"  -W -  page width for EPUB layout\n"
@@ -535,11 +547,6 @@ static int usage(void)
 		"  -J -  set PNG output compression level: 0 (none), 1 (fast)..9 (best)\n"
 		"  -i    ignore errors\n"
 		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
-#ifndef DISABLE_MUTHREADS
-		"  -P    parallel interpretation/rendering\n"
-#else
-		"  -P    parallel interpretation/rendering (disabled in this non-threading build)\n"
-#endif
 		"  -N    disable ICC workflow (\"N\"o color management)\n"
 		"  -O -  Control spot/overprint rendering\n"
 #if FZ_ENABLE_SPOT_RENDERING
@@ -553,10 +560,10 @@ static int usage(void)
 #endif
 #ifndef OCR_DISABLED
 		"  -t -  Specify language/script for OCR (default: eng)\n"
-		"  -d -\tSpecify path for OCR files (default: rely on TESSDATA_PREFIX environment variable)\n"
+		"  -d -  Specify path for OCR files (default: rely on TESSDATA_PREFIX environment variable)\n"
 #else
-		"  -t -  Specify language/script for OCR (default: eng) (disabled)\n"
-		"  -d -\tSpecify path for OCR files (default: rely on TESSDATA_PREFIX environment variable) (disabled)\n"
+		"  -t -  OCR language    (the OCR feature is not available in this build)\n"
+		"  -d -  OCR datafiles   (the OCR feature is not available in this build)\n"
 #endif
 		"\n"
 		"  -y l  List the layer configs to stderr\n"
@@ -2755,7 +2762,8 @@ int main(int argc, const char** argv)
 
 		case 'T':
 #ifndef DISABLE_MUTHREADS
-			num_workers = atoi(fz_optarg); break;
+			num_workers = fz_parse_pool_threadcount_preference(fz_optarg, 0, 0, 0);
+			break;
 #else
 			fz_warn(ctx, "Threads not enabled in this build");
 			break;
@@ -2784,7 +2792,7 @@ int main(int argc, const char** argv)
 #ifndef DISABLE_MUTHREADS
 			bgprint.active = 1;
 			if (!num_workers)
-				num_workers = max(3, fz_get_cpu_core_count());
+				num_workers = fz_maxi(2, fz_get_cpu_core_count());
 			break;
 #else
 			fz_warn(ctx, "Threads not enabled in this build");
