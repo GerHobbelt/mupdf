@@ -420,6 +420,7 @@ void fz_lock_debug_lock_obtained(fz_context *ctx, int lock)
 	{
 		fz_error(ctx, "Obtained lock %d when held already!", lock);
 	}
+#if 0
 	for (i = lock-1; i >= 0; i--)
 	{
 		if (fz_locks_debug[idx][i] != 0)
@@ -427,6 +428,7 @@ void fz_lock_debug_lock_obtained(fz_context *ctx, int lock)
 			fz_error(ctx, "Lock ordering violation: obtained lock %d when %d held already!", lock, i);
 		}
 	}
+#endif
 	fz_locks_debug[idx][lock] = 1;
 }
 
