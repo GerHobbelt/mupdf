@@ -175,7 +175,10 @@ do_reap(fz_context *ctx)
 
 		/* Drop a reference to the value (freeing if required) */
 		if (item->prev)
+		{
 			item->val->drop(ctx, item->val);
+			item->val = NULL;
+		}
 
 		/* Always drops the key and drop the item */
 		item->type->drop_key(ctx, item->key);
@@ -310,7 +313,10 @@ evict(fz_context *ctx, fz_item *item)
 	}
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
 	if (drop)
+	{
 		item->val->drop(ctx, item->val);
+		item->val = NULL;
+	}
 
 	/* Always drops the key and drop the item */
 	item->type->drop_key(ctx, item->key);
@@ -488,6 +494,8 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 	item->prev = item;
 	item->type = type;
 
+	int which_path_did_i_take = 0;
+
 	/* If we can index it fast, put it into the hash table. This serves
 	 * to check whether we have one there already. */
 	if (use_hash)
@@ -496,27 +504,33 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 
 		fz_try(ctx)
 		{
+			ASSERT(item->val->refs >= 1);
 			// we DO NOT want to break atomicity for the usual scenario here, hence
 			// we check if our item already exists in the store (cheap) before
 			// breaking atomicity during the fz_hash_insert() attempt below.
 			existing = fz_hash_find(ctx, store->hash, &hash);
 			if (!existing)
 			{
+				which_path_did_i_take = 1;
 				// Perform gymnastics similar to that in fz_process_opened_pages():
 				// keep an extra reference to the item so that no other thread can remove it
 				// during intermission time (i.e. dropped lock period) inside fz_hash_insert().
 				item->val->refs += 666;  // use a magic value for ease of debugging/diagnostics of suspicions.
+				ASSERT(item->val->refs >= 667);
 
 				/* May drop and retake the lock */
 				existing = fz_hash_insert(ctx, store->hash, &hash, item);
+				ASSERT(item->val->refs >= 667);
 				ASSERT(existing == NULL);
 				ASSERT(item == fz_hash_find(ctx, store->hash, &hash));
 
 				// now that we have our lock back, we can revert that do-not-drop refcount increase:
 				item->val->refs -= 666;
+				ASSERT(item->val->refs >= 1);
 			}
 			else
 			{
+				which_path_did_i_take = 2;
 				ASSERT(existing->val->refs > 0);
 				ASSERT(existing->val->refs < 100000);   // sanity check
 				ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
@@ -543,22 +557,122 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			ASSERT(existing->val->refs < 100000);   // sanity check
 			if (existing->val->refs > 0)
 			{
+				which_path_did_i_take |= 4;
 				(void)Memento_takeRef(existing->val);
 				existing->val->refs++;
 			}
 			ASSERT(existing->val->refs > 1);
 			ASSERT(existing->val->refs < 100000);
 			// Copying the to-be-used data pointer to a local partly 'fixed' the race condition
-			// crashes before we fixed it properly by temporarily upping the refcount above
+			// crashes before we fixed it 'properly' by temporarily upping the refcount above
 			// while we attempt to insert it into the hash (*a non-atomic operation*!)
-			void* rv = existing->val;
+			//
+			// What actually happened at the race condition / crashes we were experiencing
+			// during bulktest runs, it turns out after several days of running/waiting/debugging,
+			// is that:
+			//
+			// 1. yes, fz_hash_insert() above is non-atomic when growing the hash table to inject
+			//    the current item. That's troublesome in itself when you don't have proper
+			//    refcounts set for your aspiring `item` as competing threads MAY decide to
+			//    reap/garbage-collect it before you can say '*cheese!*'. That is a *separate*
+			//    problem though, as then `existing` will be NULL and we wouldn't be standing here
+			//    with a completely rotten `existing` record (UAF - Use After Free in the
+			//    #if 0'd code below)
+			// 2. yes, our added fz_hash_find() up front above is nicely helping our code review
+			//    analysis decide that we got here then through an 'atomic operation', making it
+			//    all that much weirder that my `existing`-referenced struct was being `fz_free()`d
+			//    by a competing thread from under my arse as soon as the lock was lifted just
+			//    above.
+			//
+			// My fault wqs I was thinking insert/find/remove, but there's also
+			// `fz_empty_store()` to consider!! Now that one sounds nice and atomic
+			// at first glance and it really doesn't matter if it is, because
+			// I finally got to the point where I could look at the `item` and
+			// `existing`-referenced structs from *before* they got clobbered by
+			// having local copies made just before releasing the lock.
+			// And THEN it turns out that the last remaining glitches that made
+			// it through into the debugger during bulktest runs were a few
+			// where the store->list was EMPTY and the `existing`-copy had
+			// both its `prev` and `next` set to NULL, i.e. we were looking at
+			// the last remaining item in the LRU cache here!
+			//
+			// So it turned out to go something like this:
+			//
+			// 1. we lift the lock just a few statements ago. (We breathe out)
+			// 2. Competitor B decides to have a look and call *evict* on the
+			//    bloody lot, nuking the `fz_item`s that were still in the
+			//    cache (which INCLUDES the one we got back from our nicely
+			//    atomic fz_hash_find(), mind you!
+			//    Having nuked the lot, we breathe out.
+			//    (Meanwhile having spared the last `var` part as it has
+			//    refcount >= 2, so someone else is still referencing it:
+			//    that would be US! `existing->val->refs++;` a couple of line back!)
+			// 3. we take a tentative step into unprotected code country,
+			//    `fz_free()` our `item` and all that and THEN...
+			// 4. (B0RK!) ... we dereferenced `existing` to give us our
+			//    properly refcount-protected `val` reference!
+			// 
+			// *BZZZZT!*
+			//
+			// This explains why I didn't see any more corruption in the bulktest
+			// runs after having moved that `val` *inside the lock* -- apart
+			// from a lot of instrumentation ASSERTs here firing because I did not
+			// yet understand what really was going on: I knew `existing` was pointing
+			// at freed memory after either `fz_free()` or `drop_key()` above,
+			// but I had no iron-clad-guaranteed thread-safe explanation WHY my
+			// *intuition*-driven code, where I made the `returnvalue = existing->val`
+			// dereference *inside the critical section*, was really improving
+			// time-till-next-glitch-occurrence: it felt like a fluke at first,
+			// but now I know: these couple of weeks I was looking at 3(!) different
+			// thread-safety race condition issues, that worked together to produce
+			// a RARE-but-fatal mess:
+			//
+			// 1. the thread safety issue with the JBig2 code not having a proper
+			//    locking, i.e. not having correct ATOMIC semantics around
+			//    reference counting and heap allocation COMBINED.
+			// 2. the thread-safety issue above due to `fz_hash_insert()`
+			//    above being NON-ATOMIC while we were injecting a 'temporary'
+			//    item into the hash table -- now that I write this, it was possibly
+			//    safe to begin with as `refcount=1` on that one when it gets
+			//    inserted...
+			// 3. me not realizing that by the time we get here in the code, the
+			//    competition can *legally* have executed an eviction of the entire
+			//    cache, thus making our `existing` pointer a *piece of crap* as
+			//    soon as it leaves the critical section. The `val` we were after
+			//    MUST be obtained within the critsec, so we can discard `existing`
+			//    then. Meanwhile that competitor-driven eviction WILL NOT destroy
+			//    our `val`-referenced data as it's got its refcount bumped
+			//    properly just a few statements earlier.
+			//
+			// And that wraps it up!
+			//
+			// TODO: test my latest hypothesis: that the refcount +/- hack
+			// around `fz_hash_insert()` can be removed PLUS that we can
+			// remove the `fz_hash_find() call as well (and let `fz_hash_insert()`
+			// handle that situation again) for we SHOULD be safe anyway:
+			// `fz_hash_insert()` *only* is non-atomic when it has not yet (!)
+			// executed its implicit `fz_hash_find()` equivalent code, so
+			// any break in atomicity doesn't 'see' our local `item` yet!
+			// And IFF `fz_hash_insert()` decides to inject it into the hash
+			// table, then we won't be arriving here as `existing` will be set
+			// to `NULL` then.
+			//
+			// --- Fini! ---
+
+			fz_item item_copy = *item; // keeping a copy for debugging
+			fz_item exist_copy = *existing; // keeping a copy for debugging
+			fz_storable* rv = existing->val;
 			fz_unlock(ctx, FZ_LOCK_ALLOC);
-			ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
+			//ASSERT((void*)existing->val != (void*)0xddddddddddddddddULL);
 			fz_free(ctx, item);
-			ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
+			//ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
 			type->drop_key(ctx, key);
-			ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
-			ASSERT_AND_CONTINUE(existing->val == rv);
+			//ASSERT_AND_CONTINUE((void*)existing->val != (void*)0xddddddddddddddddULL);
+			//ASSERT_AND_CONTINUE(existing->val == rv);
+			ASSERT_AND_CONTINUE(exist_copy.val == rv);
+
+			ASSERT(rv->refs > 0);
+			ASSERT(rv->refs < 100000);   // sanity check
 			return rv;
 		}
 	}
