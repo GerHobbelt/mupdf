@@ -168,27 +168,27 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 	int oldsize = table->size;
 	int oldload = table->load;
 	int i;
-	int atomicity_broken = (table->lock == FZ_LOCK_ALLOC);
+	int break_atomicity = (table->lock == FZ_LOCK_ALLOC);
 
-	// as size increases at with a factor of 2 always, this condition will never fail as we'll have a theoretical worst-case fill ratio of <= 50% vs. newsize:
+	// as size increases with a factor of 2 always, this condition will never fail as we'll have a theoretical worst-case fill ratio of <= 50% vs. newsize:
 	ASSERT(newsize > oldload * 10 / 8);
 
-	if (table->lock == FZ_LOCK_ALLOC)
+	if (break_atomicity)
 		fz_unlock(ctx, table->lock);
 	newents = fz_malloc_no_throw(ctx, newsize * sizeof (fz_hash_entry));
-	if (table->lock == FZ_LOCK_ALLOC)
+	if (break_atomicity)
 		fz_lock(ctx, table->lock);
 	if (table->lock >= 0)
 	{
 		if (table->size >= newsize)
 		{
 			/* Someone else fixed it before we could lock! */
-			if (table->lock == FZ_LOCK_ALLOC)
+			if (break_atomicity)
 				fz_unlock(ctx, table->lock);
 			fz_free(ctx, newents);
-			if (table->lock == FZ_LOCK_ALLOC)
+			if (break_atomicity)
 				fz_lock(ctx, table->lock);
-			return atomicity_broken;
+			return break_atomicity;
 		}
 	}
 	if (newents == NULL)
@@ -206,13 +206,13 @@ fz_resize_hash(fz_context *ctx, fz_hash_table *table, int newsize)
 		}
 	}
 
-	if (table->lock == FZ_LOCK_ALLOC)
+	if (break_atomicity)
 		fz_unlock(ctx, table->lock);
 	fz_free(ctx, oldents);
-	if (table->lock == FZ_LOCK_ALLOC)
+	if (break_atomicity)
 		fz_lock(ctx, table->lock);
 
-	return atomicity_broken;
+	return break_atomicity;
 }
 
 void *
@@ -240,11 +240,28 @@ fz_hash_find(fz_context *ctx, fz_hash_table *table, const void *key)
 int
 fz_hash_ensure_space(fz_context* ctx, fz_hash_table* table, int count)
 {
-	if (table->load + count > (table->size * 8) / 10)
+	// for fun, a tiny optimization that a compiler cannot do: 
+	// see the 'P.S. nitpickers' note in `fz_hash_insert()` below.
+	//
+	// the heuristic for triggering hash table growth action was:
+	//   fill ratio (`= load + count`) > 80%
+	//
+	// div by 10 takes clockcycles; division by a power-of-2 is a fast
+	// bitshift which the compiler will surely produce.
+	//
+	// 8/10 (80%) ~ 13/16 (81.25%)
+	//
+	// so we'll go with that AND make the `>` check a `>=` check to
+	// 'compensate' for the extra 1.25%. ;-)
+	//
+	// Old:
+	//   if (table->load + count > (table->size * 8) / 10)
+	// New:
+	if (table->load + count >= (table->size * 13) / 16)
 	{
 		int newsize = table->size * 2;
 
-		while (table->load + count > (newsize * 8) / 10)
+		while (table->load + count >= (newsize * 13) / 16)
 			newsize *= 2;
 
 		// drops lock temporarily.
@@ -256,7 +273,35 @@ fz_hash_ensure_space(fz_context* ctx, fz_hash_table* table, int count)
 void *
 fz_hash_insert(fz_context *ctx, fz_hash_table *table, const void *key, void *val)
 {
-	fz_hash_ensure_space(ctx, table, 1);
+	// `fz_hash_ensure_space()` MAY break atomicity (drop + re-acquire lock)
+	// when it has determined the hash table needs to grow!
+	//
+	// To prevent a race condition at EXTREME LOADS where 
+	// 1. a competing thread has done the resize work already while we were 
+	//    in the dropped-lock zone in `fz_hash_ensure_space()`, which is
+	//    signalled to us by `fz_hash_ensure_space()` returning 1, AND
+	// 2. one or more competing threads have already used up all that freshly
+	//    allocated space in the same time slot,
+	// THEN we would face a situation where there would NBOT be sufficient 
+	// space in the hash table to insert our item.
+	//
+	// HENCE we MUST ensure that the 'enough-space-available' check PLUS the
+	// insert-item action itself are GUARANTEED ATOMIC.
+	//
+	// We therefor loop `fz_hash_ensure_space()` until it reports 0, i.e.
+	// the active critical section has not been broken.
+	//
+	// Yes, this is an *almost* theoretical race as the chances of it occurring
+	// are close to *infinitely small*, but I've seen stuff like that happen
+	// like it was clockwork in complex, heavily loaded systems. Writing
+	// thread-safe software is all about GUARANTEEING thread-safety, so we better
+	// make sure! The usual run-time cost is utterly negligible (func-call + fast integer
+	// calculus & comparison). 
+	//
+	// P.S. to throw nitpickers a bone, we've optimized the growth check calculus by getting
+	// rid of the division by 10, which even on modern hardware is relatively costly.
+	while(0 != fz_hash_ensure_space(ctx, table, 1))
+		;
 	return do_hash_insert(ctx, table, key, val);
 }
 
