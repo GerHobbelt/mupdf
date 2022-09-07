@@ -40,6 +40,7 @@ OutputDir=Z:\lib\tooling\qiqqa\MuPDF\platform\win32\bin\Debug-Unicode-64bit-x64\
 SetupIconFile=..\..\scripts\qiqqa-mutools-packager\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
+CompressionThreads=auto
 
 LZMAUseSeparateProcess=yes
 LZMABlockSize=262144
