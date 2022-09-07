@@ -26,6 +26,7 @@
 #if defined(_WIN32)
 #include <windows.h>
 #include <intrin.h>
+#include <direct.h>
 #endif
 
 #define countof(e)   (sizeof(e) / sizeof((e)[0]))
