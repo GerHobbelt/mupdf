@@ -1,5 +1,5 @@
 /* zconf-ng.h -- configuration of the zlib-ng compression library
- * Copyright (C) 1995-2016 Jean-loup Gailly, Mark Adler
+ * Copyright (C) 1995-2022 Jean-loup Gailly and Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
@@ -95,6 +95,9 @@
 #ifndef Z_EXPORTVA
 #  define Z_EXPORTVA
 #endif
+
+/* Conditional exports */
+#define ZNG_CONDEXPORT Z_EXPORT
 
 /* Fallback for something that includes us. */
 typedef unsigned char Byte;
