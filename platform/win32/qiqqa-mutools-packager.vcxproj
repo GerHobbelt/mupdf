@@ -50,20 +50,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -110,7 +110,7 @@
     <NMakeReBuildCommandLine>nmake  -f ..\..\scripts\$(TargetName)\Makefile rebuild    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>nmake  -f ..\..\scripts\$(TargetName)\Makefile clean    OUTDIR=$(OutDir) PLATFORM=$(Platform) PLATFORM_TARGET=$(PlatformTarget) PROJECTDIR=$(ProjectDir) INTERMEDIATEDIR=$(IntDir) SOLUTIONDIR=$(SolutionDir) TARGETNAME=$(TargetName)</NMakeCleanCommandLine>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -142,7 +142,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -151,7 +151,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="..\..\scripts\qiqqa-mutools-packager\installer-info-after.txt" />
@@ -161,6 +161,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MupdfSharp\MuPDFSharp.csproj">
       <Project>{8e506476-ffae-46b2-977d-45eb25ecf394}</Project>
+    </ProjectReference>
+    <ProjectReference Include="bibutils.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff55313e}</Project>
     </ProjectReference>
     <ProjectReference Include="bulktest.vcxproj">
       <Project>{8156c20c-dd56-4200-b4a6-40c056eb0a45}</Project>
@@ -174,6 +177,9 @@
     <ProjectReference Include="example2.vcxproj">
       <Project>{00111988-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
+    <ProjectReference Include="gflags.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff634baa}</Project>
+    </ProjectReference>
     <ProjectReference Include="glob.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff17062e}</Project>
     </ProjectReference>
@@ -185,6 +191,9 @@
     </ProjectReference>
     <ProjectReference Include="misctools.vcxproj">
       <Project>{00112979-815b-4f64-bc9d-219078b1f3aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="mucrow.vcxproj">
+      <Project>{00112979-815b-4f64-bc9d-2190785f5f9a}</Project>
     </ProjectReference>
     <ProjectReference Include="mudraw.vcxproj">
       <Project>{0b51171b-b10e-4eac-8ffa-19226a1828a3}</Project>
@@ -207,11 +216,14 @@
     <ProjectReference Include="muraster.vcxproj">
       <Project>{0fdc74d7-d18c-45ce-94d6-edfcc5a0cdf2}</Project>
     </ProjectReference>
-    <ProjectReference Include="murepl.vcxproj">
-      <Project>{00112979-815b-4f64-bc9d-2190785f5f9a}</Project>
-    </ProjectReference>
     <ProjectReference Include="mutool.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-219078b1f3aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="mutool_ex.vcxproj">
+      <Project>{00811970-1151-4f64-bc9d-219078b1f3aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="storytest.vcxproj">
+      <Project>{0fdc74d7-d18c-45ce-94d6-c5a0edfccdf2}</Project>
     </ProjectReference>
     <ProjectReference Include="sync_nas_filelock.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98f87eaa}</Project>
@@ -227,8 +239,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
