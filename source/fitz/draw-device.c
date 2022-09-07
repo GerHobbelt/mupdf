@@ -677,8 +677,8 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 typedef size_t fz_trace_snapshot_f(void);
 typedef void fz_trace_report_pending_allocations_since_f(size_t snapshot_id);
 
-__declspec(dllexport) fz_trace_snapshot_f *fz_trace_snapshot = NULL;
-__declspec(dllexport) fz_trace_report_pending_allocations_since_f* fz_trace_report_pending_allocations_since = NULL;
+FZ_DATA fz_trace_snapshot_f *fz_trace_snapshot = NULL;
+FZ_DATA fz_trace_report_pending_allocations_since_f* fz_trace_report_pending_allocations_since = NULL;
 
 static void
 fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int even_odd, fz_matrix in_ctm,

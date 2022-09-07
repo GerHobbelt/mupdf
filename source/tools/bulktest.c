@@ -485,8 +485,8 @@ g_trace_report_pending_allocations_since(size_t snapshot_id)
 typedef size_t fz_trace_snapshot_f(void);
 typedef void fz_trace_report_pending_allocations_since_f(size_t snapshot_id);
 
-extern __declspec(dllimport) fz_trace_snapshot_f* fz_trace_snapshot;
-extern __declspec(dllimport) fz_trace_report_pending_allocations_since_f* fz_trace_report_pending_allocations_since;
+extern FZ_DATA fz_trace_snapshot_f* fz_trace_snapshot;
+extern FZ_DATA fz_trace_report_pending_allocations_since_f* fz_trace_report_pending_allocations_since;
 
 
 static const char *prefix = NULL;
