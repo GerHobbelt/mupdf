@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9E1C227B-23B9-4A37-9B6F-053EFD0D7CD4}</ProjectGuid>
+    <RootNamespace>libzlib_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/googletest/googletest/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libgoogletest.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/add-subdirectory-project/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/gh1235.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/infcover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/minideflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/minigzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/monolithic_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/switchlevels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_adler32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_aligned_alloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_compare256.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_compress.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_compress_bound.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_compress_dual.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_crc32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_cve-2003-0107.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_bound.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_concurrency.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_copy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_dict.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_hash_head_0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_header.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_pending.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_prime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_quick_bi_valid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_quick_block_open.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_deflate_tune.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_dict.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_gzio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_inflate_adler32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_inflate_sync.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_large_buffers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_small_buffers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/../zlib/test/test_version.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/adler32_fold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/adler32_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/arm/arm_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/arm/ctzl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/generic/chunk_permute_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/power/crc32_constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/power/fallback_builtins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/power/power_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/power/slide_ppc_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/s390/dfltcc_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/s390/dfltcc_deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/s390/dfltcc_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/s390/dfltcc_inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/s390/s390_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/adler32_avx2_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/adler32_avx2_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/adler32_avx512_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/adler32_avx512_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/adler32_ssse3_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/crc32_fold_pclmulqdq_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/crc32_fold_vpclmulqdq_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/arch/x86/x86_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/chunkset_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/cpu_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/crc32_braid_comb_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/crc32_braid_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/crc32_braid_tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/crc32_fold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/deflate_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/fallback_builtins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/functable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/gzguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/inffixed_tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/inflate_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/insert_string_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/match_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/test/benchmarks/benchmark_png_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/test/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/test/test_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/trees_emit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/trees_tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/wx/zlib_name_mangling-ng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/zbuild.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/zendian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/../zlib/zutil_p.h" />
+    <Image Include="../../thirdparty/owemdjee/../zlib/test/data/fireworks.jpg" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/../zlib/win32/zlib-ng1.rc" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/win32/zlib1.rc" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/INDEX.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/PORTING.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/arch/arm/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/arch/generic/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/arch/power/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/arch/s390/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/arch/s390/README.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/arch/x86/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/doc/algorithm.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/doc/rfc1950.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/doc/rfc1951.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/doc/rfc1952.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/doc/txtvsbin.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/gzread.c.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/run_cmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/CVE-2018-25032/default.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/CVE-2018-25032/fixed.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/GH-361/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/GH-751/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/abicheck.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/abicheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/add-subdirectory-project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/benchmarks/README.md" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/data/lcet10.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/fuzz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/pigz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/test/pkgcheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/win32/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/win32/zlib-ng.def.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/win32/zlib.def.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/win32/zlibcompat.def.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/zconf-ng.h.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/zconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/zlib-ng.h.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/zlib.h.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/zlib.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/zlib_name_mangling-ng.h.in" />
+    <Text Include="../../thirdparty/owemdjee/../zlib/zlib_name_mangling.h.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

@@ -256,6 +256,7 @@ const projectMap = {
 	"zmq_examples": "libzmq",
 	"zmq_tests": "libzmq",
 	"zmq_tools": "libzmq",
+	"libzlib_tests": "../zlib",
 };
 
 for (const key in projectMap) {
