@@ -44,6 +44,8 @@
 #include "../../thirdparty/owemdjee/bibutils/src/bin/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libzopfli/src/zopfli/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libzopfli/src/zopflipng/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/QuickJS-C++-Wrapper/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
@@ -244,6 +246,31 @@ static struct {
     { qjscompress_main, "qjscompress", "qjscompress tool" },
     { qjs_unicode_gen_main, "qjs_unicode_gen", "qjs_unicode_gen tool" },
     { qjs_test262_main, "qjs_test262", "qjs_test262 conformance test tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ qjscpp_main, "qjscpp", "qjscpp tool" },
+	{ qjscpp_class_test_main, "qjscpp_class_test", "qjscpp_class_test tool" },
+	{ qjscpp_conversions_test_main, "qjscpp_conversions_test", "qjscpp_conversions_test tool" },
+	{ qjscpp_example_main, "qjscpp_example", "qjscpp_example tool" },
+	{ qjscpp_exception_test_main, "qjscpp_exception_test", "qjscpp_exception_test tool" },
+	{ qjscpp_function_call_test_main, "qjscpp_function_call_test", "qjscpp_function_call_test tool" },
+	{ qjscpp_inheritance_test_main, "qjscpp_inheritance_test", "qjscpp_inheritance_test tool" },
+	{ qjscpp_jobs_test_main, "qjscpp_jobs_test", "qjscpp_jobs_test tool" },
+	{ qjscpp_module_loader_test_main, "qjscpp_module_loader_test", "qjscpp_module_loader_test tool" },
+	{ qjscpp_multicontext_test_main, "qjscpp_multicontext_test", "qjscpp_multicontext_test tool" },
+	{ qjscpp_point_test_main, "qjscpp_point_test", "qjscpp_point_test tool" },
+	{ qjscpp_unhandled_rejection_test_main, "qjscpp_unhandled_rejection_test", "qjscpp_unhandled_rejection_test tool" },
+	{ qjscpp_value_test_main, "qjscpp_value_test", "qjscpp_value_test tool" },
+	{ qjscpp_variant_test_main, "qjscpp_variant_test", "qjscpp_variant_test tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ qjscpp_async_example_main, "qjscpp_async_example", "qjscpp_async_example tool" },
+	{ qjscpp_classes_example_main, "qjscpp_classes_example", "qjscpp_classes_example tool" },
+	{ qjscpp_closures_example_main, "qjscpp_closures_example", "qjscpp_closures_example tool" },
+	{ qjscpp_exception_example_main, "qjscpp_exception_example", "qjscpp_exception_example tool" },
+	{ qjscpp_simple_example_main, "qjscpp_simple_example", "qjscpp_simple_example tool" },
 #endif
 
 #if defined(MUTOOL_EX)
