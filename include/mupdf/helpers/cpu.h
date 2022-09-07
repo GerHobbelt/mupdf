@@ -35,24 +35,24 @@ int fz_get_cpu_core_count(void);
 int fz_set_cpu_core_count(float perunage_or_real_number_of_cores, int min_count, int max_count);
 
 /**
-	Parse the requested thread count (string value).
+    Parse the requested thread count (string value).
 
-	You can specify the thread count in various ways:
+    You can specify the thread count in various ways:
 
-	- as a direct POSITIVE integer number, e.g. "4"
-	- as equal to the number of (virtual) cores available on your machine: "N" or "*"
-	- as a *percentage* of the number of (virtual) cores available on your machine, e.g. "50%" or "200%" (the latter will then, obviously, allocate twice as many threads as you have cores)
-	- as a NEGATIVE integer number, meaning "number of cores MINUS this number", e.g. "-1". This comes in handy when you want to keep one or more cores completely free and available for other work, e.g. GUI message pumping.
+    - as a direct POSITIVE integer number, e.g. "4"
+    - as equal to the number of (virtual) cores available on your machine: "N" or "*"
+    - as a *percentage* of the number of (virtual) cores available on your machine, e.g. "50%" or "200%" (the latter will then, obviously, allocate twice as many threads as you have cores)
+    - as a NEGATIVE integer number, meaning "number of cores MINUS this number", e.g. "-1". This comes in handy when you want to keep one or more cores completely free and available for other work, e.g. GUI message pumping.
 
-	When the input string value is NULL or does not match any of the above, the returned value is "number of available cores", i.e. identical to when you would have specified `"N"`.
+    When the input string value is NULL or does not match any of the above, the returned value is "number of available cores", i.e. identical to when you would have specified `"N"`.
 
-	All parsed input values are sanity-checked and are clipped to a "sensible range": the accepted input is \[1 .. N*32\] (i.e.: "from 1 up to and including 32 times the number of available CPU cores")
+    All parsed input values are sanity-checked and are clipped to a "sensible range": the accepted input is \[1 .. N*32\] (i.e.: "from 1 up to and including 32 times the number of available CPU cores")
 
-	When the number of available CPU cores cannot be properly detected by the underlying code, *4* is assumed as most medium-grade consumer hardware these days is based on 2 cores times 2 ("hyperthreading") hence *4* virtual cores.
+    When the number of available CPU cores cannot be properly detected by the underlying code, *4* is assumed as most medium-grade consumer hardware these days is based on 2 cores times 2 ("hyperthreading") hence *4* virtual cores.
 
-	You MAY override the default count ("N") -- used in case the parse failed to match any of the rules stated above -- by specifying an explicit default via a non-NULL `default_count` argument. This value is NOT sanity-checked and range-limited following the rules above, so you MAY pass in, f.e., a NEGATIVE number to signal a parse error, to be further dealt with by your userland code.
+    You MAY override the default count ("N") -- used in case the parse failed to match any of the rules stated above -- by specifying an explicit default via a non-NULL `default_count` argument. This value is NOT sanity-checked and range-limited following the rules above, so you MAY pass in, f.e., a NEGATIVE number to signal a parse error, to be further dealt with by your userland code.
 
-	P.S.: when you wish to provide a different number for `N`, we advise you to use the `fz_set_cpu_core_count()` API before this call.
+    P.S.: when you wish to provide a different number for `N`, we advise you to use the `fz_set_cpu_core_count()` API before this call.
 */
 int fz_parse_pool_threadcount_preference(const char *spec, int min_count, int max_count, int default_count);
 

@@ -440,23 +440,23 @@ trace_report_pending_allocations_since(size_t snapshot_id, int use_fzerror)
     int hits = 0;
     while (p && p->seqnum >= snapshot_id)
     {
-		if (use_fzerror)
-		{
+        if (use_fzerror)
+        {
 #if defined(FZDBG_HAS_TRACING)
-			fz_error(ctx, "LEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
+            fz_error(ctx, "LEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
 #else
-			fz_error(ctx, "LEAK? #%zu (size: %zu)", p->seqnum, p->size);
+            fz_error(ctx, "LEAK? #%zu (size: %zu)", p->seqnum, p->size);
 #endif
-		}
-		else
-		{
+        }
+        else
+        {
 #if defined(FZDBG_HAS_TRACING)
-			fprintf(stderr, "\nLEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
+            fprintf(stderr, "\nLEAK? #%zu (size: %zu) (origin: %s(%d))", p->seqnum, p->size, p->origin_file, p->origin_line);
 #else
-			fprintf(stderr, "\nLEAK? #%zu (size: %zu)", p->seqnum, p->size);
+            fprintf(stderr, "\nLEAK? #%zu (size: %zu)", p->seqnum, p->size);
 #endif
-		}
-		hits++;
+        }
+        hits++;
 
         p = p->prev;
     }
@@ -466,9 +466,9 @@ trace_report_pending_allocations_since(size_t snapshot_id, int use_fzerror)
     }
     else
     {
-		if (!use_fzerror)
-			fprintf(stderr, "\n");
-	}
+        if (!use_fzerror)
+            fprintf(stderr, "\n");
+    }
 
 #ifndef DISABLE_MUTHREADS
     if (heap_debug_mutex_is_initialized)
@@ -479,7 +479,7 @@ trace_report_pending_allocations_since(size_t snapshot_id, int use_fzerror)
 static void
 g_trace_report_pending_allocations_since(size_t snapshot_id)
 {
-	trace_report_pending_allocations_since(snapshot_id, 0); 
+    trace_report_pending_allocations_since(snapshot_id, 0); 
 }
 
 typedef size_t fz_trace_snapshot_f(void);
@@ -2360,7 +2360,7 @@ bulktest_main(int argc, const char **argv)
                     size_t memory_consumed = 0;
                     size_t memory_allocations = 0;
                     size_t memory_leaked = 0;
-					size_t memory_snapshot_id = trace_snapshot();
+                    size_t memory_snapshot_id = trace_snapshot();
 
                     begin_time = Curl_now();
 
@@ -2670,7 +2670,7 @@ bulktest_main(int argc, const char **argv)
                             fz_snprintf(memreport, sizeof(memreport), "USED:%.2f%sb ", used, used_unit);
                             if (memory_leaked)
                             {
-								trace_report_pending_allocations_since(memory_snapshot_id, 1);
+                                trace_report_pending_allocations_since(memory_snapshot_id, 1);
 
                                 size_t l = strlen(memreport);
                                 fz_snprintf(memreport + l, sizeof(memreport) - l, "LEAKED:%.2f%sb ", leaked, leaked_unit);
