@@ -89,8 +89,8 @@ int fz_is_directory(fz_context *ctx, const char *path);
 /**
 	Drop a reference to an archive.
 
-	Closes and releases any memory or filehandles associated
-	with the archive.
+	When the last reference is dropped, this closes and releases
+	any memory or filehandles associated with the archive.
 */
 void fz_drop_archive(fz_context *ctx, fz_archive *arch);
 
@@ -148,6 +148,8 @@ int fz_has_archive_entry(fz_context *ctx, fz_archive *arch, const char *name);
 
 	name: Entry name to look for, this must be an exact match to
 	the entry name in the archive.
+
+	Throws an exception if a matching entry cannot be found.
 */
 fz_stream *fz_open_archive_entry(fz_context *ctx, fz_archive *arch, const char *name);
 
@@ -157,6 +159,8 @@ fz_stream *fz_open_archive_entry(fz_context *ctx, fz_archive *arch, const char *
 
 	name: Entry name to look for, this must be an exact match to
 	the entry name in the archive.
+
+	Throws an exception if a matching entry cannot be found.
 */
 fz_buffer *fz_read_archive_entry(fz_context *ctx, fz_archive *arch, const char *name);
 
@@ -299,6 +303,21 @@ void fz_tree_archive_add_buffer(fz_context *ctx, fz_archive *arch_, const char *
 	may free it as soon as this returns.
 */
 void fz_tree_archive_add_data(fz_context *ctx, fz_archive *arch_, const char *name, const void *data, size_t size);
+
+/**
+	Create a new multi archive (initially empty).
+*/
+fz_archive *fz_new_multi_archive(fz_context *ctx);
+
+/**
+	Add an archive to the set of archives handled by a multi
+	archive.
+
+	If path is NULL, then the archive contents will appear at the
+	top level, otherwise, the archives contents will appear prefixed
+	by path.
+*/
+void fz_mount_multi_archive(fz_context *ctx, fz_archive *arch_, fz_archive *sub, const char *path);
 
 /**
 	Implementation details: Subject to change.
