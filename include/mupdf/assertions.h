@@ -57,10 +57,14 @@ typedef struct fz_context fz_context;
 #define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 												\
             fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, TRUE)
 
+#if !defined(GTEST_DONT_DEFINE_ASSERT_EQ)
+
 #define VERIFY_EQ(expr1, expr2) 															\
             fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)		
 #define ASSERT_EQ(expr1, expr2) 															\
             fz_check_and_report_failed_assertion_and_continue(CTX, expr1, expr2, #expr1, #expr2, __FILE__, __LINE__, FALSE)
+
+#endif
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
