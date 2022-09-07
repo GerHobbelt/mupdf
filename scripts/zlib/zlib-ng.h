@@ -1795,6 +1795,7 @@ Z_EXTERN Z_EXPORT int32_t zng_inflateInit2_(zng_stream *strm, int32_t  windowBit
 Z_EXTERN Z_EXPORT int32_t zng_inflateBackInit_(zng_stream *strm, int32_t windowBits, uint8_t *window,
                                          const char *version, int32_t stream_size);
 
+#if 0
 #define zng_deflateInit(strm, level) zng_deflateInit_((strm), (level), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
 #define zng_inflateInit(strm) zng_inflateInit_((strm), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
 #define zng_deflateInit2(strm, level, method, windowBits, memLevel, strategy) \
@@ -1803,6 +1804,7 @@ Z_EXTERN Z_EXPORT int32_t zng_inflateBackInit_(zng_stream *strm, int32_t windowB
 #define zng_inflateInit2(strm, windowBits) zng_inflateInit2_((strm), (windowBits), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
 #define zng_inflateBackInit(strm, windowBits, window) \
                         zng_inflateBackInit_((strm), (windowBits), (window), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
+#endif
 
 #ifdef WITH_GZFILEOP
 
