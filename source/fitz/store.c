@@ -1292,13 +1292,24 @@ void fz_log_dump_store(fz_context *ctx, const char *fmt, ...)
 	fz_output *out;
 	va_list args;
 	va_start(args, fmt);
-	out = fz_new_log_for_module(ctx, "STORE");
-	fz_write_vprintf(ctx, out, fmt, args);
-	va_end(args);
-	fz_debug_store(ctx, out);
-	fz_write_printf(ctx, out, "STORE\tEND\n");
-	fz_close_output(ctx, out);
-	fz_drop_output(ctx, out);
+
+	fz_try(ctx)
+	{
+		out = fz_new_log_for_module(ctx, "STORE");
+		fz_write_vprintf(ctx, out, fmt, args);
+		va_end(args);
+		fz_debug_store(ctx, out);
+		fz_write_printf(ctx, out, "STORE\tEND\n");
+		fz_close_output(ctx, out);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_output(ctx, out);
+	}
+	fz_catch(ctx)
+	{
+		/* NOP */;
+	}
 }
 
 #endif
