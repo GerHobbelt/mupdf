@@ -608,8 +608,47 @@ fz_blend_nonseparable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT s
 	while (--w);
 }
 
+// find the first occurrence of a byte that's not ZERO; return the offset to that byte.
+static inline int fz_memspnz(const byte* FZ_RESTRICT hp, int w)
+{
+	int z;
+#if 0
+	// memspn():
+	for (z = 0; z < w && hp[z] == 0; z++)
+		;
+#else
+	// vectorize the memspn():
+	if (w < 16)
+	{
+		for (z = 0; z < w && hp[z] == 0; z++)
+			;
+	}
+	else
+	{
+		// move towards 8-byte aligned storage start, before we start the vector code
+		int off1 = ((ptrdiff_t)hp) & 0x07;
+		for (z = 0; z < off1 && hp[z] == 0; z++)
+			;
+		if (z == off1)
+		{
+			int w2 = w - off1;
+			int lw = w2 >> 3;
+			uint64_t* p = (uint64_t*)(hp + off1);
+			int i;
+			for (i = 0; i < lw && p[i] == 0; i++)
+				;
+			z += i << 3;
+			// now there still may be a few NUL bytes in that last 64-bit word or in the tail bytes beyond the last:
+			for (; z < w && hp[z] == 0; z++)
+				;
+		}
+	}
+#endif
+	return z;
+}
+
 static inline void
-fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n1, int w, int blendmode, int complement, const byte * FZ_RESTRICT hp, int alpha, int first_spot)
+fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n1, int w, int blendmode, int complement, const byte * FZ_RESTRICT hp, int alpha, int first_spot)
 {
 	int k;
 
@@ -619,11 +658,27 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 		 * cancel one another out, and it's just a simple copy. */
 		/* FIXME: Maybe we can avoid using the shape plane entirely
 		 * and just copy? */
+		const int n2 = n1 + bal;
 		do
 		{
-			int ha = fz_mul255(*hp++, alpha); /* ha = shape_alpha */
-			/* If ha == 0 then leave everything unchanged */
-			if (ha != 0)
+			{
+				int z = fz_memspnz(hp, w);
+				if (z > 0)
+				{
+					if (z == w)
+						break;
+
+					hp += z;
+					sp += n1 * z;
+					bp += n2 * z;
+					w -= z;
+				}
+			}
+
+			int ha = *hp++;
+			int haa = fz_mul255(ha, alpha); /* ha = shape_alpha */
+			/* If haa == 0 then leave everything unchanged */
+			if (haa != 0)
 			{
 				for (k = 0; k < n1; k++)
 					bp[k] = sp[k];
@@ -632,172 +687,194 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_R
 			}
 
 			sp += n1;
-			bp += n1 + bal;
+			bp += n2;
 		}
 		while (--w);
 		return;
 	}
+
+	const int ns = n1 + sal;
+	const int nb = n1 + bal;
+
 	do
 	{
-		int ha = *hp++;
-		int haa = fz_mul255(ha, alpha); /* ha = shape_alpha */
-		/* If haa == 0 then leave everything unchanged */
-		while (haa != 0) /* Use while, so we can break out */
 		{
-			int sa, ba, bahaa, ra, ra0, invsa, invba, scale;
-			sa = (sal ? sp[n1] : 255);
-			if (sa == 0)
-				break; /* No change! */
-			invsa = 255 * 256 / sa;
-			ba = (bal ? bp[n1] : 255);
-			if (ba == 0)
+			int z = fz_memspnz(hp, w);
+			if (z > 0)
 			{
-				/* Just copy pixels (allowing for change in
-				 * premultiplied alphas) */
-				for (k = 0; k < n1; k++)
-					bp[k] = fz_mul255((sp[k] * invsa + 128) >> 8, haa);
-				if (bal)
-					bp[n1] = haa;
-				break;
+				if (z == w)
+					break;
+
+				hp += z;
+				sp += ns * z;
+				bp += nb * z;
+				w -= z;
 			}
-			invba = 255 * 256 / ba;
-
-			/* Because we are in a non-isolated group, we need to
-			 * do some 'uncomposition' magic before we blend.
-			 * My attempts to understand what is going on here have
-			 * utterly failed, so I've resorted (after much patient
-			 * help from Michael) to copying what the gs code does.
-			 * This seems to be an implementation of the equations
-			 * given on page 236 (section 7.3.3) of pdf_reference17.
-			 * My understanding is that this is "composition" when
-			 * we actually want to do "decomposition", hence my
-			 * confusion. It appears to work though.
-			 */
-			scale = (512 * ba + ha) / (ha*2) - FZ_EXPAND(ba);
-
-			sa = haa;
-
-			/* Calculate result_alpha - a combination of the
-			 * background alpha, and 'shape' */
-			bahaa = fz_mul255(ba, haa);
-			ra0 = ba - bahaa;
-			ra = ra0 + haa;
-			if (bal)
-				bp[n1] = ra;
-
-			if (ra == 0)
-				break;
-
-			/* Process colorants */
-			for (k = 0; k < first_spot; k++)
-			{
-				/* Read pixels (and convert to non-premultiplied form) */
-				int sc = (sp[k] * invsa + 128) >> 8;
-				int bc = (bp[k] * invba + 128) >> 8;
-				int rc;
-
-				if (complement)
-				{
-					sc = 255 - sc;
-					bc = 255 - bc;
-				}
-
-				/* Uncomposite (see above) */
-				sc = sc + (((sc-bc) * scale + 128)>>8);
-				sc = fz_clampi(sc, 0, 255);
-
-				switch (blendmode)
-				{
-				default:
-				case FZ_BLEND_NORMAL: rc = sc; break;
-				case FZ_BLEND_MULTIPLY: rc = fz_mul255(bc, sc); break;
-				case FZ_BLEND_SCREEN: rc = fz_screen_byte(bc, sc); break;
-				case FZ_BLEND_OVERLAY: rc = fz_overlay_byte(bc, sc); break;
-				case FZ_BLEND_DARKEN: rc = fz_darken_byte(bc, sc); break;
-				case FZ_BLEND_LIGHTEN: rc = fz_lighten_byte(bc, sc); break;
-				case FZ_BLEND_COLOR_DODGE: rc = fz_color_dodge_byte(bc, sc); break;
-				case FZ_BLEND_COLOR_BURN: rc = fz_color_burn_byte(bc, sc); break;
-				case FZ_BLEND_HARD_LIGHT: rc = fz_hard_light_byte(bc, sc); break;
-				case FZ_BLEND_SOFT_LIGHT: rc = fz_soft_light_byte(bc, sc); break;
-				case FZ_BLEND_DIFFERENCE: rc = fz_difference_byte(bc, sc); break;
-				case FZ_BLEND_EXCLUSION: rc = fz_exclusion_byte(bc, sc); break;
-				}
-
-				/* From the notes at the top:
-				 *
-				 *  Ar * Cr = Cb * (Ar - alpha * As) + alpha * As * (1 - Ab) * Cs + alpha * As * Ab * B(Cb, Cs) ]
-				 *
-				 * And:
-				 *
-				 *  Ar = ba + haa - bahaa
-				 *
-				 * In our 0..255 world, with our current variables:
-				 *
-				 * ra.rc = bc * (ra - haa) + haa * (255 - ba) * sc + bahaa * B(Cb, Cs)
-				 *       = bc * ra0        + haa * (255 - ba) * sc + bahaa * B(Cb, Cs)
-				 */
-
-				if (bahaa != 255)
-					rc = fz_mul255(bahaa, rc);
-				if (ba != 255)
-				{
-					int t = fz_mul255(255 - ba, haa);
-					rc += fz_mul255(t, sc);
-				}
-				if (ra0 != 0)
-					rc += fz_mul255(ra0, bc);
-
-				if (complement)
-					rc = ra - rc;
-
-				bp[k] = fz_clampi(rc, 0, ra);
-			}
-
-			/* Spots */
-			for (; k < n1; k++)
-			{
-				int sc = 255 - ((sp[k] * invsa + 128) >> 8);
-				int bc = 255 - ((bp[k] * invba + 128) >> 8);
-				int rc;
-
-				sc = sc + (((sc-bc) * scale + 128)>>8);
-
-				/* Non-white preserving use Normal */
-				switch (blendmode)
-				{
-				default:
-				case FZ_BLEND_NORMAL:
-				case FZ_BLEND_DIFFERENCE:
-				case FZ_BLEND_EXCLUSION:
-					rc = sc; break;
-				case FZ_BLEND_MULTIPLY: rc = fz_mul255(bc, sc); break;
-				case FZ_BLEND_SCREEN: rc = fz_screen_byte(bc, sc); break;
-				case FZ_BLEND_OVERLAY: rc = fz_overlay_byte(bc, sc); break;
-				case FZ_BLEND_DARKEN: rc = fz_darken_byte(bc, sc); break;
-				case FZ_BLEND_LIGHTEN: rc = fz_lighten_byte(bc, sc); break;
-				case FZ_BLEND_COLOR_DODGE: rc = fz_color_dodge_byte(bc, sc); break;
-				case FZ_BLEND_COLOR_BURN: rc = fz_color_burn_byte(bc, sc); break;
-				case FZ_BLEND_HARD_LIGHT: rc = fz_hard_light_byte(bc, sc); break;
-				case FZ_BLEND_SOFT_LIGHT: rc = fz_soft_light_byte(bc, sc); break;
-				}
-
-				if (bahaa != 255)
-					rc = fz_mul255(bahaa, rc);
-				if (ba != 255)
-				{
-					int t = fz_mul255(255 - ba, haa);
-					rc += fz_mul255(t, sc);
-				}
-				if (ra0 != 0)
-					rc += fz_mul255(ra0, bc);
-
-				bp[k] = ra - rc;
-			}
-			break; //-V612
 		}
 
-		sp += n1 + sal;
-		bp += n1 + bal;
+		int ha = *hp++;
+		/* If ha == 0 then leave everything unchanged; this spares us another multiplication in the hot path */
+		//if (ha != 0)
+		{
+			int haa = fz_mul255(ha, alpha); /* ha = shape_alpha */
+			/* If haa == 0 then leave everything unchanged */
+			while (haa != 0) /* Use while, so we can break out */
+			{
+				int sa, ba, bahaa, ra, ra0, invsa, invba, scale;
+				sa = (sal ? sp[n1] : 255);
+				if (sa == 0)
+					break; /* No change! */
+				invsa = 255 * 256 / sa;
+				ba = (bal ? bp[n1] : 255);
+				if (ba == 0)
+				{
+					/* Just copy pixels (allowing for change in
+					 * premultiplied alphas) */
+					for (k = 0; k < n1; k++)
+						bp[k] = fz_mul255((sp[k] * invsa + 128) >> 8, haa);
+					if (bal)
+						bp[n1] = haa;
+					break;
+				}
+				invba = 255 * 256 / ba;
+
+				/* Because we are in a non-isolated group, we need to
+				 * do some 'uncomposition' magic before we blend.
+				 * My attempts to understand what is going on here have
+				 * utterly failed, so I've resorted (after much patient
+				 * help from Michael) to copying what the gs code does.
+				 * This seems to be an implementation of the equations
+				 * given on page 236 (section 7.3.3) of pdf_reference17.
+				 * My understanding is that this is "composition" when
+				 * we actually want to do "decomposition", hence my
+				 * confusion. It appears to work though.
+				 */
+				scale = (512 * ba + ha) / (ha * 2) - FZ_EXPAND(ba);
+
+				sa = haa;
+
+				/* Calculate result_alpha - a combination of the
+				 * background alpha, and 'shape' */
+				bahaa = fz_mul255(ba, haa);
+				ra0 = ba - bahaa;
+				ra = ra0 + haa;
+				if (bal)
+					bp[n1] = ra;
+
+				if (ra == 0)
+					break;
+
+				/* Process colorants */
+				for (k = 0; k < first_spot; k++)
+				{
+					/* Read pixels (and convert to non-premultiplied form) */
+					int sc = (sp[k] * invsa + 128) >> 8;
+					int bc = (bp[k] * invba + 128) >> 8;
+					int rc;
+
+					if (complement)
+					{
+						sc = 255 - sc;
+						bc = 255 - bc;
+					}
+
+					/* Uncomposite (see above) */
+					sc = sc + (((sc - bc) * scale + 128) >> 8);
+					sc = fz_clampi(sc, 0, 255);
+
+					switch (blendmode)
+					{
+					default:
+					case FZ_BLEND_NORMAL: rc = sc; break;
+					case FZ_BLEND_MULTIPLY: rc = fz_mul255(bc, sc); break;
+					case FZ_BLEND_SCREEN: rc = fz_screen_byte(bc, sc); break;
+					case FZ_BLEND_OVERLAY: rc = fz_overlay_byte(bc, sc); break;
+					case FZ_BLEND_DARKEN: rc = fz_darken_byte(bc, sc); break;
+					case FZ_BLEND_LIGHTEN: rc = fz_lighten_byte(bc, sc); break;
+					case FZ_BLEND_COLOR_DODGE: rc = fz_color_dodge_byte(bc, sc); break;
+					case FZ_BLEND_COLOR_BURN: rc = fz_color_burn_byte(bc, sc); break;
+					case FZ_BLEND_HARD_LIGHT: rc = fz_hard_light_byte(bc, sc); break;
+					case FZ_BLEND_SOFT_LIGHT: rc = fz_soft_light_byte(bc, sc); break;
+					case FZ_BLEND_DIFFERENCE: rc = fz_difference_byte(bc, sc); break;
+					case FZ_BLEND_EXCLUSION: rc = fz_exclusion_byte(bc, sc); break;
+					}
+
+					/* From the notes at the top:
+					 *
+					 *  Ar * Cr = Cb * (Ar - alpha * As) + alpha * As * (1 - Ab) * Cs + alpha * As * Ab * B(Cb, Cs) ]
+					 *
+					 * And:
+					 *
+					 *  Ar = ba + haa - bahaa
+					 *
+					 * In our 0..255 world, with our current variables:
+					 *
+					 * ra.rc = bc * (ra - haa) + haa * (255 - ba) * sc + bahaa * B(Cb, Cs)
+					 *       = bc * ra0        + haa * (255 - ba) * sc + bahaa * B(Cb, Cs)
+					 */
+
+					if (bahaa != 255)
+						rc = fz_mul255(bahaa, rc);
+					if (ba != 255)
+					{
+						int t = fz_mul255(255 - ba, haa);
+						rc += fz_mul255(t, sc);
+					}
+					if (ra0 != 0)
+						rc += fz_mul255(ra0, bc);
+
+					if (complement)
+						rc = ra - rc;
+
+					bp[k] = fz_clampi(rc, 0, ra);
+				}
+
+				/* Spots */
+				for (; k < n1; k++)
+				{
+					int sc = 255 - ((sp[k] * invsa + 128) >> 8);
+					int bc = 255 - ((bp[k] * invba + 128) >> 8);
+					int rc;
+
+					sc = sc + (((sc - bc) * scale + 128) >> 8);
+
+					/* Non-white preserving use Normal */
+					switch (blendmode)
+					{
+					default:
+					case FZ_BLEND_NORMAL:
+					case FZ_BLEND_DIFFERENCE:
+					case FZ_BLEND_EXCLUSION:
+						rc = sc; break;
+					case FZ_BLEND_MULTIPLY: rc = fz_mul255(bc, sc); break;
+					case FZ_BLEND_SCREEN: rc = fz_screen_byte(bc, sc); break;
+					case FZ_BLEND_OVERLAY: rc = fz_overlay_byte(bc, sc); break;
+					case FZ_BLEND_DARKEN: rc = fz_darken_byte(bc, sc); break;
+					case FZ_BLEND_LIGHTEN: rc = fz_lighten_byte(bc, sc); break;
+					case FZ_BLEND_COLOR_DODGE: rc = fz_color_dodge_byte(bc, sc); break;
+					case FZ_BLEND_COLOR_BURN: rc = fz_color_burn_byte(bc, sc); break;
+					case FZ_BLEND_HARD_LIGHT: rc = fz_hard_light_byte(bc, sc); break;
+					case FZ_BLEND_SOFT_LIGHT: rc = fz_soft_light_byte(bc, sc); break;
+					}
+
+					if (bahaa != 255)
+						rc = fz_mul255(bahaa, rc);
+					if (ba != 255)
+					{
+						int t = fz_mul255(255 - ba, haa);
+						rc += fz_mul255(t, sc);
+					}
+					if (ra0 != 0)
+						rc += fz_mul255(ra0, bc);
+
+					bp[k] = ra - rc;
+				}
+				break; //-V612
+			}
+		}
+
+		sp += ns;
+		bp += nb;
 	}
 	while (--w);
 }
