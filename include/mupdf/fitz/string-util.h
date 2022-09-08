@@ -207,13 +207,27 @@ void fz_format_output_path(fz_context *ctx, char *path, size_t size, const char 
 	  the template ends with a directory separator, in which case the filename `____`
 	  will be assumed and appended first: this is done to prevent creating
 	  'UNIX dot files' *inadvertently*.
+
+	  If the template already includes a file extension AND that extension matches
+	  the specified extension *exactly* (case-sensitive!), then the extension in the
+	  template is stripped off, and the appended at the tail end again, i.e. the
+	  extension is kept intact when it matches exactly.
+
+	  When it DOES NOT (or does not exist) the next rule applies:
+
 	  If the template already includes a file extension, than that extension is
 	  kept as-is, but its leading dot will be replaced by a `-` dash.
 	  We keep the existing template extension like that to help applications which
 	  output many templated files for various source file templates which *may*
-	  only differ in their source extension part. In other words: if the user wants
-	  to *replace* the template extension, than they should have removed it from
-	  the template string beforehand.
+	  only differ in their source extension part.
+
+	  The given extension is then appended at the end to complete the generated file name/path.
+
+	(OTHERWISE:)
+
+	- The filename extension (if any) is stripped off the template and appended
+	  at the end of the generated filename/path: this ensures the template dictates
+	  the file extension as you'ld expect when no override has been specified.
 
 	Also note that a zero(0) page number will be treated as yet another part to skip.
 	This allows application code to re-use this API to apply arbitrary non-zero numbers,
@@ -221,7 +235,7 @@ void fz_format_output_path(fz_context *ctx, char *path, size_t size, const char 
 
 	Hence, when appending all these parts, the filename will look like this:
 
-	    TEMPLATEFILENAME-<CHAPTER>-<PAGE>-<SEQUENCENUMBER>.<EXTENSION>
+	    <TEMPLATEFILENAME>-<CHAPTER>-<PAGE>-<SEQUENCENUMBER>-<LABEL>.<EXTENSION>
 */
 void fz_format_output_path_ex(fz_context* ctx, char* path, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char *label, const char *extension);
 
@@ -231,6 +245,18 @@ void fz_format_output_path_ex(fz_context* ctx, char* path, size_t size, const ch
     Returns pointer to basename part in the input string.
 */
 const char* fz_basename(const char* path);
+
+/**
+	Returns pointer to the filename extension, *including the leading '.' dot*, in the input string.
+
+	Returns the empty string (reference to the *end* of the input string, in fact) when
+	the filename does not have a file name extension.
+
+	Note: this routine handles 'dotfiles', a.k.a. 'hidden files' for UNIX systems, across
+	all platforms: those files won't report a file extension -- unless they have one, e.g.
+	'.dotfile.org' --> extension = '.org'.
+*/
+const char* fz_name_extension(const char* path);
 
 /**
 	rewrite path to the shortest string that names the same path.

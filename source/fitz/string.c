@@ -436,12 +436,35 @@ int fz_has_percent_d(const char* s)
 // Returns pointer to basename part in the input string.
 const char* fz_basename(const char* path)
 {
+	assert0(path != NULL);
+
 	size_t i;
 	size_t len = strlen(path);
 	for (i = strcspn(path, ":/\\"); i < len; i = strcspn(path, ":/\\"))
 	{
 		path = path + i + 1;
 		len -= i + 1;
+	}
+	return path;
+}
+
+// include the leading '.' in the extension; point to the end of the input (NUL sentinel / empty string) when there's no extension to be had.
+const char* fz_name_extension(const char* path)
+{
+	assert0(path != NULL);
+
+	path = fz_basename(path);
+
+	// cope with 'dotfiles': ignore leading dots.
+	while (*path == '.')
+		path++;
+
+	const char* x = path;
+
+	path += strlen(path);
+	for (x = strchr(x, '.'); x; x = strchr(x + 1, '.'))
+	{
+		path = x;
 	}
 	return path;
 }
@@ -590,91 +613,240 @@ fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *form
 	fz_free(ctx, fmt);
 }
 
-/**
-	create output file name using a template.
-
-	Same as `fz_format_output_path()`, with these additions:
-
-	(IFF the specified chapter number is non-zero, otherwise the next rule is skipped!)
-
-	- if the path contains `$`, every such pattern will be
-	  replaced with the chapter number. If the template does not
-	  contain any `$`, the chapter number will be inserted before the
-	  filename extension, preceded by a `-` dash.
-	  If the template does not have a filename extension,
-	  the chapter number will be added to the end.
-
-	  When a chapter number is inserted like that, i.e. when not replacing a `$` marker,
-	  then it will be separated from the page number by an extra `-` dash.
-
-	(IFF the specified sequence number is non-zero, otherwise the next rule is skipped!)
-
-	- if the path contains `^`, every such pattern will be
-	  replaced with the sequence number. If the template does not
-	  contain any `^`, the sequence number will be inserted before the
-	  filename extension, preceded by a `-` dash.
-	  If the template does not have a filename extension,
-	  the sequence number will be added to the end.
-
-	(IFF the specified label is non-empty/NULL, otherwise the next rule is skipped!)
-
-	- if the path contains `!`, every such pattern will be
-	  replaced with the label text. If the template does not
-	  contain any `!`, the label text will be inserted before the
-	  filename extension, preceded by a `-` dash.
-	  If the template does not have a filename extension,
-	  the label text will be added to the end.
-
-	(IFF the specified extension is non-empty/NULL, otherwise the next rule is skipped!)
-
-	- The specified extension will be appended to the template.
-	  The code will make sure the extension is always preceded by a `.`, unless
-	  the template ends with a directory separator, in which case the filename `____`
-	  will be assumed and appended first: this is done to prevent creating
-	  'UNIX dot files' *inadvertently*.
-	  If the template already includes a file extension, than that extension is
-	  kept as-is, but its leading dot will be replaced by a `-` dash.
-	  We keep the existing template extension like that to help applications which
-	  output many templated files for various source file templates which *may*
-	  only differ in their source extension part. In other words: if the user wants
-	  to *replace* the template extension, than they should have removed it from
-	  the template string beforehand.
-
-	Also note that a zero(0) page number will be treated as yet another part to skip.
-	This allows application code to re-use this API to apply arbitrary non-zero numbers,
-	e.g. coordinates, to the filename template instead.
-
-	Hence, when appending all these parts, the filename will look like this:
-
-		TEMPLATEFILENAME-<CHAPTER>-<PAGE>-<SEQUENCENUMBER>.<EXTENSION>
-*/
-void
-fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
+// a la strspn() but for a single-char set only
+static inline size_t fz_strspn1(const char* s, char c)
 {
-	// hacky first run, not cf. spec:
-	fz_strncpy_s(ctx, dstpath, fmt, size);
-	size_t dstlen = size - strlen(dstpath);
-	char* dst = dstpath + strlen(dstpath);
-	if (chapter)
+	size_t i;
+	for (i = 0; s[i] == c; i++)
+		;
+	return i;
+}
+
+void
+fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
+{
+	//fz_strncpy_s(ctx, dstpath, fmt, size);
+	assert(dstsize >= 1);
+	*dstpath = 0;
+
+	int did_chapter = 0;
+	int did_page = 0;
+	int did_sequence_number = 0;
+	int did_label = 0;
+
+	const char* old_ext = fz_name_extension(fmt);
+	const char* nuke_old_ext = NULL;
+	if (extension)
 	{
-		fz_snprintf(dst, dstlen, "-%02d", chapter);
-		dstlen -= strlen(dst);
-		dst += strlen(dst);
+		const char* d = old_ext;
+		while (*d == '.')
+			d++;
+		while (*extension == '.')
+			extension++;
+		if (!*extension)
+		{
+			extension = NULL;
+		}
+		else if (strcmp(d, extension) == 0)
+		{
+			// DEFERRED: nuke old extension as it matches exactly with the new one:
+			nuke_old_ext = old_ext;
+		}
+		else
+		{
+			// NOT a matching extension: replace '.' with '-' as per spec.
+			/* DEFERRED */;
+		}
 	}
-	fz_snprintf(dst, dstlen, "-%04d-%02d", page, sequence_number);
-	dstlen -= strlen(dst);
-	dst += strlen(dst);
-	if (label)
+
+	if (label && !*label)
 	{
-		fz_snprintf(dst, dstlen, "-%s", label);
-		dstlen -= strlen(dst);
-		dst += strlen(dst);
+		// empty label == no label at all
+		label = NULL;
 	}
-	fz_snprintf(dst, dstlen, ".%s", extension);
-	dstlen -= strlen(dst);
-	dst += strlen(dst);
-	// TODO
-	//fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: TODO!");
+
+	if (!extension)
+	{
+		// No extension or EMPTY extension specified: use the extension from the template itself
+		extension = fz_name_extension(fmt);
+		nuke_old_ext = extension;
+
+		while (*extension == '.')
+			extension++;
+	}
+	assert(extension != NULL);
+	assert(*extension != '.');
+
+	const char* fmt_end = nuke_old_ext;
+	if (!fmt_end)
+		fmt_end = old_ext + strlen(old_ext);
+
+	while (*fmt && fmt < fmt_end && dstsize > 1)
+	{
+		size_t pos = strcspn(fmt, "^!$%#.");
+
+		if (pos >= dstsize)
+		{
+			fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: out of bounds; path too long");
+		}
+		memcpy(dstpath, fmt, pos);
+		dstpath += pos;
+		dstsize -= pos;
+		fmt += pos;
+
+		switch (fmt[0])
+		{
+		case 0:
+			continue;
+
+		case '.':
+			*dstpath++ = '-';
+			dstsize--;
+			fmt++;
+			continue;
+
+		case '%':
+			if (page)
+			{
+				const char* p2 = check_percent_d(fmt);
+				if (p2)
+				{
+					// cut after the 'd' of '%d':
+					char fstr[20];
+					fz_strncpy_s(ctx, fstr, fmt, p2 - fmt);
+
+					// bingo: workable/legal %d particle:
+					size_t l = fz_snprintf(dstpath, dstsize, fstr, page);
+					if (l >= dstsize)
+						fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+					dstpath += l;
+					dstsize -= l;
+
+					fmt = p2;
+
+					did_page++;
+					continue;
+				}
+				// else: not a legal pagenum marker: copy as-is:
+			}
+			break;
+
+		case '#':
+			if (page)
+			{
+				size_t vl = fz_strspn1(fmt, fmt[0]);
+
+				size_t l = fz_snprintf(dstpath, dstsize, "%0*d", (int)vl, page);
+				if (l >= dstsize)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				dstpath += l;
+				dstsize -= l;
+
+				fmt += l;
+
+				did_page++;
+				continue;
+			}
+			break;
+
+		case '^':
+			if (sequence_number)
+			{
+				size_t vl = fz_strspn1(fmt, fmt[0]);
+
+				size_t l = fz_snprintf(dstpath, dstsize, "%0*d", (int)vl, sequence_number);
+				if (l >= dstsize)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				dstpath += l;
+				dstsize -= l;
+
+				fmt += l;
+
+				did_sequence_number++;
+				continue;
+			}
+			break;
+
+		case '!':
+			if (label)
+			{
+				size_t vl = fz_strspn1(fmt, fmt[0]);
+
+				size_t l = fz_snprintf(dstpath, dstsize, "%s", label);
+				if (l >= dstsize)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				dstpath += l;
+				dstsize -= l;
+
+				fmt += l;
+
+				did_label++;
+				continue;
+			}
+			break;
+
+		case '$':
+			if (chapter)
+			{
+				size_t vl = fz_strspn1(fmt, fmt[0]);
+
+				size_t l = fz_snprintf(dstpath, dstsize, "%0*d", (int)vl, chapter);
+				if (l >= dstsize)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+				dstpath += l;
+				dstsize -= l;
+
+				fmt += l;
+
+				did_chapter++;
+				continue;
+			}
+			break;
+		}
+
+		// not a desirable formatter code --> copy character verbatim
+		*dstpath++ = *fmt++;
+		dstsize--;
+		fmt++;
+	}
+
+	// now append all the items which have not been incorporated in the template themselves:
+
+	if (chapter && !did_chapter)
+	{
+		fz_snprintf(dstpath, dstsize, "-%02d", chapter);
+		size_t len = strlen(dstpath);
+		dstsize -= len;
+		dstpath += len;
+	}
+	if ((page && !did_page) || (sequence_number && !did_sequence_number))
+	{
+		fz_snprintf(dstpath, dstsize, "-%04d-%02d", page, sequence_number);
+		size_t len = strlen(dstpath);
+		dstsize -= len;
+		dstpath += len;
+	}
+	if (label && !did_label)
+	{
+		fz_snprintf(dstpath, dstsize, "-%s", label);
+		size_t len = strlen(dstpath);
+		dstsize -= len;
+		dstpath += len;
+	}
+	if (*extension)
+	{
+		fz_snprintf(dstpath, dstsize, ".%s", extension);
+		size_t len = strlen(dstpath);
+		dstsize -= len;
+		dstpath += len;
+	}
+
+	if (!dstsize)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: out of bounds; path too long");
+	}
+
+	*dstpath = 0;
 }
 
 #define SEP(x) ((x)=='/' || (x) == 0)
