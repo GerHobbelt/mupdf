@@ -328,8 +328,11 @@ static int output_file_per_page = 0;
 static const char *format = NULL;
 static int output_format = OUT_NONE;
 
-static int rotation = -1;
-static float resolution = 72;
+static int rotation = -1;			// actual ~ calculated values
+static float resolution = -1;
+
+static int user_specified_rotation = -1;	// user-specified values
+static float user_specified_resolution = 72;
 static int res_specified = 0;
 static int width = 0;
 static int height = 0;
@@ -768,6 +771,9 @@ static void calc_page_render_details(fz_context* ctx, fz_page* page, fz_rect med
 {
 	/* MuPDF measures in points (72ths of an inch). */
 
+	resolution = user_specified_resolution;
+	rotation = user_specified_rotation;
+
 	// has rotation been configured for auto-detect?
 	// if so, quickest approach is to pick maximum resolution for rotation=0 or rotation=90
 	float best_res = resolution;
@@ -887,6 +893,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 	/* Calculate Page resolution & rotation */
 	calc_page_render_details(ctx, page, mediabox);
+
+	if (verbosity >= 1)
+		fz_info(ctx, "drawing page %d at resolution: %.1f, rotation: %d\n", pagenum, resolution, rotation);
 
 	if (output_format == OUT_TRACE || output_format == OUT_OCR_TRACE)
 	{
@@ -2569,8 +2578,10 @@ int main(int argc, const char** argv)
 	format = NULL;
 	output_format = OUT_NONE;
 
+	user_specified_rotation = -1;
+	user_specified_resolution = 72;
 	rotation = -1;
-	resolution = 72;
+	resolution = -1;
 	res_specified = 0;
 	width = 0;
 	height = 0;
@@ -2701,8 +2712,8 @@ int main(int argc, const char** argv)
 		case 'o': output = fz_optarg; break;
 		case 'F': format = fz_optarg; break;
 
-		case 'R': rotation = read_rotation(fz_optarg); break;
-		case 'r': resolution = fz_atof(fz_optarg); res_specified = 1; break;
+		case 'R': user_specified_rotation = read_rotation(fz_optarg); break;
+		case 'r': user_specified_resolution = fz_atof(fz_optarg); res_specified = 1; break;
 		case 'w': width = fz_atof(fz_optarg); break;
 		case 'h': height = fz_atof(fz_optarg); break;
 		case 'f': fit = 1; break;
