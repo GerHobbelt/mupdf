@@ -477,18 +477,6 @@ trace_report_pending_allocations_since(size_t snapshot_id, int use_fzerror)
 #endif
 }
 
-static void
-g_trace_report_pending_allocations_since(size_t snapshot_id)
-{
-    trace_report_pending_allocations_since(snapshot_id, 0); 
-}
-
-typedef size_t fz_trace_snapshot_f(void);
-typedef void fz_trace_report_pending_allocations_since_f(size_t snapshot_id);
-
-extern FZ_DATA fz_trace_snapshot_f* fz_trace_snapshot;
-extern FZ_DATA fz_trace_report_pending_allocations_since_f* fz_trace_report_pending_allocations_since;
-
 
 static const char *prefix = NULL;
 static int verbosity = 0;
@@ -1758,9 +1746,6 @@ static int test_dataline_against_matchspecs(const char *line, int linenumber, co
 int
 bulktest_main(int argc, const char **argv)
 {
-    fz_trace_snapshot = &trace_snapshot;
-    fz_trace_report_pending_allocations_since = &g_trace_report_pending_allocations_since;
-
     int c;
     int errored = 0;
     int script_is_template = 0;

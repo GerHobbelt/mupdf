@@ -674,12 +674,6 @@ static void
 fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const fz_stroke_state *stroke, fz_matrix in_ctm,
 	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params);
 
-typedef size_t fz_trace_snapshot_f(void);
-typedef void fz_trace_report_pending_allocations_since_f(size_t snapshot_id);
-
-FZ_DATA fz_trace_snapshot_f *fz_trace_snapshot = NULL;
-FZ_DATA fz_trace_report_pending_allocations_since_f* fz_trace_report_pending_allocations_since = NULL;
-
 static void
 fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int even_odd, fz_matrix in_ctm,
 	fz_colorspace *colorspace_in, const float *color, float alpha, fz_color_params color_params)
@@ -708,9 +702,6 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	bbox = fz_intersect_irect(fz_pixmap_bbox(ctx, state->dest), state->scissor);
 	if (fz_flatten_fill_path(ctx, rast, path, ctm, flatness, bbox, &bbox))
 		return;
-
-	// register heap debug trace snapshot
-//	size_t heap_id = fz_trace_snapshot();
 
 	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && 0)
 	{
@@ -741,9 +732,6 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	{
 		fz_knockout_end(ctx, dev);
 	}
-
-	// report memory allocations taken place above
-//	fz_trace_report_pending_allocations_since(heap_id);
 }
 
 static void
@@ -1080,6 +1068,9 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	if (colorspace == NULL && model != NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "color destination requires source color");
 
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && 0)
+		state = fz_knockout_begin(ctx, dev);
+
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
 	shapebv = 255;
 	shapebva = alpha * 255 + 0.5f;
@@ -1101,9 +1092,6 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 			tm.e = span->items[i].x;
 			tm.f = span->items[i].y;
 			trm = fz_concat(tm, ctm);
-
-			if ((state->blendmode & FZ_BLEND_KNOCKOUT) && 0)
-				state = fz_knockout_begin(ctx, dev);
 
 			glyph = fz_render_glyph(ctx, span->font, gid, &trm, model, &state->scissor, state->dest->alpha, fz_rasterizer_text_aa_level(rast));
 			if (glyph)
@@ -1142,12 +1130,11 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 					fz_warn(ctx, "cannot render glyph");
 				}
 			}
-
-			if ((state->blendmode & FZ_BLEND_KNOCKOUT) && 0)
-				fz_knockout_end(ctx, dev);
 		}
 	}
 
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && 0)
+		fz_knockout_end(ctx, dev);
 }
 
 static void
