@@ -466,6 +466,8 @@ static inline size_t fz_strspn1(const char* s, char c)
 void
 fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
 {
+	char* dstbase = dstpath;
+
 	assert(dstsize >= 1);
 	*dstpath = 0;
 
@@ -553,10 +555,14 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 				{
 					// cut after the 'd' of '%d':
 					char fstr[20];
-					fz_strncpy_s(ctx, fstr, fmt, p2 - fmt);
+					size_t l = p2 - fmt;
+					if (l >= sizeof(fmt))
+						fz_throw(ctx, FZ_ERROR_GENERIC, "illegal (too large) marker in path name template: %.*q in %q", (int)l, fmt, fmt);
+					memcpy(fstr, fmt, l);
+					fstr[l] = 0;
 
 					// bingo: workable/legal %d particle:
-					size_t l = fz_snprintf(dstpath, dstsize, fstr, page);
+					l = fz_snprintf(dstpath, dstsize, fstr, page);
 					if (l >= dstsize)
 						fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
 					dstpath += l;
@@ -649,6 +655,31 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 		dstsize--;
 		fmt++;
 	}
+
+	// backpedal when we last wrote '.' as we hit the end/extension boundary above:
+	while (dstbase < dstpath && dstpath[-1] == '.')
+	{
+		dstpath--;
+		dstsize++;
+	}
+
+	// edge case checks:
+	if (dstbase == dstpath)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: invalid or empty path template specified; path name buffer underflow");
+	}
+	if (strchr("\\/:", dstpath[-1]))
+	{
+		static const char* fname = "NO=NAME";
+		size_t l = strlen(fname);
+		if (l + 1 >= dstsize)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+		memcpy(dstpath, fname, l);
+
+		dstpath += l;
+		dstsize -= l;
+	}
+
 
 	// now append all the items which have not been incorporated in the template themselves:
 
