@@ -26,6 +26,7 @@
 #include "webp/mux.h"
 
 #include <string.h>
+#include <math.h>
 
 typedef struct webp_band_writer_s
 {
