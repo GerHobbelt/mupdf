@@ -334,10 +334,49 @@ fz_hue_rgb(unsigned char *rr, unsigned char *rg, unsigned char *rb, int br, int 
 	fz_saturation_rgb(rr, rg, rb, tr, tg, tb, br, bg, bb);
 }
 
+// find the first occurrence of a byte that's not ZERO; return the offset to that byte.
+static inline int fz_memspnz(const byte* FZ_RESTRICT hp, int w)
+{
+	int z;
+#if 0
+	// memspn():
+	for (z = 0; z < w && hp[z] == 0; z++)
+		;
+#else
+	// vectorize the memspn():
+	if (w < 16)
+	{
+		for (z = 0; z < w && hp[z] == 0; z++)
+			;
+	}
+	else
+	{
+		// move towards 8-byte aligned storage start, before we start the vector code
+		int off1 = ((ptrdiff_t)hp) & 0x07;
+		for (z = 0; z < off1 && hp[z] == 0; z++)
+			;
+		if (z == off1)
+		{
+			int w2 = w - off1;
+			int lw = w2 >> 3;
+			uint64_t* p = (uint64_t*)(hp + off1);
+			int i;
+			for (i = 0; i < lw && p[i] == 0; i++)
+				;
+			z += i << 3;
+			// now there still may be a few NUL bytes in that last 64-bit word or in the tail bytes beyond the last:
+			for (; z < w && hp[z] == 0; z++)
+				;
+		}
+	}
+#endif
+	return z;
+}
+
 /* Blending loops */
 
 static inline void
-fz_blend_separable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n1, int w, int blendmode, int complement, int first_spot)
+fz_blend_separable(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n1, int w, const int blendmode, const int complement, const int first_spot)
 {
 	int k;
 	do
@@ -437,7 +476,7 @@ fz_blend_separable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, 
 }
 
 static inline void
-fz_blend_nonseparable_gray(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n, int w, int blendmode, int first_spot)
+fz_blend_nonseparable_gray(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n, int w, const int blendmode, const int first_spot)
 {
 	do
 	{
@@ -496,7 +535,7 @@ fz_blend_nonseparable_gray(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTR
 }
 
 static inline void
-fz_blend_nonseparable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n, int w, int blendmode, int complement, int first_spot)
+fz_blend_nonseparable(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n, int w, const int blendmode, const int complement, const int first_spot)
 {
 	do
 	{
@@ -608,47 +647,8 @@ fz_blend_nonseparable(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT s
 	while (--w);
 }
 
-// find the first occurrence of a byte that's not ZERO; return the offset to that byte.
-static inline int fz_memspnz(const byte* FZ_RESTRICT hp, int w)
-{
-	int z;
-#if 0
-	// memspn():
-	for (z = 0; z < w && hp[z] == 0; z++)
-		;
-#else
-	// vectorize the memspn():
-	if (w < 16)
-	{
-		for (z = 0; z < w && hp[z] == 0; z++)
-			;
-	}
-	else
-	{
-		// move towards 8-byte aligned storage start, before we start the vector code
-		int off1 = ((ptrdiff_t)hp) & 0x07;
-		for (z = 0; z < off1 && hp[z] == 0; z++)
-			;
-		if (z == off1)
-		{
-			int w2 = w - off1;
-			int lw = w2 >> 3;
-			uint64_t* p = (uint64_t*)(hp + off1);
-			int i;
-			for (i = 0; i < lw && p[i] == 0; i++)
-				;
-			z += i << 3;
-			// now there still may be a few NUL bytes in that last 64-bit word or in the tail bytes beyond the last:
-			for (; z < w && hp[z] == 0; z++)
-				;
-		}
-	}
-#endif
-	return z;
-}
-
 static inline void
-fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n1, int w, int blendmode, int complement, const byte * FZ_RESTRICT hp, int alpha, int first_spot)
+fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n1, int w, const int blendmode, const int complement, const byte * FZ_RESTRICT hp, const int alpha, const int first_spot)
 {
 	int k;
 
@@ -690,6 +690,7 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, const int bal, const byte 
 			bp += n2;
 		}
 		while (--w);
+
 		return;
 	}
 
@@ -876,10 +877,27 @@ fz_blend_separable_nonisolated(byte * FZ_RESTRICT bp, const int bal, const byte 
 }
 
 static inline void
-fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n, int w, int blendmode, const byte * FZ_RESTRICT hp, int alpha, int first_spot)
+fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n, int w, const int blendmode, const byte * FZ_RESTRICT hp, const int alpha, const int first_spot)
 {
+	const int ns = n + sal;
+	const int nb = n + bal;
+
 	do
 	{
+		{
+			int z = fz_memspnz(hp, w);
+			if (z > 0)
+			{
+				if (z == w)
+					break;
+
+				hp += z;
+				sp += ns * z;
+				bp += nb * z;
+				w -= z;
+			}
+		}
+
 		int ha = *hp++;
 		int haa = fz_mul255(ha, alpha);
 		if (haa != 0)
@@ -947,16 +965,33 @@ fz_blend_nonseparable_nonisolated_gray(byte * FZ_RESTRICT bp, int bal, const byt
 				}
 			}
 		}
-		sp += n + sal;
-		bp += n + bal;
+		sp += ns;
+		bp += nb;
 	} while (--w);
 }
 
 static inline void
-fz_blend_nonseparable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n, int w, int blendmode, int complement, const byte * FZ_RESTRICT hp, int alpha, int first_spot)
+fz_blend_nonseparable_nonisolated(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n, int w, const int blendmode, const int complement, const byte * FZ_RESTRICT hp, const int alpha, const int first_spot)
 {
+	const int ns = n + sal;
+	const int nb = n + bal;
+
 	do
 	{
+		{
+			int z = fz_memspnz(hp, w);
+			if (z > 0)
+			{
+				if (z == w)
+					break;
+
+				hp += z;
+				sp += ns * z;
+				bp += nb * z;
+				w -= z;
+			}
+		}
+
 		int ha = *hp++;
 		int haa = fz_mul255(ha, alpha);
 		if (haa != 0)
@@ -1135,8 +1170,9 @@ fz_blend_nonseparable_nonisolated(byte * FZ_RESTRICT bp, int bal, const byte * F
 				}
 			}
 		}
-		sp += n + sal;
-		bp += n + bal;
+
+		sp += ns;
+		bp += nb;
 	}
 	while (--w);
 }
@@ -1168,7 +1204,7 @@ verify_premultiply(fz_context *ctx, const fz_pixmap * FZ_RESTRICT dst)
 #endif
 
 void
-fz_blend_pixmap(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap * FZ_RESTRICT src, int alpha, int blendmode, int isolated, const fz_pixmap * FZ_RESTRICT shape)
+fz_blend_pixmap(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap * FZ_RESTRICT src, const int alpha, const int blendmode, const int isolated, const fz_pixmap * FZ_RESTRICT shape)
 {
 	unsigned char *sp;
 	unsigned char *dp;
@@ -1347,11 +1383,27 @@ fz_blend_pixmap(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap * FZ_RES
 }
 
 static inline void
-fz_blend_knockout(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, int sal, int n1, int w, const byte * FZ_RESTRICT hp)
+fz_blend_knockout(byte * FZ_RESTRICT bp, const int bal, const byte * FZ_RESTRICT sp, const int sal, const int n1, int w, const byte * FZ_RESTRICT hp)
 {
-	int k;
+	const int ns = n1 + sal;
+	const int nb = n1 + bal;
+
 	do
 	{
+		{
+			int z = fz_memspnz(hp, w);
+			if (z > 0)
+			{
+				if (z == w)
+					break;
+
+				hp += z;
+				sp += ns * z;
+				bp += nb * z;
+				w -= z;
+			}
+		}
+
 		int ha = *hp++;
 
 		if (ha != 0)
@@ -1373,6 +1425,7 @@ fz_blend_knockout(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, i
 				int ra = hasa + fz_mul255(255-ha, ba);
 
 				/* Process colorants + spots */
+				int k;
 				for (k = 0; k < n1; k++)
 				{
 					int sc = (sp[k] * invsa + 128) >> 8;
@@ -1386,8 +1439,9 @@ fz_blend_knockout(byte * FZ_RESTRICT bp, int bal, const byte * FZ_RESTRICT sp, i
 					bp[k] = ra;
 			}
 		}
-		sp += n1 + sal;
-		bp += n1 + bal;
+
+		sp += ns;
+		bp += nb;
 	}
 	while (--w);
 }
