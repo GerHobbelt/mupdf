@@ -50,7 +50,7 @@ static void usage(void)
 
 static void mu_drop_context(void)
 {
-	fz_close_output(ctx, out);
+	//fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
 	out = NULL;
 	fz_drop_stream(ctx, datafeed);
@@ -173,6 +173,13 @@ qiqqa_muannot_main(int argc, const char** argv)
 				datafeed = NULL;
 			}
 		}
+
+		fz_close_output(ctx, out);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_output(ctx, out);
+		out = NULL;
 	}
 	fz_catch(ctx)
 	{

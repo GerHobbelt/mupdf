@@ -45,42 +45,90 @@ extern "C" {
 	fz_outputs. The supplied function of this type is called
 	whenever data is written to the output.
 
-	state: The state for the output stream.
+	out: a reference to the output stream.
 
 	data: a pointer to a buffer of data to write.
 
 	n: The number of bytes of data to write.
 */
-typedef void (fz_output_write_fn)(fz_context *ctx, void *state, const void *data, size_t n);
+typedef void (fz_output_write_fn)(fz_context *ctx, fz_output *out, const void *data, size_t n);
 
 /**
 	A function type for use when implementing
 	fz_outputs. The supplied function of this type is called when
 	fz_seek_output is requested.
 
-	state: The output stream state to seek within.
+	out: a reference to the output stream.
 
 	offset, whence: as defined for fs_seek_output.
 */
-typedef void (fz_output_seek_fn)(fz_context *ctx, void *state, int64_t offset, int whence);
+typedef void (fz_output_seek_fn)(fz_context *ctx, fz_output *out, int64_t offset, int whence);
 
 /**
 	A function type for use when implementing
 	fz_outputs. The supplied function of this type is called when
 	fz_tell_output is requested.
 
-	state: The output stream state to report on.
+	out: a reference to the output stream.
 
 	Returns the offset within the output stream.
 */
-typedef int64_t (fz_output_tell_fn)(fz_context *ctx, void *state);
+typedef int64_t (fz_output_tell_fn)(fz_context *ctx, fz_output *out);
 
 /**
 	A function type for use when implementing
 	fz_outputs. The supplied function of this type is called
 	when the output stream is closed, to flush any pending writes.
+
+	It is assumed that everything went well up to now, for otherwise
+	this function SHOULD NOT be called.
+
+	The expected coding idiom for using any `fz_output`-type object
+	goes like this:
+
+	```
+	fz_output *out = NULL;
+	fz_try(ctx)
+	{
+		out = fz_new_output_XYZ(ctx, ...);	// create the output instance
+
+		[...do preparatory work...]
+
+		// write data to output using this API & friends:
+		fz_write_output(ctx, out, ...);
+		[...]
+
+		// when finished, we close the output to announce our success at completion:
+		fz_close_output(ctx, out);
+	}
+	fz_always(ctx)
+	{
+		// call the cleanup crew now that we're done:
+		fz_drop_output(ctx, out);
+	}
+	fz_catch(ctx)
+	{
+		// report the unexpected b0rk:
+		report_our_failure_to_deliver(fz_caught_exception(ctx));
+	}
+	```
+
+	Note the placement of the `fz_close_output()` and `fz_drop_output()`
+	calls in the try/always/catch blocks above.
+
+	> As a side-effect of using this idiom consistently, we can safely code
+	> mechanisms such as 'safe file creation', where files are only kept on
+	> disk when they're actually carrying correct & complete data: the
+	> 'close' signals successful completion, while a drop-without-preceding-close
+	> signals failure to write the complete contents; in the latter case
+	> we can then delete the scratch file to prevent broken output files
+	> from remaining on the target file system.
+	>
+	> See also the `fz_set_safe_file_output_mode()` API.
+
+	out: a reference to the output stream.
 */
-typedef void (fz_output_close_fn)(fz_context *ctx, void *state);
+typedef void (fz_output_close_fn)(fz_context *ctx, fz_output *out);
 
 /**
 	A function type for use when implementing
@@ -88,14 +136,14 @@ typedef void (fz_output_close_fn)(fz_context *ctx, void *state);
 	when the output stream is dropped, to release the stream
 	specific state information.
 */
-typedef void (fz_output_drop_fn)(fz_context *ctx, void *state);
+typedef void (fz_output_drop_fn)(fz_context *ctx, fz_output *out);
 
 /**
 	A function type for use when implementing
 	fz_outputs. The supplied function of this type is called
 	when the fz_stream_from_output is called.
 */
-typedef fz_stream *(fz_stream_from_output_fn)(fz_context *ctx, void *state);
+typedef fz_stream *(fz_stream_from_output_fn)(fz_context *ctx, fz_output *out);
 
 /**
 	A function type for use when implementing
@@ -103,7 +151,7 @@ typedef fz_stream *(fz_stream_from_output_fn)(fz_context *ctx, void *state);
 	when fz_truncate_output is called to truncate the file
 	at that point.
 */
-typedef void (fz_truncate_fn)(fz_context *ctx, void *state);
+typedef void (fz_truncate_fn)(fz_context *ctx, fz_output *out);
 
 /**
 * Secondary outputs are files (or buffers, or ...) which are generated while
@@ -317,6 +365,78 @@ fz_stream *fz_stream_from_output(fz_context *, fz_output *);
 	of their storage to be truncated at the current point.
 */
 void fz_truncate_output(fz_context *, fz_output *);
+
+/**
+	Set the file write/output mode for any file created/written to
+	disk from now on.
+
+	enable: when non-zero (TRUE), files are created using 'safe mode'
+	(see below), while zero (FALSE) instructs to use classic
+	'direct write' mode instead.
+
+	## Safe Mode
+
+	'Safe mode' works as long as your file system (and target directory
+	access permissions) allow file name **rename**. Only rarely is
+	this right not granted.
+
+	'Safe mode' will create any target file using the following procedure:
+
+	- any file is opened for create/write mode, with the extra extension
+	  '.tmp' appended to the given filename.
+	- data is written as usual.
+	- when `close` is invoked (signaling a successful completion of the
+	  create/write process), the '.tmp' file is closed as usual.
+
+	  **Then** the '.tmp'-extended filename is **renamed** to the
+	  original specified target filename.
+
+	  When the original specified target filename already exists at
+	  the time rename, this is considered a collision failure and will
+	  be reported by throwing an exception, so the userland code can
+	  deal with this particular situation.
+
+	- when `drop` is invoked without a preceding `close` call, this signals
+	  the file create/write process did not succeed entirely, hence the
+	  output file is surely broken/incomplete.
+
+	  In this case, the '.tmp' file will be closed as usual, but rather
+	  rather then renaming to the target filename, the '.tmp' file is
+	  **deleted** subsequently, which we consider a file system cleanup action.
+
+	Note/Aside:
+
+	`fz_new_output_with_path(..., append)` signals the library
+	you want to **append**, rather than **create/overwrite**, the target file.
+	Here 'safe mode' is slightly less 'safe' in extreme conditions, but
+	in order to spare the HDD/SSD and keep our I/O bandwidth low, we DO NOT
+	copy the existing target file to the '.tmp' file on creation (as one
+	might expect from a naive implementation), but instead the '.tmp' file
+	only writes the appended material (effectively making 'append mode'
+	a 'create/write' mode while writing to the output), which is finally
+	*appended* to the original target file when 'close' is invoked: this
+	reduces the total I/O bytecount to O(3N): 1 write + (1 read + 1 append)_on_close.
+
+	The naive implementation would have cost O(M+N) instead: copy M old/existing + 1 write (+ 1 rename).
+	As we expect 'M' to be large/huge, compared to the amount of data we expect to append,
+	the append-on-close scheme was chosen to reduce I/O costs.
+
+	Note:
+
+	Userland code can register custom `on_create`, `on_create_append`, `on_success`, `on_collision` and
+	`on_fail` handlers to tweak the behaviour of the code during those phases
+	described above, thus giving userland code extensive control over
+	custom 'safe mode' behaviours, via `fz_set_custom_safe_file_output_mode_handlers()`.
+*/
+void fz_set_safe_file_output_mode(int enable);
+/**
+    See the `fz_set_safe_file_output_mode()` notes.
+ */
+typedef int (fz_output_safe_mode_on_event_fn)(fz_context *ctx, fz_output *out);
+/**
+	See the `fz_set_safe_file_output_mode()` notes.
+ */
+void fz_set_custom_safe_file_output_mode_handlers(fz_output_safe_mode_on_event_fn *on_create, fz_output_safe_mode_on_event_fn *on_create_append, fz_output_safe_mode_on_event_fn *on_success, fz_output_safe_mode_on_event_fn *on_rename_collision, fz_output_safe_mode_on_event_fn *on_fail);
 
 /**
 	Write data to output.

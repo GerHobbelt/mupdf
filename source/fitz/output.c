@@ -207,12 +207,31 @@ stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 #endif
 }
 
+static void
+stdout_flush_on_close(fz_context* ctx, fz_output *out)
+{
+	fz_flush_output(ctx, out);
+#if!def _WIN32
+	fflush(stdout);
+#endif
+}
+
+static void
+stdout_flush_on_drop(fz_context* ctx, fz_output* out)
+{
+	fz_flush_output_no_lock(ctx, out);
+#if!def _WIN32
+	fflush(stdout);
+#endif
+}
+
 static fz_output fz_stdout_global = {
 	NULL,
 	stdout_write,
 	NULL,
 	NULL,
-	NULL,
+	stdout_flush_on_close,
+	stdout_flush_on_drop,
 };
 
 fz_output *fz_stdout(fz_context *ctx)
@@ -230,12 +249,31 @@ stderr_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 #endif
 }
 
+static void
+stderr_flush_on_close(fz_context* ctx, fz_output* out)
+{
+	fz_flush_output(ctx, out);
+#if!def _WIN32
+	fflush(stderr);
+#endif
+}
+
+static void
+stderr_flush_on_drop(fz_context* ctx, fz_output* out)
+{
+	fz_flush_output_no_lock(ctx, out);
+#if!def _WIN32
+	fflush(stderr);
+#endif
+}
+
 static fz_output fz_stderr_global = {
 	NULL,
 	stderr_write,
 	NULL,
 	NULL,
-	NULL,
+	stderr_flush_on_close,
+	stderr_flush_on_drop,
 };
 
 fz_output *fz_stderr(fz_context *ctx)
@@ -264,12 +302,25 @@ stdods_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 		fz_free(ctx, buf);
 }
 
+static void
+stdods_flush_on_close(fz_context* ctx, fz_output* out)
+{
+	fz_flush_output(ctx, out);
+}
+
+static void
+stdods_flush_on_drop(fz_context* ctx, fz_output* out)
+{
+	fz_flush_output_no_lock(ctx, out);
+}
+
 static fz_output fz_stdods_global = {
 	NULL,
 	stdods_write,
 	NULL,
 	NULL,
-	NULL,
+	stdods_flush_on_close,
+	stdods_flush_on_drop,
 };
 
 fz_output *fz_stdods(fz_context *ctx)
@@ -322,10 +373,23 @@ file_tell(fz_context *ctx, void *opaque)
 }
 
 static void
+file_close(fz_context* ctx, void* opaque)
+{
+	FILE* file = (FILE*)opaque;
+	int n = 0;
+	if (file)
+		n = fclose(file);
+	if (n < 0)
+		fz_warn(ctx, "cannot fclose: %s", strerror(errno));
+}
+
+static void
 file_drop(fz_context *ctx, void *opaque)
 {
 	FILE *file = (FILE *)opaque;
-	int n = fclose(file);
+	int n = 0;
+	if (file)
+		n = fclose(file);
 	if (n < 0)
 		fz_warn(ctx, "cannot fclose: %s", strerror(errno));
 }
@@ -356,6 +420,54 @@ static void file_truncate(fz_context *ctx, void *opaque)
 			(void)ftruncate(fileno(file), pos);
 	}
 #endif
+}
+
+static int safe_output_mode = 0;
+
+void fz_set_safe_file_output_mode(int enable)
+{
+	safe_output_mode = enable;
+}
+
+static int fz_output_safe_mode_on_create(fz_context* ctx, fz_output* out)
+{
+	return 0;
+}
+
+static int fz_output_safe_mode_on_create_append(fz_context* ctx, fz_output* out)
+{
+	return 0;
+}
+
+static int fz_output_safe_mode_on_success(fz_context* ctx, fz_output* out)
+{
+	return 0;
+}
+
+static int fz_output_safe_mode_on_fail(fz_context* ctx, fz_output* out)
+{
+	return 0;
+}
+
+static int fz_output_safe_mode_on_rename_collision(fz_context* ctx, fz_output* out)
+{
+	return 0;
+}
+
+static fz_output_safe_mode_on_event_fn* fzevt_on_create = fz_output_safe_mode_on_create;
+static fz_output_safe_mode_on_event_fn* fzevt_on_create_append = fz_output_safe_mode_on_create_append;
+static fz_output_safe_mode_on_event_fn* fzevt_on_success = fz_output_safe_mode_on_success;
+static fz_output_safe_mode_on_event_fn* fzevt_on_rename_collision = fz_output_safe_mode_on_rename_collision;
+static fz_output_safe_mode_on_event_fn* fzevt_on_fail = fz_output_safe_mode_on_fail;
+
+
+void fz_set_custom_safe_file_output_mode_handlers(fz_output_safe_mode_on_event_fn *on_create, fz_output_safe_mode_on_event_fn *on_create_append, fz_output_safe_mode_on_event_fn *on_success, fz_output_safe_mode_on_event_fn *on_rename_collision, fz_output_safe_mode_on_event_fn *on_fail)
+{
+	fzevt_on_create = on_create ? on_create : fz_output_safe_mode_on_create;
+	fzevt_on_create_append = on_create_append ? on_create_append : fz_output_safe_mode_on_create_append;
+	fzevt_on_success = on_success ? on_success : fz_output_safe_mode_on_success;
+	fzevt_on_rename_collision = on_rename_collision ? on_rename_collision : fz_output_safe_mode_on_rename_collision;
+	fzevt_on_fail = on_fail ? on_fail : fz_output_safe_mode_on_fail;
 }
 
 fz_output *
@@ -543,7 +655,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file '%s': %s", filename, strerror(errno));
 
 	setvbuf(file, NULL, _IONBF, 0); /* we do our own buffering */
-	out = fz_new_output(ctx, 8192, file, file_write, NULL, file_drop);
+	out = fz_new_output(ctx, 8192, file, file_write, file_close, file_drop);
 	out->seek = file_seek;
 	out->tell = file_tell;
 	out->as_stream = file_as_stream;
@@ -1003,6 +1115,9 @@ fz_append_base64_buffer(fz_context *ctx, fz_buffer *out, fz_buffer *buf, int new
 void
 fz_save_buffer(fz_context *ctx, fz_buffer *buf, const char *filename)
 {
+	if (!buf)
+		return;
+
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_try(ctx)
 	{

@@ -37,11 +37,11 @@ fz_save_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pixmap, const char *file
 		writer = fz_new_psd_band_writer(ctx, out);
 		fz_write_header(ctx, writer, pixmap->w, pixmap->h, pixmap->n, pixmap->alpha, pixmap->xres, pixmap->yres, 0, pixmap->colorspace, pixmap->seps);
 		fz_write_band(ctx, writer, pixmap->stride, pixmap->h, pixmap->samples);
+		fz_close_band_writer(ctx, writer);
+		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
 	{
-		fz_close_band_writer(ctx, writer);
-		fz_close_output(ctx, out);
 		fz_drop_band_writer(ctx, writer);
 		fz_drop_output(ctx, out);
 	}
