@@ -287,11 +287,9 @@ int fz_strncasecmp(const char *a, const char *b, size_t n);
 size_t fz_strrcspn(const char *str, const char *set);
 
 /**
-	Return TRUE when the given string contains a `%d` format specifier.
-	Any legal `%d`-alike format is accepted:
-	'%[+-][ ][0-9]*[.][0-9]*d', e.g. `%04d` or `%+4.0d` or `%d` 
+	Return TRUE when the given string contains a `%d`, '#', '!', '$' or '^' page/sequence format specifier for use with `fz_format_output_path_ex()`.
 */
-int fz_has_percent_d(const char* s);
+int fz_has_page_format_marker(const char* s);
 
 /**
 	FZ_UTFMAX: Maximum number of bytes in a decoded rune (maximum

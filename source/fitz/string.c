@@ -405,30 +405,9 @@ static const char *check_percent_d(const char* s)
 	return NULL;
 }
 
-static const char* check_percent_d_alternative(const char* s)
+int fz_has_page_format_marker(const char* s)
 {
-	/* find '####', which represents %04d */
-	if (*s++ == '#')
-	{
-		while (*s == '#')
-			++s;
-		return s;
-	}
-	return NULL;
-}
-
-int fz_has_percent_d(const char* s)
-{
-	/* find '%[+-][ ][0-9]*[.][0-9]*d', e.g. %04d or %+4.0d */
-	while (*s)
-	{
-		if (check_percent_d(s))
-			return 1;
-		if (check_percent_d_alternative(s))
-			return 1;
-		++s;
-	}
-	return 0;
+	return strpbrk(s, "%#$^!") != NULL;
 }
 
 // Skip directory/(Windows)drive separators.
@@ -472,145 +451,7 @@ const char* fz_name_extension(const char* path)
 void
 fz_format_output_path(fz_context *ctx, char *path, size_t size, const char *format, int page)
 {
-	const char* s, *p, *q;
-	char* fmt = fz_strdup(ctx, format);
-	size_t w = size;
-	char* d = path;
-	int done = 0;
-
-	s = fmt;
-	while (w > 0)
-	{
-		p = strchr(s, '%');
-		q = strchr(s, '#');
-		// when both are found, the first one wins... this round, at least.
-		if (p && q)
-		{
-			if (p > q)
-				p = NULL;
-			else
-				q = NULL;
-		}
-		if (p)
-		{
-			char* p2 = (char*)check_percent_d(p);
-			if (p2)
-			{
-				// cut after the 'd' of '%d':
-				char c = *p2;
-				*p2 = 0;
-
-				// copy the chunk that precedes the %d:
-				size_t l = p - s;
-				if (l >= w)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-				if (l > 0)
-					memcpy(d, s, l);
-				w -= l;
-				d += l;
-
-				// bingo: workable/legal %d particle:
-				l = fz_snprintf(d, w, p, page);
-				if (l >= w)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-				w -= l;
-				d += l;
-
-				*p2 = c;
-				s = p2;
-
-				done = 1;
-			}
-			else
-			{
-				// unknown %... sequence: skip and copy verbatim
-				++p;
-				size_t l = p - s;
-				// while treating %% as %:
-				if (*p == '%')
-					++p;
-
-				if (l >= w)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-				if (l > 0)
-					memcpy(d, s, l);
-				w -= l;
-				d += l;
-
-				s = p;
-			}
-			continue;
-		}
-
-		if (q)
-		{
-			const char* q2 = check_percent_d_alternative(q);
-
-			// copy the chunk that precedes the first #:
-			size_t l = q - s;
-			if (l >= w)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-			if (l > 0)
-				memcpy(d, s, l);
-			w -= l;
-			d += l;
-
-			// bingo: workable/legal #### particle:
-			l = q2 - q;
-			char partfmt[10];
-			fz_snprintf(partfmt, sizeof(partfmt), "%%0%zud", l);
-			l = fz_snprintf(d, w, partfmt, page);
-			if (l >= w)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-			w -= l;
-			d += l;
-
-			s = q2;
-
-			done = 1;
-			continue;
-		}
-
-		{
-			// no more %, copy end chunk verbatim, including NUL sentinel
-			//
-			// do reckon with the situation where no %d has been encountered yet.
-			size_t l;
-
-			if (!done && page != 0)
-			{
-				p = fz_basename(s);
-				p = strrchr(p, '.');
-				// jump to end if no file extension found
-				if (!p)
-					p = s + strlen(s);
-				l = p - s;
-				if (l >= w)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-				if (l > 0)
-					memcpy(d, s, l);
-				w -= l;
-				d += l;
-
-				s = p;
-
-				char num[40];
-				l = fz_snprintf(num, sizeof(num), "%s%04d", (*s == '.' ? "." : "_p"), page);
-				if (l >= w)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-				memcpy(d, num, l);
-				w -= l;
-				d += l;
-			}
-
-			l = strlen(s) + 1;
-			if (l > w)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
-			memcpy(d, s, l);
-			break;
-		}
-	}
-	fz_free(ctx, fmt);
+	fz_format_output_path_ex(ctx, path, size, format, 0, page, 0, NULL, NULL);
 }
 
 // a la strspn() but for a single-char set only
@@ -625,7 +466,6 @@ static inline size_t fz_strspn1(const char* s, char c)
 void
 fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const char* fmt, int chapter, int page, int sequence_number, const char* label, const char* extension)
 {
-	//fz_strncpy_s(ctx, dstpath, fmt, size);
 	assert(dstsize >= 1);
 	*dstpath = 0;
 

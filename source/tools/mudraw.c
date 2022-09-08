@@ -3187,7 +3187,7 @@ int main(int argc, const char** argv)
 			output_file_per_page = 1;
 		}
 
-		if ((fz_has_percent_d(output) || output_file_per_page) &&
+		if ((fz_has_page_format_marker(output) || output_file_per_page) &&
 			strcmp(output, "/dev/stdout") && strcmp(output, "/dev/null") && fz_strcasecmp(output, "nul:"))
 		{
 			output_file_per_page = 1;
