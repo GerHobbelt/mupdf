@@ -263,6 +263,82 @@ fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pi
 */
 void fz_default_png_compression_level(int level);
 
+
+
+/**
+	Save a (Greyscale or RGB) pixmap as a webp.
+*/
+void fz_save_pixmap_as_webp(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
+
+/**
+	Write a (Greyscale or RGB) pixmap as a webp.
+*/
+void fz_write_pixmap_as_webp(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
+
+/**
+	Create a new webp band writer (greyscale or RGB, with or without
+	alpha).
+*/
+fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out);
+
+/**
+	Re-encode a given image as a webp into a buffer.
+
+	Ownership of the buffer is returned.
+*/
+fz_buffer *fz_new_buffer_from_image_as_webp(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+
+/**
+	Re-encode a given pixmap as a webp into a buffer.
+
+	Ownership of the buffer is returned.
+*/
+fz_buffer *fz_new_buffer_from_pixmap_as_webp(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+
+/**
+	Set the preferred/default quality for any subsequent WebP output.
+
+	A **negative** quality signals you want **lossless** compression;
+	a **positive** quality signals you want a **lossy** compression with the given quality percentage (1..100%)
+
+	When the given quality is ZERO, a factory default quality is assumed.
+*/
+void fz_default_webp_quality(float quality);
+
+
+
+/**
+	Save a (Greyscale or RGB) pixmap as a tiff.
+*/
+void fz_save_pixmap_as_tiff(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
+
+/**
+	Write a (Greyscale or RGB) pixmap as a tiff.
+*/
+void fz_write_pixmap_as_tiff(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
+
+/**
+	Create a new tiff band writer (greyscale or RGB, with or without
+	alpha).
+*/
+fz_band_writer *fz_new_tiff_band_writer(fz_context *ctx, fz_output *out);
+
+/**
+	Re-encode a given image as a tiff into a buffer.
+
+	Ownership of the buffer is returned.
+*/
+fz_buffer *fz_new_buffer_from_image_as_tiff(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+
+/**
+	Re-encode a given pixmap as a tiff into a buffer.
+
+	Ownership of the buffer is returned.
+*/
+fz_buffer *fz_new_buffer_from_pixmap_as_tiff(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+
+
+
 /**
 		Save a (Greyscale or RGB) pixmap as a MURAW.
 */
