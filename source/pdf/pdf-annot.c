@@ -838,8 +838,13 @@ remove_from_tree(fz_context *ctx, pdf_obj *arr, pdf_obj *item, pdf_cycle_list *c
 	pdf_cycle_list cycle;
 	int i, n, res = 0;
 
-	if (arr == NULL || pdf_cycle(ctx, &cycle, cycle_up, arr))
+	if (arr == NULL)
 		return 0;
+	if (pdf_cycle(ctx, &cycle, cycle_up, arr))
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Cycle detected while removing (annotation) item from tree. Cannot remove recursively self-referencing element.");
+		return 0;
+	}
 
 	n = pdf_array_len(ctx, arr);
 	for (i = 0; i < n; ++i)

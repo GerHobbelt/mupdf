@@ -142,7 +142,10 @@ count_entries(fz_context *ctx, pdf_obj *obj, pdf_cycle_list *cycle_up)
 	{
 		pdf_obj *o = pdf_array_get(ctx, obj, i);
 		if (pdf_cycle(ctx, &cycle, cycle_up, o))
+		{
+			fz_error(ctx, "Cycle detected at count_entities. Recovering by skipping element.");
 			continue;
+		}
 		count += (pdf_is_array(ctx, o) ? count_entries(ctx, o, &cycle) : 1);
 	}
 	return count;
@@ -179,7 +182,10 @@ populate_ui(fz_context *ctx, pdf_ocg_descriptor *desc, int fill, pdf_obj *order,
 		if (pdf_is_array(ctx, o))
 		{
 			if (pdf_cycle(ctx, &cycle, cycle_up, o))
+			{
+				fz_error(ctx, "Cycle detected at populate_ui. Recovering by skipping element.");
 				continue;
+			}
 
 			fill = populate_ui(ctx, desc, fill, o, depth+1, rbgroups, locked, &cycle);
 			continue;
@@ -649,7 +655,10 @@ pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const ch
 
 	/* Avoid infinite recursions */
 	if (pdf_cycle(ctx, &cycle, cycle_up, ocg))
+	{
+		fz_error(ctx, "Cycle detected at is_OCG_hidden code check. Recovering by skipping OCG element, assuming 'visible'.");
 		return 0;
+	}
 
 	fz_strncpy_s(ctx, event_state, usage, sizeof event_state);
 	fz_strlcat(event_state, "State", sizeof event_state);
