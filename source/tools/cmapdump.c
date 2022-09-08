@@ -99,114 +99,125 @@ cmapdump_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
-	fz_output* out = fz_stdout(ctx);
-
-	fz_write_printf(ctx, out, "/* This is an automatically generated file. Do not edit. */\n");
-
-	while (fz_optind < argc)
+	fz_output* out = NULL;
+	fz_try(ctx)
 	{
-		const char *filename = argv[fz_optind++];
-		fi = fz_open_file(ctx, filename);
-		cmap = pdf_load_cmap(ctx, fi);
-		fz_drop_stream(ctx, fi);
+		out = fz_stdout(ctx);
 
-		strcpy(name, cmap->cmap_name);
-		clean(name);
+		fz_write_printf(ctx, out, "/* This is an automatically generated file. Do not edit. */\n");
 
-		fz_write_printf(ctx, out, "\n/* %s */\n\n", cmap->cmap_name);
-
-		if (cmap->rlen)
+		while (fz_optind < argc)
 		{
-			fz_write_printf(ctx, out, "static const pdf_range cmap_%s_ranges[] = {", name);
-			for (k = 0; k < cmap->rlen; k++)
-			{
-				fz_write_printf(ctx, out, "\n{%u,%u,%u},", cmap->ranges[k].low, cmap->ranges[k].high, cmap->ranges[k].out);
-			}
-			fz_write_printf(ctx, out, "\n};\n\n");
-		}
+			const char* filename = argv[fz_optind++];
+			fi = fz_open_file(ctx, filename);
+			cmap = pdf_load_cmap(ctx, fi);
+			fz_drop_stream(ctx, fi);
 
-		if (cmap->xlen)
-		{
-			fz_write_printf(ctx, out, "static const pdf_xrange cmap_%s_xranges[] = {", name);
-			for (k = 0; k < cmap->xlen; k++)
-			{
-				fz_write_printf(ctx, out, "\n{%u,%u,%u},", cmap->xranges[k].low, cmap->xranges[k].high, cmap->xranges[k].out);
-			}
-			fz_write_printf(ctx, out, "\n};\n\n");
-		}
+			strcpy(name, cmap->cmap_name);
+			clean(name);
 
-		if (cmap->mlen > 0)
-		{
-			fz_write_printf(ctx, out, "static const pdf_mrange cmap_%s_mranges[] = {", name);
-			for (k = 0; k < cmap->mlen; k++)
-			{
-				fz_write_printf(ctx, out, "\n{%u,%u},", cmap->mranges[k].low, cmap->mranges[k].out);
-			}
-			fz_write_printf(ctx, out, "\n};\n\n");
-		}
+			fz_write_printf(ctx, out, "\n/* %s */\n\n", cmap->cmap_name);
 
-		if (cmap->dlen > 0)
-		{
-			int ti = 0, tn = cmap->dict[0];
-			fz_write_printf(ctx, out, "static const int cmap_%s_table[] = {\n", name);
-			for (k = 0; k < cmap->dlen; k++)
+			if (cmap->rlen)
 			{
-				if (ti > tn)
+				fz_write_printf(ctx, out, "static const pdf_range cmap_%s_ranges[] = {", name);
+				for (k = 0; k < cmap->rlen; k++)
 				{
-					fz_write_printf(ctx, out, "\n");
-					ti = 1;
-					tn = cmap->dict[k];
+					fz_write_printf(ctx, out, "\n{%u,%u,%u},", cmap->ranges[k].low, cmap->ranges[k].high, cmap->ranges[k].out);
 				}
-				else
-					++ti;
-				fz_write_printf(ctx, out, "%u,", cmap->dict[k]);
+				fz_write_printf(ctx, out, "\n};\n\n");
 			}
-			fz_write_printf(ctx, out, "\n};\n\n");
+
+			if (cmap->xlen)
+			{
+				fz_write_printf(ctx, out, "static const pdf_xrange cmap_%s_xranges[] = {", name);
+				for (k = 0; k < cmap->xlen; k++)
+				{
+					fz_write_printf(ctx, out, "\n{%u,%u,%u},", cmap->xranges[k].low, cmap->xranges[k].high, cmap->xranges[k].out);
+				}
+				fz_write_printf(ctx, out, "\n};\n\n");
+			}
+
+			if (cmap->mlen > 0)
+			{
+				fz_write_printf(ctx, out, "static const pdf_mrange cmap_%s_mranges[] = {", name);
+				for (k = 0; k < cmap->mlen; k++)
+				{
+					fz_write_printf(ctx, out, "\n{%u,%u},", cmap->mranges[k].low, cmap->mranges[k].out);
+				}
+				fz_write_printf(ctx, out, "\n};\n\n");
+			}
+
+			if (cmap->dlen > 0)
+			{
+				int ti = 0, tn = cmap->dict[0];
+				fz_write_printf(ctx, out, "static const int cmap_%s_table[] = {\n", name);
+				for (k = 0; k < cmap->dlen; k++)
+				{
+					if (ti > tn)
+					{
+						fz_write_printf(ctx, out, "\n");
+						ti = 1;
+						tn = cmap->dict[k];
+					}
+					else
+						++ti;
+					fz_write_printf(ctx, out, "%u,", cmap->dict[k]);
+				}
+				fz_write_printf(ctx, out, "\n};\n\n");
+			}
+
+			fz_write_printf(ctx, out, "static pdf_cmap cmap_%s = {\n", name);
+			fz_write_printf(ctx, out, "\t{ -1, pdf_drop_cmap_imp },\n");
+			fz_write_printf(ctx, out, "\t/* cmapname */ \"%s\",\n", cmap->cmap_name);
+			fz_write_printf(ctx, out, "\t/* usecmap */ \"%s\", NULL,\n", cmap->usecmap_name);
+			fz_write_printf(ctx, out, "\t/* wmode */ %u,\n", cmap->wmode);
+			fz_write_printf(ctx, out, "\t/* codespaces */ %u, {\n", cmap->codespace_len);
+			if (cmap->codespace_len == 0)
+			{
+				fz_write_printf(ctx, out, "\t\t{ 0, 0, 0 },\n");
+			}
+			for (k = 0; k < cmap->codespace_len; k++)
+			{
+				int n = cmap->codespace[k].n;
+				fz_write_printf(ctx, out, "\t\t{ %u, 0x%0*x, 0x%0*x },\n", n,
+					n * 2, cmap->codespace[k].low,
+					n * 2, cmap->codespace[k].high);
+			}
+			fz_write_printf(ctx, out, "\t},\n");
+
+			if (cmap->rlen)
+				fz_write_printf(ctx, out, "\t%u, %u, (pdf_range*)cmap_%s_ranges,\n", cmap->rlen, cmap->rlen, name);
+			else
+				fz_write_printf(ctx, out, "\t0, 0, NULL, /* ranges */\n");
+			if (cmap->xlen)
+				fz_write_printf(ctx, out, "\t%u, %u, (pdf_xrange*)cmap_%s_xranges,\n", cmap->xlen, cmap->xlen, name);
+			else
+				fz_write_printf(ctx, out, "\t0, 0, NULL, /* xranges */\n");
+			if (cmap->mlen)
+				fz_write_printf(ctx, out, "\t%u, %u, (pdf_mrange*)cmap_%s_mranges,\n", cmap->mlen, cmap->mlen, name);
+			else
+				fz_write_printf(ctx, out, "\t0, 0, NULL, /* mranges */\n");
+			if (cmap->dict)
+				fz_write_printf(ctx, out, "\t%u, %u, (int*)cmap_%s_table,\n", cmap->dlen, cmap->dlen, name);
+			else
+				fz_write_printf(ctx, out, "\t0, 0, NULL, /* table */\n");
+			fz_write_printf(ctx, out, "\t0, 0, 0, NULL /* splay tree */\n");
+			fz_write_printf(ctx, out, "};\n");
+
+			pdf_drop_cmap(ctx, cmap);
 		}
 
-		fz_write_printf(ctx, out, "static pdf_cmap cmap_%s = {\n", name);
-		fz_write_printf(ctx, out, "\t{ -1, pdf_drop_cmap_imp },\n");
-		fz_write_printf(ctx, out, "\t/* cmapname */ \"%s\",\n", cmap->cmap_name);
-		fz_write_printf(ctx, out, "\t/* usecmap */ \"%s\", NULL,\n", cmap->usecmap_name);
-		fz_write_printf(ctx, out, "\t/* wmode */ %u,\n", cmap->wmode);
-		fz_write_printf(ctx, out, "\t/* codespaces */ %u, {\n", cmap->codespace_len);
-		if (cmap->codespace_len == 0)
-		{
-			fz_write_printf(ctx, out, "\t\t{ 0, 0, 0 },\n");
-		}
-		for (k = 0; k < cmap->codespace_len; k++)
-		{
-			int n = cmap->codespace[k].n;
-			fz_write_printf(ctx, out, "\t\t{ %u, 0x%0*x, 0x%0*x },\n", n,
-				n*2, cmap->codespace[k].low,
-				n*2, cmap->codespace[k].high);
-		}
-		fz_write_printf(ctx, out, "\t},\n");
-
-		if (cmap->rlen)
-			fz_write_printf(ctx, out, "\t%u, %u, (pdf_range*)cmap_%s_ranges,\n", cmap->rlen, cmap->rlen, name);
-		else
-			fz_write_printf(ctx, out, "\t0, 0, NULL, /* ranges */\n");
-		if (cmap->xlen)
-			fz_write_printf(ctx, out, "\t%u, %u, (pdf_xrange*)cmap_%s_xranges,\n", cmap->xlen, cmap->xlen, name);
-		else
-			fz_write_printf(ctx, out, "\t0, 0, NULL, /* xranges */\n");
-		if (cmap->mlen)
-			fz_write_printf(ctx, out, "\t%u, %u, (pdf_mrange*)cmap_%s_mranges,\n", cmap->mlen, cmap->mlen, name);
-		else
-			fz_write_printf(ctx, out, "\t0, 0, NULL, /* mranges */\n");
-		if (cmap->dict)
-			fz_write_printf(ctx, out, "\t%u, %u, (int*)cmap_%s_table,\n", cmap->dlen, cmap->dlen, name);
-		else
-			fz_write_printf(ctx, out, "\t0, 0, NULL, /* table */\n");
-		fz_write_printf(ctx, out, "\t0, 0, 0, NULL /* splay tree */\n");
-		fz_write_printf(ctx, out, "};\n");
-
-		pdf_drop_cmap(ctx, cmap);
+		fz_close_output(ctx, out);
 	}
-
-	fz_close_output(ctx, out);
-	fz_drop_output(ctx, out);
+	fz_always(ctx)
+	{
+		fz_drop_output(ctx, out);
+	}
+	fz_catch(ctx)
+	{
+		fz_error(ctx, "fatal: %s\n", fz_caught_message(ctx));
+	}
 	mu_drop_context();
 	return EXIT_SUCCESS;
 }
