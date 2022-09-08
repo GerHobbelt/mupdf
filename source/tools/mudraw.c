@@ -326,7 +326,7 @@ static int output_pagenum = 0;
 static int output_file_per_page = 0;
 
 static const char *format = NULL;
-static int output_format = OUT_NONE;
+static const suffix_t *output_format = NULL;
 
 static int rotation = -1;			// actual ~ calculated values
 static float resolution = -1;
@@ -625,41 +625,41 @@ static void reset_page_counter(void) {
 static void
 file_level_headers(fz_context *ctx, const char *filename)
 {
-	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
-		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
-		|| output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
+	if (output_format->format == OUT_STEXT_XML || output_format->format == OUT_OCR_STEXT_XML
+		|| output_format->format == OUT_TRACE || output_format->format == OUT_OCR_TRACE || output_format->format == OUT_BBOX
+		|| output_format->format == OUT_XMLTEXT || output_format->format == OUT_OCR_XMLTEXT)
 	{
 		fz_write_printf(ctx, out, "<?xml version=\"1.0\"?>\n");
 	}
 
-	if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
+	if (output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML)
 		fz_print_stext_header_as_html(ctx, out);
-	else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
+	else if (output_format->format == OUT_XHTML || output_format->format == OUT_OCR_XHTML)
 		fz_print_stext_header_as_xhtml(ctx, out);
 
-	else if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
-		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
-		|| output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
+	else if (output_format->format == OUT_STEXT_XML || output_format->format == OUT_OCR_STEXT_XML
+		|| output_format->format == OUT_TRACE || output_format->format == OUT_OCR_TRACE || output_format->format == OUT_BBOX
+		|| output_format->format == OUT_XMLTEXT || output_format->format == OUT_OCR_XMLTEXT)
 	{
 		fz_write_printf(ctx, out, "<document name=\"%s\">\n", fz_basename(filename));
 	}
-	else if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+	else if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "{%q:%q,%q:[", "file", filename, "pages");
 
-	else if (output_format == OUT_PS)
+	else if (output_format->format == OUT_PS)
 		fz_write_ps_file_header(ctx, out);
 
-	else if (output_format == OUT_PWG)
+	else if (output_format->format == OUT_PWG)
 		fz_write_pwg_file_header(ctx, out);
 
-	else if (output_format == OUT_PCLM)
+	else if (output_format->format == OUT_PCLM)
 	{
 		fz_pclm_options opts = { 0 };
 		fz_parse_pclm_options(ctx, &opts, "compression=flate");
 		bander = fz_new_pclm_band_writer(ctx, out, &opts);
 	}
 #if FZ_ENABLE_OCR_OUTPUT
-	else if (output_format == OUT_OCR_PDF)
+	else if (output_format->format == OUT_OCR_PDF)
 	{
 		char options[300];
 		fz_pdfocr_options opts = { 0 };
@@ -678,24 +678,24 @@ file_level_headers(fz_context *ctx, const char *filename)
 static void
 file_level_trailers(fz_context *ctx)
 {
-	if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML
-		|| output_format == OUT_TRACE || output_format == OUT_OCR_TRACE || output_format == OUT_BBOX
-		|| output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
+	if (output_format->format == OUT_STEXT_XML || output_format->format == OUT_OCR_STEXT_XML
+		|| output_format->format == OUT_TRACE || output_format->format == OUT_OCR_TRACE || output_format->format == OUT_BBOX
+		|| output_format->format == OUT_XMLTEXT || output_format->format == OUT_OCR_XMLTEXT)
 	{
 		fz_write_printf(ctx, out, "</document>\n");
 	}
-	if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+	if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 		fz_write_printf(ctx, out, "]}");
 
-	if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
+	if (output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML)
 		fz_print_stext_trailer_as_html(ctx, out);
-	if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
+	if (output_format->format == OUT_XHTML || output_format->format == OUT_OCR_XHTML)
 		fz_print_stext_trailer_as_xhtml(ctx, out);
 
-	if (output_format == OUT_PS)
+	if (output_format->format == OUT_PS)
 		fz_write_ps_file_trailer(ctx, out, output_pagenum);
 
-	if (output_format == OUT_PCLM || output_format == OUT_OCR_PDF)
+	if (output_format->format == OUT_PCLM || output_format->format == OUT_OCR_PDF)
 	{
 		fz_close_band_writer(ctx, bander);
 		fz_drop_band_writer(ctx, bander);
@@ -757,7 +757,7 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 		if (gamma_value != 1)
 			fz_gamma_pixmap(ctx, pix, gamma_value);
 
-		if (((output_format == OUT_PCL || output_format == OUT_PWG) && out_cs == CS_MONO) || (output_format == OUT_PBM) || (output_format == OUT_PKM))
+		if (((output_format->format == OUT_PCL || output_format->format == OUT_PWG) && out_cs == CS_MONO) || (output_format->format == OUT_PBM) || (output_format->format == OUT_PKM))
 			*bit = fz_new_bitmap_from_pixmap_band(ctx, pix, NULL, band_start);
 	}
 	fz_catch(ctx)
@@ -897,7 +897,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	if (verbosity >= 1)
 		fz_info(ctx, "drawing page %d at resolution: %.1f, rotation: %d\n", pagenum, resolution, rotation);
 
-	if (output_format == OUT_TRACE || output_format == OUT_OCR_TRACE)
+	if (output_format->format == OUT_TRACE || output_format->format == OUT_OCR_TRACE)
 	{
 		float zoom;
 		fz_matrix ctm;
@@ -915,7 +915,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
 			dev = fz_new_trace_device(ctx, out);
 			apply_kill_switch(dev);
-			if (output_format == OUT_OCR_TRACE)
+			if (output_format->format == OUT_OCR_TRACE)
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
@@ -946,7 +946,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-	else if (output_format == OUT_XMLTEXT || output_format == OUT_OCR_XMLTEXT)
+	else if (output_format->format == OUT_XMLTEXT || output_format->format == OUT_OCR_XMLTEXT)
 	{
 		fz_device* pre_ocr_dev = NULL;
 
@@ -964,7 +964,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
 			dev = fz_new_xmltext_device(ctx, out);
 			apply_kill_switch(dev);
-			if (output_format == OUT_OCR_XMLTEXT)
+			if (output_format->format == OUT_OCR_XMLTEXT)
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
@@ -994,7 +994,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-	else if (output_format == OUT_BBOX)
+	else if (output_format->format == OUT_BBOX)
 	{
 		fz_try(ctx)
 		{
@@ -1028,9 +1028,9 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-	else if (output_format == OUT_TEXT || output_format == OUT_HTML || output_format == OUT_XHTML || output_format == OUT_STEXT_XML || output_format == OUT_STEXT_JSON ||
-		output_format == OUT_OCR_TEXT || output_format == OUT_OCR_HTML || output_format == OUT_OCR_XHTML || output_format == OUT_OCR_STEXT_XML || output_format == OUT_OCR_STEXT_JSON ||
-		output_format == OUT_EMPTY_BOX)
+	else if (output_format->format == OUT_TEXT || output_format->format == OUT_HTML || output_format->format == OUT_XHTML || output_format->format == OUT_STEXT_XML || output_format->format == OUT_STEXT_JSON ||
+		output_format->format == OUT_OCR_TEXT || output_format->format == OUT_OCR_HTML || output_format->format == OUT_OCR_XHTML || output_format->format == OUT_OCR_STEXT_XML || output_format->format == OUT_OCR_STEXT_JSON ||
+		output_format->format == OUT_EMPTY_BOX)
 	{
 		fz_stext_page *text = NULL;
 		float zoom;
@@ -1053,10 +1053,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			if (!(stext_options.flags_conf_mask & FZ_STEXT_PRESERVE_IMAGES))
 			{
 				// set the preserve_images flag when not set up explicitly by the commandline argument.
-				if (output_format == OUT_HTML ||
-					output_format == OUT_XHTML ||
-					output_format == OUT_OCR_HTML ||
-					output_format == OUT_OCR_XHTML
+				if (output_format->format == OUT_HTML ||
+					output_format->format == OUT_XHTML ||
+					output_format->format == OUT_OCR_HTML ||
+					output_format->format == OUT_OCR_XHTML
 					)
 					page_stext_options.flags |= FZ_STEXT_PRESERVE_IMAGES;
 				else
@@ -1068,7 +1068,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			if (!(stext_options.flags_conf_mask & FZ_STEXT_PRESERVE_SPANS))
 			{
-				if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+				if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 				{
 					page_stext_options.flags |= FZ_STEXT_PRESERVE_SPANS;
 				}
@@ -1084,12 +1084,12 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
-			if (output_format == OUT_OCR_TEXT ||
-				output_format == OUT_OCR_STEXT_JSON ||
-				output_format == OUT_OCR_STEXT_XML ||
-				output_format == OUT_OCR_XMLTEXT ||
-				output_format == OUT_OCR_HTML ||
-				output_format == OUT_OCR_XHTML)
+			if (output_format->format == OUT_OCR_TEXT ||
+				output_format->format == OUT_OCR_STEXT_JSON ||
+				output_format->format == OUT_OCR_STEXT_XML ||
+				output_format->format == OUT_OCR_XMLTEXT ||
+				output_format->format == OUT_OCR_HTML ||
+				output_format->format == OUT_OCR_XHTML)
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
@@ -1105,31 +1105,31 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			fz_close_device(ctx, pre_ocr_dev);
 			fz_drop_device(ctx, pre_ocr_dev);
 			pre_ocr_dev = NULL;
-			if (output_format == OUT_STEXT_XML || output_format == OUT_OCR_STEXT_XML)
+			if (output_format->format == OUT_STEXT_XML || output_format->format == OUT_OCR_STEXT_XML)
 			{
 				fz_print_stext_page_as_xml(ctx, out, text, pagenum, ctm);
 			}
-			else if (output_format == OUT_STEXT_JSON || output_format == OUT_OCR_STEXT_JSON)
+			else if (output_format->format == OUT_STEXT_JSON || output_format->format == OUT_OCR_STEXT_JSON)
 			{
 				int first = (inc_page_counter() == 0);
 				if (!first)
 					fz_write_string(ctx, out, ",");
 				fz_print_stext_page_as_json(ctx, out, text, pagenum, ctm);
 			}
-			else if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
+			else if (output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML)
 			{
 				fz_print_stext_page_as_html(ctx, out, text, pagenum, ctm, &page_stext_options);
 			}
-			else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
+			else if (output_format->format == OUT_XHTML || output_format->format == OUT_OCR_XHTML)
 			{
 				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum, ctm, &page_stext_options);
 			}
-			else if (output_format == OUT_TEXT || output_format == OUT_OCR_TEXT)
+			else if (output_format->format == OUT_TEXT || output_format->format == OUT_OCR_TEXT)
 			{
 				fz_print_stext_page_as_text(ctx, out, text);
 				fz_write_printf(ctx, out, "\f\n");
 			}
-			else if (output_format == OUT_EMPTY_BOX)
+			else if (output_format->format == OUT_EMPTY_BOX)
 			{
 				fz_print_stext_page_as_empty_box(ctx, out, text);
 				fz_write_printf(ctx, out, "\f\n");
@@ -1147,7 +1147,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 	}
 
-	else if (output_format == OUT_PDF)
+	else if (output_format->format == OUT_PDF)
 	{
 #if FZ_ENABLE_PDF
 		fz_buffer *contents = NULL;
@@ -1191,7 +1191,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 #endif
 	}
 
-	else if (output_format == OUT_SVG)
+	else if (output_format->format == OUT_SVG)
 	{
 		float zoom;
 		fz_matrix ctm;
@@ -1292,43 +1292,43 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 
 			/* Output any page level headers (for banded formats) */
-			if (output_format == OUT_PGM || output_format == OUT_PPM || output_format == OUT_PNM)
+			if (output_format->format == OUT_PGM || output_format->format == OUT_PPM || output_format->format == OUT_PNM)
 				bander = fz_new_pnm_band_writer(ctx, out);
-			else if (output_format == OUT_PAM)
+			else if (output_format->format == OUT_PAM)
 				bander = fz_new_pam_band_writer(ctx, out);
-			else if (output_format == OUT_PNG)
+			else if (output_format->format == OUT_PNG)
 				bander = fz_new_png_band_writer(ctx, out);
-			else if (output_format == OUT_MURAW)
+			else if (output_format->format == OUT_MURAW)
 				bander = fz_new_muraw_band_writer(ctx, out);
-			else if (output_format == OUT_PBM)
+			else if (output_format->format == OUT_PBM)
 				bander = fz_new_pbm_band_writer(ctx, out);
-			else if (output_format == OUT_PKM)
+			else if (output_format->format == OUT_PKM)
 				bander = fz_new_pkm_band_writer(ctx, out);
-			else if (output_format == OUT_PS)
+			else if (output_format->format == OUT_PS)
 				bander = fz_new_ps_band_writer(ctx, out);
-			else if (output_format == OUT_PSD)
+			else if (output_format->format == OUT_PSD)
 				bander = fz_new_psd_band_writer(ctx, out);
-			else if (output_format == OUT_PWG)
+			else if (output_format->format == OUT_PWG)
 			{
 				if (out_cs == CS_MONO)
 					bander = fz_new_mono_pwg_band_writer(ctx, out, NULL);
 				else
 					bander = fz_new_pwg_band_writer(ctx, out, NULL);
 			}
-			else if (output_format == OUT_PCL)
+			else if (output_format->format == OUT_PCL)
 			{
 				if (out_cs == CS_MONO)
 					bander = fz_new_mono_pcl_band_writer(ctx, out, NULL);
 				else
 					bander = fz_new_color_pcl_band_writer(ctx, out, NULL);
 			}
-			else if (output_format == OUT_PCLM || output_format == OUT_OCR_PDF)
+			else if (output_format->format == OUT_PCLM || output_format->format == OUT_OCR_PDF)
 			{
 				assert(bander != NULL); // must've been set up already at document level!
 			}
 			else
 			{
-				fz_throw(ctx, FZ_ERROR_ABORT, "Internal error: Unhandled output format %d.", output_format);
+				fz_throw(ctx, FZ_ERROR_ABORT, "Internal error: Unhandled output format %d (%s).", output_format->format, output_format->suffix);
 			}
 
 			if (bander)
@@ -1384,7 +1384,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				tbounds.y1 += band_height;
 			}
 
-			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
+			if (output_format->format != OUT_PCLM && output_format->format != OUT_OCR_PDF)
 			{
 				fz_close_band_writer(ctx, bander);
 				fz_drop_band_writer(ctx, bander);
@@ -1409,7 +1409,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 		fz_always(ctx)
 		{
-			if (output_format != OUT_PCLM && output_format != OUT_OCR_PDF)
+			if (output_format->format != OUT_PCLM && output_format->format != OUT_OCR_PDF)
 			{
 				fz_close_band_writer(ctx, bander);
 				fz_drop_band_writer(ctx, bander);
@@ -1451,7 +1451,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 		fz_catch(ctx)
 		{
-			if (output_format == OUT_PCLM || output_format == OUT_OCR_PDF)
+			if (output_format->format == OUT_PCLM || output_format->format == OUT_OCR_PDF)
 			{
 				fz_close_band_writer(ctx, bander);
 				fz_drop_band_writer(ctx, bander);
@@ -1466,7 +1466,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		file_level_trailers(ctx);
 
 #if FZ_ENABLE_PDF
-		if (output_format == OUT_PDF)
+		if (output_format->format == OUT_PDF)
 		{
 			// save previous page?
 			pdf_save_document(ctx, pdfout, pdfoutpath, NULL);
@@ -1681,7 +1681,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		fz_normalize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
 		fz_sanitize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
 
-		if (output_format == OUT_PDF)
+		if (output_format->format == OUT_PDF)
 		{
 #if FZ_ENABLE_PDF
 			pdfout = pdf_create_document(ctx);
@@ -2206,11 +2206,32 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 
 static int img_seqnum = 1;
 
-static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options)
+static void write_image_to_unique_nonexisting_filepath(fz_context* ctx, fz_output* out, fz_buffer* buffer, int pagenum, const fz_stext_options* options, const char *extension)
 {
+	// make sure we produce a unique, non-existing image file path:
+	char tplpath[PATH_MAX];
 	char image_path[PATH_MAX];
 	char relative_asset_path[PATH_MAX];
 
+	fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
+	do
+	{
+		fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, (buffer ? NULL : "ILLEGAL-ZERO-SIZED"), extension);
+		fz_normalize_path(ctx, image_path, sizeof image_path, image_path);
+		fz_sanitize_path(ctx, image_path, sizeof image_path, image_path);
+		img_seqnum++;
+	} while (fz_file_exists(ctx, image_path));
+
+	fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
+
+	// write the constructed image path to the target text/html/... file: HREF
+	fz_write_string(ctx, out, relative_asset_path);
+	// and write the actual image(data) to a separate file, indicated by the constructed image path:
+	fz_save_buffer(ctx, buffer, image_path);
+}
+
+static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options* options)
+{
 	fz_image* image = block->u.i.image;
 
 	fz_compressed_buffer* cbuf;
@@ -2223,64 +2244,29 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 		int type = fz_colorspace_type(ctx, image->colorspace);
 		if (type == FZ_COLORSPACE_GRAY || type == FZ_COLORSPACE_RGB)
 		{
-			// make sure we produce a unique, non-existing image file path:
-			char tplpath[PATH_MAX];
-			fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
-			do
-			{
-				fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, NULL, "jpg");
-				img_seqnum++;
-			} while (fz_file_exists(ctx, image_path));
-
-			fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
-
-			fz_write_string(ctx, out, relative_asset_path);
-			fz_save_buffer(ctx, cbuf->buffer, image_path);
+			write_image_to_unique_nonexisting_filepath(ctx, out, cbuf->buffer, pagenum, options, ".jpg");
 			return;
 		}
 	}
 	if (cbuf && cbuf->params.type == FZ_IMAGE_PNG)
 	{
-		// make sure we produce a unique, non-existing image file path:
-		char tplpath[PATH_MAX];
-		fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
-		do
-		{
-			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, NULL, "png");
-			img_seqnum++;
-		} while (fz_file_exists(ctx, image_path));
-
-		fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
-
-		fz_write_string(ctx, out, relative_asset_path);
-		fz_save_buffer(ctx, cbuf->buffer, image_path);
+		write_image_to_unique_nonexisting_filepath(ctx, out, cbuf->buffer, pagenum, options, ".png");
 		return;
 	}
 
 	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params);
 	fz_try(ctx)
 	{
-		// make sure we produce a unique, non-existing image file path:
-		char tplpath[PATH_MAX];
-		fz_mk_absolute_path_using_absolute_base(ctx, tplpath, sizeof(tplpath), options->reference_image_path_template, out->filepath);
-		do
-		{
-			fz_format_output_path_ex(ctx, image_path, sizeof(image_path), tplpath, 0, pagenum, img_seqnum, (buf ? NULL : "ILLEGAL-ZERO-SIZED"), "png");
-			img_seqnum++;
-		} while (fz_file_exists(ctx, image_path));
-
-		fz_mk_relative_path(ctx, relative_asset_path, sizeof(relative_asset_path), image_path, out->filepath);
-
-		fz_write_string(ctx, out, relative_asset_path);
-		if (buf)
-		{
-			fz_save_buffer(ctx, buf, image_path);
-		}
+		write_image_to_unique_nonexisting_filepath(ctx, out, buf, pagenum, options, ".png");
 	}
 	fz_always(ctx)
+	{
 		fz_drop_buffer(ctx, buf);
+	}
 	fz_catch(ctx)
+	{
 		fz_rethrow(ctx);
+	}
 }
 
 
@@ -2405,6 +2391,20 @@ static int
 fz_strieq(const char* arg, const char* word)
 {
 	return fz_strcasecmp(arg, word) == 0;
+}
+
+static const suffix_t* get_output_format(int code)
+{
+	int i;
+
+	for (i = 0; i < (int)nelem(suffix_table); i++)
+	{
+		if (suffix_table[i].format == code)
+		{
+			return &suffix_table[i];
+		}
+	}
+	fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown output format %d", code);
 }
 
 static void
@@ -2576,7 +2576,7 @@ int main(int argc, const char** argv)
 	output_file_per_page = 0;
 
 	format = NULL;
-	output_format = OUT_NONE;
+	output_format = NULL;
 
 	user_specified_rotation = -1;
 	user_specified_resolution = 72;
@@ -2923,7 +2923,7 @@ int main(int argc, const char** argv)
 			fz_sanitize_path_ex(tplpath, "f%#^$!", "_", 0, 0);
 			stext_options.reference_image_path_template = fz_strdup(ctx, tplpath);
 		}
-		fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, &output_format);
+		fz_set_stext_options_images_handler(ctx, &stext_options, mudraw_process_stext_referenced_image, NULL);
 
 		fz_set_text_aa_level(ctx, alphabits_text);
 		fz_set_graphics_aa_level(ctx, alphabits_graphics);
@@ -3002,7 +3002,10 @@ int main(int argc, const char** argv)
 		assert(num_workers > 0 ? band_height != 0 : 1);
 
 		/* Determine output type */
-		output_format = OUT_PNG;
+
+		// default output format: 
+		output_format = get_output_format(OUT_PNG);
+
 		if (format)
 		{
 			int i;
@@ -3011,7 +3014,7 @@ int main(int argc, const char** argv)
 			{
 				if (!stricmp(format, suffix_table[i].suffix+1))
 				{
-					output_format = suffix_table[i].format;
+					output_format = &suffix_table[i];
 					if (spots == SPOTS_FULL && suffix_table[i].spots == 0)
 					{
 						fz_error(ctx, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.", suffix_table[i].suffix+1);
@@ -3036,7 +3039,7 @@ int main(int argc, const char** argv)
 
 				if (!stricmp(s, suffix_ref))
 				{
-					output_format = suffix_table[i].format;
+					output_format = &suffix_table[i];
 					if (spots == SPOTS_FULL && suffix_table[i].spots == 0)
 					{
 						fz_error(ctx, "Output format '%s' does not support spot rendering.\nDoing overprint simulation instead.", suffix_ref+1);
@@ -3049,19 +3052,19 @@ int main(int argc, const char** argv)
 
 		if (band_height)
 		{
-			if (output_format != OUT_PAM &&
-				output_format != OUT_PGM &&
-				output_format != OUT_PPM &&
-				output_format != OUT_PNM &&
-				output_format != OUT_PNG &&
-				output_format != OUT_MURAW &&
-				output_format != OUT_PBM &&
-				output_format != OUT_PKM &&
-				output_format != OUT_PCL &&
-				output_format != OUT_PCLM &&
-				output_format != OUT_PS &&
-				output_format != OUT_PSD &&
-				output_format != OUT_OCR_PDF)
+			if (output_format->format != OUT_PAM &&
+				output_format->format != OUT_PGM &&
+				output_format->format != OUT_PPM &&
+				output_format->format != OUT_PNM &&
+				output_format->format != OUT_PNG &&
+				output_format->format != OUT_MURAW &&
+				output_format->format != OUT_PBM &&
+				output_format->format != OUT_PKM &&
+				output_format->format != OUT_PCL &&
+				output_format->format != OUT_PCLM &&
+				output_format->format != OUT_PS &&
+				output_format->format != OUT_PSD &&
+				output_format->format != OUT_OCR_PDF)
 			{
 				fz_error(ctx, "Banded operation only possible with PxM, PCL, PCLM, PDFOCR, PS, PSD, MURAW and PNG outputs");
 				band_height = 0;
@@ -3078,7 +3081,7 @@ int main(int argc, const char** argv)
 
 			for (i = 0; i < (int)nelem(format_cs_table); i++)
 			{
-				if (format_cs_table[i].format == output_format)
+				if (format_cs_table[i].format == output_format->format)
 				{
 					if (out_cs == CS_UNSET)
 						out_cs = format_cs_table[i].default_cs;
@@ -3089,7 +3092,7 @@ int main(int argc, const char** argv)
 					}
 					if (j == (int)nelem(format_cs_table[i].permitted_cs))
 					{
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unsupported colorspace (%d) for this format", output_format);
+						fz_throw(ctx, FZ_ERROR_GENERIC, "Unsupported colorspace (%d) for this format (%d: %s)", out_cs, output_format->format, output_format->suffix);
 					}
 				}
 			}
@@ -3145,7 +3148,7 @@ int main(int argc, const char** argv)
 			okay = 0;
 			for (i = 0; i < (int)nelem(format_cs_table); i++)
 			{
-				if (format_cs_table[i].format == output_format)
+				if (format_cs_table[i].format == output_format->format)
 				{
 					for (j = 0; j < (int)nelem(format_cs_table[i].permitted_cs); j++)
 					{
@@ -3178,7 +3181,7 @@ int main(int argc, const char** argv)
 			}
 		}
 
-		if (output_format == OUT_SVG || output_format == OUT_PNG || output_format == OUT_MURAW || output_format == OUT_PSD)
+		if (output_format->format == OUT_SVG || output_format->format == OUT_PNG || output_format->format == OUT_MURAW || output_format->format == OUT_PSD)
 		{
 			/* SVG files are always opened for each page. */
 			output_file_per_page = 1;
@@ -3195,7 +3198,7 @@ int main(int argc, const char** argv)
 			out = fz_new_output_with_path(ctx, output, 0);
 		}
 
-		if (output_format == OUT_PDF)
+		if (output_format->format == OUT_PDF)
 		{
 #if FZ_ENABLE_PDF
 			// Nuke `out`. We will be using `pdfout` instead.
@@ -3217,14 +3220,14 @@ int main(int argc, const char** argv)
 
 		// Check if the Tesseract engine can initialize properly when one of the OCR modes is requested.
 		// If it cannot init, report a warning accordingly and fall back to the non-OCR output format:
-		if (output_format == OUT_OCR_TRACE ||
-			output_format == OUT_OCR_TEXT ||
-			output_format == OUT_OCR_STEXT_JSON ||
-			output_format == OUT_OCR_STEXT_XML ||
-			output_format == OUT_OCR_XMLTEXT ||
-			output_format == OUT_OCR_HTML ||
-			output_format == OUT_OCR_XHTML ||
-			output_format == OUT_OCR_PDF)
+		if (output_format->format == OUT_OCR_TRACE ||
+			output_format->format == OUT_OCR_TEXT ||
+			output_format->format == OUT_OCR_STEXT_JSON ||
+			output_format->format == OUT_OCR_STEXT_XML ||
+			output_format->format == OUT_OCR_XMLTEXT ||
+			output_format->format == OUT_OCR_HTML ||
+			output_format->format == OUT_OCR_XHTML ||
+			output_format->format == OUT_OCR_PDF)
 		{
 			void* tess_api = NULL;
 
@@ -3245,24 +3248,24 @@ int main(int argc, const char** argv)
 			fz_catch(ctx)
 			{
 				fz_error(ctx, "warning: tesseract OCR engine could not be initialized. Falling back to the non-OCR-ed output format! %s", fz_caught_message(ctx));
-				switch (output_format)
+				switch (output_format->format)
 				{
 				case OUT_OCR_TRACE:
-					output_format = OUT_TRACE; break;
+					output_format = get_output_format(OUT_TRACE); break;
 				case OUT_OCR_TEXT:
-					output_format = OUT_TEXT; break;
+					output_format = get_output_format(OUT_TEXT); break;
 				case OUT_OCR_STEXT_JSON:
-					output_format = OUT_STEXT_JSON; break;
+					output_format = get_output_format(OUT_STEXT_JSON); break;
 				case OUT_OCR_STEXT_XML:
-					output_format = OUT_STEXT_XML; break;
+					output_format = get_output_format(OUT_STEXT_XML); break;
 				case OUT_OCR_XMLTEXT:
-					output_format = OUT_XMLTEXT; break;
+					output_format = get_output_format(OUT_XMLTEXT); break;
 				case OUT_OCR_HTML:
-					output_format = OUT_HTML; break;
+					output_format = get_output_format(OUT_HTML); break;
 				case OUT_OCR_XHTML:
-					output_format = OUT_XHTML; break;
+					output_format = get_output_format(OUT_XHTML); break;
 				case OUT_OCR_PDF:
-					output_format = OUT_PDF; break;
+					output_format = get_output_format(OUT_PDF); break;
 				}
 			}
 		}
@@ -3275,7 +3278,7 @@ int main(int argc, const char** argv)
 
 			for (i = 0; i < (int)nelem(suffix_table); i++)
 			{
-				if (output_format == suffix_table[i].format)
+				if (output_format->format == suffix_table[i].format)
 				{
 					fmtstr = suffix_table[i].suffix + 1;
 					break;

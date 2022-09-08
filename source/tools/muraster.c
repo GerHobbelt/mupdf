@@ -265,6 +265,8 @@
 
 enum {
 	OUT_NONE,
+	OUT_TIFF,
+	OUT_WEBP,
 	OUT_PNG,
 	OUT_PGM,
 	OUT_PPM,
@@ -289,6 +291,8 @@ typedef struct
 static const suffix_t suffix_table[] =
 {
 	{ ".png", OUT_PNG, 0 },
+	{ ".webp", OUT_WEBP, 0 },
+	{ ".tiff", OUT_TIFF, 0 },
 #if FZ_PLOTTERS_G || FZ_PLOTTERS_N
 	{ ".pgm", OUT_PGM, CS_GRAY },
 #endif
@@ -404,8 +408,7 @@ static const char *output = NULL;
 static fz_output *out = NULL;
 
 static const char *format = NULL;
-static int output_format = OUT_NONE;
-static int output_cs;
+static const suffix_t *output_format = NULL;
 
 static int rotation = -1;
 static float x_resolution;
@@ -641,7 +644,7 @@ static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_ma
 		fz_drop_device(ctx, dev);
 		dev = NULL;
 
-		if ((output_format == OUT_PBM) || (output_format == OUT_PKM))
+		if ((output_format->format == OUT_PBM) || (output_format->format == OUT_PKM))
 			*bit = fz_new_bitmap_from_pixmap_band(ctx, pix, NULL, band_start);
 	}
 	fz_catch(ctx)
@@ -767,7 +770,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 #endif
 			}
 			if (render->num_workers <= 0)
-				pix += draw_height;
+				pix->y += draw_height;
 		}
 	}
 	fz_always(ctx)
@@ -1043,8 +1046,8 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 	size_t min_band_mem;
 	int bpp, h, w, reps;
 
-	render->colorspace = output_cs;
-	render->format = output_format;
+	render->colorspace = output_format->cs;
+	render->format = output_format->format;
 #if GREY_FALLBACK != 0
 	if (color == 0)
 	{
@@ -1103,30 +1106,44 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 	render->band_height_multiple = reps;
 	render->bands_rendered = 0;
 
-	if (output_format == OUT_PGM || output_format == OUT_PPM)
+	if (output_format->format == OUT_PGM || output_format->format == OUT_PPM)
 	{
 		render->bander = fz_new_pnm_band_writer(ctx, out);
-		render->n = output_format == OUT_PGM ? 1 : 3;
+		render->n = output_format->format == OUT_PGM ? 1 : 3;
 	}
-	else if (output_format == OUT_PAM)
+	else if (output_format->format == OUT_PAM)
 	{
 		render->bander = fz_new_pam_band_writer(ctx, out);
 		render->n = 4;
 	}
-	else if (output_format == OUT_PBM)
+	else if (output_format->format == OUT_PBM)
 	{
 		render->bander = fz_new_pbm_band_writer(ctx, out);
 		render->n = 1;
 	}
-	else if (output_format == OUT_PKM)
+	else if (output_format->format == OUT_PKM)
 	{
 		render->bander = fz_new_pkm_band_writer(ctx, out);
 		render->n = 4;
 	}
-	else if (output_format == OUT_PNG)
+	else if (output_format->format == OUT_PNG)
 	{
 		render->bander = fz_new_png_band_writer(ctx, out);
-		render->n = 1;
+		render->n = 3;
+	}
+	else if (output_format->format == OUT_WEBP)
+	{
+		render->bander = fz_new_webp_band_writer(ctx, out);
+		render->n = 3;
+	}
+	else if (output_format->format == OUT_TIFF)
+	{
+		render->bander = fz_new_tiff_band_writer(ctx, out);
+		render->n = 3;
+	}
+	else
+	{
+		assert(!"Should never get here! All possible output formats should be covered in the if/elif list above!");
 	}
 }
 
@@ -1256,6 +1273,36 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			}
 		}
 #endif
+
+		// close file and create a fresh one for output formats which DO NOT multi-page image outputs:
+		if (out && out != fz_stdout(ctx) && (output_format->format == OUT_PNG || output_format->format == OUT_WEBP))
+		{
+			fz_close_output(ctx, out);
+			fz_drop_output(ctx, out);
+			out = NULL;
+
+			bgprint.solo = 0;
+		}
+
+		if (!out)
+		{
+			if (!output || *output == 0 || !strcmp(output, "-"))
+			{
+#ifdef _WIN32
+				/* Windows specific code to make stdout binary. */
+				setmode(fileno(stdout), O_BINARY);
+#endif
+				out = fz_stdout(ctx);
+			}
+			else
+			{
+				char fbuf[PATH_MAX];
+				fz_format_output_path(ctx, fbuf, sizeof fbuf, output, pagenum);
+				fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
+				fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
+				out = fz_new_output_with_path(ctx, fbuf, 0);
+			}
+		}
 
 		/* Figure out banding */
 		initialise_banding(ctx, &render, is_color);
@@ -1774,6 +1821,8 @@ int main(int argc, const char** argv)
 	output = NULL;
 	out = NULL;
 
+	output_format = NULL;
+
 	rotation = -1;
 	width = 0;
 	height = 0;
@@ -2038,8 +2087,9 @@ int main(int argc, const char** argv)
 
 		fz_set_use_document_css(ctx, layout_use_doc_css);
 
-		output_format = suffix_table[0].format;
-		output_cs = suffix_table[0].cs;
+		// default output format: first slot in the lookup table:
+		output_format = &suffix_table[0];
+
 		if (format)
 		{
 			int i;
@@ -2048,8 +2098,7 @@ int main(int argc, const char** argv)
 			{
 				if (!stricmp(format, suffix_table[i].suffix+1))
 				{
-					output_format = suffix_table[i].format;
-					output_cs = suffix_table[i].cs;
+					output_format = &suffix_table[i];
 					break;
 				}
 			}
@@ -2060,29 +2109,20 @@ int main(int argc, const char** argv)
 		}
 		else if (output)
 		{
-			const char *suffix = output;
+			const char *suffix = fz_name_extension(output);
 			int i;
 
 			for (i = 0; i < (int)nelem(suffix_table); i++)
 			{
-				char *s = strstr(suffix, suffix_table[i].suffix);
-
-				if (s != NULL)
+				if (!stricmp(suffix, suffix_table[i].suffix))
 				{
-					suffix = s+strlen(suffix_table[i].suffix);
-					output_format = suffix_table[i].format;
-					output_cs = suffix_table[i].cs;
-					// match the tail (= file extension) with the output format;
-					// when there's still a tail left after this round, we need to look again:
-					if (*suffix)
-						i = -1;
-					else
-						break;
+					output_format = &suffix_table[i];
+					break;
 				}
 			}
 		}
 
-		switch (output_cs)
+		switch (output_format->cs)
 		{
 		case CS_GRAY:
 			colorspace = fz_device_gray(ctx);
@@ -2095,6 +2135,7 @@ int main(int argc, const char** argv)
 			break;
 		}
 
+#if 0
 		if (!output || *output == 0 || !strcmp(output, "-"))
 		{
 			// No need to set quiet mode when writing to stdout as all error/warn/info/debug info is sent via stderr!
@@ -2111,12 +2152,13 @@ int main(int argc, const char** argv)
 		}
 		else
 		{
-			char fbuf[4096];
+			char fbuf[PATH_MAX];
 			fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
 			fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
 			fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
 			out = fz_new_output_with_path(ctx, fbuf, 0);
 		}
+#endif
 
 		timing.count = 0;
 		timing.total = 0;
