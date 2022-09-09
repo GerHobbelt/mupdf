@@ -2918,7 +2918,7 @@ static inline void fmt_puts(fz_context *ctx, struct fmt *fmt, const char *s)
 		fmt_putc(ctx, fmt, *s++);
 }
 
-static inline void fmt_printf(fz_context* ctx, struct fmt* fmt, const char* s, ...)
+static void fmt_printf(fz_context* ctx, struct fmt* fmt, const char* s, ...)
 {
 	va_list ap;
 
