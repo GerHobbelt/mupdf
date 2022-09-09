@@ -59,7 +59,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * Macro to check that the libxml version in use is compatible with
  * the version the software has been compiled against
  */
-#define LIBXML_TEST_VERSION xmlCheckVersion(20909);
+#define LIBXML_TEST_VERSION() xmlCheckVersion(20909)
 
 #ifndef VMS
 #if 0
@@ -255,6 +255,15 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  */
 #if 1
 #define LIBXML_XPTR_ENABLED
+#endif
+
+/**
+ * LIBXML_XPTR_LOCS_ENABLED:
+ *
+ * Whether support for XPointer locations is configured in
+ */
+#if 1
+#define LIBXML_XPTR_LOCS_ENABLED
 #endif
 
 /**
@@ -475,6 +484,19 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #  endif
 #endif
 
+#if defined(__clang__) || (defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 406))
+#define XML_IGNORE_FPTR_CAST_WARNINGS \
+    _Pragma("GCC diagnostic push") \
+    _Pragma("GCC diagnostic ignored \"-Wpedantic\"") \
+    _Pragma("GCC diagnostic ignored \"-Wcast-function-type\"")
+#define XML_POP_WARNINGS \
+    _Pragma("GCC diagnostic pop")
+#else
+#define XML_IGNORE_FPTR_CAST_WARNINGS
+#define XML_POP_WARNINGS
+#endif
+
+/** DOC_ENABLE */
 #else /* ! __GNUC__ */
 /**
  * ATTRIBUTE_UNUSED:
@@ -503,6 +525,18 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #ifndef XML_DEPRECATED
 #define XML_DEPRECATED
 #endif
+/**
+ * LIBXML_IGNORE_FPTR_CAST_WARNINGS:
+ *
+ * Macro used to ignore pointer cast warnings that can't be worked around.
+ */
+#define XML_IGNORE_FPTR_CAST_WARNINGS
+/**
+ * LIBXML_POP_WARNINGS:
+ *
+ * Macro used to restore warnings state.
+ */
+#define XML_POP_WARNINGS
 #endif /* __GNUC__ */
 
 #ifdef __cplusplus
