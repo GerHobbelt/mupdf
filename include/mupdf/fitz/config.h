@@ -260,11 +260,11 @@
 
 #ifndef FZ_ENABLE_JS
 #define FZ_ENABLE_JS 1
-#endif /* FZ_ENABLE_JS */
+#endif
 
 #ifndef FZ_ENABLE_ICC
 #define FZ_ENABLE_ICC 1
-#endif /* FZ_ENABLE_ICC */
+#endif
 
 /* If Epub and HTML are both disabled, disable SIL fonts */
 #if FZ_ENABLE_HTML == 0 && FZ_ENABLE_EPUB == 0
