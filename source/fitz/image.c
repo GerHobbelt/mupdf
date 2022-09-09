@@ -742,7 +742,7 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 		tile = fz_load_png(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
 	case FZ_IMAGE_JPEGXL:
-#if defined(HAVE_JPEGXL) && FZ_ENABLE_JPEGXL
+#if FZ_ENABLE_JPEGXL
 		tile = fz_load_jpegxl(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "JpegXL not supported in this build");
@@ -1305,7 +1305,7 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 		fz_load_jpeg_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JPEGXL:
-#if defined(HAVE_JPEGXL) && FZ_ENABLE_JPEGXL
+#if FZ_ENABLE_JPEGXL
 		fz_load_jpegxl_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "JpegXL not supported in this build");

@@ -5,7 +5,7 @@
 #include <string.h>
 #include <limits.h>
 
-#if defined(HAVE_JPEGXL) && FZ_ENABLE_JPEGXL
+#if FZ_ENABLE_JPEGXL
 
 #include "jxl/decode.h"
 
