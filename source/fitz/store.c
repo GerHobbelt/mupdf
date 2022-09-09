@@ -659,7 +659,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			//
 			// --- Fini! ---
 
-			fz_item item_copy = *item; // keeping a copy for debugging
+			//fz_item item_copy = *item; // keeping a copy for debugging
 			fz_item exist_copy = *existing; // keeping a copy for debugging
 			fz_storable* rv = existing->val;
 			fz_unlock(ctx, FZ_LOCK_ALLOC);

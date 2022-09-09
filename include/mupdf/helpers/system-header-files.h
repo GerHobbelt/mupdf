@@ -29,6 +29,8 @@
                                 // ^^^ the latter makes itself bloody useless as the switch has a `default` section which suffices nicely, while this noise makes missing a switch without a default hard/impossible.
 #pragma warning(disable: 4514)  // warning C4514: 'fz_is_pow2': unreferenced inline function has been removed (compiling source file ../../source/dll/dllmain.cpp)
 #pragma warning(disable: 4242)  // warning C4242: '=': conversion from 'int' to 'unsigned char', possible loss of data, etc.etc.
+#pragma warning(disable: 4365)  // warning C4365: 'return': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+#pragma warning(disable: 5220)  // warning C5220: '<unnamed-tag>::abort': a non-static data member with a volatile qualified type no longer implies that compiler generated copy/move constructors and copy/move assignment operators are not trivial (compiling source file ../../source/dll/pch.cpp)
 
 #pragma warning(push)
 
