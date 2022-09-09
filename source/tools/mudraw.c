@@ -855,7 +855,7 @@ static void calc_page_render_details(fz_context* ctx, fz_page* page, fz_rect med
 		fz_rect tbounds2 = fz_transform_rect(mediabox, ctm2);
 		fz_irect ibounds2 = fz_round_rect(tbounds2);
 
-		float res = max(72 * (ibounds.x1 - ibounds.x0) / (float)(ibounds2.x1 - ibounds2.x0), 72 * (ibounds.y1 - ibounds.y0) / (float)(ibounds2.y1 - ibounds2.y0));
+		float res = fz_max(72 * (ibounds.x1 - ibounds.x0) / (float)(ibounds2.x1 - ibounds2.x0), 72 * (ibounds.y1 - ibounds.y0) / (float)(ibounds2.y1 - ibounds2.y0));
 		// round resolution down to nearest int:
 		res = (int)res;
 		if (best_res < res)
