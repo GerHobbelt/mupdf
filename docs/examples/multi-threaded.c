@@ -31,13 +31,9 @@ much. Also you may run in to a limitation on the number of threads
 depending on your environment.
 */
 
-//Include the MuPDF header file, and pthread's header file.
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
+//Include the MuPDF header files, and pthread's header file.
+
+#include "mupdf/helpers/system-header-files.h"
 
 #include <mupdf/mutool.h>
 #include <mupdf/fitz.h>

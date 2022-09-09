@@ -20,12 +20,7 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
+#include "mupdf/helpers/system-header-files.h"
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"

@@ -241,10 +241,7 @@ struct mu_mutex
 
 #elif MU_THREAD_IMPL_TYPE == 1
 
-// MSWin fix: make sure we include winsock2.h *before* windows.h implicitly includes the antique winsock.h and causes all kinds of weird errors at compile time:
-#include <winsock2.h>
-
-#include <windows.h>
+#include "mupdf/helpers/system-header-files.h"
 
 /* Windows threads */
 struct mu_semaphore

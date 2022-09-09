@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#include "mupdf/helpers/system-header-files.h"
+
 #include "mupdf/assertions.h"
 #include <stdarg.h>
 #include <stdio.h>

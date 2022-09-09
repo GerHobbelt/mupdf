@@ -1,15 +1,11 @@
+
+#include "mupdf/helpers/system-header-files.h"
+
 #include "mupdf/fitz/config.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
 
 #ifndef OCR_DISABLED
-
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
 
 #include <climits>
 

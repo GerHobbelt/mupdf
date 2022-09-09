@@ -1,0 +1,145 @@
+//
+// (c) Copyright 2022, Ger Hobbelt
+// 
+// The purpose of this header file is to include all obnoxious system header files
+// (I'm looking at you, Microsoft!) which *blargh* a zillion useless warnings at
+// maximum/high compiler warning levels, obscuring the compiler warnings we can
+// actually DO something about!
+//
+// windows.h is the biggest DoS attacker in this regard, but we'll need at least
+// winsock2.h to go with that one to prevent bad stuff happening down the road
+// in bigger applications: the dread winsock.h vs. winsock2.h compile-time collisions.
+//
+// We've centralized all this cruft (and the work-arounds to make them shut up
+// without losing our ability to **sensibly** use the highest compiler warning
+// level settings) in this here header file, which is intended to be used by anybody
+// who's interested in achieving this goal (of system files not obscuring and
+// carpet-bombing your compiler diagnostics output).
+//
+
+#pragma once
+
+#ifndef MUPDF_HELPER_SYSTEM_HEADER_FILES_H
+#define MUPDF_HELPER_SYSTEM_HEADER_FILES_H
+
+#pragma warning(push)
+//#pragma warning(disable: 4201)  // winnt.h uses nameless structs
+
+// https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
+// 
+// We're doing Unicode builds
+
+#ifndef UNICODE
+#define UNICODE
+#endif
+#ifndef _UNICODE
+#define _UNICODE
+#endif
+
+#if defined(WIN32) || defined(WIN64) || defined(_WIN32) || defined(_WIN64)
+// according to MS docs, _WIN32 is the onee that should always be defined; making sure it is:
+#ifndef _WIN32
+#define _WIN32
+#endif
+#endif
+
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#if defined(_MSC_VER)
+#ifndef _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
+#endif
+
+#ifndef _CRTDBG_MAP_ALLOC_NEW
+#define _CRTDBG_MAP_ALLOC_NEW
+#endif
+
+#include <crtdbg.h>
+#endif
+
+/*
+example:
+
+#if defined _DEBUG && defined _CRTDBG_MAP_ALLOC
+	#pragma push_macro("_strdup")
+	#undef _strdup
+#endif
+
+_Check_return_
+_ACRTIMP _CRTALLOCATOR char* __cdecl _strdup(
+	_In_opt_z_ char const* _Source
+	);
+
+#if defined _DEBUG && defined _CRTDBG_MAP_ALLOC
+	#pragma pop_macro("_strdup")
+#endif
+
+*/
+
+#if defined(WIN32) || defined(WIN64) || defined(_WIN32) || defined(_WIN64)
+
+// https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=msvc-170
+// fix for missing WINNT defines:
+#include <sdkddkver.h>
+
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT	_WIN32_WINNT_WIN10
+#endif
+
+// MSWin fix: make sure we include winsock2.h *before* windows.h implicitly includes the antique winsock.h and causes all kinds of weird errors at compile time:
+#include <winsock2.h>
+
+#include <winerror.h>
+#include <windows.h>
+#include <intrin.h>
+#include <tchar.h>      // used for ANSI v.s. UNICODE abstraction
+#include <direct.h>
+#include <io.h>
+#include <fcntl.h>
+#include <commdlg.h>
+#include <shellapi.h>
+#include <winbase.h>
+#include <winapifamily.h>
+#include <time.h>
+#include <sys/stat.h>
+#else
+#ifdef HAVE_PTHREAD_H
+#include <pthread.h>
+#endif
+
+#ifdef HAVE_SYS_TYPES_H
+#    include <sys/types.h>
+#endif
+#ifdef HAVE_UNISTD_H
+#    include <unistd.h>
+#endif
+#ifdef TIME_WITH_SYS_TIME
+#    include <sys/time.h>
+#    include <time.h>
+#elif defined(HAVE_SYS_TIME_H)
+#    include <sys/time.h>
+#else
+#    include <time.h>
+#endif
+#ifdef HAVE_DIRENT_H
+#    include <dirent.h>
+#endif
+
+#endif
+
+#include <string.h>
+#include <limits.h>
+#include <stdlib.h>
+
+#ifdef _MSC_VER
+#define stat _stat
+#endif
+
+#undef min
+#undef max
+
+#pragma warning(pop)
+
+#endif

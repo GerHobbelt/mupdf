@@ -158,12 +158,7 @@
 	END OF CONFIGURATION SECTION
 */
 
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
+#include "mupdf/helpers/system-header-files.h"
 
 #include "timeval.h"
 

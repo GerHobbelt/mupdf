@@ -20,22 +20,16 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
+#include "mupdf/helpers/system-header-files.h"
+
 #ifdef _WIN32
-#define WIN32_LEAN_AND_MEAN
-#define _CRT_SECURE_NO_WARNINGS
-
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
-
 #include <windows.h>
 #include <commdlg.h>
 #include <shellapi.h>
+#endif
 #include <stdio.h>
 
+#ifdef WIN32
 
 #define OPEN_KEY(parent, name, ptr) \
 	RegCreateKeyExA(parent, name, 0, 0, 0, KEY_WRITE, 0, ptr, 0)

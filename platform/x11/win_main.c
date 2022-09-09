@@ -20,20 +20,9 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#ifndef UNICODE
-#define UNICODE
-#endif
-#ifndef _UNICODE
-#define _UNICODE
-#endif
-#define WIN32_LEAN_AND_MEAN
+#include "mupdf/helpers/system-header-files.h"
 
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
+#if defined(_WIN32)
 
 #include <windows.h>
 #include <commdlg.h>
@@ -1428,3 +1417,6 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
     return EXIT_SUCCESS;
 }
+
+#endif // _WIN32
+

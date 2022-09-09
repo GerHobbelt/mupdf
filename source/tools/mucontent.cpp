@@ -5,14 +5,9 @@
 // *Ideally*, tool should be able to overlay *any* PDF with (edited? modified?) content layer.
 //
 
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
+#include "mupdf/helpers/system-header-files.h"
 
 #pragma message("TODO: implement this tool")
-#endif
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"

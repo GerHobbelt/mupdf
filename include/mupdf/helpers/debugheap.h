@@ -23,18 +23,7 @@
 #ifndef __FZ_HELPER_DEBUGHEAP_H__
 #define __FZ_HELPER_DEBUGHEAP_H__
 
-
-#if defined(_MSC_VER)
-
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC_NEW
-#endif
-
-#include <stdlib.h>
-#include <crtdbg.h>
-
-#endif
+#include "mupdf/helpers/system-header-files.h"
 
 
 #if defined(_DEBUG) || !defined(NDEBUG)

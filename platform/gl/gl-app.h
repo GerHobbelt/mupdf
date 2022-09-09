@@ -23,16 +23,9 @@
 #ifndef MUPDF_GL_APP_H
 #define MUPDF_GL_APP_H
 
-#if defined(_WIN32) || defined(_WIN64)
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
-#include <winsock2.h>  // prevent windows.h from loading winsock.h and causing compile-time havoc due to a zillion redefinition warnings
-#include <windows.h>
+#include "mupdf/helpers/system-header-files.h"
 
+#if defined(_WIN32) || defined(_WIN64)
 void win_install(void);
 #endif
 

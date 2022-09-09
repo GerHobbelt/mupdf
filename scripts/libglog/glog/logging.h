@@ -1997,7 +1997,7 @@ class GOOGLE_GLOG_DLL_DECL NullStreamFatal : public NullStream {
   NullStreamFatal(const char* file, int line, const CheckOpString& result) :
       NullStream(file, line, result) { }
   ~NullStreamFatal() {
-	  __Fail();
+      __Fail();
   }
  protected:
   void __Fail();

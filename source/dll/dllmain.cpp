@@ -1,10 +1,12 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
 
+#include "mupdf/helpers/system-header-files.h"
+
 #include "zlib-ng.h"
 
 
-#if defined(WIN32) || defined(WIN64)
+#if defined(_WIN32)
 
 #ifdef __cplusplus
 extern "C" {
