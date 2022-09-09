@@ -20,10 +20,11 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#include "timeval.h"
-
 #include "mupdf/fitz.h"
 #include "pdf-annot-imp.h"
+
+#include "timeval.h"
+#undef open
 
 #include <zlib-ng.h>
 
