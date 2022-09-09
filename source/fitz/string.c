@@ -548,7 +548,6 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 			continue;
 
 		case '%':
-			if (page)
 			{
 				const char* p2 = check_percent_d(fmt);
 				if (p2)
@@ -578,7 +577,6 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 			break;
 
 		case '#':
-			if (page)
 			{
 				size_t vl = fz_strspn1(fmt, fmt[0]);
 
@@ -593,10 +591,8 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 				did_page++;
 				continue;
 			}
-			break;
 
 		case '^':
-			if (sequence_number)
 			{
 				size_t vl = fz_strspn1(fmt, fmt[0]);
 
@@ -611,10 +607,8 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 				did_sequence_number++;
 				continue;
 			}
-			break;
 
 		case '!':
-			if (label)
 			{
 				size_t vl = fz_strspn1(fmt, fmt[0]);
 
@@ -629,10 +623,8 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 				did_label++;
 				continue;
 			}
-			break;
 
 		case '$':
-			if (chapter)
 			{
 				size_t vl = fz_strspn1(fmt, fmt[0]);
 
@@ -647,7 +639,6 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 				did_chapter++;
 				continue;
 			}
-			break;
 		}
 
 		// not a desirable formatter code --> copy character verbatim
@@ -657,7 +648,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 	}
 
 	// backpedal when we last wrote '.' as we hit the end/extension boundary above:
-	while (dstbase < dstpath && dstpath[-1] == '.')
+	while (dstbase < dstpath && strchr("-.", dstpath[-1]))
 	{
 		dstpath--;
 		dstsize++;
