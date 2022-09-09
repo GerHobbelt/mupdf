@@ -155,7 +155,7 @@ _ACRTIMP _CRTALLOCATOR char* __cdecl _strdup(
 #include <limits.h>
 #include <stdlib.h>
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(stat)
 #define stat _stat
 #endif
 
