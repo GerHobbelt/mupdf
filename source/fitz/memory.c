@@ -372,7 +372,7 @@ void fz_lock_debug_lock_start_timer_assist(fz_context* ctx, int lock)
 
 void fz_lock_debug_attempt_lock(fz_context* ctx, int lock)
 {
-	int i, idx;
+	int idx;
 
 #if 0
 	if (ctx->locks.lock != fz_lock_default)
@@ -388,7 +388,7 @@ void fz_lock_debug_attempt_lock(fz_context* ctx, int lock)
 	{
 		fz_error(ctx, "Attempt to take lock %d when held already!", lock);
 	}
-	for (i = lock - 1; i >= 0; i--)
+	for (int i = lock - 1; i >= 0; i--)
 	{
 		if (fz_locks_debug[idx][i] != 0)
 		{
@@ -400,7 +400,7 @@ void fz_lock_debug_attempt_lock(fz_context* ctx, int lock)
 
 void fz_lock_debug_lock_obtained(fz_context *ctx, int lock)
 {
-	int i, idx;
+	int idx;
 
 #if 0
 	if (ctx->locks.lock != fz_lock_default)
@@ -416,7 +416,7 @@ void fz_lock_debug_lock_obtained(fz_context *ctx, int lock)
 		fz_error(ctx, "Obtained lock %d when held already!", lock);
 	}
 #if 0
-	for (i = lock-1; i >= 0; i--)
+	for (int i = lock-1; i >= 0; i--)
 	{
 		if (fz_locks_debug[idx][i] != 0)
 		{
