@@ -749,25 +749,30 @@ my_getline(FILE *file, int *linecounter_ref)
         if (!space)
             break;
         c = fgetc(file);
-        // replace TAB with SPACE
-        if (c == '\t')
-            c = ' ';
-        else if (c == '\n' || c <= 0)
+        if (c == '\n' || c <= 0)
             (*linecounter_ref)++;
     }
-    while (c >= 32);
+    while (c >= 32 || c == '\t');
 
     /* If we ran out of space, skip the rest of the line */
     if (space == 0)
     {
         fz_error(ctx, "getline: line too long.");
-        while (c >= 32)
+        while (c >= 32 || c == '\t')
         {
             c = fgetc(file);
             if (c == '\n')
                 (*linecounter_ref)++;
         }
     }
+
+	/* Skip over trailing CRLF */
+	while (c == '\r')
+	{
+		c = fgetc(file);
+		if (c == '\n')
+			(*linecounter_ref)++;
+	}
 
     *d = 0;
 
@@ -1057,7 +1062,7 @@ static int unescape_string(char *d, const char *s)
 }
 
 // convert line to arguments, starting at start_index.
-static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* argc, char* line, int start_index)
+static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* argc, char* line, int start_index, int tab_separated_args)
 {
     int count = 0;
     size_t len = strlen(line);
@@ -1134,8 +1139,16 @@ static void convert_string_to_argv(fz_context* ctx, const char*** argv, int* arg
         {
             // assume regular arg: sentinel is first whitespace:
             char* e = s;
-            while (*e && !isspace(*(unsigned char*)e))
-                e++;
+			if (!tab_separated_args)
+			{
+				while (*e && !isspace(*(unsigned char*)e))
+					e++;
+			}
+			else
+			{
+				while (*e && *e != '\t' && *e != '\r' && *e != '\n')
+					e++;
+			}
             *e = 0;
             char *buf2 = fz_strdup(ctx, s);
             start[count++] = buf2;
@@ -2219,7 +2232,47 @@ bulktest_main(int argc, const char **argv)
                         break;
 
                     // parse datafeed line (record)
-                    convert_string_to_argv(ctx, &template_argv, &template_argc, dataline, 0);
+                    convert_string_to_argv(ctx, &template_argv, &template_argc, dataline, 0, 1);
+
+					//# nr.:      %datarow     -- index number of the test record
+					//# PDF:      % 1          -- full RELATIVE path to the PDF
+					//# dir :     % 2          -- basedir = path part of that
+					//# name :    % 3          -- filename = PDF filename part of that one(with.pdf extension)
+					//# base :    % 4          -- basename = PDF filename "    "  "    "   (without the.pdf extension)
+					//# cd root : % 5          -- path to root of the repo
+					if (template_argc == 1)
+					{
+						// apparently we're loading a LST file instead of a full-fledged TSV.
+						//
+						// construct the other parameters from the first:
+						char* p = fz_strdup(ctx, template_argv[0]);
+						char* q1 = strrchr(p, '/');
+						char* q2 = strrchr(p, '\\');
+						if (q2 > q1)
+							q1 = q2;
+						if (q1)
+						{
+							*q1 = 0;
+						}
+						else
+						{
+							q1 = p;
+							*q1 = 0;
+						}
+						char* f = fz_strdup(ctx, fz_basename(template_argv[0]));
+						char* f_no_e = fz_strdup(ctx, fz_basename(template_argv[0]));
+						char* e = strrchr(f_no_e, '.');
+						if (e)
+						{
+							*e = 0;
+						}
+						template_argv[1] = p;
+						template_argv[2] = f;
+						template_argv[3] = f_no_e;
+						template_argv[4] = fz_strdup(ctx, "./");
+						template_argv[5] = NULL;
+						template_argc = 5;
+					}
                 }
 
                 if (verbosity >= 1)
@@ -2290,7 +2343,7 @@ bulktest_main(int argc, const char **argv)
                         }
                     }
 
-                    convert_string_to_argv(ctx, &argv, &argc, line, 0);
+                    convert_string_to_argv(ctx, &argv, &argc, line, 0, 0);
 
                     // skip empty lines
                     if (argc == 0)
