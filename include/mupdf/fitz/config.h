@@ -247,7 +247,7 @@
 #endif /* FZ_ENABLE_JPX */
 
 #ifndef FZ_ENABLE_JPEGXL
-#define FZ_ENABLE_JPEEGXL 1
+#define FZ_ENABLE_JPEGXL 1
 #endif
 
 #ifndef FZ_ENABLE_TIFF
