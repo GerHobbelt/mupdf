@@ -41,9 +41,6 @@
 #include <unistd.h>
 #endif
 
-#undef MIN
-#define MIN(a, b) ((a) < (b) ? (a) : (b))
-
 
 static inline void
 fzoutput_lock(fz_output* out)
@@ -144,7 +141,7 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 		DWORD written = 0;
 		// Write the data to the pipe in chunks of limited size, so that we won't lock
 		// on a chunk. That's also why we size our chunks to HALF the known pipe nonblocking buffer size!
-		DWORD n_lim = MIN(PIPE_MAX_NONBLOCK_BUFFER_SIZE, n);
+		DWORD n_lim = fz_minz(PIPE_MAX_NONBLOCK_BUFFER_SIZE, n);
 		int rv = WriteFile(GetStdHandle(channel), p, n_lim, &written, NULL);
 		int err = GetLastError();
 		//fprintf(stderr, "stdout_write:WriteFile: %d bytes, %p, %d written, rv:%d, err:%d\n", (int)n_lim, p, (int)written, rv, err);
