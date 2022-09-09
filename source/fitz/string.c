@@ -542,7 +542,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 			continue;
 
 		case '.':
-			*dstpath++ = '-';
+			*dstpath++ = '.';
 			dstsize--;
 			fmt++;
 			continue;
@@ -661,7 +661,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 	}
 	if (strchr("\\/:", dstpath[-1]))
 	{
-		static const char* fname = "NO=NAME";
+		static const char* fname = "NO-NAME";
 		size_t l = strlen(fname);
 		if (l + 1 >= dstsize)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
@@ -671,6 +671,20 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 		dstsize -= l;
 	}
 
+	if (!dstsize)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: out of bounds; path too long");
+	}
+
+#if 0
+	// only for the preliminary filename should we convert dots to dashes:
+	*dstpath = 0;
+	for (char* fn = (char*)fz_basename(dstbase); fn < dstpath; fn++)
+	{
+		if (*fn == '.')
+			*fn = '-';
+	}
+#endif
 
 	// now append all the items which have not been incorporated in the template themselves:
 
