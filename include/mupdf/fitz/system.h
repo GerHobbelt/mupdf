@@ -30,6 +30,8 @@
 #endif
 #endif
 
+#include "mupdf/helpers/system-header-files.h"
+
 /**
 	Include the standard libc headers.
 */

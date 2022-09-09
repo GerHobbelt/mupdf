@@ -28,6 +28,7 @@
 #pragma warning(disable: 4061)  // warning C4061: enumerator 'PDF_ANNOT_WATERMARK' in switch of enum 'pdf_annot_type' is not explicitly handled by a case label
                                 // ^^^ the latter makes itself bloody useless as the switch has a `default` section which suffices nicely, while this noise makes missing a switch without a default hard/impossible.
 #pragma warning(disable: 4514)  // warning C4514: 'fz_is_pow2': unreferenced inline function has been removed (compiling source file ../../source/dll/dllmain.cpp)
+#pragma warning(disable: 4242)  // warning C4242: '=': conversion from 'int' to 'unsigned char', possible loss of data, etc.etc.
 
 #pragma warning(push)
 
