@@ -22,8 +22,16 @@
 #ifndef MUPDF_HELPER_SYSTEM_HEADER_FILES_H
 #define MUPDF_HELPER_SYSTEM_HEADER_FILES_H
 
+#pragma warning(disable: 4464)  // warning C4464: relative include path contains '..'
+#pragma warning(disable: 4820)  // warning C4820: '<unnamed-tag>': '8' bytes padding added after data member 'top', ...
+#pragma warning(disable: 5045)  // warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+#pragma warning(disable: 4061)  // warning C4061: enumerator 'PDF_ANNOT_WATERMARK' in switch of enum 'pdf_annot_type' is not explicitly handled by a case label
+                                // ^^^ the latter makes itself bloody useless as the switch has a `default` section which suffices nicely, while this noise makes missing a switch without a default hard/impossible.
+
 #pragma warning(push)
-//#pragma warning(disable: 4201)  // winnt.h uses nameless structs
+
+#pragma warning(disable: 4820)  // warning C4820: '<unnamed-tag>': '8' bytes padding added after data member 'top', ...
+
 
 // https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 // 
@@ -42,6 +50,20 @@
 #define _WIN32
 #endif
 #endif
+
+
+#define _WIN32_WINNT_WIN10_TH2                     0x0A01
+#define _WIN32_WINNT_WIN10_RS1                     0x0A02
+#define _WIN32_WINNT_WIN10_RS2                     0x0A03
+#define _WIN32_WINNT_WIN10_RS3                     0x0A04
+#define _WIN32_WINNT_WIN10_RS4                     0x0A05
+#define _WIN32_WINNT_WIN10_RS5                     0x0A06
+#define _WIN32_WINNT_WIN10_19H1                    0x0A07
+#define _WIN32_WINNT_WIN10_VB                      0x0A08
+#define _WIN32_WINNT_WIN10_MN                      0x0A09
+#define _WIN32_WINNT_WIN10_FE                      0x0A0A
+#define _WIN32_WINNT_WIN10_CO                      0x0A0B
+
 
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -63,17 +85,17 @@
 example:
 
 #if defined _DEBUG && defined _CRTDBG_MAP_ALLOC
-	#pragma push_macro("_strdup")
-	#undef _strdup
+    #pragma push_macro("_strdup")
+    #undef _strdup
 #endif
 
 _Check_return_
 _ACRTIMP _CRTALLOCATOR char* __cdecl _strdup(
-	_In_opt_z_ char const* _Source
-	);
+    _In_opt_z_ char const* _Source
+    );
 
 #if defined _DEBUG && defined _CRTDBG_MAP_ALLOC
-	#pragma pop_macro("_strdup")
+    #pragma pop_macro("_strdup")
 #endif
 
 */

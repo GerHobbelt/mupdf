@@ -281,7 +281,7 @@ void fz_dump_lock_times(fz_context* ctx, int total_program_time_ms)
 		{
 			total += fz_lock_time[i][j];
 		}
-		fz_info(ctx, "Lock %d held for %g seconds (%g%%)\n", j, total / 1000.0, 100.0 * total / max(1.0, total_program_time_ms));
+		fz_info(ctx, "Lock %d held for %g seconds (%g%%)\n", j, total / 1000.0, 100.0 * total / fz_max(1.0, total_program_time_ms));
 	}
 	fz_info(ctx, "Total program time %g seconds\n", total_program_time_ms / 1000.0);
 }
