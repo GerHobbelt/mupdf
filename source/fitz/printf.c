@@ -116,7 +116,7 @@ static void fmtfloat(struct fmtbuf *out, float f)
 	}
 }
 
-static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, int fmt)
+static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, char fmt)
 {
 	char buf[100];
 	char* s = buf;
@@ -591,7 +591,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 							}
 							else if (mode & FPBO_VERBATIM_UNICODE)
 							{
-								for (i = 0; i < n; ++i)
+								for (int i = 0; i < n; ++i)
 									fmtputc(fmt, (unsigned char)data[i]);
 							}
 							else if (c < 0x10000)
@@ -709,7 +709,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 							fmtputc(fmt, ' ');
 						}
 						else {
-							for (i = 0; i < n; ++i) {
+							for (int i = 0; i < n; ++i) {
 								int b = (unsigned char)data[i];
 								if (i > 0)
 									fmtputc(fmt, '.');
@@ -776,7 +776,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 					// output \uFFFD + hex-encoded bad char:
 					char buf[10];
 					int l = fz_runetochar(buf, c);
-					for (i = 0; i < l; ++i)
+					for (int i = 0; i < l; ++i)
 						fmtputc(fmt, buf[i]);
 
 					c = (unsigned char)data[0];
@@ -795,7 +795,7 @@ static void fmt_print_buffer_optimally(fz_context* ctx, struct fmtbuf* fmt, cons
 				}
 				else if (mode & FPBO_VERBATIM_UNICODE)
 				{
-					for (i = 0; i < n; ++i)
+					for (int i = 0; i < n; ++i)
 						fmtputc(fmt, (unsigned char)data[i]);
 				}
 				else if (c < 0x10000)
