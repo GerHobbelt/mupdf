@@ -205,14 +205,49 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 		e = strchr(e, '\\');
 	}
 
+	int can_have_mswin_drive_letter = 1;
+
 	// Sanitize the *entire* path, including the Windows Drive/Share part:
 	e = dstpath;
 	if (e[0] == '/' && e[1] == '/' && strchr(".?", e[2]) != NULL && e[3] == '/')
+	{
 		// skip //?/ and //./ UNC leaders
 		e += 4;
+	}
 	else if (e[0] == '/' && e[1] == '/')
+	{
 		// skip //<server>... UNC path starter (which cannot contain Windows drive letters as-is)
 		e += 2;
+		can_have_mswin_drive_letter = 0;
+	}
+	else if (e[0] == '.' && e[1] == '/')
+	{
+		// skip ./ relative path at start, replace it by NIL: './' is superfluous!
+		len = strlen(e);
+		memmove(e, e + 2, len + 1);
+		can_have_mswin_drive_letter = 0;
+	}
+	else if (e[0] == '.' && e[1] == '.' && e[2] == '/')
+	{
+		// skip any chain of ../ relative path elements at start, as this may be a valid relative path
+		e += 3;
+		can_have_mswin_drive_letter = 0;
+
+		while (e[0] == '.' && e[1] == '.' && e[2] == '/')
+		{
+			e += 3;
+		}
+	}
+
+	if (can_have_mswin_drive_letter)
+	{
+		// See if we have a Windows drive as part of the path: keep that one intact!
+		if (isalpha(e[0]) && e[1] == ':')
+		{
+			*e = toupper(e[0]);
+			e += 2;
+		}
+	}
 
 	for ( ; *e; e++) {
 		int c = *e;
@@ -234,13 +269,19 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 			// wildcard characters are generally not accepted in path or file names!
 			*e = '_';
 		}
-		else if (c == '.' && e[1] == '/' && (e == dstpath || e[-1] == '.')) {
-			// a dot at the END of a path name is not accepted; tolerate ./ and ../ at the start of the path
+		else if (c == ':') {
+			// Windows drive delimiter is not allowed anywhere in the path (except at the start, which we checked already before)
 			*e = '_';
 		}
-		else if (c == '.' && e[1] == 0 && (e == dstpath || e[-1] == '.')) {
-			// a dot at the END of a file/path name is not accepted; tolerate ./ and ../ at the start of the path
-			*e = '_';
+		else if (c == '.') {
+			// a dot at the END of a path element is not accepted; neither do we tolerate ./ and ../ as we have
+			// skipped any legal ones already before.
+			//
+			// we assume the path has been normalized (relative or absolute) before it was sent here, hence
+			// we'll accept UNIX dotfiles (one leading '.' dot for an otherwise sane filename/dirname), but
+			// otherwise dots can only sit right smack in the middle of an otherwise legal filename/dirname:
+			if (!e[1] || e[1] == '.' || e[1] == '/')
+				*e = '_';
 		}
 	}
 }
