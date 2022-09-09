@@ -20,12 +20,7 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#if defined(_MSC_VER)
-#ifndef _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAP_ALLOC
-#endif
-#include <crtdbg.h>
-#endif
+#include "mupdf/helpers/system-header-files.h"
 
 #include "mupdf/fitz.h"
 #include "mupdf/assertions.h"
@@ -167,7 +162,9 @@ static void seek_prog(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 static void close_prog(fz_context *ctx, void *state)
 {
 	prog_state *ps = (prog_state *)state;
-	int n = fclose(ps->file);
+	int n = 0;
+	if (ps->file)
+		n = fclose(ps->file);
 	if (n < 0)
 		fz_warn(ctx, "cannot fclose: %s", strerror(errno));
 	fz_free(ctx, state);
