@@ -136,7 +136,7 @@ static void xml_printf_emit(fz_context* ctx, void *user, int c)
 	xml_putc(out, c);
 }
 
-static inline void xml_printf(struct fmtbuf* out, const char* s, ...)
+static void xml_printf(struct fmtbuf* out, const char* s, ...)
 {
 	va_list ap;
 
