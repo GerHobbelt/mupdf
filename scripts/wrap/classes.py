@@ -561,10 +561,12 @@ classextras = ClassExtras(
                         f'''
                         : m_internal( NULL)
                         {{
+                            #if 0
                             if (s_check_refs)
                             {{
                                 s_{rename.class_('fz_device')}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);
                             }}
+                            #endif
                         }}
                         ''',
                         comment = '/* Sets m_internal = NULL. */',
@@ -1896,10 +1898,12 @@ classextras = ClassExtras(
                         f'''
                         : m_internal( NULL)
                         {{
+                            #if 0
                             if (s_check_refs)
                             {{
                                 s_{rename.class_("pdf_processor")}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);
                             }}
+                            #endif
                         }}
                         ''',
                         comment = '/* Sets m_internal = NULL. */',

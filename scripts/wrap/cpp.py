@@ -268,6 +268,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
                 return 's_trace_keepdrop'
         return 's_trace > 1'
 
+    out.write( f'    #if 0\n')
     out.write( f'    if ({varname_enable()}) {{\n')
     out.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): calling {cursor.mangled_name}():";\n')
     for arg in parse.get_args( tu, cursor, include_fz_context=True):
@@ -301,6 +302,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
             out.write( f'        std::cerr << " {arg.name}=" << {arg.name};\n')
     out.write( f'        std::cerr << "\\n";\n')
     out.write( f'    }}\n')
+    out.write( f'    #endif\n')
 
     # Now output the function call.
     #
@@ -328,9 +330,11 @@ def make_fncall( tu, cursor, return_type, fncall, out):
         out.write(      f'    }}\n')
 
     out.write(      f'    fz_catch(auto_ctx) {{\n')
+    out.write(      f'        #if 0\n')
     out.write(      f'        if (s_trace_exceptions) {{\n')
     out.write(      f'            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): fz_catch() has caught exception.\\n";\n')
     out.write(      f'        }}\n')
+    out.write(      f'        #endif\n')
     out.write(      f'        {te}(auto_ctx);\n')
     out.write(      f'    }}\n')
     if return_type != 'void':
@@ -1016,10 +1020,12 @@ def make_function_wrappers(
                 char    code_text[32];
                 snprintf(code_text, sizeof(code_text), "%i", code);
                 m_text = std::string("code=") + code_text + ": " + text;
+                #if 0
                 if (s_trace_exceptions)
                 {{
                     std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): {base_name}: m_code=" << m_code << " m_text: " << m_text << "\\n";
                 }}
+                #endif
             }};
 
             const char* {base_name}::what() const throw()
@@ -1050,10 +1056,12 @@ def make_function_wrappers(
                 {typename}::{typename}(const char* text)
                 : {base_name}({enum}, text)
                 {{
+                    #if 0
                     if (s_trace_exceptions)
                     {{
                         std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): {typename} constructor, text: " << m_text << "\\n";
                     }}
+                    #endif
                 }}
 
                 '''))
@@ -1072,15 +1080,19 @@ def make_function_wrappers(
             void {te}(fz_context* ctx)
             {{
                 int code = fz_caught(ctx);
+                #if 0
                 if (s_trace_exceptions)
                 {{
                     std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): code=" << code << "\\n";
                 }}
+                #endif
                 const char* text = fz_caught_message(ctx);
+                #if 0
                 if (s_trace_exceptions)
                 {{
                     std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): text=" << text << "\\n";
                 }}
+                #endif
             '''))
     for enum, typename, padding in errors():
         out_exceptions_cpp.write( f'    if (code == {enum}) {padding}throw {typename}{padding}(text);\n')
@@ -1236,11 +1248,13 @@ def class_add_iterator( tu, struct_cursor, struct_name, classname, extras):
                     f'''
                     {{
                         auto ret = {classname}Iterator({'m_internal->'+it_begin if it_begin else '*this'});
+                        #if 0
                         #if {check_refs}
                         if (s_check_refs)
                         {{
                             s_{classname}_refs_check.check( this, __FILE__, __LINE__, __FUNCTION__);
                         }}
+                        #endif
                         #endif
                         return ret;
                     }}
@@ -1253,11 +1267,13 @@ def class_add_iterator( tu, struct_cursor, struct_name, classname, extras):
                     f'''
                     {{
                         auto ret = {classname}Iterator(NULL);
+                        #if 0
                         #if {check_refs}
                         if (s_check_refs)
                         {{
                             s_{classname}_refs_check.check( this, __FILE__, __LINE__, __FUNCTION__);
                         }}
+                        #endif
                         #endif
                         return ret;
                     }}
@@ -1510,18 +1526,22 @@ def class_copy_constructor(
         out_cpp.write( '{\n')
 
         # Write trace code.
+        out_cpp.write( f'    #if 0\n')
         out_cpp.write( f'    if (s_trace_keepdrop) {{\n')
         out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "():"\n')
         out_cpp.write( f'                << "calling {rename.ll_fn(drop_name)}(this->m_internal)"\n')
         out_cpp.write( f'                << "and {rename.ll_fn(keep_name)}(rhs.m_internal)\\n"\n')
         out_cpp.write( f'                ;\n')
         out_cpp.write( f'    }}\n')
+        out_cpp.write( f'    #endif\n')
 
         if parse.has_refs( tu, struct_cursor.type):
+            out_cpp.write( '    #if 0\n')
             out_cpp.write( '    if (s_check_refs)\n')
             out_cpp.write( '    {\n')
             out_cpp.write(f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
             out_cpp.write( '    }\n')
+            out_cpp.write( '    #endif\n')
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
 
@@ -1537,16 +1557,20 @@ def class_copy_constructor(
     out_cpp.write( f'    {rename.ll_fn(drop_name)}(this->m_internal);\n')
     out_cpp.write( f'    {rename.ll_fn(keep_name)}(rhs.m_internal);\n')
     if parse.has_refs( tu, struct_cursor.type):
+        out_cpp.write( '    #if 0\n')
         out_cpp.write( '    if (s_check_refs)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        s_{classname}_refs_check.remove( this, __FILE__, __LINE__, __FUNCTION__);\n')
         out_cpp.write( '    }\n')
+        out_cpp.write( '    #endif\n')
     out_cpp.write( f'    this->m_internal = {cast}rhs.m_internal;\n')
     if parse.has_refs( tu, struct_cursor.type):
+        out_cpp.write( '    #if 0\n')
         out_cpp.write( '    if (s_check_refs)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
         out_cpp.write( '    }\n')
+        out_cpp.write( '    #endif\n')
     out_cpp.write( f'    return *this;\n')
     out_cpp.write(  '}\n')
     out_cpp.write(  '\n')
@@ -1605,10 +1629,12 @@ def function_wrapper_class_aware_body(
     return_void = (fn_cursor.result_type.spelling == 'void')
 
     # Write trace code.
+    out_cpp.write( f'    #if 0\n')
     out_cpp.write( f'    if (s_trace) {{\n')
     out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "():"\n')
     out_cpp.write( f'                << "calling mupdf::{rename.ll_fn(fnname)}()\\n";\n')
     out_cpp.write( f'    }}\n')
+    out_cpp.write( f'    #endif\n')
 
     if fn_cursor.type.is_function_variadic():
         assert fnname == 'fz_warn'
@@ -1770,6 +1796,7 @@ def function_wrapper_class_aware_body(
     if struct_name and not class_static:
         if parse.has_refs( tu, struct_cursor.type):
             # Write code that does runtime checking of reference counts.
+            out_cpp.write( f'    #if 0\n')
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write( f'    {{\n')
             if class_constructor:
@@ -1777,6 +1804,7 @@ def function_wrapper_class_aware_body(
             else:
                 out_cpp.write( f'        s_{class_name}_refs_check.check( this, __FILE__, __LINE__, __FUNCTION__);\n')
             out_cpp.write( f'    }}\n')
+            out_cpp.write( f'    #endif\n')
 
     if not return_void and not class_constructor:
         out_cpp.write( f'    return ret;\n')
@@ -2200,10 +2228,12 @@ def class_custom_method(
         end = body.rfind('}')
         assert end >= 0
         out_cpp.write( body[:end])
+        out_cpp.write( f'    #if 0\n')
         out_cpp.write( f'    if (s_check_refs)\n')
         out_cpp.write( f'    {{\n')
         out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
         out_cpp.write( f'    }}\n')
+        out_cpp.write( f'    #endif\n')
         out_cpp.write( body[end:])
     else:
         out_cpp.write( body)
@@ -2273,10 +2303,12 @@ def class_raw_constructor(
                 else:
                     out_cpp.write( f'    this->{c.spelling} = internal->{c.spelling};\n')
         if parse.has_refs( tu, struct_cursor.type):
+            out_cpp.write( f'    #if 0\n')
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write( f'    {{\n')
             out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
             out_cpp.write( f'    }}\n')
+            out_cpp.write( f'    #endif\n')
         out_cpp.write( '}\n')
         out_cpp.write( '\n')
 
@@ -2314,10 +2346,12 @@ def class_raw_constructor(
                 field0 = parse.get_field0(struct_cursor.type).spelling
                 out_cpp.write( f'    auto ret = ({const_space}::{struct_name}*) &this->{field0};\n')
                 if parse.has_refs( tu, struct_cursor.type):
+                    out_cpp.write( f'    #if 0\n')
                     out_cpp.write( f'    if (s_check_refs)\n')
                     out_cpp.write( f'    {{\n')
                     out_cpp.write( f'        s_{classname}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);\n')
                     out_cpp.write( f'    }}\n')
+                    out_cpp.write( f'    #endif\n')
                 out_cpp.write( '    return ret;\n')
                 out_cpp.write( '}\n')
                 out_cpp.write( '\n')
@@ -2469,10 +2503,12 @@ def class_destructor(
         out_cpp.write(  '{\n')
         out_cpp.write( f'    {rename.ll_fn(fnname)}(m_internal);\n')
         if parse.has_refs( tu, struct_cursor.type):
+            out_cpp.write( f'    #if 0\n')
             out_cpp.write( f'    if (s_check_refs)\n')
             out_cpp.write(  '    {\n')
             out_cpp.write( f'        s_{classname}_refs_check.remove( this, __FILE__, __LINE__, __FUNCTION__);\n')
             out_cpp.write(  '    }\n')
+            out_cpp.write( f'    #endif\n')
         out_cpp.write(  '}\n')
         out_cpp.write( '\n')
     else:
@@ -2689,6 +2725,7 @@ def class_wrapper_virtual_fnptrs(
     alloc = [''] + alloc.split('\n')
     alloc = '\n    '.join(alloc)
     out_cpp.write(f'{alloc}\n')
+    out_cpp.write(f'    #if 0\n')
     out_cpp.write(f'    if (s_trace_director)\n')
     out_cpp.write( '    {\n')
     out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): this=" << this << "\\n";\n')
@@ -2697,6 +2734,7 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write(f'        {classname}2* self = {self_("m_internal")};\n')
         out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::{classname}2(): self=" << self << "\\n";\n')
     out_cpp.write('    }\n')
+    out_cpp.write('    #endif\n')
     out_cpp.write( '}\n')
 
     if free:
@@ -2707,12 +2745,14 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('\n')
         out_cpp.write(f'FZ_FUNCTION {classname}2::~{classname}2()\n')
         out_cpp.write( '{\n')
+        out_cpp.write(f'    #if 0\n')
         out_cpp.write(f'    if (s_trace_director)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): this=" << this << "\\n";\n')
         if not extras.pod:
             out_cpp.write( f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": ~{classname}2(): m_internal=" << m_internal << "\\n";\n')
-        out_cpp.write('    }\n')
+        out_cpp.write( '    }\n')
+        out_cpp.write(f'    #endif\n')
         out_cpp.write(f'    {free}\n')
         out_cpp.write( '}\n')
 
@@ -2770,10 +2810,12 @@ def class_wrapper_virtual_fnptrs(
         out_cpp.write('\n')
         out_cpp.write('{\n')
         out_cpp.write(f'    {classname}2* self = {self_("arg_1")};\n')
+        out_cpp.write(f'    #if 0\n')
         out_cpp.write(f'    if (s_trace_director)\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2_s_{cursor.spelling}(): arg_1=" << arg_1 << " self=" << self << "\\n";\n')
         out_cpp.write( '    }\n')
+        out_cpp.write( '    #endif\n')
         out_cpp.write( '    try\n')
         out_cpp.write( '    {\n')
         out_cpp.write(f'        return self->{cursor.spelling}(')
@@ -2792,10 +2834,12 @@ def class_wrapper_virtual_fnptrs(
         # todo: catch our different exception types and map to FZ_ERROR_*.
         out_cpp.write( '    catch (std::exception& e)\n')
         out_cpp.write( '    {\n')
+        out_cpp.write( '        #if 0\n')
         out_cpp.write( '        if (s_trace_director)\n')
         out_cpp.write( '        {\n')
         out_cpp.write(f'            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2_s_{cursor.spelling}(): exception: " << e.what() << "\\n";\n')
         out_cpp.write( '        }\n')
+        out_cpp.write( '        #endif\n')
         out_cpp.write( '        fz_throw(arg_0, FZ_ERROR_GENERIC, "%s", e.what());\n')
         out_cpp.write( '    }\n')
         out_cpp.write('}\n')
@@ -2928,6 +2972,7 @@ def class_wrapper(
     refs = parse.has_refs( tu, struct_cursor.type)
     if refs:
         refs_name, refs_size = refs
+        out_cpp.write( f'#if 0\n')
         if isinstance(refs_name, int):
             # <refs_name> is offset of .refs in the struct.
             allow_int_this = ', true /*allow_int_this*/' if struct_name == 'pdf_obj' else ''
@@ -2935,6 +2980,7 @@ def class_wrapper(
         else:
             # <refs_name> is name of .refs in the struct.
             out_cpp.write( f'static RefsCheck<::{struct_name}, {classname}> s_{classname}_refs_check(offsetof(::{struct_name}, {refs_name}), {refs_size});\n')
+        out_cpp.write( f'#endif\n')
         out_cpp.write( '\n')
 
     # Trailing text in header, e.g. typedef for iterator.
@@ -3353,6 +3399,7 @@ def refcount_check_code( out):
             If m_size is -1, we don't attempt any checking; this is for fz_xml
             which is reference counted but does not have a simple .refs member.
             */
+            #if 0
             template<typename Struct, typename ClassWrapper, bool allow_int_this=false>
             struct RefsCheck
             {
@@ -3379,16 +3426,20 @@ def refcount_check_code( out):
                     if (!this_->m_internal) return;
                     if (allow_int_this)
                     {
+                        #if 0
                         if (0) std::cerr << __FILE__ << ":" << __LINE__
                                 << " " << file << ":" << line << ":" << fn << ":"
                                 << " this_->m_internal=" << this_->m_internal
                                 << "\\n";
+                        #endif
                         if ((intptr_t) this_->m_internal < 4096)
                         {
+                            #if 0
                             if (0) std::cerr << __FILE__ << ":" << __LINE__
                                     << " " << file << ":" << line << ":" << fn << ":"
                                     << " Ignoring this_->m_internal=" << this_->m_internal
                                     << "\\n";
+                            #endif
                             return;
                         }
                     }
@@ -3408,6 +3459,7 @@ def refcount_check_code( out):
                     int n_prev = n;
                     assert( n >= 0);
                     n += delta;
+                    #if 0
                     if (0) std::cerr << file << ":" << line << ":" << fn << "():"
                             // << " " << typeid(ClassWrapper).name() << ":"
                             << " this_=" << this_
@@ -3415,18 +3467,22 @@ def refcount_check_code( out):
                             << " refs=" << refs
                             << " n: " << n_prev << " => " << n
                             << "\\n";
+                    #endif
                     if ( n < 0)
                     {
+                        #if 0
                         std::cerr << file << ":" << line << ":" << fn << "():"
                                 // << " " << typeid(ClassWrapper).name() << ":"
                                 << " this_=" << this_
                                 << " this_->m_internal=" << this_->m_internal
                                 << " bad n: " << n_prev << " => " << n
                                 << "\\n";
+                        #endif
                         abort();
                     }
                     if ( n && refs < n)
                     {
+                        #if 0
                         std::cerr << file << ":" << line << ":" << fn << "():"
                             // << " " << typeid(ClassWrapper).name() << ":"
                                 << " this_=" << this_
@@ -3435,6 +3491,7 @@ def refcount_check_code( out):
                                 << " n: " << n_prev << " => " << n
                                 << " refs mismatch (refs<n):"
                                 << "\\n";
+                        #endif
                         abort();
                     }
                     if (n && ::abs( refs - n) > 1000)
@@ -3442,12 +3499,14 @@ def refcount_check_code( out):
                         /* This traps case where n > 0 but underlying struct is
                         freed and .ref is set to bogus value by fz_free() or
                         similar. */
+                        #if 0
                         std::cerr << file << ":" << line << ":" << fn << "(): " << ": " << typeid(ClassWrapper).name()
                                 << " bad change to refs."
                                 << " this_=" << this_
                                 << " refs=" << refs
                                 << " n: " << n_prev << " => " << n
                                 << "\\n";
+                        #endif
                         abort();
                     }
                     if (n == 0) m_this_to_num.erase( this_->m_internal);
@@ -3465,6 +3524,7 @@ def refcount_check_code( out):
                     change( this_, file, line, fn, 0);
                 }
             };
+            #endif
 
             '''
             ))
@@ -3722,7 +3782,7 @@ def cpp_source(
 
             #include <string.h>
 
-            static const bool   s_trace_exceptions = mupdf::internal_env_flag("MUPDF_trace_exceptions");
+            //static const bool   s_trace_exceptions = mupdf::internal_env_flag("MUPDF_trace_exceptions");
 
             '''))
 
@@ -3757,9 +3817,9 @@ def cpp_source(
 
             #include <string.h>
 
-            static const int    s_trace = mupdf::internal_env_flag("MUPDF_trace");
-            static const bool   s_trace_keepdrop = mupdf::internal_env_flag("MUPDF_trace_keepdrop");
-            static const bool   s_trace_director = mupdf::internal_env_flag("MUPDF_trace_director");
+            //static const int    s_trace = mupdf::internal_env_flag("MUPDF_trace");
+            //static const bool   s_trace_keepdrop = mupdf::internal_env_flag("MUPDF_trace_keepdrop");
+            //static const bool   s_trace_director = mupdf::internal_env_flag("MUPDF_trace_director");
             '''))
 
     out_cpps.classes2.write(
@@ -3779,7 +3839,7 @@ def cpp_source(
 
             #include <string.h>
 
-            static const int    s_trace = mupdf::internal_env_flag("MUPDF_trace");
+            //static const int    s_trace = mupdf::internal_env_flag("MUPDF_trace");
             '''))
 
     namespace = 'mupdf'
@@ -3818,9 +3878,9 @@ def cpp_source(
                     "info:ModDate",
             };
 
-            static const int    s_trace = internal_env_flag("MUPDF_trace");
-            static const bool   s_trace_keepdrop = internal_env_flag("MUPDF_trace_keepdrop");
-            static const bool   s_trace_exceptions = internal_env_flag("MUPDF_trace_exceptions");
+            //static const int    s_trace = internal_env_flag("MUPDF_trace");
+            //static const bool   s_trace_keepdrop = internal_env_flag("MUPDF_trace_keepdrop");
+            //static const bool   s_trace_exceptions = internal_env_flag("MUPDF_trace_exceptions");
 
             '''))
 
