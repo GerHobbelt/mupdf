@@ -609,6 +609,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 			}
 
 		case '!':
+			if (label)
 			{
 				size_t vl = fz_strspn1(fmt, fmt[0]);
 
@@ -623,6 +624,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 				did_label++;
 				continue;
 			}
+			break;
 
 		case '$':
 			{
