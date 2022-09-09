@@ -255,10 +255,16 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     out:
         Stream to which we write generated code.
     '''
-    icg = rename.internal( 'context_get')
-    te = rename.internal( 'throw_exception')
-    out.write(      f'    fz_context* auto_ctx = {icg}();\n')
-    out.write(      f'    fz_var(auto_ctx);\n')
+    uses_fz_context = False;
+    for arg in parse.get_args( tu, cursor, include_fz_context=True):
+        if parse.is_pointer_to( arg.cursor.type, 'fz_context'):
+            uses_fz_context = True
+            break
+    if uses_fz_context:
+        icg = rename.internal( 'context_get')
+        te = rename.internal( 'throw_exception')
+        out.write(      f'    fz_context* auto_ctx = {icg}();\n')
+        out.write(      f'    fz_var(auto_ctx);\n')
 
     # Output code that writes diagnostics to std::cerr if $MUPDF_trace is set.
     #
@@ -308,35 +314,46 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     #
     if return_type != 'void':
         out.write(  f'    {return_type} ret;\n')
-        out.write(  f'    fz_var(ret);\n')
+        if uses_fz_context:
+            out.write(  f'    fz_var(ret);\n')
 
     if cursor.spelling == 'fz_warn':
         out.write( '    va_list ap;\n')
         out.write( '    fz_var(ap);\n')
-    out.write(      f'    fz_try(auto_ctx) {{\n')
+
+    indent = ''
+    if uses_fz_context:
+        out.write(      f'    fz_try(auto_ctx) {{\n')
+        indent = '    '
 
     if cursor.spelling == 'fz_warn':
-        out.write( '        va_start(ap, fmt);\n')
-        out.write( '        fz_vwarn(auto_ctx, fmt, ap);\n')
-    elif return_type == 'void':
-        out.write(  f'        {fncall};\n')
+        out.write( f'    {indent}va_start(ap, fmt);\n')
+        out.write( f'    {indent}fz_vwarn(auto_ctx, fmt, ap);\n')
     else:
-        out.write(  f'        ret = {fncall};\n')
-    out.write(      f'    }}\n')
+        if not uses_fz_context:
+            out.write( f'    /* No fz_context* arg, so no need for fz_try()/fz_catch() to convert MuPDF exceptions into C++ exceptions. */\n')
+        out.write(  f'    {indent}')
+        if return_type != 'void':
+            out.write(  f'ret = ')
+        out.write(  f'{fncall};\n')
+
+    if uses_fz_context:
+        out.write(      f'    }}\n')
 
     if cursor.spelling == 'fz_warn':
         out.write(      f'    fz_always(auto_ctx) {{\n')
         out.write(      f'        va_end(ap);\n')
         out.write(      f'    }}\n')
 
-    out.write(      f'    fz_catch(auto_ctx) {{\n')
-    out.write(      f'        #if 0\n')
-    out.write(      f'        if (s_trace_exceptions) {{\n')
-    out.write(      f'            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): fz_catch() has caught exception.\\n";\n')
-    out.write(      f'        }}\n')
-    out.write(      f'        #endif\n')
-    out.write(      f'        {te}(auto_ctx);\n')
-    out.write(      f'    }}\n')
+    if uses_fz_context:
+        out.write(      f'    fz_catch(auto_ctx) {{\n')
+        out.write(      f'        #if 0\n')
+        out.write(      f'        if (s_trace_exceptions) {{\n')
+        out.write(      f'            std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << "(): fz_catch() has caught exception.\\n";\n')
+        out.write(      f'        }}\n')
+        out.write(      f'        #endif\n')
+        out.write(      f'        {te}(auto_ctx);\n')
+        out.write(      f'    }}\n')
     if return_type != 'void':
         out.write(  f'    return ret;\n')
 
