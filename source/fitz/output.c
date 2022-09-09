@@ -41,6 +41,10 @@
 #include <unistd.h>
 #endif
 
+#undef MIN
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+
 static inline void
 fzoutput_lock(fz_output* out)
 {
@@ -140,7 +144,7 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 		DWORD written = 0;
 		// Write the data to the pipe in chunks of limited size, so that we won't lock
 		// on a chunk. That's also why we size our chunks to HALF the known pipe nonblocking buffer size!
-		DWORD n_lim = min(PIPE_MAX_NONBLOCK_BUFFER_SIZE, n);
+		DWORD n_lim = MIN(PIPE_MAX_NONBLOCK_BUFFER_SIZE, n);
 		int rv = WriteFile(GetStdHandle(channel), p, n_lim, &written, NULL);
 		int err = GetLastError();
 		//fprintf(stderr, "stdout_write:WriteFile: %d bytes, %p, %d written, rv:%d, err:%d\n", (int)n_lim, p, (int)written, rv, err);
@@ -211,7 +215,7 @@ static void
 stdout_flush_on_close(fz_context* ctx, fz_output *out)
 {
 	fz_flush_output(ctx, out);
-#if!def _WIN32
+#ifndef _WIN32
 	fflush(stdout);
 #endif
 }
@@ -220,7 +224,7 @@ static void
 stdout_flush_on_drop(fz_context* ctx, fz_output* out)
 {
 	fz_flush_output_no_lock(ctx, out);
-#if!def _WIN32
+#ifndef _WIN32
 	fflush(stdout);
 #endif
 }
@@ -253,7 +257,7 @@ static void
 stderr_flush_on_close(fz_context* ctx, fz_output* out)
 {
 	fz_flush_output(ctx, out);
-#if!def _WIN32
+#ifndef _WIN32
 	fflush(stderr);
 #endif
 }
@@ -262,7 +266,7 @@ static void
 stderr_flush_on_drop(fz_context* ctx, fz_output* out)
 {
 	fz_flush_output_no_lock(ctx, out);
-#if!def _WIN32
+#ifndef _WIN32
 	fflush(stderr);
 #endif
 }
