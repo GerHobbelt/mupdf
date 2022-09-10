@@ -828,7 +828,7 @@ gatherpageinfo(fz_context *ctx, globals *glo, int page, int show)
 	pdf_obj *pageref;
 	pdf_obj *rsrc;
 
-	pageref = pdf_lookup_page_obj(ctx, glo->doc, page-1);
+	pageref = pdf_lookup_page_obj(ctx, glo->doc, page - 1);
 
 	if (!pageref)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot retrieve info from page %d", page);
@@ -1240,6 +1240,8 @@ int pdfinfo_main(int argc, const char** argv)
 			if (!output || *output == 0 || !strcmp(output, "-"))
 			{
 				out = fz_stdout(ctx);
+				// help output write perf by setting stdout to block buffered mode
+				setvbuf(stdout, NULL, _IOFBF, 4096);
 				output = NULL;
 			}
 			else
