@@ -617,6 +617,65 @@ const char *fz_caught_message(fz_context *ctx)
 	return ctx->error.message;
 }
 
+void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, const char* errormessage, int category_code, int errorcode_mask)
+{
+	if (errorcode == 0)
+		errorcode = -1; // unknown/unidentified error.
+
+	// Warning: we should, like `fz_rethrow()`, protect any already existing exception error code as we MAY be executing this code
+	// as part of a chunk that's inside a catch block and before the upcoming `fz_rethrow()` call, which would need that exception code.
+	//
+	// See for the full story the `fz_rethrow()` implementation code comments!
+	{
+		if (/* ctx->error.errcode != FZ_ERROR_NONE && */ ctx->error.last_nonzero_errcode == FZ_ERROR_NONE)
+		{
+			ctx->error.last_nonzero_errcode = ctx->error.errcode;
+		}
+	}
+
+	// keep a copy of the ephemeral system error code:
+	ctx->error.errcode = category_code | (errorcode & errorcode_mask);
+
+	const char* category_lead_msg = (category_code == FZ_ERROR_C_RTL_SERIES ? "rtl error: " : "system error: ");
+	fz_strncpy_s(ctx, ctx->error.system_error_message, category_lead_msg, sizeof(ctx->error.system_error_message));
+
+	if (!errormessage || !errormessage[0])
+	{
+		if (errorcode == -1)
+			errormessage = "unknown/unidentified error";
+		else
+		{
+			if (category_code == FZ_ERROR_C_RTL_SERIES)
+			{
+				errormessage = strerror(errorcode);
+			}
+			else
+			{
+#if defined(_WIN32)
+				size_t offset = strlen(ctx->error.system_error_message);
+				FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, NULL);
+				return;
+#endif
+			}
+		}
+
+		if (!errormessage || !errormessage[0])
+		{
+			size_t offset = strlen(ctx->error.system_error_message);
+
+			if (errorcode < 0xFFFF)
+				fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code %d", errorcode);
+			else
+				// some segmented errorcode: dumnp as HEX value!
+				fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code 0x%08x", errorcode);
+			return;
+		}
+	}
+
+	fz_strncat_s(ctx, ctx->error.system_error_message, errormessage, sizeof(ctx->error.system_error_message));
+}
+
+
 /* coverity[+kill] */
 FZ_NORETURN void fz_vthrow(fz_context* ctx, int code, const char* fmt, va_list ap)
 {
@@ -713,7 +772,7 @@ FZ_NORETURN void fz_rethrow(fz_context *ctx)
 		// so as not having to wade through a zillion lines of code to patch all relevant try/catch/rethrow
 		// blocks, we simply remember the last non-zero error code and use that iff the
 		// rethrow would otherwise rethrow a zero=okay exception.
-		assert(ctx->error.last_nonzero_errcode > FZ_ERROR_NONE);
+		assert(ctx->error.last_nonzero_errcode != FZ_ERROR_NONE);
 		ctx->error.errcode = ctx->error.last_nonzero_errcode;
 	}
 	_throw(ctx, ctx->error.errcode);
@@ -721,7 +780,7 @@ FZ_NORETURN void fz_rethrow(fz_context *ctx)
 
 void fz_rethrow_if(fz_context *ctx, int err)
 {
-	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
+	assert(ctx && ctx->error.errcode != FZ_ERROR_NONE);
 	if (ctx->error.errcode == err)
 		fz_rethrow(ctx);
 }

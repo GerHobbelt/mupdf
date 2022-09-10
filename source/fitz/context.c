@@ -216,6 +216,8 @@ fz_init_error_context(fz_context *ctx)
 
 	ctx->warn.message[0] = 0;
 	ctx->warn.count = 0;
+
+	fz_clear_system_error(ctx);
 }
 
 fz_context *
