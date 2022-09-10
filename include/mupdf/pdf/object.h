@@ -91,11 +91,46 @@ int pdf_obj_marked(fz_context *ctx, pdf_obj *obj);
 int pdf_mark_obj(fz_context *ctx, pdf_obj *obj);
 void pdf_unmark_obj(fz_context *ctx, pdf_obj *obj);
 
+/**
+	Stack-based object to help detect cycles in the `pdf_obj` graph.
+
+	`up` references the parent (*caller*) instance to form a single-linked
+	list, which can be scanned by `pdf_cycle()` to detect cycles.
+
+	`num`: `pdf_obj` index number, denoting the `pdf_obj` instance currently accessed.
+
+	`countdown`: number of accesses still tolerated in the cycle. To make the cycle mark&detect
+	code (`pdf_cycle()`) behave as one might expect for a usual cycle detector, this value is
+	set to zero by `pdf_cycle()` when initializing the instance.
+	You can set it to any positive number afterwards to allow `pdf_cycle()` to detect & mark each
+	cyclical access *down by one* until the zero-boundary is crossed (`countdown` becoming negative on decrement).
+	You can use this to encode behaviour like: "when I run a cycle, do not stop immediately but do so for only N rounds"
+	where `countdown == N`.
+*/
 typedef struct pdf_cycle_list pdf_cycle_list;
 struct pdf_cycle_list {
 	pdf_cycle_list *up;
 	int num;
+	int countdown;
+
 };
+/**
+	Mark & detect cycles in the `pdf_obj` graph.
+
+	Return 1 (non-zero) when a cycle has been detected. Return 0 when there's no cycle (yet).
+
+	`here`: references the current (*callee's*) stack-based mark instance, which will be initialized.
+
+	`prev` references the parent (*caller's*) instance which will be linked up in `here` to form a single-linked
+	list, which is scanned by `pdf_cycle()` to detect cycles.
+
+	`prev` may be NULL to indicate the root element of the mark&detect stack chain, i.e. to mark the start of the search for a `pdf_obj` cycle.
+
+	Note: the mechanism is inherently safe as parents never reference children up the stack, but rather
+	the other way around. Hence, no matter the execution path, the linked list automatically cleaned up
+	implicitly when a function exists/returns. After all, all you need is a chain up the call stack towards
+	the root to walk that chain and find recurring `pdf_obj` references: a cycle!
+*/
 int pdf_cycle(fz_context *ctx, pdf_cycle_list *here, pdf_cycle_list *prev, pdf_obj *obj);
 
 typedef struct

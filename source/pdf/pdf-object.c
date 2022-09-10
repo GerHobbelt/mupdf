@@ -579,6 +579,10 @@ pdf_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 
 	switch (a->kind)
 	{
+	default:
+		ASSERT(!"Should never get here! All 'kind's of object must be addressed in this switch/case.");
+		break;
+
 	case PDF_INT:
 		return NUM(a)->u.i - NUM(b)->u.i;
 
@@ -2520,18 +2524,33 @@ int
 pdf_cycle(fz_context *ctx, pdf_cycle_list *here, pdf_cycle_list *up, pdf_obj *obj)
 {
 	int num = pdf_to_num(ctx, obj);
+	here->up = up;
+	here->num = num;
 	if (num > 0)
 	{
 		pdf_cycle_list *x = up;
 		while (x)
 		{
 			if (x->num == num)
-				return 1;
+			{
+				// cycle detected: see if `countdown` is depleted by now
+				if (x->countdown <= 0)
+					return 1;
+				// otherwise, silently allow the cycle to proceed yet another round
+				//
+				// NOTE: make sure to copy the countdown to `here` as *that* will be
+				// the countdown number we'll be checking down in the further depth
+				// of our local call tree.
+				// Meanwhile, this keeps the countdown in `up` intact so the cycle
+				// countdown will repeat its magic in the next branch of the parent's
+				// call tree.
+				here->countdown = up->countdown - 1;
+				return 0;
+			}
 			x = x->up;
 		}
 	}
-	here->up = up;
-	here->num = num;
+	here->countdown = 0;
 	return 0;
 }
 
