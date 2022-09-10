@@ -625,7 +625,7 @@ gatherdimensions(fz_context* ctx, globals* glo, int page, pdf_obj* pageref)
 	bbox = pdf_to_rect(ctx, obj);
 
 	obj = pdf_dict_get(ctx, pageref, PDF_NAME(UserUnit));
-	if (pdf_is_real(ctx, obj))
+	if (pdf_is_number(ctx, obj))
 	{
 		float unit = pdf_to_real(ctx, obj);
 		bbox.x0 *= unit;
@@ -951,7 +951,7 @@ gatherlayersinfo(fz_context* ctx, globals* glo)
 }
 
 static void
-gatherresourceinfo(fz_context* ctx, globals* glo, int page, pdf_obj* rsrc)
+gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int page, pdf_obj *rsrc)
 {
 	pdf_obj* pageref;
 	pdf_obj* font;
@@ -959,67 +959,69 @@ gatherresourceinfo(fz_context* ctx, globals* glo, int page, pdf_obj* rsrc)
 	pdf_obj* subrsrc;
 	int i;
 
-	pageref = pdf_lookup_page_obj(ctx, glo->doc, page - 1);
+	pageref = pdf_lookup_page_obj(ctx, glo->doc, page-1);
 	if (!pageref)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot retrieve info from page %d", page);
 
 	/* stop on cyclic resource dependencies */
-	if (pdf_mark_obj(ctx, rsrc))
+	if (pdf_mark_list_push(ctx, mark_list, rsrc))
 		return;
 
-	fz_try(ctx)
+	font = pdf_dict_get(ctx, rsrc, PDF_NAME(Font));
+	if (font)
 	{
-		font = pdf_dict_get(ctx, rsrc, PDF_NAME(Font));
-		if (font)
+		int n;
+
+		gatherfonts(ctx, glo, page, pageref, font);
+		n = pdf_dict_len(ctx, font);
+		for (i = 0; i < n; i++)
 		{
-			int n;
+			pdf_obj *obj = pdf_dict_get_val(ctx, font, i);
 
-			gatherfonts(ctx, glo, page, pageref, font);
-			n = pdf_dict_len(ctx, font);
-			for (i = 0; i < n; i++)
+			/* stop on cyclic resource dependencies */
+			if (pdf_mark_list_push(ctx, mark_list, obj))
+				return;
+
+			subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
+			if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
 			{
-				pdf_obj* obj = pdf_dict_get_val(ctx, font, i);
-
-				subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
-				if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
-					gatherresourceinfo(ctx, glo, page, subrsrc);
+				gatherresourceinfo(ctx, mark_list, glo, page, subrsrc);
 			}
 		}
+	}
 
-		xobj = pdf_dict_get(ctx, rsrc, PDF_NAME(XObject));
-		if (xobj)
+	xobj = pdf_dict_get(ctx, rsrc, PDF_NAME(XObject));
+	if (xobj)
+	{
+		int n;
+
+		gatherimages(ctx, glo, page, pageref, xobj);
+		gatherforms(ctx, glo, page, pageref, xobj);
+		gatherpsobjs(ctx, glo, page, pageref, xobj);
+
+		n = pdf_dict_len(ctx, xobj);
+		for (i = 0; i < n; i++)
 		{
-			int n;
+			pdf_obj *obj = pdf_dict_get_val(ctx, xobj, i);
 
-			gatherimages(ctx, glo, page, pageref, xobj);
-			gatherforms(ctx, glo, page, pageref, xobj);
-			gatherpsobjs(ctx, glo, page, pageref, xobj);
+			/* stop on cyclic resource dependencies */
+			if (pdf_mark_list_push(ctx, mark_list, obj))
+				return;
 
-			n = pdf_dict_len(ctx, xobj);
-			for (i = 0; i < n; i++)
+			subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
+			if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
 			{
-				pdf_obj* obj = pdf_dict_get_val(ctx, xobj, i);
-				subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
-				if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
-					gatherresourceinfo(ctx, glo, page, subrsrc);
+				gatherresourceinfo(ctx, mark_list, glo, page, subrsrc);
 			}
 		}
+	}
 
-		gatherlayersinfo(ctx, glo);
-	}
-	fz_always(ctx)
-	{
-		pdf_unmark_obj(ctx, rsrc);
-	}
-	fz_catch(ctx)
-	{
-		fz_rethrow(ctx);
-	}
 }
 
 static void
 gatherpageinfo(fz_context* ctx, globals* glo, int page)
 {
+	pdf_mark_list mark_list;
 	pdf_obj* pageref;
 	pdf_obj* rsrc;
 
@@ -1030,8 +1032,16 @@ gatherpageinfo(fz_context* ctx, globals* glo, int page)
 
 	gatherdimensions(ctx, glo, page, pageref);
 
-	rsrc = pdf_dict_get(ctx, pageref, PDF_NAME(Resources));
-	gatherresourceinfo(ctx, glo, page, rsrc);
+	pdf_mark_list_init(ctx, &mark_list);
+	fz_try(ctx)
+	{
+		rsrc = pdf_dict_get(ctx, pageref, PDF_NAME(Resources));
+		gatherresourceinfo(ctx, &mark_list, glo, page, rsrc);
+	}
+	fz_always(ctx)
+		pdf_mark_list_free(ctx, &mark_list);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 static void
@@ -2484,6 +2494,7 @@ int pdfmetadump_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
+		fz_error(ctx, "%s", fz_caught_message(ctx));
 		ret = EXIT_FAILURE;
 	}
 
@@ -2500,6 +2511,7 @@ int pdfmetadump_main(int argc, const char** argv)
 
 	fz_close_output(ctx, out);
 	fz_drop_output(ctx, out);
+	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return ret;
 }
