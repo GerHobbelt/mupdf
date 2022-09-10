@@ -124,9 +124,12 @@ static void fmtfloat_e(struct fmtbuf *out, double f, int w, int p, char fmt)
 		p = FMT_DEFAULT_FLOAT_PRECISION;
 	if (w < 0) // uninitialized value is INT_MIN but user may have passed bad negative width via '*' modifier either.
 		w = 0;
+#pragma warning(push)
+#pragma warning(disable: 4774)  // warning C4774: '_snprintf' : format string expected in argument 3 is not a string literal; format specifiers in 'name' may pose a security issue
 	char fmtstr[] = "%*.* ";
 	fmtstr[4] = fmt;
 	snprintf(buf, sizeof buf, fmtstr, w, p, f);
+#pragma warning(pop)
 	while (*s)
 		fmtputc(out, *s++);
 }
