@@ -140,6 +140,13 @@ size_t fz_strlcat(char *dst, const char *src, size_t n);
 void fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz);
 
 /**
+	Concatenate `src` string to limited-length `dst`. "Safe string concatenation to limited-length buffer."
+
+	This is similar to regular RTL strncat() with the same differences as mentioned for `fz_strncpy_s()`.
+*/
+void fz_strncat_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz);
+
+/**
 	Find the start of the first occurrence of the substring needle in haystack.
 */
 void *fz_memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen);

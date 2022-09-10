@@ -183,8 +183,6 @@ fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
 {
 	if (dstsiz == 0)
 	{
-		if (!ctx)
-			ctx = fz_get_global_context();
 		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_strncpy_s::dstsiz == 0: zero-length destination buffer specified.");
 	}
 
@@ -198,7 +196,36 @@ fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
 	else
 	{
 		// len(src) < dstsiz: can safely use strcpy()
-		memmove(dst, src, srclen + 1);		// allow overlapping copy & include sentinel
+		memmove(dst, src, srclen);		// allow overlapping copy & include sentinel
+		dst[srclen] = 0;
+	}
+}
+
+void
+fz_strcat_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
+{
+	if (dstsiz == 0)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_strncat_s::dstsiz == 0: zero-length destination buffer specified.");
+	}
+
+	// use strnlen() as this function can legally be passed a non-NUL-terminated `dst`!
+	size_t l = strnlen(dst, dstsiz);
+	dst += l;
+	dstsiz -= l;
+
+	// use strnlen() as this function can legally be passed a non-NUL-terminated `src`!
+	size_t srclen = strnlen(src, dstsiz);
+	if (srclen == dstsiz)
+	{
+		memmove(dst, src, dstsiz - 1);
+		dst[dstsiz - 1] = 0;
+	}
+	else
+	{
+		// len(src) < dstsiz: can safely use strcpy()
+		memmove(dst, src, srclen);		// allow overlapping copy & include sentinel
+		dst[srclen] = 0;
 	}
 }
 
