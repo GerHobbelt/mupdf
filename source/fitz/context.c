@@ -216,6 +216,8 @@ fz_init_error_context(fz_context *ctx)
 
 	ctx->warn.message[0] = 0;
 	ctx->warn.count = 0;
+
+	fz_clear_system_error(ctx);
 }
 
 fz_context *
@@ -363,6 +365,8 @@ fz_clone_context(fz_context *ctx)
 	fz_keep_store_context(new_ctx);
 	fz_keep_glyph_cache(new_ctx);
 #endif
+
+	fz_clear_system_error(new_ctx);
 
 	return new_ctx;
 }

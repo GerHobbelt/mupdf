@@ -105,13 +105,23 @@ file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 	{
 		int x = putc(((unsigned char*)buffer)[0], file);
 		if (x == EOF && ferror(file))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s", strerror(errno));
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			analyze_and_improve_fwrite_error(ctx, out, count);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+		}
 		return;
 	}
 
 	n = fwrite(buffer, 1, count, file);
-	if (n < count && ferror(file))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes)", strerror(errno), n, count);
+	if (n < count)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		analyze_and_improve_fwrite_error(ctx, out, count - n);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes) (%s)", fz_ctx_pop_system_errormsg(ctx), n, count, out->filepath);
+	}
 }
 
 #if defined(_WIN32) 
@@ -123,7 +133,11 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 	// > "When writing to a non-blocking, byte-mode pipe handle with insufficient buffer space,
 	// > WriteFile returns TRUE with *lpNumberOfBytesWritten < nNumberOfBytesToWrite."
 
-	assert(channel == STD_OUTPUT_HANDLE || channel == STD_ERROR_HANDLE);
+	ASSERT(channel == STD_OUTPUT_HANDLE || channel == STD_ERROR_HANDLE);
+	ASSERT(buffer);
+	ASSERT(count > 0);
+	if (count == 0)
+		return 0;
 
 	//fprintf(stderr, "stdout_write: %d bytes, %p\n", (int)count, buffer);
 	unsigned char* p = (unsigned char*)buffer;
@@ -356,7 +370,11 @@ file_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
 	int n = fseeko(file, off, whence);
 #endif
 	if (n < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fseek: %s", strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fseek: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 }
 
 static int64_t
@@ -369,7 +387,11 @@ file_tell(fz_context *ctx, void *opaque)
 	int64_t off = ftello(file);
 #endif
 	if (off == -1)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot ftell: %s", strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot ftell: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 	return off;
 }
 
@@ -377,22 +399,35 @@ static void
 file_close(fz_context* ctx, void* opaque)
 {
 	FILE* file = (FILE*)opaque;
-	int n = 0;
+	ASSERT(file);
 	if (file)
-		n = fclose(file);
-	if (n < 0)
-		fz_warn(ctx, "cannot fclose: %s", strerror(errno));
+	{
+		int n = fclose(file);
+		if (n < 0)
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			fz_warn(ctx, "cannot fclose: %s (%s)", fz_ctx_get_system_errormsg(ctx), out->filepath);
+		}
+	}
 }
 
 static void
 file_drop(fz_context *ctx, void *opaque)
 {
 	FILE *file = (FILE *)opaque;
-	int n = 0;
 	if (file)
-		n = fclose(file);
-	if (n < 0)
-		fz_warn(ctx, "cannot fclose: %s", strerror(errno));
+	{
+		int n = fclose(file);
+		if (n < 0)
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			fz_warn(ctx, "cannot drop/close file: %s (%s)", fz_ctx_get_system_errormsg(ctx), out->filepath);
+			// accept our loss.
+			out->state = NULL;
+		}
+	}
 }
 
 static fz_stream *
@@ -406,19 +441,50 @@ file_as_stream(fz_context *ctx, void *opaque)
 static void file_truncate(fz_context *ctx, void *opaque)
 {
 	FILE *file = opaque;
-	fflush(file);
+	if (fflush(file))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return;
+	}
 
 #ifdef _WIN32
 	{
 		__int64 pos = _ftelli64(file);
+		if (pos < 0)
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			return;
+		}
 		if (pos >= 0)
-			_chsize_s(fileno(file), pos);
+		{
+			if (_chsize_s(fileno(file), pos))
+			{
+				fz_copy_ephemeral_errno(ctx);
+				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				return;
+			}
+		}
 	}
 #else
 	{
 		off_t pos = ftello(file);
+		if (pos < 0)
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			return;
+		}
 		if (pos >= 0)
-			(void)ftruncate(fileno(file), pos);
+		{
+			if (ftruncate(fileno(file), pos))
+			{
+				fz_copy_ephemeral_errno(ctx);
+				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				return;
+			}
+		}
 	}
 #endif
 }
@@ -637,8 +703,14 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	if (!append)
 	{
 		if (fz_remove_utf8(ctx, filename) < 0)
-			if (errno != ENOENT)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot remove file '%s': %s", filename, strerror(errno));
+		{
+			int ec = fz_ctx_get_rtl_errno(ctx);
+			if (ec != ENOENT)
+			{
+				ASSERT(ec != 0);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot remove file '%s': %s", filename, fz_ctx_pop_system_errormsg(ctx));
+			}
+		}
 	}
 #if defined(__MINGW32__) || defined(__MINGW64__)
 	file = fz_fopen_utf8(ctx, filename, append ? "rb+" : "wb+"); /* 'x' flag not supported. */
@@ -648,12 +720,14 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	if (append)
 	{
 		if (file == NULL)
+		{
 			file = fz_fopen_utf8(ctx, filename, "wb+");
+		}
 		else
 			fseek(file, 0, SEEK_END);
 	}
 	if (!file)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file '%s': %s", filename, strerror(errno));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file '%s': %s", filename, fz_ctx_pop_system_errormsg(ctx));
 
 	setvbuf(file, NULL, _IONBF, 0); /* we do our own buffering */
 	out = fz_new_output(ctx, 8192, file, file_write, file_close, file_drop);
@@ -676,7 +750,7 @@ buffer_write(fz_context *ctx, void *opaque, const void *data, size_t len)
 static void
 buffer_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
 {
-	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek in buffer: %s", strerror(errno));
+	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek in buffer");
 }
 
 static int64_t
@@ -760,7 +834,11 @@ fz_seek_output(fz_context* ctx, fz_output* out, int64_t off, int whence)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot seek in unseekable output stream");
 
 	fz_flush_output(ctx, out);
-	out->seek(ctx, out->state, off, whence);
+	int rv = out->seek(ctx, out->state, off, whence);
+	if (rv)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to seek to specified position in this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 }
 
 int64_t
@@ -771,9 +849,13 @@ fz_tell_output(fz_context *ctx, fz_output *out)
 
 	int64_t pos = out->tell(ctx, out->state);
 	fzoutput_lock(out);
-	if (out->bp)
+	if (out->bp && pos >= 0)
 		pos += (out->wp - out->bp);
 	fzoutput_unlock(out);
+	if (pos < 0)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to tell cursor position in this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 	return pos;
 }
 
@@ -792,7 +874,11 @@ fz_truncate_output(fz_context *ctx, fz_output *out)
 	if (out->truncate == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot truncate this output stream");
 	fz_flush_output(ctx, out);
-	out->truncate(ctx, out->state);
+	int rv = out->truncate(ctx, out->state);
+	if (rv)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to truncate this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 }
 
 static void

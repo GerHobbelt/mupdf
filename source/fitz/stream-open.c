@@ -36,10 +36,16 @@ int
 fz_file_exists(fz_context *ctx, const char *path)
 {
 	FILE *file;
+	// any error that happens in here should remain hidden:
+	fz_push_system_error(ctx);
+
 	file = fz_fopen_utf8(ctx, path, "rb");
 	int e = !!file;
 	if (file)
 		fclose(file);
+
+	// 'restore' the system error state as it was before this call.
+	fz_pop_system_error(ctx);
 	return e;
 }
 
@@ -113,7 +119,11 @@ static int next_file(fz_context *ctx, fz_stream *stm, size_t n)
 	/* n is only a hint, that we can safely ignore */
 	n = fread(state->buffer, 1, sizeof(state->buffer), state->file); //-V763
 	if (n < sizeof(state->buffer) && ferror(state->file))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "read error: %s", strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "read error: %s", fz_ctx_pop_system_errormsg(ctx));
+	}
 	stm->rp = state->buffer;
 	stm->wp = state->buffer + n;
 	stm->pos += (int64_t)n;
@@ -132,7 +142,11 @@ static void seek_file(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 	int64_t n = fseeko(state->file, offset, whence);
 #endif
 	if (n < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek: %s", strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek: %s", fz_ctx_pop_system_errormsg(ctx));
+	}
 #ifdef _WIN32
 	stm->pos = _ftelli64(state->file);
 #else
@@ -145,9 +159,17 @@ static void seek_file(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 static void drop_file(fz_context *ctx, void *state_)
 {
 	fz_file_stream *state = state_;
-	int n = fclose(state->file);
-	if (n < 0)
-		fz_warn(ctx, "close error: %s", strerror(errno));
+	if (state->file)
+	{
+		int n = fclose(state->file);
+		if (n < 0)
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			fz_warn(ctx, "close error: %s", fz_ctx_get_system_errormsg(ctx));
+		}
+		state->file = NULL;
+	}
 	fz_free(ctx, state);
 }
 
@@ -178,7 +200,7 @@ fz_open_file(fz_context *ctx, const char *name)
 	FILE *file;
 	file = fz_fopen_utf8(ctx, name, "rb");
 	if (file == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, strerror(errno));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, fz_ctx_pop_system_errormsg(ctx));
 	return fz_open_file_ptr(ctx, file);
 }
 
@@ -188,7 +210,11 @@ fz_open_file_w(fz_context *ctx, const wchar_t *name)
 {
 	FILE *file = _wfopen(name, L"rb");
 	if (file == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file %ls: %s", name, strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file %ls: %s", name, fz_ctx_pop_system_errormsg(ctx));
+	}
 	return fz_open_file_ptr(ctx, file);
 }
 #endif

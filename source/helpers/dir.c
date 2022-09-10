@@ -691,15 +691,15 @@ static int fz_UNC_wfullpath_from_name(wchar_t dstbuf[PATH_MAX], const char* path
 
 	if (!MultiByteToWideChar(CP_UTF8, 0, path, -1, wpath, PATH_MAX))
 	{
-		DWORD ec = GetLastError();
-		errno = ENAMETOOLONG;
-		return ec;
+		fz_copy_ephemeral_system_error(ctx, GetLastError(), NULL);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
 	}
 	if (!GetFullPathNameW(wpath, PATH_MAX, wbuf + 4, NULL))
 	{
-		DWORD ec = GetLastError();
-		errno = ENAMETOOLONG;
-		return ec;
+		fz_copy_ephemeral_system_error(ctx, GetLastError(), NULL);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
 	}
 	const wchar_t* fp = wbuf + 4;
 	// Is full path an UNC path already? If not, make it so:
@@ -715,7 +715,7 @@ static int fz_UNC_wfullpath_from_name(wchar_t dstbuf[PATH_MAX], const char* path
 	{
 		wcsncpy(dstbuf, wbuf + 4, PATH_MAX);
 	}
-	return E_OK;
+	return 0;
 }
 
 #endif
@@ -727,7 +727,7 @@ int fz_chdir(fz_context* ctx, const char *path)
 
 	if (fz_UNC_wfullpath_from_name(wname, path))
 	{
-		return errno || ENOMEM;
+		return -1;
 	}
 
 	// remove trailing / dir separator, if any...
@@ -743,27 +743,17 @@ int fz_chdir(fz_context* ctx, const char *path)
 	if (chdir(path))
 #endif
 	{
-		int e = errno;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 
-		if (ctx)
+		if (fz_ctx_get_rtl_errno(ctx) == ENOENT)
 		{
-			switch (e)
-			{
-			case ENOENT:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Unable to locate the directory: %s", path);
-				break;
-			case EINVAL:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Invalid buffer.");
-				break;
-			default:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Unknown error %d: %s.", (int)e, strerror(e));
-				break;
-			}
+			fz_freplace_ephemeral_system_error(ctx, 0, "chdir: Unable to locate the directory: %s", path);
 		}
-		return errno;
+		return -1;
 	}
 
-	return E_OK;
+	return 0;
 }
 
 #if defined(_WIN32)
@@ -792,10 +782,10 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 		int rv = fz_mkdirp_utf8(ctx, buf);
 		if (rv)
 		{
-			rv = errno;
+			rv = fz_ctx_get_rtl_errno(ctx);
 			if (rv != EEXIST)
 			{
-				const char* errmsg = strerror(rv);
+				const char* errmsg = fz_ctx_get_system_errormsg(ctx);
 				fz_info(ctx, "mkdirp --> mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
 			}
 		}
@@ -841,11 +831,13 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 			int rv = mkdir(buf);
 			if (rv)
 			{
-				rv = errno;
+				fz_copy_ephemeral_errno(ctx);
+				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				rv = fz_ctx_get_rtl_errno(ctx);
 				if (rv != EEXIST)
 				{
-					const char* errmsg = strerror(rv);
-					fz_info(ctx, "mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
+					const char* errmsg = fz_ctx_get_system_errormsg(ctx);
+					fz_info(ctx, "mkdirp --> mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
 				}
 			}
 			*e = '/';
@@ -854,11 +846,13 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 			int rv = mkdir(buf);
 			if (rv)
 			{
-				rv = errno;
+				fz_copy_ephemeral_errno(ctx);
+				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				rv = fz_ctx_get_rtl_errno(ctx);
 				if (rv != EEXIST)
 				{
-					const char* errmsg = strerror(rv);
-					fz_info(ctx, "mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
+					const char* errmsg = fz_ctx_get_system_errormsg(ctx);
+					fz_info(ctx, "mkdirp --> mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
 				}
 			}
 		}
@@ -950,16 +944,18 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	wmode = fz_wchar_from_utf8(mode);
 	if (wmode == NULL)
 	{
-		errno = ENOMEM;
 		return NULL;
 	}
 
 	file = _wfopen(wname, wmode);
-	int e = errno;
+	if (!file)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	}
 
 	free(wmode);
 
-	errno = e;
 	return file;
 }
 
@@ -975,6 +971,11 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 	}
 
 	n = _wremove(wname);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	}
 
 	return n;
 }
@@ -1003,6 +1004,8 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 		d = q + wcslen(q);
 	}
 
+	int rv = 0;
+
 	for(;;)
 	{
 		wchar_t c = *d;
@@ -1010,9 +1013,11 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 
 		int n = _wmkdir(wname);
 		int e = errno;
-		if (n && e != EEXIST && e != EACCES)
+		if (n && e != EEXIST)
 		{
-			return -1;
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			rv = -1;
 		}
 		*d = c;
 		// did we reach the end of the *original* path spec?
@@ -1025,10 +1030,12 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 			d += wcslen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
 	}
 
-	return 0;
+	return rv;
 }
 
 #else
+
+// TODO: code review re ephemeral errorcode handling
 
 FILE*
 fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
@@ -1036,16 +1043,27 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	if (name == NULL)
 	{
 		errno = EINVAL;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return NULL;
 	}
 
 	if (mode == NULL)
 	{
 		errno = EINVAL;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return NULL;
 	}
 
-	return fopen(name, mode);
+	FILE *rv = fopen(name, mode);
+	if (!rv)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return NULL;
+	}
+	return rv;
 }
 
 int
@@ -1054,10 +1072,19 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 	if (name == NULL)
 	{
 		errno = EINVAL;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return -1;
 	}
 
-	return remove(name);
+	int rv = remove(name);
+	if (rv)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
+	}
+	return 0;
 }
 
 int
@@ -1090,8 +1117,9 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 		int e = errno;
 		if (n && e != EEXIST && e != EACCES)
 		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 			free(pname);
-			errno = e;
 			return -1;
 		}
 		*d = c;
