@@ -2865,7 +2865,7 @@ retry_after_repair:
 	}
 	fz_catch(ctx)
 	{
-		/* If we hit a repair while synthesising, we need to give it another
+		/* If we hit a repair while synthesizing, we need to give it another
 		 * go. Do that directly here, rather than waiting for the next time
 		 * we are called, because we don't want to risk discarding any
 		 * local_xrefs on the second pass through the list of annotations.
