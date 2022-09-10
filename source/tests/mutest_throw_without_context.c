@@ -1,6 +1,4 @@
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/fitz.h"
 #include "mupdf/assertions.h"
 

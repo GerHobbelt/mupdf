@@ -5,13 +5,12 @@
 // *Ideally*, tool should be able to overlay *any* PDF with (edited? modified?) content layer.
 //
 
-#include "mupdf/helpers/system-header-files.h"
-
 #pragma message("TODO: implement this tool")
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/system-header-files.h"
 
 #include <string.h>
 #include <ctype.h>

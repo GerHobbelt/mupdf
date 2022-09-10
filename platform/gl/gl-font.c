@@ -33,7 +33,6 @@
  * function with an orthogonal transform that maps units
  * to pixels accurately.
  */
-#include "mupdf/helpers/system-header-files.h"
 
 #include "gl-app.h"
 

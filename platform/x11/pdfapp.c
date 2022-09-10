@@ -1,6 +1,4 @@
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "pdfapp.h"
 #include "curl_stream.h"
 #include "mupdf/helpers/pkcs7-openssl.h"

@@ -1,12 +1,11 @@
 ﻿
-#include "mupdf/helpers/system-header-files.h"
-
-#include "timeval.h"
-
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
 #include "mupdf/assertions.h"
 #include "mupdf/helpers/mu-threads.h"
+#include "mupdf/helpers/system-header-files.h"
+
+#include "timeval.h"
 
 #include "jbig2.h"
 
