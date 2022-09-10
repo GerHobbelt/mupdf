@@ -751,9 +751,15 @@ gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int 
 		{
 			pdf_obj *obj = pdf_dict_get_val(ctx, font, i);
 
+			/* stop on cyclic resource dependencies */
+			if (pdf_mark_list_push(ctx, mark_list, obj))
+				return;
+
 			subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
 			if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
+			{
 				gatherresourceinfo(ctx, mark_list, glo, page, subrsrc, show);
+			}
 		}
 	}
 
@@ -773,9 +779,16 @@ gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int 
 		for (i = 0; i < n; i++)
 		{
 			pdf_obj *obj = pdf_dict_get_val(ctx, xobj, i);
+
+			/* stop on cyclic resource dependencies */
+			if (pdf_mark_list_push(ctx, mark_list, obj))
+				return;
+
 			subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
 			if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
+			{
 				gatherresourceinfo(ctx, mark_list, glo, page, subrsrc, show);
+			}
 		}
 	}
 
@@ -792,9 +805,16 @@ gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int 
 		for (i = 0; i < n; i++)
 		{
 			pdf_obj *obj = pdf_dict_get_val(ctx, pattern, i);
+
+			/* stop on cyclic resource dependencies */
+			if (pdf_mark_list_push(ctx, mark_list, obj))
+				return;
+
 			subrsrc = pdf_dict_get(ctx, obj, PDF_NAME(Resources));
 			if (subrsrc && pdf_objcmp(ctx, rsrc, subrsrc))
+			{
 				gatherresourceinfo(ctx, mark_list, glo, page, subrsrc, show);
+			}
 		}
 
 		gatherlayersinfo(ctx, glo);
