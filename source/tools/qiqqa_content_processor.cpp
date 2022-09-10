@@ -8,11 +8,10 @@
 // managed by Qiqqa: the PDFs (documents) and all metadata both.
 //
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/system-header-files.h"
 
 #include <string.h>
 #include <ctype.h>

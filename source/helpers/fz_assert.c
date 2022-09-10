@@ -1,8 +1,7 @@
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/fitz.h"
 #include "mupdf/assertions.h"
+#include "mupdf/helpers/system-header-files.h"
 
 #if defined(_WIN32)
 #include <windows.h>

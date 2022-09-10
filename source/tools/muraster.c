@@ -158,16 +158,15 @@
 	END OF CONFIGURATION SECTION
 */
 
-#include "mupdf/helpers/system-header-files.h"
-
-#include "timeval.h"
-
 #include "mupdf/fitz.h"
 #include "mupdf/mutool.h"
 #include "mupdf/helpers/dir.h"
 #include "mupdf/assertions.h"
 #include "mupdf/helpers/mu-threads.h"
 #include "mupdf/helpers/cpu.h"
+#include "mupdf/helpers/system-header-files.h"
+
+#include "timeval.h"
 
 #include <string.h>
 #include <stdlib.h>

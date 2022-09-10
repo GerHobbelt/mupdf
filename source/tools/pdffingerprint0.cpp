@@ -31,11 +31,10 @@
 // Qiqqa metadata libraries from a C/C++/anything environment.
 //
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/system-header-files.h"
 
 #include <cryptopp/sha.h>
 #include <cryptopp/filters.h>

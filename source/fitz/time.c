@@ -20,9 +20,9 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/fitz.h"
+
+#include "mupdf/helpers/system-header-files.h"
 
 #ifdef _WIN32
 

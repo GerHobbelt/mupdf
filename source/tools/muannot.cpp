@@ -2,11 +2,10 @@
 // PDF Annotations tool for Qiqqa: Extract / Inject annotations
 //
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/system-header-files.h"
 
 #include <string.h>
 #include <ctype.h>

@@ -24,13 +24,13 @@
  * mudraw -- command line tool for drawing and converting documents
  */
 
-#include "mupdf/helpers/system-header-files.h"
-
-#include "timeval.h"
-
 #include "mupdf/fitz.h"
 #include "mupdf/mutool.h"
 #include "mupdf/assertions.h"
+
+#include "mupdf/helpers/system-header-files.h"
+
+#include "timeval.h"
 
 #if FZ_ENABLE_PDF
 #include "mupdf/pdf.h" /* for pdf output */
@@ -1672,6 +1672,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_drop_output(ctx, out);
 			out = NULL;
 		}
+
 		fz_format_output_path(ctx, text_buffer, sizeof text_buffer, output, pagenum);
 		fz_normalize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);
 		fz_sanitize_path(ctx, text_buffer, sizeof text_buffer, text_buffer);

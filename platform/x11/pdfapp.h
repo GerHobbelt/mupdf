@@ -23,8 +23,6 @@
 #ifndef PDFAPP_H
 #define PDFAPP_H
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 

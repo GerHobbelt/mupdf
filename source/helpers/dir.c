@@ -1,8 +1,7 @@
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/system-header-files.h"
 #include "utf.h"
 
 #ifdef _MSC_VER

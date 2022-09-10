@@ -3,11 +3,11 @@
 // The source is assumed to be a Qiqqa v2 fingerprint hash for a given input file (PDF)
 //
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/system-header-files.h"
+
 #include "blake3.h"
 #include "../helpers/base58/base58X.h"
 

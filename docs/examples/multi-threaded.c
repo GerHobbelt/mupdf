@@ -33,8 +33,6 @@ depending on your environment.
 
 //Include the MuPDF header files, and pthread's header file.
 
-#include "mupdf/helpers/system-header-files.h"
-
 #include <mupdf/mutool.h>
 #include <mupdf/fitz.h>
 #include <mupdf/helpers/mu-threads.h>
