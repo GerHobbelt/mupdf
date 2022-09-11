@@ -613,17 +613,24 @@ const char *fz_caught_message(fz_context *ctx)
 void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, const char* errormessage, int category_code, int errorcode_mask)
 {
 	// do not replace any existing errorcode! First comer is the winner!
-	if (ctx->error.system_errcode)
-		return;
+	int idx = ctx->error.system_errdepth;
+	if (ctx->error.system_errcode[idx])
+	{
+		++idx;
+		if (idx > 3)
+			idx = 3;
+		// except that the LAST level will always carry the LATEST error...
+		ctx->error.system_errdepth = idx;
+	}
 
 	if (errorcode == 0)
 		errorcode = -1; // unknown/unidentified error.
 
 	// keep a copy of the ephemeral system error code:
-	ctx->error.system_errcode = category_code | (errorcode & errorcode_mask);
+	ctx->error.system_errcode[idx] = category_code | (errorcode & errorcode_mask);
 
 	const char* category_lead_msg = (category_code == FZ_ERROR_C_RTL_SERIES ? "rtl error: " : "system error: ");
-	fz_strncpy_s(ctx, ctx->error.system_error_message, category_lead_msg, sizeof(ctx->error.system_error_message));
+	fz_strncpy_s(ctx, ctx->error.system_error_message[idx], category_lead_msg, sizeof(ctx->error.system_error_message[idx]));
 
 	if (!errormessage || !errormessage[0])
 	{
@@ -638,8 +645,8 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 			else
 			{
 #if defined(_WIN32)
-				size_t offset = strlen(ctx->error.system_error_message);
-				FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, NULL);
+				size_t offset = strlen(ctx->error.system_error_message[idx]);
+				FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, NULL);
 				return;
 #endif
 			}
@@ -647,29 +654,30 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 
 		if (!errormessage || !errormessage[0])
 		{
-			size_t offset = strlen(ctx->error.system_error_message);
+			size_t offset = strlen(ctx->error.system_error_message[idx]);
 
 			if (errorcode < 0xFFFF)
-				fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code %d", errorcode);
+				fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code %d", errorcode);
 			else
 				// some segmented errorcode: dumnp as HEX value!
-				fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code 0x%08x", errorcode);
+				fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code 0x%08x", errorcode);
 			return;
 		}
 	}
 
-	fz_strncat_s(ctx, ctx->error.system_error_message, errormessage, sizeof(ctx->error.system_error_message));
+	fz_strncat_s(ctx, ctx->error.system_error_message[idx], errormessage, sizeof(ctx->error.system_error_message[idx]));
 }
 
 
 void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const char* errormessage)
 {
 	// brutally replace any existing errorcode!
+	int idx = ctx->error.system_errdepth;
 
 	if (errorcode != 0)
 	{
 		// keep a copy of the ephemeral system error code:
-		ctx->error.system_errcode = errorcode;
+		ctx->error.system_errcode[idx] = errorcode;
 
 		// check if the user also gave us a custom error message; if not, we'll fetch a system-level message instead.
 		// 
@@ -681,7 +689,7 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 			if (!errormessage[0])
 			{
 				const char* category_lead_msg = (fz_is_rtl_error(errorcode) ? "rtl error: " : "system error: ");
-				fz_strncpy_s(ctx, ctx->error.system_error_message, category_lead_msg, sizeof(ctx->error.system_error_message));
+				fz_strncpy_s(ctx, ctx->error.system_error_message[idx], category_lead_msg, sizeof(ctx->error.system_error_message[idx]));
 
 				if (errorcode == -1)
 					errormessage = "unknown/unidentified error";
@@ -694,8 +702,8 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 					else
 					{
 #if defined(_WIN32)
-						size_t offset = strlen(ctx->error.system_error_message);
-						FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, NULL);
+						size_t offset = strlen(ctx->error.system_error_message[idx]);
+						FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, NULL);
 						return;
 #endif
 					}
@@ -703,17 +711,17 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 
 				if (!errormessage || !errormessage[0])
 				{
-					size_t offset = strlen(ctx->error.system_error_message);
+					size_t offset = strlen(ctx->error.system_error_message[idx]);
 					if (errorcode < 0xFFFF)
-						fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code %d", errorcode);
+						fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code %d", errorcode);
 					else
 						// some segmented errorcode: dumnp as HEX value!
-						fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code 0x%08x", errorcode);
+						fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code 0x%08x", errorcode);
 					return;
 				}
 			}
 
-			fz_strncpy_s(ctx, ctx->error.system_error_message, errormessage, sizeof(ctx->error.system_error_message));
+			fz_strncpy_s(ctx, ctx->error.system_error_message[idx], errormessage, sizeof(ctx->error.system_error_message[idx]));
 		}
 	}
 	else
@@ -721,7 +729,7 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 		// ONLY non-empty error message overrides. We don't do defaults here as the `replace` API is intended for explicit overrides only!
 		if (errormessage != NULL && errormessage[0])
 		{
-			fz_strncpy_s(ctx, ctx->error.system_error_message, errormessage, sizeof(ctx->error.system_error_message));
+			fz_strncpy_s(ctx, ctx->error.system_error_message[idx], errormessage, sizeof(ctx->error.system_error_message[idx]));
 		}
 	}
 }

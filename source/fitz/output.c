@@ -109,11 +109,13 @@ static void analyze_and_improve_fwrite_error(fz_context* ctx, fz_output* out, si
 		int64_t delta = fourgb - pos;
 
 		fz_snprintf(msg, sizeof msg, "\n    Analysis: looks like you're near the magic 4GByte file size boundary so this may just be your run-time library or filesystem giving up on writing any file larger than %lld bytes (this file is reported as currently %lld bytes, which is %lld bytes removed from that 4GB boundary).", fourgb, pos, delta);
-		fz_strncat_s(ctx, ctx->error.system_error_message, msg, sizeof(ctx->error.system_error_message));
+
+		int idx = ctx->error.system_errdepth;
+		fz_strncat_s(ctx, ctx->error.system_error_message[idx], msg, sizeof(ctx->error.system_error_message[idx]));
 	}
 }
 
-static void
+static int
 file_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
 	ASSERT(out);
@@ -122,7 +124,7 @@ file_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 
 	ASSERT(file);
 	if (count == 0)
-		return;
+		return 0;
 
 	if (count == 1)
 	{
@@ -132,24 +134,25 @@ file_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 			fz_copy_ephemeral_errno(ctx);
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 			analyze_and_improve_fwrite_error(ctx, out, count);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (%s)", fz_ctx_get_system_errormsg(ctx), out->filepath);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
 		}
-		return;
+		return 0;
 	}
 
 	n = fwrite(buffer, 1, count, file);
-	if (n < count && ferror(file))
+	if (n < count)
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		analyze_and_improve_fwrite_error(ctx, out, count - n);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes) (%s)", fz_ctx_get_system_errormsg(ctx), n, count, out->filepath);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes) (%s)", fz_ctx_pop_system_errormsg(ctx), n, count, out->filepath);
 	}
+	return 0;
 }
 
 #if defined(_WIN32) 
 
-static void
+static int
 stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 {
 	// Windows: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefile#pipes
@@ -160,7 +163,7 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 	ASSERT(buffer);
 	ASSERT(count > 0);
 	if (count == 0)
-		return;
+		return 0;
 
 	//fprintf(stderr, "stdout_write: %d bytes, %p\n", (int)count, buffer);
 	unsigned char* p = (unsigned char*)buffer;
@@ -231,17 +234,18 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 			SleepEx(2, TRUE);
 		}
 	}
+	return 0;
 }
 
 #endif
 
-static void
+static int
 stdout_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
 #ifdef _WIN32
-	stdio_write(ctx, STD_OUTPUT_HANDLE, buffer, count);
+	return stdio_write(ctx, STD_OUTPUT_HANDLE, buffer, count);
 #else
-	file_write(ctx, stdout, buffer, count);
+	return file_write(ctx, stdout, buffer, count);
 #endif
 }
 
@@ -277,13 +281,13 @@ fz_output *fz_stdout(fz_context *ctx)
 	return &fz_stdout_global;
 }
 
-static void
+static int
 stderr_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
 #ifdef _WIN32
-	stdio_write(ctx, STD_ERROR_HANDLE, buffer, count);
+	return stdio_write(ctx, STD_ERROR_HANDLE, buffer, count);
 #else
-	file_write(ctx, stderr, buffer, count);
+	return file_write(ctx, stderr, buffer, count);
 #endif
 }
 
@@ -321,7 +325,7 @@ fz_output *fz_stderr(fz_context *ctx)
 
 #ifdef _WIN32
 
-static void
+static int
 stdods_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
 	// Assume that the heap MAY be corrupted when we call into here.
@@ -339,6 +343,8 @@ stdods_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 
 	if (buf != stkbuf)
 		fz_free(ctx, buf);
+
+	return 0;
 }
 
 static void
@@ -371,7 +377,7 @@ fz_output *fz_stdods(fz_context *ctx)
 
 //#include <android/log.h>
 
-static void
+static int
 stdods_write(fz_context* ctx, fz_output* out, const void* buffer, size_t count)
 {
 	// Assume that the heap MAY be corrupted when we call into here.
@@ -397,6 +403,8 @@ stdods_write(fz_context* ctx, fz_output* out, const void* buffer, size_t count)
 
 	if (buf != stkbuf)
 		fz_free(ctx, buf);
+
+	return 0;
 }
 
 static void
@@ -457,7 +465,7 @@ void fz_set_stddbg(fz_context *ctx, fz_output *out)
 	ctx->stddbg = out;
 }
 
-static void
+static int
 file_seek(fz_context *ctx, fz_output* out, int64_t off, int whence)
 {
 	FILE *file = out->state;
@@ -471,8 +479,9 @@ file_seek(fz_context *ctx, fz_output* out, int64_t off, int whence)
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fseek: %s (%s)", fz_ctx_get_system_errormsg(ctx), out->filepath);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fseek: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
 	}
+	return 0;
 }
 
 static int64_t
@@ -489,7 +498,7 @@ file_tell(fz_context *ctx, fz_output* out)
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot ftell: %s (%s)", fz_ctx_get_system_errormsg(ctx), out->filepath);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot ftell: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
 	}
 	return off;
 }
@@ -548,11 +557,16 @@ file_as_stream(fz_context *ctx, fz_output* out)
 	return fz_open_file_ptr_no_close(ctx, file);
 }
 
-static void file_truncate(fz_context* ctx, fz_output* out)
+static int file_truncate(fz_context* ctx, fz_output* out)
 {
 	FILE* file = out->state;
 	ASSERT(file);
-	fflush(file);
+	if (fflush(file))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
+	}
 
 #ifdef _WIN32
 	{
@@ -561,6 +575,7 @@ static void file_truncate(fz_context* ctx, fz_output* out)
 		{
 			fz_copy_ephemeral_errno(ctx);
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			return -1;
 		}
 		if (pos >= 0)
 		{
@@ -568,6 +583,7 @@ static void file_truncate(fz_context* ctx, fz_output* out)
 			{
 				fz_copy_ephemeral_errno(ctx);
 				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				return -1;
 			}
 		}
 	}
@@ -578,6 +594,7 @@ static void file_truncate(fz_context* ctx, fz_output* out)
 		{
 			fz_copy_ephemeral_errno(ctx);
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			return -1;
 		}
 		if (pos >= 0)
 		{
@@ -585,10 +602,12 @@ static void file_truncate(fz_context* ctx, fz_output* out)
 			{
 				fz_copy_ephemeral_errno(ctx);
 				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				return -1;
 			}
 		}
 	}
 #endif
+	return 0;
 }
 
 static int safe_output_mode = 0;
@@ -758,16 +777,19 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 	return rv;
 }
 
-static void null_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
+static int null_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
+	return 0;
 }
 
-static void null_seek(fz_context* ctx, fz_output* out, int64_t offset, int whence)
+static int null_seek(fz_context* ctx, fz_output* out, int64_t offset, int whence)
 {
+	return 0;
 }
 
-static void null_truncate(fz_context* ctx, fz_output* out)
+static int null_truncate(fz_context* ctx, fz_output* out)
 {
+	return 0;
 }
 
 
@@ -797,7 +819,6 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 		return fz_stdout(ctx);
 	}
 
-	fz_clear_system_error(ctx);
 	fz_mkdir_for_file(ctx, filename);
 
 	/* If <append> is false, we use fopen()'s 'x' flag to force an error if
@@ -811,15 +832,16 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	/* Ensure we create a brand new file. We don't want to clobber our old file. */
 	if (!append)
 	{
-		fz_clear_system_error(ctx);
 		if (fz_remove_utf8(ctx, filename) < 0)
 		{
 			int ec = fz_ctx_get_rtl_errno(ctx);
 			if (ec != ENOENT)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot remove file '%s': %s", filename, fz_ctx_get_system_errormsg(ctx));
+			{
+				ASSERT(ec != 0);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot remove file '%s': %s", filename, fz_ctx_pop_system_errormsg(ctx));
+			}
 		}
 	}
-	fz_clear_system_error(ctx);
 #if defined(__MINGW32__) || defined(__MINGW64__)
 	file = fz_fopen_utf8(ctx, filename, append ? "rb+" : "wb+"); /* 'x' flag not supported. */
 #else
@@ -829,14 +851,13 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	{
 		if (file == NULL)
 		{
-			fz_clear_system_error(ctx);
 			file = fz_fopen_utf8(ctx, filename, "wb+");
 		}
 		else
 			fseek(file, 0, SEEK_END);
 	}
 	if (!file)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file '%s': %s", filename, fz_ctx_get_system_errormsg(ctx));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file '%s': %s", filename, fz_ctx_pop_system_errormsg(ctx));
 
 	setvbuf(file, NULL, _IONBF, 0); /* we do our own buffering */
 	out = fz_new_output(ctx, 8192, file, file_write, file_close, file_drop);
@@ -849,17 +870,19 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	return out;
 }
 
-static void
+static int
 buffer_write(fz_context *ctx, fz_output* out, const void *data, size_t len)
 {
 	fz_buffer *buffer = out->state;
 	fz_append_data(ctx, buffer, data, len);
+	return 0;
 }
 
-static void
+static int
 buffer_seek(fz_context *ctx, fz_output* out, int64_t off, int whence)
 {
-	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek in buffer: %s", strerror(errno));
+	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek in buffer");
+	return -1;	// unreachable code
 }
 
 static int64_t
@@ -942,8 +965,14 @@ fz_seek_output(fz_context* ctx, fz_output* out, int64_t off, int whence)
 	if (out->seek == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot seek in unseekable output stream");
 
-	fz_flush_output(ctx, out);
-	out->seek(ctx, out, off, whence);
+	fzoutput_lock(out);
+	fz_flush_output_no_lock(ctx, out);
+	int rv = out->seek(ctx, out, off, whence);
+	fzoutput_unlock(out);
+	if (rv)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to seek to specified position in this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 }
 
 int64_t
@@ -954,9 +983,13 @@ fz_tell_output(fz_context *ctx, fz_output *out)
 
 	fzoutput_lock(out);
 	int64_t pos = out->tell(ctx, out);
-	if (out->bp)
+	if (out->bp && pos >= 0)
 		pos += (out->wp - out->bp);
 	fzoutput_unlock(out);
+	if (pos < 0)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to tell cursor position in this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 	return pos;
 }
 
@@ -965,8 +998,11 @@ fz_stream_from_output(fz_context *ctx, fz_output *out)
 {
 	if (out->as_stream == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot derive input stream from output stream");
-	fz_flush_output(ctx, out);
-	return out->as_stream(ctx, out);
+	fzoutput_lock(out);
+	fz_flush_output_no_lock(ctx, out);
+	fz_stream *rv = out->as_stream(ctx, out);
+	fzoutput_unlock(out);
+	return rv;
 }
 
 void
@@ -974,8 +1010,14 @@ fz_truncate_output(fz_context *ctx, fz_output *out)
 {
 	if (out->truncate == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot truncate this output stream");
-	fz_flush_output(ctx, out);
-	out->truncate(ctx, out);
+	fzoutput_lock(out);
+	fz_flush_output_no_lock(ctx, out);
+	int rv = out->truncate(ctx, out);
+	fzoutput_unlock(out);
+	if (rv)
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to truncate this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
+	}
 }
 
 static void

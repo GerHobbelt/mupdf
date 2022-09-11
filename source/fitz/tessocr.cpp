@@ -75,7 +75,6 @@ static bool
 load_file(const char* filename, std::vector<char>* data)
 {
 	bool result = false;
-	fz_clear_system_error(leptonica_mem);
 	FILE *fp = fz_fopen_utf8(leptonica_mem, filename, "rb");
 	if (fp == NULL)
 		return false;
@@ -114,7 +113,6 @@ static bool
 load_file(const char* filename, GenericVector<char>* data)
 {
 	bool result = false;
-	fz_clear_system_error(ctx);
 	FILE *fp = fz_fopen_utf8(ctx, filename, "rb");
 	if (fp == NULL)
 		return false;

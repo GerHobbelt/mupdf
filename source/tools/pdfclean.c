@@ -34,6 +34,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <stdlib.h>

@@ -822,13 +822,16 @@ typedef struct
     int errcode;
     // See fz_rethrow() code comments for the complete story:
     int last_nonzero_errcode;
+
     // This (together with the `system_error_message` member) stores the last **system error**
     // which was encountered in the fz_xxxxxxx() functions.
-    int system_errcode;
+    int system_errcode[3];   // first/nested/last
+    int system_errdepth;
+
     void *print_user;
     fz_error_print_callback *print;
     char message[LONGLINE];
-    char system_error_message[LONGLINE];
+    char system_error_message[3][LONGLINE];
 } fz_error_context;
 
 typedef struct
@@ -937,8 +940,40 @@ void fz_vreplace_ephemeral_system_error(fz_context *ctx, int errorcode, const ch
 
 static inline void fz_clear_system_error(fz_context *ctx)
 {
-    ctx->error.system_errcode = 0;
-    ctx->error.system_error_message[0] = 0;
+    ctx->error.system_errcode[0] = 0;
+    ctx->error.system_errcode[1] = 0;
+    ctx->error.system_errcode[2] = 0;
+    ctx->error.system_error_message[0][0] = 0;
+    ctx->error.system_error_message[1][0] = 0;
+    ctx->error.system_error_message[2][0] = 0;
+    ctx->error.system_errdepth = 0;
+}
+
+static inline void fz_pop_system_error(fz_context *ctx)
+{
+    int idx = ctx->error.system_errdepth;
+
+    // DO NOT clear a message what isn't used any more: this is the secret sauce that helps make
+    // `fz_ctx_pop_system_errormsg()` work!
+    // 
+    ctx->error.system_errcode[idx] = 0;
+    //ctx->error.system_error_message[idx][0] = 0;
+
+    --idx;
+    if (idx < 0)
+        idx = 0;
+    ctx->error.system_errdepth = idx;
+}
+
+static inline void fz_push_system_error(fz_context *ctx)
+{
+    int idx = ctx->error.system_errdepth + 1;
+    if (idx > 3)
+        idx = 3;
+    ctx->error.system_errdepth = idx;
+
+    ctx->error.system_errcode[idx] = 0;
+    ctx->error.system_error_message[idx][0] = 0;
 }
 
 
@@ -961,7 +996,8 @@ static inline int fz_is_rtl_error(int errorcode)
 ///  Return the ephemeral run-time-library error code stored in the `ctx` context.
 static inline int fz_ctx_get_generic_system_error(fz_context *ctx)
 {
-    return ctx->error.system_errcode;
+    int idx = ctx->error.system_errdepth;
+    return ctx->error.system_errcode[idx];
 }
 
 ///  Return 1 when the `ctx` stores an ephemeral system/run-time-library error code (& accompanying message)
@@ -1000,8 +1036,22 @@ static inline int fz_ctx_get_os_system_error(fz_context *ctx)
 static inline const char *fz_ctx_get_system_errormsg(fz_context *ctx)
 {
     if (fz_ctx_has_system_error(ctx))
-        return ctx->error.system_error_message;
+    {
+        int idx = ctx->error.system_errdepth;
+        return ctx->error.system_error_message[idx];
+    }
     return NULL;
+}
+
+// use this to mark a system error as handled, by feeding this message into an exception message, f.e.
+static inline const char *fz_ctx_pop_system_errormsg(fz_context *ctx)
+{
+    const char *msg = fz_ctx_get_system_errormsg(ctx);
+    fz_pop_system_error(ctx);
+    // while this might look positively fruity to you (fetch, then pop, then *still access previous fetch*,
+    // this is perfectly safe. This WILL, however, be the very last time you'll be able to look at that
+    // system error message; the accompanying system error *code* has already been popped = cleared!
+    return msg;
 }
 
 

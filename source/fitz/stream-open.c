@@ -37,19 +37,15 @@ fz_file_exists(fz_context *ctx, const char *path)
 {
 	FILE *file;
 	// any error that happens in here should remain hidden:
-	int ec = fz_ctx_get_generic_system_error(ctx);
+	fz_push_system_error(ctx);
+
 	file = fz_fopen_utf8(ctx, path, "rb");
 	int e = !!file;
 	if (file)
 		fclose(file);
+
 	// 'restore' the system error state as it was before this call.
-	//
-	// Note: we're being cheap about it as we *lost* any custom error
-	// message that went with that original system error...
-	if (ec)
-		fz_replace_ephemeral_system_error(ctx, ec, NULL);
-	else
-		fz_clear_system_error(ctx);
+	fz_pop_system_error(ctx);
 	return e;
 }
 
@@ -126,7 +122,7 @@ static int next_file(fz_context *ctx, fz_stream *stm, size_t n)
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "read error: %s", fz_ctx_get_system_errormsg(ctx));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "read error: %s", fz_ctx_pop_system_errormsg(ctx));
 	}
 	stm->rp = state->buffer;
 	stm->wp = state->buffer + n;
@@ -149,7 +145,7 @@ static void seek_file(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek: %s", fz_ctx_get_system_errormsg(ctx));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek: %s", fz_ctx_pop_system_errormsg(ctx));
 	}
 #ifdef _WIN32
 	stm->pos = _ftelli64(state->file);
@@ -217,7 +213,7 @@ fz_open_file(fz_context *ctx, const char *name)
 	FILE *file;
 	file = fz_fopen_utf8(ctx, name, "rb");
 	if (file == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, fz_ctx_get_system_errormsg(ctx));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, fz_ctx_pop_system_errormsg(ctx));
 	return fz_open_file_ptr(ctx, file);
 }
 
@@ -230,7 +226,7 @@ fz_open_file_w(fz_context *ctx, const wchar_t *name)
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file %ls: %s", name, fz_ctx_get_system_errormsg(ctx));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file %ls: %s", name, fz_ctx_pop_system_errormsg(ctx));
 	}
 	return fz_open_file_ptr(ctx, file);
 }
