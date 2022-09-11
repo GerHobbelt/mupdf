@@ -97,7 +97,7 @@ static void runpage(int number)
 
     fz_info(ctx, "processing page %d\n", number);
 
-    page = fz_load_page(ctx, doc, number - 1);
+    page = fz_load_page(ctx, doc, number - 1, cookie);
 
     fz_var(dev);
 
@@ -105,7 +105,7 @@ static void runpage(int number)
     {
         mediabox = fz_bound_page(ctx, page);
         dev = fz_begin_page(ctx, out, mediabox);
-        fz_run_page(ctx, page, dev, fz_identity, NULL);
+        fz_run_page(ctx, page, dev, fz_identity);
         fz_end_page(ctx, out);
     }
     fz_always(ctx)

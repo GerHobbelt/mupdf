@@ -30,7 +30,7 @@ struct ahx
 	int column;
 };
 
-static void ahx_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
+static int ahx_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
 {
 	static const char tohex[17] = "0123456789ABCDEF";
 	struct ahx *state = out->state;
@@ -47,6 +47,7 @@ static void ahx_write(fz_context *ctx, fz_output* out, const void *data, size_t 
 			state->column = 0;
 		}
 	}
+	return 0;
 }
 
 static void ahx_close(fz_context *ctx, fz_output* out)
@@ -138,7 +139,7 @@ static void a85_flush(fz_context *ctx, struct a85 *state)
 	state->n = 0;
 }
 
-static void a85_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
+static int a85_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
 {
 	struct a85 *state = out->state;
 	const unsigned char *p = data;
@@ -150,6 +151,7 @@ static void a85_write(fz_context *ctx, fz_output* out, const void *data, size_t 
 		state->word = (state->word << 8) | c;
 		state->n++;
 	}
+	return 0;
 }
 
 static void a85_close(fz_context *ctx, fz_output* out)
@@ -199,7 +201,7 @@ static void rle_flush_diff(fz_context *ctx, struct rle *enc)
 	fz_write_data(ctx, enc->chain, enc->buf, enc->run);
 }
 
-static void rle_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
+static int rle_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
 {
 	struct rle *enc = out->state;
 	const unsigned char *p = data;
@@ -261,6 +263,7 @@ static void rle_write(fz_context *ctx, fz_output* out, const void *data, size_t 
 			}
 		}
 	}
+	return 0;
 }
 
 static void rle_close(fz_context *ctx, fz_output* out)
@@ -298,7 +301,7 @@ struct arc4
 	fz_arc4 arc4;
 };
 
-static void arc4_write(fz_context *ctx, fz_output* chain, const void *data, size_t n)
+static int arc4_write(fz_context *ctx, fz_output* chain, const void *data, size_t n)
 {
 	struct arc4 *state = chain->state;
 	const unsigned char *p = data;
@@ -311,6 +314,7 @@ static void arc4_write(fz_context *ctx, fz_output* chain, const void *data, size
 		p += x;
 		n -= x;
 	}
+	return 0;
 }
 
 static void arc4_drop(fz_context *ctx, void *opaque)
@@ -335,7 +339,7 @@ struct deflate
 	unsigned char *buf;
 };
 
-static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_t n)
+static int deflate_write(fz_context *ctx, void *opaque, const void *data, size_t n)
 {
 	struct deflate *state = opaque;
 	const unsigned char *p = data;
@@ -374,6 +378,7 @@ static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_
 				fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
 		} while (state->z.avail_out > 0);
 	}
+	return 0;
 }
 
 static void deflate_close(fz_context *ctx, void *opaque)

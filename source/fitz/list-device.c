@@ -1557,7 +1557,7 @@ int fz_display_list_is_empty(fz_context *ctx, const fz_display_list *list)
 }
 
 void
-fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_matrix top_ctm, fz_rect scissor, fz_cookie *cookie)
+fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_matrix top_ctm, fz_rect scissor)
 {
 	fz_display_node *node;
 	fz_display_node *node_end;
@@ -1575,6 +1575,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	fz_colorspace *colorspace = fz_keep_colorspace(ctx, fz_device_gray(ctx));
 	fz_color_params color_params;
 	fz_rect rect = { 0 };
+	fz_cookie* cookie = dev->cookie;
 
 	/* Transformed versions of graphic state entries */
 	fz_rect trans_rect;
@@ -2032,5 +2033,7 @@ visible:
 	fz_drop_stroke_state(ctx, stroke);
 	fz_drop_path(ctx, path);
 	if (cookie)
+	{
 		cookie->progress = progress;
+	}
 }

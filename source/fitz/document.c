@@ -448,7 +448,7 @@ fz_count_pages(fz_context *ctx, fz_document *doc)
 }
 
 fz_page *
-fz_load_page(fz_context *ctx, fz_document *doc, int number)
+fz_load_page(fz_context *ctx, fz_document *doc, int number, fz_cookie* cookie)
 {
 	int i, n = fz_count_chapters(ctx, doc);
 	int start = 0;
@@ -456,7 +456,7 @@ fz_load_page(fz_context *ctx, fz_document *doc, int number)
 	{
 		int m = fz_count_chapter_pages(ctx, doc, i);
 		if (number < start + m)
-			return fz_load_chapter_page(ctx, doc, i, number - start);
+			return fz_load_chapter_page(ctx, doc, i, number - start, cookie);
 		start += m;
 	}
 	fz_throw(ctx, FZ_ERROR_GENERIC, "Page not found: %d", number+1);
@@ -571,7 +571,7 @@ fz_document_output_intent(fz_context *ctx, fz_document *doc)
 }
 
 fz_page *
-fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number)
+fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number, fz_cookie* cookie)
 {
 	fz_page *page;
 
@@ -594,7 +594,7 @@ fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number)
 
 	if (doc->load_page)
 	{
-		page = doc->load_page(ctx, doc, chapter, number);
+		page = doc->load_page(ctx, doc, chapter, number, cookie);
 		page->chapter = chapter;
 		page->number = number;
 
@@ -631,13 +631,13 @@ fz_bound_page(fz_context *ctx, fz_page *page)
 }
 
 void
-fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
+fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform)
 {
 	if (page && page->run_page_contents)
 	{
 		fz_try(ctx)
 		{
-			page->run_page_contents(ctx, page, dev, transform, cookie);
+			page->run_page_contents(ctx, page, dev, transform);
 		}
 		fz_catch(ctx)
 		{
@@ -649,13 +649,13 @@ fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix t
 }
 
 void
-fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
+fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform)
 {
 	if (page && page->run_page_annots)
 	{
 		fz_try(ctx)
 		{
-			page->run_page_annots(ctx, page, dev, transform, cookie);
+			page->run_page_annots(ctx, page, dev, transform);
 		}
 		fz_catch(ctx)
 		{
@@ -667,10 +667,10 @@ fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix tra
 }
 
 void
-fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie)
+fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform)
 {
-	fz_run_page_contents(ctx, page, dev, transform, cookie);
-	fz_run_page_annots(ctx, page, dev, transform, cookie);
+	fz_run_page_contents(ctx, page, dev, transform);
+	fz_run_page_annots(ctx, page, dev, transform);
 }
 
 fz_page *

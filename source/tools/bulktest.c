@@ -2150,7 +2150,7 @@ bulktest_main(int argc, const char **argv)
 
                 datafeed = fz_fopen_utf8(ctx, datafilename, "rb");
                 if (datafeed == NULL)
-                    fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile %q: %s", datafilename, fz_ctx_pop_system_error_message(ctx));
+                    fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile %q: %s", datafilename, fz_ctx_pop_system_errormsg(ctx));
                 datalinecounter = 0;
                 skip_to_datalinecounter = 0;
             }

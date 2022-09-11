@@ -2223,7 +2223,7 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 	gstate: The initial graphics state.
 */
 pdf_processor *
-pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie, int has_transparency)
+pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, int has_transparency)
 {
 	pdf_run_processor *proc = (pdf_run_processor *)pdf_new_processor(ctx, sizeof *proc);
 	{
@@ -2356,7 +2356,7 @@ pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char
 	}
 
 	proc->dev = dev;
-	proc->cookie = cookie;
+	proc->cookie = dev->cookie;
 
 	proc->default_cs = fz_keep_default_colorspaces(ctx, default_cs);
 

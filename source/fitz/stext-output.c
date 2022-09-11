@@ -151,7 +151,7 @@ fz_print_style_end_html(fz_context *ctx, fz_output *out, fz_font *font, float si
 }
 
 static void
-fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix page_ctm, const fz_stext_options* options)
+fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix page_ctm, const fz_stext_options* options, fz_cookie* cookie)
 {
 	fz_rect mediabox = fz_transform_rect(block->bbox, page_ctm);
 	fz_matrix ctm = block->u.i.transform;
@@ -290,7 +290,7 @@ fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 	}
 	else
 	{
-		fz_write_image_as_data_uri(ctx, out, block->u.i.image);
+		fz_write_image_as_data_uri(ctx, out, block->u.i.image, cookie);
 	}
 	fz_write_string(ctx, out, "\">\n");
 }
@@ -360,7 +360,7 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 }
 
 void
-fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int pagenum, fz_matrix ctm, const fz_stext_options *options)
+fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int pagenum, fz_matrix ctm, const fz_stext_options *options, fz_cookie* cookie)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
@@ -379,7 +379,7 @@ fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page
 	{
 		if (block->type == FZ_STEXT_BLOCK_IMAGE && (!options || (options->flags & FZ_STEXT_PRESERVE_IMAGES)))
 		{
-			fz_print_stext_image_as_html(ctx, out, block, pagenum, index, ctm, options);
+			fz_print_stext_image_as_html(ctx, out, block, pagenum, index, ctm, options, cookie);
 		}
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
 		{
@@ -416,7 +416,7 @@ fz_print_stext_trailer_as_html(fz_context *ctx, fz_output *out)
 /* XHTML output (semantic, little layout, suitable for reflow) */
 
 static void
-fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options *options)
+fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *block, int pagenum, int object_index, fz_matrix ctm, const fz_stext_options *options, fz_cookie* cookie)
 {
 	float w = block->bbox.x1 - block->bbox.x0;
 	float h = block->bbox.y1 - block->bbox.y0;
@@ -437,7 +437,7 @@ fz_print_stext_image_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_block *b
 	}
 	else
 	{
-		fz_write_image_as_data_uri(ctx, out, block->u.i.image);
+		fz_write_image_as_data_uri(ctx, out, block->u.i.image, cookie);
 	}
 	fz_write_string(ctx, out, "\"/></p>\n");
 }
@@ -566,7 +566,7 @@ static void fz_print_stext_block_as_xhtml(fz_context *ctx, fz_output *out, fz_st
 }
 
 void
-fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int pagenum, fz_matrix ctm, const fz_stext_options *options)
+fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *page, int pagenum, fz_matrix ctm, const fz_stext_options *options, fz_cookie* cookie)
 {
 	fz_stext_block *block;
 	fz_rect mediabox = fz_transform_rect(page->mediabox, ctm);
@@ -582,7 +582,7 @@ fz_print_stext_page_as_xhtml(fz_context *ctx, fz_output *out, fz_stext_page *pag
 	for (block = page->first_block; block; block = block->next)
 	{
 		if (block->type == FZ_STEXT_BLOCK_IMAGE && (!options || (options->flags & FZ_STEXT_PRESERVE_IMAGES)))
-			fz_print_stext_image_as_xhtml(ctx, out, block, pagenum, index, ctm, options);
+			fz_print_stext_image_as_xhtml(ctx, out, block, pagenum, index, ctm, options, cookie);
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
 			fz_print_stext_block_as_xhtml(ctx, out, block);
 		index++;
@@ -975,6 +975,7 @@ text_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 {
 	fz_text_writer *wri = (fz_text_writer*)wri_;
 	float s = wri->opts.scale;
+	fz_cookie* cookie = dev->cookie;
 
 	fz_scale_stext_page(ctx, wri->page, s);
 
@@ -988,10 +989,10 @@ text_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 			fz_print_stext_page_as_text(ctx, wri->out, wri->page);
 			break;
 		case FZ_FORMAT_HTML:
-			fz_print_stext_page_as_html(ctx, wri->out, wri->page, wri->number, fz_identity, &wri->opts);
+			fz_print_stext_page_as_html(ctx, wri->out, wri->page, wri->number, fz_identity, &wri->opts, cookie);
 			break;
 		case FZ_FORMAT_XHTML:
-			fz_print_stext_page_as_xhtml(ctx, wri->out, wri->page, wri->number, fz_identity, &wri->opts);
+			fz_print_stext_page_as_xhtml(ctx, wri->out, wri->page, wri->number, fz_identity, &wri->opts, cookie);
 			break;
 		case FZ_FORMAT_STEXT_XML:
 			fz_print_stext_page_as_xml(ctx, wri->out, wri->page, wri->number, fz_identity);

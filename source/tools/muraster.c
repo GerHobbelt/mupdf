@@ -626,14 +626,16 @@ static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_ma
 		fz_clear_pixmap_with_value(ctx, pix, 255);
 
 		dev = fz_new_draw_device(ctx, fz_identity, pix);
+		fz_attach_cookie_to_device(dev, cookie);
+
 		if (lowmemory)
 			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		if (alphabits_graphics == 0)
 			fz_enable_device_hints(ctx, dev, FZ_DONT_INTERPOLATE_IMAGES);
 		if (list)
-			fz_run_display_list(ctx, list, dev, ctm, tbounds, cookie);
+			fz_run_display_list(ctx, list, dev, ctm, tbounds);
 		else
-			fz_run_page(ctx, page, dev, ctm, cookie);
+			fz_run_page(ctx, page, dev, ctm);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
 		dev = NULL;
@@ -1165,7 +1167,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	{
 		start = (showtime ? gettime() : 0);
 
-		page = fz_load_page(ctx, doc, pagenum - 1);
+		page = fz_load_page(ctx, doc, pagenum - 1, cookie);
 
 		/* Calculate Page bounds, transform etc */
 		get_page_render_details(ctx, page, &render);
@@ -1175,12 +1177,14 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		{
 			list = fz_new_display_list(ctx, render.bounds);
 			list_dev = fz_new_list_device(ctx, list);
+			fz_attach_cookie_to_device(list_dev, &cookie);
 #if GREY_FALLBACK != 0
 			test_dev = fz_new_test_device(ctx, &is_color, 0.01f, 0, list_dev);
-			fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
+			fz_attach_cookie_to_device(test_dev, &cookie);
+			fz_run_page(ctx, page, test_dev, fz_identity);
 			fz_close_device(ctx, test_dev);
 #else
-			fz_run_page(ctx, page, list_dev, fz_identity, &cookie);
+			fz_run_page(ctx, page, list_dev, fz_identity);
 #endif
 			fz_close_device(ctx, list_dev);
 		}
@@ -1210,9 +1214,10 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_try(ctx)
 			{
 				test_dev = fz_new_test_device(ctx, &is_color, 0.01f, 0, NULL);
+				fz_attach_cookie_to_device(test_dev, &cookie);
 				if (lowmemory)
 					fz_enable_device_hints(ctx, test_dev, FZ_NO_CACHE);
-				fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
+				fz_run_page(ctx, page, test_dev, fz_identity);
 				fz_close_device(ctx, test_dev);
 			}
 			fz_always(ctx)
@@ -1246,12 +1251,13 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			fz_try(ctx)
 			{
 				test_dev = fz_new_test_device(ctx, &is_color, 0.01f, FZ_TEST_OPT_IMAGES | FZ_TEST_OPT_SHADINGS, NULL);
+				fz_attach_cookie_to_device(test_dev, &cookie);
 				if (lowmemory)
 					fz_enable_device_hints(ctx, test_dev, FZ_NO_CACHE);
 				if (list)
-					fz_run_display_list(ctx, list, test_dev, fz_identity, fz_infinite_rect, &cookie);
+					fz_run_display_list(ctx, list, test_dev, fz_identity, fz_infinite_rect);
 				else
-					fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
+					fz_run_page(ctx, page, test_dev, fz_identity);
 				fz_close_device(ctx, test_dev);
 			}
 			fz_always(ctx)

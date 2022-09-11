@@ -190,7 +190,7 @@ typedef struct
 
 /* Functions to set up pdf_process structures */
 
-pdf_processor *pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, fz_cookie *cookie, int has_transparency);
+pdf_processor *pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, int has_transparency);
 
 /*
 	Create an MCID extraction processor.
@@ -321,7 +321,7 @@ pdf_obj *pdf_filter_xobject_instance(fz_context *ctx, pdf_obj *old_xobj, pdf_obj
 	Functions to actually process annotations, glyphs and general stream objects.
 */
 void pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *obj, pdf_obj *res, fz_cookie *cookie);
-void pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot, fz_cookie *cookie);
+void pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot);
 void pdf_process_glyph(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *resources, fz_buffer *contents);
 
 /* Text handling helper functions */

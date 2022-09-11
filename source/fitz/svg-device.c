@@ -906,6 +906,7 @@ svg_send_image(fz_context *ctx, svg_device *sdev, fz_image *img, fz_color_params
 	fz_buffer *out = sdev->out;
 	int i;
 	int id;
+	fz_cookie* cookie = sdev->super.cookie;
 
 	if (sdev->reuse_images)
 	{
@@ -932,7 +933,7 @@ svg_send_image(fz_context *ctx, svg_device *sdev, fz_image *img, fz_color_params
 		id = sdev->id++;
 
 		fz_append_printf(ctx, out, "<image id=\"image_%d\" width=\"%d\" height=\"%d\" xlink:href=\"", id, img->w, img->h);
-		fz_append_image_as_data_uri(ctx, out, img);
+		fz_append_image_as_data_uri(ctx, out, img, cookie);
 		fz_append_printf(ctx, out, "\"/>\n");
 
 		sdev->images[sdev->num_images].id = id;
@@ -942,7 +943,7 @@ svg_send_image(fz_context *ctx, svg_device *sdev, fz_image *img, fz_color_params
 	else
 	{
 		fz_append_printf(ctx, out, "<image width=\"%d\" height=\"%d\" xlink:href=\"", img->w, img->h);
-		fz_append_image_as_data_uri(ctx, out, img);
+		fz_append_image_as_data_uri(ctx, out, img, cookie);
 		fz_append_printf(ctx, out, "\"/>\n");
 	}
 }
@@ -980,6 +981,7 @@ svg_dev_fill_shade(fz_context *ctx, fz_device *dev, fz_shade *shade, fz_matrix c
 	fz_irect bbox;
 	fz_pixmap *pix;
 	fz_rect scissor = fz_device_current_scissor(ctx, dev);
+	fz_cookie* cookie = sdev->super.cookie;
 
 	if (alpha == 0)
 		return;
@@ -1004,7 +1006,7 @@ svg_dev_fill_shade(fz_context *ctx, fz_device *dev, fz_shade *shade, fz_matrix c
 		if (alpha != 1.0f)
 			fz_append_printf(ctx, out, "<g opacity=\"%g\">\n", alpha);
 		fz_append_printf(ctx, out, "<image x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" xlink:href=\"", pix->x, pix->y, pix->w, pix->h);
-		fz_append_pixmap_as_data_uri(ctx, out, pix);
+		fz_append_pixmap_as_data_uri(ctx, out, pix, cookie);
 		fz_append_printf(ctx, out, "\"/>\n");
 		if (alpha != 1.0f)
 			fz_append_printf(ctx, out, "</g>\n");

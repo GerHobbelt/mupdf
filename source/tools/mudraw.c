@@ -734,15 +734,16 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 			fz_clear_pixmap_with_value(ctx, pix, 255);
 
 		dev = fz_new_draw_device_with_proof(ctx, fz_identity, pix, proof_cs);
+		fz_attach_cookie_to_device(dev, cookie);
 		apply_kill_switch(dev);
 		if (lowmemory)
 			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		if (alphabits_graphics == 0)
 			fz_enable_device_hints(ctx, dev, FZ_DONT_INTERPOLATE_IMAGES);
 		if (list)
-			fz_run_display_list(ctx, list, dev, ctm, tbounds, cookie);
+			fz_run_display_list(ctx, list, dev, ctm, tbounds);
 		else
-			fz_run_page(ctx, page, dev, ctm, cookie);
+			fz_run_page(ctx, page, dev, ctm);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
 		dev = NULL;
@@ -909,19 +910,21 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		{
 			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
 			dev = fz_new_trace_device(ctx, out);
+			fz_attach_cookie_to_device(dev, cookie);
 			apply_kill_switch(dev);
 			if (output_format->format == OUT_OCR_TRACE)
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
 				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, ocr_datadir, NULL, NULL);
+				fz_attach_cookie_to_device(dev, cookie);
 			}
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (list)
-				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
+				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect);
 			else
-				fz_run_page(ctx, page, dev, ctm, cookie);
+				fz_run_page(ctx, page, dev, ctm);
 			fz_close_device(ctx, dev);
 			fz_drop_device(ctx, dev);
 			dev = NULL;
@@ -958,18 +961,20 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\">\n", pagenum, &ctm, &mediabox, &tmediabox);
 			dev = fz_new_xmltext_device(ctx, out);
+			fz_attach_cookie_to_device(dev, cookie);
 			apply_kill_switch(dev);
 			if (output_format->format == OUT_OCR_XMLTEXT)
 			{
 				pre_ocr_dev = dev;
 				dev = NULL;
 				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, ocr_datadir, NULL, NULL);
+				fz_attach_cookie_to_device(dev, cookie);
 				apply_kill_switch(dev);
 			}
 			if (list)
-				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
+				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect);
 			else
-				fz_run_page(ctx, page, dev, ctm, cookie);
+				fz_run_page(ctx, page, dev, ctm);
 			fz_write_printf(ctx, out, "</page>\n");
 			fz_close_device(ctx, dev);
 			fz_drop_device(ctx, dev);
@@ -1003,13 +1008,14 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			tmediabox = fz_transform_rect(mediabox, ctm);
 
 			dev = fz_new_bbox_device(ctx, &bbox);
+			fz_attach_cookie_to_device(dev, cookie);
 			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (list)
-				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
+				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect);
 			else
-				fz_run_page(ctx, page, dev, ctm, cookie);
+				fz_run_page(ctx, page, dev, ctm);
 			fz_close_device(ctx, dev);
 			fz_write_printf(ctx, out, "<page pagenum=\"%d\" ctm=\"%M\" bbox=\"%R\" mediabox=\"%R\" />\n", pagenum, &ctm, &bbox, &tmediabox);
 		}
@@ -1076,6 +1082,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			tmediabox = fz_transform_rect(mediabox, ctm);
 			text = fz_new_stext_page(ctx, tmediabox);
 			dev = fz_new_stext_device(ctx, text, &page_stext_options);
+			fz_attach_cookie_to_device(dev, cookie);
 			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
@@ -1089,11 +1096,12 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				pre_ocr_dev = dev;
 				dev = NULL;
 				dev = fz_new_ocr_device(ctx, pre_ocr_dev, ctm, mediabox, 1, ocr_language, ocr_datadir, NULL, NULL);
+				fz_attach_cookie_to_device(dev, cookie);
 			}
 			if (list)
-				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, cookie);
+				fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect);
 			else
-				fz_run_page(ctx, page, dev, ctm, cookie);
+				fz_run_page(ctx, page, dev, ctm);
 			fz_close_device(ctx, dev);
 			fz_drop_device(ctx, dev);
 			dev = NULL;
@@ -1113,11 +1121,11 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			else if (output_format->format == OUT_HTML || output_format->format == OUT_OCR_HTML)
 			{
-				fz_print_stext_page_as_html(ctx, out, text, pagenum, ctm, &page_stext_options);
+				fz_print_stext_page_as_html(ctx, out, text, pagenum, ctm, &page_stext_options, cookie);
 			}
 			else if (output_format->format == OUT_XHTML || output_format->format == OUT_OCR_XHTML)
 			{
-				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum, ctm, &page_stext_options);
+				fz_print_stext_page_as_xhtml(ctx, out, text, pagenum, ctm, &page_stext_options, cookie);
 			}
 			else if (output_format->format == OUT_TEXT || output_format->format == OUT_OCR_TEXT)
 			{
@@ -1158,11 +1166,12 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			pdf_obj *page_obj;
 
 			dev = pdf_page_write(ctx, pdfout, mediabox, &resources, &contents);
+			fz_attach_cookie_to_device(dev, cookie);
 			apply_kill_switch(dev);
 			if (list)
-				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, cookie);
+				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect);
 			else
-				fz_run_page(ctx, page, dev, fz_identity, cookie);
+				fz_run_page(ctx, page, dev, fz_identity);
 			fz_close_device(ctx, dev);
 			fz_drop_device(ctx, dev);
 			dev = NULL;
@@ -1201,13 +1210,14 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			int text_format = ((stext_options.flags & FZ_STEXT_NO_TEXT_AS_PATH) ? FZ_SVG_TEXT_AS_TEXT : FZ_SVG_TEXT_AS_PATH);
 			int reuse_images = !(stext_options.flags & FZ_STEXT_NO_REUSE_IMAGES);
 			dev = fz_new_svg_device(ctx, out, tbounds.x1-tbounds.x0, tbounds.y1-tbounds.y0, text_format, reuse_images);
+			fz_attach_cookie_to_device(dev, cookie);
 			apply_kill_switch(dev);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 			if (list)
-				fz_run_display_list(ctx, list, dev, ctm, tbounds, cookie);
+				fz_run_display_list(ctx, list, dev, ctm, tbounds);
 			else
-				fz_run_page(ctx, page, dev, ctm, cookie);
+				fz_run_page(ctx, page, dev, ctm);
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
@@ -1561,7 +1571,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 
 	start = (showtime ? gettime() : 0);
 
-	page = fz_load_page(ctx, doc, pagenum - 1);
+	page = fz_load_page(ctx, doc, pagenum - 1, cookie);
 
 	if (spots != SPOTS_NONE)
 	{
@@ -1606,9 +1616,10 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		{
 			list = fz_new_display_list(ctx, fz_bound_page(ctx, page));
 			dev = fz_new_list_device(ctx, list);
+			fz_attach_cookie_to_device(dev, &cookie);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
-			fz_run_page(ctx, page, dev, fz_identity, &cookie);
+			fz_run_page(ctx, page, dev, fz_identity);
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
@@ -1635,15 +1646,16 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	{
 		int iscolor;
 		dev = fz_new_test_device(ctx, &iscolor, 0.02f, 0, NULL);
+		fz_attach_cookie_to_device(dev, &cookie);
 		apply_kill_switch(dev);
 		if (lowmemory)
 			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		fz_try(ctx)
 		{
 			if (list)
-				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, &cookie);
+				fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect);
 			else
-				fz_run_page(ctx, page, dev, fz_identity, &cookie);
+				fz_run_page(ctx, page, dev, fz_identity);
 			fz_close_device(ctx, dev);
 		}
 		fz_always(ctx)
@@ -2250,7 +2262,7 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 		return;
 	}
 
-	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params);
+	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params, cookie);
 	fz_try(ctx)
 	{
 		write_image_to_unique_nonexisting_filepath(ctx, out, buf, pagenum, options, ".png");

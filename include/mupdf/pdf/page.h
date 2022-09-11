@@ -76,7 +76,7 @@ void pdf_flatten_inheritable_page_items(fz_context *ctx, pdf_obj *page);
 
 	number: page number, where 0 is the first page of the document.
 */
-pdf_page *pdf_load_page(fz_context *ctx, pdf_document *doc, int number);
+pdf_page *pdf_load_page(fz_context *ctx, pdf_document *doc, int number, fz_cookie* cookie);
 fz_page *pdf_load_page_imp(fz_context *ctx, fz_document *doc, int chapter, int number);
 
 void pdf_page_obj_transform(fz_context *ctx, pdf_obj *pageobj, fz_rect *page_mediabox, fz_matrix *page_ctm);
@@ -116,7 +116,7 @@ fz_rect pdf_bound_page(fz_context *ctx, pdf_page *page);
 	ctm: A transformation matrix applied to the objects on the page,
 	e.g. to scale or rotate the page contents as desired.
 */
-void pdf_run_page(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, fz_cookie *cookie);
+void pdf_run_page(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm);
 
 /*
 	Interpret a loaded page and render it on a device.
@@ -134,7 +134,7 @@ void pdf_run_page(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm
 	cookie: A pointer to an optional fz_cookie structure that can be used
 	to track progress, collect errors etc.
 */
-void pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie);
+void pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage);
 
 /*
 	Interpret a loaded page and render it on a device.
@@ -147,10 +147,10 @@ void pdf_run_page_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz
 	ctm: A transformation matrix applied to the objects on the page,
 	e.g. to scale or rotate the page contents as desired.
 */
-void pdf_run_page_contents(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, fz_cookie *cookie);
-void pdf_run_page_annots(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, fz_cookie *cookie);
-void pdf_run_page_contents_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie);
-void pdf_run_page_annots_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage, fz_cookie *cookie);
+void pdf_run_page_contents(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm);
+void pdf_run_page_annots(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm);
+void pdf_run_page_contents_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage);
+void pdf_run_page_annots_with_usage(fz_context *ctx, pdf_page *page, fz_device *dev, fz_matrix ctm, const char *usage);
 
 void pdf_filter_page_contents(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_filter_options *filter);
 void pdf_filter_annot_contents(fz_context *ctx, pdf_document *doc, pdf_annot *annot, pdf_filter_options *filter);

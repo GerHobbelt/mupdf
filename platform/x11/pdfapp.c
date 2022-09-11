@@ -769,7 +769,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 
 	fz_try(app->ctx)
 	{
-		app->page = fz_load_page(app->ctx, app->doc, app->pageno - 1);
+		app->page = fz_load_page(app->ctx, app->doc, app->pageno - 1, cookie);
 		if (app->page && app->page->incomplete)
 			app->incomplete = 1;
 		app->page_bbox = fz_bound_page(app->ctx, app->page);
@@ -867,12 +867,12 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 	app->errored = errored;
 }
 
-static void pdfapp_runpage(pdfapp_t *app, fz_device *dev, const fz_matrix ctm, fz_rect scissor, fz_cookie *cookie)
+static void pdfapp_runpage(pdfapp_t *app, fz_device *dev, const fz_matrix ctm, fz_rect scissor)
 {
 	if (app->page_list)
-		fz_run_display_list(app->ctx, app->page_list, dev, ctm, scissor, cookie);
+		fz_run_display_list(app->ctx, app->page_list, dev, ctm, scissor);
 	if (app->annotations_list)
-		fz_run_display_list(app->ctx, app->annotations_list, dev, ctm, scissor, cookie);
+		fz_run_display_list(app->ctx, app->annotations_list, dev, ctm, scissor);
 }
 
 #define MAX_TITLE 256

@@ -452,7 +452,7 @@ epub_bound_page(fz_context *ctx, fz_page *page_)
 }
 
 static void
-epub_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
+epub_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 {
 	epub_page *page = (epub_page*)page_;
 
@@ -508,7 +508,7 @@ epub_lookup_bookmark(fz_context *ctx, fz_document *doc_, fz_bookmark mark)
 }
 
 static fz_page *
-epub_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
+epub_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number, fz_cookie* cookie)
 {
 	epub_document *doc = (epub_document*)doc_;
 	epub_chapter *ch;

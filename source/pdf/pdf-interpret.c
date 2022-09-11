@@ -1105,7 +1105,7 @@ pdf_should_print_annot(fz_context *ctx, pdf_annot *annot)
 }
 
 void
-pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot, fz_cookie *cookie)
+pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot)
 {
 	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
 

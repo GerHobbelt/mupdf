@@ -49,6 +49,8 @@ extern "C" {
 */
 typedef struct fz_device fz_device;
 
+typedef struct fz_cookie fz_cookie;
+
 enum
 {
 	/* Flags */
@@ -185,6 +187,8 @@ struct fz_device
 	int container_len;
 	int container_cap;
 	fz_device_container_stack *container;
+
+	fz_cookie *cookie;
 };
 
 /**
@@ -336,7 +340,7 @@ enum fz_run_flags
 	the PDF_ANNOT_UNKNOWN type, slot 1 is for the PDF_ANNOT_TEXT type,
 	and so on.
 */
-typedef struct
+struct fz_cookie
 {
 	volatile int abort;
 	size_t progress;
@@ -344,11 +348,29 @@ typedef struct
 	int errors;
 	int incomplete;
 	enum fz_run_flags run_mode;
+	int render_rough_approx;
+	int ignore_minor_errors;
 	char run_annotations_reject_mask[32 /* PDF_ANNOT_UNKNOWN + 2 */ ];   // char acts as boolean value carrier: 0 = false, !0 = true
 
 	size_t max_nodes_per_page_render;		// 0: doesn't matter; > 0: abort page render when there's more nodes than this
 	float max_msecs_per_page_render;		// 0: doesn't matter; > 0: abort page render when time spent is more than this
-} fz_cookie;
+};
+
+/**
+	Attach the cookie to the given device. A device can always only have one cookie attached,
+	hence attaching equals replacing any previously attached cookie.
+
+	`cookie`: NULL to detach any previously attached cookie.
+
+	Note: the cookie SHOULD outlive all device instances (`fz_device`) it is
+	attached to.
+*/
+static inline void fz_attach_cookie_to_device(fz_device *dev, fz_cookie *cookie)
+{
+	ASSERT0(dev != NULL);
+	dev->cookie = cookie;
+}
+
 
 /**
 	Create a device to print a debug trace of all device calls.

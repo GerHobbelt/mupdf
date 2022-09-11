@@ -31,6 +31,15 @@
 #pragma warning(disable: 4242)  // warning C4242: '=': conversion from 'int' to 'unsigned char', possible loss of data, etc.etc.
 #pragma warning(disable: 4365)  // warning C4365: 'return': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
 #pragma warning(disable: 5220)  // warning C5220: '<unnamed-tag>::abort': a non-static data member with a volatile qualified type no longer implies that compiler generated copy/move constructors and copy/move assignment operators are not trivial (compiling source file ../../source/dll/pch.cpp)
+#pragma warning(disable: 4611)  // warning C4611: interaction between '_setjmp' and C++ object destruction is non-portable
+// 4514;4820;5045;4464;4180;4244;4018;4267;5105;4100;4127;4206;
+#pragma warning(disable: 4100)  // warning C4100: 'dn': unreferenced formal parameter
+#pragma warning(disable: 4127)  // warning C4127: conditional expression is constant
+// warning C4133: 'function': incompatible types - from 'void (__cdecl *)(fz_context *,fz_output *,const void *,size_t)' to 'fz_output_write_fn (__cdecl *)'
+#pragma warning(disable: 4267)  // warning C4267: 'function': conversion from 'size_t' to 'unsigned long', possible loss of data
+#pragma warning(disable: 4324)  // warning C4324: '<unnamed-tag>': structure was padded due to alignment specifier
+#pragma warning(disable: 4018)  // warning C4018: '<': signed/unsigned mismatch
+#pragma warning(disable: 4388)  // warning C4388: '>=': signed/unsigned mismatch
 
 #pragma warning(push)
 

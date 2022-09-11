@@ -194,7 +194,7 @@ typedef int (fz_document_count_pages_fn)(fz_context *ctx, fz_document *doc, int 
 	Type for a function to load a given
 	page from a document. See fz_load_page for more information.
 */
-typedef fz_page *(fz_document_load_page_fn)(fz_context *ctx, fz_document *doc, int chapter, int page);
+typedef fz_page *(fz_document_load_page_fn)(fz_context *ctx, fz_document *doc, int chapter, int page, fz_cookie* cookie);
 
 /**
 	Type for a function to query
@@ -251,7 +251,7 @@ typedef fz_rect (fz_page_bound_page_fn)(fz_context *ctx, fz_page *page);
 	contents of a page. See fz_run_page_contents for more
 	information.
 */
-typedef void (fz_page_run_page_fn)(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+typedef void (fz_page_run_page_fn)(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Type for a function to load the links
@@ -607,7 +607,7 @@ int fz_page_number_from_location(fz_context *ctx, fz_document *doc, fz_location 
 	efficient than loading by location (chapter+page) for some
 	document types.
 */
-fz_page *fz_load_page(fz_context *ctx, fz_document *doc, int number);
+fz_page *fz_load_page(fz_context *ctx, fz_document *doc, int number, fz_cookie* cookie);
 
 /**
 	Return the number of chapters in the document.
@@ -631,7 +631,7 @@ int fz_count_chapter_pages(fz_context *ctx, fz_document *doc, int chapter);
 	chapter: chapter number, 0 is the first chapter of the document.
 	number: page number, 0 is the first page of the chapter.
 */
-fz_page *fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int page);
+fz_page *fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int page, fz_cookie* cookie);
 
 /**
 	Load the list of links for a page.
@@ -678,7 +678,7 @@ fz_rect fz_bound_page(fz_context *ctx, fz_page *page);
 	fields inside cookie are continually updated while the page is
 	rendering.
 */
-void fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+void fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Run a page through a device. Just the main
@@ -700,7 +700,7 @@ void fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix trans
 	fields inside cookie are continually updated while the page is
 	rendering.
 */
-void fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+void fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Run the annotations on a page through a device.
@@ -721,7 +721,7 @@ void fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_mat
 	fields inside cookie are continually updated while the page is
 	rendering.
 */
-void fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+void fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Increment the reference count for the page. Returns the same

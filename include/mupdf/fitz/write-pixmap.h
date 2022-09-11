@@ -249,14 +249,14 @@ fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out);
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *image, fz_color_params color_params, fz_cookie *cookie);
 
 /**
 	Re-encode a given pixmap as a PNG into a buffer.
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params, fz_cookie *cookie);
 
 /**
 	Set default PNG output compression level: 0..9, Z_DEFAULT_COMPRESSION (-1) by default
@@ -286,14 +286,14 @@ fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out);
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_image_as_webp(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_webp(fz_context *ctx, const fz_image *image, fz_color_params color_params, fz_cookie *cookie);
 
 /**
 	Re-encode a given pixmap as a webp into a buffer.
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_pixmap_as_webp(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_webp(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params, fz_cookie *cookie);
 
 /**
 	Set the preferred/default quality for any subsequent WebP output.
@@ -328,14 +328,14 @@ fz_band_writer *fz_new_tiff_band_writer(fz_context *ctx, fz_output *out);
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_image_as_tiff(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_tiff(fz_context *ctx, const fz_image *image, fz_color_params color_params, fz_cookie *cookie);
 
 /**
 	Re-encode a given pixmap as a tiff into a buffer.
 
 	Ownership of the buffer is returned.
 */
-fz_buffer *fz_new_buffer_from_pixmap_as_tiff(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_tiff(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params, fz_cookie *cookie);
 
 
 

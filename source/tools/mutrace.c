@@ -71,7 +71,7 @@ static void runpage(fz_context *ctx, fz_document *doc, fz_output *out, int numbe
 	fz_var(dev);
 	fz_try(ctx)
 	{
-		page = fz_load_page(ctx, doc, number - 1);
+		page = fz_load_page(ctx, doc, number - 1, cookie);
 		mediabox = fz_bound_page(ctx, page);
 		fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n",
 				number, &mediabox);
@@ -79,11 +79,11 @@ static void runpage(fz_context *ctx, fz_document *doc, fz_output *out, int numbe
 		if (use_display_list)
 		{
 			list = fz_new_display_list_from_page(ctx, page);
-			fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, NULL);
+			fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect);
 		}
 		else
 		{
-			fz_run_page(ctx, page, dev, fz_identity, NULL);
+			fz_run_page(ctx, page, dev, fz_identity);
 		}
 		fz_write_printf(ctx, out, "</page>\n");
 	}

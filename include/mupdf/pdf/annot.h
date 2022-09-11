@@ -251,7 +251,7 @@ enum pdf_annot_type pdf_annot_type(fz_context *ctx, pdf_annot *annot);
 	ctm: A transformation matrix applied to the objects on the page,
 	e.g. to scale or rotate the page contents as desired.
 */
-void pdf_run_annot(fz_context *ctx, pdf_annot *annot, fz_device *dev, fz_matrix ctm, fz_cookie *cookie);
+void pdf_run_annot(fz_context *ctx, pdf_annot *annot, fz_device *dev, fz_matrix ctm);
 
 /*
 	Lookup needle in the nametree of the document given by which.

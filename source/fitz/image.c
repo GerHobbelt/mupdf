@@ -1523,7 +1523,7 @@ display_list_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect 
 	fz_try(ctx)
 	{
 		dev = fz_new_draw_device(ctx, ctm, pix);
-		fz_run_display_list(ctx, image->list, dev, fz_identity, fz_infinite_rect, NULL);
+		fz_run_display_list(ctx, image->list, dev, fz_identity, fz_infinite_rect);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)

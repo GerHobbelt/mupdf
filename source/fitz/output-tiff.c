@@ -399,7 +399,7 @@ fz_band_writer *fz_new_tiff_band_writer(fz_context *ctx, fz_output *out)
  * drop pix early in the case where we have to convert, potentially saving
  * us having to have 2 copies of the pixmap and a buffer open at once. */
 static fz_buffer *
-tiff_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int drop)
+tiff_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int drop, fz_cookie *cookie)
 {
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
@@ -413,6 +413,8 @@ tiff_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, 
 	{
 		if (drop)
 			fz_drop_pixmap(ctx, pix);
+		if (!cookie->ignore_minor_errors)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "content error: image dimensions are specified as (0 x 0)");
 #pragma message("TODO: throw exception in strict mode. Also check out 'ignore_errors' in mudraw tool and link this to that setting.")
 		return NULL;
 	}
@@ -445,14 +447,14 @@ tiff_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, 
 }
 
 fz_buffer *
-fz_new_buffer_from_image_as_tiff(fz_context *ctx, const fz_image *image, fz_color_params color_params)
+fz_new_buffer_from_image_as_tiff(fz_context *ctx, const fz_image *image, fz_color_params color_params, fz_cookie* cookie)
 {
 	fz_pixmap *pix = fz_get_pixmap_from_image(ctx, image, NULL, NULL, NULL, NULL);
-	return tiff_from_pixmap(ctx, pix, color_params, 1);
+	return tiff_from_pixmap(ctx, pix, color_params, 1, cookie);
 }
 
 fz_buffer *
-fz_new_buffer_from_pixmap_as_tiff(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params)
+fz_new_buffer_from_pixmap_as_tiff(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params, fz_cookie* cookie)
 {
-	return tiff_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0);
+	return tiff_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0, cookie);
 }
