@@ -96,6 +96,23 @@ printf_unlock(fz_output* out)
 	}
 }
 
+static int64_t file_tell(fz_context* ctx, fz_output* out);
+
+static void analyze_and_improve_fwrite_error(fz_context* ctx, fz_output* out, size_t count)
+{
+	int64_t pos = file_tell(ctx, out);
+	// heuristic: are we near, over or at 2GB/4GB boundary?
+	if (pos + count > (1LL << 32) - 10240)
+	{
+		char msg[1024];
+		int64_t fourgb = 1LL << 32;
+		int64_t delta = fourgb - pos;
+
+		fz_snprintf(msg, sizeof msg, "\n    Analysis: looks like you're near the magic 4GByte file size boundary so this may just be your run-time library or filesystem giving up on writing any file larger than %lld bytes (this file is reported as currently %lld bytes, which is %lld bytes removed from that 4GB boundary).", fourgb, pos, delta);
+		fz_strncat_s(ctx, ctx->error.system_error_message, msg, sizeof(ctx->error.system_error_message));
+	}
+}
+
 static void
 file_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
@@ -111,13 +128,23 @@ file_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 	{
 		int x = putc(((unsigned char*)buffer)[0], file);
 		if (x == EOF && ferror(file))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s", strerror(errno));
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			analyze_and_improve_fwrite_error(ctx, out, count);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (%s)", fz_ctx_get_system_errormsg(ctx), out->filepath);
+		}
 		return;
 	}
 
 	n = fwrite(buffer, 1, count, file);
 	if (n < count && ferror(file))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes)", strerror(errno), n, count);
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		analyze_and_improve_fwrite_error(ctx, out, count - n);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes) (%s)", fz_ctx_get_system_errormsg(ctx), n, count, out->filepath);
+	}
 }
 
 #if defined(_WIN32) 
@@ -510,9 +537,6 @@ file_drop(fz_context *ctx, fz_output* out)
 			out->state = NULL;
 		}
 	}
-
-	fz_free(ctx, out->filepath);
-	out->filepath = NULL;
 }
 
 static fz_stream *
@@ -557,7 +581,7 @@ static void file_truncate(fz_context* ctx, fz_output* out)
 		}
 		if (pos >= 0)
 		{
-			(void)ftruncate(fileno(file), pos);
+			if (ftruncate(fileno(file), pos))
 			{
 				fz_copy_ephemeral_errno(ctx);
 				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
@@ -731,7 +755,6 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 			}
 		}
 	}
-	fzoutput_unlock(out);
 	return rv;
 }
 
@@ -774,6 +797,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 		return fz_stdout(ctx);
 	}
 
+	fz_clear_system_error(ctx);
 	fz_mkdir_for_file(ctx, filename);
 
 	/* If <append> is false, we use fopen()'s 'x' flag to force an error if
@@ -787,6 +811,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	/* Ensure we create a brand new file. We don't want to clobber our old file. */
 	if (!append)
 	{
+		fz_clear_system_error(ctx);
 		if (fz_remove_utf8(ctx, filename) < 0)
 		{
 			int ec = fz_ctx_get_rtl_errno(ctx);
@@ -794,6 +819,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot remove file '%s': %s", filename, fz_ctx_get_system_errormsg(ctx));
 		}
 	}
+	fz_clear_system_error(ctx);
 #if defined(__MINGW32__) || defined(__MINGW64__)
 	file = fz_fopen_utf8(ctx, filename, append ? "rb+" : "wb+"); /* 'x' flag not supported. */
 #else
@@ -802,7 +828,10 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	if (append)
 	{
 		if (file == NULL)
+		{
+			fz_clear_system_error(ctx);
 			file = fz_fopen_utf8(ctx, filename, "wb+");
+		}
 		else
 			fseek(file, 0, SEEK_END);
 	}
@@ -923,8 +952,8 @@ fz_tell_output(fz_context *ctx, fz_output *out)
 	if (out->tell == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot tell in untellable output stream");
 
-	int64_t pos = out->tell(ctx, out);
 	fzoutput_lock(out);
+	int64_t pos = out->tell(ctx, out);
 	if (out->bp)
 		pos += (out->wp - out->bp);
 	fzoutput_unlock(out);

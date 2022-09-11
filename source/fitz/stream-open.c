@@ -36,10 +36,20 @@ int
 fz_file_exists(fz_context *ctx, const char *path)
 {
 	FILE *file;
+	// any error that happens in here should remain hidden:
+	int ec = fz_ctx_get_generic_system_error(ctx);
 	file = fz_fopen_utf8(ctx, path, "rb");
 	int e = !!file;
 	if (file)
 		fclose(file);
+	// 'restore' the system error state as it was before this call.
+	//
+	// Note: we're being cheap about it as we *lost* any custom error
+	// message that went with that original system error...
+	if (ec)
+		fz_replace_ephemeral_system_error(ctx, ec, NULL);
+	else
+		fz_clear_system_error(ctx);
 	return e;
 }
 

@@ -1212,7 +1212,7 @@ static void flush_active_logfile_hard(void)
         // logfiles are cut up into ~20MB chunks:
         if (file_size < 20000000)
         {
-            logcfg.logfile = fz_fopen_utf8(ctx, logcfg.logfilepath, "a");
+			logcfg.logfile = fz_fopen_utf8(ctx, logcfg.logfilepath, "a");
         }
         else
         {
@@ -2148,7 +2148,8 @@ bulktest_main(int argc, const char **argv)
                 }
                 datafilename = fz_strdup(ctx, abspathbuf);
 
-                datafeed = fz_fopen_utf8(ctx, datafilename, "rb");
+				fz_clear_system_error(ctx);
+				datafeed = fz_fopen_utf8(ctx, datafilename, "rb");
                 if (datafeed == NULL)
                     fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
                 datalinecounter = 0;
@@ -2574,7 +2575,16 @@ bulktest_main(int argc, const char **argv)
                             struct trace_info prev_trace_info = trace_info;
                             trace_info.peak = 0;
 
-                            rv = mutool_main(argc - 1, argv + 1);
+							fz_try(ctx)
+							{
+								rv = mutool_main(argc - 1, argv + 1);
+							}
+							fz_catch(ctx)
+							{
+								fz_error(ctx, "bulktest/mutool: caught otherwise unhandled exception when executing '%s': %s", scriptname, fz_caught_message(ctx));
+								rv = 666;
+							}
+
                             if (rv != EXIT_SUCCESS)
                             {
                                 fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);

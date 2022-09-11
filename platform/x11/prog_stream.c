@@ -270,8 +270,9 @@ fz_stream *
 fz_open_file_progressive(fz_context *ctx, const char *name, int kbps, void (*on_data)(void*,int), void *opaque)
 {
 	FILE *f;
+	fz_clear_system_error(ctx);
 	f = fz_fopen_utf8(ctx, name, "rb");
 	if (f == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, strerror(errno));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, fz_ctx_get_system_errormsg(ctx));
 	return fz_open_file_ptr_progressive(ctx, f, kbps, on_data, opaque);
 }

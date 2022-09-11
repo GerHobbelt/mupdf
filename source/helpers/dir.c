@@ -871,10 +871,12 @@ fz_stat_ctime(fz_context *ctx, const char* path)
 		return 0;
 
 	int n = _wstat(wpath, &info);
-	fz_copy_ephemeral_errno(ctx);
-	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
+	}
 
 	return info.st_ctime;
 }
@@ -889,10 +891,12 @@ fz_stat_mtime(fz_context* ctx, const char* path)
 		return 0;
 
 	int n = _wstat(wpath, &info);
-	fz_copy_ephemeral_errno(ctx);
-	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
+	}
 
 	return info.st_mtime;
 }
@@ -949,8 +953,11 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	}
 
 	file = _wfopen(wname, wmode);
-	fz_copy_ephemeral_errno(ctx);
-	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	if (!file)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	}
 
 	free(wmode);
 
@@ -969,8 +976,11 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 	}
 
 	n = _wremove(wname);
-	fz_copy_ephemeral_errno(ctx);
-	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	}
 
 	return n;
 }
@@ -1052,7 +1062,14 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 		return NULL;
 	}
 
-	return fopen(name, mode);
+	FILE *rv = fopen(name, mode);
+	if (!rv)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return NULL;
+	}
+	return rv;
 }
 
 int
@@ -1066,7 +1083,14 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 		return -1;
 	}
 
-	return remove(name);
+	int rv = remove(name);
+	if (rv)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
+	}
+	return 0;
 }
 
 int
@@ -1097,12 +1121,11 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 
 		int n = mkdir(pname);
 		int e = errno;
-		fz_copy_ephemeral_errno(ctx);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		if (n && e != EEXIST && e != EACCES)
 		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 			free(pname);
-			errno = e;
 			return -1;
 		}
 		*d = c;

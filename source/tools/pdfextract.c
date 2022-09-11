@@ -27,6 +27,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/helpers/dir.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -283,10 +284,11 @@ static void extractobject(int num)
 
 int pdfextract_main(int argc, const char** argv)
 {
-	const char *infile;
-	const char *password = "";
-	int c, o;
-	int errored = 0;
+    const char *infile;
+    const char *password = "";
+    int c, o;
+    int errored = 0;
+    char file_tpl_buf[PATH_MAX];
 
 	doc = NULL;
 	ctx = NULL;
@@ -334,12 +336,19 @@ int pdfextract_main(int argc, const char** argv)
 
 	infile = argv[fz_optind++];
 
-	fz_try(ctx)
-	{
-		if (doicc)
-			fz_enable_icc(ctx);
-		else
-			fz_disable_icc(ctx);
+    fz_try(ctx)
+    {
+        fz_format_output_path(ctx, file_tpl_buf, sizeof file_tpl_buf, output_template_path, 0);
+        fz_normalize_path(ctx, file_tpl_buf, sizeof file_tpl_buf, file_tpl_buf);
+        fz_sanitize_path(ctx, file_tpl_buf, sizeof file_tpl_buf, file_tpl_buf);
+        // the lifetime of `file_tpl_buf` will be plenty long enough for all usage of that path to complete, so it's safe to reference it like this, via a global alias:
+        output_template_path = file_tpl_buf;
+
+        if (doicc)
+            fz_enable_icc(ctx);
+        else
+            fz_disable_icc(ctx);
+
 
 		doc = pdf_open_document(ctx, infile);
 		if (pdf_needs_password(ctx, doc))
