@@ -430,9 +430,10 @@ subarea_next(fz_context *ctx, fz_stream *stm, size_t len)
 }
 
 static void
-subarea_drop(fz_context *ctx, void *state)
+subarea_drop(fz_context *ctx, fz_stream* stm)
 {
-	fz_free(ctx, state);
+	fz_free(ctx, stm->state);
+	stm->state = NULL;
 }
 
 static fz_stream *
@@ -480,9 +481,10 @@ typedef struct
 } l2sub_state;
 
 static void
-subsample_drop(fz_context *ctx, void *state)
+subsample_drop(fz_context *ctx, fz_stream* stm)
 {
-	fz_free(ctx, state);
+	fz_free(ctx, stm->state);
+	stm->state = NULL;
 }
 
 static int

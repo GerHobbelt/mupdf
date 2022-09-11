@@ -54,8 +54,8 @@ fz_new_stream(fz_context *ctx, void *state, fz_stream_next_fn *next, fz_stream_d
 	}
 	fz_catch(ctx)
 	{
-		if (drop)
-			drop(ctx, state);
+//		if (drop)
+//			drop(ctx, state);
 		fz_rethrow(ctx);
 	}
 
@@ -90,7 +90,7 @@ fz_drop_stream(fz_context *ctx, fz_stream *stm)
 	if (fz_drop_imp(ctx, stm, &stm->refs))
 	{
 		if (stm->drop)
-			stm->drop(ctx, stm->state);
+			stm->drop(ctx, stm);
 		fz_free(ctx, stm);
 	}
 }
@@ -113,7 +113,11 @@ static int next_file(fz_context *ctx, fz_stream *stm, size_t n)
 	/* n is only a hint, that we can safely ignore */
 	n = fread(state->buffer, 1, sizeof(state->buffer), state->file); //-V763
 	if (n < sizeof(state->buffer) && ferror(state->file))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "read error: %s", strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "read error: %s", fz_ctx_get_system_errormsg(ctx));
+	}
 	stm->rp = state->buffer;
 	stm->wp = state->buffer + n;
 	stm->pos += (int64_t)n;
@@ -132,7 +136,11 @@ static void seek_file(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 	int64_t n = fseeko(state->file, offset, whence);
 #endif
 	if (n < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek: %s", strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek: %s", fz_ctx_get_system_errormsg(ctx));
+	}
 #ifdef _WIN32
 	stm->pos = _ftelli64(state->file);
 #else
@@ -142,13 +150,22 @@ static void seek_file(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 	stm->wp = state->buffer;
 }
 
-static void drop_file(fz_context *ctx, void *state_)
+static void drop_file(fz_context *ctx, fz_stream *stm)
 {
-	fz_file_stream *state = state_;
-	int n = fclose(state->file);
-	if (n < 0)
-		fz_warn(ctx, "close error: %s", strerror(errno));
+	fz_file_stream* state = stm->state;
+	if (state->file)
+	{
+		int n = fclose(state->file);
+		if (n < 0)
+		{
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			fz_warn(ctx, "close error: %s", fz_ctx_get_system_errormsg(ctx));
+		}
+		state->file = NULL;
+	}
 	fz_free(ctx, state);
+	stm->state = NULL;
 }
 
 static fz_stream *
@@ -164,11 +181,23 @@ fz_open_file_ptr(fz_context *ctx, FILE *file)
 	return stm;
 }
 
+static void dont_drop_file(fz_context* ctx, fz_stream* stm)
+{
+	fz_file_stream* state = stm->state;
+	if (state->file)
+	{
+		/* We don't own the file ptr. Ensure we don't close it */
+		state->file = NULL;
+	}
+	fz_free(ctx, state);
+	stm->state = NULL;
+}
+
 fz_stream *fz_open_file_ptr_no_close(fz_context *ctx, FILE *file)
 {
 	fz_stream *stm = fz_open_file_ptr(ctx, file);
 	/* We don't own the file ptr. Ensure we don't close it */
-	stm->drop = fz_free;
+	stm->drop = dont_drop_file;
 	return stm;
 }
 
@@ -178,7 +207,7 @@ fz_open_file(fz_context *ctx, const char *name)
 	FILE *file;
 	file = fz_fopen_utf8(ctx, name, "rb");
 	if (file == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, strerror(errno));
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open %s: %s", name, fz_ctx_get_system_errormsg(ctx));
 	return fz_open_file_ptr(ctx, file);
 }
 
@@ -188,7 +217,11 @@ fz_open_file_w(fz_context *ctx, const wchar_t *name)
 {
 	FILE *file = _wfopen(name, L"rb");
 	if (file == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file %ls: %s", name, strerror(errno));
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open file %ls: %s", name, fz_ctx_get_system_errormsg(ctx));
+	}
 	return fz_open_file_ptr(ctx, file);
 }
 #endif
@@ -220,9 +253,9 @@ static void seek_buffer(fz_context *ctx, fz_stream *stm, int64_t offset, int whe
 	stm->rp += (int)(offset - pos);
 }
 
-static void drop_buffer(fz_context *ctx, void *state_)
+static void drop_buffer(fz_context *ctx, fz_stream* stm)
 {
-	fz_buffer *state = (fz_buffer *)state_;
+	fz_buffer *state = (fz_buffer *)stm->state;
 	fz_drop_buffer(ctx, state);
 }
 

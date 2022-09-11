@@ -118,10 +118,10 @@ enum
     FZ_ERROR_NOT_A_PDF = 8,
     FZ_ERROR_COUNT,
 
-	FZ_ERROR_C_RTL_SERIES       = 0x10000000,	/// marks the error value is actually an `errno` error value stored in the context error state
-	FZ_ERROR_C_RTL_SERIES_MASK  = 0x0FFFFFFF,	/// the mask for the part of the integer value where the actual `errno` value is stored.
-	FZ_ERROR_SYS_SERIES         = 0x80000000,	/// marks the error value is actually a system error value stored in the context error state; e.g. a Win32 system error as may be produced by Win32 API `GetLastError()` (see also <winerror.h> ), stored in the context error state.
-	FZ_ERROR_SYS_SERIES_MASK    = 0x7FFFFFFF,	/// the mask for the part of the integer value where the actual `sys_errno` value is stored.
+    FZ_ERROR_C_RTL_SERIES       = 0x10000000,	/// marks the error value is actually an `errno` error value stored in the context error state
+    FZ_ERROR_C_RTL_SERIES_MASK  = 0x0FFFFFFF,	/// the mask for the part of the integer value where the actual `errno` value is stored.
+    FZ_ERROR_SYS_SERIES         = 0x80000000,	/// marks the error value is actually a system error value stored in the context error state; e.g. a Win32 system error as may be produced by Win32 API `GetLastError()` (see also <winerror.h> ), stored in the context error state.
+    FZ_ERROR_SYS_SERIES_MASK    = 0x7FFFFFFF,	/// the mask for the part of the integer value where the actual `sys_errno` value is stored.
 };
 
 /**
@@ -818,17 +818,17 @@ typedef struct
     fz_error_stack_slot __stack[512];
     fz_error_stack_slot padding;
     fz_error_stack_slot *stack_base;
-	// Stores the last (exception) error code. See the FZ_ERROR_XXX enum, e.g. FZ_ERROR_GENERIC.
+    // Stores the last (exception) error code. See the FZ_ERROR_XXX enum, e.g. FZ_ERROR_GENERIC.
     int errcode;
     // See fz_rethrow() code comments for the complete story:
     int last_nonzero_errcode;
-	// This (together with the `system_error_message` member) stores the last **system error**
-	// which was encountered in the fz_xxxxxxx() functions.
-	int system_errcode;
-	void *print_user;
+    // This (together with the `system_error_message` member) stores the last **system error**
+    // which was encountered in the fz_xxxxxxx() functions.
+    int system_errcode;
+    void *print_user;
     fz_error_print_callback *print;
     char message[LONGLINE];
-	char system_error_message[LONGLINE];
+    char system_error_message[LONGLINE];
 } fz_error_context;
 
 typedef struct
@@ -895,69 +895,80 @@ fz_context *fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_con
 
 
 /**
-	At least in the mupdf library internally we store ephemeral run-time and system errors in the context `ctx` to ensure they
-	don't disappear before we've been able to handle and/or report them.
+    At least in the mupdf library internally we store ephemeral run-time and system errors in the context `ctx` to ensure they
+    don't disappear before we've been able to handle and/or report them.
 
-	This intentionally DOES NOT use the same scratch space as used by the exception handling system: throwing exceptions can include
-	formatting messages, which desire to include the last system error message using `%s`, which would break in very destructive ways
-	when we were to re-use `ctx->error.message[]` for our system error message as well!
+    This intentionally DOES NOT use the same scratch space as used by the exception handling system: throwing exceptions can include
+    formatting messages, which desire to include the last system error message using `%s`, which would break in very destructive ways
+    when we were to re-use `ctx->error.message[]` for our system error message as well!
 
-	This is why the accompanying system error message is kept in a separate scratch space and can be accessed via the `fz_ctx_get_system_errormsg()` API call.
+    This is why the accompanying system error message is kept in a separate scratch space and can be accessed via the `fz_ctx_get_system_errormsg()` API call.
+
+    NOTE: once you have copied an ephemeral error (and its message), any subsequent attempts to copy an ephemeral error will
+    be silently ignored until you signal the `ctx` that you have observed and handled the error by calling `fz_clear_system_error()`.
+    This way you get desirable 'first error is the only one relevant/persisted' behaviour.
+
+    You MAY replace any ephemeral error code + message by combining the calls `fz_clear_system_error()`+`fz_copy_ephemeral_system_error_explicit()`-->`fz_replace_ephemeral_system_error()`
 */
 
 void fz_copy_ephemeral_system_error_explicit(fz_context *ctx, int errorcode, const char *errormessage, int category_code, int errorcode_mask);
 
 static inline void fz_copy_ephemeral_errno(fz_context *ctx)
 {
-	int ec = errno;
-	fz_copy_ephemeral_system_error_explicit(ctx, ec, strerror(ec), FZ_ERROR_C_RTL_SERIES, FZ_ERROR_C_RTL_SERIES_MASK);
+    int ec = errno;
+    fz_copy_ephemeral_system_error_explicit(ctx, ec, strerror(ec), FZ_ERROR_C_RTL_SERIES, FZ_ERROR_C_RTL_SERIES_MASK);
 }
 
 static inline void fz_copy_ephemeral_errno_and_message(fz_context *ctx, int sys_errorcode, const char *errormessage)
 {
-	fz_copy_ephemeral_system_error_explicit(ctx, sys_errorcode, errormessage, FZ_ERROR_C_RTL_SERIES, FZ_ERROR_C_RTL_SERIES_MASK);
+    fz_copy_ephemeral_system_error_explicit(ctx, sys_errorcode, errormessage, FZ_ERROR_C_RTL_SERIES, FZ_ERROR_C_RTL_SERIES_MASK);
 }
 
 static inline void fz_copy_ephemeral_system_error(fz_context *ctx, int sys_errorcode, const char *errormessage)
 {
-	fz_copy_ephemeral_system_error_explicit(ctx, sys_errorcode, errormessage, FZ_ERROR_SYS_SERIES, FZ_ERROR_SYS_SERIES_MASK);
+    fz_copy_ephemeral_system_error_explicit(ctx, sys_errorcode, errormessage, FZ_ERROR_SYS_SERIES, FZ_ERROR_SYS_SERIES_MASK);
 }
+
+// 0/NULL arg means: don't replace this part!
+void fz_replace_ephemeral_system_error(fz_context *ctx, int errorcode, const char *errormessage);
+void fz_freplace_ephemeral_system_error(fz_context *ctx, int errorcode, const char *errormessage_fmt, ...);
+void fz_vreplace_ephemeral_system_error(fz_context *ctx, int errorcode, const char *errormessage_fmt, va_list ap);
 
 
 static inline void fz_clear_system_error(fz_context *ctx)
 {
-	ctx->error.system_errcode = 0;
-	ctx->error.system_error_message[0] = 0;
+    ctx->error.system_errcode = 0;
+    ctx->error.system_error_message[0] = 0;
 }
 
 
 static inline int fz_is_generic_system_error(int errorcode)
 {
-	return (errorcode < 0 || errorcode >= FZ_ERROR_C_RTL_SERIES);
+    return (errorcode < 0 || errorcode >= FZ_ERROR_C_RTL_SERIES);
 }
 
 static inline int fz_is_os_system_error(int errorcode)
 {
-	return (errorcode & FZ_ERROR_SYS_SERIES);
+    return (errorcode & FZ_ERROR_SYS_SERIES);
 }
 
 static inline int fz_is_rtl_error(int errorcode)
 {
-	return errorcode >= FZ_ERROR_C_RTL_SERIES && errorcode < (FZ_ERROR_C_RTL_SERIES | FZ_ERROR_C_RTL_SERIES_MASK);
+    return errorcode >= FZ_ERROR_C_RTL_SERIES && errorcode < (FZ_ERROR_C_RTL_SERIES | FZ_ERROR_C_RTL_SERIES_MASK);
 }
 
 
-///  Return the the ephemeral run-time-library error code stored in the `ctx` context.
-static inline int fz_ctx_get_generic_system_errno(fz_context *ctx)
+///  Return the ephemeral run-time-library error code stored in the `ctx` context.
+static inline int fz_ctx_get_generic_system_error(fz_context *ctx)
 {
-	return ctx->error.system_errcode;
+    return ctx->error.system_errcode;
 }
 
 ///  Return 1 when the `ctx` stores an ephemeral system/run-time-library error code (& accompanying message)
 static inline int fz_ctx_has_system_error(fz_context *ctx)
 {
-	int ec = fz_ctx_get_generic_system_errno(ctx);
-	return fz_is_generic_system_error(ec);
+    int ec = fz_ctx_get_generic_system_error(ctx);
+    return fz_is_generic_system_error(ec);
 }
 
 ///  Return non-zero `errno`-equivalent error code IFF the `ctx` stores the ephemeral run-time-library error code
@@ -965,32 +976,32 @@ static inline int fz_ctx_has_system_error(fz_context *ctx)
 /// Return 0 when there's no system error stored in the `ctx` at all.
 static inline int fz_ctx_get_rtl_errno(fz_context *ctx)
 {
-	int ec = fz_ctx_get_generic_system_errno(ctx);
-	if (fz_is_rtl_error(ec))
-		return ec & FZ_ERROR_C_RTL_SERIES_MASK;
-	return ec ? -1 : 0;
+    int ec = fz_ctx_get_generic_system_error(ctx);
+    if (fz_is_rtl_error(ec))
+        return ec & FZ_ERROR_C_RTL_SERIES_MASK;
+    return ec ? -1 : 0;
 }
 
 ///  Return non-zero system error code IFF the `ctx` stores the ephemeral system error code
 static inline int fz_ctx_get_os_system_error(fz_context *ctx)
 {
-	int ec = fz_ctx_get_generic_system_errno(ctx);
+    int ec = fz_ctx_get_generic_system_error(ctx);
 #if defined(_WIN32)
-	// all Win32 system errors (and warnings!) have their high bit set, i.e. bitmask FZ_ERROR_SYS_SERIES ! (this is intentional!) 
-	if (fz_is_os_system_error(ec))
-		return ec;
+    // all Win32 system errors (and warnings!) have their high bit set, i.e. bitmask FZ_ERROR_SYS_SERIES ! (this is intentional!) 
+    if (fz_is_os_system_error(ec))
+        return ec;
 #else
-	if (fz_is_os_system_error(ec))
-		return ec & FZ_ERROR_SYS_SERIES_MASK;
+    if (fz_is_os_system_error(ec))
+        return ec & FZ_ERROR_SYS_SERIES_MASK;
 #endif
-	return 0;
+    return 0;
 }
 
 static inline const char *fz_ctx_get_system_errormsg(fz_context *ctx)
 {
-	if (fz_ctx_has_system_error(ctx))
-		return ctx->error.system_error_message;
-	return NULL;
+    if (fz_ctx_has_system_error(ctx))
+        return ctx->error.system_error_message;
+    return NULL;
 }
 
 

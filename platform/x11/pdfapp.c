@@ -428,8 +428,8 @@ void pdfapp_open_progressive(pdfapp_t *app, const char *filename, int reload, in
 			{
 				/* Check whether that file exists, and isn't older than
 				 * the document. */
-				atime = fz_stat_mtime(accelpath);
-				dtime = fz_stat_mtime(filename);
+				atime = fz_stat_mtime(ctx, accelpath);
+				dtime = fz_stat_mtime(ctx, filename);
 				if (atime == 0)
 				{
 					/* No accelerator */

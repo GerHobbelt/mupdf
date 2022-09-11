@@ -683,22 +683,22 @@ int fz_is_absolute_path(const char* path)
 
 #if defined(_WIN32)
 
-static int fz_UNC_wfullpath_from_name(wchar_t dstbuf[PATH_MAX], const char* path)
+static int fz_UNC_wfullpath_from_name(fz_context* ctx, wchar_t dstbuf[PATH_MAX], const char* path)
 {
 	wchar_t wpath[PATH_MAX];
 	wchar_t wbuf[PATH_MAX + 4];
 
 	if (!MultiByteToWideChar(CP_UTF8, 0, path, -1, wpath, PATH_MAX))
 	{
-		DWORD ec = GetLastError();
-		errno = ENAMETOOLONG;
-		return ec;
+		fz_copy_ephemeral_system_error(ctx, GetLastError(), NULL);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
 	}
 	if (!GetFullPathNameW(wpath, PATH_MAX, wbuf + 4, NULL))
 	{
-		DWORD ec = GetLastError();
-		errno = ENAMETOOLONG;
-		return ec;
+		fz_copy_ephemeral_system_error(ctx, GetLastError(), NULL);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
 	}
 	const wchar_t* fp = wbuf + 4;
 	// Is full path an UNC path already? If not, make it so:
@@ -714,7 +714,7 @@ static int fz_UNC_wfullpath_from_name(wchar_t dstbuf[PATH_MAX], const char* path
 	{
 		wcsncpy(dstbuf, wbuf + 4, PATH_MAX);
 	}
-	return E_OK;
+	return 0;
 }
 
 #endif
@@ -724,9 +724,9 @@ int fz_chdir(fz_context* ctx, const char *path)
 #ifdef _MSC_VER
 	wchar_t wname[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wname, path))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, path))
 	{
-		return errno || ENOMEM;
+		return -1;
 	}
 
 	// remove trailing / dir separator, if any...
@@ -742,27 +742,17 @@ int fz_chdir(fz_context* ctx, const char *path)
 	if (chdir(path))
 #endif
 	{
-		int e = errno;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 
-		if (ctx)
+		if (fz_ctx_get_rtl_errno(ctx) == ENOENT)
 		{
-			switch (e)
-			{
-			case ENOENT:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Unable to locate the directory: %s", path);
-				break;
-			case EINVAL:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Invalid buffer.");
-				break;
-			default:
-				fz_throw(ctx, FZ_ERROR_GENERIC, "chdir: Unknown error %d: %s.", (int)e, strerror(e));
-				break;
-			}
+			fz_freplace_ephemeral_system_error(ctx, 0, "chdir: Unable to locate the directory: %s", path);
 		}
-		return errno;
+		return -1;
 	}
 
-	return E_OK;
+	return 0;
 }
 
 #if defined(_WIN32)
@@ -770,9 +760,7 @@ int fz_chdir(fz_context* ctx, const char *path)
 void fz_mkdir_for_file(fz_context* ctx, const char* path)
 {
 	char* buf = fz_strdup(ctx, path);
-
-	if (!buf)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_mkdir_for_file: out of memory.");
+	ASSERT(buf);
 
 	// unixify MSDOS path:
 	char* e = strchr(buf, '\\');
@@ -791,10 +779,10 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 		int rv = fz_mkdirp_utf8(ctx, buf);
 		if (rv)
 		{
-			rv = errno;
+			rv = fz_ctx_get_rtl_errno(ctx);
 			if (rv != EEXIST)
 			{
-				const char* errmsg = strerror(rv);
+				const char* errmsg = fz_ctx_get_system_errormsg(ctx);
 				fz_info(ctx, "mkdirp --> mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
 			}
 		}
@@ -808,9 +796,7 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 void fz_mkdir_for_file(fz_context* ctx, const char* path)
 {
 	char* buf = fz_strdup(ctx, path);
-
-	if (!buf)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_mkdir_for_file: out of memory.");
+	ASSERT(buf);
 
 	// unixify MSDOS path:
 	char *e = strchr(buf, '\\');
@@ -840,11 +826,13 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 			int rv = mkdir(buf);
 			if (rv)
 			{
-				rv = errno;
+				fz_copy_ephemeral_errno(ctx);
+				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				rv = fz_ctx_get_rtl_errno(ctx);
 				if (rv != EEXIST)
 				{
-					const char* errmsg = strerror(rv);
-					fz_info(ctx, "mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
+					const char* errmsg = fz_ctx_get_system_errormsg(ctx);
+					fz_info(ctx, "mkdirp --> mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
 				}
 			}
 			*e = '/';
@@ -853,11 +841,13 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 			int rv = mkdir(buf);
 			if (rv)
 			{
-				rv = errno;
+				fz_copy_ephemeral_errno(ctx);
+				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+				rv = fz_ctx_get_rtl_errno(ctx);
 				if (rv != EEXIST)
 				{
-					const char* errmsg = strerror(rv);
-					fz_info(ctx, "mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
+					const char* errmsg = fz_ctx_get_system_errormsg(ctx);
+					fz_info(ctx, "mkdirp --> mkdir(%s) --> (%d) %s\n", buf, rv, errmsg);
 				}
 			}
 		}
@@ -872,39 +862,37 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 #if defined(_WIN32)
 
 int64_t
-fz_stat_ctime(const char* path)
+fz_stat_ctime(fz_context *ctx, const char* path)
 {
 	struct _stat info;
 	wchar_t wpath[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wpath, path))
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
 		return 0;
 
 	int n = _wstat(wpath, &info);
-	int e = errno;
-	if (n < 0) {
-		errno = e;
+	fz_copy_ephemeral_errno(ctx);
+	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	if (n)
 		return 0;
-	}
 
 	return info.st_ctime;
 }
 
 int64_t
-fz_stat_mtime(const char* path)
+fz_stat_mtime(fz_context* ctx, const char* path)
 {
 	struct _stat info;
 	wchar_t wpath[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wpath, path))
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
 		return 0;
 
 	int n = _wstat(wpath, &info);
-	int e = errno;
-	if (n < 0) {
-		errno = e;
+	fz_copy_ephemeral_errno(ctx);
+	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+	if (n)
 		return 0;
-	}
 
 	return info.st_mtime;
 }
@@ -912,20 +900,28 @@ fz_stat_mtime(const char* path)
 #else
 
 int64_t
-fz_stat_ctime(const char* path)
+fz_stat_ctime(fz_context* ctx, const char* path)
 {
 	struct stat info;
-	if (stat(path, &info) < 0)
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
+	}
 	return info.st_ctime;
 }
 
 int64_t
-fz_stat_mtime(const char* path)
+fz_stat_mtime(fz_context* ctx, const char* path)
 {
 	struct stat info;
-	if (stat(path, &info) < 0)
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
+	}
 	return info.st_mtime;
 }
 
@@ -941,7 +937,7 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	wchar_t *wmode;
 	FILE* file;
 
-	if (fz_UNC_wfullpath_from_name(wname, name))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
 	{
 		return NULL;
 	}
@@ -949,16 +945,15 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	wmode = fz_wchar_from_utf8(mode);
 	if (wmode == NULL)
 	{
-		errno = ENOMEM;
 		return NULL;
 	}
 
 	file = _wfopen(wname, wmode);
-	int e = errno;
+	fz_copy_ephemeral_errno(ctx);
+	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 
 	free(wmode);
 
-	errno = e;
 	return file;
 }
 
@@ -968,12 +963,14 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 	wchar_t wname[PATH_MAX];
 	int n;
 
-	if (fz_UNC_wfullpath_from_name(wname, name))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
 	{
 		return -1;
 	}
 
 	n = _wremove(wname);
+	fz_copy_ephemeral_errno(ctx);
+	ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 
 	return n;
 }
@@ -983,7 +980,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 {
 	wchar_t wname[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wname, name))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
 	{
 		return -1;
 	}
@@ -1002,6 +999,8 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 		d = q + wcslen(q);
 	}
 
+	int rv = 0;
+
 	for(;;)
 	{
 		wchar_t c = *d;
@@ -1009,10 +1008,13 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 
 		int n = _wmkdir(wname);
 		int e = errno;
-		if (n && e != EEXIST && e != EACCES)
+		if (n && e != EEXIST)
 		{
-			return -1;
+			fz_copy_ephemeral_errno(ctx);
+			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+			rv = -1;
 		}
+
 		*d = c;
 		// did we reach the end of the *original* path spec?
 		if (!c)
@@ -1024,10 +1026,12 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 			d += wcslen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
 	}
 
-	return 0;
+	return rv;
 }
 
 #else
+
+// TODO: code review re ephemeral errorcode handling
 
 FILE*
 fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
@@ -1035,12 +1039,16 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	if (name == NULL)
 	{
 		errno = EINVAL;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return NULL;
 	}
 
 	if (mode == NULL)
 	{
 		errno = EINVAL;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return NULL;
 	}
 
@@ -1053,6 +1061,8 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 	if (name == NULL)
 	{
 		errno = EINVAL;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return -1;
 	}
 
@@ -1087,6 +1097,8 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 
 		int n = mkdir(pname);
 		int e = errno;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		if (n && e != EEXIST && e != EACCES)
 		{
 			free(pname);

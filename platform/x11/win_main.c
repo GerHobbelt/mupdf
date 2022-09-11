@@ -1333,10 +1333,6 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
         return EXIT_FAILURE;
     }
 
-    // stderr goes nowhere.
-    // Get us a debug stream so we have a chance of seeing *independently* of stderr.
-    fz_set_stddbg(ctx, fz_stdods(ctx));
-
     pdfapp_init(ctx, &gapp);
 
     argv = fz_argv_from_wargv(argc, wargv);

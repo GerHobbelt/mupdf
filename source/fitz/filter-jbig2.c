@@ -75,9 +75,9 @@ fz_drop_jbig2_globals(fz_context *ctx, fz_jbig2_globals *globals)
 }
 
 static void
-close_jbig2d(fz_context *ctx, void *state_)
+close_jbig2d(fz_context *ctx, fz_stream* stm)
 {
-	fz_jbig2d *state = state_;
+	fz_jbig2d *state = stm->state;
 	fz_try(ctx)
 	{
 		fz_lock_jbig2(ctx);

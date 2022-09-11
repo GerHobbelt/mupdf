@@ -498,9 +498,9 @@ static int cs_next(fz_context *ctx, fz_stream *stream, size_t len)
 	return *stream->rp++;
 }
 
-static void cs_close(fz_context *ctx, void *state_)
+static void cs_close(fz_context *ctx, fz_stream* stm)
 {
-	struct curlstate *state = state_;
+	struct curlstate *state = stm->state;
 
 	lock(state);
 	state->kill_thread = 1;
@@ -519,6 +519,7 @@ static void cs_close(fz_context *ctx, void *state_)
 	fz_free(ctx, state->buffer);
 	fz_free(ctx, state->map);
 	fz_free(ctx, state);
+	stm->state = NULL;
 }
 
 static void cs_seek(fz_context *ctx, fz_stream *stm, int64_t offset, int whence)

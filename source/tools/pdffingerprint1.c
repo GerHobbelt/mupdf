@@ -129,11 +129,6 @@ qiqqa_fingerprint1_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
-#ifdef _WIN32
-	// Get us a debug stream so we have a chance of seeing *independently* of stderr.
-	fz_set_stddbg(ctx, fz_stdods(ctx));
-#endif
-
 	const char* datafilename = NULL;
 	int errored = 0;
 

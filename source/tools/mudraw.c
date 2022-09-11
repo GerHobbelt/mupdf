@@ -3191,7 +3191,12 @@ int main(int argc, const char** argv)
 		else
 		{
 			output_file_per_page = 0;
-			out = fz_new_output_with_path(ctx, output, 0);
+
+			char file_path[PATH_MAX];
+			fz_format_output_path(ctx, file_path, sizeof file_path, output, 0);
+			fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
+			fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
+			out = fz_new_output_with_path(ctx, file_path, 0);
 		}
 
 		if (output_format->format == OUT_PDF)
@@ -3327,8 +3332,8 @@ int main(int argc, const char** argv)
 					{
 						/* Check whether that file exists, and isn't older than
 						 * the document. */
-						atime = fz_stat_mtime(accelpath);
-						dtime = fz_stat_mtime(filename);
+						atime = fz_stat_mtime(ctx, accelpath);
+						dtime = fz_stat_mtime(ctx, filename);
 						if (atime == 0)
 						{
 							/* No accelerator */
@@ -3436,7 +3441,12 @@ int main(int argc, const char** argv)
 #if FZ_ENABLE_PDF
 		if (pdfout)
 		{
-			pdf_save_document(ctx, pdfout, output, NULL);
+			char file_path[PATH_MAX];
+			fz_format_output_path(ctx, file_path, sizeof file_path, output, 0);
+			fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
+			fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
+
+			pdf_save_document(ctx, pdfout, file_path, NULL);
 			pdf_drop_document(ctx, pdfout);
 			pdfout = NULL;
 		}

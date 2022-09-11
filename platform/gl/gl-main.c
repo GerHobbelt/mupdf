@@ -1731,8 +1731,8 @@ static void load_document(void)
 	{
 		/* Check whether that file exists, and isn't older than
 		 * the document. */
-		atime = fz_stat_mtime(accelpath);
-		dtime = fz_stat_mtime(filename);
+		atime = fz_stat_mtime(ctx, accelpath);
+		dtime = fz_stat_mtime(ctx, filename);
 		if (atime == 0)
 		{
 			/* No accelerator */
@@ -3056,12 +3056,6 @@ int main(int argc, const char** argv)
 	oldzoom = currentzoom = DEFRES * ui.scale;
 
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
-
-#ifdef _WIN32
-	// stderr goes nowhere.
-	// Get us a debug stream so we have a chance of seeing *independently* of stderr.
-	fz_set_stddbg(ctx, fz_stdods(ctx));
-#endif
 
 	console_init();
 

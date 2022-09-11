@@ -31,13 +31,7 @@
 #include <string.h>
 
 #ifdef _WIN32
-#define USE_OUTPUT_DEBUG_STRING  1
 #include <windows.h>
-#endif
-
-#ifdef __ANDROID__
-#define USE_ANDROID_LOG
-#include <android/log.h>
 #endif
 
 #define QUIET_ERROR				0x0001
@@ -92,7 +86,6 @@ void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 
 	if (!(quiet_mode & QUIET_ERROR))
 	{
-#if 1
 		if (buf[0])
 		{
 			fz_write_string(ctx, fz_stderr(ctx), buf);
@@ -103,31 +96,30 @@ void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 			fz_write_string(ctx, fz_stderr(ctx), message);
 			fz_write_string(ctx, fz_stderr(ctx), "\n");
 		}
-#else
-		fprintf(stderr, "error: %s\n", message);
-#endif
 	}
-#ifdef USE_OUTPUT_DEBUG_STRING
+
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		if (buf[0])
+		fz_output* out = ctx->stddbg;
+		if (out != fz_stderr(ctx))
 		{
-			OutputDebugStringA(buf);
-		}
-		else
-		{
-			OutputDebugStringA("error: ");
-			OutputDebugStringA(message);
-			OutputDebugStringA("\n");
+			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_ERROR);
+
+			if (buf[0])
+			{
+				fz_write_string(ctx, out, buf);
+			}
+			else
+			{
+				fz_write_string(ctx, out, "error: ");
+				fz_write_string(ctx, out, message);
+				fz_write_string(ctx, out, "\n");
+			}
 		}
 	}
-#endif
-#ifdef USE_ANDROID_LOG
-	__android_log_print(ANDROID_LOG_ERROR, "libmupdf", "%s", message);
-#endif
 }
 
-void fz_default_warning_callback(fz_context* ctx, void *user, const char *message)
+void fz_default_warning_callback(fz_context* ctx, void* user, const char* message)
 {
 	char buf[LONGLINE];
 	assert(message != NULL);
@@ -147,24 +139,26 @@ void fz_default_warning_callback(fz_context* ctx, void *user, const char *messag
 			fz_write_string(ctx, fz_stderr(ctx), "\n");
 		}
 	}
-#ifdef USE_OUTPUT_DEBUG_STRING
+
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		if (buf[0])
+		fz_output* out = ctx->stddbg;
+		if (out != fz_stderr(ctx))
 		{
-			OutputDebugStringA(buf);
-		}
-		else
-		{
-			OutputDebugStringA("warning: ");
-			OutputDebugStringA(message);
-			OutputDebugStringA("\n");
+			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_WARNING);
+
+			if (buf[0])
+			{
+				fz_write_string(ctx, out, buf);
+			}
+			else
+			{
+				fz_write_string(ctx, out, "warning: ");
+				fz_write_string(ctx, out, message);
+				fz_write_string(ctx, out, "\n");
+			}
 		}
 	}
-#endif
-#ifdef USE_ANDROID_LOG
-	__android_log_print(ANDROID_LOG_WARN, "libmupdf", "%s", message);
-#endif
 }
 
 /* Warning context */
@@ -194,7 +188,6 @@ void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 
 	if (!(quiet_mode & QUIET_INFO))
 	{
-#if 1
 		if (buf[0])
 		{
 			fz_write_string(ctx, fz_stderr(ctx), buf);
@@ -204,30 +197,29 @@ void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 			fz_write_string(ctx, fz_stderr(ctx), message);
 			fz_write_string(ctx, fz_stderr(ctx), "\n");
 		}
-#else
-		fprintf(stderr, "%s\n", message);
-#endif
 	}
-#ifdef USE_OUTPUT_DEBUG_STRING
+
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		if (buf[0])
+		fz_output* out = ctx->stddbg;
+		if (out != fz_stderr(ctx))
 		{
-			OutputDebugStringA(buf);
-		}
-		else
-		{
-			OutputDebugStringA(message);
-			OutputDebugStringA("\n");
+			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_INFO);
+
+			if (buf[0])
+			{
+				fz_write_string(ctx, out, buf);
+			}
+			else
+			{
+				fz_write_string(ctx, out, message);
+				fz_write_string(ctx, out, "\n");
+			}
 		}
 	}
-#endif
-#ifdef USE_ANDROID_LOG
-	__android_log_print(ANDROID_LOG_INFO, "libmupdf", "%s", message);
-#endif
 }
 
-/* Warning context */
+/* Info context */
 
 fz_error_print_callback* fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void* user)
 {
@@ -244,6 +236,7 @@ void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void
 	if (print)
 		*print = ctx->info.print;
 }
+
 
 static inline int edit_bit(int user, int set)
 {
@@ -319,20 +312,20 @@ void fz_flush_all_std_logging_channels(fz_context* ctx)
 	// log data as much as possible:
 	//
 	// - error
-	// - debug (for up to date diagnostics
+	// - debug (for up to date diagnostics)
 	// - stdout
 	// and then, just in case one or more of the above had anything to yak on the way out:
 	// - error
-	// - debug (for up to date diagnostics
+	// - debug (for up to date diagnostics)
 	fz_output* channel = fz_stderr(ctx);
 	fz_flush_output(ctx, channel);
-	channel = fz_stdods(ctx);
+	channel = fz_stddbg(ctx);
 	fz_flush_output(ctx, channel);
 	channel = fz_stdout(ctx);
 	fz_flush_output(ctx, channel);
 	channel = fz_stderr(ctx);
 	fz_flush_output(ctx, channel);
-	channel = fz_stdods(ctx);
+	channel = fz_stddbg(ctx);
 	fz_flush_output(ctx, channel);
 }
 
@@ -619,22 +612,15 @@ const char *fz_caught_message(fz_context *ctx)
 
 void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, const char* errormessage, int category_code, int errorcode_mask)
 {
+	// do not replace any existing errorcode! First comer is the winner!
+	if (ctx->error.system_errcode)
+		return;
+
 	if (errorcode == 0)
 		errorcode = -1; // unknown/unidentified error.
 
-	// Warning: we should, like `fz_rethrow()`, protect any already existing exception error code as we MAY be executing this code
-	// as part of a chunk that's inside a catch block and before the upcoming `fz_rethrow()` call, which would need that exception code.
-	//
-	// See for the full story the `fz_rethrow()` implementation code comments!
-	{
-		if (/* ctx->error.errcode != FZ_ERROR_NONE && */ ctx->error.last_nonzero_errcode == FZ_ERROR_NONE)
-		{
-			ctx->error.last_nonzero_errcode = ctx->error.errcode;
-		}
-	}
-
 	// keep a copy of the ephemeral system error code:
-	ctx->error.errcode = category_code | (errorcode & errorcode_mask);
+	ctx->error.system_errcode = category_code | (errorcode & errorcode_mask);
 
 	const char* category_lead_msg = (category_code == FZ_ERROR_C_RTL_SERIES ? "rtl error: " : "system error: ");
 	fz_strncpy_s(ctx, ctx->error.system_error_message, category_lead_msg, sizeof(ctx->error.system_error_message));
@@ -673,6 +659,88 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 	}
 
 	fz_strncat_s(ctx, ctx->error.system_error_message, errormessage, sizeof(ctx->error.system_error_message));
+}
+
+
+void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const char* errormessage)
+{
+	// brutally replace any existing errorcode!
+
+	if (errorcode != 0)
+	{
+		// keep a copy of the ephemeral system error code:
+		ctx->error.system_errcode = errorcode;
+
+		// check if the user also gave us a custom error message; if not, we'll fetch a system-level message instead.
+		// 
+		// EMPTY error message means: produce the system default message for me, please.
+		// NULL error message means: keep the existing one as-is.
+		// Anything else is the explicit overriding message.
+		if (errormessage)
+		{
+			if (!errormessage[0])
+			{
+				const char* category_lead_msg = (fz_is_rtl_error(errorcode) ? "rtl error: " : "system error: ");
+				fz_strncpy_s(ctx, ctx->error.system_error_message, category_lead_msg, sizeof(ctx->error.system_error_message));
+
+				if (errorcode == -1)
+					errormessage = "unknown/unidentified error";
+				else
+				{
+					if (fz_is_rtl_error(errorcode))
+					{
+						errormessage = strerror(errorcode);
+					}
+					else
+					{
+#if defined(_WIN32)
+						size_t offset = strlen(ctx->error.system_error_message);
+						FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, NULL);
+						return;
+#endif
+					}
+				}
+
+				if (!errormessage || !errormessage[0])
+				{
+					size_t offset = strlen(ctx->error.system_error_message);
+					if (errorcode < 0xFFFF)
+						fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code %d", errorcode);
+					else
+						// some segmented errorcode: dumnp as HEX value!
+						fz_snprintf(ctx->error.system_error_message + offset, sizeof(ctx->error.system_error_message) - offset, "unknown/unidentified error code 0x%08x", errorcode);
+					return;
+				}
+			}
+
+			fz_strncpy_s(ctx, ctx->error.system_error_message, errormessage, sizeof(ctx->error.system_error_message));
+		}
+	}
+	else
+	{
+		// ONLY non-empty error message overrides. We don't do defaults here as the `replace` API is intended for explicit overrides only!
+		if (errormessage != NULL && errormessage[0])
+		{
+			fz_strncpy_s(ctx, ctx->error.system_error_message, errormessage, sizeof(ctx->error.system_error_message));
+		}
+	}
+}
+
+void fz_freplace_ephemeral_system_error(fz_context* ctx, int errorcode, const char* fmt, ...)
+{
+	va_list ap;
+	va_start(ap, fmt);
+	fz_vreplace_ephemeral_system_error(ctx, errorcode, fmt, ap);
+	va_end(ap);
+}
+
+void fz_vreplace_ephemeral_system_error(fz_context* ctx, int errorcode, const char* fmt, va_list ap)
+{
+	char buf[sizeof ctx->warn.message];
+
+	prepmsg(buf, fmt, ap);
+
+	fz_replace_ephemeral_system_error(ctx, errorcode, buf);
 }
 
 
