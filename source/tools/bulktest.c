@@ -1617,12 +1617,17 @@ static void tst_error_callback(fz_context* ctx, void* user, const char* message)
 
     // show progress on stderr, while we log the real data to logfile:
     show_progress_on_stderr(logcfg, PML_ERROR, message);
-    fprintf(logfile, "error: %s\n", message);
+
+	fz_lock_logging(ctx);
+	fprintf(logfile, "error: %s\n", message);
     fflush(logfile);
 
     fz_output* dbg = stddbgchannel();
-    if (dbg)
-        fz_write_printf(ctx, dbg, "error: %s\n", message);
+	if (dbg)
+	{
+		fz_write_strings(ctx, dbg, "error: ", message, "\n", NULL);
+	}
+	fz_unlock_logging(ctx);
 }
 
 static void tst_warning_callback(fz_context* ctx, void* user, const char* message)
@@ -1634,13 +1639,17 @@ static void tst_warning_callback(fz_context* ctx, void* user, const char* messag
     {
         // show progress on stderr, while we log the real data to logfile:
         show_progress_on_stderr(logcfg, PML_WARNING, message);
-        fprintf(logfile, "warning: %s\n", message);
+		fz_lock_logging(ctx);
+		fprintf(logfile, "warning: %s\n", message);
         fflush(logfile);
 
         fz_output* dbg = stddbgchannel();
-        if (dbg)
-            fz_write_printf(ctx, dbg, "warning: %s\n", message);
-    }
+		if (dbg)
+		{
+			fz_write_strings(ctx, dbg, "warning: ", message, "\n", NULL);
+		}
+		fz_unlock_logging(ctx);
+	}
 }
 
 static void tst_info_callback(fz_context* ctx, void* user, const char* message)
@@ -1652,12 +1661,16 @@ static void tst_info_callback(fz_context* ctx, void* user, const char* message)
     {
         // show progress on stderr, while we log the real data to logfile:
         show_progress_on_stderr(logcfg, PML_INFO, message);
-        fprintf(logfile, "%s\n", message);
+		fz_lock_logging(ctx);
+		fprintf(logfile, "%s\n", message);
 
         fz_output* dbg = stddbgchannel();
-        if (dbg)
-            fz_write_printf(ctx, dbg, "%s\n", message);
-    }
+		if (dbg)
+		{
+			fz_write_strings(ctx, dbg, message, "\n", NULL);
+		}
+		fz_unlock_logging(ctx);
+	}
 }
 
 static struct range* decode_numbers_rangespec(const char* spec)
