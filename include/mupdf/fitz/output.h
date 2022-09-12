@@ -361,6 +361,22 @@ void fz_write_printf(fz_context *ctx, fz_output *out, const char* fmt, ...);
 void fz_write_vprintf(fz_context *ctx, fz_output *out, const char *fmt, va_list ap);
 
 /**
+	Write a series of strings (terminated by a NULL pointer) to the output.
+
+	Extra: when one of the strings starts or ends with a `\n` NEWLINE, the written
+	string data will be flushed immediately at the end of this call. This is very
+	useful for logging systems, which can use a bit of I/O buffering for improved
+	performance but where you might want to see the data ASAP on a line-by-line
+	basis.
+*/
+void fz_write_strings(fz_context* ctx, fz_output* out, ...);
+
+/**
+	va_list version of fz_write_printf.
+*/
+void fz_vwrite_strings(fz_context* ctx, fz_output* out, va_list ap);
+
+/**
     Seek to the specified file position.
     See fseek for arguments.
 

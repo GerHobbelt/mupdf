@@ -728,7 +728,7 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 
 	// are we looking at an fz_output which was NOT created using the fz_new_output() API?
 	// if so, create the buffer mutex after the fact.
-	if (!out->flags & FZOF_HAS_LOCKS)
+	if (!(out->flags & FZOF_HAS_LOCKS) && (bufsiz > 1))
 	{
 #ifndef DISABLE_MUTHREADS
 		ASSERT(mu_mutex_is_zeroed(&out->buf_mutex));
@@ -740,6 +740,19 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 		mu_create_mutex(&out->buf_mutex);
 		mu_create_mutex(&out->printf_mutex);
 #endif
+		out->flags |= FZOF_HAS_LOCKS;
+	}
+	else if ((out->flags & FZOF_HAS_LOCKS) && bufsiz <= 1)
+	{
+		ASSERT((out->flags & (FZOF_IS_INSIDE_LOCK | FZOF_IS_INSIDE_PRINTF_LOCK)) == 0);
+
+#ifndef DISABLE_MUTHREADS
+		mu_destroy_mutex(&out->buf_mutex);
+		mu_destroy_mutex(&out->printf_mutex);
+		ASSERT(mu_mutex_is_zeroed(&out->buf_mutex));
+		ASSERT(mu_mutex_is_zeroed(&out->printf_mutex));
+#endif
+		out->flags &= ~FZOF_HAS_LOCKS;
 	}
 
 	fzoutput_lock(out);
@@ -774,6 +787,7 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 			}
 		}
 	}
+	fzoutput_unlock(out);
 	return rv;
 }
 
@@ -1047,6 +1061,44 @@ fz_write_printf(fz_context *ctx, fz_output *out, const char *fmt, ...)
 	fz_format_string(ctx, out, fz_write_emit, fmt, args);
 	printf_unlock(out);
 	va_end(args);
+}
+
+void
+fz_write_strings(fz_context* ctx, fz_output* out, ...)
+{
+	va_list args;
+	va_start(args, out);
+	fz_vwrite_strings(ctx, out, args);
+	va_end(args);
+}
+
+void
+fz_vwrite_strings(fz_context* ctx, fz_output* out, va_list ap)
+{
+	// Note: can't use the fzoutput_lock() critical section for these, as they will
+	// be calling the lower level APIs (buffered I/O) internally, and quite legally so.
+	//
+	// That's why we need two mutexes per `fz_output` instance.
+	int do_flush = 0;
+	printf_lock(out);
+	for (;;)
+	{
+		const char* s = va_arg(ap, const char*);
+		if (!s)
+			break;
+
+		size_t l = strlen(s);
+		if (l > 0)
+		{
+			fz_write_data(ctx, out, s, l);
+
+			// starts or ends with a NEWLINE?
+			do_flush |= (*s == '\n') || (s[l - 1] == '\n');
+		}
+	}
+	if (do_flush)
+		fz_flush_output(ctx, out);
+	printf_unlock(out);
 }
 
 void
