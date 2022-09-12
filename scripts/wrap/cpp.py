@@ -602,7 +602,15 @@ def make_python_class_method_outparam_override(
         if not arg.out_param:
             continue
         if arg.alt:
-            out.write( f'{sep}{rename.class_(arg.alt.type.spelling)}({arg.name_python})')
+            name = util.clip( arg.alt.type.spelling, ('struct ', 'const '))
+            for prefix in ( 'fz_', 'pdf_'):
+                if name.startswith( prefix):
+                    break
+            else:
+                assert 0, f'Unexpected arg type: {name}'
+            keepfn = f'{prefix}keep_{name[ len(prefix):]}'
+            keepfn = rename.ll_fn( keepfn)
+            out.write( f'{sep}{rename.class_(name)}({keepfn}( {arg.name_python}))')
         else:
             out.write(f'{sep}{arg.name_python}')
         sep = ', '
