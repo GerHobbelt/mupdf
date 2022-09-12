@@ -49,7 +49,6 @@ cbz_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 	fz_cbz_writer *wri = (fz_cbz_writer*)wri_;
 	fz_buffer *buffer = NULL;
 	char name[40];
-	fz_cookie* cookie = dev->cookie;
 
 	fz_var(buffer);
 
@@ -58,7 +57,7 @@ cbz_end_page(fz_context *ctx, fz_document_writer *wri_, fz_device *dev)
 		fz_close_device(ctx, dev);
 		wri->count += 1;
 		fz_snprintf(name, sizeof name, "p%04d.png", wri->count);
-		buffer = fz_new_buffer_from_pixmap_as_png(ctx, wri->pixmap, fz_default_color_params, cookie);
+		buffer = fz_new_buffer_from_pixmap_as_png(ctx, wri->pixmap, fz_default_color_params);
 		if (!buffer)
 		{
 			fz_snprintf(name, sizeof name, "p%04d-ILLEGAL-ZERO-SIZED.png", wri->count);

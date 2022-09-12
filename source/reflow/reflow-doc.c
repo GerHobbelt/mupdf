@@ -49,8 +49,9 @@ typedef struct {
 } reflow_page;
 
 static void
-reflow_drop_document_imp(fz_context *ctx, reflow_document *doc)
+reflow_drop_document_imp(fz_context *ctx, fz_document *_doc)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	fz_defer_reap_start(ctx);
 
 	fz_drop_document(ctx, doc->underdoc);
@@ -58,52 +59,60 @@ reflow_drop_document_imp(fz_context *ctx, reflow_document *doc)
 }
 
 static fz_colorspace *
-reflow_document_output_intent(fz_context *ctx, reflow_document *doc)
+reflow_document_output_intent(fz_context *ctx, fz_document *_doc)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_document_output_intent(ctx, doc->underdoc);
 }
 
 static int
-reflow_needs_password(fz_context *ctx, reflow_document *doc)
+reflow_needs_password(fz_context *ctx, fz_document *_doc)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_needs_password(ctx, doc->underdoc);
 }
 
 static int
-reflow_authenticate_password(fz_context *ctx, reflow_document *doc, const char *password)
+reflow_authenticate_password(fz_context *ctx, fz_document *_doc, const char *password)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_authenticate_password(ctx, doc->underdoc, password);
 }
 
 static int
-reflow_has_permission(fz_context *ctx, reflow_document *doc, fz_permission permission)
+reflow_has_permission(fz_context *ctx, fz_document *_doc, fz_permission permission)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_has_permission(ctx, doc->underdoc, permission);
 }
 
 /* FIXME: Need to translate page targets somehow. */
 static fz_outline *
-reflow_load_outline(fz_context *ctx, reflow_document *doc)
+reflow_load_outline(fz_context *ctx, fz_document *_doc)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_load_outline(ctx, doc->underdoc);
 }
 
 /* FIXME: Need to translate page targets somehow. */
 static fz_outline_iterator *
-reflow_outline_iterator(fz_context *ctx, reflow_document *doc)
+reflow_outline_iterator(fz_context *ctx, fz_document *_doc)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_new_outline_iterator(ctx, doc->underdoc);
 }
 
 static fz_link_dest
-reflow_resolve_link_dest(fz_context *ctx, reflow_document *doc, const char *uri)
+reflow_resolve_link_dest(fz_context *ctx, fz_document *_doc, const char *uri)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_resolve_link_dest(ctx, doc->underdoc, uri);
 }
 
 static int
-reflow_count_pages(fz_context *ctx, reflow_document *doc, int chapter)
+reflow_count_pages(fz_context *ctx, fz_document *_doc, int chapter)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_count_chapter_pages(ctx, doc->underdoc, chapter);
 }
 
@@ -141,8 +150,9 @@ reflow_run_page_annots(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matri
 }
 
 static fz_page *
-reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum, fz_cookie* cookie)
+reflow_load_page(fz_context *ctx, fz_document *_doc, int chapter, int pagenum)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	fz_buffer *buf = NULL;
 	fz_stext_page *text = NULL;
 	fz_stext_options default_opts = { FZ_STEXT_PRESERVE_IMAGES | FZ_STEXT_DEHYPHENATE };
@@ -171,8 +181,8 @@ reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum
 		out = fz_new_output_with_buffer(ctx, buf);
 		fz_print_stext_header_as_xhtml(ctx, out);
 
-		text = fz_new_stext_page_from_chapter_page_number(ctx, doc->underdoc, chapter, pagenum, opts, cookie);
-		fz_print_stext_page_as_xhtml(ctx, out, text, pagenum+1, fz_identity, opts, cookie); /* pagenum is not right w.r.t chapter. */
+		text = fz_new_stext_page_from_chapter_page_number(ctx, doc->underdoc, chapter, pagenum, opts);
+		fz_print_stext_page_as_xhtml(ctx, out, text, pagenum+1, fz_identity, opts); /* pagenum is not right w.r.t chapter. */
 		fz_drop_stext_page(ctx, text);
 		text = NULL;
 
@@ -201,8 +211,9 @@ reflow_load_page(fz_context *ctx, reflow_document *doc, int chapter, int pagenum
 	return &page->base;
 }
 
-static int reflow_lookup_metadata(fz_context *ctx, reflow_document *doc, const char *key, char *buf, int size)
+static int reflow_lookup_metadata(fz_context *ctx, fz_document *_doc, const char *key, char *buf, int size)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	return fz_lookup_metadata(ctx, doc->underdoc, key, buf, size);
 }
 
@@ -214,8 +225,9 @@ static void *reflow_layout_page(fz_context *ctx, fz_page *page_, void *state)
 	return NULL;
 }
 
-static void reflow_layout(fz_context *ctx, reflow_document *doc, float w, float h, float em)
+static void reflow_layout(fz_context *ctx, fz_document *_doc, float w, float h, float em)
 {
+	reflow_document* doc = (reflow_document*)_doc;
 	if (doc->w == w && doc->h == h && doc->em == em)
 		return;
 	doc->w = w;

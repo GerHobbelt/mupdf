@@ -76,7 +76,7 @@ void pdf_flatten_inheritable_page_items(fz_context *ctx, pdf_obj *page);
 
 	number: page number, where 0 is the first page of the document.
 */
-pdf_page *pdf_load_page(fz_context *ctx, pdf_document *doc, int number, fz_cookie* cookie);
+pdf_page *pdf_load_page(fz_context *ctx, pdf_document *doc, int number);
 fz_page *pdf_load_page_imp(fz_context *ctx, fz_document *doc, int chapter, int number);
 
 void pdf_page_obj_transform(fz_context *ctx, pdf_obj *pageobj, fz_rect *page_mediabox, fz_matrix *page_ctm);

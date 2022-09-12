@@ -220,7 +220,6 @@ struct xps_document_s
 
 	/* Current device */
 	fz_device *dev;
-	fz_cookie *cookie;
 };
 
 /*

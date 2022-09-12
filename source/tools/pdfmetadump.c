@@ -1541,7 +1541,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 
 	fz_try(ctx)
 	{
-		page_obj = pdf_load_page(ctx, glo->doc, page - 1, cookie);
+		page_obj = pdf_load_page(ctx, glo->doc, page - 1);
 
 		fz_rect mediabox = fz_bound_page(ctx, fz_page_from_pdf_page(ctx, page_obj));
 

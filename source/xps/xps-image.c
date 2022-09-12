@@ -116,6 +116,7 @@ xps_parse_image_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_rect
 {
 	xps_part *part = NULL;
 	fz_image *image = NULL;
+	fz_cookie* cookie = ctx->cookie;
 
 	fz_try(ctx)
 	{
@@ -125,8 +126,8 @@ xps_parse_image_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_rect
 	{
 		if (fz_caught(ctx) == FZ_ERROR_TRYLATER)
 		{
-			if (doc->cookie)
-				doc->cookie->incomplete = 1;
+			if (cookie)
+				cookie->d.incomplete = 1;
 			else
 				fz_rethrow(ctx);
 		}

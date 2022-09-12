@@ -97,7 +97,7 @@ static void runpage(int number)
 
     fz_info(ctx, "processing page %d\n", number);
 
-    page = fz_load_page(ctx, doc, number - 1, cookie);
+    page = fz_load_page(ctx, doc, number - 1);
 
     fz_var(dev);
 

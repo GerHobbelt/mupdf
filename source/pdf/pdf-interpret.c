@@ -67,13 +67,12 @@ pdf_drop_processor(fz_context *ctx, pdf_processor *proc)
 }
 
 static void
-pdf_init_csi(fz_context *ctx, pdf_csi *csi, pdf_document *doc, pdf_obj *rdb, pdf_lexbuf *buf, fz_cookie *cookie)
+pdf_init_csi(fz_context *ctx, pdf_csi *csi, pdf_document *doc, pdf_obj *rdb, pdf_lexbuf *buf)
 {
 	memset(csi, 0, sizeof *csi);
 	csi->doc = doc;
 	csi->rdb = rdb;
 	csi->buf = buf;
-	csi->cookie = cookie;
 }
 
 static void
@@ -93,8 +92,9 @@ pdf_clear_stack(fz_context *ctx, pdf_csi *csi)
 }
 
 static pdf_font_desc *
-pdf_try_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *font, fz_cookie *cookie)
+pdf_try_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *font)
 {
+	fz_cookie* cookie = ctx->cookie;
 	pdf_font_desc *desc = NULL;
 	fz_try(ctx)
 		desc = pdf_load_font(ctx, doc, rdb, font);
@@ -102,7 +102,7 @@ pdf_try_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *fon
 	{
 		if (fz_caught(ctx) == FZ_ERROR_TRYLATER)
 			if (cookie)
-				cookie->incomplete++;
+				cookie->d.incomplete++;
 	}
 	if (desc == NULL)
 		desc = pdf_load_hail_mary_font(ctx, doc);
@@ -224,7 +224,7 @@ pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_ob
 		pdf_obj *font_size = pdf_array_get(ctx, obj, 1);
 		pdf_font_desc *font;
 		if (pdf_is_dict(ctx, font_ref))
-			font = pdf_try_load_font(ctx, csi->doc, csi->rdb, font_ref, csi->cookie);
+			font = pdf_try_load_font(ctx, csi->doc, csi->rdb, font_ref);
 		else
 			font = pdf_load_hail_mary_font(ctx, csi->doc);
 		fz_try(ctx)
@@ -702,7 +702,7 @@ pdf_process_keyword(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_strea
 			fontres = pdf_dict_get(ctx, csi->rdb, PDF_NAME(Font));
 			fontobj = pdf_dict_gets(ctx, fontres, csi->name);
 			if (pdf_is_dict(ctx, fontobj))
-				font = pdf_try_load_font(ctx, csi->doc, csi->rdb, fontobj, csi->cookie);
+				font = pdf_try_load_font(ctx, csi->doc, csi->rdb, fontobj);
 			else
 				font = pdf_load_hail_mary_font(ctx, csi->doc);
 			fz_try(ctx)
@@ -824,7 +824,7 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 {
 	pdf_document *doc = csi->doc;
 	pdf_lexbuf *buf = csi->buf;
-	fz_cookie *cookie = csi->cookie;
+	fz_cookie* cookie = ctx->cookie;
 
 	pdf_token tok = PDF_TOK_ERROR;
 	int in_text_array = 0;
@@ -836,10 +836,17 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 	fz_var(in_text_array);
 	fz_var(tok);
 
+	size_t old_progress_max = 0;
+	size_t old_progress = 0;
 	if (cookie)
 	{
-		cookie->progress_max = (size_t)-1;
-		cookie->progress = 0;
+		old_progress_max = cookie->d.progress_max;
+		old_progress = cookie->d.progress;
+
+		cookie->d.progress_max = (size_t)-1;
+		cookie->d.progress = 0;
+
+		cookie->check_back(ctx, FZ_PROGRESS_START_RUN, 0);
 	}
 
 	do
@@ -851,12 +858,15 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 				/* Check the cookie */
 				if (cookie)
 				{
-					if (cookie->abort)
+					if (cookie->d.abort)
 					{
 						tok = PDF_TOK_EOF;
 						break;
 					}
-					cookie->progress++;
+
+					cookie->check_back(ctx, FZ_PROGRESS_RUN_PROCEEDING, 1);
+
+					cookie->d.progress++;
 				}
 
 				tok = pdf_lex(ctx, stm, buf);
@@ -1000,7 +1010,7 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 			{
 				if (caught == FZ_ERROR_TRYLATER)
 				{
-					cookie->incomplete++;
+					cookie->d.incomplete++;
 					tok = PDF_TOK_EOF;
 				}
 				else if (caught == FZ_ERROR_ABORT)
@@ -1009,11 +1019,11 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 				}
 				else if (caught == FZ_ERROR_MINOR)
 				{
-					cookie->errors++;
+					cookie->d.errors++;
 				}
 				else if (caught == FZ_ERROR_SYNTAX)
 				{
-					cookie->errors++;
+					cookie->d.errors++;
 					if (++syntax_errors >= MAX_SYNTAX_ERRORS)
 					{
 						fz_warn(ctx, "too many syntax errors; ignoring rest of page");
@@ -1052,10 +1062,24 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 		}
 	}
 	while (tok != PDF_TOK_EOF);
+
+	if (cookie && !cookie->d.abort)
+	{
+		cookie->check_back(ctx, FZ_PROGRESS_RUN_FINISH, 0);
+	}
+
+	// mark the progress as completed (and of known size by now)
+	if (cookie && old_progress_max != (size_t)-1)
+	{
+		cookie->d.progress_max = old_progress_max + cookie->d.progress;
+		cookie->d.progress += old_progress;
+
+		ASSERT(cookie->d.progress <= cookie->d.progress_max);
+	}
 }
 
 void
-pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie)
+pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj)
 {
 	pdf_csi csi;
 	pdf_lexbuf buf;
@@ -1067,7 +1091,7 @@ pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pd
 	fz_var(stm);
 
 	pdf_lexbuf_init(ctx, &buf, PDF_LEXBUF_SMALL);
-	pdf_init_csi(ctx, &csi, doc, rdb, &buf, cookie);
+	pdf_init_csi(ctx, &csi, doc, rdb, &buf);
 
 	fz_try(ctx)
 	{
@@ -1167,7 +1191,7 @@ pdf_process_glyph(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_o
 		return;
 
 	pdf_lexbuf_init(ctx, &buf, PDF_LEXBUF_SMALL);
-	pdf_init_csi(ctx, &csi, doc, rdb, &buf, NULL);
+	pdf_init_csi(ctx, &csi, doc, rdb, &buf);
 
 	fz_try(ctx)
 	{

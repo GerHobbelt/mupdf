@@ -210,7 +210,7 @@ int main(int argc, const char** argv)
 		// cannot be done on the worker threads, as each use of doc
 		// uses ctx, and only one thread can be using ctx at a time.
 
-		page = fz_load_page(ctx, doc, i, cookie);
+		page = fz_load_page(ctx, doc, i);
 
 		// Compute the bounding box for each page.
 

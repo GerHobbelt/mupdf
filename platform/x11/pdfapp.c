@@ -747,6 +747,8 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 
 	fz_var(mdev);
 
+	fz_attach_cookie_to_context(app->ctx, &cookie);
+
 	fz_drop_display_list(app->ctx, app->page_list);
 	fz_drop_display_list(app->ctx, app->annotations_list);
 	fz_drop_separations(app->ctx, app->seps);
@@ -769,7 +771,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 
 	fz_try(app->ctx)
 	{
-		app->page = fz_load_page(app->ctx, app->doc, app->pageno - 1, cookie);
+		app->page = fz_load_page(app->ctx, app->doc, app->pageno - 1);
 		if (app->page && app->page->incomplete)
 			app->incomplete = 1;
 		app->page_bbox = fz_bound_page(app->ctx, app->page);
@@ -777,6 +779,8 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 	}
 	fz_catch(app->ctx)
 	{
+		fz_detach_cookie_from_context(app->ctx);
+
 		if (fz_caught(app->ctx) == FZ_ERROR_TRYLATER)
 			app->incomplete = 1;
 		else
@@ -818,6 +822,8 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		}
 		fz_catch(app->ctx)
 		{
+			fz_detach_cookie_from_context(app->ctx);
+
 			if (fz_caught(app->ctx) == FZ_ERROR_TRYLATER)
 				app->incomplete = 1;
 			else
@@ -854,6 +860,7 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 	fz_always(app->ctx)
 	{
 		fz_drop_device(app->ctx, mdev);
+		fz_detach_cookie_from_context(app->ctx);
 	}
 	fz_catch(app->ctx)
 	{
@@ -922,6 +929,8 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 	if (app->incomplete)
 		loadpage = 1;
 
+	fz_attach_cookie_from_context(app->ctx, &cookie);
+
 	if (loadpage)
 	{
 		fz_rect mediabox;
@@ -957,6 +966,8 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 			{
 				fz_error(app->ctx, "Failure when loading page %d / %d: %s",
 					app->pageno, app->pagecount, fz_caught_message(app->ctx));
+
+				fz_detach_cookie_from_context(app->ctx);
 
 				fz_rethrow(app->ctx);
 			}
@@ -1104,6 +1115,8 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 	}
 
 	fz_flush_warnings(app->ctx);
+
+	fz_detach_cookie_from_context(app->ctx);
 }
 
 static void pdfapp_gotouri(pdfapp_t *app, char *uri)

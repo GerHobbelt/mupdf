@@ -53,12 +53,12 @@ fz_new_display_list_from_page(fz_context *ctx, fz_page *page)
 }
 
 fz_display_list *
-fz_new_display_list_from_page_number(fz_context *ctx, fz_document *doc, int number, fz_cookie* cookie)
+fz_new_display_list_from_page_number(fz_context *ctx, fz_document *doc, int number)
 {
 	fz_page *page;
 	fz_display_list *list = NULL;
 
-	page = fz_load_page(ctx, doc, number, cookie);
+	page = fz_load_page(ctx, doc, number);
 	fz_try(ctx)
 		list = fz_new_display_list_from_page(ctx, page);
 	fz_always(ctx)
@@ -244,7 +244,7 @@ fz_new_pixmap_from_page_number_with_separations(fz_context *ctx, fz_document *do
 	fz_page *page;
 	fz_pixmap *pix = NULL;
 
-	page = fz_load_page(ctx, doc, number, cookie);
+	page = fz_load_page(ctx, doc, number);
 	fz_try(ctx)
 		pix = fz_new_pixmap_from_page_with_separations(ctx, page, ctm, cs, seps, alpha);
 	fz_always(ctx)
@@ -322,7 +322,7 @@ fz_new_stext_page_from_page_number(fz_context *ctx, fz_document *doc, int number
 	fz_page *page;
 	fz_stext_page *text = NULL;
 
-	page = fz_load_page(ctx, doc, number, cookie);
+	page = fz_load_page(ctx, doc, number);
 	fz_try(ctx)
 		text = fz_new_stext_page_from_page(ctx, page, options);
 	fz_always(ctx)
@@ -333,12 +333,12 @@ fz_new_stext_page_from_page_number(fz_context *ctx, fz_document *doc, int number
 }
 
 fz_stext_page *
-fz_new_stext_page_from_chapter_page_number(fz_context *ctx, fz_document *doc, int chapter, int number, const fz_stext_options *options, fz_cookie* cookie)
+fz_new_stext_page_from_chapter_page_number(fz_context *ctx, fz_document *doc, int chapter, int number, const fz_stext_options *options)
 {
 	fz_page *page;
 	fz_stext_page *text = NULL;
 
-	page = fz_load_chapter_page(ctx, doc, chapter, number, cookie);
+	page = fz_load_chapter_page(ctx, doc, chapter, number);
 	fz_try(ctx)
 		text = fz_new_stext_page_from_page(ctx, page, options);
 	fz_always(ctx)
@@ -389,7 +389,7 @@ fz_search_page_number(fz_context *ctx, fz_document *doc, int number, const char 
 	fz_page *page;
 	int count = 0;
 
-	page = fz_load_page(ctx, doc, number, cookie);
+	page = fz_load_page(ctx, doc, number);
 	fz_try(ctx)
 		count = fz_search_page(ctx, page, needle, hit_mark, hit_bbox, hit_max);
 	fz_always(ctx)
@@ -487,7 +487,7 @@ fz_new_buffer_from_page_number(fz_context *ctx, fz_document *doc, int number, co
 	fz_page *page;
 	fz_buffer *buf = NULL;
 
-	page = fz_load_page(ctx, doc, number, cookie);
+	page = fz_load_page(ctx, doc, number);
 	fz_try(ctx)
 		buf = fz_new_buffer_from_page(ctx, page, options);
 	fz_always(ctx)
@@ -498,7 +498,7 @@ fz_new_buffer_from_page_number(fz_context *ctx, fz_document *doc, int number, co
 }
 
 void
-fz_write_image_as_data_uri(fz_context *ctx, fz_output *out, fz_image *image, fz_cookie *cookie)
+fz_write_image_as_data_uri(fz_context *ctx, fz_output *out, fz_image *image)
 {
 	fz_compressed_buffer *cbuf;
 	fz_buffer *buf;
@@ -522,7 +522,7 @@ fz_write_image_as_data_uri(fz_context *ctx, fz_output *out, fz_image *image, fz_
 		return;
 	}
 
-	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params, cookie);
+	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params);
 	fz_try(ctx)
 	{
 		if (buf)
@@ -542,7 +542,7 @@ fz_write_image_as_data_uri(fz_context *ctx, fz_output *out, fz_image *image, fz_
 }
 
 void
-fz_append_image_as_data_uri(fz_context *ctx, fz_buffer *out, fz_image *image, fz_cookie* cookie)
+fz_append_image_as_data_uri(fz_context *ctx, fz_buffer *out, fz_image *image)
 {
 	fz_compressed_buffer *cbuf;
 	fz_buffer *buf;
@@ -566,7 +566,7 @@ fz_append_image_as_data_uri(fz_context *ctx, fz_buffer *out, fz_image *image, fz
 		return;
 	}
 
-	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params, cookie);
+	buf = fz_new_buffer_from_image_as_png(ctx, image, fz_default_color_params);
 	fz_try(ctx)
 	{
 		if (buf)
@@ -586,9 +586,9 @@ fz_append_image_as_data_uri(fz_context *ctx, fz_buffer *out, fz_image *image, fz
 }
 
 void
-fz_write_pixmap_as_data_uri(fz_context *ctx, fz_output *out, fz_pixmap *pixmap, fz_cookie* cookie)
+fz_write_pixmap_as_data_uri(fz_context *ctx, fz_output *out, fz_pixmap *pixmap)
 {
-	fz_buffer *buf = fz_new_buffer_from_pixmap_as_png(ctx, pixmap, fz_default_color_params, cookie);
+	fz_buffer *buf = fz_new_buffer_from_pixmap_as_png(ctx, pixmap, fz_default_color_params);
 	fz_try(ctx)
 	{
 		if (buf)
@@ -608,9 +608,9 @@ fz_write_pixmap_as_data_uri(fz_context *ctx, fz_output *out, fz_pixmap *pixmap, 
 }
 
 void
-fz_append_pixmap_as_data_uri(fz_context *ctx, fz_buffer *out, fz_pixmap *pixmap, fz_cookie* cookie)
+fz_append_pixmap_as_data_uri(fz_context *ctx, fz_buffer *out, fz_pixmap *pixmap)
 {
-	fz_buffer *buf = fz_new_buffer_from_pixmap_as_png(ctx, pixmap, fz_default_color_params, cookie);
+	fz_buffer *buf = fz_new_buffer_from_pixmap_as_png(ctx, pixmap, fz_default_color_params);
 	fz_try(ctx)
 	{
 		if (buf)
@@ -630,7 +630,7 @@ fz_append_pixmap_as_data_uri(fz_context *ctx, fz_buffer *out, fz_pixmap *pixmap,
 }
 
 fz_document *
-fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *old_doc, const fz_stext_options *opts, fz_cookie* cookie)
+fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *old_doc, const fz_stext_options *opts)
 {
 	fz_stext_options default_opts = { FZ_STEXT_PRESERVE_IMAGES | FZ_STEXT_DEHYPHENATE };
 	fz_document *new_doc;
@@ -658,7 +658,7 @@ fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *old_doc, const
 		for (i = 0; i < n; ++i)
 		{
 			text = fz_new_stext_page_from_page_number(ctx, old_doc, i, opts);
-			fz_print_stext_page_as_xhtml(ctx, out, text, i+1, fz_identity, opts, cookie);
+			fz_print_stext_page_as_xhtml(ctx, out, text, i+1, fz_identity, opts);
 			fz_drop_stext_page(ctx, text);
 			text = NULL;
 		}
@@ -684,7 +684,7 @@ fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *old_doc, const
 }
 
 fz_buffer *
-fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *format, const char *options, fz_matrix transform, fz_cookie *cookie)
+fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *format, const char *options, fz_matrix transform)
 {
 	fz_buffer *buf = NULL;
 	fz_output *out;
@@ -701,7 +701,6 @@ fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *
 		out = fz_new_output_with_buffer(ctx, buf);
 		writer = fz_new_document_writer_with_output(ctx, out, format, options);
 		dev = fz_begin_page(ctx, writer, fz_bound_page(ctx, page));
-		fz_attach_cookie_to_device(dev, cookie);
 		fz_run_page(ctx, page, dev, transform);
 		fz_end_page(ctx, writer);
 		fz_close_document_writer(ctx, writer);

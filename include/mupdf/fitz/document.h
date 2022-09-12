@@ -194,7 +194,7 @@ typedef int (fz_document_count_pages_fn)(fz_context *ctx, fz_document *doc, int 
 	Type for a function to load a given
 	page from a document. See fz_load_page for more information.
 */
-typedef fz_page *(fz_document_load_page_fn)(fz_context *ctx, fz_document *doc, int chapter, int page, fz_cookie* cookie);
+typedef fz_page *(fz_document_load_page_fn)(fz_context *ctx, fz_document *doc, int chapter, int page);
 
 /**
 	Type for a function to query
@@ -607,7 +607,7 @@ int fz_page_number_from_location(fz_context *ctx, fz_document *doc, fz_location 
 	efficient than loading by location (chapter+page) for some
 	document types.
 */
-fz_page *fz_load_page(fz_context *ctx, fz_document *doc, int number, fz_cookie* cookie);
+fz_page *fz_load_page(fz_context *ctx, fz_document *doc, int number);
 
 /**
 	Return the number of chapters in the document.
@@ -624,14 +624,14 @@ int fz_count_chapter_pages(fz_context *ctx, fz_document *doc, int chapter);
 /**
 	Load a page.
 
-	After fz_load_page is it possible to retrieve the size of the
+	After fz_load_chapter_page is it possible to retrieve the size of the
 	page using fz_bound_page, or to render the page using
 	fz_run_page_*. Free the page by calling fz_drop_page.
 
 	chapter: chapter number, 0 is the first chapter of the document.
 	number: page number, 0 is the first page of the chapter.
 */
-fz_page *fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int page, fz_cookie* cookie);
+fz_page *fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int page);
 
 /**
 	Load the list of links for a page.

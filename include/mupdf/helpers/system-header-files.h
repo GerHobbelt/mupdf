@@ -41,6 +41,8 @@
 #pragma warning(disable: 4018)  // warning C4018: '<': signed/unsigned mismatch
 #pragma warning(disable: 4388)  // warning C4388: '>=': signed/unsigned mismatch
 
+#pragma warning(disable: 5219)  // warning C5219: implicit conversion from 'int' to 'float', possible loss of data
+
 #pragma warning(push)
 
 #pragma warning(disable: 4820)  // warning C4820: '<unnamed-tag>': '8' bytes padding added after data member 'top', ...

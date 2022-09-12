@@ -156,7 +156,7 @@ htdoc_lookup_bookmark(fz_context *ctx, fz_document *doc_, fz_bookmark mark)
 }
 
 static fz_page *
-htdoc_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number, fz_cookie* cookie)
+htdoc_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 {
 	html_document *doc = (html_document*)doc_;
 	html_page *page = fz_new_derived_page(ctx, html_page, doc_);
@@ -221,7 +221,7 @@ mobi_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *
 }
 
 static fz_document *
-htdoc_open_document_with_buffer(fz_context *ctx, fz_archive *zip, fz_buffer *buf, int format, fz_cookie* cookie)
+htdoc_open_document_with_buffer(fz_context *ctx, fz_archive *zip, fz_buffer *buf, int format)
 {
 	html_document *doc = fz_new_derived_document(ctx, html_document);
 	doc->super.drop_document = htdoc_drop_document;
@@ -247,10 +247,10 @@ htdoc_open_document_with_buffer(fz_context *ctx, fz_archive *zip, fz_buffer *buf
 		doc->set = fz_new_html_font_set(ctx);
 		switch (format)
 		{
-		case FORMAT_FB2: doc->html = fz_parse_fb2(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx), cookie); break;
-		case FORMAT_HTML5: doc->html = fz_parse_html5(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx), cookie); break;
-		case FORMAT_XHTML: doc->html = fz_parse_xhtml(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx), cookie); break;
-		case FORMAT_MOBI: doc->html = fz_parse_mobi(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx), cookie); break;
+		case FORMAT_FB2: doc->html = fz_parse_fb2(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx)); break;
+		case FORMAT_HTML5: doc->html = fz_parse_html5(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx)); break;
+		case FORMAT_XHTML: doc->html = fz_parse_xhtml(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx)); break;
+		case FORMAT_MOBI: doc->html = fz_parse_mobi(ctx, doc->set, doc->zip, ".", buf, fz_user_css(ctx)); break;
 		}
 		doc->outline = fz_load_html_outline(ctx, doc->html);
 	}
@@ -268,7 +268,7 @@ htdoc_open_document_with_buffer(fz_context *ctx, fz_archive *zip, fz_buffer *buf
 static fz_document *
 htdoc_open_document_with_stream(fz_context *ctx, fz_stream *file)
 {
-	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, "."), fz_read_all(ctx, file, 0), FORMAT_HTML5, cookie);
+	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, "."), fz_read_all(ctx, file, 0), FORMAT_HTML5);
 }
 
 static fz_document *
@@ -276,7 +276,7 @@ htdoc_open_document(fz_context *ctx, const char *filename)
 {
 	char dirname[2048];
 	fz_dirname(dirname, filename, sizeof dirname);
-	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, dirname), fz_read_file(ctx, filename), FORMAT_HTML5, cookie);
+	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, dirname), fz_read_file(ctx, filename), FORMAT_HTML5);
 }
 
 static const char *htdoc_extensions[] =
@@ -306,7 +306,7 @@ fz_document_handler html_document_handler =
 static fz_document *
 xhtdoc_open_document_with_stream(fz_context *ctx, fz_stream *file)
 {
-	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, "."), fz_read_all(ctx, file, 0), FORMAT_XHTML, cookie);
+	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, "."), fz_read_all(ctx, file, 0), FORMAT_XHTML);
 }
 
 static fz_document *
@@ -314,7 +314,7 @@ xhtdoc_open_document(fz_context *ctx, const char *filename)
 {
 	char dirname[PATH_MAX];
 	fz_dirname(dirname, filename, sizeof dirname);
-	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, dirname), fz_read_file(ctx, filename), FORMAT_XHTML, cookie);
+	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, dirname), fz_read_file(ctx, filename), FORMAT_XHTML);
 }
 
 static const char *xhtdoc_extensions[] =
@@ -341,13 +341,13 @@ fz_document_handler xhtml_document_handler =
 static fz_document *
 fb2doc_open_document_with_stream(fz_context *ctx, fz_stream *file)
 {
-	return htdoc_open_document_with_buffer(ctx, NULL, fz_read_all(ctx, file, 0), FORMAT_FB2, cookie);
+	return htdoc_open_document_with_buffer(ctx, NULL, fz_read_all(ctx, file, 0), FORMAT_FB2);
 }
 
 static fz_document *
 fb2doc_open_document(fz_context *ctx, const char *filename)
 {
-	return htdoc_open_document_with_buffer(ctx, NULL, fz_read_file(ctx, filename), FORMAT_FB2, cookie);
+	return htdoc_open_document_with_buffer(ctx, NULL, fz_read_file(ctx, filename), FORMAT_FB2);
 }
 
 static const char *fb2doc_extensions[] =
@@ -394,7 +394,7 @@ mobi_open_document_with_buffer(fz_context *ctx, fz_buffer *mobi)
 		fz_drop_archive(ctx, zip);
 		fz_rethrow(ctx);
 	}
-	return htdoc_open_document_with_buffer(ctx, zip, html, FORMAT_MOBI, cookie);
+	return htdoc_open_document_with_buffer(ctx, zip, html, FORMAT_MOBI);
 }
 
 static fz_document *

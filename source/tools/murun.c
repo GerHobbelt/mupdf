@@ -2845,7 +2845,7 @@ static void ffi_Document_loadPage(js_State *J)
 	fz_page *page = NULL;
 
 	fz_try(ctx)
-		page = fz_load_page(ctx, doc, number, cookie);
+		page = fz_load_page(ctx, doc, number);
 	fz_catch(ctx)
 		rethrow(J);
 
@@ -6496,7 +6496,7 @@ static void ffi_PDFPage_process(js_State *J)
 	{
 		pdf_obj *resources = pdf_page_resources(ctx, page);
 		pdf_obj *contents = pdf_page_contents(ctx, page);
-		pdf_process_contents(ctx, proc, page->doc, resources, contents, NULL);
+		pdf_process_contents(ctx, proc, page->doc, resources, contents);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)

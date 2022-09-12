@@ -71,7 +71,7 @@ static void runpage(fz_context *ctx, fz_document *doc, fz_output *out, int numbe
 	fz_var(dev);
 	fz_try(ctx)
 	{
-		page = fz_load_page(ctx, doc, number - 1, cookie);
+		page = fz_load_page(ctx, doc, number - 1);
 		mediabox = fz_bound_page(ctx, page);
 		fz_write_printf(ctx, out, "<page pagenum=\"%d\" mediabox=\"%R\">\n",
 				number, &mediabox);

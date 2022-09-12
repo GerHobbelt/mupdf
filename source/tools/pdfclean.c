@@ -124,7 +124,7 @@ int pdfclean_main(int argc, const char** argv)
 		}
 	}
 
-	if ((opts.do_ascii || opts.do_decompress) && !opts.do_compress)
+	if ((opts.do_ascii + opts.do_decompress) == opts.do_compress + 1)
 		opts.do_pretty = 1;
 
 	if (argc == fz_optind)

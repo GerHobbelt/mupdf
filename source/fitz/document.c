@@ -448,7 +448,7 @@ fz_count_pages(fz_context *ctx, fz_document *doc)
 }
 
 fz_page *
-fz_load_page(fz_context *ctx, fz_document *doc, int number, fz_cookie* cookie)
+fz_load_page(fz_context *ctx, fz_document *doc, int number)
 {
 	int i, n = fz_count_chapters(ctx, doc);
 	int start = 0;
@@ -456,7 +456,7 @@ fz_load_page(fz_context *ctx, fz_document *doc, int number, fz_cookie* cookie)
 	{
 		int m = fz_count_chapter_pages(ctx, doc, i);
 		if (number < start + m)
-			return fz_load_chapter_page(ctx, doc, i, number - start, cookie);
+			return fz_load_chapter_page(ctx, doc, i, number - start);
 		start += m;
 	}
 	fz_throw(ctx, FZ_ERROR_GENERIC, "Page not found: %d", number+1);
@@ -571,12 +571,19 @@ fz_document_output_intent(fz_context *ctx, fz_document *doc)
 }
 
 fz_page *
-fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number, fz_cookie* cookie)
+fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number)
 {
 	fz_page *page;
 
 	if (doc == NULL)
 		return NULL;
+
+	fz_cookie* cookie = ctx->cookie;
+	if (cookie)
+	{
+		if (cookie->check_back(ctx, FZ_PROGRESS_LOAD_PAGE, (chapter << 16) | (number & 0xFFFF)))
+			return NULL;
+	}
 
 	fz_ensure_layout(ctx, doc);
 
@@ -594,7 +601,7 @@ fz_load_chapter_page(fz_context *ctx, fz_document *doc, int chapter, int number,
 
 	if (doc->load_page)
 	{
-		page = doc->load_page(ctx, doc, chapter, number, cookie);
+		page = doc->load_page(ctx, doc, chapter, number);
 		page->chapter = chapter;
 		page->number = number;
 

@@ -60,6 +60,7 @@ static const struct range* ignore_match_test_numbers_ranges = NULL;
 #ifndef DISABLE_MUTHREADS
 
 static mu_mutex mutexes[FZ_LOCK_MAX];
+static mu_mutex logging_mutex;
 static mu_mutex heap_debug_mutex;
 static int heap_debug_mutex_is_initialized;
 
@@ -85,7 +86,8 @@ static void fin_mudraw_locks(void)
     for (i = 0; i < FZ_LOCK_MAX; i++)
         mu_destroy_mutex(&mutexes[i]);
     heap_debug_mutex_is_initialized = 0;
-    mu_destroy_mutex(&heap_debug_mutex);
+	mu_destroy_mutex(&logging_mutex);
+	mu_destroy_mutex(&heap_debug_mutex);
 }
 
 static fz_locks_context *init_mudraw_locks(void)
@@ -95,8 +97,9 @@ static fz_locks_context *init_mudraw_locks(void)
 
     for (i = 0; i < FZ_LOCK_MAX; i++)
         failed |= mu_create_mutex(&mutexes[i]);
-    failed |= mu_create_mutex(&heap_debug_mutex);
-    heap_debug_mutex_is_initialized = !failed;
+    failed |= mu_create_mutex(&logging_mutex);
+	failed |= mu_create_mutex(&heap_debug_mutex);
+	heap_debug_mutex_is_initialized = !failed;
 
     if (failed)
     {
@@ -1618,16 +1621,23 @@ static void tst_error_callback(fz_context* ctx, void* user, const char* message)
     // show progress on stderr, while we log the real data to logfile:
     show_progress_on_stderr(logcfg, PML_ERROR, message);
 
-	fz_lock_logging(ctx);
+
+#ifndef DISABLE_MUTHREADS
+	mu_lock_mutex(&logging_mutex);
+#endif
+
 	fprintf(logfile, "error: %s\n", message);
     fflush(logfile);
+
+#ifndef DISABLE_MUTHREADS
+	mu_unlock_mutex(&logging_mutex);
+#endif
 
     fz_output* dbg = stddbgchannel();
 	if (dbg)
 	{
 		fz_write_strings(ctx, dbg, "error: ", message, "\n", NULL);
 	}
-	fz_unlock_logging(ctx);
 }
 
 static void tst_warning_callback(fz_context* ctx, void* user, const char* message)
@@ -1639,16 +1649,23 @@ static void tst_warning_callback(fz_context* ctx, void* user, const char* messag
     {
         // show progress on stderr, while we log the real data to logfile:
         show_progress_on_stderr(logcfg, PML_WARNING, message);
-		fz_lock_logging(ctx);
+
+#ifndef DISABLE_MUTHREADS
+		mu_lock_mutex(&logging_mutex);
+#endif
+
 		fprintf(logfile, "warning: %s\n", message);
         fflush(logfile);
+
+#ifndef DISABLE_MUTHREADS
+		mu_unlock_mutex(&logging_mutex);
+#endif
 
         fz_output* dbg = stddbgchannel();
 		if (dbg)
 		{
 			fz_write_strings(ctx, dbg, "warning: ", message, "\n", NULL);
 		}
-		fz_unlock_logging(ctx);
 	}
 }
 
@@ -1661,15 +1678,22 @@ static void tst_info_callback(fz_context* ctx, void* user, const char* message)
     {
         // show progress on stderr, while we log the real data to logfile:
         show_progress_on_stderr(logcfg, PML_INFO, message);
-		fz_lock_logging(ctx);
+
+#ifndef DISABLE_MUTHREADS
+		mu_lock_mutex(&logging_mutex);
+#endif
+
 		fprintf(logfile, "%s\n", message);
+
+#ifndef DISABLE_MUTHREADS
+		mu_unlock_mutex(&logging_mutex);
+#endif
 
         fz_output* dbg = stddbgchannel();
 		if (dbg)
 		{
 			fz_write_strings(ctx, dbg, message, "\n", NULL);
 		}
-		fz_unlock_logging(ctx);
 	}
 }
 

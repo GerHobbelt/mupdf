@@ -93,7 +93,6 @@ struct pdf_run_processor
 {
 	pdf_processor super;
 	fz_device *dev;
-	fz_cookie *cookie;
 
 	fz_default_colorspaces *default_cs;
 
@@ -501,7 +500,7 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 		{
 			gstate->ctm = ptm;
 			pdf_gsave(ctx, pr);
-			pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents, NULL);
+			pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents);
 			pdf_grestore(ctx, pr);
 		}
 		fz_end_tile(ctx, pr->dev);
@@ -538,7 +537,7 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 				gstate = pr->gstate + pr->gtop;
 				gstate->ctm = fz_pre_translate(ptm, x * pat->xstep, y * pat->ystep);
 				pdf_gsave(ctx, pr);
-				pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents, NULL);
+				pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents);
 				pdf_grestore(ctx, pr);
 			}
 		}
@@ -1291,6 +1290,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *proc, pdf_obj *xobj, pdf_obj
 	fz_colorspace *cs = NULL;
 	fz_default_colorspaces *save_default_cs = NULL;
 	fz_default_colorspaces *xobj_default_cs = NULL;
+	fz_cookie* cookie = ctx->cookie;
 
 	/* Avoid infinite recursion */
 	pdf_cycle_list *cycle_up = proc->cycle;
@@ -1370,8 +1370,8 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *proc, pdf_obj *xobj, pdf_obj
 		{
 			if (fz_caught(ctx) != FZ_ERROR_TRYLATER)
 				fz_rethrow(ctx);
-			if (pr->cookie)
-				pr->cookie->incomplete = 1;
+			if (cookie)
+				cookie->d.incomplete = 1;
 		}
 		if (xobj_default_cs != save_default_cs)
 		{
@@ -1384,7 +1384,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *proc, pdf_obj *xobj, pdf_obj
 		oldbot = pr->gbot;
 		pr->gbot = pr->gtop;
 
-		pdf_process_contents(ctx, (pdf_processor*)pr, doc, resources, xobj, pr->cookie);
+		pdf_process_contents(ctx, (pdf_processor*)pr, doc, resources, xobj);
 
 		/* Undo any gstate mismatches due to the pdf_process_contents call */
 		if (oldbot != -1)
@@ -2356,7 +2356,6 @@ pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char
 	}
 
 	proc->dev = dev;
-	proc->cookie = dev->cookie;
 
 	proc->default_cs = fz_keep_default_colorspaces(ctx, default_cs);
 

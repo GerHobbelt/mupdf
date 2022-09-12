@@ -21,7 +21,6 @@
 #endif
 
 
-
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
 typedef int tool_f_cpp();

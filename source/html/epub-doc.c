@@ -508,7 +508,7 @@ epub_lookup_bookmark(fz_context *ctx, fz_document *doc_, fz_bookmark mark)
 }
 
 static fz_page *
-epub_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number, fz_cookie* cookie)
+epub_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 {
 	epub_document *doc = (epub_document*)doc_;
 	epub_chapter *ch;
