@@ -67,6 +67,7 @@ typedef struct fz_document_handler_context fz_document_handler_context;
 typedef struct fz_secondary_outputs fz_secondary_outputs;
 typedef struct fz_output fz_output;
 typedef struct fz_context fz_context;
+typedef struct fz_cookie fz_cookie;
 
 /**
     Allocator structure; holds callbacks and private data pointer.
@@ -333,6 +334,7 @@ void __cdecl fz_drop_global_context(void);
     Return TRUE when the provided context includes locking support.
 */
 int fz_has_locking_support(fz_context* ctx);
+
 
 /**
     FIXME: Better not to expose fz_default_error_callback, and
@@ -888,6 +890,8 @@ struct fz_context
     fz_colorspace_context *colorspace;
     fz_store *store;
     fz_glyph_cache *glyph_cache;
+
+	fz_cookie* cookie;
 };
 
 fz_context *fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks, size_t max_store, const char *version);
@@ -952,6 +956,7 @@ static inline void fz_clear_system_error(fz_context *ctx)
 static inline void fz_pop_system_error(fz_context *ctx)
 {
     int idx = ctx->error.system_errdepth;
+	ASSERT0(idx >= 0 && idx < 3);
 
     // DO NOT clear a message what isn't used any more: this is the secret sauce that helps make
     // `fz_ctx_pop_system_errormsg()` work!
@@ -962,15 +967,18 @@ static inline void fz_pop_system_error(fz_context *ctx)
     --idx;
     if (idx < 0)
         idx = 0;
+	ASSERT0(idx >= 0 && idx < 3);
     ctx->error.system_errdepth = idx;
 }
 
 static inline void fz_push_system_error(fz_context *ctx)
 {
     int idx = ctx->error.system_errdepth + 1;
-    if (idx > 3)
-        idx = 3;
-    ctx->error.system_errdepth = idx;
+	ASSERT0(idx > 0 && idx <= 3);
+	if (idx >= 3)
+        idx = 2;
+	ASSERT0(idx >= 0 && idx < 3);
+	ctx->error.system_errdepth = idx;
 
     ctx->error.system_errcode[idx] = 0;
     ctx->error.system_error_message[idx][0] = 0;
@@ -997,7 +1005,8 @@ static inline int fz_is_rtl_error(int errorcode)
 static inline int fz_ctx_get_generic_system_error(fz_context *ctx)
 {
     int idx = ctx->error.system_errdepth;
-    return ctx->error.system_errcode[idx];
+	ASSERT0(idx >= 0 && idx < 3);
+	return ctx->error.system_errcode[idx];
 }
 
 ///  Return 1 when the `ctx` stores an ephemeral system/run-time-library error code (& accompanying message)
@@ -1038,7 +1047,8 @@ static inline const char *fz_ctx_get_system_errormsg(fz_context *ctx)
     if (fz_ctx_has_system_error(ctx))
     {
         int idx = ctx->error.system_errdepth;
-        return ctx->error.system_error_message[idx];
+		ASSERT0(idx >= 0 && idx < 3);
+		return ctx->error.system_error_message[idx];
     }
     return NULL;
 }

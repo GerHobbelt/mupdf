@@ -79,23 +79,11 @@ int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char
 
 void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 {
-	char buf[LONGLINE];
 	assert(message != NULL);
-	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "error: ", message, "\n"))
-		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_ERROR))
 	{
-		if (buf[0])
-		{
-			fz_write_string(ctx, fz_stderr(ctx), buf);
-		}
-		else
-		{
-			fz_write_string(ctx, fz_stderr(ctx), "error: ");
-			fz_write_string(ctx, fz_stderr(ctx), message);
-			fz_write_string(ctx, fz_stderr(ctx), "\n");
-		}
+		fz_write_strings(ctx, fz_stderr(ctx), "error: ", message, "\n", NULL);
 	}
 
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
@@ -105,39 +93,18 @@ void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 		{
 			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_ERROR);
 
-			if (buf[0])
-			{
-				fz_write_string(ctx, out, buf);
-			}
-			else
-			{
-				fz_write_string(ctx, out, "error: ");
-				fz_write_string(ctx, out, message);
-				fz_write_string(ctx, out, "\n");
-			}
+			fz_write_strings(ctx, out, "error: ", message, "\n", NULL);
 		}
 	}
 }
 
 void fz_default_warning_callback(fz_context* ctx, void* user, const char* message)
 {
-	char buf[LONGLINE];
 	assert(message != NULL);
-	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "warning: ", message, "\n"))
-		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_WARN))
 	{
-		if (buf[0])
-		{
-			fz_write_string(ctx, fz_stderr(ctx), buf);
-		}
-		else
-		{
-			fz_write_string(ctx, fz_stderr(ctx), "warning: ");
-			fz_write_string(ctx, fz_stderr(ctx), message);
-			fz_write_string(ctx, fz_stderr(ctx), "\n");
-		}
+		fz_write_strings(ctx, fz_stderr(ctx), "warning: ", message, "\n", NULL);
 	}
 
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
@@ -147,16 +114,7 @@ void fz_default_warning_callback(fz_context* ctx, void* user, const char* messag
 		{
 			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_WARNING);
 
-			if (buf[0])
-			{
-				fz_write_string(ctx, out, buf);
-			}
-			else
-			{
-				fz_write_string(ctx, out, "warning: ");
-				fz_write_string(ctx, out, message);
-				fz_write_string(ctx, out, "\n");
-			}
+			fz_write_strings(ctx, out, "warning: ", message, "\n", NULL);
 		}
 	}
 }
@@ -181,22 +139,11 @@ void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, v
 
 void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 {
-	char buf[LONGLINE];
 	assert(message != NULL);
-	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), message, "\n", NULL))
-		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_INFO))
 	{
-		if (buf[0])
-		{
-			fz_write_string(ctx, fz_stderr(ctx), buf);
-		}
-		else
-		{
-			fz_write_string(ctx, fz_stderr(ctx), message);
-			fz_write_string(ctx, fz_stderr(ctx), "\n");
-		}
+		fz_write_strings(ctx, fz_stderr(ctx), message, "\n", NULL);
 	}
 
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
@@ -206,15 +153,7 @@ void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 		{
 			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_INFO);
 
-			if (buf[0])
-			{
-				fz_write_string(ctx, out, buf);
-			}
-			else
-			{
-				fz_write_string(ctx, out, message);
-				fz_write_string(ctx, out, "\n");
-			}
+			fz_write_strings(ctx, out, message, "\n", NULL);
 		}
 	}
 }
@@ -614,12 +553,14 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 {
 	// do not replace any existing errorcode! First comer is the winner!
 	int idx = ctx->error.system_errdepth;
+	ASSERT(idx >= 0 && idx < 3);
 	if (ctx->error.system_errcode[idx])
 	{
 		++idx;
-		if (idx > 3)
-			idx = 3;
+		if (idx >= 3)
+			idx = 2;
 		// except that the LAST level will always carry the LATEST error...
+		ASSERT0(idx >= 0 && idx < 3);
 		ctx->error.system_errdepth = idx;
 	}
 
@@ -627,6 +568,7 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 		errorcode = -1; // unknown/unidentified error.
 
 	// keep a copy of the ephemeral system error code:
+	ASSERT0(idx >= 0 && idx < 3);
 	ctx->error.system_errcode[idx] = category_code | (errorcode & errorcode_mask);
 
 	const char* category_lead_msg = (category_code == FZ_ERROR_C_RTL_SERIES ? "rtl error: " : "system error: ");
