@@ -61,292 +61,303 @@
 
 static int report_version(int argc, const char** argv);
 
+
+typedef int tool_f(void);
+typedef int tool_fa(int argc, const char** argv);
+typedef int tool_f_cpp();
+
 static struct {
-    int (*func)(int argc, const char *argv[]);
-    const char *name;
+	union
+	{
+		tool_f* f;
+		tool_fa* fa;
+		tool_f_cpp* fpp;
+	} func;
+
+	const char *name;
     const char *desc;
 } tools[] = {
 #if FZ_ENABLE_PDF
-    { pdfclean_main, "clean", "rewrite pdf file" },
+	{ {.fa = pdfclean_main }, "clean", "rewrite pdf file" },
 #endif
-    { muconvert_main, "convert", "convert document" },
+	{ {.fa = muconvert_main }, "convert", "convert document" },
 #if FZ_ENABLE_PDF
-    { pdfcreate_main, "create", "create pdf document" },
+	{ {.fa = pdfcreate_main }, "create", "create pdf document" },
 #endif
-    { mudraw_main, "draw", "convert document" },
-    { muraster_main, "raster", "convert document to a raster file" },
-    { mutrace_main, "trace", "trace device calls" },
+	{ {.fa = mudraw_main }, "draw", "convert document" },
+	{ {.fa = muraster_main }, "raster", "convert document to a raster file" },
+	{ {.fa = mutrace_main }, "trace", "trace device calls" },
 #if FZ_ENABLE_PDF
-    { pdfextract_main, "extract", "extract font and image resources" },
+	{ {.fa = pdfextract_main }, "extract", "extract font and image resources" },
 #endif
 #if FZ_ENABLE_PDF
-    { pdfinfo_main, "info", "show information about pdf resources" },
-    { pdfmerge_main, "merge", "merge pages from multiple pdf sources into a new pdf" },
-    { pdfpages_main, "pages", "show information about pdf pages" },
+	{ {.fa = pdfinfo_main }, "info", "show information about pdf resources" },
+	{ {.fa = pdfmerge_main }, "merge", "merge pages from multiple pdf sources into a new pdf" },
+	{ {.fa = pdfpages_main }, "pages", "show information about pdf pages" },
 #if defined(MUTOOL_EX)
-    { pdfposter_main, "poster", "split large page into many tiles" },
+	{ {.fa = pdfposter_main }, "poster", "split large page into many tiles" },
 #endif
-    { pdfsign_main, "sign", "manipulate PDF digital signatures" },
-    { pdftagged_main, "tagged", "extract Tagged PDF content" },
+	{ {.fa = pdfsign_main }, "sign", "manipulate PDF digital signatures" },
+	{ {.fa = pdftagged_main }, "tagged", "extract Tagged PDF content" },
 #endif
 #if FZ_ENABLE_JS
 #if defined(MUTOOL_EX)
-    { murun_main, "run", "run javascript" },
+	{ {.fa = murun_main }, "run", "run javascript" },
 #endif
 #endif
 #if FZ_ENABLE_PDF
-    { pdfshow_main, "show", "show internal pdf objects" },
+	{ {.fa = pdfshow_main }, "show", "show internal pdf objects" },
 #ifndef NDEBUG
 #if defined(MUTOOL_EX)
-    { cmapdump_main, "cmapdump", "dump CMap resource as C source file" },
+	{ {.fa = cmapdump_main }, "cmapdump", "dump CMap resource as C source file" },
 #endif
 #endif
 #endif
 #if defined(MUTOOL_EX)
-    { mupdf_base64_test_main, "base64_test", "muPDF base64 fringe case tests" },
-    { mupdf_example_main, "example", "muPDF docs::example: render a single page and print the result as a PPM to stdout" },
-    { mupdf_multithreaded_example_main, "multithreaded_example", "muPDF multi-threaded rendering of all pages in a document to PNG images" },
-    { mupdf_storytest_main, "story_test", "muPDF fz_story showcase for converting HTML input to a PDF file" },
+	{ {.fa = mupdf_base64_test_main }, "base64_test", "muPDF base64 fringe case tests" },
+	{ {.fa = mupdf_example_main }, "example", "muPDF docs::example: render a single page and print the result as a PPM to stdout" },
+	{ {.fa = mupdf_multithreaded_example_main }, "multithreaded_example", "muPDF multi-threaded rendering of all pages in a document to PNG images" },
+	{ {.fa = mupdf_storytest_main }, "story_test", "muPDF fz_story showcase for converting HTML input to a PDF file" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { tesseract_main, "tesseract", "OCR given image or PDF" },
+	{ {.fa = tesseract_main }, "tesseract", "OCR given image or PDF" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { tesseract_ambiguous_words_main, "tess_ambiguous_words", "OCR training helper utility" },
-    { tesseract_classifier_tester_main, "tess_classifier_tester", "OCR training helper utility" },
-    { tesseract_cn_training_main, "tess_cn_training", "OCR training helper utility" },
-    { tesseract_mf_training_main, "tess_mf_training", "OCR training helper utility" },
-    { tesseract_shape_clustering_main, "tess_shape_clustering", "OCR training helper utility" },
+	{ {.fa = tesseract_ambiguous_words_main }, "tess_ambiguous_words", "OCR training helper utility" },
+	{ {.fa = tesseract_classifier_tester_main }, "tess_classifier_tester", "OCR training helper utility" },
+	{ {.fa = tesseract_cn_training_main }, "tess_cn_training", "OCR training helper utility" },
+	{ {.fa = tesseract_mf_training_main }, "tess_mf_training", "OCR training helper utility" },
+	{ {.fa = tesseract_shape_clustering_main }, "tess_shape_clustering", "OCR training helper utility" },
 
-    { tesseract_merge_unicharsets_main, "tess_merge_unicharsets", "OCR training helper utility" },
-    { tesseract_set_unicharset_properties_main, "tess_set_unicharset_properties", "OCR training helper utility" },
-    { tesseract_unicharset_extractor_main, "tess_unicharset_extractor", "OCR training helper utility" },
-    { tesseract_combine_lang_model_main, "tess_combine_lang_model", "OCR training helper utility" },
+	{ {.fa = tesseract_merge_unicharsets_main }, "tess_merge_unicharsets", "OCR training helper utility" },
+	{ {.fa = tesseract_set_unicharset_properties_main }, "tess_set_unicharset_properties", "OCR training helper utility" },
+	{ {.fa = tesseract_unicharset_extractor_main }, "tess_unicharset_extractor", "OCR training helper utility" },
+	{ {.fa = tesseract_combine_lang_model_main }, "tess_combine_lang_model", "OCR training helper utility" },
 
-    { tesseract_combine_tessdata_main, "tess_combine_tessdata", "OCR training helper utility" },
-    { tesseract_dawg2wordlist_main, "tess_dawg2wordlist", "OCR training helper utility" },
-    { tesseract_wordlist2dawg_main, "tess_wordlist2dawg", "OCR training helper utility" },
-    { tesseract_lstm_eval_main, "tess_lstm_eval", "OCR training helper utility" },
-    { tesseract_lstm_training_main, "tess_lstm_training", "OCR training helper utility" },
+	{ {.fa = tesseract_combine_tessdata_main }, "tess_combine_tessdata", "OCR training helper utility" },
+	{ {.fa = tesseract_dawg2wordlist_main }, "tess_dawg2wordlist", "OCR training helper utility" },
+	{ {.fa = tesseract_wordlist2dawg_main }, "tess_wordlist2dawg", "OCR training helper utility" },
+	{ {.fa = tesseract_lstm_eval_main }, "tess_lstm_eval", "OCR training helper utility" },
+	{ {.fa = tesseract_lstm_training_main }, "tess_lstm_training", "OCR training helper utility" },
 
-    { tesseract_text2image_main, "tess_text2image", "OCR training helper utility" },
+	{ {.fa = tesseract_text2image_main }, "tess_text2image", "OCR training helper utility" },
 #endif
 
-    { curl_main, "curl", "access/fetch a given URI" },
+	{ {.fa = curl_main }, "curl", "access/fetch a given URI" },
 
 #if defined(MUTOOL_EX)
-    { mujs_example_main, "js", "basic REPL for MuJS JavaScript interpreter" },
-    { mujs_prettyprint_main, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
+	{ {.fa = mujs_example_main }, "js", "basic REPL for MuJS JavaScript interpreter" },
+	{ {.fa = mujs_prettyprint_main }, "jspretty", "prettyprint (reformat) MuJS JavaScript source files" },
 #endif
 
-    { pdfmetadump_main, "metadump", "multitool shows information about pdf in JSON format" },
+	{ {.fa = pdfmetadump_main }, "metadump", "multitool shows information about pdf in JSON format" },
 
-    { qiqqa_muannot_main, "muannot", "Qiqqa annotation processing utility to help extract and inject (import/export) PDF annotations" },
-    { qiqqa_mucontent_main, "mucontent", "Qiqqa PDF content extraction / injection utility to help extract and inject (import/export) PDF content in text and hOCR formats" },
-    { qiqqa_muserver_main, "muserver", "Qiqqa/MuPDF local web server: the Qiqqa database and file management backend" },
+	{ {.fa = qiqqa_muannot_main }, "muannot", "Qiqqa annotation processing utility to help extract and inject (import/export) PDF annotations" },
+	{ {.fa = qiqqa_mucontent_main }, "mucontent", "Qiqqa PDF content extraction / injection utility to help extract and inject (import/export) PDF content in text and hOCR formats" },
+	{ {.fa = qiqqa_muserver_main }, "muserver", "Qiqqa/MuPDF local web server: the Qiqqa database and file management backend" },
 
-    { qiqqa_fingerprint0_main, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },
-    { qiqqa_fingerprint1_main, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
-    { qiqqa_documentid62_main, "qiqqa_documentid62", "calculate the new v2 Qiqqa fingerprint hash-based positive non-zero 64bit document id for a file" },
+	{ {.fa = qiqqa_fingerprint0_main }, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },
+	{ {.fa = qiqqa_fingerprint1_main }, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
+	{ {.fa = qiqqa_documentid62_main }, "qiqqa_documentid62", "calculate the new v2 Qiqqa fingerprint hash-based positive non-zero 64bit document id for a file" },
 
-    { sqlite_main, "sqlite", "SQLite3 tool" },
+	{ {.fa = sqlite_main }, "sqlite", "SQLite3 tool" },
 #if defined(MUTOOL_EX)
-    { sqlite_dbhash_main, "sqlite_dbhash", "SQLite3 dbhash tool" },
-    { sqlite_dbtotxt_main, "sqlite_dbtotxt", "SQLite3 dbtotxt tool" },
-    { sqlite_diff_main, "sqlite_diff", "SQLite3 diff tool" },
-    { sqlite_enlargedb_main, "sqlite_enlargedb", "SQLite3 enlargedb tool" },
-    { sqlite_fast_vacuum_main, "sqlite_fast_vacuum", "SQLite3 fast_vacuum tool" },
-    { sqlite_getlock_main, "sqlite_getlock", "SQLite3 getlock tool" },
-    { sqlite_index_usage_main, "sqlite_index_usage", "SQLite3 index_usage tool" },
-    { sqlite_libvers_main, "sqlite_libvers", "SQLite3 libvers tool" },
-    { sqlite_max_limits_main, "sqlite_max_limits", "SQLite3 max_limits tool" },
-    { sqlite_offsets_main, "sqlite_offsets", "SQLite3 offsets tool" },
-    { sqlite_pagesig_main, "sqlite_pagesig", "SQLite3 pagesig tool" },
-    { sqlite_showdb_main, "sqlite_showdb", "SQLite3 show db tool" },
-    { sqlite_showjournal_main, "sqlite_showjournal", "SQLite3 show journal tool" },
-    { sqlite_showlocks_main, "sqlite_showlocks", "SQLite3 show locks tool" },
-    { sqlite_showshm_main, "sqlite_showshm", "SQLite3 show shm tool" },
-    { sqlite_showstat4_main, "sqlite_showstat4", "SQLite3 show stat4 tool" },
-    { sqlite_showwal_main, "sqlite_showwal", "SQLite3 show wal tool" },
+	{ {.fa = sqlite_dbhash_main }, "sqlite_dbhash", "SQLite3 dbhash tool" },
+	{ {.fa = sqlite_dbtotxt_main }, "sqlite_dbtotxt", "SQLite3 dbtotxt tool" },
+	{ {.fa = sqlite_diff_main }, "sqlite_diff", "SQLite3 diff tool" },
+	{ {.fa = sqlite_enlargedb_main }, "sqlite_enlargedb", "SQLite3 enlargedb tool" },
+	{ {.fa = sqlite_fast_vacuum_main }, "sqlite_fast_vacuum", "SQLite3 fast_vacuum tool" },
+	{ {.fa = sqlite_getlock_main }, "sqlite_getlock", "SQLite3 getlock tool" },
+	{ {.fa = sqlite_index_usage_main }, "sqlite_index_usage", "SQLite3 index_usage tool" },
+	{ {.fa = sqlite_libvers_main }, "sqlite_libvers", "SQLite3 libvers tool" },
+	{ {.fa = sqlite_max_limits_main }, "sqlite_max_limits", "SQLite3 max_limits tool" },
+	{ {.fa = sqlite_offsets_main }, "sqlite_offsets", "SQLite3 offsets tool" },
+	{ {.fa = sqlite_pagesig_main }, "sqlite_pagesig", "SQLite3 pagesig tool" },
+	{ {.fa = sqlite_showdb_main }, "sqlite_showdb", "SQLite3 show db tool" },
+	{ {.fa = sqlite_showjournal_main }, "sqlite_showjournal", "SQLite3 show journal tool" },
+	{ {.fa = sqlite_showlocks_main }, "sqlite_showlocks", "SQLite3 show locks tool" },
+	{ {.fa = sqlite_showshm_main }, "sqlite_showshm", "SQLite3 show shm tool" },
+	{ {.fa = sqlite_showstat4_main }, "sqlite_showstat4", "SQLite3 show stat4 tool" },
+	{ {.fa = sqlite_showwal_main }, "sqlite_showwal", "SQLite3 show wal tool" },
 
-    { sqlite_logest_main, "sqlite_logest", "SQLite3 logest tool" },
-    { sqlite_varint_main, "sqlite_varint", "SQLite3 varint tool" },
+	{ {.fa = sqlite_logest_main }, "sqlite_logest", "SQLite3 logest tool" },
+	{ {.fa = sqlite_varint_main }, "sqlite_varint", "SQLite3 varint tool" },
 
-    { sqlite_kvtest_main, "sqlite_kvtest", "SQLite3 kvtest tool" },
-    { sqlite_speedtest1_main, "sqlite_speedtest1", "SQLite3 speedtest1 tool" },
-    { sqlite_speedtest8_main, "sqlite_speedtest8", "SQLite3 speedtest8 tool" },
-    { sqlite_test_startup_main, "sqlite_test_startup", "SQLite3 test_startup tool" },
-    { sqlite_threadtest1_main, "sqlite_threadtest1", "SQLite3 threadtest1 tool" },
-    { sqlite_threadtest2_main, "sqlite_threadtest2", "SQLite3 threadtest2 tool" },
-    { sqlite_threadtest3_main, "sqlite_threadtest3", "SQLite3 threadtest3 tool" },
-    { sqlite_threadtest4_main, "sqlite_threadtest4", "SQLite3 threadtest4 tool" },
-    { sqlite_threadtest5_main, "sqlite_threadtest5", "SQLite3 threadtest5 tool" },
-    { sqlite_wordcount_main, "sqlite_wordcount", "SQLite3 wordcount test tool" },
-#endif
-
-#if defined(MUTOOL_EX)
-    //{ jpeginfo_main, "jpeginfo", "jpeginfo tool" },
+	{ {.fa = sqlite_kvtest_main }, "sqlite_kvtest", "SQLite3 kvtest tool" },
+	{ {.fa = sqlite_speedtest1_main }, "sqlite_speedtest1", "SQLite3 speedtest1 tool" },
+	{ {.fa = sqlite_speedtest8_main }, "sqlite_speedtest8", "SQLite3 speedtest8 tool" },
+	{ {.fa = sqlite_test_startup_main }, "sqlite_test_startup", "SQLite3 test_startup tool" },
+	{ {.fa = sqlite_threadtest1_main }, "sqlite_threadtest1", "SQLite3 threadtest1 tool" },
+	{ {.fa = sqlite_threadtest2_main }, "sqlite_threadtest2", "SQLite3 threadtest2 tool" },
+	{ {.fa = sqlite_threadtest3_main }, "sqlite_threadtest3", "SQLite3 threadtest3 tool" },
+	{ {.fa = sqlite_threadtest4_main }, "sqlite_threadtest4", "SQLite3 threadtest4 tool" },
+	{ {.fa = sqlite_threadtest5_main }, "sqlite_threadtest5", "SQLite3 threadtest5 tool" },
+	{ {.fa = sqlite_wordcount_main }, "sqlite_wordcount", "SQLite3 wordcount test tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { jpegturbo_jpegtran_main, "jpegtran", "jpegtran tool" },
-    { jpegturbo_rdjpegcom_main, "rdjpegcom", "rdjpegcom tool" },
-    { jpegturbo_wrjpegcom_main, "wrjpegcom", "wrjpegcom tool" },
-    { jpegturbo_djpeg_main, "djpeg", "djpeg tool" },
-    { jpegturbo_cjpeg_main, "cjpeg", "cjpeg tool" },
+	//{ {.fa = jpeginfo_main }, "jpeginfo", "jpeginfo tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { jbig2dec_main, "jbig2dec", "jbig2dec tool" },
-    { jbig2dec_arith_test_main, "jbig2_arith_test", "jbig2dec test" },
-    { jbig2dec_huffman_test_main, "jbig2_huffman_test", "jbig2dec test" },
-    { jbig2dec_pbm2png_main, "jbig2dec_pbm2png", "jbig2dec_pbm2png tool" },
+	{ {.fa = jpegturbo_jpegtran_main }, "jpegtran", "jpegtran tool" },
+	{ {.fa = jpegturbo_rdjpegcom_main }, "rdjpegcom", "rdjpegcom tool" },
+	{ {.fa = jpegturbo_wrjpegcom_main }, "wrjpegcom", "wrjpegcom tool" },
+	{ {.fa = jpegturbo_djpeg_main }, "djpeg", "djpeg tool" },
+	{ {.fa = jpegturbo_cjpeg_main }, "cjpeg", "cjpeg tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { cwebp_main, "cwebp", "cwebp tool" },
-    { dwebp_main, "dwebp", "dwebp tool" },
-    { gif2webp_main, "gif2webp", "gif2webp tool" },
-    { img2webp_main, "img2webp", "img2webp tool" },
-    { vwebp_main, "vwebp", "vwebp tool" },
-    { vwebp_sdl_main, "vwebp_sdl", "vwebp_sdl tool" },
-    { webp_anim_diff_main, "webp_anim_diff", "webp: webp_anim_diff tool" },
-    { webp_anim_dump_main, "webp_anim_dump", "webp_anim_dump tool" },
-    { webp_get_disto_main, "webp_get_disto", "webp_get_disto tool" },
-    { webp_quality_main, "webp_quality", "webp_quality tool" },
-    { webpinfo_main, "webpinfo", "webpinfo tool" },
-    { webpmux_main, "webpmux", "webpmux tool" },
+	{ {.fa = jbig2dec_main }, "jbig2dec", "jbig2dec tool" },
+	{ {.fa = jbig2dec_arith_test_main }, "jbig2_arith_test", "jbig2dec test" },
+	{ {.fa = jbig2dec_huffman_test_main }, "jbig2_huffman_test", "jbig2dec test" },
+	{ {.fa = jbig2dec_pbm2png_main }, "jbig2dec_pbm2png", "jbig2dec_pbm2png tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { pngcrush_main, "pngcrush", "pngcrush tool" },
-    { pngmeta_main, "pngmeta", "pngmeta tool" },
-    { pngzop_zlib_to_idat_main, "pngzop_zlib_to_idat", "pngzop_zlib_to_idat tool" },
-    { pngidat_main, "pngidat", "pngidat tool" },
-    { pngiend_main, "pngiend", "pngiend tool" },
-    { pngihdr_main, "pngihdr", "pngihdr tool" },
+	{ {.fa = cwebp_main }, "cwebp", "cwebp tool" },
+	{ {.fa = dwebp_main }, "dwebp", "dwebp tool" },
+	{ {.fa = gif2webp_main }, "gif2webp", "gif2webp tool" },
+	{ {.fa = img2webp_main }, "img2webp", "img2webp tool" },
+	{ {.fa = vwebp_main }, "vwebp", "vwebp tool" },
+	{ {.fa = vwebp_sdl_main }, "vwebp_sdl", "vwebp_sdl tool" },
+	{ {.fa = webp_anim_diff_main }, "webp_anim_diff", "webp: webp_anim_diff tool" },
+	{ {.fa = webp_anim_dump_main }, "webp_anim_dump", "webp_anim_dump tool" },
+	{ {.fa = webp_get_disto_main }, "webp_get_disto", "webp_get_disto tool" },
+	{ {.fa = webp_quality_main }, "webp_quality", "webp_quality tool" },
+	{ {.fa = webpinfo_main }, "webpinfo", "webpinfo tool" },
+	{ {.fa = webpmux_main }, "webpmux", "webpmux tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { charter_svg_main, "charter_svg", "charter_svg tool" },
-    { charter_tex_main, "charter_tex", "charter_tex tool" },
-    { tiny_expr_repl_main, "tiny_expr_repl", "tiny_expr_repl tool" },
-
-    { smartypants_main, "smartypants", "smartypants tool" },
-    { upskirt_main, "upskirt", "upskirt tool" },
+	{ {.fa = pngcrush_main }, "pngcrush", "pngcrush tool" },
+	{ {.fa = pngmeta_main }, "pngmeta", "pngmeta tool" },
+	{ {.fa = pngzop_zlib_to_idat_main }, "pngzop_zlib_to_idat", "pngzop_zlib_to_idat tool" },
+	{ {.fa = pngidat_main }, "pngidat", "pngidat tool" },
+	{ {.fa = pngiend_main }, "pngiend", "pngiend tool" },
+	{ {.fa = pngihdr_main }, "pngihdr", "pngihdr tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { qjs_main, "qjs", "qjs (QuickJS) tool" },
-    { qjsc_main, "qjsc", "qjsc (QuickJS Compiler) tool" },
-#endif
-#if defined(MUTOOL_EX)
-    { qjscompress_main, "qjscompress", "qjscompress tool" },
-    { qjs_unicode_gen_main, "qjs_unicode_gen", "qjs_unicode_gen tool" },
-    { qjs_test262_main, "qjs_test262", "qjs_test262 conformance test tool" },
+	{ {.fa = charter_svg_main }, "charter_svg", "charter_svg tool" },
+	{ {.fa = charter_tex_main }, "charter_tex", "charter_tex tool" },
+	{ {.fa = tiny_expr_repl_main }, "tiny_expr_repl", "tiny_expr_repl tool" },
+
+	{ {.fa = smartypants_main }, "smartypants", "smartypants tool" },
+	{ {.fa = upskirt_main }, "upskirt", "upskirt tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { qjscpp_main, "qjscpp", "qjscpp tool" },
-    { qjscpp_class_test_main, "qjscpp_class_test", "qjscpp_class_test tool" },
-    { qjscpp_conversions_test_main, "qjscpp_conversions_test", "qjscpp_conversions_test tool" },
-    { qjscpp_example_main, "qjscpp_example", "qjscpp_example tool" },
-    { qjscpp_exception_test_main, "qjscpp_exception_test", "qjscpp_exception_test tool" },
-    { qjscpp_function_call_test_main, "qjscpp_function_call_test", "qjscpp_function_call_test tool" },
-    { qjscpp_inheritance_test_main, "qjscpp_inheritance_test", "qjscpp_inheritance_test tool" },
-    { qjscpp_jobs_test_main, "qjscpp_jobs_test", "qjscpp_jobs_test tool" },
-    { qjscpp_module_loader_test_main, "qjscpp_module_loader_test", "qjscpp_module_loader_test tool" },
-    { qjscpp_multicontext_test_main, "qjscpp_multicontext_test", "qjscpp_multicontext_test tool" },
-    { qjscpp_point_test_main, "qjscpp_point_test", "qjscpp_point_test tool" },
-    { qjscpp_unhandled_rejection_test_main, "qjscpp_unhandled_rejection_test", "qjscpp_unhandled_rejection_test tool" },
-    { qjscpp_value_test_main, "qjscpp_value_test", "qjscpp_value_test tool" },
-    { qjscpp_variant_test_main, "qjscpp_variant_test", "qjscpp_variant_test tool" },
+	{ {.fa = qjs_main }, "qjs", "qjs (QuickJS) tool" },
+	{ {.fa = qjsc_main }, "qjsc", "qjsc (QuickJS Compiler) tool" },
+#endif
+#if defined(MUTOOL_EX)
+	{ {.fa = qjscompress_main }, "qjscompress", "qjscompress tool" },
+	{ {.fa = qjs_unicode_gen_main }, "qjs_unicode_gen", "qjs_unicode_gen tool" },
+	{ {.fa = qjs_test262_main }, "qjs_test262", "qjs_test262 conformance test tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { qjscpp_async_example_main, "qjscpp_async_example", "qjscpp_async_example tool" },
-    { qjscpp_classes_example_main, "qjscpp_classes_example", "qjscpp_classes_example tool" },
-    { qjscpp_closures_example_main, "qjscpp_closures_example", "qjscpp_closures_example tool" },
-    { qjscpp_exception_example_main, "qjscpp_exception_example", "qjscpp_exception_example tool" },
-    { qjscpp_simple_example_main, "qjscpp_simple_example", "qjscpp_simple_example tool" },
+	{ {.fa = qjscpp_main }, "qjscpp", "qjscpp tool" },
+	{ {.f = qjscpp_class_test_main }, "qjscpp_class_test", "qjscpp_class_test tool" },
+	{ {.f = qjscpp_conversions_test_main }, "qjscpp_conversions_test", "qjscpp_conversions_test tool" },
+	{ {.f = qjscpp_example_main }, "qjscpp_example", "qjscpp_example tool" },
+	{ {.f = qjscpp_exception_test_main }, "qjscpp_exception_test", "qjscpp_exception_test tool" },
+	{ {.f = qjscpp_function_call_test_main }, "qjscpp_function_call_test", "qjscpp_function_call_test tool" },
+	{ {.f = qjscpp_inheritance_test_main }, "qjscpp_inheritance_test", "qjscpp_inheritance_test tool" },
+	{ {.f = qjscpp_jobs_test_main }, "qjscpp_jobs_test", "qjscpp_jobs_test tool" },
+	{ {.f = qjscpp_module_loader_test_main }, "qjscpp_module_loader_test", "qjscpp_module_loader_test tool" },
+	{ {.f = qjscpp_multicontext_test_main }, "qjscpp_multicontext_test", "qjscpp_multicontext_test tool" },
+	{ {.f = qjscpp_point_test_main }, "qjscpp_point_test", "qjscpp_point_test tool" },
+	{ {.f = qjscpp_unhandled_rejection_test_main }, "qjscpp_unhandled_rejection_test", "qjscpp_unhandled_rejection_test tool" },
+	{ {.f = qjscpp_value_test_main }, "qjscpp_value_test", "qjscpp_value_test tool" },
+	{ {.f = qjscpp_variant_test_main }, "qjscpp_variant_test", "qjscpp_variant_test tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { zopfli_main, "zopfli", "zopfli tool" },
-    { zopflipng_main, "zopflipng", "zopflipng tool" },
+	{ {.fa = qjscpp_async_example_main }, "qjscpp_async_example", "qjscpp_async_example tool" },
+	{ {.fa = qjscpp_classes_example_main }, "qjscpp_classes_example", "qjscpp_classes_example tool" },
+	{ {.fa = qjscpp_closures_example_main }, "qjscpp_closures_example", "qjscpp_closures_example tool" },
+	{ {.fa = qjscpp_exception_example_main }, "qjscpp_exception_example", "qjscpp_exception_example tool" },
+	{ {.fa = qjscpp_simple_example_main }, "qjscpp_simple_example", "qjscpp_simple_example tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { brotli_main, "brotli", "brotli tool" },
+	{ {.fa = zopfli_main }, "zopfli", "zopfli tool" },
+	{ {.fa = zopflipng_main }, "zopflipng", "zopflipng tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { jpegXL_decode_oneshot_main, "jxl_decode_oneshot", "jxl_decode_oneshot tool" },
-    { jpegXL_encode_oneshot_main, "jxl_encode_oneshot", "jxl_encode_oneshot tool" },
-    { jpegXL_info_main, "jxl_info", "jxl_info: jpegXL tool" },
-    { jpegXL_decode_EXIF_metadata_main, "jpegXL_decode_EXIF_metadata", "jpegXL_decode_EXIF_metadata: jpegXL tool" },
-    { jpegXL_decode_progressive_main, "jpegXL_decode_progressive", "jpegXL_decode_progressive: jpegXL tool" },
-    { jpegXL_box_list_main, "jxl_box_list", "jxl_box_list tool" },
-    { jpegXL_butteraugli_main, "jxl_butteraugli", "jxl_butteraugli tool" },
-    { jpegXL_compress_main, "jxl_compress", "jxl_compress tool" },
-    { jpegXL_cjpeg_hdr_main, "jxl_cjpeg_hdr", "jxl_cjpeg_hdr tool" },
-    { jpegXL_decompress_main, "jxl_decompress", "jxl_decompress tool" },
-    { jpegXL_dec_enc_main, "jxl_dec_enc", "jxl_dec_enc tool" },
-    { jpegXL_from_tree_main, "jxl_from_tree", "jxl_from_tree tool" },
-    { jpegXL_ssimulacra_main, "jxl_ssimulacra tool", "jxl_ssimulacra tool" },
-    { jpegXL_xyb_range_main, "jxl_xyb_range", "jxl_xyb_range tool" },
-    { jpegXL_generate_LUT_template_main, "jpegXL_generate_LUT_template", "jpegXL_generate_LUT_template tool" },
-    { jpegXL_pq_to_hlg_main, "jpegXL_pq_to_hlg", "jpegXL_pq_to_hlg tool" },
-    { jpegXL_render_hlg_main, "jpegXL_render_hlg", "jpegXL_render_hlg tool" },
-    { jpegXL_texture_to_cube_main, "jpegXL_texture_to_cube", "jpegXL_texture_to_cube tool" },
+	{ {.fa = brotli_main }, "brotli", "brotli tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { bibutils_bib2xml_main, "bib2xml", "bibutils::bib2xml tool" },
-    { bibutils_bibdiff_main, "bibdiff", "bibutils::bibdiff tool" },
-    { bibutils_biblatex2xml_main, "biblatex2xml", "bibutils::biblatex2xml tool" },
-    { bibutils_copac2xml_main, "copac2xml", "bibutils::copac2xml tool" },
-    { bibutils_ebi2xml_main, "ebi2xml", "bibutils::ebi2xml tool" },
-    { bibutils_end2xml_main, "end2xml", "bibutils::end2xml tool" },
-    { bibutils_endx2xml_main, "endx2xml", "bibutils::endx2xml tool" },
-    { bibutils_isi2xml_main, "isi2xml", "bibutils::isi2xml tool" },
-    { bibutils_med2xml_main, "med2xml", "bibutils::med2xml tool" },
-    { bibutils_modsclean_main, "bibutils_modsclean", "bibutils::modsclean tool" },
-    { bibutils_nbib2xml_main, "nbib2xml", "bibutils::nbib2xml tool" },
-    { bibutils_ris2xml_main, "ris2xml", "bibutils::ris2xml tool" },
-    { bibutils_wordbib2xml_main, "wordbib2xml", "bibutils::wordbib2xml tool" },
-    { bibutils_xml2ads_main, "xml2ads", "bibutils::xml2ads tool" },
-    { bibutils_xml2bib_main, "xml2bib", "bibutils::xml2bib tool" },
-    { bibutils_xml2biblatex_main, "xml2biblatex", "bibutils::xml2biblatex tool" },
-    { bibutils_xml2end_main, "xml2end", "bibutils::xml2end tool" },
-    { bibutils_xml2isi_main, "xml2isi", "bibutils::xml2isi tool" },
-    { bibutils_xml2nbib_main, "xml2nbib", "bibutils::xml2nbib tool" },
-    { bibutils_xml2ris_main, "xml2ris", "bibutils::xml2ris tool" },
-    { bibutils_xml2wordbib_main, "xml2wordbib", "bibutils::xml2wordbib tool" },
+	{ {.fa = jpegXL_decode_oneshot_main }, "jxl_decode_oneshot", "jxl_decode_oneshot tool" },
+	{ {.fa = jpegXL_encode_oneshot_main }, "jxl_encode_oneshot", "jxl_encode_oneshot tool" },
+	{ {.fa = jpegXL_info_main }, "jxl_info", "jxl_info: jpegXL tool" },
+	{ {.fa = jpegXL_decode_EXIF_metadata_main }, "jpegXL_decode_EXIF_metadata", "jpegXL_decode_EXIF_metadata: jpegXL tool" },
+	{ {.fa = jpegXL_decode_progressive_main }, "jpegXL_decode_progressive", "jpegXL_decode_progressive: jpegXL tool" },
+	{ {.fa = jpegXL_box_list_main }, "jxl_box_list", "jxl_box_list tool" },
+	{ {.fa = jpegXL_butteraugli_main }, "jxl_butteraugli", "jxl_butteraugli tool" },
+	{ {.fa = jpegXL_compress_main }, "jxl_compress", "jxl_compress tool" },
+	{ {.fa = jpegXL_cjpeg_hdr_main }, "jxl_cjpeg_hdr", "jxl_cjpeg_hdr tool" },
+	{ {.fa = jpegXL_decompress_main }, "jxl_decompress", "jxl_decompress tool" },
+	{ {.fa = jpegXL_dec_enc_main }, "jxl_dec_enc", "jxl_dec_enc tool" },
+	{ {.fa = jpegXL_from_tree_main }, "jxl_from_tree", "jxl_from_tree tool" },
+	{ {.fa = jpegXL_ssimulacra_main }, "jxl_ssimulacra tool", "jxl_ssimulacra tool" },
+	{ {.fa = jpegXL_xyb_range_main }, "jxl_xyb_range", "jxl_xyb_range tool" },
+	{ {.fa = jpegXL_generate_LUT_template_main }, "jpegXL_generate_LUT_template", "jpegXL_generate_LUT_template tool" },
+	{ {.fa = jpegXL_pq_to_hlg_main }, "jpegXL_pq_to_hlg", "jpegXL_pq_to_hlg tool" },
+	{ {.fa = jpegXL_render_hlg_main }, "jpegXL_render_hlg", "jpegXL_render_hlg tool" },
+	{ {.fa = jpegXL_texture_to_cube_main }, "jpegXL_texture_to_cube", "jpegXL_texture_to_cube tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { bibutils_hash_bu_main, "bibutils_hash_bu", "bibutils::hash_bu tool" },
-    { bibutils_hash_marc_main, "bibutils_hash_marc", "bibutils::hash_marc tool" },
+	{ {.fa = bibutils_bib2xml_main }, "bib2xml", "bibutils::bib2xml tool" },
+	{ {.fa = bibutils_bibdiff_main }, "bibdiff", "bibutils::bibdiff tool" },
+	{ {.fa = bibutils_biblatex2xml_main }, "biblatex2xml", "bibutils::biblatex2xml tool" },
+	{ {.fa = bibutils_copac2xml_main }, "copac2xml", "bibutils::copac2xml tool" },
+	{ {.fa = bibutils_ebi2xml_main }, "ebi2xml", "bibutils::ebi2xml tool" },
+	{ {.fa = bibutils_end2xml_main }, "end2xml", "bibutils::end2xml tool" },
+	{ {.fa = bibutils_endx2xml_main }, "endx2xml", "bibutils::endx2xml tool" },
+	{ {.fa = bibutils_isi2xml_main }, "isi2xml", "bibutils::isi2xml tool" },
+	{ {.fa = bibutils_med2xml_main }, "med2xml", "bibutils::med2xml tool" },
+	{ {.fa = bibutils_modsclean_main }, "bibutils_modsclean", "bibutils::modsclean tool" },
+	{ {.fa = bibutils_nbib2xml_main }, "nbib2xml", "bibutils::nbib2xml tool" },
+	{ {.fa = bibutils_ris2xml_main }, "ris2xml", "bibutils::ris2xml tool" },
+	{ {.fa = bibutils_wordbib2xml_main }, "wordbib2xml", "bibutils::wordbib2xml tool" },
+	{ {.fa = bibutils_xml2ads_main }, "xml2ads", "bibutils::xml2ads tool" },
+	{ {.fa = bibutils_xml2bib_main }, "xml2bib", "bibutils::xml2bib tool" },
+	{ {.fa = bibutils_xml2biblatex_main }, "xml2biblatex", "bibutils::xml2biblatex tool" },
+	{ {.fa = bibutils_xml2end_main }, "xml2end", "bibutils::xml2end tool" },
+	{ {.fa = bibutils_xml2isi_main }, "xml2isi", "bibutils::xml2isi tool" },
+	{ {.fa = bibutils_xml2nbib_main }, "xml2nbib", "bibutils::xml2nbib tool" },
+	{ {.fa = bibutils_xml2ris_main }, "xml2ris", "bibutils::xml2ris tool" },
+	{ {.fa = bibutils_xml2wordbib_main }, "xml2wordbib", "bibutils::xml2wordbib tool" },
 #endif
 
 #if defined(MUTOOL_EX)
-    { bibutils_buauth_test_main, "bibutils_buauth_test", "bibutils::buauth_test tool" },
-    { bibutils_doi_test_main, "bibutils_doi_test", "bibutils::doi_test tool" },
-    { bibutils_entities_test_main, "bibutils_entities_test", "bibutils::entities_test tool" },
-    { bibutils_fields_test_main, "bibutils_fields_test", "bibutils::fields_test tool" },
-    { bibutils_intlist_test_main, "bibutils_intlist_test", "bibutils::intlist_test tool" },
-    { bibutils_marcauth_test_main, "bibutils_marcauth_test", "bibutils::marcauth_test tool" },
-    { bibutils_slist_test_main, "bibutils_slist_test", "bibutils::slist_test tool" },
-    { bibutils_str_test_main, "bibutils_str_test", "bibutils::str_test tool" },
-    { bibutils_test_main, "bibutils_test", "bibutils::test tool" },
-    { bibutils_utf8_test_main, "bibutils_utf8_test", "bibutils::utf8_test tool" },
-    { bibutils_vplist_test_main, "bibutils_vplist_test", "bibutils::vplist_test tool" },
+	{ {.fa = bibutils_hash_bu_main }, "bibutils_hash_bu", "bibutils::hash_bu tool" },
+	{ {.fa = bibutils_hash_marc_main }, "bibutils_hash_marc", "bibutils::hash_marc tool" },
 #endif
 
-    { report_version, "version", "report version of this build / tools" },
+#if defined(MUTOOL_EX)
+	{ {.fa = bibutils_buauth_test_main }, "bibutils_buauth_test", "bibutils::buauth_test tool" },
+	{ {.f = bibutils_doi_test_main }, "bibutils_doi_test", "bibutils::doi_test tool" },
+	{ {.f = bibutils_entities_test_main }, "bibutils_entities_test", "bibutils::entities_test tool" },
+	{ {.fa = bibutils_fields_test_main }, "bibutils_fields_test", "bibutils::fields_test tool" },
+	{ {.f = bibutils_intlist_test_main }, "bibutils_intlist_test", "bibutils::intlist_test tool" },
+	{ {.fa = bibutils_marcauth_test_main }, "bibutils_marcauth_test", "bibutils::marcauth_test tool" },
+	{ {.f = bibutils_slist_test_main }, "bibutils_slist_test", "bibutils::slist_test tool" },
+	{ {.f = bibutils_str_test_main }, "bibutils_str_test", "bibutils::str_test tool" },
+	{ {.fa = bibutils_test_main }, "bibutils_test", "bibutils::test tool" },
+	{ {.f = bibutils_utf8_test_main }, "bibutils_utf8_test", "bibutils::utf8_test tool" },
+	{ {.f = bibutils_vplist_test_main }, "bibutils_vplist_test", "bibutils::vplist_test tool" },
+#endif
+
+	{ {.fa = report_version }, "version", "report version of this build / tools" },
 };
 
 static int
@@ -601,12 +612,12 @@ int mutool_main(int argc, const char** argv)
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func(argc, argv);
+                return tools[i].func.fa(argc, argv);
             strcpy(buf, "mu");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func(argc, argv);
+                return tools[i].func.fa(argc, argv);
         }
     }
 
@@ -623,12 +634,12 @@ int mutool_main(int argc, const char** argv)
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func(argc - 1, argv + 1);
+                return tools[i].func.fa(argc - 1, argv + 1);
             strcpy(buf, "mu");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func(argc - 1, argv + 1);
+                return tools[i].func.fa(argc - 1, argv + 1);
         }
         if (!strcmp(argv[1], "-v"))
         {
