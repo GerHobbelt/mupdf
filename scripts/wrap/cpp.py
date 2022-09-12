@@ -211,7 +211,7 @@ def write_call_arg(
         elif extras.pod:
             out_cpp.write( f'{arg.name_python}.m_internal')
         else:
-            out_cpp.write( f'{arg.name_python}')
+            out_cpp.write( f'{arg.name_python}.m_internal')
 
     elif extras.pod == 'inline':
         # We use the address of the first class member, casting it to a pointer
@@ -531,9 +531,11 @@ def make_python_class_method_outparam_override(
     main_name = rename.ll_fn(cursor.mangled_name)
 
     if structname:
-        name_new = f'{classname}_{main_name}_outparams_fn'
+        #main_name = rename.method(structname, cursor.mangled_name)
+        name_new = f'{classname}_{rename.method(structname, cursor.mangled_name)}_outparams_fn'
     else:
-        name_new = f'{main_name}_outparams_fn'
+        #main_name = rename.fn(cursor.mangled_name)
+        name_new = f'{rename.fn(cursor.mangled_name)}_outparams_fn'
 
     # Define an internal Python function that will become the class method.
     #
@@ -546,16 +548,16 @@ def make_python_class_method_outparam_override(
     for arg in parse.get_args( tu, cursor):
         if arg.out_param:
             continue
-        if parse.is_pointer_to( arg.cursor.type, structname):
+        if structname and parse.is_pointer_to( arg.cursor.type, structname):
             continue
         out.write(f'{comma}{arg.name_python}')
         comma = ', '
     out.write('):\n')
     out.write( '    """\n')
     if structname:
-        out.write(f'    Helper for out-params of {structname}::{main_name}() [{cursor.mangled_name}()].\n')
+        out.write(f'    Helper for out-params of class method {structname}::{main_name}() [{cursor.mangled_name}()].\n')
     else:
-        out.write(f'    Helper for out-params of {main_name}() [{cursor.mangled_name}()].\n')
+        out.write(f'    Class-aware helper for out-params of {fnname}() [{cursor.mangled_name}()].\n')
     out.write( '    """\n')
 
     # ret, a, b, ... = foo::bar(self.m_internal, p, q, r, ...)
@@ -570,15 +572,18 @@ def make_python_class_method_outparam_override(
         out.write( f'{sep}{arg.name_python}')
         sep = ', '
     out.write( f' = {main_name}(')
+    sep = ''
     if structname:
         out.write( f' self.m_internal')
+        sep = ', '
     for arg in parse.get_args( tu, cursor):
         if arg.out_param:
             continue
-        if parse.is_pointer_to( arg.cursor.type, structname):
+        if structname and parse.is_pointer_to( arg.cursor.type, structname):
             continue
-        out.write( ', ')
+        out.write( sep)
         write_call_arg( tu, arg, classname, have_used_this=False, out_cpp=out, python=True)
+        sep = ', '
     out.write( ')\n')
 
     # return ret, a, b.
@@ -1934,6 +1939,7 @@ def function_wrapper_class_aware(
         decl_cpp = f'{methodname}('
     have_used_this = False
     num_out_params = 0
+    num_class_wrapper_params = 0
     comma = ''
     debug = state.state_.show_details( fnname)
     for arg in parse.get_args( tu, fn_cursor):
@@ -1945,6 +1951,7 @@ def function_wrapper_class_aware(
             num_out_params += 1
         if arg.alt:
             # This parameter is a pointer to a struct that we wrap.
+            num_class_wrapper_params += 1
             if (1
                     and struct_name
                     and not class_static
@@ -2160,7 +2167,11 @@ def function_wrapper_class_aware(
         if duplicate_type:
             out_cpp.write( f'*/\n')
 
-    if struct_name and generated and num_out_params:
+    # fixme: the test of `struct_name` means that we don't generate outparam override for
+    # class-aware fns which don't have any struct/class args, e.g. fz_lookup_cjk_font().
+    #
+
+    if (1 or struct_name) and generated and num_out_params:
         make_python_class_method_outparam_override(
                 tu,
                 fn_cursor,
