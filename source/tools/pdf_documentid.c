@@ -116,6 +116,9 @@ static void usage(void)
 		"Syntax: documentid62 [options] <file-to-fingerprint>\n"
 		"\n"
 		"Options:\n"
+		"  -d      output DocID62 as decimal number (default is implicit '-d')\n"
+		"  -x      output DocID62 as hexadecimal number\n"
+		"  -b      output DocID62 as binary number\n"
 		"  -o [destination]\n"
 		"          specify a destination other than stdout for the calculated hash.\n"
 		"  -v      verbose (repeat to increase the chattiness of the application)\n"
@@ -143,6 +146,10 @@ int qiqqa_documentid62_main(int argc, const char** argv)
 	int verbosity = 0;
 	int c;
 	const char* output = NULL;
+	int as_decimal = 0;
+	int as_hexadecimal = 0;
+	int as_binary = 0;
+	int as_pos = 0;
 
 	ctx = NULL;
 	out = NULL;
@@ -156,11 +163,15 @@ int qiqqa_documentid62_main(int argc, const char** argv)
 	}
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:qvV")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:qvVdxb")) != -1)
 	{
 		switch (c)
 		{
 		case 'o': output = fz_optarg; break;
+
+		case 'b': as_binary = ++as_pos; break;
+		case 'd': as_decimal = ++as_pos; break;
+		case 'x': as_hexadecimal = ++as_pos; break;
 
 		case 'q': verbosity = 0; break;
 
@@ -180,6 +191,10 @@ int qiqqa_documentid62_main(int argc, const char** argv)
 		usage();
 		return EXIT_FAILURE;
 	}
+
+	// implicit 'print as decimal':
+	if (!as_binary && !as_decimal && !as_hexadecimal)
+		as_decimal = ++as_pos;
 
 	const char* datafilename = NULL;
 	int errored = 0;
@@ -229,16 +244,73 @@ int qiqqa_documentid62_main(int argc, const char** argv)
 			// now fold the fingerprint into the document id:
 			int64_t docid = fold_hash_to_documentid62(hash, BLAKE3_OUT_LEN);
 
-			// Print the hash as hexadecimal.
+			// Print the hash
 			if (verbosity)
 			{
-				fz_write_printf(ctx, out, "%q: %I64d\n", datafilename, docid);
+				fz_write_printf(ctx, out, "%q: %s\n", datafilename, (as_pos > 1 ? "{" : ""));
+				for (int pos = 1; pos <= as_pos; pos++)
+				{
+					if (as_decimal == pos)
+					{
+						if (as_pos > 1)
+							fz_write_printf(ctx, out, "  %q: ", "decimal");
+						fz_write_printf(ctx, out, "%I64d", docid);
+						as_decimal = 0;
+					}
+					else if (as_hexadecimal == pos)
+					{
+						if (as_pos > 1)
+							fz_write_printf(ctx, out, "  %q: ", "hex");
+						fz_write_printf(ctx, out, "%08jI64X", docid);
+						as_hexadecimal = 0;
+					}
+					else if (as_binary == pos)
+					{
+						if (as_pos > 1)
+							fz_write_printf(ctx, out, "  %q: ", "binary");
+						fz_write_printf(ctx, out, "%064jI64B", docid);
+						as_binary = 0;
+					}
+					else
+					{
+						// somebody has been a smart alec and specified something like `-bdxdd` on the command line: only the last `d` will be printed (@ pos = 5)
+						continue;
+					}
+
+					// at least one more to go?
+					if (as_binary || as_decimal || as_hexadecimal)
+						fz_write_char(ctx, out, ',');
+					fz_write_char(ctx, out, '\n');
+				}
+				if (as_pos > 1)
+					fz_write_string(ctx, out, "}\n");
 			}
 			else
 			{
-				fz_write_printf(ctx, out, "%I64d\n", docid);
-			}
+				for (int pos = 1; pos <= as_pos; pos++)
+				{
+					if (as_decimal == pos)
+					{
+						fz_write_printf(ctx, out, "%I64d", docid);
+						as_decimal = 0;
+					}
+					else if (as_hexadecimal == pos)
+					{
+						fz_write_printf(ctx, out, "%08I64X", docid);
+						as_hexadecimal = 0;
+					}
+					else if (as_binary == pos)
+					{
+						fz_write_printf(ctx, out, "%064I64B", docid);
+						as_binary = 0;
+					}
 
+					// at least one more to go?
+					if (as_binary || as_decimal || as_hexadecimal)
+						fz_write_char(ctx, out, '\t');
+				}
+				fz_write_char(ctx, out, '\n');
+			}
 			if (datafeed)
 			{
 				fz_drop_stream(ctx, datafeed);
