@@ -2164,7 +2164,7 @@ bulktest_main(int argc, const char **argv)
 
                 datafeed = fz_fopen_utf8(ctx, datafilename, "rb");
                 if (datafeed == NULL)
-                    fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
+                    fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile %q: %s", datafilename, fz_ctx_pop_system_errormsg(ctx));
                 datalinecounter = 0;
                 skip_to_datalinecounter = 0;
             }
@@ -2588,7 +2588,16 @@ bulktest_main(int argc, const char **argv)
                             struct trace_info prev_trace_info = trace_info;
                             trace_info.peak = 0;
 
-                            rv = mutool_main(argc - 1, argv + 1);
+                            fz_try(ctx)
+                            {
+                                rv = mutool_main(argc - 1, argv + 1);
+                            }
+                            fz_catch(ctx)
+                            {
+                                fz_error(ctx, "bulktest/mutool: caught otherwise unhandled exception when executing '%s': %s", scriptname, fz_caught_message(ctx));
+                                rv = 666;
+                            }
+
                             if (rv != EXIT_SUCCESS)
                             {
                                 fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
