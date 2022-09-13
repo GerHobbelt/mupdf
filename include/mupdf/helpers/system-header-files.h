@@ -170,6 +170,9 @@ _ACRTIMP _CRTALLOCATOR char* __cdecl _strdup(
 #include <limits.h>
 #include <stdlib.h>
 
+// override assert.h:
+#include "mupdf/assertions.h"
+
 #if defined(_MSC_VER) && !defined(stat)
 #define stat _stat
 #endif
