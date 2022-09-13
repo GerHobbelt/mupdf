@@ -312,7 +312,7 @@ xhtdoc_open_document_with_stream(fz_context *ctx, fz_stream *file)
 static fz_document *
 xhtdoc_open_document(fz_context *ctx, const char *filename)
 {
-	char dirname[2048];
+	char dirname[PATH_MAX];
 	fz_dirname(dirname, filename, sizeof dirname);
 	return htdoc_open_document_with_buffer(ctx, fz_open_directory(ctx, dirname), fz_read_file(ctx, filename), FORMAT_XHTML);
 }
