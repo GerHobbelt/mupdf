@@ -366,6 +366,8 @@ fz_clone_context(fz_context *ctx)
 	fz_keep_glyph_cache(new_ctx);
 #endif
 
+	fz_clear_system_error(new_ctx);
+
 	return new_ctx;
 }
 
