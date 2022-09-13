@@ -119,7 +119,7 @@ qiqqa_db_exporter_main(int argc, const char** argv)
 		}
 		else
 		{
-			char fbuf[4096];
+			char fbuf[PATH_MAX];
 			fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
 			fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
 			fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
