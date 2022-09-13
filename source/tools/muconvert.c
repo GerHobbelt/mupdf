@@ -26,6 +26,7 @@
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/dir.h"
 
 #include "mupdf/assertions.h"
 #include <stdlib.h>
@@ -222,7 +223,13 @@ int muconvert_main(int argc, const char** argv)
 
 	/* Open the output document. */
 	fz_try(ctx)
-		out = fz_new_document_writer(ctx, output, format, options);
+    {
+        char file_path[PATH_MAX];
+        fz_format_output_path(ctx, file_path, sizeof file_path, output, 0);
+        fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
+        fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
+        out = fz_new_document_writer(ctx, file_path, format, options);
+    }
 	fz_catch(ctx)
 	{
 		fz_error(ctx, "cannot create document: %s", fz_caught_message(ctx));

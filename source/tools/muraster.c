@@ -2163,11 +2163,11 @@ int main(int argc, const char** argv)
 		}
 		else
 		{
-			char fbuf[PATH_MAX];
-			fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
-			fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
-			fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
-			out = fz_new_output_with_path(ctx, fbuf, 0);
+			char file_path[PATH_MAX];
+			fz_format_output_path(ctx, file_path, sizeof file_path, output, 0);
+			fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
+			fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
+			out = fz_new_output_with_path(ctx, file_path, 0);
 		}
 #endif
 

@@ -34,6 +34,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/helpers/dir.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -159,7 +160,12 @@ int pdfclean_main(int argc, const char** argv)
 
 	fz_try(ctx)
 	{
-		pdf_clean_file(ctx, infile, outfile, password, &opts, argc - fz_optind, &argv[fz_optind]);
+		char file_path[PATH_MAX];
+		fz_format_output_path(ctx, file_path, sizeof file_path, outfile, 0);
+		fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
+		fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
+
+		pdf_clean_file(ctx, infile, file_path, password, &opts, argc - fz_optind, &argv[fz_optind]);
 	}
 	fz_catch(ctx)
 	{
