@@ -63,9 +63,9 @@ next_null(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_null(fz_context *ctx, void *state_)
+close_null(fz_context *ctx, fz_stream* stm)
 {
-	struct null_filter *state = (struct null_filter *)state_;
+	struct null_filter *state = (struct null_filter *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state);
 }
@@ -127,9 +127,9 @@ next_range(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_range(fz_context *ctx, void *state_)
+close_range(fz_context *ctx, fz_stream* stm)
 {
-	struct range_filter *state = (struct range_filter *)state_;
+	struct range_filter *state = (struct range_filter *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state->ranges);
 	fz_free(ctx, state);
@@ -285,9 +285,9 @@ look_for_endstream:
 }
 
 static void
-close_endstream(fz_context *ctx, void *state_)
+close_endstream(fz_context *ctx, fz_stream* stm)
 {
-	struct endstream_filter *state = (struct endstream_filter *)state_;
+	struct endstream_filter *state = (struct endstream_filter *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state);
 }
@@ -362,9 +362,9 @@ next_concat(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_concat(fz_context *ctx, void *state_)
+close_concat(fz_context *ctx, fz_stream* stm)
 {
-	struct concat_filter *state = (struct concat_filter *)state_;
+	struct concat_filter *state = (struct concat_filter *)stm->state;
 	int i;
 
 	for (i = state->current; i < state->count; i++)
@@ -496,9 +496,9 @@ next_ahxd(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_ahxd(fz_context *ctx, void *state_)
+close_ahxd(fz_context *ctx, fz_stream* stm)
 {
-	fz_ahxd *state = (fz_ahxd *)state_;
+	fz_ahxd *state = (fz_ahxd *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state);
 }
@@ -625,9 +625,9 @@ next_a85d(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_a85d(fz_context *ctx, void *state_)
+close_a85d(fz_context *ctx, fz_stream* stm)
 {
-	fz_a85d *state = (fz_a85d *)state_;
+	fz_a85d *state = (fz_a85d *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state);
 }
@@ -721,9 +721,9 @@ next_rld(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_rld(fz_context *ctx, void *state_)
+close_rld(fz_context *ctx, fz_stream* stm)
 {
-	fz_rld *state = (fz_rld *)state_;
+	fz_rld *state = (fz_rld *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state);
 }
@@ -780,9 +780,9 @@ next_arc4(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_arc4(fz_context *ctx, void *state_)
+close_arc4(fz_context *ctx, fz_stream* stm)
 {
-	fz_arc4c *state = (fz_arc4c *)state_;
+	fz_arc4c *state = (fz_arc4c *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state);
 }
@@ -867,9 +867,9 @@ next_aesd(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_aesd(fz_context *ctx, void *state_)
+close_aesd(fz_context *ctx, fz_stream* stm)
 {
-	fz_aesd *state = (fz_aesd *)state_;
+	fz_aesd *state = (fz_aesd *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state);
 }

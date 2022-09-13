@@ -214,9 +214,9 @@ next_lzwd(fz_context *ctx, fz_stream *stm, size_t len)
 }
 
 static void
-close_lzwd(fz_context *ctx, void *state_)
+close_lzwd(fz_context *ctx, fz_stream* stm)
 {
-	fz_lzwd *lzw = (fz_lzwd *)state_;
+	fz_lzwd *lzw = (fz_lzwd *)stm->state;
 	fz_sync_bits(ctx, lzw->chain);
 	fz_drop_stream(ctx, lzw->chain);
 	fz_free(ctx, lzw);

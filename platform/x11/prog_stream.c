@@ -157,15 +157,18 @@ static void seek_prog(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 	stm->wp = stm->rp;
 }
 
-static void close_prog(fz_context *ctx, void *state)
+static void close_prog(fz_context *ctx, fz_stream* stm)
 {
-	prog_state *ps = (prog_state *)state;
+	prog_state *ps = (prog_state *)stm->state;
 	int n = 0;
 	if (ps->file)
 		n = fclose(ps->file);
 	if (n < 0)
+	{
 		fz_warn(ctx, "cannot fclose: %s", strerror(errno));
-	fz_free(ctx, state);
+	}
+	fz_free(ctx, ps);
+	stm->state = NULL;
 }
 
 static void fetcher_thread(prog_state *ps)

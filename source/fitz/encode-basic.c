@@ -30,10 +30,10 @@ struct ahx
 	int column;
 };
 
-static void ahx_write(fz_context *ctx, void *opaque, const void *data, size_t n)
+static int ahx_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
 {
 	static const char tohex[17] = "0123456789ABCDEF";
-	struct ahx *state = opaque;
+	struct ahx *state = out->state;
 	const unsigned char *p = data;
 	while (n-- > 0)
 	{
@@ -47,18 +47,21 @@ static void ahx_write(fz_context *ctx, void *opaque, const void *data, size_t n)
 			state->column = 0;
 		}
 	}
+	return 0;
 }
 
-static void ahx_close(fz_context *ctx, void *opaque)
+static void ahx_close(fz_context *ctx, fz_output* out)
 {
-	struct ahx *state = opaque;
+	struct ahx *state = out->state;
 	fz_write_byte(ctx, state->chain, '>');
+	state->chain = NULL;
 }
 
-static void ahx_drop(fz_context *ctx, void *opaque)
+static void ahx_drop(fz_context *ctx, fz_output* out)
 {
-	struct ahx *state = opaque;
+	struct ahx *state = out->state;
 	fz_free(ctx, state);
+	out->state = NULL;
 }
 
 fz_output *
@@ -136,9 +139,9 @@ static void a85_flush(fz_context *ctx, struct a85 *state)
 	state->n = 0;
 }
 
-static void a85_write(fz_context *ctx, void *opaque, const void *data, size_t n)
+static int a85_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
 {
-	struct a85 *state = opaque;
+	struct a85 *state = out->state;
 	const unsigned char *p = data;
 	while (n-- > 0)
 	{
@@ -148,19 +151,20 @@ static void a85_write(fz_context *ctx, void *opaque, const void *data, size_t n)
 		state->word = (state->word << 8) | c;
 		state->n++;
 	}
+	return 0;
 }
 
-static void a85_close(fz_context *ctx, void *opaque)
+static void a85_close(fz_context *ctx, fz_output* out)
 {
-	struct a85 *state = opaque;
+	struct a85 *state = out->state;
 	a85_flush(ctx, state);
 	fz_write_byte(ctx, state->chain, '~');
 	fz_write_byte(ctx, state->chain, '>');
 }
 
-static void a85_drop(fz_context *ctx, void *opaque)
+static void a85_drop(fz_context *ctx, fz_output* out)
 {
-	struct a85 *state = opaque;
+	struct a85 *state = out->state;
 	fz_free(ctx, state);
 }
 
@@ -197,9 +201,9 @@ static void rle_flush_diff(fz_context *ctx, struct rle *enc)
 	fz_write_data(ctx, enc->chain, enc->buf, enc->run);
 }
 
-static void rle_write(fz_context *ctx, void *opaque, const void *data, size_t n)
+static int rle_write(fz_context *ctx, fz_output* out, const void *data, size_t n)
 {
-	struct rle *enc = opaque;
+	struct rle *enc = out->state;
 	const unsigned char *p = data;
 	while (n-- > 0)
 	{
@@ -259,11 +263,12 @@ static void rle_write(fz_context *ctx, void *opaque, const void *data, size_t n)
 			}
 		}
 	}
+	return 0;
 }
 
-static void rle_close(fz_context *ctx, void *opaque)
+static void rle_close(fz_context *ctx, fz_output* out)
 {
-	struct rle *enc = opaque;
+	struct rle *enc = out->state;
 	switch (enc->state)
 	{
 		case ZERO: break;
@@ -274,9 +279,9 @@ static void rle_close(fz_context *ctx, void *opaque)
 	fz_write_byte(ctx, enc->chain, 128);
 }
 
-static void rle_drop(fz_context *ctx, void *opaque)
+static void rle_drop(fz_context *ctx, fz_output* out)
 {
-	struct rle *enc = opaque;
+	struct rle *enc = out->state;
 	fz_free(ctx, enc);
 }
 
@@ -296,9 +301,9 @@ struct arc4
 	fz_arc4 arc4;
 };
 
-static void arc4_write(fz_context *ctx, void *opaque, const void *data, size_t n)
+static int arc4_write(fz_context *ctx, fz_output* chain, const void *data, size_t n)
 {
-	struct arc4 *state = opaque;
+	struct arc4 *state = chain->state;
 	const unsigned char *p = data;
 	unsigned char buffer[256];
 	while (n > 0)
@@ -309,6 +314,7 @@ static void arc4_write(fz_context *ctx, void *opaque, const void *data, size_t n
 		p += x;
 		n -= x;
 	}
+	return 0;
 }
 
 static void arc4_drop(fz_context *ctx, void *opaque)
@@ -333,7 +339,7 @@ struct deflate
 	unsigned char *buf;
 };
 
-static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_t n)
+static int deflate_write(fz_context *ctx, void *opaque, const void *data, size_t n)
 {
 	struct deflate *state = opaque;
 	const unsigned char *p = data;
@@ -372,6 +378,7 @@ static void deflate_write(fz_context *ctx, void *opaque, const void *data, size_
 				fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
 		} while (state->z.avail_out > 0);
 	}
+	return 0;
 }
 
 static void deflate_close(fz_context *ctx, void *opaque)

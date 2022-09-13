@@ -60,8 +60,8 @@ fz_new_stream(fz_context *ctx, void *state, fz_stream_next_fn *next, fz_stream_d
 	}
 	fz_catch(ctx)
 	{
-		if (drop)
-			drop(ctx, state);
+//		if (drop)
+//			drop(ctx, state);
 		fz_rethrow(ctx);
 	}
 
@@ -96,7 +96,7 @@ fz_drop_stream(fz_context *ctx, fz_stream *stm)
 	if (fz_drop_imp(ctx, stm, &stm->refs))
 	{
 		if (stm->drop)
-			stm->drop(ctx, stm->state);
+			stm->drop(ctx, stm);
 		fz_free(ctx, stm);
 	}
 }
@@ -156,9 +156,9 @@ static void seek_file(fz_context *ctx, fz_stream *stm, int64_t offset, int whenc
 	stm->wp = state->buffer;
 }
 
-static void drop_file(fz_context *ctx, void *state_)
+static void drop_file(fz_context *ctx, fz_stream *stm)
 {
-	fz_file_stream *state = state_;
+	fz_file_stream* state = stm->state;
 	if (state->file)
 	{
 		int n = fclose(state->file);
@@ -171,6 +171,7 @@ static void drop_file(fz_context *ctx, void *state_)
 		state->file = NULL;
 	}
 	fz_free(ctx, state);
+	stm->state = NULL;
 }
 
 static fz_stream *
@@ -186,11 +187,23 @@ fz_open_file_ptr(fz_context *ctx, FILE *file)
 	return stm;
 }
 
+static void dont_drop_file(fz_context* ctx, fz_stream* stm)
+{
+	fz_file_stream* state = stm->state;
+	if (state->file)
+	{
+		/* We don't own the file ptr. Ensure we don't close it */
+		state->file = NULL;
+	}
+	fz_free(ctx, state);
+	stm->state = NULL;
+}
+
 fz_stream *fz_open_file_ptr_no_close(fz_context *ctx, FILE *file)
 {
 	fz_stream *stm = fz_open_file_ptr(ctx, file);
 	/* We don't own the file ptr. Ensure we don't close it */
-	stm->drop = fz_free;
+	stm->drop = dont_drop_file;
 	return stm;
 }
 
@@ -246,9 +259,9 @@ static void seek_buffer(fz_context *ctx, fz_stream *stm, int64_t offset, int whe
 	stm->rp += (int)(offset - pos);
 }
 
-static void drop_buffer(fz_context *ctx, void *state_)
+static void drop_buffer(fz_context *ctx, fz_stream* stm)
 {
-	fz_buffer *state = (fz_buffer *)state_;
+	fz_buffer *state = (fz_buffer *)stm->state;
 	fz_drop_buffer(ctx, state);
 }
 

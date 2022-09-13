@@ -106,9 +106,9 @@ next_flated(fz_context *ctx, fz_stream *stm, size_t required)
 }
 
 static void
-close_flated(fz_context *ctx, void *state_)
+close_flated(fz_context *ctx, fz_stream* stm)
 {
-	fz_inflate_state *state = (fz_inflate_state *)state_;
+	fz_inflate_state *state = (fz_inflate_state *)stm->state;
 	int code;
 
 	code = zng_inflateEnd(&state->z);

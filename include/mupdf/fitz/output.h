@@ -50,8 +50,10 @@ extern "C" {
 	data: a pointer to a buffer of data to write.
 
 	n: The number of bytes of data to write.
+
+	Returns TRUE(!0) on error, 0 on success.
 */
-typedef void (fz_output_write_fn)(fz_context *ctx, fz_output *out, const void *data, size_t n);
+typedef int (fz_output_write_fn)(fz_context *ctx, fz_output *out, const void *data, size_t n);
 
 /**
 	A function type for use when implementing
@@ -61,8 +63,10 @@ typedef void (fz_output_write_fn)(fz_context *ctx, fz_output *out, const void *d
 	out: a reference to the output stream.
 
 	offset, whence: as defined for fs_seek_output.
+
+	Returns TRUE(!0) on error, 0 on success.
 */
-typedef void (fz_output_seek_fn)(fz_context *ctx, fz_output *out, int64_t offset, int whence);
+typedef int (fz_output_seek_fn)(fz_context *ctx, fz_output *out, int64_t offset, int whence);
 
 /**
 	A function type for use when implementing
@@ -72,6 +76,7 @@ typedef void (fz_output_seek_fn)(fz_context *ctx, fz_output *out, int64_t offset
 	out: a reference to the output stream.
 
 	Returns the offset within the output stream.
+	Returns a *negative* value when an error occurred.
 */
 typedef int64_t (fz_output_tell_fn)(fz_context *ctx, fz_output *out);
 
@@ -150,8 +155,10 @@ typedef fz_stream *(fz_stream_from_output_fn)(fz_context *ctx, fz_output *out);
 	fz_outputs. The supplied function of this type is called
 	when fz_truncate_output is called to truncate the file
 	at that point.
+
+	Returns TRUE on error, 0 on success.
 */
-typedef void (fz_truncate_fn)(fz_context *ctx, fz_output *out);
+typedef int (fz_truncate_fn)(fz_context *ctx, fz_output *out);
 
 /**
 * Secondary outputs are files (or buffers, or ...) which are generated while

@@ -232,14 +232,15 @@ next_predict(fz_context *ctx, fz_stream *stm, size_t len)
 }
 
 static void
-close_predict(fz_context *ctx, void *state_)
+close_predict(fz_context *ctx, fz_stream* stm)
 {
-	fz_predict *state = (fz_predict *)state_;
+	fz_predict *state = stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state->in);
 	fz_free(ctx, state->out);
 	fz_free(ctx, state->ref);
 	fz_free(ctx, state);
+	stm->state = NULL;
 }
 
 fz_stream *

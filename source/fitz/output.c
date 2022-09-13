@@ -45,6 +45,7 @@
 static inline void
 fzoutput_lock(fz_output* out)
 {
+	ASSERT0(out);
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
 #ifndef DISABLE_MUTHREADS
@@ -57,6 +58,7 @@ fzoutput_lock(fz_output* out)
 static inline void
 fzoutput_unlock(fz_output* out)
 {
+	ASSERT0(out);
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
 		ASSERT0(out->flags & FZOF_IS_INSIDE_LOCK);
@@ -70,6 +72,7 @@ fzoutput_unlock(fz_output* out)
 static inline void
 printf_lock(fz_output* out)
 {
+	ASSERT0(out);
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
 #ifndef DISABLE_MUTHREADS
@@ -82,6 +85,7 @@ printf_lock(fz_output* out)
 static inline void
 printf_unlock(fz_output* out)
 {
+	ASSERT0(out);
 	if (out->flags & FZOF_HAS_LOCKS)
 	{
 		ASSERT0(out->flags & FZOF_IS_INSIDE_PRINTF_LOCK);
@@ -92,14 +96,35 @@ printf_unlock(fz_output* out)
 	}
 }
 
-static void
-file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
+static int64_t file_tell(fz_context* ctx, fz_output* out);
+
+static void analyze_and_improve_fwrite_error(fz_context* ctx, fz_output* out, size_t count)
 {
-	FILE *file = (FILE *)opaque;
+	int64_t pos = file_tell(ctx, out);
+	// heuristic: are we near, over or at 2GB/4GB boundary?
+	if (pos + count > (1LL << 32) - 10240)
+	{
+		char msg[1024];
+		int64_t fourgb = 1LL << 32;
+		int64_t delta = fourgb - pos;
+
+		fz_snprintf(msg, sizeof msg, "\n    Analysis: looks like you're near the magic 4GByte file size boundary so this may just be your run-time library or filesystem giving up on writing any file larger than %lld bytes (this file is reported as currently %lld bytes, which is %lld bytes removed from that 4GB boundary).", fourgb, pos, delta);
+
+		int idx = ctx->error.system_errdepth;
+		fz_strncat_s(ctx, ctx->error.system_error_message[idx], msg, sizeof(ctx->error.system_error_message[idx]));
+	}
+}
+
+static int
+file_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
+{
+	ASSERT(out);
+	FILE *file = (FILE *)out->state;
 	size_t n;
 
+	ASSERT(file);
 	if (count == 0)
-		return;
+		return 0;
 
 	if (count == 1)
 	{
@@ -111,7 +136,7 @@ file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 			analyze_and_improve_fwrite_error(ctx, out, count);
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
 		}
-		return;
+		return 0;
 	}
 
 	n = fwrite(buffer, 1, count, file);
@@ -122,11 +147,12 @@ file_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 		analyze_and_improve_fwrite_error(ctx, out, count - n);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fwrite: %s (written %zu of %zu bytes) (%s)", fz_ctx_pop_system_errormsg(ctx), n, count, out->filepath);
 	}
+	return 0;
 }
 
 #if defined(_WIN32) 
 
-static void
+static int
 stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 {
 	// Windows: https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-writefile#pipes
@@ -208,17 +234,18 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 			SleepEx(2, TRUE);
 		}
 	}
+	return 0;
 }
 
 #endif
 
-static void
-stdout_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
+static int
+stdout_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
 #ifdef _WIN32
-	stdio_write(ctx, STD_OUTPUT_HANDLE, buffer, count);
+	return stdio_write(ctx, STD_OUTPUT_HANDLE, buffer, count);
 #else
-	file_write(ctx, stdout, buffer, count);
+	return file_write(ctx, stdout, buffer, count);
 #endif
 }
 
@@ -254,13 +281,13 @@ fz_output *fz_stdout(fz_context *ctx)
 	return &fz_stdout_global;
 }
 
-static void
-stderr_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
+static int
+stderr_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
 #ifdef _WIN32
-	stdio_write(ctx, STD_ERROR_HANDLE, buffer, count);
+	return stdio_write(ctx, STD_ERROR_HANDLE, buffer, count);
 #else
-	file_write(ctx, stderr, buffer, count);
+	return file_write(ctx, stderr, buffer, count);
 #endif
 }
 
@@ -297,8 +324,9 @@ fz_output *fz_stderr(fz_context *ctx)
 }
 
 #ifdef _WIN32
-static void
-stdods_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
+
+static int
+stdods_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
 	// Assume that the heap MAY be corrupted when we call into here.
 	// Such last effort error messages will invariably be short-ish.
@@ -307,7 +335,7 @@ stdods_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 	char stkbuf[LONGLINE + 1];
 	char* buf = stkbuf;
 	if (count > sizeof(stkbuf) - 1)
-		buf = fz_malloc(ctx, count+1);
+		buf = fz_malloc(ctx, count + 1);
 
 	memcpy(buf, buffer, count);
 	buf[count] = 0;
@@ -315,6 +343,8 @@ stdods_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
 
 	if (buf != stkbuf)
 		fz_free(ctx, buf);
+
+	return 0;
 }
 
 static void
@@ -360,10 +390,11 @@ void fz_set_stddbg(fz_context *ctx, fz_output *out)
 	ctx->stddbg = out;
 }
 
-static void
-file_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
+static int
+file_seek(fz_context *ctx, fz_output* out, int64_t off, int whence)
 {
-	FILE *file = (FILE *)opaque;
+	FILE *file = out->state;
+	ASSERT(file);
 #ifdef _WIN32
 	int n = _fseeki64(file, off, whence);
 #else
@@ -375,12 +406,14 @@ file_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot fseek: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
 	}
+	return 0;
 }
 
 static int64_t
-file_tell(fz_context *ctx, void *opaque)
+file_tell(fz_context *ctx, fz_output* out)
 {
-	FILE *file = (FILE *)opaque;
+	FILE *file = out->state;
+	ASSERT(file);
 #ifdef _WIN32
 	int64_t off = _ftelli64(file);
 #else
@@ -396,9 +429,9 @@ file_tell(fz_context *ctx, void *opaque)
 }
 
 static void
-file_close(fz_context* ctx, void* opaque)
+file_close(fz_context* ctx, fz_output* out)
 {
-	FILE* file = (FILE*)opaque;
+	FILE* file = out->state;
 	ASSERT(file);
 	if (file)
 	{
@@ -409,13 +442,18 @@ file_close(fz_context* ctx, void* opaque)
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 			fz_warn(ctx, "cannot fclose: %s (%s)", fz_ctx_get_system_errormsg(ctx), out->filepath);
 		}
+		else
+		{
+			// prevent double-close:
+			out->state = NULL;
+		}
 	}
 }
 
 static void
-file_drop(fz_context *ctx, void *opaque)
+file_drop(fz_context *ctx, fz_output* out)
 {
-	FILE *file = (FILE *)opaque;
+	FILE *file = out->state;
 	if (file)
 	{
 		int n = fclose(file);
@@ -427,25 +465,32 @@ file_drop(fz_context *ctx, void *opaque)
 			// accept our loss.
 			out->state = NULL;
 		}
+		else
+		{
+			// prevent double-close:
+			out->state = NULL;
+		}
 	}
 }
 
 static fz_stream *
-file_as_stream(fz_context *ctx, void *opaque)
+file_as_stream(fz_context *ctx, fz_output* out)
 {
-	FILE *file = (FILE *)opaque;
+	FILE *file = out->state;
+	ASSERT(file);
 	fflush(file);
 	return fz_open_file_ptr_no_close(ctx, file);
 }
 
-static void file_truncate(fz_context *ctx, void *opaque)
+static int file_truncate(fz_context* ctx, fz_output* out)
 {
-	FILE *file = opaque;
+	FILE* file = out->state;
+	ASSERT(file);
 	if (fflush(file))
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		return;
+		return -1;
 	}
 
 #ifdef _WIN32
@@ -455,7 +500,7 @@ static void file_truncate(fz_context *ctx, void *opaque)
 		{
 			fz_copy_ephemeral_errno(ctx);
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-			return;
+			return -1;
 		}
 		if (pos >= 0)
 		{
@@ -463,7 +508,7 @@ static void file_truncate(fz_context *ctx, void *opaque)
 			{
 				fz_copy_ephemeral_errno(ctx);
 				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-				return;
+				return -1;
 			}
 		}
 	}
@@ -474,7 +519,7 @@ static void file_truncate(fz_context *ctx, void *opaque)
 		{
 			fz_copy_ephemeral_errno(ctx);
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-			return;
+			return -1;
 		}
 		if (pos >= 0)
 		{
@@ -482,11 +527,12 @@ static void file_truncate(fz_context *ctx, void *opaque)
 			{
 				fz_copy_ephemeral_errno(ctx);
 				ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-				return;
+				return -1;
 			}
 		}
 	}
 #endif
+	return 0;
 }
 
 static int safe_output_mode = 0;
@@ -557,6 +603,7 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 #endif
 		ASSERT(out->flags == FZOF_NONE);
 		out->flags = FZOF_HAS_LOCKS;
+		ASSERT(out->filepath == NULL);
 		ASSERT(out->bp == NULL);
 		if (bufsiz > 1)
 		{
@@ -568,18 +615,22 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 	fz_catch(ctx)
 	{
 		if (drop)
-			drop(ctx, state);
+			drop(ctx, out);
 
-#ifndef DISABLE_MUTHREADS
-		if (out->flags & FZOF_HAS_LOCKS)
+		if (out)
 		{
-			mu_destroy_mutex(&out->printf_mutex);
-			mu_destroy_mutex(&out->buf_mutex);
-		}
+#ifndef DISABLE_MUTHREADS
+			if (out->flags & FZOF_HAS_LOCKS)
+			{
+				mu_destroy_mutex(&out->printf_mutex);
+				mu_destroy_mutex(&out->buf_mutex);
+			}
 #endif
-		out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
-		fz_free(ctx, out->bp);
-		fz_free(ctx, out);
+			out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
+			fz_free(ctx, out->bp);
+			fz_free(ctx, out);
+		}
+
 		fz_rethrow(ctx);
 	}
 	return out;
@@ -588,6 +639,8 @@ fz_new_output(fz_context *ctx, int bufsiz, void *state, fz_output_write_fn *writ
 int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 {
 	int rv = 1;
+
+	ASSERT(out);
 
 	// shortcut check if we need to do anything here: this quick check MAY FAIL
 	// but only when another modifies the buffer size at the same time. Which, thanks
@@ -663,16 +716,19 @@ int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz)
 	return rv;
 }
 
-static void null_write(fz_context *ctx, void *opaque, const void *buffer, size_t count)
+static int null_write(fz_context *ctx, fz_output* out, const void *buffer, size_t count)
 {
+	return 0;
 }
 
-static void null_seek(fz_context* ctx, void* state, int64_t offset, int whence)
+static int null_seek(fz_context* ctx, fz_output* out, int64_t offset, int whence)
 {
+	return 0;
 }
 
-static void null_truncate(fz_context* ctx, void* state)
+static int null_truncate(fz_context* ctx, fz_output* out)
 {
+	return 0;
 }
 
 
@@ -753,30 +809,32 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	return out;
 }
 
-static void
-buffer_write(fz_context *ctx, void *opaque, const void *data, size_t len)
+static int
+buffer_write(fz_context *ctx, fz_output* out, const void *data, size_t len)
 {
-	fz_buffer *buffer = opaque;
+	fz_buffer *buffer = out->state;
 	fz_append_data(ctx, buffer, data, len);
+	return 0;
 }
 
-static void
-buffer_seek(fz_context *ctx, void *opaque, int64_t off, int whence)
+static int
+buffer_seek(fz_context *ctx, fz_output* out, int64_t off, int whence)
 {
 	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek in buffer");
+	return -1;	// unreachable code
 }
 
 static int64_t
-buffer_tell(fz_context *ctx, void *opaque)
+buffer_tell(fz_context *ctx, fz_output* out)
 {
-	fz_buffer *buffer = opaque;
+	fz_buffer *buffer = out->state;
 	return (int64_t)buffer->len;
 }
 
 static void
-buffer_drop(fz_context *ctx, void *opaque)
+buffer_drop(fz_context *ctx, fz_output* out)
 {
-	fz_buffer *buffer = opaque;
+	fz_buffer *buffer = out->state;
 	fz_drop_buffer(ctx, buffer);
 }
 
@@ -796,7 +854,7 @@ fz_close_output(fz_context *ctx, fz_output *out)
 		return;
 	fz_flush_output(ctx, out);
 	if (out->close)
-		out->close(ctx, out->state);
+		out->close(ctx, out);
 	out->close = NULL;
 }
 
@@ -831,7 +889,7 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 #endif
 		out->flags &= ~FZOF_HAS_LOCKS | FZOF_IS_INSIDE_PRINTF_LOCK | FZOF_IS_INSIDE_LOCK;
 		if (out->drop)
-			out->drop(ctx, out->state);
+			out->drop(ctx, out);
 		fz_free(ctx, out->bp);
 		fz_free(ctx, out->filepath);
 		out->bp = NULL;
@@ -854,8 +912,10 @@ fz_seek_output(fz_context* ctx, fz_output* out, int64_t off, int whence)
 	if (out->seek == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot seek in unseekable output stream");
 
-	fz_flush_output(ctx, out);
-	int rv = out->seek(ctx, out->state, off, whence);
+	fzoutput_lock(out);
+	fz_flush_output_no_lock(ctx, out);
+	int rv = out->seek(ctx, out, off, whence);
+	fzoutput_unlock(out);
 	if (rv)
 	{
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to seek to specified position in this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
@@ -868,8 +928,8 @@ fz_tell_output(fz_context *ctx, fz_output *out)
 	if (out->tell == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot tell in untellable output stream");
 
-	int64_t pos = out->tell(ctx, out->state);
 	fzoutput_lock(out);
+	int64_t pos = out->tell(ctx, out);
 	if (out->bp && pos >= 0)
 		pos += (out->wp - out->bp);
 	fzoutput_unlock(out);
@@ -885,8 +945,11 @@ fz_stream_from_output(fz_context *ctx, fz_output *out)
 {
 	if (out->as_stream == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot derive input stream from output stream");
-	fz_flush_output(ctx, out);
-	return out->as_stream(ctx, out->state);
+	fzoutput_lock(out);
+	fz_flush_output_no_lock(ctx, out);
+	fz_stream *rv = out->as_stream(ctx, out);
+	fzoutput_unlock(out);
+	return rv;
 }
 
 void
@@ -894,8 +957,10 @@ fz_truncate_output(fz_context *ctx, fz_output *out)
 {
 	if (out->truncate == NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cannot truncate this output stream");
-	fz_flush_output(ctx, out);
-	int rv = out->truncate(ctx, out->state);
+	fzoutput_lock(out);
+	fz_flush_output_no_lock(ctx, out);
+	int rv = out->truncate(ctx, out);
+	fzoutput_unlock(out);
 	if (rv)
 	{
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to truncate this output: %s (%s)", fz_ctx_pop_system_errormsg(ctx), out->filepath);
@@ -980,9 +1045,10 @@ fz_flush_output(fz_context *ctx, fz_output *out)
 void
 fz_flush_output_no_lock(fz_context* ctx, fz_output* out)
 {
+	ASSERT(out);
 	if (out->bp && out->wp > out->bp)
 	{
-		out->write(ctx, out->state, out->bp, out->wp - out->bp);
+		out->write(ctx, out, out->bp, out->wp - out->bp);
 	}
 	out->wp = out->bp;
 }
@@ -990,6 +1056,7 @@ fz_flush_output_no_lock(fz_context* ctx, fz_output* out)
 void
 fz_write_byte(fz_context *ctx, fz_output *out, unsigned char x)
 {
+	ASSERT(out);
 	fzoutput_lock(out);
 	fz_write_byte_no_lock(ctx, out, x);
 	fzoutput_unlock(out);
@@ -998,20 +1065,21 @@ fz_write_byte(fz_context *ctx, fz_output *out, unsigned char x)
 void
 fz_write_byte_no_lock(fz_context* ctx, fz_output* out, unsigned char x)
 {
+	ASSERT(out);
 	if (out->bp)
 	{
 		ASSERT(out->wp <= out->ep);
 		ASSERT(out->wp >= out->bp);
 		if (out->wp == out->ep)
 		{
-			out->write(ctx, out->state, out->bp, out->wp - out->bp);
+			out->write(ctx, out, out->bp, out->wp - out->bp);
 			out->wp = out->bp;
 		}
 		*out->wp++ = x;
 	}
 	else
 	{
-		out->write(ctx, out->state, &x, 1);
+		out->write(ctx, out, &x, 1);
 	}
 }
 
@@ -1033,10 +1101,10 @@ fz_write_data(fz_context *ctx, fz_output *out, const void *data_, size_t size)
 		{
 			if (out->wp > out->bp)
 			{
-				out->write(ctx, out->state, out->bp, out->wp - out->bp);
+				out->write(ctx, out, out->bp, out->wp - out->bp);
 				out->wp = out->bp;
 			}
-			out->write(ctx, out->state, data, size);
+			out->write(ctx, out, data, size);
 		}
 		else if (out->wp + size <= out->ep) /* fits in current buffer */
 		{
@@ -1048,14 +1116,14 @@ fz_write_data(fz_context *ctx, fz_output *out, const void *data_, size_t size)
 			size_t n = out->ep - out->wp;
 			ASSERT(n <= size);
 			memcpy(out->wp, data, n);
-			out->write(ctx, out->state, out->bp, out->ep - out->bp);
+			out->write(ctx, out, out->bp, out->ep - out->bp);
 			memcpy(out->bp, data + n, size - n);
 			out->wp = out->bp + size - n;
 		}
 	}
 	else
 	{
-		out->write(ctx, out->state, data, size);
+		out->write(ctx, out, data, size);
 	}
 	fzoutput_unlock(out);
 }
