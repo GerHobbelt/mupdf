@@ -42,7 +42,10 @@ typedef struct fz_context fz_context;
             fz_report_failed_assertion(CTX, #expression, __FILE__, __LINE__)		\
         )
 
-#define ASSERT(expression) assert(expression)
+#define ASSERT(expression) (void)(							                        \
+            (!!(expression)) ||						                                \
+            fz_report_failed_assertion(CTX, #expression, __FILE__, __LINE__)		\
+        )
 
 #define ASSERT_AND_CONTINUE(expression) (void)(													\
             (!!(expression)) ||																	\
