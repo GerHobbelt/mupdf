@@ -1147,7 +1147,7 @@ mark_all(fz_context *ctx, pdf_document *doc, pdf_mark_list *list, pdf_write_stat
 
 		for (i = 0; i < n; i++)
 		{
-			pdf_obj *k = pdf_dict_get_key(ctx, val, i);
+			//pdf_obj *k = pdf_dict_get_key(ctx, val, i);
 			pdf_obj *v = pdf_dict_get_val(ctx, val, i);
 			pdf_obj *type = pdf_dict_get(ctx, v, PDF_NAME(Type));
 			int rec = pdf_is_dict(ctx, v) || pdf_is_array(ctx, v);
