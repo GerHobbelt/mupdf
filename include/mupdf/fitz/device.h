@@ -31,6 +31,8 @@
 #include "mupdf/fitz/path.h"
 #include "mupdf/fitz/text.h"
 
+#include "plf_nanotimer_c_api.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,6 +50,9 @@ extern "C" {
 	Other devices can (and will) be written in the future.
 */
 typedef struct fz_device fz_device;
+
+typedef struct fz_context fz_context;
+typedef struct fz_cookie fz_cookie;
 
 enum
 {
@@ -285,6 +290,26 @@ enum fz_run_flags
 	FZ_RUN_ANNOTATIONS				= 0x0002,
 };
 
+enum fz_progress_state
+{
+	FZ_PROGRESS_INIT = 0,
+	FZ_PROGRESS_LOAD_PAGE,			// `next_progress_step` arg will encode chapter in MSW, page number in LSW.
+	FZ_PROGRESS_START_RUN,
+	FZ_PROGRESS_RUN_PROCEEDING,
+	FZ_PROGRESS_ANNOT_RUN_PROCEEDING,
+	FZ_PROGRESS_RUN_FINISH,
+	FZ_PROGRESS_START_PAINT,
+	FZ_PROGRESS_PAINT_PROCEEDING,
+	FZ_PROGRESS_PAINT_FINISH,
+};
+
+/**
+	Return TRUE when the process should be stopped/skipped.
+*/
+typedef int fz_cookie_callback_f(fz_context *ctx, enum fz_progress_state state, size_t next_progress_step);
+
+int fz_default_cookie_callback_handler(fz_context* ctx, enum fz_progress_state state, size_t next_progress_step);
+
 /**
 	Provide two-way communication between application and library.
 	Intended for multi-threaded applications where one thread is
@@ -336,19 +361,89 @@ enum fz_run_flags
 	the PDF_ANNOT_UNKNOWN type, slot 1 is for the PDF_ANNOT_TEXT type,
 	and so on.
 */
-typedef struct
+struct fz_cookie
 {
-	volatile int abort;
-	size_t progress;
-	size_t progress_max; /* (size_t)-1 for unknown */
-	int errors;
-	int incomplete;
-	enum fz_run_flags run_mode;
-	char run_annotations_reject_mask[32 /* PDF_ANNOT_UNKNOWN + 2 */ ];   // char acts as boolean value carrier: 0 = false, !0 = true
+	struct
+	{
+		volatile int abort;
 
-	size_t max_nodes_per_page_render;		// 0: doesn't matter; > 0: abort page render when there's more nodes than this
-	float max_msecs_per_page_render;		// 0: doesn't matter; > 0: abort page render when time spent is more than this
-} fz_cookie;
+		size_t progress;
+		size_t progress_max; /* (size_t)-1 for unknown */
+		int errors;
+		int incomplete;
+		enum fz_run_flags run_mode;
+		int render_rough_approx;
+		int ignore_minor_errors;
+		char run_annotations_reject_mask[32 /* PDF_ANNOT_UNKNOWN + 2 */];   // char acts as boolean value carrier: 0 = false, !0 = true
+
+		size_t max_nodes_per_page_render;		// 0: doesn't matter; > 0: abort page render when there's more nodes than this
+		float max_msecs_per_page_render;		// 0: doesn't matter; > 0: abort page render when time spent is more than this
+
+		// `start_time` registers the time (in nsecs) when the current session was started.
+		//
+		// this can be used to measure both:
+		// 1. time elapsed since (and decide whether we wish to continue running the current process: `max_msecs_per_page_render`)
+		// 2. time elapsed since last time the check_back callback was invoked and see if we can tune the amount of time measuring overhead
+		//    to a bare minimum by dynamically adjusting the `time_step_estimate` count which is the amount the `progress` has to
+		//    increase before we we actually do another (relatively) expensive time/progress measurement.
+		//
+		// Do note: this entire procedure SHOULD be managed by the `check_back` callback, as the mupdf core code will simply keep
+		// invoking it for every notable bit of progress anyway -- this allows for maximum flexibility in the userland code driving
+		// the decision to change/alter the rendering process at hand.
+		nanotimer_data_t start_time;
+
+		size_t time_step_estimate;			
+		size_t prev_progress_pos;			
+		double prev_step_time;				// msecs since `start_time`
+	} d;
+
+	fz_cookie_callback_f *check_back;
+};
+
+/**
+	Attach the cookie to the given context. A context can always only have one cookie attached,
+	hence attaching equals replacing any previously attached cookie.
+
+	`cookie`: NULL to detach any previously attached cookie.
+
+	Note: the cookie SHOULD outlive all context instances (`fz_context`) it is
+	attached to -- or it must have been detached earlier.
+*/
+static inline void fz_attach_cookie_to_context(fz_context *ctx, fz_cookie *cookie)
+{
+	ASSERT0(ctx != NULL);
+	ctx->cookie = cookie;
+
+	// when there's no check_back been set up in the cookie already, we assign the default one:
+	if (cookie && !cookie->check_back)
+	{
+		cookie->check_back = fz_default_cookie_callback_handler;
+	}
+}
+static inline void fz_detach_cookie_from_context(fz_context* ctx)
+{
+	fz_attach_cookie_to_context(ctx, NULL);
+}
+static inline void fz_clean_cookie(fz_context *ctx, fz_cookie *cookie)
+{
+	memset(&cookie->d, 0, sizeof(cookie->d));
+}
+static inline void fz_restart_time_step_estimation(fz_context *ctx, size_t initial_step)
+{
+	fz_cookie *cookie = ctx->cookie;
+
+	cookie->d.prev_progress_pos = cookie->d.progress;
+	cookie->d.time_step_estimate = initial_step;
+	cookie->d.prev_step_time = nanotimer_get_elapsed_ms(&cookie->d.start_time);
+}
+static inline void fz_restart_time_measurement(fz_context *ctx)
+{
+	fz_cookie *cookie = ctx->cookie;
+
+	nanotimer_start(&cookie->d.start_time);
+	fz_restart_time_step_estimation(ctx, 1);
+}
+
 
 /**
 	Create a device to print a debug trace of all device calls.

@@ -80,7 +80,7 @@ img_bound_page(fz_context *ctx, fz_page *page_)
 }
 
 static void
-img_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
+img_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 {
 	img_page *page = (img_page*)page_;
 	fz_image *image = page->image;

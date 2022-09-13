@@ -183,7 +183,7 @@ cbz_bound_page(fz_context *ctx, fz_page *page_)
 }
 
 static void
-cbz_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
+cbz_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 {
 	cbz_page *page = (cbz_page*)page_;
 	fz_image *image = page->image;

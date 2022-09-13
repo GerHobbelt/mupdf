@@ -3216,9 +3216,9 @@ static void ffi_Page_run(js_State *J)
 		device = js_touserdata(J, 1, "fz_device");
 		fz_try(ctx)
 			if (no_annots)
-				fz_run_page_contents(ctx, page, device, ctm, NULL);
+				fz_run_page_contents(ctx, page, device, ctm);
 			else
-				fz_run_page(ctx, page, device, ctm, NULL);
+				fz_run_page(ctx, page, device, ctm);
 		fz_catch(ctx)
 			rethrow(J);
 	} else {
@@ -3226,9 +3226,9 @@ static void ffi_Page_run(js_State *J)
 		js_copy(J, 1); /* put the js device on the top so the callbacks know where to get it */
 		fz_try(ctx) {
 			if (no_annots)
-				fz_run_page_contents(ctx, page, device, ctm, NULL);
+				fz_run_page_contents(ctx, page, device, ctm);
 			else
-				fz_run_page(ctx, page, device, ctm, NULL);
+				fz_run_page(ctx, page, device, ctm);
 		}
 		fz_always(ctx)
 			fz_drop_device(ctx, device);
@@ -4222,14 +4222,14 @@ static void ffi_DisplayList_run(js_State *J)
 	if (js_isuserdata(J, 1, "fz_device")) {
 		device = js_touserdata(J, 1, "fz_device");
 		fz_try(ctx)
-			fz_run_display_list(ctx, list, device, ctm, fz_infinite_rect, NULL);
+			fz_run_display_list(ctx, list, device, ctm, fz_infinite_rect);
 		fz_catch(ctx)
 			rethrow(J);
 	} else {
 		device = new_js_device(ctx, J);
 		js_copy(J, 1);
 		fz_try(ctx)
-			fz_run_display_list(ctx, list, device, ctm, fz_infinite_rect, NULL);
+			fz_run_display_list(ctx, list, device, ctm, fz_infinite_rect);
 		fz_always(ctx)
 			fz_drop_device(ctx, device);
 		fz_catch(ctx)
@@ -6496,7 +6496,7 @@ static void ffi_PDFPage_process(js_State *J)
 	{
 		pdf_obj *resources = pdf_page_resources(ctx, page);
 		pdf_obj *contents = pdf_page_contents(ctx, page);
-		pdf_process_contents(ctx, proc, page->doc, resources, contents, NULL);
+		pdf_process_contents(ctx, proc, page->doc, resources, contents);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)
@@ -6567,14 +6567,14 @@ static void ffi_PDFAnnotation_run(js_State *J)
 	if (js_isuserdata(J, 1, "fz_device")) {
 		device = js_touserdata(J, 1, "fz_device");
 		fz_try(ctx)
-			pdf_run_annot(ctx, annot, device, ctm, NULL);
+			pdf_run_annot(ctx, annot, device, ctm);
 		fz_catch(ctx)
 			rethrow(J);
 	} else {
 		device = new_js_device(ctx, J);
 		js_copy(J, 1); /* put the js device on the top so the callbacks know where to get it */
 		fz_try(ctx)
-			pdf_run_annot(ctx, annot, device, ctm, NULL);
+			pdf_run_annot(ctx, annot, device, ctm);
 		fz_always(ctx)
 			fz_drop_device(ctx, device);
 		fz_catch(ctx)
@@ -7586,7 +7586,7 @@ static void ffi_PDFAnnotation_process(js_State *J)
 	pdf_processor *proc = new_js_processor(ctx, J);
 	fz_try(ctx)
 	{
-		pdf_process_annot(ctx, proc, annot, NULL);
+		pdf_process_annot(ctx, proc, annot);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)

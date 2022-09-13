@@ -1078,7 +1078,7 @@ fz_ocr_close_device(fz_context *ctx, fz_device *dev)
 	fz_try(ctx)
 	{
 		fz_run_display_list(ctx, ocr->list, rewrite_device,
-					fz_identity, bbox, NULL);
+					fz_identity, bbox);
 	}
 	fz_always(ctx)
 	{

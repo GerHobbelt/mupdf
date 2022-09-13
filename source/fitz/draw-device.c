@@ -128,8 +128,6 @@ typedef struct fz_draw_device
 	fz_shade_color_cache *shade_cache;
 } fz_draw_device;
 
-static int render_rough_approx = 1;
-
 #ifdef DUMP_GROUP_BLENDS
 
 #include <stdio.h>
@@ -691,6 +689,7 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	fz_draw_state *state = &dev->stack[dev->top];
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
+	fz_cookie *cookie = ctx->cookie;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
@@ -705,7 +704,7 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 	if (fz_flatten_fill_path(ctx, rast, path, ctm, flatness, bbox, &bbox))
 		return;
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 	{
 		state = fz_knockout_begin(ctx, dev);
 	}
@@ -730,7 +729,7 @@ fz_draw_fill_path(fz_context *ctx, fz_device *devp, const fz_path *path, int eve
 		fz_convert_rasterizer(ctx, rast, even_odd, state->group_alpha, colorbv, 0);
 	}
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 	{
 		fz_knockout_end(ctx, dev);
 	}
@@ -754,6 +753,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	float mlw = fz_rasterizer_graphics_min_line_width(rast);
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
+	fz_cookie* cookie = ctx->cookie;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
@@ -772,7 +772,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	if (fz_flatten_stroke_path(ctx, rast, path, stroke, ctm, flatness, linewidth, bbox, &bbox))
 		return;
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 		state = fz_knockout_begin(ctx, dev);
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
@@ -814,7 +814,7 @@ fz_draw_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, const
 	printf("\n");
 #endif
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -1060,6 +1060,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	fz_rasterizer *rast = dev->rast;
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
+	fz_cookie* cookie = ctx->cookie;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
@@ -1070,7 +1071,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 	if (colorspace == NULL && model != NULL)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "color destination requires source color");
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 		state = fz_knockout_begin(ctx, dev);
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
@@ -1135,7 +1136,7 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 		}
 	}
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -1155,6 +1156,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 	int aa = fz_rasterizer_text_aa_level(dev->rast);
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
+	fz_cookie* cookie = ctx->cookie;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
@@ -1162,7 +1164,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 	if (colorspace_in)
 		colorspace = fz_default_colorspace(ctx, dev->default_cs, colorspace_in);
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 		state = fz_knockout_begin(ctx, dev);
 
 	eop = resolve_color(ctx, &op, color, colorspace, alpha, color_params, colorbv, state->dest, dev->overprint_possible);
@@ -1225,7 +1227,7 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 		}
 	}
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 		fz_knockout_end(ctx, dev);
 }
 
@@ -1499,6 +1501,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 	fz_overprint op = { { 0 } };
 	fz_overprint *eop;
 	fz_colorspace *colorspace = fz_default_colorspace(ctx, dev->default_cs, shade->colorspace);
+	fz_cookie* cookie = ctx->cookie;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, color_params, dev->default_cs);
@@ -1510,7 +1513,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 	if (fz_is_empty_irect(bbox))
 		return;
 
-	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+	if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 		state = fz_knockout_begin(ctx, dev);
 
 	fz_var(dest);
@@ -1645,7 +1648,7 @@ fz_draw_fill_shade(fz_context *ctx, fz_device *devp, fz_shade *shade, fz_matrix 
 			}
 		}
 
-		if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !render_rough_approx)
+		if ((state->blendmode & FZ_BLEND_KNOCKOUT) && !cookie->d.render_rough_approx)
 			fz_knockout_end(ctx, dev);
 	}
 	fz_catch(ctx)
@@ -2349,6 +2352,7 @@ fz_draw_begin_group(fz_context *ctx, fz_device *devp, fz_rect area, fz_colorspac
 	fz_draw_state *state = &dev->stack[dev->top];
 	fz_colorspace *model = state->dest->colorspace;
 	fz_rect trect;
+	fz_cookie* cookie = ctx->cookie;
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
@@ -2369,7 +2373,7 @@ fz_draw_begin_group(fz_context *ctx, fz_device *devp, fz_rect area, fz_colorspac
 	isolated = 1;
 #endif
 
-	if (!render_rough_approx)
+	if (!cookie->d.render_rough_approx)
 	{
 		state[1].dest = dest = fz_new_pixmap_with_bbox(ctx, model, bbox, state[0].dest->seps, state[0].dest->alpha || isolated);
 
@@ -2433,6 +2437,7 @@ fz_draw_end_group(fz_context* ctx, fz_device* devp)
 	int isolated;
 	float alpha;
 	fz_draw_state* state;
+	fz_cookie* cookie = ctx->cookie;
 
 	if (dev->top == 0)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "unexpected end group");
@@ -2465,7 +2470,7 @@ fz_draw_end_group(fz_context* ctx, fz_device* devp)
 		printf(" (knockout)");
 #endif
 
-	if (!render_rough_approx)
+	if (!cookie->d.render_rough_approx)
 	{
 		assert(state[0].dest != state[1].dest);
 

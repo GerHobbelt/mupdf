@@ -1557,14 +1557,14 @@ int fz_display_list_is_empty(fz_context *ctx, const fz_display_list *list)
 }
 
 void
-fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_matrix top_ctm, fz_rect scissor, fz_cookie *cookie)
+fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_matrix top_ctm, fz_rect scissor)
 {
 	fz_display_node *node;
 	fz_display_node *node_end;
 	fz_display_node *next_node;
 	int clipped = 0;
 	int tiled = 0;
-	size_t progress = 0;
+
 
 	/* Current graphics state as unpacked from list */
 	fz_path *path = NULL;
@@ -1575,6 +1575,7 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	fz_colorspace *colorspace = fz_keep_colorspace(ctx, fz_device_gray(ctx));
 	fz_color_params color_params;
 	fz_rect rect = { 0 };
+	fz_cookie* cookie = ctx->cookie;
 
 	/* Transformed versions of graphic state entries */
 	fz_rect trans_rect;
@@ -1583,15 +1584,17 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 
 	if (cookie)
 	{
-		cookie->progress_max = list->len;
-		cookie->progress = 0;
+		if (cookie->d.progress_max != (size_t)-1)
+		{
+			cookie->d.progress_max += list->len;
+			//cookie->d.progress += 0;
+		}
+
+		cookie->check_back(ctx, FZ_PROGRESS_START_RUN, 1000);
 	}
 
 	color_params = fz_default_color_params;
 
-	clock_t start_time = clock();
-	clock_t prev_time = start_time;
-	size_t prev_progress = 0;
 	int do_not_draw = 0;
 
 	node = list->list;
@@ -1606,33 +1609,12 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 		/* Check the cookie for aborting */
 		if (cookie)
 		{
-			if (cookie->abort)
+			if (cookie->d.abort)
 				break;
-			cookie->progress = progress;
 
-			// apply render limits when any of these have been provided in the user cookie
-			if (cookie->max_msecs_per_page_render > 0 || cookie->max_nodes_per_page_render > 0)
-			{
-				if (prev_progress + 100 <= progress) {
-					clock_t time = clock();
-					float ms = (time - prev_time) * 1000.0f / CLOCKS_PER_SEC;
+			do_not_draw = cookie->check_back(ctx, FZ_PROGRESS_RUN_PROCEEDING, n.size);
 
-					// it's time to check our progress and see if we're a long-running task or not by now:
-					if (ms >= cookie->max_msecs_per_page_render && progress >= cookie->max_nodes_per_page_render)
-					{
-						if (!do_not_draw)
-						{
-							//clipped++;  <-- hacking that one causes error reports  :'-(
-							do_not_draw = 1;
-						}
-
-						prev_time = time;
-					}
-
-					prev_progress = progress;
-				}
-				progress += n.size;
-			}
+			cookie->d.progress += n.size;
 		}
 
 		node++;
@@ -1947,18 +1929,25 @@ visible:
 				break;
 			fz_warn(ctx, "Ignoring error during interpretation: %s", fz_caught_message(ctx));
 			if (cookie)
-				cookie->errors++;
+				cookie->d.errors++;
 		}
+	}
+
+	if (cookie && !cookie->d.abort)
+	{ 
+		ASSERT(cookie->d.progress <= cookie->d.progress_max);
+
+		do_not_draw |= cookie->check_back(ctx, FZ_PROGRESS_RUN_FINISH, 0);
 	}
 
 	/*
 	  When the time limit kicked in and stopped the costly page render, we notify the user/viewer
 	  by printing a loud message over the (partially rendered) page at center stage.
 	*/
-	if (do_not_draw || (cookie && cookie->abort)) {
+	if (do_not_draw || (cookie && cookie->d.abort)) {
 		const fz_color_params fz_default_color_params = { FZ_RI_RELATIVE_COLORIMETRIC, 1, 0, 0 };
 		fz_text* text = NULL;
-		int aborted = (cookie && cookie->abort);
+		int aborted = (cookie && cookie->d.abort);
 
 		fz_try(ctx)
 		{
@@ -2025,12 +2014,163 @@ visible:
 			fz_drop_text(ctx, text);
 		}
 		fz_catch(ctx)
+		{
 			fz_rethrow(ctx);
+		}
 	}
 
 	fz_drop_colorspace(ctx, colorspace);
 	fz_drop_stroke_state(ctx, stroke);
 	fz_drop_path(ctx, path);
-	if (cookie)
-		cookie->progress = progress;
 }
+
+
+int fz_default_cookie_callback_handler(fz_context* ctx, enum fz_progress_state state, size_t next_progress_step)
+{
+	fz_cookie* cookie = ctx->cookie;
+	double t = 0.0;
+
+	switch (state)
+	{
+	case FZ_PROGRESS_INIT:
+	case FZ_PROGRESS_LOAD_PAGE:
+	case FZ_PROGRESS_START_RUN:
+		if (!nanotimer_is_initialized(&cookie->d.start_time))
+		{
+			fz_restart_time_measurement(ctx);
+		}
+		// however, previous chunks of the session may have had different step timings compared to us, so we
+		// better make sure we start measuring & estimating again!
+		fz_restart_time_step_estimation(ctx, fz_maxz(500, fz_minz(10, next_progress_step)));
+
+		// ----------------------------------------------------------------------
+		// limit the amount of progress noise for multiple short runs too:
+		{
+			double t2 = nanotimer_get_elapsed_ms(&cookie->d.start_time);
+			double dt = t2 - cookie->d.prev_step_time;
+
+			if (dt > 50.0 /* ms */)
+			{
+				t = t2;
+
+				// and a bit of house-keeping for the next round through here:
+				cookie->d.prev_step_time = t2;
+				cookie->d.prev_progress_pos = cookie->d.progress;
+			}
+		}
+		break;
+
+	case FZ_PROGRESS_ANNOT_RUN_PROCEEDING:
+	case FZ_PROGRESS_RUN_PROCEEDING:
+		// don't hammer the timing measurement APIs; this also reduces execution overhead cost:
+		if (cookie->d.prev_progress_pos + cookie->d.time_step_estimate <= cookie->d.progress)
+		{
+			double t2 = nanotimer_get_elapsed_ms(&cookie->d.start_time);
+			double dt = t2 - cookie->d.prev_step_time;
+			ASSERT(cookie->d.progress >= cookie->d.prev_progress_pos);
+			size_t step = cookie->d.progress - cookie->d.prev_progress_pos;
+
+			if (dt > 0.01 /* ms */)
+			{
+				// we now have some numbers we can extrapolate by:
+				// we aim for a testing interval of ~100ms, i.e. a sampling interval of ~50ms
+				// for the time measurement APIs:
+				size_t new_step_distance = step * 100.0 / dt;
+				// and in order to prevent spikes in t he measurements to throw us off course, we only
+				// allow a maximum climb rate; any descent rate is fine as we'll re-tune from there
+				// anyhow.
+				size_t raw = new_step_distance;
+				size_t next_step_distance = fz_minz(30 * cookie->d.time_step_estimate, new_step_distance);
+
+				fz_info(ctx, "progress (EST.): dt=%.3lfms, step=%zu, prev_step=%zu, new_step=%zu / raw=%zu, count=%zu/%zd, time=%.1lfms", dt, step, cookie->d.time_step_estimate, next_step_distance, raw, cookie->d.progress, cookie->d.progress_max, t2);
+
+				cookie->d.time_step_estimate = next_step_distance;
+
+				t = t2;
+
+				// and a bit of house-keeping for the next round through here:
+				cookie->d.prev_step_time = t2;
+				cookie->d.prev_progress_pos = cookie->d.progress;
+			}
+			// that concludes our auto-tuning of the sampling rate here.
+			// -----------------------------------------------------------------------------------
+
+			// it's time to check our progress and see if we're a long-running task or not by now:
+			//
+			// (apply render limits when any of these have been provided in the user cookie)
+
+			if (cookie->d.max_msecs_per_page_render > 0)
+			{
+				if (t2 >= cookie->d.max_msecs_per_page_render)
+				{
+					return 1; // do_not_draw = 1;
+				}
+			}
+		}
+
+		// apply render limits when any of these have been provided in the user cookie
+		if (cookie->d.max_nodes_per_page_render > 0)
+		{
+			if (cookie->d.progress >= cookie->d.max_nodes_per_page_render)
+			{
+				return 1; // do_not_draw = 1;
+			}
+		}
+		break;
+
+	default:
+	case FZ_PROGRESS_RUN_FINISH:
+		// ----------------------------------------------------------------------
+		// limit the amount of progress noise for multiple short runs too:
+		{
+			double t2 = nanotimer_get_elapsed_ms(&cookie->d.start_time);
+			double dt = t2 - cookie->d.prev_step_time;
+
+			if (dt > 50.0 /* ms */)
+			{
+				t = t2;
+
+				// and a bit of house-keeping for the next round through here:
+				cookie->d.prev_step_time = t2;
+				cookie->d.prev_progress_pos = cookie->d.progress;
+			}
+		}
+		break;
+	}
+
+	if (t != 0.0)
+	{
+		if (cookie->d.progress_max != (size_t)-1)
+		{
+			int i = 1;
+			i++;
+		}
+		switch (state)
+		{
+		case FZ_PROGRESS_INIT:
+		case FZ_PROGRESS_START_RUN:
+			fz_info(ctx, "progress: **(re-)init** at count=%zu/%zd, time=%.1lfms", cookie->d.progress, cookie->d.progress_max, t);
+			break;
+
+		case FZ_PROGRESS_LOAD_PAGE:
+			fz_info(ctx, "progress: **PAGE %zu LOAD start** at count=%zu/%zd, time=%.1lfms", (next_progress_step & 0xFFFF) + 1, cookie->d.progress, cookie->d.progress_max, t);
+			break;
+
+		case FZ_PROGRESS_ANNOT_RUN_PROCEEDING:
+		case FZ_PROGRESS_RUN_PROCEEDING:
+			fz_info(ctx, "progress: step=%zu, count=%zu/%zd, time=%.1lfms", cookie->d.time_step_estimate, cookie->d.progress, cookie->d.progress_max, t);
+			break;
+
+		case FZ_PROGRESS_RUN_FINISH:
+			fz_info(ctx, "progress (finish): step=%zu, count=%zu/%zd, time=%.1lfms", cookie->d.time_step_estimate, cookie->d.progress, cookie->d.progress_max, t);
+			break;
+
+		default:
+			fz_info(ctx, "progress (misc.): count=%zu/%zd, time=%.1lfms", cookie->d.progress, cookie->d.progress_max, t);
+			break;
+		}
+	}
+
+	return 0;
+}
+

@@ -304,6 +304,7 @@ static const suffix_t suffix_table[] =
 #endif
 };
 
+static fz_cookie master_cookie = { 0 };
 
 /*
 	In the presence of pthreads or Windows threads, we can offer
@@ -507,6 +508,7 @@ static struct {
 	const char *filename;
 	render_details render;
 	int interptime;
+	fz_cookie cookie;
 } bgprint = { 0 };
 
 static struct {
@@ -613,7 +615,7 @@ static int gettime(void)
 	return Curl_timediff(now, first);
 }
 
-static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_matrix ctm, fz_rect tbounds, fz_cookie *cookie, int band_start, fz_pixmap *pix, fz_bitmap **bit)
+static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_matrix ctm, fz_rect tbounds, int band_start, fz_pixmap *pix, fz_bitmap **bit)
 {
 	fz_device *dev = NULL;
 
@@ -631,9 +633,9 @@ static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_ma
 		if (alphabits_graphics == 0)
 			fz_enable_device_hints(ctx, dev, FZ_DONT_INTERPOLATE_IMAGES);
 		if (list)
-			fz_run_display_list(ctx, list, dev, ctm, tbounds, cookie);
+			fz_run_display_list(ctx, list, dev, ctm, tbounds);
 		else
-			fz_run_page(ctx, page, dev, ctm, cookie);
+			fz_run_page(ctx, page, dev, ctm);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
 		dev = NULL;
@@ -649,7 +651,7 @@ static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_ma
 	return RENDER_OK;
 }
 
-static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_details *render)
+static int dodrawpage(fz_context *ctx, int pagenum, render_details *render)
 {
 	fz_pixmap *pix = NULL;
 	fz_bitmap *bit = NULL;
@@ -687,7 +689,8 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				w->band_start = band_start;
 				w->ctm = ctm;
 				w->tbounds = tbounds;
-				memset(&w->cookie, 0, sizeof(fz_cookie));
+				//fz_clean_cookie(ctx, &w->cookie);
+				w->cookie = master_cookie;
 				w->list = render->list;
 				if (remaining_height < band_height)
 					ibounds.y1 = ibounds.y0 + remaining_height;
@@ -730,10 +733,13 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				pix = w->pix;
 				bit = w->bit;
 				w->bit = NULL;
-				cookie->errors += w->cookie.errors;
+				ASSERT(ctx != w->ctx);
+				ctx->cookie->d.errors += w->cookie.d.errors;
 			}
 			else
-				status = drawband(ctx, render->page, render->list, ctm, tbounds, cookie, band_start, pix, &bit);
+			{
+				status = drawband(ctx, render->page, render->list, ctm, tbounds, band_start, pix, &bit);
+			}
 
 			if (status != RENDER_OK)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "Render failed");
@@ -756,7 +762,8 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 				w->band_start = band_start;
 				w->ctm = ctm;
 				w->tbounds = tbounds;
-				memset(&w->cookie, 0, sizeof(fz_cookie));
+				//fz_clean_cookie(w->ctx, &w->cookie);
+				w->cookie = master_cookie;
 				w->started = 1;
 #ifndef DISABLE_MUTHREADS
 				DEBUG_THREADS(fz_info(ctx, "Triggering worker %d for band_start= %d\n", w->num, w->band_start));
@@ -777,7 +784,7 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 			for (band = 0; band < fz_mini(render->num_workers, bands); band++)
 			{
 				worker_t *w = &workers[band];
-				w->cookie.abort = 1;
+				w->cookie.d.abort = 1;
 				if (w->started)
 				{
 #ifndef DISABLE_MUTHREADS
@@ -802,14 +809,14 @@ static int dodrawpage(fz_context *ctx, int pagenum, fz_cookie *cookie, render_de
 			return RENDER_FATAL;
 		return RENDER_RETRY;
 	}
-	if (cookie->errors)
+	if (ctx->cookie->d.errors)
 		errored = 1;
 
 	return RENDER_OK;
 }
 
 /* This functions tries to render a page, falling back repeatedly to try and make it work. */
-static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int start, int interptime, const char *fname, int bg, int solo, render_details *render)
+static int try_render_page(fz_context *ctx, int pagenum, int start, int interptime, const char *fname, int bg, int solo, render_details *render)
 {
 	int status;
 
@@ -832,7 +839,7 @@ static int try_render_page(fz_context *ctx, int pagenum, fz_cookie *cookie, int 
 
 	while (1)
 	{
-		status = dodrawpage(ctx, pagenum, cookie, render);
+		status = dodrawpage(ctx, pagenum, render);
 		if (status == RENDER_OK || status == RENDER_FATAL)
 			break;
 
@@ -1147,7 +1154,6 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	fz_display_list *list = NULL;
 	fz_device *list_dev = NULL;
 	int start;
-	fz_cookie cookie = { 0 };
 #if GREY_FALLBACK != 0
 	fz_device *test_dev = NULL;
 	int is_color = 0;
@@ -1177,10 +1183,10 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			list_dev = fz_new_list_device(ctx, list);
 #if GREY_FALLBACK != 0
 			test_dev = fz_new_test_device(ctx, &is_color, 0.01f, 0, list_dev);
-			fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
+			fz_run_page(ctx, page, test_dev, fz_identity);
 			fz_close_device(ctx, test_dev);
 #else
-			fz_run_page(ctx, page, list_dev, fz_identity, &cookie);
+			fz_run_page(ctx, page, list_dev, fz_identity);
 #endif
 			fz_close_device(ctx, list_dev);
 		}
@@ -1212,7 +1218,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 				test_dev = fz_new_test_device(ctx, &is_color, 0.01f, 0, NULL);
 				if (lowmemory)
 					fz_enable_device_hints(ctx, test_dev, FZ_NO_CACHE);
-				fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
+				fz_run_page(ctx, page, test_dev, fz_identity);
 				fz_close_device(ctx, test_dev);
 			}
 			fz_always(ctx)
@@ -1249,9 +1255,9 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 				if (lowmemory)
 					fz_enable_device_hints(ctx, test_dev, FZ_NO_CACHE);
 				if (list)
-					fz_run_display_list(ctx, list, test_dev, fz_identity, fz_infinite_rect, &cookie);
+					fz_run_display_list(ctx, list, test_dev, fz_identity, fz_infinite_rect);
 				else
-					fz_run_page(ctx, page, test_dev, fz_identity, &cookie);
+					fz_run_page(ctx, page, test_dev, fz_identity);
 				fz_close_device(ctx, test_dev);
 			}
 			fz_always(ctx)
@@ -1363,7 +1369,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	}
 	else
 	{
-		if (try_render_page(ctx, pagenum, &cookie, start, 0, filename, 0, 0, &render))
+		if (try_render_page(ctx, pagenum, start, 0, filename, 0, 0, &render))
 		{
 			/* Hard failure */
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to render page");
@@ -1615,7 +1621,7 @@ static void worker_thread(void *arg)
 		me->status = RENDER_OK;
 		if (band_start >= 0)
 		{
-			me->status = drawband(me->ctx, NULL, me->list, me->ctm, me->tbounds, &me->cookie, band_start, me->pix, &me->bit);
+			me->status = drawband(me->ctx, NULL, me->list, me->ctm, me->tbounds, band_start, me->pix, &me->bit);
 		}
 		DEBUG_THREADS(fz_info(ctx, "Worker %d completed band_start %d (status=%d)\n", me->num, band_start, me->status));
 		mu_trigger_semaphore(&me->stop);
@@ -1626,7 +1632,6 @@ static void worker_thread(void *arg)
 
 static void bgprint_worker(void *arg)
 {
-	fz_cookie cookie = { 0 };
 	int pagenum;
 
 	(void)arg;
@@ -1640,8 +1645,8 @@ static void bgprint_worker(void *arg)
 		if (pagenum >= 0)
 		{
 			int start = gettime();
-			memset(&cookie, 0, sizeof(cookie));
-			bgprint.status = try_render_page(bgprint.ctx, pagenum, &cookie, start, bgprint.interptime, bgprint.filename, 1, bgprint.solo, &bgprint.render);
+			fz_clean_cookie(ctx, &bgprint.cookie);
+			bgprint.status = try_render_page(bgprint.ctx, pagenum, start, bgprint.interptime, bgprint.filename, 1, bgprint.solo, &bgprint.render);
 		}
 		DEBUG_THREADS(fz_info(ctx, "BGPrint completed page %d\n", pagenum));
 		mu_trigger_semaphore(&bgprint.stop);
@@ -1849,6 +1854,8 @@ int main(int argc, const char** argv)
 	memset(&bgprint, 0, sizeof(bgprint));
 	memset(&timing, 0, sizeof(timing));
 
+	memset(&master_cookie, 0, sizeof(master_cookie));
+
 	gettime_once = 1;
 
 	// ---
@@ -2010,6 +2017,8 @@ int main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
+	fz_attach_cookie_to_context(ctx, &master_cookie);
+
 	fz_try(ctx)
 	{
 		fz_set_text_aa_level(ctx, alphabits_text);
@@ -2033,11 +2042,13 @@ int main(int argc, const char** argv)
 		{
 			int fail = 0;
 			bgprint.ctx = fz_clone_context(ctx);
+			fz_attach_cookie_to_context(bgprint.ctx, &bgprint.cookie);
 			fail |= mu_create_semaphore(&bgprint.start);
 			fail |= mu_create_semaphore(&bgprint.stop);
 			fail |= mu_create_thread(&bgprint.thread, bgprint_worker, NULL);
 			if (fail)
 			{
+				fz_detach_cookie_from_context(bgprint.ctx);
 				mu_destroy_semaphore(&bgprint.start);
 				mu_destroy_semaphore(&bgprint.stop);
 				fz_throw(bgprint.ctx, FZ_ERROR_GENERIC, "bgprint startup failed");
@@ -2053,6 +2064,7 @@ int main(int argc, const char** argv)
 			{
 				workers[i].ctx = fz_clone_context(ctx);
 				workers[i].num = i;
+				fz_attach_cookie_to_context(workers[i].ctx, &workers[i].cookie);
 				fail |= mu_create_semaphore(&workers[i].start);
 				fail |= mu_create_semaphore(&workers[i].stop);
 				fail |= mu_create_thread(&workers[i].thread, worker_thread, &workers[i]);
@@ -2061,6 +2073,7 @@ int main(int argc, const char** argv)
 			{
 				for (i = 0; i < num_workers; i++)
 				{
+					fz_detach_cookie_from_context(workers[i].ctx);
 					mu_destroy_semaphore(&workers[i].start);
 					mu_destroy_semaphore(&workers[i].stop);
 					mu_destroy_thread(&workers[i].thread);

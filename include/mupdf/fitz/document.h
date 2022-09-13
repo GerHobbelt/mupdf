@@ -251,7 +251,7 @@ typedef fz_rect (fz_page_bound_page_fn)(fz_context *ctx, fz_page *page);
 	contents of a page. See fz_run_page_contents for more
 	information.
 */
-typedef void (fz_page_run_page_fn)(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+typedef void (fz_page_run_page_fn)(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Type for a function to load the links
@@ -678,7 +678,7 @@ fz_rect fz_bound_page(fz_context *ctx, fz_page *page);
 	fields inside cookie are continually updated while the page is
 	rendering.
 */
-void fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+void fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Run a page through a device. Just the main
@@ -700,7 +700,7 @@ void fz_run_page(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix trans
 	fields inside cookie are continually updated while the page is
 	rendering.
 */
-void fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+void fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Run the annotations on a page through a device.
@@ -721,7 +721,7 @@ void fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_mat
 	fields inside cookie are continually updated while the page is
 	rendering.
 */
-void fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform, fz_cookie *cookie);
+void fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix transform);
 
 /**
 	Increment the reference count for the page. Returns the same

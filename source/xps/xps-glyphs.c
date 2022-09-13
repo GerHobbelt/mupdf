@@ -217,6 +217,7 @@ xps_lookup_font(fz_context *ctx, xps_document *doc, char *base_uri, char *font_u
 	int subfontid = 0;
 	xps_part *part;
 	fz_font *font;
+	fz_cookie* cookie = ctx->cookie;
 
 	xps_resolve_url(ctx, doc, partname, base_uri, font_uri, sizeof partname);
 	subfont = strrchr(partname, '#');
@@ -252,8 +253,8 @@ xps_lookup_font(fz_context *ctx, xps_document *doc, char *base_uri, char *font_u
 		{
 			if (fz_caught(ctx) == FZ_ERROR_TRYLATER)
 			{
-				if (doc->cookie)
-					doc->cookie->incomplete = 1;
+				if (cookie)
+					cookie->d.incomplete = 1;
 				else
 					fz_rethrow(ctx);
 			}

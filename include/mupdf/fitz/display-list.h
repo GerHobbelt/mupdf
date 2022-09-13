@@ -98,7 +98,7 @@ fz_device *fz_new_list_device(fz_context *ctx, fz_display_list *list);
 	progress information back to the caller. The fields inside
 	cookie are continually updated while the page is being run.
 */
-void fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_matrix ctm, fz_rect scissor, fz_cookie *cookie);
+void fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_matrix ctm, fz_rect scissor);
 
 /**
 	Increment the reference count for a display list. Returns the
