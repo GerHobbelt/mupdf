@@ -22,8 +22,8 @@ FILE *fz_fopen_utf8(fz_context *ctx, const char *name, const char *mode);
 int fz_remove_utf8(fz_context *ctx, const char *name);
 int fz_mkdirp_utf8(fz_context *ctx, const char* name);
 
-int64_t fz_stat_ctime(const char *path);
-int64_t fz_stat_mtime(const char *path);
+int64_t fz_stat_ctime(fz_context *ctx, const char *path);
+int64_t fz_stat_mtime(fz_context *ctx, const char *path);
 
 
 /**
