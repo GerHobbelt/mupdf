@@ -760,9 +760,7 @@ int fz_chdir(fz_context* ctx, const char *path)
 void fz_mkdir_for_file(fz_context* ctx, const char* path)
 {
 	char* buf = fz_strdup(ctx, path);
-
-	if (!buf)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_mkdir_for_file: out of memory.");
+	ASSERT(buf);
 
 	// unixify MSDOS path:
 	char* e = strchr(buf, '\\');
@@ -798,9 +796,7 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 void fz_mkdir_for_file(fz_context* ctx, const char* path)
 {
 	char* buf = fz_strdup(ctx, path);
-
-	if (!buf)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_mkdir_for_file: out of memory.");
+	ASSERT(buf);
 
 	// unixify MSDOS path:
 	char *e = strchr(buf, '\\');
