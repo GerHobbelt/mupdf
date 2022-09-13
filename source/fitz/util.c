@@ -36,7 +36,7 @@ fz_new_display_list_from_page(fz_context *ctx, fz_page *page)
 	fz_try(ctx)
 	{
 		dev = fz_new_list_device(ctx, list);
-		fz_run_page(ctx, page, dev, fz_identity, NULL);
+		fz_run_page(ctx, page, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -80,7 +80,7 @@ fz_new_display_list_from_page_contents(fz_context *ctx, fz_page *page)
 	fz_try(ctx)
 	{
 		dev = fz_new_list_device(ctx, list);
-		fz_run_page_contents(ctx, page, dev, fz_identity, NULL);
+		fz_run_page_contents(ctx, page, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -125,7 +125,7 @@ fz_new_pixmap_from_display_list_with_separations(fz_context *ctx, fz_display_lis
 	fz_try(ctx)
 	{
 		dev = fz_new_draw_device(ctx, ctm, pix);
-		fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, NULL);
+		fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -170,7 +170,7 @@ fz_new_pixmap_from_page_contents_with_separations(fz_context *ctx, fz_page *page
 	fz_try(ctx)
 	{
 		dev = fz_new_draw_device(ctx, ctm, pix);
-		fz_run_page_contents(ctx, page, dev, fz_identity, NULL);
+		fz_run_page_contents(ctx, page, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -216,7 +216,7 @@ fz_new_pixmap_from_page_with_separations(fz_context *ctx, fz_page *page, fz_matr
 			fz_clear_pixmap_with_value(ctx, pix, 0xFF);
 
 		dev = fz_new_draw_device(ctx, ctm, pix);
-		fz_run_page(ctx, page, dev, fz_identity, NULL);
+		fz_run_page(ctx, page, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -269,7 +269,7 @@ fz_new_stext_page_from_display_list(fz_context *ctx, fz_display_list *list, cons
 	fz_try(ctx)
 	{
 		dev = fz_new_stext_device(ctx, text, options);
-		fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, NULL);
+		fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -300,7 +300,7 @@ fz_new_stext_page_from_page(fz_context *ctx, fz_page *page, const fz_stext_optio
 	fz_try(ctx)
 	{
 		dev = fz_new_stext_device(ctx, text, options);
-		fz_run_page_contents(ctx, page, dev, fz_identity, NULL);
+		fz_run_page_contents(ctx, page, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -684,7 +684,7 @@ fz_new_xhtml_document_from_document(fz_context *ctx, fz_document *old_doc, const
 }
 
 fz_buffer *
-fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *format, const char *options, fz_matrix transform, fz_cookie *cookie)
+fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *format, const char *options, fz_matrix transform)
 {
 	fz_buffer *buf = NULL;
 	fz_output *out;
@@ -701,7 +701,7 @@ fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *
 		out = fz_new_output_with_buffer(ctx, buf);
 		writer = fz_new_document_writer_with_output(ctx, out, format, options);
 		dev = fz_begin_page(ctx, writer, fz_bound_page(ctx, page));
-		fz_run_page(ctx, page, dev, transform, cookie);
+		fz_run_page(ctx, page, dev, transform);
 		fz_end_page(ctx, writer);
 		fz_close_document_writer(ctx, writer);
 	}

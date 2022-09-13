@@ -67,6 +67,7 @@ typedef struct fz_document_handler_context fz_document_handler_context;
 typedef struct fz_secondary_outputs fz_secondary_outputs;
 typedef struct fz_output fz_output;
 typedef struct fz_context fz_context;
+typedef struct fz_cookie fz_cookie;
 
 /**
     Allocator structure; holds callbacks and private data pointer.
@@ -885,6 +886,8 @@ struct fz_context
     fz_colorspace_context *colorspace;
     fz_store *store;
     fz_glyph_cache *glyph_cache;
+
+	fz_cookie* cookie;
 };
 
 fz_context *fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks, size_t max_store, const char *version);

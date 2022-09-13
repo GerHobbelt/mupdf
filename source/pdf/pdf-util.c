@@ -36,7 +36,7 @@ pdf_new_display_list_from_annot(fz_context *ctx, pdf_annot *annot)
 	fz_try(ctx)
 	{
 		dev = fz_new_list_device(ctx, list);
-		pdf_run_annot(ctx, annot, dev, fz_identity, NULL);
+		pdf_run_annot(ctx, annot, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -75,7 +75,7 @@ pdf_new_pixmap_from_annot(fz_context *ctx, pdf_annot *annot, fz_matrix ctm, fz_c
 	fz_try(ctx)
 	{
 		dev = fz_new_draw_device(ctx, ctm, pix);
-		pdf_run_annot(ctx, annot, dev, fz_identity, NULL);
+		pdf_run_annot(ctx, annot, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -106,7 +106,7 @@ pdf_new_stext_page_from_annot(fz_context *ctx, pdf_annot *annot, const fz_stext_
 	fz_try(ctx)
 	{
 		dev = fz_new_stext_device(ctx, text, options);
-		pdf_run_annot(ctx, annot, dev, fz_identity, NULL);
+		pdf_run_annot(ctx, annot, dev, fz_identity);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -147,7 +147,7 @@ pdf_new_pixmap_from_page_contents_with_separations_and_usage(fz_context *ctx, pd
 		dev = fz_new_draw_device(ctx, ctm, pix);
 		fz_try(ctx)
 		{
-			pdf_run_page_contents_with_usage(ctx, page, dev, fz_identity, usage, NULL);
+			pdf_run_page_contents_with_usage(ctx, page, dev, fz_identity, usage);
 		}
 		fz_catch(ctx)
 		{
@@ -202,7 +202,7 @@ pdf_new_pixmap_from_page_with_separations_and_usage(fz_context *ctx, pdf_page *p
 		dev = fz_new_draw_device(ctx, ctm, pix);
 		fz_try(ctx)
 		{
-			pdf_run_page_with_usage(ctx, page, dev, fz_identity, usage, NULL);
+			pdf_run_page_with_usage(ctx, page, dev, fz_identity, usage);
 		}
 		fz_catch(ctx)
 		{

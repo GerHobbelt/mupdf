@@ -153,13 +153,13 @@ pdf_filter_content_stream(
 		{
 			*out_res = pdf_new_dict(ctx, doc, 1);
 			proc_filter = pdf_new_filter_processor(ctx, doc, proc_buffer, in_res, *out_res, struct_parents, transform, filter);
-			pdf_process_contents(ctx, proc_filter, doc, in_res, in_stm, NULL);
+			pdf_process_contents(ctx, proc_filter, doc, in_res, in_stm);
 			pdf_close_processor(ctx, proc_filter);
 		}
 		else
 		{
 			*out_res = pdf_keep_obj(ctx, in_res);
-			pdf_process_contents(ctx, proc_buffer, doc, in_res, in_stm, NULL);
+			pdf_process_contents(ctx, proc_buffer, doc, in_res, in_stm);
 		}
 		pdf_close_processor(ctx, proc_buffer);
 
@@ -235,12 +235,12 @@ pdf_filter_type3(fz_context *ctx, pdf_document *doc, pdf_obj *obj, pdf_obj *page
 				if (filter->sanitize)
 				{
 					proc_filter = pdf_new_filter_processor(ctx, doc, proc_buffer, in_res, out_res, -1, fz_identity, filter);
-					pdf_process_contents(ctx, proc_filter, doc, in_res, val, NULL);
+					pdf_process_contents(ctx, proc_filter, doc, in_res, val);
 					pdf_close_processor(ctx, proc_filter);
 				}
 				else
 				{
-					pdf_process_contents(ctx, proc_buffer, doc, in_res, val, NULL);
+					pdf_process_contents(ctx, proc_buffer, doc, in_res, val);
 				}
 				pdf_close_processor(ctx, proc_buffer);
 

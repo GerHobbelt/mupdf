@@ -1550,7 +1550,7 @@ printadvancedinfo(fz_context* ctx, globals* glo, int page, fz_gathered_statistic
 		write_item_bbox(ctx, out, "PageBounds", &mediabox);
 
 		stats_dev = fz_new_stats_device(ctx, stats, NULL);
-		fz_run_page(ctx, fz_page_from_pdf_page(ctx, page_obj), stats_dev, fz_identity, NULL);
+		fz_run_page(ctx, fz_page_from_pdf_page(ctx, page_obj), stats_dev, fz_identity);
 		// and pick up the updated statistics...
 		fz_extract_device_statistics(ctx, stats_dev, stats);
 

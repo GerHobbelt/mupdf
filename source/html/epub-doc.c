@@ -452,7 +452,7 @@ epub_bound_page(fz_context *ctx, fz_page *page_)
 }
 
 static void
-epub_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
+epub_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 {
 	epub_page *page = (epub_page*)page_;
 

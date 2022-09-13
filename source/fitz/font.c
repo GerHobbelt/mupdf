@@ -1459,7 +1459,7 @@ fz_bound_t3_glyph(fz_context *ctx, fz_font *font, int gid)
 	dev = fz_new_bbox_device(ctx, r);
 	fz_try(ctx)
 	{
-		fz_run_display_list(ctx, list, dev, font->t3matrix, fz_infinite_rect, NULL);
+		fz_run_display_list(ctx, list, dev, font->t3matrix, fz_infinite_rect);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -1551,7 +1551,7 @@ fz_run_t3_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix trm, fz_devic
 		return;
 
 	ctm = fz_concat(font->t3matrix, trm);
-	fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect, NULL);
+	fz_run_display_list(ctx, list, dev, ctm, fz_infinite_rect);
 }
 
 fz_pixmap *

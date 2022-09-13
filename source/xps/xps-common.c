@@ -58,7 +58,8 @@ xps_lookup_alternate_content(fz_context *ctx, xps_document *doc, fz_xml *node)
 void
 xps_parse_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_rect area, char *base_uri, xps_resource *dict, fz_xml *node)
 {
-	if (doc->cookie && doc->cookie->abort)
+	fz_cookie* cookie = ctx->cookie;
+	if (cookie && cookie->d.abort)
 		return;
 	/* SolidColorBrushes are handled in a special case and will never show up here */
 	if (fz_xml_is_tag(node, "ImageBrush"))
@@ -76,7 +77,8 @@ xps_parse_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_rect area,
 void
 xps_parse_element(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_rect area, char *base_uri, xps_resource *dict, fz_xml *node)
 {
-	if (doc->cookie && doc->cookie->abort)
+	fz_cookie* cookie = ctx->cookie;
+	if (cookie && cookie->d.abort)
 		return;
 	if (fz_xml_is_tag(node, "Path"))
 		xps_parse_path(ctx, doc, ctm, base_uri, dict, node);

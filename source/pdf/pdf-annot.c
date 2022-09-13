@@ -2989,7 +2989,7 @@ pdf_set_annot_appearance_from_display_list(fz_context *ctx, pdf_annot *annot, co
 		res = pdf_new_dict(ctx, doc, 1);
 		contents = fz_new_buffer(ctx, 0);
 		dev = pdf_new_pdf_device(ctx, doc, transform, res, contents);
-		fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect, NULL);
+		fz_run_display_list(ctx, list, dev, fz_identity, fz_infinite_rect);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
 		dev = NULL;

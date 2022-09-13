@@ -109,7 +109,7 @@ renderer(void *data)
 
 	fprintf(stderr, "thread at page %d rendering!\n", pagenumber);
 	dev = fz_new_draw_device(ctx, fz_identity, pix);
-	fz_run_display_list(ctx, list, dev, fz_identity, bbox, NULL);
+	fz_run_display_list(ctx, list, dev, fz_identity, bbox);
 	fz_close_device(ctx, dev);
 	fz_drop_device(ctx, dev);
 
@@ -227,7 +227,7 @@ int main(int argc, const char** argv)
 		// to populate the page's display list.
 
 		dev = fz_new_list_device(ctx, list);
-		fz_run_page(ctx, page, dev, fz_identity, NULL);
+		fz_run_page(ctx, page, dev, fz_identity);
 		fz_close_device(ctx, dev);
 		fz_drop_device(ctx, dev);
 

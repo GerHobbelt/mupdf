@@ -396,7 +396,7 @@ xps_parse_fixed_page(fz_context *ctx, xps_document *doc, fz_matrix ctm, xps_page
 }
 
 void
-xps_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_cookie *cookie)
+xps_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 {
 	xps_page *page = (xps_page*)page_;
 	xps_document *doc = (xps_document*)page->super.doc;
@@ -404,9 +404,7 @@ xps_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_
 
 	page_ctm = fz_pre_scale(ctm, 72.0f / 96.0f, 72.0f / 96.0f);
 
-	doc->cookie = cookie;
 	doc->dev = dev;
 	xps_parse_fixed_page(ctx, doc, page_ctm, page);
-	doc->cookie = NULL;
 	doc->dev = NULL;
 }

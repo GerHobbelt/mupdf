@@ -359,7 +359,7 @@ fz_write_document(fz_context *ctx, fz_document_writer *wri, fz_document *doc)
 		{
 			page = fz_load_page(ctx, doc, i);
 			dev = fz_begin_page(ctx, wri, fz_bound_page(ctx, page));
-			fz_run_page(ctx, page, dev, fz_identity, NULL);
+			fz_run_page(ctx, page, dev, fz_identity);
 			fz_drop_page(ctx, page);
 			page = NULL;
 			fz_end_page(ctx, wri);
