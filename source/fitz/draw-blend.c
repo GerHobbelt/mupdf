@@ -1193,9 +1193,10 @@ verify_premultiply(fz_context *ctx, const fz_pixmap * FZ_RESTRICT dst)
 		for (x = w; x > 0; x--)
 		{
 			int a = dp[n-1];
-			for (i = n-1; i > 0; i--)
-				if (*dp++ > a)
-					abort();
+			for (i = n - 1; i > 0; i--)
+			{
+				ASSERT(*dp++ > a);
+			}
 			dp++;
 		}
 		dp += s;
