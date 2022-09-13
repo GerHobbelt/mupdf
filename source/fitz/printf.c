@@ -876,6 +876,8 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 	{
 		if (c == '%')
 		{
+			const char* start = fmt;
+
 			s = 0;
 			l = 0;
 			z = ' ';
@@ -899,7 +901,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					break;
 			}
 			if (c == 0)
-				break;
+				goto not_a_decent_format_spec;
 
 			/* width */
 			w = INT_MIN;		// flag as 'uninitialized'; different default for floats and strings will be applied later.
@@ -913,14 +915,14 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 			}
 			if (c == 0)
-				break;
+				goto not_a_decent_format_spec;
 
 			/* precision */
 			p = INT_MAX;		// flag as 'uninitialized'; different default for floats and strings' precision will be applied later.
 			if (c == '.') {
 				c = *fmt++;
 				if (c == 0)
-					break;
+					goto not_a_decent_format_spec;
 				if (c == '*') {
 					c = *fmt++;
 					p = va_arg(args, int);
@@ -934,7 +936,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 			}
 			if (c == 0)
-				break;
+				goto not_a_decent_format_spec;
 
 			/* misc flags */
 			j = 0;
@@ -959,28 +961,36 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					c = *fmt++;
 				}
 				if (c == 0)
-					break;
+					goto not_a_decent_format_spec;
 			}
 			else if (c == 't') {
 				c = *fmt++;
 				bits = sizeof(ptrdiff_t) * 8;
 				if (c == 0)
-					break;
+					goto not_a_decent_format_spec;
 			}
 			else if (c == 'z') {
 				c = *fmt++;
 				bits = sizeof(size_t) * 8;
 				if (c == 0)
-					break;
+					goto not_a_decent_format_spec;
+			}
+			// I64d, I32d, I16d
+			else if (c == 'I') {
+				c = *fmt++;
+				while (c >= '0' && c <= '9') {
+					bits = bits * 10 + c - '0';
+					c = *fmt++;
+				}
+				if (bits != 64 && bits != 32 && bits != 16)
+					goto not_a_decent_format_spec;
 			}
 
 			hexprefix = 0;
 
 			switch (c) {
 			default:
-				fmtputc(&out, '%');
-				fmtputc(&out, c);
-				break;
+				goto not_a_decent_format_spec;
 
 			case '%':
 				fmtputc(&out, '%');
@@ -1180,8 +1190,19 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 				else
 				{
-					unsigned int i32 = va_arg(args, unsigned int);
-					fmtuint32(&out, i32, 0, z, w, 16);
+					unsigned int iv;
+					ASSERT0(sizeof(unsigned int) == sizeof(uint32_t));
+
+					if (bits == 16)
+					{
+						iv = va_arg(args, uint16_t);
+					}
+					else
+					{
+						iv = va_arg(args, unsigned int);
+					}
+
+					fmtuint32(&out, iv, 0, z, w, 16);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1198,8 +1219,19 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 				else
 				{
-					int i32 = va_arg(args, int);
-					fmtint32(&out, i32, s, z, w, 10);
+					int iv;
+					ASSERT0(sizeof(int) == sizeof(int32_t));
+
+					if (bits == 16)
+					{
+						iv = va_arg(args, int16_t);
+					}
+					else
+					{
+						iv = va_arg(args, int);
+					}
+
+					fmtint32(&out, iv, s, z, w, 10);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1215,8 +1247,19 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 				else
 				{
-					unsigned int u32 = va_arg(args, unsigned int);
-					fmtuint32(&out, u32, 0, z, w, 10);
+					unsigned int iv;
+					ASSERT0(sizeof(unsigned int) == sizeof(uint32_t));
+
+					if (bits == 16)
+					{
+						iv = va_arg(args, uint16_t);
+					}
+					else
+					{
+						iv = va_arg(args, unsigned int);
+					}
+
+					fmtuint32(&out, iv, 0, z, w, 10);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1232,8 +1275,19 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 				else
 				{
-					unsigned int u32 = va_arg(args, unsigned int);
-					fmtuint32(&out, u32, 0, z, w, 2);
+					unsigned int iv;
+					ASSERT0(sizeof(unsigned int) == sizeof(uint32_t));
+
+					if (bits == 16)
+					{
+						iv = va_arg(args, uint16_t);
+					}
+					else
+					{
+						iv = va_arg(args, unsigned int);
+					}
+
+					fmtuint32(&out, iv, 0, z, w, 2);
 				}
 				if (j)
 					fmtputc(&out, '"');
@@ -1362,6 +1416,11 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 				}
 				break;
 			}
+			continue;
+
+not_a_decent_format_spec:
+			fmt = start;
+			fmtputc(&out, '%');
 		}
 		else
 		{
