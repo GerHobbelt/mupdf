@@ -64,14 +64,12 @@ static int report_version(int argc, const char** argv);
 
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
-typedef int tool_f_cpp();
 
 static struct {
 	union
 	{
 		tool_f* f;
 		tool_fa* fa;
-		tool_f_cpp* fpp;
 	} func;
 
 	const char *name;
@@ -160,7 +158,7 @@ static struct {
 
 	{ {.fa = qiqqa_fingerprint0_main }, "qiqqa_fingerprint0", "calculate the classic Qiqqa fingerprint hash for a file" },
 	{ {.fa = qiqqa_fingerprint1_main }, "qiqqa_fingerprint1", "calculate the new v2 Qiqqa fingerprint hash for a file" },
-	{ {.fa = qiqqa_documentid62_main }, "qiqqa_documentid62", "calculate the new v2 Qiqqa fingerprint hash-based positive non-zero 64bit document id for a file" },
+	{ {.fa = qiqqa_documentid62_main }, "qiqqa_docid62", "calculate the new v2 Qiqqa fingerprint hash-based positive non-zero 64bit document id for a file" },
 
 	{ {.fa = sqlite_main }, "sqlite", "SQLite3 tool" },
 #if defined(MUTOOL_EX)
