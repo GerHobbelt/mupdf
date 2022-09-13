@@ -683,7 +683,7 @@ int fz_is_absolute_path(const char* path)
 
 #if defined(_WIN32)
 
-static int fz_UNC_wfullpath_from_name(wchar_t dstbuf[PATH_MAX], const char* path)
+static int fz_UNC_wfullpath_from_name(fz_context* ctx, wchar_t dstbuf[PATH_MAX], const char* path)
 {
 	wchar_t wpath[PATH_MAX];
 	wchar_t wbuf[PATH_MAX + 4];
@@ -724,7 +724,7 @@ int fz_chdir(fz_context* ctx, const char *path)
 #ifdef _MSC_VER
 	wchar_t wname[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wname, path))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, path))
 	{
 		return -1;
 	}
@@ -970,7 +970,7 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 	wchar_t wname[PATH_MAX];
 	int n;
 
-	if (fz_UNC_wfullpath_from_name(wname, name))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
 	{
 		return -1;
 	}
@@ -990,7 +990,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 {
 	wchar_t wname[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wname, name))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
 	{
 		return -1;
 	}
@@ -1024,6 +1024,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 			rv = -1;
 		}
+
 		*d = c;
 		// did we reach the end of the *original* path spec?
 		if (!c)
