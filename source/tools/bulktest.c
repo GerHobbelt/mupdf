@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <math.h>
+#include <signal.h>
 #if defined(_WIN32)
 #include <windows.h>
 #include <intrin.h>
@@ -2865,9 +2866,22 @@ static void should_I_wait_for_key(void)
 }
 
 
+static void SignalHandler(int signal)
+{
+	if (signal == SIGABRT) {
+		// abort signal handler code
+	}
+	else {
+		// ...
+	}
+	printf("BUGGER!!!!\n");
+}
+
 int
 main(int argc, const char** argv)
 {
-    atexit(should_I_wait_for_key);
+	signal(SIGABRT, SignalHandler);
+
+	atexit(should_I_wait_for_key);
     return bulktest_main(argc, argv);
 }
