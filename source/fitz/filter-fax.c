@@ -800,9 +800,9 @@ rtc:
 }
 
 static void
-close_faxd(fz_context *ctx, void *state_)
+close_faxd(fz_context *ctx, fz_stream* stm)
 {
-	fz_faxd *fax = (fz_faxd *)state_;
+	fz_faxd *fax = (fz_faxd *)stm->state;
 	int i;
 
 	/* if we read any extra bytes, try to put them back */

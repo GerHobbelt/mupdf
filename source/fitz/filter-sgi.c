@@ -318,9 +318,9 @@ next_sgilog16(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_sgilog16(fz_context *ctx, void *state_)
+close_sgilog16(fz_context *ctx, fz_stream* stm)
 {
-	fz_sgilog16 *state = (fz_sgilog16 *)state_;
+	fz_sgilog16 *state = (fz_sgilog16 *)stm->state;
 	fz_stream *chain = state->chain;
 
 	fz_free(ctx, state->temp);
@@ -483,9 +483,9 @@ next_sgilog24(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_sgilog24(fz_context *ctx, void *state_)
+close_sgilog24(fz_context *ctx, fz_stream* stm)
 {
-	fz_sgilog24 *state = (fz_sgilog24 *)state_;
+	fz_sgilog24 *state = (fz_sgilog24 *)stm->state;
 	fz_stream *chain = state->chain;
 
 	fz_free(ctx, state->temp);
@@ -652,9 +652,9 @@ next_sgilog32(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_sgilog32(fz_context *ctx, void *state_)
+close_sgilog32(fz_context *ctx, fz_stream* stm)
 {
-	fz_sgilog32 *state = (fz_sgilog32 *)state_;
+	fz_sgilog32 *state = (fz_sgilog32 *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state->temp);
 	fz_free(ctx, state);

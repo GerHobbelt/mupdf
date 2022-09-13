@@ -300,9 +300,9 @@ next_dctd(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_dctd(fz_context *ctx, void *state_)
+close_dctd(fz_context *ctx, fz_stream* stm)
 {
-	fz_dctd *state = (fz_dctd *)state_;
+	fz_dctd *state = (fz_dctd *)stm->state;
 
 	if (state->init)
 	{

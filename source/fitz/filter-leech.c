@@ -56,9 +56,9 @@ next_leech(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_leech(fz_context *ctx, void *state_)
+close_leech(fz_context *ctx, fz_stream* stm)
 {
-	fz_leech *state = (fz_leech *)state_;
+	fz_leech *state = (fz_leech *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_drop_buffer(ctx, state->buffer);
 	fz_free(ctx, state);

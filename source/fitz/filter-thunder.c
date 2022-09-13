@@ -133,9 +133,9 @@ next_thunder(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-close_thunder(fz_context *ctx, void *state_)
+close_thunder(fz_context *ctx, fz_stream* stm)
 {
-	fz_thunder *state = (fz_thunder *)state_;
+	fz_thunder *state = (fz_thunder *)stm->state;
 	fz_drop_stream(ctx, state->chain);
 	fz_free(ctx, state->buffer);
 	fz_free(ctx, state);

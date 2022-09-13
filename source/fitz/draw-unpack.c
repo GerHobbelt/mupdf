@@ -429,9 +429,10 @@ unpack_next(fz_context *ctx, fz_stream *stm, size_t max)
 }
 
 static void
-unpack_drop(fz_context *ctx, void *state)
+unpack_drop(fz_context *ctx, fz_stream* stm)
 {
-	fz_free(ctx, state);
+	fz_free(ctx, stm->state);
+	stm->state = NULL;
 }
 
 fz_stream *

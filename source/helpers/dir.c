@@ -866,18 +866,19 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 #if defined(_WIN32)
 
 int64_t
-fz_stat_ctime(const char* path)
+fz_stat_ctime(fz_context *ctx, const char* path)
 {
 	struct _stat info;
 	wchar_t wpath[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wpath, path))
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
 		return 0;
 
 	int n = _wstat(wpath, &info);
-	int e = errno;
-	if (n < 0) {
-		errno = e;
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
 	}
 
@@ -885,18 +886,19 @@ fz_stat_ctime(const char* path)
 }
 
 int64_t
-fz_stat_mtime(const char* path)
+fz_stat_mtime(fz_context* ctx, const char* path)
 {
 	struct _stat info;
 	wchar_t wpath[PATH_MAX];
 
-	if (fz_UNC_wfullpath_from_name(wpath, path))
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
 		return 0;
 
 	int n = _wstat(wpath, &info);
-	int e = errno;
-	if (n < 0) {
-		errno = e;
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
 	}
 
@@ -906,20 +908,28 @@ fz_stat_mtime(const char* path)
 #else
 
 int64_t
-fz_stat_ctime(const char* path)
+fz_stat_ctime(fz_context* ctx, const char* path)
 {
 	struct stat info;
-	if (stat(path, &info) < 0)
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
+	}
 	return info.st_ctime;
 }
 
 int64_t
-fz_stat_mtime(const char* path)
+fz_stat_mtime(fz_context* ctx, const char* path)
 {
 	struct stat info;
-	if (stat(path, &info) < 0)
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 		return 0;
+	}
 	return info.st_mtime;
 }
 
@@ -935,7 +945,7 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 	wchar_t *wmode;
 	FILE* file;
 
-	if (fz_UNC_wfullpath_from_name(wname, name))
+	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
 	{
 		return NULL;
 	}
