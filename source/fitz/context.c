@@ -307,6 +307,9 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		}
 #endif
 
+		// Get us a debug stream so we have a chance of seeing *independently* of stderr.
+		ctx->stddbg = fz_stdods(ctx);
+
 		fz_init_random_context(ctx);
 	}
 

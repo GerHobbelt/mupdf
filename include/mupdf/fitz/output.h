@@ -324,18 +324,18 @@ fz_output *fz_stdout(fz_context *ctx);
 */
 fz_output *fz_stderr(fz_context *ctx);
 
-#ifdef _WIN32
 /**
-	Retrieve an fz_output that directs to OutputDebugString.
+    Retrieve an fz_output that directs to OutputDebugString (Win32) or your OS's native debug channel.
+
+    Returns NULL when no debug channel is available.
 
 	Optionally may be fz_dropped when finished with.
 */
 fz_output *fz_stdods(fz_context *ctx);
-#endif
 
 /**
-	Set the output stream to be used for fz_stddbg. Set to NULL to
-	reset to default (stderr).
+    Set the output stream to be used for fz_stddbg. Set to NULL to
+    reset to default (stdods / stderr).
 */
 void fz_set_stddbg(fz_context *ctx, fz_output *out);
 
