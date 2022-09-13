@@ -823,10 +823,12 @@ typedef struct
     int errcode;
     // See fz_rethrow() code comments for the complete story:
     int last_nonzero_errcode;
+
 	// This (together with the `system_error_message` member) stores the last **system error**
 	// which was encountered in the fz_xxxxxxx() functions.
     int system_errcode[3];   // first/nested/last
     int system_errdepth;
+
 	void *print_user;
     fz_error_print_callback *print;
     char message[LONGLINE];
