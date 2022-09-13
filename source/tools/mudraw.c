@@ -3467,7 +3467,10 @@ int main(int argc, const char** argv)
 #endif
 
 		{
-			fz_close_output(ctx, out);
+			if (!errored)
+			{
+				fz_close_output(ctx, out);
+			}
 			fz_drop_output(ctx, out);
 			out = NULL;
 		}
