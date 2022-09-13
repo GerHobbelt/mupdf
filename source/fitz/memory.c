@@ -189,6 +189,7 @@ fz_strdup(fz_context *ctx, const char *s   FZDBG_DECL_ARGS)
 {
 	size_t len = strlen(s) + 1;
 	char *ns = (char *)fz_malloc(ctx, len   FZDBG_PASS);
+	ASSERT(ns);
 	if (ns)
 	{
 		memcpy(ns, s, len);
