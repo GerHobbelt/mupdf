@@ -1105,7 +1105,7 @@ fz_vwrite_strings(fz_context* ctx, fz_output* out, va_list ap)
 		}
 	}
 	if (do_flush)
-		fz_flush_output_no_lock(ctx, out);
+		fz_flush_output(ctx, out);
 	printf_unlock(out);
 }
 
