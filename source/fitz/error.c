@@ -227,7 +227,7 @@ void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 #endif
 }
 
-/* Warning context */
+/* Info context */
 
 fz_error_print_callback* fz_set_info_callback(fz_context* ctx, fz_error_print_callback* print, void* user)
 {
@@ -319,20 +319,20 @@ void fz_flush_all_std_logging_channels(fz_context* ctx)
 	// log data as much as possible:
 	//
 	// - error
-	// - debug (for up to date diagnostics
+	// - debug (for up to date diagnostics)
 	// - stdout
 	// and then, just in case one or more of the above had anything to yak on the way out:
 	// - error
-	// - debug (for up to date diagnostics
+	// - debug (for up to date diagnostics)
 	fz_output* channel = fz_stderr(ctx);
 	fz_flush_output(ctx, channel);
-	channel = fz_stdods(ctx);
+	channel = fz_stddbg(ctx);
 	fz_flush_output(ctx, channel);
 	channel = fz_stdout(ctx);
 	fz_flush_output(ctx, channel);
 	channel = fz_stderr(ctx);
 	fz_flush_output(ctx, channel);
-	channel = fz_stdods(ctx);
+	channel = fz_stddbg(ctx);
 	fz_flush_output(ctx, channel);
 }
 

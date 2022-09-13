@@ -372,12 +372,87 @@ fz_output *fz_stdods(fz_context *ctx)
 {
 	return &fz_stdods_global;
 }
+
+#elif defined(__ANDROID__)
+
+//#include <android/log.h>
+
+static int
+stdods_write(fz_context* ctx, fz_output* out, const void* buffer, size_t count)
+{
+	// Assume that the heap MAY be corrupted when we call into here.
+	// Such last effort error messages will invariably be short-ish.
+	// Besides, using a bit of stack for smaller messages reduces heap alloc+free
+	// call overhead.
+	char stkbuf[LONGLINE + 1];
+	char* buf = stkbuf;
+	if (count > sizeof(stkbuf) - 1)
+		buf = fz_malloc(ctx, count + 1);
+
+	memcpy(buf, buffer, count);
+	buf[count] = 0;
+
+	static const int lvl_map[] = { ANDROID_LOG_ERROR, ANDROID_LOG_ERROR, ANDROID_LOG_WARN, ANDROID_LOG_INFO, ANDROID_LOG_INFO, ANDROID_LOG_INFO };
+	int lvl = fz_output_get_severity_level(ctx, out);
+	if (lvl < 0)
+		lvl = 0;
+	else if (lvl >= countof(lvl_map))
+		lvl >= countof(lvl_map) - 1;
+
+	__android_log_print(lvl_map[lvl], "libmupdf", "%s", buf);
+
+	if (buf != stkbuf)
+		fz_free(ctx, buf);
+
+	return 0;
+}
+
+static void
+stdods_flush_on_close(fz_context* ctx, fz_output* out)
+{
+	fz_flush_output(ctx, out);
+}
+
+static void
+stdods_flush_on_drop(fz_context* ctx, fz_output* out)
+{
+	fz_flush_output_no_lock(ctx, out);
+}
+
+static fz_output fz_stdods_global = {
+	NULL,
+	stdods_write,
+	NULL,
+	NULL,
+	stdods_flush_on_close,
+	stdods_flush_on_drop,
+};
+
+fz_output* fz_stdods(fz_context* ctx)
+{
+	return &fz_stdods_global;
+}
+
+#else
+
+fz_output* fz_stdods(fz_context* ctx)
+{
+	return NULL;
+}
+
 #endif
 
 fz_output *fz_stddbg(fz_context *ctx)
 {
+	if (ctx == NULL)
+		return fz_stdods(NULL);
+
 	if (ctx->stddbg)
 		return ctx->stddbg;
+
+	fz_output* rv = fz_stdods(ctx);
+	if (rv)
+		return rv;
 
 	return fz_stderr(ctx);
 }
