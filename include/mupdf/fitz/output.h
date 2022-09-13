@@ -226,6 +226,7 @@ struct fz_output
 	mu_mutex printf_mutex;
 #endif
 	fz_output_flags_t flags;
+    int severity_level;			// side channel for custom dispatchers
 	struct fz_secondary_outputs secondary;
 };
 
@@ -268,6 +269,46 @@ fz_output *fz_new_output_with_buffer(fz_context *ctx, fz_buffer *buf);
 	Return 0 on success, 1 on failure to (re)set the buffer.
 */
 int fz_set_output_buffer(fz_context* ctx, fz_output* out, int bufsiz);
+
+enum {
+    FZO_SEVERITY_NONE = 0,
+    FZO_SEVERITY_ERROR = 1,
+    FZO_SEVERITY_WARNING,
+    FZO_SEVERITY_INFO,
+    FZO_SEVERITY_DEBUG,
+    FZO_SEVERITY_DENUG2,
+};
+
+/**
+    Set the 'severity level' of the `fz_output` instance. This is used
+    as a side channel to pass 'severity level' metadata to the underlying
+    output handler, which MAY use this datum to dispatch/route the data being
+    written.
+
+    This is used, f.e., by the fz_error()/fz_warn()/fz_info() functions in
+    conjunction with the `fz_stdods()` (`fz_stddbg()`) debug output channel.
+*/
+static inline void fz_output_set_severity_level(fz_context *ctx, fz_output *out, int level)
+{
+    ASSERT0(out);
+    out->severity_level = level;
+}
+
+/**
+    Get the 'severity level' of the `fz_output` instance. This is used
+    as a side channel to pass 'severity level' metadata to the underlying
+    output handler, which MAY use this datum to dispatch/route the data being
+    written.
+
+    This is used, f.e., by the fz_error()/fz_warn()/fz_info() functions in
+    conjunction with the `fz_stdods()` (`fz_stddbg()`) debug output channel.
+*/
+static inline int fz_output_get_severity_level(fz_context *ctx, fz_output *out)
+{
+    ASSERT0(out);
+    return out->severity_level;
+}
+
 
 /**
 	Retrieve an fz_output that directs to stdout.
