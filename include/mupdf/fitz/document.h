@@ -624,7 +624,7 @@ int fz_count_chapter_pages(fz_context *ctx, fz_document *doc, int chapter);
 /**
 	Load a page.
 
-	After fz_load_page is it possible to retrieve the size of the
+	After fz_load_chapter_page is it possible to retrieve the size of the
 	page using fz_bound_page, or to render the page using
 	fz_run_page_*. Free the page by calling fz_drop_page.
 
