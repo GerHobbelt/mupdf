@@ -202,7 +202,7 @@ fz_strncpy_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
 }
 
 void
-fz_strcat_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
+fz_strncat_s(fz_context* ctx, char* dst, const char* src, size_t dstsiz)
 {
 	if (dstsiz == 0)
 	{
