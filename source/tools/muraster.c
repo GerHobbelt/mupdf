@@ -1418,6 +1418,31 @@ finish_bgprint(fz_context *ctx)
 	}
 }
 
+/* Signal workers to abort work ASAP. */
+static void
+abort_bgprint(fz_context* ctx)
+{
+#ifndef DISABLE_MUTHREADS
+	// bgprint also uses the workers, hence we MUST shut down bgprint BEFORE the workers themselves:
+	if (bgprint.active)
+	{
+		bgprint.pagenum = -1;
+		mu_trigger_semaphore(&bgprint.start);
+	}
+
+	if (num_workers > 0)
+	{
+		int i;
+		DEBUG_THREADS(fz_info(ctx, "Asking workers to shutdown, then destroy their resources\n"));
+		for (i = 0; i < num_workers; i++)
+		{
+			workers[i].band_start = -1;
+			mu_trigger_semaphore(&workers[i].start);
+		}
+	}
+#endif /* DISABLE_MUTHREADS */
+}
+
 static void drawrange(fz_context *ctx, fz_document *doc, const char *range)
 {
 	int page, spage, epage, pagecount;
@@ -2241,11 +2266,18 @@ int main(int argc, const char** argv)
 				fz_catch(ctx)
 				{
 					if (!ignore_errors)
+					{
+						abort_bgprint(ctx);
+
 						fz_rethrow(ctx);
+					}
 
 					fz_warn(ctx, "ignoring error in '%s'", filename);
 				}
 			}
+		}
+		fz_always(ctx)
+		{
 			finish_bgprint(ctx);
 		}
 		fz_catch(ctx)
@@ -2327,10 +2359,6 @@ int main(int argc, const char** argv)
 			fz_free(ctx, workers);
 		}
 #endif /* DISABLE_MUTHREADS */
-
-		fz_close_output(ctx, out);
-		fz_drop_output(ctx, out);
-		out = NULL;
 	}
 	fz_catch(ctx)
 	{
@@ -2340,6 +2368,13 @@ int main(int argc, const char** argv)
 			errored = 1;
 		}
 	}
+
+	if (!errored)
+	{
+		fz_close_output(ctx, out);
+	}
+	fz_drop_output(ctx, out);
+	out = NULL;
 
 	fz_flush_warnings(ctx);
 	mu_drop_context();
