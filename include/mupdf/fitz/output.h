@@ -696,6 +696,9 @@ extern const char* fz_hex_digits;
 	`%ll{d,i,u,x,B}` is treated as synonymous to %l{d,i,u,x,B}.
 	`%t{d,i,u,x,B}` indicates that the value is a `ptrdiff_t`.
 	`%z{d,i,u,x,B}` indicates that the value is a `size_t`.
+	`%I64{d,i,u,x,B}` indicates that the value is a `uint64_t/int64_t`.
+	`%I32{d,i,u,x,B}` indicates that the value is a `uint32_t/int32_t`.
+	`%I16{d,i,u,x,B}` indicates that the value is a `uint16_t/int16_t`.
 
 	The expected order of the modifiers is:
 	- any of the { '-', '+', ' ', '0' } modifiers, in any order and any number of occurrences
@@ -705,7 +708,7 @@ extern const char* fz_hex_digits;
 	- ',' for comma-separated values, where applicable (`%R`, `%M`, `%P`, `%Z` formats)
 	- 'j' for JSON-compliant output.
 	  DO NOTE that numeric formats are quoted too when the `j` modifier was specified, e.g. `%jd` will print `"125"`.
-	- '<size>': one of 'l' , 'll', 't', 'z'. Both 'l' and 'll' expect an `int64_t` compatible-sized type, 't' maps
+	- '<size>': one of 'l' , 'll', 't', 'z', 'I64', 'I32', 'I16'. Both 'l' and 'll' expect an `int64_t` compatible-sized type, 't' maps
 	  to your system's `ptrdiff_t` type and `z` maps to your system's `size_t` type.
 
 	Unrecognized `%` commands will be copied verbatim, *but without
