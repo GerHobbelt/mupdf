@@ -132,7 +132,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_RE2;RE2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -158,7 +158,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_RE2;RE2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -187,7 +187,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_RE2;RE2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -213,7 +213,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/re2;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_RE2;RE2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -288,6 +288,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/rune.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/strutil.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/test.cc" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\re2\util\monolithic_main.c" />
     <ClInclude Include="../../thirdparty/owemdjee/re2/re2/bitmap256.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2/re2/filtered_re2.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2/re2/fuzzing/compiler-rt/include/fuzzer/FuzzedDataProvider.h" />
@@ -319,6 +320,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/re2/util/test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2/util/utf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/re2/util/util.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\re2\util\monolithic_examples.h" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

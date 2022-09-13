@@ -284,4 +284,8 @@
 
 // #define DISABLE_MUTHREADS 1
 
+#ifndef HAVE_LCMS2MT
+#define HAVE_LCMS2MT
+#endif
+
 #endif /* FZ_CONFIG_H */

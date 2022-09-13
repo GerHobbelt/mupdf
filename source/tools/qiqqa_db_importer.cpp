@@ -1,14 +1,8 @@
 ﻿//
-// Local "web server" for use as Qiqqa backend & generic (scripted?) access
+// Tool to import / export Qiqqa metadata databases.
+// Can mix multiple databases (with custom conflict resolution).
+// Can parse b0rked database dumps, which list PDF files and their associated bibtex records.
 //
-// This server should ultimately host the Qiqqa libraries' databases, OCR cache, etc.
-//
-// The 'web interface' is intended to be used by both the Qiqqa user apps, import/export apps
-// and arbitrary custom user scripts: the core intent is opening up *all* content
-// managed by Qiqqa: the PDFs (documents) and all metadata both.
-//
-
-#pragma message("TODO: implement this tool")
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
@@ -20,9 +14,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
-#if defined(_WIN32)
-#include <windows.h>
-#endif
+
+#include "qiqqa_monolithic_examples.h"
 
 
 static inline void memclr(void* ptr, size_t size)
@@ -37,13 +30,16 @@ static fz_stream* datafeed = NULL;
 static void usage(void)
 {
 	fz_info(ctx,
-		"muserver: Local web server for use as Qiqqa backend & generic (scripted?) access.\n"
+		"qq_db_importer: import / export Qiqqa metadata databases and dump files.\n"
 		"\n"
-		"Syntax: muserver [options]\n"
+		"Syntax: qq_db_importer [options] [filelist...]\n"
 		"\n"
 		"Options:\n"
 		"  -v      verbose (repeat to increase the chattiness of the application)\n"
 		"  -q      quiet ~ not verbose at all\n"
+		"  -o db   write the result to the given database file ('-' for stdout)\n"
+		"  -t dir  directory we can use for scratch space on disk (default: %%TEMP%%)\n"
+		"          (specify '-' to disable scratch space usage completely)\n"
 		"\n"
 		"  -V      display the version of this application and terminate\n"
 	);
@@ -81,7 +77,7 @@ qiqqa_db_importer_main(int argc, const char** argv)
 	}
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "o:qvV")) != -1)
+	while ((c = fz_getopt(argc, argv, "o:t:qvV")) != -1)
 	{
 		switch (c)
 		{
@@ -91,7 +87,7 @@ qiqqa_db_importer_main(int argc, const char** argv)
 
 		case 'v': verbosity++; break;
 
-		case 'V': fz_info(ctx, "muserver version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "qq_db_importer version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
 
 		default: usage(); return EXIT_FAILURE;
 		}
@@ -118,7 +114,7 @@ qiqqa_db_importer_main(int argc, const char** argv)
 		}
 		else
 		{
-			char fbuf[4096];
+			char fbuf[PATH_MAX];
 			fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
 			fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
 			fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
