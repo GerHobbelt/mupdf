@@ -1361,7 +1361,12 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				}
 
 				if (bander && (pix || bit))
+				{
+					ASSERT(bander->n == pix->n);
+					ASSERT(bander->w == pix->w);
+					ASSERT(drawheight <= pix->h);
 					fz_write_band(ctx, bander, bit ? bit->stride : pix->stride, drawheight, bit ? bit->samples : pix->samples);
+				}
 				fz_drop_bitmap(ctx, bit);
 				bit = NULL;
 

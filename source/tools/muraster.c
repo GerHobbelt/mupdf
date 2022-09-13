@@ -284,8 +284,8 @@ typedef struct
 
 static const suffix_t suffix_table[] =
 {
-	{ ".png", OUT_PNG, 0 },
-	{ ".webp", OUT_WEBP, 0 },
+	{ ".png", OUT_PNG, CS_RGB },
+	{ ".webp", OUT_WEBP, CS_RGB },
 	{ ".tiff", OUT_TIFF, 0 },
 #if FZ_PLOTTERS_G || FZ_PLOTTERS_N
 	{ ".pgm", OUT_PGM, CS_GRAY },
@@ -465,7 +465,7 @@ typedef struct render_details
 	int band_height_multiple;
 
 	/* What colorspace are we working in? (Adjusted for fallback) */
-	int colorspace;
+	enum fz_colorspace_type colorspace;
 
 	/* What output format? (Adjusted for fallback) */
 	int format;
@@ -751,6 +751,10 @@ static int dodrawpage(fz_context *ctx, int pagenum, render_details *render)
 			{
 				/* If we get any errors while outputting the bands, retrying won't help. */
 				errors_are_fatal = 1;
+				ASSERT(render->bander);
+				ASSERT(render->bander->n == pix->n);
+				ASSERT(render->bander->w == pix->w);
+				ASSERT(draw_height <= pix->h);
 				fz_write_band(ctx, render->bander, bit ? bit->stride : pix->stride, draw_height, bit ? bit->samples : pix->samples);
 				errors_are_fatal = 0;
 			}
