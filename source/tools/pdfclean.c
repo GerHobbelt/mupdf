@@ -124,7 +124,8 @@ int pdfclean_main(int argc, const char** argv)
 		}
 	}
 
-	if ((opts.do_ascii || opts.do_decompress) && !opts.do_compress)
+	// for example, specify '-d' decompress TWICE, together with one '-z' RECOMPRESS to get PRETTY processing too!
+	if ((opts.do_ascii + opts.do_decompress) == opts.do_compress + 1)
 		opts.do_pretty = 1;
 
 	if (argc == fz_optind)
