@@ -834,9 +834,17 @@ fz_drop_output(fz_context *ctx, fz_output *out)
 			out->drop(ctx, out->state);
 		fz_free(ctx, out->bp);
 		fz_free(ctx, out->filepath);
+		out->bp = NULL;
+		out->ep = NULL;
+		out->wp = NULL;
+		out->filepath = NULL;
+		//out->flags = 0;
+		out->severity_level = 0;
 
 		if (out != &fz_stdout_global && out != &fz_stderr_global && out != &fz_stdods_global)
+		{
 			fz_free(ctx, out);
+		}
 	}
 }
 
@@ -957,7 +965,7 @@ fz_vwrite_strings(fz_context* ctx, fz_output* out, va_list ap)
 		}
 	}
 	if (do_flush)
-		fz_flush_output(ctx, out);
+		fz_flush_output_no_lock(ctx, out);
 	printf_unlock(out);
 }
 
