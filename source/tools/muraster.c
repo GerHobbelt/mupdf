@@ -259,13 +259,13 @@
 
 enum {
 	OUT_NONE,
+	OUT_PNG,
 	OUT_TIFF,
 	OUT_WEBP,
-	OUT_PNG,
-	OUT_PGM,
-	OUT_PPM,
 	OUT_PAM,
 	OUT_PBM,
+	OUT_PGM,
+	OUT_PPM,
 	OUT_PKM
 };
 
@@ -628,6 +628,7 @@ static int drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_ma
 		fz_clear_pixmap_with_value(ctx, pix, 255);
 
 		dev = fz_new_draw_device(ctx, fz_identity, pix);
+
 		if (lowmemory)
 			fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
 		if (alphabits_graphics == 0)
@@ -1278,7 +1279,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		}
 #endif
 
-		// close file and create a fresh one for output formats which DO NOT multi-page image outputs:
+		// close file and create a fresh one for output formats which DO NOT support multi-page image outputs:
 		if (out && out != fz_stdout(ctx) && (output_format->format == OUT_PNG || output_format->format == OUT_WEBP))
 		{
 			fz_close_output(ctx, out);
