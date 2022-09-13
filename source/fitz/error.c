@@ -31,13 +31,7 @@
 #include <string.h>
 
 #ifdef _WIN32
-#define USE_OUTPUT_DEBUG_STRING  1
 #include <windows.h>
-#endif
-
-#ifdef __ANDROID__
-#define USE_ANDROID_LOG
-#include <android/log.h>
 #endif
 
 #define QUIET_ERROR				0x0001
@@ -85,86 +79,44 @@ int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char
 
 void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 {
-	char buf[LONGLINE];
 	assert(message != NULL);
-	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "error: ", message, "\n"))
-		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_ERROR))
 	{
-#if 1
-		if (buf[0])
-		{
-			fz_write_string(ctx, fz_stderr(ctx), buf);
-		}
-		else
-		{
-			fz_write_string(ctx, fz_stderr(ctx), "error: ");
-			fz_write_string(ctx, fz_stderr(ctx), message);
-			fz_write_string(ctx, fz_stderr(ctx), "\n");
-		}
-#else
-		fprintf(stderr, "error: %s\n", message);
-#endif
+		fz_write_strings(ctx, fz_stderr(ctx), "error: ", message, "\n", NULL);
 	}
-#ifdef USE_OUTPUT_DEBUG_STRING
+
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		if (buf[0])
+		fz_output* out = ctx->stddbg;
+		if (out != fz_stderr(ctx))
 		{
-			OutputDebugStringA(buf);
-		}
-		else
-		{
-			OutputDebugStringA("error: ");
-			OutputDebugStringA(message);
-			OutputDebugStringA("\n");
+			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_ERROR);
+
+			fz_write_strings(ctx, out, "error: ", message, "\n", NULL);
 		}
 	}
-#endif
-#ifdef USE_ANDROID_LOG
-	__android_log_print(ANDROID_LOG_ERROR, "libmupdf", "%s", message);
-#endif
 }
 
-void fz_default_warning_callback(fz_context* ctx, void *user, const char *message)
+void fz_default_warning_callback(fz_context* ctx, void* user, const char* message)
 {
-	char buf[LONGLINE];
 	assert(message != NULL);
-	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), "warning: ", message, "\n"))
-		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_WARN))
 	{
-		if (buf[0])
-		{
-			fz_write_string(ctx, fz_stderr(ctx), buf);
-		}
-		else
-		{
-			fz_write_string(ctx, fz_stderr(ctx), "warning: ");
-			fz_write_string(ctx, fz_stderr(ctx), message);
-			fz_write_string(ctx, fz_stderr(ctx), "\n");
-		}
+		fz_write_strings(ctx, fz_stderr(ctx), "warning: ", message, "\n", NULL);
 	}
-#ifdef USE_OUTPUT_DEBUG_STRING
+
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		if (buf[0])
+		fz_output* out = ctx->stddbg;
+		if (out != fz_stderr(ctx))
 		{
-			OutputDebugStringA(buf);
-		}
-		else
-		{
-			OutputDebugStringA("warning: ");
-			OutputDebugStringA(message);
-			OutputDebugStringA("\n");
+			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_WARNING);
+
+			fz_write_strings(ctx, out, "warning: ", message, "\n", NULL);
 		}
 	}
-#endif
-#ifdef USE_ANDROID_LOG
-	__android_log_print(ANDROID_LOG_WARN, "libmupdf", "%s", message);
-#endif
 }
 
 /* Warning context */
@@ -187,44 +139,23 @@ void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, v
 
 void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 {
-	char buf[LONGLINE];
 	assert(message != NULL);
-	if (!fz_bundle_str_msg_parts(buf, sizeof(buf), message, "\n", NULL))
-		buf[0] = 0;
 
 	if (!(quiet_mode & QUIET_INFO))
 	{
-#if 1
-		if (buf[0])
-		{
-			fz_write_string(ctx, fz_stderr(ctx), buf);
-		}
-		else
-		{
-			fz_write_string(ctx, fz_stderr(ctx), message);
-			fz_write_string(ctx, fz_stderr(ctx), "\n");
-		}
-#else
-		fprintf(stderr, "%s\n", message);
-#endif
+		fz_write_strings(ctx, fz_stderr(ctx), message, "\n", NULL);
 	}
-#ifdef USE_OUTPUT_DEBUG_STRING
+
 	if (quiet_mode & (QUIET_DEBUG | QUIET_STDIO_FATALITY))
 	{
-		if (buf[0])
+		fz_output* out = ctx->stddbg;
+		if (out != fz_stderr(ctx))
 		{
-			OutputDebugStringA(buf);
-		}
-		else
-		{
-			OutputDebugStringA(message);
-			OutputDebugStringA("\n");
+			fz_output_set_severity_level(ctx, out, FZO_SEVERITY_INFO);
+
+			fz_write_strings(ctx, out, message, "\n", NULL);
 		}
 	}
-#endif
-#ifdef USE_ANDROID_LOG
-	__android_log_print(ANDROID_LOG_INFO, "libmupdf", "%s", message);
-#endif
 }
 
 /* Info context */
