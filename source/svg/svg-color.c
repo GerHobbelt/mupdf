@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* Color keywords (white, blue, fuchsia)
  * System color keywords (ActiveBorder, ButtonFace -- need to find reasonable defaults)
  * #fb0 (expand to #ffbb00)
@@ -343,3 +345,5 @@ svg_parse_color_from_style(fz_context *ctx, svg_document *doc, const char *str,
 	if (p)
 		*stroke_is_set = svg_parse_color_from_style_string(ctx, doc, p+7, stroke);
 }
+
+#endif

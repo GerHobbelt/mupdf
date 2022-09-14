@@ -26,6 +26,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_PDF
+
 /*
 	The URI encoding format broadly follows that described in
 	"Parameters for Opening PDF files" from the Adobe Acrobat SDK,
@@ -716,3 +718,5 @@ pdf_new_action_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
 
 	return action;
 }
+
+#endif

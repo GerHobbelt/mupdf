@@ -29,6 +29,8 @@
 #include "mupdf/pdf/object.h"
 #include "mupdf/pdf/page.h"
 
+#if FZ_ENABLE_PDF
+
 typedef struct pdf_annot pdf_annot;
 
 enum pdf_annot_type
@@ -838,5 +840,7 @@ pdf_obj *pdf_annot_filespec(fz_context *ctx, pdf_annot *annot);
 	Set the annotation file specification.
 */
 void pdf_set_annot_filespec(fz_context *ctx, pdf_annot *annot, pdf_obj *obj);
+
+#endif // FZ_ENABLE_PDF
 
 #endif

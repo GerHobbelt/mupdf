@@ -26,6 +26,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#if FZ_ENABLE_XPS
+
 #define REL_START_PART \
 	"http://schemas.microsoft.com/xps/2005/06/fixedrepresentation"
 #define REL_DOC_STRUCTURE \
@@ -537,3 +539,5 @@ fz_document_handler xps_document_handler =
 	NULL,
 	NULL
 };
+
+#endif

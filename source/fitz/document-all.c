@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 extern fz_document_handler pdf_document_handler;
 extern fz_document_handler xps_document_handler;
 extern fz_document_handler svg_document_handler;
@@ -60,3 +62,5 @@ void fz_register_document_handlers(fz_context *ctx)
 	fz_register_document_handler(ctx, &epub_document_handler);
 #endif /* FZ_ENABLE_EPUB */
 }
+
+#endif

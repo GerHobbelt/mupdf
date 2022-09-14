@@ -34,6 +34,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if FZ_ENABLE_RENDER_CORE && FZ_ENABLE_PDF
+
 static fz_context* ctx = NULL;
 static pdf_document* doc = NULL;
 
@@ -323,3 +325,5 @@ int pdfcreate_main(int argc, const char** argv)
 	fz_drop_context(ctx);
 	return error;
 }
+
+#endif

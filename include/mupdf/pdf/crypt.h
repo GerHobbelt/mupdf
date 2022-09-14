@@ -26,6 +26,12 @@
 #include "mupdf/pdf/document.h"
 #include "mupdf/pdf/object.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum
 {
 	PDF_ENCRYPT_KEEP,
@@ -101,5 +107,11 @@ size_t pdf_signature_contents(fz_context *ctx, pdf_document *doc, pdf_obj *signa
 void pdf_encrypt_data(fz_context *ctx, pdf_crypt *crypt, int num, int gen, void (*fmt_str_out)(fz_context *, void *, const unsigned char *, size_t), void *arg, const unsigned char *s, size_t n);
 
 size_t pdf_encrypted_len(fz_context *ctx, pdf_crypt *crypt, int num, int gen, size_t len);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

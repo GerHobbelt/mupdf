@@ -2,7 +2,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
 
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 
 // Include tesseract configuration file (which should be available on both autoconf and Windows/MSVC platforms)
 #define HAVE_TESSERACT_CONFIG_H			1

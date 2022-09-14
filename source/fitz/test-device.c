@@ -24,6 +24,8 @@
 
 #include "color-imp.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
 	fz_device super;
@@ -553,3 +555,5 @@ fz_new_test_device(fz_context *ctx, int *is_color, float threshold, int options,
 
 	return (fz_device*)dev;
 }
+
+#endif

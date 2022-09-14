@@ -24,6 +24,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_IMG
+
 #define DPI 72.0f
 
 typedef struct
@@ -195,35 +197,39 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 		fmt = FZ_IMAGE_UNKNOWN;
 		if (len >= 8)
 			fmt = fz_recognize_image_format(ctx, data);
-		if (fmt == FZ_IMAGE_TIFF)
+		switch (fmt)
 		{
+#if FZ_ENABLE_TIFF 
+		case FZ_IMAGE_TIFF:
 			doc->page_count = fz_load_tiff_subimage_count(ctx, data, len);
 			doc->load_subimage = fz_load_tiff_subimage;
 			doc->format = "TIFF";
-		}
-		else if (fmt == FZ_IMAGE_PNM)
-		{
+			break;
+#endif
+
+		case FZ_IMAGE_PNM:
 			doc->page_count = fz_load_pnm_subimage_count(ctx, data, len);
 			doc->load_subimage = fz_load_pnm_subimage;
 			doc->format = "PNM";
-		}
-		else if (fmt == FZ_IMAGE_JBIG2)
-		{
+			break;
+		
+		case FZ_IMAGE_JBIG2:
 			doc->page_count = fz_load_jbig2_subimage_count(ctx, data, len);
 			if (doc->page_count > 1)
 				doc->load_subimage = fz_load_jbig2_subimage;
 			doc->format = "JBIG2";
-		}
-		else if (fmt == FZ_IMAGE_BMP)
-		{
+			break;
+		
+		case FZ_IMAGE_BMP:
 			doc->page_count = fz_load_bmp_subimage_count(ctx, data, len);
 			doc->load_subimage = fz_load_bmp_subimage;
 			doc->format = "BMP";
-		}
-		else
-		{
+			break;
+
+		default:
 			doc->page_count = 1;
 			doc->format = "Image";
+			break;
 		}
 	}
 	fz_catch(ctx)
@@ -302,3 +308,5 @@ fz_document_handler img_document_handler =
 	NULL,
 	NULL
 };
+
+#endif

@@ -23,6 +23,10 @@
 #ifndef SOURCE_XPS_IMP_H
 #define SOURCE_XPS_IMP_H
 
+#include "mupdf/fitz/config.h"
+
+#if FZ_ENABLE_XPS
+
 typedef struct xps_document_s xps_document;
 typedef struct xps_page_s xps_page;
 
@@ -230,5 +234,7 @@ fz_text *xps_parse_glyphs_imp(fz_context *ctx, xps_document *doc, fz_matrix ctm,
 	fz_font *font, float size, float originx, float originy,
 	int is_sideways, int bidi_level,
 	char *indices, char *unicode);
+
+#endif // FZ_ENABLE_XPS
 
 #endif

@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 static fz_colorspace *pdf_load_colorspace_imp(fz_context *ctx, pdf_obj *obj, pdf_cycle_list *cycle_up);
 
 /* ICCBased */
@@ -530,4 +532,6 @@ pdf_document_output_intent(fz_context *ctx, pdf_document *doc)
 	return NULL;
 }
 
-#endif
+#endif // FZ_ENABLE_ICC
+
+#endif // FZ_ENABLE_PDF

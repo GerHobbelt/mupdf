@@ -26,9 +26,12 @@
 #include "mupdf/assertions.h"
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE
+
+#if FZ_ENABLE_OCR
+
 #undef DEBUG_OCR
 
-#ifndef OCR_DISABLED
 #include "tessocr.h"
 
 /*
@@ -1094,7 +1097,7 @@ fz_ocr_drop_device(fz_context *ctx, fz_device *dev)
 {
 	drop_ocr_device(ctx, (fz_ocr_device *)dev);
 }
-#endif
+#endif // FZ_ENABLE_OCR
 
 fz_device *
 fz_new_ocr_device(fz_context *ctx,
@@ -1107,7 +1110,7 @@ fz_new_ocr_device(fz_context *ctx,
 		int (*progress)(fz_context *, void *, int),
 		void *progress_arg)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "OCR Disabled in this build");
 #else
 	fz_ocr_device *dev;
@@ -1202,3 +1205,5 @@ fz_new_ocr_device(fz_context *ctx,
 	return (fz_device*)dev;
 #endif
 }
+
+#endif

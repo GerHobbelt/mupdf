@@ -6,6 +6,8 @@
 #include "mupdf/fitz/geometry.h"
 #include "mupdf/fitz/device.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -97,6 +99,8 @@ void fz_extract_device_statistics(fz_context* ctx, fz_device* dev, fz_gathered_s
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

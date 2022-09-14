@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 /* Scan file for objects and reconstruct xref table */
 
 struct entry
@@ -751,3 +753,5 @@ pdf_repair_obj_stms(fz_context *ctx, pdf_document *doc)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid reference to non-object-stream: %d (%d 0 R)", (int)entry->ofs, i);
 	}
 }
+
+#endif

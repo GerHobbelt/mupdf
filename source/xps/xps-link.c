@@ -26,6 +26,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#if FZ_ENABLE_XPS
+
 /* Quick parsing of document to find links. */
 
 static void
@@ -216,3 +218,5 @@ xps_load_links(fz_context *ctx, fz_page *page_)
 	xps_load_links_in_fixed_page(ctx, (xps_document*)page->super.doc, ctm, page, &link);
 	return link;
 }
+
+#endif

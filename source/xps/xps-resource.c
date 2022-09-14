@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_XPS
+
 static fz_xml *
 xps_lookup_resource(fz_context *ctx, xps_document *doc, xps_resource *dict, char *name, char **urip)
 {
@@ -181,3 +183,5 @@ xps_drop_resource_dictionary(fz_context *ctx, xps_document *doc, xps_resource *d
 		dict = next;
 	}
 }
+
+#endif

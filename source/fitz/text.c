@@ -24,6 +24,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 fz_text *
 fz_new_text(fz_context *ctx)
 {
@@ -289,3 +291,5 @@ char *fz_string_from_text_language(char str[8], fz_text_language lang)
 
 	return str;
 }
+
+#endif

@@ -27,6 +27,12 @@
 
 #include "../fitz/xml-imp.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // MSWin fix
 #undef TA_LEFT
 #undef TA_RIGHT
@@ -551,5 +557,11 @@ void fz_restartable_layout_html(fz_context *ctx, fz_html_tree *tree, float start
 fz_html_flow *fz_html_split_flow(fz_context *ctx, fz_pool *pool, fz_html_flow *flow, size_t offset);
 
 fz_archive *fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

@@ -34,6 +34,8 @@
 #include <float.h>
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* Simple layout structure */
 
 fz_layout_block *fz_new_layout(fz_context *ctx)
@@ -1162,3 +1164,5 @@ fz_new_stext_device(fz_context *ctx, fz_stext_page *page, const fz_stext_options
 
 	return (fz_device*)dev;
 }
+
+#endif

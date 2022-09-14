@@ -25,6 +25,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#if FZ_ENABLE_CBZ
+
 #define DPI 72.0f
 
 static const char *cbz_ext_list[] = {
@@ -316,3 +318,5 @@ fz_document_handler cbz_document_handler =
 	NULL,
 	NULL
 };
+
+#endif

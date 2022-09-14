@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 int
 pdf_obj_num_is_stream(fz_context *ctx, pdf_document *doc, int num)
 {
@@ -759,3 +761,5 @@ fz_stream *pdf_open_stream(fz_context *ctx, pdf_obj *ref)
 		return pdf_open_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
 	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
 }
+
+#endif

@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 #define IS_NUMBER \
 	'+':case'-':case'.':case'0':case'1':case'2':case'3':\
 	case'4':case'5':case'6':case'7':case'8':case'9'
@@ -719,3 +721,5 @@ void pdf_append_token(fz_context *ctx, fz_buffer *fzbuf, int tok, pdf_lexbuf *bu
 		break;
 	}
 }
+
+#endif

@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 static pdf_obj *
 pdf_lookup_name_imp(fz_context *ctx, pdf_obj *node, pdf_obj *needle, pdf_cycle_list *cycle_up)
 {
@@ -376,3 +378,5 @@ void pdf_walk_tree(fz_context *ctx, pdf_obj *obj, pdf_obj *kid_name,
 {
 	pdf_walk_tree_imp(ctx, obj, kid_name, arrive, leave, arg, inherit_names, inherit_vals, NULL);
 }
+
+#endif

@@ -22,7 +22,7 @@
 
 #include "mupdf/fitz.h"
 
-#if FZ_ENABLE_PS_OUTPUT
+#if FZ_ENABLE_PS_OUTPUT && FZ_ENABLE_RENDER_CORE 
 
 #include <zlib-ng.h>
 

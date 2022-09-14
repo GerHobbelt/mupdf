@@ -27,6 +27,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 void fz_init_aa_context(fz_context *ctx)
 {
 #ifndef AA_BITS
@@ -316,3 +318,5 @@ void fz_convert_rasterizer(fz_context *ctx, fz_rasterizer *r, int eofill, fz_pix
 	if (!fz_is_empty_irect(clip))
 		r->fns.convert(ctx, r, eofill, &clip, pix, colorbv, eop);
 }
+
+#endif

@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE
+
 fz_outline_item *fz_outline_iterator_item(fz_context *ctx, fz_outline_iterator *iter)
 {
 	if (iter->item == NULL)
@@ -318,3 +320,5 @@ fz_outline_iterator *fz_outline_iterator_from_outline(fz_context *ctx, fz_outlin
 
 	return &iter->super;
 }
+
+#endif

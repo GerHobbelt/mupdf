@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_XPS
+
 static void xps_init_document(fz_context *ctx, xps_document *doc);
 
 static xps_part *
@@ -264,3 +266,5 @@ xps_init_document(fz_context *ctx, xps_document *doc)
 	doc->super.load_page = xps_load_page;
 	doc->super.lookup_metadata = xps_lookup_metadata;
 }
+
+#endif

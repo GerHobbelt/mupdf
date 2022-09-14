@@ -23,6 +23,10 @@
 #ifndef MUPDF_DRAW_IMP_H
 #define MUPDF_DRAW_IMP_H
 
+#include "mupdf/fitz/config.h"
+
+#if FZ_ENABLE_RENDER_CORE 
+
 #define BBOX_MIN -(1<<20)
 #define BBOX_MAX (1<<20)
 
@@ -470,5 +474,7 @@ void fz_blend_pixmap(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap * F
 void fz_blend_pixmap_knockout(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap * FZ_RESTRICT src, const fz_pixmap * FZ_RESTRICT shape);
 
 void fz_paint_glyph(const unsigned char * FZ_RESTRICT colorbv, fz_pixmap * FZ_RESTRICT dst, unsigned char * FZ_RESTRICT dp, const fz_glyph * FZ_RESTRICT glyph, int w, int h, int skip_x, int skip_y, const fz_overprint * FZ_RESTRICT eop);
+
+#endif
 
 #endif

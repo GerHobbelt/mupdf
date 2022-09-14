@@ -26,6 +26,8 @@
 #include "mupdf/pdf/document.h"
 #include "mupdf/pdf/form.h"
 
+#if FZ_ENABLE_PDF
+
 void pdf_enable_js(fz_context *ctx, pdf_document *doc);
 void pdf_disable_js(fz_context *ctx, pdf_document *doc);
 int pdf_js_supported(fz_context *ctx, pdf_document *doc);
@@ -39,5 +41,7 @@ void pdf_js_event_init_keystroke(pdf_js *js, pdf_obj *target, pdf_keystroke_even
 int pdf_js_event_result_keystroke(pdf_js *js, pdf_keystroke_event *evt);
 
 void pdf_js_execute(pdf_js *js, const char *name, const char *code, char **result);
+
+#endif // FZ_ENABLE_PDF
 
 #endif

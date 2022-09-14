@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 typedef struct
 {
 	pdf_document *doc;
@@ -364,3 +366,5 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 		fz_rethrow(ctx);
 	}
 }
+
+#endif

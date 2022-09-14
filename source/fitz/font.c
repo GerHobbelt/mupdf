@@ -28,6 +28,8 @@
 #include "glyph-imp.h"
 #include "pixmap-imp.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include <ft2build.h>
 #include "hb.h"
 #include "hb-ft.h"
@@ -2131,3 +2133,5 @@ void fz_font_digest(fz_context *ctx, fz_font *font, unsigned char digest[16])
 	}
 	memcpy(digest, font->digest, 16);
 }
+
+#endif

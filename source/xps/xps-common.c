@@ -27,6 +27,8 @@
 #include <stdio.h> /* for sscanf */
 #include <math.h> /* for pow */
 
+#if FZ_ENABLE_XPS
+
 static inline int unhex(int a)
 {
 	if (a >= 'A' && a <= 'F') return a - 'A' + 0xA;
@@ -370,3 +372,5 @@ xps_set_color(fz_context *ctx, xps_document *doc, fz_colorspace *colorspace, flo
 		doc->color[i] = samples[i + 1];
 	doc->alpha = samples[0] * doc->opacity[doc->opacity_top];
 }
+
+#endif

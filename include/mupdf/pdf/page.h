@@ -25,9 +25,14 @@
 
 #include "mupdf/pdf/interpret.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int pdf_lookup_page_number(fz_context *ctx, pdf_document *doc, pdf_obj *pageobj);
 int pdf_count_pages(fz_context *ctx, pdf_document *doc);
-int pdf_count_pages_imp(fz_context *ctx, fz_document *doc, int chapter);
 pdf_obj *pdf_lookup_page_obj(fz_context *ctx, pdf_document *doc, int needle);
 
 /*
@@ -199,5 +204,11 @@ struct pdf_page
 	fz_link *links;
 	pdf_annot *annots, **annot_tailp;
 };
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

@@ -28,6 +28,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct webp_band_writer_s
 {
 	fz_band_writer super;
@@ -529,3 +531,5 @@ fz_new_buffer_from_pixmap_as_webp(fz_context *ctx, const fz_pixmap *pix, fz_colo
 {
 	return webp_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0);
 }
+
+#endif

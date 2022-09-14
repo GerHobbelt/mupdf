@@ -25,6 +25,8 @@
 
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_PDF
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_ADVANCES_H
@@ -1589,3 +1591,5 @@ pdf_print_font(fz_context *ctx, fz_output *out, pdf_font_desc *fontdesc)
 		fz_write_printf(ctx, out, "\t}\n");
 	}
 }
+
+#endif

@@ -27,6 +27,12 @@
 #include "mupdf/pdf/resource.h"
 #include "mupdf/pdf/document.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct pdf_gstate pdf_gstate;
 typedef struct pdf_processor pdf_processor;
 
@@ -362,5 +368,11 @@ void pdf_tos_move_after_char(fz_context *ctx, pdf_text_object_state *tos);
 void pdf_tos_translate(pdf_text_object_state *tos, float tx, float ty);
 void pdf_tos_set_matrix(pdf_text_object_state *tos, float a, float b, float c, float d, float e, float f);
 void pdf_tos_newline(pdf_text_object_state *tos, float leading);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

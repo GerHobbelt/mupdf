@@ -29,6 +29,8 @@
 #include <math.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* PDF 1.4 blend modes. These are slow. */
 
 /* Define PARANOID_PREMULTIPLY to check premultiplied values are
@@ -1498,3 +1500,5 @@ fz_blend_pixmap_knockout(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, fz_pixmap
 		verify_premultiply(ctx, dst);
 #endif
 }
+
+#endif

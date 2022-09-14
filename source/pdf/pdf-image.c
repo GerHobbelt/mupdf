@@ -24,6 +24,9 @@
 #include "mupdf/pdf.h"
 
 #include <string.h>
+#include <math.h>
+
+#if FZ_ENABLE_PDF
 
 static fz_image *pdf_load_jpx(fz_context *ctx, pdf_document *doc, pdf_obj *dict, int forcemask);
 
@@ -847,3 +850,5 @@ unknown_compression:
 	}
 	return imobj;
 }
+
+#endif

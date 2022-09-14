@@ -5,6 +5,8 @@
 #include <string.h>
 #include <memory.h>
 
+#if FZ_ENABLE_HTML
+
 static const char snark[] =
 	"<!DOCTYPE html>"
 	"<style>"
@@ -634,3 +636,5 @@ int main(int argc, const char **argv)
 
 	return 0;
 }
+
+#endif

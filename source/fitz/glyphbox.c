@@ -22,6 +22,8 @@
 
 #include "glyphbox.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 int fz_glyph_entirely_outside_box(fz_context *ctx, fz_matrix *ctm, fz_text_span *span, fz_text_item *item, fz_rect *box)
 {
 	fz_rect glyph_rect = fz_bound_glyph(ctx, span->font, item->gid, span->trm);
@@ -37,3 +39,5 @@ int fz_glyph_entirely_outside_box(fz_context *ctx, fz_matrix *ctm, fz_text_span 
 		return 1;
 	return 0;
 }
+
+#endif

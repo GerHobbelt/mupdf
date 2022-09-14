@@ -22,6 +22,7 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
 
 static int s_xml_starttag_begin(fz_context *ctx, fz_output *out, const char *id)
 {
@@ -439,3 +440,5 @@ fz_device *fz_new_xmltext_device(fz_context *ctx, fz_output *out)
 
 	return (fz_device*)dev;
 }
+
+#endif

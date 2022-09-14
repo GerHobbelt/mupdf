@@ -22,14 +22,14 @@
 
 #include "mupdf/fitz.h"
 
-#if FZ_ENABLE_OCR_OUTPUT
+#if FZ_ENABLE_OCR_OUTPUT && FZ_ENABLE_RENDER_CORE 
 
 #include <zlib-ng.h> /* for compressBound() and compress() */
 
 #include <string.h>
 #include <limits.h>
 
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 
 /* In non-OCR builds, we need to define this otherwise SWIG Python gets SEGV
 when it attempts to import mupdf.py and _mupdf.py. */
@@ -155,7 +155,7 @@ static const char funky_font6[] =
 fz_pdfocr_options *
 fz_parse_pdfocr_options(fz_context *ctx, fz_pdfocr_options *opts, const char *args)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	const char *val;
@@ -194,7 +194,7 @@ fz_parse_pdfocr_options(fz_context *ctx, fz_pdfocr_options *opts, const char *ar
 void
 fz_write_pixmap_as_pdfocr(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap, const fz_pdfocr_options *pdfocr)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	fz_band_writer *writer;
@@ -218,7 +218,7 @@ fz_write_pixmap_as_pdfocr(fz_context *ctx, fz_output *out, const fz_pixmap *pixm
 #endif
 }
 
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 typedef struct pdfocr_band_writer_s
 {
 	fz_band_writer super;
@@ -893,7 +893,7 @@ pdfocr_drop_band_writer(fz_context *ctx, fz_band_writer *writer_)
 
 fz_band_writer *fz_new_pdfocr_band_writer(fz_context *ctx, fz_output *out, const fz_pdfocr_options *options)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	pdfocr_band_writer *writer = fz_new_band_writer(ctx, pdfocr_band_writer, out);
@@ -939,7 +939,7 @@ fz_band_writer *fz_new_pdfocr_band_writer(fz_context *ctx, fz_output *out, const
 void
 fz_pdfocr_band_writer_set_progress(fz_context *ctx, fz_band_writer *writer_, fz_pdfocr_progress_fn *progress, void *progress_arg)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	pdfocr_band_writer *writer = (pdfocr_band_writer *)writer_;
@@ -956,7 +956,7 @@ fz_pdfocr_band_writer_set_progress(fz_context *ctx, fz_band_writer *writer_, fz_
 void
 fz_save_pixmap_as_pdfocr(fz_context *ctx, const fz_pixmap *pixmap, char *filename, int append, const fz_pdfocr_options *pdfocr)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	fz_output *out = fz_new_output_with_path(ctx, filename, append);
@@ -974,7 +974,7 @@ fz_save_pixmap_as_pdfocr(fz_context *ctx, const fz_pixmap *pixmap, char *filenam
 
 /* High-level document writer interface */
 
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 typedef struct
 {
 	fz_document_writer super;
@@ -1038,7 +1038,7 @@ pdfocr_drop_writer(fz_context *ctx, fz_document_writer *wri_)
 fz_document_writer *
 fz_new_pdfocr_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	fz_pdfocr_writer *wri = NULL;
@@ -1067,7 +1067,7 @@ fz_new_pdfocr_writer_with_output(fz_context *ctx, fz_output *out, const char *op
 fz_document_writer *
 fz_new_pdfocr_writer(fz_context *ctx, const char *path, const char *options)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	fz_output *out = fz_new_output_with_path(ctx, path ? path : "out.pdfocr", 0);
@@ -1078,7 +1078,7 @@ fz_new_pdfocr_writer(fz_context *ctx, const char *path, const char *options)
 void
 fz_pdfocr_writer_set_progress(fz_context *ctx, fz_document_writer *writer, fz_pdfocr_progress_fn *progress, void *progress_arg)
 {
-#ifdef OCR_DISABLED
+#if !FZ_ENABLE_OCR
 	fz_throw(ctx, FZ_ERROR_GENERIC, "No OCR support in this build");
 #else
 	fz_pdfocr_writer *wri = (fz_pdfocr_writer *)writer;

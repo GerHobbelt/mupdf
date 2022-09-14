@@ -29,7 +29,7 @@
 #include "mupdf/helpers/pkcs7-openssl.h"
 #endif
 
-#if FZ_ENABLE_JS
+#if FZ_ENABLE_JS && FZ_ENABLE_RENDER_CORE 
 
 #include "mujs.h"
 

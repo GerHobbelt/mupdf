@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 /* Sample various functions into lookup tables */
 
 static void
@@ -491,3 +493,5 @@ pdf_load_shading(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 
 	return shade;
 }
+
+#endif

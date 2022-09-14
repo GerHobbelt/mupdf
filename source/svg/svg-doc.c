@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "svg-imp.h"
 
+#if FZ_ENABLE_SVG
+
 typedef struct
 {
 	fz_page super;
@@ -277,3 +279,5 @@ fz_document_handler svg_document_handler =
 	NULL,
 	NULL
 };
+
+#endif

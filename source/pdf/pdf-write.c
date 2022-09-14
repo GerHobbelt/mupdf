@@ -21,6 +21,7 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 
 #include "timeval.h"
@@ -33,6 +34,9 @@
 #include <string.h>
 
 #include <stdio.h> /* for debug printing */
+
+#if FZ_ENABLE_PDF
+
 /* #define DEBUG_LINEARIZATION */
 /* #define DEBUG_HEAP_SORT */
 /* #define DEBUG_WRITING */
@@ -4257,3 +4261,5 @@ void pdf_load_journal(fz_context *ctx, pdf_document *doc, const char *filename)
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

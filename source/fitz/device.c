@@ -24,6 +24,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 fz_device *
 fz_new_device_of_size(fz_context *ctx, int size)
 {
@@ -573,3 +575,5 @@ fz_device_current_scissor(fz_context *ctx, fz_device *dev)
 		return dev->container[dev->container_len-1].scissor;
 	return fz_infinite_rect;
 }
+
+#endif

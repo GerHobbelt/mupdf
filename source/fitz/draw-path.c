@@ -27,6 +27,8 @@
 #include <float.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define MAX_DEPTH 8
 
 /*
@@ -1580,3 +1582,5 @@ fz_flatten_stroke_path(fz_context *ctx, fz_rasterizer *rast, const fz_path *path
 	*bbox = fz_intersect_irect(scissor, fz_bound_rasterizer(ctx, rast));
 	return fz_is_empty_irect(*bbox);
 }
+
+#endif

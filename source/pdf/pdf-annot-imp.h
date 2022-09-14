@@ -25,6 +25,12 @@
 
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct pdf_annot
 {
 	int refs;
@@ -56,5 +62,14 @@ void pdf_drop_widgets(fz_context *ctx, pdf_annot *widget_list);
 void pdf_set_annot_has_changed(fz_context *ctx, pdf_annot *annot);
 
 int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int is_being_edited);
+
+fz_rect pdf_bound_page_imp(fz_context* ctx, fz_page* _page);
+int pdf_count_pages_imp(fz_context *ctx, fz_document *doc, int chapter);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

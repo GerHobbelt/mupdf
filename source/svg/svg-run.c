@@ -26,6 +26,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* default page size */
 #define DEF_WIDTH 612
 #define DEF_HEIGHT 792
@@ -1657,3 +1659,5 @@ svg_run_document(fz_context *ctx, svg_document *doc, fz_xml *root, fz_device *de
 
 	svg_run_svg(ctx, dev, doc, root, &state);
 }
+
+#endif

@@ -28,6 +28,8 @@
 #include <float.h>
 #include <stdlib.h>
 
+#if FZ_ENABLE_XPS
+
 #define MAX_STOPS 256
 
 enum { SPREAD_PAD, SPREAD_REPEAT, SPREAD_REFLECT };
@@ -547,3 +549,5 @@ xps_parse_radial_gradient_brush(fz_context *ctx, xps_document *doc, fz_matrix ct
 {
 	xps_parse_gradient_brush(ctx, doc, ctm, area, base_uri, dict, root, xps_draw_radial_gradient);
 }
+
+#endif

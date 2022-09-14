@@ -26,6 +26,8 @@
 #include <string.h>
 #include <time.h>
 
+#if FZ_ENABLE_PDF
+
 #ifdef _WIN32
 #define timegm _mkgmtime
 #endif
@@ -967,3 +969,5 @@ pdf_parse_journal_obj(fz_context *ctx, pdf_document *doc, fz_stream *stm,
 
 	return obj;
 }
+
+#endif

@@ -24,6 +24,8 @@
 
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define STACK_SIZE 96
 
 typedef struct fz_bbox_device_s
@@ -229,3 +231,5 @@ fz_new_bbox_device(fz_context *ctx, fz_rect *result)
 
 	return (fz_device*)dev;
 }
+
+#endif

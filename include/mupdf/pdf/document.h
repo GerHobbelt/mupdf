@@ -30,6 +30,12 @@
 #include "mupdf/fitz/xml.h"
 #include "mupdf/pdf/object.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct pdf_xref pdf_xref;
 typedef struct pdf_ocg_descriptor pdf_ocg_descriptor;
 
@@ -800,5 +806,11 @@ void pdf_load_journal(fz_context *ctx, pdf_document *doc, const char *filename);
     does not match. Will throw on a corrupted journal.
 */
 void pdf_read_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

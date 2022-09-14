@@ -26,6 +26,8 @@
 #include <limits.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* Enumerate marked selection */
 
 static float dist2(float a, float b)
@@ -600,3 +602,5 @@ no_more_matches:;
 
 	return hits.len;
 }
+
+#endif

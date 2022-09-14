@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 fz_display_list *
 pdf_new_display_list_from_annot(fz_context *ctx, pdf_annot *annot)
 {
@@ -230,3 +232,5 @@ pdf_new_pixmap_from_page_with_usage(fz_context *ctx, pdf_page *page, fz_matrix c
 {
 	return pdf_new_pixmap_from_page_with_separations_and_usage(ctx, page, ctm, cs, NULL, alpha, usage);
 }
+
+#endif

@@ -25,6 +25,8 @@
 
 #include <limits.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
 	fz_document_writer super;
@@ -121,3 +123,5 @@ fz_new_svg_writer(fz_context *ctx, const char *path, const char *args)
 
 	return (fz_document_writer*)wri;
 }
+
+#endif

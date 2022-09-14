@@ -26,6 +26,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 int svg_is_whitespace_or_comma(int c)
 {
 	 return (c == 0x20) || (c == 0x9) || (c == 0xD) || (c == 0xA) || (c == ',');
@@ -358,3 +360,5 @@ svg_parse_string_from_style(fz_context *ctx, svg_document *doc, const char *styl
 	fz_strncpy_s(ctx, buf, value, buf_size);
 	return buf;
 }
+
+#endif

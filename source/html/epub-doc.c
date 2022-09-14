@@ -26,6 +26,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_EPUB
+
 #include <zlib-ng.h> /* for crc32 */
 
 enum { T, R, B, L };
@@ -952,3 +954,5 @@ fz_document_handler epub_document_handler =
 	epub_open_accel_document,
 	epub_open_accel_document_with_stream
 };
+
+#endif

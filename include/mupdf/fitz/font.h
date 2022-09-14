@@ -71,6 +71,8 @@ const char *fz_glyph_name_from_unicode_sc(int unicode);
 */
 typedef struct fz_font fz_font;
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /**
 	Fonts come in two variants:
 	Regular fonts are handled by FreeType.
@@ -730,6 +732,8 @@ struct fz_font
 	int has_digest;
 	unsigned char digest[16];
 };
+
+#endif // FZ_ENABLE_RENDER_CORE 
 
 #ifdef __cplusplus
 }

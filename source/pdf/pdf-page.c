@@ -21,11 +21,14 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+
+#if FZ_ENABLE_PDF
 
 int
 pdf_count_pages(fz_context *ctx, pdf_document *doc)
@@ -1039,17 +1042,74 @@ pdf_page_separations(fz_context *ctx, pdf_page *page)
 }
 
 int
-pdf_page_uses_overprint(fz_context *ctx, pdf_page *page)
+pdf_page_uses_overprint(fz_context *ctx, fz_page *_page)
 {
+	pdf_page* page = (pdf_page*)_page;
 	return page ? page->overprint : 0;
 }
 
 static void
-pdf_drop_page_imp(fz_context *ctx, pdf_page *page)
+pdf_drop_page_imp(fz_context *ctx, fz_page *_page)
 {
+	pdf_page* page = (pdf_page*)_page;
 	fz_drop_link(ctx, page->links);
 	pdf_drop_annots(ctx, page->annots);
 	pdf_drop_obj(ctx, page->obj);
+}
+
+static
+fz_link* pdf_page_create_link_imp(fz_context* ctx, fz_page* _page, fz_rect bbox, const char* uri)
+{
+	pdf_page* page = (pdf_page*)_page;
+	return pdf_create_link(ctx, page, bbox, uri);
+}
+
+static
+void pdf_page_delete_link_imp(fz_context* ctx, fz_page* _page, fz_link* link)
+{
+	pdf_page* page = (pdf_page*)_page;
+	pdf_delete_link(ctx, page, link);
+}
+
+static
+fz_link* pdf_load_links_imp(fz_context* ctx, fz_page* _page)
+{
+	pdf_page* page = (pdf_page*)_page;
+	return pdf_load_links(ctx, page);
+}
+
+static
+fz_transition* pdf_page_presentation_imp(fz_context* ctx, fz_page* _page, fz_transition* transition, float* duration)
+{
+	pdf_page* page = (pdf_page*)_page;
+	return pdf_page_presentation(ctx, page, transition, duration);
+}
+
+static
+fz_separations *pdf_page_separations_imp(fz_context* ctx, fz_page* _page)
+{
+	pdf_page* page = (pdf_page*)_page;
+	return pdf_page_separations(ctx, page);
+}
+
+fz_rect pdf_bound_page_imp(fz_context* ctx, fz_page* _page)
+{
+	pdf_page* page = (pdf_page*)_page;
+	return pdf_bound_page(ctx, page);
+}
+
+static
+void pdf_run_page_contents_cb_imp(fz_context* ctx, fz_page* _page, fz_device* dev, fz_matrix ctm)
+{
+	pdf_page* page = (pdf_page*)_page;
+	pdf_run_page_contents(ctx, page, dev, ctm);
+}
+
+static
+void pdf_run_page_annots_cb_imp(fz_context* ctx, fz_page* _page, fz_device* dev, fz_matrix ctm)
+{
+	pdf_page* page = (pdf_page*)_page;
+	pdf_run_page_annots(ctx, page, dev, ctm);
 }
 
 static pdf_page *
@@ -1059,16 +1119,16 @@ pdf_new_page(fz_context *ctx, pdf_document *doc)
 
 	page->doc = doc; /* typecast alias for page->super.doc */
 
-	page->super.drop_page = (fz_page_drop_page_fn*)pdf_drop_page_imp;
-	page->super.load_links = (fz_page_load_links_fn*)pdf_load_links;
-	page->super.bound_page = (fz_page_bound_page_fn*)pdf_bound_page;
-	page->super.run_page_contents = (fz_page_run_page_fn*)pdf_run_page_contents;
-	page->super.run_page_annots = (fz_page_run_page_fn*)pdf_run_page_annots;
-	page->super.page_presentation = (fz_page_page_presentation_fn*)pdf_page_presentation;
-	page->super.separations = (fz_page_separations_fn *)pdf_page_separations;
-	page->super.overprint = (fz_page_uses_overprint_fn *)pdf_page_uses_overprint;
-	page->super.create_link = (fz_page_create_link_fn *)pdf_create_link;
-	page->super.delete_link = (fz_page_delete_link_fn *)pdf_delete_link;
+	page->super.drop_page = pdf_drop_page_imp;
+	page->super.load_links = pdf_load_links_imp;
+	page->super.bound_page = pdf_bound_page_imp;
+	page->super.run_page_contents = pdf_run_page_contents_cb_imp;
+	page->super.run_page_annots = pdf_run_page_annots_cb_imp;
+	page->super.page_presentation = pdf_page_presentation_imp;
+	page->super.separations = pdf_page_separations_imp;
+	page->super.overprint = pdf_page_uses_overprint;
+	page->super.create_link = pdf_page_create_link_imp;
+	page->super.delete_link = pdf_page_delete_link_imp;
 
 	page->obj = NULL;
 
@@ -1422,3 +1482,5 @@ pdf_insert_page(fz_context *ctx, pdf_document *doc, int at, pdf_obj *page_ref)
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

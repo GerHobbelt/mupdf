@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static fz_font *
 fz_load_html_default_font(fz_context *ctx, fz_html_font_set *set, const char *family, int is_bold, int is_italic)
 {
@@ -163,3 +165,5 @@ void fz_drop_html_font_set(fz_context *ctx, fz_html_font_set *set)
 
 	fz_free(ctx, set);
 }
+
+#endif

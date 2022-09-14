@@ -25,7 +25,8 @@
 
 #include <limits.h>
 
-#if FZ_ENABLE_CBZ
+#if FZ_ENABLE_RENDER_CORE 
+#if FZ_ENABLE_CBZ 
 
 typedef struct
 {
@@ -131,7 +132,7 @@ fz_new_cbz_writer(fz_context *ctx, const char *path, const char *options)
 	return wri;
 }
 
-#endif
+#endif // FZ_ENABLE_CBZ
 
 /* generic image file output writer */
 
@@ -212,3 +213,5 @@ fz_new_pixmap_writer(fz_context *ctx, const char *path, const char *options,
 
 	return (fz_document_writer*)wri;
 }
+
+#endif // FZ_ENABLE_RENDER_CORE 

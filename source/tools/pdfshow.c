@@ -35,6 +35,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 static pdf_document* doc = NULL;
 static fz_context* ctx = NULL;
 static fz_output* out = NULL;
@@ -747,3 +749,5 @@ int pdfshow_main(int argc, const char** argv)
 	fz_drop_context(ctx);
 	return errored;
 }
+
+#endif // FZ_ENABLE_PDF

@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 pdf_pattern *
 pdf_keep_pattern(fz_context *ctx, pdf_pattern *pat)
 {
@@ -94,3 +96,5 @@ pdf_load_pattern(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 	}
 	return pat;
 }
+
+#endif

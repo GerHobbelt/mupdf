@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "xps-imp.h"
 
+#if FZ_ENABLE_XPS
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_ADVANCES_H
@@ -682,3 +684,5 @@ xps_parse_glyphs(fz_context *ctx, xps_document *doc, fz_matrix ctm,
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

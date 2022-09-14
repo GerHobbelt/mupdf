@@ -25,9 +25,21 @@
 
 #include "mupdf/pdf/document.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
 	Read infile, and write selected pages to outfile with the given options.
 */
 void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, const char *password, pdf_write_options *opts, int retainlen, const char *retainlist[]);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

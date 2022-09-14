@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #ifdef FT_FONT_FORMATS_H
@@ -798,3 +800,5 @@ pdf_add_substitute_font(fz_context *ctx, pdf_document *doc, fz_font *font)
 	fz_throw(ctx, FZ_ERROR_GENERIC, "substitute font creation is not implemented yet");
 	return NULL;
 }
+
+#endif

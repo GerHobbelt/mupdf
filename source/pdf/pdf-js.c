@@ -24,7 +24,7 @@
 #include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 
-#if FZ_ENABLE_JS
+#if FZ_ENABLE_JS && FZ_ENABLE_PDF
 
 #include "mujs.h"
 
@@ -1328,7 +1328,7 @@ int pdf_js_supported(fz_context *ctx, pdf_document *doc)
 	return doc->js != NULL;
 }
 
-#else /* FZ_ENABLE_JS */
+#elif FZ_ENABLE_PDF /* && !FZ_ENABLE_JS */
 
 void pdf_drop_js(fz_context *ctx, pdf_js *js) { }
 void pdf_enable_js(fz_context *ctx, pdf_document *doc) { }
@@ -1344,4 +1344,4 @@ int pdf_js_event_result_validate(pdf_js *js, char **newvalue) { *newvalue=NULL; 
 pdf_js_console *pdf_js_get_console(fz_context *ctx, pdf_document *doc) { return NULL; }
 void pdf_js_set_console(fz_context *ctx, pdf_document *doc, pdf_js_console *console, void *user) { }
 
-#endif /* FZ_ENABLE_JS */
+#endif /* FZ_ENABLE_JS && FZ_ENABLE_PDF */

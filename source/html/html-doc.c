@@ -26,6 +26,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_HTML
+
 enum { T, R, B, L };
 
 enum { FORMAT_FB2, FORMAT_XHTML, FORMAT_HTML5, FORMAT_MOBI };
@@ -431,3 +433,5 @@ fz_document_handler mobi_document_handler =
 	mobi_extensions,
 	mobi_mimetypes
 };
+
+#endif

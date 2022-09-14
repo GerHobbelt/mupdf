@@ -28,6 +28,8 @@
 #include "mupdf/fitz/geometry.h"
 #include "mupdf/fitz/device.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -145,6 +147,8 @@ int fz_display_list_is_empty(fz_context *ctx, const fz_display_list *list);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

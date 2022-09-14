@@ -32,7 +32,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define PATH_SIZE 4096
+#if FZ_ENABLE_RENDER_CORE 
 
 static pdf_document *doc = NULL;
 static fz_context *ctx = NULL;
@@ -69,7 +69,7 @@ static int isfontdesc(pdf_obj *obj)
 
 static void writepixmap(fz_pixmap *pix, const char *file)
 {
-	char buf[PATH_SIZE];
+	char buf[PATH_MAX];
 	fz_pixmap *rgb = NULL;
 
 	if (!pix)
@@ -100,7 +100,7 @@ static void writepixmap(fz_pixmap *pix, const char *file)
 static void
 writejpeg(const unsigned char *data, size_t len, const char *file)
 {
-	char buf[PATH_SIZE];
+	char buf[PATH_MAX];
 	fz_output *out;
 
 	fz_snprintf(buf, sizeof(buf), "%s%s.jpg", output_template_path, file);
@@ -188,7 +188,7 @@ static void saveimage(pdf_obj *ref)
 
 static void savefont(pdf_obj *dict)
 {
-	char namebuf[PATH_SIZE];
+	char namebuf[PATH_MAX];
 	fz_buffer *buf;
 	pdf_obj *stream = NULL;
 	pdf_obj *obj;
@@ -380,3 +380,5 @@ int pdfextract_main(int argc, const char** argv)
 	fz_drop_context(ctx);
 	return errored;
 }
+
+#endif

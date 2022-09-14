@@ -25,6 +25,8 @@
 
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_PDF
+
 static int
 pdf_make_hash_key(fz_context *ctx, fz_store_hash *hash, void *key_)
 {
@@ -136,3 +138,5 @@ void pdf_purge_locals_from_store(fz_context *ctx, pdf_document *doc)
 {
 	fz_filter_store(ctx, pdf_filter_locals, doc, &pdf_obj_store_type);
 }
+
+#endif

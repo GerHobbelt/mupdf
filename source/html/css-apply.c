@@ -28,6 +28,8 @@
 #include <stdio.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static const char *border_width_kw[] = {
 	"medium",
 	"thick",
@@ -1659,3 +1661,5 @@ fz_debug_css(fz_context* ctx, fz_output* out, fz_css *css)
 		rule = rule->next;
 	}
 }
+
+#endif

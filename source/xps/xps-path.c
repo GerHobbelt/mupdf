@@ -27,6 +27,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#if FZ_ENABLE_XPS
+
 static char *
 xps_parse_float_array(fz_context *ctx, xps_document *doc, char *s, int num, float *x)
 {
@@ -1074,3 +1076,5 @@ xps_parse_path(fz_context *ctx, xps_document *doc, fz_matrix ctm, char *base_uri
 	if (clip_att || clip_tag)
 		fz_pop_clip(ctx, dev);
 }
+
+#endif

@@ -30,6 +30,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 #define PDF_MAKE_NAME(STRING,NAME) STRING,
 static const char *PDF_NAME_LIST[] = {
 	"", "", "", /* dummy slots for null, true, and false */
@@ -4709,3 +4711,5 @@ fz_matrix pdf_array_get_matrix(fz_context *ctx, pdf_obj *array, int index)
 {
 	return pdf_to_matrix(ctx, pdf_array_get(ctx, array, index));
 }
+
+#endif

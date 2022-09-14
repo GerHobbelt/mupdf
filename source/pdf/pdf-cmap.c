@@ -26,6 +26,8 @@
 #include "mupdf/assertions.h"
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 #undef CHECK_SPLAY
 #undef DUMP_SPLAY
 
@@ -965,3 +967,5 @@ pdf_cmap_size(fz_context *ctx, pdf_cmap *cmap)
 		cmap->tcap * sizeof *cmap->tree +
 		sizeof(*cmap);
 }
+
+#endif

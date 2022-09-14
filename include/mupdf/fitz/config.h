@@ -63,12 +63,12 @@
 	By default all are enabled. To avoid building unwanted
 	ones, define FZ_ENABLE_... to 0.
 */
-#define FZ_ENABLE_PDF 0
+#define FZ_ENABLE_PDF 0			// (Cost: ~2.7MB)
 #define FZ_ENABLE_XPS 0
 #define FZ_ENABLE_SVG 0
 #define FZ_ENABLE_CBZ 0
 #define FZ_ENABLE_IMG 0
-#define FZ_ENABLE_HTML 0
+#define FZ_ENABLE_HTML 0		// (Cost: ~1MB)
 #define FZ_ENABLE_EPUB 0
 
 /**
@@ -90,22 +90,22 @@
 	Choose whether to enable JPEG2000 decoding.
 	By default, it is enabled, but due to frequent security
 	issues with the third party libraries we support disabling
-	it with this flag.
+	it with this flag. (Cost: ~0.3MB)
 */
 #define FZ_ENABLE_JPX 0
 
 /**
-	Choose whether to enable JPEG-XL en-/decoding.
+	Choose whether to enable JPEG-XL en-/decoding. (Cost: ~1.7MB)
 */
 #define FZ_ENABLE_JPEGXL 0
 
 /**
-	Choose whether to enable TIFF en-/decoding.
+	Choose whether to enable TIFF en-/decoding. (Cost: ~0.1MB)
 */
 #define FZ_ENABLE_TIFF 0
 
 /**
-	Choose whether to enable WEBP en-/decoding.
+	Choose whether to enable WEBP en-/decoding. (Cost: ~0.1MB)
 */
 #define FZ_ENABLE_WEBP 0
 
@@ -155,13 +155,20 @@
 /* (You probably really don't want to do that except for measurement
  * purposes!) */
 
- /* To skip *all* fonts, enable: */
+ /* To skip *all* fonts, enable: (Cost: ~35MB) */
  #define FZ_ENABLE_BUILTIN_FONTS 0
  /* (You probably really don't want to do that except for measurement
   * purposes!) */
 
 /* To remove OCR/tesseract features, enable: */
-#define OCR_DISABLED
+#define FZ_ENABLE_OCR 0
+
+#define FZ_ENABLE_SPOT_RENDERING 0
+
+/**
+	Choose whether to make font rendering APIs available.
+*/
+#define FZ_ENABLE_RENDER_CORE 1       // (Cost: ~1MB)
 
 #endif
 
@@ -266,6 +273,14 @@
 #define FZ_ENABLE_ICC 1
 #endif
 
+#ifndef FZ_ENABLE_OCR
+#define FZ_ENABLE_OCR 1
+#endif
+
+#ifndef FZ_ENABLE_RENDER_CORE 
+#define FZ_ENABLE_RENDER_CORE 1
+#endif
+
 /* If Epub and HTML are both disabled, disable SIL fonts */
 #if FZ_ENABLE_HTML == 0 && FZ_ENABLE_EPUB == 0
 #undef TOFU_SIL
@@ -277,9 +292,10 @@
 #endif
 
 #if !defined(HAVE_LEPTONICA) || !defined(HAVE_TESSERACT)
-#ifndef OCR_DISABLED
-#define OCR_DISABLED
-#endif
+#undef FZ_ENABLE_OCR 
+#define FZ_ENABLE_OCR 0
+#undef FZ_ENABLE_OCR_OUTPUT 
+#define FZ_ENABLE_OCR_OUTPUT 0
 #endif
 
 // #define DISABLE_MUTHREADS 1

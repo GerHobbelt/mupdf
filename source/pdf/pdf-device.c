@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_ADVANCES_H
@@ -1270,3 +1272,5 @@ fz_device *pdf_page_write(fz_context *ctx, pdf_document *doc, fz_rect mediabox, 
 	*pcontents = fz_new_buffer(ctx, 0);
 	return pdf_new_pdf_device(ctx, doc, pagectm, *presources, *pcontents);
 }
+
+#endif

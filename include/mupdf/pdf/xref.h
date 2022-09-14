@@ -25,6 +25,12 @@
 
 #include "mupdf/pdf/document.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
 	Allocate a slot in the xref table and return a fresh unused object number.
 */
@@ -259,5 +265,11 @@ void pdf_drop_local_xref_and_resources(fz_context *ctx, pdf_document *doc);
 /* Debug call to dump the incremental/local xrefs to the
  * debug channel. */
 void pdf_debug_doc_changes(fz_context *ctx, pdf_document *doc);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

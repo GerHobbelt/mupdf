@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 #include "mupdf/helpers/pkcs7-openssl.h"
 
 #ifndef HAVE_LIBCRYPTO
@@ -910,3 +912,5 @@ pkcs7_openssl_new_verifier(fz_context *ctx)
 }
 
 #endif
+
+#endif // FZ_ENABLE_PDF

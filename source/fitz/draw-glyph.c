@@ -28,6 +28,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define MAX_GLYPH_SIZE 256
 #define MAX_CACHE_SIZE (1024*1024)
 
@@ -511,3 +513,5 @@ fz_dump_glyph_cache_stats(fz_context *ctx)
 #endif
 	}
 }
+
+#endif

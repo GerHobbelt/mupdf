@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "xps-imp.h"
 
+#if FZ_ENABLE_XPS
+
 static inline int xps_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
@@ -181,3 +183,5 @@ xps_resolve_url(fz_context *ctx, xps_document *doc, char *output, char *base_uri
 	}
 	clean_path(output);
 }
+
+#endif

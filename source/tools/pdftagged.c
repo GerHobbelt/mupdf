@@ -32,6 +32,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static pdf_document *doc = NULL;
 static fz_context *ctx = NULL;
 
@@ -294,3 +296,5 @@ int pdftagged_main(int argc, const char **argv)
 	
 	return rv;
 }
+
+#endif

@@ -25,6 +25,8 @@
 
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_PDF
+
 struct pdf_graft_map
 {
 	int refs;
@@ -288,3 +290,5 @@ void pdf_graft_page(fz_context *ctx, pdf_document *dst, int page_to, pdf_documen
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

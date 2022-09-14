@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 /*
  * CMap parser
  */
@@ -442,3 +444,5 @@ pdf_load_cmap(fz_context *ctx, fz_stream *file)
 
 	return cmap;
 }
+
+#endif

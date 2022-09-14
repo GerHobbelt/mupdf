@@ -21,10 +21,13 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 
 #include <string.h>
 #include "mupdf/assertions.h"
+
+#if FZ_ENABLE_PDF
 
 static void
 pdf_filter_xobject(fz_context *ctx, pdf_document *doc, pdf_obj *xobj, pdf_obj *page_res, pdf_filter_options *filter, pdf_cycle_list *cycle_up);
@@ -920,3 +923,5 @@ pdf_redact_page(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_redact_o
 
 	return 1;
 }
+
+#endif

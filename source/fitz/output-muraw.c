@@ -4,6 +4,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static void putchunk(fz_context *ctx, fz_output *out, const char *tag, const void *data, size_t size)
 {
 	if ((uint32_t)size != size)
@@ -338,3 +340,5 @@ fz_new_buffer_from_pixmap_as_muraw(fz_context *ctx, const fz_pixmap *pix, fz_col
 {
 	return muraw_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0);
 }
+
+#endif

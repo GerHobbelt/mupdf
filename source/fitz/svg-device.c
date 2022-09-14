@@ -26,6 +26,8 @@
 #include <float.h>
 #include <math.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
 	int pattern;
@@ -1417,3 +1419,5 @@ fz_device *fz_new_svg_device(fz_context *ctx, fz_output *out, float page_width, 
 {
 	return fz_new_svg_device_with_id(ctx, out, page_width, page_height, text_format, reuse_images, NULL);
 }
+
+#endif

@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define SUBSCRIPT_OFFSET 0.2f
 #define SUPERSCRIPT_OFFSET -0.2f
 
@@ -1118,3 +1120,5 @@ fz_new_text_writer(fz_context *ctx, const char *format, const char *path, const 
 	fz_output *out = fz_new_output_with_path(ctx, path, 0);
 	return fz_new_text_writer_with_output(ctx, format, out, options);
 }
+
+#endif

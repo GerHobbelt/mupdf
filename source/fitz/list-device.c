@@ -27,6 +27,8 @@
 #include <string.h>
 #include <time.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define STACK_SIZE 96
 
 typedef enum
@@ -2174,3 +2176,4 @@ int fz_default_cookie_callback_handler(fz_context* ctx, enum fz_progress_state s
 	return 0;
 }
 
+#endif

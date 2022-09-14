@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 static void pdf_drop_obj_as_void(fz_context *ctx, void *obj)
 {
 	pdf_drop_obj(ctx, obj);
@@ -93,3 +95,5 @@ pdf_drop_resource_tables(fz_context *ctx, pdf_document *doc)
 		fz_drop_hash_table(ctx, doc->resources.fonts);
 	}
 }
+
+#endif

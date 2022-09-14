@@ -24,6 +24,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE
+
 enum
 {
 	FZ_DOCUMENT_HANDLER_MAX = 10
@@ -837,3 +839,5 @@ fz_process_opened_pages(fz_context *ctx, fz_document *doc, fz_process_opened_pag
 
 	return ret;
 }
+
+#endif

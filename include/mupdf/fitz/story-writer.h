@@ -26,6 +26,8 @@
 #include "mupdf/fitz/story.h"
 #include "mupdf/fitz/writer.h"
 
+#if FZ_ENABLE_HTML
+
 /*
  * A fz_story_element_position plus page number information; used with
  * fz_write_story() and fz_write_stabilized_story().
@@ -205,5 +207,7 @@ void fz_write_stabilized_story(
 		void *pagefn_ref,
 		fz_archive *archive
 		);
+
+#endif
 
 #endif

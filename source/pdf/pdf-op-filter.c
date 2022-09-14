@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 typedef enum
 {
 	FLUSH_CTM = 1,
@@ -2224,3 +2226,5 @@ pdf_new_filter_processor(
 
 	return (pdf_processor*)proc;
 }
+
+#endif

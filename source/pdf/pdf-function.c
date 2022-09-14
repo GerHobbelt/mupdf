@@ -28,6 +28,8 @@
 #include <float.h>
 #include <limits.h>
 
+#if FZ_ENABLE_PDF
+
 static pdf_function *pdf_load_function_imp(fz_context *ctx, pdf_obj *dict, int in, int out, pdf_cycle_list *cycle);
 
 #define DIV_BY_ZERO(a, b, min, max) (((a) < 0) ^ ((b) < 0) ? (min) : (max))
@@ -1510,3 +1512,5 @@ pdf_load_function(fz_context *ctx, pdf_obj *dict, int in, int out)
 {
 	return pdf_load_function_imp(ctx, dict, in, out, NULL);
 }
+
+#endif

@@ -24,6 +24,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* Return non-null terminated pointers to key/value entries in comma separated
  * option string. A plain key has the default value 'yes'. Use strncmp to compare
  * key/value strings. */
@@ -371,3 +373,5 @@ fz_write_document(fz_context *ctx, fz_document_writer *wri, fz_document *doc)
 		fz_rethrow(ctx);
 	}
 }
+
+#endif

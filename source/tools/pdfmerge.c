@@ -34,6 +34,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE
+
 static fz_context *ctx = NULL;
 static pdf_document *doc_des = NULL;
 static pdf_document *doc_src = NULL;
@@ -392,3 +394,5 @@ int pdfmerge_main(int argc, const char** argv)
 
 	return EXIT_SUCCESS;
 }
+
+#endif

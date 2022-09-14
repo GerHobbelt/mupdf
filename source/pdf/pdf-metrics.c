@@ -25,6 +25,8 @@
 
 #include <stdlib.h>
 
+#if FZ_ENABLE_PDF
+
 void
 pdf_set_font_wmode(fz_context *ctx, pdf_font_desc *font, int wmode)
 {
@@ -164,3 +166,5 @@ notfound:
 	v.x = h.w / 2;
 	return v;
 }
+
+#endif

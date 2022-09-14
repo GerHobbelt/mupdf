@@ -22,7 +22,7 @@
 
 #include "mupdf/fitz.h"
 
-#if FZ_ENABLE_DOCX_OUTPUT
+#if FZ_ENABLE_DOCX_OUTPUT && FZ_ENABLE_RENDER_CORE 
 
 #include "glyphbox.h"
 #include "extract.h"

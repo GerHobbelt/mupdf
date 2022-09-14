@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define FORMAT_HTML 1
 #define FORMAT_TEXT 2
 
@@ -284,3 +286,5 @@ fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi)
 
 	return fz_new_tree_archive(ctx, tree);
 }
+
+#endif

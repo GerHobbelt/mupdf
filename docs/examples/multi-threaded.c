@@ -40,7 +40,7 @@ depending on your environment.
 #include <stdio.h>
 #include <stdlib.h>
 
-#if !defined(DISABLE_MUTHREADS)
+#if !defined(DISABLE_MUTHREADS) && FZ_ENABLE_RENDER_CORE 
 
 // A convenience function for dying abruptly on pthread errors.
 

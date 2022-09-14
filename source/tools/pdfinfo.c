@@ -34,6 +34,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if FZ_ENABLE_RENDER_CORE
+
 enum
 {
 	DIMENSIONS = 0x01,
@@ -1279,3 +1281,5 @@ int pdfinfo_main(int argc, const char** argv)
 	fz_drop_context(ctx);
 	return ret;
 }
+
+#endif

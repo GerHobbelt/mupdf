@@ -22,8 +22,11 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+
 #include <float.h>
 #include <math.h>
+
+#if FZ_ENABLE_PDF
 
 #define LINE_LIMIT (100)
 #define LINE_HEIGHT (1.2f)
@@ -220,3 +223,5 @@ fz_text *pdf_layout_fit_text(fz_context *ctx, fz_font *font, fz_text_language la
 
 	return text;
 }
+
+#endif

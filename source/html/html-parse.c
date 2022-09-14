@@ -28,6 +28,8 @@
 #include <stdio.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_HTML
+
 enum { T, R, B, L };
 
 #define DEFAULT_DIR FZ_BIDI_LTR
@@ -1548,7 +1550,7 @@ xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 	}
 	fz_always(ctx)
 	{
-		fz_drop_tree(ctx, g.images, (void(*)(fz_context*,void*))fz_drop_image);
+		fz_drop_tree(ctx, g.images, fz_drop_image);
 		fz_drop_css(ctx, g.css);
 	}
 	fz_catch(ctx)
@@ -2330,3 +2332,5 @@ void fz_story_tocwrite(fz_context *ctx, fz_document_writer *writer, fz_story_toc
 		fz_rethrow(ctx);
 	}
 }
+
+#endif

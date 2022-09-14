@@ -25,6 +25,12 @@
 
 #include "mupdf/pdf/document.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum
 {
 	PDF_TOK_ERROR, PDF_TOK_EOF,
@@ -57,5 +63,11 @@ pdf_obj *pdf_parse_journal_obj(fz_context *ctx, pdf_document *doc, fz_stream *st
 	print a lexed token to a buffer, growing if necessary
 */
 void pdf_append_token(fz_context *ctx, fz_buffer *buf, int tok, pdf_lexbuf *lex);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 enum { T, R, B, L };
 
 static int is_internal_uri(const char *uri)
@@ -461,3 +463,5 @@ fz_load_html_outline(fz_context *ctx, fz_html *html)
 	}
 	return state.head;
 }
+
+#endif

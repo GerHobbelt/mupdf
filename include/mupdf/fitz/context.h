@@ -462,6 +462,8 @@ void fz_get_info_callback(fz_context* ctx, fz_error_print_callback** print, void
     (optionally) be provided by callers.
 */
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /**
     Given the width and height of an image,
     the subsample factor, and the subarea of the image actually
@@ -617,6 +619,8 @@ typedef void (fz_aa_sub_pix_quantizer)(float size, int *x, int *y);
     others.
 */
 void fz_set_graphics_sub_pix_quantizer(fz_context *ctx, fz_aa_sub_pix_quantizer *fn);
+
+#endif // FZ_ENABLE_RENDER_CORE 
 
 /**
     Get the user stylesheet source text.
@@ -849,6 +853,8 @@ typedef struct
     fz_error_print_callback *print;
 } fz_info_context;
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
     int hscale;
@@ -860,6 +866,8 @@ typedef struct
     fz_aa_sub_pix_quantizer *sub_pix_quantizer;
 } fz_aa_context;
 
+#endif
+
 struct fz_context
 {
     void *user;
@@ -870,8 +878,10 @@ struct fz_context
     fz_info_context info;
 
     /* unshared contexts */
-    fz_aa_context aa;
-    uint16_t seed48[7];
+#if FZ_ENABLE_RENDER_CORE 
+	fz_aa_context aa;
+#endif
+	uint16_t seed48[7];
 #if FZ_ENABLE_ICC
     int icc_enabled;
 #endif

@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 static pdf_cmap *
 pdf_load_embedded_cmap_imp(fz_context *ctx, pdf_document *doc, pdf_obj *stmobj, pdf_cycle_list *cycle_up)
 {
@@ -316,3 +318,5 @@ pdf_load_system_cmap(fz_context *ctx, const char *cmap_name)
 
 	return cmap;
 }
+
+#endif

@@ -29,6 +29,8 @@
 #include "mupdf/assertions.h"
 #include <math.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 enum { MAXN = 2 + FZ_MAX_COLORS };
 
 static void paint_scan(fz_pixmap *FZ_RESTRICT pix, int y, int fx0, int fx1, int cx0, int cx1, const int *FZ_RESTRICT v0, const int *FZ_RESTRICT v1, int n)
@@ -514,3 +516,5 @@ fz_paint_shade(fz_context *ctx, fz_shade *shade, fz_colorspace *colorspace, fz_m
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

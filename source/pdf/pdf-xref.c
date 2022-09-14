@@ -21,11 +21,14 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 
 #include "mupdf/assertions.h"
 #include <limits.h>
 #include <string.h>
+
+#if FZ_ENABLE_PDF
 
 #undef DEBUG_PROGESSIVE_ADVANCE
 
@@ -2890,6 +2893,10 @@ static int __pdf_lookup_metadata(fz_context* ctx, fz_document* doc, const char* 
 {
 	return pdf_lookup_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, buf, size);
 }
+static void __pdf_document_set_metadata(fz_context* ctx, fz_document* doc, const char* key, const char* value)
+{
+	pdf_set_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, value);
+}
 
 
 /*
@@ -2918,7 +2925,7 @@ pdf_new_document(fz_context *ctx, fz_stream *file)
 	doc->super.count_pages = pdf_count_pages_imp;
 	doc->super.load_page = pdf_load_page_imp;
 	doc->super.lookup_metadata = __pdf_lookup_metadata;
-	doc->super.set_metadata = (fz_document_set_metadata_fn*)pdf_set_metadata;
+	doc->super.set_metadata = __pdf_document_set_metadata;
 
 	pdf_lexbuf_init(ctx, &doc->lexbuf.base, PDF_LEXBUF_LARGE);
 	doc->file = fz_keep_stream(ctx, file);
@@ -3323,7 +3330,7 @@ pdf_document *pdf_document_from_fz_document(fz_context *ctx, fz_document *ptr)
 
 pdf_page *pdf_page_from_fz_page(fz_context *ctx, fz_page *ptr)
 {
-	return (pdf_page *)((ptr && ptr->bound_page == (fz_page_bound_page_fn*)pdf_bound_page) ? ptr : NULL);
+	return (pdf_page *)((ptr && ptr->bound_page == pdf_bound_page_imp) ? ptr : NULL);
 }
 
 fz_document* fz_document_from_pdf_document(fz_context* ctx, pdf_document* ptr)
@@ -3335,7 +3342,7 @@ fz_document* fz_document_from_pdf_document(fz_context* ctx, pdf_document* ptr)
 fz_page* fz_page_from_pdf_page(fz_context* ctx, pdf_page* ptr)
 {
 	fz_page* fzptr = (fz_page*)ptr;
-	return ((fzptr && fzptr->bound_page == (fz_page_bound_page_fn*)pdf_bound_page) ? fzptr : NULL);
+	return ((fzptr && fzptr->bound_page == pdf_bound_page_imp) ? fzptr : NULL);
 }
 
 pdf_document *pdf_specifics(fz_context *ctx, fz_document *doc)
@@ -4960,3 +4967,5 @@ pdf_metadata(fz_context *ctx, pdf_document *doc)
 
 	return obj;
 }
+
+#endif

@@ -22,6 +22,8 @@ gcc -I/usr/local/include -o example \
 #include <stdio.h>
 #include <stdlib.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #if defined(BUILD_MONOLITHIC)
 #define main(cnt, arr)      mupdf_example_main(cnt, arr)
 #endif
@@ -138,3 +140,5 @@ int main(int argc, const char** argv)
 	fz_drop_context(ctx);
 	return EXIT_SUCCESS;
 }
+
+#endif

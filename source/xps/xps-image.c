@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_XPS
+
 static fz_image *
 xps_load_image(fz_context *ctx, xps_document *doc, xps_part *part)
 {
@@ -157,3 +159,5 @@ xps_parse_image_brush(fz_context *ctx, xps_document *doc, fz_matrix ctm, fz_rect
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

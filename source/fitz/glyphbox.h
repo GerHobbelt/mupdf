@@ -25,6 +25,12 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * Returns 1 if glyph is entirely outside box; otherwise returns 0.
  *
@@ -32,5 +38,11 @@
  * i.e. can return zero even if actually no part of the glyph is inside box.
  */
 int fz_glyph_entirely_outside_box(fz_context *ctx, fz_matrix *ctm, fz_text_span *span, fz_text_item *item, fz_rect *box);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

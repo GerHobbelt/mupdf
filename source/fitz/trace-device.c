@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
 	fz_device super;
@@ -608,3 +610,5 @@ fz_device *fz_new_trace_device(fz_context *ctx, fz_output *out)
 
 	return (fz_device*)dev;
 }
+
+#endif

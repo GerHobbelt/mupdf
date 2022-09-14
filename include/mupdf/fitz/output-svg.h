@@ -28,6 +28,8 @@
 #include "mupdf/fitz/device.h"
 #include "mupdf/fitz/output.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -67,6 +69,8 @@ fz_device *fz_new_svg_device_with_id(fz_context *ctx, fz_output *out, float page
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

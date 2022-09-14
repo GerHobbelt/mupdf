@@ -21,7 +21,10 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
+
+#if FZ_ENABLE_PDF
 
 static void
 pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_annot *annot, fz_device *dev, fz_matrix ctm, const char *usage)
@@ -386,3 +389,5 @@ pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer 
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

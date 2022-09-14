@@ -25,6 +25,12 @@
 
 #include "mupdf/pdf/document.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
 	Document events: the objects via which MuPDF informs the calling app
 	of occurrences emanating from the document, possibly from user interaction
@@ -163,5 +169,11 @@ void pdf_event_issue_print(fz_context *ctx, pdf_document *doc);
 void pdf_event_issue_exec_menu_item(fz_context *ctx, pdf_document *doc, const char *item);
 void pdf_event_issue_launch_url(fz_context *ctx, pdf_document *doc, const char *url, int new_frame);
 void pdf_event_issue_mail_doc(fz_context *ctx, pdf_document *doc, pdf_mail_doc_event *evt);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

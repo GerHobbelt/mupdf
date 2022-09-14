@@ -26,6 +26,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static inline void big32(unsigned char *buf, unsigned int v)
 {
 	buf[0] = (v >> 24) & 0xff;
@@ -462,3 +464,5 @@ fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pix, fz_color
 {
 	return png_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0);
 }
+
+#endif

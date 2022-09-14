@@ -24,6 +24,8 @@
 
 #include <float.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 fz_display_list *
 fz_new_display_list_from_page(fz_context *ctx, fz_page *page)
 {
@@ -714,3 +716,5 @@ fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, const char *
 	}
 	return buf;
 }
+
+#endif

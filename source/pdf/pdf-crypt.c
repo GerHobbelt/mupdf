@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 enum
 {
 	PDF_CRYPT_NONE,
@@ -1487,3 +1489,5 @@ pdf_new_encrypt(fz_context *ctx, const char *opwd_utf8, const char *upwd_utf8, p
 
 	return crypt;
 }
+
+#endif

@@ -34,6 +34,8 @@
 #include "mupdf/fitz/archive.h"
 #include "mupdf/fitz/display-list.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -152,6 +154,8 @@ fz_buffer *fz_new_buffer_from_page_with_format(fz_context *ctx, fz_page *page, c
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

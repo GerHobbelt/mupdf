@@ -33,6 +33,8 @@
 
 #include "plf_nanotimer_c_api.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -272,6 +274,21 @@ void fz_disable_device_hints(fz_context *ctx, fz_device *dev, int hints);
 */
 fz_rect fz_device_current_scissor(fz_context *ctx, fz_device *dev);
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif // FZ_ENABLE_RENDER_CORE 
+
+
+
+
+//==================================================================================
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum
 {
 	/* Hints */
@@ -444,6 +461,20 @@ static inline void fz_restart_time_measurement(fz_context *ctx)
 	fz_restart_time_step_estimation(ctx, 1);
 }
 
+#ifdef __cplusplus
+}
+#endif
+
+//==================================================================================
+
+
+
+
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
 	Create a device to print a debug trace of all device calls.
@@ -612,5 +643,7 @@ fz_device *fz_new_draw_device_with_options(fz_context *ctx, const fz_draw_option
 #ifdef __cplusplus
 }
 #endif
+
+#endif // FZ_ENABLE_RENDER_CORE 
 
 #endif

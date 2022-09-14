@@ -21,6 +21,7 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 #include "mupdf/ucdn.h"
 
@@ -33,6 +34,8 @@
 #include <stdio.h>
 
 #include "annotation-icons.h"
+
+#if FZ_ENABLE_PDF
 
 /* #define PDF_DEBUG_APPEARANCE_SYNTHESIS */
 
@@ -2928,3 +2931,5 @@ pdf_update_annot(fz_context *ctx, pdf_annot *annot)
 	annot->has_new_ap = 0;
 	return changed;
 }
+
+#endif

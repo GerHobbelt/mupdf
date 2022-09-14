@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 typedef struct
 {
 	pdf_processor super;
@@ -297,3 +299,5 @@ pdf_new_mcid_processor(fz_context *ctx, pdf_mcid_table *table)
 
 	return (pdf_processor*)proc;
 }
+
+#endif

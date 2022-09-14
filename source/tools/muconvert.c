@@ -32,6 +32,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if FZ_ENABLE_RENDER_CORE
+
 /* input options */
 static const char *password = "";
 static int alphabits = 8;
@@ -281,3 +283,5 @@ int muconvert_main(int argc, const char** argv)
 
 	return retval;
 }
+
+#endif

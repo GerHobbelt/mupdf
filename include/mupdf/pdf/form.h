@@ -26,6 +26,8 @@
 #include "mupdf/fitz/display-list.h"
 #include "mupdf/pdf/document.h"
 
+#if FZ_ENABLE_PDF
+
 /* Types of widget */
 enum pdf_widget_type
 {
@@ -375,5 +377,7 @@ void pdf_annot_event_page_open(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_event_page_close(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_event_page_visible(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_event_page_invisible(fz_context *ctx, pdf_annot *annot);
+
+#endif // FZ_ENABLE_PDF
 
 #endif

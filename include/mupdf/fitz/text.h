@@ -29,6 +29,8 @@
 #include "mupdf/fitz/path.h"
 #include "mupdf/fitz/bidi.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -209,5 +211,7 @@ char *fz_string_from_text_language(char str[8], fz_text_language lang);
 #ifdef __cplusplus
 }
 #endif
+
+#endif // FZ_ENABLE_RENDER_CORE 
 
 #endif

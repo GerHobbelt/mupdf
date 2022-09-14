@@ -13,6 +13,8 @@
 #include <string.h>
 #include <time.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
 	fz_device super;
@@ -698,3 +700,4 @@ fz_extract_device_statistics(fz_context* ctx, fz_device* dev, fz_gathered_statis
 	}
 }
 
+#endif

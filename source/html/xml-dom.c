@@ -24,6 +24,8 @@
 
 #include "string.h"
 
+#if FZ_ENABLE_HTML
+
 fz_xml *fz_story_document(fz_context *ctx, fz_story *story)
 {
 	if (story == NULL || story->dom == NULL)
@@ -629,3 +631,5 @@ const char *fz_dom_get_attribute(fz_context *ctx, fz_xml *elt, int i, const char
 	*att = NULL;
 	return NULL;
 }
+
+#endif

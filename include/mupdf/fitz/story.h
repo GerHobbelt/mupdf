@@ -31,6 +31,8 @@
 #include "mupdf/fitz/xml.h"
 #include "mupdf/fitz/archive.h"
 
+#if FZ_ENABLE_HTML
+
 /*
 	This header file provides an API for laying out and placing styled
 	text on a page, or pages.
@@ -286,5 +288,7 @@ ref:
 Passes <ref> to rectfn() and contentfn().
 */
 void fz_story_tocwrite(fz_context *ctx, fz_document_writer *writer, fz_story_tocwrite_rectfn rectfn, fz_story_tocwrite_contentfn contentfn, const char *user_css, float em, void *ref);
+
+#endif
 
 #endif

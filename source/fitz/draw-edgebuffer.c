@@ -27,6 +27,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #undef DEBUG_SCAN_CONVERTER
 
 /* Define ourselves a 'fixed' type for clarity */
@@ -1911,3 +1913,5 @@ fz_new_edgebuffer(fz_context *ctx, fz_edgebuffer_rule rule)
 	eb->app = rule == FZ_EDGEBUFFER_ANY_PART_OF_PIXEL;
 	return &eb->super;
 }
+
+#endif

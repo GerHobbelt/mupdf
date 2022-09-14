@@ -33,6 +33,8 @@
 #include <math.h>
 #include <float.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define STACK_SIZE 96
 
 /* Enable the following to attempt to support knockout and/or isolated
@@ -3361,3 +3363,5 @@ fz_new_draw_device_with_options(fz_context *ctx, const fz_draw_options *opts, fz
 	}
 	return dev;
 }
+
+#endif

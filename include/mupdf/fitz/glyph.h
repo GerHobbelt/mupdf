@@ -30,6 +30,8 @@
 #include "mupdf/fitz/font.h"
 #include "mupdf/fitz/path.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -85,5 +87,7 @@ fz_path *fz_outline_glyph(fz_context *ctx, fz_font *font, int gid, fz_matrix ctm
 #ifdef __cplusplus
 }
 #endif
+
+#endif // FZ_ENABLE_RENDER_CORE 
 
 #endif

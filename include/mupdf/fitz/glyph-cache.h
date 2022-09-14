@@ -29,6 +29,8 @@
 #include "mupdf/fitz/pixmap.h"
 #include "mupdf/fitz/device.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -99,6 +101,8 @@ float fz_subpixel_adjust(fz_context *ctx, fz_matrix *ctm, fz_matrix *subpix_ctm,
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

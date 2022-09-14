@@ -31,6 +31,8 @@
 #include <math.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_HTML
+
 #undef DEBUG_HARFBUZZ
 
 /*
@@ -2322,3 +2324,5 @@ void fz_story_positions(fz_context *ctx, fz_story *story, fz_story_position_call
 		if (enumerate_box(ctx, box, page_top, page_bot, cb, arg, 0, story->rect_count+1, &restart))
 			break;
 }
+
+#endif

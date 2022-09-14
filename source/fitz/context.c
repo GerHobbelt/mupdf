@@ -98,6 +98,8 @@ const char *fz_user_css(fz_context *ctx)
 	return ctx->style->user_css;
 }
 
+#if FZ_ENABLE_RENDER_CORE 
+
 static void fz_new_tuning_context(fz_context *ctx)
 {
 	if (ctx)
@@ -137,6 +139,8 @@ void fz_tune_image_scale(fz_context *ctx, fz_tune_image_scale_fn *image_scale, v
 	ctx->tuning->image_scale = image_scale ? image_scale : fz_default_image_scale;
 	ctx->tuning->image_scale_arg = arg;
 }
+
+#endif // FZ_ENABLE_RENDER_CORE 
 
 static void fz_init_random_context(fz_context *ctx)
 {

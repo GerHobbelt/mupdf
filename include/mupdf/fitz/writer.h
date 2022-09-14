@@ -29,6 +29,8 @@
 #include "mupdf/fitz/document.h"
 #include "mupdf/fitz/device.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -280,6 +282,8 @@ fz_document_writer *fz_new_document_writer_of_size(fz_context *ctx, size_t size,
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

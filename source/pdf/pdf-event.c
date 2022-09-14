@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 typedef struct
 {
 	pdf_doc_event base;
@@ -162,3 +164,5 @@ void *pdf_get_doc_event_callback_data(fz_context *ctx, pdf_document *doc)
 {
 	return doc->event_cb_data;
 }
+
+#endif

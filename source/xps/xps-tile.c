@@ -26,6 +26,8 @@
 #include <math.h>
 #include <string.h>
 
+#if FZ_ENABLE_XPS
+
 #define TILE
 
 /*
@@ -408,3 +410,5 @@ xps_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 	xps_parse_fixed_page(ctx, doc, page_ctm, page);
 	doc->dev = NULL;
 }
+
+#endif

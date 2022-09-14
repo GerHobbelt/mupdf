@@ -23,6 +23,7 @@
 #ifndef MUPDF_FITZ_IMAGE_H
 #define MUPDF_FITZ_IMAGE_H
 
+#include "mupdf/fitz/config.h"
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/store.h"
@@ -419,8 +420,10 @@ fz_pixmap *fz_load_jpx(fz_context *ctx, const unsigned char *data, size_t size, 
 /**
 	Exposed for CBZ.
 */
+#if FZ_ENABLE_TIFF 
 int fz_load_tiff_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);
 fz_pixmap *fz_load_tiff_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
+#endif
 int fz_load_pnm_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);
 fz_pixmap *fz_load_pnm_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
 int fz_load_jbig2_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);

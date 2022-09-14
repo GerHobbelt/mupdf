@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 typedef struct
 {
 	pdf_processor super;
@@ -959,3 +961,5 @@ pdf_new_buffer_processor(fz_context *ctx, fz_buffer *buffer, int ahxencode)
 	}
 	return proc;
 }
+
+#endif

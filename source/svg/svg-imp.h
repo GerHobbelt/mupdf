@@ -23,6 +23,12 @@
 #ifndef SOURCE_SVG_IMP_H
 #define SOURCE_SVG_IMP_H
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct svg_document_s svg_document;
 
 struct svg_document_s
@@ -63,5 +69,11 @@ int svg_is_digit(int c);
 
 void svg_parse_document_bounds(fz_context *ctx, svg_document *doc, fz_xml *root);
 void svg_run_document(fz_context *ctx, svg_document *doc, fz_xml *root, fz_device *dev, fz_matrix ctm);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

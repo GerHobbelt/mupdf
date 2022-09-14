@@ -27,6 +27,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #define RLE_THRESHOLD 256
 
 fz_glyph *
@@ -466,3 +468,5 @@ try_pixmap:
 
 	return glyph;
 }
+
+#endif

@@ -21,13 +21,16 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_PDF
+
 /* Maximum number of errors before aborting */
-#define MAX_SYNTAX_ERRORS 100
+#define MAX_SYNTAX_ERRORS 100    // TODO: get/check this setting via fz_cookie; some times you want the errors to stop quickly, other times you want to salvage what's left anyway
 
 pdf_processor *
 pdf_new_processor(fz_context *ctx, int size)
@@ -1322,3 +1325,5 @@ pdf_tos_newline(pdf_text_object_state *tos, float leading)
 	tos->tlm = fz_pre_translate(tos->tlm, 0, -leading);
 	tos->tm = tos->tlm;
 }
+
+#endif

@@ -30,6 +30,8 @@
 #include <math.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* TODO: here or public? */
 static int
 fz_key_storable_needs_reaping(fz_context *ctx, const fz_key_storable *ks)
@@ -1581,3 +1583,5 @@ fz_image *fz_new_image_from_display_list(fz_context *ctx, float w, float h, fz_d
 
 	return &image->super;
 }
+
+#endif

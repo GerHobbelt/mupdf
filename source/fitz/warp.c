@@ -25,6 +25,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct
 {
 	int x;
@@ -1811,3 +1813,5 @@ fz_detect_document(fz_context *ctx, fz_point *points, const fz_pixmap *src)
 		fz_rethrow(ctx);
 	}
 }
+
+#endif

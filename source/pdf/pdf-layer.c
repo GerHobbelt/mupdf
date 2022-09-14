@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 /*
 	Notes on OCGs etc.
 
@@ -910,3 +912,5 @@ pdf_set_layer_config_as_default(fz_context *ctx, pdf_document *doc)
 
 	pdf_dict_del(ctx, ocprops, PDF_NAME(Configs));
 }
+
+#endif

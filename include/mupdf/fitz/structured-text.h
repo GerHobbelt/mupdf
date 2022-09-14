@@ -33,6 +33,8 @@
 #include "mupdf/fitz/device.h"
 #include "mupdf/fitz/pool.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -477,6 +479,8 @@ fz_document *fz_open_reflowed_document(fz_context *ctx, fz_document *underdoc, c
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

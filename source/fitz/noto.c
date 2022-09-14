@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /*
 	Base 14 PDF fonts from URW.
 	Noto fonts from Google.
@@ -75,9 +77,10 @@
 #define TOFU_EMOJI
 #endif
 
-/* This historic script has an unusually large font (2MB), so we skip it by default. */
+/* This historic script has an unusually large font (2MB), so we skip it by default. (overridden; now included with the others [GHo]) */
 #ifndef NOTO_TANGUT
-#define NOTO_TANGUT 0
+//#define NOTO_TANGUT 0   // vanilla default
+#define NOTO_TANGUT 1
 #endif
 
 /* Define some extra scripts for special fonts. */
@@ -344,3 +347,5 @@ fz_lookup_noto_emoji_font(fz_context *ctx, int *size)
 {
 	return search_by_script_lang(size, NULL, MUPDF_SCRIPT_EMOJI, FZ_LANG_UNSET);
 }
+
+#endif

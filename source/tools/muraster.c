@@ -166,6 +166,8 @@
 #include "mupdf/helpers/cpu.h"
 #include "mupdf/helpers/system-header-files.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "timeval.h"
 
 #include <string.h>
@@ -2381,3 +2383,5 @@ int main(int argc, const char** argv)
 
 	return errored;
 }
+
+#endif

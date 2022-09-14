@@ -21,9 +21,12 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+#include "mupdf/pdf.h"
 #include "pdf-annot-imp.h"
 
 #include <string.h>
+
+#if FZ_ENABLE_PDF
 
 /* Must be kept in sync with definitions in pdf_util.js */
 enum
@@ -2372,3 +2375,5 @@ int pdf_count_signatures(fz_context *ctx, pdf_document *doc)
 	pdf_walk_tree(ctx, form_fields, PDF_NAME(Kids), count_sigs, NULL, &n, ft_name, &ft);
 	return n;
 }
+
+#endif

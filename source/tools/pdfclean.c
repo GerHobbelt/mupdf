@@ -40,6 +40,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if FZ_ENABLE_RENDER_CORE
+
 static fz_context* ctx = NULL;
 
 static int usage(void)
@@ -180,3 +182,5 @@ int pdfclean_main(int argc, const char** argv)
 
 	return errors != 0 ? EXIT_FAILURE : EXIT_SUCCESS;
 }
+
+#endif

@@ -27,6 +27,8 @@
 #include <float.h>
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /* Number of fraction bits for fixed point math */
 #define PREC 14
 #define MASK ((1<<PREC)-1)
@@ -4118,3 +4120,5 @@ fz_paint_image(fz_context *ctx, fz_pixmap * FZ_RESTRICT dst, const fz_irect * FZ
 {
 	fz_paint_image_imp(ctx, dst, scissor, shape, group_alpha, img, ctm, NULL, alpha, lerp_allowed, eop);
 }
+
+#endif

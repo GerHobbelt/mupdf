@@ -26,6 +26,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+#if FZ_ENABLE_XPS
+
 /*
  * Parse the document structure / outline parts referenced from fixdoc relationships.
  */
@@ -165,3 +167,5 @@ xps_load_outline(fz_context *ctx, fz_document *doc_)
 	}
 	return head;
 }
+
+#endif

@@ -26,6 +26,8 @@
 #include <string.h>
 #include <math.h>
 
+#if FZ_ENABLE_PDF
+
 #define TILE
 
 #define FIX_ACTUAL_TEXT_LENGTH_MISMATCH 0
@@ -2401,3 +2403,5 @@ pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char
 
 	return (pdf_processor*)proc;
 }
+
+#endif

@@ -23,6 +23,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_PDF
+
 pdf_obj *
 pdf_xobject_resources(fz_context *ctx, pdf_obj *xobj)
 {
@@ -128,3 +130,5 @@ pdf_update_xobject(fz_context *ctx, pdf_document *doc, pdf_obj *form, fz_rect bb
 		pdf_dict_del(ctx, form, PDF_NAME(Resources));
 	pdf_update_stream(ctx, doc, form, contents, 0);
 }
+
+#endif

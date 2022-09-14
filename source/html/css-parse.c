@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "css-properties.h"
 
 // MSWin fix
@@ -1095,3 +1097,5 @@ void fz_parse_css(fz_context *ctx, fz_css *css, const char *source, const char *
 	next(&buf);
 	css->rule = parse_stylesheet(&buf, css->rule);
 }
+
+#endif

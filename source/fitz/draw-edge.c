@@ -29,6 +29,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if FZ_ENABLE_RENDER_CORE 
+
 /*
  * Global Edge List -- list of straight path segments for scan conversion
  *
@@ -929,3 +931,5 @@ fz_new_gel(fz_context *ctx)
 
 	return &gel->super;
 }
+
+#endif

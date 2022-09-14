@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_HTML
+
 /*
  * Internal state for fz_write_story() to allow passing of page_num to
  * positionfn.
@@ -271,3 +273,5 @@ void fz_write_stabilized_story(
 		fz_rethrow(ctx);
 	}
 }
+
+#endif

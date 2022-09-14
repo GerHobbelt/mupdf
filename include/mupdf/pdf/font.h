@@ -27,6 +27,12 @@
 #include "mupdf/fitz/device.h"
 #include "mupdf/fitz/font.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum
 {
 	PDF_FD_FIXED_PITCH = 1 << 0,
@@ -153,5 +159,12 @@ pdf_obj *pdf_add_cjk_font(fz_context *ctx, pdf_document *doc, fz_font *font, int
 pdf_obj *pdf_add_substitute_font(fz_context *ctx, pdf_document *doc, fz_font *font);
 
 int pdf_font_writing_supported(fz_font *font);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

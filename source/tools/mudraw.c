@@ -28,6 +28,8 @@
 #include "mupdf/mutool.h"
 #include "mupdf/assertions.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "mupdf/helpers/system-header-files.h"
 
 #include "timeval.h"
@@ -60,12 +62,6 @@
 #ifdef _WIN32
 #include <io.h>
 #include <fcntl.h>
-#endif
-
-#if !defined(HAVE_LEPTONICA) || !defined(HAVE_TESSERACT)
-#ifndef OCR_DISABLED
-#define OCR_DISABLED
-#endif
 #endif
 
 /* Enable for helpful threading debug */
@@ -470,13 +466,13 @@ static int usage(void)
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
 		"  -F -  output format (default inferred from output file name)\n"
 		"    raster: png, pgm, ppm, pnm, pam, pbm, pkm, pwg, pcl, psd, ps, muraw\n"
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 		"    vector: svg, pdf, trace, ocr.trace\n"
 #else
 		"    vector: svg, pdf, trace\n"
 #endif
 		"    text: txt, html, xhtml, xml, stext, stext.json, bbox\n"
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 		"    ocr'd text: ocr.txt, ocr.html, ocr.xhtml, ocr.xml, ocr.stext, ocr.stext.json\n"
 #else
 		"    (ocr'd text is disabled in this build)\n"
@@ -561,7 +557,7 @@ static int usage(void)
 		"     1 = Overprint simulation (Disabled in this build)\n"
 		"     2 = Full spot rendering (Disabled in this build)\n"
 #endif
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 		"  -t -  Specify language/script for OCR (default: eng)\n"
 		"  -d -  Specify path for OCR files (default: rely on TESSDATA_PREFIX environment variable)\n"
 #else
@@ -2785,14 +2781,14 @@ int main(int argc, const char** argv)
 			break;
 #endif
 		case 'd':
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 			ocr_datadir = fz_optarg; break;
 #else
 			fz_warn(ctx, "OCR functionality not enabled in this build\n");
 			break;
 #endif
 		case 't':
-#ifndef OCR_DISABLED
+#if FZ_ENABLE_OCR
 			ocr_language = fz_optarg; break;
 #else
 			fz_warn(ctx, "OCR functionality not enabled in this build");
@@ -3248,7 +3244,7 @@ int main(int argc, const char** argv)
 
 			fz_try(ctx)
 			{
-#if FZ_ENABLE_OCR_OUTPUT && !defined(OCR_DISABLED)
+#if FZ_ENABLE_OCR_OUTPUT && FZ_ENABLE_OCR
 				tess_api = ocr_init(ctx, ocr_language, ocr_datadir);
 #else
 				fz_throw(ctx, FZ_ERROR_GENERIC, "OCR not supported in this build");
@@ -3256,7 +3252,7 @@ int main(int argc, const char** argv)
 			}
 			fz_always(ctx)
 			{
-#if FZ_ENABLE_OCR_OUTPUT && !defined(OCR_DISABLED)
+#if FZ_ENABLE_OCR_OUTPUT && FZ_ENABLE_OCR
 				ocr_fin(ctx, tess_api);
 #endif
 			}
@@ -3566,3 +3562,5 @@ int main(int argc, const char** argv)
 
 	return errored;
 }
+
+#endif

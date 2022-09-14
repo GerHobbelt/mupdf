@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 /* Load or synthesize ToUnicode map for fonts */
 
 static void
@@ -161,3 +163,5 @@ pdf_load_to_unicode(fz_context *ctx, pdf_document *doc, pdf_font_desc *font,
 		 * cmap and/or post tables or if it has glyph names. */
 	}
 }
+
+#endif
