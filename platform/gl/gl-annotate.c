@@ -351,7 +351,7 @@ static int step_high_security_save(int cancel)
 	fz_try(ctx)
 	{
 		dev = fz_begin_page(ctx, hss_state.writer, fz_bound_page(ctx, page));
-		fz_run_page(ctx, page, dev, fz_identity, NULL);
+		fz_run_page(ctx, page, dev, fz_identity);
 		fz_drop_page(ctx, page);
 		page = NULL;
 		fz_end_page(ctx, hss_state.writer);

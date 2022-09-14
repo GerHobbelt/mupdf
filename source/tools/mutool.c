@@ -46,6 +46,7 @@
 #include "../../thirdparty/owemdjee/libzopfli/src/zopflipng/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/QuickJS-C++-Wrapper/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/BLAKE3/c/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #undef BUILD_MONOLITHIC
 
@@ -353,6 +354,11 @@ static struct {
 	{ {.fa = bibutils_test_main }, "bibutils_test", "bibutils::test tool" },
 	{ {.f = bibutils_utf8_test_main }, "bibutils_utf8_test", "bibutils::utf8_test tool" },
 	{ {.f = bibutils_vplist_test_main }, "bibutils_vplist_test", "bibutils::vplist_test tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = BLAKE3_example_main }, "BLAKE3_example", "BLAKE3_example tool" },
+	{ {.fa = BLAKE3_demo_main }, "BLAKE3_demo", "BLAKE3_demo tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },

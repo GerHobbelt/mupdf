@@ -839,18 +839,18 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		mdev = fz_new_list_device(app->ctx, app->page_list);
 		if (no_cache)
 			fz_enable_device_hints(app->ctx, mdev, FZ_NO_CACHE);
-		fz_run_page_contents(app->ctx, app->page, mdev, fz_identity, &cookie);
+		fz_run_page_contents(app->ctx, app->page, mdev, fz_identity);
 		fz_close_device(app->ctx, mdev);
 		fz_drop_device(app->ctx, mdev);
 		mdev = NULL;
 		app->annotations_list = fz_new_display_list(app->ctx, fz_infinite_rect);
 		mdev = fz_new_list_device(app->ctx, app->annotations_list);
-		fz_run_page_annots(app->ctx, app->page, mdev, fz_identity, &cookie);
-		if (cookie.incomplete)
+		fz_run_page_annots(app->ctx, app->page, mdev, fz_identity);
+		if (cookie.d.incomplete)
 		{
 			app->incomplete = 1;
 		}
-		else if (cookie.errors)
+		else if (cookie.d.errors)
 		{
 			pdfapp_warn(app, "Errors found on page.");
 			errored = 1;
@@ -929,194 +929,201 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 	if (app->incomplete)
 		loadpage = 1;
 
-	fz_attach_cookie_from_context(app->ctx, &cookie);
-
-	if (loadpage)
+	fz_try(app->ctx)
 	{
-		fz_rect mediabox;
-		pdfapp_loadpage(app, searching);
+		fz_attach_cookie_to_context(app->ctx, &cookie);
 
-		/* Zero search hit position */
-		app->hit_count = 0;
-
-		/* Extract text */
-		fz_try(app->ctx)
-			mediabox = fz_bound_page(app->ctx, app->page);
-		fz_catch(app->ctx)
+		if (loadpage)
 		{
-			if (fz_caught(app->ctx) != FZ_ERROR_TRYLATER)
-				fz_rethrow(app->ctx);
-			mediabox = fz_make_rect(0, 0, 100, 100);
-			app->incomplete = 1;
-		}
+			fz_rect mediabox;
+			pdfapp_loadpage(app, searching);
 
-		app->page_text = fz_new_stext_page(app->ctx, mediabox);
+			/* Zero search hit position */
+			app->hit_count = 0;
 
-		if (app->page_list || app->annotations_list)
-		{
-			tdev = fz_new_stext_device(app->ctx, app->page_text, &dev_opts);
+			/* Extract text */
 			fz_try(app->ctx)
-			{
-				pdfapp_runpage(app, tdev, fz_identity, fz_infinite_rect, &cookie);
-				fz_close_device(app->ctx, tdev);
-			}
-			fz_always(app->ctx)
-				fz_drop_device(app->ctx, tdev);
+				mediabox = fz_bound_page(app->ctx, app->page);
 			fz_catch(app->ctx)
 			{
-				fz_error(app->ctx, "Failure when loading page %d / %d: %s",
-					app->pageno, app->pagecount, fz_caught_message(app->ctx));
+				if (fz_caught(app->ctx) != FZ_ERROR_TRYLATER)
+					fz_rethrow(app->ctx);
+				mediabox = fz_make_rect(0, 0, 100, 100);
+				app->incomplete = 1;
+			}
 
-				fz_detach_cookie_from_context(app->ctx);
+			app->page_text = fz_new_stext_page(app->ctx, mediabox);
 
-				fz_rethrow(app->ctx);
+			if (app->page_list || app->annotations_list)
+			{
+				tdev = fz_new_stext_device(app->ctx, app->page_text, &dev_opts);
+				fz_try(app->ctx)
+				{
+					pdfapp_runpage(app, tdev, fz_identity, fz_infinite_rect);
+					fz_close_device(app->ctx, tdev);
+				}
+				fz_always(app->ctx)
+					fz_drop_device(app->ctx, tdev);
+				fz_catch(app->ctx)
+				{
+					fz_error(app->ctx, "Failure when loading page %d / %d: %s",
+						app->pageno, app->pagecount, fz_caught_message(app->ctx));
+
+					fz_rethrow(app->ctx);
+				}
 			}
 		}
-	}
 
-	if (drawpage)
-	{
-		char buf2[64];
-		size_t len;
+		if (drawpage)
+		{
+			char buf2[64];
+			size_t len;
 
-		sprintf(buf2, " - %d/%d (%g dpi)",
+			sprintf(buf2, " - %d/%d (%g dpi)",
 				app->pageno, app->pagecount, app->resolution);
-		len = MAX_TITLE-strlen(buf2);
-		if (strlen(app->doctitle) >= len)
-		{
-			fz_strncpy_s(app->ctx, buf, app->doctitle, len-3);
-			fz_strlcat(buf, "...", MAX_TITLE);
-			fz_strlcat(buf, buf2, MAX_TITLE);
+			len = MAX_TITLE - strlen(buf2);
+			if (strlen(app->doctitle) >= len)
+			{
+				fz_strncpy_s(app->ctx, buf, app->doctitle, len - 3);
+				fz_strlcat(buf, "...", MAX_TITLE);
+				fz_strlcat(buf, buf2, MAX_TITLE);
+			}
+			else
+			{
+				fz_strncpy_s(app->ctx, buf, app->doctitle, MAX_TITLE);
+				fz_strlcat(buf, buf2, MAX_TITLE);
+			}
+			wintitle(app, buf);
+
+			pdfapp_viewctm(&ctm, app);
+			bounds = fz_transform_rect(app->page_bbox, ctm);
+			ibounds = fz_round_rect(bounds);
+			bounds = fz_rect_from_irect(ibounds);
+
+			/* Draw */
+			fz_drop_pixmap(app->ctx, app->image);
+			if (app->grayscale)
+				colorspace = fz_device_gray(app->ctx);
+			else
+				colorspace = app->colorspace;
+
+			app->image = NULL;
+			app->imgw = 0;
+			app->imgh = 0;
+
+			fz_var(app->image);
+			fz_var(idev);
+
+			fz_try(app->ctx)
+			{
+				app->image = fz_new_pixmap_with_bbox(app->ctx, colorspace, ibounds, app->seps, 1);
+				app->imgw = fz_pixmap_width(app->ctx, app->image);
+				app->imgh = fz_pixmap_height(app->ctx, app->image);
+
+				fz_clear_pixmap_with_value(app->ctx, app->image, 255);
+				if (app->page_list || app->annotations_list)
+				{
+					idev = fz_new_draw_device(app->ctx, fz_identity, app->image);
+					pdfapp_runpage(app, idev, ctm, bounds);
+					fz_close_device(app->ctx, idev);
+				}
+				if (app->invert)
+				{
+					fz_invert_pixmap_luminance(app->ctx, app->image);
+					fz_gamma_pixmap(app->ctx, app->image, 1 / 1.4f);
+				}
+				if (app->tint)
+					fz_tint_pixmap(app->ctx, app->image, 0, app->tint_white);
+			}
+			fz_always(app->ctx)
+				fz_drop_device(app->ctx, idev);
+			fz_catch(app->ctx)
+			{
+				cookie.d.errors++;
+
+				fz_error(app->ctx, "Failure when drawing page %d / %d @ %g dpi: %s",
+					app->pageno, app->pagecount, app->resolution, fz_caught_message(app->ctx));
+			}
 		}
-		else
+
+		if (transition && drawpage)
 		{
-			fz_strncpy_s(app->ctx, buf, app->doctitle, MAX_TITLE);
-			fz_strlcat(buf, buf2, MAX_TITLE);
-		}
-		wintitle(app, buf);
+			app->new_image = app->image;
+			app->image = NULL;
+			app->imgw = 0;
+			app->imgh = 0;
 
-		pdfapp_viewctm(&ctm, app);
-		bounds = fz_transform_rect(app->page_bbox, ctm);
-		ibounds = fz_round_rect(bounds);
-		bounds = fz_rect_from_irect(ibounds);
-
-		/* Draw */
-		fz_drop_pixmap(app->ctx, app->image);
-		if (app->grayscale)
-			colorspace = fz_device_gray(app->ctx);
-		else
-			colorspace = app->colorspace;
-
-		app->image = NULL;
-		app->imgw = 0;
-		app->imgh = 0;
-
-		fz_var(app->image);
-		fz_var(idev);
-
-		fz_try(app->ctx)
-		{
+			if (app->grayscale)
+				colorspace = fz_device_gray(app->ctx);
+			else
+				colorspace = app->colorspace;
 			app->image = fz_new_pixmap_with_bbox(app->ctx, colorspace, ibounds, app->seps, 1);
 			app->imgw = fz_pixmap_width(app->ctx, app->image);
 			app->imgh = fz_pixmap_height(app->ctx, app->image);
 
-			fz_clear_pixmap_with_value(app->ctx, app->image, 255);
-			if (app->page_list || app->annotations_list)
+			app->duration = 0;
+			fz_page_presentation(app->ctx, app->page, &app->transition, &app->duration);
+			if (app->duration == 0)
+				app->duration = app->presentation_time_in_seconds;
+			app->in_transit = fz_generate_transition(app->ctx, app->image, app->old_image, app->new_image, 0, &app->transition);
+			if (!app->in_transit)
 			{
-				idev = fz_new_draw_device(app->ctx, fz_identity, app->image);
-				pdfapp_runpage(app, idev, ctm, bounds, &cookie);
-				fz_close_device(app->ctx, idev);
+				if (app->duration != 0)
+					winadvancetimer(app, app->duration);
 			}
-			if (app->invert)
+			app->start_time = clock();
+		}
+
+		if (repaint)
+		{
+			pdfapp_panview(app, app->panx, app->pany);
+
+			if (!app->image)
 			{
-				fz_invert_pixmap_luminance(app->ctx, app->image);
-				fz_gamma_pixmap(app->ctx, app->image, 1 / 1.4f);
+				/* there is no image to blit, but there might be an error message */
+				winresize(app, app->layout_w, app->layout_h);
 			}
-			if (app->tint)
-				fz_tint_pixmap(app->ctx, app->image, 0, app->tint_white);
-		}
-		fz_always(app->ctx)
-			fz_drop_device(app->ctx, idev);
-		fz_catch(app->ctx)
-		{
-			cookie.errors++;
+			else if (app->shrinkwrap)
+			{
+				int w = app->imgw;
+				int h = app->imgh;
+				if (app->winw == w)
+					app->panx = 0;
+				if (app->winh == h)
+					app->pany = 0;
+				if (w > app->scrw * app->maxpercentage / 100)
+					w = app->scrw * app->maxpercentage / 100;
+				if (h > app->scrh * app->maxpercentage / 100)
+					h = app->scrh * app->maxpercentage / 100;
+				if (w != app->winw || h != app->winh)
+					winresize(app, w, h);
+			}
 
-			fz_error(app->ctx, "Failure when drawing page %d / %d @ %g dpi: %s",
-				app->pageno, app->pagecount, app->resolution, fz_caught_message(app->ctx));
+			winrepaint(app);
+
+			wincursor(app, ARROW);
 		}
 	}
-
-	if (transition && drawpage)
+	fz_always(app->ctx)
 	{
-		app->new_image = app->image;
-		app->image = NULL;
-		app->imgw = 0;
-		app->imgh = 0;
-
-		if (app->grayscale)
-			colorspace = fz_device_gray(app->ctx);
-		else
-			colorspace = app->colorspace;
-		app->image = fz_new_pixmap_with_bbox(app->ctx, colorspace, ibounds, app->seps, 1);
-		app->imgw = fz_pixmap_width(app->ctx, app->image);
-		app->imgh = fz_pixmap_height(app->ctx, app->image);
-
-		app->duration = 0;
-		fz_page_presentation(app->ctx, app->page, &app->transition, &app->duration);
-		if (app->duration == 0)
-			app->duration = app->presentation_time_in_seconds;
-		app->in_transit = fz_generate_transition(app->ctx, app->image, app->old_image, app->new_image, 0, &app->transition);
-		if (!app->in_transit)
+		if (cookie.d.errors && app->errored == 0)
 		{
-			if (app->duration != 0)
-				winadvancetimer(app, app->duration);
-		}
-		app->start_time = clock();
-	}
+			app->errored = 1;
 
-	if (repaint)
+			char msgbuf[512];
+			fz_snprintf(msgbuf, sizeof(msgbuf), "Errors found on page %d / %d. Page rendering may be incomplete.",
+				app->pageno, app->pagecount);
+			pdfapp_warn(app, msgbuf);
+		}
+
+		fz_flush_warnings(app->ctx);
+
+		fz_detach_cookie_from_context(app->ctx);
+	}
+	fz_catch(app->ctx)
 	{
-		pdfapp_panview(app, app->panx, app->pany);
-
-		if (!app->image)
-		{
-			/* there is no image to blit, but there might be an error message */
-			winresize(app, app->layout_w, app->layout_h);
-		}
-		else if (app->shrinkwrap)
-		{
-			int w = app->imgw;
-			int h = app->imgh;
-			if (app->winw == w)
-				app->panx = 0;
-			if (app->winh == h)
-				app->pany = 0;
-			if (w > app->scrw * app->maxpercentage / 100)
-				w = app->scrw * app->maxpercentage / 100;
-			if (h > app->scrh * app->maxpercentage / 100)
-				h = app->scrh * app->maxpercentage / 100;
-			if (w != app->winw || h != app->winh)
-				winresize(app, w, h);
-		}
-
-		winrepaint(app);
-
-		wincursor(app, ARROW);
+		fz_rethrow(app->ctx);
 	}
-
-	if (cookie.errors && app->errored == 0)
-	{
-		app->errored = 1;
-
-		char msgbuf[512];
-		fz_snprintf(msgbuf, sizeof(msgbuf), "Errors found on page %d / %d. Page rendering may be incomplete.", 
-			app->pageno, app->pagecount);
-		pdfapp_warn(app, msgbuf);
-	}
-
-	fz_flush_warnings(app->ctx);
-
-	fz_detach_cookie_from_context(app->ctx);
 }
 
 static void pdfapp_gotouri(pdfapp_t *app, char *uri)

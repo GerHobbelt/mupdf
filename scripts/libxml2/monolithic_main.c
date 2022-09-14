@@ -10,7 +10,6 @@
 
 MONOLITHIC_CMD_TABLE_START()
 	{ "xml_api", {.fa = xml_testapi_main } },
-	{ "xml_Automata", {.fa = xml_testAutomata_main } },
 	{ "xml_C14N", {.fa = xml_testC14N_main } },
 	{ "xml_catalog", {.fa = xml_xmlcatalog_main } },
 	{ "xml_char", {.fa = xml_testchar_main } },
