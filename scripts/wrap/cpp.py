@@ -1243,6 +1243,110 @@ def make_function_wrappers(
                     }}
                     '''))
 
+    # Output custom wrappers for variadic pdf_dict_getl().
+    #
+
+    decl = f'''FZ_FUNCTION pdf_obj* {rename.ll_fn('pdf_dict_getlv')}( pdf_obj* dict, va_list keys)'''
+    out_functions_h.write( textwrap.dedent( f'''
+            /* Wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of `pdf_obj*`'s. */
+            {decl};
+            '''))
+    out_functions_cpp.write( textwrap.dedent( f'''
+            {decl}
+            {{
+                pdf_obj *key;
+                while (dict != NULL && (key = va_arg(keys, pdf_obj *)) != NULL)
+                {{
+                    dict = {rename.ll_fn('pdf_dict_get')}( dict, key);
+                }}
+                return dict;
+            }}
+            '''))
+
+    decl = f'''FZ_FUNCTION pdf_obj* {rename.ll_fn('pdf_dict_getl')}( pdf_obj* dict, ...)'''
+    out_functions_h.write( textwrap.dedent( f'''
+            /* Wrapper for `pdf_dict_getl()`. `...` must be null-terminated list of `pdf_obj*`'s. */
+            {decl};
+            '''))
+    out_functions_cpp.write( textwrap.dedent( f'''
+            {decl}
+            {{
+                va_list keys;
+                va_start(keys, dict);
+                try
+                {{
+                    dict = {rename.ll_fn('pdf_dict_getlv')}( dict, keys);
+                }}
+                catch( std::exception& e)
+                {{
+                    va_end(keys);
+                    throw;
+                }}
+                va_end(keys);
+                return dict;
+            }}
+            '''))
+
+    decl = f'''FZ_FUNCTION {rename.class_('pdf_obj')} {rename.fn('pdf_dict_getlv')}( {rename.class_('pdf_obj')}& dict, va_list keys)'''
+    out_functions_h2.write(
+            textwrap.indent(
+                textwrap.dedent( f'''
+                    /* Wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of `{rename.class_('pdf_obj')}*`'s. */
+                    {decl};
+                    '''),
+                '    ',
+                )
+            )
+    out_functions_cpp2.write( textwrap.dedent( f'''
+            {decl}
+            {{
+                for(;;)
+                {{
+                    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": dict.m_internal=" << dict.m_internal << "\\n";
+                    if (!dict.m_internal)    break;
+                    mupdf::PdfObj* key = va_arg(keys, mupdf::PdfObj*);
+                    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": key=" << key << "\\n";
+                    if (!key)   break;
+                    if (key > ((mupdf::PdfObj*) 4096))
+                    {{
+                        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": key->m_internal=" << key->m_internal << "\\n";
+                    }}
+                    dict = {rename.fn('pdf_dict_get')}( dict, *key);
+                }}
+                return dict;
+            }}
+            '''))
+
+    decl = f'''FZ_FUNCTION {rename.class_('pdf_obj')} {rename.fn('pdf_dict_getl')}( {rename.class_('pdf_obj')}* dict, ...)'''
+    out_functions_h2.write(
+            textwrap.indent(
+                textwrap.dedent( f'''
+                    /* Wrapper for `pdf_dict_getl()`. `...` must be null-terminated list of
+                    `{rename.class_('pdf_obj')}*`'s. [We use pointer <dict> arg because variadic args
+                    do not with with reference args.] */
+                    {decl};
+                    '''),
+                '    ',
+                ),
+            )
+    out_functions_cpp2.write( textwrap.dedent( f'''
+            {decl}
+            {{
+                va_list keys;
+                va_start(keys, dict);
+                try
+                {{
+                    {rename.class_('pdf_obj')} ret = {rename.fn('pdf_dict_getlv')}( *dict, keys);
+                    va_end( keys);
+                    return ret;
+                }}
+                catch (std::exception& e)
+                {{
+                    va_end( keys);
+                    throw;
+                }}
+            }}
+            '''))
 
 
 def class_add_iterator( tu, struct_cursor, struct_name, classname, extras):

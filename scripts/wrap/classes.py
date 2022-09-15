@@ -1341,6 +1341,14 @@ classextras = ClassExtras(
 
                     ],
                 constructors_extra = [
+                    ExtraConstructor( '()',
+                        '''
+                        : x(0), y(0)
+                        {
+                        }
+                        ''',
+                        comment = '/* Default constructor sets to (0, 0). */',
+                        ),
                     ExtraConstructor( '(float x, float y)',
                         '''
                         : x(x), y(y)
@@ -1442,7 +1450,20 @@ classextras = ClassExtras(
                         ''',
                         comment = '/* Construct from fz_unit_rect, fz_empty_rect or fz_infinite_rect. */',
                         ),
-                        ],
+                    ExtraConstructor(
+                        '()',
+                        '''
+                        :
+                        x0(0),
+                        x1(0),
+                        y0(0),
+                        y1(0)
+                        {
+                        }
+                        ''',
+                        comment = '/* Default constructor initialises to (0, 0, 0, 0. */',
+                        ),
+                    ],
                 methods_extra = [
                     ExtraMethod(
                         'void',
@@ -1699,6 +1720,10 @@ classextras = ClassExtras(
         fz_transition = ClassExtra(
                 pod='inline',
                 constructor_raw = True,
+                ),
+
+        pdf_annot = ClassExtra(
+                constructor_raw = 'default',
                 ),
 
         pdf_document = ClassExtra(

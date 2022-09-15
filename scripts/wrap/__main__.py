@@ -1561,6 +1561,7 @@ def build( build_dirs, swig_command, args):
                             jlib.remove( out2_so)
                             jlib.remove( f'{out2_so}.cmd')
 
+                    # Build _mupdf.so.
                     command = ( textwrap.dedent(
                             f'''
                             c++
@@ -1574,7 +1575,7 @@ def build( build_dirs, swig_command, args):
                                 {cpp_path}
                                 {jlib.link_l_flags( [mupdf_so, mupdfcpp_so])}
                                 -Wno-deprecated-declarations
-
+                                -Wno-free-nonheap-object
                             ''').strip().replace( '\n', ' \\\n').strip()
                             )
                     infiles = [

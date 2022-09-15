@@ -537,6 +537,12 @@ def build_swig(
             %ignore {rename.ll_fn('fz_format_string')};
             %ignore {rename.ll_fn('fz_open_file_w')};
 
+            // Ignore custom C++ variadic fns.
+            %ignore {rename.ll_fn('pdf_dict_getlv')};
+            %ignore {rename.ll_fn('pdf_dict_getl')};
+            %ignore {rename.fn('pdf_dict_getlv')};
+            %ignore {rename.fn('pdf_dict_getl')};
+
             // SWIG can't handle this because it uses a valist.
             %ignore {rename.ll_fn('Memento_vasprintf')};
 
