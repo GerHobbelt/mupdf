@@ -264,7 +264,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
         icg = rename.internal( 'context_get')
         te = rename.internal( 'throw_exception')
         out.write(      f'    fz_context* auto_ctx = {icg}();\n')
-        out.write(      f'    fz_var(auto_ctx);\n')
+        out.write(      f'    //fz_var(auto_ctx);\n')
 
     # Output code that writes diagnostics to std::cerr if $MUPDF_trace is set.
     #
@@ -315,7 +315,7 @@ def make_fncall( tu, cursor, return_type, fncall, out):
     if return_type != 'void':
         out.write(  f'    {return_type} ret;\n')
         if uses_fz_context:
-            out.write(  f'    fz_var(ret);\n')
+            out.write(  f'    //fz_var(ret);\n')
 
     if cursor.spelling == 'fz_warn':
         out.write( '    va_list ap;\n')
