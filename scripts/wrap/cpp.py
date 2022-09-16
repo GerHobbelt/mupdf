@@ -2053,7 +2053,9 @@ def function_wrapper_class_aware(
     num_out_params = 0
     num_class_wrapper_params = 0
     comma = ''
+    this_is_const = False
     debug = state.state_.show_details( fnname)
+
     for arg in parse.get_args( tu, fn_cursor):
         if debug:
             jlib.log( 'Looking at {struct_name=} {fnname=} {fnname_wrapper} {arg=}', 1)
@@ -2064,6 +2066,12 @@ def function_wrapper_class_aware(
         if arg.alt:
             # This parameter is a pointer to a struct that we wrap.
             num_class_wrapper_params += 1
+            arg_extras = classes.classextras.get( tu, arg.alt.type.spelling)
+            assert arg_extras, jlib.log_text( '{=structname fnname arg.alt.type.spelling}')
+            const = ''
+            if not arg.out_param and (not arg_extras.pod or arg.cursor.type.kind != state.clang.cindex.TypeKind.POINTER):
+                const = 'const '
+
             if (1
                     and struct_name
                     and not class_static
@@ -2075,13 +2083,10 @@ def function_wrapper_class_aware(
                 # Omit this arg from the method's prototype - we'll use <this>
                 # when calling the underlying fz_ function.
                 have_used_this = True
+                if not arg_extras.pod:
+                    this_is_const = const
                 continue
 
-            const = ''
-            arg_extras = classes.classextras.get( tu, arg.alt.type.spelling)
-            assert arg_extras, jlib.log_text( '{=structname fnname arg.alt.type.spelling}')
-            if not arg.out_param and not arg_extras.pod:
-                const = 'const '
             if arg_extras.pod == 'none':
                 jlib.log( 'Not wrapping because {arg=} wrapper has {extras.pod=}', 1)
                 return
@@ -2110,6 +2115,9 @@ def function_wrapper_class_aware(
 
     decl_h += ')'
     decl_cpp += ')'
+    if this_is_const:
+        decl_h += ' const'
+        decl_cpp += ' const'
 
     if verbose:
         jlib.log( '{=struct_name class_constructor}')
