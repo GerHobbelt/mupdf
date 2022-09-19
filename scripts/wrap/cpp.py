@@ -2697,13 +2697,13 @@ def pod_class_members(
 
     out_cpp.write( f'FZ_FUNCTION bool {classname}::operator==(const {classname}& rhs)\n')
     out_cpp.write( f'{{\n')
-    out_cpp.write( f'    return *this == rhs;\n')
+    out_cpp.write( f'    return ::operator==( *this, rhs);\n')
     out_cpp.write( f'}}\n')
     out_cpp.write( f'\n')
 
     out_cpp.write( f'FZ_FUNCTION bool {classname}::operator!=(const {classname}& rhs)\n')
     out_cpp.write( f'{{\n')
-    out_cpp.write( f'    return *this != rhs;\n')
+    out_cpp.write( f'    return ::operator!=( *this, rhs);\n')
     out_cpp.write( f'}}\n')
     out_cpp.write( f'\n')
 
