@@ -621,6 +621,9 @@ Usage:
             rebuilds if commands change.
 
             args:
+                --clang-verbose
+                    Generate extra diagnostics in action=0 when looking for
+                    libclang.so.
                 -d <details>
                     If specified, we show extra diagnostics when wrapping
                     functions whose name contains <details>. Can be specified
@@ -1076,7 +1079,7 @@ def build( build_dirs, swig_command, args):
     build_python = True
     build_csharp = False
     check_regress = False
-
+    clang_info_verbose = False
     force_rebuild = False
     header_git = False
     state.state_.show_details = lambda name: False
@@ -1102,6 +1105,8 @@ def build( build_dirs, swig_command, args):
             pass
         elif actions == '-f':
             force_rebuild = True
+        elif actions == '--clang-verbose':
+            clang_info_verbose = True
         elif actions == '-d':
             d = args.next()
             details.append( d)
@@ -1212,6 +1217,7 @@ def build( build_dirs, swig_command, args):
                             header_git,
                             generated,
                             check_regress,
+                            clang_info_verbose,
                             )
 
                     #generated.functions = state.state_.functions_cache

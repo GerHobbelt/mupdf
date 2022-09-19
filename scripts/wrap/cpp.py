@@ -3741,6 +3741,7 @@ def cpp_source(
         header_git,
         generated,
         check_regress,
+        clang_info_version,
         ):
     '''
     Generates all .h and .cpp files.
@@ -3767,7 +3768,7 @@ def cpp_source(
     assert isinstance(generated, Generated)
     assert not dir_mupdf.endswith( '/')
     assert not base.endswith( '/')
-    state.clang_info()    # Ensure we have set up clang-python.
+    state.clang_info( clang_info_version)    # Ensure we have set up clang-python.
 
     index = state.clang.cindex.Index.create()
     #log( '{dir_mupdf=} {base=}')
