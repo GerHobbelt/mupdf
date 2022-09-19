@@ -2723,7 +2723,7 @@ def struct_to_string_fns(
     out_cpp.write( f'}}\n')
 
 
-def struct_to_string_streaming_fns(
+def pod_struct_fns(
         tu,
         namespace,
         struct_cursor,
@@ -2733,10 +2733,11 @@ def struct_to_string_streaming_fns(
         out_cpp,
         ):
     '''
-    Writes operator<< functions for streaming text representation of C struct
-    members. We should be at top-level in out_h and out_cpp, i.e. not inside
-    'namespace mupdf {...}'.
+    Writes extra fns for POD structs - operator<<(), operator==(), operator!=().
     '''
+    # Write operator<< functions for streaming text representation of C struct
+    # members. We should be at top-level in out_h and out_cpp, i.e. not inside
+    # 'namespace mupdf {...}'.
     out_h.write( f'\n')
     out_h.write( f'/** Writes {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
     out_h.write( f'FZ_FUNCTION std::ostream& operator<< (std::ostream& out, const ::{struct_name}& rhs);\n')
@@ -2760,8 +2761,26 @@ def struct_to_string_streaming_fns(
     out_cpp.write( f'    return out;\n')
     out_cpp.write( f'}}\n')
 
+    # Write comparison fns.
+    out_h.write( f'\n')
+    out_h.write( f'/** Writes {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
+    out_h.write( f'FZ_FUNCTION bool operator==( const ::{struct_name}& lhs, const ::{struct_name}& rhs);\n')
+    out_h.write( f'FZ_FUNCTION bool operator!=( const ::{struct_name}& lhs, const ::{struct_name}& rhs);\n')
 
-def class_to_string_fns(
+    out_cpp.write( f'\n')
+    out_cpp.write( f'FZ_FUNCTION bool operator==( const ::{struct_name}& lhs, const ::{struct_name}& rhs)\n')
+    out_cpp.write( f'{{\n')
+    for cursor in struct_cursor.type.get_canonical().get_fields():
+        out_cpp.write( f'    if (lhs.{cursor.spelling} != rhs.{cursor.spelling}) return false;\n')
+    out_cpp.write( f'    return true;\n')
+    out_cpp.write( f'}}\n')
+    out_cpp.write( f'FZ_FUNCTION bool operator!=( const ::{struct_name}& lhs, const ::{struct_name}& rhs)\n')
+    out_cpp.write( f'{{\n')
+    out_cpp.write( f'    return !(lhs == rhs);\n')
+    out_cpp.write( f'}}\n')
+
+
+def pod_class_fns(
         tu,
         classname,
         struct_cursor,
@@ -2771,10 +2790,13 @@ def class_to_string_fns(
         out_cpp,
         ):
     '''
-    Writes functions for text representation of wrapper-class members. These
-    functions make use of the corresponding struct functions created by
-    struct_to_string_fns().
+    Writes extra fns for wrappers for POD structs - operator<<(), operator==(),
+    operator!=().
     '''
+    # Write functions for text representation of wrapper-class members. These
+    # functions make use of the corresponding struct functions created by
+    # struct_to_string_fns().
+    #
     assert extras.pod != 'none'
     out_h.write( f'\n')
     out_h.write( f'/** Writes a {classname}\'s underlying {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
@@ -2789,6 +2811,29 @@ def class_to_string_fns(
         out_cpp.write( f'    return out << rhs.m_internal;\n')
     else:
         out_cpp.write( f'    return out << " " << *rhs.m_internal;\n')
+    out_cpp.write( f'}}\n')
+
+    # Write comparison fns, using comparison of underlying MuPDF struct.
+    out_h.write( f'\n')
+    out_h.write( f'FZ_FUNCTION bool operator==( const {classname}& lhs, const {classname}& rhs);\n')
+    out_h.write( f'FZ_FUNCTION bool operator!=( const {classname}& lhs, const {classname}& rhs);\n')
+
+    out_cpp.write( f'\n')
+    out_cpp.write( f'FZ_FUNCTION bool operator==( const {classname}& lhs, const {classname}& rhs)\n')
+    out_cpp.write( f'{{\n')
+    if extras.pod == 'inline':
+        out_cpp.write( f'    return *lhs.internal() == *rhs.internal();\n')
+    else:
+        out_cpp.write( f'    return lhs.m_internal == rhs.m_internal;\n')
+    out_cpp.write( f'}}\n')
+
+    out_cpp.write( f'\n')
+    out_cpp.write( f'FZ_FUNCTION bool operator!=( const {classname}& lhs, const {classname}& rhs)\n')
+    out_cpp.write( f'{{\n')
+    if extras.pod == 'inline':
+        out_cpp.write( f'    return *lhs.internal() != *rhs.internal();\n')
+    else:
+        out_cpp.write( f'    return lhs.m_internal != rhs.m_internal;\n')
     out_cpp.write( f'}}\n')
 
 
@@ -3438,7 +3483,7 @@ def class_wrapper(
     # Make operator<< (std::ostream&, ...) for POD classes.
     #
     if extras.pod and extras.pod != 'none':
-        class_to_string_fns(
+        pod_class_fns(
                 tu,
                 classname,
                 struct_cursor,
@@ -4180,7 +4225,7 @@ def cpp_source(
     for classname, struct_cursor, struct_name in classes_:
         extras = classes.classextras.get( tu, struct_name)
         if extras.pod:
-            struct_to_string_streaming_fns(
+            pod_struct_fns(
                     tu,
                     namespace,
                     struct_cursor,
