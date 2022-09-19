@@ -1291,7 +1291,9 @@ def make_function_wrappers(
     out_functions_h2.write(
             textwrap.indent(
                 textwrap.dedent( f'''
-                    /* Wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of `{rename.class_('pdf_obj')}*`'s. */
+                    /* Wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of
+                    `{rename.class_('pdf_obj')}*`'s, not `pdf_obj*`'s, so for example using
+                    `PDF_NAME()` will cause a SEGV. */
                     {decl};
                     '''),
                 '    ',
@@ -1322,8 +1324,10 @@ def make_function_wrappers(
             textwrap.indent(
                 textwrap.dedent( f'''
                     /* Wrapper for `pdf_dict_getl()`. `...` must be null-terminated list of
-                    `{rename.class_('pdf_obj')}*`'s. [We use pointer <dict> arg because variadic args
-                    do not with with reference args.] */
+                    `{rename.class_('pdf_obj')}*`'s, not `pdf_obj*`'s, so for example using
+                    `PDF_NAME()` will cause a SEGV; instead see low-level alternative
+                    `{rename.ll_fn('pdf_dict_getl')}()`. [We use pointer `dict` arg because variadic
+                    args do not with with reference args.] */
                     {decl};
                     '''),
                 '    ',
