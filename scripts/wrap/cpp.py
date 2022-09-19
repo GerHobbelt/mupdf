@@ -2663,7 +2663,7 @@ def class_destructor(
         out_h.write( '    /** We use default destructor. */\n')
 
 
-def class_to_string_member(
+def pod_class_members(
         tu,
         classname,
         struct_cursor,
@@ -2679,11 +2679,31 @@ def class_to_string_member(
     out_h.write( f'    /** Returns string containing our members, labelled and inside (...), using operator<<. */\n')
     out_h.write( f'    FZ_FUNCTION std::string to_string();\n')
 
+    out_h.write( f'\n')
+    out_h.write( f'    /** Comparison method. */\n')
+    out_h.write( f'    FZ_FUNCTION bool operator==(const {classname}& rhs);\n')
+
+    out_h.write( f'\n')
+    out_h.write( f'    /** Comparison method. */\n')
+    out_h.write( f'    FZ_FUNCTION bool operator!=(const {classname}& rhs);\n')
+
     out_cpp.write( f'FZ_FUNCTION std::string {classname}::to_string()\n')
     out_cpp.write( f'{{\n')
     out_cpp.write( f'    std::ostringstream buffer;\n')
     out_cpp.write( f'    buffer << *this;\n')
     out_cpp.write( f'    return buffer.str();\n')
+    out_cpp.write( f'}}\n')
+    out_cpp.write( f'\n')
+
+    out_cpp.write( f'FZ_FUNCTION bool {classname}::operator==(const {classname}& rhs)\n')
+    out_cpp.write( f'{{\n')
+    out_cpp.write( f'    return *this == rhs;\n')
+    out_cpp.write( f'}}\n')
+    out_cpp.write( f'\n')
+
+    out_cpp.write( f'FZ_FUNCTION bool {classname}::operator!=(const {classname}& rhs)\n')
+    out_cpp.write( f'{{\n')
+    out_cpp.write( f'    return *this != rhs;\n')
     out_cpp.write( f'}}\n')
     out_cpp.write( f'\n')
 
@@ -3293,7 +3313,6 @@ def class_wrapper(
                 #log( 'adding to extras.method_wrappers: {fnname}')
                 extras.method_wrappers.append( fnname)
 
-
     # Extra static methods.
     #
     if extras.method_wrappers_static:
@@ -3457,7 +3476,7 @@ def class_wrapper(
     has_to_string = False
     if extras.pod and extras.pod != 'none':
         has_to_string = True
-        class_to_string_member(
+        pod_class_members(
                 tu,
                 classname,
                 struct_cursor,
