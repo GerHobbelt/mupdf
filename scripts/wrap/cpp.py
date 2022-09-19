@@ -2739,7 +2739,7 @@ def pod_struct_fns(
     # members. We should be at top-level in out_h and out_cpp, i.e. not inside
     # 'namespace mupdf {...}'.
     out_h.write( f'\n')
-    out_h.write( f'/** Writes {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
+    out_h.write( f'/** {struct_name}: writes members, labelled and inside (...), to a stream. */\n')
     out_h.write( f'FZ_FUNCTION std::ostream& operator<< (std::ostream& out, const ::{struct_name}& rhs);\n')
 
     out_cpp.write( f'\n')
@@ -2763,8 +2763,10 @@ def pod_struct_fns(
 
     # Write comparison fns.
     out_h.write( f'\n')
-    out_h.write( f'/** Writes {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
+    out_h.write( f'/** {struct_name}: comparison function. */\n')
     out_h.write( f'FZ_FUNCTION bool operator==( const ::{struct_name}& lhs, const ::{struct_name}& rhs);\n')
+    out_h.write( f'\n')
+    out_h.write( f'/** {struct_name}: comparison function. */\n')
     out_h.write( f'FZ_FUNCTION bool operator!=( const ::{struct_name}& lhs, const ::{struct_name}& rhs);\n')
 
     out_cpp.write( f'\n')
@@ -2798,8 +2800,9 @@ def pod_class_fns(
     # struct_to_string_fns().
     #
     assert extras.pod != 'none'
+    classname = f'mupdf::{classname}'
     out_h.write( f'\n')
-    out_h.write( f'/** Writes a {classname}\'s underlying {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
+    out_h.write( f'/** {classname}: writes underlying {struct_name}\'s members, labelled and inside (...), to a stream. */\n')
     out_h.write( f'FZ_FUNCTION std::ostream& operator<< (std::ostream& out, const {classname}& rhs);\n')
 
     out_cpp.write( f'\n')
@@ -2815,7 +2818,10 @@ def pod_class_fns(
 
     # Write comparison fns, using comparison of underlying MuPDF struct.
     out_h.write( f'\n')
+    out_h.write( f'/** {classname}: comparison function. */\n')
     out_h.write( f'FZ_FUNCTION bool operator==( const {classname}& lhs, const {classname}& rhs);\n')
+    out_h.write( f'\n')
+    out_h.write( f'/** {classname}: comparison function. */\n')
     out_h.write( f'FZ_FUNCTION bool operator!=( const {classname}& lhs, const {classname}& rhs);\n')
 
     out_cpp.write( f'\n')
@@ -3479,19 +3485,6 @@ def class_wrapper(
     # Class definition end.
     #
     out_h.write( '};\n')
-
-    # Make operator<< (std::ostream&, ...) for POD classes.
-    #
-    if extras.pod and extras.pod != 'none':
-        pod_class_fns(
-                tu,
-                classname,
-                struct_cursor,
-                struct_name,
-                extras,
-                out_h,
-                out_cpp,
-                )
 
     if extras.class_post:
         out_h_end.write( textwrap.dedent( extras.class_post))
@@ -4220,11 +4213,14 @@ def cpp_source(
             continue
         make_namespace_close( namespace, file)
 
-    # Write operator<< functions - these need to be outside the namespace.
+    # Write pod struct fns such as operator<<(), operator==() - these need to
+    # be outside the namespace.
     #
     for classname, struct_cursor, struct_name in classes_:
         extras = classes.classextras.get( tu, struct_name)
         if extras.pod:
+            # Make operator<<(), operator==(), operator!=() for POD struct.
+            #
             pod_struct_fns(
                     tu,
                     namespace,
@@ -4234,6 +4230,20 @@ def cpp_source(
                     out_hs.functions,
                     out_cpps.functions,
                     )
+            if extras.pod != 'none':
+                # Make operator<<(), operator==(), operator!=() for POD class
+                # wrappers.
+                #
+                pod_class_fns(
+                        tu,
+                        classname,
+                        struct_cursor,
+                        struct_name,
+                        extras,
+                        out_hs.classes,
+                        out_cpps.classes,
+                        )
+
 
     # Terminate multiple-inclusion guards in headers:
     #
