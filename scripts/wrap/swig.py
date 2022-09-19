@@ -105,24 +105,24 @@ def build_swig(
 
     if language == 'python':
         common += textwrap.dedent(f'''
-                /* Support for extracting buffer data into a Python bytes. If
-                <clear> is true we clear and trim the buffer. */
+                /* Returns a Python `bytes` containging a copy of a `fz_buffer`'s
+                data. If <clear> is true we also clear and trim the buffer. */
                 PyObject* python_buffer_to_bytes(fz_buffer* buffer, int clear)
                 {{
                     unsigned char* c = NULL;
-                    /* We mimic the affects of fz_buffer_extract(), which leaves
-                    the buffer with zero capacity. */
                     size_t len = {rename.namespace_ll_fn('fz_buffer_storage')}(buffer, &c);
                     PyObject* ret = PyBytes_FromStringAndSize((const char*) c, (Py_ssize_t) len);
                     if (clear)
                     {{
+                        /* We mimic the affects of fz_buffer_extract(), which
+                        leaves the buffer with zero capacity. */
                         {rename.namespace_ll_fn('fz_clear_buffer')}(buffer);
                         {rename.namespace_ll_fn('fz_trim_buffer')}(buffer);
                     }}
                     return ret;
                 }}
 
-                /* Returns a Python memoryview for specified memory. */
+                /* Returns a Python `memoryview` for specified memory. */
                 PyObject* python_memoryview_from_memory( void* data, size_t size, int writable)
                 {{
                     return PyMemoryView_FromMemory(
@@ -130,6 +130,14 @@ def build_swig(
                             (Py_ssize_t) size,
                             writable ? PyBUF_WRITE : PyBUF_READ
                             );
+                }}
+
+                /* Returns a Python `memoryview` for a `fz_buffer`'s data. */
+                PyObject* python_buffer_to_memoryview(fz_buffer* buffer, int writable)
+                {{
+                    unsigned char* data = NULL;
+                    size_t len = {rename.namespace_ll_fn('fz_buffer_storage')}(buffer, &data);
+                    return python_memoryview_from_memory( data, len, writable);
                 }}
 
                 /* Creates Python bytes from copy of raw data. */
@@ -800,6 +808,15 @@ def build_swig(
                 {rename.class_('fz_buffer')}.{rename.method('fz_buffer', 'fz_buffer_extract_copy')}  = {rename.class_('fz_buffer')}_fz_buffer_extract_copy
                 {rename.fn('fz_buffer_extract_copy')} = {rename.class_('fz_buffer')}_fz_buffer_extract_copy
 
+                def fz_buffer_storage_memoryview( buffer, writable=False):
+                    """
+                    Returns a read-only or writable Python `memoryview` onto
+                    `fz_buffer` data. This relies on `buffer` existing and
+                    not changing size while the `memoryview` is used.
+                    """
+                    return python_buffer_to_memoryview( buffer, writable)
+                {rename.class_('fz_buffer')}.{rename.method('fz_buffer', 'fz_buffer_storage_memoryview')}  = fz_buffer_storage_memoryview
+
                 # Overwrite wrappers for fz_new_buffer_from_copied_data() to
                 # take Python `bytes` instance.
                 #
@@ -967,6 +984,9 @@ def build_swig(
 
                 # Direct access to fz_pixmap samples.
                 def {rename.fn('fz_pixmap_samples')}2( pixmap):
+                    """
+                    Returns a writable Python `memoryview` for a `fz_pixmap`.
+                    """
                     assert isinstance( pixmap, {rename.class_('fz_pixmap')})
                     ret = python_memoryview_from_memory(
                             {rename.fn('fz_pixmap_samples')}( pixmap),
