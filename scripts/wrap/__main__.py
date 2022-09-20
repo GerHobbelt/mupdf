@@ -750,7 +750,8 @@ Usage:
                 -d build/shared-release-x64-py3.9
 
         --doc <languages>
-            Generates documentation for the different APIs.
+            Generates documentation for the different APIs in
+            mupdf/docs/generated/.
 
             <languages> is either 'all' or a comma-separated list of API languages:
 
@@ -764,7 +765,7 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
-            Also see '--sync -d' option for copying these generated
+            Also see '--sync-docs' option for copying these generated
             documentation files elsewhere.
 
         --ref
@@ -1667,7 +1668,12 @@ def csharp_settings(build_dirs):
     return csc, mono, mupdf_cs
 
 
-def make_docs( build_dirs, languages):
+def make_docs( build_dirs, languages_original):
+
+    languages = languages_original
+    if languages == 'all':
+        languages = 'c,c++,python'
+    languages = languages.split( ',')
 
     def do_doxygen( name, outdir, path):
         '''
@@ -1803,6 +1809,7 @@ def make_docs( build_dirs, languages):
                                         <ul>
                                             <li>Date: {jlib.date_time()}
                                             <li>Git: {git_id}
+                                            <li>Command: <code>./scripts/mupdfwrap.py --doc {languages_original}</code>
                                         </ul>
                                     </small>
                                 </div>
@@ -1919,9 +1926,6 @@ def main2():
 
             elif arg == '--doc':
                 languages = args.next()
-                if languages == 'all':
-                    languages = 'c,c++,python'
-                languages = languages.split( ',')
                 make_docs( build_dirs, languages)
 
             elif arg == '--ref':
