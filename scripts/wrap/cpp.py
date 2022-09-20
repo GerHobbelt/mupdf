@@ -632,7 +632,8 @@ def make_wrapper_comment(
         fnname,
         fnname_wrapper,
         indent,
-        is_method
+        is_method,
+        is_low_level,
         ):
     ret = io.StringIO()
     def write(text):
@@ -644,7 +645,10 @@ def make_wrapper_comment(
         if arg.out_param:
             num_out_params += 1
 
-    write( f'Wrapper for `{cursor.mangled_name}()`.')
+    if is_low_level:
+        write( f'Low-level wrapper for `{cursor.mangled_name}()`.')
+    else:
+        write( f'Class-aware wrapper for `{cursor.mangled_name}()`.')
     if num_out_params:
         tuple_size = num_out_params
         if cursor.result_type.spelling != 'void':
@@ -733,7 +737,7 @@ def function_wrapper(
 
     # Write first line: <result_type> <fnname_wrapper> (<args>...)
     #
-    comment = make_wrapper_comment( tu, cursor, fnname, fnname_wrapper, indent='', is_method=False)
+    comment = make_wrapper_comment( tu, cursor, fnname, fnname_wrapper, indent='', is_method=False, is_low_level=True)
     comment = f'/** {comment}*/\n'
     for out in out_h, out_cpp:
         out.write( comment)
@@ -1212,7 +1216,7 @@ def make_function_wrappers(
             out_functions_h.write(
                     textwrap.dedent(
                     f'''
-                    /** Extra wrapper for `{fnname}()` that returns a std::string and sets
+                    /** Extra low-level wrapper for `{fnname}()` that returns a std::string and sets
                     *o_out to length of string plus one. If <key> is not found, returns empty
                     string with *o_out=-1. <o_out> can be NULL if caller is not interested in
                     error information. */
@@ -1248,7 +1252,7 @@ def make_function_wrappers(
 
     decl = f'''FZ_FUNCTION pdf_obj* {rename.ll_fn('pdf_dict_getlv')}( pdf_obj* dict, va_list keys)'''
     out_functions_h.write( textwrap.dedent( f'''
-            /* Wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of `pdf_obj*`'s. */
+            /* Low-level wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of `pdf_obj*`'s. */
             {decl};
             '''))
     out_functions_cpp.write( textwrap.dedent( f'''
@@ -1265,7 +1269,7 @@ def make_function_wrappers(
 
     decl = f'''FZ_FUNCTION pdf_obj* {rename.ll_fn('pdf_dict_getl')}( pdf_obj* dict, ...)'''
     out_functions_h.write( textwrap.dedent( f'''
-            /* Wrapper for `pdf_dict_getl()`. `...` must be null-terminated list of `pdf_obj*`'s. */
+            /* Low-level wrapper for `pdf_dict_getl()`. `...` must be null-terminated list of `pdf_obj*`'s. */
             {decl};
             '''))
     out_functions_cpp.write( textwrap.dedent( f'''
@@ -1291,9 +1295,9 @@ def make_function_wrappers(
     out_functions_h2.write(
             textwrap.indent(
                 textwrap.dedent( f'''
-                    /* Wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of
-                    `{rename.class_('pdf_obj')}*`'s, not `pdf_obj*`'s, so for example using
-                    `PDF_NAME()` will cause a SEGV. */
+                    /* Class-aware wrapper for `pdf_dict_getl()`. `keys` must be null-terminated list of
+                    `pdf_obj*`'s, not `{rename.class_('pdf_obj')}*`'s, so that conventional
+                    use with `PDF_NAME()` works. */
                     {decl};
                     '''),
                 '    ',
@@ -1302,20 +1306,8 @@ def make_function_wrappers(
     out_functions_cpp2.write( textwrap.dedent( f'''
             {decl}
             {{
-                for(;;)
-                {{
-                    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": dict.m_internal=" << dict.m_internal << "\\n";
-                    if (!dict.m_internal)    break;
-                    mupdf::PdfObj* key = va_arg(keys, mupdf::PdfObj*);
-                    std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": key=" << key << "\\n";
-                    if (!key)   break;
-                    if (key > ((mupdf::PdfObj*) 4096))
-                    {{
-                        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": key->m_internal=" << key->m_internal << "\\n";
-                    }}
-                    dict = {rename.fn('pdf_dict_get')}( dict, *key);
-                }}
-                return dict;
+                pdf_obj* ret = {rename.ll_fn('pdf_dict_getlv')}( dict.m_internal, keys);
+                return {rename.class_('pdf_obj')}( {rename.ll_fn('pdf_keep_obj')}( ret));
             }}
             '''))
 
@@ -1323,10 +1315,9 @@ def make_function_wrappers(
     out_functions_h2.write(
             textwrap.indent(
                 textwrap.dedent( f'''
-                    /* Wrapper for `pdf_dict_getl()`. `...` must be null-terminated list of
-                    `{rename.class_('pdf_obj')}*`'s, not `pdf_obj*`'s, so for example using
-                    `PDF_NAME()` will cause a SEGV; instead see low-level alternative
-                    `{rename.ll_fn('pdf_dict_getl')}()`. [We use pointer `dict` arg because variadic
+                    /* Class-aware wrapper for `pdf_dict_getl()`. `...` must be null-terminated list of
+                    `pdf_obj*`'s, not `{rename.class_('pdf_obj')}*`'s, so that conventional
+                    use with `PDF_NAME()` works. [We use pointer `dict` arg because variadic
                     args do not with with reference args.] */
                     {decl};
                     '''),
@@ -2135,6 +2126,7 @@ def function_wrapper_class_aware(
                 methodname,
                 indent='    ',
                 is_method=bool(struct_name),
+                is_low_level=False,
                 )
 
     if struct_name and not class_static and not class_constructor:
