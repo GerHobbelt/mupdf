@@ -1103,19 +1103,24 @@ def build_swig(
     else:
         jlib.update_file( '', swig2_i)
 
-    # Try to disable some unhelpful SWIG warnings;. unfortunately this doesn't
-    # seem to have any effect.
+    # Disable some unhelpful SWIG warnings. Must not use -Wall as it overrides
+    # all warning disables.
     disable_swig_warnings = [
             201,    # Warning 201: Unable to find 'stddef.h'
             314,    # Warning 314: 'print' is a python keyword, renaming to '_print'
+            302,    # Warning 302: Identifier 'pdf_annot_type' redefined (ignored),
             312,    # Warning 312: Nested union not currently supported (ignored).
             321,    # Warning 321: 'max' conflicts with a built-in name in python
+            322,    # Warning 322: Redundant redeclaration of 'pdf_annot',
             362,    # Warning 362: operator= ignored
             451,    # Warning 451: Setting a const char * variable may leak memory.
             503,    # Warning 503: Can't wrap 'operator <<' unless renamed to a valid identifier.
             512,    # Warning 512: Overloaded method mupdf::DrawOptions::internal() const ignored, using non-const method mupdf::DrawOptions::internal() instead.
+            509,    # Warning 509: Overloaded method mupdf::FzAaContext::FzAaContext(::fz_aa_context const) effectively ignored,
+            560,    # Warning 560: Unknown Doxygen command: d.
             ]
-    disable_swig_warnings = map( str, disable_swig_warnings)
+
+    disable_swig_warnings = [ '-' + str( x) for x in disable_swig_warnings]
     disable_swig_warnings = '-w' + ','.join( disable_swig_warnings)
 
     # Preserve any existing file `swig_cpp`, so that we can restore the
@@ -1141,10 +1146,10 @@ def build_swig(
                     f'''
                     "{swig_command}"
                         {"-D_WIN32" if state_.windows else ""}
-                        -Wall
                         -c++
                         {"-doxygen" if swig_major >= 4 else ""}
                         -python
+                        -Wextra
                         {disable_swig_warnings}
                         -module {module}
                         -outdir {os.path.relpath(build_dirs.dir_so)}
@@ -1155,7 +1160,7 @@ def build_swig(
                         -I{os.path.relpath(include2)}
                         -ignoremissing
                         {swig_i}
-                    ''').strip().replace( '\n', "" if state_.windows else "\\\n")
+                    ''').strip().replace( '\n', "" if state_.windows else " \\\n")
                     )
             return command
 
@@ -1265,9 +1270,9 @@ def build_swig(
                 f'''
                 "{swig_command}"
                     {"-D_WIN32" if state_.windows else ""}
-                    -Wall
                     -c++
                     -csharp
+                    -Wextra
                     {disable_swig_warnings}
                     -module mupdf
                     -namespace mupdf
