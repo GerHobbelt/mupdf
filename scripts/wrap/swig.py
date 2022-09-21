@@ -1213,7 +1213,7 @@ def build_swig(
                 # Change all our PDF_ENUM_NAME_* enums so that they are actually
                 # PdfObj instances so that they can be used like any other PdfObj.
                 #
-                jlib.log('{len(generated.c_enums)=}')
+                #jlib.log('{len(generated.c_enums)=}')
                 for enum_type, enum_names in generated.c_enums.items():
                     for enum_name in enum_names:
                         if enum_name.startswith( 'PDF_ENUM_NAME_'):
