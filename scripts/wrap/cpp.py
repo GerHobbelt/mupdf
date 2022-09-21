@@ -646,9 +646,9 @@ def make_wrapper_comment(
             num_out_params += 1
 
     if is_low_level:
-        write( f'Low-level wrapper for `{cursor.mangled_name}()`.')
+        write( f'Low-level wrapper for `{rename.c_fn(cursor.mangled_name)}()`.')
     else:
-        write( f'Class-aware wrapper for `{cursor.mangled_name}()`.')
+        write( f'Class-aware wrapper for `{rename.c_fn(cursor.mangled_name)}()`.')
     if num_out_params:
         tuple_size = num_out_params
         if cursor.result_type.spelling != 'void':
