@@ -930,7 +930,7 @@ classextras = ClassExtras(
                     ],
                 accessors = True,
                 iterator_next = ('', ''),
-                constructor_raw = True,
+                constructor_raw = 'default',
                 copyable = True,
                 ),
 
