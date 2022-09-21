@@ -1145,7 +1145,8 @@ def make_function_wrappers(
         if cursor.type.is_function_variadic():
             # We don't attempt to wrap variadic functions - would need to find
             # the equivalent function that takes a va_list.
-            jlib.log( 'Variadic fn: {cursor.type.spelling=}')
+            if 0:
+                jlib.log( 'Variadic fn: {cursor.type.spelling=}')
             if fnname != 'fz_warn':
                 continue
         if fnname == 'fz_push_try':
@@ -2230,10 +2231,12 @@ def function_wrapper_class_aware(
 
     if return_extras:
         if not return_extras.copyable:
-            jlib.log( 'Not creating class-aware wrapper because returned wrapper class is non-copyable: {fnname=}.')
+            if verbose:
+                jlib.log( 'Not creating class-aware wrapper because returned wrapper class is non-copyable: {fnname=}.')
             return
         if not return_extras.constructor_raw:
-            jlib.log( 'Not creating class-aware wrapper because returned wrapper class does not have raw constructor: {fnname=}.')
+            if verbose:
+                jlib.log( 'Not creating class-aware wrapper because returned wrapper class does not have raw constructor: {fnname=}.')
             return
 
     out_h.write( '\n')
