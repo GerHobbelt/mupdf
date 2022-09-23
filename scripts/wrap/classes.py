@@ -592,6 +592,7 @@ classextras = ClassExtras(
                         f'/* Return {rename.class_("fz_document")} for pdfdocument.m_internal.super. */',
                         ),
                     ],
+                constructor_raw = 'default',
                 method_wrappers = [
                     'fz_load_outline',
                 ],

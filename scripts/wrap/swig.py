@@ -365,22 +365,6 @@ def build_swig(
                 void* user;
             }};
 
-            /* Helper for calling a fz_document_open_fn() fnptr. */
-            fz_document *{rename.ll_fn('fz_document_open_fn_call')}(fz_document_open_fn fn, const char *filename)
-            {{
-                fz_context* ctx = mupdf::internal_context_get();
-                fz_document* ret;
-                fz_try(ctx)
-                {{
-                    ret = fn( ctx, filename);
-                }}
-                fz_catch(ctx)
-                {{
-                    mupdf::internal_throw_exception( ctx);
-                }}
-                return ret;
-            }}
-
             void Pixmap_set_alpha_helper(
                 int balen,
                 int n,
