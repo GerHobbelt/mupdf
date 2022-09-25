@@ -53,7 +53,7 @@ if (!rawPackagesPath) {
 }
 let packagesPath = unixify(path.resolve(rawPackagesPath));
 if (!fs.existsSync(packagesPath) || !fs.lstatSync(packagesPath).isDirectory()) {
-    console.error("must specify valid packages root directory argument");
+    console.error("must specify valid packages root directory argument.", {packagesPath}, " is not a packages directory.");
 	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
     process.exit(1);
 }
@@ -67,7 +67,7 @@ const globConfig = Object.assign({}, globDefaultOptions, {
 let rawBinaryOutputPath = process.argv[4];
 let binOutPath = unixify(path.resolve(rawBinaryOutputPath));
 if (!fs.existsSync(binOutPath) || !fs.lstatSync(binOutPath).isDirectory()) {
-	console.error("must specify valid build output ('binary target') directory");
+	console.error("must specify valid build output ('binary target') directory", {binOutPath});
 	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
 	process.exit(1);
 }
@@ -77,7 +77,52 @@ let nugetMode = process.argv[5] || '';
 if (nugetMode === '') {
 	console.error("must specify valid project/NuGet runtime build mode");
 	console.error("call:\n  copy.js PackagesRootDir DestDir ProjectBinaryTargetDir NuGetRunTimeMode");
-	process.exit(1);
+  let pathWithWildCards = '*WebView*';
+	glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
+	  if (err) {
+	    throw new Error(`glob scan error: ${err}`);
+	  }
+
+	  files.sort();
+
+	  // grab the first slot: that one's assumed to be the base directory of the installed WebView2 package:
+	  let basedir = files[0];
+	  if (!fs.existsSync(basedir) || !fs.lstatSync(basedir).isDirectory()) {
+	    process.exit(2);
+	  }
+
+		let binsrcdir = `${basedir}runtimes/*`;
+		const globConfig4Listing = Object.assign({}, globDefaultOptions, {
+		  nodir: false,
+		  cwd: packagesPath
+		});
+
+		glob(binsrcdir, globConfig4Listing, function processGlobResults(err, files) {
+		  if (err) {
+		    throw new Error(`glob scan error: ${err}`);
+		  }
+
+		  files.sort();
+		  
+		  files = files.map((l) => {
+			  return l
+			  .replace(/^.*runtimes[\\\/]/, '')
+			  .replace(/[\\\/]$/, '');
+		  });
+
+		  console.error("\nAvailable modes:", files);
+	    process.exit(1);
+		});
+	});
+
+  // DO NOT call process.exit() while you've still got async functions you want to see completed!
+  //
+  // This is indirectly related to https://stackoverflow.com/questions/46914025/node-exits-without-error-and-doesnt-await-promise-event-callback#answer-46916601
+  // but it is unmentioned there that process.exit() rather *aborts* the applications, not caring about any pending callback at all!
+  // As we need to exit the main code path, we invoke 'return' instead:
+  //
+	//process.exit(1);
+	return 1;
 }
 
 
