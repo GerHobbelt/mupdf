@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0B51171B-B10E-4EAC-8FFA-19226A4769C1}</ProjectGuid>
-    <RootNamespace>wxw-utils-hhp2cached</RootNamespace>
+    <ProjectGuid>{0FD9D1E6-FE9A-44CE-B409-9A42B873C6BF}</ProjectGuid>
+    <RootNamespace>wxw-tests-benchmarks</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,8 +118,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_UTILS_HHP2CACHED;WXW_UTILS_HHP2CACHED_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -131,7 +131,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -140,8 +140,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_UTILS_HHP2CACHED;WXW_UTILS_HHP2CACHED_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -153,15 +153,15 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_UTILS_HHP2CACHED;WXW_UTILS_HHP2CACHED_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -172,7 +172,7 @@
       <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -182,8 +182,8 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_UTILS_HHP2CACHED;WXW_UTILS_HHP2CACHED_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -194,7 +194,7 @@
       <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -218,7 +218,12 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/utils/hhp2cached/hhp2cached.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmlpars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmltag.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmlpars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmltag.h" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

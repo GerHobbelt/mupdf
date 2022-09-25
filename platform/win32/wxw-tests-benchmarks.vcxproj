@@ -119,7 +119,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -141,7 +141,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -161,7 +161,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -183,7 +183,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/tests;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_TESTS_BENCHMARKS;WXW_TESTS_BENCHMARKS_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRT_SECURE_NO_WARNINGS;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -198,8 +198,17 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="libexpat.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff83ffca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpcre.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518f174b2ba}</Project>
+    </ProjectReference>
     <ProjectReference Include="MuPDFLib.vcxproj">
       <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="wxScintilla.vcxproj">
+      <Project>{a60d8644-5a13-4d23-8370-7518ffb10a63}</Project>
     </ProjectReference>
     <ProjectReference Include="wxWidgets.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffb10a63}</Project>
@@ -212,7 +221,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/bench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/datetime.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/display.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/graphics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmlpars.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/tests/benchmarks/htmlparser/htmltag.cpp" />
     <ClCompile Include="..\..\thirdparty\owemdjee\wxWidgets\tests\benchmarks\imagebench.cpp" />
