@@ -383,7 +383,7 @@ static void retainpages(fz_context *ctx, globals *glo, int argc, const char** ar
 	}
 
 	/* From non-terminal widget fields, strip out annot references not
-	belonging to any retained page. */
+	 * belonging to any retained page. */
 	for (i = 0; i < pdf_array_len(ctx, allfields); i++)
 	{
 		pdf_obj *f = pdf_array_get(ctx, allfields, i);
@@ -395,7 +395,7 @@ static void retainpages(fz_context *ctx, globals *glo, int argc, const char** ar
 	}
 
 	/* For terminal fields, if action destination is not valid,
-	remove the action */
+	 * remove the action */
 	for (i = 0; i < pdf_array_len(ctx, allfields); i++)
 	{
 		pdf_obj *f = pdf_array_get(ctx, allfields, i);
