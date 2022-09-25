@@ -1227,7 +1227,7 @@ fz_drop_imp16(fz_context *ctx, void *p, int16_t *refs)
 }
 
 
-#if WASM_SKIP_TRY_CATCH
+#if defined(WASM_SKIP_TRY_CATCH)
 
 /**
 	Exception macro definitions for WASM_SKIP_TRY_CATCH. In this mode, we

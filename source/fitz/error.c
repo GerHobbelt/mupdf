@@ -34,7 +34,7 @@
 #include <windows.h>
 #endif
 
-#if WASM_SKIP_TRY_CATCH
+#if defined(WASM_SKIP_TRY_CATCH)
 #include "emscripten.h"
 #endif
 
@@ -446,7 +446,7 @@ void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, voi
 
 FZ_NORETURN static void _throw(fz_context *ctx, int code)
 {
-#if !WASM_SKIP_TRY_CATCH
+#if !defined(WASM_SKIP_TRY_CATCH)
 	if (ctx->error.top > ctx->error.stack_base)
 	{
 		ctx->error.top->state += 2;
