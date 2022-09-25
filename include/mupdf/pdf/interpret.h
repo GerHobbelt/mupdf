@@ -366,6 +366,24 @@ void pdf_processor_push_resources(fz_context *ctx, pdf_processor *proc, pdf_obj 
 void pdf_processor_pop_resources(fz_context *ctx, pdf_processor *proc);
 
 /*
+	opaque: Opaque value that is passed to all the filter functions.
+
+	cs_rewrite: function pointer called to rewrite a colorspace.
+
+	color_rewrite: function pointer called to rewrite a color (from
+	colorspace orig to colorspace changed).
+*/
+typedef struct
+{
+	void *opaque;
+	void (*cs_rewrite)(fz_context *ctx, void *opaque, fz_colorspace **cs);
+	void (*color_rewrite)(fz_context *ctx, void *opaque, fz_colorspace *orig, fz_colorspace *changed, float color[FZ_MAX_COLORS]);
+} pdf_color_filter_options;
+
+pdf_processor *
+pdf_new_color_filter(fz_context *ctx, pdf_document *doc, pdf_processor *chain, int struct_parents, fz_matrix transform, pdf_filter_options *options, pdf_color_filter_options *copts);
+
+/*
 	Functions to actually process annotations, glyphs and general stream objects.
 */
 void pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *obj, pdf_obj *res);
