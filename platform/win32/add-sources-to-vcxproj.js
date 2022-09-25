@@ -204,12 +204,15 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.rtf':
     case '.s':
     case '.sh':
+    case '.bat':
+    case '.cmd':
     case '.ts':
     case '.txt':
     case '.unx':
     case '.vc':
     case '.xml':
     case '.y':
+    case '.tcl':
         filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {
