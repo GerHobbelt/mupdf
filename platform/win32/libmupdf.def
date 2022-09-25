@@ -216,9 +216,6 @@ EXPORTS
 	fz_stat_ctime
 	fz_stat_mtime
 
-	fz_default_cookie_callback_handler
-	fz_has_page_format_marker
-
 	mu_create_mutex
 	mu_create_semaphore
 	mu_create_thread
@@ -231,6 +228,7 @@ EXPORTS
 	mu_unlock_mutex
 	mu_wait_semaphore
 	mu_zero_mutex
+	_strdup
 
 ; Fitz Documents exports
 
@@ -363,7 +361,9 @@ EXPORTS
 	fz_is_tar_archive
 	fz_is_zip_archive
 	fz_list_archive_entry
+	fz_mount_multi_archive
 	fz_new_archive_of_size
+	fz_new_multi_archive
 	fz_new_tree_archive
 	fz_new_zip_writer
 	fz_new_zip_writer_with_output
@@ -492,6 +492,7 @@ EXPORTS
 	fz_caught
 	fz_caught_message
 	fz_clone_context
+	fz_copy_ephemeral_system_error_explicit
 	fz_default_error_callback
 	fz_default_error_warn_info_mode
 	fz_default_info_callback
@@ -512,6 +513,7 @@ EXPORTS
 	fz_flush_all_std_logging_channels
 	fz_flush_warnings
 	fz_free
+	fz_freplace_ephemeral_system_error
 	fz_get_error_callback
 	fz_get_global_context
 	fz_get_info_callback
@@ -528,6 +530,7 @@ EXPORTS
 	fz_push_try
 	fz_realloc
 	fz_realloc_no_throw
+	fz_replace_ephemeral_system_error
 	fz_rethrow
 	fz_rethrow_if
 	fz_set_aa_level
@@ -554,6 +557,7 @@ EXPORTS
 	fz_var_imp
 	fz_verror
 	fz_vinfo
+	fz_vreplace_ephemeral_system_error
 	fz_vthrow
 	fz_vwarn
 	fz_warn
@@ -588,6 +592,7 @@ EXPORTS
 	fz_clip_stroke_text
 	fz_clip_text
 	fz_close_device
+	fz_default_cookie_callback_handler
 	fz_device_current_scissor
 	fz_disable_device_hints
 	fz_drop_device
@@ -867,7 +872,9 @@ EXPORTS
 	fz_output_supports_stream
 	fz_save_buffer
 	fz_seek_output
+	fz_set_custom_safe_file_output_mode_handlers
 	fz_set_output_buffer
+	fz_set_safe_file_output_mode
 	fz_set_stddbg
 	fz_snprintf
 	fz_stddbg
@@ -878,6 +885,7 @@ EXPORTS
 	fz_tell_output
 	fz_truncate_output
 	fz_vsnprintf
+	fz_vwrite_strings
 	fz_write_base64
 	fz_write_base64_buffer
 	fz_write_buffer
@@ -894,6 +902,7 @@ EXPORTS
 	fz_write_printf
 	fz_write_rune
 	fz_write_string
+	fz_write_strings
 	fz_write_uint16_be
 	fz_write_uint16_le
 	fz_write_uint32_be
@@ -1066,8 +1075,10 @@ EXPORTS
 	fz_format_output_path
 	fz_format_output_path_ex
 	fz_grisu
+	fz_has_page_format_marker
 	fz_is_page_range
 	fz_memmem
+	fz_name_extension
 	fz_parse_page_range
 	fz_realpath
 	fz_runeidx
@@ -1078,6 +1089,7 @@ EXPORTS
 	fz_strlcat
 	fz_strlcpy
 	fz_strncasecmp
+	fz_strncat_s
 	fz_strncpy_s
 	fz_strnlen
 	fz_strrcspn
@@ -1170,10 +1182,15 @@ EXPORTS
 	fz_write_pixmap_as_data_uri
 
 	fz_default_png_compression_level
+	fz_default_webp_quality
 	fz_new_buffer_from_image_as_muraw
 	fz_new_buffer_from_image_as_png
+	fz_new_buffer_from_image_as_tiff
+	fz_new_buffer_from_image_as_webp
 	fz_new_buffer_from_pixmap_as_muraw
 	fz_new_buffer_from_pixmap_as_png
+	fz_new_buffer_from_pixmap_as_tiff
+	fz_new_buffer_from_pixmap_as_webp
 	fz_new_color_pcl_band_writer
 	fz_new_mono_pcl_band_writer
 	fz_new_mono_pwg_band_writer
@@ -1188,6 +1205,8 @@ EXPORTS
 	fz_new_ps_band_writer
 	fz_new_psd_band_writer
 	fz_new_pwg_band_writer
+	fz_new_tiff_band_writer
+	fz_new_webp_band_writer
 	fz_parse_pcl_options
 	fz_parse_pclm_options
 	fz_parse_pdfocr_options
@@ -1209,6 +1228,8 @@ EXPORTS
 	fz_save_pixmap_as_ps
 	fz_save_pixmap_as_psd
 	fz_save_pixmap_as_pwg
+	fz_save_pixmap_as_tiff
+	fz_save_pixmap_as_webp
 	fz_write_bitmap_as_pbm
 	fz_write_bitmap_as_pcl
 	fz_write_bitmap_as_pkm
@@ -1225,6 +1246,8 @@ EXPORTS
 	fz_write_pixmap_as_psd
 	fz_write_pixmap_as_pwg
 	fz_write_pixmap_as_pwg_page
+	fz_write_pixmap_as_tiff
+	fz_write_pixmap_as_webp
 	fz_write_ps_file_header
 	fz_write_ps_file_trailer
 	fz_write_pwg_file_header
@@ -3066,7 +3089,6 @@ EXPORTS
 	sqlite3_declare_vtab
 	sqlite3_deserialize
 	sqlite3_drop_modules
-	sqlite3_enable_load_extension
 	sqlite3_enable_shared_cache
 	sqlite3_errcode
 	sqlite3_errmsg
@@ -3098,7 +3120,6 @@ EXPORTS
 	sqlite3_libversion
 	sqlite3_libversion_number
 	sqlite3_limit
-	sqlite3_load_extension
 	sqlite3_log
 	sqlite3_malloc
 	sqlite3_malloc64
@@ -4016,6 +4037,10 @@ EXPORTS
 	zng_deflateEnd
 	zng_deflateGetDictionary
 	zng_deflateGetParams
+	zng_deflateInit
+	zng_deflateInit2
+	zng_deflateInit2_
+	zng_deflateInit_
 	zng_deflateParams
 	zng_deflatePending
 	zng_deflatePrime
@@ -4038,6 +4063,7 @@ EXPORTS
 	zng_gzflush
 	zng_gzfread
 	zng_gzfwrite
+	zng_gzgetc
 	zng_gzgets
 	zng_gzoffset
 	zng_gzopen
@@ -4061,6 +4087,8 @@ EXPORTS
 	zng_inflateEnd
 	zng_inflateGetDictionary
 	zng_inflateGetHeader
+	zng_inflateInit
+	zng_inflateInit2
 	zng_inflateInit2_
 	zng_inflateInit_
 	zng_inflateMark

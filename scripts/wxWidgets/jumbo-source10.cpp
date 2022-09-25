@@ -32,12 +32,6 @@
 
 
 //------------------------------------------------------------------------
-// effects.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/effects.cpp"
-
-
-//------------------------------------------------------------------------
 // eggtrayicon.c
 
 #if defined(__WXGTK20__)
