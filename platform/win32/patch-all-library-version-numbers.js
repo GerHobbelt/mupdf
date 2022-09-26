@@ -52,11 +52,11 @@ execute('git rev-parse --short HEAD', (out, err) => {
 #pragma once
 
 #define JPEGXL_MAJOR_VERSION    0
-#define JPEGXL_MINOR_VERSION    6
+#define JPEGXL_MINOR_VERSION    7
 #define JPEGXL_PATCH_VERSION    0
-#define JPEGXL_LIBRARY_VERSION "0.6.0"
+#define JPEGXL_LIBRARY_VERSION "0.7.0"
 
-#define JPEGXL_VERSION         "0.6.0.${ current_commit.substr(0, 8) }"
+#define JPEGXL_VERSION         "0.7.0.${ current_commit.substr(0, 8) }"
 		`;
 
 	let jpegXLversionH = '../../scripts/libjpeg-xl/tool_version_git.h';
