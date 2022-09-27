@@ -36,6 +36,7 @@ static int hits = 0;
 
 int fz_report_failed_assertion(fz_context* ctx, const char *expression, const char *srcfile, int srcline)
 {
+#if !defined(HAS_NO_CTX_ANYWAY)
 	if (!hits)
 	{
 		hits++;
@@ -58,6 +59,10 @@ int fz_report_failed_assertion(fz_context* ctx, const char *expression, const ch
 		attempt_to_write_message_to_console_and_debug_channel("", " in atexit() handler on the rebound", expression, srcfile, srcline);
 	}
 	abort();
+#else
+	attempt_to_write_message_to_console_and_debug_channel("", "", expression, srcfile, srcline);
+	exit(77);
+#endif
 	return 0;
 }
 
