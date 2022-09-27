@@ -621,6 +621,9 @@ Usage:
             rebuilds if commands change.
 
             args:
+                --clang-verbose
+                    Generate extra diagnostics in action=0 when looking for
+                    libclang.so.
                 -d <details>
                     If specified, we show extra diagnostics when wrapping
                     functions whose name contains <details>. Can be specified
@@ -747,7 +750,8 @@ Usage:
                 -d build/shared-release-x64-py3.9
 
         --doc <languages>
-            Generates documentation for the different APIs.
+            Generates documentation for the different APIs in
+            mupdf/docs/generated/.
 
             <languages> is either 'all' or a comma-separated list of API languages:
 
@@ -761,7 +765,7 @@ Usage:
                     Generate documentation for the Python API using pydoc3:
                         platform/python/mupdf.html
 
-            Also see '--sync -d' option for copying these generated
+            Also see '--sync-docs' option for copying these generated
             documentation files elsewhere.
 
         --ref
@@ -1076,7 +1080,7 @@ def build( build_dirs, swig_command, args):
     build_python = True
     build_csharp = False
     check_regress = False
-
+    clang_info_verbose = False
     force_rebuild = False
     header_git = False
     state.state_.show_details = lambda name: False
@@ -1102,6 +1106,8 @@ def build( build_dirs, swig_command, args):
             pass
         elif actions == '-f':
             force_rebuild = True
+        elif actions == '--clang-verbose':
+            clang_info_verbose = True
         elif actions == '-d':
             d = args.next()
             details.append( d)
@@ -1212,6 +1218,7 @@ def build( build_dirs, swig_command, args):
                             header_git,
                             generated,
                             check_regress,
+                            clang_info_verbose,
                             )
 
                     #generated.functions = state.state_.functions_cache
@@ -1562,6 +1569,7 @@ def build( build_dirs, swig_command, args):
                             jlib.remove( out2_so)
                             jlib.remove( f'{out2_so}.cmd')
 
+                    # Build _mupdf.so.
                     command = ( textwrap.dedent(
                             f'''
                             c++
@@ -1575,7 +1583,7 @@ def build( build_dirs, swig_command, args):
                                 {cpp_path}
                                 {jlib.link_l_flags( [mupdf_so, mupdfcpp_so])}
                                 -Wno-deprecated-declarations
-
+                                -Wno-free-nonheap-object
                             ''').strip().replace( '\n', ' \\\n').strip()
                             )
                     infiles = [
@@ -1661,7 +1669,12 @@ def csharp_settings(build_dirs):
     return csc, mono, mupdf_cs
 
 
-def make_docs( build_dirs, languages):
+def make_docs( build_dirs, languages_original):
+
+    languages = languages_original
+    if languages == 'all':
+        languages = 'c,c++,python'
+    languages = languages.split( ',')
 
     def do_doxygen( name, outdir, path):
         '''
@@ -1797,6 +1810,7 @@ def make_docs( build_dirs, languages):
                                         <ul>
                                             <li>Date: {jlib.date_time()}
                                             <li>Git: {git_id}
+                                            <li>Command: <code>./scripts/mupdfwrap.py --doc {languages_original}</code>
                                         </ul>
                                     </small>
                                 </div>
@@ -1913,9 +1927,6 @@ def main2():
 
             elif arg == '--doc':
                 languages = args.next()
-                if languages == 'all':
-                    languages = 'c,c++,python'
-                languages = languages.split( ',')
                 make_docs( build_dirs, languages)
 
             elif arg == '--ref':
