@@ -10,13 +10,13 @@ We added flags to the project to have the linker produce a detailed MAP file and
 
 Usually this stuff happens when you've got some wicked "check and init all the supported libraries" startup code somewhere, but an initial scan through the 70K+ MAP references didn't reveal anything obviously suspicious -- of course, there's a 70K sized forest to go through, so chances are you'll miss it, but anyway: this called for a different approach.
 
-AFAICT there are not tools or flags to tell (or second-guess) a linker to produce a full-fledged dependency map/dump, so you can traverse that dependency graph to find out **why in God's name** some embedded fonts made it into this executable, for example. The *hard* part is coming up with an obscure and insensible enough reference and then somehow (sweat & tears & manual searches, a.k.a. *effort* required) dig up where the naughty boy is located that caused that part of the bloat. 
+AFAICT there are no tools or flags to tell (or second-guess) a linker to produce a full-fledged dependency map/dump, so you can traverse that dependency graph to find out **why in God's name** some embedded fonts made it into this executable, for example. The *hard* part is coming up with an obscure and insensible enough reference and then somehow (sweat & tears & manual searches, a.k.a. *effort* required) dig up where the naughty boy is located that caused that part of the bloat. 
 
 With 50-odd Megabytes you can bet there'll be several naughty boys, but let's start with finding **one**, shall we?
 
 After a few duds (too many dependents at some point, so a bad pick, try another...) we settled on `pdf_document_handler` because `wxw-samples-console` *definitely* wasn't going to allude to doing some PDF document I/O work.
 
-First off, `pdf_document_handler` is a `struct`, a *global*, and (very) old bad experiences surfaced: we **do** have all projects set up compile every *function* to its own, independent *segment*, so a linker *should* have an easy time to discard the useless ones, even if they shared a source file once. But *globals*, particularly ones with *function references* stored in them, sometimes have been nasty to me, so a quick hack is to wrap that one in its own little getter function (still a `static`, but now `pdf_document_handler` would be a variable *internal* to that getter function) and patching the codebase at thee few spots where it is referenced to properly use the new getter function.
+First off, `pdf_document_handler` is a `struct`, a *global*, and (very) old bad experiences surfaced: we **do** have all projects set up to compile every *function* to its own, independent *segment*, so a linker *should* have an easy time to discard the useless ones, even if they shared a source file once. But *globals*, particularly ones with *function references* stored in them, sometimes have been nasty to me, so a quick hack is to wrap that one in its own little getter function (still a `static`, but now `pdf_document_handler` would be a variable *internal* to that getter function) and patching the codebase at the few spots where it is referenced to properly use the new getter function.
 
 Result: no change. Linker still produces a humongous binary and my new `__get_pdf_document_handler` nicely features in the updated MAP file. Dang!
 
@@ -28,7 +28,7 @@ What would the linker say if we simply **removed** that new getter function from
 
 Turns out `fz_open_accelerated_document_with_stream` is reported as the one needing it. Next, we `#if 0 ... #endif`  that one too, and while we're at it and did dependent analysis just before, we also kill `fz_register_document_handlers` the same way.
 
-Long-ish story short: turns out that once we arrived at `fz_new_xhtml_document_from_document` and nuked that one ass well, together with the others along the way, the linker stopped complaining and delivered a fresh executable!
+Long-ish story short: turns out that once we arrived at `fz_new_xhtml_document_from_document` and nuked that one as well, together with the others along the way, the linker stopped complaining and delivered a fresh executable!
 
 *WTF*?!?!
 
@@ -40,7 +40,7 @@ I couldn't find a dependency cycle there... `pdf_*` calls are picked up by gener
 
 So it's time for waving the dead chicken and do some *voodoo*.
 
-Back when I started with this, I had the MSVC project(s) set up as "Compile At Link Time" because I liked the idea of maximizing the optimization opportunities back then, but at some point I ran into trouble with MSVC2019-revision-something and back-pedaled to *old skool* "compile right now and let the linker have the easy job of snip & stitch *object file segments*". Meanwhile we're several MSVC2019 releases further down the road (MSVC2020 has come out already) so this might be something to see: does the *compiler stage* screw up as badly as the *linker stage* when fed a complex bunch of goods?
+Back when I started with this, I had the MSVC project(s) set up as "Compile At Link Time" because I liked the idea of maximizing the optimization opportunities back then, but at some point I ran into trouble with MSVC2019-revision-something and back-pedaled to *old skool* "compile right now and let the linker have the easy job of snip & stitch *object file segments*". Meanwhile we're several MSVC2019 releases further down the road (MSVC2022 has come out already) so this might be something to see: does the *compiler stage* screw up as badly as the *linker stage* when fed a complex bunch of goods?
 
 So I did something that I usually *do not do*: **only the `libmupdf` project has now been configured to Compile At Link Time** while I've kept all the others the same -- usually I go through all related projects and make sure their settings match *exactly*, an old habit learned from painful experience. But it's *voodoo time* so let's see what gives: it can't get worse than this anyway.
 
@@ -62,9 +62,9 @@ So let's see if we can accomplish the same positive result for wxWidgets by havi
 
 > This has developer round-trip time consequences though: previously, the build process would max out my laptop's cores as multiple source files would be compiled in parallel.
 > 
-> That still happens, but with `/GL` this now has become a must *faster* task, so the core-maxing-out phase of the entire build is shorter, while the *single core linker phase* has much more work to do, thanks to `/LTCG` happening there. 
+> That still happens, but with `/GL` this now has become a much *faster* task, so the core-maxing-out phase of the entire build is shorter, while the *single core linker phase* has much more work to do, thanks to `/LTCG` happening there. 
 > 
-> So you win some, you loose some. I guess this means I won't be flipping the bit on all them projects...
+> So you win some, you loose some (more)? I guess this means I won't be flipping the bit on all them projects...
 
 Drat! That didn't change much. (The binary even got a wee little *bigger* this time.) Apparently wxWidgets is so intertwined (like MFC and all those other GUI frameworks out there) that this little fiddling doesn't help to get rid of useless material, once you start using any of it.
 
