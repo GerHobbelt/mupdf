@@ -94,6 +94,7 @@ enum {
 	OUT_SVG,
 	OUT_TEXT,
 	OUT_TRACE,
+	OUT_WEBP,
 	OUT_XHTML,
 	OUT_XMLTEXT,
 #if FZ_ENABLE_PDF
@@ -152,6 +153,7 @@ static const suffix_t suffix_table[] =
 	{ ".stext", OUT_STEXT_XML, 0 },
 
 	{ ".trace", OUT_TRACE, 0 },
+	{ ".webp", OUT_WEBP, 0 },
 	{ ".xmltext", OUT_XMLTEXT, 0 },
 	{ ".bbox", OUT_BBOX, 0 },
 };
@@ -201,6 +203,7 @@ static const format_cs_table_t format_cs_table[] =
 	{ OUT_PCLM, CS_RGB, { CS_RGB, CS_GRAY } },
 	{ OUT_PS, CS_RGB, { CS_GRAY, CS_RGB, CS_CMYK } },
 	{ OUT_PSD, CS_CMYK, { CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_CMYK, CS_CMYK_ALPHA, CS_ICC } },
+	{ OUT_WEBP, CS_RGB, { CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_ICC } },
 
 	{ OUT_TRACE, CS_RGB, { CS_RGB } },
 	{ OUT_XMLTEXT, CS_RGB, { CS_RGB } },
@@ -1083,6 +1086,8 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					bander = fz_new_ps_band_writer(ctx, out);
 				else if (output_format == OUT_PSD)
 					bander = fz_new_psd_band_writer(ctx, out);
+				else if (output_format == OUT_WEBP)
+					bander = fz_new_webp_band_writer(ctx, out);
 				else if (output_format == OUT_PWG)
 				{
 					if (out_cs == CS_MONO)
