@@ -118,10 +118,9 @@ fz_stream *fz_open_image_decomp_stream_from_buffer(fz_context *ctx, fz_compresse
 fz_stream *fz_open_image_decomp_stream(fz_context *ctx, fz_stream *, fz_compression_params *, int *l2factor);
 
 /**
-	Recognise image format strings in the first 8 bytes from image
-	data.
+	Recognise image formats by looking for magic signatures.
 */
-int fz_recognize_image_format(fz_context *ctx, unsigned char p[8]);
+int fz_recognize_image_format(fz_context *ctx, const unsigned char *p, int size);
 
 enum
 {

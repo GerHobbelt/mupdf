@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -193,8 +193,7 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 		len = fz_buffer_storage(ctx, doc->buffer, &data);
 
 		fmt = FZ_IMAGE_UNKNOWN;
-		if (len >= 8)
-			fmt = fz_recognize_image_format(ctx, data);
+		fmt = fz_recognize_image_format(ctx, data, len);
 		if (fmt == FZ_IMAGE_TIFF)
 		{
 			doc->page_count = fz_load_tiff_subimage_count(ctx, data, len);
