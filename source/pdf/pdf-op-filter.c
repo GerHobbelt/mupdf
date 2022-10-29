@@ -1675,7 +1675,8 @@ pdf_filter_Td(fz_context *ctx, pdf_processor *proc, float tx, float ty)
 
 	p->Tm_adjust = 0;
 	pdf_tos_translate(&p->tos, tx, ty);
-	p->Tm_pending = 1;
+	if (p->Tm_pending)
+		return; /* Exit, just with Tm_pending */
 	if (p->Td_pending)
 		tx += p->Td_value.x, ty += p->Td_value.y;
 	p->Td_value.x = tx;
