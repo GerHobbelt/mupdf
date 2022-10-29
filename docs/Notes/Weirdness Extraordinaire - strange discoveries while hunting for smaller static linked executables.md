@@ -24,15 +24,15 @@ Result: no change. Linker still produces a humongous binary and my new `__get_pd
 
 Manually going through the code, a.k.a. code review, for dependents, is no fun. We need a new trick.
 
-What would the linker say if we simply **removed** that new getter function from the codebase entirely? A little `#if 0 ... #endif` surrounding it and let's see who the link phase will report as *needing* this bugger.
+What would the linker say if we simply **removed** that new getter function from the codebase entirely? A little `#if 0 ... [[endif]]` surrounding it and let's see who the link phase will report as *needing* this bugger.
 
-Turns out `fz_open_accelerated_document_with_stream` is reported as the one needing it. Next, we `#if 0 ... #endif`  that one too, and while we're at it and did dependent analysis just before, we also kill `fz_register_document_handlers` the same way.
+Turns out `fz_open_accelerated_document_with_stream` is reported as the one needing it. Next, we `#if 0 ... [[endif]]`  that one too, and while we're at it and did dependent analysis just before, we also kill `fz_register_document_handlers` the same way.
 
 Long-ish story short: turns out that once we arrived at `fz_new_xhtml_document_from_document` and nuked that one as well, together with the others along the way, the linker stopped complaining and delivered a fresh executable!
 
 *WTF*?!?!
 
-Yup, code inspection reveals that absolutely *nobody* is using `fz_new_xhtml_document_from_document` so that's okay, but **why** did the linker previously decide to include it in the first place?! And only (I didn't mention this before) once we edit the `wxw-samplees-console` demo code back to have at least *one* wxWidgets-related statement in there -- you get a clean executable when you do `printf("hello world\n")` but *Heaven forbid* if you use so much as a `wxPrintf` or `wxString` to accomplish the same feat -- while having all the old `wxw-samples-console` code still `#if 0 ... #endif` disabled.
+Yup, code inspection reveals that absolutely *nobody* is using `fz_new_xhtml_document_from_document` so that's okay, but **why** did the linker previously decide to include it in the first place?! And only (I didn't mention this before) once we edit the `wxw-samplees-console` demo code back to have at least *one* wxWidgets-related statement in there -- you get a clean executable when you do `printf("hello world\n")` but *Heaven forbid* if you use so much as a `wxPrintf` or `wxString` to accomplish the same feat -- while having all the old `wxw-samples-console` code still `#if 0 ... [[endif]]` disabled.
 
 Is there some glitch that's helped along by a dependency cycle in the MuPDF library there? What about all the other stuff being included by the linker for no good reason what-so-ever?!
 

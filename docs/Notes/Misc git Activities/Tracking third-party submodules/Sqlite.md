@@ -13,7 +13,7 @@ These branches are deprecated:
 - wal1
 - cli-extension
 
-Also note that we use **zlib-ng** throughout, hence you will see our tracking branch differences-to-original-mainline include source code edits to migrate from vanilla zlib to zlib-ng (which we track in the `thirdparty/zlib` submodule, incidentally).
+Also note that we use **[[zlib-ng]]** throughout, hence you will see our tracking branch differences-to-original-mainline include source code edits to migrate from vanilla zlib to zlib-ng (which we track in the `thirdparty/zlib` submodule, incidentally).
 
 Another set of diffs that'll jump up when you diff the source tree against the original are thee 'const correctness' patches applied to all code that's driven from any `main(argc, argv)` in there: our '*monolithic build*' replaces those `main()` entry points with uniquely named functions, which can then be called by our monolithic application(s), e.g. `mutool`.
 

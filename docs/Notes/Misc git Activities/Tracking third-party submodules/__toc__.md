@@ -4,6 +4,8 @@
 - [[unicode-icu]]
 - [[zlib]] (and [[zlib-ng]])
 - [[lcms2]]
+- [[mupdf]]
+- [[tesseract-ocr]]
 - xxx
 - xxx
 - xxx
