@@ -4,6 +4,8 @@
 
 #include "tool_hugehelp.h"
 
+#ifdef USE_MANUAL
+
 void hugehelp(void)
 {
    fputs(
@@ -1152,3 +1154,5 @@ void hugehelp(void)
 "\n"
 , stdout) ;
 }
+
+#endif
