@@ -561,7 +561,7 @@ classextras = ClassExtras(
                         f'''
                         : m_internal( NULL)
                         {{
-                            #if 0
+                            #ifndef NDEBUG
                             if (s_check_refs)
                             {{
                                 s_{rename.class_('fz_device')}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);
@@ -1870,8 +1870,18 @@ classextras = ClassExtras(
                             return ret;
                         }}
                         ''',
-                        comment = '/* Typesafe wrapper for looking up things such as PDF_ENUM_NAME_Annots.*/',
+                        comment = '/* Typesafe wrapper for looking up things such as PDF_ENUM_NAME_Annots. */',
                         overload=True,
+                        ),
+                    ExtraMethod(
+                        f'std::string',
+                        f'{rename.method( "pdf_obj", "pdf_field_name2")}()',
+                        f'''
+                        {{
+                            return {rename.namespace_fn('pdf_field_name2')}( *this);
+                        }}
+                        ''',
+                        comment = f'/* Alternative to `{rename.fn("pdf_field_name")}()` that returns a std::string. */',
                         ),
                     ]
                 ),
@@ -1924,7 +1934,7 @@ classextras = ClassExtras(
                         f'''
                         : m_internal( NULL)
                         {{
-                            #if 0
+                            #ifndef NDEBUG
                             if (s_check_refs)
                             {{
                                 s_{rename.class_("pdf_processor")}_refs_check.add( this, __FILE__, __LINE__, __FUNCTION__);

@@ -990,6 +990,13 @@ def build_swig(
                     text = text.replace( '%', '%%')
                     return {rename.ll_fn('fz_warn')}_original( text)
                 #warn = mfz_warn
+
+                # Force use of pdf_field_name2() instead of pdf_field_name()
+                # because the latter returns a buffer that must be freed by the
+                # caller.
+                {rename.ll_fn('pdf_field_name')} = {rename.ll_fn('pdf_field_name2')}
+                {rename.fn('pdf_field_name')} = {rename.fn('pdf_field_name2')}
+                {rename.class_('pdf_obj')}.{rename.method('pdf_obj', 'pdf_field_name')} = {rename.class_('pdf_obj')}.{rename.method('pdf_obj', 'pdf_field_name2')}
                 ''')
 
         # Add __iter__() methods for all classes with begin() and end() methods.

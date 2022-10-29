@@ -139,7 +139,8 @@ C++ wrapping:
                 fz_device *ll_fz_begin_page(fz_document_writer *wri, fz_rect mediabox);
             }
 
-        Environmental variabes control runtime diagnostics in generated code:
+        Environmental variables control runtime diagnostics in debug builds of
+        generated code:
 
             MUPDF_trace
                 If "1", generated code outputs a diagnostic each time it calls
@@ -1083,6 +1084,8 @@ def build( build_dirs, swig_command, args):
     clang_info_verbose = False
     force_rebuild = False
     header_git = False
+    refcheck_if = '#ifndef NDEBUG'
+
     state.state_.show_details = lambda name: False
     devenv = 'devenv.com'
     if state.state_.windows:
@@ -1219,6 +1222,7 @@ def build( build_dirs, swig_command, args):
                             generated,
                             check_regress,
                             clang_info_verbose,
+                            refcheck_if,
                             )
 
                     #generated.functions = state.state_.functions_cache
