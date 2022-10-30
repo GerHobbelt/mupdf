@@ -119,8 +119,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;_CRTDBG_MAP_ALLOC;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;../../thirdparty/freeglut/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_WIN32_WINNT=0x0A00;_CRTDBG_MAP_ALLOC;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
@@ -132,8 +132,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;_CRTDBG_MAP_ALLOC;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;../../thirdparty/freeglut/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_WIN32_WINNT=0x0A00;_CRTDBG_MAP_ALLOC;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
@@ -146,8 +146,8 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;../../thirdparty/freeglut/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_WIN32_WINNT=0x0A00;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader />
     </ClCompile>
@@ -159,73 +159,136 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;../../thirdparty/freeglut/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;_WIN32_WINNT=0x0A00;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;HAVE_U__INT64;NEED_XPARSEGEOMETRY_IMPL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader />
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_callbacks.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_cursor.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_display.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_ext.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_font.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_font_data.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_gamemode.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_geometry.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_gl2.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_init.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_input_devices.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_joystick.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_main.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_menu.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_misc.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_overlay.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_spaceball.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_state.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_stroke_mono_roman.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_stroke_roman.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_structure.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_teapot.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_videoresize.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\fg_window.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_cursor_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_display_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_ext_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_gamemode_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_init_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_input_devices_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_joystick_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_main_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_menu_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_spaceball_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_state_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_structure_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\mswin\fg_window_mswin.c" />
-    <ClCompile Include="..\..\thirdparty\freeglut\src\util\xparsegeometry_repl.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\freeglut\include\GL\freeglut.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\include\GL\freeglut_ext.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\include\GL\freeglut_std.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\include\GL\freeglut_ucall.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\include\GL\glut.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\fg_callback_macros.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\fg_gl2.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\fg_init.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\fg_internal.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\fg_teapot_data.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\fg_version.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\mswin\fg_internal_mswin.h" />
-    <ClInclude Include="..\..\thirdparty\freeglut\src\util\xparsegeometry_repl.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\freeglut\src\freeglutdll.def.in" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/3dview/3dview.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/CallbackMaker/CallbackMaker.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/Fractals/fractals.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/Fractals_random/fractals_random.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/Lorenz/lorenz.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/One/one.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/indexed_color/idxcol.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/init_error_func/init_error_func.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/joystick/joystick.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/keyboard/keyboard.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/multi-touch/multi-touch.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/resizer/resizer.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/shapes/glmatrix.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/shapes/shapes.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/smooth_opengl3/smooth_opengl3.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/spaceball/spaceball.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/spaceball/vmath.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/subwin/subwin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/timer/timer.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/demos/timer_callback/timer_callback.c" />
+    <ClCompile Include="../../thirdparty/freeglut/progs/test-shapes-gles1/test-shapes-gles1.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_callbacks.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_cursor.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_display.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_ext.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_font.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_font_data.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_gamemode.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_geometry.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_gl2.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_init.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_input_devices.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_joystick.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_main.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_menu.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_misc.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_overlay.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_spaceball.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_state.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_stroke_mono_roman.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_stroke_roman.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_structure.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_teapot.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_videoresize.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/fg_window.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/gles_stubs.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_cmap_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_cursor_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_display_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_ext_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_gamemode_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_init_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_input_devices_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_joystick_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_main_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_menu_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_spaceball_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_state_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_structure_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_window_mswin.c" />
+    <ClCompile Include="../../thirdparty/freeglut/src/util/xparsegeometry_repl.c" />
+    <ClInclude Include="../../thirdparty/freeglut/include/GL/freeglut.h" />
+    <ClInclude Include="../../thirdparty/freeglut/include/GL/freeglut_ext.h" />
+    <ClInclude Include="../../thirdparty/freeglut/include/GL/freeglut_std.h" />
+    <ClInclude Include="../../thirdparty/freeglut/include/GL/freeglut_ucall.h" />
+    <ClInclude Include="../../thirdparty/freeglut/include/GL/glut.h" />
+    <ClInclude Include="../../thirdparty/freeglut/progs/demos/shapes/glmatrix.h" />
+    <ClInclude Include="../../thirdparty/freeglut/progs/demos/spaceball/vmath.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/android/fg_internal_android.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/android/fg_main_android.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/android/native_app_glue/android_native_app_glue.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/blackberry/fg_internal_blackberry.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/egl/fg_init_egl.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/egl/fg_internal_egl.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/egl/fg_state_egl.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/egl/fg_structure_egl.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/egl/fg_window_egl.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/fg_callback_macros.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/fg_gl2.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/fg_init.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/fg_internal.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/fg_teapot_data.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/fg_version.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/mswin/fg_internal_mswin.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/util/xparsegeometry_repl.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/wayland/fg_internal_wl.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/x11/fg_internal_x11.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/x11/fg_internal_x11_glx.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/x11/fg_state_x11_glx.h" />
+    <ClInclude Include="../../thirdparty/freeglut/src/x11/fg_window_x11_glx.h" />
+    <Image Include="../../thirdparty/freeglut/progs/demos/One/objects.ico" />
+    <Image Include="../../thirdparty/freeglut/web-src/images/OGL.png" />
+    <Image Include="../../thirdparty/freeglut/web-src/images/chessdemo.png" />
+    <Image Include="../../thirdparty/freeglut/web-src/images/freeglut_logo.png" />
+    <Image Include="../../thirdparty/freeglut/web-src/images/freshmeat.png" />
+    <Image Include="../../thirdparty/freeglut/web-src/images/opengl.png" />
+    <Image Include="../../thirdparty/freeglut/web-src/images/tuxcake.png" />
+    <ResourceCompile Include="../../thirdparty/freeglut/progs/demos/One/one.rc" />
+    <Text Include="../../thirdparty/freeglut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/freeglut/FreeGLUTConfig.cmake.in" />
+    <Text Include="../../thirdparty/freeglut/README.android" />
+    <Text Include="../../thirdparty/freeglut/README.blackberry" />
+    <Text Include="../../thirdparty/freeglut/README.cmake" />
+    <Text Include="../../thirdparty/freeglut/README.cygwin_mingw" />
+    <Text Include="../../thirdparty/freeglut/README.macosx" />
+    <Text Include="../../thirdparty/freeglut/README.md" />
+    <Text Include="../../thirdparty/freeglut/README.mingw_cross" />
+    <Text Include="../../thirdparty/freeglut/README.win32" />
+    <Text Include="../../thirdparty/freeglut/altbuild/README.md" />
+    <Text Include="../../thirdparty/freeglut/config.h.in" />
+    <Text Include="../../thirdparty/freeglut/freeglut.pc.in" />
+    <Text Include="../../thirdparty/freeglut/freeglut.rc.in" />
+    <Text Include="../../thirdparty/freeglut/progs/test-shapes-gles1/CMakeLists.txt" />
+    <Text Include="../../thirdparty/freeglut/src/fg_version.h.in" />
+    <Text Include="../../thirdparty/freeglut/src/freeglutdll.def.in" />
+    <Text Include="../../thirdparty/freeglut/test.txt" />
+    <Text Include="../../thirdparty/freeglut/web-src/news.php" />
+    <Xml Include="../../thirdparty/freeglut/progs/test-shapes-gles1/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/freeglut/progs/test-shapes-gles1/ndk/AndroidManifest.xml" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
