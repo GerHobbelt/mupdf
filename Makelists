@@ -62,7 +62,10 @@ HARFBUZZ_BUILD_CFLAGS += -DHAVE_OT
 HARFBUZZ_BUILD_CFLAGS += -DHAVE_ROUND
 HARFBUZZ_BUILD_CFLAGS += -DHAVE_UCDN
 HARFBUZZ_BUILD_CFLAGS += -DHB_NO_MT
-HARFBUZZ_BUILD_CFLAGS += -DHB_NO_PRAGMA_GCC_DIAGNOSTIC_ERROR
+
+# disable warnings
+HARFBUZZ_BUILD_CFLAGS += -DHB_NO_PRAGMA_GCC_DIAGNOSTIC
+HARFBUZZ_BUILD_CFLAGS += -w
 
 HARFBUZZ_BUILD_CFLAGS += -Dhb_malloc_impl=fz_hb_malloc
 HARFBUZZ_BUILD_CFLAGS += -Dhb_calloc_impl=fz_hb_calloc
@@ -74,6 +77,8 @@ HARFBUZZ_BUILD_CFLAGS += -fno-rtti
 HARFBUZZ_BUILD_CFLAGS += -fno-threadsafe-statics
 HARFBUZZ_BUILD_CFLAGS += -fvisibility-inlines-hidden
 HARFBUZZ_BUILD_CFLAGS += -std=gnu++11
+
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/graph/gsubgpos-context.cc
 
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-aat-layout.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-aat-map.cc
@@ -100,20 +105,20 @@ HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-meta.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-metrics.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-name.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-arabic.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-default.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-hangul.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-hebrew.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-indic.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-indic-table.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-khmer.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-myanmar.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-syllabic.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-thai.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-use.cc
-HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-complex-vowel-constraints.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-fallback.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shape-normalize.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-arabic.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-default.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-hangul.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-hebrew.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-indic.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-indic-table.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-khmer.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-myanmar.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-syllabic.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-thai.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-use.cc
+HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-shaper-vowel-constraints.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-tag.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-ot-var.cc
 HARFBUZZ_SRC += thirdparty/harfbuzz/src/hb-set.cc
@@ -334,6 +339,7 @@ OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/cio.c
 OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/dwt.c
 OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/event.c
 OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/function_list.c
+OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/ht_dec.c
 OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/image.c
 OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/invert.c
 OPENJPEG_SRC += thirdparty/openjpeg/src/lib/openjp2/j2k.c
