@@ -3378,6 +3378,11 @@ int Memento_squeezing(void)
     return memento.squeezing;
 }
 
+
+
+/* Dumb overrides for the new and delete operators */
+
+// void *operator new(size_t size)
 void *Memento_cpp_new(size_t size)
 {
     void *ret;
@@ -3396,6 +3401,7 @@ void *Memento_cpp_new(size_t size)
     return ret;
 }
 
+// void operator delete(void *pointer)
 void Memento_cpp_delete(void *pointer)
 {
     if (!pointer)
@@ -3416,6 +3422,10 @@ void Memento_cpp_delete(void *pointer)
 
 /* Some C++ systems (apparently) don't provide new[] or delete[]
  * operators. Provide a way to cope with this */
+
+#ifndef MEMENTO_CPP_NO_ARRAY_CONSTRUCTORS
+ 
+// void *operator new[](size_t size)
 void *Memento_cpp_new_array(size_t size)
 {
     void *ret;
@@ -3434,6 +3444,7 @@ void *Memento_cpp_new_array(size_t size)
     return ret;
 }
 
+// void  operator delete[](void *pointer)
 void  Memento_cpp_delete_array(void *pointer)
 {
     if (memento.ignoreNewDelete)
@@ -3446,6 +3457,9 @@ void  Memento_cpp_delete_array(void *pointer)
     do_free(pointer, Memento_EventType_deleteArray);
     MEMENTO_UNLOCK();
 }
+
+#endif /* MEMENTO_CPP_NO_ARRAY_CONSTRUCTORS */
+
 
 #else /* MEMENTO */
 
@@ -3717,7 +3731,5 @@ void  operator delete[](void *pointer)
 
 #endif /* __cplusplus */
 #endif /* MEMENTO_NO_CPLUSPLUS */
-
-#endif
 
 #endif

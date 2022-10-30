@@ -1,7 +1,5 @@
 // Duplicate of ../../thirdparty/extract/src/memento.h
 
-#include "../../thirdparty/extract/src/memento.h"
-
 #if 0
 
 /* Copyright (C) 2009-2018 Artifex Software, Inc.
@@ -277,7 +275,7 @@ size_t Memento_setMax(size_t);
 void Memento_stats(void);
 void *Memento_label(void *, const char *);
 void Memento_tick(void);
-int Memento_setVerbose(int verbose);
+int Memento_setVerbose(int verbose_flag);
 int Memento_setIgnoreNewDelete(int ignore);
 
 void *Memento_malloc(size_t s);
@@ -401,5 +399,9 @@ void Memento_cpp_delete_array(void *pointer);
 #endif
 
 #endif /* MEMENTO_H */
+
+#else
+
+#include "../../thirdparty/extract/src/memento.h"
 
 #endif
