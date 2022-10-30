@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -25,7 +25,7 @@
 #ifndef FZ_VERSION
 
 #define FZ_VERSION_MAJOR 1
-#define FZ_VERSION_MINOR 20
+#define FZ_VERSION_MINOR 21
 #define FZ_VERSION_PATCH 0
 // build number: YYYY MM DD NNN, where NN is the sequence number within the given day / date
 #define FZ_VERSION_BUILD "GHO2022051701"
