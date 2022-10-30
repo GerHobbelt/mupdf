@@ -526,10 +526,6 @@ static struct {
 	const char *maxlayoutfilename;
 } timing = { 0 };
 
-// https://stackoverflow.com/questions/2653214/stringification-of-a-macro-value
-#define stringify(A) __stringify(A)
-#define __stringify(A) #A
-
 static int usage(void)
 {
 	fz_info(ctx,
@@ -549,9 +545,9 @@ static int usage(void)
 		"\n"
 		"  -R {auto,0,90,180,270}\n"
 		"        rotate clockwise (default: auto)\n"
-		"  -r -{,_}  x and y resolution in dpi (default: " stringify(X_RESOLUTION) "x" stringify(Y_RESOLUTION) ")\n"
-		"  -w -  printable width (in inches) (default: " stringify(PAPER_WIDTH) ")\n"
-		"  -h -  printable height (in inches) (default: " stringify(PAPER_HEIGHT) "\n"
+		"  -r -{,_}  x and y resolution in dpi (default: %dx%d)\n"
+		"  -w -  printable width (in inches) (default: %.2f)\n"
+		"  -h -  printable height (in inches) (default: %.2f)\n"
 		"  -f    fit file to page if too large\n"
 		"  -B -  minimum band height (e.g. 32)\n"
 		"  -M -  max band memory (e.g. 655360)\n"
@@ -596,7 +592,8 @@ static int usage(void)
 		"\n"
 		"  -V    display the version of this application and terminate\n"
 		"\n"
-		"  pages  comma separated list of page numbers and ranges\n"
+		"\tpages\tcomma separated list of page numbers and ranges\n",
+		X_RESOLUTION, Y_RESOLUTION, PAPER_WIDTH, PAPER_HEIGHT
 	);
 
 	return EXIT_FAILURE;
@@ -1091,6 +1088,11 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 	}
 
 	w = render->ibounds.x1 - render->ibounds.x0;
+	h = render->ibounds.y1 - render->ibounds.y0;
+	if (w <= 0 || h <= 0)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Invalid page dimensions");
+
+
 	min_band_mem = (size_t)bpp * w * min_band_height;
 	if (min_band_mem > 0)
 		reps = (int)(max_band_memory / min_band_mem);
@@ -1101,7 +1103,6 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 	if (render->num_workers > 0)
 	{
 		int runs, num_bands;
-		h = render->ibounds.y1 - render->ibounds.y0;
 		num_bands = (h + min_band_height - 1) / min_band_height;
 		/* num_bands = number of min_band_height bands */
 		runs = (num_bands + reps - 1) / reps;
