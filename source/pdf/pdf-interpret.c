@@ -1096,7 +1096,8 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 
 void pdf_processor_push_resources(fz_context *ctx, pdf_processor *proc, pdf_obj *res)
 {
-	proc->push_resources(ctx, proc, res);
+	if (proc)
+		proc->push_resources(ctx, proc, res);
 }
 
 pdf_obj *pdf_processor_pop_resources(fz_context *ctx, pdf_processor *proc)
