@@ -412,7 +412,7 @@ void pdf_process_glyph(fz_context *ctx, pdf_processor *proc, pdf_document *doc, 
 	Function to process a contents stream without handling the resources.
 	The caller is responsible for pushing/popping the resources.
 */
-void pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie);
+void pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj);
 
 /* Text handling helper functions */
 typedef struct

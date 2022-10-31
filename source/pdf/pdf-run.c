@@ -178,7 +178,7 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 		}
 
 		proc = pdf_new_run_processor(ctx, dev, ctm, usage, NULL, default_cs, page->transparency);
-		pdf_process_contents(ctx, proc, doc, resources, contents, cookie, NULL);
+		pdf_process_contents(ctx, proc, doc, resources, contents, NULL);
 		pdf_close_processor(ctx, proc);
 
 		if (page->transparency)

@@ -167,7 +167,7 @@ pdf_filter_content_stream(
 				top = list[i] = options->filters[i].filter(ctx, doc, top, struct_parents, transform, options, options->filters[i].options);
 		}
 
-		pdf_process_contents(ctx, top, doc, in_res, in_stm, NULL, out_res);
+		pdf_process_contents(ctx, top, doc, in_res, in_stm, out_res);
 		pdf_close_processor(ctx, top);
 
 		pdf_filter_resources(ctx, doc, in_res, *out_res, options, cycle_up);
@@ -257,7 +257,7 @@ pdf_filter_type3(fz_context *ctx, pdf_document *doc, pdf_obj *obj, pdf_obj *page
 			pdf_obj *val = pdf_dict_get_val(ctx, charprocs, i);
 
 			fz_clear_buffer(ctx, buffer);
-			pdf_process_raw_contents(ctx, top, doc, in_res, val, NULL);
+			pdf_process_raw_contents(ctx, top, doc, in_res, val);
 
 			pdf_close_processor(ctx, proc_buffer);
 

@@ -1106,7 +1106,7 @@ pdf_obj *pdf_processor_pop_resources(fz_context *ctx, pdf_processor *proc)
 }
 
 void
-pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie)
+pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj)
 {
 	pdf_csi csi;
 	pdf_lexbuf buf;
@@ -1142,11 +1142,11 @@ pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc
 }
 
 void
-pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, fz_cookie *cookie, pdf_obj **out_res)
+pdf_process_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc, pdf_obj *rdb, pdf_obj *stmobj, pdf_obj **out_res)
 {
 	pdf_processor_push_resources(ctx, proc, rdb);
 	fz_try(ctx)
-		pdf_process_raw_contents(ctx, proc, doc, rdb, stmobj, cookie);
+		pdf_process_raw_contents(ctx, proc, doc, rdb, stmobj);
 	fz_always(ctx)
 	{
 		pdf_obj *res = pdf_processor_pop_resources(ctx, proc);

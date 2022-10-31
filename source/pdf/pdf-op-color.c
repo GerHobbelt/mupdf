@@ -1453,7 +1453,7 @@ pdf_color_Do_form(fz_context *ctx, pdf_processor *proc, const char *name, pdf_ob
 
 		xres = pdf_xobject_resources(ctx, xobj);
 		fz_try(ctx)
-			pdf_process_contents(ctx, (pdf_processor *)p, p->doc, xres, xobj, NULL, &new_xres);
+			pdf_process_contents(ctx, (pdf_processor *)p, p->doc, xres, xobj, &new_xres);
 		fz_catch(ctx)
 		{
 			pdf_drop_obj(ctx, new_xres);
@@ -1648,7 +1648,7 @@ pdf_new_color_filter(
 	pdf_filter_options *global_options,
 	pdf_color_filter_options *options)
 {
-	pdf_color_processor *proc = pdf_new_processor(ctx, sizeof * proc);
+	pdf_color_processor *proc = (pdf_color_processor *)pdf_new_processor(ctx, sizeof * proc);
 
 	proc->super.close_processor = pdf_close_color_processor;
 	proc->super.drop_processor = pdf_drop_color_processor;

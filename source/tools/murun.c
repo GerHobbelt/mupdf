@@ -6533,7 +6533,7 @@ static void ffi_PDFPage_process(js_State *J)
 	{
 		pdf_obj *resources = pdf_page_resources(ctx, page);
 		pdf_obj *contents = pdf_page_contents(ctx, page);
-		pdf_process_contents(ctx, proc, page->doc, resources, contents, NULL, NULL);
+		pdf_process_contents(ctx, proc, page->doc, resources, contents, NULL);
 		pdf_close_processor(ctx, proc);
 	}
 	fz_always(ctx)

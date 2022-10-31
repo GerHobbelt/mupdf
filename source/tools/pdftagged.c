@@ -271,7 +271,7 @@ int pdftagged_main(int argc, const char **argv)
 			pdf_obj *resources = pdf_page_resources(ctx, page);
 			pdf_obj *contents = pdf_page_contents(ctx, page);
 			pdf_processor *proc = pdf_new_mcid_processor(ctx, &mcid[i]);
-			pdf_process_contents(ctx, proc, page->doc, resources, contents);
+			pdf_process_contents(ctx, proc, page->doc, resources, contents, NULL);
 			pdf_close_processor(ctx, proc);
 			pdf_drop_processor(ctx, proc);
 			fz_drop_page(ctx, (fz_page*)page);

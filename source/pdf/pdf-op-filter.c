@@ -1189,7 +1189,7 @@ pdf_filter_gs_ca(fz_context *ctx, pdf_processor *proc, float alpha)
 static void
 pdf_filter_gs_TK(fz_context *ctx, pdf_processor *proc, int tk)
 {
-	pdf_filter_processor *p = (pdf_filter_processor*)proc;
+	pdf_sanitize_processor *p = (pdf_sanitize_processor*)proc;
 	if (p->chain->op_gs_TK)
 		p->chain->op_gs_TK(ctx, p->chain, tk);
 }
@@ -2492,7 +2492,7 @@ pdf_new_sanitize_filter(
 	pdf_filter_options *options,
 	pdf_sanitize_filter_options *sopts)
 {
-	pdf_sanitize_processor *proc = pdf_new_processor(ctx, sizeof *proc);
+	pdf_sanitize_processor *proc = (pdf_sanitize_processor *)pdf_new_processor(ctx, sizeof *proc);
 
 	proc->super.close_processor = pdf_close_sanitize_processor;
 	proc->super.drop_processor = pdf_drop_sanitize_processor;

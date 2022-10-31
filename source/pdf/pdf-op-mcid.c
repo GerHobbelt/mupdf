@@ -218,7 +218,7 @@ pdf_mcid_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *
 /* shadings, images, xobjects */
 
 static void
-pdf_mcid_Do_form(fz_context *ctx, pdf_processor *proc, const char *name, pdf_obj *xobj, pdf_obj *page_resources)
+pdf_mcid_Do_form(fz_context *ctx, pdf_processor *proc, const char *name, pdf_obj *xobj)
 {
 	// TODO
 }
