@@ -1,0 +1,1431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libmysql-connector-cpp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF091413}</ProjectGuid>
+    <RootNamespace>libmysql-connector-cpp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/tests/result-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/tests/session-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/tests/session_crud-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/common/exception.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/lz4frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/lz4hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/ngs_mockup/ngs_mockup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/process_launcher/process_launcher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/process_launcher/tests/gunit_test_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/process_launcher/tests/unit_tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/any.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/any_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/any_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/api.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arena.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arena_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arena_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arenastring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arenastring_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/annotation_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/code_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/command_line_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/command_line_interface_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_bootstrap_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_enum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_enum_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_extension.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_helpers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_map_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_message_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_move_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_padding_optimizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_parse_function_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_plugin_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_primitive_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_service.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_string_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_bootstrap_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_doc_comment.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_enum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_enum_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_field_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_generator_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_helpers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_map_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_message_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_primitive_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_reflection_class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_repeated_enum_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_repeated_message_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_repeated_primitive_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_source_generator_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_wrapper_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/importer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/importer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_doc_comment.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_doc_comment_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum_field_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_extension.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_extension_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_generator_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_helpers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_kotlin_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_map_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_map_field_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_builder_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_field_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_name_resolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_plugin_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_primitive_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_primitive_field_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_service.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_shared_code_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_string_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_string_field_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/js/js_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/js/well_known_types_embed.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/mock_code_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_enum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_enum_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_extension.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_helpers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_helpers_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_map_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_message_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_oneof.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_primitive_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/parser_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/php/php_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/plugin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/plugin.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/python/python_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/python/python_plugin_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/ruby/ruby_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/ruby/ruby_generator_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/subprocess.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/test_plugin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/zip_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor_database.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor_database_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/drop_unknown_fields_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/duration.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/dynamic_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/dynamic_message_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/empty.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/extension_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/extension_set_heavy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/extension_set_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/field_mask.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_enum_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_bases.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_reflection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_reflection_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_table_driven.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_table_driven_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_tctable_full.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_tctable_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/implicit_weak_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/inlined_string_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/inlined_string_field_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/coded_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/coded_stream_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/gzip_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/io_win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/io_win32_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/printer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/printer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/strtod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/tokenizer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/zero_copy_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/zero_copy_stream_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/zero_copy_stream_impl_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/zero_copy_stream_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/lite_arena_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/lite_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_field_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_lite_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/message_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/message_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/no_field_presence_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/parse_context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/preserve_unknown_enum_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/proto3_arena_lite_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/proto3_arena_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/proto3_lite_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/reflection_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/reflection_ops_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/reflection_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/repeated_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/repeated_field_reflection_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/repeated_field_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/repeated_ptr_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/service.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/source_context.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/struct.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/bytestream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/bytestream_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/common_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/int128.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/int128_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/status_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/statusor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/statusor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/stringpiece.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/stringpiece_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/stringprintf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/stringprintf_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/structurally_valid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/structurally_valid_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/strutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/strutil_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/substitute.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/template_util_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/test_util_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testing/file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testing/googletest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testing/zcgunzip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testing/zcgzip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/text_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/text_format_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/timestamp.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/type.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/unknown_field_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/unknown_field_set_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/delimited_message_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/delimited_message_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/field_comparator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/field_comparator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/field_mask_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/field_mask_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/datapiece.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/default_value_objectwriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/default_value_objectwriter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/error_listener.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/field_mask_utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_escaping.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_objectwriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_objectwriter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_stream_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_stream_parser_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/object_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/proto_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/protostream_objectsource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/protostream_objectsource_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/protostream_objectwriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/protostream_objectwriter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/type_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/type_info_test_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/json_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/json_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/message_differencer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/message_differencer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/time_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/time_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/type_resolver_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/type_resolver_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/well_known_types_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/wire_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/wire_format_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/wire_format_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/wrappers.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/gzclose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/gzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/gzread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/infback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/inffast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/inftrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/test/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/test/infcover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/test/minigzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/trees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/try.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/uncompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/entropy_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/error_private.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/fse_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/threading.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/zstd_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/fse_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/hist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/huf_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress_literals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress_sequences.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_double_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_lazy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_ldm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_opt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstdmt_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/huf_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/zstd_ddict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/zstd_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/zstd_decompress_block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/deprecated/zbuff_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/deprecated/zbuff_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/deprecated/zbuff_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/dictBuilder/cover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/dictBuilder/divsufsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/dictBuilder/fastcover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/dictBuilder/zdict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/connection_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/connection_tcpip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/diagnostics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/socket.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/socket_detail.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/boost_code.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/client_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/codec_t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/connection_tcpip_t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/diagnostics_t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/error_t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/opaque_t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/opaque_t_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/stream_t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/test_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/time_t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/auth_hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/result.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/session_mysqlx-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/socket.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/expr_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/json_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/tests/expr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/tests/parser-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/uri_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/crud.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/protocol.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/protocol_compression.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/rset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/stmt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/tests/proto_mysqlx-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/tests/proto_mysqlx_crud-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/tests/proto_mysqlx_msg-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/tests/proto_mysqlx_xplugin-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/try.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cmake/libutils/empty.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cmake/libutils/save_linker_opts.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/collection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/result.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/crud.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/document.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/result.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/batch-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/bugs-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/crud-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/ddl-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/first-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/session-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/types-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cmake/libutils/empty.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cmake/libutils/save_linker_opts.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_art_resultset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_art_rset_metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_debug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_parameter_metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_prepared_statement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_ps_resultset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_ps_resultset_metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultbind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultset_metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_statement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_uri.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_warning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/libmysql_dynamic_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/libmysql_static_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/library_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_client_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_connection_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_driver_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_resultset_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_statement_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/connect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/connection_meta_schemaobj.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/debug_output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/dynamic_load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/prepared_statement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/pthreads.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/resultset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/resultset_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/resultset_meta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/resultset_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/standalone_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/standalone_example_docs1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/standalone_example_docs2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/statement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/link_test/jdbc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/BaseTestFixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/ccpptests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/ConnectionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/DatabaseMetaDataTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/PreparedStatementTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/ResultSetMetadataTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/StatementTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/UnbufferedRsStmtTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/BlobRegressionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/EscapeProcessorRegressionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/PreparedStatementRegressionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/SubqueriesRegressionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/resources.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/simple/BlobTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/simple/TransactionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/common/file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/common/stringutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/driver_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/start_options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_asserts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_listener.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_suite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_tapOutputter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/static_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/test_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/bugs/bugs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/art_resultset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/connectionmetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/parametermetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/preparedstatement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/resultset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/resultsetmetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/savepoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/statement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/uri.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/example/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/performance/perf_statement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/template_bug_group/bug123.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/template_bug_group/bug456.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/unit_fixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/my_pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/my_thr_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/my_wincond.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/my_winthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/thr_mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/testapp/devapi_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/testapp/jdbc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/testapp/xapi_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/testing/test_harness.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/try.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/try_jdbc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/crud.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/mysqlx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/result.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/tests/xapi-t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/tests/xapi_crud-t.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/tests/expr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/common/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/lz4frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/lz4frame_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/lz4hc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/my_xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/process_launcher/process_launcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/any.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/api.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arena_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arena_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/arenastring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/annotation_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/code_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/command_line_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_enum_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_extension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_map_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_message_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_message_layout_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_padding_optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_parse_function_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_primitive_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_string_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/cpp/cpp_unittest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_doc_comment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_enum_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_field_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_map_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_message_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_primitive_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_reflection_class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_repeated_enum_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_repeated_message_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_repeated_primitive_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_source_generator_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/csharp/csharp_wrapper_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/importer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_doc_comment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_enum_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_extension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_extension_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_generator_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_kotlin_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_map_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_map_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_builder_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_message_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_name_resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_primitive_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_primitive_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_shared_code_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_string_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/java/java_string_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/js/js_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/js/well_known_types_embed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/mock_code_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_enum_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_extension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_map_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_message_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_nsobject_methods.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_oneof.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/objectivec/objectivec_primitive_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/php/php_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/plugin.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/python/python_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/ruby/ruby_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/scc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/subprocess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/zip_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/descriptor_database.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/duration.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/dynamic_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/empty.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/explicitly_constructed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/extension_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/extension_set_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/field_access_listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/field_mask.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_enum_reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_enum_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_bases.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_table_driven.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_table_driven_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_tctable_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_tctable_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/generated_message_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/has_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/implicit_weak_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/inlined_string_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/coded_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/gzip_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/io_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/printer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/strtod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/zero_copy_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/zero_copy_stream_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/zero_copy_stream_impl_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_entry_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_field_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_lite_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_test_util_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/map_type_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/message_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/metadata_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/parse_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/reflection_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/reflection_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/reflection_tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/repeated_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/repeated_ptr_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/source_context.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/string_member_robber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/struct.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/bytestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/casts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/int128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/map_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/mathutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/once.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/platform_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/status_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/statusor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/stl_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/stringpiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/stringprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/strutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/substitute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/template_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/stubs/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/test_util2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/test_util_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testing/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testing/googletest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/text_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/timestamp.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/type.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/unknown_field_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/delimited_message_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/field_comparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/field_mask_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/datapiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/default_value_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/error_listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/expecting_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/field_mask_utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_escaping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/json_stream_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/location_tracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/mock_error_listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/object_location_tracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/object_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/object_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/proto_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/protostream_objectsource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/protostream_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/structured_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/type_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/type_info_test_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/internal/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/json_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/message_differencer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/time_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/type_resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/util/type_resolver_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/wire_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/wire_format_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/wrappers.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/allocators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/cursorstreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/encodedstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/encodings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/error/en.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/error/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/filereadstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/filewritestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/biginteger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/clzll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/diyfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/dtoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/ieee754.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/itoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/pow10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/strfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/strtod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/internal/swap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/istreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/memorybuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/memorystream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/msinttypes/inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/msinttypes/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/ostreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/prettywriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/stringbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/include/rapidjson/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/gzguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/inffixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/bitstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/error_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/fse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/huf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/my_zstd_xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/threading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/zstd_errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/zstd_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/hist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress_literals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress_sequences.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_double_fast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_fast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_lazy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_ldm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstdmt_compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/zstd_ddict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/zstd_decompress_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/zstd_decompress_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/deprecated/zbuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/dictBuilder/cover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/dictBuilder/divsufsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/dictBuilder/zdict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/zstd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/connection_tcpip_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/socket_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/opaque_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/mdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/obj_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/processors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/query.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/reply.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/transaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/charsets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/converters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/data_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/cdk_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/connection_openssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/connection_tcpip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/diagnostics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/error_category.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/opaque_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/static_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/std_error_conditions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/mysqlx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/mysqlx/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/mysqlx/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/mysqlx/session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/protocol/mysqlx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/protocol/mysqlx/collations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/protocol/mysqlx/expr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/protocol/mysqlx/traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/reply.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/auth_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/converters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/stmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/cdk_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/session_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/xplugin_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/char_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/expr_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/json_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/uri_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/builders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/protocol_compression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/tests/expr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/db_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/op_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/version_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysql/jdbc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common/op_if.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common_constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/collations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/collection_crud.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/crud.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/detail/crud.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/detail/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/detail/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/detail/row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/detail/session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/detail/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/executable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/mysql_charsets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/mysql_collations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/table_crud.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/xapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/xdevapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/build_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/datatype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/parameter_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/prepared_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/resultset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/resultset_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/sqlstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/warning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_art_resultset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_art_rset_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_connection_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_connection_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_parameter_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_prepared_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_ps_resultset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_ps_resultset_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_public_iface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultbind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultset_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_statement_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_uri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_warning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/libmysql_dynamic_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/libmysql_static_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/library_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_client_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_connection_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_driver_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_resultset_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_native_statement_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/mysql_private_iface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/native_connection_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/native_driver_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/native_resultset_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/native_statement_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/BaseTestFixture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/ConnectionTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/DatabaseMetaDataTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/PreparedStatementTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/ResultSetMetadataTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/StatementTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/UnbufferedRsStmtTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/BlobRegressionTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/EscapeProcessorRegressionTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/PreparedStatementRegressionTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/regression/SubqueriesRegressionTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/resources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/simple/BlobTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/simple/TransactionTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/common/ccppTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/common/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/common/singleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/common/stringutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/framework.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/start_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_asserts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_outputter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_suite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_tapOutputter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/test_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/bugs/bugs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/art_resultset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/connectionmetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/parametermetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/preparedstatement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/resultset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/resultsetmetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/savepoint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/uri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/example/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/performance/perf_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/template_bug_group/bug123.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/template_bug_group/bug456.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/unit_fixture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/my_no_pthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/my_pthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/thr_alarm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/testing/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/crud_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/def_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/error_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/mysqlx_cc_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/tests/test.h" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/Bitmaps/MySQLConnector.ico" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/Bitmaps/New.ico" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/Bitmaps/Up.ico" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/Bitmaps/bannrbmp.bmp" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/Bitmaps/dlgbmp.bmp" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/Bitmaps/exclamic.ico" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/Bitmaps/info.ico" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/WiX/AdminBackground.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/WiX/AdminHeader.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/WiX/MySQLConnector.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/win32/zlib1.rc" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/INFO_BIN.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/INFO_SRC.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/cmake/bootstrap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/cmake/headers/check.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/cmake/headers/check.source.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/cmake/testing/test_main.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/core/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/cdk.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/coding.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/conf.py.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/designs/core_api.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/designs/errors.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/designs/foundation.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/designs/general.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/designs/protocol.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/designs/session_mysqlx.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/ms1.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/doc/usage.rst" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/exprtest/runtests.py" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/lz4/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/ngs_mockup/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/process_launcher/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/process_launcher/tests/scripts/long_test.py" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/process_launcher/tests/scripts/printn.py" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/CHANGES.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/CONTRIBUTORS.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/cmake/extract_includes.bat.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/cmake/protobuf-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/cmake/protobuf-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/cmake/protobuf-module.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/cmake/version.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/protobuf-lite.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/protobuf.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/compiler/zip_output_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/io/gzip_stream_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testdata/map_test_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testdata/text_format_unittest_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testdata/text_format_unittest_data_oneof_implemented.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testdata/text_format_unittest_data_pointy.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testdata/text_format_unittest_data_pointy_oneof.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testdata/text_format_unittest_extensions_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/protobuf/protobuf-3.19.4/src/google/protobuf/testdata/text_format_unittest_extensions_data_pointy.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/rapidjson/license_readme-oracle.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/msdos/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/old/visual-basic.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/os400/make.sh" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/win32/DLL_FAQ.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/win32/Makefile.gcc" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/win32/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/win32/README-WIN32.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/win32/VisualC.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zlib.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/foundation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/mysqlx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/mysql/cdk/protocol/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/mysqlx/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/parser/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/protocol/mysqlx/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cmake/libutils/merge_archives.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/common/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/devapi/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/DoxygenLayout.xml.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/devapi_ref.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/doxygen.cfg.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/index.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/indexing.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/jdbc_ref.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/xapi_ref.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/include/mysqlx/devapi/detail/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/BUILDINFO.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/VersionInfo.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cmake/libutils/merge_archives.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/cppconn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/link_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/framework/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/tests_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/bugs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/classes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/performance/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/unit/template_bug_group/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/thread/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/mysql-conncpp-msi-template.xml.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/WiX/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/WiX/connector-cpp.wxs.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/changelog.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/control.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/copyright.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn-dev.install.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn-dev.lintian-overrides.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn8-2-dbgsym.install.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn8-2.install.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn8-2.lintian-overrides.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn9-dbgsym.install.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn9.install.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/libmysqlcppconn9.lintian-overrides.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/deb-in/rules.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/packaging/mysql-connector-c++.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/testapp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/testing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/testing/sub_project_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/xapi/tests/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/treebuild.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mysql-connector-cpp/doc/DoxygenLayout.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/mysql-conncpp-msi-arpprops.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/win/mysql-conncpp-msi-ui.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

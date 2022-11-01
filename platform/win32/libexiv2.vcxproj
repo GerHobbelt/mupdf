@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libexiv2</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF000EB1}</ProjectGuid>
+    <RootNamespace>libexiv2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEXIV2;EXIV2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/app/actions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/app/app_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/app/exiv2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/app/getopt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/app/wmain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/contrib/Qt/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/contrib/organize/MD5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/contrib/organize/helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/contrib/organize/organize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/fuzz/fuzz-read-print-write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/addmoddel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/conntest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/convert-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/easyaccess-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/exifcomment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/exifdata-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/exifdata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/exifprint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/exifvalue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/geotag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/getopt-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/ini-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/iotest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/iptceasy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/iptcprint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/iptctest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/key-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/largeiptc-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/metacopy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/mmap-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/mrwthumb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/path-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/prevtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/remotetest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/stringto-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/taglist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/tiff-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/write-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/write2-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/xmpdump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/xmpparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/xmpparser-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/xmpprint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/samples/xmpsample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/basicio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/bmffimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/bmpimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/canonmn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/casiomn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/cr2header_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/cr2image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/crwimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/crwimage_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/datasets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/easyaccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/epsimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/exif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/fujimn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/futils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/gifimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/helper_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/image_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/ini.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/iptc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/jp2image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/jp2image_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/jpgimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/makernote_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/metadatum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/minoltamn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/mrwimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/nikonmn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/olympusmn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/orfimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/orfimage_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/panasonicmn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/pentaxmn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/pgfimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/photoshop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/pngchunk_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/pngimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/preview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/properties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/psdimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/quicktimevideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/rafimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/rw2image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/rw2image_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/samsungmn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/sigmamn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/sonymn_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/tags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/tags_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/tgaimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/tiffcomposite_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/tiffimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/tiffimage_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/tiffvisitor_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/webpimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/xmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/src/xmpsidecar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/mainTestRunner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_DateValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_Error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_FileIo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_ImageFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_IptcKey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_LangAltValueRead.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_Photoshop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_TimeValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_XmpKey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_basicio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_bmpimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_cr2header_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_datasets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_enforce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_futils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_helper_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_image_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_jp2image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_jp2image_int.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_pngimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_safe_op.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_slice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_tiffheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/unitTests/test_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/ExpatAdapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/MD5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/ParseRDF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/UnicodeConversions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/WXMPIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/WXMPMeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/WXMPUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XML_Node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPCore_Impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPMeta-GetSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPMeta-Parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPMeta-Serialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPMeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPUtils-FileInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPUtils.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/app/actions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/app/app_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/app/exiv2app.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/app/getopt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/contrib/organize/MD5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/contrib/organize/helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/contrib/vs2019/solution/exiv2lib_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/contrib/vs2019/solution/exv_conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/basicio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/bmffimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/bmpimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/convert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/cr2image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/crwimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/datasets.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/easyaccess.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/epsimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/exif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/exiv2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/futils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/gifimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/http.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/image_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/ini.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/iptc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/jp2image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/jpgimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/metadatum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/mrwimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/orfimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/pgfimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/photoshop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/pngimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/preview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/properties.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/psdimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/quicktimevideo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/rafimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/rw2image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/slice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/tags.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/tgaimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/tiffimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/webpimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/xmp_exiv2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/include/exiv2/xmpsidecar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/samples/metacopy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/canonmn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/casiomn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/cr2header_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/crwimage_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/enforce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/fff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/fujimn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/helper_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/i18n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/image_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/jp2image_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/makernote_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/minoltamn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/nikonmn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/olympusmn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/orfimage_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/panasonicmn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/pentaxmn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/pngchunk_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/rw2image_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/safe_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/samsungmn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/sigmamn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/sonymn_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/tags_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/tiffcomposite_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/tifffwd_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/tiffimage_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/tiffvisitor_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/tzfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/src/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1934_poc4_ref.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/test/data/large.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/test/data/small.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/MD5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/TXMPIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/TXMPMeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/TXMPUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/XMPSDK.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/XMP_Const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/XMP_Environment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/XMP_Version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/client-glue/WXMPFiles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/client-glue/WXMPIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/client-glue/WXMPMeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/client-glue/WXMPUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/include/client-glue/WXMP_Common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/ExpatAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/UnicodeConversions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMLParserAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPCore_Impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPMeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMPUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/exiv2/xmpsdk/src/XMP_BuildInfo.h" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/doc/include/ascending.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/doc/include/blank.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/doc/include/descending.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/doc/include/exiv2-components.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/exiv2.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/matrix-standard-vector-logo-xs.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/1-string-format.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/1343_comment.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/1343_empty.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/1343_exif.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/DSC_3079.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FujiTagsDRangeAutoRating1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FujiTagsDRangeStrongRating3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FujiTagsDRangeWeakRating2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FujiTagsSTone-2HTone4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FujiTagsSTone0HTone0Rating4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FujiTagsSTone1HTone-1Rating5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FujiTagsSTone4HTone-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FurnaceCreekInn.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FurnaceCreekInn2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/FurnaceCreekInn3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/IMGP0006-min.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/Reagan.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/ReaganLargeJpg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/ReaganLargePng.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/ReaganSmallPng.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1026.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1040.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1062.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1074.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1080.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1114.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1137.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1202.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1229.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1231a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1231b.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug1247.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug426.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug440.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug443.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug444.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug445.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug447.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug460.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug479.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug480.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug495.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug501.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug528.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug540.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug784.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug800-8BIM.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug800-AgHg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug800-DCSR.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug800-PHUT.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug841.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug855.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug876.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug884a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug884b.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug884c.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug922.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug922.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug922a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-bug937.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-canon-eos-20d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-canon-eos-300d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-canon-eos-d30.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-canon-powershot-a520.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-canon-powershot-s40.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-empty.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-fujifilm-finepix-s2pro.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-gc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-kodak-dc210.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-nikon-d70.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-nikon-e950.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-nikon-e990.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-olympus-c8080wz.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-panasonic-dmc-fz5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-sigma-d10.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2-sony-dsc-w7.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2.dc.dwc.i18n.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/imagemagick.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-noAPP13.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-noIPTC-psAPP13-wIPTC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-noIPTC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTC-psAPP13-noIPTC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTC1-psAPP13-wIPTC2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTCbeg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTCempty-psAPP13-wIPTC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTCempty.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTCend.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTCmid.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13-wIPTCmid1-wIPTCempty-wIPTCmid2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13s-noIPTC-psAPP13s-wIPTC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13s-wIPTC-psAPP13s-noIPTC.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/iptc-psAPP13s-wIPTCs-psAPP13s-wIPTCs.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1815_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1817_poc.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1833_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1847_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1881_coverage.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1881_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1912_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1918_poc1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1918_poc2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1918_poc3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1934_poc1-thumb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1934_poc4-thumb_ref.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1934_poc4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_2027_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_2160_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_2320_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_2352_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc1.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc2.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc3.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc4.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc5.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc6.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc7.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_428_poc8.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_789_poc1.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_790_poc2.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_828_poc.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_845_poc.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_853_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_869_poc.png" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_ghsa_9jh3_fcc3_g6hv_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_ghsa_g44w_q3vm_gwjq_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/issue_ghsa_mvc4_g5pv_4qqq_poc.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/pocIssue283.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/pr_1994_poc1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/pr_1994_poc2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-bug443-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-bug444-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-bug444-preview2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-bug445-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-bug447-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-bug501-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-bug528-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-canon-eos-20d-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-canon-eos-300d-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-canon-eos-d30-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-canon-powershot-a520-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-canon-powershot-s40-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-fujifilm-finepix-s2pro-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-gc-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-nikon-d70-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-nikon-d70-preview2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-nikon-e950-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-nikon-e990-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-olympus-c8080wz-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-panasonic-dmc-fz5-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-photoshop-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-pre-in-xmp-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-sigma-d10-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/exiv2-sony-dsc-w7-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/glider-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/imagemagick-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-noIPTC-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-noIPTC-psAPP13-wIPTC-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTC-psAPP13-noIPTC-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTC1-psAPP13-wIPTC2-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTCbeg-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTCempty-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTCempty-psAPP13-wIPTC-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTCend-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTCmid-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/iptc-psAPP13-wIPTCmid1-wIPTCempty-wIPTCmid2-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/preview/smiley2-preview1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/smiley1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/smiley2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/table.jpg" />
+    <Image Include="../../thirdparty/owemdjee/exiv2/test/data/test_issue_1472.jpg" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/CODING_GUIDELINES.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/GIT_GUIDELINES.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/README-CONAN.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/README-SAMPLES.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/app/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/ci/install_dependencies.sh" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/ci/test_build.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/cmake/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/cmake/exiv2.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/contrib/Qt/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/contrib/coverity.sh" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/contrib/scripts/clangFormatWholeProject.sh" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/contrib/vms/README.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/contrib/vms/setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/contrib/vms/setup_user.sh" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/contrib/vs2019/README.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/cmd.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/cmdxmp.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/include/sortabletable.js" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/readme-pvs-studio.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/crw-mapping.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/gen.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/getting-started.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/gpl-license.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/iptc.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/makernote.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-canon.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-casio.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-exif.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-fujifilm.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-iptc.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-minolta.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-nikon.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-olympus.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-panasonic.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-pentax.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-samsung.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-sigma.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-sony.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-GPano.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-MP.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-MPRI.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-MPReg.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-MicrosoftPhoto.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-acdsee.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-aux.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-crs.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-crss.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-dc.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-dcterms.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-digiKam.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-dwc.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-exif.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-exifEX.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-expressionmedia.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-iptc.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-iptcExt.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-kipi.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-lr.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-mediapro.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-mwg-kw.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-mwg-rs.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-pdf.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-photoshop.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-plus.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-tiff.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-xmp.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-xmpBJ.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-xmpDM.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-xmpMM.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-xmpRights.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags-xmp-xmpTPg.html.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/tags.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/doc/templates/xmp.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/exiv2.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/fuzz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/fuzz/README.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/fuzz/fuzzloop.sh" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/fuzz/knownleaks.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/fuzz/mkdictionary.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/po/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/releasenotes/CYGWIN/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/releasenotes/Darwin/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/releasenotes/Linux/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/releasenotes/MinGW/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/releasenotes/Unix/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/releasenotes/msvc/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/releasenotes/releasenotes.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/samples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/src/doxygen.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/Jp2Image_readMetadata_loop.poc" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/bug799.cmd" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/cmdxmp.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/exiv2.dc.dwc.i18n.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1099_poc.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/issue_1934_poc4_comment_ref.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/modifycmd1.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/modifycmd2.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/test/data/path-test.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/README-TESTS.md" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_easyaccess.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_exifprint_lint.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_issue_1504.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_issue_1996.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_issue_480.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_pr_1905.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_pr_2279.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/test_tiff_test_program.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/testcases.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bash_tests/version_test.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_1000126.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_1000127.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11336.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11337.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11338.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11339.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11340.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11553.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11591.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11592.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_11683.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_12955.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_12956.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_12957.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14857.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14858.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14859.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14860.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14861.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14862.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14863.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14864.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14865.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_14866.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_17669.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_17722.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_17724.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_17725.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_18005.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2017_9953.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2018_10999.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2018_11531.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2018_12264.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2018_12265.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2018_2018_14046.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2018_4868.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_CVE_2018_9145.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_coverage_xmp_doctype.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_coverage_xmpsidecar_isXmpType.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_fuji_tags.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1011.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1014.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1019.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1046.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1069.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1078.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1097.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1099.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1180.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1208.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1368.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1464.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1471.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1472.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1473.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1484.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1503.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1522.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1530.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1570.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_159.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_170.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1706.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1713.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1723.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1763.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1782.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1791.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1793.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1805.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1812.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1815.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1817.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1819.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1821.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1827.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1830.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1833.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1838.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1841.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1845.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1847.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1881.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1887.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1893.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1901.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1912.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1918.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1920.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1941.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1954.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_1969.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_20.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2006.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_211.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2126.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_216.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2233.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2246.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2268.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_227.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2270.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2320.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2339.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2340.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2345.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2352.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2366.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2376.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_2377.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_246.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_247.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_253.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_262.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_263.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_400.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_426.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_428.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_45.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_457.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_460.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_511.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_547.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_561.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_590.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_598.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_646.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_712.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_742.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_743.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_756.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_789.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_790.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_791.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_818.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_828.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_839.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_841.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_843.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_845.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_847.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_851.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_853.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_855.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_857.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_867.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_869.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_943.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_960.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_981.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_990.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_g44w_q3vm_gwjq.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_583f_w9pm_99r2.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_5p8g_9xf3_gfrr.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_7569_phvm_vwc2.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_8949_hhfh_j7rj.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_9jh3_fcc3_g6hv.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_h9x9_4f77_336w.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_hqjh_hpv8_8r9p.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_jgm9_5fw5_pw9p.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_m479_7frc_gqqg.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_mv9g_fxh2_m49m.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_mvc4_g5pv_4qqq.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_mxw9_qx4c_6m8v.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_pvjp_m4f6_q984.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_issue_ghsa_v5g7_46xf_h728.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_jpg_iptcDataSegs.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr1475_AVIF.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr1475_HEIC.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr1475_HIF.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1105.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1375.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1384.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1409.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1436.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1437.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1456.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1688.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1691.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1772.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1792.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1800.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1808.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1926.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1979.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1994.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_1999.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_2000.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_2068.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_2069.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_2072.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_2073.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_2244.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_317.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_906.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_pr_992.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/github/test_regression_issue_201.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_1305.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_426.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_440.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1024.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1026.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1040.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1043.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1044.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1053.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1058.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1062.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1074.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1080.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1108.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1112.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1114.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1122.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1137.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1140.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1144.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1145.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1153.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1155.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1166.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1167.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1170.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1179.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1202.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1223.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1225.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1229.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1231.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1242.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1247.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1252.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1305.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_1348.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_443.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_444.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_445.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_447.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_452.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_460.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_479.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_495.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_498.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_501.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_528.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_540.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_554.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_662.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_666.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_683.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_711.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_751.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_769.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_784.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_799.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_800.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_812.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_816.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_825.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_831.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_836.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_841.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_855.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_876.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_884.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_922.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_935.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/bugfixes/redmine/test_issue_937.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/lens_tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/lens_tests/test_canon_lenses.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/lens_tests/test_config_file.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/lens_tests/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/regression_tests/test_regression_allfiles.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/runner.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/system_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/tiff_test/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/tests/tiff_test/test_tag_compare.py" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/unitTests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/exiv2/xmpsdk/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

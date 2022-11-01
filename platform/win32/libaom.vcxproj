@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libaom</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8F864A}</ProjectGuid>
+    <RootNamespace>libaom</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAOM;AOM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom/src/aom_codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom/src/aom_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom/src/aom_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom/src/aom_image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom/src/aom_integer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/add_noise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_convolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_dsp_rtcd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/blend_a64_mask_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/fwd_txfm_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/intrapred_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/loopfilter_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/sad4d_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/sad_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/subpel_variance_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/subtract_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/arm/variance_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/binary_codes_reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/binary_codes_writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/bitreader_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/bitwriter_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/blend_a64_hmask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/blend_a64_mask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/blend_a64_vmask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/buf_ans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/daalaboolreader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/daalaboolwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/entcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/entdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/entenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/fastssim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/fft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/fwd_txfm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/grain_synthesis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/grain_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/intrapred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/loopfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/add_noise_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/aom_convolve8_horiz_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/aom_convolve8_vert_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/aom_convolve_copy_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/common_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/convolve2_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/convolve2_horiz_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/convolve2_vert_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/convolve8_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/convolve8_horiz_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/convolve8_vert_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/intrapred16_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/intrapred4_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/intrapred8_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/intrapred_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_16_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_4_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_8_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_filters_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_mb_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_mb_horiz_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_mb_vert_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/sad_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/sub_pixel_variance_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/subtract_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/variance_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/noise_model.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/noise_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/psnr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/psnrhvs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/quantize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/sad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/sad_av1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/ssim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/subtract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/sum_squares.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/variance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_asm_stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_subpixel_8t_intrin_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_subpixel_8t_intrin_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/blend_a64_hmask_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/blend_a64_mask_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/blend_a64_vmask_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/fft_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/fft_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/fwd_txfm_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/halfpix_variance_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_convolve_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_convolve_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_intrapred_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_loopfilter_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_loopfilter_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_quantize_intrin_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_quantize_intrin_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_subtract_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_variance_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_variance_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/intrapred_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/intrapred_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/intrapred_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/jnt_sad_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/jnt_variance_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/loopfilter_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/loopfilter_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/masked_sad_intrin_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/masked_variance_intrin_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/obmc_sad_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/obmc_variance_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/quantize_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad4d_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad_highbd_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad_impl_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sum_squares_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/variance_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/variance_impl_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/variance_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_mem/aom_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_ports/arm_cpudetect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_ports/ppc_cpudetect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/aom_scale_rtcd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/aom_scale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/gen_scalers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/yv12config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/generic/yv12extend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_scale/mips/dspr2/yv12extend_dspr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_util/aom_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/aom_util/debug_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/apps/aomdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/apps/aomenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/av1_cx_iface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/av1_dx_iface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/alloccommon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/av1_txfm_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/blend_a64_hmask_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/blend_a64_vmask_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/cfl_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/convolve_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/intrapred_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/jnt_convolve_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/reconinter_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/arm/wiener_convolve_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/av1_inv_txfm1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/av1_inv_txfm2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/av1_loopfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/av1_rtcd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/av1_txfm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/blockd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cdef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/cfl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/convolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/debugmodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/entropy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/entropymode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/entropymv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/frame_buffers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/idct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/mvref_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/odintrin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/ppc/cfl_ppc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/pred_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/quant_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/reconinter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/reconintra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/resize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/restoration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/scale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/seg_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/thread_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/tile_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/timing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/txb_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/warped_motion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_convolve_horiz_rs_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_convolve_scale_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_highbd_convolve_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_inv_txfm_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_inv_txfm_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_txfm_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/cfl_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/cfl_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/cfl_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/convolve_2d_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/convolve_2d_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/convolve_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/convolve_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/filterintra_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_convolve_2d_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_convolve_2d_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_convolve_2d_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_convolve_2d_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_inv_txfm_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_inv_txfm_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_jnt_convolve_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_jnt_convolve_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_warp_plane_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_wiener_convolve_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_wiener_convolve_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/intra_edge_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/jnt_convolve_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/jnt_convolve_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/jnt_convolve_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/reconinter_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/reconinter_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/reconinter_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/selfguided_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/selfguided_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/warp_plane_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/wiener_convolve_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/common/x86/wiener_convolve_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/accounting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/decodeframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/decodemv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/decodetxb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/detokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/dthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/inspection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/decoder/obu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/aq_complexity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/aq_cyclicrefresh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/aq_variance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/arm/neon/quantize_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/av1_fwd_txfm1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/av1_fwd_txfm2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/av1_quantize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/bitstream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/blockiness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/context_tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/corner_detect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/corner_match.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/cost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/dwt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodeframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodemb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodemv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodetxb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/ethread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/extend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/firstpass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/global_motion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/hash_motion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/hybrid_fwd_txfm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/lookahead.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/mbgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/mcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/mips/msa/error_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/mips/msa/fdct4x4_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/mips/msa/temporal_filter_msa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/ml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/palette.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/pickcdef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/picklpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/pickrst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/ransac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/ratectrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/ratectrl_xiph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/rd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/rdopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/segmentation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/speed_features.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/temporal_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/tokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/wedge_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_fwd_txfm1d_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_fwd_txfm2d_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_fwd_txfm_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_highbd_quantize_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_highbd_quantize_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_quantize_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_quantize_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/corner_match_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/encodetxb_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/encodetxb_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/error_intrin_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/hash_sse42.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/highbd_block_error_intrin_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/highbd_fwd_txfm_sse4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/wedge_utils_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/ivfdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/ivfenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/md5_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/obudec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/tools_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/video_reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/video_writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/warnings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/webmdec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/webmenc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/y4menc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/common/y4minput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/analyzer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/aom_cx_set_ref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/decode_to_md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/decode_with_drops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/encoder_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/inspect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/lightfield_bitstream_parsing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/lightfield_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/lightfield_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/lightfield_tile_list_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/lossless_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/noise_model.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/resize_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/scalable_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/scalable_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/set_maps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/simple_decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/simple_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/examples/twopass_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/stats/aomstats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/stats/rate_hist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/accounting_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/active_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/altref_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/aom_integer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/aq_segment_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/arf_freq_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_convolve_2d_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_convolve_2d_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_convolve_scale_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_ext_tile_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_fwd_txfm1d_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_fwd_txfm2d_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_highbd_iht_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_horz_only_frame_superres_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_inv_txfm1d_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_inv_txfm2d_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_quantize_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_round_shift_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_txfm_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/av1_wedge_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/binary_codes_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/blend_a64_mask_1d_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/blend_a64_mask_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/boolcoder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/borders_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/cdef_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/cfl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/coding_path_sync.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/comp_avg_pred_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/comp_mask_variance_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/convolve_round_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/convolve_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/corner_match_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/cpu_speed_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/datarate_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/decode_api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/decode_multithreaded_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/decode_perf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/decode_test_driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/divu_small_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/dr_prediction_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/ec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/encode_api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/encode_perf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/encode_test_driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/encodetxb_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/end_to_end_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/error_block_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/error_resilience_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/ethread_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/fft_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/film_grain_table_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/filterintra_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/frame_size_tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/fwht4x4_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/hash_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/hbd_metrics_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/hiprec_convolve_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/hiprec_convolve_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/horz_superres_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/intra_edge_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/intrabc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/intrapred_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/invalid_file_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/lossless_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/lpf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/masked_sad_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/masked_variance_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/monochrome_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/motion_vector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/noise_model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/obmc_sad_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/obmc_variance_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/onyxc_int_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/qm_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/quantize_func_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/reconinter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/resize_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/sad_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/scalability_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/scan_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/segment_binarization_sync.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/selfguided_filter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_avx2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_avx2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_sse2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_sse4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_ssse3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_neon_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_sse2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_sse4_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/simd_ssse3_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/subtract_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/sum_squares_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/superframe_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/test_intra_pred_speed.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/test_libaom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/test_vector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/test_vectors.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/tile_independence_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/variance_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/warp_filter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/warp_filter_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/test/y4m_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/fastfeat/fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/fastfeat/fast_9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/fastfeat/nonmax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-death-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-filepath.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-port.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-printers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-test-part.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-typed-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/common/file_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/common/hdr_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvmuxer/mkvmuxer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvmuxer/mkvmuxerutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvmuxer/mkvwriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvparser/mkvparser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvparser/mkvreader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/compare.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/compare_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/compare_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/compare_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/compare_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/compare_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/convert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/convert_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/convert_from.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/convert_from_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/convert_jpeg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/convert_to_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/convert_to_i420.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/cpu_id.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/mjpeg_decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/mjpeg_validate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/planar_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_mips.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/rotate_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_mips.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_argb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_gcc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_mips.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_neon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_neon64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/scale_win.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/video_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/third_party/vector/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/tools/aom_entropy_optimizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/tools/dump_obu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/tools/obu_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/tools/txfm_analyzer/txfm_gen_code.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libaom/tools/txfm_analyzer/txfm_graph.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aom_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aom_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aom_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aom_frame_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aom_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aom_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aomcx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/aomdx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom/internal/aom_codec_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_convolve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_dsp_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/aom_simd_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/binary_codes_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/binary_codes_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/bitreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/bitreader_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/bitwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/bitwriter_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/blend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/buf_ans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/daalaboolreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/daalaboolwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/entcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/entdec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/entenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/fft_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/grain_synthesis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/grain_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/intrapred_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/aom_convolve_msa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/common_dspr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/convolve_common_dspr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_filters_dspr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_macros_dspr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_masks_dspr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/loopfilter_msa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/mips/macros_msa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/noise_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/noise_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/postproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/prob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/psnr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v128_intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v128_intrinsics_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v128_intrinsics_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v128_intrinsics_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v256_intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v256_intrinsics_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v256_intrinsics_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v256_intrinsics_v128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v256_intrinsics_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v64_intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v64_intrinsics_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v64_intrinsics_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/simd/v64_intrinsics_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/ssim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/txfm_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/variance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/blend_sse4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/common_avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/convolve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/convolve_avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/convolve_common_intrin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/convolve_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/convolve_sse4_1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/fwd_txfm_impl_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/fwd_txfm_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/lpf_common_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/masked_variance_intrin_ssse3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/mem_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/obmc_intrinsic_ssse3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/synonyms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/synonyms_avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/transpose_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/txfm_common_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_mem/aom_mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_mem/include/aom_mem_intrnl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/aom_once.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/aom_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/bitops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/emmintrin_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/mem_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/mem_ops_aligned.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/ppc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/sanitizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/system_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_ports/x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_scale/aom_scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_scale/yv12config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_util/aom_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_util/debug_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/aom_util/endian_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/apps/aomenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/av1_iface_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/alloccommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/arm/convolve_neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/arm/mem_neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/arm/transpose_neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/av1_inv_txfm1d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/av1_inv_txfm1d_cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/av1_loopfilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/av1_txfm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/blockd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/cdef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/cdef_block_simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/cfl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/common_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/convolve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/entropy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/entropymode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/entropymv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/frame_buffers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/idct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/mv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/mvref_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/obmc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/odintrin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/onyxc_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/pred_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/quant_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/reconinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/reconintra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/resize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/restoration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/seg_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/thread_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/tile_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/token_cdfs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/txb_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/warped_motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_inv_txfm_avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_inv_txfm_ssse3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_txfm_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/x86/av1_txfm_sse4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/x86/cfl_simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/common/x86/highbd_txfm_utility_sse4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/accounting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/decodeframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/decodemv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/decodetxb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/detokenize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/dthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/inspection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/decoder/obu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/ab_partition_model_weights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/aq_complexity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/aq_cyclicrefresh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/aq_variance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/av1_fwd_txfm1d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/av1_fwd_txfm1d_cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/av1_quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/bitstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/context_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/corner_detect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/corner_match.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/cost.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/dwt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodeframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodemb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodemv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/encodetxb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/ethread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/extend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/firstpass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/global_motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/grain_test_vectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/hash_motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/hybrid_fwd_txfm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/k_means_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/lookahead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/mathutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/mbgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/mcomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/ml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/palette.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/picklpf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/pickrst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/pustats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/ransac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/ratectrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/ratectrl_xiph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/rd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/rdopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/segmentation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/speed_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/temporal_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/tokenize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/tx_prune_model_weights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_fwd_txfm_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_txfm1d_sse4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/ivfdec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/ivfenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/md5_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/obudec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/tools_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/video_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/video_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/video_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/warnings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/webmdec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/webmenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/y4menc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/common/y4minput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/examples/encoder_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/stats/aomstats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/stats/rate_hist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/acm_random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/av1_convolve_2d_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/av1_txfm_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/clear_system_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/codec_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/comp_avg_pred_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/decode_test_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/encode_test_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/function_equivalence_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/hiprec_convolve_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/i420_video_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/ivf_video_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/md5_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/register_state_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/simd_cmp_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/simd_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/test_vectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/transform_test_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/video_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/warp_filter_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/webm_video_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/y4m_video_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/test/yuv_video_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/fastfeat/fast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest-death-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest-message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest-param-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest-spi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest-test-part.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest-typed-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest_pred_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/gtest_prod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/custom/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/custom/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/custom/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-death-test-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-filepath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-linked_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-param-util-generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-param-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-port-arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/include/gtest/internal/gtest-type-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/src/gtest-internal-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/common/file_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/common/hdr_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/common/webmids.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvmuxer/mkvmuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvmuxer/mkvmuxertypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvmuxer/mkvmuxerutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvmuxer/mkvwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvparser/mkvparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/mkvparser/mkvreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/basic_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/convert_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/convert_from.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/convert_from_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/cpu_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/mjpeg_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/planar_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/rotate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/rotate_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/rotate_row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/scale_argb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/scale_row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/include/libyuv/video_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/third_party/vector/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/tools/obu_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libaom/tools/txfm_analyzer/txfm_graph.h" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_convolve_copy_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_high_subpixel_8t_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_high_subpixel_bilinear_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_subpixel_8t_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_subpixel_8t_ssse3.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_subpixel_bilinear_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/aom_subpixel_bilinear_ssse3.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/fwd_txfm_ssse3_x86_64.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/halfpix_variance_impl_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_intrapred_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_sad4d_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_sad_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_subpel_variance_impl_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/highbd_variance_impl_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/intrapred_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/inv_wht_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/quantize_avx_x86_64.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/quantize_ssse3_x86_64.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad4d_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/sad_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/ssim_opt_x86_64.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/subpel_variance_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_dsp/x86/subtract_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_ports/emms.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/aom_ports/x86_abi_support.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_quantize_ssse3_x86_64.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/av1_ssim_opt_x86_64.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/dct_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/error_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/av1/encoder/x86/temporal_filter_apply_sse2.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/row_x86.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/source/x86inc.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libaom/third_party/x86inc/x86inc.asm" />
+    <Text Include="../../thirdparty/owemdjee/libaom/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libaom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libaom/build/make/iosbuild.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/aomcx_set_ref.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/aomdec.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/aomenc.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/best_encode.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/decode_to_md5.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/decode_with_drops.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/dump_obu.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/gviz_api.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/run_encodes.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/set_maps.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/simple_decoder.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/simple_encoder.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/tools_common.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/twopass_encoder.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/test/visual_metrics.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/fastfeat/README.libvpx" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/googletest/README.libaom" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/googletest/src/googletest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/AUTHORS.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/LICENSE.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/PATENTS.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/libwebm/README.libaom" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/libyuv/README.libaom" />
+    <Text Include="../../thirdparty/owemdjee/libaom/third_party/x86inc/README.libaom" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/aggregate_entropy_stats.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/cpplint.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/diff.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/gen_authors.sh" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/gen_constrained_tokenset.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/inspect-cli.js" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/inspect-post.js" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/intersect-diffs.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/lint-hunks.py" />
+    <Text Include="../../thirdparty/owemdjee/libaom/tools/wrap-commit-msg.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

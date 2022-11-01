@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libwxExamples</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB5706C}</ProjectGuid>
+    <RootNamespace>libwxExamples</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWXEXAMPLES;WXEXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Applications/Application/Application.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndAssert/ApplicationAndAssert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndException/ApplicationAndException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndMain/ApplicationAndMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndMain2/ApplicationAndMain2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationIcon/ApplicationIcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Choicebook/Choicebook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Listbook/Listbook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Notebook/Notebook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Simplebook/Simplebook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Toolbook/Toolbook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Treebook/Treebook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ActivityIndicator/ActivityIndicator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/AnimationCtrl/AnimationCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/BitmapButton/BitmapButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Button/Button.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CalendarCtrl/CalendarCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CheckBox/CheckBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CheckListBox/CheckListBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Choice/Choice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ComboBox/ComboBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CommandLinkButton/CommandLinkButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Control/Control.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/DirCtrl/DirCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/FileCtrl/FileCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Gauge/Gauge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/GenericStaticBitmap/GenericStaticBitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/HyperlinkCtrl/HyperlinkCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListBox/ListBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/ListCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RadioButton/RadioButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RichTextCtrl/RichTextCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RichToolTip/RichToolTip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ScrollBar/ScrollBar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SearchCtrl/SearchCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Slider/Slider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinButton/SpinButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinCtrl/SpinCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinCtrlDouble/SpinCtrlDouble.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap/StaticBitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap2/StaticBitmap2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticLine/StaticLine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticText/StaticText.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TaskBarIcon/TaskBarIcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TextCtrl/TextCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ToggleButton/ToggleButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TreeCtrl/TreeCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/WebView/WebView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/ColourDialog/ColourDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/DirDialog/DirDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/FontDialog/FontDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/MultiChoiceDialog/MultiChoiceDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/NumberEntryDialog/NumberEntryDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/OpenFileDialog/OpenFileDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/PasswordEntryDialog/PasswordEntryDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/RearrangeDialog/RearrangeDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SaveFileDialog/SaveFileDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SingleChoiceDialog/SingleChoiceDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SymbolPickerDialog/SymbolPickerDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/TextEntryDialog/TextEntryDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/ArtProvider/ArtProvider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/BusyCursor/BusyCursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/Config/Config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/Config2/Config2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/Cursor/Cursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/ImageList/ImageList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/Timer/Timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Components/ToolTip/ToolTip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/CollapsiblePane/CollapsiblePane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/Frame/Frame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/Panel/Panel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/RadioBox/RadioBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/SplitterWindow/SplitterWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/StaticBox/StaticBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/StaticBoxSizerVertical/StaticBoxSizerVertical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/DomainSpinCtrl/DomainSpinCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/Line/Line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/NumericTextCtrl/NumericTextCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/CustomDialogs/UserDialog/UserDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/AboutBox/AboutBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/BusyInfo/BusyInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/FindReplaceDialog/FindReplaceDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericAboutBox/GenericAboutBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericFindReplaceDialog/GenericFindReplaceDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericProgressDialog/GenericProgressDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/MessageDialog/MessageDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/NotificationMessage/NotificationMessage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/PrintAbortDialog/PrintAbortDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/ProgressDialog/ProgressDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/Wizard/Wizard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/ApplicationIdle/ApplicationIdle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/CustomEvent/CustomEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/FrameAndEvents/FrameAndEvents.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/FrameClick/FrameClick.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/FramePaint/FramePaint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/KeyEvents/KeyEvents.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/MouseEvents/MouseEvents.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Events/ProcessEvent/ProcessEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldEmoticons/HelloWorldEmoticons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldGenericStaticText/HelloWorldGenericStaticText.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldMessageDialog/HelloWorldMessageDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldMessageDialog2/HelloWorldMessageDialog2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldPaint/HelloWorldPaint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldSay/HelloWorldSay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldStaticText/HelloWorldStaticText.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/wxWidgetsHelloWorld/wxWidgetsHelloWorld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/MainMenu/MainMenu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/Menu/Menu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/StatusBar/StatusBar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/StatusBarWithoutPanels/StatusBarWithoutPanels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/ToolBar/ToolBar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/MiscellaneousWindows/BannerWindow/BannerWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/OpenGL/Dice/Dice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/AutoScroll/AutoScroll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/BitmapButtonWithLabel/BitmapButtonWithLabel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/BorderStyle/BorderStyle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/BoxedPanel/BoxedPanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/ColoredFrames/ColoredFrames.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/Colors/Colors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/CursorFromFile/CursorFromFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/DirDialogShowWindowModal/DirDialogShowWindowModal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/DisplayInformations/DisplayInformations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameAndThread/FrameAndThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameAndThreadWithCallAfter/FrameAndThreadWithCallAfter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameIcon/FrameIcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameShow/FrameShow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/MdiFrame/MdiFrame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/MessageDialogShowWindowModal/MessageDialogShowWindowModal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/OpenFileDialogShowWindowModal/OpenFileDialogShowWindowModal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/SaveFileDialogShowWindowModal/SaveFileDialogShowWindowModal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/ShellExecute/ShellExecute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticBoxAndCheckBox/StaticBoxAndCheckBox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticBoxAndRadioButton/StaticBoxAndRadioButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticTextAndUnicode/StaticTextAndUnicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextCtrlMultiline/TextCtrlMultiline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextEntryDialogAsPassword/TextEntryDialogAsPassword.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextEntryDialogMultiline/TextEntryDialogMultiline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Others/UserDialogShowWindowModal/UserDialogShowWindowModal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Painting/DeviceContext/DeviceContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Painting/GraphicsContext/GraphicsContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/ColourPickerCtrl/ColourPickerCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/DatePickerCtrl/DatePickerCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/DirPickerCtrl/DirPickerCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/FilePickerCtrl/FilePickerCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/FontPickerCtrl/FontPickerCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/TimePickerCtrl/TimePickerCtrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Tests/TestConsole/TestConsole.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/Tests/TestGui/TestGui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiManager/AuiManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiNotebook/AuiNotebook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiToolbar/AuiToolbar.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndMain2/Application.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxExamples/src/Components/Config2/Settings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/DomainSpinCtrl/wxDomainSpinCtrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxExamples/src/Others/ShellExecute/ShellExecute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxExamples/src/Tests/TestConsole/Console.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/wxExamples/src/Tests/TestGui/Application.h" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/docs/Pictures/HelloWorld.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/docs/Pictures/Logo.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/docs/Pictures/PictureBox.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/docs/Pictures/ProgressBar.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/docs/Pictures/TabControl.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/docs/Pictures/TrackBar.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/docs/Pictures/wxwidgets_header.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationIcon/Resources/Gammasoft.ico" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationIcon/Resources/Gammasoft.png" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/AnimationCtrl/Resources/load.gif" />
+    <Image Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap2/Resources/Logo.png" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/Application/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/Application/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndAssert/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndAssert/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndException/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndException/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndMain/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndMain/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndMain2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationAndMain2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationIcon/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/ApplicationIcon/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Applications/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Choicebook/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Choicebook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Listbook/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Listbook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Notebook/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Notebook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Simplebook/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Simplebook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Toolbook/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Toolbook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Treebook/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/BookControls/Treebook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ActivityIndicator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ActivityIndicator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/AnimationCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/AnimationCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/BitmapButton/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/BitmapButton/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/BitmapButton/gammasoft_16x16.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/BitmapButton/gammasoft_64x64.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Button/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Button/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CalendarCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CalendarCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CheckBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CheckBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CheckListBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CheckListBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Choice/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Choice/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ComboBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ComboBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CommandLinkButton/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/CommandLinkButton/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Control/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Control/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/DirCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/DirCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/FileCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/FileCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Gauge/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Gauge/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/GenericStaticBitmap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/GenericStaticBitmap/Logo.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/GenericStaticBitmap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/HyperlinkCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/HyperlinkCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/Ai16.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/Ai48.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/Avi16.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/Avi48.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/Bmp16.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/Bmp48.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ListCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RadioButton/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RadioButton/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RichTextCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RichTextCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RichToolTip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/RichToolTip/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ScrollBar/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ScrollBar/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SearchCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SearchCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Slider/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/Slider/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinButton/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinButton/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinCtrlDouble/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/SpinCtrlDouble/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap/Logo.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticBitmap2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticLine/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticLine/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticText/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/StaticText/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TaskBarIcon/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TaskBarIcon/Gammasoft.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TaskBarIcon/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TextCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TextCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ToggleButton/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/ToggleButton/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TreeCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/TreeCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/WebView/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonControls/WebView/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/ColourDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/ColourDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/DirDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/DirDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/FontDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/FontDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/MultiChoiceDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/MultiChoiceDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/NumberEntryDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/NumberEntryDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/OpenFileDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/OpenFileDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/PasswordEntryDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/PasswordEntryDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/RearrangeDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/RearrangeDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SaveFileDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SaveFileDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SingleChoiceDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SingleChoiceDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SymbolPickerDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/SymbolPickerDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/TextEntryDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CommonDialogs/TextEntryDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/ArtProvider/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/ArtProvider/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/BusyCursor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/BusyCursor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Config/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Config2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Config2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Cursor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Cursor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/ImageList/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/ImageList/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Timer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/Timer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/ToolTip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Components/ToolTip/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/CollapsiblePane/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/CollapsiblePane/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/Frame/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/Frame/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/Panel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/Panel/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/RadioBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/RadioBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/SplitterWindow/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/SplitterWindow/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/StaticBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/StaticBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/StaticBoxSizerVertical/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/ContainerControls/StaticBoxSizerVertical/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/DomainSpinCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/DomainSpinCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/Line/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/Line/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/NumericTextCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomControls/NumericTextCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomDialogs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomDialogs/UserDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/CustomDialogs/UserDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/AboutBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/AboutBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/AboutBox/gammasoft_64x64.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/BusyInfo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/BusyInfo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/FindReplaceDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/FindReplaceDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericAboutBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericAboutBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericAboutBox/gammasoft_64x64.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericFindReplaceDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericFindReplaceDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericProgressDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/GenericProgressDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/MessageDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/MessageDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/NotificationMessage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/NotificationMessage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/PrintAbortDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/PrintAbortDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/ProgressDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/ProgressDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/Wizard/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Dialogs/Wizard/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/ApplicationIdle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/ApplicationIdle/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/CustomEvent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/CustomEvent/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/FrameAndEvents/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/FrameAndEvents/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/FrameClick/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/FrameClick/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/FramePaint/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/FramePaint/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/KeyEvents/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/KeyEvents/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/MouseEvents/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/MouseEvents/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/ProcessEvent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Events/ProcessEvent/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldEmoticons/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldEmoticons/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldGenericStaticText/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldGenericStaticText/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldMessageDialog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldMessageDialog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldMessageDialog2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldMessageDialog2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldPaint/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldPaint/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldSay/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldSay/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldStaticText/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/HelloWorldStaticText/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/wxWidgetsHelloWorld/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/HelloWorlds/wxWidgetsHelloWorld/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/MainMenu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/MainMenu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/Menu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/Menu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/StatusBar/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/StatusBar/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/StatusBarWithoutPanels/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/StatusBarWithoutPanels/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/ToolBar/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MenusAndToolbars/ToolBar/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MiscellaneousWindows/BannerWindow/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/MiscellaneousWindows/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/OpenGL/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/OpenGL/Dice/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/OpenGL/Dice/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/AutoScroll/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/AutoScroll/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BitmapButtonWithLabel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BitmapButtonWithLabel/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BitmapButtonWithLabel/gammasoft_16x16.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BitmapButtonWithLabel/gammasoft_32x32.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BitmapButtonWithLabel/gammasoft_64x64.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BorderStyle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BorderStyle/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BoxedPanel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/BoxedPanel/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/ColoredFrames/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/ColoredFrames/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/Colors/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/Colors/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/CursorFromFile/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/CursorFromFile/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/DirDialogShowWindowModal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/DirDialogShowWindowModal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/DisplayInformations/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/DisplayInformations/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameAndThread/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameAndThread/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameAndThreadWithCallAfter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameAndThreadWithCallAfter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameIcon/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameIcon/Gammasoft.xpm" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameIcon/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameShow/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/FrameShow/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/MdiFrame/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/MdiFrame/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/MessageDialogShowWindowModal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/MessageDialogShowWindowModal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/OpenFileDialogShowWindowModal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/OpenFileDialogShowWindowModal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/SaveFileDialogShowWindowModal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/SaveFileDialogShowWindowModal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/ShellExecute/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/ShellExecute/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticBoxAndCheckBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticBoxAndCheckBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticBoxAndRadioButton/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticBoxAndRadioButton/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticTextAndUnicode/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/StaticTextAndUnicode/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextCtrlMultiline/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextCtrlMultiline/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextEntryDialogAsPassword/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextEntryDialogAsPassword/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextEntryDialogMultiline/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/TextEntryDialogMultiline/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/UserDialogShowWindowModal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Others/UserDialogShowWindowModal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Painting/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Painting/DeviceContext/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Painting/DeviceContext/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Painting/GraphicsContext/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Painting/GraphicsContext/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/ColourPickerCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/ColourPickerCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/DatePickerCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/DatePickerCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/DirPickerCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/DirPickerCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/FilePickerCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/FilePickerCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/FontPickerCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/FontPickerCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/TimePickerCtrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/PickerControls/TimePickerCtrl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Tests/TestConsole/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/Tests/TestGui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiManager/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiManager/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiNotebook/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiNotebook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiToolbar/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/AuiToolbar/README.md" />
+    <Text Include="../../thirdparty/owemdjee/wxExamples/src/WindowDocking/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

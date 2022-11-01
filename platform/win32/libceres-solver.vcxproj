@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libceres-solver</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFBF50E}</ProjectGuid>
+    <RootNamespace>libceres-solver</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCERES_SOLVER;CERES_SOLVER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/bal_problem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/bicubic_interpolation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/bicubic_interpolation_analytic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/bundle_adjuster.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/circle_fit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/curve_fitting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/curve_fitting.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/denoising.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/ellipse_approximation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/fields_of_experts.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/helloworld.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/helloworld_analytic_diff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/helloworld_numeric_diff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/libmv_bundle_adjuster.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/libmv_homography.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/more_garbow_hillstrom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/nist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/powell.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/robot_pose_mle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/robust_curve_fitting.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/rosenbrock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/rosenbrock_analytic_diff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/rosenbrock_numeric_diff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/sampled_function/sampled_function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/simple_bundle_adjuster.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/pose_graph_2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_3d/pose_graph_3d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/accelerate_sparse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/array_selector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/array_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/array_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/autodiff_benchmarks.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_cost_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_first_order_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_manifold_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_evaluate_preparer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_jacobi_preconditioner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_jacobi_preconditioner_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_jacobi_preconditioner_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_jacobian_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_dense_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_dense_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_diagonal_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_diagonal_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_sparse_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_sparse_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_structure.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/c_api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/c_api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/callbacks.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/canonical_views_clustering.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/canonical_views_clustering_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cgnr_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_col_sparse_matrix_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_col_sparse_matrix_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_row_jacobian_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_row_sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_row_sparse_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/concurrent_queue_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/conditioned_cost_function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/conditioned_cost_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/conjugate_gradients_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/context_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/coordinate_descent_minimizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/corrector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/corrector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cost_function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cost_function_to_functor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/covariance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/covariance_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/covariance_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cubic_interpolation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_dense_cholesky_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_dense_qr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_kernels.cu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_kernels_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_sparse_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_vector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_vector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_cholesky.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_cholesky_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_linear_solver_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_linear_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_normal_cholesky_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_qr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_qr_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_qr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_sparse_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/detect_structure.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/detect_structure_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dogleg_strategy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dogleg_strategy_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_autodiff_cost_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_compressed_row_jacobian_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_compressed_row_sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_compressed_row_sparse_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_numeric_diff_cost_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_sparse_normal_cholesky_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_sparse_normal_cholesky_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_sparsity_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/eigensparse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluation_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluation_callback.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluation_callback_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluator_test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/fake_bundle_adjustment_jacobian.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/first_order_function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/fixed_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/float_suitesparse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/function_sample.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_2_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_2_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_2_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_2_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_3_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_3_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_3_6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_3_9.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_3_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_4_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_4_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_4_6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_4_8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_4_9.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_4_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_2_d_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_3_3_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_4_4_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_4_4_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_4_4_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_4_4_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/partitioned_matrix_view_d_d_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_2_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_2_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_2_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_2_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_3_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_3_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_3_6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_3_9.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_3_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_4_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_4_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_4_6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_4_8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_4_9.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_4_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_2_d_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_3_3_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_4_4_2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_4_4_3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_4_4_4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_4_4_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated/schur_eliminator_d_d_d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_cuda_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_cuda_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_cuda_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_cuda_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_eigen_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_eigen_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_eigen_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_eigen_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_lapack_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_lapack_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_lapack_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_denseschur_lapack_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clustjacobi_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clustjacobi_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clustjacobi_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clustjacobi_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clusttri_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clusttri_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clusttri_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_acceleratesparse_clusttri_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clustjacobi_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clustjacobi_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clustjacobi_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clustjacobi_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clusttri_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clusttri_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clusttri_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_eigensparse_clusttri_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_jacobi_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_jacobi_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_jacobi_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_jacobi_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_schurjacobi_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_schurjacobi_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_schurjacobi_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_schurjacobi_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clustjacobi_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clustjacobi_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clustjacobi_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clustjacobi_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clusttri_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clusttri_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clusttri_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_iterschur_suitesparse_clusttri_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_acceleratesparse_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_acceleratesparse_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_acceleratesparse_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_acceleratesparse_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_eigensparse_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_eigensparse_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_eigensparse_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_eigensparse_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_suitesparse_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_suitesparse_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_suitesparse_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparsecholesky_suitesparse_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_acceleratesparse_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_acceleratesparse_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_acceleratesparse_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_acceleratesparse_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_eigensparse_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_eigensparse_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_eigensparse_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_eigensparse_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_suitesparse_auto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_suitesparse_auto_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_suitesparse_user_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/ba_sparseschur_suitesparse_user_threads_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gmock_gtest_all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gmock_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_checker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_checker_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_checking_cost_function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_checking_cost_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_problem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_problem_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_problem_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_problem_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/graph_algorithms_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/graph_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/householder_vector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/implicit_schur_complement.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/implicit_schur_complement_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/inner_product_computer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/inner_product_computer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/integer_sequence_algorithm_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/invert_psd_matrix_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/invert_psd_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/is_close.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/is_close_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/iteration_callback.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/iterative_refiner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/iterative_refiner_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/iterative_schur_complement_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/iterative_schur_complement_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/jet_operator_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/jet_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/jet_traits_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/levenberg_marquardt_strategy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/levenberg_marquardt_strategy_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_direction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_minimizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_minimizer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_preprocessor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_preprocessor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/linear_least_squares_problems.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/linear_operator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/linear_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/loss_function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/loss_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/low_rank_inverse_hessian.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/manifold.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/manifold_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/miniglog/glog/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/minimizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/minimizer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/normal_prior.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/normal_prior_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/numeric_diff_cost_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/numeric_diff_first_order_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/numeric_diff_test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/ordered_groups_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_for_cxx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_for_nothreads.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_for_openmp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_for_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parameter_block_ordering.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parameter_block_ordering_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parameter_block_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parameter_dims_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/partitioned_matrix_view.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/partitioned_matrix_view_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/partitioned_matrix_view_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/polynomial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/polynomial_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/power_series_expansion_preconditioner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/power_series_expansion_preconditioner_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/preconditioner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/preprocessor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/problem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/problem_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/problem_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/program.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/program_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/reorder_program.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/reorder_program_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/residual_block.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/residual_block_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/residual_block_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/residual_block_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/rotation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_complement_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_complement_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_eliminator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_eliminator_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_eliminator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_jacobi_preconditioner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/scratch_evaluate_preparer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/single_linkage_clustering.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/single_linkage_clustering_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/small_blas_gemm_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/small_blas_gemv_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/small_blas_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/solver_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_cholesky.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_cholesky_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_normal_cholesky_solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_normal_cholesky_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/spmv_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/stringprintf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/subset_preconditioner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/subset_preconditioner_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/suitesparse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/system_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/thread_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/thread_pool_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/thread_token_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/tiny_solver_autodiff_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/tiny_solver_cost_function_adapter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/tiny_solver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/triplet_sparse_matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/triplet_sparse_matrix_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_minimizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_minimizer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_preprocessor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_preprocessor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_step_evaluator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_strategy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/visibility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/visibility_based_preconditioner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/visibility_based_preconditioner_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/visibility_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/wall_time.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/config/ceres/internal/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/config/ceres/internal/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/bal_problem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/fields_of_experts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/pgm_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/common/read_g2o.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/angle_manifold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/normalize_angle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/pose_graph_2d_error_term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_3d/pose_graph_3d_error_term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_3d/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/examples/snavely_reprojection_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/autodiff_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/autodiff_first_order_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/autodiff_manifold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/c_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/ceres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/conditioned_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/cost_function_to_functor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/covariance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/crs_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/cubic_interpolation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/dynamic_autodiff_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/dynamic_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/dynamic_cost_function_to_functor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/dynamic_numeric_diff_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/evaluation_callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/first_order_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/gradient_checker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/gradient_problem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/gradient_problem_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/array_selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/autodiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/disable_warnings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/euler_angles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/fixed_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/householder_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/integer_sequence_algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/jet_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/line_parameterization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/numeric_diff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/parameter_dims.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/reenable_warnings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/sphere_manifold_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/internal/variadic_evaluate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/iteration_callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/jet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/jet_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/line_manifold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/loss_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/manifold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/manifold_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/normal_prior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/numeric_diff_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/numeric_diff_first_order_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/numeric_diff_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/ordered_groups.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/problem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/product_manifold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/rotation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/sized_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/sphere_manifold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/tiny_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/tiny_solver_autodiff_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/tiny_solver_cost_function_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/include/ceres/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/accelerate_sparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/array_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/brdf_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/constant_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/linear_cost_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/photometric_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/relative_pose_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/snavely_reprojection_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_evaluate_preparer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_jacobi_preconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_jacobian_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_dense_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_diagonal_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_random_access_sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/block_structure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/bundle_adjustment_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/callbacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/canonical_views_clustering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/casts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cgnr_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_col_sparse_matrix_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_row_jacobian_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/compressed_row_sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/concurrent_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/conjugate_gradients_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/context_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/coordinate_descent_minimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/corrector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/covariance_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/cuda_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_cholesky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_jacobian_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_normal_cholesky_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_qr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_qr_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dense_sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/detect_structure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dogleg_strategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_compressed_row_finalizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_compressed_row_jacobian_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_compressed_row_sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/dynamic_sparse_normal_cholesky_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/eigen_vector_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/eigensparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/evaluator_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/execution_summary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/fake_bundle_adjustment_jacobian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/float_suitesparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/function_sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gmock/gmock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gmock/mock-log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_checking_cost_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gradient_problem_evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/graph_algorithms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/implicit_schur_complement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/inner_product_computer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/invert_psd_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/is_close.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/iterative_refiner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/iterative_schur_complement_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/levenberg_marquardt_strategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_direction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_minimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/line_search_preprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/linear_least_squares_problems.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/linear_operator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/linear_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/low_rank_inverse_hessian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/map_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/miniglog/glog/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/minimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/numeric_diff_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/pair_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_for.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_for_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_for_openmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parallel_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parameter_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/parameter_block_ordering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/partitioned_matrix_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/partitioned_matrix_view_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/polynomial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/power_series_expansion_preconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/preconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/preprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/problem_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/program_evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/reorder_program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/residual_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/residual_block_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_complement_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_eliminator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_eliminator_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_jacobi_preconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/scoped_thread_token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/scratch_evaluate_preparer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/single_linkage_clustering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/small_blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/small_blas_generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/solver_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_cholesky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/sparse_normal_cholesky_solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/stl_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/stringprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/subset_preconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/suitesparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/thread_token_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/tiny_solver_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/triplet_sparse_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_minimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_preprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_step_evaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/trust_region_strategy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/visibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/visibility_based_preconditioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/wall_time.h" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/forward_central_error.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/forward_central_ridders_error.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/least_squares_fit.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/loss.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/manhattan_olson_3500_result.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/non_robust_least_squares_fit.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/pose_graph_3d_ex.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/robust_least_squares_fit.png" />
+    <Image Include="../../thirdparty/owemdjee/ceres-solver/docs/source/slam2d.png" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/cmake/CeresConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/cmake/uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/data/README.foe" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/data/libmv-ba-problems/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/data/problem-16-22106-pre.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/analytical_derivatives.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/automatic_derivatives.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/bibliography.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/contributing.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/derivatives.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/faqs.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/features.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/gradient_solver.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/gradient_tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/installation.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/interfacing_with_autodiff.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/inverse_and_implicit_function_theorems.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/license.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/modeling_faqs.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/nnls_covariance.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/nnls_modeling.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/nnls_solving.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/nnls_tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/numerical_derivatives.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/solving_faqs.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/spivak_notation.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/users.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/docs/source/version_history.rst" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/sampled_function/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/sampled_function/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_2d/plot_results.py" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_3d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_3d/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/examples/slam/pose_graph_3d/plot_results.py" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/autodiff_benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/benchmarks/macbook-pro-2014-small_blas_gemm_benchmark.json" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/benchmarks/macbook-pro-2014-small_blas_gemv_benchmark.json" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generate_bundle_adjustment_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generate_template_specializations.py" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/generated_bundle_adjustment_tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/partitioned_matrix_view_template.py" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/internal/ceres/schur_eliminator_template.py" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/scripts/format_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/ceres-solver/scripts/make_docs.py" />
+    <Xml Include="../../thirdparty/owemdjee/ceres-solver/package.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

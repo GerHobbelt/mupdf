@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libCriterion</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0C232A}</ProjectGuid>
+    <RootNamespace>libCriterion</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCRITERION;CRITERION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/dev/autotools/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/dev/cmake/src/foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/dev/cmake/test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/asserts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/asserts.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/description.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/description.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/fixtures.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/fixtures.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/log.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/more-suites.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/more-suites.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/parameterized.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/parameterized.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/redirect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/redirect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/report.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/report.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/signal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/simple.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/skip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/skip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/suites.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/suites.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/theories.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/theories.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/samples/timeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/capi/specifiers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/capi/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/kill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/mockfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/process.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/processor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/section-elf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/section-mach-o.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/section-pe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/section.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/strtok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/compat/time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/abort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/assert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/ordered-set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/report.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/runner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/runner_coroutine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/core/theories.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/csptr/array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/csptr/mman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/entry/entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/entry/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/entry/params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/io/event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/io/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/io/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/io/output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/io/redirect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/io/tap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/io/xml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/log/logging.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/log/normal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/protocol/connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/protocol/criterion.pb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/protocol/messages.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/protocol/protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/string/brz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/string/diff-stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/string/diff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/string/extglobmatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/string/fmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/string/i18n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/src/string/xxd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/exception.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/exit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/failmessages.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/failmessages.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/flood.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/long-messages.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/long-messages.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/other-crashes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/other-crashes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/theories_regression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/theories_regression.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/full/with-time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/unit/alloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/unit/asprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/unit/ordered-set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/unit/path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Criterion/test/unit/redirect.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/dependencies/valgrind/include/valgrind/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/dev/cmake/include/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/abort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/criterion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/embedded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/hooks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/asprintf-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/ieee.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/op.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/tostr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/assert/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/capabilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/deprecation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/designated-initializer-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/hooks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/new_asserts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/ordered-set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/parameterized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/preprocess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/redirect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/stdio_filebuf.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/stream.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/internal/theories.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/new/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/new/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/new/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/parameterized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/redirect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/theories.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/include/criterion/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/kill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/off_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/pipe-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/pipe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/section.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/strtok.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/compat/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/core/abort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/core/client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/core/coroutine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/core/report.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/core/runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/core/runner_coroutine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/core/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/csptr/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/csptr/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/csptr/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/csptr/csptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/csptr/mman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/csptr/smalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/csptr/smart_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/io/event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/io/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/log/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/protocol/connect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/protocol/criterion.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/protocol/messages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/protocol/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/string/brz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/string/diff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/string/extglobmatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/string/fmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/string/i18n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Criterion/src/string/xxd.h" />
+    <Image Include="../../thirdparty/owemdjee/Criterion/doc/criterion-title.png" />
+    <Image Include="../../thirdparty/owemdjee/Criterion/doc/screencast.gif" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/ci/isdir.py" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/autotools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/autotools/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/autotools/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/autotools/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/cmake/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/dev/cmake/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/assert.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/assert_old.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/debug.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/env.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/faq.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/hooks.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/internal.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/logging.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/output.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/parameterized.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/setup.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/starter.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/doc/theories.rst" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/src/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/Criterion/src/protocol/gen-pb.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

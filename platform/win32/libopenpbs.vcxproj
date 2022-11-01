@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopenpbs</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF6A35D}</ProjectGuid>
+    <RootNamespace>libopenpbs</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENPBS;OPENPBS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_attach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_attach_sup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_dataservice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_demux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_ds_password.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_ralter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_rdel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_release_nodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_rstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_rsub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_tmrsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbsdsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbsnodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qalter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qdel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qdisable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qenable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qhold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qmgr_sup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qmove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qmsg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qrerun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qrls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qrun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qselect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qsig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qstart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qstop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qsub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qsub_sup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/cmds/qterm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/iff/iff2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/Long_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_atomic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_acl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_arst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_entlim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_hold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_intr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_resc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_fn_unkn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_node_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/attr_resc_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/resc_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/strToL.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/strTouL.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/uLTostr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libauth/gss/pbs_gss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libauth/munge/munge_supp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/batch_status.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/check_job_script.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/chk_Jrange.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/ck_job_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/cmds_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/cnt2server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/cs_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/cvtdate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/err_handling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/get_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/get_dataservice_usr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/get_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/isjobid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/locate_job.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_at.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_depend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_destid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_equal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_jobid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/parse_stage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/pbs_json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/prepare_path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/set_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libcmds/set_resource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_job.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_node.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_que.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_resv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_sched.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_svr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/dis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/dis_helpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/discui_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/discul_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/discull_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disi10d_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disi10l_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disiui_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disp10d_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disp10l_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrcs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrfcs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrl_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrsc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrsi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrsi_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrsl_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrsll_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disruc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/disrus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswcs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswl_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswsi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswui_.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/diswull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/ps_dis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libecl/ecl_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libecl/ecl_verify_datatypes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libecl/ecl_verify_object_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libecl/ecl_verify_values.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libecl/pbs_client_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/DIS_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/DIS_encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/PBS_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/advise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/conn_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/dec_DelJobList.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/dec_reply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/enc_reply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/entlim_parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/get_svrport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/grunt_parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/ifl_impl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/ifl_pointers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/ifl_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_cred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_jcred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_manage2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_modify_resv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_msg2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_rdrpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_sig2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_status.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_status2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_submit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_submit_resv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/int_ucred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/list_link.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_Preempt_Jobs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_alterjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_confirmresv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_defschreply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_deljob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_deljoblist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_delresv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_holdjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_locjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_modify_resv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_movejob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_msgjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_orderjo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_rerunjo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_resc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_rlsjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_runjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_selectj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_sigjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_stagein.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_stathook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_stathost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_statjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_statnode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_statque.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_statresv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_statrsc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_statsched.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_statsrv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_submit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_submit_resv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbsD_termin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbs_delstatfree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbs_get_attribute_errors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbs_geterrmg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbs_geterrno.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbs_loadconf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbs_quote_parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/pbs_statfree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/strsep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/tcp_dis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/tm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/xml_encode_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblicensing/license_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/chk_file_sec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/log_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/pbs_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/pbs_messages.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/setup_env.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/get_hostaddr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/hnls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/net_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/net_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/net_set_clse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/port_forwarding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/common_python_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/module_pbs_v1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/pbs_python_external.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/pbs_python_import_types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/pbs_python_svr_external.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/pbs_python_svr_internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/pbs_python_svr_size_type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/shared_python_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsec/cs_standard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/site_allow_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/site_alt_rte.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/site_check_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/site_map_usr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/site_mom_chu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/site_mom_ckp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/site_mom_jst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/tpp_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/tpp_em.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/tpp_platform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/tpp_router.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/tpp_transport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/tpp_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/avltree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/daemon_protect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/entlim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/execvnode_seq_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/get_hostname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/misc_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/pbs_aes_encrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/pbs_array_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/pbs_ical.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/pbs_idx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/pbs_secrets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/thread_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/work_task.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs_v1_module_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/mom_rcp/rcp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/mom_rcp/replace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/mom_rcp/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/catch_child.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/job_recov_fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/linux/alps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/linux/mom_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/linux/mom_mach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/linux/mom_start.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/linux/pe_input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mock_run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_comm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_hook_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_inter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_pmix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_updates_bundle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_vnode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_walltime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/popen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/prolog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/renew_creds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/requests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/stage_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/start_exec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/resmom/vnode_storage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/buckets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/dedtime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/fairshare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/fifo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/get_4byte.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/globals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/job_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/limits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/multi_threading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/node_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/node_partition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/pbs_bitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/pbs_sched.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/pbs_sched_bare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/pbs_sched_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/pbsfs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/prev_job_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/prime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/queue_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/resource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/resource_resv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/resv_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/sched_exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/sched_ifl_wrappers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/server_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/simulate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/site_code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/scheduler/state_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/accounting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/array_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/attr_recov.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/attr_recov_db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/checkkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/daemon_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/dis_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/failover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/geteusernam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/hook_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/issue_request.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/jattr_get_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/job_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/job_recov_db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/job_route.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/license_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/licensing_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/mom_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/nattr_get_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/node_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/node_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/node_recov_db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/pbs_comm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/pbs_db_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/pbsd_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/pbsd_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/process_request.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/qattr_get_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/queue_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/queue_recov_db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/rattr_get_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/reply_send.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_cred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_getcred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_holdjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_jobobit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_locate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_message.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_modify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_movejob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_preemptjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_quejob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_register.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_rerun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_rescq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_runjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_shutdown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/req_track.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/resc_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/run_sched.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/sattr_get_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/sched_attr_get_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/sched_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/setup_resc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/stat_job.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_chk_owner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_credfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_jobfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_mail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_movejob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_recov_db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/svr_resccost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/user_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/server/vnparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/chk_tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/hostn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbsTclInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbsTkInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbs_ds_monitor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbs_idled.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbs_probe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbs_python.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbs_sleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbs_tclWrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/pbs_upgrade_job.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/printjob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/rstester.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/site_tclWrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/tools/tracejob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/unsupported/pbs_rmget.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/unsupported/renew-test/base64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openpbs/src/unsupported/renew-test/renew-test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/Long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/Long_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/acct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/attribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/auth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/avltree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/basil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/batch_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/bitfield.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/cmds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/credential.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/dis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/grunt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/hook_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/ifl_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/job.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/libauth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/libpbs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/libsec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/libutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/list_link.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/mom_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/mom_hook_func.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/mom_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/mom_vnode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/net_connect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_array_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_client_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_ecl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_entlim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_idx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_ifl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_license.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_mpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_nodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_python_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_reliable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_sched.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_share.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/placementsets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/port_forwarding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/portability.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/provision.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/qmgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/reservation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/resmon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/resv_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/rm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/sched_cmds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/server_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_job_attr_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_job_attr_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_qmgr_node_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_qmgr_que_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_qmgr_sched_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_qmgr_svr_print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_que_attr_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_que_attr_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_resc_attr_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_resv_attr_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_resv_attr_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_sched_attr_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_sched_attr_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_svr_attr_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/site_svr_attr_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/svrfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/ticket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/tm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/tm_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/tpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/tracking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/include/work_task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/db_postgres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdis/dis_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblicensing/liblicense.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/tpp_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/mom_rcp/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/mom_rcp/pathnames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/mom_rcp/pbs_stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/resmom/linux/mom_mach.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/resmom/mock_run.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/resmom/mom_pmix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/resmom/renew_creds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/resmom/rm_dep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/buckets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/constant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/data_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/dedtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/fairshare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/fifo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/job_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/limits_if.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/multi_threading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/node_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/node_partition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/pbs_bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/prev_job_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/prime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/queue_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/resource_resv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/resv_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/server_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/simulate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/site_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/site_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/scheduler/state_count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/tools/tracejob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openpbs/src/unsupported/renew-test/base64.h" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/PBS_License.txt" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/buildutils/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/buildutils/attr_parser.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/etc/build-pbs-packages.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/etc/configure_node.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/etc/container-env-setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/etc/do.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/etc/do_sanitize_mode.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/etc/gen_ptl_json.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/ci/etc/killit.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/openpbs.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/mpiexec.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_lamboot.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_mpihp.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_mpilam.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_mpirun.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbs_remsh.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbsrun.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbsrun_unwrap.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/pbsrun_wrap.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/modulefile.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs.service.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs_bootcheck.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs_habitat.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs_init.d.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs_poerun.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs_postinstall.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs_reload.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbs_topologyinfo.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.ch_gm.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.ch_mx.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.gm_mpd.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.intelmpi.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.mpich2.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.mvapich1.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.mvapich2.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.mx_mpd.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.poe.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/cmds/scripts/pbsrun.poe.init.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/hooks/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/hooks/cgroups/pbs_cgroups.PY" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/iff/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/include/pbs_version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libauth/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libauth/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libauth/gss/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libauth/munge/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libdb/pgsql/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libifl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblicensing/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Liblog/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libnet/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpbs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpbs/pbs.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libpython/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libsite/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libtpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Libutil/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_attr_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_base_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_exc_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_export_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_pmi_cray.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_pmi_none.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_pmi_sgi.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_pmi_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_pmi_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs/v1/_svr_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs_hooks/PBS_alps_inventory_check.PY" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs_hooks/PBS_cray_atom.PY" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs_hooks/PBS_power.PY" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/pbs_hooks/PBS_xeon_phi_provision.PY" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/modules/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/mom_rcp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/resmom/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/scheduler/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/server/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/tools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/tools/create_env_file.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/tools/wrap_tcl.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/NodeHealthCheck.json" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/NodeHealthCheck.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/ReliableJobStartup.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/load_balance.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/mom_dyn_res.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/pbs-mailer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/pbs-mailer/pbs_mail.json" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/pbs-mailer/release-deb.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/pbs-mailer/release-rpm.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/pbs_output.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/rapid_inter.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/run_pelog_shell.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/sgiICEplacement.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/src/unsupported/sgiICEvnode.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/caveats.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/commands.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/howtotest.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/ptl.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/doc/tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/__init__.py.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/pbs_api_to_cli.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/pbs_ifl_mock.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/pbs_testlib.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_batchutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_comm.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_config.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_constants.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_entities.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_error.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_expect_action.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_fairshare.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_mom.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_object.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_resourceresv.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_sched.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_server.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_service.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/lib/ptl_wrappers.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_anonutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_cliutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_covutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_crayutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_dshutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_logutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_procutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_snaputils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_testsuite.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/pbs_testusers.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/ptl_report_json.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/ptl_test_data.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/ptl_test_db.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/ptl_test_info.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/ptl_test_loader.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/ptl_test_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/ptl/utils/plugins/ptl_test_tags.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/fw/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/scripts/qsub_multi.sh" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_Rrecord_resources_used.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acct_log.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_accumulate_resc_used.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acl_groups.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acl_host_moms.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_acl_host_queue.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_admin_suspend.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_allpart.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_alps_inventory_check_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_alps_release_tunables.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_array_job_mail.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_basil_parser_err.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_basil_support.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_calendaring.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cgroups_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_check_job_attrib.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_checkpoint.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_client_response.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_complete_running_parent_job.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_conf_resv_stale_vnode.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_config.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cpuset.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_check_node_exclusivity.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_hyperthread.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_pagg_id.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_reliable_job_startup.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_smoketest.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_suspend_resume.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_vnode_per_numa.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_cray_vnode_pool.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_daemon_service_user.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_dup_acc_log_for_resv.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_eligible_time.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_equiv_classes.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_exceeded_resources_notification.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_execjob_susp_resume.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_fairshare.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_gen_nodefile_on_sister_mom.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_grunt.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_highreslog.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_holidays.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_config_os_env.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_crosslink_mom.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_debug_input.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_debug_nocrash.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_exechost_periodic.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_execjob_abort.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_execjob_end.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_execjob_prologue.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_jobobit.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_management.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_modifyvnode_state_changes.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_perf_stat.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_set_interrupt.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_set_jobenv.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_set_nonexist.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_timeout.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hook_unset_res.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hooksmoketest.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_hookswig.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_indirect_resources.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_init_script.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_array.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_array_comment.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_comment_on_resume.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_dependency.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_purge.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_requeue_timeout_error.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_routing.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_script.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_sort_formula.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_status_after_mom_hup.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_job_task.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_maintenance_reservations.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_modifyresv_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_mom_hook_sync.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_mom_hooks_test.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_mom_job_dir.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_mom_local_nodename.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_mom_mock_run.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_mom_walltime.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_moved_job.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_multi_sched.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_multiple_execjob_launch_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_node_buckets.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_node_jobs_restart.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_node_jobs_restart_multinode.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_node_rampdown.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_node_rampdown_keep_select.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_node_sleep_state.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_nodes_json.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_nodes_queues.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_nonprint_characters.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_offline_vnodes.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_one_event_multiple_hooks.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_only_explicit_psets.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_only_small_files_over_tpp.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_passing_environment_variable.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_pbsnodes.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_pbsnodes_output_trimmed.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_peer.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_periodic_constant.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_power_provisioning_cray.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_power_provisioning_sgi.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_preemption.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_printjob.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_provisioning.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_provisioning_enhancement.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_python_restart_settings.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_python_test.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qdel.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qmgr.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qrun.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qselect.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qstat.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qstat_2servers.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qstat_count.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qstat_formats.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qsub_direct_write.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qsub_opts_args.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qsub_remove_files.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qsub_script.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_qsub_wblock.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_que_resc_usage.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_ralter.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_release_limited_res_suspend.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_reliable_job_startup.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resc_custom_perm.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resc_used_single_node.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_reservations.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resource_multichunk.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resource_unset.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resource_usage_log.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resv_begin_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resv_confirm_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resv_end_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_resv_start_dur_end.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_root_owned_script.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_rstat.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_runjob_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_sched_attr_updates.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_sched_badstate.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_sched_fifo.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_sched_preempt_enforce_resumption.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_sched_runjobwait.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_sched_signal.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_schedule_indirect_resources.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_server_periodic_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_set_enforcement.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_sister_mom_crash.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_snapshot_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_soft_walltime.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_stf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_strict_ordering.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_support_linux_hook_event_phase1_2.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_suspend_resume_accounting.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_svr_dyn_res.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_systemd.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_test_entity_limits.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_test_qorder.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_test_run_count.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_test_svr_dflt.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_test_tpp.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_trillion_jobid.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_two_mom_hooks_resources_used.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_types.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_unknown_resource_hook_update.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_unset_exectime.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_user_reliability.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_validate_job_qsub_attributes.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/functional/pbs_verify_log_output.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/interfaces/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/interfaces/pbs_libpbs_so.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/interfaces/pbs_node_partition.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/interfaces/pbs_partition.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/interfaces/pbs_preempt_params.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/interfaces/pbs_sched_interface_test.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/pbs_smoketest.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_cgroups_stress.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_client_nagle_performance.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_equiv_classes_perf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_history_cleanup_quasihang.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_jobperf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_preemptperformance.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_qstat_performance.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_qsub_performance.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_rerunjob_file_transfer_perf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_runjobwait_perf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_sched_perf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/pbs_standing_resv_quasihang.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/performance/test_dependency_perf.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/resilience/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/resilience/pbs_hook_alarm_large_multinode_job.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/security/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_config_sched.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_cycles_test.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_default_timeout.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_dshutils_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_expect.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_initservices.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_job_cleanup.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_json_test_report.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_manager.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_managers_operators.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_param_dict.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_pbstestsuite.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_requirements_decorator.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_resvid_test.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_test_create_vnodes.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_test_revert_site_hooks.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_test_revert_to_defaults.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_testlogutils.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/selftest/pbs_testparams_decorator.py" />
+    <Text Include="../../thirdparty/owemdjee/openpbs/test/tests/upgrades/__init__.py" />
+    <Xml Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/master_job_attr_def.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/master_node_attr_def.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/master_queue_attr_def.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/master_resc_def_all.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/master_resv_attr_def.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/master_sched_attr_def.xml" />
+    <Xml Include="../../thirdparty/owemdjee/openpbs/src/lib/Libattr/master_svr_attr_def.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

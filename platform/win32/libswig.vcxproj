@@ -1,0 +1,1486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libswig</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE9543B}</ProjectGuid>
+    <RootNamespace>libswig</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSWIG;SWIG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/ccache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/cleanup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/execute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/mdfour.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/snprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/unify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/CCache/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/android/class/jni/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/android/extend/jni/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/android/simple/jni/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/arrays/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/callback/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/nested/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/csharp/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/d/callback/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/d/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/d/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/d/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/d/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/d/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/d/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/callback/callback.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/class/class.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/enum/enum.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/extend/extend.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/funcptr/funcptr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/multimap/multimap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/pointer/pointer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/reference/reference.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/simple/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/go/variables/variables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/guile/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/guile/matrix/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/guile/matrix/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/guile/multimap/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/guile/multivalue/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/guile/port/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/guile/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/callback/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/doxygen/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/multimap/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/nested/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/java/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/javascript/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/javascript/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/javascript/exception/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/javascript/pointer/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/javascript/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/javascript/simple/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/javascript/variables/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/arrays/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/dual/dual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/embed/embed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/embed/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/embed2/embed2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/embed2/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/embed3/embed3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/embed3/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/funcptr3/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/functest/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/lua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/owner/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/lua/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/multimap/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/argout_ref/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/callback/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/class/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/shapes/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ocaml/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/callback/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/contract/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/funcptr2/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/module_load/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/octave/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/callback/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/multimap/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/value/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/perl5/xmlstring/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/callback/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/cpointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/disown/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/overloading/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/proxy/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/sync/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/value/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/php/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/callback/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/contract/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/docstrings/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/doxygen/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/extend/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr2/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/multimap/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/smartptr/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/python/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/r/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/r/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/free_function/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/funcptr2/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/mark_function/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/multimap/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/overloading/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/value/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/ruby/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/contract/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/matrix/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/matrix2/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/matrix2/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/std_list/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/scilab/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/class/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/contract/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/enum/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/funcptr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/multimap/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/pointer/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/reference/example.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/simple/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/value/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/tcl/variables/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/test-suite/guile/guile_ext_test_external.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Examples/test-suite/octave/octave_empty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Lib/linkruntime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Lib/tcl/mactkinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/CParse/cscanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/CParse/templ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/CParse/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/base.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/fio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/DOH/void.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Doxygen/doxyentity.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Doxygen/doxyparser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Doxygen/doxytranslator.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Doxygen/javadoc.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Doxygen/pydoc.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/allocate.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/browser.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/cffi.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/contract.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/csharp.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/d.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/directors.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/emit.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/go.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/guile.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/interface.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/java.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/javascript.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/lang.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/lua.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/main.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/mzscheme.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/nested.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/ocaml.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/octave.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/overload.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/perl5.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/php.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/python.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/r.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/ruby.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/scilab.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/swigmain.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/tcl8.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/typepass.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/utils.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Modules/xml.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Preprocessor/cpp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Preprocessor/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/cwrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/deprecate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/extend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/fragment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/naming.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/parms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/stype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/typemap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/typeobj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/typesys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Source/Swig/wrapfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Tools/javascript/javascript.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Tools/javascript/js_shell.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Tools/javascript/jsc_shell.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/swig/Tools/javascript/v8_shell.cxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/CCache/ccache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/CCache/mdfour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/android/class/jni/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/android/extend/jni/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/arrays/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/nested/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/csharp/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/d/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/d/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/d/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/d/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/d/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/d/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/director/director.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/go/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/guile/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/guile/matrix/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/guile/std_vector/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/doxygen/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/nested/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/java/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/constant/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/exception/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/nspace/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/operator/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/overload/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/javascript/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/embed3/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/exception/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/funcptr3/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/import/bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/import/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/import/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/import/spam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/nspace/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/owner/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/lua/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/mzscheme/std_vector/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/scoped_enum/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/shapes/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/std_string/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/std_vector/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/stl/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ocaml/strings_test/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/funcptr2/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/module_load/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/operator/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/octave/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/import/bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/import/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/import/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/import/spam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/multiple_inheritance/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/value/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/perl5/xmlstring/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/disown/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/overloading/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/proxy/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/sync/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/value/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/php/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/callback/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/docstrings/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/doxygen/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/exception/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/exceptproxy/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/extend/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr2/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import/bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import/spam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py2/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py2/pkg2/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py3/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py3/pkg2/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py2/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py2/pkg2/pkg3/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py3/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py3/pkg2/pkg3/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py2/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py2/pkg2/pkg3/pkg4/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py3/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py3/pkg2/pkg3/pkg4/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/module_is_init/pkg1/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py2/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py2/pkg2/pkg3/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py3/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py3/pkg2/pkg3/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py2/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py2/pkg2/pkg3/pkg4/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py3/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py3/pkg2/pkg3/pkg4/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py2/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py2/pkg2/pkg3/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py3/pkg2/bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py3/pkg2/pkg3/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames1/pkg1/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames1/pkg2/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames2/pkg1/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames2/pkg1/pkg2/foo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_template/bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_template/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_template/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/import_template/spam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/operator/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/smartptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/smartptr/smartptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/std_map/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/std_vector/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/python/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/r/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/exceptproxy/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/free_function/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/funcptr2/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import/bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import/spam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import_template/bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import_template/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import_template/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/import_template/spam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/mark_function/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/operator/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/overloading/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/std_vector/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/value/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/ruby/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/scilab/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/scilab/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/scilab/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/scilab/std_list/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/scilab/std_vector/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/scilab/template/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/scilab/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/class/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/enum/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/funcptr/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/import/bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/import/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/import/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/import/spam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/operator/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/reference/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/std_vector/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/value/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/tcl/variables/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/clientdata_prop_a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/clientdata_prop_b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/doxygen_basic_translate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/doxygen_misc_constructs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/import_nomodule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/imports_a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/imports_b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/inctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/insert_directive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/mod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/multi_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/packageoption.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_gcc_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_include_a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_include_b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_include_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_include_d withspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_include_e withspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_include_f withspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/preproc_include_g.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/refcount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/rename.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/shared_ptr_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/swig_examples_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/test-suite/template_typedef_cplx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/xml/example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/xml/example_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Examples/xml/example_xml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Lib/octave/octheaders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Lib/perl5/noembed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/CParse/cparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/DOH/doh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/DOH/dohint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Doxygen/doxycommands.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Doxygen/doxyentity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Doxygen/doxyparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Doxygen/doxytranslator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Doxygen/javadoc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Doxygen/pydoc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Include/swigwarn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Modules/swigmod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Preprocessor/preprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Swig/swig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Swig/swigfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Swig/swigopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Swig/swigparm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Swig/swigscan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Swig/swigtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Source/Swig/swigwrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/swig/Tools/javascript/js_shell.h" />
+    <Image Include="../../thirdparty/owemdjee/swig/Doc/Manual/android-class.png" />
+    <Image Include="../../thirdparty/owemdjee/swig/Doc/Manual/android-simple.png" />
+    <Image Include="../../thirdparty/owemdjee/swig/Doc/Manual/ch2.1.png" />
+    <Image Include="../../thirdparty/owemdjee/swig/Doc/Manual/swig16.png" />
+    <Text Include="../../thirdparty/owemdjee/swig/CCache/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/CCache/README.swig" />
+    <Text Include="../../thirdparty/owemdjee/swig/CCache/ccache_swig_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/CCache/config_win32.h.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/CCache/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/swig/CCache/debian/README.Debian" />
+    <Text Include="../../thirdparty/owemdjee/swig/CCache/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/swig/CHANGES.current" />
+    <Text Include="../../thirdparty/owemdjee/swig/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/swig/Doc/Devel/migrate.txt" />
+    <Text Include="../../thirdparty/owemdjee/swig/Doc/Devel/plan-gsoc-2012.txt" />
+    <Text Include="../../thirdparty/owemdjee/swig/Doc/Devel/runtime.txt" />
+    <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/fixstyle.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/makechap.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Doc/Manual/maketoc.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/d/example.mk.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/class/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/class/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/class/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/constant/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/constant/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/constant/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/enum/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/enum/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/enum/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/exception/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/exception/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/exception/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/functor/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/functor/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/functor/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/native/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/native/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/native/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/nspace/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/nspace/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/nspace/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/operator/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/operator/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/operator/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/overload/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/overload/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/overload/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/pointer/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/pointer/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/pointer/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/reference/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/reference/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/reference/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/simple/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/simple/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/simple/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/template/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/template/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/template/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/variables/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/variables/example.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/javascript/variables/runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/arrays/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/class/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/constants/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/embed/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/embed2/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/embed3/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/exception/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/funcptr3/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/functest/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/functor/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/import.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/import/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/nspace/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/owner/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/pointer/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/simple/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/lua/variables/runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/callback/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/class/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/constants/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/contract/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/docstrings/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/doxygen/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/enum/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/exception/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/exceptproxy/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/extend/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/funcptr2/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/functor/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py2/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/py3/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init1/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py2/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py2/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py3/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/py3/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init2/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py2/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py2/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py2/pkg2/pkg3/pkg4/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py3/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py3/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/py3/pkg2/pkg3/pkg4/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/from_init3/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/module_is_init/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/namespace_pkg/nonpkg.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/namespace_pkg/normal.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/namespace_pkg/nstest.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/namespace_pkg/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/namespace_pkg/split.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/namespace_pkg/zipsplit.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py2/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py2/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py3/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/py3/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport1/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py2/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py2/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py2/pkg2/pkg3/pkg4/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py3/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py3/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/py3/pkg2/pkg3/pkg4/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport2/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py2/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py2/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py3/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/py3/pkg2/pkg3/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/relativeimport3/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames1/pkg1/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames1/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames1/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames2/pkg1/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames2/pkg1/pkg2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/same_modnames2/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/split_modules/vanilla/pkg1/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/split_modules/vanilla/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/split_modules/vanilla_split/pkg1/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_packages/split_modules/vanilla_split/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/import_template/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/multimap/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/operator/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/performance/constructor/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/performance/func/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/performance/harness.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/performance/hierarchy/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/performance/hierarchy_operator/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/performance/operator/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/pointer/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/reference/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/simple/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/smartptr/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/std_map/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/std_vector/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/template/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/varargs/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/python/variables/runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/class/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/class/runme2.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/constants/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/contract/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/enum/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/funcptr/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/import/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/multimap/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/operator/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/pointer/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/reference/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/simple/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/std_vector/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/value/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/tcl/variables/runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/cffi/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/csharp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/d/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/errors/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/go/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/guile/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/java/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/abstract_access_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/abstract_inherit_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/abstract_typedef2_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/abstract_typedef_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/abstract_virtual_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/array_member_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/arrays_global_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/callback_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/char_binary_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/char_strings_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/class_ignore_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/class_scope_weird_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/complextest_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/constover_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/constructor_copy_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/cpp11_strongly_typed_enumerations_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/cpp_enum_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/cpp_namespace_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/cpp_static_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/director_alternating_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/disown_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/dynamic_cast_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/empty_c_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/empty_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/enum_template_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/infinity_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/inherit_missing_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/integers_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/javascript_lib_arrays_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/li_typemaps_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/namespace_virtual_method_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/native_directive_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/node_template/binding.gyp.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/node_template/index.js.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/nspace_extend_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/nspace_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/null_pointer_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/overload_copy_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/overload_null_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/preproc_include_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/preproc_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/rename1_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/rename2_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/rename3_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/rename4_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/rename_scope_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/rename_simple_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/ret_by_value_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/string_simple_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/struct_value_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/swig_exception_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/template_static_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/typedef_class_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/typedef_inherit_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/typedef_scope_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/typemap_arrays_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/typemap_delete_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/typemap_namespace_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/typemap_ns_using_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/types_directive_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/using1_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/using2_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/varargs_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/javascript/virtual_derivation_runme.js" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/abstract_access_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/array_member_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/arrays_global_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/char_strings_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/chartest_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/cpp11_strongly_typed_enumerations_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/cpp_basic_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/cpp_enum_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/cpp_namespace_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/cpp_nodefault_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/cpp_static_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/cpp_typedef_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/disown_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/dynamic_cast_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/enum_plus_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/enum_rename_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/enum_scope_template_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/enum_template_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/enums_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/equality_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/exception_order_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/exception_partial_info_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/extend_constructor_destructor_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/extend_placement_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/extend_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/extend_template_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/extend_typedef_class_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/extend_variable_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/friends_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/funcptr_cpp_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/fvirtual_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/global_namespace_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/global_vars_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/grouping_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/iadd_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/import.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/import_nomodule_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/imports_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/inherit_missing_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/keyword_rename_c_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/keyword_rename_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_carrays_cpp_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_carrays_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_factory_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_std_except_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_std_pair_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_std_string_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_std_vector_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/li_typemaps_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/lua_inherit_getitem_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/lua_lightuserdata_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/lua_no_module_global_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/member_pointer_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/multi_import_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/nested_workaround_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/newobject1_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/newobject2_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/nspace_extend_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/nspace_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/operator_overload_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/overload_complicated_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/overload_null_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/overload_simple_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/overload_template_fast_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/overload_template_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/pointer_reference_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/primitive_ref_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/refcount_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/rename_simple_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/ret_by_value_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/sizet_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_extend_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_inherit_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_multi_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_not_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_overload_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_rename_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_simple_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/smart_pointer_templatemethods_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/static_const_member_2_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/static_const_member_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/template_construct_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/template_default_arg_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/template_extend1_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/template_extend2_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/template_inherit_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/template_static_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/valuewrapper_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/varargs_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/lua/voidtest_runme.lua" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/mzscheme/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/ocaml/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/octave/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/perl5/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/php/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/abstract_access_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/abstract_typedef2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/abstract_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/abstract_virtual_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/argcargvtest_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/array_member_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/arrays_global_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/autodoc_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/callback_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/ccomplextest_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/char_binary_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/class_ignore_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/class_scope_weird_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/comment_verifier.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/compactdefaultargs_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/complextest_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/constant_directive_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/constover_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/constructor_copy_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/constructor_rename_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/contract_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_alternate_function_syntax_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_decltype_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_final_directors_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_function_objects_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_hash_tables_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_initializer_list_extend_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_initializer_list_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_null_pointer_constant_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_raw_string_literals_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_ref_qualifiers_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_ref_qualifiers_rvalue_unignore_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_result_of_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_rvalue_reference_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_shared_ptr_overload_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_shared_ptr_template_upcast_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_shared_ptr_upcast_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_std_array_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_strongly_typed_enumerations_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_template_typedefs_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_thread_local_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_type_aliasing_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_type_traits_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp11_uniform_initialization_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp14_binary_integer_literals_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp17_hex_floating_literals_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp17_nested_namespaces_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp17_u8_char_literals_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp_enum_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp_namespace_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp_parameters_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/cpp_static_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/default_arg_values_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/default_args_c_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/default_args_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/default_constructor_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_abstract_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_alternating_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_basic_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_classic_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_comparison_operators_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_default_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_detect_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_enum_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_exception_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_extend_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_finalizer_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_frob_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_keywords_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_nested_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_pass_by_value_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_profile_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_property_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_protected_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_smartptr_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_stl_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_string_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_thread_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_unroll_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/director_wstring_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/disown_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_alias_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_basic_notranslate_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_basic_translate_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_basic_translate_style2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_basic_translate_style3_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_code_blocks_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_ignore_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_misc_constructs_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_parsing_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_translate_all_tags_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_translate_links_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/doxygen_translate_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/dynamic_cast_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/empty_c_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/empty_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/enum_forward_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/enum_template_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/enums_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/exception_classname_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/exception_order_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/extend_placement_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/extend_template_method_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/extend_template_ns_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/extend_template_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/extend_variable_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/extern_c_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/file_test_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/friends_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/funcptr_cpp_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/functors_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/fvirtual_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/global_functions_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/global_namespace_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/global_ns_arg_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/global_vars_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/grouping_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/iadd_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/ignore_parameter_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/implicittest_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/import_nomodule_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/import_stl_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/imports_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/inctest_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/inherit_missing_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/inout_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/inplaceadd_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/input_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/keyword_rename_c_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/keyword_rename_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/kwargs_feature_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/langobj_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_attribute_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_attribute_template_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_boost_shared_ptr_bits_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_boost_shared_ptr_director_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_boost_shared_ptr_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_boost_shared_ptr_template_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_carrays_cpp_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_carrays_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_cdata_cpp_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_cdata_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_cmalloc_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_cpointer_cpp_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_cpointer_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_cstring_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_cwstring_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_factory_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_implicit_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_auto_ptr_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_carray_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_containers_int_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_containers_overload_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_except_as_class_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_map_member_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_map_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_pair_extra_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_pair_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_pair_using_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_set_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_stream_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_string_extra_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_vector_back_reference_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_vector_enum_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_vector_extra_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_vector_ptr_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_vector_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_wstream_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_wstring_inherit_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/li_std_wstring_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/member_pointer_const_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/member_pointer_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/memberin_extend_c_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/minherit_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/mod_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/multi_import_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/namespace_class_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/namespace_typemap_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/namespace_virtual_method_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/naturalvar_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/nested_in_template_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/nested_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/nested_template_base_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/nested_workaround_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/not_c_keywords_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/operator_overload_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/operbool_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_bool_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_complicated_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_copy_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_extend2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_extend_c_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_extend_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_null_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_numeric_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_rename_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_simple_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_subtype_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_template_fast_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/overload_template_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/pointer_reference_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/preproc_defined_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/preproc_gcc_output_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/preproc_include_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/preproc_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/primitive_ref_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/primitive_types_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/profiletest_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/profiletestc_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_abstractbase_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_append_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_builtin_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_destructor_exception_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_docstring_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_extranative_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_moduleimport_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_nondynamic_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_overload_simple_cast_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_pickle_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_pybuffer_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_pythoncode_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_richcompare_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_strict_unicode_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_threads_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/python_varargs_typemap_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/refcount_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/reference_global_vars_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/rename_pcre_encoder_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/rename_predicates_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/rename_rstrip_encoder_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/rename_scope_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/rename_strip_encoder_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/ret_by_value_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/return_const_value_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_const_overload_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_extend_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_member_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_multi_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_multi_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_not_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_overload_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_rename_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_simple_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_templatevariables_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/smart_pointer_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/sneaky1_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/special_variable_macros_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/static_const_member_2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/std_containers_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/struct_initialization_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/struct_rename_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/struct_value_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/swigobject_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_class_reuse_name_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_classes_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_construct_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_default_arg_overloaded_extend_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_default_arg_overloaded_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_default_arg_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_default_cache_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_extend1_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_extend2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_inherit_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_matrix_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_ns4_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_ns_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_opaque_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_ref_type_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_rename_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_static_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_tbase_template_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_template_parameters_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_type_namespace_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typedef_cplx2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typedef_cplx3_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typedef_cplx4_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typedef_cplx_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typedef_import_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typemaps_typedef2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_typemaps_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/template_using_directive_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/threads_exception_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typedef_class_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typedef_classforward_same_name_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typedef_funcptr_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typedef_inherit_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typedef_scope_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typedef_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_arrays_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_delete_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_documentation_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_namespace_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_ns_using_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_out_optimal_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_qualifier_strip_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typemap_template_typedef_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/typename_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/types_directive_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/unicode_strings_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/unions_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/using1_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/using2_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/using_composition_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/using_extend_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/using_inherit_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/using_private_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/using_protected_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/varargs_overload_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/varargs_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/virtual_derivation_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/virtual_poly_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/voidtest_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/python/wrapmacro_runme.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/r/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/ruby/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/scilab/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/bools_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/clientdata_prop_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/cpp11_strongly_typed_enumerations_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/disown_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/enum_thorough_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/import_nomodule_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/imports_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/li_std_string_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/member_pointer_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/newobject1_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/newobject2_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/null_pointer_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/overload_copy_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/overload_null_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/overload_simple_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/primitive_ref_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/primitive_types_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/profiletest_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/reference_global_vars_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/union_parameter_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/test-suite/tcl/unions_runme.tcl" />
+    <Text Include="../../thirdparty/owemdjee/swig/Examples/xml/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Lib/perl5/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Lib/python/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Lib/tcl/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Source/CParse/parser.y" />
+    <Text Include="../../thirdparty/owemdjee/swig/Source/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/cmake/swigconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/javascript/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/mkdist.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/mkrelease.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/mkwindows.sh" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/nuget-install.cmd" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/obs-buildlogs.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/pcre-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/pyname_patch.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/testflags.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/travis-linux-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/travis-osx-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/swig/Tools/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/swig/Win/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/swig/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/swig/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/swig/preinst-swig.in" />
+    <Text Include="../../thirdparty/owemdjee/swig/swig.spec.in" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/class/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/class/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/class/res/layout/main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/class/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/extend/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/extend/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/extend/res/layout/main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/extend/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/simple/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/simple/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/simple/res/layout/main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/swig/Examples/android/simple/res/values/strings.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

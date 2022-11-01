@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>librclone</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA9C0C2}</ProjectGuid>
+    <RootNamespace>librclone</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRCLONE;RCLONE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/rclone/librclone/ctest/ctest.c" />
+    <Font Include="../../thirdparty/owemdjee/rclone/docs/static/webfonts/fa-brands-400.ttf" />
+    <Font Include="../../thirdparty/owemdjee/rclone/docs/static/webfonts/fa-regular-400.ttf" />
+    <Font Include="../../thirdparty/owemdjee/rclone/docs/static/webfonts/fa-solid-900.ttf" />
+    <Image Include="../../thirdparty/owemdjee/rclone/backend/googlephotos/testfiles/rclone-test-image1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/rclone/backend/googlephotos/testfiles/rclone-test-image2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/rclone/cmd/serve/dlna/data/static/rclone-120x120.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/cmd/serve/dlna/data/static/rclone-48x48.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/cmd/serve/dlna/testdata/files/small_jpeg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/rclone/docs/static/img/ncw-bitcoin-address.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/docs/static/img/rclone-32x32.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/cover.jpg" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/favicon/favicon_16px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/favicon/favicon_32px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/ico/logo_symbol_color.ico" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_color_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_color_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_color_32px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_color_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_mono_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_mono_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_mono_32px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__horizontal_mono_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_color_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_color_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_color_512px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_color_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_mono_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_mono_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_mono_512px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_on_dark__vertical_mono_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_symbol_on_dark_mono_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_symbol_on_dark_mono_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_symbol_on_dark_mono_512px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_dark/logo_symbol_on_dark_mono_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_color_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_color_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_color_32px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_color_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_mono_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_mono_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_mono_32px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__horizontal_mono_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_color_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_color_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_color_512px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_color_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_mono_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_mono_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_mono_512px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_on_light__vertical_mono_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_symbol_on_light_mono_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_symbol_on_light_mono_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_symbol_on_light_mono_512px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_on_light/logo_symbol_on_light_mono_64px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_symbol/logo_symbol_color_128px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_symbol/logo_symbol_color_16px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_symbol/logo_symbol_color_256px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_symbol/logo_symbol_color_512px.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_symbol/logo_symbol_color_600px_spaced.png" />
+    <Image Include="../../thirdparty/owemdjee/rclone/graphics/logo/logo_symbol/logo_symbol_color_64px.png" />
+    <Text Include="../../thirdparty/owemdjee/rclone/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/MANUAL.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/MANUAL.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/alias/test/files/four/five/underfive.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/alias/test/files/four/under four.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/alias/test/files/one%.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/alias/test/files/three/underthree.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/drive/test/about.json" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/http/test/files/four/under four.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/http/test/files/one%.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/http/test/files/three/underthree.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/backend/sharefile/update-timezone.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/bisect-go-rclone.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/bisect-rclone.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/build-xgo-cgofuse.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/config.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/decrypt_names.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/make_backend_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/make_changelog.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/make_manual.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/make_rc_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/test-all-commits-compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/test-repeat-vfs.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/test-repeat.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/test_proxy.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/update-authors.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/bin/win-build.bat" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/initial/file1.copy1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/initial/file1.copy2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/initial/file1.copy3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/initial/file1.copy4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/initial/file1.copy5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_all_changed/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/initial/file1.copy1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/initial/file1.copy2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/initial/file1.copy3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/initial/file1.copy4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/initial/file1.copy5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/modfiles/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_basic/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/initial/file8.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file10.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file11.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file5L.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file5R.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/modfiles/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_changes/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access/modfiles/hold.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/golden/exclude-other-filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/golden/include-other-filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/subdir-not/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/subdir-not/subdir-not2/file30.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/subdir/subdirA/file30.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/subdir/subdirB/file30.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/subdirX/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/initial/subdirX/subdirX1/file30.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/modfiles/exclude-other-filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/modfiles/include-other-filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_access_filters/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_filename/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_filename/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_filename/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_filename/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_filename/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_filename/modfiles/hold.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_filename/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/initial/file8.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_check_sync/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/initial/file5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/initial/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/initial/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file10.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file11.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file5L.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file5R.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/modfiles/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_dry_run/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/golden/測試_filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/initial/file_enconde_mañana_funcionará.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/initial/filename_contains_ě_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/initial/filename_contains_ࢺ_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/initial/Русский.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/initial/測試_Русский_ _ _ě_áñ/filename_contains_ě_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/initial/測試_Русский_ _ _ě_áñ/filename_contains_ࢺ_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/modfiles/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/modfiles/測試_filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_char_paths/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/file1 - Copy (2).txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/file1 - Copy.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/file_enconde_mañana_funcionará.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/filename_contains_ě_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/filename_contains_ࢺ_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/subdir_with_ࢺ_/filename_contains_ě_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/subdir_with_ࢺ_/filename_contains_ࢺ_.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/initial/Русский.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/modfiles/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_extended_filenames/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/file5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/modfiles/fileZ.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filters/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/golden/filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/modfiles/filtersfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/modfiles/filtersfile2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/modfiles/hold.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_filtersfile_checks/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file8.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/initial/file9.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/modfiles/hold.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path1/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file8.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/initial/file9.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/modfiles/hold.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_max_delete_path2_force/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/initial/subdir/file21.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/modfiles/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/modfiles/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/modfiles/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/modfiles/file21.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rclone_args/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/initial/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/initial/file3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/initial/file4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/initial/file5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/initial/file6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/initial/file7.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/modfiles/fileA.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/modfiles/fileB.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_resync/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/initial/file1.copy1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/initial/file1.copy2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/initial/file1.copy3.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/initial/file1.copy4.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/initial/file1.copy5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/initial/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/initial/subdir/file20.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/modfiles/file1.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/bisync/testdata/test_rmdirs/scenario.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/files/hidden.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/files/hidden/file.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/files/one%.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/files/three/a.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/files/three/b.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/files/two.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/a.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/hidden.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/indexhead.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/indexpost.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/one.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/onehead.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/onepost.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/two-6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/two.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/two2-5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/http/testdata/golden/two3-.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/restic/restic-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/a.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/hidden.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/indexhead.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/indexpost.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/one.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/onehead.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/onepost.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/two-6.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/two.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/two2-5.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/serve/webdav/testdata/golden/two3-.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/test/info/all.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/test/info/test.cmd" />
+    <Text Include="../../thirdparty/owemdjee/rclone/cmd/test/info/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/contrib/docker-plugin/managed/config.json" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/config.json" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/alias.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/amazonclouddrive.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/authors.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/azureblob.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/b2.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/bisync.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/box.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/bugs.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/cache.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/chunker.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/combine.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_about.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_authorize.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_backend.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_bisync.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_cat.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_check.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_checksum.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_cleanup.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_completion.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_completion_bash.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_completion_fish.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_completion_powershell.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_completion_zsh.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_create.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_delete.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_disconnect.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_dump.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_edit.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_file.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_password.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_paths.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_providers.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_reconnect.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_show.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_touch.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_update.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_config_userinfo.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_copy.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_copyto.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_copyurl.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_cryptcheck.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_cryptdecode.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_dedupe.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_delete.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_deletefile.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_genautocomplete.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_genautocomplete_bash.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_genautocomplete_fish.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_genautocomplete_zsh.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_gendocs.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_hashsum.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_link.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_listremotes.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_ls.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_lsd.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_lsf.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_lsjson.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_lsl.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_md5sum.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_mkdir.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_mount.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_move.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_moveto.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_ncdu.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_obscure.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_purge.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_rc.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_rcat.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_rcd.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_rmdir.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_rmdirs.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_selfupdate.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve_dlna.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve_docker.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve_ftp.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve_http.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve_restic.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve_sftp.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_serve_webdav.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_settier.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_sha1sum.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_size.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_sync.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_test.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_test_changenotify.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_test_histogram.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_test_info.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_test_makefile.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_test_makefiles.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_test_memory.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_touch.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_tree.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/commands/rclone_version.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/compress.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/contact.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/crypt.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/docker.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/docs.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/donate.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/downloads.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/drive.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/dropbox.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/fichier.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/filefabric.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/filtering.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/flags.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/ftp.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/googlecloudstorage.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/googlephotos.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/gui.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/hasher.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/hdfs.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/hidrive.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/http.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/install.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/internetarchive.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/jottacloud.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/koofr.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/licence.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/local.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/mailru.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/mega.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/memory.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/netstorage.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/onedrive.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/opendrive.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/overview.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/pcloud.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/premiumizeme.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/privacy.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/putio.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/qingstor.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/rc.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/remote_setup.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/s3.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/seafile.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/sftp.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/sharefile.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/sia.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/smb.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/storj.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/sugarsync.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/swift.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/tardigrade.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/union.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/uptobox.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/webdav.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/yandex.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/content/zoho.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/static/js/bootstrap.min.4.4.1.js" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/static/js/custom.js" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/static/js/jquery.min.3.5.1.js" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/static/js/popper.min.1.16.0.js" />
+    <Text Include="../../thirdparty/owemdjee/rclone/docs/static/js/search.js" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fs/rc/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fs/rc/js/loader.js" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fs/rc/js/wasm_exec.js" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fs/rc/rcserver/testdata/files/dir/file2.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fs/rc/rcserver/testdata/files/file.txt" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-sftp-openssh/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/fstest/testserver/init.d/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/graphics/logo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/librclone/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rclone/librclone/python/rclone.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/librclone/python/test_rclone.py" />
+    <Text Include="../../thirdparty/owemdjee/rclone/notes.txt" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/cmd/serve/dlna/data/static/ConnectionManager.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/cmd/serve/dlna/data/static/ContentDirectory.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/cmd/serve/dlna/data/static/X_MS_MediaReceiverRegistrar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/docs/layouts/rss.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/docs/layouts/sitemap.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/core-site.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/hdfs-site.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/httpfs-site.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/kms-site.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/mapred-site.xml" />
+    <Xml Include="../../thirdparty/owemdjee/rclone/fstest/testserver/images/test-hdfs/yarn-site.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

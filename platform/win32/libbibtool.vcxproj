@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libbibtool</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF547CD3}</ProjectGuid>
+    <RootNamespace>libbibtool</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/BibTcl/bibtool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/binding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/boolean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/function.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/number.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/lcore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/linereader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/literate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/lreader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/rec_sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/term.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/tester.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/tstack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/crossref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/database.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/macros.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/pxfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/regex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/alloca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/bsd-interf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/debugmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/emacsmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/fileregex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/g++malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/iregex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/malloc-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/other.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/printchar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-extend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-group.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-interf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-interv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/tregress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/upcase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/xmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/rewrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/rsc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/s_parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/sbuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/com_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/commands.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/eval_term.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/tagged.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/term.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/symbols.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/tex_aux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/tex_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/wordlist.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/binding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/builtin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/lcore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/linereader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/literate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/lreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/rec_sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/cmd/tstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/bibtool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/crossref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/database.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/keynode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/pxfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/rewrite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/rsc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/s_parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/sbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/symbols.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/tex_aux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/tex_read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/include/bibtool/wordlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/regex-0.12/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/regex-0.12/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/getpagesize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/select/commands.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/select/eval_term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/select/tagged.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibtool/select/term.h" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/back.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/back2.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/idx.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/idx2.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/next.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/next2.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/toc.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile-0/toc2.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/BibTool-title.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/index-active.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/index-normal.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/next-active.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/next-normal.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/prev-active.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/prev-normal.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/toc-active.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/toc-normal.gif" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/top-bg.png" />
+    <Image Include="../../thirdparty/owemdjee/bibtool/html/profile/top2-bg.png" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/AutoConf/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/AutoConf/makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/AutoConf/reconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/BibTcl/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/BibTcl/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/BibTcl/main.tcl" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/Changes.tex" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/MSDOS/link.msc" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/Tcl/bibtool.tcl" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/html/lib/Changes.lh" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/html/profile/site.js" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/makefile.unx" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/select/commands.y" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

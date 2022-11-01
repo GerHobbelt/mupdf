@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libxsldbg</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD5E9E9}</ProjectGuid>
+    <RootNamespace>libxsldbg</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLDBG;XSLDBG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/configtests/historytest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/configtests/readlinetest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/qtnotifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/qtnotifier2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/xsldbgdebuggerbase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/xsldbgevent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/xsldbgnotifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/xsldbgthread_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/xsldbgthreadimpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/arraylist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/breakpoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/breakpoint_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/callstack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/debug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/debugXSL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/file_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/files.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/files_unix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/help_unix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/nodeview_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/option_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/options_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/options_unix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/options_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/os_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/param_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/search_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/template_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/trace_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/variable_cmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgmsg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgsettingsmodel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgthread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/src/simpleio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/tests/listTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xsldbg/tests/searchTest.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/qtnotifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/xsldbgdebuggerbase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/arraylist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/breakpoint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/callstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/cmds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/debugXSL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/files.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/qtnotifier2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgdebuggerbase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgevent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgmsg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgnotifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgsettingsmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgwin32config.h" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/docs/en/website/kxsldbg_screenshot1.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/docs/en/website/qxsldbg_screenshot1.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/docs/en/website/sflogo-88-1.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/docs/en/website/snapshot1.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/docs/en/website/xsldbg-mode-screenshot1.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/icons/128x128/xsldbg_source.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/icons/22x22/xsldbg_source.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/icons/256x256/xsldbg_source.png" />
+    <Image Include="../../thirdparty/owemdjee/xsldbg/icons/512x512/xsldbg_source.png" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/build_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/createcatalog.bat" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/debian/changelog.Debian" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/docs/en/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/docs/en/createCatalog.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/docs/en/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/docs/en/xsldoc.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/help/C/xsldbg-C.omf.in" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/makedist.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/man1/updateMan1.sh" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/patch_history/Daniel_7_11_2001.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/problem_analysis/Keith_5_11_2001.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/problem_analysis/Problem_Analysis.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/src/libqtnotifier/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/src/libxsldbg/xsldbgwin32config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/tests/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/tests/testcoverage.txt" />
+    <Text Include="../../thirdparty/owemdjee/xsldbg/tests/updateTestData.sh" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/docs/en/GNOME/legal.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/docs/en/catalog.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/docs/en/search.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/docs/en/searchresult.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/docs/en/xsldoc.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/note3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/notemessage1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/notemessage2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/subdir/test14.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/subdir/test17.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test10.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test11.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test12.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test12_conv.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test13.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test14.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test15.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test16.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test17.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test18.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test19.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test20.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test7.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/xsldbg/tests/test9.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libscintilla</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7D0A29}</ProjectGuid>
+    <RootNamespace>libscintilla</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCINTILLA;SCINTILLA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/call/ScintillaCall.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/gtk/PlatGTK.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/gtk/ScintillaGTK.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/gtk/ScintillaGTKAccessible.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/gtk/scintilla-marshal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEdit/ScintillaDocument.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEditBase/PlatQt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEditBase/ScintillaEditBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEditBase/ScintillaQt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/AutoComplete.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/CallTip.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/CaseConvert.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/CaseFolder.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/CellBuffer.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/CharClassify.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/CharacterCategoryMap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/CharacterType.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/ContractionState.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/DBCS.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/Decoration.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/Document.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/EditModel.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/EditView.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/Editor.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/Geometry.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/Indicator.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/KeyMap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/LineMarker.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/MarginView.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/PerLine.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/PositionCache.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/RESearch.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/RunStyles.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/ScintillaBase.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/Selection.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/Style.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/UniConversion.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/UniqueString.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/ViewStyle.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/src/XPM.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/UnitTester.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testCellBuffer.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testCharClassify.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testCharacterCategoryMap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testContractionState.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testDecoration.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testDocument.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testGeometry.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testPartitioning.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testPerLine.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testRESearch.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testRunStyles.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testSparseVector.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testSplitVector.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/testUniConversion.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/test/unit/unitTest.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/win32/HanjaDic.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/win32/PlatWin.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/win32/ScintillaDLL.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/scintilla/win32/ScintillaWin.cxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/InfoBar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/InfoBarCommunicator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/PlatCocoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/QuartzTextLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/QuartzTextStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/QuartzTextStyleAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/ScintillaCocoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/ScintillaTest/AppController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/cocoa/ScintillaView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/gtk/Converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/gtk/ScintillaGTK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/gtk/ScintillaGTKAccessible.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/gtk/Wrappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/gtk/scintilla-marshal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/ILexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/ILoader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/Sci_Position.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/Scintilla.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/ScintillaCall.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/ScintillaMessages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/ScintillaStructures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/ScintillaTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/include/ScintillaWidget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEdit/ScintillaDocument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEditBase/PlatQt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEditBase/ScintillaQt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/AutoComplete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/CallTip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/CaseConvert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/CaseFolder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/CellBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/CharClassify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/CharacterCategoryMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/CharacterType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/ContractionState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/DBCS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Debugging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Decoration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/EditModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/EditView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Editor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/ElapsedPeriod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Geometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Indicator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/KeyMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/LineMarker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/MarginView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Partitioning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/PerLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Position.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/PositionCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/RESearch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/RunStyles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/ScintillaBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Selection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/SparseVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/SplitVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/Style.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/UniConversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/UniqueString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/ViewStyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/src/XPM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/test/unit/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/win32/HanjaDic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/win32/PlatWin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/win32/ScintillaWin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/scintilla/win32/WinTypes.h" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/cocoa/res/info_bar_bg.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/cocoa/res/info_bar_bg@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/cocoa/res/mac_cursor_busy.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/cocoa/res/mac_cursor_busy@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/cocoa/res/mac_cursor_flipped.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/cocoa/res/mac_cursor_flipped@2x.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/Indicators.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/Markers.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/SciBreak.jpg" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/SciRest.jpg" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/SciTEIco.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/SciWord.jpg" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/StadiumVariants.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/annotations.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/eolannotation.png" />
+    <Image Include="../../thirdparty/owemdjee/scintilla/doc/styledmargin.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/scintilla/win32/ScintRes.rc" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/bin/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/bin/empty.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/cocoa/checkbuildosx.sh" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/delbin.bat" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/doc/AddSource.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/doc/Lexer.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/gtk/DepGen.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEdit/WidgetGen.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/qt/ScintillaEditBase/Notes.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/CheckMentioned.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/Dependencies.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/Face.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/FileGenerator.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/GenerateCaseConvert.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/GenerateCharacterCategory.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/HFacer.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/HeaderCheck.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/HeaderOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/LexGen.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/ScintillaAPIFacer.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/ScintillaData.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/scripts/archive.sh" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/MessageNumbers.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/ScintillaCallable.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/XiteMenu.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/XiteWin.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/gi/filter-scintilla-h.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/gi/gi-test.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/performanceTests.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/simpleTests.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/unit/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/win32Tests.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/test/xite.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/version.txt" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/win32/DepGen.py" />
+    <Text Include="../../thirdparty/owemdjee/scintilla/zipsrc.bat" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

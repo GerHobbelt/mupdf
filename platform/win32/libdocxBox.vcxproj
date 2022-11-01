@@ -1,0 +1,1576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libdocxBox</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF305836}</ProjectGuid>
+    <RootNamespace>libdocxBox</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCXBOX;DOCXBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_argument.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_command.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_help.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_log.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/archive/docx_archive.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/archive/docx_archive_list.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/archive/docx_archive_replace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/contentTypes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/fontTable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/media.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/meta.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/numbering.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/partNames.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/rels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/styles.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/docx_batch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/docx_compare.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/docx_diff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/component/docx_renderer_rels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/component/docx_renderer_styles.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_heading.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_link.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_list.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_paragraph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_text.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/docx_renderer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/docx_renderer_delegate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/component/docx_xml_contentTypes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/component/docx_xml_rels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/component/docx_xml_styles.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/contentType/docx_xml_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/contentType/docx_xml_table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/docx_xml.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_lorem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_remove.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_replace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_tidy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_to_plaintext.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_dateTime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_numeric.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_xml.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/docxbox/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/src/benchmarks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/cmake/gnu_posix_regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/cmake/posix_regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/cmake/std_regex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/cmake/steady_clock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/cmake/thread_safety_attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/benchmark_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/benchmark_register.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/colorprint.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/commandlineflags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/complexity.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/console_reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/counter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/csv_reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/json_reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/reporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/sleep.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/statistics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/string_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/sysinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/timers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/README.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/at__object_t_key_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/at__object_t_key_type_const.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/at__size_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/at__size_type_const.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/at_json_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/at_json_pointer_const.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/back.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__CompatibleType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__InputIt_InputIt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__basic_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__copyassignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__list_init_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__moveconstructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__nullptr_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__size_type_basic_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__value_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/basic_json__value_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/begin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/cbegin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/cend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/clear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/contains.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/contains_json_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/crbegin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/crend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/dump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/emplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/emplace_back.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/end.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/erase__IteratorType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/erase__IteratorType_IteratorType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/erase__key_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/erase__size_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/find__key_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/flatten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/from_bson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/from_cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/from_msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/from_ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/front.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/get__PointerType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/get__ValueType_const.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/get_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/get_ref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/get_to.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/insert__count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/insert__ilist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/insert__range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/insert__range_object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/invalid_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_boolean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_discarded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_null.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_number.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_number_float.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_number_integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_number_unsigned.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_primitive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/is_structured.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/items.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/iterator_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__back.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__operator_add.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__operator_add_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__parent_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__pop_back.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__push_back.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/json_pointer__to_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/max_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/merge_patch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/meta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__ValueType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__equal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__equal__nullptr_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__greater.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__greaterequal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__less.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__lessequal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__notequal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__notequal__nullptr_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator__value_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator_deserialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operator_serialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operatorarray__key_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operatorarray__key_type_const.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operatorarray__size_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operatorarray__size_type_const.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operatorjson_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/operatorjson_pointer_const.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/other_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/out_of_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/parse__array__parser_callback_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/parse__contiguouscontainer__parser_callback_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/parse__istream__parser_callback_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/parse__iteratortype__parser_callback_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/parse__string__parser_callback_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/parse_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/patch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/push_back.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/push_back__initializer_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/push_back__object_t__value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/rbegin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/rend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/sax_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/swap__array_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/swap__object_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/swap__reference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/swap__string_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/to_bson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/to_cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/to_msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/to_ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/type_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/type_name.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/unflatten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/update.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/update__range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_add_subdirectory/project/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_import/project/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_import_minver/project/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/fuzzer-driver_afl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/fuzzer-parse_bson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/fuzzer-parse_cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/fuzzer-parse_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/fuzzer-parse_msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/fuzzer-parse_ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-algorithms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-alt-string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-bson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-capacity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-class_const_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-class_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-class_lexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-class_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-comparison.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-concepts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-constructor1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-constructor2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-convenience.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-conversions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-deserialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-element_access1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-element_access2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-inspection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-items.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-iterators1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-iterators2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-json_patch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-json_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-large_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-merge_patch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-meta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-modifiers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-noexcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-pointer_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-readme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-reference_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-testsuites.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-to_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-udt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit-wstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/src/unit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerCrossOver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerDriver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerExtFunctionsDlsym.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerExtFunctionsWeak.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerExtFunctionsWeakAlias.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerIOPosix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerIOWindows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerLoop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerMerge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerMutate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerSHA1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerTracePC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerTraceState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerUtilDarwin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerUtilLinux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerUtilPosix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerUtilWindows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/afl/afl_driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/standalone/StandaloneFuzzTargetMain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/AFLDriverTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/AbsNegAndConstant64Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/AbsNegAndConstantTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/AccumulateAllocationsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/BufferOverflowOnInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/CallerCalleeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/CounterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/CustomCrossOverTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/CustomMutatorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/DSO1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/DSO2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/DSOTestExtra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/DSOTestMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/DivTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/EmptyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/FourIndependentBranchesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/FullCoverageSetTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/FuzzerUnittest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/InitializeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/LeakTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/LeakTimeoutTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/LoadTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/MemcmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/NthRunCrashTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/NullDerefOnEmptyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/NullDerefTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/OneHugeAllocTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/OutOfMemorySingleLargeMallocTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/OutOfMemoryTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/RepeatedBytesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/RepeatedMemcmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/ShrinkControlFlowTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/ShrinkValueProfileTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SignedIntOverflowTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SimpleCmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SimpleDictionaryTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SimpleHashTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SimpleTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SimpleThreadedTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SingleMemcmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SingleStrcmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SingleStrncmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SpamyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/StrcmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/StrncmpOOBTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/StrncmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/StrstrTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SwapCmpTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/Switch2Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/SwitchTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/ThreadedLeakTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/ThreadedTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/TimeoutEmptyTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/TimeoutTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/TraceMallocTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/UninstrumentedTest.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_argument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/app/app_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/archive/docx_archive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/archive/docx_archive_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/archive/docx_archive_replace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/contentTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/fontTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/media.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/numbering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/partNames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/rels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/component/styles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/docx_batch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/docx_compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/docx_diff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/component/docx_renderer_rels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/component/docx_renderer_styles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_heading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_link.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_paragraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/contentType/docx_renderer_text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/docx_renderer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/renderer/docx_renderer_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/component/docx_xml_contentTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/component/docx_xml_rels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/component/docx_xml_styles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/contentType/docx_xml_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/contentType/docx_xml_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/docx_xml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_lorem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_remove.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_replace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_tidy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/docx/xml/visitor/docx_xml_to_plaintext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/ext/ext_miniz_cpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_cli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_dateTime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/docxbox/helper/helper_xml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/include/benchmark/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/arraysize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/benchmark_api_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/benchmark_register.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/colorprint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/commandlineflags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/complexity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/cycleclock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/internal_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/re.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/sleep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/string_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/thread_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/thread_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/timers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/adl_serializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/conversions/from_json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/conversions/to_chars.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/conversions/to_json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/input/binary_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/input/input_adapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/input/json_sax.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/input/lexer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/input/parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/input/position_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/iterators/internal_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/iterators/iter_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/iterators/iteration_proxy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/iterators/iterator_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/iterators/json_reverse_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/iterators/primitive_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/json_pointer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/json_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/macro_scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/macro_unscope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/meta/cpp_future.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/meta/detected.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/meta/is_sax.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/meta/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/meta/void_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/output/binary_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/output/output_adapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/output/serializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/detail/value_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/json_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/thirdparty/hedley/hedley.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/include/nlohmann/thirdparty/hedley/hedley_undef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/single_include/nlohmann/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerCorpus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerDefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerDictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerExtFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerInternal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerMerge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerMutate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerSHA1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerTracePC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/FuzzerValueBitMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/doctest/doctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/doctest/doctest_compatibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/fifo_map/fifo_map.hpp" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/screenshots/docxbox-docx-diff.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/screenshots/docxbox-docx-ls-compare.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/screenshots/docxbox-docx-ls.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/screenshots/docxbox-docx-lsf.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/screenshots/docxbox-docx-lsm.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/01_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/02_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/03_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/04_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/05_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/06_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/07_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/08_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/09_300x300.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/32x32_pink.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/32x32_white.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/32x32_yellow.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_black_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_blue_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_brown_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_green_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_orange_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_pink_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_red_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_white_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/test/assets/images/block_yellow_130x130.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/avatars.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/images/binary.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/images/callback_events.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/json.gif" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/usages/ios.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/usages/macos.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-08-29-fuzz/exec_speed.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-08-29-fuzz/high_freq.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-08-29-fuzz/low_freq.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/conformance_overall_Result.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_1._Parse_Memory_(byte).png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_1._Parse_Time_(ms).png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_2._Stringify_Time_(ms).png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_3._Prettify_Time_(ms).png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/performance_Corei7-4980HQ@2.80GHz_mac64_clang7.0_7._Code_size_FileSize_(byte).png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-10-02-fuzz/exec_speed.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-10-02-fuzz/high_freq.png" />
+    <Image Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-10-02-fuzz/low_freq.png" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/docxbox/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/assets/documents/other/mock_csv.csv" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/_check_for_valgrind_errors.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/_copy_mockfiles.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/_delete_copied_mockfiles.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/_set_docxbox_binary.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/_set_valgrind_variables.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/batch.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/cat.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/diff.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/help.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lorem.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/ls.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsd.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsdj.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsf.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsfj.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsi.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsij.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsj.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsl.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lslj.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsm.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/lsmj.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/mm.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/rmt.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/rpi.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/rpt.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/sfv.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/txt.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/uz.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/uzi.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/uzm.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/version.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/zp.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/test/functional/zpc.bats.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/ChangeLog.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/data/jeopardy/jeopardy.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/data/nativejson-benchmark/canada.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/data/nativejson-benchmark/citm_catalog.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/data/nativejson-benchmark/twitter.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/cmake/benchmark.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/docs/AssemblyTests.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/docs/tools.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/mingw.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/releasing.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/compare.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/compare_bench.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/gbench/Inputs/test1_run1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/gbench/Inputs/test1_run2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/gbench/Inputs/test2_run.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/gbench/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/gbench/report.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/gbench/util.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/benchmarks/thirdparty/benchmark/tools/strip_asm.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/cmake/config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/binary_formats.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/README.link" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/examples/README.output" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/doc/scripts/send_to_wandbox.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_add_subdirectory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_add_subdirectory/project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_import/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_import/project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_import_minver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/cmake_import_minver/project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/big-list-of-naughty-strings/blns.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json-patch-tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json-patch-tests/spec_tests.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json-patch-tests/tests.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json.org/1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json.org/2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json.org/3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json.org/4.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json.org/5.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_nlohmann_tests/all_unicode.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_nlohmann_tests/all_unicode_ascii.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_nlohmann_tests/bom.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip01.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip02.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip03.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip04.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip05.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip06.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip07.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip08.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip09.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip10.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip11.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip12.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip13.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip14.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip15.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip16.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip17.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip18.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip19.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip20.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip21.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip22.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip23.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip24.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip25.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip26.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip27.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip28.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip29.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip30.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip31.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_roundtrip/roundtrip32.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail10.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail11.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail12.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail13.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail14.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail15.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail16.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail17.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail18.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail19.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail20.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail21.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail22.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail23.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail24.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail25.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail26.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail27.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail28.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail29.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail30.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail31.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail32.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail33.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail4.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail5.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail6.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail7.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/fail9.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/pass1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/pass2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_tests/pass3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_testsuite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/json_testsuite/sample.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/markus_kuhn/UTF-8-test.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_number_neg_int_huge_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_number_pos_double_huge_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_object_key_lone_2nd_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_1st_surrogate_but_2nd_missing.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_1st_valid_surrogate_2nd_invalid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_UTF-16_invalid_lonely_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_UTF-16_invalid_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_UTF-8_invalid_sequence.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_incomplete_surrogate_and_escape_valid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_incomplete_surrogate_pair.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_incomplete_surrogates_escape_valid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_inverted_surrogates_U+1D11E.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_lone_second_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_not_in_unicode_range.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_truncated-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_unicode_U+10FFFE_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_unicode_U+1FFFE_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_unicode_U+FDD0_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_string_unicode_U+FFFE_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_structure_500_nested_arrays.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/i_structure_UTF-8_BOM_empty_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_1_true_without_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_a_invalid_utf8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_colon_instead_of_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_comma_after_close.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_comma_and_number.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_double_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_double_extra_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_extra_close.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_extra_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_incomplete.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_incomplete_invalid_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_inner_array_no_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_invalid_utf8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_items_separated_by_semicolon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_just_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_just_minus.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_missing_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_newlines_unclosed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_number_and_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_number_and_several_commas.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_spaces_vertical_tab_formfeed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_star_inside.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_unclosed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_unclosed_trailing_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_unclosed_with_new_lines.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_array_unclosed_with_object_inside.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_incomplete_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_incomplete_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_incomplete_true.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_++.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_+1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_+Inf.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_-01.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_-1.0..json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_-2..json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_-NaN.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_.-1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_.2e-3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0.1.2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0.3e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0.3e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0.e1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0_capital_E+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0_capital_E.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_0e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_1.0e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_1.0e-.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_1.0e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_1_000.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_1eE2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_2.e+3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_2.e-3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_2.e3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_9.e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_Inf.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_NaN.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_U+FF11_fullwidth_digit_one.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_expression.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_hex_1_digit.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_hex_2_digits.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_infinity.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_invalid+-.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_invalid-negative-real.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_invalid-utf-8-in-bigger-int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_invalid-utf-8-in-exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_invalid-utf-8-in-int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_minus_infinity.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_minus_sign_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_minus_space_1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_neg_int_starting_with_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_neg_real_without_int_part.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_neg_with_garbage_at_end.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_real_garbage_after_e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_real_with_invalid_utf8_after_e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_real_without_fractional_part.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_starting_with_dot.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_then_00.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_with_alpha.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_with_alpha_char.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_number_with_leading_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_bad_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_bracket_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_comma_instead_of_colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_double_colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_emoji.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_garbage_at_end.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_key_with_single_quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_missing_colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_missing_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_missing_semicolon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_missing_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_no-colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_non_string_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_non_string_key_but_huge_number_instead.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_pi_in_key_and_trailing_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_repeated_null_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_several_trailing_commas.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_single_quote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_trailing_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_trailing_comment.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_trailing_comment_open.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_trailing_comment_slash_open.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_trailing_comment_slash_open_incomplete.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_two_commas_in_a_row.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_unquoted_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_unterminated-value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_with_single_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_object_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_single_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_1_surrogate_then_escape u.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_1_surrogate_then_escape u1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_1_surrogate_then_escape u1x.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_1_surrogate_then_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_UTF-16_incomplete_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_UTF8_surrogate_U+D800.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_accentuated_char_no_quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_backslash_00.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_escape_x.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_escaped_backslash_bad.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_escaped_ctrl_char_tab.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_escaped_emoji.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_incomplete_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_incomplete_escaped_character.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_incomplete_surrogate_escape_invalid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_invalid-utf-8-in-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_invalid_backslash_esc.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_invalid_unicode_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_invalid_utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_invalid_utf8_after_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_iso_latin_1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_leading_uescaped_thinspace.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_lone_utf8_continuation_byte.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_no_quotes_with_bad_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_overlong_sequence_2_bytes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_overlong_sequence_6_bytes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_overlong_sequence_6_bytes_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_single_doublequote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_single_quote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_single_string_no_double_quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_start_escape_unclosed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_unescaped_crtl_char.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_unescaped_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_unescaped_tab.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_unicode_CapitalU.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_string_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_100000_opening_arrays.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_3C.3E.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_3Cnull3E.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_U+2060_word_joined.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_UTF8_BOM_no_data.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_array_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_array_with_extra_array_close.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_array_with_unclosed_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_ascii-unicode-identifier.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_capitalized_True.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_close_unopened_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_comma_instead_of_closing_brace.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_double_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_end_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_incomplete_UTF8_BOM.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_lone-invalid-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_lone-open-bracket.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_no_data.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_null-byte-outside-string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_number_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_object_followed_by_closing_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_object_unclosed_no_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_object_with_comment.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_object_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_array_apostrophe.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_array_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_array_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_array_open_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_array_open_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_array_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_object_close_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_object_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_object_open_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_object_open_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_object_string_with_apostrophes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_open_open.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_single_point.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_single_star.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_trailing_#.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_uescaped_LF_before_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_unclosed_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_unclosed_array_partial_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_unclosed_array_unfinished_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_unclosed_array_unfinished_true.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_unclosed_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_unicode-identifier.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_whitespace_U+2060_word_joiner.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/n_structure_whitespace_formfeed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_arraysWithSpaces.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_empty-string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_empty.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_ending_with_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_heterogeneous.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_with_1_and_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_with_leading_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_with_several_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_array_with_trailing_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_0e+1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_0e1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_after_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_double_close_to_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_double_huge_neg_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_huge_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_int_with_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_minus_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_negative_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_negative_one.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_negative_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_capital_e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_capital_e_neg_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_capital_e_pos_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_fraction_exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_neg_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_neg_overflow.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_pos_exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_pos_overflow.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_real_underflow.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_simple_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_simple_real.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_too_big_neg_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_too_big_pos_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_number_very_big_negative_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_basic.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_duplicated_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_duplicated_key_and_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_empty.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_empty_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_escaped_null_in_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_extreme_numbers.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_long_strings.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_simple.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_string_unicode.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_object_with_newlines.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_1_2_3_bytes_UTF-8_sequences.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_UTF-16_Surrogates_U+1D11E_MUSICAL_SYMBOL_G_CLEF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_accepted_surrogate_pair.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_accepted_surrogate_pairs.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_allowed_escapes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_backslash_and_u_escaped_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_backslash_doublequotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_comments.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_double_escape_a.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_double_escape_n.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_escaped_control_character.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_escaped_noncharacter.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_in_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_in_array_with_leading_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_last_surrogates_1_and_2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_newline_uescaped.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_nonCharacterInUTF-8_U+10FFFF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_nonCharacterInUTF-8_U+1FFFF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_nonCharacterInUTF-8_U+FFFF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_null_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_one-byte-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_pi.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_simple_ascii.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_three-byte-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_two-byte-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_u+2028_line_sep.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_u+2029_par_sep.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_uEscape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_unescaped_char_delete.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_unicode.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_unicodeEscapedBackslash.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_unicode_2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_unicode_U+200B_ZERO_WIDTH_SPACE.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_unicode_U+2064_invisible_plus.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_unicode_escaped_double_quote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_utf16.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_utf8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_string_with_del_character.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_lonely_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_lonely_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_lonely_negative_real.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_lonely_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_lonely_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_lonely_true.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_string_empty.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_trailing_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_true_in_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite/test_parsing/y_structure_whitespace_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_double_huge_neg_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_huge_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_neg_int_huge_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_pos_double_huge_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_real_neg_overflow.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_real_pos_overflow.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_real_underflow.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_too_big_neg_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_too_big_pos_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_number_very_big_negative_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_object_key_lone_2nd_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_1st_surrogate_but_2nd_missing.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_1st_valid_surrogate_2nd_invalid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_UTF-16LE_with_BOM.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_UTF-8_invalid_sequence.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_UTF8_surrogate_U+D800.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_incomplete_surrogate_and_escape_valid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_incomplete_surrogate_pair.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_incomplete_surrogates_escape_valid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_invalid_lonely_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_invalid_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_invalid_utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_inverted_surrogates_U+1D11E.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_iso_latin_1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_lone_second_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_lone_utf8_continuation_byte.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_not_in_unicode_range.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_overlong_sequence_2_bytes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_overlong_sequence_6_bytes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_overlong_sequence_6_bytes_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_truncated-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_utf16BE_no_BOM.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_string_utf16LE_no_BOM.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_structure_500_nested_arrays.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/i_structure_UTF-8_BOM_empty_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_1_true_without_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_a_invalid_utf8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_colon_instead_of_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_comma_after_close.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_comma_and_number.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_double_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_double_extra_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_extra_close.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_extra_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_incomplete.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_incomplete_invalid_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_inner_array_no_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_invalid_utf8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_items_separated_by_semicolon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_just_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_just_minus.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_missing_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_newlines_unclosed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_number_and_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_number_and_several_commas.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_spaces_vertical_tab_formfeed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_star_inside.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_unclosed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_unclosed_trailing_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_unclosed_with_new_lines.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_array_unclosed_with_object_inside.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_incomplete_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_incomplete_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_incomplete_true.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_multidigit_number_then_00.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_++.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_+1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_+Inf.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_-01.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_-1.0..json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_-2..json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_-NaN.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_.-1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_.2e-3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0.1.2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0.3e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0.3e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0.e1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0_capital_E+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0_capital_E.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_0e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_1.0e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_1.0e-.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_1.0e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_1_000.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_1eE2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_2.e+3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_2.e-3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_2.e3.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_9.e+.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_Inf.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_NaN.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_U+FF11_fullwidth_digit_one.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_expression.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_hex_1_digit.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_hex_2_digits.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_infinity.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_invalid+-.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_invalid-negative-real.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_invalid-utf-8-in-bigger-int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_invalid-utf-8-in-exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_invalid-utf-8-in-int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_minus_infinity.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_minus_sign_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_minus_space_1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_neg_int_starting_with_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_neg_real_without_int_part.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_neg_with_garbage_at_end.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_real_garbage_after_e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_real_with_invalid_utf8_after_e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_real_without_fractional_part.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_starting_with_dot.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_with_alpha.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_with_alpha_char.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_number_with_leading_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_bad_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_bracket_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_comma_instead_of_colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_double_colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_emoji.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_garbage_at_end.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_key_with_single_quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_lone_continuation_byte_in_key_and_trailing_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_missing_colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_missing_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_missing_semicolon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_missing_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_no-colon.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_non_string_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_non_string_key_but_huge_number_instead.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_repeated_null_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_several_trailing_commas.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_single_quote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_trailing_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_trailing_comment.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_trailing_comment_open.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_trailing_comment_slash_open.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_trailing_comment_slash_open_incomplete.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_two_commas_in_a_row.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_unquoted_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_unterminated-value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_with_single_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_object_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_single_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_1_surrogate_then_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_1_surrogate_then_escape_u.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_1_surrogate_then_escape_u1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_1_surrogate_then_escape_u1x.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_accentuated_char_no_quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_backslash_00.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_escape_x.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_escaped_backslash_bad.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_escaped_ctrl_char_tab.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_escaped_emoji.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_incomplete_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_incomplete_escaped_character.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_incomplete_surrogate.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_incomplete_surrogate_escape_invalid.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_invalid-utf-8-in-escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_invalid_backslash_esc.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_invalid_unicode_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_invalid_utf8_after_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_leading_uescaped_thinspace.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_no_quotes_with_bad_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_single_doublequote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_single_quote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_single_string_no_double_quotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_start_escape_unclosed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_unescaped_crtl_char.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_unescaped_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_unescaped_tab.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_unicode_CapitalU.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_string_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_100000_opening_arrays.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_U+2060_word_joined.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_UTF8_BOM_no_data.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_angle_bracket_..json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_angle_bracket_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_array_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_array_with_extra_array_close.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_array_with_unclosed_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_ascii-unicode-identifier.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_capitalized_True.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_close_unopened_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_comma_instead_of_closing_brace.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_double_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_end_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_incomplete_UTF8_BOM.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_lone-invalid-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_lone-open-bracket.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_no_data.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_null-byte-outside-string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_number_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_object_followed_by_closing_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_object_unclosed_no_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_object_with_comment.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_object_with_trailing_garbage.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_array_apostrophe.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_array_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_array_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_array_open_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_array_open_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_array_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_object_close_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_object_comma.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_object_open_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_object_open_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_object_string_with_apostrophes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_open_open.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_single_eacute.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_single_star.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_trailing_#.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_uescaped_LF_before_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_unclosed_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_unclosed_array_partial_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_unclosed_array_unfinished_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_unclosed_array_unfinished_true.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_unclosed_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_unicode-identifier.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_whitespace_U+2060_word_joiner.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/n_structure_whitespace_formfeed.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_arraysWithSpaces.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_empty-string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_empty.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_ending_with_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_heterogeneous.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_with_1_and_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_with_leading_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_with_several_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_array_with_trailing_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_0e+1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_0e1.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_after_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_double_close_to_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_int_with_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_minus_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_negative_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_negative_one.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_negative_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_real_capital_e.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_real_capital_e_neg_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_real_capital_e_pos_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_real_exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_real_fraction_exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_real_neg_exp.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_real_pos_exponent.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_simple_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_number_simple_real.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_basic.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_duplicated_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_duplicated_key_and_value.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_empty.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_empty_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_escaped_null_in_key.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_extreme_numbers.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_long_strings.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_simple.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_string_unicode.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_object_with_newlines.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_1_2_3_bytes_UTF-8_sequences.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_accepted_surrogate_pair.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_accepted_surrogate_pairs.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_allowed_escapes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_backslash_and_u_escaped_zero.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_backslash_doublequotes.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_comments.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_double_escape_a.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_double_escape_n.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_escaped_control_character.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_escaped_noncharacter.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_in_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_in_array_with_leading_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_last_surrogates_1_and_2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_nbsp_uescaped.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_nonCharacterInUTF-8_U+10FFFF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_nonCharacterInUTF-8_U+FFFF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_null_escape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_one-byte-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_pi.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_reservedCharacterInUTF-8_U+1BFFF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_simple_ascii.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_space.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_surrogates_U+1D11E_MUSICAL_SYMBOL_G_CLEF.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_three-byte-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_two-byte-utf-8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_u+2028_line_sep.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_u+2029_par_sep.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_uEscape.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_uescaped_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unescaped_char_delete.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicodeEscapedBackslash.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_2.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_U+10FFFE_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_U+1FFFE_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_U+200B_ZERO_WIDTH_SPACE.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_U+2064_invisible_plus.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_U+FDD0_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_U+FFFE_nonchar.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_unicode_escaped_double_quote.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_utf8.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_string_with_del_character.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_lonely_false.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_lonely_int.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_lonely_negative_real.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_lonely_null.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_lonely_string.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_lonely_true.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_string_empty.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_trailing_newline.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_true_in_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/nst_json_testsuite2/test_parsing/y_structure_whitespace_array.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/regression/broken_file.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/regression/floats.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/regression/signed_ints.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/regression/small_signed_ints.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/regression/unsigned_ints.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/data/regression/working_file.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/reports/2016-09-09-nativejson_benchmark/conformance_Nlohmann (C++11).md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/dict1.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/hi.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/lit.site.cfg.in" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/no-coverage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/ubsan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/uninstrumented/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/Fuzzer/test/unit/lit.site.cfg.in" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/doctest/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/fastcov/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/fastcov/fastcov.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/imapdl/filterbr.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/test/thirdparty/imapdl/gpl-3.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/amalgamate/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/amalgamate/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/amalgamate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/amalgamate/amalgamate.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/amalgamate/config.json" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/cpplint/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/cpplint/cpplint.py" />
+    <Text Include="../../thirdparty/owemdjee/docxBox/vendor/json/third_party/cpplint/update.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libc-blosc2</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF992F21}</ProjectGuid>
+    <RootNamespace>libc-blosc2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBC_BLOSC2;C_BLOSC2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/bench/b2bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/bench/create_frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/bench/delta_schunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/bench/sframe_bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/bench/sum_openmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/bench/trunc_prec_schunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/bench/zero_runlen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/blosc2-stdio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/blosc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/blosclz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/delta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/directories.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/fastcopy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/schunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/sframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/stune.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/timestamp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/trunc-prec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/blosc/win32/pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/compat/filegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/Test/bitshuffle_bitunshuffle_test1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/Test/bitshuffle_bitunshuffle_test16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/Test/bitshuffle_bitunshuffle_test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/Test/bitshuffle_bitunshuffle_test4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/Test/bitshuffle_bitunshuffle_test8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle16_neon/bitshuffle16_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle16_neon/bitshuffle16_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle1_neon/bitshuffle1_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle1_neon/bitshuffle1_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle2_neon/bitshuffle2_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle2_neon/bitshuffle2_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle4_neon/bitshuffle4_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle4_neon/bitshuffle4_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle8_neon/bitshuffle8_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitshuffle8_neon/bitshuffle8_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle16_neon/bitunshuffle16_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle16_neon/bitunshuffle16_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle1_neon/bitunshuffle1_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle1_neon/bitunshuffle1_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle2_neon/bitunshuffle2_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle2_neon/bitunshuffle2_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle4_neon/bitunshuffle4_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle4_neon/bitunshuffle4_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle8_neon/bitunshuffle8_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/bitshuffle_neon/bitunshuffle8_neon/bitunshuffle8_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/Test/shuffle_unshuffle_test16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/Test/shuffle_unshuffle_test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/Test/shuffle_unshuffle_test4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/Test/shuffle_unshuffle_test8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle16_neon/shuffle16_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle16_neon/shuffle16_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle16_neon/shuffle16_neon_vtbx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle16_neon/shuffle16_neon_vtbx_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle2_neon/shuffle2_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle2_neon/shuffle2_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle4_neon/shuffle4_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle4_neon/shuffle4_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle8_neon/shuffle8_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle8_neon/shuffle8_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle8_neon/shuffle8_neon_opt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle8_neon/shuffle8_neon_opt_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle8_neon/shuffle8_neon_vtbx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/shuffle8_neon/shuffle8_neon_vtbx_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle16_neon/unshuffle16_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle16_neon/unshuffle16_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle16_neon/unshuffle16_neon_vtbx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle16_neon/unshuffle16_neon_vtbx_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle2_neon/unshuffle2_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle2_neon/unshuffle2_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle4_neon/unshuffle4_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle8_neon/unshuffle8_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle8_neon/unshuffle8_neon_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle8_neon/unshuffle8_neon_vtbx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/contrib/shuffle_neon/unshuffle8_neon/unshuffle8_neon_vtbx_bucle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/compress_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/contexts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/delta_schunk_ex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/find_roots.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/frame_backed_schunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/frame_big.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/frame_metalayers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/frame_offset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/frame_roundtrip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/frame_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/frame_vlmetalayers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/instrument_codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/many_compressors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/multithread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/noinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/schunk_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/sframe_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/urcodecs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/urfilters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/win-dynamic-linking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/examples/zstd_dict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/lz4-1.9.4/lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/lz4-1.9.4/lz4hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/adler32_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/armfeature.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/chunkset_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/crc32_acle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/insert_string_acle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/slide_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/power/adler32_power8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/power/power.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/power/slide_hash_power8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/dfltcc_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/dfltcc_deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/dfltcc_inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/adler32_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/adler32_ssse3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/chunkset_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/chunkset_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/compare258_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/compare258_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/crc_folding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/insert_string_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/slide_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/slide_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/chunkset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/cmake/detect-arch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/compare258.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/crc32_comb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/deflate_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/deflate_medium.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/deflate_quick.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/deflate_slow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/functable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/gzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/gzread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/infback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inffast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inftrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/insert_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/CVE-2003-0107.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/adler32_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/crc32_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/deflate_quick_bi_valid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/deflate_quick_block_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/checksum_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/compress_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/example_dict_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/example_flush_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/example_large_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/example_small_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/minigzip_fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/fuzz/standalone_fuzz_target_runner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/hash_head_0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/infcover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/inflate_adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/minideflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/minigzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/switchlevels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/tools/makecrct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/tools/makefixed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/tools/maketrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/trees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/uncompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/entropy_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/error_private.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/fse_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/threading.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/zstd_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/fse_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/hist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/huf_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress_literals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress_sequences.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress_superblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_double_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_lazy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_ldm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_opt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstdmt_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/huf_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/zstd_ddict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/zstd_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/zstd_decompress_block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/deprecated/zbuff_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/deprecated/zbuff_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/deprecated/zbuff_decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/dictBuilder/cover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/dictBuilder/divsufsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/dictBuilder/fastcover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/dictBuilder/zdict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v01.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v02.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v03.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v04.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v05.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v06.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v07.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/codecs-registry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/ndlz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/ndlz4x4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/ndlz8x8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/test_ndlz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/xxhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/bitstream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode1f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode1i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode1l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode2f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode2i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode3f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode3i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode3l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode4d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode4f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode4i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/decode4l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode1f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode1i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode1l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode2f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode2i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode3f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode3i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode3l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode4d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode4f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode4i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/encode4l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/inline/bitstream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/share/omp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/share/parallel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/codec1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/codec2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/codec3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/codec4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/codecf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decode1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decode2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decode3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decode4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decodef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decodei.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/encode1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/encode2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/encode3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/encode4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/encodef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/encodei.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/ompcompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revcodecf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revdecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revdecode1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revdecode2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revdecode3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revdecode4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revdecodef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revencode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revencode1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revencode2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revencode3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revencode4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/revencodef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/zfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/test_zfp_acc_float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/test_zfp_acc_int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/test_zfp_prec_float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/test_zfp_rate_float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/test_zfp_rate_getitem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/filters-registry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndcell/ndcell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndcell/test_ndcell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndmean/ndmean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndmean/test_ndmean_mean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndmean/test_ndmean_repart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/plugins/plugin_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/fuzz_compress_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/fuzz_compress_frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/fuzz_decompress_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/fuzz_decompress_frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/generate_inputs_corpus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/standalone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/gcc-segfault-issue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/print_versions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_bitshuffle_leftovers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_blosc1_compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_change_nthreads_append.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_compress_roundtrip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_compressor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_contexts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_delete_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_delta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_delta_schunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_dict_schunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_empty_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_fill_special.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_frame_get_offsets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_frame_offset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_getitem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_getitem_delta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_insert_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_lazychunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_lazychunk_memcpyed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_maskout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_maxout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_noinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_nolock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_nthreads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_postfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_prefilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_reorder_offsets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_schunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_schunk_frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_schunk_header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_sframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_sframe_lazychunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_small_chunks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_udio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_update_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_urcodecs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_urfilters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/c-blosc2/tests/test_zero_runlen.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-altivec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/bitshuffle-sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/blosc-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/blosclz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/fastcopy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/sframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-altivec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle-sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/stune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/transpose-altivec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/trunc-prec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/win32/pthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/blosc/win32/stdint-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/include/blosc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/include/blosc2/blosc2-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/include/blosc2/blosc2-export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/include/blosc2/blosc2-stdio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/include/blosc2/codecs-registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/include/blosc2/filters-registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/lz4-1.9.4/lz4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/lz4-1.9.4/lz4hc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/adler32_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/ctzl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/power/power.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/dfltcc_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/dfltcc_deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/dfltcc_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/dfltcc_inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/crc_folding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/chunkset_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/crc32_comb_tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/crc32_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/crc32_tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/deflate_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/fallback_builtins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/functable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/gzguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inffixed_tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inflate_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/insert_string_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/match_tpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/trees_emit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/trees_tbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zbuild.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zendian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zlib-ng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zutil_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/bitstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/error_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/fse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/huf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/portability_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/threading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/zstd_deps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/zstd_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/common/zstd_trace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/clevels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/hist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress_literals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress_sequences.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_compress_superblock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_cwksp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_double_fast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_fast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_lazy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_ldm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_ldm_geartab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstd_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/compress/zstdmt_compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/zstd_ddict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/zstd_decompress_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/zstd_decompress_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/deprecated/zbuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/dictBuilder/cover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/dictBuilder/divsufsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v01.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v02.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v03.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v04.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v05.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v06.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/legacy/zstd_v07.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/zdict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/zstd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/zstd_errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/ndlz-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/ndlz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/ndlz4x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/ndlz8x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/blosc2-zfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/include/bitstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/include/zfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/include/zfp/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/include/zfp/system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/include/zfp/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/include/zfp/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/block1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/block2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/block3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/block4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/inline/inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/template/template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/traitsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/traitsf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/traitsi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/src/traitsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/zfp-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndcell/ndcell.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndmean/ndmean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/plugins/plugin_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/tests/cutest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/c-blosc2/tests/test_common.h" />
+    <Image Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/_static/blosc-logo_256.png" />
+    <Image Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/data/fireworks.jpg" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/win32/zlib-ng1.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/win32/zlib1.rc" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/ANNOUNCE.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/COMPILING_WITH_WHEELS.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/CONTRIBUTING.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/DEVELOPING-GUIDE.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSES/BITSHUFFLE.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSES/BLOSC.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSES/FASTLZ.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSES/LZ4.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSES/SNAPPY.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSES/STDINT.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/LICENSES/ZLIB.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/README_ARM.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/README_CFRAME_FORMAT.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/README_CHUNK_FORMAT.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/README_FUZZER.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/README_SFRAME_FORMAT.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/README_THREADED.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/RELEASE_NOTES.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/RELEASING.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/ROADMAP.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/THANKS.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/TODO-refactorization.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/bench/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/bench/plot-speeds.py" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/bench/plot-sum_openmp-results.py" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/bench/read-grid-150x150.py" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/blosc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/blosc/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/blosc2.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/code_of_conduct.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/compat/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/compat/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/contrib/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/development/contributing.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/development/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/development/releasing.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/development/roadmap.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/format/cframe_format.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/format/chunk_format.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/format/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/format/sframe_format.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/reference/blosc1.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/reference/context.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/reference/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/reference/metalayers.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/reference/plugins.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/reference/schunk.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/doc/sphinx/source/reference/utility.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/examples/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/INDEX.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/PORTING.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/arm/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/generic/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/power/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/s390/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/INDEX.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/arch/x86/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/doc/algorithm.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/doc/rfc1950.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/doc/rfc1951.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/doc/rfc1952.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/doc/txtvsbin.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/GH-361/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/GH-751/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/abicheck.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/abicheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/data/lcet10.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/pigz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/pkgcheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/test/testCVEinputs.sh" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/tools/codecov-upload.sh" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/win32/DLL_FAQ.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/win32/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/win32/README-WIN32.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zconf-ng.h.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zlib-ng-2.0.6/zlib.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/decompress/huf_decompress_amd64.S" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/dll/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/internal-complibs/zstd-1.5.2/libzstd.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/ndlz/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/codecs/zfp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndcell/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndcell/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndmean/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/filters/ndmean/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/plugins/test_data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/fuzz/corpus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_compress_roundtrip.csv" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_getitem.csv" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_altivec.csv" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_avx2.csv" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_generic.csv" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_neon.csv" />
+    <Text Include="../../thirdparty/owemdjee/c-blosc2/tests/test_shuffle_roundtrip_sse2.csv" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

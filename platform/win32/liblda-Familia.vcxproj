@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>liblda-Familia</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBEEF80}</ProjectGuid>
+    <RootNamespace>liblda-Familia</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLDA_FAMILIA;LDA_FAMILIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/python/cpp/familia_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/demo/doc_distance_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/demo/document_keywords_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/demo/inference_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/demo/query_doc_sim_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/demo/show_topic_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/demo/topic_word_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/demo/word_distance_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/document.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/inference_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/sampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/semantic_matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/tokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/vocab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lda-Familia/src/vose_alias.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/inference_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/semantic_matching.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/vocab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lda-Familia/include/familia/vose_alias.h" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/README.EN.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/model/README.EN.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/model/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/model/download_model.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/README.EN.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/app.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/doc_distance_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/document_keywords_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/document_twe_keywords_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/lda_infer_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/query_doc_sim_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/slda_infer_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/topic_word_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/demo/word_distance_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/familia_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_doc_distance_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_doc_keywords_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_doc_keywords_twe_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_lda_infer_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_query_doc_sim_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_slda_infer_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_topic_word_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/python/run_word_distance_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/run_doc_distance_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/run_document_keywords_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/run_inference_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/run_query_doc_sim_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/run_show_topic_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/run_topic_word_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/run_word_distance_demo.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/README.EN.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/TopicCompress/compress_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/TopicCompress/topic_model_compress.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/TopicFastMerge/fastmerge_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/TopicFastMerge/topic_model_fastmerge.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/TopicMerge/merge_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/TopicMerge/topic_model_merge.py" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/run_topic_model_compress.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/run_topic_model_fastmerge.sh" />
+    <Text Include="../../thirdparty/owemdjee/lda-Familia/tools/run_topic_model_merge.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcpp-ipc</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6582F2}</ProjectGuid>
+    <RootNamespace>libcpp-ipc</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample10_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample1_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample2_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample3_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample4_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample5_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample6_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample7_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample8_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample9_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-death-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-filepath.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-matchers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-port.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-printers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-test-part.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-typed-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-break-on-failure-unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-catch-exceptions-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-color-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-death-test-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-death-test_ex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-env-var-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-filepath-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-filter-unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-list-tests-unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-listener-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-message-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-options-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-output-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-param-test-invalid-name1-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-param-test-invalid-name2-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-param-test-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-param-test2-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-port-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-printers-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-shuffle-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-test-part-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-test2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-throw-on-failure-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-uninitialized-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest-typed-test2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest-typed-test_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest-unittest-api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_all_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_assert_by_exception_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_environment_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_help_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_list_output_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_main_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_no_test_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_pred_impl_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_premature_exit_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_prod_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_repeat_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_skip_in_environment_setup_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_skip_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_sole_header_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_stress_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_test_macro_stack_footprint_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_testbridge_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_throw_on_failure_ex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_xml_outfile1_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_xml_outfile2_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_xml_output_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/production.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/chat/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/msg_que/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/send_recv/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/ipc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/mtx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/strconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/tid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/platform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/posix/shm_posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/win/shm_win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/pool_alloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/shm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/sync/condition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/sync/mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/sync/semaphore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_ipc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_mem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_shm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_thread_utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/test/test_waiter.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/make.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/noncopyable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/random.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/scope_guard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/spin_lock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/stopwatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/type_name.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/capo/unused.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gperftools/tcmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-death-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-param-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-spi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-test-part.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest-typed-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest_pred_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/gtest_prod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/custom/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/custom/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/custom/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-death-test-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-filepath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-param-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-port-arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/gtest-type-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/prime_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample3-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/samples/sample4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/src/gtest-internal-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-param-test-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest-typed-test_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/production.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/condition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/ipc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/pool_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/rw_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/semaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/include/libipc/shm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/circ/elem_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/circ/elem_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/memory/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/memory/allocator_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/memory/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/memory/wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/clock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/empty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/err_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/ftx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/mtx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/strconv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/thread_local.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/tid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/unused.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/condition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/get_wait_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/sync_obj_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/posix/condition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/posix/get_wait_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/posix/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/posix/semaphore_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/win/condition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/win/get_sa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/win/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/win/semaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/win/to_tchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/prod_cons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/utility/concept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/utility/id_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/utility/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/utility/pimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/utility/scope_guard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/utility/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/waiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/test/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-ipc/test/thread_pool.h" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/cmake/gtest.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/cmake/gtest_main.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/cmake/libgtest.la.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/docs/advanced.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/docs/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/docs/pkgconfig.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/docs/primer.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/docs/pump_manual.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/docs/samples.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/include/gtest/internal/custom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/common.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/fuse_gtest_files.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/gen_gtest_pred_impl.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/gtest-config.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/pump.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/release_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/upload.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/scripts/upload_gtest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-break-on-failure-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-catch-exceptions-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-color-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-env-var-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-filter-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-json-outfiles-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-json-output-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-list-tests-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-output-test-golden-lin.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-output-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-param-test-invalid-name1-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-param-test-invalid-name2-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-shuffle-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-throw-on-failure-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/googletest-uninitialized-test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_help_test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_json_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_list_output_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_skip_environment_check_output_test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_testbridge_test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_xml_outfiles_test.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_xml_output_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/3rdparty/gtest/test/gtest_xml_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/chat/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/msg_que/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/send_recv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/test/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

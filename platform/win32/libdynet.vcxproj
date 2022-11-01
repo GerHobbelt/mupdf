@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libdynet</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6DA888}</ProjectGuid>
+    <RootNamespace>libdynet</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDYNET;DYNET_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/devices.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/dim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/expr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/internal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/param-init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/rnn-builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/softmax-builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/tensor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/training.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/test/dim_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/test/exec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/c/test/params_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/contrib/csharp/dynetsharp/dynetsharp/dynet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/aligned-mem-pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/cfsm-builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/cuda.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/deep-lstm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/devices.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/dict.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/dim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/dynet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/exec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/expr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/fast-lstm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/globals.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/grad-check.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/gru.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/hsm-builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/lstm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/mem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/mp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-affinetransform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-argmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-const.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-cwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-unary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-const.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-contract.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-conv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-cumulative.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-dropout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-flow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-hinge.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-linalg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-logsumexp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-losses.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-lstm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-matrixmultiply.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-maxpooling2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-minmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-moments.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-norms.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-pickneglogsoftmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-random.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-rounding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-select.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-similarities.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-softmaxes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-to-device.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/nodes-trig.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/param-init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/param-nodes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/pretrain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/rnn-state-machine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/rnn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/saxe-init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/shadow-params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/tensor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/training.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/treelstm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/dynet/weight-decay.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/autobatch/train_rnn-autobatch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/autobatch/train_xor-autobatch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/batching/train_rnnlm-batch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/batching/train_xor-batch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/batching/xor-batch-lookup/train_xor-batch-lookup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/devices/xor-multidevice/train_xor-multidevice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/document-classification/train_imdb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/fflm/train_fflm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/mnist/train_mnist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/multiprocessing/train_rnnlm-mp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/multiprocessing/train_xor-mp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/multiprocessing/train_xor-simple-mp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/noise-contrastive-estimation/train_rnnlm-batch-nce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/poisson-regression/train_poisson-regression.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/read-write/train_read-write.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/rnnlm/train_rnnlm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/segmental-rnn/train_segrnn-sup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/sentence-embedding/train_embed-cl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/sequence-to-sequence/train_attention.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/sequence-to-sequence/train_encdec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/softmax-builders/train_rnnlm-cfsm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/tagger/train_tag-bilstm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/textcat/train_textcat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/transformer/transformer-decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/transformer/transformer-train.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/variational-autoencoder/train_rnnlm-aevb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/word-embedding/train_tok-embed.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/examples/xor/train_xor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-dim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-dynet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-exec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-mem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-nodes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-rnn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-serialize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-tensor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-trainers-io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tests/test-trainers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tutorial/0_multiply.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/dynet/tutorial/1_linear_regression.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/define.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/devices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/dim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/expr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/param-init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/rnn-builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/softmax-builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/training.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/c/test/test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/contrib/csharp/dynetsharp/dynetsharp/dynet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/aligned-mem-pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/c2w.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/cfsm-builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/cudnn-ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/deep-lstm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/device-structs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/devices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/dict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/dim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/dynet-helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/dynet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/except.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/exec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/expr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/fast-lstm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/functors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/gpu-kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/gpu-ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/grad-check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/gru.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/hsm-builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/index-tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/lstm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/matrix-multiply.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/mp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-activations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-affinetransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-argmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-cwise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-arith-unary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-contract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-cumulative.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-def-macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-dropout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-flow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-hinge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-impl-macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-linalg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-logsumexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-losses.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-lstm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-matrixmultiply.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-maxpooling2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-minmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-moments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-normalization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-norms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-pickneglogsoftmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-rounding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-select.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-similarities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-softmaxes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-to-device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes-trig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/nodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/param-init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/param-nodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/pretrain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/rnn-state-machine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/rnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/saxe-init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/shadow-params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/sig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/simd-functors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/str-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/tensor-eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/training.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/treelstm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/virtual-cudnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/dynet/weight-decay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/batching/rnnlm-batch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/cpp-utils/cl-args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/cpp-utils/data-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/cpp-utils/getpid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/mnist/mlp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/multiprocessing/rnnlm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/noise-contrastive-estimation/nce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/noise-contrastive-estimation/sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/sequence-to-sequence/attention.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/sequence-to-sequence/encdec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/batch-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/data-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/dict-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/ensemble-decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/expr-xtra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/mask-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/math-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/str-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/transformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/examples/transformer/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/third_party/eigen_backward_spatial_convolutions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/third_party/eigen_pooling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/third_party/eigen_spatial_convolutions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/third_party/eigen_volume_patch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/third_party/topk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/third_party/topk_tf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/dynet/third_party/topk_tr.h" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/ai2.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/autobatch.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/biu.jpg" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/cmu.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/dynet_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/dynet_logo_bg.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/dynet_logo_white.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/dynet_logo_white_and_color.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/dynet_logomark.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/minibatch.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/naist.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/petuum.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/doc/source/images/uw.jpg" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/jupyter-tutorials/imgs/autobatch.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/jupyter-tutorials/imgs/bist-autobatch-speed.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/jupyter-tutorials/imgs/treelstm-autobatch-speed.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/results/Acrobot.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/results/Cartpole.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/results/MountainCar.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/results/hopforward.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/results/move.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/results/stand_still.gif" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/tensorboard/tensorboardexample.png" />
+    <Image Include="../../thirdparty/owemdjee/dynet/examples/tensorboard/tensorboardexample2.png" />
+    <Text Include="../../thirdparty/owemdjee/dynet/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/dynet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/bench/sequence_transduction.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/c/dynet_c/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/c/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/csharp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/rust/dynet-sys/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/rust/examples/mnist/download_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/rust/examples/rnnlm/install-examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/swig/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/contrib/swig/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/build_doc.sh" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/builders.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/citing.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/code_style.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/commandline.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/contributing.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/contributors.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/core.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/cpp_basic_tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/cpp_ref.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/cpp_saving_tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/debugging.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/doc_style.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/doc_util.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/examples.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/install.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/minibatch.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/multiprocessing.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/operations.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/optimizers.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/other_languages.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/projects.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/python.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/python_ref.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/python_saving_tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/doc/source/unorthodox.rst" />
+    <Text Include="../../thirdparty/owemdjee/dynet/dynet/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/batching/minibatch.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/batching/rnnlm-batch.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/devices/cpu_vs_gpu.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/devices/xor-multidevice.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/clusters-hsm.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/dev-hsm.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/dev-poi.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/fin-dev.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/fin-toy.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/fin-words-dev.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/fin-words.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/fin.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/seg-sup.dev.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/textcat.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/train-hsm.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/example-data/train-poi.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/mnist/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/mnist/basic-mnist-benchmarks/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/mnist/basic-mnist-benchmarks/mnist_dynet_autobatch.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/mnist/basic-mnist-benchmarks/mnist_dynet_minibatch.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/mnist/basic-mnist-benchmarks/mnist_pytorch.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/mnist/mnist-autobatch.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/python-utils/util.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/ddpg.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/dqn.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/main_ddpg.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/main_dqn.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/memory.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/network.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/reduce_tree.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/reinforcement-learning/train_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/rnnlm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/rnnlm/install-examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/rnnlm/lstmlm-auto.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/rnnlm/rnnlm.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/rnnlm/rnnlm_transduce.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/sequence-to-sequence/attention.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/tagger/bilstmtagger.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/tensorboard/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/tensorboard/rnnlm-batch.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/tensorboard/util.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/transformer/wrap-data.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/treelstm/dataloader.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/treelstm/filter_glove.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/treelstm/main.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/treelstm/model.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/treelstm/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/treelstm/scheduler.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/treelstm/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/variational-autoencoder/basic-image-recon/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/variational-autoencoder/basic-image-recon/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/variational-autoencoder/basic-image-recon/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/variational-autoencoder/basic-image-recon/vae.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/examples/xor/xor.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/python/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/python/dynet.py.in" />
+    <Text Include="../../thirdparty/owemdjee/dynet/python/dynet_config.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/python/dynet_viz.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/python/model_test.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/dynet/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/dynet/tests/python/test.py" />
+    <Text Include="../../thirdparty/owemdjee/dynet/tutorial/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libOpenFST</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF2C2421}</ProjectGuid>
+    <RootNamespace>libOpenFST</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENFST;OPENFST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstarcsort-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstarcsort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstclosure-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstclosure.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstcompile-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstcompile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstcompose-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstcompose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstconcat-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstconcat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstconnect-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstconnect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstconvert-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstconvert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdeterminize-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdeterminize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdifference-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdifference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdisambiguate-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdisambiguate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdraw-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstdraw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstencode-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstencode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstepsnormalize-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstepsnormalize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstequal-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstequal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstequivalent-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstequivalent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstinfo-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstintersect-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstintersect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstinvert-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstinvert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstisomorphic-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstisomorphic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstmap-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstminimize-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstminimize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstprint-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstprint.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstproject-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstproject.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstprune-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstprune.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstpush-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstpush.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstrandgen-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstrandgen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstrelabel-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstrelabel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstreplace-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstreplace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstreverse-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstreverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstreweight-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstreweight.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstrmepsilon-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstrmepsilon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstshortestdistance-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstshortestdistance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstshortestpath-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstshortestpath.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstsymbols-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstsymbols.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstsynchronize-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstsynchronize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fsttopsort-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fsttopsort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstunion-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/bin/fstunion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact16_acceptor-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact16_string-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact16_unweighted-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact16_unweighted_acceptor-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact16_weighted_string-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact64_acceptor-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact64_string-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact64_unweighted-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact64_unweighted_acceptor-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact64_weighted_string-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact8_acceptor-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact8_string-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact8_unweighted-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact8_unweighted_acceptor-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/compact8_weighted_string-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compress/compressscript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compress/fstcompress-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compress/fstcompress.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/const/const16-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/const/const64-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/const/const8-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/compile-strings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/far-class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farcompilestrings-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farcompilestrings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farconvert-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farconvert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farcreate-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farcreate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farencode-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farencode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farequal-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farequal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farextract-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farextract.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farinfo-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farisomorphic-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farisomorphic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farprintstrings-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farprintstrings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/farscript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/getters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/script-impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/stlist.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/sttable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/fstlinear-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/fstlinear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/fstloglinearapply-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/fstloglinearapply.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/linear-classifier-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/linear-tagger-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/linearscript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/lookahead/arc_lookahead-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/lookahead/ilabel_lookahead-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/lookahead/olabel_lookahead-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtcompose-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtcompose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtexpand-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtexpand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtinfo-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtreverse-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtreverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/mpdtscript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/ngram/bitmap-index.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/ngram/ngram-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/ngram/nthbit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/getters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtcompose-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtcompose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtexpand-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtexpand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtinfo-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtreplace-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtreplace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtreverse-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtreverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtscript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtshortestpath-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/pdtshortestpath.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/python/pywrapfst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/special/fstspecial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/special/phi-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/special/rho-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/extensions/special/sigma-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/compat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/flags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/fst-types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/mapped-file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/properties.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/symbol-table-ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/symbol-table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/lib/weight.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/arciterator-class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/arcsort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/closure.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/compile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/compose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/connect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/convert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/determinize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/difference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/disambiguate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/draw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/encode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/encodemapper-class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/epsnormalize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/equal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/equivalent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/fst-class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/getters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/info-impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/intersect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/invert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/isomorphic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/minimize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/print.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/project.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/prune.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/push.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/randequivalent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/randgen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/relabel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/replace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/reverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/reweight.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/rmepsilon.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/shortest-distance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/shortest-path.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/stateiterator-class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/synchronize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/text-io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/topsort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/union.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/script/weight-class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/test/algo_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/test/fst_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenFST/src/test/weight_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/accumulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/add-on.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/arc-arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/arc-map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/arc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/arcfilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/arcsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/bi-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/closure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/compact-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/complement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/compose-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/connect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/const-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/determinize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/dfs-visit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/difference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/disambiguate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/edit-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/epsnormalize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/equal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/equivalent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/error-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/expanded-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/expander-cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/expectation-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/compress/compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/compress/compressscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/compress/elias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/compile-strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/create.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/equal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/extract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/far-class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/far.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/farlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/farscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/getters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/isomorphic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/map-reduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/print-strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/script-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/stlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/far/sttable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/linear/linear-fst-data-builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/linear/linear-fst-data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/linear/linear-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/linear/linearscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/linear/loglinear-apply.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/linear/trie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/mpdt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/mpdtlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/mpdtscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/read_write_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/mpdt/reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/ngram/bitmap-index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/ngram/ngram-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/ngram/nthbit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/getters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/paren.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/pdt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/pdtlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/pdtscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/replace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/pdt/shortest-path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/special/phi-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/special/rho-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/extensions/special/sigma-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/factor-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/filter-state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/float-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/fst-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/fstlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/generic-register.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/icu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/intersect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/interval-set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/invert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/isomorphic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/label-reachable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/lexicographic-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/lookahead-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/lookahead-matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/mapped-file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/matcher-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/minimize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/mutable-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/pair-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/partition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/power-weight-mappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/power-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/product-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/project.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/prune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/push.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/randequivalent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/randgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/rational.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/register.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/relabel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/replace-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/replace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/reweight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/rmepsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/rmfinalepsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/arc-class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/arcfilter-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/arciterator-class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/arcsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/arg-packs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/closure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/compile-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/connect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/determinize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/difference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/disambiguate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/draw-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/draw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/encodemapper-class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/epsnormalize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/equal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/equivalent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/fst-class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/fstscript-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/fstscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/getters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/info-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/intersect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/invert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/isomorphic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/minimize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/print-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/project.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/prune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/push.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/randequivalent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/randgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/relabel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/replace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/reweight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/rmepsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/script-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/shortest-distance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/shortest-path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/stateiterator-class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/synchronize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/text-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/topsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/union.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/script/weight-class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/set-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/shortest-distance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/shortest-path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/signed-log-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/sparse-power-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/sparse-tuple-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/state-map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/state-reachable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/state-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/statesort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/string-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/symbol-table-ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/symbol-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/synchronize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/test-properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/test/algo_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/test/compactors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/test/fst_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/test/rand-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/test/weight-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/topsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/tuple-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/union-find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/union-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/union.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/vector-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/visit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenFST/src/include/fst/weight.h" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/bin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/bin/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compact/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compress/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/compress/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/const/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/const/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/far/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/linear/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/lookahead/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/lookahead/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/mpdt/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/ngram/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/ngram/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/pdt/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/python/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/python/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/special/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/extensions/special/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/include/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/lib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/script/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/script/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/OpenFST/src/test/Makefile.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

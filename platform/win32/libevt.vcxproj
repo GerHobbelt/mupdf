@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libevt</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF633281}</ProjectGuid>
+    <RootNamespace>libevt</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVT;EVT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/evtexport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/evtinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/evtinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/evttools_getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/evttools_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/evttools_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/evttools_wide_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/export_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/info_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/log_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/message_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/message_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/path_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/registry_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/evttools/resource_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_end_of_file_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_event_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_file_header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_io_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_notify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_record_values.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_strings_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/libevt/libevt_support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/ossfuzz/file_fuzzer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/ossfuzz/record_fuzzer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_codepage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_datetime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_event_types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_file_flags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_file_object_io_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_integer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_records.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_strings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_end_of_file_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_event_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_file_header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_io_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_notify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_record_values.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_strings_array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_info_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_message_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_message_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_path_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_registry_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_resource_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevt/tests/evt_test_tools_signal.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/byte_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/config_borlandc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/config_msc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/config_winapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/file_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/narrow_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/system_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/common/wide_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evtinput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_i18n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libbfio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libcdirectory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libcerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libclocale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libcnotify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libcpath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libcsplit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libevt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libexe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libfcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libfdatetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libfwevt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libfwnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libregf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libuna.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_libwrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_system_split_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_unused.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/evttools_wide_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/export_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/info_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/log_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/message_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/message_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/path_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/registry_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/evttools/resource_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/include/libevt/codepage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/include/libevt/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/include/libevt/extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/evt_end_of_file_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/evt_event_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/evt_file_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/evt_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_codepage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_end_of_file_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_event_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_extern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_file_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_io_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libbfio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libcdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libcerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libclocale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libcnotify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libcthreads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libfcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libfdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libfdatetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libfwnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_libuna.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_notify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_record_values.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_strings_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/libevt/libevt_unused.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/ossfuzz/ossfuzz_libbfio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/ossfuzz/ossfuzz_libevt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_codepage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_datetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_event_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_file_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_file_object_io_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_libbfio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_libcerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_libclocale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_libevt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_libfwnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_records.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/pyevt/pyevt_unused.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_libbfio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_libcerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_libclocale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_libcnotify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_libevt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_libuna.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevt/tests/evt_test_unused.h" />
+    <Text Include="../../thirdparty/owemdjee/libevt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/autogen.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libevt/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/build.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libevt/common/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/common/types.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libevt/dpkg/changelog.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/evttools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/include/libevt.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/include/libevt/definitions.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/include/libevt/features.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/include/libevt/types.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/libevt.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/libevt.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/libevt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/libevt/libevt.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/libevt/libevt_definitions.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/manuals/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/msvscpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/ossfuzz/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/po/Makevars.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/libevt/pyevt-python2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/pyevt-python3/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/pyevt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/runtests.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libevt/runtests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/libevt/synclibs.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libevt/synclibs.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/synctestdata.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/pkgbuild.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/pyevt_test_file.py" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/pyevt_test_support.py" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/runtests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/syncsharedlibs.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_evtexport.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_evtinfo.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_evtinfo.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_library.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_library.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_manpage.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_python_module.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_runner.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevt/tests/test_tools.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

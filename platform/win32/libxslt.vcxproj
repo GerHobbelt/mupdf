@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libxslt</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCE99E8}</ProjectGuid>
+    <RootNamespace>libxslt</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXSLT;XSLT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/libxslt_tutorial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/doc/tutorial2/libxslt_pipes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/examples/xsltICUSort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/crypto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/date.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/dynamic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/exslt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/saxon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/sets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libexslt/strings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/attributes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/attrvt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/documents.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/extensions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/imports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/keys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/namespaces.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/pattern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/preproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/security.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/templates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/variables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/xslt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/xsltlocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/libxslt/xsltutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/python/libxslt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/python/types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/fuzz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/testTargets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/xpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/xslt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/tests/runtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/tests/testplugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/xsltproc/testThreads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxslt/xsltproc/xsltproc.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libexslt/exslt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libexslt/exsltexports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libexslt/libexslt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/attributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/documents.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/extensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/imports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/keys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/libxslt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/namespaces.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/numbersInternals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/pattern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/preproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/security.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/trio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/triodef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/variables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/win32config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/xslt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/xsltInternals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/xsltexports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/xsltlocale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/libxslt/xsltutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/python/libxml_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/python/libxslt_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/fuzz.h" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/EXSLT/devhelp/home.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/EXSLT/devhelp/left.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/EXSLT/devhelp/right.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/EXSLT/devhelp/up.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/devhelp/home.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/devhelp/left.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/devhelp/right.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/devhelp/up.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/1.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/10.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/2.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/3.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/4.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/5.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/6.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/7.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/8.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/images/callouts/9.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/1.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/10.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/2.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/3.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/4.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/5.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/6.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/7.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/8.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/callouts/9.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/caution.gif" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/caution.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/home.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/important.gif" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/important.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/next.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/note.gif" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/note.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/prev.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/tip.gif" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/tip.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/toc-blank.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/toc-minus.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/toc-plus.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/up.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/warning.gif" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/images/warning.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/result/html/emc2.gif" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/result/html/emc2.png" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/emc2.gif" />
+    <Image Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/emc2.png" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/doc/EXSLT/devhelp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/doc/apibuild.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/doc/devhelp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libexslt.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libexslt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libexslt/exsltconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libxslt-config.cmake.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libxslt-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libxslt.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libxslt.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libxslt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/libxslt/xsltconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/generator.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/libxsl.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/tests/basic.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/tests/exslt.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/tests/extelem.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/tests/extfunc.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/python/tests/pyxsltproc.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/docbook/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/4.0/40chg.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/4.0/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/4.1.2/40chg.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/4.1.2/41chg.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/4.1.2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/multiple/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/xinclude/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/tests/xmlspec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/vms/readme.vms" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/win32/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/win32/configure.js" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/win32/runtests.py" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/xslt-config.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/xsltConf.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/libxslt/xsltproc/Makefile.am" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/EXSLT/libexslt-api.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/EXSLT/libexslt-refs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/libxslt-api.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/libxslt-refs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/symbols.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/tutorial/libxslttutorial.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/tutorial2/libxslt_pipes.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/doc/xsltproc.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/python/libxslt-python-api.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/python/tests/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/stand-2.7-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/stand-2.7-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/stand-2.7-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-10-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-10-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-11.2-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-11.2-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-11.2-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-11.2-4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-11.2-5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-11.2-6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-12.2-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-12.2-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-12.4-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-15-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-16.1-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-16.1-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-2.3-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-2.3-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-2.5-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-2.6.2-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-3.4-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-3.4-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-3.4-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-10.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-11.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-12.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-13.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-14.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-15.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-16.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-17.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-18.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-19.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-20.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-21.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-22.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-7.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.2-9.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.4-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.4-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.4-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.4-4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.4-5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.5-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-5.8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-6.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.1.1-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.1.1-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.1.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.1.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.1.4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.5-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.6.1-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.6.1-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.6.1-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.6.2-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.6.2-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.7-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.7-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.7-3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.7-4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.7-5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-7.7-6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-8-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-9.1-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC/test-9.1-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC2/html.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC2/svg.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/REC2/vrml.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/axis.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/bottles.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/breadth.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/brutal.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/chart.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/current.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/depth.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/game.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/gettysburg.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/html.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/identity.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/inventory.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/metric.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/number.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/oddtemplate.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/priority.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/products.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/queens.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/tower.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/trend.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/union.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/xpath.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/xslbench1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/XSLTMark/xslbenchdream.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/ca.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/cs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/da.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/de.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/el.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/en.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/es.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/et.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/fi.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/fr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/hu.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/id.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/it.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/ja.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/ko.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/l10n.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/nl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/no.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/pl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/pt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/pt_br.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/ro.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/ru.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/sk.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/sl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/sr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/sv.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/zh_cn.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/common/zh_tw.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/3.1.7/tblcals.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/3.1.7/tblxchg.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/3.1.7/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/3.1.7.1/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/3.1.7.1/testcss.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/3.1.7.1/testcust.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/3.1.7.1/testrefcust.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/4.1.2.4/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/4.1.2.4/testcss.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/4.1.2.4/testcust.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/dtd/simple/4.1.2.4/testrefcust.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/fo/titlepage.templates.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/html/titlepage.templates.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/htmlhelp/doc/htmlhelp.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/htmlhelp/langcodes.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/template/testtemplate.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/article.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/article2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/article3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/bib.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/book.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/book2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/book3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/callout.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/chunk.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/classsynop.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/condition.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/docbook40.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/external.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/figtest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/foottest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/fotest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/func.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/gdp-handbook.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/graphics.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/gtest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/idxbook.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/kwrite.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/multilingual.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/qa.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/qa2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/sectest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/set.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/table.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/docbook/test/verbtest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/bredfort.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/doc_file.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/docfile.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/fragment.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/fragment2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/menu.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/message.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/system.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/test_bad.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/documents/worklog.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/encoding/bug-146.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/dynamic-id.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/import-test1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.7.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/node-set.9.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/common/object-type.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/crypto/crypt.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/crypto/hash.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/add-duration.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/add-duration.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/add.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/add.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/date.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/date.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/datetime.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/datetime.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/difference.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/difference.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/duration.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/duration.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gday.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gday.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gmonth.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gmonth.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gmonthday.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gmonthday.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gyear.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gyear.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gyearmonth.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/gyearmonth.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/seconds.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/seconds.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/sum.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/sum.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/time.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/date/time.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/dynamic/dynmap.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/dynamic/recursion.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.10.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.11.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.7.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/functions/function.9.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/highest.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/highest.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/highest.5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/lowest.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/lowest.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/max.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/max.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/max.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/max.5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/min.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/min.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/math/power.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/saxon/eval.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/saxon/eval.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/saxon/eval.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/saxon/lineno.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/sets/difference.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/sets/distinct.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/sets/has-same-node.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/sets/leading.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/sets/trailing.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/align.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/padding.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/replace.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/split.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/tokenize.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/tokenize.2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/tokenize.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/exslt/strings/uri.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/extensions/evaluate.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/extensions/list.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/extensions/module.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/xpath.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/fuzz/xslt.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/array.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-1-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-10-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-100.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-101.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-102.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-103.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-104.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-105.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-106.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-107.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-108.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-109.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-11-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-110.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-111.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-112.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-113.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-114.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-115.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-116.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-117.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-118.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-119.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-12-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-120.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-121.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-122.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-123.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-124.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-125.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-126.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-127.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-128.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-129.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-13-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-130.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-131.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-132.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-133.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-134.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-135.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-136.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-137.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-138.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-139.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-14-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-140.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-141.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-142.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-143.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-144.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-145.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-147.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-148.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-149.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-15-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-150.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-151.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-152.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-153.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-154.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-155.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-156.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-157.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-158.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-159.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-16-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-160.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-161.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-163.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-164.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-165.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-166.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-167.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-168.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-169.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-17-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-170.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-171.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-172.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-173.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-174.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-175.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-176.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-177.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-178.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-179.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-18-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-180.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-181.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-182.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-183.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-184.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-186.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-187.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-188.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-189.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-19-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-190.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-191.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-192.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-193.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-194.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-195.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-196.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-197.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-198.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-199.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-2-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-20-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-200.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-201.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-202.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-203.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-204.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-205.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-206.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-207.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-208.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-209.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-21-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-210.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-211.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-212.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-213.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-214.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-215.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-216.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-217.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-218.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-219.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-22-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-220.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-221.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-222.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-23-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-24-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-25-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-26-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-27-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-28-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-29-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-3-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-30-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-31-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-32-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-33-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-35-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-36-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-37-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-38-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-39-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-4-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-40-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-41-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-42-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-43-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-44-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-45-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-46-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-47-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-48-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-49-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-5-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-50-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-52.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-53.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-54.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-55.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-56.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-57.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-59.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-6-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-60.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-61.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-62.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-63.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-64.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-65.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-66.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-68.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-69.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-7-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-70.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-71.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-72.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-73.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-74.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-75.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-76.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-77.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-78.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-79.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-8-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-80.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-81.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-82.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-83.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-84.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-86.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-87.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-88.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-89.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-9-.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-90.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-91.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-92.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-93.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-94.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-95.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-96.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-97.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-98.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/bug-99.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/character.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/date_add.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/doc.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/general/items.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/keys/dates.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/keys/month.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/multiple/dict.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/multiple/result.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/extra.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/extra2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst4.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst7.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/namespaces/tst9.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/numbers/format-number.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/plugins/plugin.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/cmdlineparams.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/recglobparam.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/recglobvar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/reclocparam.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/reclocvar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/tst-1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/tst-2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/reports/undefvar.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/xinclude/e.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/xinclude/x1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/xinclude/x2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxslt/tests/xmlspec/REC-xml-20001006.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

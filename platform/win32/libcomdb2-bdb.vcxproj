@@ -1,0 +1,1919 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcomdb2-bdb</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD65FBB}</ProjectGuid>
+    <RootNamespace>libcomdb2-bdb</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOMDB2_BDB;COMDB2_BDB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/TestComdb2RLE/testcrle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_blkseq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_llops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqlbkfill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqlcur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqllog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqltrn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_schemachange.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_thd_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/berktest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/callback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/cursor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/cursor_ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/cursor_rowlocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/custom_recover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/del.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/fetch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/fstdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/genid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/lite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/llmeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/locks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/locktest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/odh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/phys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/phys_rep_lsn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/queuedb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/rep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/rep_qstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/rowlocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/rowlocks_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/serializable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/summarize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/temphash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/temptable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/tran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/tranread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/upd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_compare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_conv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_curadj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_cursor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_pf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_pgcompact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_prefix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_put.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_reclaim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_recno.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_rsearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_split.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_upgrade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/crypto_stub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/db_byteorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/db_err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/db_getlong.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/db_idspace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/db_log2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/util_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/util_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/common/util_sig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/crypto/aes_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/crypto/crypto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/crypto/mersenne/mt19937db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/crdel_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_am.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_cam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_conv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_dispatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_iface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_join.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_meta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_overflow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_ovfl_vrfy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_pgcompact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_pgdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_pr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_reclaim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_remove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_rename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_ret.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_truncate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_upg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_upg_opd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_vrfy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_vrfy_stub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/db_vrfyutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/db/trigger_subscription.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbreg/dbreg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbreg/dbreg_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbreg/dbreg_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/db_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/db_salloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/db_shash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/env_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/env_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/env_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/env_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/env_pgcompact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/env_recover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/env/env_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/fileops/fop_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/fileops/fop_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/fileops/fop_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_conv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_meta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_page.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_reclaim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_stub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_upgrade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hash/hash_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/hmac/hmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/lock/lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/lock/lock_deadlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/lock/lock_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/lock/lock_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/lock/lock_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/lock/lock_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/log/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/log/log_archive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/log/log_compare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/log/log_get.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/log/log_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/log/log_put.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_bh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_fget.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_fopen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_fput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_fset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_register.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mp/mp_trickle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mut_fcntl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mut_pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mut_tas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mut_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/tm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_clock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_errno.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_falloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_fid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_fsync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_id.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_namemangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_oflags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_rename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_root.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_rpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_rw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_seek.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_sleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_spin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_tmpdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/os/os_unlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_conv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_files.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_stub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_upgrade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/qam/qam_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/rep/rep_lc_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/rep/rep_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/rep/rep_record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/rep/rep_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/rep/rep_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn_auto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn_recover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/txn/txn_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/xa/xa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/xa/xa_db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/xa/xa_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2api/cdb2api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/comdb2rle/comdb2rle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/dev-util/testrunner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/crc32c/crc32c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/macc_so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/maccglobals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/maccprocarr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/maccwrite2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/cson/cson.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/datetime/asctime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/datetime/difftime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/datetime/localtimedb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/appsock_handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/autoanalyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/block_internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/bpfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_ruleset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2uuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/constraints.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/cron.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_fingerprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_metrics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_tunables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/dbglog_iface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/dbqueuedb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/dohast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/dohsql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/endian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/envstubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/errstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/eventlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_bend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_bend_sql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_boots.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_fend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_fend_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/glue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/handle_buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/history.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/indices.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/localrep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/logical_cron.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/lrucache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/macc_glue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/machclass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/marshal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/memdebug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osql_srs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlblkseq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlblockproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlcheckboard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlcomm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlpfthdpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlrepository.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsession.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlshadtbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsqlnet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsqlsocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsqlthr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqluprec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/phys_rep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/plugin_handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/prefault.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/prefault_helper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/prefault_net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/prefault_readahead.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/prefault_toblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/printlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/process_message.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/pushlogs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/record.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/repl_wait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/reqdebug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/reqlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/request_stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/resource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/rmtpolicy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/rowlocks_bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/shard_range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sigutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sltdbt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/socket_interfaces.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sql_stmt_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlanalyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlexplain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlglue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlinterfaces.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqllog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqloffload.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlstat1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/ssl_bend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/testcompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/thrman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/timers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/toblob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/toblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/toproxy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/trans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/translistener.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/trigger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/truncate_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/views.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/views_persist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/views_serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/views_sqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/views_systable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/views_updates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/db/watchdog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decBasic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decCommon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decContext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decDouble.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decNumber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decPacked.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decQuad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decSingle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decimal128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decimal32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decimal64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/example8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/dfpal-sample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/dfpal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/dlmalloc/dlmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lauxlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lbaselib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ldblib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ldebug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ldo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ldump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lgc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/linit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/liolib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/llex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lmathlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/loadlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lobject.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lopcodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/loslib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lparser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lstrlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ltable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ltablib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ltm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ltypes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/luac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/luautil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lundump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lvm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lzio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/sp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/lua/syssp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/mem/mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/akq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/net_evbuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/sqlwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/testnet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/net/trace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/dbqueuedb/dbqueuedb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/logdelete/logdelete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/newsql/newsql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/newsql/newsql_evbuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/newsql/newsql_sbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/remsql/fdb_comm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/remsql/remsql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/repopnewlrl/repopnewlrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/sockbplog/sockbplog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_add_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_alter_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_callbacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_csc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_drop_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_fastinit_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_logic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_lua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_queues.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_records.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_rename_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_schema.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_stripes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_struct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_view.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/schemachange.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sockpool/passfd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sockpool/sockpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/activelocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/activeosqls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/appsock_handlers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/blkseq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/clientstats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/cluster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/columns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/connections.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/constraints.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/crons.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/ezsystables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/fdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/fingerprints.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/indexuse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/keycomponents.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/keys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/keywords.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/limits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/logicalops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/memstats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/metrics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/netuserfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/opcode_handlers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/partial_datacopies.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/permissions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/plugins.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/procedures.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/queues.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/repl_stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/repnetqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/schistory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/scstatus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/sqlclientstats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/sqlpoolqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/systables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/table_properties.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tablesizes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/temporary_file_sizes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/threadpools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/timepartitions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/timeseries.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tranlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/triggers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tunables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/typesamples.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/users.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/views.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/expert/expert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/expert/sqlite3expert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/misc/carray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/misc/completion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/misc/json1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/misc/regexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/misc/series.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/alter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/analyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/attach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/backup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/bitvec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/btmutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/btree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/build.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/callback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/comdb2build.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/comdb2lua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/comdb2vdbe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/complete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/ctime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/date.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/dbpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/dbstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/decimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/dttz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/fault.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/fkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/insert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/loadext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mem0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mem1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mem2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mem3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mem5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/memdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/memjournal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mutex_noop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mutex_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mutex_w32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/notify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/os_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/os_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/pager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/pcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/pcache1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/pragma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/prepare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/resolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/rowset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/shell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqlite_tunables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/status.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/tclsqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_autoext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_backup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_bestindex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_blob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_btree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_demovfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_devsym.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_hexio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_intarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_journal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_loadext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_multiplex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_onefile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_osinst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_pcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_quota.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_rtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_schema.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_sqllog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_superlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_syscall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_tclsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_tclvar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_vfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_vfstrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_windirent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_wsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/tokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/treeview.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/trigger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/update.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/upsert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/utf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vacuum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbeapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbeaux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbeblob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbemem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbesort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbetrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/wal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/walker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/where.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/wherecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/whereexpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/tool/lemon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/tool/lempar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/tool/mkkeywordhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tcl/tclcdb2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/bb_getopt_long.test/getopt_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/cdb2api_unit.test/unit_get_comdb2db_hosts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/int_overflow.test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/api_events.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/api_hello_world_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/api_libs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/blob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/bound.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/breakloop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2_close_early.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2api_caller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2api_read_intrans_results.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2api_unit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2bind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cldeadlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/client_datetime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/close_old_connections.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/comdb2_blobtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/crle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cson_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/deadlock_load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/emit_timeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/endian_core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/hatest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/ins_upd_del.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/inscntdel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/insert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/insert_lots_mt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/leakcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/localrep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/makerecord_timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/malloc_resize_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/multithd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/nemesis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/nowritetimeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/overflow_blobtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/pmux_queries.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/ptrantest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/recom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/register.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/selectv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/selectv_deadlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/selectv_rcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/sicountbug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/simple_ssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/sirace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/slt_comdb2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/slt_sqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/smartbeats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/sqllogictest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/ssl_multi_certs_one_process.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/stepper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/stepper_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/strbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/test_threadpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/testutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/updater.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/verify_atomics_work.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_dump/cdb2_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_load/cdb2_load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_pgdump/cdb2_pgdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_printlog/cdb2_printlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_printlog/comdb2_dbprintlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_sqlreplay/cdb2_sqlreplay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_stat/cdb2_stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_verify/cdb2_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/cdb2sockpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/settings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sql/cdb2sql.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/appsock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/chksum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/comdb2ar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/db_wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/deserialise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/fdostream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/file_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/incr_deserialise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/incr_manifest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/increment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/logholder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/lrlerror.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/repopnewlrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/riia.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/serialise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/serialiseerror.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/tar_header.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/tools/pmux/pmux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/averager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/bb_asprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/bb_daemon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/bb_getopt_long.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/bb_oscompat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/bbhrtime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/cheapstub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/comdb2_pthread_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/comdb2file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/ctrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/debug_switches.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/flibc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/fsnapf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/hostname_support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/int_overflow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/intern_strings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/logmsg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/memdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/nodemap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/object_pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/parse_lsn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/pb_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/perf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/plhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/pooltest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/portmuxusr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/quantize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/queuetest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/roll_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/rtcpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/sbuf2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/schema_lk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/segstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/sltpck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/ssl_glue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/ssl_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/ssl_support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/str0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/strbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/string_ref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/switches.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/tcputil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/thdpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/thread_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/thread_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/time_accounting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/time_epoch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/tohex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/utilmisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/walkback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/comdb2-bdb/util/xstring.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/averager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/bb_inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/bb_oscompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/bb_stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/bbhrtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/blob_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/cdb2_constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/cheapstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_appsock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_initializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_machine_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_opcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_pthread_create.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_query_preparer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/comdb2_ruleset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/compile_time_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/ctrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/debug_switches.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/dynschematypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/endian_core.amd64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/endian_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/endian_core.powerpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/endian_core.sparc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/epochlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/f2cstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/fieldof_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/flibc.amd64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/flibc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/flibc.powerpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/flibc.sparc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/fsnapf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/gettimeofday_ms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/hostname_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/int_overflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/intern_strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/itoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/lockmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/marshal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/memdup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/memory_sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/nodemap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/object_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/plbitlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/plhash_glue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/portmuxapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/printformats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/roll_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/rtcpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/sbuf2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/segstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/sendmsg_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/setrmtdbm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/sizeof_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/sltpck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/ssl_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/ssl_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/str0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/strbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/switches.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/sysutil_compilerdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/tcputil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/thdpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/thread_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/thread_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/thread_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/thrman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/timer_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/timers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/tohex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/trigger_sub_status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/tunables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/utilmisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/walkback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/xstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_fetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osql_log_rec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqlbkfill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqlcur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqllog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_osqltrn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_queuedb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_schemachange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/bdb_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/cursor_ll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/genid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/ix_return_codes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/llog_handlers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/locks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/missing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/phys_rep_lsn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/rep_qstat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_pf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/btree/bt_prefix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_config_hp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_config_ibm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_config_linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_config_sun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_cxx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_dbt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/build/db_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/cxx_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_am.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_attr_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_dispatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_join.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_page.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_server_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_shash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_swap.amd64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_swap.big.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_swap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_upgrade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/fileid_len.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/fop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/locker_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/mp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/printlog_hooks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/qam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/region.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/rep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/rep_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/shqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/tcl_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/trigger_subscription.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/txn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/xa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc_auto/txn_auto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc_auto/txn_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2api/cdb2api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/comdb2rle/comdb2rle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/crc32c/crc32c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/crc32c/crc32c_1024.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/crc32c/sb8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/csctypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/dynschemaload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/macc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/cson/cson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/datetime/datetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/datetime/private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/datetime/tzfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/analyze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/ast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/autoanalyze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/block_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/bpfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_dbinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_rcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_sql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_sql_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2_trn_intrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/comdb2uuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/constraints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/cron.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/cron_systable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/db_tunables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/dbdest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/dbglog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/dohsql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/errstat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/eventlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_bend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_bend_sql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_boots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_comm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_fend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_fend_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_systable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/fdb_whitelist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/history.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/indices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/localrep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/logical_cron.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/lrucache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/macc_glue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/machclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/marshal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/memdebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osql_srs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlblkseq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlblockproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlcheckboard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlcomm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlrepository.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlrpltypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsession.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlshadtbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsqlnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsqlsocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqlsqlthr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/osqluprec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/pfault.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/phys_rep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/prefault.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/remote.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/repl_wait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/reqlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/reqlog_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/request_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/rngextrx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/shard_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sigutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/socket_interfaces.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sql_stmt_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlexplain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlglue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlinterfaces.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqllog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqloffload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlstat1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/sqlthdpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/ssl_bend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/timepart_systable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/translistener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/trigger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/truncate_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/db/views.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decDPD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decDouble.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decNumber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decNumberLocal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decPacked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decQuad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decSingle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decimal128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decimal32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/decimal64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/asmdfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/dfpal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/dfpalct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/dfpalerr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/dfpaltypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/dfpstub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/ppcdfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dlmalloc/dlmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/dlmalloc/dlmalloc_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lauxlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ldebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ldo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lgc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/llex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/llimits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lopcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lstate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ltable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ltm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/ltypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lua_fwd_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/luaconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/luaglue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lualib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/luautil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lundump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/lzio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/sp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/lua/sp_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/mem/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/mem/mem_override.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/mem/mem_restore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/akq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/net_appsock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/net_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/net_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/net/sqlwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/newsql/newsql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/protobuf/pb_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_add_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_alter_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_callbacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_csc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_drop_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_fastinit_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_logic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_queues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_records.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_rename_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_stripes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/sc_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/schemachange.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sockpool/passfd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sockpool/sockpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sockpool/sockpool_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/comdb2systbl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/comdb2systblInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/ezsystables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/comdb2/tranlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/expert/sqlite3expert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/ext/misc/series.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/btreeInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/comdb2Int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/comdb2build.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/comdb2vdbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/decimal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/fwd_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/hwtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/os_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/os_setup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/os_win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/pager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/pcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/pragma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqlite3ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqliteInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqliteLimit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqlite_btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqlite_tunables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_intarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_multiplex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_quota.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/test_windirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vdbeInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/vxworks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/wal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/whereInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tcl/tclcdb2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sirandtest2.test/prodconq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/comdb2sql_clnt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/client_datetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/endian_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/nemesis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/sqllogictest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/stepper_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/strbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_printlog/printlog_hooks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/cdb2sockpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/appsock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/chksum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/comdb2ar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/db_page.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/db_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/fdostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/file_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/glue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/increment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/logholder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/lrlerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/repopnewlrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/riia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/serialiseerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/tar_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/pmux/comdb2_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/pmux/no_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/pmux/pmux_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/pmux/raii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/tools/pmux/sqlite_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/bb_daemon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/bb_getopt_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/locks_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/logmsg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/parse_lsn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/perf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/schema_lk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/ssl_glue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/string_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/time_accounting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/comdb2-bdb/util/txn_properties.h" />
+    <Font Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/css/fonts/FontAwesome.otf" />
+    <Font Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/css/fonts/fontawesome-webfont.ttf" />
+    <Font Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/fonts/FontAwesome.otf" />
+    <Font Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/fonts/fontawesome-webfont.ttf" />
+    <Font Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/fonts/glyphicons-halflings-regular.ttf" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/androidsdkmanagericon.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/authorizegithubscreen2.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/authorizeongithub.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/company_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/company_logo_big.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/helpapi-01.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/illustratoroptions.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/itermexample.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/jekyll.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/killalljekyll.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/liningup.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/images/workflowarrow.png" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/alter-table-ddl.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/alter-table.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/analyze.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/begin-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/column-constraint.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/comment-syntax.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/commit-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/common-table-expression.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/compound-operator.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/compound-select-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/constant-section.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/constraint-section.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-index.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-lua-func.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-proc.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-table-ddl.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-table.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-time-part.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-trigger.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/create-view.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/cte-table-name.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/delete-stmt-limited.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/drop-index.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/drop.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/exec-procedure.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/expr.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/factored-select-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/filter.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/foreign-key-def.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/frame-spec.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/function-invocation.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/get.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/grant.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/host-config.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/idxexpr-type.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/index-column-list.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/insert-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/join-clause.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/join-constraint.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/join-operator.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/key-section.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/literal-value.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/numeric-literal.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/ordering-term.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/put.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/qualified-table-name.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/rebuild.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/recursive-cte.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/result-column.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/revoke.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/rollback-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/schema-section.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/schema.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/schemachange.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/select-core.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/select-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/set-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/signed-number.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/simple-select-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/sql-stmt.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/supervisor-web-interface.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/table-constraint.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/table-event.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/table-options.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/table-or-subquery.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/truncate.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/type-name.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/update-stmt-limited.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/upsert-clause.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/window-defn.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/window-function-invocation.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/images/with-clause.gif" />
+    <Image Include="../../thirdparty/owemdjee/comdb2-bdb/docs/src/dash/icon.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqlite3.rc" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/INTERNAL_CONTRIBUTORS.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/PULL_REQUEST_TEMPLATE.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/bbinc/plhash.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/bdb/build_recfiles.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_cxx.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dbinc/db_int.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/db.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/geninc.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/genrec.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/pubdef.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/srcfiles.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/vx_config.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/win_config.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/win_db.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/dist/win_exports.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/berkdb/mutex/uts4_cc.s" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/java/com/bloomberg/comdb2/jdbc/NewSqlHeader.java" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/comdb2rle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/cdb2hibernatedialect/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/backup-database.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/create-cluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/deploy-database.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/drop-database.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/for-each.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/gen-db-conf.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/get-backup-from-s3.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/list-backups-in-s3.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/reboot-cluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/start-cluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/start-database.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/stop-cluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/stop-database.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/terminate-cluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/turn-database.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/comdb2aws/which.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/docker/cluster-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/docker/docker-dev-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/crc32c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/macclex.l" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/csc2/maccparse.y" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/cson/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/datetime/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/db/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/decNumber/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/asmdfp.S" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/dfp/dfpal/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/dlmalloc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/404.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/customscripts.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/jekyll-search.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/jquery.ba-throttle-debounce.min.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/jquery.localScroll.min.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/jquery.navgoco.min.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/jquery.scrollTo.min.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/jquery.shuffle.min.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/js/toc.js" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/licenses/LICENSE-BSD-NAVGOCO.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/gh-resource/search.json" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/config/args.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/config/clients.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/config/config_files.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/config/crypto.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/config/ruleset.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/config/ssl.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/operating/backups.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/operating/cluster.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/operating/commands.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/operating/hosted.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/operating/logs.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/operating/op.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/overview/about.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/overview/contrib.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/overview/durable.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/overview/example_db.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/overview/home.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/overview/install.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/overview/transaction_model.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/auth.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/c_api.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/client_protocol.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/constraints.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/datatypes.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/datetime.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/decimals.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/jdbc_api.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/luasp.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/sql.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/system_tables.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/table_schema.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/timepart.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/pages/programming/triggers.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/src/sqlitegen/bubble-generator-data.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/docs/src/sqlitegen/bubble-generator.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/lua/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/mem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/mem/mem.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/net/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/dbqueuedb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/dbqueuedb/plugin.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/logdelete/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/logdelete/plugin.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/newsql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/newsql/plugin.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/remsql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/remsql/plugin.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/repopnewlrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/repopnewlrl/plugin.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/sockbplog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/plugins/sockbplog/plugin.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/schemachange/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sockpool/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/in-operator.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/parse.y" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/shell.c.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/src/sqlite.h.in" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/tool/mkopcodec.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/tool/mkopcodeh.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/sqlite/tool/mkvdbeauxinlines.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tcl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tcl/helper.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tcl/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tcl/tests/all.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/analyze_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t04_01.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t05_01.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t06_01.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/analyze.test/t10_01.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/biginplace.test/bigrec1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/biginplace.test/bigrec2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/biginplace.test/bigrec3.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/blob_size_limit.test/expected.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/bloballoc.test/blobtestapp.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/bulk_overflow.test/t_v1_sel.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/bulk_overflow.test/t_v1_sql.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2sys.test/fkrcode.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/comdb2sys.test/update.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/constraints.test/update.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/consumer.test/t03.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/copyschema_timepart.test/clonedb.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/copyschema_timepart.test/killdb.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/csvcopy.test/agg.csv" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/csvcopy.test/agg1.csv" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/curmoves.test/oc.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/curmoves.test/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetimeusec.test/microseconds.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetimeusec.test/sp_db_now_arg.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetimeusec.test/sp_ms_to_us.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/datetimeusec.test/sp_us_to_ms.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/decimal.test/decimal.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/dupewrite.test/dupe.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/dupewrite.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fingerprints.test/fp.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/fingerprints.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incremental_backup_load.test/deleter.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incremental_backup_load.test/inserter.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/incremental_backup_load.test/updater.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/instant_sc.test/compress_alter.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/instant_sc.test/compress_alter_driver.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/instant_sc.test/dumpvers.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/instant_sc.test/instant_sc.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/instant_sc.test/t17.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/interval.test/out.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/remsql_curmoves.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ioerror_remsql.test/repro.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/killcluster.test/generate_correct_out.py" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/logical_ops.test/expected.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/mismatch_class_remsql.test/remsql.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/misstable_remsql.test/test_missing.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsi_temptables.test/" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/newsqlreplay.test/" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/overflowblobs.test/overfl_blobtst.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/parenttran_fail.test/ptrantest.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/parserdiagnose.test/findcluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/3-1-truncate.src.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/5-1-create-alltypes.src.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/5-2-alter.src.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/generate_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/phys_rep.test/register_replicant.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/pmux.test/portmux.py" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ptranfail_socksql.test/ptrantest.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/dml_consumer.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/log_consumer.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/nop_consumer.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/qdb0.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/qdb0_adds.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/qdb0_cons.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/qdb1.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/qdb4.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/qdb4_adds.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/qdb4_cons.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover_extended.test/nop_consumer.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover_extended.test/qdb2.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover_extended.test/qdb2_adds.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover_extended.test/qdb2_cons.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/queuedb_rollover_extended.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rawindex.test/t00.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rawindex.test/t01.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rawindex.test/t08.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rawindex.test/t09.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rawindex.test/t10.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rawindex.test/t11.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/readonly.test/output.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/readonly.test/output2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/readonly.test/reqoutput.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/readonly.test/reqoutput2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/readonly.test/reqoutput3.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/recom_replay.test/t3.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/renametable.test/reqoutput.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rootpagememleak.test/create.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/rowlocks_blkseq.test/ptrantest.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ruleset.test/ruleset.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ruleset.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_addcolumn_remsql.test/test_sc.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_blob_update.test/addrecs.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_constraints.test/addrecs.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_lock_inversion.test/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_rebuilds.test/addrecs.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sc_remsql.test/test_sc.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/selectv_range.test/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/siasof.test/cartesian_ix1_ix1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/siasof.test/cartesian_t1_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/siasof.test/cartesian_t2_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/siasof.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/siasof.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/siasofupdate.test/sql.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex.test/cartesian_ix1_ix1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex.test/cartesian_t1_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex.test/cartesian_t2_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex2.test/cartesian_ix1_ix1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex2.test/cartesian_t1_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex2.test/cartesian_t2_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex2.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex2.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex3.test/cartesian_ix1_ix1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex3.test/cartesian_t1_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex3.test/cartesian_t2_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex3.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicomplex3.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicountbug2.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sicountbug2.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sidupidx3.test/cartesian_ix1_ix1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sidupidx3.test/cartesian_t1_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sidupidx3.test/cartesian_t2_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sidupidx3.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sidupidx3.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sigstopcluster.test/generate_correct_out.py" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/simple_remsql.test/remsql_curmoves.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sirandtest.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sirandtest.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sirandtest2.test/select_t1.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sirandtest2.test/select_t2.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/smoketest/docker-dev-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/smoketest/docker-jdbctest-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/snapisol.test/ordercounts_stepper.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/socksql.test/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/socksql_master_swings.test/downgrade.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/audit.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/blobliteral.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/bound.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/close.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/commitsp.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/cons.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/cons_with_sequence_epoch.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/cons_with_tid.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/dup.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/gen.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/hexarg.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/json_extract.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/myavg.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/pending.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/prepare.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/resolved.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/sp.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/sp_index.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/transactions.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp.test/types.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp_sql_tran.test/sp_sql_tran.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp_sql_tran.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp_timeout.test/sp_timeout.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sp_timeout.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/sqlite.test/comdb2_sqltest.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/ssl_remsql.test/test_ssl.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/strict_dbl_quotes.test/strict.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/strict_dbl_quotes.test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/stripe_order_inserts.test/addrecs.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/systable_locking.test/audit.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cdb2apy/client.py" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/cluster_utils.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/compare_results.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/copy_files_to_cluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/create_generated_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/ddl.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/get_random.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/get_test_counter.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/get_testopts_path.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/get_tests_inorder.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/hrtime.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/keygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/filetest/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/filetest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/filetest/doc/intro.md" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/filetest/history.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/jdbctest/jdbctest_loop.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/jepsen/jepsenloop.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/killcluster/generate_correct_out.py" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/killcluster/killclusterloop.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/killcluster/killclustertest.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/scripts/blockcoherent.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/nemesis.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/random.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/readsql.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/runit_common.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/runt.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/send_msg_port.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/smalldelay.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/testloop.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/waitmach.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/write_prompt.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/writesql.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/update_datetime.test/upd_date.lua" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/upsert.test/upsert_effects.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/upsert.test/upsert_stress.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/verify_error.test/ordercounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql.test/test_writes.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/writes_remsql_names.test/writes_remsql_names.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/yast.test/tester.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tests/yast.test/thread_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_sqlreplay/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2_stat/dd.sh" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sockpool/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tools/cdb2sql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tools/comdb2ar/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/tools/pmux/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/comdb2-bdb/util/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/cdb2jdbc/src/main/assembly/dist.xml" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/cdb2hibernatedialect/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/cdb2hibernatedialect/src/main/assembly/dist.xml" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/contrib/docker/maven-settings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/docs/diagrams/cluster.xml" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/docs/diagrams/transaction_life_cycle.xml" />
+    <Xml Include="../../thirdparty/owemdjee/comdb2-bdb/tests/tools/linearizable/jdbctest/pom.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

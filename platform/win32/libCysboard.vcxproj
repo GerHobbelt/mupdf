@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libCysboard</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAB6894}</ProjectGuid>
+    <RootNamespace>libCysboard</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYSBOARD;CYSBOARD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/behavior_camera_capture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/behavior_drawing-gdi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/behavior_drawing-opengl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/behavior_drawing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/behavior_tabs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/behavior_video_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/camera/camera-capture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-gtk-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-win-main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/cpuinfo_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/cpuinfo_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/default_theme.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/diskinfo_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/linuxutil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/meminfo_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/osinfo_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Cysboard/sources/win32util.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/aux-asset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/aux-cvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/aux-platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/aux-slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/behaviors/camera/camera-capture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-behavior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-dom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-graphics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-host-callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-lite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-msg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-video-api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x-window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/sciter-x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/tiscript-streams.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/tiscript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/tiscript.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/sciter/value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/async_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/async_log_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/async_logger_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/file_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/line_logger_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/line_logger_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/log_msg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/logger_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/mpmc_bounded_q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/null_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/pattern_formatter_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/details/spdlog_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/android_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/ansicolor_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/base_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/dist_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/file_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/msvc_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/null_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/ostream_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/stdout_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/sinks/syslog_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/spdlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/includes/spdlog/tweakme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/call_program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/ccpuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/cpucoreobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/cpuinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/cpuobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/cysboard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/diskinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/diskobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/linuxutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/meminfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/memoryobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/osinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/osobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Cysboard/sources/win32util.h" />
+    <Text Include="../../thirdparty/owemdjee/Cysboard/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Cysboard/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Cysboard/sources/resources/default_exports.js" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

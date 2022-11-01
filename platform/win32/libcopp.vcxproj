@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcopp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF5AE86}</ProjectGuid>
+    <RootNamespace>libcopp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOPP;COPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_coroutine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_coroutine_malloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_coroutine_mem_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_coroutine_stack_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_callable_create_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_callable_create_generator_no_trivial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_callable_recursive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_callable_reuse_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_callable_reuse_generator_no_trivial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_task_create_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_task_create_generator_no_trivial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_task_reuse_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_std_couroutine_task_reuse_generator_no_trivial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_task_malloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_task_mem_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_benchmark_task_stack_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_default_coroutine_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_linux_gcc_splited_segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_10.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/sample/sample_readme_9.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/coroutine/coroutine_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/coroutine/coroutine_context_fiber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/coroutine/std_coroutine_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/tail_ppc32_sysv_elf_gas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/allocator/stack_allocator_malloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/allocator/stack_allocator_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/allocator/stack_allocator_posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/allocator/stack_allocator_split_segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/allocator/stack_allocator_windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/stack_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/stack_traits/stack_traits_posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/stack/stack_traits/stack_traits_windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcopp/utils/uint64_id_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcotask/impl/task_action_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcotask/impl/task_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/src/libcotask/this_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/app/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/callable_promise_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_context_base_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_context_fiber_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_context_private_data_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_context_split_segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_context_this_coroutine_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_task_fiber_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_task_manager_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/coroutine_task_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/fcontext_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/future_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/generator_promise_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/id_allocator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/stack_pool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/task_promise_task_manager_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/case/task_promise_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/cli/shell_font.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/frame/test_case_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcopp/test/frame/test_manager.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/algorithm_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/callable_promise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/coroutine_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/coroutine_context_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/coroutine_context_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/coroutine_context_fiber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/coroutine_context_fiber_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/generator_promise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/coroutine/std_coroutine_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_arm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_arm_mac.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_arm_win.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_i386.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_i386_win.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_mips.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_ppc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_sparc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_x86_64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/detail/fcontext_x86_64_win.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/fcontext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/future/future.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/future/poller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/future/storage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/allocator/stack_allocator_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/allocator/stack_allocator_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/allocator/stack_allocator_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/allocator/stack_allocator_posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/allocator/stack_allocator_split_segment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/allocator/stack_allocator_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/stack_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/stack_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/stack_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/stack/stack_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/abi/borland_prefix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/abi/borland_suffix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/abi/msvc_prefix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/abi/msvc_suffix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/atomic_int_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/config/compile_optimize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/config/stl_include_prefix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/config/stl_include_suffix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/gsl/not_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/gsl/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/intrusive_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/lock_holder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/spin_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/std/coroutine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/std/explicit_declare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/std/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/uint64_id_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/core/standard_new_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/impl/task_action_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/impl/task_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/task_actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/task_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/task_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/task_promise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/include/libcotask/this_task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_bind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_bind_param_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_bindt_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_bindt_cc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_bindt_mf_cc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_phoenix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/cmd_option_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/cli/shell_font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/common/string_oprs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/frame/test_case_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/frame/test_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/frame/test_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/std/ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/std/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcopp/test/std/utility.h" />
+    <Image Include="../../thirdparty/owemdjee/libcopp/docs/sphinx/_static/icon.png" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_arm_aapcs_pe_armasm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_i386_ms_pe_gas.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_i386_ms_pe_masm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_x86_64_ms_pe_gas.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_x86_64_ms_pe_masm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_arm_aapcs_pe_armasm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_i386_ms_pe_gas.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_i386_ms_pe_masm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_x86_64_ms_pe_gas.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_x86_64_ms_pe_masm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_arm_aapcs_pe_armasm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_i386_ms_pe_gas.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_i386_ms_pe_masm.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_x86_64_ms_pe_gas.asm" />
+    <MASM Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_x86_64_ms_pe_masm.asm" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/BOOST_LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/ci/do_ci.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/ci/do_ci.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/ci/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/ci/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/cmake_dev.bat" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/cmake_dev.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/cmake_dev.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/doxygen-index.md" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/libcopp.doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/reports/linux_benchmark_report.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/reports/linux_start_benchmark.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/reports/windows_benchmark_report.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/reports/windows_start_benchmark.bat" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/requirements-vscode.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/setup-sphinx.bat" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/setup-sphinx.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/setup-sphinx.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/sphinx/_static/js/setup_lineno.js" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/sphinx/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/sphinx/example/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/sphinx/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/docs/sphinx/reference/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/include/libcopp/fcontext/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/include/libcopp/utils/config/libcopp_build_features.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/libcopp-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/sample/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_arm64_aapcs_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_arm64_aapcs_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_arm_aapcs_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_arm_aapcs_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_combined_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_i386_ms_pe_clang_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_i386_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_i386_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_i386_x86_64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_mips32_o32_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_mips64_n64_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_ppc32_ppc64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_ppc32_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_ppc32_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_ppc32_sysv_xcoff_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_ppc64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_ppc64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_ppc64_sysv_xcoff_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_riscv64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_s390x_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_x86_64_ms_pe_clang_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_x86_64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/jump_x86_64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_arm64_aapcs_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_arm64_aapcs_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_arm_aapcs_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_arm_aapcs_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_combined_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_i386_ms_pe_clang_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_i386_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_i386_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_i386_x86_64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_mips32_o32_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_mips64_n64_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_ppc32_ppc64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_ppc32_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_ppc32_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_ppc32_sysv_xcoff_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_ppc64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_ppc64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_ppc64_sysv_xcoff_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_riscv64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_s390x_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_x86_64_ms_pe_clang_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_x86_64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/make_x86_64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_arm64_aapcs_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_arm64_aapcs_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_arm_aapcs_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_arm_aapcs_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_combined_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_i386_ms_pe_clang_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_i386_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_i386_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_i386_x86_64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_mips32_o32_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_mips64_n64_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_ppc32_ppc64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_ppc32_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_ppc32_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_ppc32_sysv_xcoff_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_ppc64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_ppc64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_ppc64_sysv_xcoff_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_riscv64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_s390x_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_x86_64_ms_pe_clang_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_x86_64_sysv_elf_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/asm/ontop_x86_64_sysv_macho_gas.S" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcopp/fcontext/update_tool.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/src/libcotask/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/tools/format.ps1" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/tools/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/tools/run-with-asan.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcopp/tools/valgrind-memcheck.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

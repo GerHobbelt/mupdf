@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libgettext</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF013449}</ProjectGuid>
+    <RootNamespace>libgettext</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGETTEXT;GETTEXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/bindtextdom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/dcgettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/dcigettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/dcngettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/dgettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/dngettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/explodename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/finddomain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/gettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/hash-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/intl-compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/intl-exports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/l10nflist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/langprefs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/loadmsgcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/localealias.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/ngettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/os2compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/osdep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/plural-exp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/setlocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/textdomain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/asnprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/asprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/autosprintf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/lib-asprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/vasprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/src/envsubst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/src/gettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/src/ngettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-gnome/hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/hellowindow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-qt/hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-wxwidgets/hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++/hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgettextpo/gettext-po.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgrep/kwset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgrep/m-fgrep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgrep/m-regex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/misc/cvsuser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/cldr-plural-exp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/cldr-plurals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/dir-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/file-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/filter-quote.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/filter-sr-latin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-awk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-boost.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-csharp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-elisp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-gcc-internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-gfc-internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-java-printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-java.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-javascript.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-kde-kuit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-kde.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-librep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-lisp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-lua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-pascal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-perl-brace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-perl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-php.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-python-brace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-python.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-qt-plural.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-qt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-ruby.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-scheme.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-sh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-smalltalk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-tcl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/hostname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/its.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/lang-table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/locating-rule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/message.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgattrib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgcmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgcomm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgfmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msggrep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msginit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-ascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-cat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-charset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-english.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-equal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-fsearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-iconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-ofn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgmerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgunfmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msguniq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/open-catalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-exp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-charset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-lex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-xerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/pos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-catalog-abstract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-catalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-csharp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-desktop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-java.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-mo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-po.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-properties.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-resources.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-stringtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-tcl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/recode-sr-latin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/search-path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/sentence.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/str-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/urlget.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-catalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-csharp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-desktop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-java.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-mo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-po.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-properties.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-qt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-resources.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-stringtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-tcl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-xml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-awk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-csharp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-desktop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-elisp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-java.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-javascript.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-librep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-lisp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-lua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-perl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-php.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-po.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-python.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-rst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-ruby.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-scheme.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-sh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-smalltalk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-tcl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-vala.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-ycp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-callshape.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-message.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-mixed-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-pos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xgettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/format-c-3-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/format-c-4-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/format-c-5-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-3-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-4-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-5-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-setlocale-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-setlocale-2-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-thread-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-thread-2-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/intl-thread-3-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/plural-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/testlocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/format-c-3-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/format-c-4-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/format-c-5-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/gettextpo-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-3-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-4-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-5-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-6-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-setlocale-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-setlocale-2-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-thread-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-thread-2-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-thread-3-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/intl-version-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/plural-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/sentence-1-prg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/setlocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/testlocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/tstgettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/tstngettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xg-c-comment-6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/xg-c-escape-3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msgattrib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msgcat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msgcomm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msgconv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msgen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msgfilter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msggrep.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msgmerge.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++msguniq.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/c++xgettext.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/gettextlib-exports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/gettextpo-exports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/gettextsrc-exports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/addext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/backupfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/closeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/error-progname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/DOCBparser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/HTMLparser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/HTMLtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/SAX.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/SAX2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/c14n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/catalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/chvalid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/debugXML.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/dict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/entities.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/globals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/nanoftp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/nanohttp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/parserInternals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/pattern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/relaxng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/schematron.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/trionan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/uri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/valid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xinclude.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlIO.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlmemory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlmodule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlreader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlregexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlsave.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlschemas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlschemastypes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlunicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlwriter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xpointer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/markup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/mem-hash-map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/xerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/xgetcwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/adhoc-tests/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-filter/filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-hello/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-hello/names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/fd-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/file-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/ghash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/glist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gmessages.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gprimes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gstrfuncs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/html-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/html-styled-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/iconv-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-additional-sel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-attr-sel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-cascade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-declaration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-doc-handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-enc-handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-fonts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-num.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-om-parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-parsing-location.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-prop-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-pseudo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-rgb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-sel-eng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-selector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-simple-sel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-statement.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-style.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-stylesheet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-term.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-tknzr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/memory-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/noop-styled-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/styled-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/term-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/term-styled-ostream.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-memory-ostream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-aroot.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-assign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-asub1.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-root.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-sub1.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-sub2.oo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-term-ostream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/tests/test-accessors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/tests/test-instanceof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gettext/os2/iconv/iconv.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/eval-plural.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/gettextP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/gmo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/hash-string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/libgnuintl.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/loadinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/os2compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/plural-exp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/vasnprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/vasnwprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/wprintf-parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/autosprintf.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/lib-asprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/vasprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-runtime/src/escapes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/hellowindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnustep/AppController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnustep/Hello.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgettextpo/gettext-po.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgrep/kwset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgrep/libgrep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/cldr-plural-exp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/dir-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/file-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-c-parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format-invalid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/its.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/lang-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/locating-rule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgfmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-cat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-charset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-english.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-equal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-fsearch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-iconv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgl-ofn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgunfmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/open-catalog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-distrib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/plural-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-charset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-gram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-lex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-xerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/pos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/quote.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/rc-str-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-catalog-abstract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-catalog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-csharp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-desktop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-java.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-mo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-po.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-resources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-stringtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/read-tcl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/search-path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/sentence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/str-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-catalog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-csharp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-desktop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-java.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-mo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-po.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-qt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-resources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-stringtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-tcl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/write-xml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-appdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-awk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-csharp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-desktop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-elisp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-glade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-gsettings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-java.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-javascript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-librep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-lisp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-perl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-php.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-po.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-rst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-ruby.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-scheme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-sh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-smalltalk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-stringtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-tcl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-vala.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/x-ycp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-callshape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-arglist-parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-mixed-string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xg-pos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/xgettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gettext-tools/woe32dll/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/alloca.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/backupfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/closeout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/error-progname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/gettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/DOCBparser.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/HTMLparser.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/HTMLtree.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/SAX.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/SAX2.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/c14n.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/catalog.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/chvalid.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/debugXML.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/dict.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/elfgcchack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/encoding.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/entities.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/globals.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/hash.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/libxml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/list.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/nanoftp.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/nanohttp.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/parser.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/parserInternals.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/pattern.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/relaxng.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/save.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/schemasInternals.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/schematron.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/threads.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/timsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/tree.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/uri.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/valid.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xinclude.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xlink.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlIO.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlautomata.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlerror.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlexports.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlmemory.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlmodule.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlreader.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlregexp.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlsave.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlschemas.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlschemastypes.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlstring.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlunicode.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlversion.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xmlwriter.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xpath.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xpathInternals.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/libxml/xpointer.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/markup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/mem-hash-map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/xerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/xgetcwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/fd-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/file-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/ghash.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/glist.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gmacros.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gprimes.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gprintfint.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gstrfuncs.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gstring.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glib/gtypes.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/glibconfig.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/html-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/html-styled-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/iconv-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-additional-sel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-attr-sel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-cascade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-declaration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-doc-handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-enc-handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-fonts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-num.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-om-parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-parsing-location.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-prop-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-pseudo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-rgb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-sel-eng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-simple-sel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-style.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-stylesheet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-tknzr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/cr-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/libcroco-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/libcroco/libcroco.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/memory-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/moo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/noop-styled-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/styled-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/term-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/lib/term-styled-ostream.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-aroot.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-asub1.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-root.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-sub1.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-moo-sub2.oo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/notinline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/stdbool.mini.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/textstyle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/textstyle/version.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/textstyle/woe32dll.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gettext/os2/iconv/iconv.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/libintl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/libasprintf.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgettextpo/libgettextpo.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/libtextstyle.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gettext/windows/gettext.rc" />
+    <Text Include="../../thirdparty/owemdjee/gettext/Admin/coverage.txt" />
+    <Text Include="../../thirdparty/owemdjee/gettext/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/autopull.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/build-aux/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/doc/Admin/compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/doc/Admin/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/doc/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl-csharp/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl-csharp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl-java/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl-java/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/intl/plural.y" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/libasprintf/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/m4/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/man/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/man/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/man/bind_textdomain_codeset.3.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/man/bindtextdomain.3.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/man/gettext.3.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/man/ngettext.3.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/man/textdomain.3.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/po/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/po/Makefile.in.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/src/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/src/gettext.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/tests/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-runtime/uninstalled-config.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/doc/Admin/iso-639-2-table.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/doc/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/doc/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/emacs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-gnome/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-gnome/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-gnome/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-gnome/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-gnome/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-gnome/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/admin/Doxyfile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/admin/acinclude.m4.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/admin/cvs.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/admin/detect-autoconf.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/admin/libtool.m4.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/admin/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/configure.in.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-kde/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-qt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-qt/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-qt/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-qt/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-qt/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-qt/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-wxwidgets/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-wxwidgets/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-wxwidgets/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-wxwidgets/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-wxwidgets/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++-wxwidgets/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c++/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/hello.desktop.in.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-clisp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-clisp/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-clisp/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-clisp/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-clisp/hello.lisp.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-clisp/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-clisp/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp-forms/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp-forms/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp-forms/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp-forms/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp-forms/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp-forms/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-csharp/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-gawk/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-gawk/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-gawk/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-gawk/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-gawk/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-gawk/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-guile/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-guile/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-guile/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-guile/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-guile/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-guile/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-awt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-awt/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-awt/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-awt/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-awt/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-awt/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-qtjambi/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-qtjambi/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-qtjambi/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-qtjambi/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-qtjambi/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-qtjambi/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-swing/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-swing/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-swing/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-swing/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-swing/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java-swing/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-java/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-librep/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-librep/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-librep/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-librep/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-librep/hello.jl.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-librep/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-librep/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnome/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnome/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnome/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnome/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnome/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnome/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnustep/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc-gnustep/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-objc/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-pascal/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-pascal/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-pascal/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-pascal/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-pascal/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-pascal/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/hello-1.pl.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/hello-2.pl.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-perl/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-php/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-php/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-php/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-php/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-php/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-php/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-python/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-python/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-python/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-python/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-python/hello.py.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-python/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-python/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-sh/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-sh/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-sh/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-sh/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-sh/hello.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-sh/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-sh/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-smalltalk/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-smalltalk/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-smalltalk/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-smalltalk/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-smalltalk/hello.st.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-smalltalk/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-smalltalk/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl-tk/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl-tk/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl-tk/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl-tk/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl-tk/hello.tcl" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl-tk/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl-tk/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl/hello.tcl" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-tcl/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-ycp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-ycp/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-ycp/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-ycp/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-ycp/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-ycp/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/installpaths.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/po/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/po/mmsmallpo.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/po/xsmallpot.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/gnulib-lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/gnulib-tests/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/gnulib-tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/its/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgettextpo/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgettextpo/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgettextpo/exported.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgrep/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/libgrep/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/m4/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/man/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/man/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/man/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/misc/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/misc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/misc/autopoint.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/misc/convert-archive.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/misc/gettextize.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/po/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/po/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/projects/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/projects/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/cldr-plural.y" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/msgunfmt.tcl" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/po-gram-gen.y" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/src/user-email.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/styles/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/styles/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/system-tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/init-env.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/msguniq-a.in" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/qttest2_de.ts" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gitsub.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gnulib-local/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gnulib-local/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gnulib-local/lib/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gnulib-local/m4/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gettext/gnulib-local/m4/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/adhoc-tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/autopull.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-filter/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-filter/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-filter/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-filter/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-hello/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-hello/autoclean.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-hello/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/examples/color-hello/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/gnulib-local/tests/test-term-ostream-xterm.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gettext/libtextstyle/version.sh" />
+    <Text Include="../../thirdparty/owemdjee/gettext/os2/README.OS2" />
+    <Xml Include="../../thirdparty/owemdjee/gettext/gettext-runtime/doc/Admin/PoInventory.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/hello.gresource.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gettext/gettext-tools/examples/hello-c-gnome3/hello.gschema.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gettext/gettext-tools/tests/common/supplemental/plurals.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

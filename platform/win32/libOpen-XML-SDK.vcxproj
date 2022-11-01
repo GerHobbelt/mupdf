@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libOpen-XML-SDK</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCF5996}</ProjectGuid>
+    <RootNamespace>libOpen-XML-SDK</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPEN_XML_SDK;OPEN_XML_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/Open-XML-SDK/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/Open-XML-SDK/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Image.png" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/ISSUE_TEMPLATE.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/SUPPORT.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/namespaces.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/AlternativeFormatImportPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CalculationChainPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CellMetadataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ChartColorStylePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ChartDrawingPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ChartPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ChartStylePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ChartsheetPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CommentAuthorsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ConnectionsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ControlPropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CoreFilePropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomDataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomDataPropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomFilePropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomPropertyPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomXmlMappingsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomXmlPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomXmlPropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/CustomizationPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DiagramColorsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DiagramDataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DiagramLayoutDefinitionPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DiagramPersistLayoutPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DiagramStylePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DialogsheetPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DigitalSignatureOriginPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DocumentSettingsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DocumentTasksPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/DrawingsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/EmbeddedControlPersistenceBinaryDataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/EmbeddedControlPersistencePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/EmbeddedObjectPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/EmbeddedPackagePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/EndnotesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ExcelAttachedToolbarsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ExtendedChartPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ExtendedFilePropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ExternalWorkbookPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/FontPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/FontTablePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/FooterPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/FootnotesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/GlossaryDocumentPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/HandoutMasterPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/HeaderPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ImagePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/InternationalMacroSheetPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/LabelInfoPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/LegacyDiagramTextInfoPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/LegacyDiagramTextPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/MacroSheetPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/MailMergeRecipientDataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/MainDocumentPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/Model3DReferenceRelationshipPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/NamedSheetViewsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/NotesMasterPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/NotesSlidePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/NumberingDefinitionsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/PivotTableCacheDefinitionPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/PivotTableCacheRecordsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/PivotTablePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/PowerPointAuthorsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/PowerPointCommentPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/PresentationPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/PresentationPropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/QueryTablePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/QuickAccessToolbarCustomizationsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RdArrayPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RdRichValuePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RdRichValueStructurePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RdRichValueTypesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RdRichValueWebImagePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RdSupportingPropertyBagPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RdSupportingPropertyBagStructurePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RibbonAndBackstageCustomizationsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RibbonExtensibilityPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/RichStylesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SharedStringTablePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SingleCellTablePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SlicerCachePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SlicersPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SlideCommentsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SlideLayoutPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SlideMasterPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SlidePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SlideSyncDataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/SpreadsheetPrinterSettingsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/StyleDefinitionsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/StylesWithEffectsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/TableDefinitionPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/TableStylesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ThemeOverridePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ThemePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ThumbnailPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/TimeLineCachePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/TimeLinePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/UserDefinedTagsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/VbaDataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/VbaProjectPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/ViewPropertiesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/VmlDrawingPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/VolatileDependenciesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WebExTaskpanesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WebExtensionPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WebSettingsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WordAttachedToolbarsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WordCommentsExtensiblePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WordprocessingCommentsExPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WordprocessingCommentsIdsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WordprocessingCommentsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WordprocessingPeoplePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WordprocessingPrinterSettingsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorkbookPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorkbookPersonPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorkbookRevisionHeaderPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorkbookRevisionLogPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorkbookStylesPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorkbookUserDataPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorksheetCommentsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorksheetPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorksheetSortMapPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/WorksheetThreadedCommentsPart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/parts/XmlSignaturePart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas-microsoft-com_office_excel.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas-microsoft-com_office_office.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas-microsoft-com_office_powerpoint.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas-microsoft-com_office_word.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas-microsoft-com_vml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_ink_2010_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_01_customui.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_activeX.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_coverPageProps.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_customDocumentInformationPanel.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_metadata_contentType.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_metadata_customXsn.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_metadata_longProperties.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2006_metadata_properties_metaAttributes.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2009_07_customui.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2019_extlst.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_2020_mipLabelMetadata.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2007_8_2_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2008_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2010_chartDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2010_compatibility.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2010_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2010_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2010_picture.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2010_slicer.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2012_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2012_chartStyle.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2012_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2012_timeslicer.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2013_main_command.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2014_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2014_chart_ac.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2014_chartex.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2014_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2016_11_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2016_11_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2016_12_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2016_SVG_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2016_ink.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2017_03_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2017_decorative.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2017_model3d.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2018_animation.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2018_animation_model3d.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2018_hyperlinkcolor.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2018_sketchyshapes.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2020_classificationShape.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2021_livefeed.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2021_oembed.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_drawing_2021_scriptlink.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_excel_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_excel_2010_spreadsheetDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2010_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2012_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2012_roamingSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2013_main_command.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2015_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2017_10_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2017_3_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2018_4_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2018_8_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2019_12_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2020_02_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_powerpoint_2021_06_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2009_9_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2010_11_ac.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2010_11_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2011_1_ac.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2014_11_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2014_revision.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2015_02_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2015_revision2.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2016_01_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2016_pivotdefaultlayout.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2016_revision10.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2016_revision3.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2016_revision5.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2016_revision6.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2016_revision9.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2017_dynamicarray.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2017_revision16.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2017_richdata.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2017_richdata2.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2018_08_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2018_calcfeatures.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2018_threadedcomments.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2019_extlinksprops.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2019_namedsheetviews.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2020_pivotNov2020.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2020_richdatawebimage.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2020_richvaluerefresh.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2020_threadedcomments2.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2021_extlinks2021.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_spreadsheetml_2022_pivotVersionInfo.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_tasks_2019_documenttasks.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_thememl_2012_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_webextensions_taskpanes_2010_11.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_webextensions_webextension_2010_11.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2006_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2010_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2010_wordprocessingCanvas.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2010_wordprocessingDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2010_wordprocessingGroup.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2010_wordprocessingShape.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2012_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2012_wordprocessingDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2015_wordml_symex.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2016_wordml_cid.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2018_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2018_wordml_cex.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2020_oembed.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_microsoft_com_office_word_2020_wordml_sdtdatahash.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_chartDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_compatibility.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_lockedCanvas.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_picture.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_spreadsheetDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_drawingml_2006_wordprocessingDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_bibliography.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_characteristics.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_custom-properties.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_customXml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_docPropsVTypes.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_extended-properties.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_math.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_officeDocument_2006_relationships.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_presentationml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_schemaLibrary_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_spreadsheetml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/schemas_openxmlformats_org_wordprocessingml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/www_w3_org_2003_04_emma.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/www_w3_org_2003_InkML.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schemas/www_w3_org_XML_1998_namespace.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/schematrons.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/namespaces.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas-microsoft-com_office_excel.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas-microsoft-com_office_office.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas-microsoft-com_office_powerpoint.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas-microsoft-com_office_word.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas-microsoft-com_vml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_ink_2010_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_01_customui.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_activeX.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_coverPageProps.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_customDocumentInformationPanel.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_metadata_contentType.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_metadata_customXsn.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_metadata_longProperties.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2006_metadata_properties_metaAttributes.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2009_07_customui.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2019_extlst.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_2020_mipLabelMetadata.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2007_8_2_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2008_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2010_chartDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2010_compatibility.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2010_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2010_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2010_picture.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2010_slicer.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2012_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2012_chartStyle.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2012_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2012_timeslicer.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2013_main_command.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2014_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2014_chart_ac.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2014_chartex.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2014_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2016_11_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2016_11_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2016_12_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2016_SVG_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2016_ink.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2017_03_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2017_decorative.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2017_model3d.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2018_animation.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2018_animation_model3d.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2018_hyperlinkcolor.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2018_sketchyshapes.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2020_classificationShape.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2021_livefeed.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2021_oembed.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_drawing_2021_scriptlink.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_excel_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_excel_2010_spreadsheetDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2010_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2012_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2012_roamingSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2013_main_command.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2015_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2017_10_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2017_3_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2018_4_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2018_8_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2019_12_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2020_02_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_powerpoint_2021_06_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2009_9_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2010_11_ac.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2010_11_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2011_1_ac.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2014_11_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2014_revision.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2015_02_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2015_revision2.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2016_01_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2016_pivotdefaultlayout.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2016_revision10.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2016_revision3.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2016_revision5.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2016_revision6.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2016_revision9.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2017_dynamicarray.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2017_revision16.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2017_richdata.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2017_richdata2.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2018_08_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2018_calcfeatures.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2018_threadedcomments.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2019_extlinksprops.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2019_namedsheetviews.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2020_pivotNov2020.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2020_richdatawebimage.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2020_richvaluerefresh.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2020_threadedcomments2.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2021_extlinks2021.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_spreadsheetml_2022_pivotVersionInfo.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_tasks_2019_documenttasks.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_thememl_2012_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_webextensions_taskpanes_2010_11.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_webextensions_webextension_2010_11.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2006_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2010_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2010_wordprocessingCanvas.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2010_wordprocessingDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2010_wordprocessingGroup.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2010_wordprocessingShape.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2012_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2012_wordprocessingDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2015_wordml_symex.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2016_wordml_cid.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2018_wordml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2018_wordml_cex.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2020_oembed.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_microsoft_com_office_word_2020_wordml_sdtdatahash.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_chart.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_chartDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_compatibility.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_diagram.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_lockedCanvas.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_picture.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_spreadsheetDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_drawingml_2006_wordprocessingDrawing.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_markup-compatibility_2006.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_bibliography.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_characteristics.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_custom-properties.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_customXml.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_docPropsVTypes.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_extended-properties.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_math.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_officeDocument_2006_relationships.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_presentationml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_schemaLibrary_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_spreadsheetml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/schemas_openxmlformats_org_wordprocessingml_2006_main.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/www_w3_org_2003_04_emma.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/www_w3_org_2003_InkML.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/data/typed/www_w3_org_XML_1998_namespace.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/docs/Features.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/docs/ROADMAP.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/gen/DocumentFormat.OpenXml.Generator/Properties/launchSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/global.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/samples/AnimatedModel3DExample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/samples/DocumentTaskExample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/samples/IsolatedStorageExceptionWorkaround/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/samples/NamedSheetView/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/samples/PowerPointModernCommentSample/Properties/launchSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/samples/SVGExample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/samples/SunburstChartExample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/src/DocumentFormat.OpenXml/Framework/Schema/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/stylecop.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/test/DocumentFormat.OpenXml.Framework.Tests/ElementChildren.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/test/DocumentFormat.OpenXml.Packaging.Tests/data/PartConstraintData.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/test/DocumentFormat.OpenXml.Packaging.Tests/data/Particles.json" />
+    <Text Include="../../thirdparty/owemdjee/Open-XML-SDK/test/DocumentFormat.OpenXml.Tests/xunit.runner.json" />
+    <Xml Include="../../thirdparty/owemdjee/Open-XML-SDK/src/DocumentFormat.OpenXml/Properties/DocumentFormat.OpenXml.rd.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Open-XML-SDK/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/DocProperties.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Open-XML-SDK/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Document.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

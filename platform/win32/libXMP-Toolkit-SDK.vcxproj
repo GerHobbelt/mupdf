@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libXMP-Toolkit-SDK</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA257C8}</ProjectGuid>
+    <RootNamespace>libXMP-Toolkit-SDK</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXMP_TOOLKIT_SDK;XMP_TOOLKIT_SDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/AutoSharedLock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/ConfigurableImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/ConfigurationManagerImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/DefaultErrorNotifierImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/ErrorImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/ErrorNotifierWrapperImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/IConfigurable_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/IConfigurationManager_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/IErrorNotifier_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/IError_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/IMemoryAllocator_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/IUTF8StringComparator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/IUTF8String_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/MemoryAllocatorWrapperImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/MemoryManagedObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/SharedMutexImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/SharedObjectImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/ThreadSafeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/UTF8StringImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/source/XMPCommon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ArrayNodeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ClientDOMParserWrapperImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ClientDOMSerializerWrapperImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/CompositeNodeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/CoreConfigurationManagerImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/CoreObjectFactoryImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/DOMImplementationRegistryImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/DOMParserImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/DOMSerializerImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ExpatAdapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IArrayNode_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ICompositeNode_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ICoreConfigurationManager_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ICoreObjectFactory_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IDOMImplementationRegistry_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IDOMParser_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IDOMSerializer_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IMetadataConverterUtils_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IMetadata_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/INameSpacePrefixMap_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/INodeIterator_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/INode_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IPathSegment_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IPath_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ISimpleNode_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/IStructureNode_I.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/MetadataConverterUtilsImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/MetadataImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/NameSpacePrefixMapImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/NodeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/ParseRDF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/PathImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/PathSegmentImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/RDFDOMParserImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/RDFDOMSerializerImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/SimpleNodeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/StructureNodeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/WXMPIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/WXMPMeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/WXMPUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPCore_Impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPIterator2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPMeta-GetSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPMeta-Parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPMeta-Serialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPMeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPMeta2-GetSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPUtils-FileInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPUtils2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/AIFF_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/ASF_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/AVCHD_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/Basic_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/FLV_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/GIF_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/InDesign_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/JPEG_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/MP3_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/MPEG2_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/MPEG4_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/P2_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/PNG_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/PSD_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/PostScript_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/RIFF_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/SVG_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/SWF_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/Scanner_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/SonyHDV_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/TIFF_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/Trivial_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/UCF_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/WAVE_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/WEBP_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAMEX_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAMFAM_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAMSAM_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAM_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/AIFF/AIFFBehavior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/AIFF/AIFFMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/AIFF/AIFFReconcile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ASF_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ID3_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/Chunk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/ChunkController.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/ChunkPath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/IChunkBehavior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IPTC_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ISOBaseMedia_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/META_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/MOOV_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/P2_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PNG_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PSIR_FileWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PSIR_MemoryReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PackageFormat_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PostScript_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/QuickTime_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/RIFF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/RIFF_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ReconcileIPTC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ReconcileLegacy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ReconcileTIFF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/Reconcile_Impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/SVG_Adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/SWF_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/TIFF_FileWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/TIFF_MemoryReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/TIFF_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/TimeConversionUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/BEXTMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/CartMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/Cr8rMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/DISPMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/INFOMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/PrmLMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/WAVEBehavior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/WAVEReconcile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/iXMLMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WEBP_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/XDCAM_Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/XMPScanner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/HandlerRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/NativeMetadataSupport/IMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/NativeMetadataSupport/IReconcile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/NativeMetadataSupport/MetadataSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/FileHandlerInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/HostAPIImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/Module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/OS_Utils_Android.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/OS_Utils_Linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/OS_Utils_Mac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/OS_Utils_WIN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/PluginManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/XMPAtoms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/WXMPFiles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/XMPFiles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/XMPFiles_Impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/source/Template_Handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/HostAPIAccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginAPIImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/source/IConfigurable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/source/IConfigurationManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/source/IError.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/source/IErrorNotifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/source/IUTF8String.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IArrayNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IClientDOMParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IClientDOMSerializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/ICompositeNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/ICoreConfigurationManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/ICoreObjectFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IDOMImplementationRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IDOMParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IDOMSerializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IMetadataConverterUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/INameSpacePrefixMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/INode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/INodeIterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IPath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IPathSegment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/ISimpleNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/source/IStructureNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/CustomSchema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/CustomSchemaNewDOM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/DumpMainXMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/DumpScannedXMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/ModifyingXMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/ModifyingXMPNewDOM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/ReadingXMP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/ReadingXMPNewDOM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/UnicodeCorrectness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/UnicodeParseSerialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/UnicodePerformance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/XMPCoreCoverage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/XMPFilesCoverage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/XMPIterations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/DumpFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/LargeFileAccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/Log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/TagTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/XMPScanner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/dumpfile/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/xmpcommand/Actions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/xmpcommand/PrintUsage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/xmpcommand/XMPCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/Host_IO-POSIX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/Host_IO-Win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/IOUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/PerfUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/SafeStringAPIs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/UnicodeConversions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XML_Node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XMPFiles_IO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XMP_LibUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XMP_ProgressTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/third-party/zuid/interfaces/MD5.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/BaseClasses/MemoryManagedObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/BaseClasses/TSingleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/ConfigurableImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/ConfigurationManagerImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/DefaultErrorNotifierImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/ErrorImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/ErrorNotifierWrapperImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/MemoryAllocatorWrapperImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/SharedMutexImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/SharedObjectImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/ThreadSafeImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/ImplHeaders/UTF8StringImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/BaseInterfaces/IConfigurable_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/BaseInterfaces/ISharedObject_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/BaseInterfaces/IThreadSafe_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/IConfigurationManager_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/IErrorNotifier_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/IError_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/IMemoryAllocator_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/ISharedMutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Interfaces/IUTF8String_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/AutoSharedLock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/IUTF8StringComparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TAtomicTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TAtomicTypes_Android.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TAtomicTypes_Linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TAtomicTypes_Mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TAtomicTypes_Win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TSmartPointers_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TWrapperFunctions2_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/TWrapperFunctions_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/Utilities/UTF8String.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/XMPCommonDefines_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/XMPCommonErrorCodes_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/XMPCommonFwdDeclarations_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCommon/XMPCommon_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/ArrayNodeImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/ClientDOMParserWrapperImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/ClientDOMSerializerWrapperImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/CompositeNodeImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/CoreConfigurationManagerImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/CoreObjectFactoryImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/DOMImplementationRegistryImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/DOMParserImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/DOMSerializerImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/MetadataConverterUtilsImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/MetadataImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/NameSpacePrefixMapImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/NodeImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/PathImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/PathSegmentImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/RDFDOMParserImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/RDFDOMSerializerImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/SimpleNodeImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/StructureNodeImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/ImplHeaders/TNodeIteratorImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IArrayNode_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/ICompositeNode_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/ICoreConfigurationManager_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/ICoreObjectFactory_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IDOMImplementationRegistry_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IDOMParser_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IDOMSerializer_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IMetadataConverterUtils_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IMetadata_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/INameSpacePrefixMap_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/INodeIterator_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/INode_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IPathSegment_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IPath_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/ISimpleNode_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IStructureNode_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/Interfaces/IXMPLanguageAlternative_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/XMPCoreDefines_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/XMPCoreFwdDeclarations_I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/android/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/ios/XMPCorePList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/ios/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/linux/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/mac/XMPCorePList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/mac/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/win/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPCore_Impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPIterator2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPMeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPMeta2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/source/XMPUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/android/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/ios/XMPFilesPList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/ios/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/linux/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/mac/XMPFilesPList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/mac/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/win/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/AIFF_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/ASF_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/AVCHD_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/Basic_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/FLV_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/GIF_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/InDesign_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/JPEG_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/MP3_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/MPEG2_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/MPEG4_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/P2_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/PNG_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/PSD_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/PostScript_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/RIFF_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/SVG_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/SWF_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/Scanner_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/SonyHDV_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/TIFF_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/Trivial_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/UCF_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/WAVE_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/WEBP_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAMEX_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAMFAM_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAMSAM_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FileHandlers/XDCAM_Handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/AIFF/AIFFBehavior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/AIFF/AIFFMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/AIFF/AIFFReconcile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ASF_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ID3_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/Chunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/ChunkController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/ChunkPath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/IChunkBehavior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/IChunkContainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IFF/IChunkData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/IPTC_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ISOBaseMedia_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/META_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/MOOV_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/MacScriptExtracts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/P2_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PNG_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PSIR_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PackageFormat_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/PostScript_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/QuickTime_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/RIFF.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/RIFF_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/ReconcileLegacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/Reconcile_Impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/SVG_Adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/SWF_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/TIFF_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/TimeConversionUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/BEXTMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/CartMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/Cr8rMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/DISPMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/INFOMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/PrmLMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/WAVEBehavior.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/WAVEReconcile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WAVE/iXMLMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/WEBP_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/XDCAM_Support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/FormatSupport/XMPScanner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/HandlerRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/NativeMetadataSupport/IMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/NativeMetadataSupport/IReconcile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/NativeMetadataSupport/MetadataSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/NativeMetadataSupport/ValueObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/FileHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/FileHandlerInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/Module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/ModuleUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/PluginManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/PluginHandler/XMPAtoms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/XMPFiles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/source/XMPFiles_Impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/resource/mac/PDF_HandlerPList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/HostAPI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/HostAPIAccess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginConst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/api/source/PluginUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/XMP_BuildInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/TXMPFiles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/TXMPIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/TXMPMeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/TXMPUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/BaseInterfaces/IConfigurable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/BaseInterfaces/ISharedObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/BaseInterfaces/IThreadSafe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/BaseInterfaces/IVersionable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/IConfigurationManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/IError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/IErrorNotifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/IMemoryAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/IObjectFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Interfaces/IUTF8String.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Utilities/TWrapperFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/Utilities/TWrapperFunctions2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/XMPCommonDefines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/XMPCommonErrorCodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/XMPCommonFwdDeclarations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCommon/XMPCommonLatestInterfaceVersions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IArrayNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IClientDOMParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IClientDOMSerializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/ICompositeNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/ICoreConfigurationManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/ICoreObjectFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IDOMImplementationRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IDOMParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IDOMSerializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IMetadataConverterUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/INameSpacePrefixMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/INode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/INodeIterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IPath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IPathSegment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/ISimpleNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/Interfaces/IStructureNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/XMPCoreDefines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/XMPCoreErrorCodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/XMPCoreFwdDeclarations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMPCore/XMPCoreLatestInterfaceVersions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMP_Const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMP_Environment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMP_IO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/XMP_Version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/client-glue/WXMPFiles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/client-glue/WXMPIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/client-glue/WXMPMeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/client-glue/WXMPUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/public/include/client-glue/WXMP_Common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/DumpFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/LargeFileAccess.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/Log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/TagTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/XMPScanner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/common/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/xmpcommand/Actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/source/xmpcommand/PrintUsage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/Endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/EndianUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/ExpatAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/Host_IO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/IOUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/PerfUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/SafeStringAPIs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/SafeTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/SuppressSAL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/UnicodeConversions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XIO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XMLParserAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XMPFiles_IO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XMP_LibUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/source/XMP_ProgressTracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/third-party/zuid/interfaces/MD5.h" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/bdwn.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IConfigurable.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IConfigurationManagerProxy.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IConfigurationManager__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IError__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IObjectFactory__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1ISharedObject.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IThreadSafe.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IUTF8String__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IVersionable.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IArrayNode__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ICompositeNode__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ICoreConfigurationManager__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ICoreObjectFactory__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IDOMImplementationRegistry__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IDOMParser__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IDOMSerializer__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IMetadataConverterUtils__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IMetadata__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1INameSpacePrefixMap__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1INodeIterator__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1INode__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IPathSegment__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IPath__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ISimpleNode__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IStructureNode__v1.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/doc.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/nav_g.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/open.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/sync_off.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/sync_on.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/xmp_tagline_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/testfiles/BlueSquare.jpg" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/testfiles/BlueSquare.png" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/testfiles/Image1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/testfiles/Image2.jpg" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/resource/win/XMPCore.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/resource/win/XMPFiles.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/resource/win/PDF_Handler-32.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/resource/win/PDF_Handler-64.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/resource/win/PluginTemplate-32.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/resource/win/PluginTemplate-64.rc" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/README.md" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/build/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPCore/build/CMakeListsCommon.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/build/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFiles/build/CMakeListsCommon.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/i80386linux/i80386linux/PDF_Handler.resources/MODULE_IDENTIFIER.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/i80386linux/i80386linux/PDF_Handler.resources/XMPPLUGINUIDS.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/i80386linux/i80386linux_x64/PDF_Handler.resources/MODULE_IDENTIFIER.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/i80386linux/i80386linux_x64/PDF_Handler.resources/XMPPLUGINUIDS.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/macintosh/intel_64_libcpp/PDF_Handler.xpi/Versions/A/Resources/MODULE_IDENTIFIER.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/macintosh/intel_64_libcpp/PDF_Handler.xpi/Versions/A/Resources/XMPPLUGINUIDS.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PDF_Handler/resource/win/CopyPDFL.bat" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/build/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/build/GeneratePluginTemplate_mac.sh" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/build/GeneratePluginTemplate_win.bat" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/build/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/build/resource/txt/MODULE_IDENTIFIER.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/build/resource/txt/XMPPLUGINUIDS-32.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/XMPFilesPlugins/PluginTemplate/build/resource/txt/XMPPLUGINUIDS-64.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/GenerateAndBuildXMPToolkitSDK_android.sh" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/GenerateXMPToolkitSDK_mac.sh" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/GenerateXMPToolkitSDK_win.bat" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/cmake.bat" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/cmake_all.bat" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/shared/CMakeUtils.bat" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/build/shared/CMakeUtils.sh" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/IError_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/IMetadataConverterUtils_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/WXMPFiles_8hpp.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/WXMPIterator_8hpp.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/WXMPMeta_8hpp.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/WXMPUtils_8hpp.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/WXMP__Common_8hpp.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCommonDefines_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCommonErrorCodes_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCommonFwdDeclarations_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCommonLatestInterfaceVersions_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCoreDefines_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCoreErrorCodes_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCoreFwdDeclarations_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMPCoreLatestInterfaceVersions_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMP__Const_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMP__Environment_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/XMP__Version_8h.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/annotated_dup.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IConfigurable.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IConfigurationManagerProxy.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IConfigurationManager__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IErrorNotifier__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IError__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IMemoryAllocator__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IObjectFactory__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1ISharedObject.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IThreadSafe.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IUTF8String__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1IVersionable.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCommon_1_1ReportErrorAndContinueFunctor.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IArrayNode__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IClientDOMParser__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IClientDOMSerializer__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ICompositeNode__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ICoreConfigurationManager__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ICoreObjectFactory__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IDOMImplementationRegistry__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IDOMParser__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IDOMSerializer__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IMetadataConverterUtils__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IMetadata__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1INameSpacePrefixMap__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1INodeIterator__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1INode__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IPathSegment__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IPath__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1ISimpleNode__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classAdobeXMPCore_1_1IStructureNode__v1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classTXMPFiles.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classTXMPIterator.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classTXMPMeta.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classTXMPUtils.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classXMP__Error.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/classXMP__IO.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_0e5f10c8914b73a2f667b010a9332417.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_0fb2101ba02d68f078970216a1fe0334.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_13a16c6fe91841c884a316194c73d6c1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_3ce2d6caf42dd158441e2c69545b6561.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_47a03e1ff379e16c0ff8dae8eab507ef.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_8223d5ea7844a33492dce354418ea45e.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_a2aafb81ccb63bf25660f5baa8263a1b.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_d9f2167f9fcfc7d7593f67aa31e893fd.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dir_f832923ad3cb060bc87ad85e68b8a1c3.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/dynsections.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/files_dup.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/functions_dup.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/functions_func.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/globals_defs.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/globals_dup.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/globals_eval.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/hierarchy.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/menu.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/menudata.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/namespaceAdobeXMPCommon.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/namespaceAdobeXMPCore.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/namespacemembers_dup.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/namespaces_dup.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtree.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreedata.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex0.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex1.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex2.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex3.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex4.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex5.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex6.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/navtreeindex7.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/resize.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/structWXMP__Result.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/structXMP__DateTime.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/structXMP__PacketInfo.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/structXMP__VersionInfo.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/docs/API/unionAdobeXMPCommon_1_1IConfigurable_1_1CombinedDataValue.js" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/GenerateSamples_mac.sh" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/GenerateSamples_win.bat" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/CMakeListsCommonSDK.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/CustomSchema/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/CustomSchemaNewDOM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/DumpFile/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/DumpFile/CMakeListsCommon.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/DumpMainXMP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/DumpScannedXMP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/ModifyingXMP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/ModifyingXMPNewDOM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/ReadingXMP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/ReadingXMPNewDOM/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/XMPCommand/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/XMPCommand/CMakeListsCommon.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/XMPCoreCoverage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/XMPFilesCoverage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/cmake/XMPIterations/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/samples/build/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/third-party/expat/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/third-party/zlib/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/tools/android/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/XMP-Toolkit-SDK/tools/cmake/ReadMe.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libOptimizationTemplateLibrary</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCFC4B9}</ProjectGuid>
+    <RootNamespace>libOptimizationTemplateLibrary</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPTIMIZATIONTEMPLATELIBRARY;OPTIMIZATIONTEMPLATELIBRARY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/GrEA/Fitness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/ONL/Decode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/TSP/TSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Projects/GDE3/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Projects/NSGA_II/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/DM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/Epsilon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/GD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/IGD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/KMP_HV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/MS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/MonteCarloHV.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/R2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/Spacing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Operator/Adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Operator/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Operator/SBX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Operator/TSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/AR+CD'.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/AR+DMO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/AR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/CDAS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/Epsilon-MOEA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/G-NSGA-II.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/GDE3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/GrEA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/HypE.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/IBEA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/ISNPS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/MOEA_D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/MSOPS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/NSGA-II.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/NSGA-III.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/R-NSGA-II.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/RWSGA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/SGA-NPS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/SGA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/SMS-EMOA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/SPEA2+SDE.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/SPEA2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/TDEA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Problem/MOTSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Problem/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Problem/Rectangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Problem/UF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Problem/WFG.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Test/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Utility/CommunityDiscovery/ONL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Utility/KMeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Utility/Main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Utility/NBI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Utility/Nondominate.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/Bitset/SinglePointCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/CoupleCoupleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/CoupleCoupleCrossoverAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/CoupleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/CoupleCrossoverAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/Crossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/DynamicBitset/UniformCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/Integer/SinglePointCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/Real/DifferentialEvolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/Real/SBX/SimulatedBinaryCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/Real/SBX/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/TSP/OrderBasedCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/TSP/PartiallyMappedCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/TSP/PositionBasedCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/TripleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/TripleCrossoverAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/TripleTripleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/TripleTripleCrossoverAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/WithCoupleCoupleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/WithCoupleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/WithCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/WithTripleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/WithTripleTripleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/WithXTripleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/XTripleCrossover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Crossover/XTripleCrossoverAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/DM/DiversityMetric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/DM/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Epsilon/AdditiveEpsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Epsilon/Epsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Epsilon/MultiplicativeEpsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/GD/DTLZ2GD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/GD/FrontGD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/GD/GenerationalDistance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/GD/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/GD/WFG4GD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Hypervolume/FilterAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Hypervolume/Hypervolume.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Hypervolume/KMP_HV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Hypervolume/MonteCarloHV.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/IGD/InvertedGenerationalDistance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/IGD/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Indicator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/MS/MaximumSpread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/MS/MaximumSpread1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/MS/MaximumSpread2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/MS/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/R2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Indicator/Spacing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Initial/DynamicBitset/Uniform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Initial/Integer/Uniform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Initial/Real/Uniform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Initial/TSP/Shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/Bitset/BitwiseMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/Integer/BitwiseMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/Mutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/Real/PM/PolynomialMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/Real/PM/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/TSP/DisplacementMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/TSP/ExchangeMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/TSP/InsertionMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/TSP/InversionMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/TSP/SpreadMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Mutation/WithMutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/AR+CD'/AR+CD'.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/AR+CD'/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/AR+DMO/AR+DMO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/AR+DMO/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/AR/AR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/AR/AverageRanking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/AR/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/CDAS/CDAS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/CDAS/ConvertedObjective.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/CDAS/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/Epsilon-MOEA/Couple/Epsilon-MOEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/Epsilon-MOEA/CoupleCouple/Epsilon-MOEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/Epsilon-MOEA/Epsilon-MOEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/Epsilon-MOEA/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/G-NSGA-II/G-Dominance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/G-NSGA-II/G-NSGA-II.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/GDE3/GDE3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/GrEA/Fitness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/GrEA/GrEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/GrEA/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/HypE/FastMonteCarloHypE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/HypE/Fitness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/HypE/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/HypE/MonteCarloHypE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/HypE/ReferencePoint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/IBEA/Boundary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/IBEA/Hypervolume.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/IBEA/IBEA-Epsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/IBEA/IBEA-HD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/IBEA/IBEA-R2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/IBEA/IBEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/IBEA/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/ISNPS/ISNPS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/ISNPS/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/ISNPS/InformationSeparation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/ISNPS/NeighborPunishmentSelection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/ISNPS/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Aggregation/NormTchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/CoupleCouple/MOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/CoupleCouple/MOEA-D_PBI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/CoupleCouple/MOEA-D_Tchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/CoupleCouple/MOEA-D_WeightedSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/CoupleCouple/NormMOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/CoupleCouple/NormMOEA-D_Tchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/CoupleCoupleAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/MOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/NormMOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Triple/MOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Triple/MOEA-D_PBI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Triple/MOEA-D_Tchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Triple/MOEA-D_WeightedSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Triple/NormMOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Triple/NormMOEA-D_Tchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/TripleAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Weight/AdjustWeight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/Weight/NormalizeWeight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/XTriple/MOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/XTriple/MOEA-D_PBI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/XTriple/MOEA-D_Tchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/XTriple/MOEA-D_WeightedSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/XTriple/NormMOEA-D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/XTriple/NormMOEA-D_Tchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MOEA-D/XTripleAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MSOPS/Fitness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MSOPS/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/MSOPS/MSOPS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/Metaheuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-II/ConstrainedDominate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-II/ConstrainedNSGA-II.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-II/CrowdingDistanceAssignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-II/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-II/NSGA-II.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-II/Offspring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-III/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-III/NBI2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-III/NSGA-III.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-III/Normalize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/NSGA-III/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/Optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/R-NSGA-II/R-NSGA-II.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/RWSGA/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/RWSGA/RWSGA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SGA-NPS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SGA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/ContributionAssignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/ContributionEstimation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/CoupleCouple/MonteCarloSMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/CoupleCouple/SMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/MakeHypervolume.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/MonteCarloSMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/ReferencePoint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/SMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/Triple/MonteCarloSMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/Triple/SMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/XTriple/MonteCarloSMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SMS-EMOA/XTriple/SMS-EMOA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2+SDE/SDE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2+SDE/SPEA2+SDE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2+SDE/Trim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2+SDE/Truncation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2/Density.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2/RawFitness.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2/SPEA2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2/Trim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2/Truncation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/SPEA2/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/TDEA/Couple/TDEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/TDEA/CoupleCouple/TDEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/TDEA/Individual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Optimizer/TDEA/TDEA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Binh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CF/CF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CF/CF1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CF/Distance/Distance1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Camel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/Ductance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/Expansion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/Metric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/MinMaxCut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/NCut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/Q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/QLi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/Silhouette.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Metric/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/ONL/Decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/ONL/ONL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/ONL/OrderedNeighborList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/CommunityDiscovery/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ConvexDTLZ2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ConvexDTLZ3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ConvexDTLZ4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ConvexDTLZ5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ConvexDTLZ5I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ConvexDTLZ6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ConvexDTLZ6I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ5I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ6I.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/DTLZ7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Distance/Distance1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Distance/Distance2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Distance/Distance3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Distance/Distance4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/NegativeDTLZ2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/ScaledDTLZ2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Shape/Concave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Shape/Convex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Shape/Disconnected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Shape/Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Shape/Scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Shape/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Transform/Bias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DTLZ/Transform/Degenerate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/DynamicProblem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/FDA/Distance/Distance2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/FDA/FDA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/FDA/FDA5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/FDA/StdFDA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Fonseca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/GreedyRepairAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Knapsack/GreedyRepairAdapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Knapsack/Knapsack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Kursawe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/OKA1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/OKA2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ParetoBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Poloni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Problem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Rectangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/RotatedRectangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Schaffer/Schaffer1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Schaffer/Schaffer2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Schaffer/Schaffer6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Shubert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/TSP/MOTSP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/TSP/TSP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/Distance/Distance9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/UF/UF9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Viennet/Viennet1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Viennet/Viennet2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Viennet/Viennet3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Viennet/Viennet4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Shape/Convex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Shape/ConvexConcave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Shape/Disconnected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Shape/InvertConcave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Shape/Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Shape/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/StdWFG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Bias/Dependent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Bias/Flat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Bias/Polynomial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Degenerate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Reduction/NonSeparable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Reduction/WeightedSum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Shift/Deceptive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Shift/Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Shift/MultiModal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Transform/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/Utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/WFG/WFG9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/Water.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/XSinX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Distance/Distance1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Distance/Distance2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Distance/Distance3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Shape/Shape1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Shape/Shape2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Shape/Shape3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Shape/Shape4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/Transform/Bias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/ZDT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/ZDT1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/ZDT2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/ZDT3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/ZDT4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/ZDT5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Problem/ZDT/ZDT6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Selection/NondominateSelection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Selection/RouletteWheelSelection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Selection/StratifiedSelection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Selection/TournamentSelection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Solution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Aggregation/PBI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Aggregation/Tchebycheff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Clustering/KMeans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Fix/Bounce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Fix/Truncate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Nondominate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Relation/Pareto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/Weight/NormalBoundaryIntersection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/WithBoundary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/WithProbability.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/Utility/WithRandom.h" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Document/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Include/OTL/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Projects/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Projects/GDE3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Projects/NSGA_II/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Indicator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Operator/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Optimizer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Problem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OptimizationTemplateLibrary/Tests/Utility/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

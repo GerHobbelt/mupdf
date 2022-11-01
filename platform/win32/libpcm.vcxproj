@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpcm</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF2A3EEC}</ProjectGuid>
+    <RootNamespace>libpcm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPCM;PCM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/examples/c_example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/MSRAccessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PCIDriverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/PcmMsr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/PcmMsrClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/PcmMsrDriver_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/WinMSRDriver/msrmain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/bw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/client/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/client/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/cpucounters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/daemon/daemon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/daemon/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/dashboard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/dashboardtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/debug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/freegetopt/getopt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/memoptest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/mmio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/msr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/msrtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pci.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-iio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-latency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-lspci.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-mmio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-msr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-numa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-pcicfg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-pcie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-power.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-raw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-sensor-server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-sensor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm-tsx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/pcm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/readmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/realtime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/resctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/threadpool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/topology.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/AssemblyInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/PCMInstaller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/PCMService.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-core-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-iio-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-latency-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-lspci-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-memory-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-mmio-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-msr-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-numa-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-pcicfg-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-pcie-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-power-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-raw-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-tsx-win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/pcm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/restrictDriverAccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/windows/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/src/winpmem/winpmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/daemon_alignment_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pcm/tests/urltest.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/MSRAccessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/MSRKernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PCIDriverInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/PcmMsr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/PcmMsrClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/UserKernelShared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/WinMSRDriver/msr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/WinMSRDriver/msrstruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/bw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/client/client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/cpuasynchcounter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/cpucounters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/daemon/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/daemon/daemon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/daemon/pcm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/dashboard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/exceptions/unsupported_processor_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/favicon.ico.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/freegetopt/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/lspci.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/mmio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/msr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pci.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/pcm-pcie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/resctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/threadpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/topology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/topologyentry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/width_extender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/windows/PCMInstaller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/windows/PCMService.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/windows/pcm-lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/windows/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/windows/windriver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/winpmem/winpmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/winring0/OlsApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/winring0/OlsApiInit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/winring0/OlsApiInitDef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/winring0/OlsApiInitExt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pcm/src/winring0/OlsDef.h" />
+    <Image Include="../../thirdparty/owemdjee/pcm/doc/run-as-administrator.png" />
+    <Text Include="../../thirdparty/owemdjee/pcm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/CUSTOM-COMPILE-OPTIONS.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/DOCKER_README.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/ENVVAR_README.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/FREEBSD_HOWTO.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/LINUX_HOWTO.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/MAC_HOWTO.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/PCM-EXPORTER.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/PCM-SENSOR-SERVER-README.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/PCM_RAW_README.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/WINDOWS_HOWTO.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/doc/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/convert_edp_list.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/cppcheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/find_field.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/get_sles_bins.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/start-prometheus.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/start.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/grafana/stop.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/pcm-background.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/pcm-stop.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/pmu-query.py" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/readmem.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/scripts/single_header.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/PcmMsr/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/kextload.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/MacMSRDriver/kextunload.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-55-4.json" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-55-7.json" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-6A-6.json" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-86-5.json" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/PMURegisterDeclarations/GenuineIntel-6-8E-C.json" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-106.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-134.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/opCode-85.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/pcm-bw-histogram.sh" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/windows/PCM_cpp_ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/windows/ReadMe_PCMService.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/windows/pcm_lib_ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/windows/pcm_power_ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/winpmem/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/src/winring0/COPYRIGHT.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pcm/tests/test.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

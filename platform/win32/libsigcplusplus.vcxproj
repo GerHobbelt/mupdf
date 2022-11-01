@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsigcplusplus</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4CE5CF}</ProjectGuid>
+    <RootNamespace>libsigcplusplus</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIGCPLUSPLUS;SIGCPLUSPLUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/examples/hello_world.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/examples/member_method.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/examples/qt_with_qmake/exampleclass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/examples/qt_with_qmake/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/connection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/functors/slot_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/signal_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/trackable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_accum_iter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_accumulated.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_bind.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_bind_as_slot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_bind_ref.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_bind_refptr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_bind_return.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_compose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_connection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_copy_invalid_slot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_cpp11_lambda.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_custom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_disconnect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_disconnect_during_emit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_exception_catch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_hide.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_limit_reference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_mem_fun.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_member_method_trait.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_ptr_fun.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_retype.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_retype_return.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_rvalue_ref.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_signal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_signal_move.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_size.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_slot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_slot_disconnect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_slot_move.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_track_obj.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_trackable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_trackable_move.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_tuple_cdr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_tuple_end.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_tuple_for_each.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_tuple_start.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_tuple_transform_each.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_visit_each.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_visit_each_trackable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/test_weak_raw_ptr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsigcplusplus/tests/testutilities.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/examples/qt_with_qmake/exampleclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/adaptor_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/adaptor_trait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/adaptors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/adapts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/bind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/bind_return.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/bound_argument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/exception_catch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/hide.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/retype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/retype_return.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/track_obj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/adaptors/tuple_visitor_visit_each.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/bind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/bind_return.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/functors/functor_trait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/functors/functors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/functors/mem_fun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/functors/ptr_fun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/functors/slot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/functors/slot_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/limit_reference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/member_method_trait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/reference_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/retype_return.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/sigc++.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/signal_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/slot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/trackable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/tuple-utils/tuple_cdr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/tuple-utils/tuple_end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/tuple-utils/tuple_for_each.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/tuple-utils/tuple_start.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/tuple-utils/tuple_transform_each.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/visit_each.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/weak_raw_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsigcplusplus/tests/testutilities.h" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/active.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/anvil24.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/blank.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/bug.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/home.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/inactive.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/logo.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/mail.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/news.gif" />
+    <Image Include="../../thirdparty/owemdjee/libsigcplusplus/docs/pix/save.gif" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/ChangeLog.pre-2-3-1" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/MSVC_NMake/Makefile.vc" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/MSVC_NMake/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/MSVC_NMake/create-lists.bat" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/MSVC_NMake/filelist.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/MSVC_NMake/sigc.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/cmake/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/cmake/sigc++-3Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/devel.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/doc.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/docs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/docs/doc-manual.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/docs/reference/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/download.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/glossary.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/docs/license.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/examples/qt_with_qmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++-uninstalled.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++/filelist.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/sigc++config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/tests/memleakcheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/tools/handle-built-files.py" />
+    <Text Include="../../thirdparty/owemdjee/libsigcplusplus/tools/tutorial-custom-cmd.py" />
+    <Xml Include="../../thirdparty/owemdjee/libsigcplusplus/docs/docs/manual/can_use_xmllint.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libsigcplusplus/docs/docs/manual/libsigc_manual.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

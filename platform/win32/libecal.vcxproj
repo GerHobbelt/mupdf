@@ -1,0 +1,1837 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libecal</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFDD1360}</ProjectGuid>
+    <RootNamespace>libecal</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBECAL;ECAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/app_pb/src/app_pb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/config_file_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/ecal_meas_cutter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_converter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_exporter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_importer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_worker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_cli/src/ecal_mon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/convert_utf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/ecalmon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/plugin/plugin_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/plugin/plugin_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/about_dialog/about_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/column_selector_dialog/column_picker_delegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/column_selector_dialog/column_selector_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/ecalmon_tree_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/host_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/process_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/service_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/topic_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/license_dialog/license_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/log_widget/log_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/column_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/column_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/group_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/group_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/host_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/host_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/item_view_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/log_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/log_sort_filter_proxy_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/plugin_table_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/process_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/process_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/service_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/service_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/topic_sort_filter_proxy_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/topic_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/topic_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/npcap_status_dialog/npcap_status_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/plugin_settings_dialog/plugin_settings_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/system_information_widget/system_information_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/tree_item_view_widget/tree_item_view_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/visualisation_widget/visualisation_dock_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/visualisation_widget/visualisation_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/visualisation_widget/visualisation_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugin_lib/src/dummy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/src/capnproto_tree_builder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/src/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/src/plugin_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/src/monitor_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/src/monitor_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/plugin_template/src/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/plugin_template/src/plugin_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/src/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/src/plugin_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/src/protobuf_tree_builder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/raw_data_reflection/src/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/raw_data_reflection/src/plugin_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/chart_settings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/chart_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/plugin_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/protobuf_tree_builder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/signal_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/signal_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/tabwidget_container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/string_reflection/src/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/string_reflection/src/plugin_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/src/convert_utf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/src/ecal_play_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/src/ecal_play_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/ecal_play.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/measurement_container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/play_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/state_publisher_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/stop_watch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/ecal_play_gui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/ecal_play_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/help_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/q_ecal_play.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/about_dialog/about_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/channel_widget/channel_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/description_widget/description_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/license_dialog/license_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/models/channel_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/models/channel_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/player_controls_widget/player_controls_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/player_controls_widget/player_time_slider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/scenario_widget/edit_button_delegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/scenario_widget/scenario_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/scenario_widget/scenario_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/settings_widget/settings_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/io_stream_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/request_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_dummy/src/recorder_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_cli/src/ecal_rec_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_cli/src/ecal_rec_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/addon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/addon_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/pipe_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/response_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/ecal_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/ecal_rec_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/frame_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/garbage_collector_trigger_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/job/ftp_upload_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/job/hdf5_writer_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/job/record_job.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/job_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/monitoring_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/proto_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/ecalrec_gui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/help_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/qecalrec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/service/rec_server_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/about_dialog/about_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/config_widget/config_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/control_widget/control_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/license_dialog/license_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/host_filter_delegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/host_picker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/recorder_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/recordermanager_add_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/recordermanager_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/job_history_jobitem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/job_history_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/job_history_recorderitem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/push_button_delegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/recording_history_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/remote_measurement_debug_widget/remote_measurement_debug_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/row_height_delegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/topic_list_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/topic_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/topiclist_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/upload_settings_dialog/upload_settings_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/wait_for_shutdown_dialog/wait_for_shutdown_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/command_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/__TEMPLATE.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/activate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/comment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/deactivate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/delete.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/exit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/get_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/load_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/record.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/save_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/save_pre_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/set_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/status.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/stop_recording.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/table_printer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/upload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/ecal_rec_server_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/rec_server_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/config/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/config/config_v1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/config/config_v2to3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/ecalstate_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/monitoring_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/proto_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/rec_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/rec_server_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/recorder/local_recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/recorder/remote_recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/command_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/exit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/load_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/restart_tasks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/start_tasks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/stop_tasks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/update_from_cloud.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/ecalsys_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/ecalsys_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/ecalsys_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_cli/src/ecal_sys_client_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_cli/src/ecal_sys_client_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/src/ecal_sys_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/src/proto_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/src/task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/config/config_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/config/esys_cfg_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/connection/connection_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/connection/local_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/connection/remote_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/ecal_sys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/ecal_sys_monitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/proto_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/task/ecal_sys_runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/task/ecal_sys_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/task/ecal_sys_task_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/task/task_group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/restart_task_list_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/start_task_list_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/stop_task_list_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/update_from_cloud_task_list_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/convert_utf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/ecalsys_gui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/ecalsys_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/ecalsys_settings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/help_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/about_dialog/about_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/group_edit_widget/group_edit_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/group_edit_widget/severity_picker_delegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/groupwidget/group_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/import_from_cloud_widget/import_from_cloud_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/import_from_cloud_widget/import_from_cloud_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/license_dialog/license_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/mma_host_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/mma_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/multi_label_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/runnerwidget/runner_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/runnerwidget/runner_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/severity_model/severity_level_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/severity_model/severity_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/targets_reachable_dialog/targets_reachable_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/taskwidget/task_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_min_task_state_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_min_task_state_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/import_from_cloud_runner_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/import_from_cloud_task_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/runner_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/runner_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/task_tree_item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/task_tree_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_python/src/module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/util/config/src/ecal_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/util/launcher/src/about_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/util/launcher/src/hover_event_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/util/launcher/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/util/launcher/src/main_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/app/util/stop/src/ecal_stop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_dir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/escape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/src/ecal_proto_decoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/src/ecal_proto_dyn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/src/ecal_proto_maximum_array_dimensions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/src/ecal_proto_message_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/src/ecal_proto_visitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/ecaltime_pb/src/ecaltime_pb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/src/convert_utf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/src/ecal_time_linuxptp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/src/ecaltime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/localtime/src/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/localtime/src/ecaltime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/simtime/src/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/simtime/src/ecal_time_simtime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/simtime/src/ecaltime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/linux/mma_linux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/linux/pipe_refresher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/mma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/mma_application.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/query_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/disk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/mma_windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/network.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/processes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/windows/ressource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/zombie_instance_killer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world/hello_world_rec/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world/hello_world_snd/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world_protobuf/protobuf_rec/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world_protobuf/protobuf_snd/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/convert_utf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/custom_tclap/advanced_tclap_output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_clang.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_config_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_descgate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_global_accessors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_globals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_log_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_process_stub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_registration_provider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_registration_receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_timegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecalc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/linux/ecal_memfile_os.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/rcv_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/snd_raw_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/snd_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_receiver_asio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_receiver_npcap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/win32/ecal_memfile_os.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/mon/ecal_monitoring_def.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/mon/ecal_monitoring_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/mon/ecal_monitoring_threads.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/pubsub/ecal_proto_dyn_json_sub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/pubsub/ecal_pubgate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/pubsub/ecal_publisher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/pubsub/ecal_subgate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/pubsub/ecal_subscriber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_iceoryx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_shm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_tcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_udp_mc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_iceoryx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_inproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_shm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_tcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_udp_mc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_clientgate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_service_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_service_client_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_service_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_service_server_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_servicegate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_tcpclient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_tcpserver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/sys_usage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/win32/dll/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/core_pb/src/core_pb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/ecal/pb/src/pb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lang/csharp/Continental/eCAL/Core/AssemblyInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lang/csharp/Continental/eCAL/Core/ecal_clr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lang/python/core/src/ecal_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lang/python/ecalhdf5/src/ecalhdf5_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QAbstractTreeItem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QAbstractTreeModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QAdvancedTreeView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QCheckboxHeaderView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QClickableStatusBar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QCustomFileSystemModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QFilterLineEdit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QListMenuToolButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QMulticolumnSortFilterProxyModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QPathLineEdit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QSizeHintFrame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QStableSortFilterProxyModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QStandardTreeItem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QStandardTreeModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/src/QToolTipMenu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/src/advanced_tclap_output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/src/fuzzy_duo_value_arg_unsigned_longlong_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/src/fuzzy_value_switch_arg_bool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/src/fuzzy_value_switch_arg_double.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/src/fuzzy_value_switch_arg_unsigned_longlong.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/EcalParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/env.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/hostname.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/os.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/osselect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/username.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/src/ecal_parser_editor/ecal_parser_editor_dialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/src/ecal_parser_editor/ecal_parser_editor_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/src/ecal_parser_editor/function_list_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/src/ecal_parser_lineedit/ecal_parser_lineedit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/src/ecal_parser_textedit/ecal_parser_textedit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/ThreadingUtils/src/dummy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/host_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/ip_reassembly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/npcap_helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/udpcap_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/udpcap_socket_private.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/src/command_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/src/filesystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/src/str_convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/src/win_cp_changer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/c/minimal/minimal_rec/src/minimal_rec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/c/minimal/minimal_rec_cb/src/minimal_rec_cb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/c/minimal/minimal_snd/src/minimal_snd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/c/services/minimal_client_c/src/minimal_client_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/c/services/minimal_server_c/src/minimal_server_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/benchmarks/many_connections/many_connections_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/benchmarks/many_connections/many_connections_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_rec/src/addressbook_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_rec_cb/src/addressbook_rec_cb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_rec_dynamic/src/addressbook_rec_dynamic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_snd/src/addressbook_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/counter/counter_rec_cb/src/counter_rec_cb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/counter/counter_snd/src/counter_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/datarate/datarate_rec/src/datarate_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/datarate/datarate_snd/src/datarate_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/event/event_rec/src/event_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/event/event_snd/src/event_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/flatbuffer/monster_rec/src/monster_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/flatbuffer/monster_snd/src/monster_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/latency/latency_rec/src/latency_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/latency/latency_rec/src/latency_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/latency/latency_snd/src/latency_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/measurement/measurement_read/src/measurement_read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/measurement/measurement_write/src/measurement_write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/minimal/minimal_rec/src/minimal_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/minimal/minimal_rec_cb/src/minimal_rec_cb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/minimal/minimal_snd/src/minimal_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/process/src/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/proto_dyn/src/proto_dyn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/proto_dyn_json/src/proto_dyn_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/time/src/time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/timer/src/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/monitoring/monitoring_rec/src/monitoring_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/monitoring/monitoring_reg/src/monitoring_reg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/msgpack/address_rec/src/address_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/msgpack/address_snd/src/address_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/src/multiple_rec_cb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/src/multiple_rec_cb_person.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/src/multiple_rec_cb_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/src/multiple_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/src/multiple_snd_person.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/src/multiple_snd_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/dynsize_snd/src/dynsize_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/performance_rec/src/performance_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/performance_rec_cb/src/performance_rec_cb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/performance_snd/src/performance_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/pubsub_throughput/src/pubsub_throughput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_rec/src/person_rec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_rec_events/src/person_rec_events.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_rec_lambda_in_class/src/addressbook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd/src/person_snd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_dyn/src/person_snd_dyn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_events/src/person_snd_events.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_inproc/src/person_snd_inproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_multicast/src/person_snd_multicast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_tcp/src/person_snd_tcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/pingpong/ping/src/ping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/pingpong/pong/src/pong.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalplayer_client/src/ecalplayer_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalplayer_gui_client/src/ecalplayer_gui_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalplayer_gui_client/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalsys_client/src/ecalsys_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/latency_client/src/latency_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/latency_server/src/latency_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/math_client/src/math_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/math_server/src/math_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/minimal_client/src/minimal_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/minimal_server/src/minimal_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_client/src/ping_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_client_dyn/src/ping_client_dyn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_client_dyn/src/proto_json_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_server/src/ping_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_client_service_cli/src/ecalrecorder_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_client_service_gui/src/EcalrecGuiClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_client_service_gui/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_server_service_gui/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_server_service_gui/src/rec_server_service_gui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalhdf5/hdf5_test/src/hdf5_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalproto/dynproto_test/src/dynproto_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalproto/ecal_proto_test/src/test_filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalproto/ecal_proto_test/src/test_maximum_array_dimensions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalproto/ecal_proto_test/src/test_proto_dyn_decoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/clientserver_test/src/clientserver_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/clientserver_test/src/dummy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/core_test/src/core_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/event_test/src/event_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/expmap_test/src/expmap_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/io_memfile_test/src/memfile_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/pubsub_inproc_test/src/pubsub_inproc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/pubsub_proto_test/src/proto_publisher_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/pubsub_proto_test/src/proto_subscriber_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ecal/testing/ecal/pubsub_test/src/pubsub_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/apps/include/ecal/ecal_apps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/config_file_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/ecal_meas_cutter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/ecal_meas_cutter_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_importer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/measurement_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_cli/src/ecal_mon_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_cli/src/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/convert_utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/ecalmon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/ecalmon_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/plugin/plugin_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/plugin/plugin_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/about_dialog/about_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/column_selector_dialog/column_picker_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/column_selector_dialog/column_selector_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/ecalmon_tree_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/host_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/process_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/service_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/ecalmon_tree_widget/topic_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/license_dialog/license_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/log_widget/log_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/column_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/column_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/group_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/group_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/host_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/host_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/item_data_roles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/item_view_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/log_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/log_sort_filter_proxy_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/plugin_table_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/process_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/process_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/service_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/service_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/topic_sort_filter_proxy_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/topic_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/topic_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/models/tree_item_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/npcap_status_dialog/npcap_status_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/plugin_settings_dialog/plugin_settings_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/system_information_widget/system_information_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/tree_item_view_widget/tree_item_view_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/visualisation_widget/visualisation_dock_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/visualisation_widget/visualisation_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/src/widgets/visualisation_widget/visualisation_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugin_lib/include/ecal/mon/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugin_lib/include/ecal/mon/plugin_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugin_lib/include/ecal/mon/plugin_widget_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/src/capnproto_tree_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/src/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/src/plugin_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/src/item_data_roles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/src/monitor_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/src/monitor_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/src/tree_item_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/plugin_template/src/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/plugin_template/src/plugin_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/src/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/src/plugin_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/src/protobuf_tree_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/raw_data_reflection/src/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/raw_data_reflection/src/plugin_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/chart_settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/chart_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/plugin_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/protobuf_tree_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/signal_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/signal_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/tabwidget_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/string_reflection/src/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/string_reflection/src/plugin_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/src/convert_utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/src/ecal_play_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/include/continuity_report.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/include/ecal_play.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/include/ecal_play_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/include/ecal_play_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/include/ecal_play_scenario.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/include/ecal_play_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/ecal_play_command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/measurement_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/play_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/state_publisher_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_core/src/stop_watch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/ecal_play_gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/ecal_play_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/help_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/q_ecal_play.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/about_dialog/about_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/channel_widget/channel_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/description_widget/description_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/license_dialog/license_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/models/channel_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/models/channel_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/models/item_data_roles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/models/tree_item_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/player_controls_widget/player_controls_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/player_controls_widget/player_time_slider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/scenario_widget/edit_button_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/scenario_widget/scenario_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/scenario_widget/scenario_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/src/widgets/settings_widget/settings_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/include/ecal/rec/concurrent_status_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/include/ecal/rec/recorder_impl_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/include/ecal/rec/recorder_impl_base_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/common_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/function_descriptors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/io_stream_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/recorder_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/request_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/src/time_limited_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_dummy/src/recorder_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_cli/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_cli/src/ecal_rec_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/ecal_rec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/ecal_rec_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/ecal_rec_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/job_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/proto_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/rec_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/record_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/topic_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/include/rec_client_core/upload_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/addon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/addon_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/common_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/concurrent_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/function_descriptors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/pipe_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/addons/response_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/ecal_rec_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/frame_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/garbage_collector_trigger_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/job/ftp_upload_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/job/hdf5_writer_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/job/record_job.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/src/monitoring_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/ecalrec_gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/help_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/models/item_data_roles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/models/tree_item_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/qecalrec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/service/rec_server_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/about_dialog/about_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/config_widget/config_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/control_widget/control_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/license_dialog/license_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/host_filter_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/host_picker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/recorder_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/recordermanager_add_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recordermanager_widget/recordermanager_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/job_history_jobitem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/job_history_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/job_history_recorderitem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/push_button_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/recording_history_widget/recording_history_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/remote_measurement_debug_widget/remote_measurement_debug_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/row_height_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/topic_list_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/topic_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/topic_widget/topiclist_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/upload_settings_dialog/upload_settings_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/src/widgets/wait_for_shutdown_dialog/wait_for_shutdown_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/bytes_to_pretty_string_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/command_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/__TEMPLATE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/activate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/comment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/deactivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/delete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/exit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/get_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/load_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/save_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/save_pre_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/set_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/sleep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/stop_recording.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/table_printer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/commands/upload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/src/rec_server_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/include/rec_server_core/ecalstate_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/include/rec_server_core/proto_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/include/rec_server_core/rec_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/include/rec_server_core/rec_server_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/include/rec_server_core/rec_server_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/include/rec_server_core/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/config/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/config/config_v1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/config/config_v2to3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/monitoring_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/rec_server_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/recorder/abstract_recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/recorder/local_recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/recorder/remote_recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/recorder_command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/src/recorder_settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/command_executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/exit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/load_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/restart_tasks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/sleep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/start_tasks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/stop_tasks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/commands/update_from_cloud.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/ecalsys_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/ecalsys_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/sys_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_cli/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_cli/src/ecal_sys_client_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/include/sys_client_core/ecal_sys_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/include/sys_client_core/ecal_sys_client_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/include/sys_client_core/ecal_sys_client_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/include/sys_client_core/proto_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/include/sys_client_core/runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/include/sys_client_core/task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/config/config_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/ecal_sys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/ecal_sys_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/esys_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/proto_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/task/ecal_sys_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/task/ecal_sys_task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/task/ecal_sys_task_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/task/task_group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/ecalsys/task/task_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/threading/blocking_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/threading/interruptible_loop_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/threading/interruptible_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/include/threading/threadsafe_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/config/config_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/config/esys_cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/config/esys_cfg_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/connection/abstract_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/connection/connection_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/connection/local_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/connection/remote_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/ecal_sys_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/restart_task_list_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/start_task_list_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/stop_task_list_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/task_list_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/src/taskaction_threads/update_from_cloud_task_list_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/convert_utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/ecalsys_gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/ecalsys_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/ecalsys_settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/help_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/about_dialog/about_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/group_edit_widget/group_edit_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/group_edit_widget/severity_picker_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/groupwidget/group_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/import_from_cloud_widget/import_from_cloud_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/import_from_cloud_widget/import_from_cloud_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/license_dialog/license_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/mma_host_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/mma_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/multi_label_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/resource_bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/mmawidget/tree_widget_item_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/runnerwidget/runner_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/runnerwidget/runner_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/severity_model/severity_level_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/severity_model/severity_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/targets_reachable_dialog/targets_reachable_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/taskwidget/task_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_min_task_state_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_min_task_state_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_state_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/group_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/import_from_cloud_runner_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/import_from_cloud_task_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/runner_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/runner_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/task_tree_item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/task_tree_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/tree_data_roles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/src/widgets/treemodels/tree_item_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/util/launcher/resources/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/util/launcher/src/about_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/util/launcher/src/hover_event_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/app/util/launcher/src/main_window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/include/ecal/measurement/imeasurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/include/ecal/measurement/measurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/include/ecal/measurement/omeasurement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/include/ecalhdf5/eh5_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/include/ecalhdf5/eh5_meas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/include/ecalhdf5/eh5_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_dir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_file_v5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/eh5_meas_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/src/escape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/include/ecal/protobuf/ecal_proto_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/include/ecal/protobuf/ecal_proto_dyn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/include/ecal/protobuf/ecal_proto_hlp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/include/ecal/protobuf/ecal_proto_maximum_array_dimensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/include/ecal/protobuf/ecal_proto_message_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/include/ecal/protobuf/ecal_proto_visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/include/dynamic_sleeper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/include/ecaltime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/src/clock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/src/config/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/src/convert_utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/src/ecal_time_linuxptp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/simtime/src/ecal_time_simtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/message/include/ecal/msg/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/message/include/ecal/msg/proto/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/message/include/ecal/msg/string/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/interruptable_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/linux/mma_linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/linux/pipe_refresher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/linux/ressource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/mma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/mma_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/mma_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/query_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/disk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/mma_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/network.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/processes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/windows/ressource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/contrib/mma/include/zombie_instance_killer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/doc/doc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_callback_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_client_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_core_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_event_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_init_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_log_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_monitoring_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_process_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_proto_dyn_json_subscriber_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_publisher_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_qos_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_server_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_service_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_service_info_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_subscriber_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_time_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_timer_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_tlayer_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/cimpl/ecal_util_cimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_clang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_eventhandle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_log_level.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_monitoring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_process_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_process_severity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_qos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_service_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_timed_cb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_tlayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecal_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecalc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/ecalc_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/capnproto/dynamic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/capnproto/helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/capnproto/publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/capnproto/subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/dynamic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/flatbuffers/publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/flatbuffers/subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/messagepack/publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/messagepack/subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/protobuf/client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/protobuf/dynamic_json_subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/protobuf/dynamic_publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/protobuf/dynamic_subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/protobuf/publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/protobuf/server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/protobuf/subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/string/publisher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/string/subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/include/ecal/msg/subscriber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/convert_utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/custom_tclap/advanced_tclap_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_config_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_config_reader_hlp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_def_ini.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_descgate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_expmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_global_accessors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_log_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_process_stub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_registration_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_registration_receiver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_timegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_win_main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_win_socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/getenvvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_mtx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_memfile_sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_receiver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/ecal_sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/linux/ecal_memfile_mtx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/msg_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/rcv_sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/snd_raw_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/snd_sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_receiver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_receiver_asio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_receiver_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_receiver_npcap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/udp_sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/io/win32/ecal_memfile_mtx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/mon/ecal_monitoring_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/mon/ecal_monitoring_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/mon/ecal_monitoring_threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/pubsub/ecal_pubgate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/pubsub/ecal_subgate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_iceoryx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_layer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_shm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_tcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_reader_udp_mc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_tcp_pubsub_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_iceoryx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_inproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_shm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_tcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/readwrite/ecal_writer_udp_mc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/asio_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_clientgate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_service_client_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_service_server_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_servicegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_tcpclient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_tcpheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/service/ecal_tcpserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/sys_usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/topic2mcast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/core/src/win32/dll/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/ecal.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/host.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/layer.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/mma/mma.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/monitoring.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/play/service.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/play/state.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/process.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/rec/client_service.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/rec/client_state.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/rec/server_config.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/rec/server_service.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/rec/server_state.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/service.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/sim_time.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/sys/client_service.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/sys/service.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/sys/state.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/ecal/pb/include/ecal/pb/topic.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lang/csharp/Continental/eCAL/Core/ecal_clr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QAbstractTreeItem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QAbstractTreeModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QAdvancedCheckBox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QAdvancedTreeView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QBytesToPrettyStringUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QCheckboxHeaderView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QClickableStatusBar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QCustomFileSystemModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QFilterLineEdit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QListMenuToolButton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QMulticolumnSortFilterProxyModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QPathLineEdit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QSizeHintFrame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QStableSortFilterProxyModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QStandardTreeItem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QStandardTreeModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/include/CustomQt/QToolTipMenu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/include/custom_tclap/advanced_tclap_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/include/custom_tclap/fuzzy_duo_value_arg_unsigned_longlong_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/include/custom_tclap/fuzzy_value_switch_arg_bool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/include/custom_tclap/fuzzy_value_switch_arg_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/include/custom_tclap/fuzzy_value_switch_arg_unsigned_longlong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/include/EcalParser/EcalParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/include/EcalParser/Function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/hostname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/osselect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/src/functions/username.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/include/QEcalParser/ecal_parser_editor/ecal_parser_editor_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/include/QEcalParser/ecal_parser_editor/ecal_parser_editor_widget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/include/QEcalParser/ecal_parser_lineedit/ecal_parser_lineedit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/include/QEcalParser/ecal_parser_textedit/ecal_parser_textedit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/src/ecal_parser_editor/function_list_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ThreadingUtils/include/ThreadingUtils/DynamicSleeper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ThreadingUtils/include/ThreadingUtils/InterruptibleLoopThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ThreadingUtils/include/ThreadingUtils/InterruptibleThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ThreadingUtils/include/ThreadingUtils/ThreadSafeQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/include/udpcap/host_address.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/include/udpcap/npcap_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/include/udpcap/udpcap_socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/ip_reassembly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/log_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/src/udpcap_socket_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/include/ecal_utils/command_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/include/ecal_utils/ecal_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/include/ecal_utils/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/include/ecal_utils/portable_endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/include/ecal_utils/str_convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/include/ecal_utils/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/include/ecal_utils/win_cp_changer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/latency/latency_rec/src/latency_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/src/multiple_rec_cb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/src/multiple_rec_cb_person.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/src/multiple_rec_cb_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/src/multiple_snd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/src/multiple_snd_person.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/src/multiple_snd_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_rec_lambda_in_class/include/addressbook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalplayer_gui_client/src/ecalplayer_gui_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_client_dyn/src/proto_json_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_client_service_gui/src/EcalrecGuiClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_server_service_gui/src/rec_server_service_gui.h" />
+    <Font Include="../../thirdparty/owemdjee/ecal/app/util/launcher/resources/NEURPOLI.TTF" />
+    <Font Include="../../thirdparty/owemdjee/ecal/cpack/innosetup/gfx/NEURPOLI.TTF" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/appmenu/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/resources/ecalmon.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/resources/ecalplay.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/appmenu/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/resources/ecalplay.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_cli/resources/ecalrec.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/appmenu/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/resources/ecalrec.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/resources/ecalrec.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/ecalsys.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_cli/resources/ecalsys.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/appmenu/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/resources/gfx/ecalsys.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/util/launcher/appmenu/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/app/util/launcher/resources/ecallauncher.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/cpack/background.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/cpack/banner.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/cpack/ecalproduct.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/cpack/innosetup/gfx/logo_icon.bmp" />
+    <Image Include="../../thirdparty/owemdjee/ecal/cpack/innosetup/gfx/logo_icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/ecal/cpack/innosetup/gfx/logo_iss.bmp" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/mockups/assets/eCALMon.jpg" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/mockups/assets/eCALMonIcon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/_static/img/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/img_documentation/vscode_complete.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/img_documentation/vscode_preview.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/img_documentation/vscode_preview_button.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/img_documentation/vscode_rst_addon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/img_documentation/vscode_statusbar.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_configuration.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_controls.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_measurements.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_measurements_context_menu.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_measurements_context_menu_cut.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_menubar_options.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_menubar_options_cut.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_overview.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_recorders.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_recorders_dropdown.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_recorders_dropdown_cut.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_topics.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_gui_upload_settings.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/img/rec_server_cli.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/ecal_sys_groups_blank.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/ecal_sys_import_from_cloud.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/ecal_sys_mma.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/ecal_sys_options.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/ecal_sys_runner_blank.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/ecal_sys_start_on_host.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/ecal_sys_task_overview.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/img/sys_cli.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/img/npcap_adapter.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/img/npcap_ecal_mon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/img/npcap_error_npcapstatus.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/img/npcap_error_systeminformation.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/img/npcap_install.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/img/tcpip_sys.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/img/winsocks.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/cloud_person_combined.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/cloud_person_rec_win.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/cloud_person_snd_ubuntu.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/cmake_setup.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/cmake_setup_cut.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/disable_mcaffee_firewall.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/gedit_space_indentation.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/gnome_netplan_gui.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/hello_world_protobuf_snd_monitor.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/hello_world_protobuf_snd_rec.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/hello_world_snd_monitor.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/hello_world_snd_rec.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/monitor_error_getting_monitoring_information.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/monitor_hosts_view.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/monitor_overview_blank.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/monitor_processes_view.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/monitor_reflection_window.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/monitor_reset_layout.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/ping_ubuntu_localdomain.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/player_monitor_person_rec.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/player_overview_blank.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/player_reset_layout.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/python_hello_world_snd_monitor.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/python_hello_world_snd_rec.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/recorder_measurement_filesystem.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/recorder_overview_blank.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/recorder_recording.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/recorder_reset_layout.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/samples_person.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/samples_service.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/samples_service_cloud_combined.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/setup.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/sys_overview_blank.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/sys_reset_layout.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/sys_tasks_started.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/ubuntu_route_gui.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/ubuntu_route_print.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/img/win_route_print.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/monitor_combined.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/monitor_dark_mode.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/monitor_default_mode.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/monitor_signal_plotting.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/rec_combined.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/rec_dark_mode.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/rec_default_mode.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/img/zerocopy_improvements.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/app/monitor_imagevisu.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/app/monitor_person.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/app/player.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/app/recorder.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/configuration/npcap_ecalmon.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/configuration/npcap_installer.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/configuration/npcap_settings.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/ecal_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/ecal/gfx/ecal_logo_square.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_cli/src/ecal_mon.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_cli/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/src/ecalsys.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_cli/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/app/util/launcher/resources/win32_resources.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/contrib/mma/src/mma.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/ecal/ecal/core/src/win32/dll/ecal.rc" />
+    <Text Include="../../thirdparty/owemdjee/ecal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/CMakeSettings.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/ecal/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/ecal/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/app_pb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/apps/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/meas_cutter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_gui/appmenu/app.desktop.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugin_lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/capnproto_reflection/src/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/monitor_tree_view/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/plugin_template/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/plugin_template/src/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/protobuf_reflection/src/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/raw_data_reflection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/raw_data_reflection/src/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/signals_plotting/src/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/string_reflection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/mon/mon_plugins/string_reflection/src/metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/play/play_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/play/play_core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/appmenu/app.desktop.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_addon_dummy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_client_core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/appmenu/app.desktop.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_cli/tests/ecal rec test commands.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/rec/rec_server_core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_client_core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/appmenu/app.desktop.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/resources/gfx/ecalsys.xpm" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/sys/sys_python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/util/config/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/util/launcher/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/util/launcher/appmenu/app.desktop.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/app/util/stop/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_linux/clang-tidy/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_linux/clang-tidy/excludes_clang_tidy.json" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_linux/clang-tidy/filter_clang_tidy.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/download_npcap.ps1" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_make_all.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_make_build.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_make_cmake.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_make_python_wheel.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_make_setup.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_run_pvs.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_run_tests.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/build_win/win_set_vars.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/cmake/eCALConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/cmake/helper_functions/app.desktop.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/ecalhdf5/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/ecalproto/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/ecaltime_pb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/linuxptp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/localtime/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/ecaltime/simtime/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/message/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/mma/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/mma/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/mma/bat/perfmon_counters_rebuild.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/contrib/mma/bat/start_mma_hidden.bat" />
+    <Text Include="../../thirdparty/owemdjee/ecal/cpack/debscripts/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/cpack/debscripts/postinst.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/cpack/debscripts/postrm.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/cpack/innosetup/ecal_setup.iss.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/conf_py_buildvars.py.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/extensions/empy_helpers/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/extensions/generate_download_tables.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/extensions/generate_ecalicons.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/_static/css/change_colors.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/compatibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/documentation.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/ecal_in_docker.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/ecal_internals.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/layers/inproc.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/layers/shm.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/layers/tcp.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/layers/udp_mc.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/measurement_format.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/performance.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/ros_comparison.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/threading_model.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/transport_layers.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/advanced/tutorials.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/meas_cutter/meas_cutter.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/meas_cutter/meas_cutter_usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/rec_client_usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/rec_server_cli_interactive_help.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/rec_server_cli_usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/recorder.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/recorder_architecture.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/recorder_cli.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/recorder_client.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/rec/recorder_gui.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys_architecture.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys_cli.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys_cli_interactive_help.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys_cli_usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys_client.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys_client_usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/applications/sys/sys_gui.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/cloud.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/local.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/npcap.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/npcap_details.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/options.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/configuration/player.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/development/build_ecal.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/development/building_ecal_from_source.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/development/building_ecal_with_conan_dependencies.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/development/ecal_cmake_options.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/ecal_api.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/faq.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/applications.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/clean_images.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/cloud.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/development.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/development_python.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/hello_world.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/hello_world_proto.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/hello_world_python.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/hello_world_python_proto.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/introduction.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/monitor.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/player.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/recorder.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/samples.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/services.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/setup.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world/hello_world_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world/hello_world_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world_protobuf/protobuf_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world_protobuf/protobuf_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world_python/hello_world_rec.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/src/hello_world_python/hello_world_snd.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/getting_started/sys.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/img/snail_code.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/img/source.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/include.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/ecal_license.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/icon_license.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/apache-2.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/apache-2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/boost-1.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/boost-1.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/bsd-3.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/bsd-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/convert-utf.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/convert-utf.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/creative-commons-3.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/creative-commons-3.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/findqwt-bsd-2.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/findqwt-bsd-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/fontawesome-free.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/fontawesome-free.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/gpl-2.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/gpl-2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/gpl-3.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/gpl-3.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/hdf5-bsd-3.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/hdf5-bsd-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/lgpl-2.1.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/lgpl-2.1.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/lgpl-3.0.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/lgpl-3.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/mit.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/mit.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/npcap.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/npcap.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/qwt.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/qwt.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/unlicense.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/unlicense.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/zlib.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/license/thirdparty_licenses/zlib.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/old code.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/tutorials/rec_distributed_recordings.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/api_incompatibilities.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/compatibility_table.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.10/whats_new.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.8/compatibility_table.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.8/whats_new.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.9/compatibility_table.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/5.9/whats_new.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/compatibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/doc/rst/versions/ecal_versions.rst" />
+    <Text Include="../../thirdparty/owemdjee/ecal/ecal/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/ecal/core/cfg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/ecal/core/src/ecal_defs.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/ecal/core_pb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/ecal/pb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/csharp/Continental/eCAL/Core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/csharp/Continental/eCAL/Protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/csharp/Continental/eCAL/Protobuf/packages.config.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/core/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/core/core.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/core/publisher.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/core/service.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/core/subscriber.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/proto/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/core/ecal/proto/helper.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/ecalhdf5/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/ecalhdf5/ecal/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/ecalhdf5/ecal/measurement/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/ecalhdf5/ecal/measurement/hdf5.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/ecalhdf5/ecal/measurement/measurement.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lang/python/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lib/CustomQt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lib/CustomTclap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lib/EcalParser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lib/QEcalParser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lib/ThreadingUtils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lib/Udpcap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/lib/ecal_utils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/licenses/asio/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/licenses/convert-utf/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/licenses/google-flatbuffers/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/licenses/simpleini/LICENCE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/licenses/thirdparty-licenses.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/c/minimal/minimal_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/c/minimal/minimal_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/c/minimal/minimal_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/c/services/minimal_client_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/c/services/minimal_server_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/benchmarks/many_connections/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_rec_dynamic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/capnp/addressbook_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/counter/counter_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/counter/counter_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/datarate/datarate_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/datarate/datarate_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/event/event_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/event/event_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/latency/latency_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/latency/latency_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/measurement/measurement_read/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/measurement/measurement_write/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/minimal/minimal_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/minimal/minimal_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/minimal/minimal_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/process/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/proto_dyn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/proto_dyn_json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/time/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/misc/timer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/monitoring/monitoring_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/monitoring/monitoring_reg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/multiple/multiple_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/dynsize_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/performance_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/performance_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/performance_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/performance/pubsub_throughput/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_rec_events/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_rec_lambda_in_class/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_dyn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_events/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_inproc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_multicast/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/person/person_snd_tcp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/pingpong/ping/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/pingpong/pong/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalplayer_client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalplayer_gui_client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ecalsys_client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/latency_client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/latency_server/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/math_client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/math_server/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/minimal_client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/minimal_server/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_client_dyn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/ping_server/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_client_service_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_client_service_gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/cpp/services/rec_server_service_gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/minimal/minimal_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/minimal/minimal_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/minimal/minimal_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/person/person_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/person/person_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/person/person_rec_json_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/person/person_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/person/protobuf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/csharp/person/protobuf/packages.config.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/_protobuf/animal_pb2.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/_protobuf/house_pb2.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/_protobuf/person_pb2.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/ecalhdf5_rw/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/ecalhdf5_rw/ecalhdf5_rw.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/latency_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/latency_rec/latency_rec.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/latency_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/latency_rec_cb/latency_rec_cb.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/latency_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/latency_snd/latency_snd.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/measurement_read/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/measurement_read/measurement_read.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_rec/minimal_rec.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_rec_cb/minimal_rec_cb.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_service/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_service/minimal_service_client.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_service/minimal_service_server.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/minimal_snd/minimal_snd.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/monitoring/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/monitoring/monitoring.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_rec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_rec/person_rec.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_rec_cb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_rec_cb/person_rec_cb.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_rec_json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_rec_json/person_rec_json.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_snd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/samples/python/person_snd/person_snd.py" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/contrib/cross/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalhdf5/hdf5_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalproto/dynproto_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/contrib/ecalproto/ecal_proto_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/clientserver_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/core_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/event_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/expmap_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/io_memfile_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/pubsub_inproc_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/pubsub_proto_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/testing/ecal/pubsub_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/thirdparty/cmake_functions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ecal/thirdparty/cmake_functions/cmake/CMakeFunctionsConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/thirdparty/cmake_functions/qt/qt_windeployqt_threadsafe_cmake.bat.in" />
+    <Text Include="../../thirdparty/owemdjee/ecal/thirdparty/qwt/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/ecal/PVSSettings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ecal/app/play/play_gui/mimetype/ecal-play.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ecal/app/rec/rec_gui/mimetype/ecal-rec.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ecal/app/sys/sys_gui/mimetype/ecal-sys.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ecal/cpack/ecal_path.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

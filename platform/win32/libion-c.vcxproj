@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libion-c</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC980FE}</ProjectGuid>
+    <RootNamespace>libion-c</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBION_C;ION_C_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decBasic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decCommon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decContext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decDouble.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decNumber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decPacked.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decQuad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decSingle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decimal128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decimal32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/decimal64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/decNumber/example8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/decQuadHelpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_allocation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_binary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_catalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_collection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_decimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_errors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_extractor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_helpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_initialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_reader_binary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_reader_text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_symbol_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_timestamp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_writer_binary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/ion_writer_text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/updated/ion_helpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/ionc/updated/ion_tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/gather_vectors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/ion_assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/ion_test_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_decimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_extractor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_reader_seek.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_symbol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_timestamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_ion_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/test/test_vectors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/cli/argtable/argtable3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/cli/cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/cli/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/events/ion_event_equivalence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/events/ion_event_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/events/ion_event_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/ionizer/ionizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/ionizer/ionizer_args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/ionizer/ionizer_stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/ionizer/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/ionsymbols/ionsymbols.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/ionsymbols/ionsymbols_args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ion-c/tools/ionsymbols/options.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decDPD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decDouble.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decNumber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decNumberLocal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decPacked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decQuad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decSingle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decimal128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decimal32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/decNumber/include/decNumber/decimal64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/decQuadHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_catalog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_decimal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_error_codes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_extractor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_platform_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_symbol_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_timestamp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/include/ionc/ion_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_binary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_catalog_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_collection_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_decimal_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_extractor_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_reader_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_reader_text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_stream_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_sub_type_records.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_symbol_table_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_timestamp_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/ionc/ion_writer_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/test/gather_vectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/test/ion_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/test/ion_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/cli/argtable/argtable3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/cli/cli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/events/floating_point_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/events/inc/ion_event_equivalence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/events/inc/ion_event_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/events/ion_event_equivalence_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/events/ion_event_stream_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/events/ion_event_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/ionizer/ionizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/ionizer/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/ionsymbols/ionsymbols.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ion-c/tools/ionsymbols/options.h" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/build-debug.sh" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/build-release.sh" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/cmake/IonCConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/debug-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/decNumber/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/decNumber/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/ionc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/tools/cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/tools/events/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/tools/ionizer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ion-c/tools/ionsymbols/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libde265</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF71455F}</ProjectGuid>
+    <RootNamespace>libde265</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDE265;DE265_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/acceleration-speed/acceleration-speed.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/acceleration-speed/dct-scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/acceleration-speed/dct-sse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/acceleration-speed/dct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/dec265/dec265.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/dec265/hdrcopy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/dec265/sdl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/enc265/enc265.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/enc265/image-io-png.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/extra/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/extra/getopt_long.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/extra/win32cond.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/alloc_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/arm/arm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/bitstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/cabac.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/configparam.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/contextmodel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/de265.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/deblock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/decctx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/dpb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/en265.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/algo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-interpartmode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-intra-inter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-intrapartmode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-mergeindex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-skip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/coding-options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/ctb-qscale.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/pb-mv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-intrapredmode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-rateestim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-core.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-intrapred.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-motion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-syntax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encpicbuf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/encoder/sop.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/fallback-dct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/fallback-motion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/fallback.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/image-io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/intrapred.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/md5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/motion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/nal-parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/nal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/pps.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/quality.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/refpic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/sao.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/scan.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/sei.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/sps.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/threads.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/visualize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/vps.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/vui.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/x86/sse-dct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/x86/sse-motion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/libde265/x86/sse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/sherlock265/VideoDecoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/sherlock265/VideoPlayer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/sherlock265/VideoWidget.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/sherlock265/sherlock265.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/tools/bjoentegaard.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/tools/block-rate-estim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/tools/gen-entropy-table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/tools/rd-curves.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/tools/tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libde265/tools/yuv-distortion.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/acceleration-speed/acceleration-speed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/acceleration-speed/dct-scalar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/acceleration-speed/dct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/dec265/sdl.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/enc265/image-io-png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/extra/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/extra/libde265/de265-version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/extra/stdbool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/extra/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/extra/win32cond.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/acceleration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/alloc_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/arm/arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/bitstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/cabac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/configparam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/contextmodel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/de265.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/deblock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/decctx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/dpb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/en265.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/algo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-interpartmode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-intra-inter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-intrapartmode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-mergeindex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-skip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/cb-split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/coding-options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/ctb-qscale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/pb-mv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-intrapredmode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-rateestim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/tb-transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-intrapred.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-syntax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encoder-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/encpicbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/encoder/sop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/fallback-dct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/fallback-motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/fallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/image-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/intrapred.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/nal-parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/nal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/pps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/quality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/refpic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/sao.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/sei.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/sps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/visualize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/vps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/vui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/x86/sse-dct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/x86/sse-motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/libde265/x86/sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/sherlock265/VideoDecoder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/sherlock265/VideoPlayer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/libde265/sherlock265/VideoWidget.hh" />
+    <Image Include="../../thirdparty/owemdjee/libde265/libde265.png" />
+    <Text Include="../../thirdparty/owemdjee/libde265/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libde265/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libde265/acceleration-speed/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/libde265/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/libde265/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libde265/dec265/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libde265/dec265/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/enc265/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libde265/enc265/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/arm/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/arm/asm.S" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/arm/cpudetect.S" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/arm/hevcdsp_qpel_neon.S" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/arm/neon.S" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/de265-version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/encoder/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/encoder/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/encoder/algo/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/x86/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libde265/libde265/x86/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/scripts/check_licenses.sh" />
+    <Text Include="../../thirdparty/owemdjee/libde265/scripts/ci-before-install-linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/libde265/scripts/ci-before-install-osx.sh" />
+    <Text Include="../../thirdparty/owemdjee/libde265/scripts/ci-before-script.sh" />
+    <Text Include="../../thirdparty/owemdjee/libde265/scripts/ci-run.sh" />
+    <Text Include="../../thirdparty/owemdjee/libde265/scripts/decodestreams.py" />
+    <Text Include="../../thirdparty/owemdjee/libde265/sherlock265/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libde265/tools/Makefile.am" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libRxCpp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF98116E}</ProjectGuid>
+    <RootNamespace>libRxCpp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRXCPP;RXCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/samples/SampleCppLinq/SampleCppLinq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/unittest/testbench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/awaitable/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/cep/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/amb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/as_dynamic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/blocking_observable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/combine_latest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/composite_exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/concat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/concat_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/contains.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/create.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/debounce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/default_if_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/defer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/delay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/distinct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/distinct_until_changed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/element_at.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/exists.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/finally.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/flat_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/group_by.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/ignore_elements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/interval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/is_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/iterate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/just.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/merge_delay_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/never.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/observe_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/on_error_resume_next.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/pairwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/publish.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/ref_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/repeat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/replay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/retry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/scope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/sequence_equal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/skip_last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/skip_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/skip_while.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/start_with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/subscribe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/subscribe_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/switch_if_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/switch_on_next.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/take.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/take_last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/take_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/take_while.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/tap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/time_interval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/timeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/timestamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/with_latest_from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/zip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/linesfrombytes/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/println/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/pythagorian/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/stop/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/tests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/tests/take.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/win_text/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/amb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/amb_variadic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/combine_latest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/concat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/concat_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/contains.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/debounce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/default_if_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/delay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/distinct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/distinct_until_changed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/element_at.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/exists.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/finally.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/flat_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/group_by.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/ignore_elements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/is_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/lift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/merge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/merge_delay_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/observe_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/on_error_resume_next.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/pairwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/publish.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/repeat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/replay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/retry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/sequence_equal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/skip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/skip_last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/skip_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/skip_while.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/start_with.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/subscribe_on.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/switch_if_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/switch_on_next.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/take.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/take_last.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/take_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/take_while.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/tap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/time_interval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/timeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/timestamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/window_toggle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/with_latest_from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/operators/zip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/sources/create.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/sources/defer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/sources/empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/sources/interval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/sources/iterate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/sources/scope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/sources/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/subjects/subject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/subscriptions/coroutine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/subscriptions/observer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/subscriptions/subscription.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_cursor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_groupby.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_iterators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_last.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_selectmany.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_take.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/linq_where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/src/cpplinq/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/unittest/testbench.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/main.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/win_text/rx_windows_user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/win_text/unwinder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/win_text/windows_user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-amb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-buffer_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-buffer_time.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-buffer_time_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-combine_latest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-concat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-concat_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-connect_forever.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-debounce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-delay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-distinct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-distinct_until_changed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-element_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-finally.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-flat_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-group_by.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-ignore_elements.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-lift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-merge_delay_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-multicast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-observe_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-on_error_resume_next.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-pairwise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-publish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-ref_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-repeat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-replay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-retry-repeat-common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-retry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-sample_time.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-sequence_equal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-skip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-skip_last.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-skip_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-skip_while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-start_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-subscribe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-subscribe_on.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-switch_if_empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-switch_on_next.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-take.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-take_last.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-take_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-take_while.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-tap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-time_interval.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-timeout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-timestamp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-window_time.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-window_time_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-window_toggle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-with_latest_from.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/operators/rx-zip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-composite_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-connectable_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-coordination.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-coroutine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-grouped_observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-includes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-lite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-notification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-observable-fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-observable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-predef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-sources.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-subjects.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-subscriber.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-subscription.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx-util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/rx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-currentthread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-eventloop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-immediate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-newthread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-runloop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-sameworker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/schedulers/rx-virtualtime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-create.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-empty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-interval.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-iterate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-never.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-scope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/sources/rx-timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/subjects/rx-behavior.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/subjects/rx-replaysubject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/subjects/rx-subject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/src/rxcpp/subjects/rx-synchronize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/copy_verifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/test.h" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/AUTHORS.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/DeveloperManual.md" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Ix/CPP/samples/SampleCppLinq/data.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Readme.html" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/awaitable/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/cep/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/doxygen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/linesfrombytes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/println/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/pythagorian/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/stop/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/examples/win_text/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/Rx/v2/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/license.md" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/projects/CMake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/projects/doxygen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/projects/doxygen/doxygen.conf.in" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/projects/nuget/release.txt" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/projects/scripts/install_libcxx.sh" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/projects/scripts/travis-doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/RxCpp/projects/scripts/travis-install.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

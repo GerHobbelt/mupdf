@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>librestc-cpp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1301BC}</ProjectGuid>
+    <RootNamespace>librestc-cpp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESTC_CPP;RESTC_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/examples/cmake_external_project/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/examples/cmake_normal/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/examples/cmdline/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/examples/logip/logip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/ChunkedReaderImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/ChunkedWriterImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/ConnectionPoolImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/DataReaderStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/IoReaderImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/IoWriterImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/NoBodyReaderImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/PlainReaderImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/PlainWriterImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/ReplyImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/RequestBodyFileImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/RequestBodyStringImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/RequestImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/RestClientImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/Url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/ZipReaderImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/pch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/src/url_encode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/AuthTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/BasicTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/CRUD_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/ConnectionCacheTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/ConnectionPoolInstancesTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/CookieTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/HttpsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/InsertSerializerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/ManyConnectionsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/OwnIoserviceTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/PropertiesTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/ProxyTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/ReadmeTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/RedirectTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/UploadTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/unit/AsyncSleepTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/unit/HttpReplyTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/unit/Iostream2JsonTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/unit/JsonSerializeTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/unit/RequestBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/restc-cpp/tests/unit/UrlTests.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/Connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/ConnectionPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/DataReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/DataReaderStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/DataWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/IoTimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/IteratorFromJsonSerializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/RapidJsonReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/RapidJsonWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/RequestBody.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/RequestBodyWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/RequestBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/SerializeJson-cpp17.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/SerializeJson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/Socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/Url.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/internals/for_each_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/internals/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/restc-cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/test_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/typename.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/include/restc-cpp/url_encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/src/ConnectionImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/src/ReplyImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/src/SocketImpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/restc-cpp/src/TlsSocketImpl.h" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/build_vc2015.bat" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/build_vc2017.bat" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/build_vc2019_x64_vcpkg.bat" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/build_vc2019_x86_vcpkg.bat" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/cmake_scripts/restc-cppConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/conan/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/conan/build_with_conan_vc2015.bat" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/conan/conanfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/create-and-run-containers.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/doc/GettingStarted.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/doc/Logging.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/doc/RunningTheTests.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/doc/Tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/doc/doxygen-mainpage.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/examples/cmake_external_project/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/examples/cmake_external_project/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/examples/cmake_normal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/examples/cmake_normal/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/examples/cmdline/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/examples/cmdline/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/examples/logip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/stop-containers.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/functional/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/mock-json/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/mock-nginx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/mock-nginx/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/mock-squid/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/run-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/run-unit-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/restc-cpp/tests/unit/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

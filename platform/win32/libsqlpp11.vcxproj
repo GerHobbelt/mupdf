@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsqlpp11</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF60FA17}</ProjectGuid>
+    <RootNamespace>libsqlpp11</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLPP11;SQLPP11_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_fetch_content/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_find_package/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/constraints/count_of_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/constraints/max_of_max.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/constraints/must_not_insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/constraints/must_not_update.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/constraints/require_insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/As.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/Blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/CustomQuery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/DynamicWhere.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/ForUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/From.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/In.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/Insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/Operator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/Over.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/ParameterizedVerbatim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/TableAlias.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/Where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/aggregates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/date.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/date_time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/from.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/having.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/in.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/no_self_compare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/unwrapped_bool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/update_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/types/result_row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/BooleanExpression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/CustomQuery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/DateTime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Interpret.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Minimalistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Ppgen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Prepared.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Remove.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/SelectType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Union.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Update.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/With.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/CustomQuery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/DateTime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/DynamicSelect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/MoveConstructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Prepared.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Remove.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Truncated.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Union.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/Update.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/OnConflictEmptyWhereDoUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/OnConflictInvalidAssignmentsDoUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/OnConflictInvalidParameter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/OnConflictInvalidWhereDoUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/OnConflictMissingAction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/OnConflictMissingAssignmentsDoUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/OnConflictMissingParameterDoUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/ReturningEmptyAssert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/ReturningInvalidArgument.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Constructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Date.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/DateTime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/InsertOnConflict.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Returning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Transaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/Type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/scripts/sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/scripts/sample_identity_naming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/Attach.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/AutoIncrement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/Blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/DateTime.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/DynamicLoadingTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/DynamicSelect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/FloatingPoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/Integral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/Sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/Select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/Transaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/Union.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/With.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/connector_api/bind_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/connector_api/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/connector_api/interpreter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/connector_api/prepared_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/aggregate_function_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/aggregate_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/aggregate_functions/avg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/aggregate_functions/count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/aggregate_functions/max.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/aggregate_functions/min.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/aggregate_functions/sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/alias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/alias_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/alias_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/all_of.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/assignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/auto_alias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/bad_expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/basic_expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/boolean_expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/case.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/char_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/column.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/column_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/column_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/consistent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/cte.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/custom_query.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/blob/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/boolean/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/day_point/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/floating_point/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/integral/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/no_value/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/parameter_value_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/like.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/return_type_like.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/text/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_of_day/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/time_point/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral/column_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral/operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral/parameter_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/data_types/unsigned_integral/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/default_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/column_tuple_merge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/enable_if.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/get_first.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/get_last.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/index_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/pick_arg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/type_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/type_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/detail/void.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/dynamic_join.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/dynamic_pre_join.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/dynamic_select_column_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/exists.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/expression_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/expression_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/expression_return_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/field_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/for_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/from.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/group_by.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/having.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/hidden.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/in_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/inconsistent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/insert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/insert_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/insert_value_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/interpret_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/interpretable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/interpretable_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/into.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/is_equal_to_or_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/is_not_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/is_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/is_null_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/join.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/join_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/limit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/logic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/bind_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/char_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/char_result_row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/connection_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/mysql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/prepared_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/remove.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/sqlpp_mysql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/mysql/update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/named_interpretable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/no_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/no_name.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/noop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/noop_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/not_in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/on.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/operand_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/order_by.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/over.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/parameter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/parameter_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/parameterized_verbatim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/policy_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/portable_static_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/bind_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/connection_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/detail/connection_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/detail/prepared_statement_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/dynamic_libpq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/insert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/on_conflict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/on_conflict_do_nothing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/on_conflict_do_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/postgresql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/prepared_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/returning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/returning_column_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/postgresql/visibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/auto_increment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/blob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/bool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/comment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/datetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/floating_point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/foreign_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/not_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/primary_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/timestamp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/unique_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/unsigned_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/colops/varchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/tblops/character_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/tblops/comment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/tblops/default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/tblops/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/tools/tuple_pop_front.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/ppgen/tools/wrap_seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/pre_join.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/prepared_execute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/prepared_insert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/prepared_remove.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/prepared_select.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/prepared_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/remove.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/result_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/result_field_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/result_row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/result_row_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/schema_qualified_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/select.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/select_column_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/select_flag_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/select_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/select_pseudo_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/serializer_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/simple_column.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/single_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/some.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sort_order.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/bind_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/connection_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/dynamic_libsqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/insert_or.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/prepared_statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/prepared_statement_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlite3/sqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/sqlpp11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/statement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/statement_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/table_alias.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/table_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/transaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/trim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/unconditional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/union.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/union_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/union_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/update_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/using.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/value_or_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/value_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/value_type_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/verbatim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/verbatim_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/where.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/with.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/without_table_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/wrap_operand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/include/sqlpp11/wrong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/AssertTables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/MockDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/Sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/is_regular.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/TabJson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/TabSample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/BlobSample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/TabBar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/TabDateTime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/TabFoo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/TabSample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/assertThrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/make_test_connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/BlobSample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/FpSample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/IntegralSample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/TabSample.h" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/ChangeLog.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/dependencies/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/dependencies/hinnant_date/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Database.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Dynamic-Insert.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Dynamic-Select.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Exception-Handling.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Functions.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Home.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Insert.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/NULL.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/New-Features.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Prepared-Statements.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Remove.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Select.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Tables.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Threads.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Transactions.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/docs/Update.md" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_fetch_content/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_fetch_content/dependencies/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_fetch_content/dependencies/sqlpp11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_fetch_content/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_find_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/examples/usage_find_package/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/scripts/sqlite2cpp.py" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/core/constraints/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/core/serialize/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/core/static_asserts/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/core/types/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/core/usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/mysql/usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/constraints/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/postgresql/usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/scripts/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/tests/sqlite3/usage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlpp11/wishlist.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

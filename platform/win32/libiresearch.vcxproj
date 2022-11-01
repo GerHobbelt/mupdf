@@ -1,0 +1,1364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libiresearch</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA375B1}</ProjectGuid>
+    <RootNamespace>libiresearch</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/analyzers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/classification_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/collation_token_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/delimited_token_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/minhash_token_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/nearest_neighbors_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/ngram_token_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/pipeline_token_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/segmentation_token_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/text_token_normalizing_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/text_token_stemming_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/text_token_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/token_attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/token_stopwords_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/analysis/token_streams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/error/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/columnstore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/columnstore2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/format_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/formats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/formats_10.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/formats_10_attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/formats_burst_trie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/skip_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/formats/sparse_bitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/directory_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/field_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/field_meta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/file_names.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/index_meta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/index_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/index_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/iterators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/merge_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/postings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/segment_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/segment_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/index/sorted_column.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/all_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/all_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/bitset_doc_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/bm25.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/boolean_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/boost_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/collectors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/column_existence_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/cost.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/granular_range_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/levenshtein_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/multiterm_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/nested_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/ngram_similarity_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/ngram_similarity_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/phrase_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/phrase_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/prefix_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/proxy_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/range_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/same_position_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/score.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/scorers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/term_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/term_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/terms_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/tfidf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/search/wildcard_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/async_directory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/data_input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/data_output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/directory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/directory_attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/directory_cleaner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/fs_directory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/memory_directory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/mmap_directory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/store/store_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/async_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/automaton_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/bit_packing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/ctr_encryption.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/delta_compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/directory_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/encryption.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/file_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/index_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/levenshtein_default_pdp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/levenshtein_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/lz4compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/math_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/mman_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/mmap_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/network_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/numeric_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/process_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/snowball_stemmer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/so_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/thread_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/timer_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/utf8_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/version_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/core/utils/wildcard_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/args.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/autotune.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/densematrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/fasttext.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/loss.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/meter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/productquantizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/quantmatrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/vector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/aligned_allocator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/aligned_allocator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/base_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/contrib/image/image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/contrib/image/image_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/contrib/math/math_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/examples/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/examples/skeleton.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/examples/skeleton_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/highway_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/nanobenchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/nanobenchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/targets.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/targets_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/arithmetic_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/blockwise_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/combine_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/compare_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/convert_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/crypto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/list_targets.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/logical_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/mask_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/memory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/swizzle_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/io-funcs-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/io-funcs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-error-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-math-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-math.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/timer-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/timer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/context-fst-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/context-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/deterministic-fst-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/determinize-lattice-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/determinize-star-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/epsilon-property-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/factor-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/fstext-utils-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/grammar-context-fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/kaldi-fst-io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/lattice-utils-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/lattice-weight-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/pre-determinize-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/prune-special-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/push-special-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/push-special.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/remove-eps-local-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/table-matcher-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/trivial-factor-weight-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/compat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/flags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst-types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/mapped-file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/properties.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/symbol-table-ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/symbol-table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/openfst/weight.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/benchmarks/benchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/benchmarks/bitpackingbenchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/avx512bitpacking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/avxbitpacking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/simdbitpacking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/simdcomputil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/simdfor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/simdintegratedbitpacking.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/simdpackedsearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/src/simdpackedselect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/tests/unit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/tests/unit_chars.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/cmake/constexpr_if.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/bidirectional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/breaks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/case_mapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/code_point_to_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/collation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/collation_search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/app_state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/curses_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/key_mappings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/graphemes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/normalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/segmented_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/transcoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/example/trie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/bidi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/case_mapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/collation_data_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/collation_data_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/collation_data_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/data_versions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/grapheme_break.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/line_break.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/normalization_data_compose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/normalization_data_cp_props.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/sentence_break.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/external/text/src/word_break.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/microbench/lower_bound_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/microbench/microbench_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/microbench/segmentation_stream_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/microbench/simd_utils_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/microbench/top_term_collector_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/python/pyresearch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/analyzer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/classification_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/collation_token_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/delimited_token_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/minhash_token_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/nearest_neighbors_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/ngram_token_stream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/pipeline_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/segmentation_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/text_analyzer_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/text_token_normalizing_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/text_token_stemming_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/token_attributes_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/token_stopwords_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/analysis/token_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/columnstore2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_10_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_11_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_12_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_13_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_14_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_15_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_test_case_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/skip_list_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/formats/sparse_bitmap_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/assert_format.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/consolidation_policy_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/doc_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/field_meta_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/index_column_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/index_death_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/index_levenshtein_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/index_meta_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/index_profile_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/index_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/merge_writer_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/norm_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/postings_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/segment_writer_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/sorted_column_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/index/sorted_index_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/all_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/bitset_doc_iterator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/bm25_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/boolean_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/boost_attribute_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/column_existence_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/cost_attribute_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/empty_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/filter_test_case_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/granular_range_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/index_reader_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/levenshtein_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/nested_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/ngram_similarity_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/phrase_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/prefix_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/proxy_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/range_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/same_position_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/scorers_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/sort_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/term_filter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/terms_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/tfidf_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/top_terms_collector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/search/wildcard_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/store/directory_cleaner_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/store/directory_test_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/store/memory_index_output_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/store/store_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/tests_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/tests_param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/async_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/attributes_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/automaton_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/bit_packing_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/bit_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/bitset_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/bitvector_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/block_pool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/compression_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/container_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/crc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/directory_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/ebo_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/encryption_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/file_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/fst_builder_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/fst_string_weight_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/fst_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/levenshtein_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/map_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/math_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/memory_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/minhash_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/misc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/ngram_match_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/numeric_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/object_pool_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/ref_counter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/simd_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/std_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/string_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/thread_pool_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/type_utils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/utf8_path_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/utf8_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/tests/utils/wildcard_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/index-benchmarks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/index-convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/index-dump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/index-put.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/index-search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/index-util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/iresearch/utils/pdd.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/analyzer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/analyzers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/classification_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/collation_token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/collation_token_stream_encoder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/delimited_token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/minhash_token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/nearest_neighbors_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/ngram_token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/pipeline_token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/segmentation_token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/text_token_normalizing_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/text_token_stemming_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/text_token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/token_attributes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/token_stopwords_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/token_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/analysis/token_streams.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/error/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/columnstore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/columnstore2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/empty_term_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/format_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/formats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/formats_10.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/formats_10_attributes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/formats_burst_trie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/seek_cookie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/skip_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/formats/sparse_bitmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/column_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/comparer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/composite_reader_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/directory_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/field_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/field_meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/file_names.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/heap_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/index_features.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/index_meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/index_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/index_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/iterators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/merge_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/postings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/segment_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/segment_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/index/sorted_column.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/all_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/all_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/all_terms_collector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/bitset_doc_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/bm25.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/boolean_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/boost_sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/collectors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/column_existence_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/conjunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/cost.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/disjunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/exclusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/filter_visitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/granular_range_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/levenshtein_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/limited_sample_collector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/min_match_disjunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/multiterm_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/nested_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/ngram_similarity_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/ngram_similarity_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/phrase_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/phrase_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/phrase_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/prefix_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/prepared_state_visitor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/prev_doc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/proxy_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/range_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/same_position_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/score.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/scorers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/search_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/states/multiterm_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/states/ngram_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/states/phrase_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/states/term_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/states_cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/term_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/term_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/terms_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/tfidf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/top_terms_collector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/search/wildcard_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/shared.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/async_directory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/data_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/data_output.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/directory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/directory_attributes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/directory_cleaner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/fs_directory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/memory_directory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/mmap_directory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/store/store_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/arena_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/async_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/attribute_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/attribute_provider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/attributes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/automaton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/automaton_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/automaton_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/bit_packing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/bit_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/bitpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/bitset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/bitvector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/block_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/bytes_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/compression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/container_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/crc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/ctr_encryption.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/delta_compression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/directory_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/ebo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/encryption.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fasttext_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/file_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_builder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_decl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_draw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_matcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_sorted_range_matcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_states_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_string_ref_weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_string_weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_table_matcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/fst_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/fstext/immutable_fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/hash_set_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/hash_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/index_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/io_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/json_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/levenshtein_default_pdp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/levenshtein_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/lz4compression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/map_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/math_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/memory_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/minhash_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/mman_win32.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/mmap_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/network_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/ngram_match_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/noncopyable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/numeric_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/object_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/process_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/ref_counter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/register.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/runtime_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/simd_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/singleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/small_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/snowball_stemmer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/so_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/std.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/string_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/text_format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/thread_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/timer_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/type_id.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/type_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/type_limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/type_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/utf8_character_tables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/utf8_character_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/utf8_path.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/utf8_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/version_defines.template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/version_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/vpack_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/core/utils/wildcard_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/cmdline/cmdline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/autotune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/densematrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/fasttext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/loss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/meter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/productquantizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/quantmatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/real.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/fastText/src/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/algorithms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/basic_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/constexpr_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/elsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/pmh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/bits/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/frozen/include/frozen/unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/aligned_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/cache_control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/contrib/image/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/contrib/math/math-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/detect_compiler_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/detect_targets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/examples/skeleton-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/examples/skeleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/foreach_target.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/highway.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/nanobenchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/arm_neon-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/arm_sve-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/generic_ops-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/rvv-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/scalar-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/set_macros-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/shared-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/wasm_128-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/x86_128-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/x86_256-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/ops/x86_512-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/targets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/highway/hwy/tests/test_util-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/io-funcs-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/io-funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/kaldi-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/context-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/deterministic-fst-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/deterministic-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/determinize-lattice-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/determinize-lattice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/determinize-star-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/determinize-star.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/epsilon-property-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/epsilon-property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/factor-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/factor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/fst-test-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/fstext-lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/fstext-utils-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/fstext-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/grammar-context-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/kaldi-fst-io-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/kaldi-fst-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/lattice-utils-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/lattice-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/lattice-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/pre-determinize-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/pre-determinize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/prune-special-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/prune-special.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/push-special.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/rand-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/remove-eps-local-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/remove-eps-local.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/table-matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/fstext/trivial-factor-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/draw-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/accumulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/add-on.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/arc-arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/arc-map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/arc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/arcfilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/arcsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/bi-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/closure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/compact-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/complement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/compose-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/connect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/const-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/determinize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/dfs-visit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/difference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/disambiguate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/edit-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/epsnormalize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/equal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/equivalent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/expanded-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/expander-cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/expectation-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/factor-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/filter-state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/float-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/fst-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/fstlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/generic-register.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/icu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/intersect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/interval-set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/invert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/isomorphic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/label-reachable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/lexicographic-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/lookahead-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/lookahead-matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/mapped-file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/matcher-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/minimize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/mutable-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/pair-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/partition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/power-weight-mappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/power-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/product-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/project.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/prune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/push.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/randequivalent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/randgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/rational.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/register.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/relabel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/replace-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/replace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/reweight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/rmepsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/rmfinalepsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/set-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/shortest-distance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/shortest-path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/signed-log-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/sparse-power-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/sparse-tuple-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/state-map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/state-reachable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/state-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/statesort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/string-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/symbol-table-ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/symbol-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/synchronize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/test-properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/topsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/tuple-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/union-find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/union-weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/union.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/vector-fst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/visit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/allocators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/cursorstreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/encodedstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/encodings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/error/en.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/error/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/filereadstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/filewritestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/biginteger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/clzll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/diyfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/dtoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/ieee754.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/itoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/pow10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/strfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/strtod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/internal/swap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/istreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/memorybuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/memorystream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/msinttypes/inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/msinttypes/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/ostreamwrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/prettywriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/stringbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/uri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/rapidjson/rapidjson/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/avx512bitpacking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/avxbitpacking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/portability.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/simdbitpacking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/simdcomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/simdcomputil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/simdfor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/include/simdintegratedbitpacking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/sse2neon/emmintrin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/sse2neon/smmintrin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/sse2neon/sse2neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/app_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/curses_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/example/editor/key_mappings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/stl_interfaces/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/stl_interfaces/container_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/stl_interfaces/fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/stl_interfaces/iterator_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/stl_interfaces/reverse_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/stl_interfaces/sequence_container_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/stl_interfaces/view_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/bidirectional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/bidirectional_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/case_mapping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/collate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/collation_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/collation_search.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/collation_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/dangling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/af.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/am.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/as.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/az.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/be.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/bg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/bn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/bs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/bs_Cyrl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ca.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/chr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/cs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/cy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/da.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/de.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/de_AT.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/dsb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ee.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/el.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/en_US_POSIX.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/eo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/es.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/et.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/fa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/fa_AF.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/fi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/fil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/fo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/fr_CA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/gl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/gu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ha.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/haw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/he.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/hi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/hr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/hsb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/hu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/hy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/is.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ja.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ka.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/kk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/kl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/km.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/kn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ko.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/kok.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/lkt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ln.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/lo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/lt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/lv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/mk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/mn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/mr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/mt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/my.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/nb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ne.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/nn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/om.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/or.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/pa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/pl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ps.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ru.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/se.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/si.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/sk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/sl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/smn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/sq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/sr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/sr_Latn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/sv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/te.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/th.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/to.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/tr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/uk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/und.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/ur.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/uz.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/vi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/wo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/yi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/yo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data/zh.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/data_versions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/bidirectional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/break_prop_iter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/btree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/case_constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/case_mapping_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/case_mapping_tables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/collation_constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/collation_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/lexer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/lzw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/make_container.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/make_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/norm2_nfc_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/norm2_nfkc_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/norm_collate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/normalization_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/normalization_table_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/normalization_trie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/normalize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/rope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/rope_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/sentinel_tag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/serialization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/unpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/detail/vector_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/estimated_width.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/grapheme.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/grapheme_break.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/grapheme_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/grapheme_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/in_place_case_mapping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/lazy_segment_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/line_break.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/normalize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/normalize_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/normalize_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/normalize_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/paragraph_break.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/parser_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/rope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/rope_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/rope_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/save_load_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/segmented_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/segmented_vector_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/sentence_break.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/stream_safe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/string_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/string_utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/table_serialization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/text.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/text_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/text_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/transcode_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/transcode_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/transcode_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/trie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/trie_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/trie_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/trie_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/unencoded_rope.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/unencoded_rope_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/unencoded_rope_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/utf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/text/include/boost/text/word_break.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/utfcpp/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/utfcpp/utf8/checked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/utfcpp/utf8/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/utfcpp/utf8/cpp11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/external/utfcpp/utf8/unchecked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/python/pyresearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/tests/formats/formats_test_case_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/tests/index/assert_format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/tests/index/doc_generator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/tests/index/index_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/tests/search/filter_test_case_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/tests/tests_param.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/tests/tests_shared.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/utils/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/utils/index-convert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/utils/index-dump.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/utils/index-put.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/iresearch/utils/index-search.hpp" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/THIRD_PARTY_README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/fastText/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/fastText/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/fastText/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/fastText/fasttext.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/fastText/tests/fetch_test_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/frozen/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/CMakeLists.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/g3doc/design_philosophy.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/g3doc/quick_reference.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/g3doc/release_testing_process.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/libhwy-contrib.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/libhwy-test.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/libhwy.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/run_tests.bat" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/highway/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/kaldi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/kaldi/src/base/get_version.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/openfst/fst/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/makefile.vc" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/package.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/scripts/avx512packing.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/scripts/avxpacking.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/simdcomp/scripts/simdfor.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/snowball/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/doc/generate_perf_charts.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/doc/make_perf_chart.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/doc/make_perf_table.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/example/gen_gb_file.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/llvm-gcov.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_break_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_breaks.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_case_data.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_case_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_collation_data.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_collation_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_data.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_normalization_data.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_normalization_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/generate_unicode_tailoring_data.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/scripts/lzw.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/microbench/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/python/scripts/index-dump.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/python/swig/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/python/swig/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/ArangoDBLoader/BySampleLoader.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/ArangoDBLoader/BySchemaLoader.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/ArangoDBLoader/Schemas/EntitySchema.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/ArangoDBLoader/Schemas/LinkSchema.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/ArangoDBLoader/WikiLoader.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/Prometheus/Dashboard.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/Prometheus/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/Prometheus/PythonBenchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/download-benchmark-resources.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/format-benchmark-results.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/gtest-parallel/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/gtest-parallel/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/gtest-parallel/gtest_parallel.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/gtest-parallel/gtest_parallel_mocks.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/gtest-parallel/gtest_parallel_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/index-benchmark.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/search-benchmark.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/scripts/start-benchmark-comparison.sh" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/AdventureWorks2014.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/AdventureWorks2014Edges.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/AdventureWorksDW2014.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/AdventureWorksDW2014Edges.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/ECO_Monarch.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/Northwnd.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/NorthwndEdges.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/arango_demo.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/en/text_analyzer_stopwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/europarl.subset.big.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/europarl.subset.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/fst_prefixes.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/granular_sequential.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/levenshtein_sequential.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/ngram_similarity.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/numeric_sequence.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/phrase_sequential.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/postings.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/same_position.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_sequential.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_sequential_33.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_sequential_common_prefix.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_sequential_order.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_sequential_upper_case.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_sequential_utf8.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_single_column_multi_term.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/simple_two_column.csv" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/resources/v_DSS_Entity_id.json" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/tests/tests_config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/utils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/utils/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

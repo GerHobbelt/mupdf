@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpthread-win32</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8DF2C2}</ProjectGuid>
+    <RootNamespace>libpthread-win32</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/b/CMakeFiles/3.22.0-rc1/CompilerIdC/CMakeCCompilerId.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/b/CMakeFiles/3.22.0-rc1/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/b/target_arch_detect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/cleanup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/dll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/errno.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread-EH.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread-JMP.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getaffinity_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getdetachstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getinheritsched.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getname_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getschedparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getschedpolicy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getscope.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getstackaddr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getstacksize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setaffinity_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setdetachstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setinheritsched.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setname_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setschedparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setschedpolicy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setscope.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setstackaddr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_setstacksize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_barrier_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_barrier_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_barrier_wait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_barrierattr_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_barrierattr_getpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_barrierattr_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_barrierattr_setpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_cancel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_cond_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_cond_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_cond_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_cond_wait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_condattr_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_condattr_getpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_condattr_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_condattr_setpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_delay_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_detach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_equal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_getconcurrency.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_getname_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_getschedparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_getspecific.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_getunique_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_getw32threadhandle_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_join.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_key_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_key_delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_kill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutex_consistent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutex_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutex_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutex_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutex_timedlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutex_trylock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutex_unlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_getkind_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_getpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_getrobust.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_gettype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_setkind_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_setpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_setrobust.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_mutexattr_settype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_num_processors_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_once.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_rdlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_timedrdlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_timedwrlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_tryrdlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_trywrlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_unlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlock_wrlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlockattr_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlockattr_getpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlockattr_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_rwlockattr_setpshared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_self.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_setaffinity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_setcancelstate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_setcanceltype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_setconcurrency.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_setname_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_setschedparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_setspecific.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_spin_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_spin_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_spin_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_spin_trylock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_spin_unlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_testcancel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_timechange_handler_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_timedjoin_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_tryjoin_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_win32_attach_detach_np.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_MCS_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_callUserDestroyRoutines.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_calloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_cond_check_need_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_getprocessors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_is_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_mutex_check_need_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_new.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_processInitialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_processTerminate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_relmillisecs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_reuse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_rwlock_cancelwrwait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_rwlock_check_need_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_semwait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_spinlock_check_need_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_threadDestroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_threadStart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_throw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_timespec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_tkAssocCreate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/ptw32_tkAssocDestroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sched_get_priority_max.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sched_get_priority_min.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sched_getscheduler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sched_setaffinity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sched_setscheduler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sched_yield.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_close.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_destroy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_getvalue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_post.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_post_multiple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_timedwait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_trywait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_unlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/sem_wait.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/affinity1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/affinity2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/affinity3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/affinity4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/affinity5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/affinity6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/barrier1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/barrier2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/barrier3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/barrier4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/barrier5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/barrier6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/benchlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/benchtest1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/benchtest2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/benchtest3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/benchtest4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/benchtest5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel6a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel6d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cancel9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cleanup0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cleanup1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cleanup2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/cleanup3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar1_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar1_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar2_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar3_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar3_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar3_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/condvar9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/context1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/context2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/count1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/create1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/create2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/create3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/create3a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/delay1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/delay2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/detach1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/equal0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/equal1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/errno0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/errno1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exception1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exception2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exception3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exception3_0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exit1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exit2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exit3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exit4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exit5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/exit6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/eyal1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/inherit1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/join0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/join1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/join2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/join3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/join4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/kill1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/kill2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/loadfree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex1e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex1n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex1r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex2e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex3e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex3r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex6e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex6es.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex6n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex6r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex6rs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex6s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex7e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex7n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex7r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex8e.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex8n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/mutex8r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/name_np1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/name_np2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/once1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/once2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/once3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/once4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/openmp1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/priority1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/priority2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/reinit1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/reuse1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/reuse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/robust1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/robust2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/robust3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/robust4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/robust5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock2_t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock3_t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock4_t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock5_t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock6_t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock6_t2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/rwlock8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/self1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/self2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/semaphore1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/semaphore2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/semaphore3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/semaphore4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/semaphore4t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/semaphore5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/sequence1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/sequence2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/sizes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/spin1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/spin2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/spin3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/spin4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/stress1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/threestage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/timeouts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/tryentercs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/tryentercs2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/tsd1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/tsd2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/tsd3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/valid1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/valid2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/tests/wrapper4tests_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/w32_CancelableWait.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/_ptw32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/implement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/need_errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/pthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/sched.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/semaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/tests/benchtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2015/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2017/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2019/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2022/resource.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pthread-win32/b/version.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pthread-win32/version.rc" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/ChangeLog.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/GNUmakefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/CMakeCache.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/CMakeFiles/3.22.0-rc1/VCTargetsPath.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/CMakeFiles/TargetDirectories.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/libpthreadVC3.dir/Debug/libpthreadVC3.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/libpthreadVCE3.dir/Debug/libpthreadVCE3.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/libpthreadVSE3.dir/Debug/libpthreadVSE3.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/pthreadVC3.dir/Debug/pthreadVC3.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/pthreadVCE3.dir/Debug/pthreadVCE3.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/pthreadVSE3.dir/Debug/pthreadVSE3.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/x64/Debug/ALL_BUILD/ALL_BUILD.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/b/x64/Debug/ZERO_CHECK/ZERO_CHECK.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/builddmc.bat" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/cmake/version.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/ANNOUNCE.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/BUGS.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/CONTRIBUTORS.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/COPYING.FSF.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/COPYING.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/ChangeLog.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/NEWS.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/NOTICE.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/PROGRESS.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/README.Borland.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/README.CV.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/README.NONPORTABLE.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/README.Watcom.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/README.WinCE.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/TODO.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/WinCE-PORT.md" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/mamafile.py" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/tests/Debug.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/tests/GNUmakefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/tests/README.BENCHTESTS" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/tests/SIZES.VC" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/util/_update_from_cvs.sh" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/util/register_git_remotes_recursive.sh" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/windows/Debug.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2019/obj/Debug-Unicode-32bit-x86/pthread-Application-pthread_test/Debug.2019.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2019/obj/Debug-Unicode-32bit-x86/pthread-DynamicLibrary-pthread_dll/pthread.2019.vcxproj.FileListAbsolute.txt" />
+    <Text Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2019/obj/Debug-Unicode-32bit-x86/pthread-StaticLibrary-pthread_static_lib/pthread_lib.2019.vcxproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

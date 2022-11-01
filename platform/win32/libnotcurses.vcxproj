@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libnotcurses</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB02D52}</ProjectGuid>
+    <RootNamespace>libnotcurses</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNOTCURSES;NOTCURSES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/directmode-helloworld.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/python/notcurses/channels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/python/notcurses/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/python/notcurses/functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/python/notcurses/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/python/notcurses/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/python/notcurses/plane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/compat/compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/animate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/box.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/chunli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/dragon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/eagle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/fission.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/grid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/highcon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/hud.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/intro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/jungle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/keller.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/luigi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/mojibake.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/normal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/outro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/qrcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/reel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/sliders.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/trans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/uniblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/view.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/whiteout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/xray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/yield.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/demo/zoo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/fetch/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/fetch/ncart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/info/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/input/input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/automaton.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/banner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/blit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/fade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/fd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/fill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/gpm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/in.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/kitty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/layout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/menu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/metric.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/mice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/notcurses.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/plot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/progbar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/reel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/selector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/sixel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/sprite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/tabbed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/termdesc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/unixsig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/visual.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/lib/windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/FDPlane.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Menu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/MultiSelector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/NotCurses.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Plane.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Plot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Reel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Root.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Selector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Subproc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Tablet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libcpp/Utilities.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/libffi/ffi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/ls/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/man/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/man/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/man/structure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/media/ffmpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/media/none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/media/oiio-indep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/media/oiio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/media/shim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/player/play.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/bitmapstates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/blitters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/cjkscroll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/cli1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/cli2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/cli3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/direct-input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/dirgb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/dirlines.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/fbconscroll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/fileroller.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/gradients.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/grid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/interp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/linuxconjammer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/linuxconsole.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/menu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/multiselect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/ncwidth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/pixel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/procroller.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/qrcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/readline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/rgb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/rotate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/rtl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/scroll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/selector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/sgr-direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/sgr-full.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/statepixel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/tabbed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/poc/zalgo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/pocpp/ncpp_build.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/pocpp/ncpp_build_exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/pocpp/reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/pocpp/reel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/pocpp/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/pocpp/rgbbg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/pocpp/widestomp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/Exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/Ncpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/autogrow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/bitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/blit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/cell.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/channels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/egcpool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/fade.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/fbuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/fds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/fills.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/geom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/libunistring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/media.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/menu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/metric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/multiselector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/notcurses.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/palette.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/piles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/plane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/plot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/progbar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/reel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/reelgaps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/scrolling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/selector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/sixels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/stacking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/tabbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/tabs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/textlayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/visual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/wide.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tests/zaxis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/notcurses/src/tetris/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Cell.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/CellStyle.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Direct.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/FDPlane.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Menu.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/MultiSelector.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/NCAlign.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/NCBox.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/NCKey.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/NCLogLevel.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/NotCurses.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Palette.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Pile.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Plane.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Plot.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Progbar.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Reader.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Reel.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Root.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Selector.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Subproc.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Tablet.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/TabletCallback.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Utilities.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Visual.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/Widget.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/_exceptions.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/_flag_enum_operator_helpers.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/_helpers.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/internal/Helpers.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/ncpp/ncpp.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/notcurses/direct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/notcurses/nckeys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/notcurses/ncport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/notcurses/ncseqs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/include/notcurses/notcurses.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/python/notcurses/notcurses-python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/compat/compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/demo/demo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/fetch/ncart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/automaton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/banner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/blit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/blitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/egcpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/fbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/gpm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/sixel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/sprite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/termdesc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/unixsig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/visual-details.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/lib/windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/man/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/man/structure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/media/oiio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tests/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/background.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/clear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/gravity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/movedown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/movelateral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/newpiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/rotate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/score.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/stain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/stuck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/notcurses/src/tetris/ticker.h" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/PurpleDrank.jpg" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/Windows10Logo.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/atma.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/changes.jpg" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli01.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli02.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli03.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli04.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli05.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli06.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli07.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli08.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli09.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli10.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli11.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli12.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli13.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli14.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli15.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli16.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli17.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli18.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli19.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli20.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli21.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli22.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli23.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli24.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli25.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli26.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli27.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli28.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli29.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli3.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli30.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli31.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli38.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli4.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli40.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli45.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli5.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli6.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli7.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/chunli8.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/covid19.jpg" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/dsscaw-purp.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/eagles.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/fonts.jpg" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/freebsd.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/lamepatents.jpg" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/megaman2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/natasha-blur.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/normal.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/notcurses.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/onedot.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/spaceship.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/tetris-background.jpg" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/warmech.bmp" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/data/worldmap.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/directmode-helloworld.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/doc/icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/doc/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/doc/logo-1280x640.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/doc/logo-200x55.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/doc/sexblitter-perfection.png" />
+    <Image Include="../../thirdparty/owemdjee/notcurses/doc/worldmap-sexblitter.png" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/NEWS.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/README.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/TERMINALS.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/USAGE.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/ncdirect-pydemo.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/notcurses-pydemo.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/src/notcurses/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/src/notcurses/build_notcurses.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/cffi/src/notcurses/notcurses.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/data/changes.xcf" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/CURSES.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/HACKING.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/HISTORY.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/OTHERS.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/SUMMARY.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/basics.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/boxes.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/colors.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/directmode.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/fdwidget.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/input.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/media.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/menus.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/planes.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/plots.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/reader.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/reels.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/rendered.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/selectors.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/examples/src/writetext.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/ncls.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/ncneofetch.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/ncplayer.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/nctetris.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/notcurses-demo.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/notcurses-info.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/notcurses-input.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/notcurses-tester.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man1/tfman.1.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_capabilities.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_cell.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_channels.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_core.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_direct.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_fade.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_fds.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_init.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_input.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_lines.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_menu.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_metric.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_multiselector.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_output.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_palette.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_pile.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_plane.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_plot.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_progbar.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_reader.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_reel.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_refresh.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_render.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_selector.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_stats.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_stdplane.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_stop.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_tabbed.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_tree.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_util.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/man/man3/notcurses_visual.3.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/proposed-terminfo.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/release-checklist.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/doc/testing-checklist.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/HACKING.md" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/docs/nc_context.rst" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/docs/nc_direct.rst" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/docs/nc_input.rst" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/docs/nc_misc.rst" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/docs/nc_plane.rst" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/000-print-version.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/001-init-notcurses.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/002-hello-world.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/003-color-example.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/004-dimensions.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/005-nc-direct-print-used-memory-bars.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/006-input-tester.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/007-plane_split.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/008-put-lines.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/examples/009-box.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/notcurses/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/notcurses/notcurses.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/Notcurses++Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/NotcursesConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/NotcursesCoreConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/builddef.h.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/debrelease.sh" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/emojiprep.sh" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/function-table.sh" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/generate_ffi.py" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/interactive-tester.sh" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/notcurses++.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/notcurses-core.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/notcurses-ffi.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/notcurses.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/setup.cfg.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/notcurses/tools/version.h.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

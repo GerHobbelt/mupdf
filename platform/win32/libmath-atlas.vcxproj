@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libmath-atlas</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF08EA17}</ProjectGuid>
+    <RootNamespace>libmath-atlas</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATH_ATLAS;MATH_ATLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/auxiliary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_c2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_c3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_cblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_cblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_cblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_d2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_d3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_dblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_dblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_dblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_rblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_s2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_s3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_sblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_sblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_sblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_xerbla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_z2chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_z3chke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_zblas1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_zblas2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/c_zblas3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/cblas_xerbla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/FBLATST/axpbytst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/FBLATST/settst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/qr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/test_dynlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/tst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/ATL_gemm_SSE.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/ATL_gemvN_SSE.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/ATL_gemvT_SSE.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/ATL_gemv_SSE.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/ATL_ger1_SSE.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/asum_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/axpby_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/axpy_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/copy_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/cpsc_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/dot_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/scal_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/set_SSE_p4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_amm4x2x4_kb4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_cmm4x4x128_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm14x1x56_sse2pABC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm14x1x56_sse2pABC_K.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm14x1x56_sse2pABC_Kodd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm14x1x56_sse2pABC_MN.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm15x1x60_sse2_pABC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm15x1x60_sse2_pABC_NK.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm1x14x56_sse2pABC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm1x6x72_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm2x1x24_5pABC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm2x1x40_5pABC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm2x1x40_x87.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x1rp_x8664.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x1x44_4_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x1x90_x87.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x2x4_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x16_hppa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x16r8_US.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x2_US.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x2_mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x2pf_arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x2pf_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x32_ppc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x80_ppc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4x8_US.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4xUR2_mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4xUR3_mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm4x4xURx_mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm6x1x30_x87.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm6x1x60_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm6x1x60_sse2_32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm6x1x60pABC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm6x1x72_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm6x1x72_sse2_K.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm8x1x120_L1pf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm8x1x120_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm8x4x2_vsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dmm_sse2_6x4x60.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm2x1x40pf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x3x2p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x3x8p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x4x2rp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x4x4_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x4x56_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x4x8_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x4x8_bpfab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x4x8_bpfabc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm4x4x8p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm6x8x2_1p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm6x8x2_1pCU.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm6x8x8_1p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_mm8x8x2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_objdummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm10x1x120_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm14x1x84_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm14x1x84_sseCU.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x1x256_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x1x60_4_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x2x8_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x128_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x16_US.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x16_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x16_hppa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x2_US.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x2dld_arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x2pf_arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x4_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4x72_US.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm4x4xURx_mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm6x1x120_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm6x1x60_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm6x1x60_x87.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm6x1x80_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm8x2x4_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smmMNCU_av.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm_3dnow_90.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm_sse_6x1x60.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_smm_sse_6x4x60.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_dmm_julian_gas_30.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_dmm_sse2_80.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_dmm_sse2_80M.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_dmm_sse2_80N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_dmm_sse2_K.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_3dnow_100.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_3dnow_100M.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_3dnow_100N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_3dnow_K.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_56.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_56M.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_56N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_60.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_60M.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_60N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_64M.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_64N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse1_K.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse2_112.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse2_112M.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/ATL_smm_sse2_112N.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/external/ATL_gemvN_v6x8_vsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/external/ATL_gemvT_8xv3_vsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/external/ATL_gerk_vx4_vsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/external/ATL_smm4x4x4_neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/C/src/Cgen2dat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/C/src/Cgen3dat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/F77/src/Fgen2dat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/F77/src/Fgen3dat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/extract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/arch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/bvec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/fko.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/flow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/h2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/inst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/l2a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/optflow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/optloop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/optmisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/optreg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/optsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/printinst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/printregs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/symtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/vars.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_CachelineSize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_DestroyArchInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_DestroyInstInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_DestroyOptLoopInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_GetArchInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_GetInstInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_GetOptLoopInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_HasSpecialInst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_InststrToInt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_NumCachesC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_NumRegs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_ParseInfoLine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_PipelenADD.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_PipelenDIV.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_PipelenMAC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_PipelenMUL.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_RegtypesAliased.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_TypestrToInt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_Veclen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_system.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/fko_findPL.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/queryarch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/queryinst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/queryoloop.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER32AVXFMA4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDOZER64AVXFMA4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDDRIVER64AVXMAC/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDLLANO64SSE3/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core232SSE3/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei132SSE3/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei132SSE3/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei132SSE3/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei132SSE3/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei132SSE3/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei132SSE3/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei132SSE3/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVX/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVX/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVX/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVX/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVX/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVX/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVX/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264SSE3/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp6/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp6/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXMACp18/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXMACp18/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19632/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19632/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19632/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/gcc/atlas_ctXover_4p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/gcc/atlas_dtXover_4p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/gcc/atlas_stXover_4p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/gemm/gcc/atlas_ztXover_4p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/IBMz19664/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/lapack/gcc/atlas_ztGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/kern/atlas_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/lapack/gcc/atlas_cGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/lapack/gcc/atlas_ctGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/lapack/gcc/atlas_dGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/lapack/gcc/atlas_dtGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/lapack/gcc/atlas_sGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/lapack/gcc/atlas_stGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/lapack/gcc/atlas_zGetNB_geqrf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/atlas_cacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/atlas_csNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/atlas_tcacheedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/atlas_zdNKB.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/icc/cXover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/icc/dXover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/icc/sXover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/XeonPHI64AVXZ/gemm/icc/zXover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/CBLATST/cblas_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/ATL_gemv_ger_SSE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/camm_dpa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/camm_pipe3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/camm_scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/camm_strat1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/camm_tpipe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/CammMaguire/camm_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/PeterSoendergaard/SSE3Dnow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/C/src/Cgendat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/F77/src/Fgendat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_bvec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_flow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_h2l.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_inst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_l2a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_loop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_optflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_optloop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_optmisc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_optreg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_optsimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_symtab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/include/fko_vars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/include/fko_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/include/fko_infoC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/math-atlas/iFKO/include/fko_parseinfo.h" />
+    <Image Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/branch_list.png" />
+    <Image Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/branch_list_compare.png" />
+    <Image Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/forking_button.png" />
+    <Image Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/pull_button.png" />
+    <MASM Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/JulianRuhe/ATL_dJIK30x30x30TN30x30x0_a1_b0.asm" />
+    <MASM Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/JulianRuhe/ATL_dJIK30x30x30TN30x30x0_a1_b1.asm" />
+    <MASM Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/JulianRuhe/ATL_dJIK30x30x30TN30x30x0_a1_bX.asm" />
+    <MASM Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/JulianRuhe/ATL_sJIK48x48x48TN48x48x0_a1_b0.asm" />
+    <MASM Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/JulianRuhe/ATL_sJIK48x48x48TN48x48x0_a1_b1.asm" />
+    <MASM Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/JulianRuhe/ATL_sJIK48x48x48TN48x48x0_a1_bX.asm" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlF77blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlF77lin.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atllv2blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atllv3blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlpt1blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlpt2blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlpt3blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlptmblas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlrc2blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlrc3blas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlrefblas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Antoine/comments/atlwrpblas.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMD64K10h64SSE3p32/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp16/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp64/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/AMDRyzen64AVXMACp8/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64thund64p48/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARM64xgene164p8/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACNONIEEEp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa1532FPV3D32MACp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa732FPV3D32MACp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D16MACp2/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/ARMa932FPV3D32MACp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Core264SSE3/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei164SSE3p12/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei232AVXp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVX/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp12/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp16/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei264AVXp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp6/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp6/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp6/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei364AVXMACp6/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp24/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp36/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei3EP64AVXMACp8/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei464AVXMACp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXMACp18/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXMACp18/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXMACp18/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXMACp18/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp10/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/Corei4X64AVXZp18/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER864LEVSXp4/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/cPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/dPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/sPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/misc/ARCHDEF/POWER964LEVSXp8/zPerfSumm.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/Clint/tst.s" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/configure_git.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/development_workflow.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/dot2_dot3.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/following_latest.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/forking_hell.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/git_development.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/git_install.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/git_intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/git_resources.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/patching.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/gitwash/set_up_fork.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/devel/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/TexDoc/gitwash/tools/gitwash_dumper.py" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_amm6x1x1_x87.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_amm8x8x8_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_ammm12x3x1_fma3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm12x4x1_aarch64-A53.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm12x4x1_fma3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm12x4x2_fma3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm12x4x6_aarch64-A57.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm16x8x4_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm24x1x1_sse2.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm24x1x8_sse2.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm24x8x1_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm24x8x2_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm32x4x2rp_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm32x6x1_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm3x4x1_armpf.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm48x4x1_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm48x4x2_avxz.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm4x4x2rp_arm.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm5x5x1_armpf.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm5x5x2_aarch64.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm5x5x2_arm.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm5x5x2_armpf.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm6x3x2_sse3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm6x4x1_fma3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_damm8x6x2_fma3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dammm12x6x2_vsx.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dammm4x3x6_arm64.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_dkmmm14x1x2_sse3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_kmm5x5x8_fma.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_samm24x4x2_fma3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_samm4x6x1_arm.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_samm4x6x2_arm.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_samm4x6x2b_aarch64.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_sammm8x4x2_sse.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/ClintWhaley/ATL_skmmm12x1x4_sse3.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/external/ATL_sgemvT_8x4_neon.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/external/ATL_sger2K_NEON.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasBase/kernel/external/ATL_sger2K_NEON_lda4.S" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/scope.sh" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/AtlasTest/tar.sh" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/SYMBOL-TABLE.txt" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/hil_gram.y" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/iFKO/FKO/src/hil_lex.l" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/iFKO/fkotar.sh" />
+    <Text Include="../../thirdparty/owemdjee/math-atlas/iFKO/src/FKO_GetCycleCount.S" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

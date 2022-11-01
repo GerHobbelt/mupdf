@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>liboneTBB</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFABE05}</ProjectGuid>
+    <RootNamespace>liboneTBB</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBONETBB;ONETBB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/convideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/d2dvideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/gdivideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/macvideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/xvideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_hash_map/count_strings/count_strings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_priority_queue/shortpath/shortpath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/getting_started/sub_string_finder/sub_string_finder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/getting_started/sub_string_finder/sub_string_finder_extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/getting_started/sub_string_finder/sub_string_finder_pretty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/binpack/binpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/cholesky/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/cholesky/init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/dining_philosophers/dining_philosophers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/blocksort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/bzlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/compress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/crctable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/decompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/fgbzip2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/huffman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/randtable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/test_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/som/som.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/graph/som/som_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/game_of_life/Evolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/game_of_life/Game_of_life.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/game_of_life/Update_state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/polymain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/polyover.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/pover_video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/seismic_video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/universe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/apigeom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/apitrigeom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/bndbox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/camera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/coordsys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/cylinder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/extvol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/global.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/grid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/imageio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/imap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/intersect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/jpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/light.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/objbound.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/plane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/ppm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/pthread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/quadric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/render.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/ring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/shade.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/sphere.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/tachyon_video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/texture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/tgafile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.omp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.serial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.taskq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.tbb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.tbb1d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.threads.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.threads2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace_rest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/triangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/ui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/vol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/parallel_preorder/Graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/parallel_preorder/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/parallel_preorder/parallel_preorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_pipeline/square/gen_input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_pipeline/square/square.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/convex_hull/convex_hull_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/convex_hull/convex_hull_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/primes/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/primes/primes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/fractal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/task_group/sudoku/sudoku.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/examples/test_all/fibonacci/fibonacci.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/python/rml/ipc_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/python/rml/ipc_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/address_waiter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/arena.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/arena_slot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/concurrent_bounded_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/dynamic_link.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/global_control.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/governor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/itt_notify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/market.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/misc_ex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/observer_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/parallel_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/private_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/profiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/queuing_rw_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/rml_tbb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/rtm_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/rtm_rw_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/semaphore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/small_object_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/task_dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/task_group_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tools_api/ittnotify_static.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbb/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbbind/tbb_bind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/backend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/backref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/frontend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/large_objects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/tbbmalloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc_proxy/function_replacement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc_proxy/proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_allocators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_arena_constraints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_async_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_blocked_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_blocked_range2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_blocked_range3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_blocked_rangeNd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_broadcast_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_buffer_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_combinable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_composite_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_hash_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_lru_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_priority_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_unordered_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_concurrent_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_continue_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_enumerable_thread_specific.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_function_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_global_control.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_indexer_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_input_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_join_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_limiter_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_multifunction_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_overwrite_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_parallel_for.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_parallel_for_each.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_parallel_invoke.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_parallel_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_parallel_reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_parallel_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_parallel_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_priority_queue_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_queue_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_resumable_tasks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_sequencer_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_split_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_task_arena.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_task_group_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_tick_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_write_once_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_adaptive_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_allocators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_arena_constraints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_arena_priorities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_async_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_blocked_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_broadcast_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_buffer_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_collaborative_call_once.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_composite_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_hash_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_lru_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_monitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_priority_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_queue_whitebox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_unordered_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_unordered_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_concurrent_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_continue_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_dynamic_link.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_eh_algorithms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_eh_flow_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_eh_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_enumerable_thread_specific.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_environment_whitebox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_flow_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_flow_graph_priorities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_flow_graph_whitebox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_function_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_global_control.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_handle_perror.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_hw_concurrency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_implicit_linkage_on_windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_indexer_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_input_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_intrusive_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_join_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_join_node_key_matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_join_node_msg_key_matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_limiter_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_multifunction_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_openmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_overwrite_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_parallel_for.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_parallel_for_each.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_parallel_invoke.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_parallel_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_parallel_reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_parallel_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_parallel_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_partitioner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_priority_queue_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_profiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_queue_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_resumable_tasks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_scheduler_mix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_semaphore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_sequencer_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_split_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_tagged_msg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_task_arena.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_task_group.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_tbb_fork.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_tbb_header.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_tbb_header_secondary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_tick_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_write_once_node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_atexit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_compliance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_init_shutdown.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_lib_unload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_new_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_overload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_overload_disable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_pools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_pure_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_shutdown_hang.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_used_by_lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_malloc_whitebox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/oneTBB/test/tbbmalloc/test_scalable_allocator.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/winvideo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/xcode/tbbExample/OpenGLView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/xcode/tbbExample/tbbAppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/common/utility/fast_random.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/common/utility/get_default_num_threads.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/common/utility/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/bzlib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/bzlib_private.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/D_latch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/basics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/four_bit_adder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/one_bit_adder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/two_bit_adder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/graph/som/som.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/game_of_life/Board.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/game_of_life/Evolution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/gui/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/polymain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/polyover.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/pover_global.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/pover_video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/rpolygon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/gui/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/resource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/seismic_video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/universe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/gui/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/apitrigeom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/bndbox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/camera.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/coordsys.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/cylinder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/extvol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/global.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/grid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/imageio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/imap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/intersect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/jpeg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/light.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/machine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/objbound.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/plane.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/ppm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/pthread_w.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/quadric.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/render.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/ring.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/shade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/sphere.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/tachyon_video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/texture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/tgafile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/ui.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/src/vol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/parallel_preorder/Graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/parallel_preorder/Matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/convex_hull/convex_hull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/primes/primes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/fractal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/fractal_video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/gui/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/blocked_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/blocked_range2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/blocked_range3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/blocked_rangeNd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/cache_aligned_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/collaborative_call_once.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/combinable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_lru_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_priority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/concurrent_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_aggregator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_aligned_space.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_allocator_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_concurrent_queue_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_concurrent_skip_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_concurrent_unordered_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_containers_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_body_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_cache_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_indexer_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_item_buffer_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_join_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_node_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_node_set_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_nodes_deduction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_tagged_buffer_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_trace_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_flow_graph_types_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_hash_compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_intrusive_list_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_machine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_mutex_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_namespace_injection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_node_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_pipeline_filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_pipeline_filters_deduction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_range_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_rtm_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_rtm_rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_scoped_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_segment_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_small_object_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_string_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_task_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_template_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/detail/_waitable_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/enumerable_thread_specific.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/flow_graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/flow_graph_abstractions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/global_control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/memory_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/null_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/null_rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/parallel_for.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/parallel_for_each.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/parallel_invoke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/parallel_pipeline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/parallel_reduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/parallel_scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/parallel_sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/partitioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/profiling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/queuing_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/queuing_rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/scalable_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/spin_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/spin_rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/task_arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/task_group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/task_scheduler_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/tbb_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/tbbmalloc_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/tick_count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/oneapi/tbb/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/blocked_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/blocked_range2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/blocked_range3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/blocked_rangeNd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/cache_aligned_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/collaborative_call_once.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/combinable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_lru_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_priority_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/concurrent_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/enumerable_thread_specific.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/flow_graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/flow_graph_abstractions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/global_control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/memory_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/null_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/null_rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/parallel_for.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/parallel_for_each.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/parallel_invoke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/parallel_pipeline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/parallel_reduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/parallel_scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/parallel_sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/partitioner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/profiling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/queuing_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/queuing_rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/scalable_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/spin_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/spin_rw_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/task_arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/task_group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/task_scheduler_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/tbb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/tbb_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/tbbmalloc_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/tick_count.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/include/tbb/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/python/rml/ipc_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/arena_slot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/assert_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/co_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/concurrent_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/concurrent_monitor_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/dynamic_link.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/environment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/governor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/intrusive_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/itt_notify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/mailbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/market.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/market_concurrent_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/observer_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/rml_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/rml_tbb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/rml_thread_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/scheduler_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/semaphore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/small_object_pool_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/task_dispatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/task_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/thread_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tools_api/disable_warnings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tools_api/ittnotify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tools_api/ittnotify_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tools_api/ittnotify_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tools_api/ittnotify_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/tools_api/legacy/ittnotify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbb/waiters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/Customize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/MapMemory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/Statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/Synchronize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/TypeDefinitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/backend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/large_objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/shared_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/tbbmalloc_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/tbbmalloc_internal_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc_proxy/function_replacement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc_proxy/proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc_proxy/proxy_overload_osx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/allocator_overload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/allocator_stl_test_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/allocator_test_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/checktype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/common_arena_constraints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/concepts_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/concurrency_tracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/concurrent_associative_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/concurrent_lru_cache_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/concurrent_ordered_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/concurrent_priority_queue_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/concurrent_unordered_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/container_move_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/containers_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/cpu_usertime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/custom_allocators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/doctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/dummy_body.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/exception_handling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/fp_control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/graph_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/initializer_list_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/inject_scheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/memory_usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/node_handling_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/parallel_for_each_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/parallel_invoke_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/parallel_reduce_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/range_based_for_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/rwm_upgrade_downgrade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/spin_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/state_trackable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/test_comparisons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/test_follows_and_precedes_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/tls_limit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/utils_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/utils_concurrency_limit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/utils_dynamic_libs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/utils_env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/utils_report.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/utils_yield.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/common/vector_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_flowgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/conformance/conformance_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_join_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/oneTBB/test/tbb/test_partitioner.h" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/_static/favicons.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/_static/oneAPI-rgb-rev-100.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/Resources/TBB-128x128.gif" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/Resources/fg_api_graph_structure.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/Resources/make_edges_example.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/Resources/make_edges_usage.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/dependence_graph.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/execution_timeline2node.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/execution_timeline_dependence.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_complex.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_message_passing_protocol.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_reserve_buffers_1.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_reserve_buffers_2.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_reserve_buffers_3.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_reserve_buffers_4.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_reserve_buffers_5.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_reserve_buffers_6.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/flow_graph_reserve_buffers_7.png" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image002.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image004.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image007.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image008.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image009.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image010.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image011.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image012.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Images/image013.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Images/image002a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Images/image003a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Images/image004a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Images/image005a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Images/image006a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Images/image007a.jpg" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/speedup.gif" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/gui/SeismicSimulation.ico" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/gui/small.ico" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/gui/gui.ico" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/gui/small.ico" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/gui/gui.ico" />
+    <Image Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/gui/small.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/gui/polygon_overlay.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/gui/seismic.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/gui/tachyon.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/gui/fractal.rc" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/Bazel.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/cmake/post_install/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/cmake/templates/TBBConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/cmake/templates/TBBConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/GSG/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/GSG/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/_static/custom.js" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/Benefits.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/help_support.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/introducing_main.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/notation.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/intro/notices_and_disclaimers.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/blocking_terminate.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/concurrent_lru_cache_cls.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/constraints_extensions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/constructors_for_nodes.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/custom_mutex_chmap.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/follows_and_precedes_functions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/helpers_for_expressing_graphs.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/heterogeneous_extensions_chmap.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/info_namespace.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/info_namespace_extensions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/make_edges_function.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/make_node_set_function.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/mutex_cls.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/parallel_for_each_semantics.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/parallel_sort_ranges_extension.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/rw_mutex_cls.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/scalable_memory_pools.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/scalable_memory_pools/fixed_pool_cls.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/scalable_memory_pools/memory_pool_allocator_cls.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/scalable_memory_pools/memory_pool_cls.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/task_arena_extensions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/task_group_extensions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/task_group_extensions/task_handle.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/this_task_arena_extensions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/reference/type_specified_message_keys.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Advanced_Example.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Advanced_Topic_Other_Kinds_of_Iteration_Spaces.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Allocator_Configuration.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Automatic_Chunking.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Automically_Replacing_malloc.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Bandwidth_and_Cache_Affinity.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Basic_Flow_Graph_concepts.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Cancellation_Without_An_Exception.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Cancellation_and_Nested_Parallelism.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Concurrent_Queue_Classes.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Constraints.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Containers.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Controlling_Chunking.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Cook_Until_Done_parallel_do.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Data_Flow_Graph.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Debug_Versus_Release_Libraries.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Dependence_Graph.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Edges.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Exceptions_and_Cancellation.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_Buffering_in_Nodes.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_Message_Passing_Protocol.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_Reservation.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_Single_Vs_Broadcast.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_Tips.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_exception_tips.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_making_edges_tips.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_nested_parallelism_tips.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_resource_tips.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Flow_Graph_waiting_tips.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Graph_Main_Categories.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Graph_Object.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Guiding_Task_Scheduler_Execution.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Initializing_and_Terminating_the_Library.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Iterating_Over_a_Concurrent_Queue_for_Debugging.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Lambda_Expressions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Linux_C_Dynamic_Memory_Interface_Replacement.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Linux_OS.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Lock_Pathologies.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Mac_OS.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Mapping_Nodes2Tasks.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Memory_Allocation.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Migration_Guide.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Migration_Guide/Mixing_Two_Runtimes.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Migration_Guide/Task_API.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Migration_Guide/Task_Scheduler_Init.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/More_on_HashCompare.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Mutex_Flavors.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Mutual_Exclusion.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Nodes.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Non-Linear_Pipelines.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Package_Contents.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Parallelizing_Complex_Loops.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Parallelizing_Flow_Graph.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Parallelizing_Simple_Loops.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Partitioner_Summary.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Predefined_Node_Types.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Reader_Writer_Mutexes.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/References.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Scalable_Memory_Allocator.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Summary_of_Containers.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Summary_of_Loops_and_Pipelines.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Task-Based_Programming.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Task_Scheduler_Summary.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/The_Task_Scheduler.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Throughput_of_pipeline.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Timing.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/UpgradeDowngrade.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Using_Circular_Buffers.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/When_Not_to_Use_Queues.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/When_Task-Based_Programming_Is_Inappropriate.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Which_Dynamic_Libraries_to_Use.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Windows_C_Dynamic_Memory_Interface_Replacement.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Windows_OS_ug.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/Working_on_the_Assembly_Line_pipeline.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/always_use_wait_for_all.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/appendix_A.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/appendix_B.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/avoid_dynamic_node_removal.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/avoiding_data_races.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/broadcast_or_send.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/cancel_a_graph.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/cancelling_nested_parallelism.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/catching_exceptions.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/communicate_with_nodes.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/concurrent_hash_map.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/concurrent_vector_ug.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/create_token_based_system.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Agglomeration.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Design_Patterns.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Divide_and_Conquer.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Elementwise.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Fenced_Data_Transfer.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/GUI_Thread.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/General_References.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Local_Serializer.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Non-Preemptive_Priorities.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Odd-Even_Communication.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Reduction.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Reference_Counting.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/design_patterns/Wavefront.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/destroy_graphs_outside_main_thread.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/estimate_flow_graph_performance.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/parallel_for.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/parallel_reduce.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/title.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_concurrency_limits.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_graph_reset.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_input_node.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_limiter_node.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_make_edge.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_nested_algorithms.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/use_nested_flow_graphs.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/doc/main/tbb_userguide/work_isolation.rst" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/common/gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_hash_map/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_hash_map/count_strings/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_hash_map/count_strings/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_priority_queue/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_priority_queue/shortpath/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/concurrent_priority_queue/shortpath/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/getting_started/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/getting_started/sub_string_finder/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/getting_started/sub_string_finder/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/binpack/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/binpack/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/cholesky/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/cholesky/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/dining_philosophers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/dining_philosophers/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/fgbzip2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/logic_sim/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/som/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/graph/som/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/game_of_life/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/game_of_life/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/polygon_overlay/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/seismic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for/tachyon/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/parallel_preorder/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_for_each/parallel_preorder/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_pipeline/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_pipeline/square/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_pipeline/square/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/convex_hull/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/convex_hull/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/primes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/parallel_reduce/primes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/task_arena/fractal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/task_group/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/task_group/sudoku/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/task_group/sudoku/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/test_all/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/test_all/fibonacci/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/examples/test_all/fibonacci/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/linux/env/vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/linux/env/vars.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/linux/sys_check/sys_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/mac/env/vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/mac/env/vars.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/pkg-config/tbb.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/windows/env/vars.bat" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/windows/env/vars.bat.in" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/integration/windows/sys_check/sys_check.bat" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/TBB.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/rml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/tbb/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/tbb/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/tbb/pool.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/python/tbb/test.py" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/src/tbb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/src/tbbbind/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/src/tbbmalloc_proxy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/oneTBB/third-party-programs.txt" />
+    <Xml Include="../../thirdparty/owemdjee/oneTBB/doc/DoxygenLayout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
