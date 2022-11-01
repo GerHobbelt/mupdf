@@ -1,10 +1,12 @@
-//
+﻿//
 // add C/C++ source files to a vcxproj file & vcxproj.filter file
 // 
 // usage: run as
 //
 //     node ./add-sources-to-vcxproj.js your_project.vcxproj path-to-sources/ [ignoreSpecFile]
 //
+
+// UTF8 hint for editors: aAÀÁÂÃÄÅàáâãäåɑΑαаᎪbBßʙΒβВЬᏴᛒcCϲϹСсᏟⅭⅽ𐐠dDĎďĐđԁժᎠḍⅮⅾeEÈÉÊËéêëĒēĔĕĖėĘĚěΕЕеᎬfFϜgGɡɢԌնᏀhHʜΗНһᎻiIlΙІіjJϳЈјյᎫkKΚКᏦᛕKLʟᏞⅬmMΜϺМᎷᛖⅯⅿnNɴΝ0OoΟοОоՕpPΡρРрᏢqQႭႳrRʀᏒᚱsSЅѕՏႽᏚtTΤτТᎢuUμυԱՍ⋃vVνѴѵᏙⅤⅴwWѡᎳxXΧχХхⅩⅹyYʏΥγуҮzZΖᏃ!
 
 let fs = require('fs');
 let path = require('path');
@@ -42,6 +44,37 @@ const globDefaultOptions = {
 
 function unixify(path) {
   return path.replace(/\\/g, '/');
+}
+
+function xmlEncode(path) {
+	return path.replace(/["'<>&;?*]/g, function (m) {
+		switch (m) {
+			case '"':
+				return "&quot;";
+
+			case "'":
+				return "&apos;";
+
+			case "<":
+				return "&lt;";
+
+			case ">":
+				return "&gt;";
+
+			case "&":
+				return "&amp;";
+
+			case ";":
+				console.warn("WARNING: Filename contains semicolon. Using Unicode homoglyph to appease MSVC, but you SHOULD rename the bugger to be safe!\n    File:", path);
+				return ";";  // use a Unicode homoglyph as MSVC20XX b0rks on projects including files which include a semicolon in their name -- even when you HTML-entity-encode the bugger!
+
+			case "?":
+			case "*":
+				console.warn(`WARNING: Filename contains wildcard '${m}'. Using underscore to appease MSVC, but you MUST rename the bugger to be safe!\n    File:`, path);
+				return "_";
+		}
+		return m;
+	});
 }
 
 let ignores = [];
@@ -290,12 +323,12 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   for (let item of Array.from(filterDirs.keys()).sort().values()) {
     item = item.replace(/\//g, '\\');
     do {
-      if (!m.includes(`<Filter Include="${item}">`)) {
+      if (!m.includes(`<Filter Include="${xmlEncode(item)}">`)) {
         fcnt++;
         let cntstr = '' + fcnt;
         cntstr = cntstr.padStart(4, '0');
         let slot = `
-    <Filter Include="${item}">
+    <Filter Include="${xmlEncode(item)}">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f${cntstr}}</UniqueIdentifier>
     </Filter>
         `;
@@ -336,14 +369,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <Text Include="${f}">
-      <Filter>${base}</Filter>
+    <Text Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </Text>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <Text Include="${f}" />
+    <Text Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -366,14 +399,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <ClCompile Include="${f}">
-      <Filter>${base}</Filter>
+    <ClCompile Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </ClCompile>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <ClCompile Include="${f}" />
+    <ClCompile Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -397,14 +430,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <ClInclude Include="${f}">
-      <Filter>${base}</Filter>
+    <ClInclude Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </ClInclude>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <ClInclude Include="${f}" />
+    <ClInclude Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -423,14 +456,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <ResourceCompile Include="${f}">
-      <Filter>${base}</Filter>
+    <ResourceCompile Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </ResourceCompile>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <ResourceCompile Include="${f}" />
+    <ResourceCompile Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -453,14 +486,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <Image Include="${f}">
-      <Filter>${base}</Filter>
+    <Image Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </Image>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <Image Include="${f}" />
+    <Image Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -481,14 +514,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <Font Include="${f}">
-      <Filter>${base}</Filter>
+    <Font Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </Font>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <Font Include="${f}" />
+    <Font Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -509,14 +542,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <Text Include="${f}">
-      <Filter>${base}</Filter>
+    <Text Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </Text>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <Text Include="${f}" />
+    <Text Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -535,14 +568,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <MASM Include="${f}">
-      <Filter>${base}</Filter>
+    <MASM Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </MASM>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <MASM Include="${f}" />
+    <MASM Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -562,14 +595,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <None Include="${f}">
-      <Filter>${base}</Filter>
+    <None Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </None>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <None Include="${f}" />
+    <None Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
@@ -588,14 +621,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <Xml Include="${f}">
-      <Filter>${base}</Filter>
+    <Xml Include="${xmlEncode(f)}">
+      <Filter>${xmlEncode(base)}</Filter>
     </Xml>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <Xml Include="${f}" />
+    <Xml Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
