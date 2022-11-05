@@ -1161,7 +1161,14 @@ tiff_decode_ifd(fz_context *ctx, struct tiff *tiff)
 	if (tiff->planar != 1)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "image data is not in chunky format");
 
-	if (tiff->photometric == 6)
+	if (tiff->photometric == 4)
+	{
+		if (tiff->samplesperpixel != 1)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported samples per pixel for transparency mask");
+		if (tiff->bitspersample != 1)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported bits per sample for transparency mask");
+	}
+	else if (tiff->photometric == 6)
 	{
 		if (tiff->samplesperpixel != 3)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported samples per pixel when subsampling");
