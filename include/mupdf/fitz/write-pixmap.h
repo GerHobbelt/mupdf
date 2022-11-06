@@ -370,6 +370,22 @@ fz_buffer* fz_new_buffer_from_image_as_muraw(fz_context* ctx, const fz_image* im
 fz_buffer* fz_new_buffer_from_pixmap_as_muraw(fz_context* ctx, const fz_pixmap* pixmap, fz_color_params color_params);
 
 /**
+	Save a (Greyscale or RGB) pixmap as a webp.
+*/
+void fz_save_pixmap_as_webp(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+
+/**
+	Write a (Greyscale or RGB) pixmap as a webp.
+*/
+void fz_write_pixmap_as_webp(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap);
+
+/**
+	Create a new webp band writer (greyscale or RGB, with or without
+	alpha).
+*/
+fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out);
+
+/**
 	Save a pixmap as a pnm (greyscale or rgb, no alpha).
 */
 void fz_save_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
