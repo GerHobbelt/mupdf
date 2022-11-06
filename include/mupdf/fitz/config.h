@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -233,6 +233,10 @@
 #define FZ_ENABLE_EPUB 1
 #endif /* FZ_ENABLE_EPUB */
 
+#ifndef FZ_ENABLE_WEBP
+#define FZ_ENABLE_WEBP 1
+#endif /* FZ_ENABLE_WEBP */
+
 #ifndef FZ_ENABLE_OCR_OUTPUT
 #define FZ_ENABLE_OCR_OUTPUT 1
 #endif /* FZ_ENABLE_OCR_OUTPUT */
@@ -259,10 +263,6 @@
 
 #ifndef FZ_ENABLE_TIFF
 #define FZ_ENABLE_TIFF 1
-#endif
-
-#ifndef FZ_ENABLE_WEBP
-#define FZ_ENABLE_WEBP 1
 #endif
 
 #ifndef FZ_ENABLE_JS

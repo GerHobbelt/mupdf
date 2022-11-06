@@ -244,6 +244,70 @@ endif
 
 endif
 
+# --- LIBWEBP ---
+
+LIBWEBP_CFLAGS += -Ithirdparty/libwebp/src
+
+LIBWEBP_BUILD_CFLAGS += -Ithirdparty/libwebp
+
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/alpha_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/buffer_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/frame_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/idec_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/io_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/quant_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/tree_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/vp8_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/vp8l_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dec/webp_dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/alpha_processing.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/alpha_processing_mips_dsp_r2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/alpha_processing_neon.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/alpha_processing_sse2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/alpha_processing_sse41.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/cpu.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec_clip_tables.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec_mips32.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec_mips_dsp_r2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec_msa.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec_neon.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec_sse2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/dec_sse41.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/filters.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/filters_mips_dsp_r2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/filters_msa.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/filters_neon.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/filters_sse2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/lossless.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/lossless_mips_dsp_r2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/lossless_msa.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/lossless_neon.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/lossless_sse2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/rescaler.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/rescaler_mips32.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/rescaler_mips_dsp_r2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/rescaler_msa.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/rescaler_neon.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/rescaler_sse2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/upsampling.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/upsampling_mips_dsp_r2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/upsampling_msa.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/upsampling_neon.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/upsampling_sse2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/yuv.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/yuv_mips32.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/yuv_mips_dsp_r2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/dsp/yuv_sse2.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/bit_reader_utils.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/color_cache_utils.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/huffman_utils.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/quant_levels_dec_utils.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/random_utils.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/rescaler_utils.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/thread_utils.c
+LIBWEBP_SRC += thirdparty/libwebp/src/utils/utils.c
+
 # --- LCMS2 (multi-threaded fork) ---
 
 LCMS2_CFLAGS += -Ithirdparty/lcms2/include

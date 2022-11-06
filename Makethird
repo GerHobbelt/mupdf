@@ -231,6 +231,19 @@ $(OUT)/thirdparty/libwebp/%.o: thirdparty/libwebp/%.c
 
 endif
 
+# --- WebP ---
+
+ifeq ($(USE_SYSTEM_WEBP),yes)
+  THIRD_CFLAGS += $(SYS_WEBP_CFLAGS)
+  THIRD_LIBS += $(SYS_WEBP_LIBS)
+else
+  THIRD_CFLAGS += $(LIBWEBP_CFLAGS)
+  THIRD_LIBS += $(LIBWEBP_LIBS)
+  THIRD_SRC += $(LIBWEBP_SRC)
+$(OUT)/thirdparty/libwebp/%.o: thirdparty/libwebp/%.c
+	$(CC_CMD) $(LIB_CFLAGS) $(LIBWEBP_CFLAGS) $(LIBWEBP_BUILD_CFLAGS)
+endif
+
 # --- ZLIB ---
 
 ifeq ($(USE_SYSTEM_ZLIB),yes)

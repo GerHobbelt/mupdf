@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1233,8 +1233,10 @@ void fz_set_pixmap_image_tile(fz_context *ctx, fz_pixmap_image *image, fz_pixmap
 }
 
 int
-fz_recognize_image_format(fz_context *ctx, unsigned char p[16])
+fz_recognize_image_format(fz_context *ctx, const unsigned char *p, int n)
 {
+	if (n < 16)
+		return FZ_IMAGE_UNKNOWN;
 	if (p[0] == 'P' && p[1] >= '1' && p[1] <= '7')
 		return FZ_IMAGE_PNM;
 	if (p[0] == 'P' && (p[1] == 'F' || p[1] == 'f'))
@@ -1251,8 +1253,11 @@ fz_recognize_image_format(fz_context *ctx, unsigned char p[16])
 		return FZ_IMAGE_PNG;
 	if (p[0] == 'I' && p[1] == 'I' && p[2] == 0xBC)
 		return FZ_IMAGE_JXR;
-	if (!memcmp(p, "RIFF", 4) && !memcmp(p+8, "WEBPVP8 ", 8))
-		return FZ_IMAGE_WEBP;
+	if (!memcmp(p, "RIFF", 4) && !memcmp(p+8, "WEBP", 4))
+	{
+		if (!memcmp(p+12, "VP8 ", 4) || !memcmp(p+12, "VP8L", 4) || !memcmp(p+12, "VP8X", 4))
+			return FZ_IMAGE_WEBP;
+	}
 	if (p[0] == 'I' && p[1] == 'I' && p[2] == 42 && p[3] == 0)
 		return FZ_IMAGE_TIFF;
 	if (p[0] == 'M' && p[1] == 'M' && p[2] == 0 && p[3] == 42)
@@ -1288,10 +1293,7 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 	int bpc;
 	uint8_t orientation = 0;
 
-	if (len < 16)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
-
-	type = fz_recognize_image_format(ctx, buf);
+	type = fz_recognize_image_format(ctx, buf, len);
 	bpc = 8;
 	switch (type)
 	{

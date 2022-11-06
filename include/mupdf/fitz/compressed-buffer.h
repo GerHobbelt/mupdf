@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -122,10 +122,9 @@ fz_stream *fz_open_image_decomp_stream_from_buffer(fz_context *ctx, fz_compresse
 fz_stream *fz_open_image_decomp_stream(fz_context *ctx, fz_stream *, fz_compression_params *, int *l2factor);
 
 /**
-	Recognise image format strings in the first 8 bytes from image
-	data.
+	Recognise image formats by looking for magic signatures.
 */
-int fz_recognize_image_format(fz_context *ctx, unsigned char p[8]);
+int fz_recognize_image_format(fz_context *ctx, const unsigned char *p, int size);
 
 enum
 {
@@ -148,10 +147,10 @@ enum
 	FZ_IMAGE_JPEGXL,
 	FZ_IMAGE_JPX,
 	FZ_IMAGE_JXR,
-	FZ_IMAGE_WEBP,
 	FZ_IMAGE_PNG,
 	FZ_IMAGE_PNM,
 	FZ_IMAGE_TIFF,
+	FZ_IMAGE_WEBP,
 };
 
 /**

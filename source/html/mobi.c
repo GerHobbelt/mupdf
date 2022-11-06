@@ -258,17 +258,14 @@ fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi)
 		for (i = extra; i < n; ++i)
 		{
 			uint32_t size = offset[i+1] - offset[i];
-			if (size > 8)
+			unsigned char *data = mobi->data + offset[i];
+			if (fz_recognize_image_format(ctx, data, size))
 			{
-				unsigned char *data = mobi->data + offset[i];
-				if (fz_recognize_image_format(ctx, data))
-				{
-					buffer = fz_new_buffer_from_copied_data(ctx, data, size);
-					fz_snprintf(buf, sizeof buf, "%05d", recindex);
-					tree = fz_tree_insert(ctx, tree, buf, buffer);
-					buffer = NULL;
-					recindex++;
-				}
+				buffer = fz_new_buffer_from_copied_data(ctx, data, size);
+				fz_snprintf(buf, sizeof buf, "%05d", recindex);
+				tree = fz_tree_insert(ctx, tree, buf, buffer);
+				buffer = NULL;
+				recindex++;
 			}
 		}
 	}
