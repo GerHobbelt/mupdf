@@ -557,6 +557,11 @@ tabulate
 portable-snippets
 salieri
 honggfuzz
+rsync
+unpaper
+shadesmar
+libuv
+ucx
 
 EOT
 )
