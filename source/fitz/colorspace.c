@@ -1426,6 +1426,9 @@ fz_convert_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst,
 		return;
 	}
 
+	if (!ss)
+		ss = fz_default_gray(ctx, default_cs);
+
 	fz_try(ctx)
 	{
 		/* Convert indexed into base colorspace. */
