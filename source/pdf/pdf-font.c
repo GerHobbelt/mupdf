@@ -1494,7 +1494,10 @@ pdf_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict)
 	if ((fontdesc = pdf_find_item(ctx, pdf_drop_font_imp, dict)) != NULL)
 	{
 		if (fontdesc->t3loading)
+		{
+			pdf_drop_font(ctx, fontdesc);
 			fz_throw(ctx, FZ_ERROR_GENERIC, "recursive type3 font");
+		}
 		return fontdesc;
 	}
 
