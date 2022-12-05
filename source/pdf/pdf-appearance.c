@@ -106,6 +106,27 @@ pdf_write_opacity(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj **r
 	pdf_write_opacity_blend_mode(ctx, annot, buf, res, FZ_BLEND_NORMAL);
 }
 
+static void
+pdf_write_dash_pattern(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj **res)
+{
+	int count = pdf_annot_border_dash_count(ctx, annot);
+	int i;
+
+	if (count == 0)
+		return;
+
+	fz_append_printf(ctx, buf, "[");
+	for (i = 0; i < count; ++i)
+	{
+		float length = pdf_annot_border_dash_item(ctx, annot, i);
+		if (i == 0)
+			fz_append_printf(ctx, buf, "%g", length);
+		else
+			fz_append_printf(ctx, buf, " %g", length);
+	}
+	fz_append_printf(ctx, buf, "]0 d\n");
+}
+
 static float pdf_write_border_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf)
 {
 	float w = pdf_annot_border(ctx, annot);
@@ -356,6 +377,7 @@ pdf_write_line_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_
 	int ic;
 
 	pdf_write_opacity(ctx, annot, buf, res);
+	pdf_write_dash_pattern(ctx, annot, buf, res);
 	w = pdf_write_border_appearance(ctx, annot, buf);
 	sc = pdf_write_stroke_color_appearance(ctx, annot, buf);
 	ic = pdf_write_interior_fill_color_appearance(ctx, annot, buf);
@@ -405,6 +427,7 @@ pdf_write_square_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, f
 	int ic;
 
 	pdf_write_opacity(ctx, annot, buf, res);
+	pdf_write_dash_pattern(ctx, annot, buf, res);
 	lw = pdf_write_border_appearance(ctx, annot, buf);
 	sc = pdf_write_stroke_color_appearance(ctx, annot, buf);
 	ic = pdf_write_interior_fill_color_appearance(ctx, annot, buf);
@@ -457,6 +480,7 @@ pdf_write_circle_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, f
 	int ic;
 
 	pdf_write_opacity(ctx, annot, buf, res);
+	pdf_write_dash_pattern(ctx, annot, buf, res);
 	lw = pdf_write_border_appearance(ctx, annot, buf);
 	sc = pdf_write_stroke_color_appearance(ctx, annot, buf);
 	ic = pdf_write_interior_fill_color_appearance(ctx, annot, buf);
@@ -488,6 +512,7 @@ pdf_write_polygon_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, 
 	int sc, ic;
 
 	pdf_write_opacity(ctx, annot, buf, res);
+	pdf_write_dash_pattern(ctx, annot, buf, res);
 	lw = pdf_write_border_appearance(ctx, annot, buf);
 	sc = pdf_write_stroke_color_appearance(ctx, annot, buf);
 	ic = pdf_write_interior_fill_color_appearance(ctx, annot, buf);
@@ -563,6 +588,7 @@ pdf_write_ink_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz_r
 	int sc;
 
 	pdf_write_opacity(ctx, annot, buf, res);
+	pdf_write_dash_pattern(ctx, annot, buf, res);
 	lw = pdf_write_border_appearance(ctx, annot, buf);
 	sc = pdf_write_stroke_color_appearance(ctx, annot, buf);
 
@@ -1762,6 +1788,7 @@ pdf_write_free_text_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf
 	*bbox = fz_make_rect(0, 0, w, h);
 
 	pdf_write_opacity(ctx, annot, buf, res);
+	pdf_write_dash_pattern(ctx, annot, buf, res);
 
 	if (pdf_write_fill_color_appearance(ctx, annot, buf))
 		fz_append_printf(ctx, buf, "0 0 %g %g re\nf\n", w, h);
