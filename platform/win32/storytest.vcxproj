@@ -46,20 +46,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -118,7 +118,7 @@
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -133,7 +133,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
       <SDLCheck>false</SDLCheck>
@@ -150,8 +150,16 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -166,7 +174,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -187,7 +195,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -206,7 +214,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -227,13 +235,13 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Memento|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;WIN32;_DEBUG;MEMENTO=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -245,7 +253,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Memento|x64'">
@@ -254,7 +262,7 @@
     </Midl>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;WIN64;_DEBUG;MEMENTO=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -266,7 +274,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\scripts\freetype;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\extract\include;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\zlib;..\..\thirdparty\freetype\include;..\..\thirdparty\mujs;..\..\thirdparty\harfbuzz\src;..\..\thirdparty\lcms2\include;..\..\thirdparty\tesseract\include;..\..\scripts\tesseract;..\..\thirdparty\leptonica/src;..\..\scripts\zlib;..\..\scripts\libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;..\..\scripts\libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -412,7 +420,8 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
