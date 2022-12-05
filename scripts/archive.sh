@@ -33,7 +33,7 @@ make_submodule_archive lcms2		testbed plugins/fast_float
 make_submodule_archive leptonica	prog
 make_submodule_archive libjpeg		libjpeg/test*
 make_submodule_archive mujs
-make_submodule_archive openjpeg
+make_submodule_archive openjpeg		thirdparty/openjpeg/thirdparty tests tools wrapping bin
 make_submodule_archive tesseract	unittest
 make_submodule_archive zlib		test contrib
 make_submodule_archive libwebp		tests webp_js
