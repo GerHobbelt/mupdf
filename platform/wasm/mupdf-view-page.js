@@ -193,11 +193,14 @@ class MupdfPageViewer {
 
 	// TODO - remove dpi param
 	_updateSize(dpi) {
-		this.rootNode.style.width = (this.size.width * dpi / 72) + "px";
-		this.rootNode.style.height = (this.size.height * dpi / 72) + "px";
-		this.canvasNode.style.width = (this.size.width * dpi / 72) + "px";
-		this.canvasNode.style.height = (this.size.height * dpi / 72) + "px";
-}
+		// We use the `foo | 0` notation to convert dimensions to integers.
+		// This matches the conversion done in `mupdf.js` when `Pixmap.withBbox`
+		// calls `libmupdf._wasm_new_pixmap_with_bbox`.
+		this.rootNode.style.width = (this.size.width * dpi / 72 | 0) + "px";
+		this.rootNode.style.height = (this.size.height * dpi / 72 | 0) + "px";
+		this.canvasNode.style.width = (this.size.width * dpi / 72 | 0) + "px";
+		this.canvasNode.style.height = (this.size.height * dpi / 72 | 0) + "px";
+	}
 
 	async _loadPageImg(renderArgs) {
 		if (this.renderPromise != null || this.renderIsOngoing) {
@@ -598,7 +601,6 @@ class MupdfDocumentViewer {
 		this.currentSearchPage = 1;
 
 		// TODO use rootDiv instead
-		let zoomTimer = null;
 		pagesDiv.addEventListener("wheel", (event) => {
 			if (event.ctrlKey || event.metaKey) {
 				if (event.deltaY < 0)

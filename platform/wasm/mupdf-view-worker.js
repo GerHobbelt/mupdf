@@ -24,26 +24,60 @@
 
 "use strict";
 
-
 // Import the WASM module
+// We do additional fetches to these paths to have better error messages in case
+// they're missing because the user forgot to compile them.
 if (globalThis.SharedArrayBuffer != null) {
+	checkPath("mupdf-wasm.wasm");
+	checkPath("mupdf-wasm.js");
 	importScripts("mupdf-wasm.js");
 } else {
-	console.warn("SharedArrayBuffer not found. Loading mupdf.js single-threaded fallback");
+	checkPath("mupdf-wasm-singlethread.wasm");
+	checkPath("mupdf-wasm-singlethread.js");
 	importScripts("mupdf-wasm-singlethread.js");
 }
 importScripts("lib/mupdf.js");
 
-mupdf.ready.then(result => {
-	postMessage(["READY", result.sharedBuffer]);
-});
+mupdf.ready
+	.then(result => postMessage(["READY", result.sharedBuffer]))
+	.catch(error => postMessage(["ERROR", error]));
+
+function checkPath(path) {
+	fetch(path, { method: "HEAD" }).then(response => {
+		if (!response.ok)
+			postMessage(["ERROR", `Failed to load ${path}: Status ${response.status}. This likely indicates that mupdf wasn't compiled to wasm.`]);
+	});
+}
+
+// A list of RegExp objects to check function names against
+let logFilters = [];
+
+function logCall(id, funcName, args) {
+	for (const filter of logFilters) {
+		if (filter.test(funcName)) {
+			console.log(`(${id}) CALL ${funcName}:`, args);
+			return;
+		}
+	}
+}
+
+function logReturn(id, funcName, value) {
+	for (const filter of logFilters) {
+		if (filter.test(funcName)) {
+			console.log(`(${id}) RETURN ${funcName}:`, value);
+			return;
+		}
+	}
+}
 
 onmessage = async function (event) {
 	let [ func, id, args ] = event.data;
 	await mupdf.ready;
 
 	try {
+		logCall(id, func, args);
 		let result = workerMethods[func](...args);
+		logReturn(id, func, result);
 		postMessage(["RESULT", id, result]);
 	} catch (error) {
 		if (error instanceof mupdf.MupdfTryLaterError) {
@@ -73,6 +107,10 @@ const workerMethods = {};
 
 let openStream = null;
 let openDocument = null;
+
+workerMethods.setLogFilters = function (filters) {
+	logFilters = filters;
+}
 
 workerMethods.openStreamFromUrl = function (url, contentLength, progressive, prefetch) {
 	openStream = mupdf.Stream.fromUrl(url, contentLength, Math.max(progressive << 10, 1 << 16), prefetch);
@@ -137,7 +175,8 @@ workerMethods.countPages = function() {
 // TODO - keep page loaded?
 workerMethods.getPageSize = function (pageNumber) {
 	let page = openDocument.loadPage(pageNumber - 1);
-	return { width: page.width(), height: page.height() };
+	let bounds = page.bounds();
+	return { width: bounds.width(), height: bounds.height() };
 };
 
 workerMethods.getPageLinks = function(pageNumber) {
