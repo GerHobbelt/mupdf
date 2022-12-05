@@ -330,6 +330,10 @@ pdf_copy_pattern_gstate(fz_context *ctx, pdf_gstate *dst, const pdf_gstate *src)
 
 	fz_drop_stroke_state(ctx, dst->stroke_state);
 	dst->stroke_state = fz_keep_stroke_state(ctx, src->stroke_state);
+
+	pdf_keep_font(ctx, src->text.font);
+	pdf_drop_font(ctx, dst->text.font);
+	dst->text = src->text;
 }
 
 static void
