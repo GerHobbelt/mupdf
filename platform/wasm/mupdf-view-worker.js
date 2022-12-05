@@ -135,14 +135,9 @@ workerMethods.countPages = function() {
 // TODO - use hungarian notation for coord spaces
 // TODO - document the "- 1" better
 // TODO - keep page loaded?
-workerMethods.getPageWidth = function (pageNumber) {
+workerMethods.getPageSize = function (pageNumber) {
 	let page = openDocument.loadPage(pageNumber - 1);
-	return page.width();
-};
-
-workerMethods.getPageHeight = function (pageNumber) {
-	let page = openDocument.loadPage(pageNumber - 1);
-	return page.height();
+	return { width: page.width(), height: page.height() };
 };
 
 workerMethods.getPageLinks = function(pageNumber) {
@@ -298,6 +293,36 @@ workerMethods.drawPageAsPNG = function(pageNumber, dpi, cookiePointer) {
 	}
 };
 
+workerMethods.drawPageAsPixmap = function(pageNumber, dpi, cookiePointer) {
+	const doc_to_screen = mupdf.Matrix.scale(dpi / 72, dpi / 72);
+
+	let page;
+	let pixmap;
+
+	try {
+		page = openDocument.loadPage(pageNumber - 1);
+		pixmap = page.toPixmap(doc_to_screen, mupdf.DeviceRGB, true, cookiePointer);
+
+		if (mupdf.cookieAborted(cookiePointer)) {
+			return null;
+		}
+
+		// TODO - move to frontend
+		if (pageNumber == currentTool.pageNumber)
+			currentTool.drawOnPage(pixmap, dpi);
+
+		let pixArray = pixmap.toUint8ClampedArray();
+
+		let imageData = new ImageData(pixArray, pixmap.width(), pixmap.height());
+
+		return imageData;
+	}
+	finally {
+		pixmap?.free();
+		page?.free();
+	}
+};
+
 workerMethods.createCookie = function() {
 	return mupdf.createCookie();
 };
@@ -439,7 +464,9 @@ function findAnnotationAtPos(pdfPage, x, y) {
 		const annotation = annotations[i];
 		const bbox = annotation.bound();
 		if (x >= bbox.x0 && x <= bbox.x1 && y >= bbox.y0 && y <= bbox.y1) {
-			return annotation;
+			// TODO - remove this if
+			if (annotation.hasRect())
+				return annotation;
 		}
 	}
 	return null;
@@ -498,14 +525,14 @@ class SelectAnnot {
 
 	drawOnPage(pixmap, dpi) {
 		if (this.hovered != null) {
-			let rect = this.hovered.rect();
+			let rect = this.hovered.bound();
 			pixmap.drawGrabHandle(rect.x0 * dpi / 72, rect.y0 * dpi / 72);
 			pixmap.drawGrabHandle(rect.x0 * dpi / 72, rect.y1 * dpi / 72);
 			pixmap.drawGrabHandle(rect.x1 * dpi / 72, rect.y0 * dpi / 72);
 			pixmap.drawGrabHandle(rect.x1 * dpi / 72, rect.y1 * dpi / 72);
 		}
 		if (currentSelection != null) {
-			let rect = currentSelection.annotation.rect();
+			let rect = currentSelection.annotation.bound();
 			pixmap.drawGrabHandle(rect.x0 * dpi / 72, rect.y0 * dpi / 72);
 			pixmap.drawGrabHandle(rect.x0 * dpi / 72, rect.y1 * dpi / 72);
 			pixmap.drawGrabHandle(rect.x1 * dpi / 72, rect.y0 * dpi / 72);

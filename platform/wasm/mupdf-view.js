@@ -86,13 +86,12 @@ mupdfView.freeDocument = wrap("freeDocument");
 mupdfView.documentTitle = wrap("documentTitle");
 mupdfView.documentOutline = wrap("documentOutline");
 mupdfView.countPages = wrap("countPages");
-mupdfView.getPageSizes = wrap("getPageSizes");
-mupdfView.getPageWidth = wrap("getPageWidth");
-mupdfView.getPageHeight = wrap("getPageHeight");
+mupdfView.getPageSize = wrap("getPageSize");
 mupdfView.getPageLinks = wrap("getPageLinks");
 mupdfView.getPageText = wrap("getPageText");
 mupdfView.search = wrap("search");
 mupdfView.drawPageAsPNG = wrap("drawPageAsPNG");
+mupdfView.drawPageAsPixmap = wrap("drawPageAsPixmap");
 mupdfView.createCookie = wrap("createCookie");
 mupdfView.deleteCookie = wrap("deleteCookie");
 

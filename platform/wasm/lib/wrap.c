@@ -611,6 +611,12 @@ unsigned char *wasm_pixmap_samples(fz_pixmap *pix)
 }
 
 EMSCRIPTEN_KEEPALIVE
+int wasm_pixmap_samples_size(fz_pixmap *pix)
+{
+	return pix->w * pix->h * pix->n;
+}
+
+EMSCRIPTEN_KEEPALIVE
 fz_buffer *wasm_new_buffer(size_t capacity)
 {
 	fz_buffer *buf;
@@ -1121,6 +1127,13 @@ void wasm_pdf_set_annot_flags(pdf_annot *annot, int flags)
 		pdf_set_annot_flags(ctx, annot, flags);
 	fz_catch(ctx)
 		wasm_rethrow(ctx);
+}
+
+EMSCRIPTEN_KEEPALIVE
+int wasm_pdf_annot_has_rect(pdf_annot *annot)
+{
+	// never throws
+	return pdf_annot_has_rect(ctx, annot);
 }
 
 EMSCRIPTEN_KEEPALIVE
