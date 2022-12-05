@@ -499,12 +499,12 @@ class MupdfDocumentViewer {
 		// This is a hack to compensate for the lack of a priority queue
 		// We wait until the user has stopped scrolling to load pages.
 		let scrollTimer = null;
-		document.addEventListener("scroll", function (event) {
+		document.addEventListener("scroll", (event) => {
 			if (scrollTimer !== null)
 				clearTimeout(scrollTimer);
-			scrollTimer = setTimeout(function () {
+			scrollTimer = setTimeout(() => {
 				scrollTimer = null;
-				updateView();
+				this._updateView();
 			}, 50);
 		})
 
@@ -605,6 +605,7 @@ class MupdfDocumentViewer {
 					this.zoomIn();
 				else if (event.deltaY > 0)
 					this.zoomOut();
+				event.preventDefault();
 			}
 		}, {passive: false});
 
@@ -621,6 +622,11 @@ class MupdfDocumentViewer {
 			this.showOutline();
 		} else {
 			this.hideOutline();
+		}
+
+		// TODO - remove once we add a priority queue
+		for (let i = 0; i < Math.min(pageCount, 5); ++i) {
+			this.activePages.add(pages[i].rootNode);
 		}
 
 		this._updateView();
@@ -694,33 +700,33 @@ class MupdfDocumentViewer {
 		this.searchDialogDiv.style.display = "flex";
 		this.searchDivInput.focus();
 		this.searchDivInput.select();
-		this._updateView();
+		this.setSearch(this.searchDivInput.value ?? "");
 	}
 
 	hideSearchBox() {
 		this.searchStatusDiv.textContent = "";
 		this.searchDialogDiv.style.display = "none";
-		this.searchNeedle = "";
-		this._updateView();
+		this.cancelSearch();
+		this.setSearch("");
 	}
 
 	async runSearch(direction) {
+		// TODO - internalize
 		let searchStatus = document.getElementById("search-status");
-		let searchNeedle = this.searchNeedle;
 
 		try {
 			let page = this.currentSearchPage + direction;
 			while (page >= 1 && page < this.pageCount) {
 				// We run the check once per loop iteration,
 				// in case the search was cancel during the 'await' below.
-				if (searchNeedle === "") {
+				if (this.searchNeedle === "") {
 					searchStatus.textContent = "";
 					return;
 				}
 
 				searchStatus.textContent = `Searching page ${page}.`;
 
-				await this.pages[page]._loadPageSearch(this._dpi(), searchNeedle);
+				await this.pages[page]._loadPageSearch(this._dpi(), this.searchNeedle);
 				const hits = this.pages[page].searchResultObject ?? [];
 				if (hits.length > 0) {
 					this.pages[page].rootNode.scrollIntoView();
@@ -732,7 +738,6 @@ class MupdfDocumentViewer {
 				page += direction;
 			}
 
-			// TODO remove log
 			searchStatus.textContent = "No more search hits.";
 		}
 		catch (error) {

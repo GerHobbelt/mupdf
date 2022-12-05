@@ -160,7 +160,7 @@ div.page {
 	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
 }
 
-div.page img {
+div.page canvas {
 	position:absolute;
 	user-select:none;
 }
@@ -229,12 +229,12 @@ div.error {
 			<div onclick="toggleFullscreen()">Fullscreen</div>
 			<div onclick="toggleOutline()">Outline</div>
 			<hr>
-			<div onclick="setZoom(50)">50%</div>
-			<div onclick="setZoom(75)">75% (72 dpi)</div>
-			<div onclick="setZoom(100)">100% (96 dpi)</div>
-			<div onclick="setZoom(125)">125%</div>
-			<div onclick="setZoom(150)">150%</div>
-			<div onclick="setZoom(200)">200%</div>
+			<div onclick="documentViewer?.setZoom(50)">50%</div>
+			<div onclick="documentViewer?.setZoom(75)">75% (72 dpi)</div>
+			<div onclick="documentViewer?.setZoom(100)">100% (96 dpi)</div>
+			<div onclick="documentViewer?.setZoom(125)">125%</div>
+			<div onclick="documentViewer?.setZoom(150)">150%</div>
+			<div onclick="documentViewer?.setZoom(200)">200%</div>
 		</div>
 	</div>
 </div>
@@ -364,11 +364,12 @@ async function initDocument(docName) {
 	document.title = documentViewer.title || docName;
 }
 
+// TODO - remove these functions
 function showSearch() {
 	documentViewer.showSearchBox();
 }
 
-async function updateView() {
+function updateView() {
 	documentViewer._updateView();
 }
 
@@ -392,6 +393,10 @@ window.addEventListener("keydown", function (event) {
 		}
 	}
 
+	if (event.key === "Escape") {
+		documentViewer?.hideSearchBox();
+	}
+
 	if (event.ctrlKey || event.metaKey) {
 		switch (event.keyCode) {
 		// '=' / '+' on various keyboards
@@ -412,7 +417,7 @@ window.addEventListener("keydown", function (event) {
 		// '0'
 		case 48:
 		case 96:
-			setZoom(100);
+			documentViewer?.setZoom(100);
 			break;
 		case 70: // 'F':
 			event.preventDefault();
