@@ -149,6 +149,9 @@ static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 {
 	const char *s;
 
+	if (item == NULL)
+		return;
+
 	/* Skip over the DOC object at the top. */
 	if (item->up == NULL)
 	{
