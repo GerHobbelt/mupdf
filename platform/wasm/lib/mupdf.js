@@ -24,7 +24,12 @@
 
 // If running in Node.js environment
 if (typeof require === "function") {
-	var libmupdf = require("../mupdf-wasm.js");
+	var libmupdf;
+	if (globalThis.SharedArrayBuffer != null) {
+		libmupdf = require("../mupdf-wasm.js");
+	} else {
+		libmupdf = require("../mupdf-wasm-singlethread.js");
+	}
 }
 
 function assert(pred, message) {
@@ -983,6 +988,18 @@ class JobCookie extends Wrapper {
 	}
 }
 
+function createCookie() {
+	return libmupdf._wasm_new_cookie();
+}
+
+function cookieAborted(cookiePointer) {
+	return libmupdf._wasm_cookie_aborted(cookiePointer);
+}
+
+function deleteCookie(cookiePointer) {
+	libmupdf._wasm_free_cookie(cookiePointer);
+}
+
 class Buffer extends Wrapper {
 	constructor(pointer) {
 		super(pointer, libmupdf._wasm_drop_buffer);
@@ -1235,6 +1252,9 @@ const mupdf = {
 	Pixmap,
 	Device,
 	JobCookie,
+	createCookie,
+	cookieAborted,
+	deleteCookie,
 	Buffer,
 	Stream,
 	Output,
@@ -1296,10 +1316,8 @@ mupdf.ready = libmupdf(libmupdf_injections).then(m => {
 	mupdf.DeviceBGR = new ColorSpace(libmupdf._wasm_device_bgr());
 	mupdf.DeviceCMYK = new ColorSpace(libmupdf._wasm_device_cmyk());
 
-	let buffer = null
-	if (libmupdf.wasmMemory)
-		buffer = libmupdf.wasmMemory.buffer;
-	if (typeof SharedArrayBuffer !== 'undefined' && buffer instanceof SharedArrayBuffer) {
+	let buffer = libmupdf.wasmMemory?.buffer;
+	if (typeof SharedArrayBuffer !== "undefined" && buffer instanceof SharedArrayBuffer) {
 		return { sharedBuffer: buffer };
 	} else {
 		return { sharedBuffer: null };
