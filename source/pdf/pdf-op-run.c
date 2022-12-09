@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1382,7 +1382,7 @@ pdf_set_pattern(fz_context *ctx, pdf_run_processor *pr, int what, pdf_pattern *p
 	mat->gstate_num = pr->gparent;
 }
 
-fz_struct
+fz_structure
 structure_type(fz_context *ctx, pdf_run_processor *proc, pdf_obj *tag)
 {
 	/* Perform Structure mapping to go from tag to standard. */
@@ -1394,119 +1394,163 @@ structure_type(fz_context *ctx, pdf_run_processor *proc, pdf_obj *tag)
 	}
 
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Document)))
-		return FZ_STRUCT_DOCUMENT;
+		return FZ_STRUCTURE_DOCUMENT;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Part)))
-		return FZ_STRUCT_PART;
+		return FZ_STRUCTURE_PART;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Art)))
-		return FZ_STRUCT_ART;
+		return FZ_STRUCTURE_ART;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Sect)))
-		return FZ_STRUCT_SECT;
+		return FZ_STRUCTURE_SECT;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Div)))
-		return FZ_STRUCT_DIV;
+		return FZ_STRUCTURE_DIV;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(BlockQuote)))
-		return FZ_STRUCT_BLOCKQUOTE;
+		return FZ_STRUCTURE_BLOCKQUOTE;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Caption)))
-		return FZ_STRUCT_CAPTION;
+		return FZ_STRUCTURE_CAPTION;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(TOC)))
-		return FZ_STRUCT_TOC;
+		return FZ_STRUCTURE_TOC;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(TOCI)))
-		return FZ_STRUCT_TOCI;
+		return FZ_STRUCTURE_TOCI;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Index)))
-		return FZ_STRUCT_INDEX;
+		return FZ_STRUCTURE_INDEX;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(NonStruct)))
-		return FZ_STRUCT_NONSTRUCT;
+		return FZ_STRUCTURE_NONSTRUCT;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Private)))
-		return FZ_STRUCT_PRIVATE;
+		return FZ_STRUCTURE_PRIVATE;
 
 	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
 	if (pdf_name_eq(ctx, tag, PDF_NAME(P)))
-		return FZ_STRUCT_P;
+		return FZ_STRUCTURE_P;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(H)))
-		return FZ_STRUCT_H;
+		return FZ_STRUCTURE_H;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(H1)))
-		return FZ_STRUCT_H1;
+		return FZ_STRUCTURE_H1;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(H2)))
-		return FZ_STRUCT_H2;
+		return FZ_STRUCTURE_H2;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(H3)))
-		return FZ_STRUCT_H3;
+		return FZ_STRUCTURE_H3;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(H4)))
-		return FZ_STRUCT_H4;
+		return FZ_STRUCTURE_H4;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(H5)))
-		return FZ_STRUCT_H5;
+		return FZ_STRUCTURE_H5;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(H6)))
-		return FZ_STRUCT_H6;
+		return FZ_STRUCTURE_H6;
 
 	/* List elements (PDF 1.7 - Table 10.23) */
 	if (pdf_name_eq(ctx, tag, PDF_NAME(List)))
-		return FZ_STRUCT_LIST;
+		return FZ_STRUCTURE_LIST;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(LI)))
-		return FZ_STRUCT_LISTITEM;
+		return FZ_STRUCTURE_LISTITEM;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Label)))
-		return FZ_STRUCT_LABEL;
+		return FZ_STRUCTURE_LABEL;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(LBody)))
-		return FZ_STRUCT_LISTBODY;
+		return FZ_STRUCTURE_LISTBODY;
 
 	/* Table elements (PDF 1.7 - Table 10.24) */
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Table)))
-		return FZ_STRUCT_TABLE;
+		return FZ_STRUCTURE_TABLE;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(TR)))
-		return FZ_STRUCT_TR;
+		return FZ_STRUCTURE_TR;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(TH)))
-		return FZ_STRUCT_TH;
+		return FZ_STRUCTURE_TH;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(TD)))
-		return FZ_STRUCT_TD;
+		return FZ_STRUCTURE_TD;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(THead)))
-		return FZ_STRUCT_THEAD;
+		return FZ_STRUCTURE_THEAD;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(TBody)))
-		return FZ_STRUCT_TBODY;
+		return FZ_STRUCTURE_TBODY;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(TFoot)))
-		return FZ_STRUCT_TFOOT;
+		return FZ_STRUCTURE_TFOOT;
 
 	/* Inline elements (PDF 1.7 - Table 10.25) */
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Span)))
-		return FZ_STRUCT_SPAN;
+		return FZ_STRUCTURE_SPAN;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Quote)))
-		return FZ_STRUCT_QUOTE;
+		return FZ_STRUCTURE_QUOTE;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Note)))
-		return FZ_STRUCT_NOTE;
+		return FZ_STRUCTURE_NOTE;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Reference)))
-		return FZ_STRUCT_REFERENCE;
+		return FZ_STRUCTURE_REFERENCE;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(BibEntry)))
-		return FZ_STRUCT_BIBENTRY;
+		return FZ_STRUCTURE_BIBENTRY;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Code)))
-		return FZ_STRUCT_CODE;
+		return FZ_STRUCTURE_CODE;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Link)))
-		return FZ_STRUCT_LINK;
+		return FZ_STRUCTURE_LINK;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Annot)))
-		return FZ_STRUCT_ANNOT;
+		return FZ_STRUCTURE_ANNOT;
 
 	/* Ruby inline element (PDF 1.7 - Table 10.26) */
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Ruby)))
-		return FZ_STRUCT_RUBY;
+		return FZ_STRUCTURE_RUBY;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(RB)))
-		return FZ_STRUCT_RB;
+		return FZ_STRUCTURE_RB;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(RT)))
-		return FZ_STRUCT_RT;
+		return FZ_STRUCTURE_RT;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(RP)))
-		return FZ_STRUCT_RP;
+		return FZ_STRUCTURE_RP;
 
 	/* Warichu inline element (PDF 1.7 - Table 10.26) */
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Warichu)))
-		return FZ_STRUCT_WARICHU;
+		return FZ_STRUCTURE_WARICHU;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(WT)))
-		return FZ_STRUCT_WT;
+		return FZ_STRUCTURE_WT;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(WP)))
-		return FZ_STRUCT_WP;
+		return FZ_STRUCTURE_WP;
 
 	/* Illustration elements (PDF 1.7 - Table 10.27) */
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Figure)))
-		return FZ_STRUCT_FIGURE;
+		return FZ_STRUCTURE_FIGURE;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Formula)))
-		return FZ_STRUCT_FORMULA;
+		return FZ_STRUCTURE_FORMULA;
 	if (pdf_name_eq(ctx, tag, PDF_NAME(Form)))
-		return FZ_STRUCT_FORM;
+		return FZ_STRUCTURE_FORM;
 
-	return FZ_STRUCT_INVALID;
+	return FZ_STRUCTURE_INVALID;
+}
+
+static void
+begin_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
+{
+	/* val has been resolved to a dict for us by the originally specified name
+	 * having been looked up in Properties already for us. Either there will
+	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
+	int i, n;
+	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
+	if (obj)
+	{
+		fz_begin_layer(ctx, proc->dev, pdf_to_name(ctx, obj));
+		return;
+	}
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(OCGs));
+	n = pdf_array_len(ctx, obj);
+	for (i = 0; i < n; i++)
+	{
+		begin_layer(ctx, proc, pdf_array_get(ctx, obj, i));
+	}
+}
+
+static void
+end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
+{
+	/* val has been resolved to a dict for us by the originally specified name
+	 * having been looked up in Properties already for us. Either there will
+	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
+	int i, n;
+	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
+	if (obj)
+	{
+		fz_end_layer(ctx, proc->dev);
+		return;
+	}
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(OCGs));
+	n = pdf_array_len(ctx, obj);
+	for (i = n-1; i >= 0; i--)
+	{
+		end_layer(ctx, proc, pdf_array_get(ctx, obj, i));
+	}
 }
 
 static void
@@ -1545,7 +1589,7 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 	pdf_obj *tag;
 	marked_content_stack *mc = NULL;
 	int drop_tag = 1;
-	fz_struct standard;
+	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
 
 	if (!tagstr)
@@ -1570,20 +1614,17 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 		/* Start any optional content layers. */
 		if (pdf_name_eq(ctx, tag, PDF_NAME(OC)))
 		{
-			const char *name = pdf_to_name(ctx, val);
-			/* Previously we'd checked for val being a dict, and read the 'Name' entry from that, but I think that's incorrect. */
-			if (name)
-				fz_begin_layer(ctx, proc->dev, name);
+			begin_layer(ctx, proc, val);
 		}
 
 		/* Structure */
 		standard = structure_type(ctx, proc, tag);
-		if (standard == FZ_STRUCT_INVALID)
+		if (standard == FZ_STRUCTURE_INVALID)
 			standard = structure_type(ctx, proc, pdf_dict_get(ctx, mc_dict, PDF_NAME(S)));
-		if (standard != FZ_STRUCT_INVALID)
+		if (standard != FZ_STRUCTURE_INVALID)
 		{
 			pdf_flush_text(ctx, proc);
-			fz_begin_struct(ctx, proc->dev, standard, pdf_to_name(ctx, tag));
+			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag));
 		}
 
 		/* ActualText */
@@ -1611,7 +1652,7 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 {
 	marked_content_stack *mc = proc->marked_content;
 	pdf_obj *val, *tag;
-	fz_struct standard;
+	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
 
 	if (mc == NULL)
@@ -1652,21 +1693,18 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 
 		/* Structure */
 		standard = structure_type(ctx, proc, tag);
-		if (standard == FZ_STRUCT_INVALID)
+		if (standard == FZ_STRUCTURE_INVALID)
 			standard = structure_type(ctx, proc, pdf_dict_get(ctx, mc_dict, PDF_NAME(S)));
-		if (standard != FZ_STRUCT_INVALID)
+		if (standard != FZ_STRUCTURE_INVALID)
 		{
 			pdf_flush_text(ctx, proc);
-			fz_end_struct(ctx, proc->dev);
+			fz_end_structure(ctx, proc->dev);
 		}
 
 		/* Finally, close any layers. */
 		if (pdf_name_eq(ctx, tag, PDF_NAME(OC)))
 		{
-			const char *name = pdf_to_name(ctx, val);
-			/* Previously we'd checked for val being a dict, and read the 'Name' entry from that, but I think that's incorrect. */
-			if (name)
-				fz_end_layer(ctx, proc->dev);
+			end_layer(ctx, proc, val);
 		}
 	}
 	fz_always(ctx)
@@ -2843,9 +2881,8 @@ pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_mat
 	/* We need to save an extra level to allow for level 0 to be the parent gstate level. */
 	pdf_gsave(ctx, proc);
 
-	proc->role_map = pdf_keep_obj(ctx, pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(StructTreeRoot), PDF_NAME(RoleMap), NULL));
-
 	proc->struct_parent = struct_parent;
+	proc->role_map = pdf_keep_obj(ctx, pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(StructTreeRoot), PDF_NAME(RoleMap), NULL));
 
 	return (pdf_processor*)proc;
 }

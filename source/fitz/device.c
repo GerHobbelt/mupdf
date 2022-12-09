@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -62,8 +62,10 @@ fz_disable_device(fz_context *ctx, fz_device *dev)
 	dev->set_default_colorspaces = NULL;
 	dev->begin_layer = NULL;
 	dev->end_layer = NULL;
-	dev->begin_struct = NULL;
-	dev->end_struct = NULL;
+	dev->begin_structure = NULL;
+	dev->end_structure = NULL;
+	dev->begin_metatext = NULL;
+	dev->end_metatext = NULL;
 }
 
 void
@@ -570,12 +572,12 @@ void fz_end_layer(fz_context *ctx, fz_device *dev)
 	}
 }
 
-void fz_begin_struct(fz_context *ctx, fz_device *dev, fz_struct str, const char *raw)
+void fz_begin_structure(fz_context *ctx, fz_device *dev, fz_structure str, const char *raw)
 {
-	if (dev->begin_struct)
+	if (dev->begin_structure)
 	{
 		fz_try(ctx)
-			dev->begin_struct(ctx, dev, str, raw);
+			dev->begin_structure(ctx, dev, str, raw);
 		fz_catch(ctx)
 		{
 			fz_disable_device(ctx, dev);
@@ -584,12 +586,12 @@ void fz_begin_struct(fz_context *ctx, fz_device *dev, fz_struct str, const char 
 	}
 }
 
-void fz_end_struct(fz_context *ctx, fz_device *dev)
+void fz_end_structure(fz_context *ctx, fz_device *dev)
 {
-	if (dev->end_struct)
+	if (dev->end_structure)
 	{
 		fz_try(ctx)
-			dev->end_struct(ctx, dev);
+			dev->end_structure(ctx, dev);
 		fz_catch(ctx)
 		{
 			fz_disable_device(ctx, dev);
@@ -635,123 +637,123 @@ fz_device_current_scissor(fz_context *ctx, fz_device *dev)
 }
 
 const char *
-fz_struct_to_string(fz_struct type)
+fz_structure_to_string(fz_structure type)
 {
 	switch (type)
 	{
 	default:
 		return "Invalid";
-	case FZ_STRUCT_DOCUMENT:
+	case FZ_STRUCTURE_DOCUMENT:
 		return "Document";
-	case FZ_STRUCT_PART:
+	case FZ_STRUCTURE_PART:
 		return "Part";
-	case FZ_STRUCT_ART:
+	case FZ_STRUCTURE_ART:
 		return "Art";
-	case FZ_STRUCT_SECT:
+	case FZ_STRUCTURE_SECT:
 		return "Sect";
-	case FZ_STRUCT_DIV:
+	case FZ_STRUCTURE_DIV:
 		return "Div";
-	case FZ_STRUCT_BLOCKQUOTE:
+	case FZ_STRUCTURE_BLOCKQUOTE:
 		return "BlockQuote";
-	case FZ_STRUCT_CAPTION:
+	case FZ_STRUCTURE_CAPTION:
 		return "Caption";
-	case FZ_STRUCT_TOC:
+	case FZ_STRUCTURE_TOC:
 		return "TOC";
-	case FZ_STRUCT_TOCI:
+	case FZ_STRUCTURE_TOCI:
 		return "TOCI";
-	case FZ_STRUCT_INDEX:
+	case FZ_STRUCTURE_INDEX:
 		return "Index";
-	case FZ_STRUCT_NONSTRUCT:
+	case FZ_STRUCTURE_NONSTRUCT:
 		return "NonDtruct";
-	case FZ_STRUCT_PRIVATE:
+	case FZ_STRUCTURE_PRIVATE:
 		return "Private";
 
 	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
-	case FZ_STRUCT_P:
+	case FZ_STRUCTURE_P:
 		return "P";
-	case FZ_STRUCT_H:
+	case FZ_STRUCTURE_H:
 		return "H";
-	case FZ_STRUCT_H1:
+	case FZ_STRUCTURE_H1:
 		return "H1";
-	case FZ_STRUCT_H2:
+	case FZ_STRUCTURE_H2:
 		return "H2";
-	case FZ_STRUCT_H3:
+	case FZ_STRUCTURE_H3:
 		return "H3";
-	case FZ_STRUCT_H4:
+	case FZ_STRUCTURE_H4:
 		return "H4";
-	case FZ_STRUCT_H5:
+	case FZ_STRUCTURE_H5:
 		return "H5";
-	case FZ_STRUCT_H6:
+	case FZ_STRUCTURE_H6:
 		return "H6";
 
 	/* List elements (PDF 1.7 - Table 10.23) */
-	case FZ_STRUCT_LIST:
+	case FZ_STRUCTURE_LIST:
 		return "List";
-	case FZ_STRUCT_LISTITEM:
+	case FZ_STRUCTURE_LISTITEM:
 		return "LI";
-	case FZ_STRUCT_LABEL:
+	case FZ_STRUCTURE_LABEL:
 		return "Lbl";
-	case FZ_STRUCT_LISTBODY:
+	case FZ_STRUCTURE_LISTBODY:
 		return "LBody";
 
 	/* Table elements (PDF 1.7 - Table 10.24) */
-	case FZ_STRUCT_TABLE:
+	case FZ_STRUCTURE_TABLE:
 		return "Table";
-	case FZ_STRUCT_TR:
+	case FZ_STRUCTURE_TR:
 		return "TR";
-	case FZ_STRUCT_TH:
+	case FZ_STRUCTURE_TH:
 		return "TH";
-	case FZ_STRUCT_TD:
+	case FZ_STRUCTURE_TD:
 		return "TD";
-	case FZ_STRUCT_THEAD:
+	case FZ_STRUCTURE_THEAD:
 		return "THead";
-	case FZ_STRUCT_TBODY:
+	case FZ_STRUCTURE_TBODY:
 		return "TBody";
-	case FZ_STRUCT_TFOOT:
+	case FZ_STRUCTURE_TFOOT:
 		return "TFoot";
 
 	/* Inline elements (PDF 1.7 - Table 10.25) */
-	case FZ_STRUCT_SPAN:
+	case FZ_STRUCTURE_SPAN:
 		return "Span";
-	case FZ_STRUCT_QUOTE:
+	case FZ_STRUCTURE_QUOTE:
 		return "Quote";
-	case FZ_STRUCT_NOTE:
+	case FZ_STRUCTURE_NOTE:
 		return "Note";
-	case FZ_STRUCT_REFERENCE:
+	case FZ_STRUCTURE_REFERENCE:
 		return "Reference";
-	case FZ_STRUCT_BIBENTRY:
+	case FZ_STRUCTURE_BIBENTRY:
 		return "BibEntry";
-	case FZ_STRUCT_CODE:
+	case FZ_STRUCTURE_CODE:
 		return "Code";
-	case FZ_STRUCT_LINK:
+	case FZ_STRUCTURE_LINK:
 		return "Link";
-	case FZ_STRUCT_ANNOT:
+	case FZ_STRUCTURE_ANNOT:
 		return "Annot";
 
 	/* Ruby inline element (PDF 1.7 - Table 10.26) */
-	case FZ_STRUCT_RUBY:
+	case FZ_STRUCTURE_RUBY:
 		return "Ruby";
-	case FZ_STRUCT_RB:
+	case FZ_STRUCTURE_RB:
 		return "RB";
-	case FZ_STRUCT_RT:
+	case FZ_STRUCTURE_RT:
 		return "RT";
-	case FZ_STRUCT_RP:
+	case FZ_STRUCTURE_RP:
 		return "RP";
 
 	/* Warichu inline element (PDF 1.7 - Table 10.26) */
-	case FZ_STRUCT_WARICHU:
+	case FZ_STRUCTURE_WARICHU:
 		return "Warichu";
-	case FZ_STRUCT_WT:
+	case FZ_STRUCTURE_WT:
 		return "WT";
-	case FZ_STRUCT_WP:
+	case FZ_STRUCTURE_WP:
 		return "WP";
 
 	/* Illustration elements (PDF 1.7 - Table 10.27) */
-	case FZ_STRUCT_FIGURE:
+	case FZ_STRUCTURE_FIGURE:
 		return "Figure";
-	case FZ_STRUCT_FORMULA:
+	case FZ_STRUCTURE_FORMULA:
 		return "Formula";
-	case FZ_STRUCT_FORM:
+	case FZ_STRUCTURE_FORM:
 		return "Form";
 	}
 

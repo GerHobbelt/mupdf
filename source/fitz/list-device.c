@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -57,8 +57,8 @@ typedef enum
 	FZ_CMD_DEFAULT_COLORSPACES,
 	FZ_CMD_BEGIN_LAYER,
 	FZ_CMD_END_LAYER,
-	FZ_CMD_BEGIN_STRUCT,
-	FZ_CMD_END_STRUCT,
+	FZ_CMD_BEGIN_STRUCTURE,
+	FZ_CMD_END_STRUCTURE,
 	FZ_CMD_BEGIN_METATEXT,
 	FZ_CMD_END_METATEXT
 } fz_display_command;
@@ -1358,7 +1358,7 @@ fz_list_end_layer(fz_context *ctx, fz_device *dev)
 }
 
 static void
-fz_list_begin_struct(fz_context *ctx, fz_device *dev, fz_struct standard, const char *raw)
+fz_list_begin_structure(fz_context *ctx, fz_device *dev, fz_structure standard, const char *raw)
 {
 	unsigned char *data;
 	size_t len = (raw ? strlen(raw) : 0);
@@ -1366,7 +1366,7 @@ fz_list_begin_struct(fz_context *ctx, fz_device *dev, fz_struct standard, const 
 	data = fz_append_display_node(
 		ctx,
 		dev,
-		FZ_CMD_BEGIN_STRUCT,
+		FZ_CMD_BEGIN_STRUCTURE,
 		0, /* flags */
 		NULL,
 		NULL, /* path */
@@ -1385,12 +1385,12 @@ fz_list_begin_struct(fz_context *ctx, fz_device *dev, fz_struct standard, const 
 }
 
 static void
-fz_list_end_struct(fz_context *ctx, fz_device *dev)
+fz_list_end_structure(fz_context *ctx, fz_device *dev)
 {
 	fz_append_display_node(
 		ctx,
 		dev,
-		FZ_CMD_END_STRUCT,
+		FZ_CMD_END_STRUCTURE,
 		0, /* flags */
 		NULL,
 		NULL, /* path */
@@ -1499,8 +1499,8 @@ fz_new_list_device(fz_context *ctx, fz_display_list *list)
 	dev->super.begin_layer = fz_list_begin_layer;
 	dev->super.end_layer = fz_list_end_layer;
 
-	dev->super.begin_struct = fz_list_begin_struct;
-	dev->super.end_struct = fz_list_end_struct;
+	dev->super.begin_structure = fz_list_begin_structure;
+	dev->super.end_structure = fz_list_end_structure;
 
 	dev->super.begin_metatext = fz_list_begin_metatext;
 	dev->super.end_metatext = fz_list_end_metatext;
@@ -1860,7 +1860,9 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 		if (tiled ||
 			n.cmd == FZ_CMD_BEGIN_TILE || n.cmd == FZ_CMD_END_TILE ||
 			n.cmd == FZ_CMD_RENDER_FLAGS || n.cmd == FZ_CMD_DEFAULT_COLORSPACES ||
-			n.cmd == FZ_CMD_BEGIN_LAYER || n.cmd == FZ_CMD_END_LAYER)
+			n.cmd == FZ_CMD_BEGIN_LAYER || n.cmd == FZ_CMD_END_LAYER ||
+			n.cmd == FZ_CMD_BEGIN_STRUCTURE || n.cmd == FZ_CMD_END_STRUCTURE
+			)
 		{
 			empty = 0;
 		}
@@ -2026,16 +2028,16 @@ visible:
 			case FZ_CMD_END_LAYER:
 				fz_end_layer(ctx, dev);
 				break;
-			case FZ_CMD_BEGIN_STRUCT:
+			case FZ_CMD_BEGIN_STRUCTURE:
 			{
 				const unsigned char *data;
 				align_node_for_pointer(&node);
 				data = (const unsigned char *)node;
-				fz_begin_struct(ctx, dev, (fz_struct)data[0], (const char *)(data[1] == 0 ? NULL : &data[1]));
+				fz_begin_structure(ctx, dev, (fz_structure)data[0], (const char *)(data[1] == 0 ? NULL : &data[1]));
 				break;
 			}
-			case FZ_CMD_END_STRUCT:
-				fz_end_struct(ctx, dev);
+			case FZ_CMD_END_STRUCTURE:
+				fz_end_structure(ctx, dev);
 				break;
 			case FZ_CMD_BEGIN_METATEXT:
 			{
