@@ -72,6 +72,35 @@ fz_trace_text_span(fz_context *ctx, fz_output *out, fz_text_span *span, int dept
 	int i;
 	fz_trace_indent(ctx, out, depth);
 	fz_write_printf(ctx, out, "<span font=\"%s\" wmode=\"%d\" bidi=\"%d\"", fz_font_name(ctx, span->font), span->wmode, span->bidi_level);
+	switch (span->language)
+	{
+	case FZ_LANG_ur:
+		fz_write_printf(ctx, out, " lang=\"ur\"");
+		break;
+	case FZ_LANG_urd:
+		fz_write_printf(ctx, out, " lang=\"urd\"");
+		break;
+	case FZ_LANG_ko:
+		fz_write_printf(ctx, out, " lang=\"ko\"");
+		break;
+	case FZ_LANG_ja:
+		fz_write_printf(ctx, out, " lang=\"ja\"");
+		break;
+	case FZ_LANG_zh:
+		fz_write_printf(ctx, out, " lang=\"zh\"");
+		break;
+	case FZ_LANG_zh_Hans:
+		fz_write_printf(ctx, out, " lang=\"zh_Hans\"");
+		break;
+	case FZ_LANG_zh_Hant:
+		fz_write_printf(ctx, out, " lang=\"zh_Hant\"");
+		break;
+	default:
+		fz_write_printf(ctx, out, " lang=\"???\"");
+		break;
+	case FZ_LANG_UNSET:
+		break;
+	}
 	fz_write_printf(ctx, out, " trm=%jM>\n", &span->trm);
 	for (i = 0; i < span->len; i++)
 	{
