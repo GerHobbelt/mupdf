@@ -443,7 +443,6 @@ int main(int argc, const char **argv)
 		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
 	}
 
-
 	/* First one made with precooked content. */
 	fz_try(ctx)
 	{

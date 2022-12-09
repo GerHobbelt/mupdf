@@ -5012,6 +5012,7 @@ static pdf_obj *ffi_toobj(js_State *J, pdf_document *pdf, int idx)
 	if (js_isobject(J, idx)) {
 		const char *key;
 		pdf_obj *val;
+		char buf[32];
 		fz_try(ctx)
 			obj = pdf_new_dict(ctx, pdf, 0);
 		fz_catch(ctx)
@@ -5021,7 +5022,7 @@ static pdf_obj *ffi_toobj(js_State *J, pdf_document *pdf, int idx)
 			js_throw(J);
 		}
 		js_pushiterator(J, idx, 1);
-		while ((key = js_nextiterator(J, -1))) {
+		while ((key = js_nextiterator(J, -1, buf))) {
 			js_getproperty(J, idx, key);
 			val = ffi_toobj(J, pdf, -1);
 			fz_try(ctx)

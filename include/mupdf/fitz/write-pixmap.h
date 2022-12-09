@@ -372,7 +372,7 @@ fz_buffer* fz_new_buffer_from_pixmap_as_muraw(fz_context* ctx, const fz_pixmap* 
 /**
 	Save a (Greyscale or RGB) pixmap as a webp.
 */
-void fz_save_pixmap_as_webp(fz_context *ctx, fz_pixmap *pixmap, const char *filename);
+void fz_save_pixmap_as_webp(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
 	Write a (Greyscale or RGB) pixmap as a webp.

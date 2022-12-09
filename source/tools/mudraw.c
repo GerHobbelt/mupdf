@@ -104,7 +104,6 @@ enum {
 	OUT_SVG,
 	OUT_TEXT,
 	OUT_TRACE,
-	OUT_WEBP,
 	OUT_XHTML,
 	OUT_XMLTEXT,
 	OUT_PDF,
@@ -1306,7 +1305,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 				bander = fz_new_ps_band_writer(ctx, out);
 			else if (output_format->format == OUT_PSD)
 				bander = fz_new_psd_band_writer(ctx, out);
-			else if (output_format == OUT_WEBP)
+			else if (output_format->format == OUT_WEBP)
 				bander = fz_new_webp_band_writer(ctx, out);
 			else if (output_format->format == OUT_PWG)
 			{
