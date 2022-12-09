@@ -145,13 +145,14 @@ struct genstate
 	const char *base_uri;
 	fz_css *css;
 	int at_bol;
-	int emit_white;
+	fz_html_box *emit_white;
 	int last_brk_cls;
 
 	int list_counter;
 	int section_depth;
 	fz_bidi_direction markup_dir;
 	fz_text_language markup_lang;
+	char *href;
 
 	fz_css_style_splay *styles;
 };
@@ -278,19 +279,19 @@ fz_html_flow *fz_html_split_flow(fz_context *ctx, fz_pool *pool, fz_html_flow *f
 	return new_flow;
 }
 
-static void flush_space(fz_context *ctx, fz_html_box *flow, fz_html_box *inline_box, int lang, struct genstate *g)
+static void flush_space(fz_context *ctx, fz_html_box *flow, int lang, struct genstate *g)
 {
 	static const char *space = " ";
-	int bsp = inline_box->style->white_space & WS_ALLOW_BREAK_SPACE;
 	fz_pool *pool = g->pool;
 	if (g->emit_white)
 	{
+		int bsp = g->emit_white->style->white_space & WS_ALLOW_BREAK_SPACE;
 		if (!g->at_bol)
 		{
 			if (bsp)
-				add_flow_space(ctx, pool, flow, inline_box);
+				add_flow_space(ctx, pool, flow, g->emit_white);
 			else
-				add_flow_word(ctx, pool, flow, inline_box, space, space+1, lang);
+				add_flow_word(ctx, pool, flow, g->emit_white, space, space+1, lang);
 		}
 		g->emit_white = 0;
 	}
@@ -387,7 +388,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 				else
 					while (iswhite(*text))
 						++text;
-				g->emit_white = 1;
+				g->emit_white = box;
 			}
 			else
 			{
@@ -405,7 +406,7 @@ static void generate_text(fz_context *ctx, fz_html_box *box, const char *text, i
 			const char *prev, *mark = text;
 			int c;
 
-			flush_space(ctx, flow, box, lang, g);
+			flush_space(ctx, flow, lang, g);
 
 			if (g->at_bol)
 				g->last_brk_cls = UCDN_LINEBREAK_CLASS_WJ;
@@ -514,7 +515,7 @@ static void generate_image(fz_context *ctx, fz_html_box *box, fz_image *img, str
 
 	flow = find_flow_encloser(ctx, box);
 
-	flush_space(ctx, flow, box, 0, g);
+	flush_space(ctx, flow, 0, g);
 
 	if (!img)
 	{
@@ -651,8 +652,11 @@ static fz_html_box *new_box(fz_context *ctx, struct genstate *g, fz_xml *node, i
 			href = fz_xml_att(node, "href");
 		}
 		if (href)
-			box->href = fz_pool_strdup(ctx, g->pool, href);
+			g->href = fz_pool_strdup(ctx, g->pool, href);
 	}
+
+	if (g->href)
+		box->href = g->href;
 
 	if (type == BOX_FLOW)
 	{
@@ -746,7 +750,7 @@ static void gen2_text(fz_context *ctx, struct genstate *g, fz_html_box *root_box
 	collapse = root_box->style->white_space & WS_COLLAPSE;
 	if (collapse && is_all_white(text))
 	{
-		g->emit_white = 1;
+		g->emit_white = root_box;
 	}
 	else
 	{
@@ -925,6 +929,7 @@ static void gen2_tag(fz_context *ctx, struct genstate *g, fz_html_box *root_box,
 
 	int save_markup_dir = g->markup_dir;
 	int save_markup_lang = g->markup_lang;
+	char *save_href = g->href;
 
 	if (display == DIS_NONE)
 		return;
@@ -1015,6 +1020,7 @@ static void gen2_tag(fz_context *ctx, struct genstate *g, fz_html_box *root_box,
 
 	g->markup_dir = save_markup_dir;
 	g->markup_lang = save_markup_lang;
+	g->href = save_href;
 }
 
 static void gen2_children(fz_context *ctx, struct genstate *g, fz_html_box *root_box, fz_xml *root_node, fz_css_match *root_match)
@@ -1440,6 +1446,7 @@ xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 	g.last_brk_cls = UCDN_LINEBREAK_CLASS_OP;
 	g.styles = NULL;
 	g.xml = xml;
+	g.href = NULL;
 
 	if (rtitle)
 		*rtitle = NULL;
