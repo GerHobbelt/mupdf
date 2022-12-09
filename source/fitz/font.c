@@ -113,6 +113,7 @@ fz_new_font(fz_context *ctx, const char *name, int use_glyph_bbox, int glyph_cou
 	font->flags.has_opentype = 0;
 	font->flags.embed = 0;
 	font->flags.never_embed = 0;
+	font->flags.is_base14 = 0;
 
 	font->t3matrix = fz_identity;
 	font->t3resources = NULL;
@@ -870,6 +871,7 @@ fz_new_base14_font(fz_context *ctx, const char *name)
 		{
 			ctx->font->base14[x] = fz_new_font_from_memory(ctx, name, data, size, 0, 1);
 			ctx->font->base14[x]->flags.is_serif = (name[0] == 'T'); /* Times-Roman */
+			ctx->font->base14[x]->flags.is_base14 = 1;
 			/* Do not embed base14 fonts by default. */
 			fz_set_font_embedding(ctx, ctx->font->base14[x], 0);
 			return fz_keep_font(ctx, ctx->font->base14[x]);

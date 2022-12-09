@@ -1374,7 +1374,7 @@ pdf_write_stamp_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz
 		if (!*res)
 			*res = pdf_new_dict(ctx, annot->page->doc, 1);
 		res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
-		pdf_dict_put_drop(ctx, res_font, PDF_NAME(Times), pdf_add_simple_font(ctx, annot->page->doc, font, 0));
+		pdf_dict_put_drop(ctx, res_font, PDF_NAME(Times), pdf_add_simple_font(ctx, annot->page->doc, font, PDF_SIMPLE_ENCODING_NONE));
 
 		pdf_write_opacity(ctx, annot, buf, res);
 		pdf_write_fill_color_appearance(ctx, annot, buf);

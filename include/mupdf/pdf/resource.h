@@ -44,7 +44,7 @@ void pdf_purge_locals_from_store(fz_context *ctx, pdf_document *doc);
  */
 
 enum { PDF_SIMPLE_FONT_RESOURCE=1, PDF_CID_FONT_RESOURCE=2, PDF_CJK_FONT_RESOURCE=3 };
-enum { PDF_SIMPLE_ENCODING_LATIN, PDF_SIMPLE_ENCODING_GREEK, PDF_SIMPLE_ENCODING_CYRILLIC };
+enum { PDF_SIMPLE_ENCODING_NONE, PDF_SIMPLE_ENCODING_LATIN, PDF_SIMPLE_ENCODING_GREEK, PDF_SIMPLE_ENCODING_CYRILLIC };
 
 /* The contents of this structure are defined publically just so we can
  * define this on the stack. */

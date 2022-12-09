@@ -128,6 +128,8 @@ typedef struct
 
 	unsigned int embed : 1;
 	unsigned int never_embed : 1;
+
+	unsigned int is_base14: 1;
 } fz_font_flags_t;
 
 /**

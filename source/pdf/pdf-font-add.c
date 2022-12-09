@@ -92,7 +92,7 @@ pdf_add_font_file(fz_context *ctx, pdf_document *doc, fz_font *font)
 	fz_var(ref);
 
 	/* Check for substitute fonts */
-	if (font->flags.ft_substitute)
+	if (font->flags.ft_substitute || font->flags.is_base14)
 		return NULL;
 
 	if (is_ttc(font))
@@ -641,6 +641,8 @@ pdf_add_simple_font_encoding(fz_context *ctx, pdf_document *doc, pdf_obj *fobj, 
 	case PDF_SIMPLE_ENCODING_CYRILLIC:
 		pdf_add_simple_font_encoding_imp(ctx, doc, fobj, fz_glyph_name_from_koi8u);
 		break;
+	case PDF_SIMPLE_ENCODING_NONE:
+		break;
 	}
 }
 
@@ -650,7 +652,7 @@ pdf_add_simple_font(fz_context *ctx, pdf_document *doc, fz_font *font, int encod
 	FT_Face face = font->ft_face;
 	pdf_obj *fobj = NULL;
 	pdf_obj *fref = NULL;
-	const char **enc;
+	const char **enc = NULL;
 	pdf_font_resource_key key;
 
 	fref = pdf_find_font_resource(ctx, doc, PDF_SIMPLE_FONT_RESOURCE, encoding, font, &key);
@@ -680,17 +682,16 @@ pdf_add_simple_font(fz_context *ctx, pdf_document *doc, fz_font *font, int encod
 			if (!ps_name)
 				ps_name = font->name;
 			pdf_dict_put_name(ctx, fobj, PDF_NAME(BaseFont), ps_name);
-			pdf_add_simple_font_encoding(ctx, doc, fobj, encoding);
 			pdf_add_simple_font_widths(ctx, doc, fobj, font, enc);
 			pdf_add_font_descriptor(ctx, doc, fobj, font);
 		}
 		else
 		{
 			pdf_dict_put_name(ctx, fobj, PDF_NAME(BaseFont), pdf_clean_font_name(font->name));
-			pdf_add_simple_font_encoding(ctx, doc, fobj, encoding);
-			if (encoding != PDF_SIMPLE_ENCODING_LATIN)
+			if (encoding != PDF_SIMPLE_ENCODING_LATIN && encoding != PDF_SIMPLE_ENCODING_NONE)
 				pdf_add_simple_font_widths(ctx, doc, fobj, font, enc);
 		}
+		pdf_add_simple_font_encoding(ctx, doc, fobj, encoding);
 
 		fref = pdf_insert_font_resource(ctx, doc, &key, fobj);
 	}

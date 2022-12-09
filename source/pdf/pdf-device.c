@@ -434,6 +434,24 @@ pdf_dev_add_embedded_font_res(fz_context *ctx, pdf_device *pdev, fz_font *font)
 	return pdf_dev_add_font_res_imp(ctx, pdev, font, fres, ENC_IDENTITY);
 }
 
+static int
+pdf_dev_add_base14_font_res(fz_context *ctx, pdf_device *pdev, fz_font *font)
+{
+	pdf_obj *fres;
+	int k;
+
+	/* Check if we already had this one */
+	k = pdf_dev_find_font_res(ctx, pdev, font);
+	if (k >= 0)
+		return k;
+
+	/* This will add it to the xref if needed */
+	fres = pdf_add_simple_font(ctx, pdev->doc, font, PDF_SIMPLE_ENCODING_NONE);
+
+	/* And add to the resource dictionary. */
+	return pdf_dev_add_font_res_imp(ctx, pdev, font, fres, ENC_UNICODE);
+}
+
 static void
 pdf_dev_font(fz_context *ctx, pdf_device *pdev, fz_font *font, fz_matrix trm)
 {
@@ -449,7 +467,9 @@ pdf_dev_font(fz_context *ctx, pdf_device *pdev, fz_font *font, fz_matrix trm)
 	if (fz_font_t3_procs(ctx, font))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "pdf device does not support type 3 fonts");
 
-	if (fz_font_flags(font)->ft_substitute || !pdf_font_writing_supported(font))
+	if (font->flags.is_base14)
+		gs->font = pdf_dev_add_base14_font_res(ctx, pdev, font);
+	else if (fz_font_flags(font)->ft_substitute || !pdf_font_writing_supported(font))
 		gs->font = pdf_dev_add_substitute_font_res(ctx, pdev, font);
 	else
 		gs->font = pdf_dev_add_embedded_font_res(ctx, pdev, font);
