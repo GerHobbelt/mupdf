@@ -56,7 +56,9 @@ typedef enum
 	FZ_CMD_RENDER_FLAGS,
 	FZ_CMD_DEFAULT_COLORSPACES,
 	FZ_CMD_BEGIN_LAYER,
-	FZ_CMD_END_LAYER
+	FZ_CMD_END_LAYER,
+	FZ_CMD_BEGIN_STRUCT,
+	FZ_CMD_END_STRUCT
 } fz_display_command;
 
 /* The display list is a list of nodes.
@@ -211,7 +213,7 @@ static void align_node_for_pointer(fz_display_node **node)
 		(*node) = (fz_display_node *)((ptr + FZ_POINTER_ALIGN_MOD - 1) & ~(FZ_POINTER_ALIGN_MOD-1));
 }
 
-static void
+static unsigned char *
 fz_append_display_node(
 	fz_context *ctx,
 	fz_device *dev,
@@ -245,6 +247,7 @@ fz_append_display_node(
 	fz_stroke_state *my_stroke = NULL;
 	fz_rect local_rect;
 	size_t path_size = 0;
+	unsigned char *out_private = NULL;
 
 	switch (cmd)
 	{
@@ -528,7 +531,7 @@ fz_append_display_node(
 
 		size += path_size;
 	}
-	if (private_data != NULL)
+	if (private_data_len)
 	{
 		size_t max;
 
@@ -702,12 +705,15 @@ fz_append_display_node(
 		/* Can never fail as my_stroke was kept above */
 		writer->stroke = fz_keep_stroke_state(ctx, my_stroke);
 	}
-	if (private_off)
+	if (private_data_len)
 	{
-		char *out_private = (char *)(void *)(&node_ptr[private_off]);
-		memcpy(out_private, private_data, private_data_len);
+		out_private = (unsigned char *)(void *)(&node_ptr[private_off]);
+		if (private_data)
+			memcpy(out_private, private_data, private_data_len);
 	}
 	list->len += size;
+
+	return out_private;
 }
 
 /* Pack ri, op, opm, bp into flags upper bits, even/odd in lower bit */
@@ -1350,6 +1356,52 @@ fz_list_end_layer(fz_context *ctx, fz_device *dev)
 }
 
 static void
+fz_list_begin_struct(fz_context *ctx, fz_device *dev, fz_struct standard, const char *raw)
+{
+	unsigned char *data;
+	size_t len = (raw ? strlen(raw) : 0);
+
+	data = fz_append_display_node(
+		ctx,
+		dev,
+		FZ_CMD_BEGIN_STRUCT,
+		0, /* flags */
+		NULL,
+		NULL, /* path */
+		NULL, /* color */
+		NULL, /* colorspace */
+		NULL, /* alpha */
+		NULL,
+		NULL, /* stroke */
+		NULL, /* private_data */
+		len+2); /* private_data_len */
+	data[0] = (char)standard;
+	if (len)
+		memcpy(data+1, raw, len+1);
+	else
+		data[1] = 0;
+}
+
+static void
+fz_list_end_struct(fz_context *ctx, fz_device *dev)
+{
+	fz_append_display_node(
+		ctx,
+		dev,
+		FZ_CMD_END_STRUCT,
+		0, /* flags */
+		NULL,
+		NULL, /* path */
+		NULL, /* color */
+		NULL, /* colorspace */
+		NULL, /* alpha */
+		NULL, /* ctm */
+		NULL, /* stroke */
+		NULL, /* private_data */
+		0); /* private_data_len */
+}
+
+static void
 fz_list_drop_device(fz_context *ctx, fz_device *dev)
 {
 	fz_list_device *writer = (fz_list_device *)dev;
@@ -1398,6 +1450,9 @@ fz_new_list_device(fz_context *ctx, fz_display_list *list)
 
 	dev->super.begin_layer = fz_list_begin_layer;
 	dev->super.end_layer = fz_list_end_layer;
+
+	dev->super.begin_struct = fz_list_begin_struct;
+	dev->super.end_struct = fz_list_end_struct;
 
 	dev->super.drop_device = fz_list_drop_device;
 
@@ -1919,6 +1974,17 @@ visible:
 				break;
 			case FZ_CMD_END_LAYER:
 				fz_end_layer(ctx, dev);
+				break;
+			case FZ_CMD_BEGIN_STRUCT:
+			{
+				const unsigned char *data;
+				align_node_for_pointer(&node);
+				data = (const unsigned char *)node;
+				fz_begin_struct(ctx, dev, (fz_struct)data[0], (const char *)(data[1] == 0 ? NULL : &data[1]));
+				break;
+			}
+			case FZ_CMD_END_STRUCT:
+				fz_end_struct(ctx, dev);
 				break;
 			}
 		}

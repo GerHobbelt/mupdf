@@ -62,6 +62,8 @@ fz_disable_device(fz_context *ctx, fz_device *dev)
 	dev->set_default_colorspaces = NULL;
 	dev->begin_layer = NULL;
 	dev->end_layer = NULL;
+	dev->begin_struct = NULL;
+	dev->end_struct = NULL;
 }
 
 void
@@ -568,6 +570,34 @@ void fz_end_layer(fz_context *ctx, fz_device *dev)
 	}
 }
 
+void fz_begin_struct(fz_context *ctx, fz_device *dev, fz_struct str, const char *raw)
+{
+	if (dev->begin_struct)
+	{
+		fz_try(ctx)
+			dev->begin_struct(ctx, dev, str, raw);
+		fz_catch(ctx)
+		{
+			fz_disable_device(ctx, dev);
+			fz_rethrow(ctx);
+		}
+	}
+}
+
+void fz_end_struct(fz_context *ctx, fz_device *dev)
+{
+	if (dev->end_struct)
+	{
+		fz_try(ctx)
+			dev->end_struct(ctx, dev);
+		fz_catch(ctx)
+		{
+			fz_disable_device(ctx, dev);
+			fz_rethrow(ctx);
+		}
+	}
+}
+
 fz_rect
 fz_device_current_scissor(fz_context *ctx, fz_device *dev)
 {
@@ -576,4 +606,129 @@ fz_device_current_scissor(fz_context *ctx, fz_device *dev)
 	return fz_infinite_rect;
 }
 
+const char *
+fz_struct_to_string(fz_struct type)
+{
+	switch (type)
+	{
+	default:
+		return "Invalid";
+	case FZ_STRUCT_DOCUMENT:
+		return "Document";
+	case FZ_STRUCT_PART:
+		return "Part";
+	case FZ_STRUCT_ART:
+		return "Art";
+	case FZ_STRUCT_SECT:
+		return "Sect";
+	case FZ_STRUCT_DIV:
+		return "Div";
+	case FZ_STRUCT_BLOCKQUOTE:
+		return "BlockQuote";
+	case FZ_STRUCT_CAPTION:
+		return "Caption";
+	case FZ_STRUCT_TOC:
+		return "TOC";
+	case FZ_STRUCT_TOCI:
+		return "TOCI";
+	case FZ_STRUCT_INDEX:
+		return "Index";
+	case FZ_STRUCT_NONSTRUCT:
+		return "NonDtruct";
+	case FZ_STRUCT_PRIVATE:
+		return "Private";
+
+	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
+	case FZ_STRUCT_P:
+		return "P";
+	case FZ_STRUCT_H:
+		return "H";
+	case FZ_STRUCT_H1:
+		return "H1";
+	case FZ_STRUCT_H2:
+		return "H2";
+	case FZ_STRUCT_H3:
+		return "H3";
+	case FZ_STRUCT_H4:
+		return "H4";
+	case FZ_STRUCT_H5:
+		return "H5";
+	case FZ_STRUCT_H6:
+		return "H6";
+
+	/* List elements (PDF 1.7 - Table 10.23) */
+	case FZ_STRUCT_LIST:
+		return "List";
+	case FZ_STRUCT_LISTITEM:
+		return "LI";
+	case FZ_STRUCT_LABEL:
+		return "Lbl";
+	case FZ_STRUCT_LISTBODY:
+		return "LBody";
+
+	/* Table elements (PDF 1.7 - Table 10.24) */
+	case FZ_STRUCT_TABLE:
+		return "Table";
+	case FZ_STRUCT_TR:
+		return "TR";
+	case FZ_STRUCT_TH:
+		return "TH";
+	case FZ_STRUCT_TD:
+		return "TD";
+	case FZ_STRUCT_THEAD:
+		return "THead";
+	case FZ_STRUCT_TBODY:
+		return "TBody";
+	case FZ_STRUCT_TFOOT:
+		return "TFoot";
+
+	/* Inline elements (PDF 1.7 - Table 10.25) */
+	case FZ_STRUCT_SPAN:
+		return "Span";
+	case FZ_STRUCT_QUOTE:
+		return "Quote";
+	case FZ_STRUCT_NOTE:
+		return "Note";
+	case FZ_STRUCT_REFERENCE:
+		return "Reference";
+	case FZ_STRUCT_BIBENTRY:
+		return "BibEntry";
+	case FZ_STRUCT_CODE:
+		return "Code";
+	case FZ_STRUCT_LINK:
+		return "Link";
+	case FZ_STRUCT_ANNOT:
+		return "Annot";
+
+	/* Ruby inline element (PDF 1.7 - Table 10.26) */
+	case FZ_STRUCT_RUBY:
+		return "Ruby";
+	case FZ_STRUCT_RB:
+		return "RB";
+	case FZ_STRUCT_RT:
+		return "RT";
+	case FZ_STRUCT_RP:
+		return "RP";
+
+	/* Warichu inline element (PDF 1.7 - Table 10.26) */
+	case FZ_STRUCT_WARICHU:
+		return "Warichu";
+	case FZ_STRUCT_WT:
+		return "WT";
+	case FZ_STRUCT_WP:
+		return "WP";
+
+	/* Illustration elements (PDF 1.7 - Table 10.27) */
+	case FZ_STRUCT_FIGURE:
+		return "Figure";
+	case FZ_STRUCT_FORMULA:
+		return "Formula";
+	case FZ_STRUCT_FORM:
+		return "Form";
+	}
+
+	return NULL;
+}
+
 #endif
+

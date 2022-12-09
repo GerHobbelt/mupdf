@@ -107,6 +107,7 @@ typedef struct marked_content_stack
 struct pdf_run_processor
 {
 	pdf_processor super;
+	pdf_document *doc;
 	fz_device *dev;
 
 	fz_default_colorspaces *default_cs;
@@ -134,6 +135,8 @@ struct pdf_run_processor
 
 	/* xobject cycle detector */
 	pdf_cycle_list *cycle;
+
+	pdf_obj *role_map;
 
 	marked_content_stack *marked_content;
 };
@@ -1353,41 +1356,250 @@ pdf_set_pattern(fz_context *ctx, pdf_run_processor *pr, int what, pdf_pattern *p
 	mat->gstate_num = pr->gparent;
 }
 
-static void
-push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tag, pdf_obj *val)
+fz_struct
+structure_type(fz_context *ctx, pdf_run_processor *proc, pdf_obj *tag)
 {
-	pdf_obj *tagobj = pdf_new_name(ctx, tag);
-	marked_content_stack *mc = NULL;
+	/* Perform Structure mapping to go from tag to standard. */
+	if (proc->role_map)
+	{
+		pdf_obj *o = pdf_dict_get(ctx, proc->role_map, tag);
+		if (o)
+			tag = o;
+	}
 
-	fz_var(mc);
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Document)))
+		return FZ_STRUCT_DOCUMENT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Part)))
+		return FZ_STRUCT_PART;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Art)))
+		return FZ_STRUCT_ART;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Sect)))
+		return FZ_STRUCT_SECT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Div)))
+		return FZ_STRUCT_DIV;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(BlockQuote)))
+		return FZ_STRUCT_BLOCKQUOTE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Caption)))
+		return FZ_STRUCT_CAPTION;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TOC)))
+		return FZ_STRUCT_TOC;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TOCI)))
+		return FZ_STRUCT_TOCI;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Index)))
+		return FZ_STRUCT_INDEX;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(NonStruct)))
+		return FZ_STRUCT_NONSTRUCT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Private)))
+		return FZ_STRUCT_PRIVATE;
+
+	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(P)))
+		return FZ_STRUCT_P;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H)))
+		return FZ_STRUCT_H;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H1)))
+		return FZ_STRUCT_H1;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H2)))
+		return FZ_STRUCT_H2;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H3)))
+		return FZ_STRUCT_H3;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H4)))
+		return FZ_STRUCT_H4;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H5)))
+		return FZ_STRUCT_H5;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(H6)))
+		return FZ_STRUCT_H6;
+
+	/* List elements (PDF 1.7 - Table 10.23) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(List)))
+		return FZ_STRUCT_LIST;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(LI)))
+		return FZ_STRUCT_LISTITEM;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Label)))
+		return FZ_STRUCT_LABEL;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(LBody)))
+		return FZ_STRUCT_LISTBODY;
+
+	/* Table elements (PDF 1.7 - Table 10.24) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Table)))
+		return FZ_STRUCT_TABLE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TR)))
+		return FZ_STRUCT_TR;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TH)))
+		return FZ_STRUCT_TH;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TD)))
+		return FZ_STRUCT_TD;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(THead)))
+		return FZ_STRUCT_THEAD;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TBody)))
+		return FZ_STRUCT_TBODY;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(TFoot)))
+		return FZ_STRUCT_TFOOT;
+
+	/* Inline elements (PDF 1.7 - Table 10.25) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Span)))
+		return FZ_STRUCT_SPAN;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Quote)))
+		return FZ_STRUCT_QUOTE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Note)))
+		return FZ_STRUCT_NOTE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Reference)))
+		return FZ_STRUCT_REFERENCE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(BibEntry)))
+		return FZ_STRUCT_BIBENTRY;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Code)))
+		return FZ_STRUCT_CODE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Link)))
+		return FZ_STRUCT_LINK;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Annot)))
+		return FZ_STRUCT_ANNOT;
+
+	/* Ruby inline element (PDF 1.7 - Table 10.26) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Ruby)))
+		return FZ_STRUCT_RUBY;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(RB)))
+		return FZ_STRUCT_RB;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(RT)))
+		return FZ_STRUCT_RT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(RP)))
+		return FZ_STRUCT_RP;
+
+	/* Warichu inline element (PDF 1.7 - Table 10.26) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Warichu)))
+		return FZ_STRUCT_WARICHU;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(WT)))
+		return FZ_STRUCT_WT;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(WP)))
+		return FZ_STRUCT_WP;
+
+	/* Illustration elements (PDF 1.7 - Table 10.27) */
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Figure)))
+		return FZ_STRUCT_FIGURE;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Formula)))
+		return FZ_STRUCT_FORMULA;
+	if (pdf_name_eq(ctx, tag, PDF_NAME(Form)))
+		return FZ_STRUCT_FORM;
+
+	return FZ_STRUCT_INVALID;
+}
+
+static void
+push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr, pdf_obj *val)
+{
+	pdf_obj *tag;
+	marked_content_stack *mc = NULL;
+	int drop_tag = 1;
+	fz_struct standard;
+
+	if (!tagstr)
+		tagstr = "Untitled";
+	tag = pdf_new_name(ctx, tagstr);
+
+	fz_var(drop_tag);
 
 	fz_try(ctx)
 	{
+		/* First, push it on the stack. */
 		mc = fz_malloc_struct(ctx, marked_content_stack);
 		mc->next = proc->marked_content;
-		mc->tag = tagobj;
+		mc->tag = tag;
 		mc->val = pdf_keep_obj(ctx, val);
 		proc->marked_content = mc;
+		drop_tag = 0;
+
+		/* Start any optional content layers. */
+		if (pdf_name_eq(ctx, tag, PDF_NAME(OC)))
+		{
+			const char *name = pdf_to_name(ctx, val);
+			/* Previously we'd checked for val being a dict, and read the 'Name' entry from that, but I think that's incorrect. */
+			if (name)
+				fz_begin_layer(ctx, proc->dev, name);
+		}
+
+		/* Structure */
+		standard = structure_type(ctx, proc, tag);
+		if (standard != FZ_STRUCT_INVALID)
+		{
+			pdf_flush_text(ctx, proc);
+			fz_begin_struct(ctx, proc->dev, standard, pdf_to_name(ctx, tag));
+		}
 	}
 	fz_catch(ctx)
 	{
-		pdf_drop_obj(ctx, tagobj);
+		if (drop_tag)
+			pdf_drop_obj(ctx, tag);
 		fz_rethrow(ctx);
 	}
 }
 
 static void
-pop_marked_content(fz_context *ctx, pdf_run_processor *proc)
+pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 {
 	marked_content_stack *mc = proc->marked_content;
+	pdf_obj *val, *tag;
+	fz_struct standard;
 
 	if (mc == NULL)
 		return;
 
 	proc->marked_content = mc->next;
-	pdf_drop_obj(ctx, mc->tag);
-	pdf_drop_obj(ctx, mc->val);
+	tag = mc->tag;
+	val = mc->val;
 	fz_free(ctx, mc);
+
+	/* If we're not interested in neatly closing any open layers etc
+	 * in the processor, (maybe we've had errors already), then just
+	 * exit here. */
+	if (!neat)
+	{
+		pdf_drop_obj(ctx, tag);
+		pdf_drop_obj(ctx, val);
+		return;
+	}
+
+	/* Close structure/layers here, in reverse order to how we opened them. */
+	fz_try(ctx)
+	{
+		/* Structure */
+		standard = structure_type(ctx, proc, tag);
+		if (standard != FZ_STRUCT_INVALID)
+		{
+			pdf_flush_text(ctx, proc);
+			fz_end_struct(ctx, proc->dev);
+		}
+
+		/* Finally, close any layers. */
+		if (pdf_name_eq(ctx, tag, PDF_NAME(OC)))
+		{
+			const char *name = pdf_to_name(ctx, val);
+			/* Previously we'd checked for val being a dict, and read the 'Name' entry from that, but I think that's incorrect. */
+			if (name)
+				fz_end_layer(ctx, proc->dev);
+		}
+	}
+	fz_always(ctx)
+	{
+		pdf_drop_obj(ctx, tag);
+		pdf_drop_obj(ctx, val);
+	}
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+static void
+clear_marked_content(fz_context *ctx, pdf_run_processor *pr)
+{
+	if (pr->marked_content == NULL)
+		return;
+
+	fz_try(ctx)
+		while (pr->marked_content)
+			pop_marked_content(ctx, pr, 1);
+	fz_always(ctx)
+		while (pr->marked_content)
+			pop_marked_content(ctx, pr, 0);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 static void
@@ -1540,13 +1752,12 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *proc, pdf_obj *xobj, pdf_obj
 	}
 	fz_always(ctx)
 	{
+		clear_marked_content(ctx, pr);
+		pr->marked_content = save_marked_content;
 		pr->default_cs = save_default_cs;
 		fz_drop_default_colorspaces(ctx, xobj_default_cs);
 		fz_drop_colorspace(ctx, cs);
 		proc->cycle = cycle_up;
-		while (pr->marked_content)
-			pop_marked_content(ctx, pr);
-		pr->marked_content = save_marked_content;
 	}
 	fz_catch(ctx)
 	{
@@ -2213,66 +2424,20 @@ static void pdf_run_Do_form(fz_context *ctx, pdf_processor *proc, const char *na
 static void pdf_run_BMC(fz_context *ctx, pdf_processor *proc, const char *tag)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
-
-	if (!tag)
-		tag = "Untitled";
-
 	push_marked_content(ctx, pr, tag, NULL);
-
-	fz_begin_layer(ctx, pr->dev, tag);
 }
 
 static void pdf_run_BDC(fz_context *ctx, pdf_processor *proc, const char *tag, pdf_obj *raw, pdf_obj *cooked)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
-	pdf_obj *at;
-	const char *str;
-
-	if (!tag)
-		tag = "Untitled";
-
-	str = pdf_dict_get_text_string(ctx, cooked, PDF_NAME(Name));
-	if (strlen(str) == 0)
-		str = tag;
-
-	at = pdf_dict_get(ctx, cooked, PDF_NAME(ActualText));
-	if (at)
-	{
-		if (pr->actual_text)
-		{
-			if (*pr->actual_text_p)
-			{
-				fz_warn(ctx, "interrupted ActualText content");
-			}
-			fz_free(ctx, pr->actual_text);
-			pr->actual_text = NULL;
-			pr->actual_text_p = NULL;
-		}
-		pr->actual_text = fz_strdup(ctx, pdf_to_text_string(ctx, at, NULL));
-		pr->actual_text_p = pr->actual_text;
-	}
-	
 	push_marked_content(ctx, pr, tag, cooked);
-
-	fz_begin_layer(ctx, pr->dev, str);
 }
 
 static void pdf_run_EMC(fz_context *ctx, pdf_processor *proc)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 
-	if (pr->actual_text)
-	{
-		if (*pr->actual_text_p != 0)
-			fz_warn(ctx, "ActualText content length mismatch: more ActualText content than characters");
-		fz_free(ctx, pr->actual_text);
-		pr->actual_text = NULL;
-		pr->actual_text_p = NULL;
-	}
-	
-	pop_marked_content(ctx, pr);
-
-	fz_end_layer(ctx, pr->dev);
+	pop_marked_content(ctx, pr, 1);
 }
 
 static void pdf_run_MP(fz_context *ctx, pdf_processor *proc, const char *tag)
@@ -2317,8 +2482,7 @@ pdf_close_run_processor(fz_context *ctx, pdf_processor *proc)
 		pr->gstate[0].clip_depth--;
 	}
 
-	while (pr->marked_content)
-		pop_marked_content(ctx, pr);
+	clear_marked_content(ctx, pr);
 }
 
 static void
@@ -2350,7 +2514,10 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 	}
 
 	while (pr->marked_content)
-		pop_marked_content(ctx, pr);
+		pop_marked_content(ctx, pr, 0);
+
+	pdf_drop_document(ctx, pr->doc);
+	pdf_drop_obj(ctx, pr->role_map);
 }
 
 static void
@@ -2393,7 +2560,7 @@ pdf_run_pop_resources(fz_context *ctx, pdf_processor *proc)
 	gstate: The initial graphics state.
 */
 pdf_processor *
-pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, int has_transparency)
+pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, int has_transparency)
 {
 	pdf_run_processor *proc = (pdf_run_processor *)pdf_new_processor(ctx, sizeof *proc);
 	{
@@ -2528,6 +2695,7 @@ pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char
 		proc->super.op_END = pdf_run_END;
 	}
 
+	proc->doc = pdf_keep_document(ctx, doc);
 	proc->dev = dev;
 
 	proc->default_cs = fz_keep_default_colorspaces(ctx, default_cs);
@@ -2573,6 +2741,8 @@ pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char
 
 	/* We need to save an extra level to allow for level 0 to be the parent gstate level. */
 	pdf_gsave(ctx, proc);
+
+	proc->role_map = pdf_keep_obj(ctx, pdf_dict_getl(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root), PDF_NAME(StructTreeRoot), PDF_NAME(RoleMap), NULL));
 
 	return (pdf_processor*)proc;
 }

@@ -146,6 +146,79 @@ enum
 	fz_device_container_stack_is_tile,
 };
 
+/* Structure types */
+typedef enum
+{
+	FZ_STRUCT_INVALID = -1,
+
+	/* Grouping elements (PDF 1.7 - Table 10.20) */
+	FZ_STRUCT_DOCUMENT,
+	FZ_STRUCT_PART,
+	FZ_STRUCT_ART,
+	FZ_STRUCT_SECT,
+	FZ_STRUCT_DIV,
+	FZ_STRUCT_BLOCKQUOTE,
+	FZ_STRUCT_CAPTION,
+	FZ_STRUCT_TOC,
+	FZ_STRUCT_TOCI,
+	FZ_STRUCT_INDEX,
+	FZ_STRUCT_NONSTRUCT,
+	FZ_STRUCT_PRIVATE,
+
+	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
+	FZ_STRUCT_P,
+	FZ_STRUCT_H,
+	FZ_STRUCT_H1,
+	FZ_STRUCT_H2,
+	FZ_STRUCT_H3,
+	FZ_STRUCT_H4,
+	FZ_STRUCT_H5,
+	FZ_STRUCT_H6,
+
+	/* List elements (PDF 1.7 - Table 10.23) */
+	FZ_STRUCT_LIST,
+	FZ_STRUCT_LISTITEM,
+	FZ_STRUCT_LABEL,
+	FZ_STRUCT_LISTBODY,
+
+	/* Table elements (PDF 1.7 - Table 10.24) */
+	FZ_STRUCT_TABLE,
+	FZ_STRUCT_TR,
+	FZ_STRUCT_TH,
+	FZ_STRUCT_TD,
+	FZ_STRUCT_THEAD,
+	FZ_STRUCT_TBODY,
+	FZ_STRUCT_TFOOT,
+
+	/* Inline elements (PDF 1.7 - Table 10.25) */
+	FZ_STRUCT_SPAN,
+	FZ_STRUCT_QUOTE,
+	FZ_STRUCT_NOTE,
+	FZ_STRUCT_REFERENCE,
+	FZ_STRUCT_BIBENTRY,
+	FZ_STRUCT_CODE,
+	FZ_STRUCT_LINK,
+	FZ_STRUCT_ANNOT,
+
+	/* Ruby inline element (PDF 1.7 - Table 10.26) */
+	FZ_STRUCT_RUBY,
+	FZ_STRUCT_RB,
+	FZ_STRUCT_RT,
+	FZ_STRUCT_RP,
+
+	/* Warichu inline element (PDF 1.7 - Table 10.26) */
+	FZ_STRUCT_WARICHU,
+	FZ_STRUCT_WT,
+	FZ_STRUCT_WP,
+
+	/* Illustration elements (PDF 1.7 - Table 10.27) */
+	FZ_STRUCT_FIGURE,
+	FZ_STRUCT_FORMULA,
+	FZ_STRUCT_FORM
+} fz_struct;
+
+const char *fz_struct_to_string(fz_struct type);
+
 struct fz_device
 {
 	int refs;
@@ -187,6 +260,9 @@ struct fz_device
 	void (*begin_layer)(fz_context *, fz_device *, const char *layer_name);
 	void (*end_layer)(fz_context *, fz_device *);
 
+	void (*begin_struct)(fz_context *, fz_device *, fz_struct standard, const char *raw);
+	void (*end_struct)(fz_context *, fz_device *);
+
 	fz_rect d1_rect;
 
 	int container_len;
@@ -222,6 +298,8 @@ void fz_render_flags(fz_context *ctx, fz_device *dev, int set, int clear);
 void fz_set_default_colorspaces(fz_context *ctx, fz_device *dev, fz_default_colorspaces *default_cs);
 void fz_begin_layer(fz_context *ctx, fz_device *dev, const char *layer_name);
 void fz_end_layer(fz_context *ctx, fz_device *dev);
+void fz_begin_struct(fz_context *ctx, fz_device *dev, fz_struct standard, const char *raw);
+void fz_end_struct(fz_context *ctx, fz_device *dev);
 
 /**
 	Devices are created by calls to device implementations, for

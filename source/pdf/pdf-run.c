@@ -97,7 +97,8 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 
 		ctm = fz_concat(page_ctm, ctm);
 
-		proc = pdf_new_run_processor(ctx, dev, ctm, usage, NULL, default_cs, page->transparency);
+        assert(doc == page->doc); //[GHo]
+		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, usage, NULL, default_cs, page->transparency);
 		pdf_processor_push_resources(ctx, proc, pdf_page_resources(ctx, annot->page));
 		resources_pushed = 1;
 		pdf_process_annot(ctx, proc, annot);
@@ -177,7 +178,8 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 			fz_begin_group(ctx, dev, mediabox, colorspace, 1, 0, 0, 1);
 		}
 
-		proc = pdf_new_run_processor(ctx, dev, ctm, usage, NULL, default_cs, page->transparency);
+        assert(doc == page->doc); //[GHo]
+		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, usage, NULL, default_cs, page->transparency);
 		pdf_process_contents(ctx, proc, doc, resources, contents, NULL);
 		pdf_close_processor(ctx, proc);
 
@@ -384,7 +386,7 @@ pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer 
 {
 	pdf_processor *proc;
 
-	proc = pdf_new_run_processor(ctx, dev, ctm, "View", gstate, default_cs, has_transparency);
+	proc = pdf_new_run_processor(ctx, doc, dev, ctm, "View", gstate, default_cs, has_transparency);
 	fz_try(ctx)
 	{
 		pdf_process_glyph(ctx, proc, doc, resources, contents);

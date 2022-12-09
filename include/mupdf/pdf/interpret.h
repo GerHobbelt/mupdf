@@ -209,7 +209,7 @@ typedef struct
 
 /* Functions to set up pdf_process structures */
 
-pdf_processor *pdf_new_run_processor(fz_context *ctx, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, int has_transparency);
+pdf_processor *pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_matrix ctm, const char *usage, pdf_gstate *gstate, fz_default_colorspaces *default_cs, int has_transparency);
 
 /*
 	Create an MCID extraction processor.
