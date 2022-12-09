@@ -1112,6 +1112,8 @@ find_lang_from_mc(fz_context *ctx, pdf_run_processor *pr)
 			continue;
 
 		lang = pdf_dict_get_string(ctx, mc->val, PDF_NAME(Lang), &len);
+		if (!lang)
+			lang = pdf_dict_get_string(ctx, lookup_mcid(ctx, pr, mc->val), PDF_NAME(Lang), &len);
 		if (lang)
 		{
 			if (len == 2)
