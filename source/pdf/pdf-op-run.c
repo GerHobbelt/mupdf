@@ -1168,38 +1168,10 @@ find_lang_from_mc(fz_context *ctx, pdf_run_processor *pr)
 			lang = pdf_dict_get_string(ctx, lookup_mcid(ctx, pr, mc->val), PDF_NAME(Lang), &len);
 		if (lang)
 		{
-			if (len == 2)
-			{
-				if (!memcmp(lang, "ur", 2))
-					return FZ_LANG_ur;
-				if (!memcmp(lang, "ko", 2))
-					return FZ_LANG_ko;
-				if (!memcmp(lang, "ja", 2))
-					return FZ_LANG_ja;
-				if (!memcmp(lang, "zh", 2))
-					return FZ_LANG_zh;
-			}
-			else if (len == 3)
-			{
-				if (!memcmp(lang, "urd", 3))
-					return FZ_LANG_urd;
-				if (!memcmp(lang, "zhs", 3))
-					return FZ_LANG_zh_Hans;
-				if (!memcmp(lang, "zht", 3))
-					return FZ_LANG_zh_Hant;
-			}
-			else if (len == 5)
-			{
-				if (!memcmp(lang, "zh-TW", 5)) return FZ_LANG_zh_Hant;
-				if (!memcmp(lang, "zh-HK", 5)) return FZ_LANG_zh_Hant;
-				if (!memcmp(lang, "zh-CN", 5)) return FZ_LANG_zh_Hans;
-			}
-			else if (len == 7)
-			{
-				if (!memcmp(lang, "zh-Hant", 7)) return FZ_LANG_zh_Hant;
-				if (!memcmp(lang, "zh-Hans", 7)) return FZ_LANG_zh_Hans;
-			}
-			return FZ_LANG_UNSET;
+			char text[8];
+			memcpy(text, lang, len < 8 ? len : 7);
+			text[len < 8 ? len : 7] = 0;
+			return fz_text_language_from_string(text);
 		}
 	}
 
