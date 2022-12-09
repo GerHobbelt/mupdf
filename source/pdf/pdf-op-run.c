@@ -907,7 +907,7 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 }
 
 static void
-pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid)
+pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language lang)
 {
 	pdf_gstate *gstate = pr->gstate + pr->gtop;
 	pdf_font_desc *fontdesc = gstate->text.font;
@@ -956,11 +956,11 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid)
 	}
 
 	/* add glyph to textobject */
-	fz_show_glyph(ctx, pr->tos.text, fontdesc->font, trm, gid, ucsbuf[0], fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, FZ_LANG_UNSET);
+	fz_show_glyph(ctx, pr->tos.text, fontdesc->font, trm, gid, ucsbuf[0], fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, lang);
 
 	/* add filler glyphs for one-to-many unicode mapping */
 	for (i = 1; i < ucslen; i++)
-		fz_show_glyph(ctx, pr->tos.text, fontdesc->font, trm, -1, ucsbuf[i], fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, FZ_LANG_UNSET);
+		fz_show_glyph(ctx, pr->tos.text, fontdesc->font, trm, -1, ucsbuf[i], fontdesc->wmode, 0, FZ_BIDI_NEUTRAL, lang);
 
 	pdf_tos_move_after_char(ctx, &pr->tos);
 }
@@ -977,6 +977,61 @@ pdf_show_space(fz_context *ctx, pdf_run_processor *pr, float tadj)
 		pr->tos.tm = fz_pre_translate(pr->tos.tm, 0, tadj);
 }
 
+static fz_text_language
+find_lang_from_mc(fz_context *ctx, pdf_run_processor *pr)
+{
+	marked_content_stack *mc;
+
+	for (mc = pr->marked_content; mc != NULL; mc = mc->next)
+	{
+		size_t len;
+		const char *lang;
+
+		/* Only look in 'Span' entries. */
+		if (!pdf_name_eq(ctx, mc->tag, PDF_NAME(Span)))
+			continue;
+
+		lang = pdf_dict_get_string(ctx, mc->val, PDF_NAME(Lang), &len);
+		if (lang)
+		{
+			if (len == 2)
+			{
+				if (!memcmp(lang, "ur", 2))
+					return FZ_LANG_ur;
+				if (!memcmp(lang, "ko", 2))
+					return FZ_LANG_ko;
+				if (!memcmp(lang, "ja", 2))
+					return FZ_LANG_ja;
+				if (!memcmp(lang, "zh", 2))
+					return FZ_LANG_zh;
+			}
+			else if (len == 3)
+			{
+				if (!memcmp(lang, "urd", 3))
+					return FZ_LANG_urd;
+				if (!memcmp(lang, "zhs", 3))
+					return FZ_LANG_zh_Hans;
+				if (!memcmp(lang, "zht", 3))
+					return FZ_LANG_zh_Hant;
+			}
+			else if (len == 5)
+			{
+				if (!memcmp(lang, "zh-TW", 5)) return FZ_LANG_zh_Hant;
+				if (!memcmp(lang, "zh-HK", 5)) return FZ_LANG_zh_Hant;
+				if (!memcmp(lang, "zh-CN", 5)) return FZ_LANG_zh_Hans;
+			}
+			else if (len == 7)
+			{
+				if (!memcmp(lang, "zh-Hant", 7)) return FZ_LANG_zh_Hant;
+				if (!memcmp(lang, "zh-Hans", 7)) return FZ_LANG_zh_Hans;
+			}
+			return FZ_LANG_UNSET;
+		}
+	}
+
+	return FZ_LANG_UNSET;
+}
+
 static void
 show_string(fz_context *ctx, pdf_run_processor *pr, unsigned char *buf, size_t len)
 {
@@ -985,6 +1040,7 @@ show_string(fz_context *ctx, pdf_run_processor *pr, unsigned char *buf, size_t l
 	unsigned char *end = buf + len;
 	unsigned int cpt;
 	int cid;
+	fz_text_language lang = find_lang_from_mc(ctx, pr);
 
 	while (buf < end)
 	{
@@ -993,7 +1049,7 @@ show_string(fz_context *ctx, pdf_run_processor *pr, unsigned char *buf, size_t l
 
 		cid = pdf_lookup_cmap(fontdesc->encoding, cpt);
 		if (cid >= 0)
-			pdf_show_char(ctx, pr, cid);
+			pdf_show_char(ctx, pr, cid, lang);
 		else
 			fz_warn(ctx, "cannot encode character");
 		if (cpt == 32 && w == 1)
