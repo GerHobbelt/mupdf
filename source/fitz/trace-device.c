@@ -565,7 +565,7 @@ fz_trace_begin_layer(fz_context *ctx, fz_device *dev_, const char *name)
 	fz_trace_device *dev = (fz_trace_device*)dev_;
 	fz_output *out = dev->out;
 	fz_trace_indent(ctx, out, dev->depth);
-	fz_write_printf(ctx, out, "<layer name=\"%s\"/>\n", name);
+	fz_write_printf(ctx, out, "<layer name=\"%s\">\n", name);
 	dev->depth++;
 }
 
@@ -576,7 +576,7 @@ fz_trace_end_layer(fz_context *ctx, fz_device *dev_)
 	fz_output *out = dev->out;
 	dev->depth--;
 	fz_trace_indent(ctx, out, dev->depth);
-	fz_write_printf(ctx, out, "<end_layer/>\n");
+	fz_write_printf(ctx, out, "</layer>\n");
 }
 
 static void
@@ -589,7 +589,7 @@ fz_trace_begin_struct(fz_context *ctx, fz_device *dev_, fz_struct standard, cons
 	fz_write_printf(ctx, out, "<struct standard=\"%s\"", str);
 	if (raw && strcmp(str, raw))
 		fz_write_printf(ctx, out, " raw=\"%s\"", fz_struct_to_string(standard));
-	fz_write_printf(ctx, out, "/>\n");
+	fz_write_printf(ctx, out, ">\n");
 	dev->depth++;
 }
 
@@ -601,6 +601,45 @@ fz_trace_end_struct(fz_context *ctx, fz_device *dev_)
 	dev->depth--;
 	fz_trace_indent(ctx, out, dev->depth);
 	fz_write_printf(ctx, out, "<end_struct>\n");
+}
+
+static const char *
+metatext_type(fz_metatext meta)
+{
+	switch (meta)
+	{
+	case FZ_METATEXT_ABBREVIATION:
+		return "abbreviation";
+	case FZ_METATEXT_ACTUALTEXT:
+		return "actualtext";
+	case FZ_METATEXT_ALT:
+		return "alt";
+	case FZ_METATEXT_TITLE:
+		return "title";
+	}
+	return "????";
+}
+
+static void
+fz_trace_begin_metatext(fz_context *ctx, fz_device *dev_, fz_metatext meta, const char *txt)
+{
+	fz_trace_device *dev = (fz_trace_device*)dev_;
+	fz_output *out = dev->out;
+	const char *type = metatext_type(meta);
+	fz_trace_indent(ctx, out, dev->depth);
+	fz_write_printf(ctx, out, "<metatext type=\"%s\" txt=\"%s\">\n", type, txt ? txt : "");
+	dev->depth++;
+}
+
+static void
+fz_trace_end_metatext(fz_context *ctx, fz_device *dev_, fz_struct meta)
+{
+	fz_trace_device *dev = (fz_trace_device*)dev_;
+	fz_output *out = dev->out;
+	const char *type = metatext_type(meta);
+	dev->depth--;
+	fz_trace_indent(ctx, out, dev->depth);
+	fz_write_printf(ctx, out, "</metatext type=\"%s\">\n", type);
 }
 
 static void
@@ -660,6 +699,9 @@ fz_device *fz_new_trace_device(fz_context *ctx, fz_output *out)
 
 	dev->super.begin_struct = fz_trace_begin_struct;
 	dev->super.end_struct = fz_trace_end_struct;
+
+	dev->super.begin_metatext = fz_trace_begin_metatext;
+	dev->super.end_metatext = fz_trace_end_metatext;
 
 	dev->super.render_flags = fz_trace_render_flags;
 	dev->super.set_default_colorspaces = fz_trace_set_default_colorspaces;

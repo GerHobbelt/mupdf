@@ -58,7 +58,9 @@ typedef enum
 	FZ_CMD_BEGIN_LAYER,
 	FZ_CMD_END_LAYER,
 	FZ_CMD_BEGIN_STRUCT,
-	FZ_CMD_END_STRUCT
+	FZ_CMD_END_STRUCT,
+	FZ_CMD_BEGIN_METATEXT,
+	FZ_CMD_END_METATEXT
 } fz_display_command;
 
 /* The display list is a list of nodes.
@@ -1402,6 +1404,55 @@ fz_list_end_struct(fz_context *ctx, fz_device *dev)
 }
 
 static void
+fz_list_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const char *text)
+{
+	unsigned char *data;
+	size_t data_size = 1 + (text ? strlen(text) : 0) + 1;
+
+	data = fz_append_display_node(
+		ctx,
+		dev,
+		FZ_CMD_BEGIN_METATEXT,
+		0, /* flags */
+		NULL,
+		NULL, /* path */
+		NULL, /* color */
+		NULL, /* colorspace */
+		NULL, /* alpha */
+		NULL,
+		NULL, /* stroke */
+		NULL, /* private_data */
+		data_size); /* private_data_len */
+	data[0] = (char)meta;
+	if (text)
+		strcpy(data+1, text);
+	else
+		data[1] = 0;
+}
+
+static void
+fz_list_end_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta)
+{
+	unsigned char *data;
+
+	data = fz_append_display_node(
+		ctx,
+		dev,
+		FZ_CMD_END_METATEXT,
+		0, /* flags */
+		NULL,
+		NULL, /* path */
+		NULL, /* color */
+		NULL, /* colorspace */
+		NULL, /* alpha */
+		NULL, /* ctm */
+		NULL, /* stroke */
+		NULL, /* private_data */
+		1); /* private_data_len */
+	data[0] = (char)meta;
+}
+
+static void
 fz_list_drop_device(fz_context *ctx, fz_device *dev)
 {
 	fz_list_device *writer = (fz_list_device *)dev;
@@ -1453,6 +1504,9 @@ fz_new_list_device(fz_context *ctx, fz_display_list *list)
 
 	dev->super.begin_struct = fz_list_begin_struct;
 	dev->super.end_struct = fz_list_end_struct;
+
+	dev->super.begin_metatext = fz_list_begin_metatext;
+	dev->super.end_metatext = fz_list_end_metatext;
 
 	dev->super.drop_device = fz_list_drop_device;
 
@@ -1986,6 +2040,22 @@ visible:
 			case FZ_CMD_END_STRUCT:
 				fz_end_struct(ctx, dev);
 				break;
+			case FZ_CMD_BEGIN_METATEXT:
+			{
+				const unsigned char *data;
+				align_node_for_pointer(&node);
+				data = (const unsigned char *)node;
+				fz_begin_metatext(ctx, dev, data[0], data[1] == 0 ? NULL : &data[1]);
+				break;
+			}
+			case FZ_CMD_END_METATEXT:
+			{
+				const unsigned char *data;
+				align_node_for_pointer(&node);
+				data = (const unsigned char *)node;
+				fz_end_metatext(ctx, dev, data[0]);
+				break;
+			}
 			}
 		}
 		fz_catch(ctx)
