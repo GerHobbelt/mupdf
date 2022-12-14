@@ -1861,7 +1861,8 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 			n.cmd == FZ_CMD_BEGIN_TILE || n.cmd == FZ_CMD_END_TILE ||
 			n.cmd == FZ_CMD_RENDER_FLAGS || n.cmd == FZ_CMD_DEFAULT_COLORSPACES ||
 			n.cmd == FZ_CMD_BEGIN_LAYER || n.cmd == FZ_CMD_END_LAYER ||
-			n.cmd == FZ_CMD_BEGIN_STRUCTURE || n.cmd == FZ_CMD_END_STRUCTURE
+			n.cmd == FZ_CMD_BEGIN_STRUCTURE || n.cmd == FZ_CMD_END_STRUCTURE ||
+			n.cmd == FZ_CMD_BEGIN_METATEXT || n.cmd == FZ_CMD_END_METATEXT
 			)
 		{
 			empty = 0;

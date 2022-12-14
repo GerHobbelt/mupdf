@@ -1536,6 +1536,36 @@ structure_type(fz_context *ctx, pdf_run_processor *proc, pdf_obj *tag)
 }
 
 static void
+begin_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, fz_metatext meta, pdf_obj *name)
+{
+	pdf_obj *text = pdf_dict_get(ctx, val, name);
+
+	if (!text)
+		text = pdf_dict_get(ctx, mcid, name);
+	if (!text)
+		return;
+
+	pdf_flush_text(ctx, proc);
+
+	fz_begin_metatext(ctx, proc->dev, meta, pdf_to_text_string(ctx, text));
+}
+
+static void
+end_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, pdf_obj *name)
+{
+	pdf_obj *text = pdf_dict_get(ctx, val, name);
+
+	if (!text)
+		text = pdf_dict_get(ctx, mcid, name);
+	if (!text)
+		return;
+
+	pdf_flush_text(ctx, proc);
+
+	fz_end_metatext(ctx, proc->dev);
+}
+
+static void
 begin_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 {
 	/* val has been resolved to a dict for us by the originally specified name
