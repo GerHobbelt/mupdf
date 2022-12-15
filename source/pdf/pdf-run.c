@@ -35,6 +35,8 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 	fz_default_colorspaces *default_cs = NULL;
 	int flags;
 	int resources_pushed = 0;
+	int struct_parent_num = -1;
+	pdf_obj *struct_parent;
 	fz_cookie* cookie = ctx->cookie;
 
 	fz_var(proc);
@@ -97,8 +99,12 @@ pdf_run_annot_with_usage(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf
 
 		ctm = fz_concat(page_ctm, ctm);
 
+		struct_parent = pdf_dict_getl(ctx, page->obj, PDF_NAME(StructParent));
+		if (pdf_is_number(ctx, struct_parent))
+			struct_parent_num = pdf_to_int(ctx, struct_parent);
+
         assert(doc == page->doc); //[GHo]
-		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, usage, NULL, default_cs, page->transparency);
+		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, page->transparency);
 		pdf_processor_push_resources(ctx, proc, pdf_page_resources(ctx, annot->page));
 		resources_pushed = 1;
 		pdf_process_annot(ctx, proc, annot);
@@ -126,6 +132,8 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 	pdf_processor *proc = NULL;
 	fz_default_colorspaces *default_cs = NULL;
 	fz_colorspace *colorspace = NULL;
+	int struct_parent_num = -1;
+	pdf_obj *struct_parent;
 	fz_cookie* cookie = ctx->cookie;
 
 	fz_var(proc);
@@ -178,8 +186,12 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 			fz_begin_group(ctx, dev, mediabox, colorspace, 1, 0, 0, 1);
 		}
 
+		struct_parent = pdf_dict_getl(ctx, page->obj, PDF_NAME(StructParents));
+		if (pdf_is_number(ctx, struct_parent))
+			struct_parent_num = pdf_to_int(ctx, struct_parent);
+
         assert(doc == page->doc); //[GHo]
-		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, usage, NULL, default_cs, page->transparency);
+		proc = pdf_new_run_processor(ctx, page->doc, dev, ctm, struct_parent_num, usage, NULL, default_cs, page->transparency);
 		pdf_process_contents(ctx, proc, doc, resources, contents, NULL);
 		pdf_close_processor(ctx, proc);
 
@@ -386,7 +398,7 @@ pdf_run_glyph(fz_context *ctx, pdf_document *doc, pdf_obj *resources, fz_buffer 
 {
 	pdf_processor *proc;
 
-	proc = pdf_new_run_processor(ctx, doc, dev, ctm, "View", gstate, default_cs, has_transparency);
+	proc = pdf_new_run_processor(ctx, doc, dev, ctm, -1, "View", gstate, default_cs, has_transparency);
 	fz_try(ctx)
 	{
 		pdf_process_glyph(ctx, proc, doc, resources, contents);
