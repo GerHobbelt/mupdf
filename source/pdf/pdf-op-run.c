@@ -1769,6 +1769,8 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 		{
 			/* Maybe drop this entirely? */
 			standard = structure_type(ctx, proc, tag);
+			if (standard == FZ_STRUCTURE_INVALID)
+				standard = structure_type(ctx, proc, pdf_dict_get(ctx, mc_dict, PDF_NAME(S)));
 			if (standard != FZ_STRUCTURE_INVALID)
 			{
 				pdf_flush_text(ctx, proc);
@@ -1849,6 +1851,8 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		{
 			/* Maybe drop this entirely? */
 			standard = structure_type(ctx, proc, tag);
+			if (standard == FZ_STRUCTURE_INVALID)
+				standard = structure_type(ctx, proc, pdf_dict_get(ctx, mc_dict, PDF_NAME(S)));
 			if (standard != FZ_STRUCTURE_INVALID)
 			{
 				pdf_flush_text(ctx, proc);
