@@ -1525,7 +1525,7 @@ begin_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *
 }
 
 static void
-end_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, fz_metatext meta, pdf_obj *name)
+end_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, pdf_obj *name)
 {
 	pdf_obj *text = pdf_dict_get(ctx, val, name);
 
@@ -1536,7 +1536,7 @@ end_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mc
 
 	pdf_flush_text(ctx, proc);
 
-	fz_end_metatext(ctx, proc->dev, meta);
+	fz_end_metatext(ctx, proc->dev);
 }
 
 static void
@@ -1639,16 +1639,16 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		mc_dict = lookup_mcid(ctx, proc, val);
 
 		/* Title */
-		end_metatext(ctx, proc, val, mc_dict, FZ_METATEXT_TITLE, PDF_NAME(T));
+		end_metatext(ctx, proc, val, mc_dict, PDF_NAME(T));
 
 		/* Abbreviation */
-		end_metatext(ctx, proc, val, mc_dict, FZ_METATEXT_ABBREVIATION, PDF_NAME(E));
+		end_metatext(ctx, proc, val, mc_dict, PDF_NAME(E));
 
 		/* Alt */
-		end_metatext(ctx, proc, val, mc_dict, FZ_METATEXT_ALT, PDF_NAME(Alt));
+		end_metatext(ctx, proc, val, mc_dict, PDF_NAME(Alt));
 
 		/* ActualText */
-		end_metatext(ctx, proc, val, mc_dict, FZ_METATEXT_ACTUALTEXT, PDF_NAME(ActualText));
+		end_metatext(ctx, proc, val, mc_dict, PDF_NAME(ActualText));
 
 		/* Structure */
 		standard = structure_type(ctx, proc, tag);

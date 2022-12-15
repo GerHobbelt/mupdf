@@ -612,12 +612,12 @@ void fz_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const 
 	}
 }
 
-void fz_end_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta)
+void fz_end_metatext(fz_context *ctx, fz_device *dev)
 {
 	if (dev->end_metatext)
 	{
 		fz_try(ctx)
-			dev->end_metatext(ctx, dev, meta);
+			dev->end_metatext(ctx, dev);
 		fz_catch(ctx)
 		{
 			fz_disable_device(ctx, dev);

@@ -272,7 +272,7 @@ struct fz_device
 	void (*end_struct)(fz_context *, fz_device *);
 
 	void (*begin_metatext)(fz_context *, fz_device *, fz_metatext meta, const char *text);
-	void (*end_metatext)(fz_context *, fz_device *, fz_metatext meta);
+	void (*end_metatext)(fz_context *, fz_device *);
 
 	fz_rect d1_rect;
 
@@ -312,7 +312,7 @@ void fz_end_layer(fz_context *ctx, fz_device *dev);
 void fz_begin_struct(fz_context *ctx, fz_device *dev, fz_struct standard, const char *raw);
 void fz_end_struct(fz_context *ctx, fz_device *dev);
 void fz_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const char *text);
-void fz_end_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta);
+void fz_end_metatext(fz_context *ctx, fz_device *dev);
 
 /**
 	Devices are created by calls to device implementations, for

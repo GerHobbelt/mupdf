@@ -1407,7 +1407,7 @@ static void
 fz_list_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const char *text)
 {
 	unsigned char *data;
-	size_t data_size = 1 + (text ? strlen(text) : 0) + 1;
+	size_t len = (text ? strlen(text) : 0);
 
 	data = fz_append_display_node(
 		ctx,
@@ -1422,20 +1422,18 @@ fz_list_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const 
 		NULL,
 		NULL, /* stroke */
 		NULL, /* private_data */
-		data_size); /* private_data_len */
+		len + 2); /* private_data_len */
 	data[0] = (char)meta;
-	if (text)
-		strcpy(data+1, text);
+	if (len)
+		memcpy(data+1, text, len+1);
 	else
 		data[1] = 0;
 }
 
 static void
-fz_list_end_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta)
+fz_list_end_metatext(fz_context *ctx, fz_device *dev)
 {
-	unsigned char *data;
-
-	data = fz_append_display_node(
+	fz_append_display_node(
 		ctx,
 		dev,
 		FZ_CMD_END_METATEXT,
@@ -1448,8 +1446,7 @@ fz_list_end_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta)
 		NULL, /* ctm */
 		NULL, /* stroke */
 		NULL, /* private_data */
-		1); /* private_data_len */
-	data[0] = (char)meta;
+		0); /* private_data_len */
 }
 
 static void
@@ -2045,17 +2042,12 @@ visible:
 				const unsigned char *data;
 				align_node_for_pointer(&node);
 				data = (const unsigned char *)node;
-				fz_begin_metatext(ctx, dev, data[0], data[1] == 0 ? NULL : &data[1]);
+				fz_begin_metatext(ctx, dev, (fz_metatext)data[0], (const char *)(data[1] == 0 ? NULL : &data[1]));
 				break;
 			}
 			case FZ_CMD_END_METATEXT:
-			{
-				const unsigned char *data;
-				align_node_for_pointer(&node);
-				data = (const unsigned char *)node;
-				fz_end_metatext(ctx, dev, data[0]);
+				fz_end_metatext(ctx, dev);
 				break;
-			}
 			}
 		}
 		fz_catch(ctx)

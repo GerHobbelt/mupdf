@@ -632,14 +632,13 @@ fz_trace_begin_metatext(fz_context *ctx, fz_device *dev_, fz_metatext meta, cons
 }
 
 static void
-fz_trace_end_metatext(fz_context *ctx, fz_device *dev_, fz_struct meta)
+fz_trace_end_metatext(fz_context *ctx, fz_device *dev_)
 {
 	fz_trace_device *dev = (fz_trace_device*)dev_;
 	fz_output *out = dev->out;
-	const char *type = metatext_type(meta);
 	dev->depth--;
 	fz_trace_indent(ctx, out, dev->depth);
-	fz_write_printf(ctx, out, "</metatext type=\"%s\">\n", type);
+	fz_write_printf(ctx, out, "</metatext>\n");
 }
 
 static void
