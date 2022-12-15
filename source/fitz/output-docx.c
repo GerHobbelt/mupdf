@@ -537,7 +537,7 @@ fz_struct_to_extract(fz_structure type)
 }
 
 static void
-dev_begin_structure(fz_context *ctx, fz_device *dev_, fz_structure standard, const char *raw)
+dev_begin_structure(fz_context *ctx, fz_device *dev_, fz_structure standard, const char *raw, int uid)
 {
 	fz_docx_device *dev = (fz_docx_device *)dev_;
 	extract_t *extract = dev->writer->extract;
