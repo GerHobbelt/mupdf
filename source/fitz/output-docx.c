@@ -25,8 +25,8 @@
 #if FZ_ENABLE_DOCX_OUTPUT && FZ_ENABLE_RENDER_CORE 
 
 #include "glyphbox.h"
-#include "extract.h"
-#include "extract_buffer.h"
+#include "extract/extract.h"
+#include "extract/buffer.h"
 
 #include "mupdf/assertions.h"
 #include <errno.h>
@@ -411,7 +411,7 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 	}
 }
 
-#if defined(EXPERIMENTAL)
+//#if defined(EXPERIMENTAL)
 
 static extract_struct_t
 fz_struct_to_extract(fz_structure type)
@@ -445,6 +445,20 @@ fz_struct_to_extract(fz_structure type)
 		return extract_struct_NONSTRUCT;
 	case FZ_STRUCTURE_PRIVATE:
 		return extract_struct_PRIVATE;
+	/* Grouping elements (PDF 2.0 - Table 364) */
+	case FZ_STRUCTURE_DOCUMENTFRAGMENT:
+		return extract_struct_DOCUMENTFRAGMENT;
+	/* Grouping elements (PDF 2.0 - Table 365) */
+	case FZ_STRUCTURE_ASIDE:
+		return extract_struct_ASIDE;
+	/* Grouping elements (PDF 2.0 - Table 366) */
+	case FZ_STRUCTURE_TITLE:
+		return extract_struct_TITLE;
+	case FZ_STRUCTURE_FENOTE:
+		return extract_struct_FENOTE;
+	/* Grouping elements (PDF 2.0 - Table 367) */
+	case FZ_STRUCTURE_SUB:
+		return extract_struct_SUB;
 
 	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
 	case FZ_STRUCTURE_P:
@@ -507,6 +521,11 @@ fz_struct_to_extract(fz_structure type)
 		return extract_struct_LINK;
 	case FZ_STRUCTURE_ANNOT:
 		return extract_struct_ANNOT;
+	/* Inline elements (PDF 2.0 - Table 368) */
+	case FZ_STRUCTURE_EM:
+		return extract_struct_EM;
+	case FZ_STRUCTURE_STRONG:
+		return extract_struct_STRONG;
 
 	/* Ruby inline element (PDF 1.7 - Table 10.26) */
 	case FZ_STRUCTURE_RUBY:
@@ -533,6 +552,10 @@ fz_struct_to_extract(fz_structure type)
 		return extract_struct_FORMULA;
 	case FZ_STRUCTURE_FORM:
 		return extract_struct_FORM;
+
+	/* Artifact structure type (PDF 2.0 - Table 375) */
+	case FZ_STRUCTURE_ARTIFACT:
+		return extract_struct_ARTIFACT;
 	}
 }
 
@@ -546,7 +569,7 @@ dev_begin_structure(fz_context *ctx, fz_device *dev_, fz_structure standard, con
 	dev->writer->ctx = ctx;
 	fz_try(ctx)
 	{
-		if (extract_begin_struct(extract, fz_struct_to_extract(standard)))
+		if (extract_begin_struct(extract, fz_struct_to_extract(standard), uid))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin struct");
 	}
 	fz_always(ctx)
@@ -574,7 +597,7 @@ dev_end_structure(fz_context *ctx, fz_device *dev_)
 		fz_rethrow(ctx);
 }
 
-#endif
+//#endif
 
 static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_, fz_rect mediabox)
 {
