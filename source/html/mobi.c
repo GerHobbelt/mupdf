@@ -52,7 +52,7 @@ static void
 mobi_read_text_palmdoc(fz_context *ctx, fz_buffer *out, fz_stream *stm, uint32_t size)
 {
 	// https://wiki.mobileread.com/wiki/PalmDOC
-	uint32_t end = out->len + size;
+	size_t end = out->len + size;
 	while (out->len < end)
 	{
 		int c = fz_read_byte(ctx, stm);
@@ -147,7 +147,7 @@ mobi_read_data(fz_context *ctx, fz_buffer *out, fz_stream *stm, uint32_t *offset
 	if (text_encoding != TEXT_ENCODING_UTF8 || format == FORMAT_TEXT)
 	{
 		unsigned char *p;
-		int i, n = fz_buffer_extract(ctx, out, &p);
+		size_t i, n = fz_buffer_extract(ctx, out, &p);
 		fz_resize_buffer(ctx, out, 0);
 		if (format == FORMAT_TEXT)
 			fz_append_string(ctx, out, "<html><head><style>body{white-space:pre-wrap}</style></head><body>");
