@@ -687,7 +687,7 @@ pdf_objcmp_deep(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 	return do_objcmp(ctx, a, b, 1);
 }
 
-int pdf_name_eq(fz_context *ctx, pdf_obj *a, pdf_obj *b)
+int (pdf_name_eq)(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 {
 	RESOLVE(a);
 	RESOLVE(b);
