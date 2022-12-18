@@ -2348,6 +2348,9 @@ pdf_drop_run_processor(fz_context *ctx, pdf_processor *proc)
 		pdf_drop_obj(ctx, stk->resources);
 		fz_free(ctx, stk);
 	}
+
+	while (pr->marked_content)
+		pop_marked_content(ctx, pr);
 }
 
 static void

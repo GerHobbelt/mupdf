@@ -337,6 +337,7 @@ public class PDFAnnotation
 		setNativeAppearanceDisplayList(null, null, null, list);
 	}
 
+	public native boolean hasFileSpecification();
 	public native void setFileSpecification(PDFObject fs);
 	public native PDFObject getFileSpecification();
 
