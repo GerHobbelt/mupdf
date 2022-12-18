@@ -4814,7 +4814,7 @@ fz_matrix pdf_array_get_matrix(fz_context *ctx, pdf_obj *array, int index)
 }
 
 #ifndef NDEBUG
-void pdf_verify_name_table_sanity(void)
+void pdf_verify_name_table_sanity(fz_context* ctx)
 {
 	int i;
 
@@ -4823,4 +4823,6 @@ void pdf_verify_name_table_sanity(void)
 		assert(strcmp(PDF_NAME_LIST[i], PDF_NAME_LIST[i+1]) < 0);
 	}
 }
+#endif
+
 #endif

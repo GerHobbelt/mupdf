@@ -297,6 +297,10 @@ int pdf_obj_refs(fz_context *ctx, pdf_obj *ref);
 
 int pdf_obj_parent_num(fz_context *ctx, pdf_obj *obj);
 
+#ifndef NDEBUG
+void pdf_verify_name_table_sanity(fz_context* ctx);
+#endif
+
 // Extra `ascii`/`flags` bits:
 
 // resolve any indirect node to dictionary, array, etc.

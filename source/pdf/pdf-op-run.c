@@ -1521,7 +1521,7 @@ begin_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *
 
 	pdf_flush_text(ctx, proc);
 
-	fz_begin_metatext(ctx, proc->dev, meta, pdf_to_text_string(ctx, text));
+	fz_begin_metatext(ctx, proc->dev, meta, pdf_to_text_string(ctx, text, NULL));
 }
 
 static void
