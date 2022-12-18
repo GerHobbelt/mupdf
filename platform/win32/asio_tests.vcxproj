@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,7 +120,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_TESTS;ASIO_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -234,9 +234,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/asio.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/asio_ssl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/allocation/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/allocation/server00.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/buffers/reference_counted.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/chat/chat_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/chat/chat_server.cpp" />
@@ -258,7 +256,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/reply.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/request_handler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/request_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/server01.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/connection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/io_context_pool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/main.cpp" />
@@ -266,20 +264,20 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/reply.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/request_handler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/request_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/server02.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/connection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/mime_types.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/reply.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/request_handler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/request_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/server03.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/file_handler.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/mime_types.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/reply.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/request_parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/server04.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/icmp/ping.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/invocation/prioritised_handlers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/iostreams/daytime_client.cpp" />
@@ -293,29 +291,29 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/multicast/sender.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/nonblocking/third_party_lib.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/porthopper/client.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/porthopper/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/porthopper/hop_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/serialization/client.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/serialization/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/serialization/serialize_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/services/daytime_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/services/logger_service.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/socks4/sync_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/spawn/echo_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/spawn/parallel_grep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/ssl/client.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/ssl/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/ssl/ssl_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/async_tcp_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/blocking_tcp_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/blocking_token_tcp_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/blocking_udp_client.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/timeout_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timers/time_t_timer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime1/client.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime2/server.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime3/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime2/dt2_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime3/dt3_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime4/client.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime5/server.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime6/server.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime7/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime5/dt5_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime6/dt6_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime7/dt7_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer1/timer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer2/timer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer3/timer.cpp" />
@@ -373,6 +371,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_6.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_7.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/ranged_wait_for_all.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/wait_for_all.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/wait_for_one.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/wait_for_one_error.cpp" />
@@ -388,6 +387,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timeouts/blocking_udp_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timeouts/server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timers/time_t_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/stdin_line_reader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_3.cpp" />
@@ -421,6 +423,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_7.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/parallel_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/ranged_wait_for_all.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/wait_for_all.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/wait_for_one.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/wait_for_one_error.cpp" />
@@ -433,6 +436,28 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/range_based_for.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/refactored_echo_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/channels/throttling_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/chat_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_as_single_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_as_tuple_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_deferred.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_deferred_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/refactored_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/timeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/c_callback_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/callback_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/stdin_line_reader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/tcp_client.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/tcp_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/udp_client.cpp" />
@@ -651,6 +676,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/compose.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/connect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/connect_pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/consign.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/coroutine.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/deadline_timer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/defer.cpp" />
@@ -690,7 +716,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/basic_concurrent_channel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/channel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/channel_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/co_composed.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/concurrent_channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/allocator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/cancel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/co_spawn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/exception.cpp" />
@@ -802,6 +830,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/write.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/write_at.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/any_completion_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/any_completion_handler.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/any_io_executor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/append.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/as_tuple.hpp" />
@@ -851,6 +881,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/compose.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/connect.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/connect_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/consign.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/coroutine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/deadline_timer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/defer.hpp" />
@@ -872,6 +903,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/chrono.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/chrono_time_traits.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/completion_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/composed_work.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/concurrency_hint.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/conditionally_enabled_event.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/conditionally_enabled_mutex.hpp" />
@@ -1144,6 +1176,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/channel.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/channel_error.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/channel_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/co_composed.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/co_spawn.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/concurrent_channel.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/coro.hpp" />
@@ -1157,20 +1190,23 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_send_functions.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_send_op.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_service.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/completion_handler_erasure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/coro_completion_handler.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/coro_promise_allocator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/has_signature.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/impl/channel_service.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/partial_promise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/as_single.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/co_composed.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/coro.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/parallel_group.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/promise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/use_coro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/use_promise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/parallel_group.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/prepend.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/promise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/use_coro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/use_promise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/file_base.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/basic_endpoint.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/datagram_protocol.hpp" />
@@ -1190,6 +1226,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/co_spawn.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/connect.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/connect_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/consign.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/defer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/deferred.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/detached.hpp" />
@@ -1437,6 +1474,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/request_parser.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/server.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/socks4/socks4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/line_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/sleep.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/stdin_line_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/line_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/sleep.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/stdin_line_reader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/allocator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/high_res_clock.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/performance/handler_allocator.hpp" />
@@ -1463,6 +1506,7 @@
     <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/sync_op.png" />
     <Text Include="../../thirdparty/owemdjee/asio/asio/LICENSE_1_0.txt" />
     <Text Include="../../thirdparty/owemdjee/asio/asio/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/asio.pc.in" />
     <Text Include="../../thirdparty/owemdjee/asio/asio/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/asio/asio/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/asio/asio/include/Makefile.am" />
@@ -1485,8 +1529,12 @@
     <Xml Include="../../thirdparty/owemdjee/asio/asio/src/doc/index.xml" />
     <Xml Include="../../thirdparty/owemdjee/asio/asio/src/doc/quickref.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ProjectReference Include="libasio.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa26b05}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

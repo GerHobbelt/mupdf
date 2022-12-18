@@ -28,7 +28,7 @@
 #include <webp/encode.h>
 
 void
-fz_save_pixmap_as_webp(fz_context *ctx, fz_pixmap *pixmap, const char *filename)
+fz_save_pixmap_as_webp(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	uint8_t *data = NULL;
@@ -216,6 +216,11 @@ fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out)
 	writer->super.drop = webp_drop_band_writer;
 
 	return &writer->super;
+}
+
+void fz_default_webp_quality(float quality)
+{
+	//TODO
 }
 
 #endif

@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>cxxtest_tests</ProjectName>
+    <ProjectGuid>{105F884A-C170-4C30-A810-C7DA2146D2B1}</ProjectGuid>
+    <RootNamespace>cxxtest_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4180;4244;4018;4267;5105;4100;4127;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CXXTEST_TESTS;CXXTEST_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing/src/requirement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing_edmundo/hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing_edmundo/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath/src/foo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath_multitarget/src1/foo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath_multitarget/src2/bar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/multifile_tests/src/requirement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/recursive_sources/src/requirement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/Descriptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/DummyDescriptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/GlobalFixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/LinkedList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/RealDescriptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/Root.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TestSuite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TestTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/cxxtest/ValueTraits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/doc/examples/rand_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/doc/examples/time_mock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/doc/examples/time_real.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/sample/SCons/src/stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/sample/mock/Dice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/sample/mock/mock_stdlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/sample/mock/real_stdlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/sample/mock/roll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/sample/yes_no_runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/test/anything.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/test/int64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/test/longlong.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/test/stpltpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/test/tpltpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cxxtest/test/wchar.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/empty_source_list/requirement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/empty_source_list/test_bar.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/empty_source_list/test_foo.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing/src/requirement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing/src/test_bar.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing/src/test_foo.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing_edmundo/hello.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing_edmundo/hellotest.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/include_CCFLAGS/src/not-with-pedantic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/include_CCFLAGS/src/only_with_ansi.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/include_CXXFLAGS/src/not-with-pedantic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath/test/test.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath_multitarget/test/test1.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath_multitarget/test/test2.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/multifile_tests/src/requirement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/multifile_tests/src/test_bar.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/multifile_tests/src/test_foo.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/need_cpppath/src/cpppath.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/need_cpppath/src/cpppathdir/include.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/printer_propagation/cxxtest/CrazyRunner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/printer_propagation/src/failtest.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/recursive_sources/src/requirement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/recursive_sources/src/test_bar.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/recursive_sources/src/test_foo.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/string_cpppath/src/cpppath.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/string_cpppath/src/cpppathdir/include.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/target_syntax/src/cpppath.t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/target_syntax/src/cpppathdir/include.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/Descriptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/DummyDescriptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/ErrorFormatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/ErrorPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/Flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/GlobalFixture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/Gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/LinkedList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/MSVCErrorPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/Mock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/ParenPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/QtGui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/RealDescriptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/SelfTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/StdHeaders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/StdTestSuite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/StdValueTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/StdioFilePrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/StdioPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TeeListener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TestListener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TestMain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TestRunner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TestSuite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/TestTracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/ValueTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/Win32Gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/X11Gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/XUnitPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/XmlFormatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/XmlPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/YesNoRunner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/cxxtest/unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/Assertions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/BadTestSuite1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MockTestSuite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyClass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/MyTestSuite9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/Namespace1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/Namespace2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/TMyClass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/doc/examples/time_mock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/CreatedTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/DeltaTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/EnumTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/ExceptionTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/FixtureTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/MessageTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/SCons/include/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/SCons/tests/stack_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/SimpleTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/TraitsTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/gui/GreenYellowRed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/mock/Dice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/mock/MockStdlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/mock/T/stdlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/sample/mock/TestDice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/AborterNoThrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/BadTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/CharAssertions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Comments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Comments2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/CppTemplateTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/DeepAbort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/DefaultAbort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/DefaultTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/DoubleCall.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/DynamicAbort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/DynamicMax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/EmptySuite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Factor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/ForceNoEh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/GfSetUpFails.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/GfSetUpThrows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/GfTearDownFails.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/GfTearDownThrows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/GlobalFixtures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/GoodSuite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/GuiWait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/HaveStd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/IncludeTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/InheritedTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Int64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/LessThanEquals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/LongLong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/LongTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/MaxDump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/MockTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Namespace1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Namespace2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/NoEh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/NullPtrGuards.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Part1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Part2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Relation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SameData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SameFiles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SameFilesLonger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SameZero.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SetUpWorldError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SetUpWorldFails.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SetUpWorldThrows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SimpleInheritedTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/SimpleInheritedTest2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Something.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/StlTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/TearDownWorldFails.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/TearDownWorldThrows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/TestNonFinite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/ThrowNoStd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/ThrowsAssert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/TraitsTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/Tsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/UserTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/VoidTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/WideCharTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/WorldFixtures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/cxxtest/DummyGui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/X11/Xlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/X11/Xutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/commctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qapplication.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qglobal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qlabel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qlayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qmessagebox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qpixmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qprogressbar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qstatusbar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/qwidget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/fake/windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cxxtest/test/unit/LinkedList_test.t.h" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/1.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/10.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/11.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/12.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/13.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/14.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/15.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/2.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/3.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/4.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/5.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/6.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/7.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/8.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/callouts/9.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/caution.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/example.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/home.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/important.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/next.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/note.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/prev.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/tip.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/up.png" />
+    <Image Include="../../thirdparty/owemdjee/cxxtest/doc/images/icons/warning.png" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/admin/virtualenv.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/admin/virtualenv_1.7.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/bin/cxxtestgen.bat" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/cxxtest.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/default_env/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/empty_source_list/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/eprouvette.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/expanding_#/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/globbing_edmundo/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/include_CCFLAGS/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/include_CXXFLAGS/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/libpath_multitarget/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/multifile_tests/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/need_cpppath/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/nonstandard_cxxtest_dir/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/printer_propagation/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/recursive_sources/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/string_cpppath/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/build_tools/SCons/test/target_syntax/TestDef.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/GetGlobals.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner10.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner10.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner11.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner11.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner12.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner12.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner13.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner14.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner14.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner15.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner15.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner16.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner16.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner17.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner17.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner18.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner18.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner19.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner19.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner2.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner2.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner20.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner20.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner21.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner21.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner22.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner22.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner23.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner23.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner24.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner24.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner25.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner25.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner3.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner3.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner4.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner4.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner5.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner5.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner6.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner6.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner7.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner7.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner8.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/buildRunner9.sh" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/runner13.MyTestSuite2.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/runner13.help.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/runner13.helpTests.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/runner13.testMultiplication.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/runner13.testMultiplicationVerbose.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/examples/test_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/guide.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/doc/include_anchors.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/convert.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/cxxtest/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/cxxtest/__release__.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/cxxtest/cxx_parser.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/cxxtest/cxxtest_fog.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/cxxtest/cxxtest_misc.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/cxxtest/cxxtest_parser.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/cxxtest/cxxtestgen.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/python3/cxxtest/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/python3/cxxtest/__release__.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/python3/cxxtest/cxx_parser.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/python3/cxxtest/cxxtest_fog.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/python3/cxxtest/cxxtest_misc.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/python3/cxxtest/cxxtest_parser.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/python3/cxxtest/cxxtestgen.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/sample/msvc/FixFiles.bat" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/sample/msvc/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/test/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/test/test_cxxtest.py" />
+    <Text Include="../../thirdparty/owemdjee/cxxtest/test/test_doc.py" />
+    <Xml Include="../../thirdparty/owemdjee/cxxtest/doc/catalog.xml" />
+    <Xml Include="../../thirdparty/owemdjee/cxxtest/test/normal.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

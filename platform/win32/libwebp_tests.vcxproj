@@ -19,53 +19,53 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libwebp</ProjectName>
-    <ProjectGuid>{105F884A-C170-4C30-A810-C7DA2103002F}</ProjectGuid>
-    <RootNamespace>libwebp</RootNamespace>
+    <ProjectName>libwebp_tests</ProjectName>
+    <ProjectGuid>{105F884A-C170-4C30-A810-C7DA2151E325}</ProjectGuid>
+    <RootNamespace>libwebp_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,9 +120,9 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -133,11 +133,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -150,7 +150,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -159,12 +159,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -177,7 +177,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -188,11 +188,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -205,7 +205,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -214,12 +214,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H;FREEGLUT_LIB_PRAGMAS=0;FREEGLUT_STATIC;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP;WEBP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBWEBP_TESTS;WEBP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/pthread-win32;../../scripts/libjpeg-turbo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../scripts/libtiff;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/libgif;../../thirdparty/freeglut/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -453,6 +453,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/libwebp/src/webp/mux.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwebp/src/webp/mux_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwebp/src/webp/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwebp/tests/fuzzer/fuzz_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwebp/tests/fuzzer/img_alpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwebp/tests/fuzzer/img_grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwebp/tests/fuzzer/img_peak.h" />
     <ResourceCompile Include="../../thirdparty/owemdjee/libwebp/sharpyuv/libsharpyuv.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/libwebp/src/demux/libwebpdemux.rc" />
     <ResourceCompile Include="../../thirdparty/owemdjee/libwebp/src/libwebp.rc" />
@@ -505,8 +509,12 @@
     <Text Include="../../thirdparty/owemdjee/libwebp/webp_js/README.md" />
     <Text Include="../../thirdparty/owemdjee/libwebp/xcframeworkbuild.sh" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
