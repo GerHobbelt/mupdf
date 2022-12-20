@@ -442,7 +442,7 @@ int fz_has_page_format_marker(const char* s)
 // Returns pointer to basename part in the input string.
 const char* fz_basename(const char* path)
 {
-	assert0(path != NULL);
+	ASSERT0(path != NULL);
 
 	size_t i;
 	size_t len = strlen(path);
@@ -457,7 +457,7 @@ const char* fz_basename(const char* path)
 // include the leading '.' in the extension; point to the end of the input (NUL sentinel / empty string) when there's no extension to be had.
 const char* fz_name_extension(const char* path)
 {
-	assert0(path != NULL);
+	ASSERT0(path != NULL);
 
 	path = fz_basename(path);
 

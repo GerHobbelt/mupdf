@@ -143,7 +143,7 @@ size_t muq_report_bundled_software(const char** array_buffer, size_t array_eleme
 			size_t n = strlen(libsqlite_version);
 			size_t len = sizeof(libsqlite_version);
 			dst += n;
-			assert0(len > n);
+			ASSERT0(len > n);
 			len -= n;
 			for (int i = 0; ; i++)
 			{
@@ -154,13 +154,13 @@ size_t muq_report_bundled_software(const char** array_buffer, size_t array_eleme
 				fz_snprintf(dst, len, "%s,", opt);
 				n = strlen(dst);
 				dst += n;
-				assert0(len > n);
+				ASSERT0(len > n);
 				len -= n;
 			}
 			dst--; // drop that last comma!
 			fz_snprintf(dst, len, "] (https://sqlite.org/)");
 			n = strlen(dst);
-			assert0(len > n);
+			ASSERT0(len > n);
 		}
 
 		if (array_element_count < count)

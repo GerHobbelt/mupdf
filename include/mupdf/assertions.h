@@ -37,10 +37,16 @@ typedef struct fz_context fz_context;
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
+#ifndef FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL
 #define assert(expression) (void)(							                        \
             (!!(expression)) ||						                                \
             fz_report_failed_assertion(CTX, #expression, __FILE__, __LINE__)		\
         )
+#else
+// make sure this expands to a compiler error:
+#define assert(expression)       							                        \
+  ;WARNING:: %% "do not use assert() but ASSERT() et al to prevent potential mishaps due to header files' load order picking the undesirable system/compiler assert.h implementation after all" %% ;
+#endif
 
 #define ASSERT(expression) (void)(							                        \
             (!!(expression)) ||						                                \
@@ -71,14 +77,12 @@ typedef struct fz_context fz_context;
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
-#define assert0(expression) (void)(							                        \
+#define ASSERT0(expression) (void)(							                        \
             (!!(expression)) ||						                                \
             fz_report_failed_assertion(NULL, #expression, __FILE__, __LINE__)		\
         )
 
-#define ASSERT0(expression) assert0(expression)
-
-#define ASSERT_AND_CONTINUE0(expression) (void)(													\
+#define ASSERT_AND_CONTINUE0(expression) (void)(												\
             (!!(expression)) ||																	\
             fz_report_failed_assertion_and_continue(NULL, #expression, __FILE__, __LINE__)		\
         )
@@ -106,7 +110,13 @@ void fz_check_and_report_failed_assertion_and_continue(fz_context *ctx, int expr
 
 #pragma message("You are compiling a binary with assertions removed. Be aware that this MAY only be a good thing for high quality, previously tested, production binaries that must produce the highest possible throughput. Cave canem!")
 
+#ifndef FZ_WARN_ABOUT_ASSERT_COLLISION_WITH_STD_RTL
 #define assert(expression)				((void)0)
+#else
+	// make sure this expands to a compiler error:
+#define assert(expression)       							                        \
+  ;WARNING:: %% "do not use assert() but ASSERT() et al to prevent potential mishaps due to header files' load order picking the undesirable system/compiler assert.h implementation after all" %% ;
+#endif
 
 #define ASSERT(expression)				((void)0)
 #define ASSERT_AND_CONTINUE(expression) ((void)0)
@@ -116,11 +126,30 @@ void fz_check_and_report_failed_assertion_and_continue(fz_context *ctx, int expr
 
 #define VERIFY_AND_CONTINUE_EQ(expr1, expr2) 												\
             (void)((expr1) == (expr2))
-#define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 		
+#define ASSERT_AND_CONTINUE_EQ(expr1, expr2) 												\
+			((void)0)
 
 #define VERIFY_EQ(expr1, expr2) 															\
             (void)((expr1) == (expr2))
-#define ASSERT_EQ(expr1, expr2) 		
+#define ASSERT_EQ(expr1, expr2) 															\
+			((void)0)
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+#define ASSERT0(expression)					((void)0)
+#define ASSERT_AND_CONTINUE0(expression)	((void)0)
+
+#define VERIFY0(expression)					expression
+#define VERIFY_AND_CONTINUE0(expression)	expression
+
+#define VERIFY_AND_CONTINUE_EQ0(expr1, expr2) 												\
+            (void)((expr1) == (expr2))
+#define ASSERT_AND_CONTINUE_EQ0(expr1, expr2) 												\
+            ((void)0)
+
+#define VERIFY_EQ0(expr1, expr2) 															\
+            (void)((expr1) == (expr2))
+#define ASSERT_EQ0(expr1, expr2) 															\
+            ((void)0)
 
 #endif
 

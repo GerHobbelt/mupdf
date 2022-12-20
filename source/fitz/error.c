@@ -84,7 +84,7 @@ int fz_bundle_str_msg_parts(char* dst, size_t dstsiz, const char* s1, const char
 
 void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 {
-	assert(message != NULL);
+	ASSERT(message != NULL);
 
 	if (!(quiet_mode & QUIET_ERROR))
 	{
@@ -105,7 +105,7 @@ void fz_default_error_callback(fz_context* ctx, void *user, const char *message)
 
 void fz_default_warning_callback(fz_context* ctx, void* user, const char* message)
 {
-	assert(message != NULL);
+	ASSERT(message != NULL);
 
 	if (!(quiet_mode & QUIET_WARN))
 	{
@@ -144,7 +144,7 @@ void fz_get_warning_callback(fz_context* ctx, fz_error_print_callback** print, v
 
 void fz_default_info_callback(fz_context* ctx, void* user, const char* message)
 {
-	assert(message != NULL);
+	ASSERT(message != NULL);
 
 	if (!(quiet_mode & QUIET_INFO))
 	{
