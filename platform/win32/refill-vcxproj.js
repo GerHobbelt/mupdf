@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
-
+const debug = false;
 
 if (process.argv.length !== 3) {
 	console.error("refill-vcxproj.js: please provide the project filename as the sole (single) argument.")
@@ -17,7 +17,8 @@ const scriptpath = path.dirname(process.argv[1]);
 
 let projname = path.basename(projpath, ".vcxproj");
 
-//console.error({projname, scriptpath})
+if (debug) 
+	console.error({projname, scriptpath})
 
 
 // now try to map the project name to a source directory:
@@ -84,6 +85,11 @@ if (projname.endsWith("_tests")) {
 	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/_tests$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_tools")) {
@@ -93,6 +99,11 @@ if (projname.endsWith("_tools")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
 	testpath = `${scriptpath}/../../thirdparty/${tool_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tool_projname = nonlib_projname.replace(/_tools$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tool_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -106,6 +117,11 @@ if (projname.endsWith("_demos")) {
 	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/_demos$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_demo")) {
@@ -115,6 +131,11 @@ if (projname.endsWith("_demo")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
 	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/_demo$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -128,6 +149,11 @@ if (projname.endsWith("_benchmark")) {
 	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/_benchmark$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_examples")) {
@@ -137,6 +163,11 @@ if (projname.endsWith("_examples")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
 	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/_examples$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
