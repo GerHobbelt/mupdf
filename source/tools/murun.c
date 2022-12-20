@@ -7772,6 +7772,18 @@ static void ffi_PDFAnnotation_setFilespec(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_PDFAnnotation_setStampImage(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
+	fz_image *img = js_touserdata(J, 1, "fz_image");
+
+	fz_try(ctx)
+		pdf_set_annot_stamp_image(ctx, annot, img);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
 static void ffi_PDFAnnotation_update(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -8906,6 +8918,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "PDFAnnotation.hasFilespec", ffi_PDFAnnotation_hasFilespec, 0);
 		jsB_propfun(J, "PDFAnnotation.getFilespec", ffi_PDFAnnotation_getFilespec, 0);
 		jsB_propfun(J, "PDFAnnotation.setFilespec", ffi_PDFAnnotation_setFilespec, 1);
+		jsB_propfun(J, "PDFAnnotation.setStampImage", ffi_PDFAnnotation_setStampImage, 1);
 
 		jsB_propfun(J, "PDFAnnotation.hasInkList", ffi_PDFAnnotation_hasInkList, 0);
 		jsB_propfun(J, "PDFAnnotation.getInkList", ffi_PDFAnnotation_getInkList, 0);

@@ -1550,3 +1550,16 @@ FUN(PDFAnnotation_hasFileSpecification)(JNIEnv *env, jobject self)
 
 	return has;
 }
+
+JNIEXPORT void JNICALL
+FUN(PDFAnnotation_setStampImage)(JNIEnv *env, jobject self, jobject jimg)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	fz_image *img = from_Image(env, jimg);
+
+	fz_try(ctx)
+		pdf_set_annot_stamp_image(ctx, annot, img);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
+}
