@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,7 +111,7 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
@@ -120,7 +120,7 @@
       <AdditionalOptions>/bigobj /utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEFLATE;DEFLATE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -132,7 +132,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libdeflate;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEFLATE;DEFLATE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -158,7 +158,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libdeflate;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEFLATE;DEFLATE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -187,7 +187,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libdeflate;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEFLATE;DEFLATE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -213,7 +213,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libdeflate;../../scripts/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDEFLATE;DEFLATE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -263,19 +263,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/libdeflate/scripts/afl-fuzz/gzip_decompress/fuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdeflate/scripts/afl-fuzz/zlib_decompress/fuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libdeflate/scripts/gen_crc32_multipliers.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libdeflate/scripts/gen_crc32_table.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/common/common_defs.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/common/compiler_gcc.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/common/compiler_msc.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdeflate/scripts/gen_crc32_tables.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/common_defs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/adler32_vec_template.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/arm/adler32_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/arm/cpu_features.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/arm/crc32_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/arm/crc32_pmull_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/arm/crc32_pmull_wide.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/arm/matchfinder_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/bt_matchfinder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/cpu_features_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/crc32_table.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/crc32_vec_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/crc32_multipliers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/crc32_tables.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/decompress_template.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/deflate_compress.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/deflate_constants.h" />
@@ -284,7 +284,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/ht_matchfinder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/lib_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/matchfinder_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/unaligned.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/x86/adler32_impl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/x86/cpu_features.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/lib/x86/crc32_impl.h" />
@@ -295,27 +294,31 @@
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/libdeflate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/programs/prog_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libdeflate/programs/test_util.h" />
-    <Text Include="../../thirdparty/owemdjee/libdeflate/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/NEWS.md" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/libdeflate-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/libdeflate.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/programs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/programs/config.h.in" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/afl-fuzz/fuzz.sh" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/android_build.sh" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/android_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/benchmark.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/checksum.sh" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/checksum_benchmarks.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/cmake-helper.sh" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/deflate_benchmarks.sh" />
-    <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/detect.sh" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/exec_tests.sh" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/gen_bitreverse_tab.py" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/gen_default_litlen_costs.py" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/gen_offset_slot_map.py" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/gzip_tests.sh" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/make-windows-releases.sh" />
-    <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/pgo_build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/msc_test.bat" />
     <Text Include="../../thirdparty/owemdjee/libdeflate/scripts/run_tests.sh" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
