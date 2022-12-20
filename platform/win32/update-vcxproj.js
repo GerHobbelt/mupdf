@@ -300,6 +300,11 @@ src = src
 	.replace(/<ConformanceMode>[^]*?<\/ConformanceMode>/g, (m) => ``)
 	.replace(/<OmitFramePointers>[^]*?<\/OmitFramePointers>/g, '')
 	.replace(/<PrecompiledHeaderOutputFile>[^]*?<\/PrecompiledHeaderOutputFile>/g, '')
+	.replace(/<AdditionalOptions>\/bigobj \/utf-8 \/Zc:__cplusplus %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
+	.replace(/<AdditionalOptions>\/bigobj \/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
+	.replace(/<AdditionalOptions>\/bigobj %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
+	.replace(/<AdditionalOptions>\/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
+	.replace(/<AdditionalOptions>\/Zc:__cplusplus \/utf-8 %\(AdditionalOptions\)<\/AdditionalOptions>/g, '')
 
 	return `<ItemDefinitionGroup${p1}>${p2}</ItemDefinitionGroup>`;
 });
