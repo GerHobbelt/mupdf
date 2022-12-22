@@ -389,6 +389,7 @@ const dupliBlockbaseReParticle = dupliBlockbase
 .trim()
 .replace(/([\/()])/g, '\\$1')
 .replace(/\\\/bigobj /g, '(?:\\/bigobj )?')
+.replace(/\\\/Zc:__cplusplus /g, '(?:\\/Zc:__cplusplus )?')
 .replace(/[\s\r\n]+/g, '[\\s\\r\\n]*')
 
 const dupliBlockre = new RegExp(`(?:${ dupliBlockbaseReParticle }[\\s\\r\\n]*){2,}`, 'g');
