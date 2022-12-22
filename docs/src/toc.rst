@@ -12,6 +12,7 @@ Table of Contents
    quick-start-guide.rst
    mupdf-command-line.rst
    using-mupdf.rst
+   progressive-loading.rst
    API.rst
    language-bindings.rst
    changes.rst
