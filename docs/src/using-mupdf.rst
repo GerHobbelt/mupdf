@@ -298,7 +298,7 @@ In general:
 - Offsets within files/streams are represented using ``int64_t``.
 
 
-In addition, we use floats (and avoid doubles when possible), assumed to be IEEE compliant.
+In addition, we use floats (and avoid doubles when possible), assumed to be `IEEE compliant`_.
 
 Reference counting
 ~~~~~~~~~~~~~~~~~~~~
@@ -322,4 +322,6 @@ Any objects returned by functions that do not have any of these special words, a
 
 
 .. External links
+
+.. _IEEE compliant: https://en.wikipedia.org/wiki/IEEE_754
 
