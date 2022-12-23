@@ -15,6 +15,7 @@ Quick Start Guide
 
 :title:`MuPDF` is a lightweight :title:`PDF`, :title:`XPS`, and :title:`E-book` viewer.
 
+
 :title:`MuPDF` consists of a software library, command line tools, and viewers for various platforms.
 
 
@@ -118,9 +119,51 @@ Validating your installation
 
 From the command line you should now have the following :title:`MuPDF` commands available:
 
-- ``mupdf-gl`` - a handy viewer UI.
-- ``muraster`` - can be used to convert :title:`PDF` pages to raster images.
-- ``mutool`` - an all purpose tool for dealing with :title:`PDF` files.
+- ``mupdf-gl`` A handy viewer UI.
+- ``muraster`` Can be used to convert :title:`PDF` pages to raster images.
+- ``mutool`` An all purpose tool for dealing with :title:`PDF` files.
+
+
+.. _supported_file_formats:
+
+Supported file formats
+--------------------------------
+
+
+
+.. _supported_document_formats:
+
+Document
+~~~~~~~~~~~~~~~~~~~
+
+
+:title:`MuPDF` supports the following document formats:
+
+``pdf``
+
+``epub``
+
+``xps``
+
+``cbz``
+
+
+.. _supported_image_formats:
+
+
+Image
+~~~~~~~~~~~~~~~~~~~
+
+:title:`MuPDF` supports the following image formats:
+
+``svg``
+
+``png``
+
+``jpg``
+
+
+
 
 
 
