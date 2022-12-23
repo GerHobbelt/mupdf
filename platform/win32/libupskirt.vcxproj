@@ -19,44 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\upskirt-markdown\html_block_names.gperf" />
-    <None Include="..\..\thirdparty\owemdjee\upskirt-markdown\MANIFESTO.md" />
-    <None Include="..\..\thirdparty\owemdjee\upskirt-markdown\README.md" />
-    <None Include="..\..\thirdparty\owemdjee\upskirt-markdown\upskirt.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\bin\scidown.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\bin\smartypants.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\examples\upskirt.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\autolink.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\buffer.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\constants.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\document.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\escape.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\html.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\html_blocks.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\html_smartypants.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\md_latex.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\stack.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\utils.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\version.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\bin\common.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\bin\monolithic_examples.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\autolink.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\buffer.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\constants.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\document.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\escape.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\html.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\md_latex.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\stack.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\upskirt_dll_exports.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\utils.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\upskirt-markdown\src\version.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="libsvgcharter.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
     </ProjectReference>
@@ -271,6 +233,95 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/bin/scidown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/bin/smartypants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/examples/upskirt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/autolink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/charter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/charter_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/clist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/csv_parser/csvparser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/latex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/main_svg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/main_tex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/svg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/svg_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/benchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/example2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/example3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/repl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/smoke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/tinyexpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/constants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/document.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/escape.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/html.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/html_blocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/html_smartypants.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/md_latex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/version.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/bin/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/bin/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/mvc/2008/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/mvc/upskirt_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/autolink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/charter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/charter_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/clist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/csv_parser/csvparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/renderer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/svg_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/minctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/tinyexpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/escape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/html.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/md_latex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/upskirt_dll_exports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/upskirt-markdown/src/version.h" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_abstract.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_floating_eq.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_floating_fig.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_floating_listing.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_floating_table.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_reference.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_toc.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/doc/ex_yaml_header.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/examples/Falcon_Heavy.jpg" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/html_article.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/html_report.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/marker_charter_support.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/doc/e1.png" />
+    <Image Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/doc/e2.png" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/MANIFESTO.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/README.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/examples/abstract.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/examples/example.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/examples/example_article.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/examples/example_report.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/examples/references.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/test/data.csv" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/test/test.md" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/test/config.json" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/test/runner.py" />
+    <Text Include="../../thirdparty/owemdjee/upskirt-markdown/upskirt.podspec.json" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
