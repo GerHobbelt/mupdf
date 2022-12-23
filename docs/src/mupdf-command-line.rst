@@ -8,11 +8,20 @@
    :description: MuPDF documentation
    :keywords: MuPDF, pdf, epub
 
+.. _mupdf_command_line:
+
 
 :title:`MuPDF` on the command line
 ==========================================
 
 
+:title:`MuPDF` has few command line options available:
+
+- :ref:`mupdf-gl<mupdf_command_line_mupdf_gl>` A handy viewer UI.
+- :ref:`muraster<mupdf_command_line_muraster>` Can be used to convert PDF pages to raster images.
+- :ref:`mutool<mupdf_command_line_mutool>` An all purpose tool for dealing with PDF files.
+
+.. _mupdf_command_line_mupdf_gl:
 
 
 :title:`mupdf-gl`
@@ -229,6 +238,8 @@ Several commands can take a number argument entered before the key, to modify th
 
 
 
+.. _mupdf_command_line_muraster:
+
 
 :title:`muraster`
 ---------------------
@@ -321,6 +332,8 @@ This will render a raster file from page one of the input file "mupdf_explored.p
    muraster -o test.ppm -R clockwise -A 0/8 mupdf_explored.pdf 1
 
 
+
+.. _mupdf_command_line_mutool:
 
 :title:`mutool`
 ---------------------
