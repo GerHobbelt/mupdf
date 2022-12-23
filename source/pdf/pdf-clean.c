@@ -463,10 +463,21 @@ pdf_redact_end_page(fz_context *ctx, fz_buffer *buf, void *opaque)
 	pdf_obj *qp;
 	int i, n;
 
-	fz_append_string(ctx, buf, "0 g\n");
-
 	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
 	{
+		int n;
+		float color[4];
+		pdf_annot_interior_color(ctx, annot, &n, color);
+		if (n == 0)
+			continue;
+		else if (n == 1)
+			fz_append_printf(ctx, buf, "%f g\n", color[0]);
+		else if (n == 3)
+			fz_append_printf(ctx, buf, "%f %f %f rg\n", color[0], color[1], color[2]);
+		else if (n == 4)
+			fz_append_printf(ctx, buf, "%f %f %f %f k\n", color[0], color[1], color[2], color[3]);
+		else
+			fz_append_printf(ctx, buf, "0 g\n");
 		if (pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype)) == PDF_NAME(Redact))
 		{
 			qp = pdf_dict_get(ctx, annot->obj, PDF_NAME(QuadPoints));
@@ -547,14 +558,16 @@ pdf_redact_text_filter(fz_context *ctx, void *opaque, int *ucsbuf, int ucslen, f
 }
 
 static fz_pixmap *
-pdf_redact_image_imp(fz_context *ctx, fz_matrix ctm, fz_image *image, fz_pixmap *pixmap, fz_pixmap **pmask, fz_quad q)
+pdf_redact_image_imp(fz_context *ctx, fz_matrix ctm, fz_image *image, fz_pixmap *pixmap, fz_pixmap **pmask, fz_quad q, fz_colorspace *cs, float color[4])
 {
 	fz_matrix inv_ctm;
 	fz_irect r;
 	int x, y, k, n, bpp;
-	unsigned char white;
 	fz_pixmap *mask = *pmask;
 	int pixmap_cloned = 0;
+	float pixcol[FZ_MAX_COLORS];
+	unsigned char bcol[FZ_MAX_COLORS];
+	unsigned char alpha;
 
 	if (!pixmap)
 	{
@@ -597,10 +610,19 @@ pdf_redact_image_imp(fz_context *ctx, fz_matrix ctm, fz_image *image, fz_pixmap 
 
 	n = pixmap->n - pixmap->alpha;
 	bpp = pixmap->n;
-	if (fz_colorspace_is_subtractive(ctx, pixmap->colorspace))
-		white = 0;
+	if (cs == NULL)
+	{
+		cs = fz_device_gray(ctx);
+		color[0] = 0;
+		alpha = 0;
+	}
 	else
-		white = 255;
+	{
+		alpha = 255;
+	}
+	fz_convert_color(ctx, cs, color, pixmap->colorspace, pixcol, NULL, fz_default_color_params);
+	for (k = 0; k < n; k++)
+		bcol[k] = fz_clamp(pixcol[k] * 255 + 0.5f, 0, 255);
 
 	inv_ctm = fz_post_scale(fz_invert_matrix(ctm), pixmap->w, pixmap->h);
 	r = fz_round_rect(fz_transform_rect(fz_rect_from_quad(q), inv_ctm));
@@ -614,9 +636,9 @@ pdf_redact_image_imp(fz_context *ctx, fz_matrix ctm, fz_image *image, fz_pixmap 
 		{
 			unsigned char *s = &pixmap->samples[(size_t)y * pixmap->stride + (size_t)x * bpp];
 			for (k = 0; k < n; ++k)
-				s[k] = white;
+				s[k] = bcol[k];
 			if (pixmap->alpha)
-				s[k] = 255;
+				s[k] = alpha;
 		}
 	}
 
@@ -631,7 +653,7 @@ pdf_redact_image_imp(fz_context *ctx, fz_matrix ctm, fz_image *image, fz_pixmap 
 		for (y = r.y1; y < r.y0; ++y)
 		{
 			unsigned char *s = &mask->samples[(size_t)y * mask->stride + (size_t)r.x0];
-			memset(s, 0xff, r.x1-r.x0);
+			memset(s, alpha, r.x1-r.x0);
 		}
 	}
 
@@ -732,6 +754,25 @@ pdf_redact_image_filter_pixels(fz_context *ctx, void *opaque, fz_matrix ctm, con
 		{
 			if (pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype)) == PDF_NAME(Redact))
 			{
+				float color[4];
+				int n;
+				fz_colorspace *cs;
+				pdf_annot_interior_color(ctx, annot, &n, color);
+				switch (n)
+				{
+				default:
+					cs = NULL;
+					break;
+				case 1:
+					cs = fz_device_gray(ctx);
+					break;
+				case 3:
+					cs = fz_device_rgb(ctx);
+					break;
+				case 4:
+					cs = fz_device_cmyk(ctx);
+					break;
+				}
 				qp = pdf_dict_get(ctx, annot->obj, PDF_NAME(QuadPoints));
 				n = pdf_array_len(ctx, qp);
 				if (n > 0)
@@ -740,7 +781,7 @@ pdf_redact_image_filter_pixels(fz_context *ctx, void *opaque, fz_matrix ctm, con
 					{
 						q = pdf_to_quad(ctx, qp, i);
 						if (fz_is_quad_intersecting_quad(area, q))
-							redacted = pdf_redact_image_imp(ctx, ctm, image, redacted, &mask, q);
+							redacted = pdf_redact_image_imp(ctx, ctm, image, redacted, &mask, q, cs, color);
 					}
 				}
 				else
@@ -748,7 +789,7 @@ pdf_redact_image_filter_pixels(fz_context *ctx, void *opaque, fz_matrix ctm, con
 					r = pdf_dict_get_rect(ctx, annot->obj, PDF_NAME(Rect));
 					q = fz_quad_from_rect(r);
 					if (fz_is_quad_intersecting_quad(area, q))
-						redacted = pdf_redact_image_imp(ctx, ctm, image, redacted, &mask, q);
+						redacted = pdf_redact_image_imp(ctx, ctm, image, redacted, &mask, q, cs, color);
 				}
 			}
 		}
