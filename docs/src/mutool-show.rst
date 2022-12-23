@@ -72,7 +72,7 @@ The ``show`` command will print the specified objects and streams to stdout. Str
       A path starts with either an object number, a property in the trailer dictionary, or the keyword "trailer" or "pages". Separate elements with a period '.' or slash '/'. Select a page object by using pages/N where N is the page number. The first page is number 1.
 
    ``*``
-      You can use ``*`` as an element to iterate over all array indices or dictionary properties in an object.
+      You can use ``*`` as an element to iterate over all array indices or dictionary properties in an object. Thus you can have multiple keywords with for your ``mutool show`` query.
 
 
 
@@ -91,6 +91,12 @@ The ``show`` command will print the specified objects and streams to stdout. Str
    .. code-block:: bash
 
       mutool show -b $FILE pages/1/Contents
+
+   Print the raw content stream of the first page & second page & the PDF outline (demonstrates use of the ``*`` element):
+
+   .. code-block:: bash
+
+      mutool show -b $FILE pages/1/Contents pages/2/Contents outline
 
    Show all :title:`JPEG` compressed stream objects:
 

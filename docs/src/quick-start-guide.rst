@@ -119,9 +119,9 @@ Validating your installation
 
 From the command line you should now have the following :title:`MuPDF` commands available:
 
-- ``mupdf-gl`` A handy viewer UI.
-- ``muraster`` Can be used to convert :title:`PDF` pages to raster images.
-- ``mutool`` An all purpose tool for dealing with :title:`PDF` files.
+- :ref:`mupdf-gl<mupdf_command_line_mupdf_gl>` A handy viewer UI.
+- :ref:`muraster<mupdf_command_line_muraster>` Can be used to convert PDF pages to raster images.
+- :ref:`mutool<mupdf_command_line_mutool>` An all purpose tool for dealing with PDF files.
 
 
 .. _supported_file_formats:

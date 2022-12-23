@@ -13,10 +13,44 @@
 ==========================================
 
 
+The ``extract`` command can be used to extract images and font files from a :title:`PDF` file. The image and font files will be saved out to the same folder which the file originates from.
 
 
 
 
+.. code-block:: bash
+
+   mutool extract [options] pdf_file [object numbers]
+
+
+``[options]``
+   Options are as follows:
+
+      ``-p`` password
+            Use the specified password if the file is encrypted.
+
+      ``-r``
+            Convert images to RGB when extracting them.
+
+      ``-a``
+            Embed SMasks as alpha channel.
+
+      ``-N``
+            Do not use ICC color conversions.
+
+
+
+----
+
+
+``pdf_file``
+   Input file name. Must be a :title:`PDF` file.
+
+----
+
+
+``[object numbers]``
+   An array of object ids to extract from. If no object numbers are given on the command line, all images and fonts will be extracted from the file.
 
 .. include:: footer.rst
 
