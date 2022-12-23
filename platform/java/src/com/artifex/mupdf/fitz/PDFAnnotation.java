@@ -340,6 +340,7 @@ public class PDFAnnotation
 	public native boolean hasFileSpecification();
 	public native void setFileSpecification(PDFObject fs);
 	public native PDFObject getFileSpecification();
+	public native void setStampImage(Image image);
 
 	private native void updateAppearanceFromDisplayList(DisplayList dlist);
 	public void updateAppearance(DisplayList dlist) {updateAppearanceFromDisplayList(dlist);}
