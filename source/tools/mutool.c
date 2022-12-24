@@ -88,14 +88,14 @@ static struct {
 	{ {.fa = mutrace_main }, "trace", "trace device calls" },
 #if FZ_ENABLE_PDF
 	{ {.fa = pdfextract_main }, "extract", "extract font and image resources" },
-#endif
-#if FZ_ENABLE_PDF
 	{ {.fa = pdfinfo_main }, "info", "show information about pdf resources" },
 	{ {.fa = pdfmerge_main }, "merge", "merge pages from multiple pdf sources into a new pdf" },
 	{ {.fa = pdfpages_main }, "pages", "show information about pdf pages" },
 #if defined(MUTOOL_EX)
 	{ {.fa = pdfposter_main }, "poster", "split large page into many tiles" },
-#endif
+	{ pdfrecolor_main, "recolor", "Change colorspace of pdf document" },
+	{ pdfsign_main, "sign", "manipulate PDF digital signatures" },
+	{ pdftrim_main, "trim", "trim PDF page contents" },
 	{ {.fa = pdfsign_main }, "sign", "manipulate PDF digital signatures" },
 	{ {.fa = pdftagged_main }, "tagged", "extract Tagged PDF content" },
 #endif
