@@ -131,17 +131,17 @@ rewrite_page_streams(fz_context *ctx, pdf_document *doc, int page_num)
 		fz_rethrow(ctx);
 }
 
-int pdfrecolor_main(int argc, char **argv)
+int pdfrecolor_main(int argc, const char** argv)
 {
 	fz_context *ctx = NULL;
 	pdf_document *pdf = NULL;
 	fz_document *doc = NULL;
 	pdf_write_options opts = pdf_default_write_options;
 	int n, i;
-	char *infile = NULL;
-	char *outputfile = NULL;
-	char *imagefile = NULL;
-	char *profilefile = NULL;
+	const char *infile = NULL;
+	const char *outputfile = NULL;
+	const char *imagefile = NULL;
+	const char *profilefile = NULL;
 	int code = EXIT_SUCCESS;
 	const char *colorspace = NULL;
 	int remove_oi = 0;

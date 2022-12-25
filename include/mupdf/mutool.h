@@ -26,6 +26,8 @@ int pdfpages_main(int argc, const char** argv);
 int pdfcreate_main(int argc, const char** argv);
 int pdfmerge_main(int argc, const char** argv);
 int pdfsign_main(int argc, const char** argv);
+int pdfrecolor_main(int argc, const char** argv);
+int pdftrim_main(int argc, const char** argv);
 int pdftagged_main(int argc, const char** argv);
 int pdfmetadump_main(int argc, const char** argv);
 

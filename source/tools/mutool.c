@@ -82,22 +82,20 @@ static struct {
 	{ {.fa = muconvert_main }, "convert", "convert document" },
 #if FZ_ENABLE_PDF
 	{ {.fa = pdfcreate_main }, "create", "create pdf document" },
-#endif
 	{ {.fa = mudraw_main }, "draw", "convert document" },
 	{ {.fa = muraster_main }, "raster", "convert document to a raster file" },
 	{ {.fa = mutrace_main }, "trace", "trace device calls" },
-#if FZ_ENABLE_PDF
 	{ {.fa = pdfextract_main }, "extract", "extract font and image resources" },
 	{ {.fa = pdfinfo_main }, "info", "show information about pdf resources" },
 	{ {.fa = pdfmerge_main }, "merge", "merge pages from multiple pdf sources into a new pdf" },
 	{ {.fa = pdfpages_main }, "pages", "show information about pdf pages" },
 #if defined(MUTOOL_EX)
 	{ {.fa = pdfposter_main }, "poster", "split large page into many tiles" },
-	{ pdfrecolor_main, "recolor", "Change colorspace of pdf document" },
-	{ pdfsign_main, "sign", "manipulate PDF digital signatures" },
-	{ pdftrim_main, "trim", "trim PDF page contents" },
+	{ {.fa = pdfrecolor_main }, "recolor", "change colorspace of pdf document" },
 	{ {.fa = pdfsign_main }, "sign", "manipulate PDF digital signatures" },
+	{ {.fa = pdftrim_main }, "trim", "trim PDF page contents" },
 	{ {.fa = pdftagged_main }, "tagged", "extract Tagged PDF content" },
+#endif
 #endif
 #if FZ_ENABLE_JS
 #if defined(MUTOOL_EX)
