@@ -60,20 +60,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -87,7 +87,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -119,8 +119,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUPSKIRT;UPSKIRT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -239,24 +239,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/examples/upskirt.c" />
     <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/autolink.c" />
     <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/buffer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/charter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/charter_string.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/clist.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/csv_parser/csvparser.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/latex.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/main_svg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/main_tex.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/parser.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/svg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/svg_utils.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/benchmark.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/example.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/example2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/example3.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/repl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/smoke.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/charter/src/tinyexpr/tinyexpr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/constants.c" />
     <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/document.c" />
     <ClCompile Include="../../thirdparty/owemdjee/upskirt-markdown/src/escape.c" />
@@ -322,8 +304,7 @@
     <Text Include="../../thirdparty/owemdjee/upskirt-markdown/test/runner.py" />
     <Text Include="../../thirdparty/owemdjee/upskirt-markdown/upskirt.podspec.json" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
