@@ -19,8 +19,26 @@
 
 
 
-Base :title:`MuPDF` methods
+Base :title:`MuPDF` properties & methods
 ------------------------------------------
+
+
+.. property:: DeviceGray
+
+    The default grayscale colorspace.
+
+.. property:: DeviceRGB
+
+    The default RGB colorspace.
+
+.. property:: DeviceBGR
+
+    The default RGB colorspace, but with components in reverse order.
+
+.. property:: DeviceCMYK
+
+    The default CMYK colorspace.
+
 
 .. method:: setUserCSS(userStylesheet, usePublisherStyles)
 
@@ -28,6 +46,11 @@ Base :title:`MuPDF` methods
 
     :arg userStylesheet: Link to CSS stylesheet file.
     :arg usePublisherStyles: ``Boolean``.
+
+
+
+
+
 
 
 
@@ -93,11 +116,15 @@ Constructors
 
     Create a new empty buffer.
 
+    :return: ``Buffer``.
+
 .. method:: readFile(fileName)
 
     Create a new buffer with the contents of a file.
 
     :arg fileName: The path to the file to read.
+
+    :return: ``Buffer``.
 
 
 Buffer properties
@@ -172,6 +199,9 @@ Constructors
     :arg fileName: Filename to open.
 
 
+    :return: ``Document``.
+
+
 
 Document methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -231,6 +261,9 @@ Document methods
     :return: ``Boolean``.
 
 
+
+.. _mutool_run_js_api_page:
+
 Page
 --------
 
@@ -250,7 +283,7 @@ Page
 
 .. method:: toPixmap(transform, colorspace, alpha, skipAnnotations)
 
-    Render the page into a ``Pixmap``, using the transform and colorspace. If alpha is true, the page will be drawn on a transparent background, otherwise white.
+    Render the page into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the transform and colorspace. If alpha is *true*, the page will be drawn on a transparent background, otherwise white.
 
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: ``ColorSpace``.
@@ -292,7 +325,7 @@ Page
 
 .. method:: isPDF()
 
-    Returns true if the page is from a :title:`PDF` document.
+    Returns *true* if the page is from a :title:`PDF` document.
 
     :return: ``Boolean``.
 
@@ -314,11 +347,11 @@ Annotation
 
 .. method:: toPixmap(transform, colorspace, alpha)
 
-    Render the annotation into a ``Pixmap``, using the transform and colorspace.
+    Render the annotation into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the transform and colorspace.
 
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: ``ColorSpace``.
-    :arg alpha: ``Boolean``. If alpha is true, the annotation will be drawn on a transparent background, otherwise white.
+    :arg alpha: ``Boolean``. If alpha is *true*, the annotation will be drawn on a transparent background, otherwise white.
 
 
 .. method:: toDisplayList()
@@ -327,9 +360,357 @@ Annotation
 
 .. method:: isPDF()
 
-    Returns true if the annotation is from a :title:`PDF` document.
+    Returns *true* if the annotation is from a :title:`PDF` document.
 
     :return: ``Boolean``.
 
 
+
+.. _mutool_run_js_api_structured_text:
+
+
+StructuredText
+----------------------------
+
+``StructuredText`` objects hold text from a page that has been analyzed and grouped into blocks, lines and spans.
+
+.. method:: search(needle)
+
+    Search the text for all instances of ``needle``, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
+
+    :arg needle: ``String``.
+    :return: ``[]``.
+
+.. method:: highlight(p, q)
+
+    Return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` needed to highlight a selection defined by the start and end points.
+
+    :arg p: Start point in format ``{x:y}``.
+    :arg q: End point in format ``{x:y}``.
+
+.. method:: copy(p, q)
+
+    Return the text from the selection defined by the start and end points.
+
+    :arg p: Start point in format ``{x:y}``.
+    :arg q: End point in format ``{x:y}``.
+
+
+ColorSpace
+----------------------------
+
+.. method:: getNumberOfComponents()
+
+    A grayscale colorspace has one component, RGB has 3, CMYK has 4, and DeviceN may have any number of components.
+
+
+**Example**
+
+.. code-block:: javascript
+
+    var cs = DeviceRGB;
+    var num = cs.getNumberOfComponents();
+    print(num);  //3
+
+
+
+
+.. _mutool_run_js_api_pixmap:
+
+Pixmap
+----------------------------
+
+A ``Pixmap`` object contains a color raster image (short for pixel map). The components in a pixel in the ``Pixmap`` are all byte values, with the transparency as the last component. A ``Pixmap`` also has a location (x, y) in addition to its size; so that they can easily be used to represent tiles of a page.
+
+
+
+Constructors
+~~~~~~~~~~~~~~~~
+
+.. method:: new Pixmap(colorspace, bounds, alpha)
+
+    Create a new pixmap. The pixel data is **not** initialized; and will contain garbage.
+
+    :arg colorspace: ``Colorspace``.
+    :arg bounds: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg alpha: ``Boolean``.
+
+    :return: ``Pixmap``.
+
+
+Methods
+~~~~~~~~~~~~
+
+.. method:: clear(value)
+
+    Clear the pixels to the specified value. Pass ``255`` for white, or ``undefined`` for transparent.
+
+    :arg value: Pixel value.
+
+.. method:: bound()
+
+    Return the pixmap bounds.
+
+    :return: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+.. method:: getWidth()
+
+    :return: The width value.
+
+.. method:: getHeight()
+
+    :return: The height value.
+
+.. method:: getNumberOfComponents()
+
+    Number of colors; plus one if an alpha channel is present.
+
+    :return: Number of color components.
+
+.. method:: getAlpha()
+
+    *True* if alpha channel is present.
+
+    :return: ``Boolean``.
+
+.. method:: getStride()
+
+    Number of bytes per row.
+
+    :return: ``Int``.
+
+.. method:: getColorSpace()
+
+    Returns the ``ColorSpace`` for the ``Pixmap``.
+
+    :return: ``ColorSpace``.
+
+.. method:: getXResolution()
+
+    Returns the x resolution for the ``Pixmap``.
+
+    :return: ``Int`` Image resolution in dots per inch.
+
+
+.. method:: getYResolution()
+
+    Returns the x resolution for the ``Pixmap``.
+
+    :return: ``Int`` Image resolution in dots per inch.
+
+
+
+.. method:: getSample(x, y, k)
+
+    Get the value of component ``k`` at position ``x``, ``y`` (relative to the image origin: 0, 0 is the top left pixel).
+
+    :arg x: X co-ordinate.
+    :arg y: Y co-ordinate.
+    :arg k: Component value.
+
+
+.. method:: saveAsPNG(fileName, saveAlpha)
+
+    Save the ``Pixmap`` as a :title:`PNG`. Only works for Gray and RGB images.
+
+
+
+DrawDevice
+----------------------------
+
+The ``DrawDevice`` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pixmap>`; either by running a :ref:`Page<mutool_run_js_api_page>` with it or by calling its methods directly.
+
+
+Constructors
+~~~~~~~~~~~~~~~~
+
+.. method:: new DrawDevice(transform, pixmap)
+
+    Create a device for drawing into a ``Pixmap``. The ``Pixmap`` bounds used should match the transformed page bounds, or you can adjust them to only draw a part of the page.
+
+    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg pixmap: ``Pixmap``.
+
+
+
+.. _mutool_run_js_api_display_list:
+
+
+DisplayList
+------------------------
+
+A display list records all the device calls for playback later. If you want to run a page through several devices, or run it multiple times for any other reason, recording the page to a display list and replaying the display list may be a performance gain since then you can avoid reinterpreting the page each time. Be aware though, that a display list will keep all the graphics required in memory, so will increase the amount of memory required.
+
+
+Constructors
+~~~~~~~~~~~~~~~~
+
+.. method:: new DisplayList(mediabox)
+
+    Create an empty display list. The mediabox rectangle has the bounds of the page in points.
+
+    :arg mediabox: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+    :return: ``DisplayList``.
+
+
+
+Methods
+~~~~~~~~~~~~~~~~
+
+.. method:: run(device, transform)
+
+    Play back the recorded device calls onto the device.
+
+    :arg device: ``Device``.
+    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+
+.. method:: bound()
+
+    Returns a rectangle containing the dimensions of the display list contents.
+
+    :return: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+
+.. method:: toPixmap(transform, colorspace, alpha)
+
+    Render display list to a ``Pixmap``.
+
+    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg colorspace: ``ColorSpace``.
+    :arg alpha: ``Boolean``. If alpha is *true*, the annotation will be drawn on a transparent background, otherwise white.
+
+
+
+.. method:: toStructuredText(options)
+
+
+    Extract the text on the page into a ``StructuredText`` object. The options argument is a comma separated list of flags: "preserve-ligatures", "preserve-whitespace", "preserve-spans", and "preserve-images".
+
+    :arg options: ``String``.
+
+
+.. method:: search(needle)
+
+    Search the display list text for all instances of 'needle', and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
+
+    :arg needle: ``String``.
+    :return: ``[]``.
+
+
+
+.. _mutool_run_js_api_display_list_device:
+
+DisplayListDevice
+--------------------------------------------------------
+
+
+Constructors
+~~~~~~~~~~~~~~~~
+
+.. method:: new DisplayListDevice(displayList)
+
+    Create a device for recording onto a display list.
+
+    :arg displayList: ``DisplayList``.
+
+    :return: ``DisplayListDevice``.
+
+
+
+.. _mutool_run_js_api_device:
+
+Device
+------------------
+
+All built-in devices have the methods listed below. Any function that accepts a device will also accept a :title:`JavaScript` object with the same methods. Any missing methods are simply ignored, so you only need to create methods for the device calls you care about.
+
+Many of the methods take graphics objects as arguments: ``Path``, ``Text``, ``Image`` and ``Shade``.
+
+The stroking state is a dictionary with keys for:
+
+    - ``startCap``, ``dashCap``, ``endCap``
+        "Butt", "Round", "Square", or "Triangle".
+
+    - ``lineCap``
+        Set ``startCap``, ``dashCap``, and ``endCap`` all at once.
+
+    - ``lineJoin``
+        "Miter", "Round", "Bevel", or "MiterXPS".
+
+    - ``lineWidth``
+        Thickness of the line.
+
+    - ``miterLimit``
+        Maximum ratio of the miter length to line width, before beveling the join instead.
+
+    - ``dashPhase``
+        Starting offset for dash pattern.
+
+    - ``dashes``
+        Array of on/off dash lengths.
+
+
+Colors are specified as arrays with the appropriate number of components for the color space.
+
+The methods that clip graphics must be balanced with a corresponding ``popClip``.
+
+.. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha)
+
+    Fill a path.
+
+    :arg path: ``Path``.
+    :arg evenOdd:
+    :arg transform:
+    :arg colorspace:
+    :arg color:
+    :arg alpha:
+
+.. method:: strokePath(path, stroke, transform)
+
+    Stroke a path.
+
+    :arg path: ``Path``.
+    :arg stroke:
+    :arg transform:
+
+.. method:: clipPath(path, evenOdd, transform, colorspace, color, alpha)
+
+    Clip a path.
+
+    :arg path: ``Path``.
+    :arg evenOdd:
+    :arg transform:
+    :arg colorspace:
+    :arg color:
+    :arg alpha:
+
+.. method:: clipStrokePath(path, stroke, transform)
+
+    Clip & stroke a path.
+
+    :arg path: ``Path``.
+    :arg stroke:
+    :arg transform:
+
+
+
+
+
+
+
+
+
+
+
+
+
 .. include:: footer.rst
+
+
+
+
+
+
+
