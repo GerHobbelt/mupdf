@@ -13,13 +13,15 @@
 ==========================================
 
 
-The ``show`` command will print the specified objects and streams to stdout. Streams are decoded and non-printable characters are represented with a period by default.
+The ``show`` command will print the specified objects and streams to ``stdout``. Streams are decoded and non-printable characters are represented with a period by default.
 
 
 
 .. code-block:: bash
 
-   mutool show [options] pdf_file ( trailer | xref | pages | grep | outline | js | form | <path> ) *
+   mutool show [options] input.pdf ( trailer | xref | pages | grep | outline | js | form | <path> ) *
+
+.. include:: optional-command-line-note.rst
 
 
 ``[options]``
@@ -28,7 +30,7 @@ The ``show`` command will print the specified objects and streams to stdout. Str
       ``-p`` password
          Use the specified password if the file is encrypted.
       ``-o`` output
-         The output file name instead of stdout. Should be a plain text file format.
+         The output file name instead of using ``stdout``. Should be a plain text file format.
       ``-e``
          Leave stream contents in their original form.
       ``-b``
@@ -39,7 +41,7 @@ The ``show`` command will print the specified objects and streams to stdout. Str
 ----
 
 
-``pdf_file``
+``input.pdf``
    Input file name. Must be a :title:`PDF` file.
 
 ----

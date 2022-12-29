@@ -19,7 +19,7 @@
 
 - :ref:`mupdf-gl<mupdf_command_line_mupdf_gl>` A handy viewer UI.
 - :ref:`muraster<mupdf_command_line_muraster>` Can be used to convert PDF pages to raster images.
-- :ref:`mutool<mupdf_command_line_mutool>` An all purpose tool for dealing with PDF files.
+- :ref:`mutool<mupdf_command_line_mutool>` An all purpose tool for dealing with PDF files. Used in conjunction with the :ref:`mutool JavaScript API<mupdf_command_line_mutool_js_api>`
 
 .. _mupdf_command_line_mupdf_gl:
 
@@ -426,16 +426,24 @@ There are also several tools specifically for working with :title:`PDF` files:
    Prints details about media box, artbox, etc. for each page in a :title:`PDF` file.
 
 
-----
-
-
-And finally, there is a tool for doing anything you can imagine:
-
    .. toctree::
 
      mutool-run.rst
 
    A tool for running :title:`JavaScript` programs with access to the :title:`MuPDF` library functions.
+
+
+
+.. _mupdf_command_line_mutool_js_api:
+
+:title:`mutool JavaScript` API
+------------------------------------
+
+
+.. toctree::
+
+     mutool-run-js-api.rst
+
 
 
 
