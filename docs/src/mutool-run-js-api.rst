@@ -23,22 +23,6 @@ Base :title:`MuPDF` properties & methods
 ------------------------------------------
 
 
-.. property:: DeviceGray
-
-    The default grayscale colorspace.
-
-.. property:: DeviceRGB
-
-    The default RGB colorspace.
-
-.. property:: DeviceBGR
-
-    The default RGB colorspace, but with components in reverse order.
-
-.. property:: DeviceCMYK
-
-    The default CMYK colorspace.
-
 
 .. method:: setUserCSS(userStylesheet, usePublisherStyles)
 
@@ -109,16 +93,26 @@ Buffer
 
 The ``Buffer`` objects are used for working with binary data. They can be used much like arrays, but are much more efficient since they only store bytes.
 
-Constructors
-~~~~~~~~~~~~~~~~
 
-.. method:: new Buffer()
+
+.. method:: new()
+
+    *Constructor method*.
 
     Create a new empty buffer.
 
     :return: ``Buffer``.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var buffer = new Buffer();
+
+
 .. method:: readFile(fileName)
+
+    *Constructor method*.
 
     Create a new buffer with the contents of a file.
 
@@ -126,9 +120,17 @@ Constructors
 
     :return: ``Buffer``.
 
+    **Example**
 
-Buffer properties
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+    .. code-block:: javascript
+
+        var buffer = readFile("my_file.pdf");
+
+----
+
+**Instance properties**
+
+
 
 .. property:: length
 
@@ -140,8 +142,18 @@ Buffer properties
     Read/write the byte at index 'n'. Will throw exceptions on out of bounds accesses.
 
 
-Buffer methods
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+    **Example**
+
+    .. code-block:: javascript
+
+        var byte = buffer[0];
+
+
+
+
+----
+
+**Instance methods**
 
 .. method:: writeByte(b)
 
@@ -189,10 +201,11 @@ Document
 :title:`MuPDF` can open many document types (:title:`PDF`, :title:`XPS`, :title:`CBZ`, :title:`EPUB`, :title:`FB2` and a handful of image formats).
 
 
-Constructors
-~~~~~~~~~~~~~~~~
 
-.. method:: new Document(fileName)
+
+.. method:: new(fileName)
+
+    *Constructor method*.
 
     Open the named document.
 
@@ -202,9 +215,13 @@ Constructors
     :return: ``Document``.
 
 
+    **Example**
 
-Document methods
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+    .. code-block:: javascript
+
+        var document = new Document("my_pdf.pdf");
+
+
 
 .. method:: needsPassword()
 
@@ -275,7 +292,7 @@ Page
 
 .. method:: run(device, transform, skipAnnotations)
 
-    Calls device functions for all the contents on the page, using the specified transform `matrix<mutool_run_js_api_matrix>`. The device can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The transform maps from user space points to device space pixels. If ``skipAnnotations`` is *true* then annotations are ignored.
+    Calls device functions for all the contents on the page, using the specified ``transform`` `matrix<mutool_run_js_api_matrix>`. The ``device`` can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The ``transform`` maps from user space points to device space pixels. If ``skipAnnotations`` is *true* then annotations are ignored.
 
     :arg device: The device object.
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
@@ -283,7 +300,7 @@ Page
 
 .. method:: toPixmap(transform, colorspace, alpha, skipAnnotations)
 
-    Render the page into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the transform and colorspace. If alpha is *true*, the page will be drawn on a transparent background, otherwise white.
+    Render the page into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the ``transform`` and ``colorspace``. If ``alpha`` is *true*, the page will be drawn on a transparent background, otherwise white.
 
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: ``ColorSpace``.
@@ -306,7 +323,7 @@ Page
 
 .. method:: search(needle)
 
-    Search for 'needle' text on the page, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
+    Search for ``needle`` text on the page, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
 
     :arg needle: ``String``.
     :return: ``[]``.
@@ -396,21 +413,46 @@ StructuredText
     :arg q: End point in format ``{x:y}``.
 
 
+
+.. _mutool_run_javascript_api_colorspace:
+
+
 ColorSpace
 ----------------------------
+
+
+
+
+.. property:: DeviceGray
+
+    The default grayscale colorspace.
+
+.. property:: DeviceRGB
+
+    The default RGB colorspace.
+
+.. property:: DeviceBGR
+
+    The default RGB colorspace, but with components in reverse order.
+
+.. property:: DeviceCMYK
+
+    The default CMYK colorspace.
+
+
 
 .. method:: getNumberOfComponents()
 
     A grayscale colorspace has one component, RGB has 3, CMYK has 4, and DeviceN may have any number of components.
 
 
-**Example**
+    **Example**
 
-.. code-block:: javascript
+    .. code-block:: javascript
 
-    var cs = DeviceRGB;
-    var num = cs.getNumberOfComponents();
-    print(num);  //3
+        var cs = DeviceRGB;
+        var num = cs.getNumberOfComponents();
+        print(num);  //3
 
 
 
@@ -424,10 +466,10 @@ A ``Pixmap`` object contains a color raster image (short for pixel map). The com
 
 
 
-Constructors
-~~~~~~~~~~~~~~~~
 
-.. method:: new Pixmap(colorspace, bounds, alpha)
+.. method:: new(colorspace, bounds, alpha)
+
+    *Constructor method*.
 
     Create a new pixmap. The pixel data is **not** initialized; and will contain garbage.
 
@@ -437,9 +479,12 @@ Constructors
 
     :return: ``Pixmap``.
 
+    **Example**
 
-Methods
-~~~~~~~~~~~~
+    .. code-block:: javascript
+
+        var pixmap = new Pixmap(DeviceRGB, [0,0,100,100], true);
+
 
 .. method:: clear(value)
 
@@ -521,15 +566,22 @@ DrawDevice
 The ``DrawDevice`` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pixmap>`; either by running a :ref:`Page<mutool_run_js_api_page>` with it or by calling its methods directly.
 
 
-Constructors
-~~~~~~~~~~~~~~~~
 
-.. method:: new DrawDevice(transform, pixmap)
+
+.. method:: new(transform, pixmap)
+
+    *Constructor method*.
 
     Create a device for drawing into a ``Pixmap``. The ``Pixmap`` bounds used should match the transformed page bounds, or you can adjust them to only draw a part of the page.
 
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg pixmap: ``Pixmap``.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var pixmap = new DrawDevice(Identity, pixmap);
 
 
 
@@ -542,10 +594,11 @@ DisplayList
 A display list records all the device calls for playback later. If you want to run a page through several devices, or run it multiple times for any other reason, recording the page to a display list and replaying the display list may be a performance gain since then you can avoid reinterpreting the page each time. Be aware though, that a display list will keep all the graphics required in memory, so will increase the amount of memory required.
 
 
-Constructors
-~~~~~~~~~~~~~~~~
 
-.. method:: new DisplayList(mediabox)
+
+.. method:: new(mediabox)
+
+    *Constructor method*.
 
     Create an empty display list. The mediabox rectangle has the bounds of the page in points.
 
@@ -553,10 +606,13 @@ Constructors
 
     :return: ``DisplayList``.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var displayList = new DisplayList([0,0,100,100]);
 
 
-Methods
-~~~~~~~~~~~~~~~~
 
 .. method:: run(device, transform)
 
@@ -606,16 +662,22 @@ DisplayListDevice
 --------------------------------------------------------
 
 
-Constructors
-~~~~~~~~~~~~~~~~
 
 .. method:: new DisplayListDevice(displayList)
+
+    *Constructor method*.
 
     Create a device for recording onto a display list.
 
     :arg displayList: ``DisplayList``.
 
     :return: ``DisplayListDevice``.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var displayListDevice = new DisplayListDevice(my_display_list);
 
 
 
@@ -663,7 +725,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg path: ``Path``.
     :arg evenOdd:
     :arg transform:
-    :arg colorspace:
+    :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color:
     :arg alpha:
 
@@ -682,7 +744,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg path: ``Path``.
     :arg evenOdd:
     :arg transform:
-    :arg colorspace:
+    :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color:
     :arg alpha:
 
