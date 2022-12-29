@@ -240,7 +240,6 @@ static struct {
 #if defined(MUTOOL_EX)
 	{ {.fa = charter_svg_main }, "charter_svg", "charter_svg tool" },
 	{ {.fa = charter_tex_main }, "charter_tex", "charter_tex tool" },
-	{ {.fa = tiny_expr_repl_main }, "tiny_expr_repl", "tiny_expr_repl tool" },
 
 	{ {.fa = smartypants_main }, "smartypants", "smartypants tool" },
 	{ {.fa = upskirt_main }, "upskirt", "upskirt tool" },

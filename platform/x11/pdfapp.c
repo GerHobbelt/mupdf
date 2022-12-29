@@ -623,7 +623,7 @@ static int gen_tmp_file(char *buf, int len)
 	{
 		FILE *f;
 		fz_snprintf(name, len, "tmp%04d", i);
-		assert0(strlen(name) < len);
+		ASSERT0(strlen(name) < len);
 		f = fopen(buf, "r");
 		if (f == NULL)
 			return 1;

@@ -32,9 +32,11 @@ EXPORTS
 	pdfmetadump_main
 	pdfpages_main
 	pdfposter_main
+	pdfrecolor_main
 	pdfshow_main
 	pdfsign_main
 	pdftagged_main
+	pdftrim_main
 	qiqqa_documentid62_main
 	qiqqa_fingerprint0_main
 	qiqqa_fingerprint1_main
@@ -98,9 +100,6 @@ EXPORTS
 	curl_easy_strerror
 	curl_easy_unescape
 	curl_escape
-	curl_formadd
-	curl_formfree
-	curl_formget
 	curl_free
 	curl_getdate
 	curl_getenv
@@ -164,9 +163,7 @@ EXPORTS
 	curl_multi_poll
 	curl_multi_remove_handle
 	curl_multi_setopt
-	curl_multi_socket
 	curl_multi_socket_action
-	curl_multi_socket_all
 	curl_multi_strerror
 	curl_multi_timeout
 	curl_multi_wait
@@ -180,6 +177,9 @@ EXPORTS
 	curl_url_get
 	curl_url_set
 	curl_url_strerror
+	curl_ws_meta
+	curl_ws_recv
+	curl_ws_send
 
 	Curl_now
 	Curl_timediff
@@ -414,6 +414,7 @@ EXPORTS
 	fz_buffer_extract
 	fz_buffer_storage
 	fz_clear_buffer
+	fz_clone_buffer
 	fz_drop_buffer
 	fz_grow_buffer
 	fz_keep_buffer
@@ -583,6 +584,8 @@ EXPORTS
 	fz_begin_group
 	fz_begin_layer
 	fz_begin_mask
+	fz_begin_metatext
+	fz_begin_struct
 	fz_begin_tile
 	fz_begin_tile_id
 	fz_blendmode_name
@@ -600,6 +603,8 @@ EXPORTS
 	fz_end_group
 	fz_end_layer
 	fz_end_mask
+	fz_end_metatext
+	fz_end_struct
 	fz_end_tile
 	fz_fill_image
 	fz_fill_image_mask
@@ -626,6 +631,7 @@ EXPORTS
 	fz_set_default_colorspaces
 	fz_stroke_path
 	fz_stroke_text
+	fz_struct_to_string
 	fz_bound_display_list
 	fz_display_list_is_empty
 	fz_drop_display_list
@@ -721,6 +727,7 @@ EXPORTS
 	fz_new_type3_font
 	fz_run_t3_glyph
 	fz_set_font_bbox
+	fz_set_font_embedding
 	fz_unicode_from_glyph_name
 	fz_unicode_from_glyph_name_strict
 	fz_windows_1250_from_unicode
@@ -888,6 +895,8 @@ EXPORTS
 	fz_vwrite_strings
 	fz_write_base64
 	fz_write_base64_buffer
+	fz_write_bits
+	fz_write_bits_sync
 	fz_write_buffer
 	fz_write_byte
 	fz_write_byte_no_lock
@@ -949,6 +958,7 @@ EXPORTS
 	fz_invert_pixmap
 	fz_invert_pixmap_alpha
 	fz_invert_pixmap_luminance
+	fz_invert_pixmap_raw
 	fz_invert_pixmap_rect
 	fz_is_pixmap_monochrome
 	fz_keep_pixmap
@@ -1339,6 +1349,7 @@ EXPORTS
 
 ; MuPDF exports
 
+	pdf_add_annot_border_dash_item
 	pdf_add_annot_ink_list
 	pdf_add_annot_ink_list_stroke
 	pdf_add_annot_ink_list_stroke_vertex
@@ -1353,6 +1364,12 @@ EXPORTS
 	pdf_annot_ap
 	pdf_annot_author
 	pdf_annot_border
+	pdf_annot_border_dash_count
+	pdf_annot_border_dash_item
+	pdf_annot_border_effect
+	pdf_annot_border_effect_intensity
+	pdf_annot_border_style
+	pdf_annot_border_width
 	pdf_annot_color
 	pdf_annot_contents
 	pdf_annot_creation_date
@@ -1364,6 +1381,8 @@ EXPORTS
 	pdf_annot_filespec
 	pdf_annot_flags
 	pdf_annot_has_author
+	pdf_annot_has_border
+	pdf_annot_has_border_effect
 	pdf_annot_has_filespec
 	pdf_annot_has_icon_name
 	pdf_annot_has_ink_list
@@ -1372,6 +1391,7 @@ EXPORTS
 	pdf_annot_has_line_ending_styles
 	pdf_annot_has_open
 	pdf_annot_has_quad_points
+	pdf_annot_has_rect
 	pdf_annot_has_vertices
 	pdf_annot_hot
 	pdf_annot_icon_name
@@ -1408,6 +1428,7 @@ EXPORTS
 	pdf_annot_vertex
 	pdf_annot_vertex_count
 	pdf_bound_annot
+	pdf_clear_annot_border_dash
 	pdf_clear_annot_ink_list
 	pdf_clear_annot_quad_points
 	pdf_clear_annot_vertices
@@ -1460,6 +1481,10 @@ EXPORTS
 	pdf_set_annot_appearance_from_display_list
 	pdf_set_annot_author
 	pdf_set_annot_border
+	pdf_set_annot_border_effect
+	pdf_set_annot_border_effect_intensity
+	pdf_set_annot_border_style
+	pdf_set_annot_border_width
 	pdf_set_annot_color
 	pdf_set_annot_contents
 	pdf_set_annot_creation_date
@@ -1616,6 +1641,7 @@ EXPORTS
 	pdf_event_issue_print
 	pdf_get_doc_event_callback_data
 	pdf_set_doc_event_callback
+	fz_extract_ttf_from_ttc
 	pdf_add_cid_font
 	pdf_add_cjk_font
 	pdf_add_hmtx
@@ -1735,9 +1761,13 @@ EXPORTS
 	pdf_new_output_processor
 	pdf_new_processor
 	pdf_new_run_processor
+	pdf_new_sanitize_filter
 	pdf_process_annot
 	pdf_process_contents
 	pdf_process_glyph
+	pdf_process_raw_contents
+	pdf_processor_pop_resources
+	pdf_processor_push_resources
 	pdf_tos_get_text
 	pdf_tos_make_trm
 	pdf_tos_move_after_char
@@ -1896,6 +1926,7 @@ EXPORTS
 	pdf_obj_parent_num
 	pdf_obj_refs
 	pdf_objcmp
+	pdf_objcmp_deep
 	pdf_objcmp_resolve
 	pdf_objkindstr
 	pdf_parse_date
@@ -1954,6 +1985,7 @@ EXPORTS
 	pdf_new_pixmap_from_page_with_usage
 	pdf_page_contents
 	pdf_page_group
+	pdf_page_has_transparency
 	pdf_page_obj_transform
 	pdf_page_presentation
 	pdf_page_resources
@@ -2003,8 +2035,10 @@ EXPORTS
 	pdf_new_xobject
 	pdf_purge_local_font_resources
 	pdf_purge_locals_from_store
+	pdf_recolor_shade
 	pdf_remove_item
 	pdf_resources_use_blending
+	pdf_sample_shade_function
 	pdf_store_item
 	pdf_update_xobject
 	pdf_xobject_bbox
@@ -2305,6 +2339,7 @@ EXPORTS
 	JxlEncoderSetExtraChannelBlendInfo
 	JxlEncoderSetExtraChannelInfo
 	JxlEncoderSetExtraChannelName
+	JxlEncoderSetFrameBitDepth
 	JxlEncoderSetFrameDistance
 	JxlEncoderSetFrameLossless
 	JxlEncoderSetFrameName
@@ -2646,6 +2681,7 @@ EXPORTS
 	TIFFCheckpointDirectory
 	TIFFCleanup
 	TIFFClientOpen
+	TIFFClientOpenExt
 	TIFFClientdata
 	TIFFClose
 	TIFFComputeStrip
@@ -2665,7 +2701,9 @@ EXPORTS
 	TIFFDeferStrileArrayWriting
 	TIFFError
 	TIFFErrorExt
+	TIFFErrorExtR
 	TIFFFdOpen
+	TIFFFdOpenExt
 	TIFFFieldDataType
 	TIFFFieldIsAnonymous
 	TIFFFieldName
@@ -2718,7 +2756,14 @@ EXPORTS
 	TIFFNumberOfStrips
 	TIFFNumberOfTiles
 	TIFFOpen
+	TIFFOpenExt
+	TIFFOpenOptionsAlloc
+	TIFFOpenOptionsFree
+	TIFFOpenOptionsSetErrorHandlerExtR
+	TIFFOpenOptionsSetMaxSingleMemAlloc
+	TIFFOpenOptionsSetWarningHandlerExtR
 	TIFFOpenW
+	TIFFOpenWExt
 	TIFFPrintDirectory
 	TIFFRGBAImageBegin
 	TIFFRGBAImageEnd
@@ -2795,6 +2840,7 @@ EXPORTS
 	TIFFVTileSize64
 	TIFFWarning
 	TIFFWarningExt
+	TIFFWarningExtR
 	TIFFWriteBufferSetup
 	TIFFWriteCheck
 	TIFFWriteCustomDirectory
@@ -3007,6 +3053,8 @@ EXPORTS
 	sqlite3_backup_pagecount
 	sqlite3_backup_remaining
 	sqlite3_backup_step
+	sqlite3_begin_concurrent_report
+	sqlite3_begin_concurrent_report_enable
 	sqlite3_bind_blob
 	sqlite3_bind_blob64
 	sqlite3_bind_double
@@ -3244,6 +3292,7 @@ EXPORTS
 	sqlite3_value_bytes16
 	sqlite3_value_double
 	sqlite3_value_dup
+	sqlite3_value_encoding
 	sqlite3_value_free
 	sqlite3_value_frombind
 	sqlite3_value_int
@@ -3758,8 +3807,6 @@ EXPORTS
 	xmlCleanupGlobals
 	xmlDeregisterNodeDefault
 	xmlInitGlobals
-	xmlOutputBufferCreateFilenameDefault
-	xmlParserInputBufferCreateFilenameDefault
 	xmlRegisterNodeDefault
 	xmlThrDefDefaultBufferSize
 	xmlThrDefDeregisterNodeDefault
@@ -4414,6 +4461,7 @@ EXPORTS
 	FIO_setNbWorkers
 	FIO_setNotificationLevel
 	FIO_setOverlapLog
+	FIO_setPassThroughFlag
 	FIO_setPatchFromMode
 	FIO_setProgressSetting
 	FIO_setRemoveSrcFile
@@ -4490,6 +4538,7 @@ EXPORTS
 	UTIL_mirrorSourceFilesDirectories
 	UTIL_refFilename
 	UTIL_requireUserConfirmation
+	UTIL_searchFileNamesTable
 	UTIL_setFileStat
 	UTIL_stat
 	UTIL_utime
@@ -4519,7 +4568,6 @@ EXPORTS
 	charter_svg_main
 	charter_tex_main
 	smartypants_main
-	tiny_expr_repl_main
 	upskirt_main
 
 ; MuPDF/Fitz default heap debug exports

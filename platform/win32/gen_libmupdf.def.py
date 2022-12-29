@@ -312,7 +312,7 @@ def main():
 	ucdn_exports = generateExports("include/mupdf/ucdn.h")
 	ocr_exports = generateExports("source/fitz/tessocr.h")
 	ocr_train_exports = generateExports("thirdparty/tesseract/include/tesseract/capi_training_tools.h")
-	curl_exports = generateExports("thirdparty/curl/include/curl", ["fread", "fwrite", "strcasecmp", "strncasecmp"])
+	curl_exports = generateExports("thirdparty/curl/include/curl", ["fread", "fwrite", "strcasecmp", "strncasecmp", "CURL_DEPRECATED"])
 	curl_time_exports = generateExports("thirdparty/curl/lib/timeval.h")
 	platform_exports = generateExports("platform/x11/curl_stream.h")
 	pkcs7ex_exports = generateExports("include/mupdf/helpers/pkcs7-openssl.h", pkcs7_ignores)
