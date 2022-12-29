@@ -21,6 +21,9 @@ The ``trace`` command prints a trace of device calls needed to render a page.
    mutool trace [options] file [pages]
 
 
+.. include:: optional-command-line-note.rst
+
+
 ``[options]``
    Options are as follows:
 

@@ -17,14 +17,16 @@ The ``clean`` command pretty prints and rewrites the syntax of a :title:`PDF` fi
 
 .. code-block:: bash
 
-   mutool clean [options] input_pdf_file [output_pdf_file] [pages]
+   mutool clean [options] input.pdf [output.pdf] [pages]
+
+.. include:: optional-command-line-note.rst
 
 
 ``[options]``
    Options are as follows:
 
       ``-p`` password
-            Use the specified password if the file is encrypted.
+         Use the specified password if the file is encrypted.
 
       ``-g``
          Garbage collect unused objects.
@@ -87,11 +89,10 @@ The ``clean`` command pretty prints and rewrites the syntax of a :title:`PDF` fi
          Preserve metadata.
 
 
-
 ----
 
 
-``input_pdf_file``
+``input.pdf``
    Input file name. Must be a :title:`PDF` file.
 
 ----

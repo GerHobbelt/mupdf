@@ -20,7 +20,10 @@ The ``extract`` command can be used to extract images and font files from a :tit
 
 .. code-block:: bash
 
-   mutool extract [options] pdf_file [object numbers]
+   mutool extract [options] input.pdf [object numbers]
+
+
+.. include:: optional-command-line-note.rst
 
 
 ``[options]``
@@ -43,7 +46,7 @@ The ``extract`` command can be used to extract images and font files from a :tit
 ----
 
 
-``pdf_file``
+``input.pdf``
    Input file name. Must be a :title:`PDF` file.
 
 ----

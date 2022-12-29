@@ -32,6 +32,7 @@ The ``draw`` command will render a document to image files, convert to another v
 
    mutool draw [options] file [pages]
 
+.. include:: optional-command-line-note.rst
 
 
 ``[options]``
