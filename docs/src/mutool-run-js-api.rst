@@ -1332,10 +1332,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     :options: The options as key-value pairs.
 
 
-
-
-
-
 .. method:: getTrailer()
 
     The trailer dictionary. This contains indirect references to the "Root" and "Info" dictionaries. See: :ref:`PDF object access<mutool_run_js_api_pdf_object_access>`.
@@ -1497,22 +1493,22 @@ All page objects are structured into a page tree, which defines the order the pa
 
 .. method:: findPage(number)
 
-    Return the page object for a page number.
+    Return the ``Page`` object for a page number.
 
-    :arg number: The page number - the first page is number zero.
+    :arg number: The page number, the first page is number zero.
 
     :return: ``Page``.
 
 .. method:: deletePage(number)
 
-    Delete the numbered page.
+    Delete the numbered ``Page``.
 
-    :arg number: The page number - the first page is number zero.
+    :arg number: The page number, the first page is number zero.
 
 
 .. method:: insertPage(at, page)
 
-    Insert the page object in the page tree at the location. If 'at' is -1, at the end of the document.
+    Insert the ``Page`` object in the page tree at the location. If 'at' is -1, at the end of the document.
 
     Pages consist of a content stream, and a resource dictionary containing all of the fonts and images used.
 
@@ -1525,11 +1521,18 @@ All page objects are structured into a page tree, which defines the order the pa
     Create a new page object. Note: this function does NOT add it to the page tree.
 
     :arg mediabox: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
-    :arg rotate:
-    :arg resources:
-    :arg contents:
+    :arg rotate: Rotation value.
+    :arg resources: Resources object.
+    :arg contents: Contents string.
 
     :return: ``Page``.
+
+
+    **Example**
+
+    .. literalinclude:: ../examples/pdf-create.js
+       :caption: docs/examples/pdf-create.js
+       :language: javascript
 
 
 .. method:: addSimpleFont(font, encoding)
@@ -1795,6 +1798,299 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: ``[...]``.
 
+
+
+PDFPage
+---------------
+
+.. method:: getAnnotations()
+
+    Return array of all annotations on the page.
+
+    :return: ``[]``.
+
+
+.. method:: createAnnotation(type)
+
+    Create a new blank annotation of a given type. The type must be one of the annotation subtypes: "Text", "Link", "FreeText", "Line", "Square", "Circle", "Polygon", "PolyLine", "Highlight", "Underline", "Squiggly", "StrikeOut", "Redact", "Stamp", "Caret", "Ink", "Popup", "FileAttachment", "Sound", "Movie", "RichMedia", "Widget", "Screen", "PrinterMark", "TrapNet", "Watermark", "3D" or "Projection".
+
+    :arg type: ``String`` representing annotation type.
+    :return: ``PDFAnnotation``.
+
+.. method:: deleteAnnotation(annot)
+
+    Delete the annotation from the page.
+
+    :arg annot: ``PDFAnnotation``.
+
+.. method:: update()
+
+    Loop through all annotations of the page and update them. Returns true if re-rendering is needed because at least one annotation was changed (due to either events or :title:`JavaScript` actions or annotation editing).
+
+.. method:: applyRedactions(blackboxes, imageMethod)
+
+    Apply redaction annotations to the page. Should black boxes be drawn at each redaction or not? Should affected images be ignored, entirely redacted or should just the covered part of the image be redacted?
+
+    :arg blackboxes:
+    :arg imageMethod:
+
+
+
+
+
+PDFAnnotation
+----------------------
+
+:title:`PDF` Annotations belong to a specific ``PDFPage`` and may be created/changed/removed. Because annotation appearances may change (for several reasons) it is possible to scan through the annotations on a page and query them whether a re-render is necessary. Finally redaction annotations can be applied to a ``PDFPage``, destructively removing content from the page.
+
+
+.. method:: bound()
+
+    Returns a rectangle containing the location and dimension of the annotation.
+
+    :return: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+
+.. method:: run(device, transform)
+
+    Calls the device functions to draw the annotation.
+
+    :arg device: ``Device``.
+    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+
+.. method:: toPixmap(transform, colorspace, alpha)
+
+    Render the annotation into a ``Pixmap``, using the transform and colorspace.
+
+    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg colorspace: ``ColorSpace``.
+    :arg alpha: ``Boolean``.
+
+
+.. method:: toDisplayList()
+
+    Record the contents of the annotation into a ``DisplayList``.
+
+    :return: ``DisplayList``.
+
+
+.. method:: getObject()
+
+    Get the underlying ``PDFObject`` for an annotation.
+
+    :return: ``PDFObject``.
+
+
+.. method:: process(processor)
+
+    Run through the annotation appearance stream and call methods on the supplied :title:`PDF` processor.
+
+    :arg processor: User defined function.
+
+
+.. method:: setAppearance(appearance, state, transform, displayList)
+
+    Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a display list.
+
+    :arg appearance: Appearance stream ("N", "R" or "D").
+    :arg state: "On" or "Off".
+    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg displayList: ``DisplayList``.
+
+.. method:: setAppearance(appearance, state, transform, bbox, resources, contents)
+
+    Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a bounding box, a :title:`PDF` dictionary of resources and a content stream.
+
+    :arg appearance: Appearance stream ("N", "R" or "D").
+    :arg state: "On" or "Off".
+    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg bbox: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg resources: Resources object.
+    :arg contents: Contents string.
+
+
+.. method:: update()
+
+    Update the appearance stream to account for changes in the annotation.
+
+
+.. method:: getHot()
+
+    Get the annotation as being hot, *i.e.* that the pointer is hovering over the annotation.
+
+    :return: ``Boolean``.
+
+.. method:: setHot(hot)
+
+    Set the annotation as being hot, *i.e.* that the pointer is hovering over the annotation.
+
+    :arg hot: ``Boolean``.
+
+
+----
+
+These properties are available for all annotation types.
+
+.. method:: getType()
+
+    Return the annotation subtype.
+
+    :return: Annotation type.
+
+.. method:: getFlags()
+
+    Get the annotation flags.
+
+    :return: Annotsation flags.
+
+.. method:: setFlags(flags)
+
+    Set the annotation flags.
+
+    :arg flags:
+
+
+.. method:: getContents()
+
+    Get the annotation contents.
+
+    :return: ``String``.
+
+.. method:: setContents(text)
+
+    Set the annotation contents.
+
+    :arg text: ``String``.
+
+
+.. method:: getBorder()
+
+    Get the annotation border line width in points.
+
+    :return: Border width.
+
+.. method:: setBorder(width)
+
+    Set the annotation border line width in points. Use ``setBorderWidth()`` to avoid removing the border effect.
+
+    :arg width: Border width.
+
+
+.. method:: getColor()
+
+    Get the annotation color, represented as an array of up to 4 component values.
+
+    :return: The :ref:`color value<mutool_run_js_api_colors>`.
+
+.. method:: setColor(color)
+
+    Set the annotation color, represented as an array of up to 4 component values.
+
+    :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+
+.. method:: getOpacity()
+
+    Get the annotation opacity.
+
+    :return: The :ref:`opacity<mutool_run_js_api_alpha>` value.
+
+.. method:: setOpacity(opacity)
+
+    Set the annotation opacity.
+
+    :arg opacity: The :ref:`opacity<mutool_run_js_api_alpha>` value.
+
+.. method:: getCreationDate()
+
+    Get the annotation creation date as a :title:`JavaScript` ``Date`` object.
+
+    :return: ``Date``.
+
+.. method:: setCreationDate(milliseconds)
+
+    Set the creation date to the number of milliseconds since the epoch.
+
+    :arg milliseconds: Milliseconds value.
+
+
+
+.. method:: getModificationDate()
+
+    Get the annotation modification date as a :title:`JavaScript` ``Date`` object.
+
+    :return: ``Date``.
+
+
+.. method:: setModificationDate(milliseconds)
+
+    Set the annotation modification date to the number of milliseconds since the epoch.
+
+    :arg milliseconds: Milliseconds value.
+
+
+.. method:: getQuadding()
+
+    Get the annotation quadding (justification).
+
+    :return: Quadding value, ``0`` for left-justified, ``1`` for centered, ``2`` for right-justified.
+
+
+.. method:: setQuadding(value)
+
+    Set the annotation quadding (justification).
+
+    :arg value: Quadding value, ``0`` for left-justified, ``1`` for centered, ``2`` for right-justified.
+
+
+.. method:: getLanguage()
+
+    Get the annotation language (or get inherit the document language).
+
+    :return: ``String``.
+
+
+.. method:: setLanguage(language)
+
+    Set the annotation language.
+
+    :arg language: ``String``.
+
+
+
+----
+
+
+These properties are only present for some annotation types, so support for them must be checked before use.
+
+PDFAnnotation#getRect(), #setRect(rect)
+Get/set the annotation bounding box.
+PDFAnnotation#getDefaultAppearance(), #setDefaultAppearance(font, size, color)
+Get/Set the default text appearance used for free text annotations.
+PDFAnnotation#hasInteriorColor(), #getInteriorColor(), #setInteriorColor(color)
+Check for support/get/set the annotation interior color, represented as an array of up to 4 component values.
+PDFAnnotation#hasAuthor(), #getAuthor(), #setAuthor(author)
+Check for support/get/set the annotation author.
+PDFAnnotation#hasLineEndingStyles(), #getLineEndingStyles(), #setLineEndingStyles(start, end)
+Check for support/get/set the annotation line ending styles, either of "None", "Square", "Circle", "Diamond", "OpenArrow", "ClosedArrow", "Butt", "ROpenArrow", "RClosedArrow" or "Slash".
+PDFAnnotation#hasIcon(), #getIcon(), #setIcon(iconname)
+Check for support/get/set annotation icon. Standard icons names for:
+File attachment annotations:
+"Graph", "PaperClip", "PushPin" and "Tag".
+Sound annotations:
+"Mic" and "Speaker".
+Stamp annotations:
+"Approved", "AsIs", "Confidential", "Departmental", "Draft", "Experimental", "Expired", "Final", "ForComment", "ForPublicRelease", "NotApproved", "NorForPublicRelease", "Sold" and "TopSecret".
+Text annotations:
+"Comment", "Help", "Insert", "Key", "NewParagraph", "Note" and "Paragraph".
+PDFAnnotation#hasLine(), #getLine(), #setLine(endpoints)
+Check for support/get/set line end points, represented by an array of to points, each represented as an [x, y] array.
+PDFAnnotation#hasOpen(), #isOpen(), #setIsOpen(state)
+Check for support/get/set annotation open state, represented as a boolean.
+PDFAnnotation#hasFilespec(), #getFilespec(), #setFilespec(filespecpdfobject)
+Check for support/get/set annotation file specification, represented by a PDF object.
+
+----
 
 
 
