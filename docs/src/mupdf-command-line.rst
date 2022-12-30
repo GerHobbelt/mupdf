@@ -340,6 +340,12 @@ This will render a raster file from page one of the input file "mupdf_explored.p
 
 
 
+.. note::
+
+  It is advised to use `rlwrap`_ with ``mutool`` for command line history and cursor navigation (this can be also installed via :title:`Homebrew` or :title:`MacPorts`).
+
+
+
 For rendering and converting documents there are three commands available:
 
 
@@ -440,6 +446,9 @@ There are also several tools specifically for working with :title:`PDF` files:
 ------------------------------------
 
 
+
+
+
 .. toctree::
 
      mutool-run-js-api.rst
@@ -456,5 +465,6 @@ There are also several tools specifically for working with :title:`PDF` files:
 
 
 .. _GLUT: https://freeglut.sourceforge.net
+.. _rlwrap: https://github.com/hanslub42/rlwrap
 
 
