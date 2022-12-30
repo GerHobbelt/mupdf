@@ -9,6 +9,8 @@
    :keywords: MuPDF, pdf, epub
 
 
+.. _mutool_convert:
+
 :title:`mutool convert`
 ==========================================
 
