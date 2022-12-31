@@ -90,6 +90,30 @@ if (projname.endsWith("_tests")) {
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.endsWith("_test")) {
+	let tst_projname = projname.replace(/_test$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/_test$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_tools")) {
@@ -104,6 +128,10 @@ if (projname.endsWith("_tools")) {
 
 	tool_projname = nonlib_projname.replace(/_tools$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tool_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tool_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -122,6 +150,10 @@ if (projname.endsWith("_demos")) {
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_demo")) {
@@ -136,6 +168,10 @@ if (projname.endsWith("_demo")) {
 
 	tst_projname = nonlib_projname.replace(/_demo$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -154,6 +190,10 @@ if (projname.endsWith("_benchmark")) {
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
 if (projname.endsWith("_examples")) {
@@ -168,6 +208,10 @@ if (projname.endsWith("_examples")) {
 
 	tst_projname = nonlib_projname.replace(/_examples$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -189,6 +233,20 @@ if (projname.startsWith("libboost-")) {
 if (projname.startsWith("wxw-samples-")) {
 	let tst_projname = projname.replace(/^wxw-samples-/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/${ tst_projname.replace(/-/, '/') }`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.startsWith("wxw-samples-sockets-")) {
+	let tst_projname = projname.replace(/^wxw-samples-sockets-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/sockets/${ tst_projname.replace(/-/, '/') }`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.startsWith("wxw-samples-ipc-")) {
+	let tst_projname = projname.replace(/^wxw-samples-ipc-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/ipc/${ tst_projname.replace(/-/, '/') }`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -238,6 +296,8 @@ const projectMap = {
 	"libYAC": "YACLib",
 	"libhnsw": "hnswlib",
 	"libnms": "nmslib",
+	"libsafestring": "safestringlib",
+	"libCache": "CacheLib",
 	"libyaml-tests": "libyaml",
 	"uberlogger": "uberlog",
 	"uberlog_test": "uberlog",

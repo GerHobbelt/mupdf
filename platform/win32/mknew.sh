@@ -739,6 +739,6 @@ fi
 if [[ "$ARG" =~ [4] ]] ; then
 	for f in *.vcxproj ; do
 		echo "Refilling $f..."
-		node ./refill-vcxproj.js $f
+		./refill-vcxproj.sh $f
 	done
 fi
