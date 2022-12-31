@@ -2,13 +2,13 @@
 
 mknewproj() {
   echo "mknewproj: $1"
-  libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/lib$//i' )
+  libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
   if ! test -f $1.vcxproj -o -f $libname.vcxproj ; then
 	  cp -n libcpuid.vcxproj $libname.vcxproj
 	  node ./patch-vcxproj.js $libname.vcxproj
 	  node ./refill-vcxproj.js $libname.vcxproj
 	  ( node ./mk_project_line_for_sln.js $libname.vcxproj ) >> m-dev-list.sln
-  fi	  
+  fi
 }
 
 mknewAPPproj() {
@@ -23,8 +23,16 @@ mknewAPPproj() {
 }
 
 
+delnewproj() {
+  echo "delnewproj: $1"
+  libname=$1
+  rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
+  libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
+  rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
+}
 
-mylist=$( 
+
+mylist=$(
 cat <<EOT
 
 A-MNS_TemplateMatching
@@ -638,7 +646,7 @@ zxing-cpp
 EOT
 )
 
-myapplist=$( 
+myapplist=$(
 cat <<EOT
 
 EtwExplorer
@@ -655,14 +663,55 @@ sumatrapdf
 EOT
 )
 
-if [ -z "$1" ] ; then 
+# projects which use names different from their actual storage directory; see also update-cvxproj.js script's mapping table:
+
+deletelist=$(
+cat <<EOT
+
+cryptopp
+math-atlas
+c-blosc2
+cpp-btree
+CHM-lib
+djvulibre
+dtl-diff-template-library
+enkiTS-TaskScheduler
+lda-Familia
+google-diff-match-patch
+parallel-hashmap
+HDiffPatch
+google-marl
+mime-mega
+promise-cpp
+QuickJS-C++-Wrapper
+QuickJS-C++-Wrapper2
+bibtex-robust-decoder
+svg-charter
+oneTBB
+tomlpp
+pytorch
+uint128_t
+upskirt-markdown
+XMP-Toolkit-SDK
+unicode-icu
+json-jansson
+cxxtest_catch_2_gtest
+OptimizationTemplateLibrary
+manticoresearch
+uberlog
+pmt-png-tools
+
+EOT
+)
+
+if [ -z "$1" ] ; then
 	ARG="3"
 else
 	ARG="$1"
 fi
 
 
-if [[ "$ARG" =~ [1] ]] ; then 
+if [[ "$ARG" =~ [1] ]] ; then
 	for f in  $mylist  ; do
 	  mknewproj $f
 	done
@@ -671,6 +720,12 @@ fi
 if [[ "$ARG" =~ [2] ]] ; then
 	for f in  $myapplist  ; do
 	  mknewAPPproj $f
+	done
+fi
+
+if [[ "$ARG" =~ [12] ]] ; then
+	for f in  $deletelist  ; do
+	  delnewproj $f
 	done
 fi
 

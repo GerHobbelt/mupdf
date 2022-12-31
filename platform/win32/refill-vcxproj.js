@@ -205,9 +205,6 @@ const projectMap = {
 	"binlog_bread": "binlog",
 	"binlog_brecovery": "binlog",
 	"libchm_io": "CHM-lib",
-	"libcli11-examples": "cli11/examples",
-	"libclipp_examples": "clipp/examples",
-	"libcurl_examples": "curl",
 	"libdjvu_io": "djvulibre",
 	"libdtldiff": "dtl-diff-template-library",
 	"libenkiTaskScheduler": "enkiTS-TaskScheduler",
@@ -217,7 +214,6 @@ const projectMap = {
 	"libhdiff": "HDiffPatch",
 	"libmarl": "google-marl",
 	"libmegamime": "mime-mega",
-	"libnanotimer": "plf_nanotimer",
 	"libprocess": "subprocess",
 	"libpromise": "promise-cpp",
 	"libQuickJSpp": "QuickJS-C++-Wrapper",
@@ -236,7 +232,7 @@ const projectMap = {
 	"libjansson": "json-jansson",
 	"libjpeg-xl-benchmark": "jpeg-xl",
 	"libjpeg-xl-test": "jpeg-xl",
-	"libcxxtest_catch2_2_gtest": "/cxxtest_catch_2_gtest",
+	"libcxxtest_catch2_2_gtest": "cxxtest_catch_2_gtest",
 	"otl-ml": "OptimizationTemplateLibrary",
 	"manticore": "manticoresearch",
 	"libYAC": "YACLib",
@@ -284,10 +280,6 @@ const projectMap = {
 	"wxw-tests": "wxWidgets/tests",
 	"wxw-utils-helpview-client": "wxWidgets/utils/helpview",
 	"wxw-utils-mk-ctable": "wxWidgets/misc/unictabl",
-	"zmq_examples": "libzmq",
-	"zmq_tests": "libzmq",
-	"zmq_tools": "libzmq",
-	"libzlib_tests": "../zlib",
 };
 
 for (const key in projectMap) {
