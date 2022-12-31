@@ -46,6 +46,20 @@ console.error({projectName});
 
 const removeLinkTimeCodeGeneration = true;
 
+// collect the project's settings re Compiler Warnings being disabled: keep that set at least:
+function collect_warning_codes(src) {
+	let warnings = [];
+	let re = /<DisableSpecificWarnings>([^]*?)<\/DisableSpecificWarnings>/g;
+	let m = re.exec(src);
+	while (m) {
+		let wset = m[1].trim().split(';');
+		m = re.exec(src);
+		warnings.push(...wset);
+	}
+	return warnings;
+}
+let warnings = collect_warning_codes(src);
+
 src = src
 //    <ProjectName>libcurl</ProjectName>
 //    <RootNamespace>libcurl</RootNamespace>
@@ -319,19 +333,6 @@ src = src
 .replace(/<ItemDefinitionGroup>[\s\r\n]*<ClCompile>[\s\r\n]*<Optimization>[^<]*<\/Optimization>[\s\r\n]*<BasicRuntimeChecks>[^<]*<\/BasicRuntimeChecks>[\s\r\n]*<RuntimeLibrary>[^<]*<\/RuntimeLibrary>[\s\r\n]*<PrecompiledHeaderOutputFile>[^<]*<\/PrecompiledHeaderOutputFile>[\s\r\n]*<\/ClCompile>[\s\r\n]*<\/ItemDefinitionGroup>/g, '')
 .replace(/<ItemDefinitionGroup>[\s\r\n]*<ClCompile>[\s\r\n]*<Optimization>[^<]*<\/Optimization>[\s\r\n]*<BasicRuntimeChecks>[^<]*<\/BasicRuntimeChecks>[\s\r\n]*<RuntimeLibrary>[^<]*<\/RuntimeLibrary>[\s\r\n]*<\/ClCompile>[\s\r\n]*<\/ItemDefinitionGroup>/g, '')
 
-// collect the project's settings re Compiler Warnings being disabled: keep that set at least:
-function collect_warning_codes(src) {
-	let warnings = [];
-	let re = /<DisableSpecificWarnings>([^]*?)<\/DisableSpecificWarnings>/g;
-	let m = re.exec(src);
-	while (m) {
-		let wset = m[1].trim().split(';');
-		m = re.exec(src);
-		warnings.push(...wset);
-	}
-	return warnings;
-}
-let warnings = collect_warning_codes(src);
 warnings.push(...collect_warning_codes(compiler_settings));
 // and make sure the warnings are sorted and unique:
 warnings.sort();
