@@ -319,6 +319,33 @@ src = src
 .replace(/<ItemDefinitionGroup>[\s\r\n]*<ClCompile>[\s\r\n]*<Optimization>[^<]*<\/Optimization>[\s\r\n]*<BasicRuntimeChecks>[^<]*<\/BasicRuntimeChecks>[\s\r\n]*<RuntimeLibrary>[^<]*<\/RuntimeLibrary>[\s\r\n]*<PrecompiledHeaderOutputFile>[^<]*<\/PrecompiledHeaderOutputFile>[\s\r\n]*<\/ClCompile>[\s\r\n]*<\/ItemDefinitionGroup>/g, '')
 .replace(/<ItemDefinitionGroup>[\s\r\n]*<ClCompile>[\s\r\n]*<Optimization>[^<]*<\/Optimization>[\s\r\n]*<BasicRuntimeChecks>[^<]*<\/BasicRuntimeChecks>[\s\r\n]*<RuntimeLibrary>[^<]*<\/RuntimeLibrary>[\s\r\n]*<\/ClCompile>[\s\r\n]*<\/ItemDefinitionGroup>/g, '')
 
+// collect the project's settings re Compiler Warnings being disabled: keep that set at least:
+function collect_warning_codes(src) {
+	let warnings = [];
+	let re = /<DisableSpecificWarnings>([^]*?)<\/DisableSpecificWarnings>/g;
+	let m = re.exec(src);
+	while (m) {
+		let wset = m[1].trim().split(';');
+		m = re.exec(src);
+		warnings.push(...wset);
+	}
+	return warnings;
+}
+let warnings = collect_warning_codes(src);
+warnings.push(...collect_warning_codes(compiler_settings));
+// and make sure the warnings are sorted and unique:
+warnings.sort();
+warnings = warnings.filter(function flt(el, i, arr) {
+	if (!el.length)
+		return false;
+	if (i > 0 && arr[i-1] === el)
+		return false;
+	if (el[0] === '%')
+		return false;
+	return true;
+});
+compiler_settings = compiler_settings.replace(/<DisableSpecificWarnings>.*?<\/DisableSpecificWarnings>/, `<DisableSpecificWarnings>${ warnings.join(';') };%(DisableSpecificWarnings)</DisableSpecificWarnings>`);
+
 // prepend this common blob before all other blobs:
 src = src
 .replace(/<ItemDefinitionGroup/, (m) => {

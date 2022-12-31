@@ -655,19 +655,35 @@ sumatrapdf
 EOT
 )
 
-if false ; then 
+if [ -z "$1" ] ; then 
+	ARG="3"
+else
+	ARG="$1"
+fi
+
+
+if [[ "$ARG" =~ [1] ]] ; then 
 	for f in  $mylist  ; do
 	  mknewproj $f
 	done
 fi
 
-if false ; then
+if [[ "$ARG" =~ [2] ]] ; then
 	for f in  $myapplist  ; do
 	  mknewAPPproj $f
 	done
 fi
 
-for f in *.vcxproj ; do
-	echo "Updating $f..."
-	./update-vcxproj.sh $f
-done
+if [[ "$ARG" =~ [3] ]] ; then
+	for f in *.vcxproj ; do
+		echo "Updating $f..."
+		./update-vcxproj.sh $f
+	done
+fi
+
+if [[ "$ARG" =~ [4] ]] ; then
+	for f in *.vcxproj ; do
+		echo "Refilling $f..."
+		node ./refill-vcxproj.js $f
+	done
+fi
