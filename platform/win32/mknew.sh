@@ -27,6 +27,7 @@ mknewAPPproj() {
 mylist=$( 
 cat <<EOT
 
+A-MNS_TemplateMatching
 ApprovalTestsCpp
 BBHash
 BCF-cuckoo-index
@@ -36,6 +37,8 @@ BoxFort
 CHM-lib
 CImg
 CLBlast
+CRFpp
+CRFsuite-extended
 CRoaring
 CTCWordBeamSearch
 CTPL-Thread-Pool
@@ -45,6 +48,7 @@ CxImage
 Cysboard
 DBoW2
 DCF-cuckoo-index
+DGM-CRF
 ECMA262
 Extensible-Storage-Engine
 GMM-HMM-kMeans
@@ -53,6 +57,7 @@ GoldFish-CBOR
 HDiffPatch
 JabRef-Browser-Extension
 JabRef-abbreviations
+JamSpell
 LDCF-hash
 LightGBM
 LightLDA
@@ -153,12 +158,14 @@ cppzmq
 cpuinfo
 cpython
 createprocess-windows
+crfsuite
 crow
 cryptopp
 csv-parser
 csync2
 cuckoo-index
 cuckoofilter
+cxxtest
 cxxtest_catch_2_gtest
 date
 datetimepp
@@ -227,6 +234,7 @@ html2openxml
 htmlstreamparser
 http-parser
 hunspell
+hunspell-dictionarries
 hunspell-hyphen
 hyperscan
 hypertextcpp
@@ -234,6 +242,7 @@ iceoryx
 indicators
 infoware
 ion-c
+ipa-dict
 iresearch
 jasper
 jemalloc
@@ -392,6 +401,7 @@ nmslib
 notcurses
 npoi
 nsync
+nuspell
 ocreval
 oiio
 oneTBB
@@ -437,6 +447,7 @@ portable-snippets
 portable_concurrency-std-future
 preprocess-corpuses
 prio_queue
+probminhash
 promise-cpp
 promise-hpp
 proxygen
@@ -466,6 +477,7 @@ safestringlib
 salieri
 scantailor
 scintilla
+sdhash
 sentence-tokenizer
 sentencepiece
 shadesmar
@@ -514,8 +526,12 @@ taskflow
 tcp_pubsub
 tcpshm
 tensorflow
+tensorflow-docs
+tensorflow-io
+tensorflow-text
 tesseract-gImgRdrGui
 tesslinesplit
+textflowcpp
 thread-pool
 thread-pool-c
 thread-pool-cpp
@@ -534,6 +550,7 @@ tlx-btree
 toml11
 tomlpp
 tracelogging-for-ETW
+transwarp
 tre
 tsf
 tvision
@@ -550,7 +567,7 @@ unicode-icu
 universal-numbers
 unpaper
 upscaledb
-upskirt-markdown
+upskirt
 url
 userver
 utfcpp
@@ -565,6 +582,8 @@ wget
 wil-Win32-Interface-Library
 win32-dpi
 winflexbison
+word2vec
+word2vec-GloVe
 wxCharts
 wxExamples
 wxFormBuilder
