@@ -22,12 +22,17 @@ mknewAPPproj() {
   fi
 }
 
-
 delnewproj() {
   echo "delnewproj: $1"
   libname=$1
   rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
   libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
+  rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
+}
+
+delnewproj2() {
+  echo "delnewproj: $1"
+  libname=$1
   rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
 }
 
@@ -704,6 +709,17 @@ pmt-png-tools
 EOT
 )
 
+deletelist2=$(
+cat <<EOT
+
+libYACLib
+libnmslib
+libhnswlib
+libsafestringlib
+
+EOT
+)
+
 if [ -z "$1" ] ; then
 	ARG="3"
 else
@@ -726,6 +742,9 @@ fi
 if [[ "$ARG" =~ [12] ]] ; then
 	for f in  $deletelist  ; do
 	  delnewproj $f
+	done
+	for f in  $deletelist2  ; do
+	  delnewproj2 $f
 	done
 fi
 
