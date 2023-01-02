@@ -249,7 +249,7 @@
       <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Cx /Zi /Fo"$(IntDir)rdseed-x64.obj" "%(FullPath)"</Command>
       <Outputs>$(IntDir)\rdseed-x64.obj;%(Outputs)</Outputs>
     </CustomBuild>
-    <CustomBuild Condition="'$(Platform)'=='x64' AND ('$(Configuration)'=='Debug' Or '$(Configuration)'=='Release')" Include="..\..\thirdparty\owemdjee\cryptopp\x64dll.asm">
+    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptopp\x64dll.asm">
       <Message>Building and assembling x64dll.asm</Message>
       <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Zi /Fo"$(IntDir)x64dll.obj" "%(FullPath)"</Command>
       <Outputs>$(IntDir)x64dll.obj;%(Outputs)</Outputs>
@@ -681,10 +681,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/cryptopp/zdeflate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cryptopp/zinflate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cryptopp/zlib.h" />
-    <MASM Include="../../thirdparty/owemdjee/cryptopp/rdrand.asm" />
-    <MASM Include="../../thirdparty/owemdjee/cryptopp/rdseed.asm" />
-    <MASM Include="../../thirdparty/owemdjee/cryptopp/x64dll.asm" />
-    <MASM Include="../../thirdparty/owemdjee/cryptopp/x64masm.asm" />
     <ResourceCompile Include="../../thirdparty/owemdjee/cryptopp/cryptopp.rc" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/Filelist.txt" />
