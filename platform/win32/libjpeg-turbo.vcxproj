@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -303,12 +303,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdppm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdswitch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/rdtarga.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/aarch32/jccolext-neon.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/aarch32/jchuff-neon.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/aarch32/jsimd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/aarch64/jccolext-neon.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/aarch64/jchuff-neon.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/aarch64/jsimd.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\arm\aarch32\jccolext-neon32.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\arm\aarch32\jchuff-neon32.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\arm\aarch32\jsimd32.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\arm\aarch64\jccolext-neon64.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\arm\aarch64\jchuff-neon64.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\arm\aarch64\jsimd64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/jccolor-neon.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/jcgray-neon.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/jcgryext-neon.c" />
@@ -325,8 +325,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/jidctint-neon.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/jidctred-neon.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/jquanti-neon.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jsimd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips/jsimd.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jsimd_i386.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\mips\jsimd_mips.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jccolext-mmi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jccolor-mmi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jcgray-mmi.c" />
@@ -342,7 +342,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jidctfst-mmi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jidctint-mmi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jquanti-mmi.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jsimd.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\mips64\jsimd_mips64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jccolext-altivec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jccolor-altivec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jcgray-altivec.c" />
@@ -358,8 +358,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jidctfst-altivec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jidctint-altivec.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jquanti-altivec.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jsimd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jsimd.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\powerpc\jsimd_ppc.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jsimd_x64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/strtest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/tjbench.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/tjexample.c" />
@@ -635,8 +635,7 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/projectTargets-release.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/wizard.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
