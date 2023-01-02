@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,7 +124,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\thirdparty\owemdjee\sqlite\include;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/sqlite/ext/lsm1;../../thirdparty/owemdjee/sqlite/ext/fts5;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/sqlite/ext/fts3;../../thirdparty/owemdjee/sqlite/ext/rtree;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -150,7 +150,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\thirdparty\owemdjee\sqlite\include;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/sqlite/ext/lsm1;../../thirdparty/owemdjee/sqlite/ext/fts5;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/sqlite/ext/fts3;../../thirdparty/owemdjee/sqlite/ext/rtree;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;SQLITE_DEBUG;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -179,7 +179,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\thirdparty\owemdjee\sqlite\include;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/sqlite/ext/lsm1;../../thirdparty/owemdjee/sqlite/ext/fts5;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/sqlite/ext/fts3;../../thirdparty/owemdjee/sqlite/ext/rtree;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -205,7 +205,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\scripts\sqlite;..\..\thirdparty\owemdjee\sqlite\include;..\..\include;..\..\thirdparty\owemdjee\sqlite-amalgamation;..\..\thirdparty\owemdjee\sqlite;..\..\thirdparty\owemdjee\sqlite\src;..\..\thirdparty\owemdjee\pthread-win32;../../thirdparty/zlib;../../scripts/zlib;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/sqlite/ext/lsm1;../../thirdparty/owemdjee/sqlite/ext/fts5;../../thirdparty/owemdjee/unicode-icu/icu4c/source/common;../../thirdparty/owemdjee/unicode-icu/icu4c/source/i18n;../../thirdparty/owemdjee/sqlite/ext/fts3;../../thirdparty/owemdjee/sqlite/ext/rtree;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;_HAVE_SQLITE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;SQLITE_DEBUG;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -226,25 +226,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\scripts\sqlite\sqlite3_config.h" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/autoconf/tea/win/nmakehlp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/async/sqlite3async.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/expert/expert.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/expert/sqlite3expert.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/expert/test_expert.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts1/ft_hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fts1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fts1_hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fts1_porter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fts1_tokenizer1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fulltext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts1/simple_tokenizer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2_hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2_icu.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2_porter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2_tokenizer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2_tokenizer1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_aux.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_expr.c" />
@@ -253,7 +238,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_porter.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_snippet.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_term.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_tokenize_vtab.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_tokenizer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_tokenizer1.c" />
@@ -379,7 +363,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/repair/checkindex.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/rtree/geopoly.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/rtree/rtree.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/rtree/test_rtreedoc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/session/changeset.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/session/changesetfuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/session/session_speed_test.c" />
@@ -387,21 +370,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/session/sqlite3session.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/session/test_session.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/userauth/userauth.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-wasm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/wasm/c-pp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/ext/wasm/version-info.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/fts5.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/fts5parse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/lempar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/mptest/mptest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/opcodes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/parse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/shell.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/sqlite3-all.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/sqlite3.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/sqlite3_analyzer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/sqlite3_checker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/sqltclsh.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/alter.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/analyze.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/attach.c" />
@@ -458,7 +432,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/select.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/status.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/table.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/tclsqlite.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/test1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/test2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/src/test3.c" />
@@ -535,16 +508,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/atrc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/bc_test1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/crashtest1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/dbfuzz.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/dbfuzz2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/fuzzcheck.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/fuzzinvariants.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/kvtest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/optfuzz-db01.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/optfuzz.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/ossfuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/ossshell.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/sessionfuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/speedtest1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/startup.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/threadtest1.c" />
@@ -552,14 +517,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/threadtest3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/threadtest4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/threadtest5.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_bcwal2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_checkpoint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_core.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_index.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_lookaside1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_shared.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_stress.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/tt3_vacuum.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/vt02.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/test/wordcount.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/checkSpacing.c" />
@@ -568,11 +525,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/enlargedb.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/extract.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/fast_vacuum.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/fuzzershell.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/getlock.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/index_usage.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/lemon.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/lempar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/libvers.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/loadfts.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/logest.c" />
@@ -590,141 +545,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/showwal.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/speedtest16.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/speedtest8.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/speedtest8inst1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/sqldiff.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/srcck1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/stripccomments.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/tserver.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlite/tool/varint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/alter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/analyze.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/attach.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/auth.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/backup.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/bitvec.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/btmutex.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/btree.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/build.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/callback.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/complete.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/ctime.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/date.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/dbpage.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/dbstat.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/delete.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/expr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fault.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fkey.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts1_hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts1_porter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts1_tokenizer1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts2_hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts2_icu.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts2_porter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts2_tokenizer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts2_tokenizer1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_aux.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_expr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_icu.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_porter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_snippet.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_tokenize_vtab.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_tokenizer.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_tokenizer1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_unicode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_unicode2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts3_write.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/fts5.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/func.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/geopoly.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/global.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/icu.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/insert.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/json.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/legacy.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/loadext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/malloc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mem0.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mem1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mem2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mem3.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mem5.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/memdb.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/memjournal.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mutex.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mutex_noop.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mutex_unix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/mutex_w32.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/notify.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/opcodes.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/os.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/os_kv.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/os_unix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/os_win.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/pager.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/parse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/pcache.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/pcache1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/pragma.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/prepare.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/printf.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/random.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/resolve.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/rowset.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/rtree.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/select.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/shell.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/sqlite3rbu.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/sqlite3session.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/status.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/stmt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/table.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/tclsqlite.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/threads.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/tokenize.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/treeview.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/trigger.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/update.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/upsert.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/userauth.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/utf.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/util.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vacuum.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbe.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbeapi.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbeaux.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbeblob.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbemem.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbesort.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbetrace.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vdbevtab.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/vtab.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/wal.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/walker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/where.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/wherecode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/whereexpr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/tsrc/window.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/vsixtest/App.xaml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/vsixtest/MainPage.xaml.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite/vsixtest/pch.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/async/sqlite3async.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/expert/sqlite3expert.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts1/ft_hash.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fts1.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fts1_hash.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fts1_tokenizer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts1/fulltext.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts1/tokenizer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2_hash.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts2/fts2_tokenizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3Int.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/fts3/fts3_hash.h" />
@@ -744,7 +571,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/session/sqlite3changebatch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/session/sqlite3session.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/userauth/sqlite3userauth.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-wasi.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/fts5.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/fts5parse.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/keywordhash.h" />
@@ -1050,8 +876,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/tsrc/shell.c.in" />
     <Text Include="../../thirdparty/owemdjee/sqlite/vsixtest/vsixtest.tcl" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
