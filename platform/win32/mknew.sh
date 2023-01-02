@@ -716,6 +716,7 @@ libYACLib
 libnmslib
 libhnswlib
 libsafestringlib
+libCacheLib
 
 EOT
 )
