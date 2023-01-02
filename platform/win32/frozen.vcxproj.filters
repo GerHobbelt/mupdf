@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -12,28 +12,41 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\examples">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Header Files\include">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\include\frozen">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\include\frozen">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\include\frozen\bits">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Misc Files\benchmarks">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\examples">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\include">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\include\frozen">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\benchmarks">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\examples">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +54,9 @@
       <Filter>Source Files\benchmarks</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/frozen/benchmarks/bench_main.cpp">
+      <Filter>Source Files\benchmarks</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/frozen/benchmarks/bench_str_map.cpp">
       <Filter>Source Files\benchmarks</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/frozen/benchmarks/bench_str_search.cpp">
@@ -71,6 +87,9 @@
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_algorithms.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_elsa_std.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/frozen/tests/test_main.cpp">
@@ -121,13 +140,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/elsa.h">
       <Filter>Header Files\include\frozen\bits</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/elsa_std.h">
+      <Filter>Header Files\include\frozen\bits</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/exceptions.h">
       <Filter>Header Files\include\frozen\bits</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/pmh.h">
+    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/hash_string.h">
       <Filter>Header Files\include\frozen\bits</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/type_traits.h">
+    <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/pmh.h">
       <Filter>Header Files\include\frozen\bits</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/frozen/include/frozen/bits/version.h">
@@ -157,16 +179,24 @@
     <ClInclude Include="../../thirdparty/owemdjee/frozen/tests/catch.hpp">
       <Filter>Header Files\tests</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\frozen\AUTHORS">
+    <Text Include="../../thirdparty/owemdjee/frozen/CMakeLists.txt">
       <Filter>Misc Files</Filter>
-    </None>
-    <None Include="..\..\thirdparty\owemdjee\frozen\LICENSE">
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/frozen/README.rst">
       <Filter>Misc Files</Filter>
-    </None>
-    <None Include="..\..\thirdparty\owemdjee\frozen\README.rst">
-      <Filter>Misc Files</Filter>
-    </None>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/frozen/benchmarks/CMakeLists.txt">
+      <Filter>Misc Files\benchmarks</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/frozen/examples/CMakeLists.txt">
+      <Filter>Misc Files\examples</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/frozen/include/frozen/CMakeLists.txt">
+      <Filter>Misc Files\include\frozen</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/frozen/tests/CMakeLists.txt">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>
+    

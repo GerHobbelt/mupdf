@@ -1,0 +1,1535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>asio_examples</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBAE096}</ProjectGuid>
+    <RootNamespace>asio_examples</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_WIN32_WINNT=0x0603;ASIO_SEPARATE_COMPILATION;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_WIN32_WINNT=0x0603;ASIO_SEPARATE_COMPILATION;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_WIN32_WINNT=0x0603;ASIO_SEPARATE_COMPILATION;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_WIN32_WINNT=0x0603;ASIO_SEPARATE_COMPILATION;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_ASIO_EXAMPLES;ASIO_EXAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libasio.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa26b05}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/asio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/asio_ssl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/allocation/server00.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/buffers/reference_counted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/chat/chat_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/chat/chat_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/chat/posix_chat_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/echo/async_tcp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/echo/async_udp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/echo/blocking_tcp_echo_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/echo/blocking_tcp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/echo/blocking_udp_echo_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/echo/blocking_udp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/fork/daemon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/fork/process_per_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/client/async_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/client/sync_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/connection_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/mime_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/reply.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/request_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/request_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/server01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/io_context_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/mime_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/reply.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/request_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/request_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/server02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/mime_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/reply.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/request_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/request_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/server03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/file_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/mime_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/reply.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/request_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/server04.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/icmp/ping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/invocation/prioritised_handlers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/iostreams/daytime_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/iostreams/daytime_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/iostreams/http_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/local/connect_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/local/iostream_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/local/stream_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/local/stream_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/multicast/receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/multicast/sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/nonblocking/third_party_lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/porthopper/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/porthopper/hop_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/serialization/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/serialization/serialize_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/services/daytime_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/services/logger_service.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/socks4/sync_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/spawn/echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/spawn/parallel_grep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/ssl/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/ssl/ssl_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/async_tcp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/blocking_tcp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/blocking_token_tcp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/blocking_udp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timeouts/timeout_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/timers/time_t_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime1/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime2/dt2_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime3/dt3_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime4/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime5/dt5_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime6/dt6_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime7/dt7_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer1/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer2/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer3/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer4/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer5/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/windows/transmit_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/allocation/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/buffers/reference_counted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/chat/chat_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/chat/chat_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/deferred/deferred_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/deferred/deferred_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/echo/async_tcp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/echo/async_udp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/echo/blocking_tcp_echo_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/echo/blocking_tcp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/echo/blocking_udp_echo_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/echo/blocking_udp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/executors/actor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/executors/bank_account_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/executors/bank_account_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/executors/fork_join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/executors/pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/executors/priority_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/files/async_file_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/files/blocking_file_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/fork/daemon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/fork/process_per_connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/futures/daytime_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/handler_tracking/async_tcp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/connection_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/mime_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/reply.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/request_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/request_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/invocation/prioritised_handlers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/iostreams/http_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/local/connect_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/local/fd_passing_stream_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/local/fd_passing_stream_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/local/iostream_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/local/stream_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/local/stream_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/multicast/receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/multicast/sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/nonblocking/third_party_lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/operations/composed_8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/ranged_wait_for_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/wait_for_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/wait_for_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/wait_for_one_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/parallel_group/wait_for_one_success.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/socks4/sync_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/spawn/echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/spawn/parallel_grep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/ssl/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/ssl/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timeouts/async_tcp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timeouts/blocking_tcp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timeouts/blocking_token_tcp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timeouts/blocking_udp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timeouts/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/timers/time_t_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/stdin_line_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/deferred/deferred_7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/echo/async_tcp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/echo/async_udp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/echo/blocking_tcp_echo_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/echo/blocking_tcp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/echo/blocking_udp_echo_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/echo/blocking_udp_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/actor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/async_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/async_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/bank_account_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/bank_account_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/fork_join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/executors/priority_scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/iostreams/http_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/c_callback_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/callback_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/operations/composed_8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/parallel_sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/ranged_wait_for_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/wait_for_all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/wait_for_one.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/wait_for_one_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/parallel_group/wait_for_one_success.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/chat_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/echo_server_with_as_single_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/echo_server_with_as_tuple_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/echo_server_with_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/range_based_for.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/coroutines_ts/refactored_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/channels/throttling_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/chat_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_as_single_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_as_tuple_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_deferred.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/echo_server_with_deferred_default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/refactored_echo_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/coroutines/timeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/c_callback_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/callback_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/operations/composed_8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/stdin_line_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/tcp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/tcp_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/udp_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/udp_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/performance/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/performance/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_applicable_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_applicable_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_applicable_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_applicable_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_preferable_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_preferable_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_preferable_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_preferable_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_preferable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_not_preferable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_prefer_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_query_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_concept_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/can_require_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/prefer_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/prefer_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/prefer_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/prefer_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/prefer_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/prefer_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/query_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/query_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/query_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/require_concept_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/require_concept_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/require_concept_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/require_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/require_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp03/require_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_applicable_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_applicable_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_applicable_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_applicable_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_preferable_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_preferable_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_preferable_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_preferable_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_preferable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_not_preferable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_prefer_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_query_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_concept_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/can_require_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/prefer_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/prefer_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/prefer_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/prefer_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/prefer_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/prefer_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/query_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/query_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/query_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/require_concept_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/require_concept_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/require_concept_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/require_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/require_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp11/require_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_applicable_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_applicable_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_applicable_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_applicable_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_preferable_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_preferable_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_preferable_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_preferable_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_preferable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_not_preferable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_prefer_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_query_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_concept_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_not_applicable_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_not_applicable_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_not_applicable_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_not_applicable_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/can_require_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/prefer_free_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/prefer_free_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/prefer_member_prefer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/prefer_member_require.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/prefer_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/prefer_unsupported.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/query_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/query_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/query_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/require_concept_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/require_concept_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/require_concept_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/require_free.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/require_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/cpp14/require_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/append.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/as_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/associated_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/associated_cancellation_slot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/associated_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/associator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/async_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/awaitable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_datagram_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_deadline_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_random_access_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_raw_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_readable_pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_seq_packet_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_serial_port.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_signal_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_socket_acceptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_stream_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_stream_socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_streambuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_waitable_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/basic_writable_pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/bind_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/bind_cancellation_slot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/bind_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/buffer_registration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/buffered_read_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/buffered_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/buffered_write_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/buffers_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/cancellation_signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/cancellation_state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/cancellation_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/co_spawn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/completion_condition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/compose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/connect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/connect_pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/consign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/coroutine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/deadline_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/defer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/deferred.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/detached.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/dispatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/any_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/blocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/blocking_adaptation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/bulk_execute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/bulk_guarantee.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/connect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/context_as.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/execute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/invocable_archetype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/mapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/operation_state.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/outstanding_work.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/prefer_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/relationship.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/schedule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/set_done.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/set_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/set_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/start.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution/submit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/execution_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/executor_work_guard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/awaitable_operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/basic_channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/basic_concurrent_channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/channel_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/co_composed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/concurrent_channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/cancel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/co_spawn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/partial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/simple_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/stack_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/coro/use_coro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/experimental/promise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/file_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/generic/basic_endpoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/generic/datagram_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/generic/raw_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/generic/seq_packet_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/generic/stream_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/high_resolution_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/io_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/io_context_strand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/address_v4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/address_v4_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/address_v4_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/address_v6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/address_v6_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/address_v6_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/basic_endpoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/basic_resolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/basic_resolver_entry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/basic_resolver_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/basic_resolver_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/host_name.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/icmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/multicast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/network_v4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/network_v6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/resolver_query_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/tcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/udp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/unicast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ip/v6_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/is_read_buffered.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/is_write_buffered.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/local/basic_endpoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/local/connect_pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/local/datagram_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/local/stream_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/packaged_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/placeholders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/posix/basic_descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/posix/basic_stream_descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/posix/descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/posix/descriptor_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/posix/stream_descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/post.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/prepend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/random_access_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/read.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/read_at.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/read_until.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/readable_pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/recycling_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/redirect_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/registered_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/serial_port.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/serial_port_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/signal_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/socket_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ssl/context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ssl/context_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ssl/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ssl/host_name_verification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ssl/rfc2818_verification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ssl/stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ssl/stream_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/static_thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/steady_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/strand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/stream_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/streambuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/system_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/system_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/system_timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/this_coro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/time_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/internet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/io_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/netfwd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/socket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/ts/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/use_awaitable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/use_future.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/uses_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/wait_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/basic_object_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/basic_overlapped_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/basic_random_access_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/basic_stream_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/object_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/overlapped_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/overlapped_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/random_access_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/windows/stream_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/writable_pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/write_at.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/any_completion_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/any_completion_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/any_io_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/append.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/as_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_cancellation_slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/async_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_datagram_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_deadline_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_io_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_random_access_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_raw_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_readable_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_seq_packet_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_serial_port.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_signal_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_socket_acceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_socket_iostream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_socket_streambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_stream_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_stream_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_streambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_streambuf_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_waitable_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/basic_writable_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_cancellation_slot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffer_registration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffered_read_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffered_read_stream_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffered_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffered_stream_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffered_write_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffered_write_stream_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffers_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/cancellation_signal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/cancellation_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/cancellation_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/co_spawn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/completion_condition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/compose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/connect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/connect_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/consign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/coroutine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/deadline_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/deferred.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detached.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/array_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/atomic_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/base_from_cancellation_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/base_from_completion_cond.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/bind_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/blocking_executor_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/buffer_resize_guard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/buffer_sequence_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/buffered_stream_storage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/bulk_executor_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/call_stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/chrono.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/chrono_time_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/completion_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/composed_work.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/concurrency_hint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/conditionally_enabled_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/conditionally_enabled_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/consuming_buffers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/cstddef.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/cstdint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/date_time_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/deadline_timer_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/dependent_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/descriptor_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/descriptor_read_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/descriptor_write_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/dev_poll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/epoll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/eventfd_select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/executor_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/executor_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/fd_set_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/future.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/gcc_arm_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/gcc_hppa_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/gcc_sync_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/gcc_x86_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/global.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/handler_alloc_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/handler_cont_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/handler_invoke_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/handler_tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/handler_type_requirements.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/handler_work.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/hash_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/dev_poll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/epoll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/io_uring_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/kqueue_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/select_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/service_registry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/strand_executor_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/strand_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/win_iocp_io_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/winrt_timer_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_control.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_object_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_descriptor_read_at_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_descriptor_read_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_descriptor_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_descriptor_write_at_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_descriptor_write_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_file_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_null_buffers_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_accept_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_connect_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_recv_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_recvfrom_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_recvmsg_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_sendto_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_socket_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_wait_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/is_buffer_sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/is_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/keyword_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/kqueue_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/local_free_on_block_exit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/macos_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/non_const_lvalue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/noncopyable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_global.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_signal_blocker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/null_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/object_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/old_win_sdk_compat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/op_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/pipe_select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/pop_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_fd_set_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_global.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_serial_port_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_signal_blocker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/posix_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/push_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_descriptor_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_null_buffers_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_accept_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_connect_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_recv_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_recvfrom_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_recvmsg_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_sendto_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_socket_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactive_wait_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactor_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/reactor_op_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/recycling_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/regex_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/resolve_endpoint_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/resolve_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/resolve_query_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/resolver_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/resolver_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/scheduler_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/scheduler_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/scheduler_thread_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/scoped_lock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/scoped_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/select_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/service_registry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/signal_blocker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/signal_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/signal_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/signal_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/signal_set_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/socket_holder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/socket_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/socket_option.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/socket_select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/socket_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/solaris_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/source_location.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/std_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/std_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/std_global.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/std_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/std_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/std_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/strand_executor_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/strand_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/thread_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/thread_group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/thread_info_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/throw_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/throw_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/timer_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/timer_queue_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/timer_queue_ptime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/timer_queue_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/timer_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/timer_scheduler_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/variadic_templates.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/wait_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/wait_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_fd_set_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_global.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_file_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_handle_read_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_handle_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_handle_write_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_io_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_null_buffers_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_overlapped_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_overlapped_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_serial_port_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_accept_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_connect_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_recv_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_recvfrom_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_recvmsg_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_socket_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_thread_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_iocp_wait_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_object_handle_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/win_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winapp_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/wince_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_async_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_async_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_resolve_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_resolver_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_socket_connect_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_socket_recv_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_socket_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_ssocket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_ssocket_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_timer_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winrt_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/winsock_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/work_dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/wrapped_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/dispatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/error_code.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/any_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/bad_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/blocking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/blocking_adaptation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/bulk_execute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/bulk_guarantee.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/connect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/context_as.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/detail/as_invocable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/detail/as_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/detail/as_receiver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/detail/bulk_sender.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/detail/submit_receiver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/detail/void_receiver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/execute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/invocable_archetype.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/mapping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/occupancy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/operation_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/outstanding_work.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/prefer_only.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/receiver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/receiver_invocation_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/relationship.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/schedule.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/sender.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/set_done.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/set_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/set_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/start.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution/submit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/execution_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/executor_work_guard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/append.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/as_single.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/as_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/awaitable_operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/basic_channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/basic_concurrent_channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/cancellation_condition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/channel_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/channel_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/co_composed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/co_spawn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/concurrent_channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/coro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/coro_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/deferred.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_message.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_payload.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_receive_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_send_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/channel_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/coro_completion_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/coro_promise_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/has_signature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/impl/channel_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/detail/partial_promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/as_single.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/co_composed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/coro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/parallel_group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/use_coro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/impl/use_promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/parallel_group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/prepend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/use_coro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/experimental/use_promise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/file_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/datagram_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/detail/endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/raw_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/seq_packet_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/generic/stream_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/handler_alloc_hook.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/handler_continuation_hook.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/handler_invoke_hook.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/high_resolution_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/append.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/as_tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/buffered_read_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/buffered_write_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/co_spawn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/connect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/connect_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/consign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/deferred.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/detached.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/dispatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/execution_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/io_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/post.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/prepend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/read_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/read_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/redirect_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/serial_port_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/spawn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/src.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/system_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/system_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/use_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/use_future.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/write_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/io_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/io_context_strand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/io_service_strand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/address_v4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/address_v4_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/address_v4_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/address_v6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/address_v6_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/address_v6_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/bad_address_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/basic_resolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/basic_resolver_entry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/basic_resolver_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/basic_resolver_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/basic_resolver_results.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/detail/endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/detail/socket_option.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/host_name.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/icmp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/impl/address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/impl/address_v4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/impl/address_v6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/impl/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/impl/network_v4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/impl/network_v6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/multicast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/network_v4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/network_v6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/resolver_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/resolver_query_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/tcp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/udp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/unicast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ip/v6_only.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/is_applicable_property.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/is_contiguous_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/is_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/is_read_buffered.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/is_write_buffered.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/connect_pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/datagram_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/detail/endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/stream_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/multiple_exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/packaged_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/placeholders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/posix/basic_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/posix/basic_stream_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/posix/descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/posix/descriptor_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/posix/stream_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/post.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/prefer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/prepend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/random_access_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/read_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/read_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/readable_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/recycling_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/redirect_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/registered_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/require.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/require_concept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/serial_port.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/serial_port_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/signal_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/socket_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/spawn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/context_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/buffered_handshake_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/handshake_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/openssl_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/openssl_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/password_callback.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/read_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/shutdown_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/stream_core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/verify_callback.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/detail/write_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/host_name_verification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/impl/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/impl/src.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/rfc2818_verification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/stream_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/verify_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ssl/verify_mode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/static_thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/steady_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/strand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/stream_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/streambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/system_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/system_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/system_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/system_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/this_coro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/time_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/bulk_execute_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/bulk_execute_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/connect_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/connect_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/equality_comparable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/execute_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/execute_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/prefer_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/prefer_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/query_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/query_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/query_static_constexpr_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/require_concept_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/require_concept_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/require_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/require_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/schedule_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/schedule_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/set_done_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/set_done_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/set_error_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/set_error_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/set_value_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/set_value_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/start_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/start_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/static_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/static_require.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/static_require_concept.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/submit_free.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/traits/submit_member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/internet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/io_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/net.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/netfwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/ts/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/unyield.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/use_awaitable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/use_future.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/uses_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/wait_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/basic_object_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/basic_overlapped_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/basic_random_access_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/basic_stream_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/object_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/overlapped_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/overlapped_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/random_access_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/windows/stream_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/writable_pipe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/write_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/yield.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/chat/chat_message.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/connection_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/mime_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/reply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/request_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/request_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server/server.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/io_context_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/mime_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/reply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/request_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/request_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server2/server.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/mime_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/reply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/request_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/request_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server3/server.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/file_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/mime_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/reply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/request_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/http/server4/server.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/icmp/icmp_header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/icmp/ipv4_header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/porthopper/protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/serialization/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/serialization/stock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/services/basic_logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/services/logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/services/logger_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/socks4/socks4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/chat/chat_message.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/handler_tracking/custom_tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/connection_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/header.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/mime_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/reply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/request.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/request_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/request_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/http/server/server.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/socks4/socks4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/line_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/sleep.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/type_erasure/stdin_line_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/line_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/sleep.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/type_erasure/stdin_line_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/latency/high_res_clock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/performance/handler_allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/archetypes/async_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/archetypes/async_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/archetypes/gettable_socket_option.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/archetypes/io_control_command.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/archetypes/settable_socket_option.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/src/tests/unit/unit_test.hpp" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/asio.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/async_op1.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/async_op2.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/async_agent_chain.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/async_agent_model.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/async_child_agent_chain.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/async_op_init_complete.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/async_op_model.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/async_op_phases.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/async_op_trivial_chain.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/completion_token_model.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/completion_token_transform.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/model/higher_level_model.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/proactor.png" />
+    <Image Include="../../thirdparty/owemdjee/asio/asio/src/doc/overview/sync_op.png" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/asio.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/doc/boost_bind_dox.txt" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/doc/noncopyable_dox.txt" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/doc/std_exception_dox.txt" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/daytime_dox.txt" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/index_dox.txt" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp03/tutorial/timer_dox.txt" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp11/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp14/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp17/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/examples/cpp20/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/tests/properties/Makefile.msc" />
+    <Xml Include="../../thirdparty/owemdjee/asio/asio/src/doc/index.xml" />
+    <Xml Include="../../thirdparty/owemdjee/asio/asio/src/doc/quickref.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

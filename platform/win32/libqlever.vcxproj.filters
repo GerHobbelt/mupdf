@@ -51,19 +51,19 @@
     <Filter Include="Header Files\src\util\CompressionUsingZstd">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\util\HttpServer">
+    <Filter Include="Header Files\src\util\Serializer">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\util\HttpServer\HttpParser">
+    <Filter Include="Header Files\src\util\antlr">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\util\HttpServer\HttpParser\generated">
+    <Filter Include="Header Files\src\util\http">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\util\Serializer">
+    <Filter Include="Header Files\src\util\http\HttpParser">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\util\antlr">
+    <Filter Include="Header Files\src\util\http\HttpParser\generated">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\test">
@@ -135,10 +135,10 @@
     <Filter Include="Misc Files\src\util">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0041}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src\util\HttpServer">
+    <Filter Include="Misc Files\src\util\http">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0042}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src\util\HttpServer\HttpParser">
+    <Filter Include="Misc Files\src\util\http\HttpParser">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0043}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\src\web">
@@ -177,16 +177,16 @@
     <Filter Include="Source Files\src\util">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0055}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\util\HttpServer">
+    <Filter Include="Source Files\src\util\antlr">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0056}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\util\HttpServer\HttpParser">
+    <Filter Include="Source Files\src\util\http">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0057}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\util\HttpServer\HttpParser\generated">
+    <Filter Include="Source Files\src\util\http\HttpParser">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0058}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\util\antlr">
+    <Filter Include="Source Files\src\util\http\HttpParser\generated">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0059}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\test">
@@ -231,6 +231,9 @@
       <Filter>Source Files\src\engine</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/Join.cpp">
+      <Filter>Source Files\src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/LocalVocab.cpp">
       <Filter>Source Files\src\engine</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/Minus.cpp">
@@ -287,7 +290,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/Values.cpp">
       <Filter>Source Files\src\engine</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/VariableToColumnMap.cpp">
+      <Filter>Source Files\src\engine</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/AggregateExpression.cpp">
+      <Filter>Source Files\src\engine\sparqlExpressions</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/LangExpression.cpp">
       <Filter>Source Files\src\engine\sparqlExpressions</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/NaryExpression.cpp">
@@ -386,9 +395,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/SelectClause.cpp">
       <Filter>Source Files\src\parser</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlLexer.cpp">
-      <Filter>Source Files\src\parser</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlParser.cpp">
       <Filter>Source Files\src\parser</Filter>
     </ClCompile>
@@ -396,6 +402,9 @@
       <Filter>Source Files\src\parser</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/Tokenizer.cpp">
+      <Filter>Source Files\src\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/TripleComponent.cpp">
       <Filter>Source Files\src\parser</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/parser/TurtleParser.cpp">
@@ -443,35 +452,41 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/GeoSparqlHelpers.cpp">
       <Filter>Source Files\src\util</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/AcceptHeaderQleverVisitor.cpp">
-      <Filter>Source Files\src\util\HttpServer\HttpParser</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderBaseListener.cpp">
-      <Filter>Source Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderBaseVisitor.cpp">
-      <Filter>Source Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderLexer.cpp">
-      <Filter>Source Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderListener.cpp">
-      <Filter>Source Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderParser.cpp">
-      <Filter>Source Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderVisitor.cpp">
-      <Filter>Source Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/MediaTypes.cpp">
-      <Filter>Source Files\src\util\HttpServer</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/UrlParser.cpp">
-      <Filter>Source Files\src\util\HttpServer</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/antlr/ANTLRErrorHandling.cpp">
       <Filter>Source Files\src\util\antlr</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpClient.cpp">
+      <Filter>Source Files\src\util\http</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/AcceptHeaderQleverVisitor.cpp">
+      <Filter>Source Files\src\util\http\HttpParser</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderBaseListener.cpp">
+      <Filter>Source Files\src\util\http\HttpParser\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderBaseVisitor.cpp">
+      <Filter>Source Files\src\util\http\HttpParser\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderLexer.cpp">
+      <Filter>Source Files\src\util\http\HttpParser\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderListener.cpp">
+      <Filter>Source Files\src\util\http\HttpParser\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderParser.cpp">
+      <Filter>Source Files\src\util\http\HttpParser\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderVisitor.cpp">
+      <Filter>Source Files\src\util\http\HttpParser\generated</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpUtils.cpp">
+      <Filter>Source Files\src\util\http</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/MediaTypes.cpp">
+      <Filter>Source Files\src\util\http</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/src/util/http/UrlParser.cpp">
+      <Filter>Source Files\src\util\http</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/AcceptHeaderTest.cpp">
       <Filter>Source Files\test</Filter>
@@ -494,6 +509,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/CacheTest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/CallFixedSizeTest.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/CheckUsePatternTrickTest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
@@ -510,6 +528,9 @@
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ConcurrentCacheTest.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ConstexprUtilsTest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/ContentEncodingHelperTest.cpp">
@@ -551,6 +572,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/HashSetTest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/HttpTest.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/HttpUtilsTest.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/IdTableTest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
@@ -567,6 +594,9 @@
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/LimitedAllocatorTest.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/LocalVocabTest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/MilestoneIdTest.cpp">
@@ -633,9 +663,6 @@
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/SparqlExpressionTest.cpp">
-      <Filter>Source Files\test</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/qlever/test/SparqlLexerTest.cpp">
       <Filter>Source Files\test</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/qlever/test/SparqlParserTest.cpp">
@@ -761,6 +788,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Join.h">
       <Filter>Header Files\src\engine</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/LocalVocab.h">
+      <Filter>Header Files\src\engine</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Minus.h">
       <Filter>Header Files\src\engine</Filter>
     </ClInclude>
@@ -824,10 +854,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/Values.h">
       <Filter>Header Files\src\engine</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/VariableToColumnMap.h">
+      <Filter>Header Files\src\engine</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/AggregateExpression.h">
       <Filter>Header Files\src\engine\sparqlExpressions</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/GroupConcatExpression.h">
+      <Filter>Header Files\src\engine\sparqlExpressions</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/LangExpression.h">
       <Filter>Header Files\src\engine\sparqlExpressions</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/engine/sparqlExpressions/LiteralExpression.h">
@@ -1004,9 +1040,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/SelectClause.h">
       <Filter>Header Files\src\parser</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlLexer.h">
-      <Filter>Header Files\src\parser</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/parser/SparqlParser.h">
       <Filter>Header Files\src\parser</Filter>
     </ClInclude>
@@ -1133,6 +1166,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/ConstexprSmallString.h">
       <Filter>Header Files\src\util</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/ConstexprUtils.h">
+      <Filter>Header Files\src\util</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Conversions.h">
       <Filter>Header Files\src\util</Filter>
     </ClInclude>
@@ -1140,6 +1176,9 @@
       <Filter>Header Files\src\util</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Date.h">
+      <Filter>Header Files\src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/DisableWarningsClang13.h">
       <Filter>Header Files\src\util</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Exception.h">
@@ -1162,48 +1201,6 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HashSet.h">
       <Filter>Header Files\src\util</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/ContentEncodingHelper.h">
-      <Filter>Header Files\src\util\HttpServer</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/AcceptHeaderQleverVisitor.h">
-      <Filter>Header Files\src\util\HttpServer\HttpParser</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderBaseListener.h">
-      <Filter>Header Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderBaseVisitor.h">
-      <Filter>Header Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderLexer.h">
-      <Filter>Header Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderListener.h">
-      <Filter>Header Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderParser.h">
-      <Filter>Header Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/generated/AcceptHeaderVisitor.h">
-      <Filter>Header Files\src\util\HttpServer\HttpParser\generated</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpServer.h">
-      <Filter>Header Files\src\util\HttpServer</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpUtils.h">
-      <Filter>Header Files\src\util\HttpServer</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/MediaTypes.h">
-      <Filter>Header Files\src\util\HttpServer</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/UrlParser.h">
-      <Filter>Header Files\src\util\HttpServer</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/beast.h">
-      <Filter>Header Files\src\util\HttpServer</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/streamable_body.h">
-      <Filter>Header Files\src\util\HttpServer</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/Iterators.h">
       <Filter>Header Files\src\util</Filter>
@@ -1312,6 +1309,51 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/antlr/ANTLRErrorHandling.h">
       <Filter>Header Files\src\util\antlr</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/ContentEncodingHelper.h">
+      <Filter>Header Files\src\util\http</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpClient.h">
+      <Filter>Header Files\src\util\http</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/AcceptHeaderQleverVisitor.h">
+      <Filter>Header Files\src\util\http\HttpParser</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderBaseListener.h">
+      <Filter>Header Files\src\util\http\HttpParser\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderBaseVisitor.h">
+      <Filter>Header Files\src\util\http\HttpParser\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderLexer.h">
+      <Filter>Header Files\src\util\http\HttpParser\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderListener.h">
+      <Filter>Header Files\src\util\http\HttpParser\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderParser.h">
+      <Filter>Header Files\src\util\http\HttpParser\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/generated/AcceptHeaderVisitor.h">
+      <Filter>Header Files\src\util\http\HttpParser\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpServer.h">
+      <Filter>Header Files\src\util\http</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpUtils.h">
+      <Filter>Header Files\src\util\http</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/MediaTypes.h">
+      <Filter>Header Files\src\util\http</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/UrlParser.h">
+      <Filter>Header Files\src\util\http</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/beast.h">
+      <Filter>Header Files\src\util\http</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/http/streamable_body.h">
+      <Filter>Header Files\src\util\http</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/qlever/src/util/json.h">
       <Filter>Header Files\src\util</Filter>
@@ -1559,20 +1601,17 @@
     <Text Include="../../thirdparty/owemdjee/qlever/src/parser/sparqlParser/CMakeLists.txt">
       <Filter>Misc Files\src\parser\sparqlParser</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/qlever/src/parser/sparqlParser/generated/CMakeLists.txt">
-      <Filter>Misc Files\src\parser\sparqlParser\generated</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/qlever/src/parser/sparqlParser/generated/README.md">
       <Filter>Misc Files\src\parser\sparqlParser\generated</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/qlever/src/util/CMakeLists.txt">
       <Filter>Misc Files\src\util</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/CMakeLists.txt">
-      <Filter>Misc Files\src\util\HttpServer</Filter>
+    <Text Include="../../thirdparty/owemdjee/qlever/src/util/http/CMakeLists.txt">
+      <Filter>Misc Files\src\util\http</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/qlever/src/util/HttpServer/HttpParser/CMakeLists.txt">
-      <Filter>Misc Files\src\util\HttpServer\HttpParser</Filter>
+    <Text Include="../../thirdparty/owemdjee/qlever/src/util/http/HttpParser/CMakeLists.txt">
+      <Filter>Misc Files\src\util\http\HttpParser</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/qlever/src/web/script.js">
       <Filter>Misc Files\src\web</Filter>

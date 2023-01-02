@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -13,30 +13,49 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Header Files\src\sljit">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\src\wx">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\doc">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\doc\html">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Misc Files\cmake">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\doc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\doc\html">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\maint">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\maint\Unicode.tables">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\maint">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\src\sljit">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/maint/ucptest.c">
+      <Filter>Source Files\maint</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/maint/utf8.c">
+      <Filter>Source Files\maint</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_auto_possess.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -70,15 +89,21 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_find_bracket.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_fuzzsupport.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_compile.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_match.c">
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_match.c">
       <Filter>Source Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_misc.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_misc.c">
       <Filter>Source Files\src</Filter>
-    </ClInclude>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_jit_test.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_maketables.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -124,71 +149,92 @@
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_ucd.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_ucptables.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_valid_utf.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2_xclass.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitExecAllocator.c">
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2demo.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2grep.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2posix.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/pcre2test.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitExecAllocator.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitLir.c">
       <Filter>Source Files\src\sljit</Filter>
     </ClCompile>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_32.c">
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_32.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_64.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_64.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_T2_32.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeARM_T2_32.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_32.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_32.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_64.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_64.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_common.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeMIPS_common.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_32.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_32.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_64.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_64.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_common.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativePPC_common.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeS390X.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeRISCV_32.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeSPARC_32.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeRISCV_64.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeSPARC_common.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeRISCV_common.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_32.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeS390X.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_64.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_32.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_common.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_64.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitProtExecAllocator.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitNativeX86_common.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitUtils.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitProtExecAllocator.c">
       <Filter>Source Files\src\sljit</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitWXExecAllocator.c">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitUtils.c">
       <Filter>Source Files\src\sljit</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/pcre/src/sljit/sljitWXExecAllocator.c">
+      <Filter>Source Files\src\sljit</Filter>
+    </ClCompile>
+    <ClInclude Include="../../thirdparty/owemdjee/pcre/src/monolithic_examples.h">
+      <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/pcre2_internal.h">
       <Filter>Header Files\src</Filter>
@@ -223,11 +269,144 @@
     <ClInclude Include="../../thirdparty/owemdjee/pcre/src/wx/pcre2.h">
       <Filter>Header Files\src\wx</Filter>
     </ClInclude>
+    <Text Include="../../thirdparty/owemdjee/pcre/CMakeLists.txt">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/Makefile.am">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/Makefile.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/README-WX.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/README.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/RunGrepTest.bat">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/RunTest.bat">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/autogen.sh">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/cmake/pcre2-config-version.cmake.in">
+      <Filter>Misc Files\cmake</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/cmake/pcre2-config.cmake.in">
+      <Filter>Misc Files\cmake</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/config-cmake.h.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/configure.ac">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/doc/html/NON-AUTOTOOLS-BUILD.txt">
+      <Filter>Misc Files\doc\html</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/pcre/doc/html/README.txt">
       <Filter>Misc Files\doc\html</Filter>
     </Text>
-    <ClCompile Include="..\..\thirdparty\owemdjee\pcre\src\pcre2posix.c">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
+    <Text Include="../../thirdparty/owemdjee/pcre/doc/pcre2-config.txt">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/doc/pcre2.txt">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/doc/pcre2grep.txt">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/doc/pcre2test.txt">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/index.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/libpcre2-16.pc.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/libpcre2-32.pc.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/libpcre2-8.pc.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/libpcre2-posix.pc.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/ltmain.sh">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/GenerateCommon.py">
+      <Filter>Misc Files\maint</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/GenerateTest26.py">
+      <Filter>Misc Files\maint</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/GenerateUcd.py">
+      <Filter>Misc Files\maint</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/GenerateUcpHeader.py">
+      <Filter>Misc Files\maint</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/GenerateUcpTables.py">
+      <Filter>Misc Files\maint</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/BidiMirroring.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/CaseFolding.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/DerivedBidiClass.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/DerivedCoreProperties.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/DerivedGeneralCategory.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/GraphemeBreakProperty.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/PropList.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/PropertyAliases.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/PropertyValueAliases.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/ScriptExtensions.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/Scripts.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/UnicodeData.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/maint/Unicode.tables/emoji-data.txt">
+      <Filter>Misc Files\maint\Unicode.tables</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/pcre2-config.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/perltest.sh">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/src/config.h.in">
+      <Filter>Misc Files\src</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/pcre/src/pcre2.h.in">
+      <Filter>Misc Files\src</Filter>
+    </Text>
   </ItemGroup>
 </Project>
+    

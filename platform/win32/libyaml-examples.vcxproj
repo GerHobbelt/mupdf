@@ -226,17 +226,18 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libyaml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcfd7a9}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/emit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/fruit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/parse.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/scan.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libyaml-examples/fruit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyaml-examples/monolithic_examples.h" />
     <Text Include="../../thirdparty/owemdjee/libyaml-examples/README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libyaml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffcfd7a9}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

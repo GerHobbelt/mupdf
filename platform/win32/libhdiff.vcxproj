@@ -226,6 +226,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/bsdiff_wrapper/bsdiff_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/bsdiff_wrapper/bspatch_wrapper.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/hpatch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/hpatch_jni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/compress_parallel.cpp" />
@@ -243,24 +245,30 @@
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/hdiffz_import_patch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/hpatchz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/match_block.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/bytes_rle.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/compress_detect.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/divsufsort.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/divsufsort64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/divsufsort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/divsufsort64.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/limit_mem_diff/adler_roll.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/limit_mem_diff/digest_matcher.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/limit_mem_diff/stream_serialize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/suffix_string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatch/patch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite.c" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_channel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_import.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/test/_private_searchBestParams.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/test/hpatchz_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/test/testHashClash.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/test/unit_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcdiff_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcpatch_wrapper.c" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/_atosize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/_clock_for_demo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/_dir_ignore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/bsdiff_wrapper/bsdiff_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/bsdiff_wrapper/bspatch_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/hpatch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/checksum_plugin_demo.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/compress_parallel.h" />
@@ -282,7 +290,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/hdiffz_import_patch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/hpatch_dir_listener.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/diff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/diff_for_hpatch_lite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/diff_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/match_block.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/bytes_rle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/compress_detect.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/config.h" />
@@ -292,7 +302,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/divsufsort_private.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/sssort.c.inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/trsort.c.inc.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/libdivsufsort/utils.c.inc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/limit_mem_diff/adler_roll.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/limit_mem_diff/bloom_filter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/limit_mem_diff/covers.h" />
@@ -300,13 +309,29 @@
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/limit_mem_diff/stream_serialize.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/mem_buf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/pack_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/qsort_parallel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HDiff/private_diff/suffix_string.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatch/checksum_plugin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatch/patch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatch/patch_private.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatch/patch_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite_input_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libHDiffPatch/HPatchLite/hpatch_lite_types.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_channel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/libParallel/parallel_import.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcdiff_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcpatch_code_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/HDiffPatch/vcdiff_wrapper/vcpatch_wrapper.h" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/README_cmdline_cn.md" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/build_libs.bat" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/build_libs.sh" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/build_libs_patchers.bat" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/build_libs_patchers.sh" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/build_libs_zstd.bat" />
+    <Text Include="../../thirdparty/owemdjee/HDiffPatch/builds/android_ndk_jni_mk/build_libs_zstd.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

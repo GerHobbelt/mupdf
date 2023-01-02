@@ -226,10 +226,20 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="librapidyaml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe80885}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/bm/bm_emit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/bm/bm_parse.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/samples/quickstart.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/samples/singleheaderlib/lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/preprocess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/src/c4/yml/tree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_basic.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_block_folded.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_block_literal.cpp" />
@@ -239,6 +249,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_emit.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_empty_file.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_empty_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_empty_scalar.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_empty_seq.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_explicit_key.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_generic_map.cpp" />
@@ -256,6 +267,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_seqx2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_seqx3.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_nested_seqx4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_noderef.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_null_val.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_number.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/rapidyaml/test/test_parser.cpp" />
@@ -323,6 +335,7 @@
     <Text Include="../../thirdparty/owemdjee/rapidyaml/api/python/ryml/tests/parse_bm.py" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/api/python/ryml/tests/test_parse.py" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/bm_plot_rapidyaml.py" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/cases/bm-cases.txt" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/cases/compile_commands.json" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/bm/results/parse.linux.i7_6800K.md" />
@@ -333,7 +346,8 @@
     <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.2.3.md" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.3.0.md" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.4.0.md" />
-    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/current.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.4.1.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidyaml/changelog/0.5.0.md" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/add_subdirectory/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/samples/add_subdirectory/run.sh" />
@@ -356,11 +370,6 @@
     <Text Include="../../thirdparty/owemdjee/rapidyaml/tools/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/tools/amalgamate.py" />
     <Text Include="../../thirdparty/owemdjee/rapidyaml/tools/test_suite/run_test_suite.sh" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="librapidyaml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffe80885}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

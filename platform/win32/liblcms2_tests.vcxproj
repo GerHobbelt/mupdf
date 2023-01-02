@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5EDCF4FD-0291-4FB9-8D96-1589571FCC89}</ProjectGuid>
+    <RootNamespace>liblcms2_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLCMS2_TESTS;LCMS2_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLCMS2_TESTS;LCMS2_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLCMS2_TESTS;LCMS2_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLCMS2_TESTS;LCMS2_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_16_tethra.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_8_curves.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_8_matsh.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_8_matsh_sse.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_8_tethra.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_15bits.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_15mats.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_cmyk.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_curves.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_lab.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_matsh.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_separate.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_sup.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_tethra.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/testbed/demo_cmyk.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/fast_float/testbed/fast_float_testbed.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/threaded/src/threaded_core.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/threaded/src/threaded_main.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/threaded/src/threaded_scheduler.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/threaded/src/threaded_split.c" />
+    <ClCompile Include="../../thirdparty/lcms2/plugins/threaded/testbed/threaded_testbed.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsalpha.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmscam02.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmscgats.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmscnvrt.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmserr.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsgamma.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsgmt.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmshalf.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsintrp.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsio0.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsio1.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmslut.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsmd5.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsmtrx.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsnamed.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsopt.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmspack.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmspcs.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsplugin.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsps2.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmssamp.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmssm.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmstypes.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsvirt.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmswtpnt.c" />
+    <ClCompile Include="../../thirdparty/lcms2/src/cmsxform.c" />
+    <ClCompile Include="../../thirdparty/lcms2/testbed/alpha_test.c" />
+    <ClCompile Include="../../thirdparty/lcms2/testbed/testcms2.c" />
+    <ClCompile Include="../../thirdparty/lcms2/testbed/testplugin.c" />
+    <ClCompile Include="../../thirdparty/lcms2/testbed/testthread.cpp" />
+    <ClCompile Include="../../thirdparty/lcms2/testbed/zoo_icc.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/common/vprf.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/common/xgetopt.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/jpgicc/iccjpeg.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/jpgicc/jpgicc.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/linkicc/linkicc.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/matlab/icctrans.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/psicc/psicc.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/samples/itufax.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/samples/mkcmy.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/samples/mkgrayer.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/samples/mktiff8.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/samples/roundtrip.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/samples/vericc.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/samples/wtpt.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/tificc/tifdiff.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/tificc/tificc.c" />
+    <ClCompile Include="../../thirdparty/lcms2/utils/transicc/transicc.c" />
+    <ClInclude Include="../../thirdparty/lcms2/Projects/VC2015/resource.h" />
+    <ClInclude Include="../../thirdparty/lcms2/Projects/VC2017/resource.h" />
+    <ClInclude Include="../../thirdparty/lcms2/Projects/VC2019/jconfig.h" />
+    <ClInclude Include="../../thirdparty/lcms2/Projects/VC2019/resource.h" />
+    <ClInclude Include="../../thirdparty/lcms2/Projects/VC2019/tif_config.h" />
+    <ClInclude Include="../../thirdparty/lcms2/Projects/VC2019/tiffconf.h" />
+    <ClInclude Include="../../thirdparty/lcms2/Projects/VC2022/resource.h" />
+    <ClInclude Include="../../thirdparty/lcms2/include/lcms2mt.h" />
+    <ClInclude Include="../../thirdparty/lcms2/include/lcms2mt_plugin.h" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/fast_float/include/lcms2mt_fast_float.h" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/fast_float/src/fast_float_internal.h" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/test_profiles/test0.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/test_profiles/test1.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/test_profiles/test2.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/test_profiles/test3.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/test_profiles/test5.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/threaded/include/lcms2_threaded.h" />
+    <ClInclude Include="../../thirdparty/lcms2/plugins/threaded/src/threaded_internal.h" />
+    <ClInclude Include="../../thirdparty/lcms2/src/extra_xform.h" />
+    <ClInclude Include="../../thirdparty/lcms2/src/lcms2_internal.h" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/TestCLT.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/bad.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/bad_mpe.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/crayons.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/ibm-t61.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/new.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/test1.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/test2.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/test3.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/test4.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/test5.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/testcms2.h" />
+    <ClInclude Include="../../thirdparty/lcms2/testbed/toosmall.icc" />
+    <ClInclude Include="../../thirdparty/lcms2/utils/common/utils.h" />
+    <ClInclude Include="../../thirdparty/lcms2/utils/jpgicc/iccjpeg.h" />
+    <ResourceCompile Include="../../thirdparty/lcms2/Projects/BorlandC_5.5/lcms2mt.rc" />
+    <ResourceCompile Include="../../thirdparty/lcms2/Projects/VC2015/lcms2mt.rc" />
+    <ResourceCompile Include="../../thirdparty/lcms2/Projects/VC2017/lcms2mt.rc" />
+    <ResourceCompile Include="../../thirdparty/lcms2/Projects/VC2019/lcms2mt.rc" />
+    <ResourceCompile Include="../../thirdparty/lcms2/Projects/VC2022/lcms2.rc" />
+    <Text Include="../../thirdparty/lcms2/Lib/BC/BC.txt" />
+    <Text Include="../../thirdparty/lcms2/Lib/MS/MS.TXT" />
+    <Text Include="../../thirdparty/lcms2/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/Projects/BorlandC_5.5/mklcmsdll.bat" />
+    <Text Include="../../thirdparty/lcms2/README.1ST" />
+    <Text Include="../../thirdparty/lcms2/autogen.sh" />
+    <Text Include="../../thirdparty/lcms2/configure.ac" />
+    <Text Include="../../thirdparty/lcms2/doc/WhyThisFork.txt" />
+    <Text Include="../../thirdparty/lcms2/include/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/include/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/lcms2mt.pc.in" />
+    <Text Include="../../thirdparty/lcms2/ltmain.sh" />
+    <Text Include="../../thirdparty/lcms2/meson_options.txt" />
+    <Text Include="../../thirdparty/lcms2/plugins/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/README.1ST" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/include/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/include/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/src/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/src/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/src/lcms2_fast_float.rc.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/testbed/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/fast_float/testbed/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/include/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/include/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/src/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/src/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/src/lcms2_threaded.rc.in" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/testbed/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/plugins/threaded/testbed/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/src/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/src/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/src/lcms2.rc.in" />
+    <Text Include="../../thirdparty/lcms2/testbed/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/testbed/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/utils/jpgicc/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/utils/jpgicc/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/utils/linkicc/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/utils/linkicc/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/utils/matlab/howto.txt" />
+    <Text Include="../../thirdparty/lcms2/utils/psicc/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/utils/psicc/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/utils/samples/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/utils/samples/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/utils/tificc/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/utils/tificc/Makefile.in" />
+    <Text Include="../../thirdparty/lcms2/utils/transicc/Makefile.am" />
+    <Text Include="../../thirdparty/lcms2/utils/transicc/Makefile.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

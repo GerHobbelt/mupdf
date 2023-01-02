@@ -222,22 +222,14 @@
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\nas_lockfile.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\src\nas_lockfile.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\lib_nas_lockfile\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lib_nas_lockfile/src/nas_lockfile.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/lib_nas_lockfile/src/nas_lockfile.h" />
+    <Text Include="../../thirdparty/owemdjee/lib_nas_lockfile/README.md" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

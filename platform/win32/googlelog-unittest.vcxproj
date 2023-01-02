@@ -77,19 +77,6 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <ItemGroup>
-    <ClInclude Include="../../scripts/googlelog-unittest/pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../scripts/googlelog-unittest/pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\scripts\googlelog-unittest\main.cpp" />
-    <ClCompile Include="..\..\scripts\googlelog-unittest\test_glog.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="../../scripts/googlelog-unittest/packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="libgflags.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc19ff8}</Project>
     </ProjectReference>
@@ -246,22 +233,51 @@
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
   </Target>
   <ItemGroup>
+    <ClInclude Include="../../scripts/googlelog-unittest/pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../scripts/googlelog-unittest/pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\scripts\googlelog-unittest\main.cpp" />
+    <ClCompile Include="..\..\scripts\googlelog-unittest\test_glog.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../scripts/googlelog-unittest/packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/glog/bazel/example/main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_immediately_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_with_absolute_prefix_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/cleanup_with_relative_prefix_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/demangle.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/demangle_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/glog_statics_single_instance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_custom_prefix_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest10.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest2.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_striptest_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/logging_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/mock-log_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/package_config_unittest/working_config/glog_package_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/raw_logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/signalhandler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/signalhandler_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/stacktrace_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/stl_logging_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/symbolize.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/symbolize_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/utilities.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/utilities_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/glog/src/vlog_is_on.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/windows/port.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/b/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/raw_logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/stl_logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/vlog_is_on.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/commandlineflags.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/googleinit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/mutex.h" />
@@ -282,8 +298,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/utilities.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/dirent.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/port.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/glog/cmake/VersionResource.rc" />
     <Text Include="../../thirdparty/owemdjee/glog/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glog/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/glog/b/CMakeCache.txt" />
+    <Text Include="../../thirdparty/owemdjee/glog/b/CMakeFiles/3.22.0-rc1/VCTargetsPath.txt" />
+    <Text Include="../../thirdparty/owemdjee/glog/b/CMakeFiles/TargetDirectories.txt" />
+    <Text Include="../../thirdparty/owemdjee/glog/b/DartConfiguration.tcl" />
+    <Text Include="../../thirdparty/owemdjee/glog/build_win_cmake.bat" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/VersionInfo.in" />
     <Text Include="../../thirdparty/owemdjee/glog/glog-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/glog/glog-modules.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/glog/libglog.pc.in" />

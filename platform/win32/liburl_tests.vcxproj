@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>liburl_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD55040}</ProjectGuid>
+    <RootNamespace>liburl_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBURL_TESTS;URL_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_04.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_05.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_06.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_07.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_08.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_09.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_10.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/examples/v1/example_11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/core/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/core/url_parser_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/domain/idna.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/network/ipv4_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/network/ipv6_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/url/url.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/src/v1/url/url_search_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/allocations/host_parsing_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/containers/static_vector_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/domain/domain_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/domain/idna_table_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/domain/punycode_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/filesystem/filesystem_path_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/json/json_query_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/network/ipv4_address_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/network/ipv6_address_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/percent_encoding/percent_decoding_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/percent_encoding/percent_encoding_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/unicode/byte_conversion_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/unicode/unicode_code_point_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/unicode/unicode_range_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/unicode/unicode_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/parse_host_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_literal_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_parse_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_search_parameters_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_serialize_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_setter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_tests_with_exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v1/url/url_vector_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/allocations/host_parsing_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/containers/static_vector_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/core/parse_host_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/core/parse_path_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/core/parse_query_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/core/url_parse_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/core/url_serialize_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/domain/domain_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/domain/idna_table_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/domain/punycode_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/filesystem/filesystem_path_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/json/json_query_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/network/ipv4_address_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/network/ipv6_address_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/percent_encoding/percent_decoding_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/percent_encoding/percent_encoding_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/unicode/byte_conversion_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/unicode/unicode_code_point_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/unicode/unicode_range_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/unicode/unicode_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/url/url_literal_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/url/url_search_parameters_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/url/url_setter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/url/url_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/url/url_tests_with_exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/url/tests/v2/url/url_vector_tests.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/core/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/core/host.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/core/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/core/schemes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/core/serialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/core/url_record.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/domain/domain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/domain/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/filesystem/path.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/json/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/network/ipv4_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/network/ipv6_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/percent_encoding/percent_decode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/percent_encoding/percent_encode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/url.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/containers/static_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/core/check_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/core/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/core/host.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/core/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/core/schemes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/core/serialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/core/url_record.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/domain/domain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/domain/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/domain/idna.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/domain/punycode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/filesystem/path.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/filesystem/portability.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/json/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/network/ipv4_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/network/ipv6_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/percent_encoding/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/percent_encoding/percent_decode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/percent_encoding/percent_decode_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/percent_encoding/percent_encode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/percent_encoding/percent_encoded_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/percent_encoding/sentinel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/platform/endianness.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/string/starts_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/traits/string_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/code_point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/code_points/u16.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/code_points/u8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/details/to_u8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/ranges/sentinel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/ranges/transforms/u16_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/ranges/transforms/u32_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/ranges/transforms/u8_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/ranges/views/u16_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/ranges/views/u8_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/ranges/views/unchecked_u8_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/traits/iterator_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/traits/range_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/unicode/traits/range_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/url.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v1/url_search_parameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/concepts/url_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/containers/static_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/check_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/host.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/parse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/parse_path.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/parse_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/schemes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/serialize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/url_parse_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/url_parser_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/core/url_record.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/domain/domain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/domain/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/domain/idna.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/domain/idna_status.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/domain/idna_tables.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/domain/punycode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/filesystem/path.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/json/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/network/ipv4_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/network/ipv6_address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/percent_encoding/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/percent_encoding/percent_decode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/percent_encoding/percent_decode_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/percent_encoding/percent_encode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/percent_encoding/percent_encoded_char.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/percent_encoding/sentinel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/platform/endianness.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/code_point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/code_points/u16.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/code_points/u8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/details/to_u8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/ranges/sentinel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/ranges/transforms/u16_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/ranges/transforms/u32_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/ranges/transforms/u8_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/ranges/views/u16_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/ranges/views/u8_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/ranges/views/unchecked_u8_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/traits/iterator_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/traits/range_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/unicode/traits/range_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/url.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/include/skyr/v2/url_search_parameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/src/v1/core/url_parse_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/src/v1/core/url_parser_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/tests/v1/allocations/allocations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/url/tests/v2/allocations/allocations.hpp" />
+    <Text Include="../../thirdparty/owemdjee/url/ACKNOWLEDGEMENTS.md" />
+    <Text Include="../../thirdparty/owemdjee/url/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/url/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/url/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/README.md" />
+    <Text Include="../../thirdparty/owemdjee/url/cmake/skyr-url-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/conf.py.in" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/core.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/domain.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/filesystem.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/json.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/network.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/percent_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/docs/url.rst" />
+    <Text Include="../../thirdparty/owemdjee/url/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/examples/v1/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/examples/v1/example_01.md" />
+    <Text Include="../../thirdparty/owemdjee/url/examples/v1/example_02.md" />
+    <Text Include="../../thirdparty/owemdjee/url/examples/v1/example_03.md" />
+    <Text Include="../../thirdparty/owemdjee/url/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/src/v1/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/src/v2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/src/version.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/allocations/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/containers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/domain/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/filesystem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/network/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/percent_encoding/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/unicode/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v1/url/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/allocations/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/containers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/domain/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/filesystem/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/network/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/percent_encoding/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/unicode/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tests/v2/url/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tools/IdnaMappingTable.txt" />
+    <Text Include="../../thirdparty/owemdjee/url/tools/make_idna_table_v1.py" />
+    <Text Include="../../thirdparty/owemdjee/url/tools/make_idna_table_v2.py" />
+    <Text Include="../../thirdparty/owemdjee/url/tools/requirements.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

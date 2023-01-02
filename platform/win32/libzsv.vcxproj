@@ -237,6 +237,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/builtin/version.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/cli.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/cli_ini.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/app/count-pull.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/count.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/desc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/echo.c" />
@@ -266,6 +267,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/pretty.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/prop.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/app/select-pull.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/select.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/serialize.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/sql.c" />
@@ -290,9 +292,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/utils/win/dl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/utils/writer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/app/zsv_command_standalone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/examples/js/zsv_parser_api_dummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/examples/lib/parse_by_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/examples/lib/print_my_column.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/examples/lib/pull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/examples/lib/simple.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/src/vector_delim.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/src/zsv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/src/zsv_internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/zsv/src/zsv_scan_delim.c" />
     <ClCompile Include="../../thirdparty/owemdjee/zsv/src/zsv_scan_fixed.c" />
     <ClInclude Include="../../thirdparty/owemdjee/zsv/app/cli_const.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zsv/app/cli_export.h" />
@@ -349,6 +357,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/zsv/include/zsv/utils/utf8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zsv/include/zsv/utils/win/dl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/zsv/include/zsv/utils/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/zsv/include/zsv/zsv_export.h" />
     <Text Include="../../thirdparty/owemdjee/zsv/BUILD.md" />
     <Text Include="../../thirdparty/owemdjee/zsv/README.md" />
     <Text Include="../../thirdparty/owemdjee/zsv/app/benchmark/README.md" />
@@ -374,10 +383,12 @@
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/2tsv.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/blank-leading-rows.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/buffsplit_quote.csv" />
+    <Text Include="../../thirdparty/owemdjee/zsv/data/test/desc-trim.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/desc.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/embedded.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/embedded_dos.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/flatten.csv" />
+    <Text Include="../../thirdparty/owemdjee/zsv/data/test/invalid_surrogate_pair.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/pretty-2.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/pretty.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/data/test/quoted3.csv" />
@@ -392,14 +403,32 @@
     <Text Include="../../thirdparty/owemdjee/zsv/docs/db.schema.json" />
     <Text Include="../../thirdparty/owemdjee/zsv/docs/extension.md" />
     <Text Include="../../thirdparty/owemdjee/zsv/docs/memory.md" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/browser/util/http-dev.py" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/browser/zsv-browser-example.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/js/foot.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/js/foot_node.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/js/head.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/package.json" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/count-csv-parser.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/count-papaparse.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/count.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/count_sync.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/out.json" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/select_all-csv-parser.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/select_all-papaparse.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/select_all.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/js/npm/test/select_all_sync.js" />
+    <Text Include="../../thirdparty/owemdjee/zsv/examples/lib/README.md" />
     <Text Include="../../thirdparty/owemdjee/zsv/misc/THIRDPARTY.md" />
     <Text Include="../../thirdparty/owemdjee/zsv/misc/licenses.csv" />
     <Text Include="../../thirdparty/owemdjee/zsv/scripts/ci-build.sh" />
     <Text Include="../../thirdparty/owemdjee/zsv/scripts/ci-create-debian-package.sh" />
     <Text Include="../../thirdparty/owemdjee/zsv/scripts/ci-create-nuget-package.sh" />
     <Text Include="../../thirdparty/owemdjee/zsv/scripts/ci-create-rpm-package.sh" />
-    <Text Include="../../thirdparty/owemdjee/zsv/scripts/ci-install-libjq.sh" />
     <Text Include="../../thirdparty/owemdjee/zsv/scripts/ci-prepare-artifacts-for-upload.sh" />
+    <Text Include="../../thirdparty/owemdjee/zsv/scripts/ci-update-homebrew-tap.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

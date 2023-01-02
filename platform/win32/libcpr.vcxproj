@@ -226,14 +226,26 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/accept_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/async.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/auth.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/bearer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/cert_info.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/cookies.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/cprtypes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/curl_container.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/curlholder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/curlmultiholder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/interceptor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/multipart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/multiperform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/parameters.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/payload.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/proxies.cpp" />
@@ -241,38 +253,54 @@
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/redirect.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/response.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/ssl_ctx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/threadpool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/timeout.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/unix_socket.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libcpr/cpr/util.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/accept_encoding.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/async.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/auth.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/bearer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/body.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/buffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/cert_info.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/connect_timeout.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/cookies.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/cpr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/cprtypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/curl_container.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/curlholder.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/digest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/curlmultiholder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/filesystem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/http_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/interceptor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/interface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/limit_rate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/local_port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/local_port_range.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/low_speed.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/multipart.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/ntlm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/multiperform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/parameters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/payload.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/proxies.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/proxyauth.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/range.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/redirect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/reserve_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/resolve.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/response.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/singleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/ssl_ctx.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/ssl_options.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/status_codes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/threadpool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/timeout.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/unix_socket.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/include/cpr/user_agent.h" />
@@ -281,6 +309,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/test/abstractServer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/test/httpServer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libcpr/test/httpsServer.hpp" />
+    <Image Include="../../thirdparty/owemdjee/libcpr/nuget/resources/cpr.png" />
     <Text Include="../../thirdparty/owemdjee/libcpr/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libcpr/CODE_OF_CONDUCT.md" />
     <Text Include="../../thirdparty/owemdjee/libcpr/CONTRIBUTING.md" />
@@ -291,13 +320,10 @@
     <Text Include="../../thirdparty/owemdjee/libcpr/cmake/mongoose.CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libcpr/cpr/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libcpr/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libcpr/package-build/build-package.sh" />
+    <Text Include="../../thirdparty/owemdjee/libcpr/package-build/debian-libcpr/README.Debian" />
     <Text Include="../../thirdparty/owemdjee/libcpr/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libcpr/test/data/generate.sh" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libcurl.vcxproj">
-      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
-    </ProjectReference>
+    <Text Include="../../thirdparty/owemdjee/libcpr/test/data/generate-certificates.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

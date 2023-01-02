@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -25,28 +25,34 @@
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\src\efsw\platform">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\src\efsw\platform\posix">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\src\efsw\platform\win">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\src\efsw">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\efsw\platform">
+    <Filter Include="Header Files\src\efsw\platform\posix">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\src\efsw\platform\win">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\project">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\efsw\platform\posix">
+    <Filter Include="Source Files\src\efsw">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\efsw\platform\win">
+    <Filter Include="Source Files\src\efsw\platform">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\efsw\platform\posix">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\efsw\platform\win">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\test">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -125,18 +131,18 @@
     <ClCompile Include="../../thirdparty/owemdjee/efsw/src/efsw/WatcherWin32.cpp">
       <Filter>Source Files\src\efsw</Filter>
     </ClCompile>
-    <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/FileSystemImpl.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/FileSystemImpl.cpp">
       <Filter>Source Files\src\efsw\platform\posix</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/MutexImpl.cpp">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/MutexImpl.cpp">
       <Filter>Source Files\src\efsw\platform\posix</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/SystemImpl.cpp">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/SystemImpl.cpp">
       <Filter>Source Files\src\efsw\platform\posix</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/ThreadImpl.cpp">
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/posix/ThreadImpl.cpp">
       <Filter>Source Files\src\efsw\platform\posix</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/win/FileSystemImpl.cpp">
       <Filter>Source Files\src\efsw\platform\win</Filter>
     </ClCompile>
@@ -149,13 +155,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/efsw/src/efsw/platform/win/ThreadImpl.cpp">
       <Filter>Source Files\src\efsw\platform\win</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/efsw/src/test/efsw-test.cpp">
+      <Filter>Source Files\src\test</Filter>
+    </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/efsw/include/efsw/efsw.h">
       <Filter>Header Files\include\efsw</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/efsw/include/efsw/efsw.hpp">
       <Filter>Header Files\include\efsw</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/AtomicBool.hpp">
+    <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/Atomic.hpp">
       <Filter>Header Files\src\efsw</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/Debug.hpp">
@@ -266,8 +275,24 @@
     <ClInclude Include="../../thirdparty/owemdjee/efsw/src/efsw/sophist.h">
       <Filter>Header Files\src\efsw</Filter>
     </ClInclude>
+    <Text Include="../../thirdparty/owemdjee/efsw/CMakeLists.txt">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/efsw/README.md">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/efsw/efswConfig.cmake.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/efsw/premake4.lua">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/efsw/premake5.lua">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/efsw/project/build.reldbginfo.sh">
+      <Filter>Misc Files\project</Filter>
+    </Text>
   </ItemGroup>
 </Project>
+    

@@ -226,8 +226,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/b/CMakeFiles/3.22.0-rc1/CompilerIdC/CMakeCCompilerId.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/b/CMakeFiles/3.22.0-rc1/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/cmake/tests/check_has_std_filesystem_path.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/cmake/tests/normal_uuid_lib_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/cmake/tests/ossp_uuid_lib_test.cc" />
@@ -256,6 +254,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/login_session/main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis/controllers/Client.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/controllers/SlowCtrl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/filters/TimeFilter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/test/test_main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/plugins/SimpleReverseProxy.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/websocket_client/WebSocketClient.cc" />
@@ -289,6 +291,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/MultiPart.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/NotFound.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/PluginsManager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RangeParser.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RedisClientManagerSkipped.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RedisClientSkipped.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RedisResultSkipped.cc" />
@@ -414,7 +417,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/DelayedSSLServerTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/DnsTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/KickoffTest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/LoggerMacroTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/LoggerTest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/MTLSClient.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/MTLSServer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/PathConversionTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/RunInLoopTest1.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/RunInLoopTest2.cc" />
@@ -422,6 +428,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SSLClientTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SSLServerTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SendfileTest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SendstreamTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SerialTaskQueueTest1.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SerialTaskQueueTest2.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/TcpClientTest.cc" />
@@ -433,6 +440,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/InetAddressUnittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/MsgBufferUnittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/splitStringUnittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/sslNameVerifyUnittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/stringEncodingUnittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/AsyncFileLogger.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/ConcurrentTaskQueue.cc" />
@@ -444,8 +452,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/TimingWheel.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Utilities.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/WindowsSupport.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/b/exports/drogon/exports.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/b/trantor/exports/trantor/exports.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/CommandHandler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/cmd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create.h" />
@@ -461,6 +467,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/benchmark/BenchmarkCtrl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/benchmark/JsonCtrl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis/controllers/Client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/DateFuncs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/RedisCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/controllers/SlowCtrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/filters/TimeFilter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/plugins/SimpleReverseProxy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/Attribute.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/CacheMap.h" />
@@ -524,6 +534,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/ListenerManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/PluginsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/RangeParser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/RedisClientManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/SessionManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/SharedLibManager.h" />
@@ -631,15 +642,57 @@
     <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/TimingWheel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Utilities.h" />
     <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/WindowsSupport.h" />
+    <Image Include="../../thirdparty/owemdjee/drogon/drogon.jpg" />
+    <Text Include="../../thirdparty/owemdjee/drogon/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/ChangeLog.md" />
     <Text Include="../../thirdparty/owemdjee/drogon/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/README.zh-CN.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/README.zh-TW.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/drogon/cmake/templates/DrogonConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/drogon/cmake/templates/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/drogon/cmake/templates/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/drogon/conanfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/config.example.json" />
     <Text Include="../../thirdparty/owemdjee/drogon/docker/alpine/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/drogon_ctl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/drogon/examples/README.md" />
     <Text Include="../../thirdparty/owemdjee/drogon/examples/jsonstore/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/drogon/examples/redis/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/config.json" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/config.json" />
+    <Text Include="../../thirdparty/owemdjee/drogon/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/test.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/中文.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/src/mysql_impl/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/mysql/model.json" />
+    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/postgresql/model.json" />
+    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/sqlite3/model.json" />
+    <Text Include="../../thirdparty/owemdjee/drogon/test.sh" />
     <Text Include="../../thirdparty/owemdjee/drogon/third_party/mman-win32/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/ChangeLog.md" />
     <Text Include="../../thirdparty/owemdjee/drogon/trantor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/cmake/templates/TrantorConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/conanfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/format.sh" />
     <Text Include="../../thirdparty/owemdjee/drogon/trantor/third_party/wepoll/README.md" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/CMakeLists.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

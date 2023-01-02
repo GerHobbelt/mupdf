@@ -227,8 +227,7 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/bin/ngt/ngt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/bin/ngtq/ngtq.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/bin/ngtqg/ngtqg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/bin/qbg/qbg.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/ArrayFile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Capi.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Command.cpp" />
@@ -236,7 +235,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/MmapManager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/Capi.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/NGTQGCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/Optimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/QbgCli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/QuantizedGraph.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Node.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/SharedMemoryAllocator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Thread.cpp" />
@@ -248,6 +249,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/samples/jaccard-sparse/jaccard-sparse.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/samples/l2-uint8-range-search/l2-uint8-range-search.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/samples/l2-uint8/l2-uint8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libngt-ann/samples/qg-l2-float/qg-l2-float.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/ArrayFile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Capi.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Clustering.h" />
@@ -263,8 +265,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/MmapManagerException.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/MmapManagerImpl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/Capi.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/NGTQCommand.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/NGTQGCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/HierarchicalKmeans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/Matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/ObjectFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/Optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/QbgCli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/QuantizedBlobGraph.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/QuantizedGraph.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/NGTQ/Quantizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libngt-ann/lib/NGT/Node.h" />
@@ -294,11 +300,8 @@
     <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngt/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngt/README-jp.md" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngt/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngtq/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngtq/README-jp.md" />
-    <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngtq/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngtqg/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/ngtqg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/qbg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libngt-ann/bin/qbg/README.md" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/data/lorentz_input_generator.py" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/data/poincare_input_generator.py" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/lib/CMakeLists.txt" />
@@ -320,6 +323,7 @@
     <Text Include="../../thirdparty/owemdjee/libngt-ann/samples/jaccard-sparse/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/samples/l2-uint8-range-search/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/samples/l2-uint8/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libngt-ann/samples/qg-l2-float/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libngt-ann/utils/mk_version_defs_h.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >

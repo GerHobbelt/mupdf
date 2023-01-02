@@ -298,6 +298,11 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libbibutils.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff09284b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/args.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/bib2xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/bibdiff.c" />
@@ -311,6 +316,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/measure_time.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/med2xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/modsclean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/monolithic-main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/nbib2xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/ris2xml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/bin/tomods.c" />
@@ -338,10 +344,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/utf8_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/test/vplist_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibutils/src/win32/pch.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\bibutils\src\bin\monolithic-main.c" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/args.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/bibprog.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/measure_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bin/tomods.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bldhash/marc_auth.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/bldhash/uintlist.h" />
@@ -401,12 +407,35 @@
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/win32/include/dirent.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bibutils/src/win32/pch.h" />
     <Text Include="../../thirdparty/owemdjee/bibutils/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/Working.with.MODS.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/bib2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/bibdiff.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/biblatex2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/copac2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/cvt.js" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/end2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/endx2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version2/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version3/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version4/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version5/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/history_version6/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/isi2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/markdown_syntax/index.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/med2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/modsclean.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/package.json" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/ris2xml.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2ads.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2bib.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2end.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2isi.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2ris.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/docs/xml2wordbib.md" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/src/makedeb.sh" />
+    <Text Include="../../thirdparty/owemdjee/bibutils/src/maketgz.sh" />
     <Text Include="../../thirdparty/owemdjee/bibutils/src/readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libbibutils.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff09284b}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

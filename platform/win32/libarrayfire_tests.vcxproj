@@ -1,0 +1,1988 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libarrayfire_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6FAD46}</ProjectGuid>
+    <RootNamespace>libarrayfire_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARRAYFIRE_TESTS;ARRAYFIRE_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/bin2cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/benchmarks/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/benchmarks/cg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/benchmarks/fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/benchmarks/pi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/computer_vision/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/computer_vision/harris.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/computer_vision/matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/computer_vision/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/financial/black_scholes_options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/financial/heston_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/financial/monte_carlo_options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/getting_started/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/getting_started/integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/getting_started/rainfall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/getting_started/vectorize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/conway.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/conway_pretty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/field.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/fractal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/gravity_sim.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/plot2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/plot3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/helloworld/helloworld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/adaptive_thresholding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/binary_thresholding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/brain_segmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/confidence_connected_components.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/deconvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/edge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/gradient_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/image_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/image_editing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/morphing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/optical_flow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/pyramids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/lin_algebra/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/lin_algebra/lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/lin_algebra/qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/lin_algebra/svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/bagging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/deep_belief_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/geneticalgorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/kmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/knn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/logistic_regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/naive_bayes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/neural_network.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/perceptron.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/rbm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/softmax_regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/pde/swe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/examples/unified/basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/approx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/clamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/colorspace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/complex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/confidence_connected.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/corrcoef.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/covariance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/deconvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/det.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/dog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/events.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/exampleFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/fftconvolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/flip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/gaussian_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/hamming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/harris.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/hist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/histeq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/homography.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/hsv_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/iir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/imageio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/imageio2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/implicit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/jit_test_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/match_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/median.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/moddims.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/morph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/nearest_neighbour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/orb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/pinverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/plot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/print.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/rank.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/regions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/replace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/rgb_gray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/sat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/shift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/sift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/solve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/sparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/stdev.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/topk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/transform_coordinates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/type_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/unary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/unwrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/var.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/vector_field.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/c/ycbcr_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/approx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/clamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/colorspace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/complex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/confidence_connected.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/corrcoef.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/covariance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/deconvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/dog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/exampleFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/fftconvolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/gaussian_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/gfor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/hamming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/harris.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/homography.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/hsv_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/iir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/imageio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/jit_test_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/lapack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/matchTemplate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/meanvar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/median.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/morph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/nearest_neighbour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/orb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/regions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/rgb_gray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/sat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/scale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/seq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/sift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/skew.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/sparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/stdev.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/timing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/topk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/transform_coordinates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/translate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/unary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/unwrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/var.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/ycbcr_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/arith.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/jit_test_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/lapack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/ml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/opencl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/signal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/sparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/statistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/symbol_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/vision.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/ArrayInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/DefaultMemoryManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/DependencyModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/Logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/SparseArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/cblas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/constants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/deterministicHash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/dim4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/dispatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/err_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/graphics_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/half.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/host_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/BinaryNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/Node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/kernel_cache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/lapacke.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/moddims.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/module_loading_unix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/module_loading_windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/Event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/approx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/device_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/diagonal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/exampleFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/fftconvolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/flood_fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/harris.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/hist_graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/homography.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/hsv_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/identity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/iir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/iota.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/ireduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sort_by_key/sort_by_key_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/lookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/match_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/medfilt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/morph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/nearest_neighbour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/orb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/plot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/random_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/regions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/reshape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/scan_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/shift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/solve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sort_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sort_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sparse_arith.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sparse_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/topk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/triangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/unwrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/vector_field.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/GraphicsResourceManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/approx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/compile_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/convolveNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cublas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cudnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cudnnModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cusolverDn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cusparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cusparseModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/device_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/diagonal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/exampleFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/fast_pyramid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/fftconvolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/flood_fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/hist_graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/hsv_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/identity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/iir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/iota.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/ireduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/jit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/convolve_separable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_by_key/scan_by_key_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/lookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/match_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/medfilt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/morph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/pad_array_borders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/plot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/reshape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/scan_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/shift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/transpose_inplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/triangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/unwrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/utility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/vector_field.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/GraphicsResourceManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/approx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/approx1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/approx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/compile_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/convolve_separable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/device_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/diagonal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/errorcodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/exampleFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/fftconvolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/flood_fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/harris.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/hist_graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/homography.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/hsv_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/identity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/iir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/iota.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/ireduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/jit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/lookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/match_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/max.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/medfilt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/min.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/morph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/nearest_neighbour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/orb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/plot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/product.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/random_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/regions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/reshape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/scan_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/shift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/solve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sort_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sort_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sparse_arith.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sparse_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/topk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/transpose_inplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/triangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/unwrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/vector_field.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/GraphicsResourceManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/approx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/clfft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/compile_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/convolve_separable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_solve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_sparse_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/device_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/diagonal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/errorcodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/exampleFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/fftconvolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/flood_fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/harris.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/hist_graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/homography.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/hsv_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/identity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/iir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/inverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/iota.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/ireduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/jit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_b8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_c32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_c64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_f32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_f64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_s16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_s32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_s64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_u16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_u32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_u64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_u8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve_separable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_by_key/scan_by_key_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sort_by_key/sort_by_key_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/lookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/gebrd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/geqrf2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/geqrf3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/getrf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/getrs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/labrd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/larfb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/laset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/laset_band.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/laswp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/potrf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/swapdblk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/transpose_inplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/ungqr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/unmqr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/unmqr2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/match_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/max.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/medfilt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/min.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/morph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/nearest_neighbour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/orb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/plot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/product.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/random_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/regions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/reshape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/scan_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/shift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/solve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sort_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sort_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sparse_arith.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sparse_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/topk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/transpose_inplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/triangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/unwrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/vector_field.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/anisotropic_diffusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/approx1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/approx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/array_death_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/arrayfire_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/arrayio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/backend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/basic_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/bilateral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/canny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/cholesky_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/clamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/compare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/complex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/confidence_connected.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/constant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/convolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/corrcoef.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/covariance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/diagonal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/diff1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/diff2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/dog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/fft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/fft_large.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/fft_real.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/fftconvolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/flat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/flip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/gaussiankernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/gen_assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/gen_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/getting_started.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/gfor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/gloh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/gray_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/half.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/hamming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/harris.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/homography.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/hsv_rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/iir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/imageio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/interop_opencl_custom_kernel_snippet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/interop_opencl_external_context_snippet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/inverse_deconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/inverse_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/iota.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/ireduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/iterative_deconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/jit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/jit_test_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/join.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/lu_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/manual_memory_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/match_template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/matrix_manipulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/matrixmarket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/meanvar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/medfilt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/median.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/memory_lock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/missing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/mmio/mmio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/moddims.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/moments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/morph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/nearest_neighbour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/nodevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/ocl_ext_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/orb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/pad_borders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/pinverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/print_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/qr_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/random_practrand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/rank_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/regions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/replace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/resize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/rng_match.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/rng_quality.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/rotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/rotate_linear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/scan_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/shift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/solve_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sort_by_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sort_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sparse_arith.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/sparse_convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/stdev.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/susan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/svd_dense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/threading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/tile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/topk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/transform_coordinates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/translate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/transpose_inplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/triangle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/unwrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/var.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/where.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/write.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/arrayfire/test/ycbcr_rgb.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/compilers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/examples/common/idxio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/examples/common/progress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/examples/financial/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/gravity_sim_init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/mnist_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/extern/half/include/half.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/arith.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/backend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/compatible.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/dim4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/gfor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/half.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/lapack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/ml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/oneapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/opencl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/sparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/af/vision.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/include/arrayfire.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/events.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/features.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/fft_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/imageio_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/imgproc_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/implicit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/indexing_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/jit_test_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/memoryapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/optypes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/sparse_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/c/type_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/symbol_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/AllocatorInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/ArrayFireTypesIO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/ArrayInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/Binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/DefaultMemoryManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/DependencyModule.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/EventBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/FFTPlanCache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/HandleBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/InteropManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/KernelInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/Logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/MemoryManagerBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/MersenneTwister.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/ModuleInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/Source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/SparseArray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/TemplateArg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/TemplateTypename.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/Transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/blas_headers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/compile_module.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/debug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/defines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/deprecated.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/deterministicHash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/dispatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/err_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/forge_loader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/graphics_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/half.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/host_memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/indexing_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/internal_enums.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/BinaryNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/BufferNodeBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/ModdimNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/NaryNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/Node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/NodeIO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/NodeIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/ScalarNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/ShiftNodeBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/jit/UnaryNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/kernel_cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/kernel_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/lapacke.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/moddims.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/module_loading.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/sparse_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/unique_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/Array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/Event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/Param.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/ParamIterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/anisotropic_diffusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/backend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/canny.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/cholesky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/device_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/err_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/exampleFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/fft.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/fftconvolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/flood_fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/harris.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/hist_graphics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/homography.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/hsv_rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/iir.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/inverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/ireduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/jit/BinaryNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/jit/BufferNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/jit/Node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/jit/ScalarNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/jit/UnaryNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/Array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/anisotropic_diffusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/canny.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/dot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/exampleFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/fftconvolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/flood_fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/harris.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/hsv_rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/iir.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/interp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/ireduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/lookup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/lu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/match_template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/medfilt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/moments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/morph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/nearest_neighbour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/orb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/pad_array_borders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/random_engine_mersenne.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/random_engine_philox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/random_engine_threefry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/regions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/reorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/rotate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/scan_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/shift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sobel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sort_by_key_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sort_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sparse_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/susan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/lapack_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/logic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/lookup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/lu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/match_template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/medfilt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/moments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/morph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/nearest_neighbour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/orb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/platform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/plot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/print.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/qr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/regions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/reorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/rotate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/scan_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/shift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sobel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/solve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sort_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sparse_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/sparse_blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/surface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/susan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/svd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/topk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/unary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/vector_field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/EnqueueArgs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/GraphicsResourceManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Kernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/LookupTable1D.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Module.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/Param.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/ThrustArrayFirePolicy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/anisotropic_diffusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/assign_kernel_param.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/backend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/canny.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cholesky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cu_check_macro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cublas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cudaDataType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cudnn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cudnnModule.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cufft.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cusolverDn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cusparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cusparseModule.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/cusparse_descriptor_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/debug_cuda.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/device_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/dims_param.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/err_cuda.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/exampleFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/fast_pyramid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/fft.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/fftconvolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/flood_fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/harris.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/hist_graphics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/homography.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/hsv_rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/iir.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/inverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/ireduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/jit/BufferNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/jit/kernel_generators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/anisotropic_diffusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/atomics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/canny.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/exampleFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/fast_lut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/fftconvolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/flood_fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/harris.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/homography.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/hsv_rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/iir.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/interp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/ireduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/lookup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/lu_split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/match_template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/medfilt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/memcopy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/moments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/morph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/nearest_neighbour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/orb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/orb_patch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/pad_array_borders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/random_engine_mersenne.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/random_engine_philox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/random_engine_threefry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/reduce_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/regions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/reorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/rotate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_dim.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_dim_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_dim_by_key_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_first.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_first_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_first_by_key_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/shared.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/shfl_intrinsics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/sobel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/sparse_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/susan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/thrust_sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/thrust_sort_by_key_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/topk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/transpose_inplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/logic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/lookup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/lu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/match_template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/medfilt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/minmax_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/moments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/morph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/nearest_neighbour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/orb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/platform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/plot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/print.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/qr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/reduce_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/regions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/reorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/rotate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/scan_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/shift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sobel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/solve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sort_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sparse_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/sparse_blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/surface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/susan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/svd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/threadsMgt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/thrust_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/topk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/unary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/vector_field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/GraphicsResourceManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Kernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Module.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/Param.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/anisotropic_diffusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/backend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/canny.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/cholesky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/debug_oneapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/device_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/err_oneapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/errorcodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/exampleFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/fft.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/fftconvolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/flood_fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/harris.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/hist_graphics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/homography.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/hsv_rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/iir.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/inverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/ireduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/jit/BufferNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/jit/kernel_generators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/KParam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/approx1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/approx2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/convolve1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/convolve2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/convolve3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/default_config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/interp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/memcopy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/random_engine_mersenne.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/random_engine_philox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/random_engine_threefry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/random_engine_write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/reduce_all.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/reduce_config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/reduce_dim.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/reduce_first.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/scan_dim.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/scan_first.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/transpose_inplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/kernel/wrap_dilated.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/logic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/lookup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/lu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/match_template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/medfilt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/moments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/morph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/nearest_neighbour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/orb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/platform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/plot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/print.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/qr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/reduce_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/regions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/reorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/rotate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/scan_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/shift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sobel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/solve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sort_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sparse_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/sparse_blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/surface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/susan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/svd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/topk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/unary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/vector_field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/GraphicsResourceManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Kernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Module.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/Param.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/anisotropic_diffusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/backend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/canny.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cholesky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cl2hpp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/clfft.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/complex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_cholesky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_inverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_lu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_qr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_solve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_sparse_blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_svd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/cpu/cpu_triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/debug_opencl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/device_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/err_clblast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/err_opencl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/errorcodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/exampleFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/fft.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/fftconvolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/flood_fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/harris.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/hist_graphics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/homography.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/hsv_rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/iir.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/inverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/ireduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/jit/BufferNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/jit/kernel_generators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/join.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/KParam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/anisotropic_diffusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/approx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/assign.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/bilateral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/canny.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv2_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve/conv_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/convolve_separable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/cscmm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/cscmv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/csrmm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/csrmv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/diagonal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/exampleFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/fast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/fftconvolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/flood_fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/harris.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/homography.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/hsv_rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/iir.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/interp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/ireduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/laset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/laset_band.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/laswp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/lookup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/lu_split.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/match_template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/medfilt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/memcopy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/moments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/morph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/names.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/nearest_neighbour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/orb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/pad_array_borders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/reduce_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/regions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/reorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/rotate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_dim.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_dim_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_dim_by_key_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_first.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_first_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_first_by_key_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sobel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sort_by_key_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sort_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sparse_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/susan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/swapdblk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/transpose_inplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/logic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/lookup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/lu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_blas_clblast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_cpu_blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_cpu_lapack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/magma/magma_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/match_template.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/medfilt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/moments.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/morph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/nearest_neighbour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/orb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/platform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/plot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/print.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/qr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/random_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/reduce_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/regions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/reorder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/rotate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/scan_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/select.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/shift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sobel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/solve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sort_by_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sort_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sparse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sparse_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/sparse_blas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/surface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/susan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/svd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/threadsMgt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/topk.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/triangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/unary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/unwrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/vector_field.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/test/binary_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/test/mmio/mmio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/test/relative_difference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/test/solve_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/test/sparse_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/arrayfire/test/testHelpers.hpp" />
+    <Font Include="../../thirdparty/owemdjee/arrayfire/docs/Prototype.ttf" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/ACKNOWLEDGEMENTS.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/ArrayFireConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/FetchContent/CMakeLists.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/LSANSuppression.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/build_version.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/examples.dox.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/launch-c.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/launch-cxx.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/launch-nvcc.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/nsis/NSIS.InstallOptions.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/nsis/NSIS.definitions.nsh.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/nsis/NSIS.template.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/osx_install/readme.html.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/osx_install/welcome.html.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/vcpkg/ports/lapack-reference/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakeModules/version_info.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/COPYRIGHT.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/Apache-2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/BSD 3-Clause.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/Boost Software License.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/FreeImage Public License.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/Half(MIT) License.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/ISSL License.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/OpenSIFT License.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/LICENSES/zlib-libpng License.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/README.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/README.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/configuring_arrayfire_environment.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/debugging.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/forge_visualization.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/getting_started.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/gfor.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/indexing.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/install.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/interop_cuda.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/interop_opencl.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/matrix_manipulation.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/release_notes.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/timing.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/tutorials.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/unified_backend.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/using_on_linux.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/using_on_osx.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/using_on_windows.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/docs/pages/vectorization.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/computer_vision/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/financial/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/getting_started/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/graphics/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/helloworld/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/image_processing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/lin_algebra/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/machine_learning/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/pde/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/examples/unified/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/api/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/api/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/api/unified/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/cpu/kernel/sort_by_key/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/scan_by_key/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/cuda/kernel/thrust_sort_by_key/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/oneapi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/scan_by_key/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/src/backend/opencl/kernel/sort_by_key/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/test/mmio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/arrayfire/vcpkg.json" />
+    <Xml Include="../../thirdparty/owemdjee/arrayfire/docs/layout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

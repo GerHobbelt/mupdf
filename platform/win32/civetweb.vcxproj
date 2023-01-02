@@ -230,6 +230,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/embed_certificate/ec_example.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/embedded_c/embedded_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/embedded_cpp/embedded_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/linux_ws_server_cpp/main.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/rest/cJSON/cJSON.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/rest/cJSON/cJSON_Utils.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/examples/rest/rest.c" />
@@ -241,6 +242,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/LuaXML_lib.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lfs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/lsqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/civetweb/src/third_party/sqlite3.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/cgi_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/civetweb/unittest/private.c" />
@@ -390,6 +392,7 @@
     <Text Include="../../thirdparty/owemdjee/civetweb/README.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/RELEASE_NOTES.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/build.cmd" />
     <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/01_basic/basic_spec.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/README.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/ci/test/civet.lua" />
@@ -398,6 +401,10 @@
     <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/platform.sh" />
     <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/run_ci_tests.sh" />
     <Text Include="../../thirdparty/owemdjee/civetweb/ci/travis/setup_lua.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/civetweb-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/civetweb-cpp.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/cmake/civetweb.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/contrib/buildroot/Config.in" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/APIReference.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/Building.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/Contribution.md" />
@@ -449,6 +456,7 @@
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_init_library.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_lock_connection.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_lock_context.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_match.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_md5.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_modify_passwords_file.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/docs/api/mg_modify_passwords_file_ha1.md" />
@@ -495,14 +503,25 @@
     <Text Include="../../thirdparty/owemdjee/civetweb/examples/README.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/examples/embed_certificate/build.sh" />
     <Text Include="../../thirdparty/owemdjee/civetweb/examples/https/README.md" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/examples/linux_ws_server_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/examples/linux_ws_server_cpp/README.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/examples/multidomain/README.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/examples/rest/cJSON/README.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/examples/ws_client/build.sh" />
     <Text Include="../../thirdparty/owemdjee/civetweb/examples/ws_server/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/format.bat" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/fuzztest/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/fuzztest/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/fuzztest/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/fuzztest/build_with_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/fuzztest/docroot/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/mingw.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/make_certs.bat" />
     <Text Include="../../thirdparty/owemdjee/civetweb/resources/cert/make_certs.sh" />
     <Text Include="../../thirdparty/owemdjee/civetweb/resources/check_defines.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/resources/complete.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/resources/coverity_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/resources/mingw.bat" />
     <Text Include="../../thirdparty/owemdjee/civetweb/resources/used_defines.txt" />
     <Text Include="../../thirdparty/owemdjee/civetweb/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/civetweb/src/third_party/LuaXML.lua" />
@@ -510,7 +529,9 @@
     <Text Include="../../thirdparty/owemdjee/civetweb/test/HugeText.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/README.md" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/ajax/echo.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/ajax/jquery.js" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/bad_script.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/canvasdir/canvas.js" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/cors.reply.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/dir with spaces/file with spaces.txt" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/dir with spaces/r&amp;d.txt" />
@@ -522,6 +543,7 @@
     <Text Include="../../thirdparty/owemdjee/civetweb/test/hello.txt" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/hello_gz_unzipped.txt" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/html_esc.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/htmldir/script.js" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/json.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/lua_backbround_script_logging.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/lua_backbround_script_timer.lua" />
@@ -550,6 +572,9 @@
     <Text Include="../../thirdparty/owemdjee/civetweb/test/scriptdir/index.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/websocket.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/websocket2.lua" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/windows.cgi.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/windows_fail.cgi.cmd" />
+    <Text Include="../../thirdparty/owemdjee/civetweb/test/windows_fail_silent.cgi.cmd" />
     <Text Include="../../thirdparty/owemdjee/civetweb/test/ws_status.lua" />
     <Text Include="../../thirdparty/owemdjee/civetweb/unittest/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/civetweb/unittest/build_and_test_default.sh" />

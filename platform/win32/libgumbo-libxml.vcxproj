@@ -19,17 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\gumbo-libxml\gumbo_libxml.pc.in" />
-    <None Include="..\..\thirdparty\owemdjee\gumbo-libxml\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\gumbo-libxml\example.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\gumbo-libxml\gumbo_libxml.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\gumbo-libxml\gumbo_libxml.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="libicu.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fff6b65d}</Project>
     </ProjectReference>
@@ -247,6 +236,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gumbo-libxml/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.h" />
+    <Text Include="../../thirdparty/owemdjee/gumbo-libxml/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gumbo-libxml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gumbo-libxml/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gumbo-libxml/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gumbo-libxml/gumbo_libxml.pc.in" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5EDCF4FD-0291-4FB9-8D96-75895703BE01}</ProjectGuid>
+    <RootNamespace>libopenjpeg_tools</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENJPEG_TOOLS;OPENJPEG_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENJPEG_TOOLS;OPENJPEG_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENJPEG_TOOLS;OPENJPEG_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENJPEG_TOOLS;OPENJPEG_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/openjpeg/cmake/TestFileOffsetBits.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/cmake/TestWindowsFSeek.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/common/color.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/common/opj_getopt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/convert.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/convertbmp.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/convertpng.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/converttif.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/index.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/opj_compress.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/opj_decompress.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jp2/opj_dump.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jpip/opj_dec_server.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jpip/opj_jpip_addxml.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jpip/opj_jpip_test.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jpip/opj_jpip_transcode.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/jpip/opj_server.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJAbout.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJDialogs.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJThreads.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJViewer.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/imagjpeg2000.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/imagmxf.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/wxj2kparser.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/wxjp2parser.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/bench_dwt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/bio.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/cidx_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/cio.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/dwt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/event.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/function_list.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/ht_dec.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/image.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/invert.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/j2k.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/jp2.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/mct.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/mqc.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/openjpeg.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_clock.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_malloc.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/phix_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/pi.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/ppix_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/sparse_array.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/t1.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/t1_generate_luts.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/t1_ht_generate_luts.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/t2.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/tcd.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/test_sparse_array.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/tgt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/thix_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/thread.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjp2/tpix_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/auxtrans_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/box_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/boxheader_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/byte_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/cache_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/cachemodel_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/channel_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/codestream_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/dec_clientmsg_handler.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/faixbox_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/ihdrbox_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/imgreg_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/imgsock_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/index_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/j2kheader_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/jp2k_decoder.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/jp2k_encoder.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/jpip_parser.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/jpipstream_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/manfbox_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/marker_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/metadata_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/mhixbox_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/msgqueue_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/openjpip.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/placeholder_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/query_parser.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/session_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/sock_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/src/lib/openjpip/target_manager.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/compare_dump_files.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/compare_images.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/compare_raw_files.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/fuzzers/fuzzingengine.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/fuzzers/opj_decompress_fuzzer_J2K.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/fuzzers/opj_decompress_fuzzer_JP2.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/include_openjpeg.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/j2k_random_tile_access.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/pdf2jp2.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/ppm2rgb3.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/test_decode_area.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/test_tile_decoder.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/test_tile_encoder.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/unit/testempty0.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/unit/testempty1.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tests/unit/testempty2.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/astyle/ASBeautifier.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/astyle/ASEnhancer.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/astyle/ASFormatter.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/astyle/ASLocalizer.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/astyle/ASResource.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/astyle/astyle_main.cpp" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsalpha.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmscam02.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmscgats.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmscnvrt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmserr.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsgamma.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsgmt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmshalf.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsintrp.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsio0.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsio1.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmslut.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsmd5.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsmtrx.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsnamed.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsopt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmspack.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmspcs.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsplugin.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsps2.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmssamp.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmssm.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmstypes.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsvirt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmswtpnt.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/cmsxform.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/png.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngerror.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngget.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngmem.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngpread.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngread.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngrio.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngrtran.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngrutil.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngset.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngtrans.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngwio.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngwrite.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngwtran.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libpng/pngwutil.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/snprintf.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/test_inline.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_aux.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_close.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_codec.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_color.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_compress.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_dir.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_dirinfo.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_dirread.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_dirwrite.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_dumpmode.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_error.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_extension.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_fax3.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_fax3sm.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_flush.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_getimage.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_jbig.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_jpeg.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_jpeg_12.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_luv.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_lzma.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_lzw.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_next.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_ojpeg.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_open.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_packbits.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_pixarlog.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_predict.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_print.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_read.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_stream.cxx" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_strip.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_swab.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_thunder.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_tile.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_unix.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_version.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_warning.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_win32.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_write.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_zip.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/adler32.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/compress.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/crc32.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/deflate.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/gzclose.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/gzlib.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/gzread.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/infback.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/inffast.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/inflate.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/inftrees.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/trees.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/uncompr.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/thirdparty/libz/zutil.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/tools/travis-ci/detect-avx2.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/wrapping/csharp/openjp2/CSharpOpenJPEG.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/wrapping/java/openjp2/JavaOpenJPEG.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/wrapping/java/openjp2/JavaOpenJPEGDecoder.c" />
+    <ClCompile Include="../../thirdparty/openjpeg/wrapping/java/openjp2/index.c" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/common/color.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/common/format_defs.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/common/opj_getopt.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/common/opj_string.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/jp2/convert.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/jp2/index.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/jp2/windirent.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJViewer.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/about_htm.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/build.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/imagjpeg2000.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/imagmxf.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/bio.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/cidx_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/cio.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/dwt.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/event.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/function_list.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/image.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/indexbox_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/invert.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/j2k.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/jp2.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/mct.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/mqc.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/mqc_inl.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/openjpeg.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_clock.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_codec.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_common.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_config.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_config_private.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_includes.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_intmath.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_inttypes.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_malloc.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_stdint.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/pi.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/sparse_array.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/t1.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/t1_ht_luts.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/t1_luts.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/t2.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/tcd.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/tgt.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/thread.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjp2/tls_keys.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/auxtrans_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/box_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/boxheader_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/byte_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/cache_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/cachemodel_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/channel_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/codestream_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/dec_clientmsg_handler.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/faixbox_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/ihdrbox_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/imgreg_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/imgsock_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/index_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/j2kheader_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/jp2k_decoder.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/jp2k_encoder.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/jpip_parser.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/jpipstream_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/manfbox_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/marker_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/metadata_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/mhixbox_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/msgqueue_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/openjpip.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/placeholder_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/query_parser.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/session_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/sock_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/src/lib/openjpip/target_manager.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/astyle/ASLocalizer.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/astyle/astyle.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/astyle/astyle_main.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/include/zconf.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/include/zlib.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/liblcms2/include/lcms2.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/liblcms2/include/lcms2_plugin.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/liblcms2/src/lcms2_internal.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libpng/png.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libpng/pngconf.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libpng/pngdebug.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libpng/pnginfo.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libpng/pnglibconf.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libpng/pngpriv.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libpng/pngstruct.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/libport.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/t4.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_dir.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_fax3.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_predict.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tiff.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tiffio.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tiffio.hxx" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tiffiop.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/tiffvers.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libtiff/uvcode.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/crc32.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/deflate.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/gzguts.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/inffast.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/inffixed.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/inflate.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/inftrees.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/trees.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/zlib.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/thirdparty/libz/zutil.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/wrapping/java/openjp2/index.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/wrapping/java/openjp2/org_openJpeg_OpenJPEGJavaDecoder.h" />
+    <ClInclude Include="../../thirdparty/openjpeg/wrapping/java/openjp2/org_openJpeg_OpenJPEGJavaEncoder.h" />
+    <Image Include="../../thirdparty/openjpeg/doc/jpip_architect.png" />
+    <Image Include="../../thirdparty/openjpeg/doc/jpip_protocol.png" />
+    <Image Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/about/opj_logo.png" />
+    <Image Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJChild.ico" />
+    <Image Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJViewer.ico" />
+    <ResourceCompile Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJViewer.rc" />
+    <Text Include="../../thirdparty/openjpeg/AUTHORS.md" />
+    <Text Include="../../thirdparty/openjpeg/CHANGELOG.md" />
+    <Text Include="../../thirdparty/openjpeg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/CMakeSettings.json" />
+    <Text Include="../../thirdparty/openjpeg/INSTALL.md" />
+    <Text Include="../../thirdparty/openjpeg/NEWS.md" />
+    <Text Include="../../thirdparty/openjpeg/README.md" />
+    <Text Include="../../thirdparty/openjpeg/THANKS.md" />
+    <Text Include="../../thirdparty/openjpeg/cmake/CTestCustom.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/cmake/OpenJPEGConfig.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/cmake/TestLargeFiles.c.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/doc/Doxyfile.dox.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/doc/mainpage.dox.in" />
+    <Text Include="../../thirdparty/openjpeg/doc/openjpip.dox.in" />
+    <Text Include="../../thirdparty/openjpeg/scripts/astyle.sh" />
+    <Text Include="../../thirdparty/openjpeg/scripts/prepare-commit.sh" />
+    <Text Include="../../thirdparty/openjpeg/scripts/remove_temporary_files.sh" />
+    <Text Include="../../thirdparty/openjpeg/scripts/verify-indentation.sh" />
+    <Text Include="../../thirdparty/openjpeg/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/common/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/common/opj_apps_config.h.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/jp2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/jpip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/jpip/opj_viewer/dist/manifest.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/jpip/opj_viewer_xerces/dist/manifest.txt.in" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/Readme.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJChild16.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/OPJViewer16.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/icon1.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/icon2.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/icon3.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/icon4.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/icon5.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/license.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/opj_logo.xpm" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/readmeafter.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/bin/wx/OPJViewer/source/readmebefore.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/lib/openjp2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/lib/openjp2/libopenjp2.pc.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_config.h.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/src/lib/openjp2/opj_config_private.h.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/src/lib/openjpip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/src/lib/openjpip/libopenjpip.pc.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/tests/conformance/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/tests/fuzzers/README.TXT" />
+    <Text Include="../../thirdparty/openjpeg/tests/fuzzers/build_google_oss_fuzzers.sh" />
+    <Text Include="../../thirdparty/openjpeg/tests/fuzzers/build_seed_corpus.sh" />
+    <Text Include="../../thirdparty/openjpeg/tests/nonregression/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/tests/nonregression/md5refs.txt" />
+    <Text Include="../../thirdparty/openjpeg/tests/nonregression/test_suite.ctest.in" />
+    <Text Include="../../thirdparty/openjpeg/tests/performance/compare_perfs.py" />
+    <Text Include="../../thirdparty/openjpeg/tests/performance/perf_test.py" />
+    <Text Include="../../thirdparty/openjpeg/tests/performance/perf_test_filelist.csv" />
+    <Text Include="../../thirdparty/openjpeg/tests/profiling/filter_massif_output.py" />
+    <Text Include="../../thirdparty/openjpeg/tests/unit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/README.txt" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/astyle/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/astyle/LICENSE.md" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/liblcms2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/libpng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/libtiff/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_config.h.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/libtiff/tif_config.h.in" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/libtiff/tiffconf.h.cmake.in" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/libtiff/tiffconf.h.in" />
+    <Text Include="../../thirdparty/openjpeg/thirdparty/libz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/tools/abi-tracker/openjpeg.json" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/abi-check.sh" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/install.sh" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/knownfailures-Ubuntu14.04-gcc4.8.4-i386-Release-3rdP.txt" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/knownfailures-Ubuntu20.04-clang10.0.0-i386-Release-3rdP.txt" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/knownfailures-Ubuntu20.04-gcc9.4.0-x86_64-Release-3rdP.txt" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/knownfailures-all.txt" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/knownfailures-windows-vs2010-x86-Release-3rdP.txt" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/knownfailures-windows-vs2015-x64-avx2-Release-3rdP.txt" />
+    <Text Include="../../thirdparty/openjpeg/tools/travis-ci/run.sh" />
+    <Text Include="../../thirdparty/openjpeg/wrapping/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/wrapping/csharp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/wrapping/csharp/openjp2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/wrapping/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/openjpeg/wrapping/java/openjp2/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

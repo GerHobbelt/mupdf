@@ -354,6 +354,16 @@
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixneon.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixsse.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/simddetect.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/dotproduct.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/dotproductavx.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/dotproductfma.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/dotproductneon.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/dotproductsse.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/intsimdmatrix.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/intsimdmatrixavx2.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/intsimdmatrixneon.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/intsimdmatrixsse.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/simddetect.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccmain/adaptions.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccmain/applybox.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccmain/control.cpp" />
@@ -479,6 +489,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/dict/permdawg.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/stopper.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/trie.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/fmt/src/format.cc" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/convolve.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/fullyconnected.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/functions.cpp" />
@@ -496,7 +507,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/series.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/stridemap.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/tfnetwork.cpp" />
-    <ClInclude Include="../../thirdparty/tesseract/src/lstm/tfnetwork.pb.cc" />
+    <ClCompile Include="../../thirdparty/tesseract/src/lstm/tfnetwork.pb.cc" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/weightmatrix.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/opencl/openclwrapper.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/svpaint.cpp" />
@@ -608,7 +619,8 @@
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/tface.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/wordclass.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/wordrec.cpp" />
-    <ClInclude Include="../../thirdparty/tesseract/sw.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/sw.cpp" />
+    <ClInclude Include="../../thirdparty/tesseract/include/tesseract/assert.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/baseapi.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/capi.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/capi_training_tools.h" />
@@ -626,6 +638,9 @@
     <ClInclude Include="../../thirdparty/tesseract/src/arch/dotproduct.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/arch/intsimdmatrix.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/arch/simddetect.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/arch_sse/dotproduct.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/arch_sse/intsimdmatrix.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/arch_sse/simddetect.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccmain/control.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccmain/docqual.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/ccmain/equationdetect.h" />
@@ -750,6 +765,9 @@
     <ClInclude Include="../../thirdparty/tesseract/src/dict/matchdefs.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/dict/stopper.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/dict/trie.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/fmt/include/fmt/core.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/fmt/include/fmt/format-inl.h" />
+    <ClInclude Include="../../thirdparty/tesseract/src/fmt/include/fmt/format.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/lstm/convolve.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/lstm/fullyconnected.h" />
     <ClInclude Include="../../thirdparty/tesseract/src/lstm/functions.h" />
@@ -903,6 +921,9 @@
     <Text Include="../../thirdparty/tesseract/make-installer.sh" />
     <Text Include="../../thirdparty/tesseract/nsis/Makefile.am" />
     <Text Include="../../thirdparty/tesseract/run_cmake.sh" />
+    <Text Include="../../thirdparty/tesseract/src/fmt/ChangeLog.rst" />
+    <Text Include="../../thirdparty/tesseract/src/fmt/LICENSE.rst" />
+    <Text Include="../../thirdparty/tesseract/src/fmt/README.rst" />
     <Text Include="../../thirdparty/tesseract/src/lstm/generate_lut.py" />
     <Text Include="../../thirdparty/tesseract/src/training/CMakeLists.txt" />
     <Text Include="../../thirdparty/tesseract/tessdata/Makefile.am" />

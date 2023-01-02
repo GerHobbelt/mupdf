@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -12,55 +12,59 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Header Files\cli">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\tests\bench">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\tests\collisions">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\tests\collisions\allcodecs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\cmake_unofficial">
+    <Filter Include="Header Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc">
+    <Filter Include="Header Files\tests\bench">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tests\collisions">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tests\collisions\allcodecs">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\cli">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\cmake_unofficial">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\doc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\tests\collisions">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\tests\collisions\allcodecs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\cli">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests\bench">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests\collisions">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests\collisions\allcodecs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_bench.c">
+      <Filter>Source Files\cli</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_os_specific.c">
       <Filter>Source Files\cli</Filter>
     </ClCompile>
@@ -121,6 +125,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_arch.h">
       <Filter>Header Files\cli</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_bench.h">
+      <Filter>Header Files\cli</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_config.h">
       <Filter>Header Files\cli</Filter>
     </ClInclude>
@@ -175,17 +182,41 @@
     <Text Include="../../thirdparty/owemdjee/xxHash/README.md">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/cli/README.md">
+      <Filter>Misc Files\cli</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/cli/xxhsum.1.md">
+      <Filter>Misc Files\cli</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/CMakeLists.txt">
+      <Filter>Misc Files\cmake_unofficial</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/README.md">
+      <Filter>Misc Files\cmake_unofficial</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/xxHashConfig.cmake.in">
       <Filter>Misc Files\cmake_unofficial</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/xxHash/doc/README.md">
       <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/doc/xxhash_spec.md">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/libxxhash.pc.in">
+      <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/README.md">
       <Filter>Misc Files\tests\collisions</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/README.md">
       <Filter>Misc Files\tests\collisions\allcodecs</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/tests/filename-escape.sh">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/xxHash/tests/unicode_lint.sh">
+      <Filter>Misc Files\tests</Filter>
     </Text>
   </ItemGroup>
 </Project>

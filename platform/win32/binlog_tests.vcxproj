@@ -226,7 +226,24 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libbinlog.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffdf7ea}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgbenchmark.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/binaryio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/getopt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/bin/printers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/ConsumeLoop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/DetailedHelloWorld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/HelloWorld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/LogRotation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/MultiOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/TextOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/example/TscClock.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/EntryStream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/EventStream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/include/binlog/PrettyPrinter.cpp" />
@@ -237,6 +254,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Categories.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/IntegrationTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/Logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingAdaptedConcepts.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingAdaptedStructs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingBoostTypes.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/integration/LoggingCStrings.cpp" />
@@ -287,7 +305,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/tag.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/tag_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/visit.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\binlog\tools\monolithic_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/tools/generate_foreach_macro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/binlog/tools/monolithic_main.c" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/bin/getopt.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/bin/printers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/include/binlog/Address.hpp" />
@@ -365,7 +384,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_streams.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_structs.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/binlog/test/unit/mserialize/test_type_lists.hpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\binlog\tools\monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/binlog/tools/monolithic_examples.h" />
     <Text Include="../../thirdparty/owemdjee/binlog/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/binlog/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/binlog/INSTALL.md" />
@@ -381,14 +400,6 @@
     <Text Include="../../thirdparty/owemdjee/binlog/test/cmake/install/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/binlog/test/cmake/subdir/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/binlog/test/doctest/detail/doctest-LICENSE.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libbinlog.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518fffdf7ea}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libgbenchmark.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

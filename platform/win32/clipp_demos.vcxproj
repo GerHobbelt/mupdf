@@ -209,15 +209,93 @@
       <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/clipp;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\scripts\libclipp\monolithic_main.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\clipp\examples\monolithic_examples.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\scripts\libclipp\monolithic_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/actions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/align.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/alternatives.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/annotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/argv0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/commands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/complex_nesting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/counter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/doc_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/documentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/finder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/float_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/groups.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/joinable_flags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/naval_fate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/nested_alternatives.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/numbers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/options_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/parsing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/positional_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/repeatable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/required_flags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/sanity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/send.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/simplify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/switches.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/tagnames.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/text_formatting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/timing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/examples/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/actions_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/alternative_groups_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/alternative_options_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/alternative_required_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test04.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test05.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test06.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test07.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test08.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test09.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/blocking_test10.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/documentation_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/empty_args.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/flag_param_factories_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_flags_test1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_flags_test2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_flags_test3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_flags_test4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_flags_test5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_flags_test6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_params_test1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_params_test2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/joined_sequence_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/mixed_params_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/nesting_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/options_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/prefix_free_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/prefix_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/repeatability_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/repeatable_alternatives_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/required_params_test1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/required_params_test2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/usage_lines_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/values_conversion_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/values_filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/clipp/test/values_sequencing_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/clipp/examples/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clipp/include/clipp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clipp/test/monolithic_tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/clipp/test/testing.h" />
+    <Text Include="../../thirdparty/owemdjee/clipp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/clipp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/clipp/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/clipp/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/clipp/test/run_tests.py" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

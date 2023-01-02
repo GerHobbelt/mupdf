@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libCxImage_demos</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFB783F}</ProjectGuid>
+    <RootNamespace>libCxImage_demos</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCXIMAGE_DEMOS;CXIMAGE_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/CxImageCrtDll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/CxImageMfcDll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/StdAfx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/tif_xfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximabmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximadsp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaenc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaexif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximagif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximahist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaico.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximainfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximajas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximajbg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximajpg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximalpha.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximalyr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximamng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximapal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximapcx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximapng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximapsd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaraw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximasel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaska.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximatga.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximatif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximatran.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximawbmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximawmf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/ximawnd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/xmemfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/AxImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/AxImagePpg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/StdAfx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/aximagectl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/BCMenu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/ChildFrm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgColorize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgCombine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgCustomFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgDataExt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgDecBpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgDither.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgExpand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgFFT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgFloodFill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgGamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgHisto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgIncBpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgJpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgMix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgOpacity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgOptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgPalette.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgRepair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgResample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgRotate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgShadow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgSkew.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgText.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgThreshold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/DlgURL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/MainFrm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/Quantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/StdAfx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/TwainCpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/demoDoc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/demoView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/dlgcapture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/logomdi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo/xTargetButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo2/Console.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/CxPicture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/DateTimeFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/ExDialog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/ExDlgEngine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/FileOpenDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/Misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/demo_ce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/demo_ceDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_cm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_icc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_iccdata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_seq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_tmr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_tvp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/base/jas_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/bmp/bmp_cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/bmp/bmp_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/bmp/bmp_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jp2/jp2_cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jp2/jp2_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jp2/jp2_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_bs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_cs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mqcod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mqdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mqenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_qmfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t1cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t1dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t1enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t2cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t2dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t2enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_tagtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_tsfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpg/jpg_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpg/jpg_dummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpg/jpg_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/jpg/jpg_val.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/mif/mif_cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/pgx/pgx_cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/pgx/pgx_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/pgx/pgx_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/pnm/pnm_cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/pnm/pnm_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/pnm/pnm_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/ras/ras_cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/ras/ras_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jasper/ras/ras_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jbig/jbig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jbig/jbig_tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jbig/tstcodec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/ansi2knr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/cdjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/cjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/ckconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/djpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jaricom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jccoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jccolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcdctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jchuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcomapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcprepct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jcsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdatadst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdatasrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdcoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jddctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdmerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdpostct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jdtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jfdctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jfdctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jfdctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jidctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jidctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jidctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemansi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemdos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemnobs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jpegtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jquant1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jquant2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/jutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdcolmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdrle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdswitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/rdtarga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/transupp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/wrbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/wrgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/wrjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/wrppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/wrrle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/jpeg/wrtarga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/adjustment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/bevel_emboss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/blend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/boundary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/brightness_contrast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/channel_image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/channel_mixer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/color_balance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/color_mode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/color_overlay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/curves.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/descriptor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/drop_shadow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/effects.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/file_header.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/fixed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/gaussian_blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/gradient_blend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/gradient_fill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/gradient_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/gradient_overlay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/hue_saturation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/image_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/image_resource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/inner_glow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/inner_shadow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/invert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/layer_mask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/levels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/outer_glow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/pattern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/pattern_fill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/pattern_overlay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/photo_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/posterize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/psd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_system.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/rect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/satin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/selective_color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/solid_color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/stroke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/threshold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/thumbnail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/libpsd/type_tool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_callback_xs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunk_descr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunk_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunk_prc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunk_xs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_cms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_display.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_dither.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_hlapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_object_prc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_pixels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_prop_xs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_trace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/mng/libmng_zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngget.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngpread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngrio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngrtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngrutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngvalid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngwio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngwtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/png/pngwutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/raw/dcr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/raw/dcraw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/raw/libdcr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/mkg3states.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_acorn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_apple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_atari.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_aux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_close.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_dirinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_dirread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_dirwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_dumpmode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_extension.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_fax3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_fax3sm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_getimage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_jbig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_luv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_lzw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_msdos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_next.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_ojpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_packbits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_pixarlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_predict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_stream.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_strip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_swab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_thunder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_warning.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_win3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/tiff/tif_zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/ChildData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/args.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/env.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/errno.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/io_wce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/pipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/redir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/stdio_extras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/stdlib_extras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/string_extras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/timeb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/ts_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wce211_ctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wce211_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wce_bsearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wce_lfind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wce_localtime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wince.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/winmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/winsock_extras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/gzclose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/gzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/gzread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/infback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/inffast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/inftrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/minigzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/trees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/uncompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CxImage/zlib/zutil.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/CxImageMfcDll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/StdCrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/resrc1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/xfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximabmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximacfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximadef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximagif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaico.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximajas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximajbg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximajpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximamng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximapcx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximapng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximapsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximaska.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximatga.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximatif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximawbmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/ximawmf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/xiofile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage/xmemfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/AxImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/AxImagePpg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/Resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/aximagectl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/BCMenu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/ChildFrm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgColorize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgCombine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgCustomFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgDataExt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgDecBpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgDither.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgExpand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgFFT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgFloodFill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgGamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgHisto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgIncBpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgJpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgMix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgOpacity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgPalette.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgRepair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgResample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgRotate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgShadow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgSkew.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgText.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgThreshold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/DlgURL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/MainFrm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/Quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/TwainCpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/demo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/demoDoc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/demoView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/dlgcapture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/enumwnd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/logomdi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/memdc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/twain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo/xTargetButton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo2/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/CxPicture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/DateTimeFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/ExDialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/ExDlgEngine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/FileOpenDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/Misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/demo_ce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/demo_ceDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/resourceppc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/demo_ce/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/bmp/bmp_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/bmp/bmp_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_cm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_config2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_fix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_icc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_tmr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_tvp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jasper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jp2/jp2_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jp2/jp2_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_bs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_cs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_fix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_flt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mqcod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mqdec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_mqenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_qmfb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t1cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t1dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t1enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t2cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t2dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_t2enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_tagtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_tsfb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpc/jpc_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpg/jpg_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpg/jpg_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/jpg/jpg_jpeglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/mif/mif_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/pgx/pgx_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/pgx/pgx_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/pnm/pnm_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/pnm/pnm_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/ras/ras_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jasper/ras/ras_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jbig/jbig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/cderror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/cdjpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jdct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jinclude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jmorecfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jpegint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jpeglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/jversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/jpeg/transupp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/libpsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_blend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_fixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_gradient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_rect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/libpsd/psd_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunk_descr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunk_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunk_prc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_chunks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_cms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_display.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_dither.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_jpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_object_prc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_pixels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_trace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/mng/libmng_zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/png/png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/png/pngconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/png/pngdebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/png/pnginfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/png/pnglibconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/png/pngpriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/png/pngstruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/raw/libdcr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/t4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tif_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tif_config.wince.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tif_dir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tif_fax3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tif_predict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tiffconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tiffconf.wince.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tiffio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tiffio.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tiffiop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/tiffvers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/tiff/uvcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/conio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/ctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/fcntl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/setjmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/stdarg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/stddef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/stdlib_extras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/sys/stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/sys/timeb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/sys/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/include/winsock_extras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/ChildData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/direct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/pipe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/redir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/ts_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wce_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/wcecompat/src/wince.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/gzguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/inffixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/zconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CxImage/zlib/zutil.h" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/aximagectl.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/Toolbar.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/b1.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/bg.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/bg.gif" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/bg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/bg2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/canc.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/demo.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/demoDoc.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/gray.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/ico2.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/no1.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/ok.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/r1.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/toolbar1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/toolbar2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo/Res/us.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/CeSkin.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/CeSkinDoc.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/ClosedFolder.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/Cmdbar.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/FileOpen.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/FileOpen_VS.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/Folder_16.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/Folder_32.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/OpenFolder.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/OpenFolder_16.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/OpenFolder_32.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/OpenPocket_16.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/Pocket_16.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/bitmap1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/demo_ce.ico" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/fileopen.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/demo_ce/res/sort_arr.bmp" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/cximagelogo.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2blank.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2doc.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2lastnode.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2link.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2mlastnode.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2mnode.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2node.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2plastnode.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2pnode.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/ftv2vertline.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/tab_b.gif" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/tab_l.gif" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/doc/doxy/html/tab_r.gif" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/png/pngbar.jpg" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/png/pngbar.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/png/pngnow.png" />
+    <Image Include="../../thirdparty/owemdjee/CxImage/png/pngtest.png" />
+    <MASM Include="../../thirdparty/owemdjee/CxImage/jpeg/jmemdosa.asm" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/CxImageCrtDll.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/CxImage/CxImage/CxImageDLL/CxImageMfcDll.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/CxImage/CxImage_ocx/AxImage.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/CxImage/demo/demo.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/CxImage/demo_ce/demo_ceppc.rc" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/CxImage/Doxyfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/CxImage/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jasper/include/jasper/jas_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jbig/copying.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/coderules.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/filelist.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/install.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/jdosaobj.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/libjpeg.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/structure.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/jpeg/wizard.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/mng/CHANGES.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/mng/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/mng/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/png/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/png/libpng-config.in" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/png/libpng-manual.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/png/libpng.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/zlib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/zlib/zconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/CxImage/zlib/zlib.pc.in" />
+    <Xml Include="../../thirdparty/owemdjee/CxImage/zlib/treebuild.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -18,25 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\CHM-lib\NEWS" />
-    <None Include="..\..\thirdparty\owemdjee\CHM-lib\NOTES" />
-    <None Include="..\..\thirdparty\owemdjee\CHM-lib\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\CHM-lib\src\chm_lib.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\CHM-lib\src\lzx.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\CHM-lib\tools\chm_http.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\CHM-lib\tools\enum.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\CHM-lib\tools\extract.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\CHM-lib\tools\sha1.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\CHM-lib\tools\test.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\CHM-lib\src\chm_lib.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\CHM-lib\src\lzx.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\CHM-lib\tools\sha1.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libchm_io</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFDBCF53}</ProjectGuid>
@@ -244,6 +225,28 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/CHM-lib/src/chm_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CHM-lib/src/lzx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CHM-lib/tools/chm_http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CHM-lib/tools/enum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CHM-lib/tools/extract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CHM-lib/tools/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/CHM-lib/tools/test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/CHM-lib/osx/CHMFramework/CHM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CHM-lib/src/chm_lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CHM-lib/src/lzx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CHM-lib/tools/sha1.h" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/build_common.sh" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/check_ref.sh" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/clang-analyzer.sh" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/fmt.sh" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/fuzz.sh" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/run_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/CHM-lib/test_one.sh" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

@@ -19,16 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\glob\standalone\source\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\scripts\libglob\glob\version.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\glob\include\glob\glob.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\glob\single_include\glob\glob.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="libglob.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff518d62}</Project>
     </ProjectReference>
@@ -280,6 +270,20 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\scripts\libglob\glob\version.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/glob/source/glob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/glob/standalone/source/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/glob/include/glob/glob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/glob/single_include/glob/glob.hpp" />
+    <Image Include="../../thirdparty/owemdjee/glob/img/logo.png" />
+    <Text Include="../../thirdparty/owemdjee/glob/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glob/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/glob/README.md" />
+    <Text Include="../../thirdparty/owemdjee/glob/all/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/glob/build_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/glob/standalone/CMakeLists.txt" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

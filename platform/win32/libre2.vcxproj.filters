@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -7,37 +7,52 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{42f0fc98-34f6-4567-b3cf-de13e74a89ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Misc Files">
+      <UniqueIdentifier>{b1798409-2031-413d-9df7-70b0202ddd98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files\re2">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\re2\fuzzing">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\re2\fuzzing\compiler-rt">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\re2\fuzzing\compiler-rt\include">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\re2\fuzzing\compiler-rt\include\fuzzer">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\re2\testing">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\util">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\re2">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\re2\testing">
+    <Filter Include="Header Files\re2\fuzzing">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\re2\fuzzing\compiler-rt">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\re2\fuzzing\compiler-rt\include">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\re2\fuzzing\compiler-rt\include\fuzzer">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\re2\testing">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\benchlog">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\doc">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\re2">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\re2">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\re2\fuzzing">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\re2\testing">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\util">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/filtered_re2.cc">
       <Filter>Source Files\re2</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/re2/re2/fuzzing/re2_fuzzer.cc">
+      <Filter>Source Files\re2\fuzzing</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/mimics_pcre.cc">
       <Filter>Source Files\re2</Filter>
@@ -191,6 +209,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/benchmark.cc">
       <Filter>Source Files\util</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/re2/util/fuzz.cc">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/re2/util/monolithic_main.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/pcre.cc">
       <Filter>Source Files\util</Filter>
     </ClCompile>
@@ -278,6 +302,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/re2/util/mix.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/re2/util/monolithic_examples.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/re2/util/mutex.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
@@ -296,5 +323,36 @@
     <ClInclude Include="../../thirdparty/owemdjee/re2/util/util.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <Text Include="../../thirdparty/owemdjee/re2/CMakeLists.txt">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/CONTRIBUTING.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/SECURITY.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/benchlog/benchplot.py">
+      <Filter>Misc Files\benchlog</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/doc/syntax.txt">
+      <Filter>Misc Files\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/re2.pc.in">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/re2/make_unicode_casefold.py">
+      <Filter>Misc Files\re2</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/re2/make_unicode_groups.py">
+      <Filter>Misc Files\re2</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/re2/unicode.py">
+      <Filter>Misc Files\re2</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/re2/re2Config.cmake.in">
+      <Filter>Misc Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
+    

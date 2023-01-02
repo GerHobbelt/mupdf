@@ -153,8 +153,14 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\freetype\builds\windows\ftdebug.c" />
-    <ClCompile Include="..\..\thirdparty\freetype\builds\windows\ftsystem.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/amiga/src/base/ftdebug.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/amiga/src/base/ftsystem.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/mac/ftmac.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/unix/ftsystem.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/vms/ftsystem.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/wince/ftdebug.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/windows/ftdebug.c" />
+    <ClCompile Include="../../thirdparty/freetype/builds/windows/ftsystem.c" />
     <ClCompile Include="../../thirdparty/freetype/src/autofit/afblue.c" />
     <ClCompile Include="../../thirdparty/freetype/src/autofit/afcjk.c" />
     <ClCompile Include="../../thirdparty/freetype/src/autofit/afdummy.c" />
@@ -176,6 +182,7 @@
     <ClCompile Include="../../thirdparty/freetype/src/base/ftcid.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/ftcolor.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/ftdbgmem.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/base/ftdebug.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/fterrors.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/ftfntfmt.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/ftfstype.c" />
@@ -199,6 +206,7 @@
     <ClCompile Include="../../thirdparty/freetype/src/base/ftstream.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/ftstroke.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/ftsynth.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/base/ftsystem.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/fttrigon.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/fttype1.c" />
     <ClCompile Include="../../thirdparty/freetype/src/base/ftutil.c" />
@@ -332,6 +340,7 @@
     <ClCompile Include="../../thirdparty/freetype/src/svg/ftsvg.c" />
     <ClCompile Include="../../thirdparty/freetype/src/svg/svg.c" />
     <ClCompile Include="../../thirdparty/freetype/src/tools/apinames.c" />
+    <ClCompile Include="../../thirdparty/freetype/src/tools/ftrandom/ftrandom.c" />
     <ClCompile Include="../../thirdparty/freetype/src/tools/test_afm.c" />
     <ClCompile Include="../../thirdparty/freetype/src/tools/test_bbox.c" />
     <ClCompile Include="../../thirdparty/freetype/src/tools/test_trig.c" />
@@ -355,6 +364,11 @@
     <ClCompile Include="../../thirdparty/freetype/src/type42/t42parse.c" />
     <ClCompile Include="../../thirdparty/freetype/src/type42/type42.c" />
     <ClCompile Include="../../thirdparty/freetype/src/winfonts/winfnt.c" />
+    <ClCompile Include="../../thirdparty/freetype/tests/issue-1063/main.c" />
+    <ClInclude Include="../../thirdparty/freetype/builds/amiga/include/config/ftconfig.h" />
+    <ClInclude Include="../../thirdparty/freetype/builds/amiga/include/config/ftmodule.h" />
+    <ClInclude Include="../../thirdparty/freetype/builds/atari/ATARI.H" />
+    <ClInclude Include="../../thirdparty/freetype/builds/vms/ftconfig.h" />
     <ClInclude Include="../../thirdparty/freetype/devel/ft2build.h" />
     <ClInclude Include="../../thirdparty/freetype/devel/ftoption.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/config/ftconfig.h" />
@@ -416,6 +430,7 @@
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/ftgloadr.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/fthash.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/ftmemory.h" />
+    <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/ftmmtypes.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/ftobjs.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/ftpsprop.h" />
     <ClInclude Include="../../thirdparty/freetype/include/freetype/internal/ftrfork.h" />
@@ -625,7 +640,14 @@
     <Text Include="../../thirdparty/freetype/LICENSE.TXT" />
     <Text Include="../../thirdparty/freetype/README.git" />
     <Text Include="../../thirdparty/freetype/autogen.sh" />
+    <Text Include="../../thirdparty/freetype/builds/atari/README.TXT" />
+    <Text Include="../../thirdparty/freetype/builds/atari/gen-purec-patch.sh" />
     <Text Include="../../thirdparty/freetype/builds/cmake/testbuild.sh" />
+    <Text Include="../../thirdparty/freetype/builds/mac/FreeType.m68k_cfm.make.txt" />
+    <Text Include="../../thirdparty/freetype/builds/mac/FreeType.m68k_far.make.txt" />
+    <Text Include="../../thirdparty/freetype/builds/mac/FreeType.ppc_carbon.make.txt" />
+    <Text Include="../../thirdparty/freetype/builds/mac/FreeType.ppc_classic.make.txt" />
+    <Text Include="../../thirdparty/freetype/builds/mac/ascii2mpw.py" />
     <Text Include="../../thirdparty/freetype/builds/meson/extract_freetype_version.py" />
     <Text Include="../../thirdparty/freetype/builds/meson/extract_libtool_version.py" />
     <Text Include="../../thirdparty/freetype/builds/meson/generate_reference_docs.py" />
@@ -661,6 +683,7 @@
     <Text Include="../../thirdparty/freetype/src/tools/make_distribution_archives.py" />
     <Text Include="../../thirdparty/freetype/tests/README.md" />
     <Text Include="../../thirdparty/freetype/tests/scripts/download-test-fonts.py" />
+    <Xml Include="../../thirdparty/freetype/builds/mac/ftlib.prj.xml" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -226,19 +226,32 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/monolithic_main.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/src/sqlite3pp.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/src/sqlite3ppext.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/test/monolithic_examples.h" />
-    <Text Include="../../thirdparty/owemdjee/sqlite3pp/README.md" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="libsqlite.vcxproj">
       <Project>{7830156c-02ff-4795-9eba-fdc531ac6c4f}</Project>
     </ProjectReference>
     <ProjectReference Include="libsqlite3pp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc299cc}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/src/sqlite3pp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/src/sqlite3ppext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/monolithic_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testaggregate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testattach.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testbackup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testcallback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testdisconnect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testfunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testinsert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testinsertall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqlite3pp/test/testselect.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/headeronly_src/sqlite3pp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/headeronly_src/sqlite3ppext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/src/sqlite3pp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/src/sqlite3ppext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqlite3pp/test/monolithic_examples.h" />
+    <Text Include="../../thirdparty/owemdjee/sqlite3pp/README.md" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

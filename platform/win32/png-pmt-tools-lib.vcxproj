@@ -18,57 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\png2uri\png2uri.sh" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\ChangeLog.html" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\LICENSE" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\Makefile" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\Makefile-nolib" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\ChangeLog" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\config.h.in" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\configure.in" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\Makefile.am" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\Makefile.old" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\NEWS" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.1" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.spec" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.spec.in" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\README" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test1" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test1.xpt" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test2" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test2.xpt" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test3" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test3.xpt" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test4" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\test4.xpt" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop.sh" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_references.html" />
-    <None Include="..\..\thirdparty\owemdjee\pmt-png-tools\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\thirdparty\owemdjee\pmt-png-tools\png2uri\png2uri-README.txt" />
-    <Text Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop-1.0.2-README.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\pngcrush.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\pngmeta.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_get_idat.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_get_iend.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_get_ihdr.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngzop\pngzop_zlib_to_idat.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\8859.png" />
-    <Image Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\ct1n0g04.png" />
-    <Image Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngmeta\ctzn0g04.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\monolithic.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\cexcept.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\pngchunk.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\pmt-png-tools\pngcrush\pngcrush.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>png-pmt-tools-lib</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1147A4}</ProjectGuid>
@@ -276,6 +225,34 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pmt-png-tools/monolithic-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmt-png-tools/pngcrush/pngcrush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/pngmeta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmt-png-tools/pngzop/pngzop_get_idat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmt-png-tools/pngzop/pngzop_get_iend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmt-png-tools/pngzop/pngzop_get_ihdr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmt-png-tools/pngzop/pngzop_zlib_to_idat.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmt-png-tools/pngcrush/cexcept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmt-png-tools/pngcrush/pngchunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmt-png-tools/pngcrush/pngcrush.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmt-png-tools/pngtools-monolithic.h" />
+    <Image Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/8859.png" />
+    <Image Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/ct1n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/ctzn0g04.png" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/png2uri/png2uri-README.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/png2uri/png2uri.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngcrush/ChangeLog.html" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngmeta/pngmeta.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngzop/pngzop-1.0.2-README.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmt-png-tools/pngzop/pngzop.sh" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

@@ -227,17 +227,17 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/cat/bsdcat.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libarchive\cat\cat_cmdline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/cat/cat_cmdline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/contrib/archivetest.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/contrib/shar/shar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/contrib/shar/tree.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/contrib/untar.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libarchive\cpio\cpio_cmdline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/cpio/cpio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/cpio/cpio_cmdline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/cpio/cpio_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libarchive/examples/example_untar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/examples/minitar/minitar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/examples/tarfilter.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libarchive\examples\example_untar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_acl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_blake2s_ref.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/libarchive/archive_blake2sp_ref.c" />
@@ -385,6 +385,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/libarchive/test_utils/test_utils.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/cat/bsdcat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/cat/bsdcat_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/android/config/android.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/android/config/linux_host.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/android/config/windows_host.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/android/include/Bcrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/android/include/Windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/android/include/android_lf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/shar/tree.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/contrib/shar/tree_config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/cpio/config_freebsd.h" />
@@ -441,20 +447,38 @@
     <ClInclude Include="../../thirdparty/owemdjee/libarchive/tar/config_freebsd.h" />
     <Text Include="../../thirdparty/owemdjee/libarchive/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libarchive/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libarchive/README.md" />
     <Text Include="../../thirdparty/owemdjee/libarchive/build/README.txt" />
     <Text Include="../../thirdparty/owemdjee/libarchive/build/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/libarchive/build/bump-version.sh" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/cirrus_ci/ci.cmd" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/cirrus_ci/ci.sh" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/github_actions/ci.cmd" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/github_actions/macos.sh" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/ci/travis_ci.sh" />
     <Text Include="../../thirdparty/owemdjee/libarchive/build/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/cmake/CheckFuncs_stub.c.in" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/cmake/config.h.in" />
     <Text Include="../../thirdparty/owemdjee/libarchive/build/makerelease.sh" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/build/pkgconfig/libarchive.pc.in" />
     <Text Include="../../thirdparty/owemdjee/libarchive/build/release/release.sh" />
     <Text Include="../../thirdparty/owemdjee/libarchive/build/utils/gen_archive_string_composition_h.sh" />
     <Text Include="../../thirdparty/owemdjee/libarchive/cat/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/cat/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/contrib/oss-fuzz/oss-fuzz-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/contrib/psota-benchmark/results.txt" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/contrib/psota-benchmark/tcp.sh" />
     <Text Include="../../thirdparty/owemdjee/libarchive/cpio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/cpio/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libarchive/doc/update.sh" />
     <Text Include="../../thirdparty/owemdjee/libarchive/libarchive/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libarchive/libarchive/libarchive_changes.3" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/libarchive/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libarchive/tar/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libarchive/tar/test/CMakeLists.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

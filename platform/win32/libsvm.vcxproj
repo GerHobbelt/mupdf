@@ -18,22 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\thirdparty\owemdjee\libsvm\FAQ.html" />
-    <None Include="..\..\thirdparty\owemdjee\libsvm\heart_scale" />
-    <None Include="..\..\thirdparty\owemdjee\libsvm\Makefile.win" />
-    <None Include="..\..\thirdparty\owemdjee\libsvm\README" />
-    <None Include="..\..\thirdparty\owemdjee\libsvm\svm.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\libsvm\svm-predict.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libsvm\svm-scale.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libsvm\svm-train.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libsvm\svm.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\thirdparty\owemdjee\libsvm\svm.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libsvm</ProjectName>
     <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE78173}</ProjectGuid>
@@ -241,6 +225,31 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/matlab/libsvmread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/matlab/libsvmwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/matlab/svm_model_matlab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/matlab/svmpredict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/matlab/svmtrain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/svm-predict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/svm-scale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/svm-toy/qt/svm-toy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/svm-toy/windows/svm-toy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/svm-train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsvm/svm.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsvm/matlab/svm_model_matlab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsvm/svm.h" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/python/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/python/libsvm/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/python/libsvm/commonutil.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/python/libsvm/svm.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/python/libsvm/svmutil.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/tools/checkdata.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/tools/easy.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/tools/grid.py" />
+    <Text Include="../../thirdparty/owemdjee/libsvm/tools/subset.py" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
