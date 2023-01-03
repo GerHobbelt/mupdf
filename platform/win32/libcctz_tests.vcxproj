@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libb2xtranslator</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF648AB9}</ProjectGuid>
-    <RootNamespace>libb2xtranslator</RootNamespace>
+    <ProjectName>libcctz_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF5B4C86}</ProjectGuid>
+    <RootNamespace>libcctz_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,10 +111,10 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -125,11 +125,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -151,12 +151,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -180,11 +180,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -206,12 +206,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBB2XTRANSLATOR;B2XTRANSLATOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCCTZ_TESTS;CCTZ_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -226,48 +226,42 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <Image Include="../../thirdparty/owemdjee/b2xtranslator/Shell/doc2x/doc2x.ico" />
-    <Image Include="../../thirdparty/owemdjee/b2xtranslator/Shell/ppt2x/ppt2x.ico" />
-    <Text Include="../../thirdparty/owemdjee/b2xtranslator/CODE_OF_CONDUCT.md" />
-    <Text Include="../../thirdparty/owemdjee/b2xtranslator/README.md" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/clrMap.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/blank.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/chart.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/chartAndTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/clipArtAndTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/dgm.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/fourObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/mediaAndTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/obj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/objAndTwoObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/objAndTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/objOnly.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/objOverTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/objTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/picTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/secHead.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/tbl.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/title.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/titleOnly.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/twoObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/twoObjAndObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/twoObjAndTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/twoObjOverTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/twoTxTwoObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/txAndChart.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/txAndClipArt.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/txAndMedia.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/txAndObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/txAndTwoObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/txOverObj.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/vertTitleAndTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/slideLayouts/vertTx.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/theme.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/Ppt/PresentationMLMapping/Defaults/txStyles.xml" />
-    <Xml Include="../../thirdparty/owemdjee/b2xtranslator/UnitTests/Config.xml" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/examples/classic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/examples/epoch_shift.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/examples/example1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/examples/example2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/examples/example3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/examples/example4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/examples/hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/src/cctz_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/src/civil_time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/src/time_tool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/src/time_zone_format_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cctz/src/time_zone_lookup_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/include/cctz/civil_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/include/cctz/civil_time_detail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/include/cctz/time_zone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/include/cctz/zone_info_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/src/time_zone_fixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/src/time_zone_if.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/src/time_zone_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/src/time_zone_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/src/time_zone_libc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/src/time_zone_posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cctz/src/tzfile.h" />
+    <Text Include="../../thirdparty/owemdjee/cctz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cctz/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/cctz/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/cctz/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cctz/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cctz/testdata/README.zoneinfo" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ProjectReference Include="libcctz.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd5b0c3}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

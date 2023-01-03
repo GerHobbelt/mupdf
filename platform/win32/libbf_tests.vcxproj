@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libcyaml</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0D8A67}</ProjectGuid>
-    <RootNamespace>libcyaml</RootNamespace>
+    <ProjectName>libbf_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD7494B}</ProjectGuid>
+    <RootNamespace>libbf_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -114,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,12 +124,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libcyaml/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,13 +150,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libcyaml/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,12 +179,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libcyaml/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,13 +205,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libcyaml/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCYAML;CYAML_STATICLIB;CHM__DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBF_TESTS;BF_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -226,40 +226,18 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ProjectReference Include="libyaml.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffcfd7a9}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/examples/numerical/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/examples/planner/main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/src/free.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/src/load.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/src/mem.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/src/save.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/src/utf8.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/src/util.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/errs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/file.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/free.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/load.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/save.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/test.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/utf8.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libcyaml/test/units/util.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcyaml/include/cyaml/cyaml.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcyaml/src/data.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcyaml/src/mem.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcyaml/src/utf8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcyaml/src/util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcyaml/test/units/test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libcyaml/test/units/ttest.h" />
-    <Text Include="../../thirdparty/owemdjee/libcyaml/CHANGES.md" />
-    <Text Include="../../thirdparty/owemdjee/libcyaml/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libcyaml/docs/guide.md" />
-    <Text Include="../../thirdparty/owemdjee/libcyaml/examples/numerical/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libcyaml/examples/planner/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libcyaml/libcyaml.pc.in" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbf/bfbench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbf/bftest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libbf/tinypi.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbf/cutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbf/libbf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbf/softfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbf/softfp_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbf/softfp_template_icvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbf/tmp/QuickJS/libbf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libbf/tmp/QuickJS2/libbf.h" />
+    <Text Include="../../thirdparty/owemdjee/libbf/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/libbf/tmp/QuickJS2/clrmod.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

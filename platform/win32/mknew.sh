@@ -123,7 +123,7 @@ arrayfire
 asio
 asyncplusplus
 asynqro
-b2xtranslator
+##b2xtranslator
 basez
 bhtsne--Barnes-Hut-t-SNE
 bibtex-robust-decoder

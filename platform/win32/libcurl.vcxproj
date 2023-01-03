@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -227,121 +227,6 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="..\..\scripts\curl\tool_hugehelp.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/10-at-a-time.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/altsvc_demo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/anyauthput.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/cacertinmem.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/certinfo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/chkspeed.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/cookie_interface.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/crawler.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/curlgtk.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/debug.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ephiperfifo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/evhiperfifo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/externalsocket.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/fileupload.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/fopen_demo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftp-wildcard.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftpget.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftpgetinfo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftpgetresp.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftpsget.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftpupload.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftpuploadfrommem.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ftpuploadresume.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/getinfo_demo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/getinmemory.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/getredirect.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/getreferrer.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/ghiper.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/headerapi.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/hiperfifo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/href_extractor.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/htmltidy.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/htmltitle.cpp" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/http-post.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/http2-download.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/http2-pushinmemory.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/http2-serverpush.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/http2-upload.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/http3-present.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/http3.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/httpcustomheader.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/httpput-postfields.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/httpput.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/https.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-append.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-authzid.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-copy.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-create.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-delete.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-examine.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-fetch.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-list.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-lsub.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-multi.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-noop.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-search.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-ssl.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-store.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/imap-tls.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-app.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-debugcallback.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-double.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-event.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-formadd.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-legacy.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-post.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-single.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multi-uv.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/multithread.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/opensslthreadlock.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/parseurl.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/persistent.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-authzid.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-dele.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-list.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-multi.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-noop.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-retr.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-ssl.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-stat.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-tls.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-top.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/pop3-uidl.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/post-callback.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/postinmemory.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/postit2-formadd.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/postit2.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/progressfunc.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/resolve_demo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/rtsp_demo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/sendrecv.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/sepheaders.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/sessioninfo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/sftpget.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/sftpuploadresume.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/shared-connection-cache.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/simple.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/simplepost.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/simplessl.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smooth-gtk-thread.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-authzid.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-expn.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-mail.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-mime.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-multi.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-ssl.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-tls.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/smtp-vrfy.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/sslbackend.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/synctime.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/threaded-ssl.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/url2file.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/urlapi_demo.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/usercertinmem.c" />
-    <ClCompile Include="../../thirdparty/curl/docs/examples/xmlstream.c" />
     <ClCompile Include="../../thirdparty/curl/lib/altsvc.c" />
     <ClCompile Include="../../thirdparty/curl/lib/amigaos.c" />
     <ClCompile Include="../../thirdparty/curl/lib/asyn-ares.c" />
@@ -916,8 +801,7 @@
     <Text Include="../../thirdparty/curl/winbuild/gen_resp_file.bat" />
     <Text Include="../../thirdparty/curl/winbuild/makedebug.cmd" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

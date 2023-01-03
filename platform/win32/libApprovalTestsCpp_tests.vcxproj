@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libApprovalTestsCpp</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF09D370}</ProjectGuid>
-    <RootNamespace>libApprovalTestsCpp</RootNamespace>
+    <ProjectName>libApprovalTestsCpp_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF3428AC}</ProjectGuid>
+    <RootNamespace>libApprovalTestsCpp_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,10 +111,10 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,14 +124,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,15 +150,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,14 +179,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,15 +205,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP;APPROVALTESTSCPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_TESTS;APPROVALTESTSCPP_TESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/catch2/include;../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/doctest/include;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -295,6 +295,102 @@
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/SystemUtils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/writers/ExistingFile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/writers/StringWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/boost_starter/boost_starter_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/boost_starter/boost_starter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/catch2_existing_main/Catch2ApprovalsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/catch2_existing_main/catch2_exist_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/catch2_starter/catch2_starter_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/catch2_starter/catch2_starter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/cpputest_existing_main/CppUTestApprovalsTestsExistingMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/cpputest_existing_main/cpputest_exist_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/cpputest_starter/cpputest_starter_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/cpputest_starter/cpputest_starter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/doctest_existing_main/DoctestApprovalsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/doctest_existing_main/doctest_exist_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/doctest_starter/doctest_starter_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/doctest_starter/doctest_starter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/fmt_approvals_demo/FmtAsDefaultTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/fmt_approvals_demo/FmtTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/fmt_approvals_demo/fmt_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/googletest_existing_main/GoogleTestExistApprovalsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/googletest_existing_main/googletest_exist_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/googletest_starter/googletest_starter_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/googletest_starter/googletest_starter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/out_of_source/DocTestReporter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/out_of_source/out_of_source_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/out_of_source/out_of_source_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/out_of_source/source_subdir/source_sub_dir_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/ut_starter/ut_starter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Boost_Tests/BoostTestApprovalTestsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Boost_Tests/boost_test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMake_Tests/catch2_checks/catch2_cmake_checks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMake_Tests/doctest_checks/doctest_cmake_checks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/catch2_test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/Catch2DocsSamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/namers/Catch2NamerTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/CppUTestApprovalsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/cputest_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/namers/CppUTestNamerTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/ApprovalsExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/ApprovalsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/CombinationExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/CombinationTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/CustomizingToStringTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/DocTestApprovalTestTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/GameOfLifeTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/StoryboardTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/VectorTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/comparators/ComparatorDisposerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/ApprovalExceptionTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/FileApproverExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/FileApproverTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/OptionsExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/OptionsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/CombinationsSampleCode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ContainerRequirementsDocs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/DateTimeScrubbingSamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/DisposableSamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/DocTestDocsSamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ForgottenToConfigure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/OverviewExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ToStringExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ToStringTemplateExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ToStringWrapperExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/Tutorial.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/doctest_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/DocTestNamerTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/NamerExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/NamerTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/TemplatedCustomNamerExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/TemplatedCustomNamerTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/BlockingReporterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/CIBuildOnlyReporterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/CommandLineReporterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/CustomReporterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/EnvironmentVariableReporterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/ReporterFactoryTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/ReporterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/TextDiffReporterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/GuidScrubberTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/ScrubberTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/CartesianProductTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/DateUtilsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/EmptyFileCreatorByTypeTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/ExceptionCollectorTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/FileUtilsExamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/FileUtilsSystemSpecificTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/FileUtilsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/GridTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/MachineBlockerTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/PathTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/StringUtilsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/SystemUtilsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/writers/StringWriterTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/GoogleTestApprovalsTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/googletest_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/namers/GoogleFixtureNamerCustomizationTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/namers/GoogleNamerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/UTApprovalTestTests.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalTests.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalTestsVersion.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalUtils.h" />
@@ -823,7 +919,8 @@
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/third_party/ut/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/to_do.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
