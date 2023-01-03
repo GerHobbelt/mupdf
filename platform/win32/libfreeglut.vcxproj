@@ -48,20 +48,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -75,7 +75,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -107,8 +107,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;../../thirdparty/freeglut/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -182,30 +182,6 @@
     <ClCompile Include="../../thirdparty/freeglut/progs/demos/timer/timer.c" />
     <ClCompile Include="../../thirdparty/freeglut/progs/demos/timer_callback/timer_callback.c" />
     <ClCompile Include="../../thirdparty/freeglut/progs/test-shapes-gles1/test-shapes-gles1.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_cursor_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_ext_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_gamemode_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_init_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_input_devices_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_joystick_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_main_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_runtime_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_spaceball_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_state_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_structure_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/fg_window_android.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/android/native_app_glue/android_native_app_glue.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/blackberry/fg_init_blackberry.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/blackberry/fg_main_blackberry.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/blackberry/fg_state_blackberry.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/blackberry/fg_structure_blackberry.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/blackberry/fg_window_blackberry.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/egl/fg_display_egl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/egl/fg_ext_egl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/egl/fg_init_egl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/egl/fg_state_egl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/egl/fg_structure_egl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/egl/fg_window_egl.c" />
     <ClCompile Include="../../thirdparty/freeglut/src/fg_callbacks.c" />
     <ClCompile Include="../../thirdparty/freeglut/src/fg_cursor.c" />
     <ClCompile Include="../../thirdparty/freeglut/src/fg_display.c" />
@@ -246,33 +222,6 @@
     <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_structure_mswin.c" />
     <ClCompile Include="../../thirdparty/freeglut/src/mswin/fg_window_mswin.c" />
     <ClCompile Include="../../thirdparty/freeglut/src/util/xparsegeometry_repl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_cursor_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_ext_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_gamemode_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_init_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_input_devices_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_main_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_state_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_structure_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/wayland/fg_window_wl.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_cmap_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_cursor_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_display_x11_glx.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_ext_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_gamemode_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_glutfont_definitions_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_init_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_input_devices_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_joystick_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_main_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_menu_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_spaceball_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_state_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_state_x11_glx.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_structure_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_window_x11.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_window_x11_glx.c" />
-    <ClCompile Include="../../thirdparty/freeglut/src/x11/fg_xinput_x11.c" />
     <ClInclude Include="../../thirdparty/freeglut/include/GL/freeglut.h" />
     <ClInclude Include="../../thirdparty/freeglut/include/GL/freeglut_ext.h" />
     <ClInclude Include="../../thirdparty/freeglut/include/GL/freeglut_std.h" />
@@ -332,8 +281,7 @@
     <Xml Include="../../thirdparty/freeglut/progs/test-shapes-gles1/AndroidManifest.xml" />
     <Xml Include="../../thirdparty/freeglut/progs/test-shapes-gles1/ndk/AndroidManifest.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
