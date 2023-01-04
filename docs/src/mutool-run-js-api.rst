@@ -19,8 +19,23 @@
 
 
 
-Base :title:`MuPDF` properties & methods
+Base :title:`MuPDF` methods
 ------------------------------------------
+
+
+
+.. method:: print(repr(Object))
+
+    Prints an object back into javascript syntax format.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var document = new Document("my_pdf.pdf");
+        print(repr(document)); // [userdata pdf_document]
+
 
 
 
@@ -69,13 +84,25 @@ This matrix is represented in :title:`JavaScript` as ``[a,b,c,d,e,f]``.
 
     Returns a scaling matrix, short hand for ``[sx,0,0,sy,0,0]``.
 
+    :return: ``[a,b,c,d,e,f]``.
+
 .. method:: Translate(tx, ty)
 
     Return a translation matrix, short hand for ``[1,0,0,1,tx,ty]``.
 
+    :return: ``[a,b,c,d,e,f]``.
+
+.. method:: Rotate(theta)
+
+    Return a rotation matrix, short hand for ``[cos(theta),sin(theta),-sin(theta),cos(theta),0,0]``.
+
+    :return: ``[a,b,c,d,e,f]``.
+
 .. method:: Concat(a, b)
 
     Concatenate matrices ``a`` and ``b``. Bear in mind that matrix multiplication is not commutative.
+
+    :return: ``[a,b,c,d,e,f]``.
 
 .. _mutool_run_js_api_rectangle:
 
@@ -93,10 +120,13 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 Colors
 ----------
 
-Colors are specified as arrays with the appropriate number of components for the color space. Each number is a floating point between ``0`` and ``1`` for the color value.
+Colors are specified as arrays with the appropriate number of components for the :ref:`color space<mutool_run_javascript_api_colorspace>`. Each number is a floating point between ``0`` and ``1`` for the color value.
+
+Therefore colors are represented as an array of up to 4 component values.
 
 For example:
 
+- In the ``DeviceCMYK`` color space a color would be ``[Cyan,Magenta,Yellow,Black]``. A full magenta color would therefore be ``[0,1,0,0]``.
 - In the ``DeviceRGB`` color space a color would be ``[Red,Green,Blue]``. A full green color would therefore be ``[0,1,0]``.
 - In the ``DeviceGray`` color space a color would be ``[Black]``. A full black color would therefore be ``[1]``.
 
@@ -108,6 +138,66 @@ Alpha
 ~~~~~~~~~~~~
 
 Alpha values are floats between ``0`` and ``1``, whereby ``0`` denotes full transparency & ``1`` denotes full opacity.
+
+
+
+.. _mutool_run_js_api_links:
+
+Links
+---------
+
+
+.. _mutool_run_js_api_link_dict:
+
+Link dictionary
+~~~~~~~~~~~~~~~~~~~
+
+
+
+A link is a dictionary with keys for:
+
+``bounds``
+    A rectangle describing the link's location on the page.
+
+``uri``
+    A uri describing either a document internal destination or a URL for a web page.
+
+
+.. _mutool_run_js_api_link_dest:
+
+
+Link destination
+~~~~~~~~~~~~~~~~~~~
+
+A link destination points to a location within a document and how a document viewer should show that destination.
+
+It contsists of a dictionary with keys for:
+
+``chapter``
+    The chapter within the document.
+
+``page``
+    The page within the document.
+
+``type``
+    Either "Fit", "FitB", "FitH", "FitBH", "FitV", "FitBV", "FitR" or "XYZ", controlling which of the keys below exist.
+
+``x``
+    The left coordinate, valid for FitV, FitBV, FitR and XYZ.
+
+``y``
+    The top coordinate, valid for FitH, FitBH, FitR and XYZ.
+
+``width``
+    The width of the zoomed in region, valid for XYZ.
+
+``height``
+    The height of the zoomed in region, valid for XYZ.
+
+``zoom``
+    The zoom factor, valid for "XYZ".
+
+
 
 
 Buffer
@@ -260,12 +350,35 @@ Document
     :return: ``Boolean``.
 
 
+.. method:: hasPermission(permission)
+
+    Returns *true* if the document has permission for "print", "annotate", "edit" or "copy".
+
+    :arg permission: ``String`` The permission to seek for, e.g. "edit".
+    :return: ``Boolean``.
+
+
 .. method:: getMetaData(key)
 
     Return various meta data information. The common keys are: "format", "encryption", "info:Author", and "info:Title".
 
     :arg key: ``String``.
     :return: ``String``.
+
+
+.. method:: setMetaData(key, value)
+
+    Set document meta data information field to a new value.
+
+    :arg key: ``String``.
+    :arg value: ``String``.
+
+.. method:: isReflowable()
+
+    Returns true if the document is reflowable, such as EPUB, FB2 or XHTML.
+
+    :return: ``Boolean``.
+
 
 .. method:: layout(pageWidth, pageHeight, fontSize)
 
@@ -292,6 +405,23 @@ Document
     Returns an array with the outline (also known as "table of contents" or "bookmarks"). In the array is an object for each heading with the property 'title', and a property 'page' containing the page number. If the object has a 'down' property, it contains an array with all the sub-headings for that entry.
 
     :return: ``[]``.
+
+
+.. method:: resolveLink(uri)
+
+    Resolve a document internal link URI to a link destination.
+
+    :arg uri: ``String``.
+    :return: :ref:`Link destination<mutool_run_js_api_link_dest>`.
+
+
+.. method:: formatLinkURI(linkDestination)
+
+    Format a document internal link destination object to a URI string suitable for :ref:`createLink()<mutool_run_js_api_page_create_link>`.
+
+    :arg linkDestination: :ref:`Link destination<mutool_run_js_api_link_dest>`.
+    :return: ``String``.
+
 
 .. method:: isPDF()
 
@@ -358,9 +488,34 @@ Page
 
 .. method:: getLinks()
 
-    Return an array of all the links on the page. Each link is an object with a 'bounds' property, and either a 'page' or 'uri' property, depending on whether it's an internal or external link.
+    Return an array of all the links on the page. Each link is an object with a 'bounds' property, and either a 'page' or 'uri' property, depending on whether it's an internal or external link. See: :ref:`Links<mutool_run_js_api_links>`.
 
     :return: ``[]``.
+
+
+.. _mutool_run_js_api_page_create_link:
+
+
+.. method:: createLink(rect, destinationUri)
+
+    Create a new link within the rectangle on the page, linking to the destination URI string.
+
+    :arg rect: :ref:`Rectangle<mutool_run_js_api_rectangle>` for the link.
+    :arg destinationUri: ``String``.
+    :return: :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var link = page.createLink([0,0,100,100],"http://mupdf.com");
+
+
+.. method:: deleteLink(link)
+
+    Delete the link from the page.
+
+    :arg link: `Link dictionary<mutool_run_js_api_link_dict>`.
 
 .. method:: isPDF()
 
@@ -1942,7 +2097,7 @@ These properties are available for all annotation types.
 
     Get the annotation flags.
 
-    :return: Annotsation flags.
+    :return: Annotation flags.
 
 .. method:: setFlags(flags)
 
@@ -2045,7 +2200,7 @@ These properties are available for all annotation types.
 
 .. method:: getLanguage()
 
-    Get the annotation language (or get inherit the document language).
+    Get the annotation language (or the get the inherited document language).
 
     :return: ``String``.
 
@@ -2063,32 +2218,253 @@ These properties are available for all annotation types.
 
 These properties are only present for some annotation types, so support for them must be checked before use.
 
-PDFAnnotation#getRect(), #setRect(rect)
-Get/set the annotation bounding box.
-PDFAnnotation#getDefaultAppearance(), #setDefaultAppearance(font, size, color)
-Get/Set the default text appearance used for free text annotations.
-PDFAnnotation#hasInteriorColor(), #getInteriorColor(), #setInteriorColor(color)
-Check for support/get/set the annotation interior color, represented as an array of up to 4 component values.
-PDFAnnotation#hasAuthor(), #getAuthor(), #setAuthor(author)
-Check for support/get/set the annotation author.
-PDFAnnotation#hasLineEndingStyles(), #getLineEndingStyles(), #setLineEndingStyles(start, end)
-Check for support/get/set the annotation line ending styles, either of "None", "Square", "Circle", "Diamond", "OpenArrow", "ClosedArrow", "Butt", "ROpenArrow", "RClosedArrow" or "Slash".
-PDFAnnotation#hasIcon(), #getIcon(), #setIcon(iconname)
-Check for support/get/set annotation icon. Standard icons names for:
-File attachment annotations:
-"Graph", "PaperClip", "PushPin" and "Tag".
-Sound annotations:
-"Mic" and "Speaker".
-Stamp annotations:
-"Approved", "AsIs", "Confidential", "Departmental", "Draft", "Experimental", "Expired", "Final", "ForComment", "ForPublicRelease", "NotApproved", "NorForPublicRelease", "Sold" and "TopSecret".
-Text annotations:
-"Comment", "Help", "Insert", "Key", "NewParagraph", "Note" and "Paragraph".
-PDFAnnotation#hasLine(), #getLine(), #setLine(endpoints)
-Check for support/get/set line end points, represented by an array of to points, each represented as an [x, y] array.
-PDFAnnotation#hasOpen(), #isOpen(), #setIsOpen(state)
-Check for support/get/set annotation open state, represented as a boolean.
-PDFAnnotation#hasFilespec(), #getFilespec(), #setFilespec(filespecpdfobject)
-Check for support/get/set annotation file specification, represented by a PDF object.
+.. method:: getRect()
+
+    Get the annotation bounding box.
+
+    :return: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+.. method:: setRect(rect)
+
+    Set the annotation bounding box.
+
+    :arg language:  ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+
+.. method:: getDefaultAppearance()
+
+    Get the default text appearance used for free text annotations.
+
+    :return: ``{font:String, size:Integer, color:[r,g,b]}`` Returns an object with the key/value pairs.
+
+
+.. method:: setDefaultAppearance(font, size, color)
+
+    Set the default text appearance used for free text annotations.
+
+    :arg font: ``String``.
+    :arg size: ``Integer``.
+    :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+
+
+.. method:: hasInteriorColor()
+
+    Checks whether the annotation has support for an interior color.
+
+    :return: ``Boolean``.
+
+.. method:: getInteriorColor()
+
+    Gets the annotation interior color.
+
+    :return: The :ref:`color value<mutool_run_js_api_colors>`.
+
+.. method:: setInteriorColor(color)
+
+    Sets the annotation interior color.
+
+    :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+
+
+
+.. method:: hasAuthor()
+
+    Checks whether the annotation has an author.
+
+    :return: ``Boolean``.
+
+.. method:: getAuthor()
+
+    Gets the annotation author.
+
+    :return: ``String``.
+
+
+.. method:: setAuthor(author)
+
+    Sets the annotation author.
+
+    :arg author: ``String``.
+
+
+.. method:: hasLineEndingStyles()
+
+    Checks the support for line ending styles.
+
+    :return: ``Boolean``.
+
+
+.. method:: getLineEndingStyles()
+
+    Gets the line ending styles object.
+
+    :return: ``{start:String, end:String}`` Returns an object with the key/value pairs.
+
+
+.. method:: setLineEndingStyles(start, end)
+
+    Sets the line ending styles object.
+
+    :arg start: ``String``.
+    :arg end: ``String``.
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - **Line ending names**
+   * - "None"
+   * - "Square"
+   * - "Circle"
+   * - "Diamond"
+   * - "OpenArrow"
+   * - "ClosedArrow"
+   * - "Butt"
+   * - "ROpenArrow"
+   * - "RClosedArrow"
+   * - "Slash"
+
+
+
+
+.. method:: hasIcon()
+
+    Checks the support for annotation icon.
+
+.. method:: getIcon()
+
+    Gets the annotation icon.
+
+    :return: ``String``.
+
+
+.. method:: setIcon(name)
+
+    Sets the annotation icon.
+
+    :arg name: ``String``.
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - **Icon type**
+     - **Icon name**
+   * - File attachment
+     - "Graph"
+   * -
+     - "PaperClip"
+   * -
+     - "PushPin"
+   * -
+     - "Tag"
+   * - Sound
+     - "Mic"
+   * -
+     - "Speaker"
+   * - Stamp
+     - "Approved"
+   * -
+     - "AsIs"
+   * -
+     - "Confidential"
+   * -
+     - "Departmental"
+   * -
+     - "Draft"
+   * -
+     - "Experimental"
+   * -
+     - "Expired"
+   * -
+     - "Final"
+   * -
+     - "ForComment"
+   * -
+     - "ForPublicRelease"
+   * -
+     - "NotApproved"
+   * -
+     - "NotForPublicRelease"
+   * -
+     - "Sold"
+   * -
+     - "TopSecret"
+   * - Text
+     - "Comment"
+   * -
+     - "Help"
+   * -
+     - "Insert"
+   * -
+     - "Key"
+   * -
+     - "NewParagraph"
+   * -
+     - "Note"
+   * -
+     - "Paragraph"
+
+
+
+.. method:: hasLine()
+
+
+    Checks the support for annotation line.
+
+
+.. method:: getLine()
+
+    Get line end points, represented by an array of two points, each represented as an ``[x, y]`` array.
+
+    :return: ``[[x,y],...]``.
+
+
+.. method:: setLine(endpoints)
+
+
+    Set line end points, represented by an array of two points, each represented as an ``[x, y]`` array.
+
+    :arg endpoints: ``[[x,y],...]``.
+
+
+.. method:: hasOpen()
+
+    Checks the support for annotation open state.
+
+
+.. method:: isOpen()
+
+    Get annotation open state.
+
+    :return: ``Boolean``.
+
+.. method:: setIsOpen(state)
+
+    Set annotation open state.
+
+    :arg state: ``Boolean``.
+
+
+.. method:: hasFilespec()
+
+    Checks the support for annotation file specification.
+
+    :return: ``Boolean``.
+
+.. method:: getFilespec()
+
+    Gets the file specification object.
+
+    :return: File specification object.
+
+.. method:: setFilespec(fileSpecPdfObject)
+
+    Sets the file specification object.
+
+    :arg fileSpecPdfObject: File specification object.
+
+
 
 ----
 
