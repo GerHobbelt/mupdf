@@ -4603,7 +4603,7 @@ static void ffi_DocumentWriter_close(js_State *J)
 static void ffi_new_Story(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_buffer *contents = ffi_tobuffer(J, 1);
+	fz_buffer *contents = ffi_tobuffer(J, 1); /* FIXME: leak if js_tostring() throws */
 	const char *user_css = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
 	double em = js_tonumber(J, 3);
 	fz_archive *archive = js_iscoercible(J, 4) ? ffi_toarchive(J, 4) : NULL;
