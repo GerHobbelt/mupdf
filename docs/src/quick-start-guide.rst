@@ -19,7 +19,7 @@ Quick Start Guide
 :title:`MuPDF` consists of a software library, command line tools, and viewers for various platforms.
 
 
-To get started with :title:`MuPDF` a developer should :ref:`aquire the source code<quick_start_acquire_source_code>` and :ref:`build the library<quick_start_building_the_library>`.
+To get started with :title:`MuPDF` a developer should :ref:`acquire the source code<quick_start_acquire_source_code>` and :ref:`build the library<quick_start_building_the_library>`.
 
 
 .. _quick_start_acquire_source_code:
