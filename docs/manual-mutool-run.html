@@ -190,6 +190,8 @@ If the object has a 'down' property, it contains an array with all the sub-headi
 <dd>Resolve a document internal link uri to a link destination.
 <dt>Document#formatLinkURI(linkDestination)
 <dd>Format a document internal link destination object to an URI string suitable for Page#createLink().
+<dt>Document#outlineIterator()
+<dd>Return an OutlineIterator for the document outline.
 <dt>Document#isPDF()
 <dd>Returns true if the document is a PDF document.
 </dl>
@@ -1151,6 +1153,41 @@ An EmbeddedFileParams object contain metadata about an embedded file.
 <dd>The creation date of the embedded file.
 <dt>EmbeddedFileParams#modificationDate:
 <dd>The modification date of the embedded file.
+</dl>
+
+<h3>
+OutlineIterator
+</h3>
+
+<p>
+An outline iterator is can be used to walk over all the items in an Outline and query their properties.
+To be able to insert items at the end of a list of sibling items, it can also walk one item past the end of the list.
+
+<dl>
+<dt>OutlineIterator#item()
+<dd>Return an OutlineIteratorItem or undefined if out of range.
+<dt>OutlineIterator#next()
+<dt>OutlineIterator#prev()
+<dt>OutlineIterator#up()
+<dt>OutlineIterator#down()
+<dd>Move the iterator position next/prev/up/down. Returns 0 if the new position has a valid item, or 1 if the position contains no valid item, but one may be inserted at this position.
+<dt>OutlineIterator#insert(item)
+<dd>Insert item before the current item. The position does not change. Returns 0 if the position has a valid item, or 1 if the position has no valid item.
+<dt>OutlineIterator#delete()
+<dd>Delete the current item. This implicitly moves to the next item. Returns 0 if the new position has a valid item, or 1 if the position contains no valid item, but one may be inserted at this position.
+<dt>OutlineIterator#update(item)
+<dd>Updates the current item with the properties of the supplied item.
+</dl>
+
+<p>
+An OutlineIteratorItem is a dictionary with keys for:
+<dl>
+<dt>OutlineIteratorItem.title:
+<dd>The title of the item.
+<dt>OutlineIteratorItem.uri:
+<dd>A uri pointing to the destination. Likely to be a document internal link that can be resolved by Document#resolveLink(), otherwise a link to a web page.
+<dt>OutlineIteratorItem.open:
+<dd>Returns true if the item should be opened when shown in a tree view.
 </dl>
 
 <h3>
