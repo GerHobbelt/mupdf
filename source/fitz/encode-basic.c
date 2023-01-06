@@ -335,7 +335,7 @@ struct deflate
 {
 	fz_output *chain;
 	zng_stream z;
-	size_t bufsize;
+	uInt bufsize;
 	unsigned char *buf;
 };
 
@@ -343,11 +343,12 @@ static int deflate_write(fz_context *ctx, void *opaque, const void *data, size_t
 {
 	struct deflate *state = opaque;
 	const unsigned char *p = data;
-	size_t newbufsize;
+	uLong newbufsizeLong;
+	uInt newbufsize;
 	int err;
 
-	newbufsize = n >= UINT_MAX ? UINT_MAX : zng_deflateBound(&state->z, n);
-	newbufsize = newbufsize >= UINT_MAX ? UINT_MAX : newbufsize;
+	newbufsizeLong = n >= UINT_MAX ? UINT_MAX : zng_deflateBound(&state->z, (uLong)n);
+	newbufsize = (uInt)(newbufsizeLong >= UINT_MAX ? UINT_MAX : newbufsizeLong);
 
 	if (state->buf == NULL)
 	{

@@ -73,10 +73,10 @@ mobi_read_text_palmdoc(fz_context *ctx, fz_buffer *out, fz_stream *stm, uint32_t
 			int x = (c << 8) | fz_read_byte(ctx, stm);
 			int distance = (x >> 3) & 0x7ff;
 			int length = (x & 7) + 3;
-			int p = out->len - distance;
-			if (p >= 0 && p < (int)out->len)
+			if (distance > 0 && (size_t)distance <= out->len)
 			{
 				int i;
+				int p = (int)(out->len - distance);
 				for (i = 0; i < length; ++i)
 					fz_append_byte(ctx, out, out->data[p + i]);
 			}
@@ -129,7 +129,7 @@ mobi_read_data(fz_context *ctx, fz_buffer *out, fz_stream *stm, uint32_t *offset
 
 	for (i = 1; i <= record_count && i < total_count; ++i)
 	{
-		uint32_t remain = text_length - out->len;
+		uint32_t remain = text_length - (uint32_t)out->len;
 		uint32_t size = remain < 4096 ? remain : 4096;
 		fz_seek(ctx, stm, offset[i], 0);
 		if (compression == COMPRESSION_NONE)
@@ -238,7 +238,7 @@ fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi)
 			offset[i] = fz_read_uint32(ctx, stm);
 			fz_skip(ctx, stm, 4);
 		}
-		offset[n] = mobi->len;
+		offset[n] = (uint32_t)mobi->len;
 
 		// decompress text data
 		buffer = fz_new_buffer(ctx, 128 << 10);

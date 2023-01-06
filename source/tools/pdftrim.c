@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 typedef struct
 {
@@ -74,7 +75,7 @@ const char *boxes[] =
 };
 
 static void
-rewrite_page_streams(fz_context *ctx, pdf_document *doc, int page_num, int box, int exclude, int fallback)
+rewrite_page_streams(fz_context *ctx, pdf_document *doc, int page_num, int box, float *margins, int exclude, int fallback)
 {
 	pdf_page *page = pdf_load_page(ctx, doc, page_num);
 	pdf_filter_options options = { 0 };
@@ -113,6 +114,11 @@ rewrite_page_streams(fz_context *ctx, pdf_document *doc, int page_num, int box, 
 			break;
 		}
 
+		cd.cullbox.x0 += margins[3];
+		cd.cullbox.y0 += margins[2];
+		cd.cullbox.x1 -= margins[1];
+		cd.cullbox.y1 -= margins[0];
+
 		if (fz_is_empty_rect(cd.cullbox) && fallback && box != MEDIABOX)
 		{
 			fprintf(stderr, "Falling back to Mediabox for page %d\n", page_num);
@@ -135,6 +141,58 @@ rewrite_page_streams(fz_context *ctx, pdf_document *doc, int page_num, int box, 
 		fz_rethrow(ctx);
 }
 
+static char *
+skip_comma(char *s)
+{
+	while (isspace(*s))
+		s++;
+	if (*s == ',')
+		s++;
+	while (isspace(*s))
+		s++;
+	return s;
+}
+
+static void
+read_margins(float *margin, char *arg)
+{
+	char *e;
+
+	/* A single one reads for all margins. */
+	margin[0] = fz_strtof(arg, &e);
+	margin[1] = margin[2] = margin[3] = margin[0];
+	e = skip_comma(e);
+	if (*e == 0)
+		return;
+	/* 2 entries reads for V,H. */
+	margin[1] = fz_strtof(e, &e);
+	margin[3] = margin[1];
+	e = skip_comma(e);
+	if (*e == 0)
+		return;
+	/* 4 entries reads for T,R,B,L. */
+	margin[2] = fz_strtof(e, &e);
+	margin[3] = 0;
+	e = skip_comma(e);
+	if (*e == 0)
+		return;
+	margin[3] = fz_strtof(e, &e);
+}
+
+static int
+usage(void)
+{
+	fprintf(stderr, "mutool convert version " FZ_VERSION "\n");
+	fprintf(stderr, "Usage: mutool trim [options] <input filename>\n");
+	fprintf(stderr, "\t-b <box>\tWhich box to trim to (mediabox(default),cropbox,bleedbox,trimbox,artbox)\n");
+	fprintf(stderr, "\t-m <margin>\tAdd margins to box (+ve for inwards, -ve outwards).\n");
+	fprintf(stderr, "\t\t <margin> = <all> or <V>,<H> or <T>,<R>,<B>,<L>\n");
+	fprintf(stderr, "\t-e\tExclude contents of box, rather than include them\n");
+	fprintf(stderr, "\t-f\tFallback to mediabox if specified box not available\n");
+	fprintf(stderr, "\t-o <output>\tOutput file\n");
+	return 1;
+}
+
 int pdftrim_main(int argc, const char** argv)
 {
 	fz_context *ctx = NULL;
@@ -152,58 +210,27 @@ int pdftrim_main(int argc, const char** argv)
 	const char *boxname = NULL;
 	int box = MEDIABOX;
 	int fallback = 0;
+	float margins[4] = { 0 };
+	int c;
 
-	for (i = 1; i < argc; i++)
+	while ((c = fz_getopt(argc, argv, "b:o:efm:")) != -1)
 	{
-		if (!strcmp(argv[i], "-b"))
+		switch (c)
 		{
-			if (i >= argc-1 || boxname)
-				goto error;
-			boxname = argv[++i];
+		default: return usage();
+
+		case 'b': boxname = fz_optarg; break;
+		case 'o': outputfile = fz_optarg; break;
+		case 'e': exclude = 1; break;
+		case 'f': fallback = 1; break;
+		case 'm': read_margins(margins, fz_optarg); break;
 		}
-		else if (!strcmp(argv[i], "-o"))
-		{
-			if (i >= argc-1)
-				goto error;
-			outputfile = argv[++i];
-		}
-		else if (!strcmp(argv[i], "-e"))
-			exclude = 1;
-		else if (!strcmp(argv[i], "-f"))
-			fallback = 1;
-		else if (infile == NULL)
-			infile = argv[i];
-		else
-			break;
 	}
 
-	if (infile == NULL)
-	{
-		fprintf(stderr, "No input file specified!\n");
-		i = 0;
-	}
+	if (fz_optind == argc)
+		return usage();
 
-	if (outputfile == NULL)
-	{
-		fprintf(stderr, "No output file specified!\n");
-		i = 0;
-	}
-
-	if (i < argc)
-	{
-		if (0)
-		{
-error:
-			fprintf(stderr, "Error while parsing options.\n");
-		}
-		fprintf(stderr, "Usage:\n\t%s [options] <input filename>\n", argv[0]);
-		fprintf(stderr, "\t<options>:\n");
-		fprintf(stderr, "\t\t-b <box>\tWhich box to trim to (mediabox(default),cropbox,bleedbox,trimbox,artbox)\n");
-		fprintf(stderr, "\t\t-e\tExclude contents of box, rather than include them\n");
-		fprintf(stderr, "\t\t-f\tFallback to mediabox if specified box not available\n");
-		fprintf(stderr, "\t\t-o <output>\tOutput file\n");
-		return 1;
-	}
+	infile = argv[fz_optind];
 
 	if (boxname)
 	{
@@ -257,7 +284,7 @@ error:
 		n = fz_count_pages(ctx, doc);
 
 		for (i = 0; i < n; i++)
-			rewrite_page_streams(ctx, pdf, i, box, exclude, fallback);
+			rewrite_page_streams(ctx, pdf, i, box, margins, exclude, fallback);
 
 		pdf_save_document(ctx, pdf, outputfile, &opts);
 	}
