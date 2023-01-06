@@ -207,12 +207,12 @@ error:
 
 	if (boxname)
 	{
-		for (box = 0; box < nelem(boxes); box++)
+		for (box = 0; box < (int)nelem(boxes); box++)
 		{
 			if (!strcmp(boxes[box], boxname))
 				break;
 		}
-		if (box == nelem(boxes))
+		if (box == (int)nelem(boxes))
 		{
 			fprintf(stderr, "Unknown box %s specified!\n", boxname);
 			return 1;
