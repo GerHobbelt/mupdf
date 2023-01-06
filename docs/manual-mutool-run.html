@@ -206,9 +206,9 @@ If the object has a 'down' property, it contains an array with all the sub-headi
 <p>
 A link is a dictionary with keys for:
 <dl>
-<dt>Link#bounds:
+<dt>Link.bounds:
 <dd>A rectangle describing the link's location on the page.
-<dt>Link#uri:
+<dt>Link.uri:
 <dd>A uri describing either a document internal destination or a URL for a web page.
 </dl>
 </p>
@@ -217,19 +217,19 @@ A link is a dictionary with keys for:
 A link destination points to a location within a document and how a document viewer should show that destination.
 It consists of a dictionary with keys for:
 <dl>
-<dt>LinkDestination#chapter, #page:
+<dt>LinkDestination.chapter, .page:
 <dd>The chapter and page within the document.
-<dt>LinkDestination#type:
+<dt>LinkDestination.type:
 <dd>Either "Fit", "FitB", "FitH", "FitBH", "FitV", "FitBV", "FitR" or "XYZ", controlling which of the keys below exist.
-<dt>LinkDestination#x:
+<dt>LinkDestination.x:
 <dd>The left coordinate, valid for FitV, FitBV, FitR and XYZ.
-<dt>LinkDestination#y:
+<dt>LinkDestination.y:
 <dd>The top coordinate, valid for FitH, FitBH, FitR and XYZ.
-<dt>LinkDestination#width:
+<dt>LinkDestination.width:
 <dd>The width of the zoomed in region, valid for XYZ.
-<dt>LinkDestination#height:
+<dt>LinkDestination.height:
 <dd>The height of the zoomed in region, valid for XYZ.
-<dt>LinkDestination#zoom:
+<dt>LinkDestination.zoom:
 <dd>The zoom factor, valid for "XYZ".
 </dl>
 </p>
@@ -421,19 +421,19 @@ Many of the methods take graphics objects as arguments: Path, Text, Image and Sh
 <p>
 The stroking state is a dictionary with keys for:
 <dl>
-<dt>StrokingState#startCap, #dashCap, #endCap:
+<dt>StrokingState.startCap, .dashCap, .endCap:
 <dd>"Butt", "Round", "Square", or "Triangle".
-<dt>StrokingState#lineCap:
+<dt>StrokingState.lineCap:
 <dd>Set startCap, dashCap, and endCap all at once.
-<dt>StrokingState#lineJoin:
+<dt>StrokingState.lineJoin:
 <dd>"Miter", "Round", "Bevel", or "MiterXPS".
-<dt>StrokingState#lineWidth:
+<dt>StrokingState.lineWidth:
 <dd>Thickness of the line.
-<dt>StrokingState#miterLimit:
+<dt>StrokingState.miterLimit:
 <dd>Maximum ratio of the miter length to line width, before beveling the join instead.
-<dt>StrokingState#dashPhase:
+<dt>StrokingState.dashPhase:
 <dd>Starting offset for dash pattern.
-<dt>StrokingState#dashes:
+<dt>StrokingState.dashes:
 <dd>Array of on/off dash lengths.
 </dl>
 
@@ -903,9 +903,9 @@ PDF journalling
 <p>
 A PDF journal object contains a numbered array of operations and a reference into this list indicating the current position.
 <dl>
-<dt>PDFJournal#position:
+<dt>PDFJournal.position:
 <dd>The current position in the journal.
-<dt>PDFJournal#steps:
+<dt>PDFJournal.steps:
 <dd>An array containing the name of each step in the journal.
 </dl>
 
@@ -1145,15 +1145,15 @@ After embedding a file into a PDF, it can be connected to an annotation using PD
 <p>
 An EmbeddedFileParams object contain metadata about an embedded file.
 <dl>
-<dt>EmbeddedFileParams#filename:
+<dt>EmbeddedFileParams.filename:
 <dd>The name of the embedded file.
-<dt>EmbeddedFileParams#mimetype:
+<dt>EmbeddedFileParams.mimetype:
 <dd>The MIME type of the embedded file, or undefined if none exists.
-<dt>EmbeddedFileParams#size:
+<dt>EmbeddedFileParams.size:
 <dd>The size in bytes of the embedded file contents.
-<dt>EmbeddedFileParams#creationDate:
+<dt>EmbeddedFileParams.creationDate:
 <dd>The creation date of the embedded file.
-<dt>EmbeddedFileParams#modificationDate:
+<dt>EmbeddedFileParams.modificationDate:
 <dd>The modification date of the embedded file.
 </dl>
 
