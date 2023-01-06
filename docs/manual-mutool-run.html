@@ -628,7 +628,7 @@ Image objects are similar to Pixmaps, but can contain compressed data.
 <dt>Image#getInterpolate()
 <dd>Returns true if interpolation was used during decoding.
 <dt>Image#getImageMask()
-<dd>Returns true if this image is an imagemask.
+<dd>Returns true if this image is an image mask.
 <dt>Image#getMask()
 <dd>Get another Image used as a mask for this one.
 <dt>Image#toPixmap(scaledWidth, scaledHeight)
@@ -685,7 +685,7 @@ The write options are a string of comma separated options (see the document writ
 <dd>Returns the number of versions of the document in a PDF file, typically 1 + the number of updates.
 <dt>PDFDocument#countUnsavedVersions()
 <dd>Returns the number of unsaved updates to the document.
-<dt>PDFDocument#validateChangedHistory()
+<dt>PDFDocument#validateChangeHistory()
 <dd>Check the history of the document, return the last version that checks out OK. Returns 0 if the entire history is ok, 1 if the next to last version is ok, but the last version has issues, etc.
 <dt>PDFDocument#hasUnsavedChanges()
 <dd>Returns true if the document has been saved since it was last opened or saved.
@@ -745,7 +745,7 @@ The buffer must contain already compressed data that matches the Filter and Deco
 <dt>PDFDocument#newInteger(number)
 <dt>PDFDocument#newReal(number)
 <dt>PDFDocument#newString(string)
-<dt>PDFDocument#newByteString(bytestring)
+<dt>PDFDocument#newByteString(byteString)
 <dt>PDFDocument#newName(string)
 <dt>PDFDocument#newIndirect(objectNumber, generation)
 <dt>PDFDocument#newArray()
@@ -767,7 +767,7 @@ Each graft map should only be used with <i>one</i> source document! Make sure to
 <dt>PDFGraftMap#graftObject(object)
 <dd>Use the graft map to copy objects, with the ability to remember previously copied objects.
 <dt>PDFGraftMap#graftPage(map, dstPageNumber, srcDoc, srcPageNumber)
-<dd>Graft a page at  the given page nubmer from the source document to the requested page number in the destination document connected to the map.
+<dd>Graft a page at  the given page number from the source document to the requested page number in the destination document connected to the map.
 <dt>PDFDocument#graftPage(dstDoc, dstPageNumber, srcDoc, srcPageNumber)
 <dd>Graft a page and its resources at the given page number from the source document to the requested page number in the destination document.
 </dl>
@@ -870,7 +870,7 @@ PDF JavaScript actions
 <dt>PDFDocument#disableJS()
 <dd>Disable interpretation of document JavaScript actions.
 <dt>PDFDocument#isJSSupported()
-<dd>Returns true if interpreation of document JavaScript actions is supported.
+<dd>Returns true if interpretation of document JavaScript actions is supported.
 <dt>PDFDocument#setJSEventListener(listener)
 <dd>Calls method onAlert whenever a document JS action trigger an alert.
 </dl>
@@ -889,7 +889,7 @@ PDF journalling
 <dt>PDFDocument#beginImplicitOperation()
 <dd>Begin an implicit journal operation. Implicit operations are operations that happen due to other operations, e.g. updating an annotation.
 <dt>PDFDocument#endOperation()
-<dd>End a previously started normal or implicit operation. AFter this it can be undone/redone using the methods below.
+<dd>End a previously started normal or implicit operation. After this it can be undone/redone using the methods below.
 <dt>PDFDocument#canUndo()
 <dd>Returns true if undo is possible in this state.
 <dt>PDFDocument#canRedo()
@@ -956,7 +956,7 @@ and style ("serif" or "sans-serif").
 <dt>PDFPage#process(processor)
 <dd>Run through the page contents stream and call methods on the supplied PDF processor.
 <dt>PDFPage#toPixmap(transform, colorspace, alpha, renderExtra, usage)
-<dd>Render the page into a Pixmap using the given colorspace and alpha while applying the transform. Rendering fo annotations/widgets can be disabled. A page can be rendered for e.g. "View" or "Print" usage.
+<dd>Render the page into a Pixmap using the given colorspace and alpha while applying the transform. Rendering of annotations/widgets can be disabled. A page can be rendered for e.g. "View" or "Print" usage.
 <dt>PDFPage#getTransform()
 <dd>Return the transform from Fitz page space (upper left page origin, y descending, 72 dpi) to PDF user space (arbitrary page origin, y ascending, UserUnit dpi). This may
 </dl>
