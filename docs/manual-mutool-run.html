@@ -741,6 +741,7 @@ The buffer must contain already compressed data that matches the Filter and Deco
 <dt>PDFDocument#newInteger(number)
 <dt>PDFDocument#newReal(number)
 <dt>PDFDocument#newString(string)
+<dt>PDFDocument#newByteString(bytestring)
 <dt>PDFDocument#newName(string)
 <dt>PDFDocument#newIndirect(objectNumber, generation)
 <dt>PDFDocument#newArray()
@@ -796,6 +797,10 @@ to JavaScript objects and arrays by getting and setting their properties.
 <dd>Length of the array.
 <dt>PDFObject#push(item)
 <dd>Append item to the end of the array.
+<dt>PDFObject#toString()
+<dd>Returns the object as a pretty-printed string.
+<dt>PDFObject#valueOf()
+<dd>Convert primitive PDF objects to a corresponding primitive null, boolean, number or string javascript objects. Indirect PDF objects get converted to the string "R" while PDF names are converted to plain strings. PDF arrays or dictionaries are returned unchanged.
 </dl>
 
 <p>
