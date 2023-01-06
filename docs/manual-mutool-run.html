@@ -761,6 +761,10 @@ use a graft map instead.
 Each graft map should only be used with <i>one</i> source document! Make sure to create a new graft map for each source document used.
 <dt>PDFGraftMap#graftObject(object)
 <dd>Use the graft map to copy objects, with the ability to remember previously copied objects.
+<dt>PDFGraftMap#graftPage(map, dstPageNumber, srcDoc, srcPageNumber)
+<dd>Graft a page at  the given page nubmer from the source document to the requested page number in the destination document connected to the map.
+<dt>PDFDocument#graftPage(dstDoc, dstPageNumber, srcDoc, srcPageNumber)
+<dd>Graft a page and its resources at the given page number from the source document to the requested page number in the destination document.
 </dl>
 
 <p>
