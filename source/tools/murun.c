@@ -1613,7 +1613,7 @@ static void js_proc_j(fz_context *ctx, pdf_processor *proc, int linejoin)
 {
 	if (!((pdf_js_processor*)proc)->extgstate)
 	{
-		PROC_BEGIN("op_w");
+		PROC_BEGIN("op_j");
 		js_pushnumber(J, linejoin);
 		PROC_END(1);
 	}
@@ -5781,7 +5781,7 @@ static void ffi_PDFDocument_wasPureXFA(js_State *J)
 	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
 	int val = 0;
 	fz_try(ctx)
-		val = pdf_validate_change_history(ctx, pdf);
+		val = pdf_was_pure_xfa(ctx, pdf);
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushboolean(J, val);
