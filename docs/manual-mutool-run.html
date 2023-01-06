@@ -440,16 +440,16 @@ Colors are specified as arrays with the appropriate number of components for the
 The methods that clip graphics must be balanced with a corresponding popClip.
 
 <dl>
-<dt>Device#fillPath(path, evenOdd, transform, colorspace, color, alpha)
-<dt>Device#strokePath(path, stroke, transform)
+<dt>Device#fillPath(path, evenOdd, transform, colorspace, color, alpha, colorParams)
+<dt>Device#strokePath(path, stroke, transform, colorspace, color, alpha, colorParams)
 <dt>Device#clipPath(path, evenOdd, transform)
 <dt>Device#clipStrokePath(path, stroke, transform)
 <dd>Fill/stroke/clip a path.
 </dl>
 
 <dl>
-<dt>Device#fillText(text, transform, colorspace, color, alpha)
-<dt>Device#strokeText(text, stroke, transform, colorspace, color, alpha)
+<dt>Device#fillText(text, transform, colorspace, color, alpha, colorParams)
+<dt>Device#strokeText(text, stroke, transform, colorspace, color, alpha, colorParams)
 <dt>Device#clipText(text, transform)
 <dt>Device#clipStrokeText(text, stroke, transform)
 <dd>Fill/stroke/clip a text object.
@@ -458,18 +458,18 @@ The methods that clip graphics must be balanced with a corresponding popClip.
 </dl>
 
 <dl>
-<dt>Device#fillShade(shade, transform, alpha)
+<dt>Device#fillShade(shade, transform, alpha, colorParams)
 <dd>Fill a shade (a.k.a. gradient). TODO: this details of gradient fills are not exposed to JavaScript yet.
-<dt>Device#fillImage(shade, transform, alpha)
+<dt>Device#fillImage(shade, transform, alpha, colorParams)
 <dd>Draw an image. An image always fills a unit rectangle [0,0,1,1], so must be transformed to be placed and drawn at the appropriate size.
-<dt>Device#fillImageMask(image, transform, colorspace, color, alpha)
+<dt>Device#fillImageMask(image, transform, colorspace, color, alpha, colorParams)
 <dd>An image mask is an image without color. Fill with the color where the image is opaque.
 <dt>Device#clipImageMask(image, transform)
 <dd>Clip graphics using the image to mask the areas to be drawn.
 </dl>
 
 <dl>
-<dt>Device#beginMask(area, luminosity, backdropColorspace, backdropColor, backdropAlpha)
+<dt>Device#beginMask(area, luminosity, backdropColorspace, backdropColor, backdropAlpha, colorParams)
 <dt>Device#endMask()
 <dd>Create a soft mask. Any drawing commands between beginMask and endMask are grouped and used as a clip mask.
 If luminosity is true, the mask is derived from the luminosity (grayscale value) of the graphics drawn;
