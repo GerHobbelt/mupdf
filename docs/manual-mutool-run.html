@@ -395,7 +395,6 @@ will keep all the graphics required in memory, so will increase the amount of me
 The options argument is a comma separated list of flags: preserve-ligatures, preserve-whitespace, preserve-spans, and preserve-images.
 <dt>DisplayList#search(needle)
 <dd>Search the display list text for all instances of 'needle', and return an array with rectangles of all matches found.
-<dd>
 </dl>
 
 <dl>
@@ -623,11 +622,11 @@ Image objects are similar to Pixmaps, but can contain compressed data.
 <dt>Image#getNumberOfComponents()
 <dt>Image#getBitsPerComponent()
 <dt>Image#getInterpolate()
-<dd>Returns true of interpolated was used during decoding.
+<dd>Returns true if interpolation was used during decoding.
 <dt>Image#getImageMask()
-<dd>Returns true if this image is and imagemask.
+<dd>Returns true if this image is an imagemask.
 <dt>Image#getMask()
-<dd>Get another Image used as as mask for this one.
+<dd>Get another Image used as a mask for this one.
 <dt>Image#toPixmap(scaledWidth, scaledHeight)
 <dd>Create a pixmap from the image. The scaledWidth and scaledHeight arguments are optional,
 but may be used to decode a down-scaled pixmap.
@@ -862,7 +861,6 @@ PDF JavaScript actions
 <dt>PDFDocument#setJSEventListener(listener)
 <dd>Calls method onAlert whenever a document JS action trigger an alert.
 </dl>
-
 
 <h2>
 PDF journalling
@@ -1161,10 +1159,9 @@ removing content from the page.
 <dt>PDFPage#getAnnotations()
 <dd>Return array of all annotations on the page.
 <dt>PDFPage#createAnnotation(type)
-<dd>Create a new blank annotation of a given type.
-The type must be one of the annotation subtypes: "Text", "Link", "FreeText",
-"Line", "Square", "Circle", "Polygon", "PolyLine", "Highlight", "Underline",
-"Squiggly", "StrikeOut", "Redact", "Stamp", "Caret", "Ink", "Popup",
+<dd>Create a new blank annotation of a given annotation type: "Text", "Link",
+"FreeText", "Line", "Square", "Circle", "Polygon", "PolyLine", "Highlight",
+"Underline", "Squiggly", "StrikeOut", "Redact", "Stamp", "Caret", "Ink", "Popup",
 "FileAttachment", "Sound", "Movie", "RichMedia", "Widget", "Screen",
 "PrinterMark", "TrapNet", "Watermark", "3D" or "Projection".
 <dt>PDFPage#deleteAnnotation(annot)
@@ -1208,7 +1205,7 @@ These properties are available for all annotation types.
 
 <dl>
 <dt>PDFAnnotation#getType()
-<dd>Return the annotation subtype.
+<dd>Return the annotation type.
 <dt>PDFAnnotation#getFlags(), #setFlags(flags)
 <dd>Get/set the annotation flags.
 <dt>PDFAnnotation#getContents(), #setContents(text)
@@ -1346,13 +1343,10 @@ TODO
 </h2>
 
 <p>
-There are several areas in MuPDF that still need bindings to access from JavaScript:
+There are areas in MuPDF that still need bindings to access from JavaScript:
 
 <ul>
 <li>Shadings
-<li>PDFDocument#graftObject()
-<li>PDFWriteDevice
-<li>DocumentWriter
 </ul>
 
 </article>
