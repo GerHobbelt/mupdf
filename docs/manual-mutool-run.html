@@ -1498,6 +1498,71 @@ A description of layouted text value from a text widget with keys:
 </dl>
 </dl>
 
+<h3>
+Story
+</h3>
+
+<dl>
+<dt>Story#document()
+<dd>Return a DOM for an unplaced story. This allows adding content before placing the story.
+<dt>Story#place(rect)
+<dd>Place (or continue placing) a story into the supplied rectangle, returning a PlacementResult described below. Call Story#draw() to draw the placed content before calling Story#place() again to continue placing remaining content.
+<dt>Story#draw(device, matrix)
+<dd>Draw the placed story to the given device with the given transform.
+</dl>
+
+<dl>
+<dt>PlacementResult.filled:
+<dd>The rectangle of the actual area that was used.
+<dt>PlacementResult.more:
+<dd>True if more content remains to be placed, otherwise false if all content fit in the story.
+</dl>
+
+<h3>
+DOM
+</h3>
+
+<dl>
+<dt>DOM#body()
+<dd>Return a DOM for the body element.
+<dt>DOM#documentElement()
+<dd>Return a DOM for the top level element.
+<dt>DOM#createElement(tag)
+<dd>Create an element with the given tag type, but do not link it into the DOM yet.
+<dt>DOM#createTextMode(text)
+<dd>Create a text node with the given text contents, but do not link it into the DOM yet.
+<dt>DOM#find(tag, attribute, value)
+<dd>Find the element matching the tag, attribute and value. Set either of those to null to match anything.
+<dt>DOM#findNext(tag, attribute, value)
+<dd>Find the next element matching the tag, attribute and value. Set either of those to null to match anything.
+<dt>DOM#appendChild(dom, childdom)
+<dd>Insert an element as the last child of a parent, unlinking the child from its current position if required.
+<dt>DOM#insertBefore(dom, elementDom)
+<dd>Insert an element before this element, unlinking the new element from its current position if required.
+<dt>DOM#insertAfter(dom, elementDom)
+<dd>Insert an element after this element, unlinking the new element from its current position if required.
+<dt>DOM#remove()
+<dd>Remove an element from the DOM. The element can be added back elsewhere if required.
+<dt>DOM#clone()
+<dd>Clone an element (and its children). The clone is not yet linked into the DOM.
+<dt>DOM#firstChild()
+<dd>Return the first child of the element as a DOM, or null if no child exist.
+<dt>DOM#parent()
+<dd>Return the parent of the element as a DOM, or null if no parent exists.
+<dt>DOM#next()
+<dd>Return the next element as a DOM, or null if no such element exists.
+<dt>DOM#previous()
+<dd>Return the previous element as a DOM, or null if no such element exists.
+<dt>DOM#addAttribute(attribute, value)
+<dd>Add attribute with the given value, returns the updated element as a DOM.
+<dt>DOM#removeAttribute(attribute)
+<dd>Remove the specified attribute from the element.
+<dt>DOM#attribute(attribute)
+<dd>Return the element's attribute value as a string, or null if no such attribute exists.
+<dt>DOM#getAttributes()
+<dd>Returns a dictionary object with properties and their values corresponding to the element's attributes and their values.
+</dl>
+
 <h2>
 TODO
 </h2>
