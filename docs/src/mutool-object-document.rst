@@ -98,9 +98,9 @@
 
 .. method:: loadPage(number)
 
-    Returns a ``Page`` object for the given page number. Page number zero (0) is the first page in the document.
+    Returns a ``Page`` (or ``PDFPage``) object for the given page number. Page number zero (0) is the first page in the document.
 
-    :return: ``Page``.
+    :return: ``Page`` or ``PDFPage``.
 
 .. method:: loadOutline()
 

@@ -69,8 +69,8 @@
 
     Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a display list.
 
-    :arg appearance: Appearance stream ("N", "R" or "D").
-    :arg state: "On" or "Off".
+    :arg appearance: ``String`` Appearance stream ("N", "R" or "D").
+    :arg state: ``String`` "On" or "Off".
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg displayList: ``DisplayList``.
 
@@ -78,12 +78,28 @@
 
     Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a bounding box, a :title:`PDF` dictionary of resources and a content stream.
 
-    :arg appearance: Appearance stream ("N", "R" or "D").
-    :arg state: "On" or "Off".
+    :arg appearance: ``String`` Appearance stream ("N", "R" or "D").
+    :arg state: ``String`` "On" or "Off".
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg bbox: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
     :arg resources: Resources object.
     :arg contents: Contents string.
+
+
+**Appearance stream values**
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - Value
+     - Description
+   * - N
+     - normal appearance
+   * - R
+     - roll-over appearance
+   * - D
+     - down (pressed) appearance
 
 
 .. method:: update()
@@ -110,21 +126,54 @@ These properties are available for all annotation types.
 
 .. method:: getType()
 
-    Return the annotation subtype.
+    Return the annotation type.
 
-    :return: Annotation type.
+    :return: ``String`` :ref:`Annotation type<mutool_run_js_api_annotation_types>`.
 
 .. method:: getFlags()
 
     Get the annotation flags.
 
-    :return: Annotation flags.
+    :return: ``Integer`` which determines the bit-field value.
 
 .. method:: setFlags(flags)
 
     Set the annotation flags.
 
-    :arg flags:
+    :arg flags: ``Integer`` which determines the bit-field value.
+
+
+**Annotation flags**
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - **Bit position**
+     - **Name**
+   * - ``1``
+     - Invisible
+   * - ``2``
+     - Hidden
+   * - ``3``
+     - Print
+   * - ``4``
+     - NoZoom
+   * - ``5``
+     - NoRotate
+   * - ``6``
+     - NoView
+   * - ``7``
+     - ReadOnly
+   * - ``8``
+     - Locked
+   * - ``9``
+     - ToggleNoView
+   * - ``10``
+     - LockedContents
+
+
+
 
 
 .. method:: getContents()
@@ -187,7 +236,7 @@ These properties are available for all annotation types.
 
     Set the creation date to the number of milliseconds since the epoch.
 
-    :arg milliseconds: Milliseconds value.
+    :arg milliseconds: ``Integer`` Milliseconds value.
 
 
 
@@ -202,7 +251,7 @@ These properties are available for all annotation types.
 
     Set the annotation modification date to the number of milliseconds since the epoch.
 
-    :arg milliseconds: Milliseconds value.
+    :arg milliseconds: ``Integer`` Milliseconds value.
 
 
 .. method:: getQuadding()
@@ -352,6 +401,8 @@ These properties are only present for some annotation types, so support for them
 
     Checks the support for annotation icon.
 
+    :return: ``Boolean``.
+
 .. method:: getIcon()
 
     Gets the annotation icon.
@@ -433,6 +484,8 @@ These properties are only present for some annotation types, so support for them
 
     Checks the support for annotation line.
 
+    :return: ``Boolean``.
+
 
 .. method:: getLine()
 
@@ -453,6 +506,8 @@ These properties are only present for some annotation types, so support for them
 
     Checks the support for annotation open state.
 
+    :return: ``Boolean``.
+
 
 .. method:: isOpen()
 
@@ -467,6 +522,9 @@ These properties are only present for some annotation types, so support for them
     :arg state: ``Boolean``.
 
 
+.. note::
+
+    "Open" refers to whether the annotation has an open state or is opened - e.g. A note icon is considered "Open" if the user has clicked on it to view its contents.
 
 
 .. method:: hasFilespec()

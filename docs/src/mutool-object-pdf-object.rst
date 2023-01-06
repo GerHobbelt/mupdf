@@ -32,11 +32,15 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
 .. method:: get(ref)
 
-    :arg ref: Key or index.
+    Access dictionaries and arrays in the ``PDFObject``.
 
+    :arg ref: Key or index.
     :return: The value for the key or index.
 
+
 .. method:: put(key or index, value)
+
+    Put information into dictionaries and arrays in the ``PDFObject``. Dictionaries and arrays can also be accessed using normal property syntax: ``obj.Foo = 42; delete obj.Foo; x = obj[5]``.
 
     :arg ref: Key or index.
     :arg value: The value for the key or index.
@@ -44,7 +48,7 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
 .. method:: delete(ref)
 
-    Access dictionaries and arrays. Dictionaries and arrays can also be accessed using normal property syntax: ``obj.Foo = 42; delete obj.Foo; x = obj[5]``.
+    Delete a reference from a ``PDFObject``.
 
     :arg ref: Key or index.
 

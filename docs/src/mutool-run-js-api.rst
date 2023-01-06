@@ -236,8 +236,6 @@ It consists of a dictionary with keys for:
 
 
 
-
-
 .. _mutool_run_js_api_pdf_processor:
 
 

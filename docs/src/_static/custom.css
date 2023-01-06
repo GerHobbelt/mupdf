@@ -25,17 +25,36 @@
     color:hsla(0,0%,100%,1);
 }
 
-/* visible scroll bars on tables witrh scrollable content */
+
+/* adds scrollbar to sidenav */
+.wy-side-scroll {
+    width: auto;
+    overflow-y: scroll;
+}
+
+.wy-side-scroll ::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.wy-side-scroll ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.wy-side-scroll::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+}
+
+/* visible scroll bars on tables with scrollable content */
 .wy-table-responsive::-webkit-scrollbar {
     background-color: #dddddd;
     width: 1em;
 }
 
-.wy-table-responsive::-webkit-scrollbar-track {
+.wy-menu-vertical::-webkit-scrollbar-track, .wy-table-responsive::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-.wy-table-responsive::-webkit-scrollbar-thumb {
+.wy-menu-vertical::-webkit-scrollbar-thumb, .wy-table-responsive::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
