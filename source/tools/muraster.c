@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2004-2022 Artifex Software, Inc.
+﻿// Copyright (C) 2004-2021 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -530,7 +530,7 @@ static int usage(void)
 {
 	fz_info(ctx,
 		"muraster version " FZ_VERSION "\n"
-		"Usage: muraster [options] file [pages]\n"
+		"usage: muraster [options] file [pages]\n"
 		"  -p -  password\n"
 		"\n"
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"

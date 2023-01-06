@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2021 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -460,8 +460,7 @@ static int usage(void)
 #endif
 
 	fz_info(ctx,
-		"mudraw version " FZ_VERSION "\n"
-		"Usage: mudraw [options] file [pages]\n"
+		"usage: mudraw [options] file [pages]\n"
 		"  -p -  password\n"
 		"\n"
 		"  -o -  output file name (%%d or ### for page number, '-' for stdout)\n"
