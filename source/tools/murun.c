@@ -6623,7 +6623,7 @@ static void ffi_PDFPage_createAnnotation(js_State *J)
 	pdf_page *page = js_touserdata(J, 0, "pdf_page");
 	const char *name = js_tostring(J, 1);
 	pdf_annot *annot = NULL;
-	enum pdf_annot_type subtype;
+	enum pdf_annot_type type;
 
 	fz_try(ctx)
 	{
@@ -6814,12 +6814,12 @@ static void ffi_PDFAnnotation_getType(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	int type;
+	enum pdf_annot_type type_id;
 	const char *type = NULL;
 	fz_try(ctx)
 	{
-		type = pdf_annot_type(ctx, annot);
-		type = pdf_string_from_annot_type(ctx, type);
+		type_id = pdf_annot_type(ctx, annot);
+		type = pdf_string_from_annot_type(ctx, type_id);
 	}
 	fz_catch(ctx)
 		rethrow(J);
