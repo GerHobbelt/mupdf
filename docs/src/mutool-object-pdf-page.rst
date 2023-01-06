@@ -24,10 +24,54 @@
 
 .. method:: createAnnotation(type)
 
-    Create a new blank annotation of a given type. The type must be one of the annotation subtypes: "Text", "Link", "FreeText", "Line", "Square", "Circle", "Polygon", "PolyLine", "Highlight", "Underline", "Squiggly", "StrikeOut", "Redact", "Stamp", "Caret", "Ink", "Popup", "FileAttachment", "Sound", "Movie", "RichMedia", "Widget", "Screen", "PrinterMark", "TrapNet", "Watermark", "3D" or "Projection".
+    Create a new blank annotation of a given :ref:`type<mutool_run_js_api_annotation_types>`.
 
-    :arg type: ``String`` representing annotation type.
+    :arg type: ``String`` representing :ref:`annotation type<mutool_run_js_api_annotation_types>`.
     :return: ``PDFAnnotation``.
+
+
+.. _mutool_run_js_api_annotation_types:
+
+
+**Annotation types**
+
+.. note::
+
+    Annotation types are also referred to as "subtypes".
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - **Name**
+   * - Text
+   * - Link
+   * - FreeText
+   * - Square
+   * - Circle
+   * - Polygon
+   * - PolyLine
+   * - Highlight
+   * - Underline
+   * - Squiggly
+   * - StrikeOut
+   * - Redact
+   * - Stamp
+   * - Caret
+   * - Ink
+   * - Popup
+   * - FileAttachment
+   * - Sound
+   * - Movie
+   * - RichMedia
+   * - Widget
+   * - Screen
+   * - PrinterMark
+   * - TrapNet
+   * - Watermark
+   * - 3D
+   * - Projection
+
 
 .. method:: deleteAnnotation(annot)
 
@@ -39,13 +83,16 @@
 
     Loop through all annotations of the page and update them. Returns true if re-rendering is needed because at least one annotation was changed (due to either events or :title:`JavaScript` actions or annotation editing).
 
-.. method:: applyRedactions(blackboxes, imageMethod)
+.. method:: applyRedactions(blackBoxes, imageMethod)
 
-    Apply redaction annotations to the page. Should black boxes be drawn at each redaction or not? Should affected images be ignored, entirely redacted or should just the covered part of the image be redacted?
+    Applies redactions to the page.
 
-    :arg blackboxes:
-    :arg imageMethod:
+    :arg blackBoxes: ``Boolean`` Whether to use black boxes at each redaction or not.
+    :arg imageMethod: ``Integer``. ``0`` for no redactions, ``1`` to redact entire images, ``2`` for redacting just the covered pixels.
 
+    .. note::
+
+        Redactions are secure as they remove the affected content completely.
 
 .. method:: process(processor)
 

@@ -148,10 +148,14 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: setJSEventListener(listener)
 
-    Calls method ``onAlert`` whenever a document :title:`JavaScript` action triggers an alert.
+    Calls the listener whenever a document :title:`JavaScript` action triggers an event.
 
-    :arg listener: The :title:`JavaScript` listener object.
+    :arg listener: ``{}`` The :title:`JavaScript` listener function.
 
+
+    .. note::
+
+        At present this listener will only trigger when a document :title:`JavaScript` action triggers an alert.
 
 ----
 
@@ -269,7 +273,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     Create a new null object.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 .. method:: newBoolean(boolean)
 
@@ -277,7 +281,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :arg boolean: The boolean value.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 .. method:: newInteger(number)
 
@@ -285,7 +289,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :arg number: The number value.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 .. method:: newReal(number)
 
@@ -293,7 +297,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :arg number: The number value.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 
 .. method:: newString(string)
@@ -302,7 +306,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :arg string: The string value.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 .. method:: newName(string)
 
@@ -310,7 +314,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :arg string: The string value.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 .. method:: newIndirect(objectNumber, generation)
 
@@ -319,19 +323,19 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
     :arg objectNumber: The string value.
     :arg generation: The string value.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 .. method:: newArray()
 
     Create a new array object.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 .. method:: newDictionary()
 
     Create a new dictionary object.
 
-    :return: Object.
+    :return: ``PDFObject``.
 
 
 
@@ -349,35 +353,35 @@ All page objects are structured into a page tree, which defines the order the pa
 
 .. method:: findPage(number)
 
-    Return the ``Page`` object for a page number.
+    Return the ``PDFPage`` object for a page number.
 
     :arg number: The page number, the first page is number zero.
 
-    :return: ``Page``.
+    :return: ``PDFPage``.
 
 
 .. method:: findPageNumber(page)
 
-    Given a ``Page`` object, find the page number in the document.
+    Given a ``PDFPage`` object, find the page number in the document.
 
     :return: ``Integer``.
 
 
 .. method:: deletePage(number)
 
-    Delete the numbered ``Page``.
+    Delete the numbered ``PDFPage``.
 
     :arg number: The page number, the first page is number zero.
 
 
 .. method:: insertPage(at, page)
 
-    Insert the ``Page`` object in the page tree at the location. If 'at' is -1, at the end of the document.
+    Insert the ``PDFPage`` object in the page tree at the location. If 'at' is -1, at the end of the document.
 
     Pages consist of a content stream, and a resource dictionary containing all of the fonts and images used.
 
     :arg at: The index to insert at.
-    :arg page: The ``Page`` to insert.
+    :arg page: The ``PDFPage`` to insert.
 
 
 .. method:: addPage(mediabox, rotate, resources, contents)
@@ -387,9 +391,10 @@ All page objects are structured into a page tree, which defines the order the pa
     :arg mediabox: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
     :arg rotate: Rotation value.
     :arg resources: Resources object.
-    :arg contents: Contents string.
+    :arg contents: Contents string. This represents the page content stream - see section 3.7.1 in the PDF 1.7 specification.
 
-    :return: ``Page``.
+
+    :return: ``PDFPage``.
 
 
     **Example**

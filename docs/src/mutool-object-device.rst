@@ -188,10 +188,15 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     Push/pop a transparency blending group. See the PDF reference for details on ``isolated`` and ``knockout``.
 
     :arg area: ``Path`` Blend area.
-    :arg isolated:
-    :arg knockout:
+    :arg isolated: ``Boolean``.
+    :arg knockout: ``Boolean``.
     :arg blendmode: Blendmode is one of the standard :title:`PDF` blend modes: "Normal", "Multiply", "Screen", etc.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
+
+
+    .. image:: images/isolated-and-knockout.png
+       :align: center
+       :scale: 50%
 
 
 .. method:: endGroup()
@@ -205,10 +210,10 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     :arg areaRect: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
     :arg viewRect: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
-    :arg xStep: Integer representing ``x`` step.
-    :arg yStep: Integer representing ``y`` step.
+    :arg xStep: ``Integer`` representing ``x`` step.
+    :arg yStep: ``Integer`` representing ``y`` step.
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg id:
+    :arg id: ``Integer`` The purpose of ``id`` is to allow for efficient caching of rendered tiles. If ``id`` is ``0``, then no caching is performed. If it is non-zero, then it assumed to uniquely identify this tile.
 
 
 .. method:: endTile()
