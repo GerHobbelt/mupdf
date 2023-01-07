@@ -142,6 +142,7 @@ if (!filterSrc.match(/<\/Project>/)) {
 const specialFilenames = [
   "README", 
   "NEWS", 
+  "TODO", 
   "CHANGES", 
   "ChangeLog", 
   "Contributors"
@@ -149,7 +150,6 @@ const specialFilenames = [
 let specialFilenameRes = [];
 
 function isSpecialMiscFile(f) {
-
   let name = path.basename(f);
   if (specialFilenameRes.length === 0) {
     for (let i = 0, len = specialFilenames.length; i < len; i++) {
@@ -167,7 +167,7 @@ function isSpecialMiscFile(f) {
 
 let ignoreCount = 0;
 
-let pathWithWildCards = '*.*';
+let pathWithWildCards = '*';
 glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   if (err) {
     throw new Error(`glob scan error: ${err}`);
