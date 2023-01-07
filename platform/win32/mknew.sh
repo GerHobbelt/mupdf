@@ -7,7 +7,6 @@ mknewproj() {
 	  cp -n libcpuid.vcxproj $libname.vcxproj
 	  node ./patch-vcxproj.js $libname.vcxproj
 	  node ./refill-vcxproj.js $libname.vcxproj
-	  ( node ./mk_project_line_for_sln.js $libname.vcxproj ) >> m-dev-list.sln
   fi
 }
 
@@ -18,7 +17,6 @@ mknewAPPproj() {
 	  cp -n mutool.vcxproj $libname.vcxproj
 	  node ./patch-vcxproj.js $libname.vcxproj
 	  node ./refill-vcxproj.js $libname.vcxproj
-	  ( node ./mk_project_line_for_sln.js $libname.vcxproj ) >> m-dev-list.sln
   fi
 }
 
@@ -38,7 +36,7 @@ delnewproj2() {
 
 
 mylist=$(
-cat <<EOT
+grep -v '#' <<EOT
 
 A-MNS_TemplateMatching
 ApprovalTestsCpp
@@ -123,7 +121,7 @@ arrayfire
 asio
 asyncplusplus
 asynqro
-##b2xtranslator
+#	b2xtranslator
 basez
 bhtsne--Barnes-Hut-t-SNE
 bibtex-robust-decoder
@@ -519,6 +517,7 @@ sqlite_fts_tokenizer_chinese_simple
 sqlite_wrapper
 sqlite_zstd_vfs
 sqlpp11
+ssdeep
 ssimulacra2
 stan
 stan-math
@@ -652,7 +651,7 @@ EOT
 )
 
 myapplist=$(
-cat <<EOT
+grep -v '#' <<EOT
 
 EtwExplorer
 GraphicsMagick
@@ -671,7 +670,7 @@ EOT
 # projects which use names different from their actual storage directory; see also update-cvxproj.js script's mapping table:
 
 deletelist=$(
-cat <<EOT
+grep -v '#' <<EOT
 
 cryptopp
 math-atlas
@@ -710,7 +709,7 @@ EOT
 )
 
 deletelist2=$(
-cat <<EOT
+grep -v '#' <<EOT
 
 libYACLib
 libnmslib
@@ -747,6 +746,15 @@ if [[ "$ARG" =~ [12] ]] ; then
 	for f in  $deletelist2  ; do
 	  delnewproj2 $f
 	done
+
+	# and only now do we add all those generated project files to the overview solution!
+	# we do this brute-force by simply adding ALL projects to that solution again; the next
+	# load by Visual Studio will clean up the .sln file for us.
+	( 
+		for f in *.vcxproj ; do
+			node ./mk_project_line_for_sln.js $libname.vcxproj 
+		done
+	) >> m-dev-list.sln
 fi
 
 if [[ "$ARG" =~ [3] ]] ; then

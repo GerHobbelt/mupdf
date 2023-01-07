@@ -271,6 +271,7 @@ const projectMap = {
 	"libhashmapbtree": "parallel-hashmap",
 	"libhdiff": "HDiffPatch",
 	"libmarl": "google-marl",
+	"libmarl_tests": "google-marl",
 	"libmegamime": "mime-mega",
 	"libprocess": "subprocess",
 	"libpromise": "promise-cpp",
