@@ -1707,6 +1707,7 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 		pdf_obj *send = mc_dict;
 		fz_structure standard;
 		pdf_obj *tag;
+		int uid;
 
 		while (1) {
 			pdf_obj *p = pdf_dict_get(ctx, send, PDF_NAME(P));
@@ -1716,10 +1717,11 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 			send = p;
 		}
 
+		uid = pdf_to_num(ctx, send);
 		tag = pdf_dict_get(ctx, send, PDF_NAME(S));
 		standard = structure_type(ctx, proc, tag);
 		if (standard != FZ_STRUCTURE_INVALID)
-			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), 0);
+			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), uid);
 
 		pdf_drop_obj(ctx, proc->mcid_sent);
 		proc->mcid_sent = pdf_keep_obj(ctx, send);
@@ -1769,8 +1771,6 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 		{
 			/* Maybe drop this entirely? */
 			standard = structure_type(ctx, proc, tag);
-			if (standard == FZ_STRUCTURE_INVALID)
-				standard = structure_type(ctx, proc, pdf_dict_get(ctx, mc_dict, PDF_NAME(S)));
 			if (standard != FZ_STRUCTURE_INVALID)
 			{
 				pdf_flush_text(ctx, proc);
@@ -1851,8 +1851,6 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		{
 			/* Maybe drop this entirely? */
 			standard = structure_type(ctx, proc, tag);
-			if (standard == FZ_STRUCTURE_INVALID)
-				standard = structure_type(ctx, proc, pdf_dict_get(ctx, mc_dict, PDF_NAME(S)));
 			if (standard != FZ_STRUCTURE_INVALID)
 			{
 				pdf_flush_text(ctx, proc);
