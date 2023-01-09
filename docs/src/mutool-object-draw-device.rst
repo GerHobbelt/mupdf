@@ -7,6 +7,7 @@
 .. _mutool_object_draw_device:
 
 
+.. _mutool_run_js_api_draw_device:
 
 
 ``DrawDevice``

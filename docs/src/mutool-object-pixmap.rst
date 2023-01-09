@@ -7,9 +7,6 @@
 .. _mutool_object_pixmap:
 
 
-
-
-
 .. _mutool_run_js_api_pixmap:
 
 ``Pixmap``
