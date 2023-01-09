@@ -1,5 +1,19 @@
 #! /bin/bash
 
+
+if [ -z "$1" ] ; then
+	ARG="3"
+else
+	ARG="$1"
+fi
+
+if [ -z "$2" ] ; then
+	FILTER=.
+else
+	FILTER=$2
+fi
+
+
 mknewproj() {
   echo "mknewproj: $1"
   libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
@@ -647,6 +661,22 @@ zsv
 zsync2
 zxing-cpp
 
+
+ssdeep
+cr
+RuntimeCompiledCPlusPlus
+koan
+iODBC
+nanodbc
+unixODBC
+jerryscript
+wxDatabase
+sqliteodbc
+Xoshiro-cpp
+fastPRNG
+libchaos
+
+
 EOT
 )
 
@@ -720,22 +750,20 @@ libCacheLib
 EOT
 )
 
-if [ -z "$1" ] ; then
-	ARG="3"
-else
-	ARG="$1"
-fi
-
 
 if [[ "$ARG" =~ [1] ]] ; then
 	for f in  $mylist  ; do
-	  mknewproj $f
+		if [[ $f =~ $FILTER ]] ; then
+			mknewproj $f
+		fi
 	done
 fi
 
 if [[ "$ARG" =~ [2] ]] ; then
 	for f in  $myapplist  ; do
-	  mknewAPPproj $f
+		if [[ $f =~ $FILTER ]] ; then
+			mknewAPPproj $f
+		fi
 	done
 fi
 
@@ -759,14 +787,18 @@ fi
 
 if [[ "$ARG" =~ [3] ]] ; then
 	for f in *.vcxproj ; do
-		echo "Updating $f..."
-		./update-vcxproj.sh $f
+		if [[ $f =~ $FILTER ]] ; then
+			echo "Updating $f..."
+			./update-vcxproj.sh $f
+		fi
 	done
 fi
 
 if [[ "$ARG" =~ [4] ]] ; then
 	for f in *.vcxproj ; do
-		echo "Refilling $f..."
-		./refill-vcxproj.sh $f
+		if [[ $f =~ $FILTER ]] ; then
+			echo "Refilling $f..."
+			./refill-vcxproj.sh $f
+		fi
 	done
 fi
