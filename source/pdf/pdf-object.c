@@ -4314,7 +4314,7 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 										if (string_value[i] == 0)
 											string_value[i] = ' ';
 									}
-									ASSERT_AND_CONTINUE_EQ(strlen(string_value), string_length);
+									ASSERT_AND_CONTINUE_EQ(strlen((const char *)string_value), string_length);
 
 									// trim whitespace at end:
 									i = string_length;
