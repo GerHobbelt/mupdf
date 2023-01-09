@@ -15,37 +15,39 @@ fi
 
 
 mknewproj() {
-  echo "mknewproj: $1"
-  libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
-  if ! test -f $1.vcxproj -o -f $libname.vcxproj ; then
-	  cp -n libcpuid.vcxproj $libname.vcxproj
-	  node ./patch-vcxproj.js $libname.vcxproj
-	  node ./refill-vcxproj.js $libname.vcxproj
-  fi
+	libname=$( echo lib$1 | sed -E -e 's/^liblib/lib/' -e 's/-?lib$//i' )
+	if ! test -f $1.vcxproj -o -f $libname.vcxproj ; then
+		echo "mknewproj: $libname"
+		cp -n libcpuid.vcxproj $libname.vcxproj
+		node ./patch-vcxproj.js $libname.vcxproj
+		./update-vcxproj.sh $libname.vcxproj
+		node ./refill-vcxproj.js $libname.vcxproj
+	fi
 }
 
 mknewAPPproj() {
-  echo "mknewAPPproj: $1"
-  libname=$1
-  if ! test -f $libname.vcxproj ; then
-	  cp -n mutool.vcxproj $libname.vcxproj
-	  node ./patch-vcxproj.js $libname.vcxproj
-	  node ./refill-vcxproj.js $libname.vcxproj
-  fi
+	libname=$1
+	if ! test -f $libname.vcxproj ; then
+		echo "mknewAPPproj: $libname"
+		cp -n mutool.vcxproj $libname.vcxproj
+		node ./patch-vcxproj.js $libname.vcxproj
+		./update-vcxproj.sh $libname.vcxproj
+		node ./refill-vcxproj.js $libname.vcxproj
+	fi
 }
 
 delnewproj() {
-  echo "delnewproj: $1"
-  libname=$1
-  rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
-  libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
-  rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
+	libname=$1
+	echo "delnewproj: $libname"
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   2> /dev/null
+	libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   2> /dev/null
 }
 
 delnewproj2() {
-  echo "delnewproj: $1"
-  libname=$1
-  rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*
+	libname=$1
+	echo "delnewproj: $libname"
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   2> /dev/null
 }
 
 
@@ -135,7 +137,7 @@ arrayfire
 asio
 asyncplusplus
 asynqro
-#	b2xtranslator
+##############b2xtranslator
 basez
 bhtsne--Barnes-Hut-t-SNE
 bibtex-robust-decoder
@@ -734,6 +736,7 @@ OptimizationTemplateLibrary
 manticoresearch
 uberlog
 pmt-png-tools
+libchm_io
 
 EOT
 )
@@ -778,9 +781,12 @@ if [[ "$ARG" =~ [12] ]] ; then
 	# and only now do we add all those generated project files to the overview solution!
 	# we do this brute-force by simply adding ALL projects to that solution again; the next
 	# load by Visual Studio will clean up the .sln file for us.
+	echo "augment MSVC solution 'm-dev-list.sln' by adding all known projects..."
 	( 
 		for f in *.vcxproj ; do
-			node ./mk_project_line_for_sln.js $libname.vcxproj 
+			if [[ $f =~ $FILTER ]] ; then
+				node ./mk_project_line_for_sln.js $f
+			fi
 		done
 	) >> m-dev-list.sln
 fi
