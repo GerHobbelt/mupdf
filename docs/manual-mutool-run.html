@@ -521,7 +521,7 @@ Apply a clip mask to restrict the pattern to the desired shape.
 ColorParams is a dictionary with keys for:
 <dl>
 <dt>ColorParams.renderingIntent:
-<dd>Either of "perceptual", "relativecolorimetric", "saturation" or "absolutecolorimetric".
+<dd>Either of "Perceptual", "RelativeColorimetric", "Saturation" or "AbsoluteColorimetric".
 <dt>ColorParams.blackPointCompensation:
 <dd>True if black point compensation is activated.
 <dt>ColorParams.overPrinting:
@@ -788,7 +788,7 @@ Each graft map should only be used with <i>one</i> source document! Make sure to
 <dt>PDFGraftMap#graftObject(object)
 <dd>Use the graft map to copy objects, with the ability to remember previously copied objects.
 <dt>PDFGraftMap#graftPage(map, dstPageNumber, srcDoc, srcPageNumber)
-<dd>Graft a page at  the given page number from the source document to the requested page number in the destination document connected to the map.
+<dd>Graft a page at the given page number from the source document to the requested page number in the destination document connected to the map.
 <dt>PDFDocument#graftPage(dstDoc, dstPageNumber, srcDoc, srcPageNumber)
 <dd>Graft a page and its resources at the given page number from the source document to the requested page number in the destination document.
 </dl>
@@ -1457,6 +1457,11 @@ PDF Widgets
 <dd>Clear a signed signature, making it unsigned again.
 </dl>
 
+<dl>
+<dt>new PDFPKCS7Signer(filename, password)
+<dd>Read a certificate and private key from a pfx file and create a signer to hold this information. Used with PDFWidget#sign().
+</dl>
+
 <p>
 A signature configuration of what to include in the signature appearance:
 <dl>
@@ -1526,6 +1531,8 @@ Story
 </h3>
 
 <dl>
+<dt>new Story(contents, user_css, em)
+<dd>Create a new story with the given contents, formatted according to the provided user css and em size.
 <dt>Story#document()
 <dd>Return a DOM for an unplaced story. This allows adding content before placing the story.
 <dt>Story#place(rect)

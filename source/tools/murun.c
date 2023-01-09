@@ -646,10 +646,10 @@ static const char *string_from_ri(uint8_t ri)
 {
 	switch (ri) {
 	default:
-	case 0: return "perceptual";
-	case 1: return "relativecolorimetric";
-	case 2: return "saturation";
-	case 3: return "absolutecolorimetric";
+	case 0: return "Perceptual";
+	case 1: return "RelativeColorimetric";
+	case 2: return "Saturation";
+	case 3: return "AbsoluteColorimetric";
 	}
 }
 
@@ -6814,16 +6814,16 @@ static void ffi_PDFAnnotation_getType(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
-	enum pdf_annot_type type_id;
-	const char *type = NULL;
+	enum pdf_annot_type type;
+	const char *typestr = NULL;
 	fz_try(ctx)
 	{
-		type_id = pdf_annot_type(ctx, annot);
-		type = pdf_string_from_annot_type(ctx, type_id);
+		type = pdf_annot_type(ctx, annot);
+		typestr = pdf_string_from_annot_type(ctx, type);
 	}
 	fz_catch(ctx)
 		rethrow(J);
-	js_pushstring(J, type);
+	js_pushstring(J, typestr);
 }
 
 static void ffi_PDFAnnotation_getFlags(js_State *J)
@@ -8742,7 +8742,7 @@ int murun_main(int argc, const char** argv)
 	}
 	js_setregistry(J, "fz_story");
 
-	js_getregistry(J, "DOM");
+	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
 	{
 		jsB_propfun(J, "DOM.body", ffi_DOM_body, 0);
