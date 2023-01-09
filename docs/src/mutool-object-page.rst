@@ -6,6 +6,8 @@
 
 .. _mutool_object_page:
 
+.. _mutool_run_js_api_page:
+
 ``Page``
 -------------
 
@@ -17,7 +19,7 @@
 
 .. method:: run(device, transform, skipAnnotations)
 
-    Calls device functions for all the contents on the page, using the specified ``transform`` `matrix<mutool_run_js_api_matrix>`. The ``device`` can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The ``transform`` maps from user space points to device space pixels. If ``skipAnnotations`` is *true* then annotations are ignored.
+    Calls device functions for all the contents on the page, using the specified ``transform`` :ref:`matrix<mutool_run_js_api_matrix>`. The ``device`` can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The ``transform`` maps from user space points to device space pixels. If ``skipAnnotations`` is *true* then annotations are ignored.
 
     :arg device: The device object.
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
@@ -84,7 +86,7 @@
 
     Delete the link from the page.
 
-    :arg link: `Link dictionary<mutool_run_js_api_link_dict>`.
+    :arg link: :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
 
 .. method:: isPDF()
 

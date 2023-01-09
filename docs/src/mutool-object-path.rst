@@ -41,6 +41,7 @@ A ``Path`` object represents vector graphics as drawn by a pen. A path can be ei
     :return: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 
+
 .. method:: moveTo(x, y)
 
     Lift and move the pen to the coordinate.
@@ -57,7 +58,7 @@ A ``Path`` object represents vector graphics as drawn by a pen. A path can be ei
 
 .. method:: curveTo(x1, y1, x2, y2, x3, y3)
 
-    Draw a cubic bezier curve to (``x3``,``y3``) using (``x1``,``y1``) and (``x2``,``y2``) as control points.
+    Draw a cubic bezier curve to (``x3``, ``y3``) using (``x1``, ``y1``) and (``x2``, ``y2``) as control points.
 
     :arg x1: X1 coordinate.
     :arg y1: Y1 coordinate.
@@ -68,7 +69,7 @@ A ``Path`` object represents vector graphics as drawn by a pen. A path can be ei
 
 .. method:: curveToV(cx, cy, ex, ey)
 
-    Draw a cubic bezier curve to (``ex``,``ey``) using the start point and (``cx``,``cy``) as control points.
+    Draw a cubic bezier curve to (``ex``, ``ey``) using the start point and (``cx``, ``cy``) as control points.
 
     :arg cx: CX coordinate.
     :arg cy: CY coordinate.
@@ -78,7 +79,7 @@ A ``Path`` object represents vector graphics as drawn by a pen. A path can be ei
 
 .. method:: curveToY(cx, cy, ex, ey)
 
-    Draw a cubic bezier curve to (``ex``,``ey``) using the (``cx``,``cy``) and (``ex``, ``ey``) as control points.
+    Draw a cubic bezier curve to (``ex``, ``ey``) using the (``cx``, ``cy``) and (``ex``, ``ey``) as control points.
 
     :arg cx: CX coordinate.
     :arg cy: CY coordinate.
@@ -87,7 +88,7 @@ A ``Path`` object represents vector graphics as drawn by a pen. A path can be ei
 
 .. method:: closePath()
 
-    Close the path by drawing a line to the last moveTo.
+    Close the path by drawing a line to the last ``moveTo``.
 
 .. method:: rect(x1, y1, x2, y2)
 

@@ -69,8 +69,16 @@
 
 .. method:: getNumberOfComponents()
 
+    Number of colors; plus one if an alpha channel is present.
+
+    :return: ``Integer``.
+
 
 .. method:: getBitsPerComponent()
+
+    Returns the number of bits per component.
+
+    :return: ``Integer``.
 
 
 .. method:: getInterpolate()

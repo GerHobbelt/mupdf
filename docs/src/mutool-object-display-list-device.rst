@@ -7,9 +7,8 @@
 .. _mutool_object_display_list_device:
 
 
-
-
 .. _mutool_run_js_api_display_list_device:
+
 
 ``DisplayListDevice``
 --------------------------------------------------------

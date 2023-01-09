@@ -148,13 +148,13 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
 .. method:: isNull()
 
-    Is the object the 'null' object?
+    Returns *true* if the object is a ``null`` object.
 
     :return: ``Boolean``.
 
 .. method:: isBoolean()
 
-    Is the object a boolean?
+    Returns *true* if the object is a ``Boolean`` object.
 
     :return: ``Boolean``.
 
@@ -166,7 +166,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
 .. method:: isNumber()
 
-    Is the object a number?
+    Returns *true* if the object is a ``Number`` object.
 
     :return: ``Boolean``.
 
@@ -178,7 +178,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
 .. method:: isName()
 
-    Is the object a name?
+    Returns *true* if the object is a ``Name`` object.
 
     :return: ``Boolean``.
 
@@ -190,7 +190,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
 .. method:: isString()
 
-    Is the object a string?
+    Returns *true* if the object is a ``String`` object.
 
     :return: ``Boolean``.
 

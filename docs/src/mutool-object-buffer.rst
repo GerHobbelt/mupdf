@@ -4,6 +4,8 @@
 
 .. _mutool_object_buffer:
 
+.. _mutool_run_js_api_buffer:
+
 
 ``Buffer``
 --------------

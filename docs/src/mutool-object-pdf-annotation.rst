@@ -10,10 +10,6 @@
 .. _mutool_run_js_api_pdf_annotation:
 
 
-
-
-
-
 ``PDFAnnotation``
 ----------------------
 
@@ -543,7 +539,7 @@ These properties are only present for some annotation types, so support for them
 
     Sets the file specification object.
 
-    :arg fileSpecPdfObject: File specification object.
+    :arg fileSpecObject: File specification object.
 
 
 ----
@@ -597,11 +593,11 @@ The border drawn around some annotations can be controlled by:
     :return: ``Integer``.
 
 
-.. method:: setBorderDashPattern(dashpattern)
+.. method:: setBorderDashPattern(dashPattern)
 
-    Set the annotation border dash pattern to the given array of dash item lengths.
+    Set the annotation border dash pattern to the given array of dash item lengths. The supplied array represents the respective line stroke and gap lengths, e.g. ``[1,1]`` sets a small dash and small gap, ``[2,1,4,1]`` would set a medium dash, a small gap, a longer dash and then another small gap.
 
-    :arg dashpattern: ?
+    :arg dashpattern: [Integer, Integer, ....]
 
 .. method:: clearBorderDash()
 

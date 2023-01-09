@@ -7,6 +7,7 @@
 .. _mutool_object_document:
 
 
+.. _mutool_run_js_api_document:
 
 
 ``Document``
@@ -62,7 +63,7 @@
 
 .. method:: getMetaData(key)
 
-    Return various meta data information. The common keys are: "format", "encryption", "info:Author", and "info:Title".
+    Return various meta data information. The common keys are: ``format``, ``encryption``, ``info:Author``, and ``info:Title``.
 
     :arg key: ``String``.
     :return: ``String``.

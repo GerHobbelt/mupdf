@@ -6,10 +6,10 @@
 
 .. _mutool_object_color_space:
 
-
-
-
 .. _mutool_run_javascript_api_colorspace:
+
+
+.. _mutool_run_js_api_colorspace:
 
 
 ``ColorSpace``

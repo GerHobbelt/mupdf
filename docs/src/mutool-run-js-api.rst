@@ -139,6 +139,7 @@ Alpha values are floats between ``0`` and ``1``, whereby ``0`` denotes full tran
 
 .. _mutool_run_js_api_links:
 
+
 Links
 ---------
 
