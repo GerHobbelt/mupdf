@@ -25,8 +25,8 @@
 #if FZ_ENABLE_DOCX_OUTPUT && FZ_ENABLE_RENDER_CORE 
 
 #include "glyphbox.h"
-#include "extract/extract.h"
-#include "extract/buffer.h"
+#include "extract.h"
+#include "extract_buffer.h"
 
 #include "mupdf/assertions.h"
 #include <errno.h>
@@ -290,7 +290,7 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 		fz_color_params color_params)
 {
 	fz_docx_device *dev = (fz_docx_device*) dev_;
-	extract_t* extract = dev->writer->extract;
+	extract_t *extract = dev->writer->extract;
 	fz_path_walker walker;
 
 	walker.moveto = fill_moveto;
@@ -304,20 +304,20 @@ void dev_fill_path(fz_context *ctx, fz_device *dev_, const fz_path *path, int ev
 
 	assert(!dev->writer->ctx);
 	dev->writer->ctx = ctx;
-	if (extract_fill_begin(
-			extract,
-			matrix.a,
-			matrix.b,
-			matrix.c,
-			matrix.d,
-			matrix.e,
-			matrix.f,
-			color[0]
-			))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin fill");
 
 	fz_try(ctx)
 	{
+		if (extract_fill_begin(
+				extract,
+				matrix.a,
+				matrix.b,
+				matrix.c,
+				matrix.d,
+				matrix.e,
+				matrix.f,
+				color[0]
+				))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin fill");
 		fz_walk_path(ctx, path, &walker, extract /*arg*/);
 		if (extract_fill_end(extract))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "extract_fill_end() failed");
@@ -383,21 +383,20 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 
 	assert(!dev->writer->ctx);
 	dev->writer->ctx = ctx;
-	if (extract_stroke_begin(
-			extract,
-			in_ctm.a,
-			in_ctm.b,
-			in_ctm.c,
-			in_ctm.d,
-			in_ctm.e,
-			in_ctm.f,
-			stroke->linewidth,
-			color[0]
-			))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin stroke");
-
 	fz_try(ctx)
 	{
+		if (extract_stroke_begin(
+				extract,
+				in_ctm.a,
+				in_ctm.b,
+				in_ctm.c,
+				in_ctm.d,
+				in_ctm.e,
+				in_ctm.f,
+				stroke->linewidth,
+				color[0]
+				))
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin stroke");
 		fz_walk_path(ctx, path, &walker, extract /*arg*/);
 		if (extract_stroke_end(extract))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "extract_stroke_end() failed");
@@ -754,7 +753,8 @@ static void *s_realloc_fn(void *state, void *prev, size_t size)
 }
 
 /* Will drop <out> if an error occurs. */
-static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_output *out, const char *options, extract_format_t format)
+static fz_document_writer *fz_new_docx_writer_internal(fz_context *ctx, fz_output *out,
+		const char *options, extract_format_t format)
 {
 	fz_docx_writer *writer = NULL;
 
@@ -824,6 +824,11 @@ fz_document_writer *fz_new_odt_writer_with_output(fz_context *ctx, fz_output *ou
 	return fz_new_docx_writer_internal(ctx, out, options, extract_format_ODT);
 }
 
+fz_document_writer *fz_new_docx_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
+{
+	return fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
+}
+
 fz_document_writer *fz_new_odt_writer(fz_context *ctx, const char *path, const char *options)
 {
 	/* No need to drop <out> if fz_new_docx_writer_internal() throws, because
@@ -832,26 +837,12 @@ fz_document_writer *fz_new_odt_writer(fz_context *ctx, const char *path, const c
 	return fz_new_docx_writer_internal(ctx, out, options, extract_format_ODT);
 }
 
-fz_document_writer *fz_new_docx_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
-{
-	return fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
-}
-
 fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *path, const char *options)
 {
+	/* No need to drop <out> if fz_new_docx_writer_internal() throws, because
+	it always drops <out> if it fails. */
 	fz_output *out = fz_new_output_with_path(ctx, path, 0 /*append*/);
-	fz_document_writer *ret;
-	fz_var(ret);
-	fz_try(ctx)
-	{
-		ret = fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
-	}
-	fz_catch(ctx)
-	{
-		fz_drop_output(ctx, out);
-		fz_rethrow(ctx);
-	}
-	return ret;
+	return fz_new_docx_writer_internal(ctx, out, options, extract_format_DOCX);
 }
 
 #endif
