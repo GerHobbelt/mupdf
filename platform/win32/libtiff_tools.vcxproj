@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5EDCF4FD-0291-4FB9-8D96-558957CA5E3C}</ProjectGuid>
-    <RootNamespace>libtiff</RootNamespace>
+    <ProjectGuid>{5EDCF4FD-0291-4FB9-8D96-5589573C22A7}</ProjectGuid>
+    <RootNamespace>libtiff_tools</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,7 +111,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_TOOLS;TIFF_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -123,7 +123,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_TOOLS;TIFF_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -133,7 +133,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_TOOLS;TIFF_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -145,7 +145,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;BUILD_MONOLITHIC;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_TOOLS;TIFF_TOOLS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -153,51 +153,42 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_aux.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_close.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_codec.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_color.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_compress.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dir.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dirinfo.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dirread.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dirwrite.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_dumpmode.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_error.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_extension.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_fax3.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_fax3sm.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_flush.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_getimage.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_hash_set.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_jbig.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_jpeg.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_jpeg_12.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_lerc.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_luv.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_lzma.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_lzw.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_next.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_ojpeg.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_open.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_packbits.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_pixarlog.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_predict.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_print.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_read.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_stream.cxx" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_strip.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_swab.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_thunder.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_tile.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_unix.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_version.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_warning.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_webp.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_win32.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_write.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_zip.c" />
-    <ClCompile Include="../../thirdparty/libtiff/libtiff/tif_zstd.c" />
+    <ClCompile Include="../../thirdparty/libtiff/archive/tools/bmp2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/archive/tools/gif2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/archive/tools/ras2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/archive/tools/sgi2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/archive/tools/sgisv.c" />
+    <ClCompile Include="../../thirdparty/libtiff/archive/tools/ycbcr.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/mkg3states.c" />
+    <ClCompile Include="../../thirdparty/libtiff/libtiff/mkspans.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/bmp2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/fax2ps.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/fax2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/gif2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/pal2rgb.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/ppm2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/ras2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/raw2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/rgb2ycbcr.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/sgi2tiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/sgisv.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/thumbnail.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiff2bw.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiff2pdf.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiff2ps.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiff2rgba.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffcmp.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffcp.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffcrop.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffdither.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffdump.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffgt.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffinfo.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffjoin.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffmedian.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffset.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/tiffsplit.c" />
+    <ClCompile Include="../../thirdparty/libtiff/tools/ycbcr.c" />
     <ClInclude Include="../../thirdparty/libtiff/archive/tools/rasterfile.h" />
     <ClInclude Include="../../thirdparty/libtiff/contrib/addtiffo/tif_ovrcache.h" />
     <ClInclude Include="../../thirdparty/libtiff/contrib/dbs/xtiff/patchlevel.h" />

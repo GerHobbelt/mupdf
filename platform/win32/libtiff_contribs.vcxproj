@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8A6B8B4A-BAFB-46BD-ABC2-A236B714E353}</ProjectGuid>
+    <RootNamespace>libtiff_contribs</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_CONTRIBS;TIFF_CONTRIBS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_CONTRIBS;TIFF_CONTRIBS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_CONTRIBS;TIFF_CONTRIBS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/libtiff/port;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIFF_CONTRIBS;TIFF_CONTRIBS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/libtiff/contrib/addtiffo/addtiffo.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/addtiffo/tif_overview.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/addtiffo/tif_ovrcache.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/dbs/tiff-bi.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/dbs/tiff-grayscale.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/dbs/tiff-palette.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/dbs/tiff-rgb.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/dbs/xtiff/xtiff.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/iptcutil/iptcutil.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/mfs/mfs_file.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/oss-fuzz/tiff_read_data_fuzzer.cc" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/oss-fuzz/tiff_read_rgba_fuzzer.cc" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/pds/tif_imageiter.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/pds/tif_pdsdirread.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/pds/tif_pdsdirwrite.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/ras/ras2tif.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/ras/tif2ras.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/stream/tiffstream.cpp" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/tags/listtif.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/tags/maketif.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/tags/xtif_dir.c" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/win_dib/Tiffile.cpp" />
+    <ClCompile Include="../../thirdparty/libtiff/contrib/win_dib/tiff2dib.c" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/addtiffo/tif_ovrcache.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/dbs/xtiff/patchlevel.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/dbs/xtiff/xtifficon.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/pds/tif_imageiter.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/stream/tiffstream.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/tags/xtiffio.h" />
+    <ClInclude Include="../../thirdparty/libtiff/contrib/tags/xtiffiop.h" />
+    <Image Include="../../thirdparty/libtiff/contrib/LibTIFF.NET/LibTIFF.NET.test/App.ico" />
+    <Image Include="../../thirdparty/libtiff/contrib/LibTIFF.NET/LibTIFF.NET/App.ico" />
+    <Text Include="../../thirdparty/libtiff/contrib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/addtiffo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/addtiffo/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/addtiffo/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/addtiffo/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/xtiff/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/xtiff/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/dbs/xtiff/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/CMakeLists.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/iptcutil/test.txt" />
+    <Text Include="../../thirdparty/libtiff/contrib/mfs/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/mfs/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/mfs/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/oss-fuzz/build.sh" />
+    <Text Include="../../thirdparty/libtiff/contrib/pds/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/pds/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/pds/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/ras/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/ras/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/ras/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/stream/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/stream/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/stream/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/tags/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/tags/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/tags/README" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/Makefile.am" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/Makefile.in" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/README.Tiffile" />
+    <Text Include="../../thirdparty/libtiff/contrib/win_dib/README.tiff2dib" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

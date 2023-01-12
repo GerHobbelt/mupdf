@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5EDCF4FD-0291-4FB9-8D96-658957CA5E3C}</ProjectGuid>
-    <RootNamespace>libpng</RootNamespace>
+    <ProjectGuid>{4E43F33A-3587-48C8-911D-A9E3212A8097}</ProjectGuid>
+    <RootNamespace>libpng_contribs</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -153,27 +153,40 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/libpng/example.c" />
-    <ClCompile Include="../../thirdparty/libpng/intel/filter_sse2_intrinsics.c" />
-    <ClCompile Include="../../thirdparty/libpng/intel/intel_init.c" />
-    <ClCompile Include="../../thirdparty/libpng/loongson-mmi/filter_mmi_intrinsics.c" />
-    <ClCompile Include="../../thirdparty/libpng/loongson-mmi/loongson_mmi_init.c" />
-    <ClCompile Include="../../thirdparty/libpng/png.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngerror.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngget.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngmem.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngpread.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngread.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngrio.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngrtran.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngrutil.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngset.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngtest.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngtrans.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngwio.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngwrite.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngwtran.c" />
-    <ClCompile Include="../../thirdparty/libpng/pngwutil.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/examples/iccfrompng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/examples/pngpixel.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/examples/pngtopng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/examples/simpleover.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/readpng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/readpng2.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/readppm.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/rpng-win.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/rpng-x.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/rpng2-win.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/rpng2-x.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/wpng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/gregbook/writepng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/fakepng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/makepng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/pngadhoc.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/pngimage.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/pngstest.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/pngunknown.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/pngvalid.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/readpng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/tarith.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/libtests/timepng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/pngminus/png2pnm.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/pngminus/pnm2png.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/tools/checksum-icc.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/tools/cvtcolor.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/tools/genpng.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/tools/makesRGB.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/tools/png-fix-itxt.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/tools/pngcp.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/tools/pngfix.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/visupng/PngFile.c" />
+    <ClCompile Include="../../thirdparty/libpng/contrib/visupng/VisualPng.c" />
     <ClInclude Include="../../thirdparty/libpng/contrib/gregbook/readpng.h" />
     <ClInclude Include="../../thirdparty/libpng/contrib/gregbook/readpng2.h" />
     <ClInclude Include="../../thirdparty/libpng/contrib/gregbook/writepng.h" />
@@ -185,13 +198,6 @@
     <ClInclude Include="../../thirdparty/libpng/contrib/visupng/PngFile.h" />
     <ClInclude Include="../../thirdparty/libpng/contrib/visupng/cexcept.h" />
     <ClInclude Include="../../thirdparty/libpng/contrib/visupng/resource.h" />
-    <ClInclude Include="../../thirdparty/libpng/png.h" />
-    <ClInclude Include="../../thirdparty/libpng/pngconf.h" />
-    <ClInclude Include="../../thirdparty/libpng/pngdebug.h" />
-    <ClInclude Include="../../thirdparty/libpng/pnginfo.h" />
-    <ClInclude Include="../../thirdparty/libpng/pnglibconf.h" />
-    <ClInclude Include="../../thirdparty/libpng/pngpriv.h" />
-    <ClInclude Include="../../thirdparty/libpng/pngstruct.h" />
     <Image Include="../../thirdparty/libpng/contrib/gregbook/toucan.png" />
     <Image Include="../../thirdparty/libpng/contrib/pngsuite/basn0g01.png" />
     <Image Include="../../thirdparty/libpng/contrib/pngsuite/basn0g02.png" />
@@ -382,28 +388,21 @@
     <Image Include="../../thirdparty/libpng/contrib/testpngs/rgb-alpha-8.png" />
     <Image Include="../../thirdparty/libpng/contrib/visupng/VisualPng.ico" />
     <Image Include="../../thirdparty/libpng/contrib/visupng/VisualPng.png" />
-    <Image Include="../../thirdparty/libpng/pngbar.jpg" />
-    <Image Include="../../thirdparty/libpng/pngbar.png" />
-    <Image Include="../../thirdparty/libpng/pngnow.png" />
-    <Image Include="../../thirdparty/libpng/pngtest.png" />
     <ResourceCompile Include="../../thirdparty/libpng/contrib/visupng/VisualPng.rc" />
-    <ResourceCompile Include="../../thirdparty/libpng/scripts/pngwin.rc" />
-    <Text Include="../../thirdparty/libpng/CMakeLists.txt" />
-    <Text Include="../../thirdparty/libpng/Makefile.am" />
-    <Text Include="../../thirdparty/libpng/Makefile.in" />
-    <Text Include="../../thirdparty/libpng/arm/filter_neon.S" />
-    <Text Include="../../thirdparty/libpng/autogen.sh" />
-    <Text Include="../../thirdparty/libpng/ci/ci_verify_cmake.sh" />
-    <Text Include="../../thirdparty/libpng/ci/ci_verify_configure.sh" />
-    <Text Include="../../thirdparty/libpng/ci/ci_verify_makefiles.sh" />
-    <Text Include="../../thirdparty/libpng/config.h.in" />
-    <Text Include="../../thirdparty/libpng/configure.ac" />
     <Text Include="../../thirdparty/libpng/contrib/README.txt" />
+    <Text Include="../../thirdparty/libpng/contrib/arm-neon/README" />
+    <Text Include="../../thirdparty/libpng/contrib/conftest/README" />
     <Text Include="../../thirdparty/libpng/contrib/examples/README.txt" />
     <Text Include="../../thirdparty/libpng/contrib/gregbook/Makefile.unx" />
+    <Text Include="../../thirdparty/libpng/contrib/gregbook/README" />
     <Text Include="../../thirdparty/libpng/contrib/libtests/gentests.sh" />
+    <Text Include="../../thirdparty/libpng/contrib/mips-msa/README" />
     <Text Include="../../thirdparty/libpng/contrib/oss-fuzz/README.txt" />
     <Text Include="../../thirdparty/libpng/contrib/oss-fuzz/build.sh" />
+    <Text Include="../../thirdparty/libpng/contrib/pngminim/README" />
+    <Text Include="../../thirdparty/libpng/contrib/pngminim/decoder/README" />
+    <Text Include="../../thirdparty/libpng/contrib/pngminim/encoder/README" />
+    <Text Include="../../thirdparty/libpng/contrib/pngminim/preader/README" />
     <Text Include="../../thirdparty/libpng/contrib/pngminus/CHANGES.txt" />
     <Text Include="../../thirdparty/libpng/contrib/pngminus/CMakeLists.txt" />
     <Text Include="../../thirdparty/libpng/contrib/pngminus/LICENSE.txt" />
@@ -414,30 +413,15 @@
     <Text Include="../../thirdparty/libpng/contrib/pngminus/pngminus.sh" />
     <Text Include="../../thirdparty/libpng/contrib/pngminus/pnm2png.bat" />
     <Text Include="../../thirdparty/libpng/contrib/pngminus/pnm2png.sh" />
+    <Text Include="../../thirdparty/libpng/contrib/pngsuite/README" />
     <Text Include="../../thirdparty/libpng/contrib/pngsuite/bad_interlace_conversions.txt" />
+    <Text Include="../../thirdparty/libpng/contrib/pngsuite/interlaced/README" />
+    <Text Include="../../thirdparty/libpng/contrib/powerpc-vsx/README" />
     <Text Include="../../thirdparty/libpng/contrib/testpngs/makepngs.sh" />
     <Text Include="../../thirdparty/libpng/contrib/tools/README.txt" />
     <Text Include="../../thirdparty/libpng/contrib/tools/chkfmt.sh" />
     <Text Include="../../thirdparty/libpng/contrib/tools/intgamma.sh" />
     <Text Include="../../thirdparty/libpng/contrib/visupng/README.txt" />
-    <Text Include="../../thirdparty/libpng/libpng-config.in" />
-    <Text Include="../../thirdparty/libpng/libpng-manual.txt" />
-    <Text Include="../../thirdparty/libpng/libpng.pc.in" />
-    <Text Include="../../thirdparty/libpng/ltmain.sh" />
-    <Text Include="../../thirdparty/libpng/package.py" />
-    <Text Include="../../thirdparty/libpng/projects/visualc71/README.txt" />
-    <Text Include="../../thirdparty/libpng/projects/visualc71/README_zlib.txt" />
-    <Text Include="../../thirdparty/libpng/projects/vstudio/README.txt" />
-    <Text Include="../../thirdparty/libpng/run_cmake.sh" />
-    <Text Include="../../thirdparty/libpng/scripts/README.txt" />
-    <Text Include="../../thirdparty/libpng/scripts/genchk.cmake.in" />
-    <Text Include="../../thirdparty/libpng/scripts/genout.cmake.in" />
-    <Text Include="../../thirdparty/libpng/scripts/gensrc.cmake.in" />
-    <Text Include="../../thirdparty/libpng/scripts/libpng-config-body.in" />
-    <Text Include="../../thirdparty/libpng/scripts/libpng-config-head.in" />
-    <Text Include="../../thirdparty/libpng/scripts/libpng.pc.in" />
-    <Text Include="../../thirdparty/libpng/scripts/makefile.gcc" />
-    <Text Include="../../thirdparty/libpng/scripts/test.cmake.in" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

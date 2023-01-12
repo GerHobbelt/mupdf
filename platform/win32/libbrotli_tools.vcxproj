@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libbrotli</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD7760D}</ProjectGuid>
-    <RootNamespace>libbrotli</RootNamespace>
+    <ProjectName>libbrotli_tools</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7428FFD7760D}</ProjectGuid>
+    <RootNamespace>libbrotli_tools</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBROTLI;BROTLI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/brotli/research/libdivsufsort/include;../../scripts/libgflags/include;../../thirdparty/owemdjee/abseil-cpp;../../scripts/libdivsufsort/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBROTLI;BROTLI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/brotli/research/libdivsufsort/include;../../scripts/libgflags/include;../../thirdparty/owemdjee/abseil-cpp;../../scripts/libdivsufsort/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBROTLI;BROTLI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/brotli/research/libdivsufsort/include;../../scripts/libgflags/include;../../thirdparty/owemdjee/abseil-cpp;../../scripts/libdivsufsort/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBROTLI;BROTLI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/brotli/research/libdivsufsort/include;../../scripts/libgflags/include;../../thirdparty/owemdjee/abseil-cpp;../../scripts/libdivsufsort/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -226,37 +226,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/common/constants.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/common/context.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/common/dictionary.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/common/platform.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/common/shared_dictionary.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/common/transform.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/dec/bit_reader.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/dec/decode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/dec/huffman.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/dec/state.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/backward_references.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/backward_references_hq.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/bit_cost.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/block_splitter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/brotli_bit_stream.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/cluster.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/command.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/compound_dictionary.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/compress_fragment.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/compress_fragment_two_pass.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/dictionary_hash.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/encode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/encoder_dict.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/entropy_encode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/fast_log.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/histogram.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/literal_cost.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/memory.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/metablock.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/static_dict.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/enc/utf8_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/brotli/c/tools/brotli.c" />
     <ClInclude Include="../../thirdparty/owemdjee/brotli/c/common/constants.h" />
     <ClInclude Include="../../thirdparty/owemdjee/brotli/c/common/context.h" />
     <ClInclude Include="../../thirdparty/owemdjee/brotli/c/common/dictionary.h" />
@@ -334,7 +304,9 @@
     <Text Include="../../thirdparty/owemdjee/brotli/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/brotli/MANIFEST.in" />
     <Text Include="../../thirdparty/owemdjee/brotli/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/brotli/README" />
     <Text Include="../../thirdparty/owemdjee/brotli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/brotli/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/brotli/c/fuzz/test_fuzzer.sh" />
     <Text Include="../../thirdparty/owemdjee/brotli/c/tools/brotli.md" />
     <Text Include="../../thirdparty/owemdjee/brotli/configure.ac" />
@@ -350,7 +322,6 @@
     <Text Include="../../thirdparty/owemdjee/brotli/js/package.json" />
     <Text Include="../../thirdparty/owemdjee/brotli/js/polyfill.js" />
     <Text Include="../../thirdparty/owemdjee/brotli/js/test_data.js" />
-    <Text Include="../../thirdparty/owemdjee/brotli/premake5.lua" />
     <Text Include="../../thirdparty/owemdjee/brotli/python/README.md" />
     <Text Include="../../thirdparty/owemdjee/brotli/python/bro.py" />
     <Text Include="../../thirdparty/owemdjee/brotli/python/brotli.py" />
@@ -363,6 +334,7 @@
     <Text Include="../../thirdparty/owemdjee/brotli/python/tests/decompressor_test.py" />
     <Text Include="../../thirdparty/owemdjee/brotli/research/README.md" />
     <Text Include="../../thirdparty/owemdjee/brotli/research/brotlidump.py" />
+    <Text Include="../../thirdparty/owemdjee/brotli/research/esaxx/README" />
     <Text Include="../../thirdparty/owemdjee/brotli/research/libdivsufsort/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/brotli/research/libdivsufsort/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/brotli/research/libdivsufsort/CMakeModules/cmake_uninstall.cmake.in" />

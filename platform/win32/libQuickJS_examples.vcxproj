@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libQuickJS</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0E57BA}</ProjectGuid>
-    <RootNamespace>libQuickJS</RootNamespace>
+    <ProjectName>libQuickJS_examples</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0E57B3}</ProjectGuid>
+    <RootNamespace>libQuickJS_examples</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -135,7 +135,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;..\..\thirdparty\owemdjee\QuickJS\sample_app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -177,7 +177,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;..\..\thirdparty\owemdjee\QuickJS\sample_app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -222,7 +222,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;..\..\thirdparty\owemdjee\QuickJS\sample_app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -264,7 +264,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;..\..\thirdparty\owemdjee\QuickJS\sample_app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -302,29 +302,14 @@
   </ImportGroup>
   <ItemGroup>
     <ClInclude Include="..\..\scripts\QuickJS\quickjs-config.h" />
-    <Text Include="..\..\scripts\libQuickJS\compile_scripts.js" />
-    <ClCompile Include="..\..\scripts\libQuickJS\qjscalc.c" />
-    <ClCompile Include="..\..\scripts\libQuickJS\qjsrepl.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/bjson.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/getopt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/gettimeofday.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/jscompress.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/libregexp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/libunicode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/qjs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/qjsc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs-debugger-transport-unix.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs-debugger-transport-win.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs-debugger-transport.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs-debugger.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs-find-module.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs-libc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs-port.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/quickjs_dump_flags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/examples/fib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/examples/point.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuickJS/sample_app/main.cpp" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\QuickJS\unicode_gen.c" />
     <ClInclude Include="../../thirdparty/owemdjee/QuickJS/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuickJS/cutils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/QuickJS/getopt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/QuickJS/libbf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/QuickJS/libregexp-opcode.h" />

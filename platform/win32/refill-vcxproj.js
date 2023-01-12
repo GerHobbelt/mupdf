@@ -306,6 +306,8 @@ const projectMap = {
 	"libsafestring": "safestringlib",
 	"libCache": "CacheLib",
 	"libyaml-tests": "libyaml",
+	"libtiff_contribs": "libtiff/contrib",
+	"libpng_contribs": "libpng/contrib",
 	"uberlogger": "uberlog",
 	"uberlog_test": "uberlog",
 	"filesystem_tests_exception": "filesystem/test",
