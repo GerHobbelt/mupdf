@@ -1547,7 +1547,7 @@ begin_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *
 
 	pdf_flush_text(ctx, proc);
 
-	fz_begin_metatext(ctx, proc->dev, meta, pdf_to_text_string(ctx, text));
+	fz_begin_metatext(ctx, proc->dev, meta, pdf_to_text_string(ctx, text, NULL));
 }
 
 static void
@@ -1621,7 +1621,7 @@ begin_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	if (obj)
 	{
 		pdf_flush_text(ctx, proc);
-		push_begin_layer(ctx, proc, pdf_to_text_string(ctx, obj));
+		push_begin_layer(ctx, proc, pdf_to_text_string(ctx, obj, NULL));
 	}
 }
 
@@ -1707,36 +1707,6 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 		pdf_drop_obj(ctx, proc->mcid_sent);
 		proc->mcid_sent = pdf_keep_obj(ctx, send);
 	}
-}
-
-static void
-begin_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, fz_metatext meta, pdf_obj *name)
-{
-	pdf_obj *text = pdf_dict_get(ctx, val, name);
-
-	if (!text)
-		text = pdf_dict_get(ctx, mcid, name);
-	if (!text)
-		return;
-
-	pdf_flush_text(ctx, proc);
-
-	fz_begin_metatext(ctx, proc->dev, meta, pdf_to_text_string(ctx, text, NULL));
-}
-
-static void
-end_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, pdf_obj *name)
-{
-	pdf_obj *text = pdf_dict_get(ctx, val, name);
-
-	if (!text)
-		text = pdf_dict_get(ctx, mcid, name);
-	if (!text)
-		return;
-
-	pdf_flush_text(ctx, proc);
-
-	fz_end_metatext(ctx, proc->dev);
 }
 
 static void
