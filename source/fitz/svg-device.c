@@ -464,7 +464,7 @@ svg_dev_text_span(fz_context *ctx, svg_device *sdev, fz_matrix ctm, const fz_tex
 			if (it->ucs >= 0)
 			{
 				int c = it->ucs;
-				if (c >= 32 && c <= 127 && c != '<' && c != '&' && c != '>')
+				if (c >= 32 && c < 127 && c != '<' && c != '&' && c != '>')
 					fz_append_byte(ctx, out, c);
 				else
 					fz_append_printf(ctx, out, "&#x%04x;", c);
@@ -568,7 +568,13 @@ svg_dev_data_text(fz_context *ctx, fz_buffer *out, int c)
 			fz_append_string(ctx, out, "&amp;");
 		else if (c == '"')
 			fz_append_string(ctx, out, "&quot;");
-		else if (c >= 32 && c < 127 && c != '<' && c != '>')
+		else if (c == '<')
+			fz_append_string(ctx, out, "&lt;");
+		else if (c == '>')
+			fz_append_string(ctx, out, "&gt;");
+		else if (c == '\'')
+			fz_append_string(ctx, out, "&apos;"); 
+		else if (c >= 32 && c < 127)
 			fz_append_byte(ctx, out, c);
 		else
 			fz_append_printf(ctx, out, "&#x%04x;", c);
