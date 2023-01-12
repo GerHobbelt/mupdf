@@ -411,6 +411,8 @@ dev_stroke_path(fz_context *ctx, fz_device *dev_, const fz_path *path,
 	}
 }
 
+#if defined(EXPERIMENTAL)
+
 static extract_struct_t
 fz_struct_to_extract(fz_structure type)
 {
@@ -572,6 +574,7 @@ dev_end_structure(fz_context *ctx, fz_device *dev_)
 		fz_rethrow(ctx);
 }
 
+#endif
 
 static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_, fz_rect mediabox)
 {
@@ -594,8 +597,10 @@ static fz_device *writer_begin_page(fz_context *ctx, fz_document_writer *writer_
 		dev->super.fill_image = dev_fill_image;
 		dev->super.fill_path = dev_fill_path;
 		dev->super.stroke_path = dev_stroke_path;
+#if defined(EXPERIMENTAL)
 		dev->super.begin_structure = dev_begin_structure;
 		dev->super.end_structure = dev_end_structure;
+#endif
 		dev->writer = writer;
 	}
 	fz_always(ctx)
