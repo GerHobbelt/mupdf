@@ -19,34 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>sqlite_tools</ProjectName>
-    <ProjectGuid>{5924A383-0110-4CBE-A7B4-0FBBA6C19561}</ProjectGuid>
-    <RootNamespace>sqlite_tools</RootNamespace>
+    <ProjectName>libsqlite_tools</ProjectName>
+    <ProjectGuid>{6E890463-3EEB-4CCE-B8BD-5AA89148C35A}</ProjectGuid>
+    <RootNamespace>libsqlite_tools</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -226,8 +226,100 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\monolithic_main.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\user_code.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test2.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test3.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test4.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test5.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test6.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test7.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test8.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test9.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_async.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_autoext.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_backup.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_bestindex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_blob.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_btree.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_config.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_delete.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_demovfs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_devsym.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_fs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_func.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_hexio.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_init.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_intarray.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_journal.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_loadext.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_malloc.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_md5.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_multiplex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_mutex.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_onefile.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_osinst.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_pcache.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_quota.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_rtree.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_schema.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_server.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_sqllog.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_superlock.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_syscall.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_tclsh.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_tclvar.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_thread.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_vdbecov.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_vfs.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_vfstrace.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_window.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\src\test_wsd.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\atrc.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\bc_test1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\crashtest1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\dbfuzz.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\fuzzinvariants.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\kvtest.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\speedtest1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\startup.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest2.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest3.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest4.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\threadtest5.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\vt02.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\test\wordcount.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\checkSpacing.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\dbhash.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\dbtotxt.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\enlargedb.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\extract.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\fast_vacuum.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\getlock.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\index_usage.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\lemon.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\libvers.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\loadfts.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\logest.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\max-limits.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\mkkeywordhash.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\mksourceid.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\offsets.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\pagesig.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\rollback-test.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showdb.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showjournal.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showlocks.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showshm.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showstat4.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\showwal.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\speedtest16.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\speedtest8.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\sqldiff.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\srcck1.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\stripccomments.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\tserver.c" />
+    <ClCompile Include="..\..\thirdparty\owemdjee\sqlite\tool\varint.c" />
     <ClInclude Include="../../thirdparty/owemdjee/sqlite/monolithic_examples.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\dirent.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\obj_interfaces.h" />
@@ -235,6 +327,10 @@
     <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3rc.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite3session.h" />
     <ClInclude Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\sqlite_cfg.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\src\test_intarray.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\src\test_multiplex.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\src\test_quota.h" />
+    <ClInclude Include="..\..\thirdparty\owemdjee\sqlite\src\test_windirent.h" />
     <Image Include="../../thirdparty/owemdjee/sqlite/art/sqlite370.ico" />
     <Image Include="../../thirdparty/owemdjee/sqlite/art/sqlite370.jpg" />
     <Image Include="../../thirdparty/owemdjee/sqlite/vsixtest/Assets/LockScreenLogo.scale-200.png" />
@@ -460,9 +556,6 @@
   <ItemGroup>
     <ProjectReference Include="libsqlite-amalgamation.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsqlite_tools.vcxproj">
-      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
     </ProjectReference>
     <ProjectReference Include="pthread_lib.2019.vcxproj">
       <Project>{c431b5c5-ff25-4450-a13c-ea3123456789}</Project>

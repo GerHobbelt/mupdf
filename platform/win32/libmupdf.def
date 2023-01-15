@@ -585,7 +585,7 @@ EXPORTS
 	fz_begin_layer
 	fz_begin_mask
 	fz_begin_metatext
-	fz_begin_struct
+	fz_begin_structure
 	fz_begin_tile
 	fz_begin_tile_id
 	fz_blendmode_name
@@ -604,7 +604,7 @@ EXPORTS
 	fz_end_layer
 	fz_end_mask
 	fz_end_metatext
-	fz_end_struct
+	fz_end_structure
 	fz_end_tile
 	fz_fill_image
 	fz_fill_image_mask
@@ -631,7 +631,7 @@ EXPORTS
 	fz_set_default_colorspaces
 	fz_stroke_path
 	fz_stroke_text
-	fz_struct_to_string
+	fz_structure_to_string
 	fz_bound_display_list
 	fz_display_list_is_empty
 	fz_drop_display_list
@@ -2074,6 +2074,7 @@ EXPORTS
 	pdf_get_incremental_xref_entry
 	pdf_get_populating_xref_entry
 	pdf_get_xref_entry
+	pdf_get_xref_entry_no_change
 	pdf_get_xref_entry_no_null
 	pdf_is_field_locked
 	pdf_is_local_object
@@ -3256,6 +3257,7 @@ EXPORTS
 	sqlite3_stmt_readonly
 	sqlite3_stmt_scanstatus
 	sqlite3_stmt_scanstatus_reset
+	sqlite3_stmt_scanstatus_v2
 	sqlite3_stmt_status
 	sqlite3_str_append
 	sqlite3_str_appendall
@@ -3381,15 +3383,23 @@ EXPORTS
 	sqlite_dbtotxt_main
 	sqlite_diff_main
 	sqlite_enlargedb_main
+	sqlite_ext_expert_main
+	sqlite_ext_session_changeset_main
+	sqlite_ext_session_fuzzer_main
+	sqlite_ext_session_speed_test_main
 	sqlite_fast_vacuum_main
+	sqlite_fts3view_main
 	sqlite_getlock_main
 	sqlite_index_usage_main
 	sqlite_kvtest_main
+	sqlite_lemon_main
 	sqlite_libvers_main
 	sqlite_logest_main
+	sqlite_lsmtest_main
 	sqlite_max_limits_main
 	sqlite_offsets_main
 	sqlite_pagesig_main
+	sqlite_rbu_main
 	sqlite_showdb_main
 	sqlite_showjournal_main
 	sqlite_showlocks_main
