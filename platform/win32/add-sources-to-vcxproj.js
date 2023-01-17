@@ -263,6 +263,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.hxx':
     case '.hpp':
     case '.icc':
+    case '.inc':
         filterDirs.add('Header Files');
         base = path.dirname(f);
         if (base === '.') {
@@ -417,6 +418,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.hxx':
     case '.hpp':
     case '.icc':
+    case '.inc':
         base = path.dirname(item);
         if (base === '.') {
           base = '';
@@ -568,14 +570,14 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
         base = base.replace(/\//g, '\\');
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
-    <MASM Include="${xmlEncode(f)}">
+    <NASM Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
-    </MASM>
+    </NASM>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <MASM Include="${xmlEncode(f)}" />
+    <NASM Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
