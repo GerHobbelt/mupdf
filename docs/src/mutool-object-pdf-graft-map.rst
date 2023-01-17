@@ -20,3 +20,13 @@
 
     :arg object: Object to graft.
 
+
+
+.. method:: graftPage(map, dstPageNumber, srcDoc, srcPageNumber)
+
+    Graft a page at the given page number from the source document to the requested page number in the destination document connected to the map.
+
+    :arg map: ``PDFGraftMap``.
+    :arg dstPageNumber: Destination page number.
+    :arg srcDoc: Source document.
+    :arg srcPageNumber: Source page number.

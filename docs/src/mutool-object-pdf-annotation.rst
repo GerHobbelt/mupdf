@@ -189,13 +189,13 @@ These properties are available for all annotation types.
 
     Get the annotation border line width in points.
 
-    :return: Border width.
+    :return: ``Float``.
 
 .. method:: setBorder(width)
 
     Set the annotation border line width in points. Use ``setBorderWidth()`` to avoid removing the border effect.
 
-    :arg width: Border width.
+    :arg width: ``Float`` Border width.
 
 
 .. method:: getColor()
@@ -525,7 +525,7 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasFilespec()
 
-    Checks the support for annotation file specification.
+    Checks support for the annotation file specification.
 
     :return: ``Boolean``.
 
@@ -533,13 +533,18 @@ These properties are only present for some annotation types, so support for them
 
     Gets the file specification object.
 
-    :return: File specification object.
+    :return: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+
+
+
+.. _mutool_run_js_api_pdf_annotation_setFilespec:
+
 
 .. method:: setFilespec(fileSpecObject)
 
     Sets the file specification object.
 
-    :arg fileSpecObject: File specification object.
+    :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
 
 
 ----

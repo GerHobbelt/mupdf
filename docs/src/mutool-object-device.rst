@@ -22,7 +22,7 @@ Colors are specified as arrays with the appropriate number of components for the
 
 The methods that clip graphics must be balanced with a corresponding ``popClip``.
 
-.. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha)
+.. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha, colorParams)
 
     Fill a path.
 
@@ -32,6 +32,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 
     **Example**
@@ -40,7 +41,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
         device.fillPath(path, false, Identity, DeviceRGB, [1,0,0], 1);
 
-.. method:: strokePath(path, stroke, transform)
+.. method:: strokePath(path, stroke, transform, colorspace, color, alpha, colorParams)
 
     Stroke a path.
 
@@ -50,6 +51,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
     **Example**
 
@@ -76,7 +78,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
 
 
-.. method:: fillText(text, transform, colorspace, color, alpha)
+.. method:: fillText(text, transform, colorspace, color, alpha, colorParams)
 
     Fill a text object.
 
@@ -85,8 +87,9 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
-.. method:: strokeText(text, stroke, transform, colorspace, color, alpha)
+.. method:: strokeText(text, stroke, transform, colorspace, color, alpha, colorParams)
 
     Stroke a text object.
 
@@ -96,7 +99,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
-
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 .. method:: clipText(text, transform)
 
@@ -122,28 +125,30 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
 
 
-.. method:: fillShade(shade, transform, alpha)
+.. method:: fillShade(shade, transform, alpha, colorParams)
 
     Fill a shade (a.k.a. gradient).
 
     .. note::
 
-        TODO: the details of gradient fills are not exposed to :title:`JavaScript` yet.
+        The details of gradient fills are not exposed to :title:`JavaScript` yet.
 
 
     :arg shade: The gradient.
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
-.. method:: fillImage(image, transform, alpha)
+.. method:: fillImage(image, transform, alpha, colorParams)
 
     Draw an image. An image always fills a unit rectangle ``[0,0,1,1]``, so must be transformed to be placed and drawn at the appropriate size.
 
     :arg image: ``Image`` object.
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
-.. method:: fillImageMask(image, transform, colorspace, color, alpha)
+.. method:: fillImageMask(image, transform, colorspace, color, alpha, colorParams)
 
     An image mask is an image without color. Fill with the color where the image is opaque.
 
@@ -152,6 +157,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 .. method:: clipImageMask(image, transform)
 
@@ -166,7 +172,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     Pop the clip mask installed by the last clipping operation.
 
 
-.. method:: beginMask(area, luminosity, backdropColorspace, backdropColor, backdropAlpha)
+.. method:: beginMask(area, luminosity, backdropColorspace, backdropColor, backdropAlpha, colorParams)
 
     Create a soft mask. Any drawing commands between ``beginMask`` and ``endMask`` are grouped and used as a clip mask.
 
@@ -175,6 +181,8 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
     :arg backdropColorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg backdropColor: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg backdropAlpha: The  :ref:`alpha value<mutool_run_js_api_alpha>`.
+    :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
+
 
 
 .. method:: endMask()

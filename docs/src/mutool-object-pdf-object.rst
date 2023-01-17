@@ -73,12 +73,25 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
     :arg fun: Function in the format ``function(key,value){...}``.
 
 
-
 .. method:: push(item)
 
     Append ``item`` to the end of the array.
 
     :arg item: Item to add.
+
+
+.. method:: toString()
+
+    Returns the object as a pretty-printed string.
+
+    :return: ``String``.
+
+
+.. method:: valueOf()
+
+    Convert primitive :title:`PDF` objects to a corresponding primitive ``Null``, ``Boolean``, ``Number`` or ``String`` :title:`JavaScript` objects. Indirect :title:`PDF` objects get converted to the string "R" while :title:`PDF` names are converted to plain strings. :title:`PDF` arrays or dictionaries are returned unchanged.
+
+    :return: ``Null`` \| ``Boolean`` \| ``Number`` \| ``String``.
 
 
 ----

@@ -110,6 +110,37 @@ A ``Pixmap`` object contains a color raster image (short for pixel map). The com
     :arg xRes: ``Int`` X resolution in dots per inch.
     :arg yRes: ``Int`` Y resolution in dots per inch.
 
+
+.. method:: saveAsPNG(fileName, saveAlpha)
+
+    Save the ``Pixmap`` as a :title:`PNG`. Only works for :title:`Gray` and :title:`RGB` images.
+
+    :arg fileName: ``String``.
+    :arg saveAlpha: ``Boolean``.
+
+
+.. method:: invert()
+
+    Invert all pixels. All components are processed, except alpha which is unchanged.
+
+.. method:: invertLuminance()
+
+    Transform all pixels so that luminance of each pixel is inverted, and the chrominance remains as unchanged as possible. All components are processed, except alpha which is unchanged.
+
+.. method:: gamma(gamma)
+
+    Apply gamma correction to ``Pixmap``. All components are processed, except alpha which is unchanged.
+
+    :arg gamma: ``Float``.
+
+.. method:: tint(black, white)
+
+    Tint all pixels in an :title:`RGB`, :title:`BGR` or :title:`Gray` ``Pixmap``. Map black and white respectively to the given hex :title:`RGB` values.
+
+    :arg black: ``Float``.
+    :arg white: ``Float``.
+
+
 .. method:: warp(points, width, height)
 
     Return a warped subsection of the ``Pixmap``, where the result has the requested dimensions.
@@ -119,12 +150,6 @@ A ``Pixmap`` object contains a color raster image (short for pixel map). The com
     :arg height: ``Int``.
 
 
-.. method:: saveAsPNG(fileName, saveAlpha)
-
-    Save the ``Pixmap`` as a :title:`PNG`. Only works for Gray and RGB images.
-
-    :arg fileName: ``String``.
-    :arg saveAlpha: ``Boolean``.
 
 
 
