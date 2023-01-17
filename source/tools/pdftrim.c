@@ -141,8 +141,8 @@ rewrite_page_streams(fz_context *ctx, pdf_document *doc, int page_num, int box, 
 		fz_rethrow(ctx);
 }
 
-static char *
-skip_comma(char *s)
+static const char *
+skip_comma(const char *s)
 {
 	while (isspace(*s))
 		s++;
@@ -154,9 +154,9 @@ skip_comma(char *s)
 }
 
 static void
-read_margins(float *margin, char *arg)
+read_margins(float *margin, const char *arg)
 {
-	char *e;
+	const char *e;
 
 	/* A single one reads for all margins. */
 	margin[0] = fz_strtof(arg, &e);
