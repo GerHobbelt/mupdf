@@ -77,7 +77,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Integer`.
 
-.. method:: validateChangedHistory()
+.. method:: validateChangeHistory()
 
     Check the history of the document, return the last version that checks out OK. Returns ``0`` if the entire history is OK, ``1`` if the next to last version is OK, but the last version has issues, etc.
 
@@ -304,9 +304,19 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     Create a new string object.
 
-    :arg string: The string value.
+    :arg string: ``String``.
 
     :return: ``PDFObject``.
+
+
+.. method:: newByteString(byteString)
+
+    Create a new byte string object.
+
+    :arg byteString: ``String``.
+
+    :return: ``PDFObject``.
+
 
 .. method:: newName(string)
 
@@ -456,10 +466,99 @@ The following functions can be used to copy objects from one document to another
     :arg object: Object to graft.
 
 
+.. method:: graftPage(dstDoc, dstPageNumber, srcDoc, srcPageNumber)
+
+    Graft a page and its resources at the given page number from the source document to the requested page number in the destination document.
+
+    :arg dstDoc: Destination document.
+    :arg dstPageNumber: Destination page number.
+    :arg srcDoc: Source document.
+    :arg srcPageNumber: Source page number.
+
 .. method:: newGraftMap()
 
-    Create a graft map on the destination document, so that objects that have already been copied can be found again. Each graft map should only be used with one source document! Make sure to create a new graft map for each source document used.
+    Create a graft map on the destination document, so that objects that have already been copied can be found again. Each graft map should only be used with one source document. Make sure to create a new graft map for each source document used.
 
     :return: ``PDFGraftMap``.
 
+
+----
+
+
+**Embedded files in PDFs**
+
+
+
+
+.. method:: addEmbeddedFile(filename, mimetype, contents, creationDate, modificationDate, addChecksum)
+
+    Embedded a file into the document. If a checksum is added then the file contents can be verified later. An indirect reference to the :ref:`filespec PDF object<mutool_run_js_api_file_spec_object>` is returned.
+
+
+    :arg filename: ``String``.
+    :arg mimetype: ``String`` See: Mimetype_.
+    :arg contents: Contents string. This represents the page content stream - see section 3.7.1 in the PDF 1.7 specification.
+    :arg creationDate: ``Integer`` Milliseconds value.
+    :arg modificationDate: ``Integer`` Milliseconds value.
+    :arg addChecksum: ``Boolean``.
+
+    :return: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+
+
+    .. note::
+
+        After embedding a file into a :title:`PDF`, it can be connected to an annotation using :ref:`PDFAnnotation.setFilespec()<mutool_run_js_api_pdf_annotation_setFilespec>`.
+
+
+.. method:: getEmbeddedFileParams(fileSpecObject)
+
+    Return an object describing the file referenced by the ``filespecObject``.
+
+    :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+
+    :return: :ref:`Embedded file object<mutool_run_js_api_pdf_document_embedded_file_object>`.
+
+.. method:: getEmbeddedFileContents(fileSpecObject)
+
+    Returns a ``Buffer`` with the contents of the embedded file referenced by the ``filespecObject``.
+
+    :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+
+    :return: :ref:`Buffer<mutool_object_buffer>`.
+
+.. method:: verifyEmbeddedFileChecksum(fileSpecObject)
+
+    Verify the :title:`MD5` checksum of the embedded file contents.
+
+     :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+
+     :return: ``Boolean``.
+
+
+.. _mutool_run_js_api_pdf_document_embedded_file_object:
+
+**Embedded file object**
+
+This object contains metadata about an embedded file, it has properties for:
+
+``filename``
+    The name of the embedded file.
+
+``mimetype``
+    The :title:`MIME` type of the embedded file, or ``undefined`` if none exists.
+
+``size``
+    The size in bytes of the embedded file contents.
+
+``creationDate``
+    The creation date of the embedded file.
+
+``modificationDate``
+    The modification date of the embedded file.
+
+
+
+.. External links
+
+.. _Mimetype: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
 

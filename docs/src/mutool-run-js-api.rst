@@ -15,14 +15,36 @@
 
 
 
-Base :title:`MuPDF` methods
+Global :title:`MuPDF` methods
 ------------------------------------------
 
 
 
-.. method:: print(repr(Object))
+.. method:: print(...)
 
-    Prints an object back into javascript syntax format.
+    Print arguments to ``stdout``, separated by spaces and followed by a newline.
+
+    :arg ...: Arguments to print.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var document = new Document("my_pdf.pdf");
+        print(document); // [object pdf_document]
+
+
+
+.. method:: write(...)
+
+    Print arguments to ``stdout``, separated by spaces.
+
+    :arg ...: Arguments to print.
+
+
+.. method:: repr(object)
+
+    Format the ``object`` into a string with :title:`JavaScript` syntax.
 
 
     **Example**
@@ -30,20 +52,50 @@ Base :title:`MuPDF` methods
     .. code-block:: javascript
 
         var document = new Document("my_pdf.pdf");
-        print(repr(document)); // [userdata pdf_document]
+        repr(document); // "[userdata pdf_document]"
 
 
+.. method:: gc(report)
+
+    Run the garbage collector to free up memory. Optionally report statistics on the garbage collection.
+
+    :arg report: ``Boolean`` If *true* then the results will be printed to ``stdout``.
+
+.. method:: load(fileName)
+
+    Load and execute script in ``fileName``.
+
+    :arg fileName: ``String`` :title:`JavaScript` file to load.
 
 
-.. method:: setUserCSS(userStylesheet, usePublisherStyles)
+.. method:: read(fileName)
+
+    Read the contents of a file and return them as a :title:`UTF-8` decoded string.
+
+    :arg fileName: ``String``.
+
+.. method:: readline()
+
+    Read one line of input from ``stdin`` and return it as a string.
+
+    :return: ``String``.
+
+.. method:: require(module)
+
+    Load a :title:`JavaScript` module.
+
+
+.. method:: setUserCSS(userStyleSheet, usePublisherStyles)
 
     Set user styles and whether to use publisher styles when laying out reflowable documents.
 
-    :arg userStylesheet: Link to CSS stylesheet file.
+    :arg userStyleSheet: Link to :title:`CSS` stylesheet file.
     :arg usePublisherStyles: ``Boolean``.
 
 
+.. method:: quit()
 
+    Exit the shell.
 
 
 
@@ -128,6 +180,26 @@ For example:
 
 
 
+.. _mutool_run_js_api_color_params:
+
+Color parameters
+~~~~~~~~~~~~~~~~~~~~
+
+This object is a dictionary with keys for:
+
+``renderingIntent``
+    Either of "Perceptual", "RelativeColorimetric", "Saturation" or "AbsoluteColorimetric".
+
+``blackPointCompensation``
+    *True* if black point compensation is activated.
+
+``overPrinting``
+    *True* if overprint is activated.
+
+``overPrintMode``
+    The overprint mode.
+
+
 .. _mutool_run_js_api_alpha:
 
 Alpha
@@ -193,6 +265,15 @@ It consists of a dictionary with keys for:
 
 ``zoom``
     The zoom factor, valid for "XYZ".
+
+
+.. _mutool_run_js_api_file_spec_object:
+
+File specification object
+----------------------------
+
+This object is used to represent a file.
+
 
 
 .. include:: mutool-object-buffer.rst

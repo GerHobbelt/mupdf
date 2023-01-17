@@ -90,7 +90,7 @@
 
 .. method:: getImageMask()
 
-    Returns *true* if this image is an imagemask.
+    Returns *true* if this image is an image mask.
 
     :return: ``Boolean``.
 
