@@ -13,7 +13,7 @@
 #define DEPRECATE_ATTR __attribute__((__deprecated__))
 #endif  // _WIN32
 
-#if defined(GBENCHMARK_STATICLIB) && !defined(BENCHMARK_STATIC_DEFINE)
+#if (defined(GBENCHMARK_STATICLIB) || defined(BUILD_MONOLITHIC)) && !defined(BENCHMARK_STATIC_DEFINE)
 #define BENCHMARK_STATIC_DEFINE  1
 #else
 #if defined(BUILDING_LIBGBENCHMARK)
