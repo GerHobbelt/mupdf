@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\nasm.props" />
@@ -80,7 +80,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -112,8 +112,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -364,6 +364,18 @@
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/align.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/arm/jchuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolext-mmx.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolext-sse2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcgryext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcgryext-mmx.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcgryext-sse2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdcolext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdcolext-mmx.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdcolext-sse2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdmrgext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdmrgext-mmx.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdmrgext-sse2.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/jsimd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips/jsimd_dspr2_asm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/mips64/jcsample.h" />
@@ -376,6 +388,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/nasm/jsimdext.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jcsample.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/powerpc/jsimd_altivec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jccolext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jccolext-sse2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jcgryext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jcgryext-sse2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdcolext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdcolext-sse2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdmrgext-avx2.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdmrgext-sse2.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test1.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/test2.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/libjpeg-turbo/tjutil.h" />
@@ -416,35 +436,23 @@
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/vgl_6434_0018a.bmp" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimages/vgl_6548_0026a.bmp" />
     <Image Include="../../thirdparty/owemdjee/libjpeg-turbo/testimg.gif" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jccolext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jccolext-mmx.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jccolext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolor-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolor-mmx.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jccolor-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcgray-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcgray-mmx.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcgray-sse2.asm" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jcgryext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jcgryext-mmx.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jcgryext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jchuff-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcphuff-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcsample-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcsample-mmx.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jcsample-sse2.asm" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jdcolext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jdcolext-mmx.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jdcolext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdcolor-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdcolor-mmx.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdcolor-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdmerge-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdmerge-mmx.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdmerge-sse2.asm" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jdmrgext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jdmrgext-mmx.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\i386\jdmrgext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdsample-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdsample-mmx.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jdsample-sse2.asm" />
@@ -472,26 +480,18 @@
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jquanti-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jquanti-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/i386/jsimdcpu.asm" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jccolext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jccolext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jccolor-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jccolor-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jcgray-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jcgray-sse2.asm" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jcgryext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jcgryext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jchuff-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jcphuff-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jcsample-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jcsample-sse2.asm" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jdcolext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jdcolext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdcolor-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdcolor-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdmerge-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdmerge-sse2.asm" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jdmrgext-avx2.inc" />
-    <NASM Include="..\..\thirdparty\owemdjee\libjpeg-turbo\simd\x86_64\jdmrgext-sse2.inc" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdsample-avx2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jdsample-sse2.asm" />
     <NASM Include="../../thirdparty/owemdjee/libjpeg-turbo/simd/x86_64/jfdctflt-sse.asm" />
@@ -603,7 +603,8 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/projectTargets-release.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/wizard.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
