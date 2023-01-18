@@ -294,7 +294,7 @@ These properties are only present for some annotation types, so support for them
 
     Set the annotation bounding box.
 
-    :arg language:  ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg rect: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 
 .. method:: getDefaultAppearance()

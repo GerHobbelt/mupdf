@@ -79,6 +79,14 @@
 
     :arg annot: ``PDFAnnotation``.
 
+
+.. method:: getWidgets()
+
+    Return array of all :ref:`widgets<mutool_object_pdf_widget>` on the page.
+
+    :return: ``[]``.
+
+
 .. method:: update()
 
     Loop through all annotations of the page and update them. Returns true if re-rendering is needed because at least one annotation was changed (due to either events or :title:`JavaScript` actions or annotation editing).
@@ -102,7 +110,7 @@
 
 .. method:: toPixmap(transform, colorspace, alpha, renderExtra, usage)
 
-    Render the page into a ``Pixmap`` using the given ``colorspace`` and ``alpha`` while applying the ``transform``. Rendering for annotations/widgets can be disabled. A page can be rendered for e.g. "View" or "Print" ``usage``.
+    Render the page into a ``Pixmap`` using the given ``colorspace`` and ``alpha`` while applying the ``transform``. Rendering of annotations/widgets can be disabled. A page can be rendered for e.g. "View" or "Print" ``usage``.
 
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: ``ColorSpace``.
