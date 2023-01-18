@@ -78,7 +78,7 @@
 
 .. method:: isReflowable()
 
-    Returns true if the document is reflowable, such as EPUB, FB2 or XHTML.
+    Returns true if the document is reflowable, such as :title:`EPUB`, :title:`FB2` or :title:`XHTML`.
 
     :return: ``Boolean``.
 
@@ -110,9 +110,20 @@
     :return: ``[]``.
 
 
+
+.. method:: outlineIterator()
+
+    Returns an :ref:`OutlineIterator<mutool_object_outline_iterator>` for the document outline.
+
+    :return: ``OutlineIterator``.
+
+
+.. _mutool_run_js_api_document_resolveLink:
+
+
 .. method:: resolveLink(uri)
 
-    Resolve a document internal link URI to a link destination.
+    Resolve a document internal link :title:`URI` to a link destination.
 
     :arg uri: ``String``.
     :return: :ref:`Link destination<mutool_run_js_api_link_dest>`.
@@ -120,7 +131,7 @@
 
 .. method:: formatLinkURI(linkDestination)
 
-    Format a document internal link destination object to a URI string suitable for :ref:`createLink()<mutool_run_js_api_page_create_link>`.
+    Format a document internal link destination object to a :title:`URI` string suitable for :ref:`createLink()<mutool_run_js_api_page_create_link>`.
 
     :arg linkDestination: :ref:`Link destination<mutool_run_js_api_link_dest>`.
     :return: ``String``.

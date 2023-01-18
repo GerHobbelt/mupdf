@@ -316,7 +316,15 @@ This object is used to represent a file.
 
 .. include:: mutool-object-pdf-annotation.rst
 
+.. include:: mutool-object-pdf-widget.rst
 
+.. include:: mutool-object-outline-iterator.rst
+
+.. include:: mutool-object-archive.rst
+
+.. include:: mutool-object-story.rst
+
+.. include:: mutool-object-dom.rst
 
 .. _mutool_run_js_api_pdf_processor:
 
