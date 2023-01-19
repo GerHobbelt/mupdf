@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_font:
 
@@ -19,7 +19,7 @@
 ``Font`` objects can be created from :title:`TrueType`, :title:`OpenType`, :title:`Type1` or :title:`CFF` fonts. In :title:`PDF` there are also special :title:`Type3` fonts.
 
 
-.. method:: new(ref)
+.. method:: new Font(ref)
 
     *Constructor method*.
 

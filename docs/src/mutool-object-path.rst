@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_path:
 
@@ -17,7 +17,7 @@
 A ``Path`` object represents vector graphics as drawn by a pen. A path can be either stroked or filled, or used as a clip mask.
 
 
-.. method:: new()
+.. method:: new Path()
 
     *Constructor method*.
 

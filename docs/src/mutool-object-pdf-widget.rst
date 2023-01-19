@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_pdf_widget:
 
@@ -50,9 +50,9 @@
 
 .. method:: getValue()
 
-    Get the widget string value.
+    Get the widget value.
 
-    :return:``String``
+    :return: ``String``
 
 .. method:: setTextValue(value)
 
@@ -62,7 +62,7 @@
 
 .. method:: setChoiceValue(value)
 
-    ?
+    Sets the value against the widget.
 
     :arg value: ``String``.
 
@@ -74,7 +74,7 @@
 
 .. method:: getOptions()
 
-    Returns an array with one text string describing the state of each child of radio button/checkbox field.
+    Returns an array of strings which represents the value for each corresponding radio button or checkbox field.
 
     :return: ``[]``.
 
@@ -103,10 +103,11 @@
     :return: ``Boolean``.
 
 
-.. method:: setEditingState()
+.. method:: setEditingState(state)
 
     Set whether the widget is in editing state.
 
+    :arg state: ``Boolean``.
 
 .. note::
 
@@ -148,9 +149,9 @@
 
     :arg signer: :ref:`PDFPKCS7Signer<mutool_object_pdf_widget_signer>`.
     :arg signatureConfig: :ref:`Signature configuration object<mutool_object_pdf_widget_signature_configuration>`.
-    :arg image:
-    :arg reason:
-    :arg location:
+    :arg image: :ref:`Image<mutool_object_image>`.
+    :arg reason: ``String``.
+    :arg location: ``String``.
 
     :return: ``Pixmap``.
 
@@ -222,7 +223,7 @@ To create a signer object an instance of ``PDFPKCS7Signer`` is required.
 
     .. code-block:: javascript
 
-        let signer = new PDFPKCS7Signer(<file_name>,<password>);
+        var signer = new PDFPKCS7Signer(<file_name>,<password>);
 
 
 .. _mutool_object_pdf_widget_signature_configuration:

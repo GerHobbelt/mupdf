@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_pixmap:
 
@@ -15,7 +15,7 @@
 A ``Pixmap`` object contains a color raster image (short for pixel map). The components in a pixel in the ``Pixmap`` are all byte values, with the transparency as the last component. A ``Pixmap`` also has a location (x, y) in addition to its size; so that they can easily be used to represent tiles of a page.
 
 
-.. method:: new(colorspace, bounds, alpha)
+.. method:: new Pixmap(colorspace, bounds, alpha)
 
     *Constructor method*.
 
@@ -131,14 +131,16 @@ A ``Pixmap`` object contains a color raster image (short for pixel map). The com
 
     Apply gamma correction to ``Pixmap``. All components are processed, except alpha which is unchanged.
 
+    Values ``>= 0.1 & < 1`` = darken, ``> 1 & < 10`` = lighten.
+
     :arg gamma: ``Float``.
 
 .. method:: tint(black, white)
 
-    Tint all pixels in an :title:`RGB`, :title:`BGR` or :title:`Gray` ``Pixmap``. Map black and white respectively to the given hex :title:`RGB` values.
+    Tint all pixels in a :title:`RGB`, :title:`BGR` or :title:`Gray` ``Pixmap``. Map black and white respectively to the given hex :title:`RGB` values.
 
-    :arg black: ``Float``.
-    :arg white: ``Float``.
+    :arg black: ``Integer``.
+    :arg white: ``Integer``.
 
 
 .. method:: warp(points, width, height)

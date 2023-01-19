@@ -1,10 +1,14 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+.. default-domain:: js
 
 .. _mutool_object_buffer:
 
 .. _mutool_run_js_api_buffer:
+
+
+
 
 
 ``Buffer``
@@ -13,7 +17,8 @@
 The ``Buffer`` objects are used for working with binary data. They can be used much like arrays, but are much more efficient since they only store bytes.
 
 
-.. method:: new()
+
+.. method:: new Buffer()
 
     *Constructor method*.
 

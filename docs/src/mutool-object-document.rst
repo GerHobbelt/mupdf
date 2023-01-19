@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_document:
 
@@ -18,7 +18,7 @@
 
 
 
-.. method:: new(fileName)
+.. method:: new Document(fileName)
 
     *Constructor method*.
 
