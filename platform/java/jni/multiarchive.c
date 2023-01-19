@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -20,40 +20,25 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-package com.artifex.mupdf.fitz;
+/* MultiArchive interface */
 
-public class Archive
+JNIEXPORT void JNICALL
+FUN(MultiArchive_mountArchive)(JNIEnv *env, jobject self, jobject jsub, jstring jpath)
 {
-	static {
-		Context.init();
-	}
+	fz_context *ctx = get_context(env);
+	fz_archive *arch = from_Archive(env, self);
+	fz_archive *sub = from_Archive(env, jsub);
+	const char *path = NULL;
 
-	private long pointer;
+	if (!ctx || !arch) return;
+	if (jpath)
+		path = (*env)->GetStringUTFChars(env, jpath, NULL);
 
-	protected native void finalize();
-
-	public void destroy() {
-		finalize();
-	}
-
-	private native long newNativeArchive(String path);
-	private native long newNativeMultiArchive();
-
-	public Archive(String path) {
-		pointer = newNativeArchive(path);
-	}
-
-	public Archive() {
-		pointer = newNativeMultiArchive();
-	}
-
-	protected Archive(long p) {
-		pointer = p;
-	}
-
-	public native String getFormat();
-	public native int countEntries();
-	public native String listEntries();
-	public native boolean hasEntry(String name);
-	public native Buffer readEntry(String name);
+	fz_try(ctx)
+		fz_mount_multi_archive(ctx, arch, sub, path);
+	fz_always(ctx)
+		if (jpath)
+			(*env)->ReleaseStringUTFChars(env, jpath, path);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
 }

@@ -105,7 +105,6 @@ static void jsB_gc(js_State *J)
 {
 	int report = js_toboolean(J, 1);
 	js_gc(J, report);
-	js_pushundefined(J);
 }
 
 static void jsB_load(js_State *J)
@@ -124,7 +123,6 @@ static void jsB_print(js_State *J)
 		fputs(s, stdout);
 	}
 	putchar('\n');
-	js_pushundefined(J);
 }
 
 static void jsB_write(js_State *J)
@@ -135,7 +133,6 @@ static void jsB_write(js_State *J)
 		if (i > 1) putchar(' ');
 		fputs(s, stdout);
 	}
-	js_pushundefined(J);
 }
 
 static void jsB_read(js_State *J)
@@ -236,10 +233,13 @@ struct event_cb_data
 
 /* destructors */
 
-static void ffi_gc_fz_archive(js_State *J, void *archive)
+static void ffi_gc_fz_archive(js_State *J, void *arch)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_drop_archive(ctx, archive);
+	fz_try(ctx)
+		fz_drop_archive(ctx, arch);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_gc_fz_buffer(js_State *J, void *buf)
@@ -1085,10 +1085,31 @@ static int is_number(const char *key, int *idx)
 	return *end == 0;
 }
 
-static void ffi_pusharchive(js_State *J, fz_archive *archive)
+static fz_archive *ffi_toarchive(js_State *J, int idx)
+{
+	if (js_isuserdata(J, idx, "fz_tree_archive"))
+		return js_touserdata(J, idx, "fz_tree_archive");
+	if (js_isuserdata(J, idx, "fz_multi_archive"))
+		return js_touserdata(J, idx, "fz_multi_archive");
+	return js_touserdata(J, idx, "fz_archive");
+}
+
+static void ffi_pusharchive(js_State *J, fz_archive *arch)
 {
 	js_getregistry(J, "fz_archive");
-	js_newuserdata(J, "fz_archive", archive, ffi_gc_fz_archive);
+	js_newuserdata(J, "fz_archive", arch, ffi_gc_fz_archive);
+}
+
+static void ffi_pushmultiarchive(js_State *J, fz_archive *arch)
+{
+	js_getregistry(J, "fz_multi_archive");
+	js_newuserdata(J, "fz_multi_archive", arch, ffi_gc_fz_archive);
+}
+
+static void ffi_pushtreearchive(js_State *J, fz_archive *arch)
+{
+	js_getregistry(J, "fz_tree_archive");
+	js_newuserdata(J, "fz_tree_archive", arch, ffi_gc_fz_archive);
 }
 
 static int ffi_buffer_has(js_State *J, void *buf_, const char *key)
@@ -1133,11 +1154,6 @@ static void ffi_pushbuffer(js_State *J, fz_buffer *buf)
 	js_newuserdatax(J, "fz_buffer", buf,
 			ffi_buffer_has, ffi_buffer_put, NULL,
 			ffi_gc_fz_buffer);
-}
-
-static fz_archive *ffi_toarchive(js_State *J, int idx)
-{
-	return js_touserdata(J, idx, "fz_archive");
 }
 
 #if FZ_ENABLE_PDF
@@ -2770,39 +2786,130 @@ static void ffi_setUserCSS(js_State *J)
 		rethrow(J);
 }
 
-static void ffi_Archive_openDirectory(js_State *J)
-{
-	fz_context *ctx = js_getcontext(J);
-	const char *directory = js_tostring(J, 1);
-	fz_archive *archive = NULL;
-
-	fz_try(ctx)
-		archive = fz_open_directory(ctx, directory);
-	fz_catch(ctx)
-		rethrow(J);
-
-	ffi_pusharchive(J, archive);
-}
-
-static void ffi_Archive_open(js_State *J)
-{
-	fz_context *ctx = js_getcontext(J);
-	const char *path = js_tostring(J, 1);
-	fz_archive *archive = NULL;
-
-	fz_try(ctx)
-		archive = fz_open_archive(ctx, path);
-	fz_catch(ctx)
-		rethrow(J);
-
-	ffi_pusharchive(J, archive);
-}
-
-/* Dummy constructor */
 static void ffi_new_Archive(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	ffi_pusharchive(J, NULL);
+	const char *path = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+	fz_archive *arch = NULL;
+	fz_try(ctx)
+		if (fz_is_directory(ctx, path))
+			arch = fz_open_directory(ctx, path);
+		else
+			arch = fz_open_archive(ctx, path);
+	fz_catch(ctx)
+		rethrow(J);
+	ffi_pusharchive(J, arch);
+}
+
+static void ffi_Archive_getFormat(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = ffi_toarchive(J, 0);
+	const char *format = NULL;
+	fz_try(ctx)
+		format = fz_archive_format(ctx, arch);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushstring(J, format);
+}
+
+static void ffi_Archive_countEntries(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = ffi_toarchive(J, 0);
+	int count = 0;
+	fz_try(ctx)
+		count = fz_count_archive_entries(ctx, arch);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushnumber(J, count);
+}
+
+static void ffi_Archive_listEntry(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = ffi_toarchive(J, 0);
+	int idx = js_tointeger(J, 1);
+	const char *name = NULL;
+	fz_try(ctx)
+		name = fz_list_archive_entry(ctx, arch, idx);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushstring(J, name);
+}
+
+static void ffi_Archive_hasEntry(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = ffi_toarchive(J, 0);
+	const char *name = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+	int has = 0;
+	fz_try(ctx)
+		has = fz_has_archive_entry(ctx, arch, name);
+	fz_catch(ctx)
+		rethrow(J);
+	js_pushboolean(J, has);
+}
+
+static void ffi_Archive_readEntry(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = ffi_toarchive(J, 0);
+	const char *name = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+	fz_buffer *buf = NULL;
+	fz_try(ctx)
+		buf = fz_read_archive_entry(ctx, arch, name);
+	fz_catch(ctx)
+		rethrow(J);
+	ffi_pushbuffer(J, buf);
+}
+
+static void ffi_new_MultiArchive(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = NULL;
+	fz_try(ctx)
+		arch = fz_new_multi_archive(ctx);
+	fz_catch(ctx)
+		rethrow(J);
+	ffi_pushmultiarchive(J, arch);
+}
+
+static void ffi_new_TreeArchive(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = NULL;
+	fz_try(ctx)
+		arch = fz_new_tree_archive(ctx, NULL);
+	fz_catch(ctx)
+		rethrow(J);
+	ffi_pushtreearchive(J, arch);
+}
+
+static void ffi_MultiArchive_mountArchive(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = js_touserdata(J, 0, "fz_multi_archive");
+	fz_archive *sub = ffi_toarchive(J, 1);
+	const char *path = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
+	fz_try(ctx)
+		fz_mount_multi_archive(ctx, arch, sub, path);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
+static void ffi_TreeArchive_add(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_archive *arch = js_touserdata(J, 0, "fz_tree_archive");
+	const char *name = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+	fz_buffer *buf = ffi_tobuffer(J, 2);
+	fz_try(ctx)
+		fz_tree_archive_add_buffer(ctx, arch, name, buf);
+	fz_always(ctx)
+		fz_drop_buffer(ctx, buf);
+	fz_catch(ctx)
+		rethrow(J);
 }
 
 static void ffi_new_Buffer(js_State *J)
@@ -3024,8 +3131,6 @@ static void ffi_Document_getMetaData(js_State *J)
 
 	if (found)
 		js_pushstring(J, info);
-	else
-		js_pushundefined(J);
 }
 
 static void ffi_Document_setMetaData(js_State *J)
@@ -3287,8 +3392,6 @@ static void ffi_OutlineIterator_update(js_State *J)
 	}
 	fz_catch(ctx)
 		rethrow(J);
-
-	js_pushundefined(J);
 }
 
 static void ffi_Page_isPDF(js_State *J)
@@ -4681,14 +4784,14 @@ static void ffi_DocumentWriter_close(js_State *J)
 static void ffi_new_Story(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_buffer *contents = ffi_tobuffer(J, 1); /* FIXME: leak if js_tostring() throws */
 	const char *user_css = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
 	double em = js_tonumber(J, 3);
-	fz_archive *archive = js_iscoercible(J, 4) ? ffi_toarchive(J, 4) : NULL;
+	fz_archive *arch = js_isdefined(J, 4) ? ffi_toarchive(J, 4) : NULL;
+	fz_buffer *contents = ffi_tobuffer(J, 1);
 	fz_story *story = NULL;
 
 	fz_try(ctx)
-		story = fz_new_story(ctx, contents, user_css, em, archive);
+		story = fz_new_story(ctx, contents, user_css, em, arch);
 	fz_always(ctx)
 		fz_drop_buffer(ctx, contents);
 	fz_catch(ctx)
@@ -5321,8 +5424,8 @@ static void ffi_PDFDocument_addStream_imp(js_State *J, int compressed)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
-	fz_buffer *buf = ffi_tobuffer(J, 1); /* FIXME: leak if ffi_toobj throws */
 	pdf_obj *obj = js_iscoercible(J, 2) ? ffi_toobj(J, pdf, 2) : NULL;
+	fz_buffer *buf = ffi_tobuffer(J, 1);
 	pdf_obj *ind = NULL;
 
 	fz_try(ctx)
@@ -5551,9 +5654,17 @@ static void ffi_PDFDocument_addPage(js_State *J)
 	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
 	fz_rect mediabox = ffi_torect(J, 1);
 	int rotate = js_tonumber(J, 2);
-	pdf_obj *resources = ffi_toobj(J, pdf, 3); /* FIXME: leak if ffi_tobuffer throws */
-	fz_buffer *contents = ffi_tobuffer(J, 4);
+	pdf_obj *resources = ffi_toobj(J, pdf, 3);
+	fz_buffer *contents = NULL;
 	pdf_obj *ind = NULL;
+
+	if (js_try(J)) {
+		pdf_drop_obj(ctx, resources);
+		js_throw(J);
+	}
+
+	contents = ffi_tobuffer(J, 4);
+	js_endtry(J);
 
 	fz_try(ctx)
 		ind = pdf_add_page(ctx, pdf, mediabox, rotate, resources, contents);
@@ -8671,7 +8782,28 @@ int murun_main(int argc, const char** argv)
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
+	{
+		jsB_propfun(J, "Archive.getFormat", ffi_Archive_getFormat, 0);
+		jsB_propfun(J, "Archive.countEntries", ffi_Archive_countEntries, 0);
+		jsB_propfun(J, "Archive.listEntry", ffi_Archive_listEntry, 1);
+		jsB_propfun(J, "Archive.hasEntry", ffi_Archive_hasEntry, 1);
+		jsB_propfun(J, "Archive.readEntry", ffi_Archive_readEntry, 1);
+	}
 	js_setregistry(J, "fz_archive");
+
+	js_getregistry(J, "fz_archive");
+	js_newobjectx(J);
+	{
+		jsB_propfun(J, "MultiArchive.mountArchive", ffi_MultiArchive_mountArchive, 2);
+	}
+	js_setregistry(J, "fz_multi_archive");
+
+	js_getregistry(J, "fz_archive");
+	js_newobjectx(J);
+	{
+		jsB_propfun(J, "TreeArchive.add", ffi_TreeArchive_add, 2);
+	}
+	js_setregistry(J, "fz_tree_archive");
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
@@ -9245,11 +9377,13 @@ int murun_main(int argc, const char** argv)
 
 	js_pushglobal(J);
 	{
-		jsB_propcon(J, "fz_archive", "Archive", ffi_new_Archive, 1);
 #if FZ_ENABLE_PDF
 		jsB_propcon(J, "pdf_document", "PDFDocument", ffi_new_PDFDocument, 1);
 #endif
 
+		jsB_propcon(J, "fz_archive", "Archive", ffi_new_Archive, 1);
+		jsB_propcon(J, "fz_multi_archive", "MultiArchive", ffi_new_MultiArchive, 1);
+		jsB_propcon(J, "fz_tree_archive", "TreeArchive", ffi_new_TreeArchive, 1);
 		jsB_propcon(J, "fz_buffer", "Buffer", ffi_new_Buffer, 1);
 		jsB_propcon(J, "fz_document", "Document", ffi_new_Document, 1);
 		jsB_propcon(J, "fz_pixmap", "Pixmap", ffi_new_Pixmap, 3);
@@ -9281,14 +9415,6 @@ int murun_main(int argc, const char** argv)
 		js_defproperty(J, -2, "DeviceCMYK", JS_DONTENUM | JS_READONLY | JS_DONTCONF);
 
 		jsB_propfun(J, "setUserCSS", ffi_setUserCSS, 2);
-	}
-
-	{
-		js_getglobal(J, "Archive");
-		js_newcfunction(J, ffi_Archive_openDirectory, "Archive.openDirectory", 1);
-		js_setproperty(J, -2, "openDirectory");
-		js_newcfunction(J, ffi_Archive_open, "Archive.open", 1);
-		js_setproperty(J, -2, "open");
 	}
 
 	/* re-implement matrix math in javascript */

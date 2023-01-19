@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -20,40 +20,41 @@
 // Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
-package com.artifex.mupdf.fitz;
+/* TreeArchive interface */
 
-public class Archive
+JNIEXPORT jlong JNICALL
+FUN(Archive_newNativeTreeArchive)(JNIEnv *env, jobject self)
 {
-	static {
-		Context.init();
-	}
+	fz_context *ctx = get_context(env);
+	fz_archive *arch = NULL;
 
-	private long pointer;
+	if (!ctx) return 0;
 
-	protected native void finalize();
+	fz_try(ctx)
+		arch = fz_new_tree_archive(ctx, NULL);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
 
-	public void destroy() {
-		finalize();
-	}
+	return jlong_cast(arch);
+}
 
-	private native long newNativeArchive(String path);
-	private native long newNativeMultiArchive();
+JNIEXPORT void JNICALL
+FUN(TreeArchive_add)(JNIEnv *env, jobject self, jstring jname, jobject jbuf)
+{
+	fz_context *ctx = get_context(env);
+	fz_archive *arch = from_Archive(env, self);
+	fz_buffer *buf = from_Buffer(env, jbuf);
+	const char *name = NULL;
 
-	public Archive(String path) {
-		pointer = newNativeArchive(path);
-	}
+	if (!ctx || !arch) return;
+	if (jname)
+		name = (*env)->GetStringUTFChars(env, jname, NULL);
 
-	public Archive() {
-		pointer = newNativeMultiArchive();
-	}
-
-	protected Archive(long p) {
-		pointer = p;
-	}
-
-	public native String getFormat();
-	public native int countEntries();
-	public native String listEntries();
-	public native boolean hasEntry(String name);
-	public native Buffer readEntry(String name);
+	fz_try(ctx)
+		fz_tree_archive_add_buffer(ctx, arch, name, buf);
+	fz_always(ctx)
+		if (jname)
+			(*env)->ReleaseStringUTFChars(env, jname, name);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
 }

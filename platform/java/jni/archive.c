@@ -26,104 +26,148 @@ JNIEXPORT void JNICALL
 FUN(Archive_finalize)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
-	fz_archive *zip = from_Archive_safe(env, self);
-	if (!ctx || !zip) return;
+	fz_archive *arch = from_Archive_safe(env, self);
+	if (!ctx || !arch) return;
 	(*env)->SetLongField(env, self, fid_Archive_pointer, 0);
-	fz_drop_archive(ctx, zip);
+	fz_drop_archive(ctx, arch);
 }
 
-JNIEXPORT jobject JNICALL
-FUN(Archive_nativeOpenDirectory)(JNIEnv *env, jclass cls, jstring jdir)
+JNIEXPORT jlong JNICALL
+FUN(Archive_newNativeMultiArchive)(JNIEnv *env, jobject self)
 {
 	fz_context *ctx = get_context(env);
-	fz_archive *zip = NULL;
-	const char *dir = NULL;
-	jobject jzip;
+	fz_archive *arch = NULL;
 
 	if (!ctx) return 0;
-	if (!jdir) jni_throw_arg(env, "directory must not be null");
-
-	dir = (*env)->GetStringUTFChars(env, jdir, NULL);
-	if (!dir) return 0;
 
 	fz_try(ctx)
-		zip = fz_open_directory(ctx, dir);
-	fz_always(ctx)
-		(*env)->ReleaseStringUTFChars(env, jdir, dir);
+		arch = fz_new_multi_archive(ctx);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	jzip = (*env)->NewObject(env, cls_Archive, mid_Archive_init, (jlong)(intptr_t)zip);
-	if (!jzip || (*env)->ExceptionCheck(env))
-	{
-		fz_drop_archive(ctx, zip);
-		return NULL;
-	}
-
-	return jzip;
+	return jlong_cast(arch);
 }
 
-JNIEXPORT jobject JNICALL
-FUN(Archive_nativeOpenArchive)(JNIEnv *env, jclass cls, jstring jpath)
+JNIEXPORT jlong JNICALL
+FUN(Archive_newNativeArchive)(JNIEnv *env, jobject self, jstring jpath)
 {
 	fz_context *ctx = get_context(env);
-	fz_archive *zip = NULL;
+	fz_archive *arch = NULL;
 	const char *path = NULL;
-	jobject jzip;
 
 	if (!ctx) return 0;
-	if (!jpath) jni_throw_arg(env, "archive name must not be null");
-
-	path = (*env)->GetStringUTFChars(env, jpath, NULL);
-	if (!path) return 0;
+	if (jpath)
+		path = (*env)->GetStringUTFChars(env, jpath, NULL);
 
 	fz_try(ctx)
-		zip = fz_open_archive(ctx, path);
+	{
+		if (fz_is_directory(ctx, path))
+			arch = fz_open_directory(ctx, path);
+		else
+			arch = fz_open_archive(ctx, path);
+	}
 	fz_always(ctx)
-		(*env)->ReleaseStringUTFChars(env, jpath, path);
+		if (jpath)
+			(*env)->ReleaseStringUTFChars(env, jpath, path);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	jzip = (*env)->NewObject(env, cls_Archive, mid_Archive_init, (jlong)(intptr_t)zip);
-	if (!jzip || (*env)->ExceptionCheck(env))
-	{
-		fz_drop_archive(ctx, zip);
-		return NULL;
-	}
+	return jlong_cast(arch);
+}
 
-	return jzip;
+JNIEXPORT jstring JNICALL
+FUN(Archive_getFormat)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	fz_archive *arch = from_Archive(env, self);
+	const char *format = NULL;
+
+	if (!ctx || !arch) return NULL;
+
+	fz_try(ctx)
+		format = fz_archive_format(ctx, arch);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return (*env)->NewStringUTF(env, format);
+}
+
+JNIEXPORT jint JNICALL
+FUN(Archive_countEntries)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	fz_archive *arch = from_Archive(env, self);
+	int count = -1;
+
+	if (!ctx || !arch) return -1;
+
+	fz_try(ctx)
+		count = fz_count_archive_entries(ctx, arch);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return count;
+}
+
+JNIEXPORT jstring JNICALL
+FUN(Archive_listEntry)(JNIEnv *env, jobject self, jint index)
+{
+	fz_context *ctx = get_context(env);
+	fz_archive *arch = from_Archive(env, self);
+	const char *name = NULL;
+
+	if (!ctx || !arch) return NULL;
+
+	fz_try(ctx)
+		name = fz_list_archive_entry(ctx, arch, index);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return (*env)->NewStringUTF(env, name);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(Archive_hasEntry)(JNIEnv *env, jobject self, jstring jname)
+{
+	fz_context *ctx = get_context(env);
+	fz_archive *arch = from_Archive(env, self);
+	const char *name = NULL;
+	int has = 0;
+
+	if (!ctx || !arch) return JNI_FALSE;
+	if (jname)
+		name = (*env)->GetStringUTFChars(env, jname, NULL);
+
+	fz_try(ctx)
+		has = fz_has_archive_entry(ctx, arch, name);
+	fz_always(ctx)
+		if (jname)
+			(*env)->ReleaseStringUTFChars(env, jname, name);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return has;
 }
 
 JNIEXPORT jobject JNICALL
-FUN(Archive_nativeOpenArchiveBuffer)(JNIEnv *env, jclass cls, jobject jbuf)
+FUN(Archive_readEntry)(JNIEnv *env, jobject self, jstring jname)
 {
 	fz_context *ctx = get_context(env);
-	fz_archive *zip = NULL;
-	fz_buffer *buf = from_Buffer_safe(env, jbuf);
-	fz_stream *stream = NULL;
-	jobject jzip;
+	fz_archive *arch = from_Archive(env, self);
+	const char *name = NULL;
+	fz_buffer *buffer = NULL;
 
-	if (!ctx) return 0;
-	if (!buf) jni_throw_arg(env, "buffer must not be null");
-
-	fz_var(stream);
+	if (!ctx || !arch) return NULL;
+	if (jname)
+		name = (*env)->GetStringUTFChars(env, jname, NULL);
 
 	fz_try(ctx)
-	{
-		stream = fz_open_buffer(ctx, buf);
-		zip = fz_open_archive_with_stream(ctx, stream);
-	}
+		buffer = fz_read_archive_entry(ctx, arch, name);
 	fz_always(ctx)
-		fz_drop_stream(ctx, stream);
+		if (jname)
+			(*env)->ReleaseStringUTFChars(env, jname, name);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
-	jzip = (*env)->NewObject(env, cls_Archive, mid_Archive_init, (jlong)(intptr_t)zip);
-	if (!jzip || (*env)->ExceptionCheck(env))
-	{
-		fz_drop_archive(ctx, zip);
-		return NULL;
-	}
-
-	return jzip;
+	return to_Buffer_safe_own(ctx, env, buffer);
 }

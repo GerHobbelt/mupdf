@@ -22,38 +22,13 @@
 
 package com.artifex.mupdf.fitz;
 
-public class Archive
+public class TreeArchive extends Archive
 {
 	static {
 		Context.init();
 	}
 
-	private long pointer;
+	private TreeArchive(long p) { super(p); }
 
-	protected native void finalize();
-
-	public void destroy() {
-		finalize();
-	}
-
-	private native long newNativeArchive(String path);
-	private native long newNativeMultiArchive();
-
-	public Archive(String path) {
-		pointer = newNativeArchive(path);
-	}
-
-	public Archive() {
-		pointer = newNativeMultiArchive();
-	}
-
-	protected Archive(long p) {
-		pointer = p;
-	}
-
-	public native String getFormat();
-	public native int countEntries();
-	public native String listEntries();
-	public native boolean hasEntry(String name);
-	public native Buffer readEntry(String name);
+	public native void add(String name, Buffer buf);
 }

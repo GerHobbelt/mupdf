@@ -33,7 +33,7 @@ FUN(Story_finalize)(JNIEnv *env, jobject self)
 }
 
 JNIEXPORT jlong JNICALL
-FUN(Story_newStory)(JNIEnv *env, jclass cls, jbyteArray content, jbyteArray css, float em, jobject jzip)
+FUN(Story_newStory)(JNIEnv *env, jclass cls, jbyteArray content, jbyteArray css, float em, jobject jarch)
 {
 	fz_context *ctx = get_context(env);
 	int content_len, css_len;
@@ -42,7 +42,7 @@ FUN(Story_newStory)(JNIEnv *env, jclass cls, jbyteArray content, jbyteArray css,
 	fz_story *story = NULL;
 	fz_buffer *content_buf = NULL;
 	fz_buffer *css_buf = NULL;
-	fz_archive *zip = from_Archive_safe(env, jzip);
+	fz_archive *arch = from_Archive(env, jarch);
 
 	if (!ctx) return 0;
 
@@ -77,7 +77,7 @@ FUN(Story_newStory)(JNIEnv *env, jclass cls, jbyteArray content, jbyteArray css,
 		css_buf = fz_new_buffer_from_copied_data(ctx, (const unsigned char *)css_bytes, css_len);
 		fz_terminate_buffer(ctx, css_buf);
 
-		story = fz_new_story(ctx, content_buf, (const char *)css_buf->data, em, zip);
+		story = fz_new_story(ctx, content_buf, (const char *)css_buf->data, em, arch);
 	}
 	fz_always(ctx)
 	{
