@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2021, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2022, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -17,6 +17,8 @@
  *
  * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
  * KIND, either express or implied.
+ *
+ * SPDX-License-Identifier: curl
  *
  ***************************************************************************/
 /* lib/curl_config.h.in.  Generated somehow by cmake.  */
@@ -33,64 +35,91 @@
 /* Location of default ca path */
 /* #undef CURL_CA_PATH */
 
-/* to disable cookies support */
+/* disables alt-svc */
+/* #undef CURL_DISABLE_ALTSVC */
+
+/* disables cookies support */
 /* #undef CURL_DISABLE_COOKIES */
 
-/* to disable cryptographic authentication */
+/* disables cryptographic authentication */
 /* #undef CURL_DISABLE_CRYPTO_AUTH */
 
-/* to disable DICT */
+/* disables DICT */
 /* #undef CURL_DISABLE_DICT */
 
-/* to disable FILE */
+/* disables DNS-over-HTTPS */
+/* #undef CURL_DISABLE_DOH */
+
+/* disables FILE */
 /* #undef CURL_DISABLE_FILE */
 
-/* to disable FTP */
+/* disables FTP */
 /* #undef CURL_DISABLE_FTP */
 
-/* to disable GOPHER */
+/* disables GOPHER */
 /* #undef CURL_DISABLE_GOPHER */
 
-/* to disable IMAP */
-/* #undef CURL_DISABLE_IMAP */
+/* disables HSTS support */
+/* #undef CURL_DISABLE_HSTS */
 
-/* to disable HTTP */
+/* disables HTTP */
 /* #undef CURL_DISABLE_HTTP */
 
-/* to disable LDAP */
+/* disables IMAP */
+/* #undef CURL_DISABLE_IMAP */
+
+/* disables LDAP */
 /* #undef CURL_DISABLE_LDAP */
 
-/* to disable LDAPS */
+/* disables LDAPS */
 /* #undef CURL_DISABLE_LDAPS */
 
-/* to disable --libcurl C code generation option */
+/* disables --libcurl option from the curl tool */
 /* #undef CURL_DISABLE_LIBCURL_OPTION */
 
-/* to disable MQTT */
+/* disables MIME support */
+/* #undef CURL_DISABLE_MIME */
+
+/* disables MQTT */
 /* #undef CURL_DISABLE_MQTT */
 
-/* to disable POP3 */
+/* disables netrc parser */
+/* #undef CURL_DISABLE_NETRC */
+
+/* disables NTLM support */
+/* #undef CURL_DISABLE_NTLM */
+
+/* disables date parsing */
+/* #undef CURL_DISABLE_PARSEDATE */
+
+/* disables POP3 */
 /* #undef CURL_DISABLE_POP3 */
 
-/* to disable proxies */
+/* disables built-in progress meter */
+/* #undef CURL_DISABLE_PROGRESS_METER */
+
+/* disables proxies */
 /* #undef CURL_DISABLE_PROXY */
 
-/* to disable RTSP */
+/* disables RTSP */
 /* #undef CURL_DISABLE_RTSP */
 
-/* to disable SMB */
+/* disables SMB */
 /* #undef CURL_DISABLE_SMB */
 
-/* to disable SMTP */
+/* disables SMTP */
 /* #undef CURL_DISABLE_SMTP */
 
-/* to disable TELNET */
+/* disables use of socketpair for curl_multi_poll */
+/* #undef CURL_DISABLE_SOCKETPAIR */
+
+/* disables TELNET */
 /* #undef CURL_DISABLE_TELNET */
 
-/* to disable TFTP */
+/* disables TFTP */
 /* #undef CURL_DISABLE_TFTP */
 
-/* to disable verbose strings */
+/* disables verbose strings */
 /* #undef CURL_DISABLE_VERBOSE_STRINGS */
 
 /* to make a symbol visible */
@@ -115,17 +144,8 @@
 /* Define if you want to enable IPv6 support */
 #define ENABLE_IPV6 1
 
-/* Specifies the number of arguments to getservbyport_r */
-/* #undef GETSERVBYPORT_R_ARGS */
-
-/* Specifies the size of the buffer to pass to getservbyport_r */
-/* #undef GETSERVBYPORT_R_BUFSIZE */
-
 /* Define to 1 if you have the alarm function. */
 /* #undef HAVE_ALARM */
-
-/* Define to 1 if you have the <alloca.h> header file. */
-/* #undef HAVE_ALLOCA_H */
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
 /* #undef HAVE_ARPA_INET_H */
@@ -135,6 +155,12 @@
 
 /* Define to 1 if you have the <assert.h> header file. */
 #define HAVE_ASSERT_H 1
+
+/* Define to 1 if you have _Atomic support. */
+/* #undef HAVE_ATOMIC */
+
+/* Define to 1 if you have the `fchmod' function. */
+/* #undef HAVE_FCHMOD */
 
 /* Define to 1 if you have the `basename' function. */
 /* #undef HAVE_BASENAME */
@@ -195,6 +221,9 @@
 
 /* Define to 1 if you have a working getaddrinfo function. */
 #define HAVE_GETADDRINFO 1
+
+/* Define to 1 if the getaddrinfo function is threadsafe. */
+#define HAVE_GETADDRINFO_THREADSAFE 1
 
 /* Define to 1 if you have the `geteuid' function. */
 /* #undef HAVE_GETEUID */
@@ -317,7 +346,7 @@
 #define HAVE_INET_ADDR 1
 
 /* Define to 1 if you have a IPv6 capable working inet_ntop function. */
-/* #undef HAVE_INET_NTOP */
+#define HAVE_INET_NTOP 1
 
 /* Define to 1 if you have a IPv6 capable working inet_pton function. */
 #define HAVE_INET_PTON 1
@@ -342,7 +371,7 @@
 
 /* Define to 1 if you have a working IoctlSocket camel case FIONBIO function.
    */
-#define HAVE_IOCTLSOCKET_CAMEL_FIONBIO 1
+/* #undef HAVE_IOCTLSOCKET_CAMEL_FIONBIO */
 
 /* Define to 1 if you have a working ioctlsocket FIONBIO function. */
 #define HAVE_IOCTLSOCKET_FIONBIO 1
@@ -591,7 +620,7 @@
 /* #undef HAVE_SIGINTERRUPT */
 
 /* Define to 1 if you have the signal function. */
-/* #undef HAVE_SIGNAL */
+#define HAVE_SIGNAL 1
 
 /* Define to 1 if you have the <signal.h> header file. */
 #define HAVE_SIGNAL_H 1
@@ -606,7 +635,7 @@
 /* #undef HAVE_SIG_ATOMIC_T_VOLATILE */
 
 /* Define to 1 if struct sockaddr_in6 has the sin6_scope_id member */
-/* #undef HAVE_SOCKADDR_IN6_SIN6_SCOPE_ID */
+#define HAVE_SOCKADDR_IN6_SIN6_SCOPE_ID 1
 
 /* Define to 1 if you have the `socket' function. */
 #define HAVE_SOCKET 1
@@ -617,8 +646,14 @@
 /* Define to 1 if you have the `SSL_get_shutdown' function. */
 /* #undef HAVE_SSL_GET_SHUTDOWN */
 
+/* Define to 1 if you have the socketpair function. */
+/* #undef HAVE_SOCKETPAIR */
+
 /* Define to 1 if you have the <ssl.h> header file. */
 /* #undef HAVE_SSL_H */
+
+/* Define to 1 if you have the <stdatomic.h> header file. */
+/* #undef HAVE_STDATOMIC_H */
 
 /* Define to 1 if you have the <stdbool.h> header file. */
 #define HAVE_STDBOOL_H 1
@@ -639,7 +674,7 @@
 /* #undef HAVE_STRCASESTR */
 
 /* Define to 1 if you have the strcmpi function. */
-/* #undef HAVE_STRCMPI */
+#define HAVE_STRCMPI 1
 
 /* Define to 1 if you have the strdup function. */
 #define HAVE_STRDUP 1
@@ -787,9 +822,6 @@
 
 /* Define to 1 if you have the <x509.h> header file. */
 /* #undef HAVE_X509_H */
-
-/* Define if you have the <process.h> header file. */
-#define HAVE_PROCESS_H 1
 
 /* if you have the zlib.h header file */
 /* #undef HAVE_ZLIB_H */
@@ -972,6 +1004,9 @@
 /* Define if you want to enable WIN32 threaded DNS lookup */
 #define USE_THREADS_WIN32 1
 
+/* Define if you have process.h */
+#define HAVE_PROCESS_H 1
+
 /* if GnuTLS is enabled */
 /* #undef USE_GNUTLS */
 
@@ -992,6 +1027,9 @@
 
 /* if libSSH2 is in use */
 /* #undef USE_LIBSSH2 */
+
+/* if libPSL is in use */
+/* #undef USE_LIBPSL */
 
 /* If you want to build curl with the built-in manual */
 #define USE_MANUAL 1
@@ -1027,8 +1065,11 @@
 /* Define to 1 if you have the quiche_conn_set_qlog_fd function. */
 /* #undef HAVE_QUICHE_CONN_SET_QLOG_FD */
 
+/* to enable msh3 */
+/* #undef USE_MSH3 */
+
 /* if Unix domain sockets are enabled  */
-/* #undef USE_UNIX_SOCKETS */
+#define USE_UNIX_SOCKETS
 
 /* to disable alt-svc */
 /* #undef CURL_DISABLE_ALTSVC */
@@ -1037,10 +1078,10 @@
 #define USE_WIN32_LARGE_FILES 1
 
 /* to enable SSPI support */
-/* #undef USE_WINDOWS_SSPI */
+#define USE_WINDOWS_SSPI 1
 
 /* to enable Windows SSL  */
-/* #undef USE_SCHANNEL */
+#define USE_SCHANNEL 1
 
 /* enable multiple SSL backends */
 /* #undef CURL_WITH_MULTI_SSL */
@@ -1087,7 +1128,10 @@
 /* #undef HAVE_MACH_ABSOLUTE_TIME */
 
 /* to enable Windows IDN */
-/* #undef USE_WIN32_IDN */
+#define USE_WIN32_IDN 1
 
 /* to make the compiler know the prototypes of Windows IDN APIs */
 /* #undef WANT_IDN_PROTOTYPES */
+
+/* Define to 1 to enable websocket support. */
+/* #undef USE_WEBSOCKETS */
