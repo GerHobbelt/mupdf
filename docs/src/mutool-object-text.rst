@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_text:
 
@@ -19,7 +19,7 @@
 A ``Text`` object contains text.
 
 
-.. method:: new()
+.. method:: new Text()
 
     *Constructor method*.
 

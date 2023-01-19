@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_pdf_document:
 
@@ -18,7 +18,7 @@
 With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`PDF` documents using low level access to the objects and streams contained in a :title:`PDF` file. A ``PDFDocument`` object is also a ``Document`` object. You can test a ``Document`` object to see if it is safe to use as a ``PDFDocument`` by calling ``document.isPDF()``.
 
 
-.. method:: new()
+.. method:: new PDFDocument()
 
     *Constructor method*.
 
@@ -33,7 +33,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
         var pdfDocument = new PDFDocument();
 
 
-.. method:: new(fileName)
+.. method:: new PDFDocument(fileName)
 
     *Constructor method*.
 
@@ -539,7 +539,7 @@ The following functions can be used to copy objects from one document to another
 
 **Embedded file object**
 
-This object contains metadata about an embedded file, it has properties for:
+This ``Object`` contains metadata about an embedded file, it has properties for:
 
 ``filename``
     The name of the embedded file.

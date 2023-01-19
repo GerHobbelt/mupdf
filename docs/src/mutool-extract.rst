@@ -2,6 +2,8 @@
 .. All Rights Reserved.
 
 
+.. default-domain:: js
+
 .. include:: header.rst
 
 .. meta::

@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_outline_iterator:
 
@@ -56,7 +56,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
 .. note::
 
-    The ``next()``, ``prev()``, ``up()``, ``down()`` methods returns ``0`` if the new position has a valid item, or ``1`` if the position contains no valid item, but one may be inserted at the position.
+    The ``next()``, ``prev()``, ``up()``, ``down()`` methods returns ``0`` if the new position has a valid item, or ``1`` if the position contains no valid item, but one may be inserted at the position. If neither of these conditions are met then ``-1`` is returned.
 
 
 

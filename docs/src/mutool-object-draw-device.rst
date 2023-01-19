@@ -3,6 +3,8 @@
 
 
 
+.. default-domain:: js
+
 
 .. _mutool_object_draw_device:
 
@@ -18,7 +20,7 @@ The ``DrawDevice`` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pix
 
 
 
-.. method:: new(transform, pixmap)
+.. method:: new DrawDevice(transform, pixmap)
 
     *Constructor method*.
 

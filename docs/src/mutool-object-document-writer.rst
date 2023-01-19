@@ -1,7 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
-
+.. default-domain:: js
 
 
 .. _mutool_object_document_writer:
@@ -19,7 +19,7 @@
 ``DocumentWriter`` objects are used to create new documents in several formats.
 
 
-.. method:: new(filename, format, options)
+.. method:: new DocumentWriter(filename, format, options)
 
     *Constructor method*.
 

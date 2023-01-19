@@ -1,7 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
-
+.. default-domain:: js
 
 
 .. _mutool_object_archive:
@@ -16,7 +16,9 @@
 ------------------------
 
 
-.. method:: new(path)
+.. method:: new Archive(path)
+
+    *Constructor method*.
 
     Create a new archive based either on a :title:`tar` or :title:`zip` file or the contents of a directory.
 
@@ -28,7 +30,7 @@
 
     .. code-block:: javascript
 
-        let archive = new Archive(<path>);
+        var archive = new Archive(<path>);
 
 .. method:: getFormat()
 
@@ -71,7 +73,9 @@
 ------------------------
 
 
-.. method:: new()
+.. method:: new MultiArchive()
+
+    *Constructor method*.
 
     Create a new empty multi archive.
 
@@ -81,14 +85,14 @@
 
     .. code-block:: javascript
 
-        let multiArchive = new MultiArchive();
+        var multiArchive = new MultiArchive();
 
 
 .. method:: mountArchive(subArchive, path)
 
     Add an archive to the set of archives handled by a multi archive. If ``path`` is ``null``, the ``subArchive`` contents appear at the top-level, otherwise they will appear prefixed by the string ``path``.
 
-    :arg subArchive:
+    :arg subArchive: ``Archive``.
     :arg path: ``String``.
 
 
@@ -96,7 +100,9 @@
 ``TreeArchive``
 ------------------------
 
-.. method:: new()
+.. method:: new TreeArchive()
+
+    *Constructor method*.
 
     Create a new empty tree archive.
 
@@ -106,7 +112,7 @@
 
     .. code-block:: javascript
 
-        let treeArchive = new TreeArchive();
+        var treeArchive = new TreeArchive();
 
 
 .. method:: add(name, buffer)

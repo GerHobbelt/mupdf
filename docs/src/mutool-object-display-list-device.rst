@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_display_list_device:
 
@@ -15,7 +15,7 @@
 
 
 
-.. method:: new (displayList)
+.. method:: new DisplayListDevice(displayList)
 
     *Constructor method*.
 

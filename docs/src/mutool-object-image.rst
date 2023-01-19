@@ -2,7 +2,7 @@
 .. All Rights Reserved.
 
 
-
+.. default-domain:: js
 
 .. _mutool_object_image:
 
@@ -19,7 +19,7 @@
 ``Image`` objects are similar to ``Pixmaps``, but can contain compressed data.
 
 
-.. method:: new(ref)
+.. method:: new Image(ref)
 
     *Constructor method*.
 

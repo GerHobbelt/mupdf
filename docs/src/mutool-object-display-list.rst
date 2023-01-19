@@ -1,7 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
-
+.. default-domain:: js
 
 
 .. _mutool_object_display_list:
@@ -19,7 +19,7 @@ A display list records all the device calls for playback later. If you want to r
 
 
 
-.. method:: new(mediabox)
+.. method:: new DisplayList(mediabox)
 
     *Constructor method*.
 

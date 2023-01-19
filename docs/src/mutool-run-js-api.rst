@@ -2,6 +2,9 @@
 .. All Rights Reserved.
 
 
+.. default-domain:: js
+
+
 .. title:: mutool JavaScript API
 
 .. include:: header.rst
@@ -12,6 +15,8 @@
 
 
 .. _mutool_run_javascript_api:
+
+
 
 
 
@@ -197,7 +202,7 @@ This object is a dictionary with keys for:
     *True* if overprint is activated.
 
 ``overPrintMode``
-    The overprint mode.
+    The overprint mode. Can be either ``0`` or ``1``.
 
 
 .. _mutool_run_js_api_alpha:
