@@ -355,8 +355,8 @@ static void ffi_pushdom(js_State *J, fz_xml *dom)
 {
 	if (dom)
 	{
-		js_getregistry(J, "fz_xml");
-		js_newuserdata(J, "fz_xml", dom, ffi_gc_fz_xml);
+		js_getregistry(J, "fz_dom");
+		js_newuserdata(J, "fz_dom", dom, ffi_gc_fz_xml);
 	}
 	else
 		js_pushnull(J);
@@ -4818,7 +4818,7 @@ static void ffi_Story_document(js_State *J)
 static void ffi_DOM_body(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		dom = fz_dom_body(ctx, dom);
@@ -4831,7 +4831,7 @@ static void ffi_DOM_body(js_State *J)
 static void ffi_DOM_documentElement(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		dom = fz_dom_document_element(ctx, dom);
@@ -4844,7 +4844,7 @@ static void ffi_DOM_documentElement(js_State *J)
 static void ffi_DOM_createElement(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *tag = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 
 	fz_try(ctx)
@@ -4859,7 +4859,7 @@ static void ffi_DOM_createElement(js_State *J)
 static void ffi_DOM_createTextNode(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *text = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 
 	fz_try(ctx)
@@ -4873,7 +4873,7 @@ static void ffi_DOM_createTextNode(js_State *J)
 static void ffi_DOM_find(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *tag = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 	const char *att = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
 	const char *val = js_iscoercible(J, 3) ? js_tostring(J, 3) : NULL;
@@ -4889,7 +4889,7 @@ static void ffi_DOM_find(js_State *J)
 static void ffi_DOM_findNext(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *tag = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 	const char *att = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
 	const char *val = js_iscoercible(J, 3) ? js_tostring(J, 3) : NULL;
@@ -4905,8 +4905,8 @@ static void ffi_DOM_findNext(js_State *J)
 static void ffi_DOM_appendChild(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
-	fz_xml *child = js_touserdata(J, 1, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
+	fz_xml *child = js_touserdata(J, 1, "fz_dom");
 
 	fz_try(ctx)
 		fz_dom_append_child(ctx, dom, child);
@@ -4917,8 +4917,8 @@ static void ffi_DOM_appendChild(js_State *J)
 static void ffi_DOM_insertBefore(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
-	fz_xml *elt = js_touserdata(J, 1, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
+	fz_xml *elt = js_touserdata(J, 1, "fz_dom");
 
 	fz_try(ctx)
 		fz_dom_insert_before(ctx, dom, elt);
@@ -4929,8 +4929,8 @@ static void ffi_DOM_insertBefore(js_State *J)
 static void ffi_DOM_insertAfter(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
-	fz_xml *elt = js_touserdata(J, 1, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
+	fz_xml *elt = js_touserdata(J, 1, "fz_dom");
 
 	fz_try(ctx)
 		fz_dom_insert_after(ctx, dom, elt);
@@ -4941,7 +4941,7 @@ static void ffi_DOM_insertAfter(js_State *J)
 static void ffi_DOM_remove(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		fz_dom_remove(ctx, dom);
@@ -4952,7 +4952,7 @@ static void ffi_DOM_remove(js_State *J)
 static void ffi_DOM_clone(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		dom = fz_dom_clone(ctx, dom);
@@ -4965,7 +4965,7 @@ static void ffi_DOM_clone(js_State *J)
 static void ffi_DOM_firstChild(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		dom = fz_dom_first_child(ctx, dom);
@@ -4978,7 +4978,7 @@ static void ffi_DOM_firstChild(js_State *J)
 static void ffi_DOM_parent(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		dom = fz_dom_parent(ctx, dom);
@@ -4991,7 +4991,7 @@ static void ffi_DOM_parent(js_State *J)
 static void ffi_DOM_next(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		dom = fz_dom_next(ctx, dom);
@@ -5004,7 +5004,7 @@ static void ffi_DOM_next(js_State *J)
 static void ffi_DOM_previous(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 
 	fz_try(ctx)
 		dom = fz_dom_previous(ctx, dom);
@@ -5017,7 +5017,7 @@ static void ffi_DOM_previous(js_State *J)
 static void ffi_DOM_addAttribute(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *att = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 	const char *val = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
 
@@ -5032,7 +5032,7 @@ static void ffi_DOM_addAttribute(js_State *J)
 static void ffi_DOM_removeAttribute(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *att = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 
 	fz_try(ctx)
@@ -5044,7 +5044,7 @@ static void ffi_DOM_removeAttribute(js_State *J)
 static void ffi_DOM_attribute(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *att = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
 	const char *val;
 
@@ -5062,7 +5062,7 @@ static void ffi_DOM_attribute(js_State *J)
 static void ffi_DOM_getAttributes(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	fz_xml *dom = js_touserdata(J, 0, "fz_xml");
+	fz_xml *dom = js_touserdata(J, 0, "fz_dom");
 	const char *att;
 	const char *val;
 	int i;
@@ -8791,7 +8791,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "DOM.attribute", ffi_DOM_attribute, 1);
 		jsB_propfun(J, "DOM.getAttributes", ffi_DOM_getAttributes, 0);
 	}
-	js_setregistry(J, "fz_xml");
+	js_setregistry(J, "fz_dom");
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
