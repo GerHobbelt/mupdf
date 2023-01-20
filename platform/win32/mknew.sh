@@ -663,7 +663,6 @@ zsv
 zsync2
 zxing-cpp
 
-
 ssdeep
 cr
 RuntimeCompiledCPlusPlus
@@ -678,6 +677,16 @@ Xoshiro-cpp
 fastPRNG
 libchaos
 
+libevent
+abseil-cpp
+libdivsufsort
+fluent-bit
+bitsery
+CryptSync
+taglib
+harbour-core
+id3-tagparser
+mmkv
 
 EOT
 )
@@ -695,6 +704,7 @@ drogon
 h2o-server
 olena
 sumatrapdf
+gperf
 
 EOT
 )

@@ -211,6 +211,10 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\tools\curl_tool.c" />
+    <ClInclude Include="../../thirdparty/curl/docs/cmdline-opts/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/docs/examples/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/docs/libcurl/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/docs/libcurl/opts/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/include/curl/curl.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/curlbuild.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/curlver.h" />
@@ -224,6 +228,7 @@
     <ClInclude Include="../../thirdparty/curl/include/curl/typecheck-gcc.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/urlapi.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/websockets.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/lib/altsvc.h" />
     <ClInclude Include="../../thirdparty/curl/lib/amigaos.h" />
     <ClInclude Include="../../thirdparty/curl/lib/arpa_telnet.h" />
@@ -231,6 +236,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/bufref.h" />
     <ClInclude Include="../../thirdparty/curl/lib/c-hyper.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cacert.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/cf-socket.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cfilters.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-amigaos.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-dos.h" />
@@ -258,6 +264,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/curl_hmac.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_krb5.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_ldap.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/curl_log.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_md4.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_md5.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_memory.h" />
@@ -305,6 +312,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/http_negotiate.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http_ntlm.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http_proxy.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/idn.h" />
     <ClInclude Include="../../thirdparty/curl/lib/if2ip.h" />
     <ClInclude Include="../../thirdparty/curl/lib/imap.h" />
     <ClInclude Include="../../thirdparty/curl/lib/inet_ntop.h" />
@@ -324,7 +332,6 @@
     <ClInclude Include="../../thirdparty/curl/lib/pop3.h" />
     <ClInclude Include="../../thirdparty/curl/lib/progress.h" />
     <ClInclude Include="../../thirdparty/curl/lib/psl.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/quic.h" />
     <ClInclude Include="../../thirdparty/curl/lib/rand.h" />
     <ClInclude Include="../../thirdparty/curl/lib/rename.h" />
     <ClInclude Include="../../thirdparty/curl/lib/rtsp.h" />
@@ -362,10 +369,11 @@
     <ClInclude Include="../../thirdparty/curl/lib/vauth/ntlm.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vauth/vauth.h" />
     <ClInclude Include="../../thirdparty/curl/lib/version_win32.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/vquic/msh3.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/vquic/ngtcp2.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/vquic/quiche.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/curl_msh3.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/curl_ngtcp2.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/curl_quiche.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vquic/vquic.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/vquic_int.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vssh/ssh.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/bearssl.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/gskit.h" />
@@ -391,7 +399,10 @@
     <ClInclude Include="../../thirdparty/curl/packages/vms/curlmsg.h" />
     <ClInclude Include="../../thirdparty/curl/packages/vms/curlmsg_vms.h" />
     <ClInclude Include="../../thirdparty/curl/packages/vms/vms_eco_level.h" />
+    <ClInclude Include="../../thirdparty/curl/plan9/lib/mkfile.inc" />
+    <ClInclude Include="../../thirdparty/curl/plan9/src/mkfile.inc" />
     <ClInclude Include="../../thirdparty/curl/projects/wolfssl_options.h" />
+    <ClInclude Include="../../thirdparty/curl/src/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/src/slist_wc.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_binmode.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_bname.h" />
@@ -434,19 +445,24 @@
     <ClInclude Include="../../thirdparty/curl/src/tool_writeout.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_writeout_json.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_xattr.h" />
+    <ClInclude Include="../../thirdparty/curl/tests/data/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/tests/libtest/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/sethostname.h" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/stub_gssapi.h" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/test.h" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/testtrace.h" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/testutil.h" />
+    <ClInclude Include="../../thirdparty/curl/tests/server/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/tests/server/getpart.h" />
     <ClInclude Include="../../thirdparty/curl/tests/server/server_setup.h" />
     <ClInclude Include="../../thirdparty/curl/tests/server/server_sockaddr.h" />
     <ClInclude Include="../../thirdparty/curl/tests/server/tftp.h" />
     <ClInclude Include="../../thirdparty/curl/tests/server/util.h" />
+    <ClInclude Include="../../thirdparty/curl/tests/unit/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/tests/unit/curlcheck.h" />
     <ResourceCompile Include="../../thirdparty/curl/lib/libcurl.rc" />
     <ResourceCompile Include="../../thirdparty/curl/src/curl.rc" />
+    <Text Include="../../thirdparty/curl/CHANGES" />
     <Text Include="../../thirdparty/curl/CMake/CMakeConfigurableFile.in" />
     <Text Include="../../thirdparty/curl/CMake/cmake_uninstall.cmake.in" />
     <Text Include="../../thirdparty/curl/CMake/curl-config.cmake.in" />
@@ -456,6 +472,7 @@
     <Text Include="../../thirdparty/curl/LICENSES/ISC.txt" />
     <Text Include="../../thirdparty/curl/LICENSES/curl.txt" />
     <Text Include="../../thirdparty/curl/Makefile.am" />
+    <Text Include="../../thirdparty/curl/README" />
     <Text Include="../../thirdparty/curl/README.md" />
     <Text Include="../../thirdparty/curl/SECURITY.md" />
     <Text Include="../../thirdparty/curl/buildconf.bat" />
@@ -504,6 +521,7 @@
     <Text Include="../../thirdparty/curl/docs/SSL-PROBLEMS.md" />
     <Text Include="../../thirdparty/curl/docs/SSLCERTS.md" />
     <Text Include="../../thirdparty/curl/docs/TINY-CURL.md" />
+    <Text Include="../../thirdparty/curl/docs/TODO" />
     <Text Include="../../thirdparty/curl/docs/TheArtOfHttpScripting.md" />
     <Text Include="../../thirdparty/curl/docs/URL-SYNTAX.md" />
     <Text Include="../../thirdparty/curl/docs/VERSIONS.md" />
@@ -536,12 +554,15 @@
     <Text Include="../../thirdparty/curl/packages/OS400/make-src.sh" />
     <Text Include="../../thirdparty/curl/packages/OS400/make-tests.sh" />
     <Text Include="../../thirdparty/curl/packages/OS400/makefile.sh" />
+    <Text Include="../../thirdparty/curl/packages/README" />
     <Text Include="../../thirdparty/curl/packages/vms/Makefile.am" />
     <Text Include="../../thirdparty/curl/packages/vms/curl_gnv_build_steps.txt" />
     <Text Include="../../thirdparty/curl/packages/vms/curl_release_note_start.txt" />
     <Text Include="../../thirdparty/curl/packages/vms/gnv_curl_configure.sh" />
     <Text Include="../../thirdparty/curl/packages/vms/make_gnv_curl_install.sh" />
     <Text Include="../../thirdparty/curl/packages/vms/pcsi_gnv_curl_file_list.txt" />
+    <Text Include="../../thirdparty/curl/packages/vms/readme" />
+    <Text Include="../../thirdparty/curl/plan9/README" />
     <Text Include="../../thirdparty/curl/projects/README.md" />
     <Text Include="../../thirdparty/curl/projects/build-openssl.bat" />
     <Text Include="../../thirdparty/curl/projects/build-wolfssl.bat" />
@@ -577,6 +598,20 @@
     <Text Include="../../thirdparty/curl/tests/server/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/server/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/smbserver.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/README.md" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/config.ini.in" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/conftest.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_01_basic.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_02_download.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_03_goaway.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_04_stuttered.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_05_errors.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/__init__.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/certs.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/curl.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/env.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/httpd.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/nghttpx.py" />
     <Text Include="../../thirdparty/curl/tests/unit/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/unit/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/unit/README.md" />

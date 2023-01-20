@@ -236,6 +236,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/base64.c" />
     <ClCompile Include="../../thirdparty/curl/lib/bufref.c" />
     <ClCompile Include="../../thirdparty/curl/lib/c-hyper.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cf-socket.c" />
     <ClCompile Include="../../thirdparty/curl/lib/cfilters.c" />
     <ClCompile Include="../../thirdparty/curl/lib/conncache.c" />
     <ClCompile Include="../../thirdparty/curl/lib/connect.c" />
@@ -248,6 +249,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/curl_get_line.c" />
     <ClCompile Include="../../thirdparty/curl/lib/curl_gethostname.c" />
     <ClCompile Include="../../thirdparty/curl/lib/curl_gssapi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_log.c" />
     <ClCompile Include="../../thirdparty/curl/lib/curl_memrchr.c" />
     <ClCompile Include="../../thirdparty/curl/lib/curl_multibyte.c" />
     <ClCompile Include="../../thirdparty/curl/lib/curl_ntlm_core.c" />
@@ -362,9 +364,9 @@
     <ClCompile Include="../../thirdparty/curl/lib/vauth/vauth.c" />
     <ClCompile Include="../../thirdparty/curl/lib/version.c" />
     <ClCompile Include="../../thirdparty/curl/lib/version_win32.c" />
-    <ClCompile Include="../../thirdparty/curl/lib/vquic/msh3.c" />
-    <ClCompile Include="../../thirdparty/curl/lib/vquic/ngtcp2.c" />
-    <ClCompile Include="../../thirdparty/curl/lib/vquic/quiche.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/curl_msh3.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/curl_ngtcp2.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/curl_quiche.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vquic/vquic.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vssh/libssh.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vssh/libssh2.c" />
@@ -427,6 +429,10 @@
     <ClCompile Include="../../thirdparty/curl/src/tool_writeout.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_writeout_json.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_xattr.c" />
+    <ClInclude Include="../../thirdparty/curl/docs/cmdline-opts/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/docs/examples/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/docs/libcurl/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/docs/libcurl/opts/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/include/curl/curl.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/curlbuild.h" />
     <ClInclude Include="../../thirdparty/curl/include/curl/curlver.h" />
@@ -448,6 +454,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/bufref.h" />
     <ClInclude Include="../../thirdparty/curl/lib/c-hyper.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cacert.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/cf-socket.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cfilters.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-amigaos.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-dos.h" />
@@ -475,6 +482,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/curl_hmac.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_krb5.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_ldap.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/curl_log.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_md4.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_md5.h" />
     <ClInclude Include="../../thirdparty/curl/lib/curl_memory.h" />
@@ -542,7 +550,6 @@
     <ClInclude Include="../../thirdparty/curl/lib/pop3.h" />
     <ClInclude Include="../../thirdparty/curl/lib/progress.h" />
     <ClInclude Include="../../thirdparty/curl/lib/psl.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/quic.h" />
     <ClInclude Include="../../thirdparty/curl/lib/rand.h" />
     <ClInclude Include="../../thirdparty/curl/lib/rename.h" />
     <ClInclude Include="../../thirdparty/curl/lib/rtsp.h" />
@@ -580,10 +587,11 @@
     <ClInclude Include="../../thirdparty/curl/lib/vauth/ntlm.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vauth/vauth.h" />
     <ClInclude Include="../../thirdparty/curl/lib/version_win32.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/vquic/msh3.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/vquic/ngtcp2.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/vquic/quiche.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/curl_msh3.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/curl_ngtcp2.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/curl_quiche.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vquic/vquic.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/vquic/vquic_int.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vssh/ssh.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/bearssl.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/gskit.h" />
@@ -808,6 +816,20 @@
     <Text Include="../../thirdparty/curl/tests/server/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/server/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/smbserver.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/README.md" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/config.ini.in" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/conftest.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_01_basic.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_02_download.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_03_goaway.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_04_stuttered.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_05_errors.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/__init__.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/certs.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/curl.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/env.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/httpd.py" />
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/nghttpx.py" />
     <Text Include="../../thirdparty/curl/tests/unit/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/unit/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/unit/README.md" />
@@ -822,3 +844,4 @@
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
