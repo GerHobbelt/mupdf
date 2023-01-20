@@ -4,42 +4,46 @@
 
 .. default-domain:: js
 
-.. _mutool_object_dom:
+.. _mutool_object_xml:
 
-.. _mutool_run_js_api_object_dom:
+.. _mutool_run_js_api_object_xml:
 
 
-``DOM``
+``XML``
 -------------
+
+
+This represents an :title:`HTML` or an :title:`XML` node. It is a helper class intended to access the :title:`DOM` (:title:`Document Object Model`) content of a :ref:`Story<mutool_object_story>` object.
+
 
 .. method:: body()
 
-    Return a ``DOM`` for the body element.
+    Return an ``XML`` for the body element.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 .. method:: documentElement()
 
-    Return a ``DOM`` for the top level element.
+    Return an ``XML`` for the top level element.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 .. method:: createElement(tag)
 
-    Create an element with the given tag type, but do not link it into the ``DOM`` yet.
+    Create an element with the given tag type, but do not link it into the ``XML`` yet.
 
     :arg tag: ``String``.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 
 .. method:: createTextNode(text)
 
-    Create a text node with the given text contents, but do not link it into the ``DOM`` yet.
+    Create a text node with the given text contents, but do not link it into the ``XML`` yet.
 
     :arg text: ``String``.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 .. method:: find(tag, attribute, value)
 
@@ -49,7 +53,7 @@
     :arg attribute: ``String``.
     :arg value: ``String``.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 .. method:: findNext(tag, attribute, value)
 
@@ -59,74 +63,74 @@
     :arg attribute: ``String``.
     :arg value: ``String``.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 
 .. method:: appendChild(dom, childDom)
 
     Insert an element as the last child of a parent, unlinking the child from its current position if required.
 
-    :arg dom: ``DOM``.
-    :arg childDom: ``DOM``.
+    :arg dom: ``XML``.
+    :arg childDom: ``XML``.
 
 
 .. method:: insertBefore(dom, elementDom)
 
     Insert an element before this element, unlinking the new element from its current position if required.
 
-    :arg dom: ``DOM``.
-    :arg elementDom: ``DOM``.
+    :arg dom: ``XML``.
+    :arg elementDom: ``XML``.
 
 .. method:: insertAfter(dom, elementDom)
 
     Insert an element after this element, unlinking the new element from its current position if required.
 
-    :arg dom: ``DOM``.
-    :arg elementDom: ``DOM``.
+    :arg dom: ``XML``.
+    :arg elementDom: ``XML``.
 
 
 .. method:: remove()
 
-    Remove this element from the ``DOM``. The element can be added back elsewhere if required.
+    Remove this element from the ``XML``. The element can be added back elsewhere if required.
 
 .. method:: clone()
 
-    Clone this element (and its children). The clone is not yet linked into the ``DOM``.
+    Clone this element (and its children). The clone is not yet linked into the ``XML``.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 .. method:: firstChild()
 
-    Return the first child of the element as a ``DOM``, or ``null`` if no child exist.
+    Return the first child of the element as a ``XML``, or ``null`` if no child exist.
 
-    :return: ``DOM`` \| ``null``.
+    :return: ``XML`` \| ``null``.
 
 .. method:: parent()
 
-    Return the parent of the element as a ``DOM``, or ``null`` if no parent exists.
+    Return the parent of the element as a ``XML``, or ``null`` if no parent exists.
 
-    :return: ``DOM`` \| ``null``.
+    :return: ``XML`` \| ``null``.
 
 .. method:: next()
 
-    Return the next element as a ``DOM``, or ``null`` if no such element exists.
+    Return the next element as a ``XML``, or ``null`` if no such element exists.
 
-    :return: ``DOM`` \| ``null``.
+    :return: ``XML`` \| ``null``.
 
 .. method:: previous()
 
-    Return the previous element as a ``DOM``, or ``null`` if no such element exists.
+    Return the previous element as a ``XML``, or ``null`` if no such element exists.
 
-    :return: ``DOM`` \| ``null``.
+    :return: ``XML`` \| ``null``.
 
 .. method:: addAttribute(attribute, value)
 
-    Add attribute with the given value, returns the updated element as a ``DOM``.
+    Add attribute with the given value, returns the updated element as an ``XML``.
 
     :arg attribute: ``String``.
     :arg value: ``String``.
 
-    :return: ``DOM``.
+    :return: ``XML``.
 
 .. method:: removeAttribute(attribute)
 
