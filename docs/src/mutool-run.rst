@@ -75,7 +75,7 @@ Several global functions that are common for command line shells are available:
    Read one line of input from ``stdin`` and return it as a string.
 
 ``require(module)``
-   Load a JavaScript module.
+   Load a :title:`JavaScript` module.
 
 ``write(...)``
    Print arguments to ``stdout``, separated by spaces.

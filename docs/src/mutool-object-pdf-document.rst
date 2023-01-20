@@ -485,6 +485,8 @@ The following functions can be used to copy objects from one document to another
 ----
 
 
+.. _mutool_object_pdf_document_embedded_files:
+
 **Embedded files in PDFs**
 
 

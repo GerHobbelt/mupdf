@@ -8,12 +8,11 @@ Table of Contents
 
 .. toctree::
 
-
    quick-start-guide.rst
    mupdf-command-line.rst
    using-mupdf.rst
+   C-API.rst
    progressive-loading.rst
-   API.rst
    language-bindings.rst
    changes.rst
    third-party.rst

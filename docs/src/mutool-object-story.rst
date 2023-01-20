@@ -35,9 +35,9 @@
 
 .. method:: document()
 
-    Return a ``DOM`` for an unplaced story. This allows adding content before placing the ``Story``.
+    Return an ``XML`` for an unplaced story. This allows adding content before placing the ``Story``.
 
-    :return: :ref:`DOM<mutool_object_dom>`.
+    :return: :ref:`XML<mutool_object_xml>`.
 
 .. method:: place(rect)
 
@@ -50,7 +50,7 @@
 
     Draw the placed ``Story`` to the given ``device`` with the given ``transform``.
 
-    :arg device: :ref:`Device<mutool_object_device>`
+    :arg device: :ref:`Device<mutool_object_device>`.
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 

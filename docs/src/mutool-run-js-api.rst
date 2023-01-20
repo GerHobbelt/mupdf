@@ -279,7 +279,7 @@ File specification object
 
 This object is used to represent a file.
 
-
+In order to retieve information from this object see methods described within :ref:`Embedded files in PDFs<mutool_object_pdf_document_embedded_files>`.
 
 .. include:: mutool-object-buffer.rst
 
@@ -329,7 +329,7 @@ This object is used to represent a file.
 
 .. include:: mutool-object-story.rst
 
-.. include:: mutool-object-dom.rst
+.. include:: mutool-object-xml.rst
 
 .. _mutool_run_js_api_pdf_processor:
 
