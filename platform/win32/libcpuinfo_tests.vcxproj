@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcpuinfo_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-9528FF24F32D}</ProjectGuid>
+    <RootNamespace>libcpuinfo_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPUINFO;CPUINFO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cpuinfo/include;../../thirdparty/owemdjee/cpuinfo/src;../../thirdparty/owemdjee/cpuinfo/deps/clog/include;../../thirdparty/owemdjee/gbenchmark/include;../../thirdparty/owemdjee/googletest/googletest/include;../../scripts/gbenchmark/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/bench/bench-get-current.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/bench/bench-init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/src/clog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/test/clog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/android/properties.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/arm-cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/arm-uarch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/aarch32-isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/aarch64-isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/arm-hwcap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/arm-linux-cpuinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/arm-linux-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/chipset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/clusters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/midr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/mach/arm-mach-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/tlb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/windows/init-by-logical-sys-info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/arm/windows/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/emscripten/em-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/cpulist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/mockfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/multiline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/processors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/linux/smallfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/mach/mach-topology.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/cache/descriptor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/cache/deterministic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/cache/x86-cache-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/isa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/linux/x86-linux-cpuinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/linux/x86-linux-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/mach/x86-mach-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/mockcpuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/vendor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/windows/x86-win-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/x86-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/x86-topology.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/src/x86/x86-uarch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/arm-cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/alcatel-revvl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/alldocube-iwork8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/atm7029b-tablet.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/blu-r1-hd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-a3-2016-eu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-a8-2016-duos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-a8-2018.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-c9-pro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-grand-prime-value-edition.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j1-2016.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j7-prime.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j7-tmobile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j7-uae.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s3-us.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s4-us.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s5-global.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s5-us.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s7-global.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s7-us.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s8-global.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s8-us.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s9-global.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s9-us.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-tab-3-7.0.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-tab-3-lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-win-duos.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-ascend-p7.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-honor-6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-10.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-20.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-9.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-p20-pro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-p8-lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-p9-lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/iconia-one-10.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/leagoo-t5c.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lenovo-a6600-plus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lenovo-vibe-x2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lg-k10-eu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lg-optimus-g-pro.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/meizu-pro-6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/meizu-pro-6s.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/meizu-pro-7-plus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/memo-pad-7.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-e-gen1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus-s.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus10.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus5x.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus6p.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus9.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oneplus-3t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oneplus-5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oneplus-5t.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oppo-a37.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oppo-r15.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oppo-r9.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/padcod-10.1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel-2-xl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel-c.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel-xl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/scaleway.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-mi-5c.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-redmi-2a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-redmi-note-3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-redmi-note-4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xperia-c4-dual.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xperia-sl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/zenfone-2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/zenfone-2e.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/mock/zenfone-c.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/android-properties-interface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/android-properties.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/brand-string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/proc-cpuinfo-hardware.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/ro-arch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/ro-board-platform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/ro-chipname.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/ro-mediatek-platform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/name/ro-product-board.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/test-get-current.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/test/test-init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/tools/auxv-dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/tools/cache-info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/tools/cpu-info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/tools/cpuid-dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/tools/cpuinfo-dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/tools/gpu-dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpuinfo/tools/isa-info.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/include/clog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/include/cpuinfo-mock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/include/cpuinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/arm/android/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/arm/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/arm/linux/cp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/arm/midr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/arm/windows/windows-arm-init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/cpuinfo/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/cpuinfo/internal-api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/cpuinfo/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/cpuinfo/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/linux/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/mach/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/x86/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/x86/cpuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/x86/linux/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/src/x86/windows/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/alcatel-revvl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/alldocube-iwork8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/atm7029b-tablet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/blu-r1-hd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-a3-2016-eu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-a8-2016-duos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-a8-2018.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-c9-pro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-grand-prime-value-edition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j1-2016.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j7-prime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j7-tmobile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-j7-uae.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s3-us.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s4-us.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s5-global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s5-us.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s7-global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s7-us.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s8-global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s8-us.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s9-global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-s9-us.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-tab-3-7.0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-tab-3-lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/galaxy-win-duos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-ascend-p7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-honor-6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-20.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-mate-9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-p20-pro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-p8-lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/huawei-p9-lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/iconia-one-10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/leagoo-t5c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lenovo-a6600-plus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lenovo-vibe-x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lg-k10-eu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/lg-optimus-g-pro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/meizu-pro-6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/meizu-pro-6s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/meizu-pro-7-plus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/memo-pad-7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-e-gen1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/moto-g-gen5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus-s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus5x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus6p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/nexus9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oneplus-3t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oneplus-5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oneplus-5t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oppo-a37.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oppo-r15.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/oppo-r9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/padcod-10.1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel-2-xl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel-c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel-xl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/pixel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/scaleway.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-mi-5c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-redmi-2a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-redmi-note-3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xiaomi-redmi-note-4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xperia-c4-dual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/xperia-sl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/zenfone-2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/zenfone-2e.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpuinfo/test/mock/zenfone-c.h" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/CMakePresets.json" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/cmake/cpuinfo-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/configure.py" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/deps/clog/configure.py" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/libcpuinfo.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-arm64-auxv-dump.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-arm64-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-arm64-mock.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-arm64-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-armv7-auxv-dump.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-armv7-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-armv7-cache-info.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-armv7-cpu-info.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-armv7-isa-info.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-armv7-mock.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-armv7-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-device-dump.py" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-x86-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-x86-cache-info.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-x86-cpu-info.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-x86-cpuid-dump.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-x86-isa-info.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/android-x86-mock.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/arm-linux-filesystem-dump.py" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/local-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpuinfo/scripts/parse-x86-cpuid-dump.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

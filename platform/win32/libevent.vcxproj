@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libevent</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF95448C}</ProjectGuid>
+    <RootNamespace>libevent</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBEVENT;EVENT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/WIN32-Code/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/WIN32-Code/getopt_long.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/arc4random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/buffer_iocp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_mbedtls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_openssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_pair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_ratelim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_sock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/bufferevent_ssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/cmake/CheckFileOffsetBits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/devpoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/epoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/epoll_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evdns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/event_iocp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/event_tagging.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evrpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evthread_pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evthread_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evutil_rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/evutil_time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/kqueue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/listener.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/becat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/dns-example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/event-read-fifo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/hello-world.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/hostcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/http-connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/http-server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/https-client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/le-proxy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/openssl_hostname_validation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/signal-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/ssl-client-mbedtls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/time-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/watch-timing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sample/ws-chat-server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/signalfd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/strlcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test-export/test-export.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/bench_cascade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/bench_http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/bench_httpclient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/print-winsock-errors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_bufferevent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_dns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_et.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_finalize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_iocp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_listener.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_mbedtls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_minheap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_openssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_rpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_ssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_testutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_watch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_ws.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/regress_zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-changelist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-closed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-dumpevents.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-eof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-fdleak.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-ratelim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/test-weof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/tinytest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/test/tinytest_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/watch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/wepoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/win32select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libevent/ws.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/WIN32-Code/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/WIN32-Code/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/bufferevent-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/changelist-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/compat/sys/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/defer-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/epolltable-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/evbuffer-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/event-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/evmap-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/evrpc-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/evsignal-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/evthread-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/ht-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/http-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/evdns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/buffer_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/bufferevent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/bufferevent_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/bufferevent_ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/bufferevent_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/dns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/dns_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/dns_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/event_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/event_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/http_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/http_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/keyvalq_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/rpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/rpc_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/rpc_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/tag_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/visibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/watch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/event2/ws.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/evhttp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/evrpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/include/evutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/iocp-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/ipv6-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/kqueue-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/log-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/mbedtls-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/minheap-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/mm-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/openssl-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/ratelim-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/sample/hostcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/sample/openssl_hostname_validation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/ssl-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/strlcpy-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/regress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/regress_http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/regress_testutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/regress_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/regress_ws.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/tinytest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/tinytest_local.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/test/tinytest_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/time-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/util-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libevent/wepoll.h" />
+    <Text Include="../../thirdparty/owemdjee/libevent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libevent/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libevent/CONTRIBUTORS.md" />
+    <Text Include="../../thirdparty/owemdjee/libevent/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libevent/ChangeLog-1.4" />
+    <Text Include="../../thirdparty/owemdjee/libevent/ChangeLog-2.0" />
+    <Text Include="../../thirdparty/owemdjee/libevent/ChangeLog-2.1" />
+    <Text Include="../../thirdparty/owemdjee/libevent/Documentation/Building.md" />
+    <Text Include="../../thirdparty/owemdjee/libevent/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libevent/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libevent/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevent/checkpatch.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevent/cmake/CheckPrototypeDefinition.c.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/cmake/Copyright.txt" />
+    <Text Include="../../thirdparty/owemdjee/libevent/cmake/LibeventConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/cmake/LibeventConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/cmake/Uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libevent/doxygen.am" />
+    <Text Include="../../thirdparty/owemdjee/libevent/evconfig-private.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/event_rpcgen.py" />
+    <Text Include="../../thirdparty/owemdjee/libevent/extra/abi-check/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libevent/extra/abi-check/abi_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevent/extra/abi-check/libevent.json" />
+    <Text Include="../../thirdparty/owemdjee/libevent/extra/release/changelog.py" />
+    <Text Include="../../thirdparty/owemdjee/libevent/extra/release/update-contributors.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevent/include/include.am" />
+    <Text Include="../../thirdparty/owemdjee/libevent/libevent.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/libevent_core.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/libevent_extra.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/libevent_mbedtls.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/libevent_openssl.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/libevent_pthreads.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libevent/make_epoll_table.py" />
+    <Text Include="../../thirdparty/owemdjee/libevent/sample/include.am" />
+    <Text Include="../../thirdparty/owemdjee/libevent/test-export/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libevent/test-export/test-export.py" />
+    <Text Include="../../thirdparty/owemdjee/libevent/test/check-dumpevents.py" />
+    <Text Include="../../thirdparty/owemdjee/libevent/test/include.am" />
+    <Text Include="../../thirdparty/owemdjee/libevent/test/rpcgen_wrapper.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevent/test/test-ratelim.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevent/test/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/libevent/whatsnew-2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/libevent/whatsnew-2.1.txt" />
+    <Text Include="../../thirdparty/owemdjee/libevent/whatsnew-2.2.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

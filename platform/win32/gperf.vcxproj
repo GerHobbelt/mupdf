@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078AD6ED3}</ProjectGuid>
+    <RootNamespace>gperf</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GPERF;GPERF_STATICLIB;FZ_DLL_CLIENT;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GPERF;GPERF_STATICLIB;FZ_DLL_CLIENT;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GPERF;GPERF_STATICLIB;FZ_DLL_CLIENT;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GPERF;GPERF_STATICLIB;FZ_DLL_CLIENT;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;..\..\thirdparty\owemdjee\gperf\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/lib/getline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/lib/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/lib/getopt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/lib/hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/bool-array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/graph2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/graph3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/hash-table.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/input.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/keyword-list.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/keyword.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/mi_vector_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/nbperf-bdz.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/nbperf-chm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/nbperf-chm3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/output-javascript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/output-lua.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/output.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/positions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/search.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/search.cc.BASE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/search.cc.LOCAL.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/search.cc.REMOTE.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/src/version.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/tests/perf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/tests/perf_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/tests/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/tests/test1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf/tests/test2.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/lib/getline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/lib/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/lib/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/bool-array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/bool-array.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/crc3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/fnv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/fnv3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/graph2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/hash-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/keyword-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/keyword-list.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/keyword.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/keyword.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/mi_vector_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/nbperf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/options.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/output-javascript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/output-lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/output.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/positions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/positions.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/wyhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/src/wyhash3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf/tests/perf.h" />
+    <Image Include="../../thirdparty/owemdjee/gperf/doc/gperf.png" />
+    <Image Include="../../thirdparty/owemdjee/gperf/doc/run.png" />
+    <Image Include="../../thirdparty/owemdjee/gperf/doc/size.png" />
+    <Text Include="../../thirdparty/owemdjee/gperf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperf/CMakeLists.txt.BASE.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperf/CMakeLists.txt.LOCAL.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperf/CMakeLists.txt.REMOTE.txt" />
+    <Text Include="../../thirdparty/owemdjee/gperf/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/gperf/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/gperf/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/gperf/README" />
+    <Text Include="../../thirdparty/owemdjee/gperf/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperf/autopull.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperf/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/gperf/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gperf/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/gperf/doc/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gperf/lib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/gperf/lib/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gperf/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/gperf/src/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gperf/tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/gperf/tests/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gperf/tests/lang-ucs2.in" />
+    <Text Include="../../thirdparty/owemdjee/gperf/tests/perf_img.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperf/tests/perf_plot.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

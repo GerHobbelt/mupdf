@@ -1,0 +1,2017 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libharbour-core</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF97E895}</ProjectGuid>
+    <RootNamespace>libharbour-core</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARBOUR_CORE;HARBOUR_CORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/3rd/sqlite3/sqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtalleg/gtallegd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtalleg/ssf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtqtc/gtqtc1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/gtwgud.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/gtwvgd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/wvgcore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/wvgcuig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/wvgutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/wvgwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/wvgwing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/checkbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/editbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/gtwvwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/menubar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/pushbut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/statbar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/toolbar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/wvwdraw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/wvwutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbamf/amfdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbamf/amfenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbamf/amfstdio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbamf/hbcls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbblat/blatwrp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/blocksor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/bzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/crctable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/decompre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/huffman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/randtabl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/errint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2io/bz2io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/paths.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/pattern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/pdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/ps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/surface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/transfor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcomio/comio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/addascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/asciisum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ascpos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/atadjust.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/atnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/atrepl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/bitnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/bitstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/blank.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charevod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charlihb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charmirr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charmix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charonly.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charophb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charrepl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charsprd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/charswap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctchksum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctcom1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctcom2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctcrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctmath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctmath2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctnet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctpad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctstrfil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctwfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/cursor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/datetime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/dattime2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/dattime3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/dbftools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/disk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/dummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/envparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/exponent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/files.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/finan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ftoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/justify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/keyset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/like.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/lton.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/maxline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/misc1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/misc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/misc3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/misc4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/num1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/numat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/numbase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/numcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/numline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/pos1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/pos2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/posdiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/relation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/remove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/replace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/screen1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/screen2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/setlast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/setrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/strdiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/strswap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/token1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/token2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/trig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/video.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/wordrepl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/wordtoch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcups/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcurl/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/loadlibr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmlparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmlrole.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmltok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmltok_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmltok_n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfbird/firebird.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfbird/tests/testapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfimage/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfoxpro/dbfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfoxpro/miscfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfoxpro/relfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/dbsetloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/exec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/isbegseq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/isfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/secondfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/strpeek.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfship/users.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/gdwrp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgs/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/asciisgt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/ascposgt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/atdiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/bitflags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/chareven.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/charmixg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/charodd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/chrcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/chrfirst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/chrtotal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strasint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strcspn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strdiffg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strexpan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strleft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strpbrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/strright.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgzio/gzio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/_hbhbpdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdf3dme.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfanno.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfarra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfbina.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfbool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfcata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfdest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfdict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfdoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfdocp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfecy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfecyd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfencc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfencj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfenck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfencn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfenco.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfencu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdferro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfexda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfextg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdf1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdfc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdfi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdfj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdfk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdfn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffdft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffon1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffonc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffott.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfgsta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfimac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfimag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfimap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdflist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfmmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfndic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfnull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfnumb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfobje.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfoutl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfpago.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfpags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfpdfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfreal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfstre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfstri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfu3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfxref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/annot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/enccns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/enccnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/encjp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/enckr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/fontcns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/fontcnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/fontjp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/fontkr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/pdfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/3rd/liblzf/lzf_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/3rd/liblzf/lzf_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmagic/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmemio/memio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/bbabble.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/dates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/ffind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/hb_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/hbeditc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/irm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/spd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/strfmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/stringsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmlzo/3rd/minilzo/minilzo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmlzo/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_att.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_ent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_fil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_get.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_ind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_nod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_pri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_sea.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmysql/mysql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/ioapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/unzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/mzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnetio/netiocli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnetio/netiosrv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/alt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/caplock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/chdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/cint86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/color2n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/ctrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/descendn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/dispc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/dosver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/ftattr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/fttext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/getenvrn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/iamidle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/idle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/isprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/isshare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/kspeed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/mkdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/mouse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/n2color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/numlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/origin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/page.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/peek.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/proper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/prtscr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/putkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/rmdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/setdate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/setkeys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/setlastk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/settime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/shadow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/shift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/stod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/video1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/vidmode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbodbc/odbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbpgsql/postgres.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbpgsql/rddcopy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbpipeio/pipeio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbsqlit3/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/bio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/evp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/evpciph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/evpenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/evpmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/evppkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/pem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/ssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/ssl_hb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/ssl_inet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/ssl_sock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/sslciph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/sslctx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/sslsess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtcpio/tcpio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtinymt/3rd/tinymt/tinymt32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtinymt/3rd/tinymt/tinymt64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtinymt/core32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtinymt/core64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtip/encurlc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtip/mime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtip/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/chdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/chroot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/daemon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/posixerr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/sleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/uidgid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/axcore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/hbolesrv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/mapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/oemansi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/olecore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/oleuuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_commctrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_mmsystem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_shellapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winbase_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winbase_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winbase_mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_wingdi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_wingdi_font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winnetwk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winnls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winuser_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winuser_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wapi_winuser_dlg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wce_simc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/wce_smsc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_bmpd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_com.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_dlg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_evnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_misc_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_misc_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_osc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_prn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_prn2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_prn3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_regc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_rpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_shell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_svc_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/win_svc_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xadler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xbdiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xbpatchi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xdiffi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xemit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xmerge3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xmissing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xpatchi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xprepare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xrabdiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xrabply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xversion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/binnumx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/dbcmdx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/dbdetacx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/dllx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/idlex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/mousex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/oemansix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/philesx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/wafuncx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/xppopc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/codabar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/code11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/code128.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/code39.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/code93.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/coredraw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/datamtrx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/eanupc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/itf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/msi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/pdf417.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/qrcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/ads1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/adsfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/adsmgmnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/adsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/rddbm/bmdbfx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/rddsql/sqlbase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/rddsql/sqlmix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/sddfb/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/sddmy/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/sddoci/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/sddodbc/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/sddpg/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/sddsqlt3/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/bkgtsks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/cstructc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/datesxhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/dbf2txt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/dbgfxc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/filestat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/fparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/freadlin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbcrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hboutdbg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbserv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbsyslog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbxml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/txtline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbarr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbarrex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbbit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbcopyf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbctbit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbdate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbenum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhberrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbgt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbhasha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbhashp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbi18n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbinet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbini.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbmsgs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbmtc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbmvinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbolec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbprn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbqself.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbregx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbsave.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbscr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbtrim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhbwith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xstrdel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xthrow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xwin_reg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xwin_ver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/extras/gfspell/spellc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/extras/hbdroid/hvminit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/extras/hbdroid/msginfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/extras/hbusb/core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/extras/template/corec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/include/hbexpra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/include/hbexprb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/include/hbwmain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbdossrl/serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/com.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/irq_g.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/irq_ow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/wrap_ow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/big5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cp950.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cp_950.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cp_big5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cp_gbk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cp_tpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cp_u16le.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cp_utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpbg866.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpbgiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpbgmik.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpbgwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpcs852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpcs852c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpcsiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpcskamc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpcswin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpde850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpde850m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpde858.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpdeiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpdewin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpdk865.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpee775.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpeewin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpel437.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpel737.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpeliso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpelwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpes850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpes850c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpes850m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpesiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpesmwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpeswin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpfi850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpfr850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpfr850c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpfr850m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpfriso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpfrwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphe862.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphewin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphr646.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphr852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphriso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphrwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphu852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphu852c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphuiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cphuwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpis850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpis861.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpit437.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpit850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpit850m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpitisb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpitiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpitwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cplt775.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpltwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cplv775.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cplvwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpnl850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpnl850m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpno865.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cppl852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cppliso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpplmaz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpplwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cppt850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cppt860.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpptiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpro852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cproiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cprowin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpru1251.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpru866.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpruiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cprukoi8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsk852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsk852c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpskiso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpskkamc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpskwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsl646.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsl852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsliso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpslwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsr646.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsr646c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsrwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsv437c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsv850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsv850m.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsviso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpsvwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cptr857.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cptriso.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cptrwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpua1125.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpua1251.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpua866.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/cpuakoi8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/gbk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc037.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1006.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1026.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1125.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1250.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1251.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1252.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1253.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1254.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1255.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1257.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc1258.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc16def.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc424.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc500.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc646_yu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc646yuc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc737.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc775.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc850.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc852.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc855.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc856.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc857.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc858.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc860.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc861.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc862.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc863.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc864.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc865.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc866.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc869.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc874.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc875.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc885910.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc885911.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc885913.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc885914.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc885915.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc885916.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc88591b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uc8859_9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucatari.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uckam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uckoi8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/uckoi8u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmacce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmaccyr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmacgrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmacice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmacrom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmactrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmaz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucmik.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/ucnext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/codepage/utf8sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/expropt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/expropt2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/funcid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbarch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbdate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbffind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbfopen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbfsapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbgete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbstrbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbverdsp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/hbwince.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/common/strwild.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/cmdcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/compi18n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/complex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/expropta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/exproptb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/genc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/gencc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/genhrb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbcmplib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbdbginf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbdead.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbfix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbfunchk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbgenerr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbident.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hblbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbmain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbpcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbstripl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/hbusage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/compiler/ppcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/debug/dbgentry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_be.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_bg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_ca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_cs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_de.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_de_at.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_ee.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_el.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_en_tpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_eo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_es.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_es_419.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_eu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_fr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_gl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_he.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_hr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_hu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_id.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_is.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_it.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_ko.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_lt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_lv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_nl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_pl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_pt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_pt_br.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_ro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_ru.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_sk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_sl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_sr_cyr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_sr_lat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_sv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_tr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_uk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_zh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/lang/l_zh_sim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/macro/macroa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/macro/macrob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/macro/macrolex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/main/harbour.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/nortl/nortl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/pp/hbpp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/pp/ppcore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/pp/pplib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/pp/pplib2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbcmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbcmd53.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbcmdhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbdetach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbdrop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbexists.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbf1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbfcdx/dbfcdx1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbfcdx/sixcdx1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbffpt/dbffpt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbfnsx/dbfnsx1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbfntx/dbfntx1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbnubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbrename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/dbsql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/delim1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/fieldhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxcompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxcrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxdate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxfname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxord.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxredir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxsem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hbsix/sxutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hsx/cftsfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/hsx/hsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/nulsys/nulsys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/ordcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/ordwldsk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/rddinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/rddshort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/sdf1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/usrrdd/usrrdd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/wacore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/wafunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rdd/workarea.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/accept.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/ampm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/arc4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/at.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/ati.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/base64c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/base64d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/binnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/box.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/cdpapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/cdpapihb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/cdpbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/cdpdetc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/chrasc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/chruni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/colorind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/console.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/copyfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/cputime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/datec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/dates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/dateshb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/datesx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/defpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/defpathu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/descend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/dirdrive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/diskspac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/disksphb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/do.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/empty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/errapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/errapiu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/errint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/errintlo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/filebuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/filebufd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/filehb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/filesys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fkmax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fmhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fnsplit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fscopy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fserr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fslink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fssize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/fstemp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gt_tpl/gt_tpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtapiu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtcgi/gtcgi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtchrmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtclip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtcrs/gtcrs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtdos/gtdos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtgui/gtgui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtkbstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtkeycod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtos2/gtos2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtpca/gtpca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtsln/gtsln.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtsln/kbsln.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtsln/keytrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtsln/mousesln.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtstd/gtstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtsys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gttone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gttrm/gttrm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtwin/gtwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtwvt/gtwvt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtxwc/gtxwc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hardcr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbadler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbbffnc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbbfish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbbfsock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbbit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbbyte.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbcomhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbcrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbdef.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbdyn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbdynhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbfeof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbfilehc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbgtcore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbhex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbi18n1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbinet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbinetz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbjson.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hblpp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hblpphb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbmd5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbmd5enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbntos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbproces.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbprocfn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbrand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbrandom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbregex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbregexc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbrunfun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbsha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbsha1hm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbsha2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbsha2hm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbsocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbsockhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbstrfmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbstrsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbtoken.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbzlibc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbzlibgz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbznet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/hbzsock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/idle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/inkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/inkeyapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/iousr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/is.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/isprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/itemseri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/lang.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/langapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/left.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/len.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/lennum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/libnamec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/maxrow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/memofile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/minmax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/mlcfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/mod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/mouse53.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/mouseapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/mousehb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/mtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/natmsg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/natmsgu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/netusr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/oemansi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/oldbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/oldclear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/pad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/padx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/philes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/philes53.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/rat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/replic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/right.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/rtlshort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/samples.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/saverest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/scroll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/scrrow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/seconds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/setcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/setcurs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/setkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/setpos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/setposbs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha1hmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha2hmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/shadow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/shadowu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/soundex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/space.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/spfiles.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strcase.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strclear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strmatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strrepl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strtoexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strutf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strxor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/strzero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/stuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/substr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/trace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/transfrm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/trim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalara.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalarb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalarc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalarh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalarl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalarn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalarp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalars.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/tscalaru.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/val.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/valtostr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/valtype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/vfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/word.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/xhelp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/rtl/xsavescr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/arrays.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/arrayshb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/asort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/break.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/classes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/cmdarg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/codebloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/dlmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/dynlibhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/dynsym.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/estack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/evalhb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/extend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/extrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/fm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/garbage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/hashes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/hashfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/hvm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/hvmall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/initexit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/initsymb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/itemapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/macro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/maindllh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/maindllp/dllext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/maindllp/dllpcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/mainstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/mainwin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/memvars.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/memvclip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/pbyref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/pcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/procaddr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/pvalue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/pvaluehb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/runner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/short.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/strapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/task.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/src/vm/vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/tests/bldtest/bldtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/tests/cmdarg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/tests/dyn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/tests/extend2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/tests/gtapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/harbour-core/utils/hbtest/rt_miscc.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/3rd/sqlite3/sqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/3rd/sqlite3/sqlite3x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/gtalleg/ssf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/gtqtc/gtqtc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/gtwgu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/gtwvg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/hbgtwvw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/hbole.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbamf/amf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/bzlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbbz2/3rd/bz2/bzlib_pr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcairo/hbcairo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctstrfil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/ctwin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/_hbconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/ascii.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/asciitab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/expat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/expat_co.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/expat_ex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/iasciita.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/latin1ta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/nametab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/siphash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/utf8tab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/winconfi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmlrole.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmltok.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/3rd/expat/xmltok_i.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdf3dme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfanno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfcata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfcfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfcons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfdest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfdoc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfenco.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfencr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfency.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdferro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfexda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfextg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffond.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdffont.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfgsta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfimag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdflist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfmmgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfndic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfobje.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfoutl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfpage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfpags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfpdfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfstre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdftype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfu3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/hpdfvers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/t4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/hbhpdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/3rd/liblzf/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/3rd/liblzf/lzf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/3rd/liblzf/lzfP.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmlzo/3rd/minilzo/lzoconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmlzo/3rd/minilzo/lzodefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmlzo/3rd/minilzo/minilzo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/3rd/minixml/mxml_pri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/crypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/ioapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/unzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/zip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnetio/netio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/dhkey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbpgsql/hbpgsql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbssl/hbssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtinymt/3rd/tinymt/tinymt32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtinymt/3rd/tinymt/tinymt64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbunix/hbposix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/hbwapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/hbwin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/hbwinole.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/_hbconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/winconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xadler32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xbdiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xdiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xdiffi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xemit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xinclude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xmissing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xprepare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xtypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/hbzebra/hbzebra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/rddads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/unixutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/rddsql/hbrddsql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbcompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbfast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbnxs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbserv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/hbxml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/inet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/xhb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/extras/hbdroid/hbdroid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/clipdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/extend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hb_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapicdp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapicls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapicom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapidbg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapierr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapifs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapigt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapiitm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapilng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapirdd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbapistr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbarc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbassert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbatomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbbfish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbcdpreg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbchksum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbcomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbcompdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbdate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbdbf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbdbferr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hberrors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbexprop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbfloat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbgtcore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbgtreg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbiniseg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbinit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hblpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbmacro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbmather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbmsgreg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbpcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbrddcdx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbrdddbf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbrdddel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbrddfpt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbrddnsx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbrddntx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbrddsdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbregex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbsetup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbsocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbsxfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbtask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbtrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbtypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbvmint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbvmopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbvmpub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbwince.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbwinuni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbxvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbzlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/include/hbznet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbdossrl/serial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/com.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/irq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/irqwrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_bg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_cs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_de.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_ee.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_el.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_es.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_fr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_he.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_hr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_hu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_is.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_it.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_lt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_lv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_pl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_pt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_ro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_ru.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_sk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_sl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_sr_cyr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_sr_lat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_sv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_tr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/codepage/l_uk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/arc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtcrs/gtcrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtsln/gtsln.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtwvt/gtwvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/gtxwc/gtxwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha1hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/src/rtl/sha2hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/harbour-core/utils/hbtest/rt_main.h" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/dia_excl.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_browse.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_calend.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_clclt.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_clclt.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_filter.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_help.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_index.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_lock.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_new.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_notes.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_notes1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_selct1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/v_tools.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/vouch1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvg/tests/vr_1.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/tests/def2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/tests/dia_excl.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/tests/vouch1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/tests/vouch1.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfimage/tests/fsg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfimage/tests/italia.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfimage/tests/sample1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/conv_tst.jpg" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/d57chevy.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/d7seg.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/dbrsd.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/ddigib.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/dfdb.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/djelly.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/dodb.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/dodw.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/dpdg.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/dpdw.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/gdlogo.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/tests/imgs_in/harbour.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn0g02.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/basn6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/gray.jpg" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/maskimag.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/tests/files/rgb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/contrib/hbsqlit3/tests/pngtest.png" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/extras/hbvpdf/tests/files/color.jpg" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/extras/httpsrv/home/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/extras/httpsrv/home/images/ajax-loader.gif" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/package/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/package/harb_os2.ico" />
+    <Image Include="../../thirdparty/owemdjee/harbour-core/package/harbour.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/tests/dlg.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/harbour-core/package/harbour.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/harbour-core/src/main/harbour.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/harbour.rc" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/ChangeLog.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/README.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/addons/README.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/doc/ChangeLog.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/doc/funclist.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/doc/gtwvw.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/gtwvw/tests/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbamf/issues.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbamf/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbblat/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbblat/tests/f_listtx.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbblat/tests/f_ps.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbblat/tests/f_sampl1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbblat/tests/f_sample.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbblat/tests/f_subjct.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcomm/DEPRECATED.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/addascii.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/asciisum.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/ascpos.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/atadjust.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/atnum.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/atrepl.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charevod.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charlihb.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charlist.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charmirr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charmix.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charone.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charonly.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charop.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charophb.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charrepl.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charsort.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/charswap.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/color.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/count.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/ctc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/ctmath.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/ctmath2.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/ctpad.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/ctstr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/datetime.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/dattime2.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/dattime3.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/exponent.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/finan.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/ftoc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/justify.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/keyset.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/misc1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/num1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/numat.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/numconv.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/pos1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/pos2.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/posdiff.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/print.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/range.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/relation.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/remove.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/replace.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/screen1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/strdiff.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/strswap.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/tab.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/token1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/token2.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/trig.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/video.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/wordrepl.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/doc/en/wordtoch.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbct/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbcups/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfbird/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbfimage/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgd/doc/en/gdwrp.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbgt/doc/en/hbgt.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhpdf/3rd/libhpdf/README" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbhttpd/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/3rd/liblzf/Changes" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hblzf/3rd/liblzf/README" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/doc/en/dates.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/doc/en/fileread.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/doc/en/ht_file.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/doc/en/nconvert.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmisc/doc/en/strfmt.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmlzo/3rd/minilzo/README" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmysql/diff-en.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmysql/diff-es.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmysql/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/3rd/minizip/README" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmzip/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnetio/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/aading.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/aavg.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/acctadj.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/acctmnth.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/acctqtr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/acctweek.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/acctyear.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/adapter.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/adessort.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/aemaxlen.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/aeminlen.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/alt.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/amedian.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/anomatch.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/any2any.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/aredit.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/asum.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/at2.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/bitclr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/bitset.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/blink.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/byt2bit.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/byt2hex.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/byteand.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/byteneg.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/bytenot.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/byteor.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/bytexor.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/calendar.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/caplock.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/chdir.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/cint86.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/clrsel.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/cntryset.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/color2n.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/ctrl.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/d2e.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/datecnfg.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/dayofyr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/daytobow.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/dectobin.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/default.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/descendn.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/dfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/diskfunc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/dispc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/dispmsg.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/dosver.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/e2d.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/easter.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/elapmil.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/elapsed.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/eltime.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/findith.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/firstday.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/floptst.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/ftattr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/fttext.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/gcd.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/getenvrn.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/hex2dec.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/iamidle.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/idle.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/inp.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/invclr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/isbit.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/isbiton.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/isprint.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/isshare.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/kspeed.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/lastday.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/linked.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/madd.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/menu1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/menutonf.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/metaph.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/miltime.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/min2dhm.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/mkdir.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/month.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/mouse1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/n2color.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/netpv.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/nooccur.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/ntow.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/numlock.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/nwlstat.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/nwsem.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/nwuid.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/ontick.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/origin.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/outp.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/page.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/pchr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/peek.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/pegs.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/pending.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/pickday.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/poke.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/popadder.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/proper.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/prtesc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/prtscr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/putkey.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/pvid.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/qtr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/rand1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/reboot.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/restsets.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/rmdir.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/round.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/savearr.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/savesets.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/scancode.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/scregion.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/setdate.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/setkeys.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/setlastk.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/settime.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/shadow.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/shift.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/sinkey.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/sleep.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/sqzn.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/stod.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/sysmem.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/tbwhile.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/tempfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/vertmenu.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/vidcur.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/video1.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/vidmode.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/wda.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/week.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/workdays.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/woy.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/xbox.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbnf/doc/en/year.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbplist.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/_autogen.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.el.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.en.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.es.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.es_419.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.fr.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.gl.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.hu.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.it.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbrun/doc/hbrun.pt_BR.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbsms/DEPRECATED.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtinymt/3rd/tinymt/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtip/WARNING.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtpathy/DEPRECATED.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbtpathy/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbwin/tests/oletst2.js" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxdiff/3rd/libxdiff/xdiff.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/doc/en/binnumx.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbxpp/doc/en/dbcmdx.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/hbziparc/doc/en/ziparc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/doc/en/adsfunc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/doc/en/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/rddads/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/rddsql/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/WARNING.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/c_std.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/class_tp.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/clipper.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/cmdline.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/cmpopt.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/codebloc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/codestyl.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/destruct.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/dirstruc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/1stread.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/arrayshb.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/ati.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/binnum.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/browse.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/command.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/compiler.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/datetime.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/dbdelim.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/dbsdf.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/dbstrux.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/dir.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/dirdrive.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/diskspac.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/errsys.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/evalhb.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/file.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/garbage.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/gx.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/harbext.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/hashfunc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/hbflock.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/hbinet.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/hbtoken.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/hvm.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/idle.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/inputall.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/langall.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/left.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/macro.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/math.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/memo.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/memvar.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/menu.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/misc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/natmsg.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/objfunc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/proc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/rdd.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/rddmisc.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/rddord.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/readvar.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/sayget.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/set.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/string.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/strtran.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/subcodes.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/tbrowse.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/tclass.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/terminal.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/tlabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/transfrm.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/treport.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/typefile.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/en/var.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/gmake.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/gtapi.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/gtslang.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/hdr_tpl.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/howtorel.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/howtovcs.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/locks.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/oldnews.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/pcode.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/pp.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/pp_prg.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/pragma.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/statics.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/todo.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/tracing.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/transfrm.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/vm.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/windll.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/doc/xhb-diff.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/dbu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/gfspell/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/hbvpdf/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/hbvpdf/tests/files/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/httpsrv/home/js/ajax.js" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/httpsrv/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/ps32/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/rl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/superlib/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/extras/template/README.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/lib/3rd/win/bcc/unicows_license.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/lib/3rd/win/mingw/libunicows_license.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/harbour-wce.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/harbour-win.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/mpkg_rpm.sh" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/mpkg_rpm_wce.sh" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/mpkg_rpm_win.sh" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/mpkg_src.sh" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/mpkg_ver.sh" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/mpkg_win_nightly.bat" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/HARBOUR_README_ADDONS.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/HARBOUR_README_DJGPP.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/HARBOUR_README_MINGW.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/HARBOUR_README_MINGW64.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/HARBOUR_README_MINGWARM.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/HARBOUR_README_POCC.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/HARBOUR_README_WATCOM.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/RELNOTES.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/package/winuni/mpkg_win_uni.bat" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbdossrl/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/doc/com.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/3rd/hbpmcom/doc/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/3rd/jpeg/README" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/3rd/zlib/ChangeLog.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/3rd/zlib/README" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/compiler/harbour.y" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/debug/en.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/src/macro/macro.y" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/tests/rddtest/make_c52.bat" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/tests/rddtest/make_c53.bat" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/_autogen.txt" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.el.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.en.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.es.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.es_419.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.fr.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.gl.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.hu.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.it.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbmk2/doc/hbmk2.pt_BR.md" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbtest/make_c5x.bat" />
+    <Text Include="../../thirdparty/owemdjee/harbour-core/utils/hbtest/make_xpp.bat" />
+    <Xml Include="../../thirdparty/owemdjee/harbour-core/contrib/hbexpat/tests/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/tests/rem.xml" />
+    <Xml Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/tests/rem_err.xml" />
+    <Xml Include="../../thirdparty/owemdjee/harbour-core/contrib/hbmxml/tests/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/harbour-core/contrib/xhb/tests/test.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

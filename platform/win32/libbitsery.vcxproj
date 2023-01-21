@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libbitsery</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0CC246}</ProjectGuid>
+    <RootNamespace>libbitsery</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITSERY;BITSERY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/basic_usage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/bit_packing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/brief_syntax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/composite_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/context_usage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/file_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/forward_backward_compatibility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/inheritance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/non_default_constructible.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/raw_pointers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/examples/smart_pointers_with_polymorphism.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/brief_syntax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/data_endianness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/data_operations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/data_writing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/not_default_constructible.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_bool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_compact_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_entropy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_growable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_inheritance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_pointer_polymorphic_types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_pointer_with_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_bitset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_chrono.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_smart_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_stack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_tuple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_std_variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_ext_value_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_objects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bitsery/tests/serialization_values.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/adapter/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/adapter/measure_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/adapter/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/bitsery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/forward_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/unordered_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/unordered_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/brief_syntax/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/deserializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/details/adapter_bit_packing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/details/adapter_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/details/brief_syntax_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/details/not_defined_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/details/serialization_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/compact_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/entropy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/growable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/inheritance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_bitset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_smart_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/std_variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/utils/composite_type_overloads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/utils/memory_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/utils/pointer_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/utils/polymorphism_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/utils/rtti_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/ext/value_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/core/std_defaults.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/core/traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/forward_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/include/bitsery/traits/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bitsery/tests/serialization_test_utils.h" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/design/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/design/errors.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/design/extensions.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/design/function_n.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/design/function_overload.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/design/fundamental_types.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/design/pointers.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/reference/buf_get_error.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/reference/buf_is_completed_successfully.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/tutorial/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/tutorial/first_extension.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/doc/tutorial/hello_world.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/patches/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/scripts/show_coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/bitsery/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

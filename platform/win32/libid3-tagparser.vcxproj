@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libid3-tagparser</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF77FEE}</ProjectGuid>
+    <RootNamespace>libid3-tagparser</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBID3_TAGPARSER;ID3_TAGPARSER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/aac/aaccodebook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/aac/aacframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/abstractattachment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/abstractchapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/abstractcontainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/abstracttrack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/adts/adtsframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/adts/adtsstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/aspectratio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/av1/av1configuration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/avc/avcconfiguration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/avc/avcinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/avi/bitmapinfoheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/backuphelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/basicfileinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/diagnostics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/doc/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/flac/flacmetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/flac/flacstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/flac/flactooggmappingheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3genres.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v1tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v2frame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v2frameids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v2tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/ivf/ivfframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/ivf/ivfstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/localeawarestring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/localehelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/ebmlelement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaattachment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskachapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskacontainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskacues.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaeditionentry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaseekinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatagfield.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatagid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatrack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mediafileinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mediaformat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4atom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4container.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4ids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4tagfield.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4track.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mpeg4descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mpegaudio/mpegaudioframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/mpegaudio/mpegaudioframestream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggcontainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggiterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggpage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/opus/opusidentificationheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/progressfeedback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/signature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tagtarget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tagvalue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/mediafileinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/overallflac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/overallgeneral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/overallmkv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/overallmp3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/overallmp4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/overallogg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/tagvalue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/testfilecheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/tests/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbiscomment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbiscommentfield.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbisidentificationheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/id3-tagparser/wav/waveaudiostream.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/aac/aaccodebook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/aac/aacframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/abstractattachment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/abstractchapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/abstractcontainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/abstracttrack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/adts/adtsframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/adts/adtsstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/aspectratio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/av1/av1configuration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/avc/avcconfiguration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/avc/avcinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/avi/bitmapinfoheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/backuphelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/basicfileinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/caseinsensitivecomparer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/diagnostics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/fieldbasedtag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/flac/flacmetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/flac/flacstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/flac/flactooggmappingheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/genericcontainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/genericfileelement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/generictagfield.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3genres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v1tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v2frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v2frameids.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/id3/id3v2tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/ivf/ivfframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/ivf/ivfstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/localeawarestring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/localehelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/margin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/ebmlelement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/ebmlid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaattachment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskachapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskacontainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskacues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaeditionentry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskaseekinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatagfield.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatagid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/matroska/matroskatrack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mediafileinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mediaformat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4atom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4ids.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4tagfield.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mp4track.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mp4/mpeg4descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mpegaudio/mpegaudioframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/mpegaudio/mpegaudioframestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggcontainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggiterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggpage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/ogg/oggstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/opus/opusidentificationheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/positioninset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/progressfeedback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/signature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/tagtarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/tagtype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/tagvalue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/tests/helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/tests/overall.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbiscomment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbiscommentfield.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbiscommentids.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbisidentificationheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/vorbis/vorbispackagetypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/id3-tagparser/wav/waveaudiostream.h" />
+    <Text Include="../../thirdparty/owemdjee/id3-tagparser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/id3-tagparser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/id3-tagparser/doc/adding-new-fields.md" />
+    <Text Include="../../thirdparty/owemdjee/id3-tagparser/scripts/download_testfiles.sh" />
+    <Text Include="../../thirdparty/owemdjee/id3-tagparser/scripts/download_various_files.sh" />
+    <Text Include="../../thirdparty/owemdjee/id3-tagparser/scripts/list_required_testfiles.sh" />
+    <Text Include="../../thirdparty/owemdjee/id3-tagparser/testfiles/metadata_for_ffmpeg.txt" />
+    <Xml Include="../../thirdparty/owemdjee/id3-tagparser/testfiles/mkv/nested-tags.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
