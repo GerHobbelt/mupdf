@@ -2114,22 +2114,24 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Link_setURI
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_UNKNOWN
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_UNKNOWN 0L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT 0L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT 1L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_B
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_B 1L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_B 2L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_H
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_H 2L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_H 3L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BH
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BH 3L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BH 4L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_V
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_V 4L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_V 5L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BV
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BV 5L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_BV 6L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_R
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_R 6L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_FIT_R 7L
 #undef com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_XYZ
-#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_XYZ 7L
+#define com_artifex_mupdf_fitz_LinkDestination_LINK_DEST_XYZ 8L
 #ifdef __cplusplus
 }
 #endif
@@ -4140,6 +4142,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_setPageLabels
  */
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_deletePageLabels
   (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFDocument
+ * Method:    formatRemoteLinkURI
+ * Signature: (Lcom/artifex/mupdf/fitz/LinkDestination;Ljava/lang/String;Ljava/lang/String;Z)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_formatRemoteLinkURI
+  (JNIEnv *, jobject, jobject, jstring, jstring, jboolean);
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFDocument

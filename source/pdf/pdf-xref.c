@@ -2901,10 +2901,9 @@ pdf_resolve_link_imp(fz_context *ctx, fz_document *doc_, const char *uri)
 	return pdf_resolve_link_dest(ctx, doc, uri);
 }
 
-char *
-pdf_format_link_uri_imp(fz_context *ctx, fz_document *doc, fz_link_dest dest)
+char *pdf_format_link_uri_imp(fz_context *ctx, fz_document *doc, fz_link_dest dest)
 {
-	return pdf_format_link_uri(ctx, dest);
+	return pdf_format_link_uri(ctx, pdf_specifics(ctx, doc), dest);
 }
 
 /*
