@@ -165,6 +165,10 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :arg obj: The object to delete.
 
+.. method:: formatRemoteLinkURI(linkDestination, file, name, isURL)
+
+    Format a remote link destination object to an :title:`URI` string suitable for :ref:`createLink()<mutool_run_js_api_page_create_link>`.
+
 ----
 
 
