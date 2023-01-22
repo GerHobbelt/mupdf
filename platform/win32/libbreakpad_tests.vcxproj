@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBREAKPAD_TESTS;BREAKPAD_TESTS_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -244,6 +244,18 @@
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/unittests/minidump_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/byte_cursor_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/convert_UTF.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/bytereader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/bytereader_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/cfi_assembler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2diehandler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2diehandler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_cfi_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_die_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_lineinfo_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_splitfunctions_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/elf_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/functioninfo.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_cfi_to_module.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_cfi_to_module_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_cu_to_module.cc" />
@@ -720,7 +732,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/third_party/mac_headers/mach/vm_prot.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/third_party/musl/include/elf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/linux/md2core/minidump_memory_range.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/mac/crash_report/on_demand_symbol_supplier.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/mac/upload_system_symbols/arch_constants.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/converter/ms_symbol_server_converter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/converter_exe/escaping.h" />
@@ -734,12 +745,15 @@
     <Image Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/crash_generation_app.ico" />
     <Image Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/small.ico" />
     <ResourceCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/crash_generation_app.rc" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/breakpad/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/breakpad/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/NEWS" />
     <Text Include="../../thirdparty/owemdjee/breakpad/README.ANDROID" />
     <Text Include="../../thirdparty/owemdjee/breakpad/README.md" />
     <Text Include="../../thirdparty/owemdjee/breakpad/android/common-functions.sh" />
     <Text Include="../../thirdparty/owemdjee/breakpad/android/run-checks.sh" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/android/sample_app/README" />
     <Text Include="../../thirdparty/owemdjee/breakpad/android/test-shell.sh" />
     <Text Include="../../thirdparty/owemdjee/breakpad/autotools/ltmain.sh" />
     <Text Include="../../thirdparty/owemdjee/breakpad/breakpad-client.pc.in" />
@@ -763,9 +777,14 @@
     <Text Include="../../thirdparty/owemdjee/breakpad/src/common/android/include/asm-mips/README.md" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/common/linux/breakpad_getcontext.S" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/processor/proto/README" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_selftest_sol.s" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/README.breakpad" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/TODO" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/swig/README" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/mac_headers/README" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/musl/README" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/musl/README.breakpad" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/tools/python/deps-to-manifest.py" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/tools/python/filter_syms.py" />
@@ -779,7 +798,8 @@
     <Text Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/refresh_binaries.bat" />
     <Xml Include="../../thirdparty/owemdjee/breakpad/default.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

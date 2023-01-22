@@ -48,20 +48,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -75,7 +75,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -107,8 +107,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\freeglut\include;../../thirdparty/freeglut/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -260,6 +260,7 @@
     <Image Include="../../thirdparty/freeglut/web-src/images/tuxcake.png" />
     <ResourceCompile Include="../../thirdparty/freeglut/progs/demos/One/one.rc" />
     <Text Include="../../thirdparty/freeglut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/freeglut/ChangeLog" />
     <Text Include="../../thirdparty/freeglut/FreeGLUTConfig.cmake.in" />
     <Text Include="../../thirdparty/freeglut/README.android" />
     <Text Include="../../thirdparty/freeglut/README.blackberry" />
@@ -270,10 +271,12 @@
     <Text Include="../../thirdparty/freeglut/README.mingw_cross" />
     <Text Include="../../thirdparty/freeglut/README.win32" />
     <Text Include="../../thirdparty/freeglut/altbuild/README.md" />
+    <Text Include="../../thirdparty/freeglut/android/README" />
     <Text Include="../../thirdparty/freeglut/config.h.in" />
     <Text Include="../../thirdparty/freeglut/freeglut.pc.in" />
     <Text Include="../../thirdparty/freeglut/freeglut.rc.in" />
     <Text Include="../../thirdparty/freeglut/progs/test-shapes-gles1/CMakeLists.txt" />
+    <Text Include="../../thirdparty/freeglut/src/android/native_app_glue/README" />
     <Text Include="../../thirdparty/freeglut/src/fg_version.h.in" />
     <Text Include="../../thirdparty/freeglut/src/freeglutdll.def.in" />
     <Text Include="../../thirdparty/freeglut/test.txt" />
@@ -281,7 +284,8 @@
     <Xml Include="../../thirdparty/freeglut/progs/test-shapes-gles1/AndroidManifest.xml" />
     <Xml Include="../../thirdparty/freeglut/progs/test-shapes-gles1/ndk/AndroidManifest.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

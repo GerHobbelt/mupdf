@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIODBC;IODBC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -225,8 +225,264 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/ConfigDSN.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/ConfigDriver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/Info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/drvconn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/gtk/gensetup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/gtk/loginbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/login.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/confirm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/gensetup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/loginbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/catalog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/dlproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/execute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/fetch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/hdbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/henv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/herr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/hstmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/odbc3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/prepare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/result.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/AllocConnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/AllocEnv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/AllocHandle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/AllocStmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/BindCol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/BindParameter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/BrowseConnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/BulkOperations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Cancel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/CloseCursor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ColAttribute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ColumnPrivileges.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Columns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/CopyDesc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/DataSources.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/DescribeCol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/DescribeParam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Disconnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/DriverConnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Drivers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/EndTran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ExecDirect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Execute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ExtendedFetch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Fetch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/FetchScroll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ForeignKeys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/FreeConnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/FreeEnv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/FreeHandle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/FreeStmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetConnectAttr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetConnectOption.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetCursorName.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetData.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetDescField.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetDescRec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetDiagField.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetDiagRec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetEnvAttr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetFunctions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetStmtAttr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetStmtOption.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/GetTypeInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/MoreResults.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/NativeSql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/NumParams.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/NumResultCols.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ParamData.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ParamOptions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Prepare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/PrimaryKeys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/ProcedureColumns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Procedures.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/PutData.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/RowCount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetConnectAttr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetConnectOption.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetCursorName.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetDescField.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetDescRec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetEnvAttr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetPos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetScrollOptions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetStmtAttr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SetStmtOption.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/SpecialColumns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Statistics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/TablePrivileges.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Transact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/trace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/Info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/drvconn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/administrator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/confirm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/connectionpooling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/driverchooser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/driversetup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/dsnchooser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/errorbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/gensetup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/messagebox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/translatorchooser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/translatorchooser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/Info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLConfigDataSource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLConfigDriver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLCreateDataSource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLGetAvailableDrivers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLGetConfigMode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLGetInstalledDrivers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLGetPrivateProfileString.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLGetTranslator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLInstallDriver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLInstallDriverEx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLInstallDriverManager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLInstallODBC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLInstallTranslator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLInstallTranslatorEx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLInstallerError.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLManageDataSource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLPostInstallerError.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLReadFileDSN.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLRemoveDSNFromIni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLRemoveDefaultDataSource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLRemoveDriver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLRemoveDriverManager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLRemoveTranslator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLSetConfigMode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLValidDSN.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLWriteDSNToIni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLWriteFileDSN.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/SQLWritePrivateProfileString.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/dlf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/inifile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/iodbc_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/iodbcinst/unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/iODBC/samples/iodbctest.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/drvproxy/gtk/gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/drvproxy/gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/IODBCProxy_LoginController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/IODBCProxy_SetupController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/iodbc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/iodbcext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/iodbcinst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/iodbcunix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/isql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/isqlext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/isqltypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/macos_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/odbcinst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/sql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/sqlext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/sqltypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/include/sqlucode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/dlproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/hdbc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/hdesc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/henv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/herr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/hstmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/iodbc_misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/ithread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/itrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/proto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/trace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/iodbcadm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/Helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_DSNchooserController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_DSNmanageController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_DriverChooseDSNController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_DriverChooseFDSNController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_DrvConfigController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_DrvRemoveController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_KeyValController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_PoolConfigController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/IODBCadm_SetupController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcinst/dlf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcinst/inifile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcinst/iodbc_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcinst/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/iodbcinst/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCadministrator/AppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCadministrator64/AppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/DSNchooserController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/ExecController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/Helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/LinkTextFieldCell.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/NSAttributedStringAdditions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/NSResWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/TestController.h" />
+    <Image Include="../../thirdparty/owemdjee/iODBC/drvproxy/mac/confirm.png" />
+    <Image Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/confirm.png" />
+    <Image Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/drvchoose.png" />
+    <Image Include="../../thirdparty/owemdjee/iODBC/iodbcadm/mac/odbc.png" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/README" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/README_GIT" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/README_GIT.md" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/README_MACOSX" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/README_MACOSX.md" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/admin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/admin/libiodbc.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/admin/libiodbc.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/bin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/bin/iodbc-config.in" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/debian/README.Debian" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/drvproxy/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/drvproxy/gtk/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/etc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbc/install_libodbc.sh" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbc/trace/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbcadm/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/error.xpm" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/img.xpm" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/odbc4.xpm" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbcadm/gtk/question.xpm" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/iodbcinst/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/mac/framework-include.sh" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/mac/iODBCdemo/en.lproj/Credits.rtf" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/mac/link-inclibs.sh" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/man/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/man/iodbc-config.1.in" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/man/iodbcadm-gtk.1.in" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/man/iodbctest.1.in" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/man/iodbctestw.1.in" />
+    <Text Include="../../thirdparty/owemdjee/iODBC/samples/Makefile.am" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

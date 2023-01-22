@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBREAKPAD;BREAKPAD_STATICLIB;BUILDING_LIBBZIP2;BZIP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -235,59 +235,109 @@
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/sender/crash_report_sender.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/abstract_class.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/crash_generation_app.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/unittests/crash_generation_server_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/unittests/dump_analysis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/unittests/exception_handler_death_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/unittests/exception_handler_nesting_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/unittests/exception_handler_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/unittests/minidump_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/byte_cursor_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/convert_UTF.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/bytereader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/bytereader_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/cfi_assembler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2diehandler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2diehandler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_cfi_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_die_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_lineinfo_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/dwarf2reader_splitfunctions_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/elf_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf/functioninfo.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_cfi_to_module.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_cfi_to_module_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_cu_to_module.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_cu_to_module_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_line_to_module.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_line_to_module_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/dwarf_range_list_handler.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/language.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/long_string_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/long_string_dictionary_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/md5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/memory_allocator_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/memory_range_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/module.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/module_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/path_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/safe_math_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/simple_string_dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/simple_string_dictionary_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/stabs_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/stabs_reader_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/stabs_to_module.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/stabs_to_module_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/string_conversion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/string_conversion_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/test_assembler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/test_assembler_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/tests/file_utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/dia_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/guid_string.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/http_upload.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/omap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/omap_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/pdb_source_line_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/pe_source_line_writer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/pe_util.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/string_utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/sym_upload_v2_protocol.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/common/windows/symbol_collector_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/address_map_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/basic_code_modules.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/basic_source_line_resolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/basic_source_line_resolver_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/call_stack.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/cfi_frame_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/cfi_frame_info_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/contained_range_map_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/convert_old_arm64_context.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/disassembler_objdump.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/disassembler_objdump_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/disassembler_x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/disassembler_x86_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/dump_context.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/dump_object.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/exploitability.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/exploitability_linux.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/exploitability_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/exploitability_win.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/fast_source_line_resolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/fast_source_line_resolver_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/map_serializers_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/microdump.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/microdump_processor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/microdump_processor_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/microdump_stackwalk.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/minidump.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/minidump_dump.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/minidump_processor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/minidump_processor_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/minidump_stackwalk.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/minidump_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/module_comparer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/module_serializer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/pathname_stripper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/pathname_stripper_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/postfix_evaluator_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/proc_maps_linux.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/proc_maps_linux_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/process_state.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/range_map_truncate_lower_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/range_map_truncate_upper_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/range_map_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/simple_symbol_supplier.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/source_line_resolver_base.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stack_frame_cpu.cc" />
@@ -295,18 +345,35 @@
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalk_common.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_address_list.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_address_list_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_amd64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_amd64_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_arm.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_arm64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_arm64_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_arm_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_mips.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_mips64_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_mips_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_ppc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_ppc64.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_riscv.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_riscv64.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_riscv64_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_riscv_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_selftest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_sparc.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_x86_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/static_address_map_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/static_contained_range_map_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/static_map_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/static_range_map_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/symbolic_constants_win.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/synth_minidump.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/synth_minidump_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/testdata/linux_test_app.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/testdata/test_app.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/processor/tokenize.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/ia32_implicit.c" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/ia32_insn.c" />
@@ -330,6 +397,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/converter_exe/winhttp_client.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/converter_exe/wininet_client.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/dump_syms/dump_syms.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/dump_syms/dump_syms_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/dump_syms/testdata/dump_syms_regtest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/symupload/symupload.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/breakpad_googletest_includes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/client/apple/Framework/BreakpadDefines.h" />
@@ -662,7 +731,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/third_party/mac_headers/mach/vm_prot.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/third_party/musl/include/elf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/linux/md2core/minidump_memory_range.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/mac/crash_report/on_demand_symbol_supplier.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/mac/upload_system_symbols/arch_constants.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/converter/ms_symbol_server_converter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/converter_exe/escaping.h" />
@@ -676,12 +744,15 @@
     <Image Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/crash_generation_app.ico" />
     <Image Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/small.ico" />
     <ResourceCompile Include="../../thirdparty/owemdjee/breakpad/src/client/windows/tests/crash_generation_app/crash_generation_app.rc" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/breakpad/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/breakpad/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/NEWS" />
     <Text Include="../../thirdparty/owemdjee/breakpad/README.ANDROID" />
     <Text Include="../../thirdparty/owemdjee/breakpad/README.md" />
     <Text Include="../../thirdparty/owemdjee/breakpad/android/common-functions.sh" />
     <Text Include="../../thirdparty/owemdjee/breakpad/android/run-checks.sh" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/android/sample_app/README" />
     <Text Include="../../thirdparty/owemdjee/breakpad/android/test-shell.sh" />
     <Text Include="../../thirdparty/owemdjee/breakpad/autotools/ltmain.sh" />
     <Text Include="../../thirdparty/owemdjee/breakpad/breakpad-client.pc.in" />
@@ -705,9 +776,14 @@
     <Text Include="../../thirdparty/owemdjee/breakpad/src/common/android/include/asm-mips/README.md" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/common/linux/breakpad_getcontext.S" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/processor/proto/README" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/processor/stackwalker_selftest_sol.s" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/README.breakpad" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/TODO" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/libdisasm/swig/README" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/mac_headers/README" />
+    <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/musl/README" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/third_party/musl/README.breakpad" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/tools/python/deps-to-manifest.py" />
     <Text Include="../../thirdparty/owemdjee/breakpad/src/tools/python/filter_syms.py" />
@@ -721,7 +797,8 @@
     <Text Include="../../thirdparty/owemdjee/breakpad/src/tools/windows/refresh_binaries.bat" />
     <Xml Include="../../thirdparty/owemdjee/breakpad/default.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

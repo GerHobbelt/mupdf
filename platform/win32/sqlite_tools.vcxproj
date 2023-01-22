@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SQLITE_TOOLS;SQLITE_TOOLS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SQLITE_TOOLS;SQLITE_TOOLS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/sqlite/tsrc;../../thirdparty/owemdjee/sqlite/src;../../thirdparty/owemdjee/sqlite/sqlite/ext/recover;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SQLITE_TOOLS;SQLITE_TOOLS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/sqlite/tsrc;../../thirdparty/owemdjee/sqlite/src;../../thirdparty/owemdjee/sqlite/sqlite/ext/recover;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SQLITE_TOOLS;SQLITE_TOOLS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/sqlite/tsrc;../../thirdparty/owemdjee/sqlite/src;../../thirdparty/owemdjee/sqlite/sqlite/ext/recover;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SQLITE_TOOLS;SQLITE_TOOLS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/monolithic_tmplt;../../thirdparty/owemdjee/sqlite/tsrc;../../thirdparty/owemdjee/sqlite/src;../../thirdparty/owemdjee/sqlite/sqlite/ext/recover;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;../../scripts/zlib;../../thirdparty/zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,6 +225,17 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="pthread_lib.2019.vcxproj">
+      <Project>{c431b5c5-ff25-4450-a13c-ea3123456789}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\monolithic_main.c" />
     <ClCompile Include="..\..\thirdparty\owemdjee\sqlite-amalgamation\user_code.c" />
@@ -255,6 +266,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/autoconf/README.txt" />
     <Text Include="../../thirdparty/owemdjee/sqlite/autoconf/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/sqlite/autoconf/tea/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/sqlite/autoconf/tea/README" />
     <Text Include="../../thirdparty/owemdjee/sqlite/autoconf/tea/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/sqlite/autoconf/tea/pkgIndex.tcl.in" />
     <Text Include="../../thirdparty/owemdjee/sqlite/autoconf/tea/win/makefile.vc" />
@@ -299,6 +311,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/fts5/tool/showfts5.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/icu/README.txt" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/lsm1/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/sqlite/ext/lsm1/lsm-test/README" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/lsm1/test/lsm1_common.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/lsm1/tool/mklsm1c.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/misc/README.md" />
@@ -309,6 +322,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/repair/sqlite3_checker.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/repair/test/README.md" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/repair/test/test.tcl" />
+    <Text Include="../../thirdparty/owemdjee/sqlite/ext/rtree/README" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/rtree/rtree_perf.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/rtree/rtree_util.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/rtree/util/randomshape.tcl" />
@@ -333,7 +347,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-api-worker1.js" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-license-version-header.js" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-opfs-async-proxy.js" />
-    <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-vfs-helper.js" />
+    <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-v-helper.js" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-vfs-opfs.c-pp.js" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-worker1-promiser.js" />
     <Text Include="../../thirdparty/owemdjee/sqlite/ext/wasm/api/sqlite3-worker1.js" />
@@ -430,6 +444,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/tool/mksqlite3c.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/tool/mksqlite3h.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/tool/mksqlite3internalh.tcl" />
+    <Text Include="../../thirdparty/owemdjee/sqlite/tool/mksqliteInt_h.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/tool/mkvsix.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/tool/omittest-msvc.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlite/tool/omittest.tcl" />
@@ -457,18 +472,8 @@
     <Text Include="../../thirdparty/owemdjee/sqlite/tsrc/shell.c.in" />
     <Text Include="../../thirdparty/owemdjee/sqlite/vsixtest/vsixtest.tcl" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libsqlite_tools.vcxproj">
-      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="pthread_lib.2019.vcxproj">
-      <Project>{c431b5c5-ff25-4450-a13c-ea3123456789}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

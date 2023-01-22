@@ -111,6 +111,9 @@
     <Filter Include="Resource Files\visupng">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\arm-neon">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0035}</UniqueIdentifier>
     </Filter>
@@ -120,8 +123,17 @@
     <Filter Include="Source Files\libtests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0037}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\mips-msa">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\oss-fuzz">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0039}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\pngminus">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\powerpc-vsx">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0041}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tools">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0042}</UniqueIdentifier>
@@ -131,6 +143,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/libpng/contrib/arm-neon/android-ndk.c">
+      <Filter>Source Files\arm-neon</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/libpng/contrib/arm-neon/linux-auxv.c">
+      <Filter>Source Files\arm-neon</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/libpng/contrib/arm-neon/linux.c">
+      <Filter>Source Files\arm-neon</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/libpng/contrib/examples/iccfrompng.c">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
@@ -200,11 +221,23 @@
     <ClCompile Include="../../thirdparty/libpng/contrib/libtests/timepng.c">
       <Filter>Source Files\libtests</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/libpng/contrib/mips-msa/linux.c">
+      <Filter>Source Files\mips-msa</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/libpng/contrib/oss-fuzz/libpng_read_fuzzer.cc">
+      <Filter>Source Files\oss-fuzz</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/libpng/contrib/pngminus/png2pnm.c">
       <Filter>Source Files\pngminus</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/libpng/contrib/pngminus/pnm2png.c">
       <Filter>Source Files\pngminus</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/libpng/contrib/powerpc-vsx/linux.c">
+      <Filter>Source Files\powerpc-vsx</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/libpng/contrib/powerpc-vsx/linux_aux.c">
+      <Filter>Source Files\powerpc-vsx</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/libpng/contrib/tools/checksum-icc.c">
       <Filter>Source Files\tools</Filter>
@@ -940,3 +973,4 @@
     </Text>
   </ItemGroup>
 </Project>
+    

@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGD;GD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGD;GD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGD;GD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGD;GD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGD;GD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libgd/src;../../thirdparty/owemdjee/libgd/tests/gdtest;../../include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -298,6 +298,232 @@
     <ClCompile Include="../../thirdparty/owemdjee/libgd/src/testtr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libgd/src/wbmp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libgd/src/webpng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/avif/avif_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/avif/avif_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/avif/avif_ptr_double_free.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/avif/bad_input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/avif/compare_avif_to_png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/bmp/bmp_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/bmp/bmp_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/bmp/bug00275.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/bmp/bug00276.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/bmp/bug00450.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/fontconfig/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/freetype/bug00132.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd/bug00383.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd/gd_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd/gd_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd/gd_num_colors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd/gd_versiontest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/bug00209.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/bug00309.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/bug00354.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/bug00383.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/bug797.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/bug_289.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/createimagefromgd2part.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/createimagefromgd2partptr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/gd2_empty_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/gd2_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/gd2_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/gd2_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/gd2_read_corrupt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/php_bug_72339.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gd2/too_few_image_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdcolormaplookup/gdcolormaplookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdhelpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagearc/bug00079.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagebrightness/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageclone/bug00300.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageclone/style.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolor/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolorclosest/gdimagecolorclosest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolorclosesthwb/gdImageColorClosestHWB.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolordeallocate/gdimagecolordeallocate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolorexact/gdimagecolorexact.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolormatch/cve_2019_6977.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolormatch/gdimagecolormatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolorreplace/gdimagecolorreplace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolorresolve/gdimagecolorresolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecolortransparent/gdimagecolortransparent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecompare/gdimagecompare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecontrast/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageconvolution/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageconvolution/bug00369.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopy/bug00007.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopy/bug00081.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopymerge/gdimagecopymerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopymergegray/gdimagecopymergegray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopyresampled/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopyresampled/basic_alpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopyresampled/bug00201.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopyresampled/exact_alpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopyresized/gdimagecopyresized.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopyrotated/bug00020.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecopyrotated/bug00320.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecreate/bug00340.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecrop/bug00297.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecrop/bug00432.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecrop/bug00485_auto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecrop/bug00485_threshold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecrop/bug00486.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagecrop/php_bug_72494.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageellipse/bug00169.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefile/gdnametest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefill/bug00002_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefill/bug00002_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefill/bug00002_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefill/bug00002_4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefill/bug00104_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledarc/bug00351.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledarc/php_bug43828.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledellipse/bug00010.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledellipse/bug00169.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledellipse/bug00191.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledellipse/github_bug_00238.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledpolygon/bug00100.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledpolygon/gdimagefilledpolygon0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledpolygon/gdimagefilledpolygon1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledpolygon/gdimagefilledpolygon2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledpolygon/gdimagefilledpolygon3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledpolygon/php_bug_64641.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledpolygon/self_intersecting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledrectangle/bug00004.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledrectangle/bug00078.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilledrectangle/bug00106_gdimagefilledrectangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilltoborder/bug00037.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilltoborder/github_bug_215.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagefilter/gdCopyBlurred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageflip/gdimageflip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagegrayscale/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagegrayscale/bug00386.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/bug00072.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/bug00077.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/bug00111.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/bug00315.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/gdImageAALine_thickness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/gdimageline_aa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/gdimageline_aa_outofrange.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/gdimageline_bug5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageline/github_bug_167.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagenegate/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageopenpolygon/gdimageopenpolygon0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageopenpolygon/gdimageopenpolygon1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageopenpolygon/gdimageopenpolygon2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimageopenpolygon/gdimageopenpolygon3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagepixelate/gdimagepixelate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagepolygon/gdimagepolygon0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagepolygon/gdimagepolygon1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagepolygon/gdimagepolygon2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagepolygon/gdimagepolygon3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerectangle/bug00003.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerectangle/bug00106_gdimagerectangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerectangle/bug00299.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerectangle/github_bug_00172.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerectangle/point_ordering.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerotate/bug00067.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerotate/php_bug_64898.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagerotate/php_bug_65070.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagescale/bug00329.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagescale/bug00330.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagescale/bug_overflow_large_new_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagescale/github_bug_00218.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagescatterex/bug00208_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagescatterex/bug00208_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagesetinterpolationmethod/github_bug_00584.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagesetpixel/alpha_blending.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagesetpixel/bug00186.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagesetpixel/gdeffectmultiply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagesetpixel/gdeffectoverlay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagesquaretocircle/gdimagesquaretocircle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagestring/gdimagestring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagestring16/gdimagestring16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagestringft/bug00615.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagestringft/gdimagestringft_bbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagestringftex/gdimagestringftex_returnfontpathname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagestringup/gdimagestringup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagestringup16/gdimagestringup16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagetruecolortopalette/bug00307.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagetruecolortopalette/php_bug_67325.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdimagetruecolortopalette/php_bug_72512.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdinterpolatedscale/gdModesAndPalettes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdinterpolatedscale/gdTrivialResize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdmatrix/bug00402.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdnewfilectx/gdnewfilectx_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtest/gdtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtest/readdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtiled/bug00032.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtransformaffineboundingbox/github_bug_00221.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtransformaffinecopy/github_bug_00583.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtransformaffinecopy/github_bug_00585.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtransformaffinecopy/github_bug_00586.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gdtransformaffinecopy/github_bug_00596.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00005.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00005_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00006.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00060.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00066.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00181.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00227.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00415.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/bug00499.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/gif_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/gif_nocolormaps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/gif_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/ossfuzz5700.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/php_bug_75571.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/gif/uninitialized_memory_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/heif/avif_ptr_double_free.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/heif/bug788.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/heif/heif_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/heif/heif_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/heif/heif_ptr_double_free.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/heif/heif_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/bug00338.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/bug_github_18.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/jpeg_empty_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/jpeg_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/jpeg_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/jpeg_ptr_double_free.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/jpeg_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/jpeg/jpeg_resolution.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00011.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00033.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00086.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00088.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00193.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00338.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00381_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/bug00381_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/png_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/png_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/png/png_resolution.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/bug00084.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/bug00247.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/bug00247a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/bug00248.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/bug00248a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/heap_overflow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/tga_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tga/tga_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tiff/tiff_dpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tiff/tiff_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tiff/tiff_invalid_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tiff/tiff_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/tiff/tiff_read_bw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/wbmp/wbmp_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/wbmp/wbmp_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/webp/bug00111.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/webp/bug_double_free.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/webp/gdImageWebpEx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/webp/webp_ll_im2im.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/xbm/github_bug_109.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/xbm/github_bug_170.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/xbm/github_bug_501.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/xbm/x10_basic_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/xpm/bug00166.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/xpm/bug00185.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libgd/tests/xpm/color_name.c" />
     <ClInclude Include="../../thirdparty/owemdjee/libgd/src/bmp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libgd/src/entities.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libgd/src/gd.h" />
@@ -469,10 +695,12 @@
     <Image Include="../../thirdparty/owemdjee/libgd/tests/webp/bug_double_free.jpg" />
     <Image Include="../../thirdparty/owemdjee/libgd/tests/xbm/github_bug_109_exp.png" />
     <Image Include="../../thirdparty/owemdjee/libgd/tests/xbm/x10_basic_read_exp.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libgd/windows/libgd.rc" />
     <Text Include="../../thirdparty/owemdjee/libgd/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/libgd/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libgd/CODE_OF_CONDUCT.md" />
     <Text Include="../../thirdparty/owemdjee/libgd/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libgd/CONTRIBUTORS" />
     <Text Include="../../thirdparty/owemdjee/libgd/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libgd/README.md" />
     <Text Include="../../thirdparty/owemdjee/libgd/SECURITY.md" />
@@ -669,7 +897,8 @@
     <Text Include="../../thirdparty/owemdjee/libgd/windows/readme.md" />
     <Text Include="../../thirdparty/owemdjee/libgd/windows/run_tests.bat" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

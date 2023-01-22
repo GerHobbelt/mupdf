@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../thirdparty/libjpeg;../../scripts/libjpeg;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../thirdparty/libjpeg;../../scripts/libjpeg;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../thirdparty/libjpeg;../../scripts/libjpeg;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_XL;JPEG_XL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../thirdparty/owemdjee/jpeg-xl;../../thirdparty/owemdjee/jpeg-xl/third_party/highway;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/libpng;../../thirdparty/lcms2/include;../../thirdparty/owemdjee/OpenEXR/OpenEXR/IlmImf;../../thirdparty/owemdjee/jpeg-xl/third_party/lodepng;../../thirdparty/owemdjee/opencv/include/opencv2;../../thirdparty/owemdjee/opencv/modules/highgui/include/opencv2;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../scripts/OpenCV;../../thirdparty/libjpeg;../../scripts/libjpeg;../../scripts/libgflags/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -571,6 +571,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/file-jxl-load.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/file-jxl-save.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/color_management/sRGB-D2700.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/c/common/constants.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/c/common/context.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/c/common/dictionary.h" />
@@ -974,6 +975,92 @@
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/wasm_demo/jxl_decoder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/wasm_demo/jxl_decompressor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/jpeg-xl/tools/wasm_demo/no_png.h" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/dots/ellipses.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/ccwn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/ccwn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/ct1n0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/ctjn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/ctzn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/exif2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/g04n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/g10n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/DJI-FC6310-16bit_709_v4_krita.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/DJI-FC6310-16bit_srgb8_v4_krita.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/Google-Pixel2XL-16bit_acescg_g1_v4_krita.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/Google-Pixel2XL-16bit_srgb8_v4_krita.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/HUAWEI-EVA-L09-16bit_709_g1_dt.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/HUAWEI-EVA-L09-16bit_srgb8_dt.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/Nikon-D300-12bit_2020_g1_dt.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/Nikon-D300-12bit_srgb8_dt.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/Sony-DSC-RX1RM2-14bit_709_v4_krita.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/Sony-DSC-RX1RM2-14bit_srgb8_v4_krita.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/500px/cvo9xd_keong_macan_grayscale.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/500px/cvo9xd_keong_macan_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/500px/tmshre_riaphotographs_alpha.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/500px/tmshre_riaphotographs_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/500px/u76c0g_bliznaca_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/Nikon-D3-14bit_2020_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/Nikon-D3-14bit_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/a2d1un_nkitzmiller_2020_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/a2d1un_nkitzmiller_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/cvo9xd_keong_macan_2020_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/cvo9xd_keong_macan_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/l1qnb5_nkitzmiller_2020_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/l1qnb5_nkitzmiller_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/phu1or_alfann24_2020_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/phu1or_alfann24_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/q3a0b3_d17ws_709_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/q3a0b3_d17ws_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/ra0ed45_alfann24_709_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/ra0ed45_alfann24_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/t0gho7_orlaustral_709_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/t0gho7_orlaustral_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/tmshre_riaphotographs_709_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/tmshre_riaphotographs_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/u76c0g_bliznaca_709_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/u76c0g_bliznaca_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/vgqcws_vin_709_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/64px/vgqcws_vin_srgb8.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/P3-sRGB-blue.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/P3-sRGB-color-bars.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/P3-sRGB-color-ring.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/P3-sRGB-green.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/P3-sRGB-red.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/R2020-sRGB-blue.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/R2020-sRGB-color-bars.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/R2020-sRGB-color-ring.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/R2020-sRGB-green.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/R2020-sRGB-red.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/rgb-to-gbr-test.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/animation_patches.gif" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/blending/cropped_traffic_light_frame-0.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/blending/cropped_traffic_light_frame-1.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/blending/cropped_traffic_light_frame-2.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/blending/cropped_traffic_light_frame-3.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_420.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_420_R13B.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_420_progr.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_422.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_440.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_444.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_444_1x2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_asymmetric.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_gray.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_luma_subsample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_rgb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower.png.im_q85_rgb_subsample_blue.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower_alpha.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower_cropped.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower_small.q85_420_non_interleaved.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower_small.q85_420_partially_interleaved.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower_small.q85_444_non_interleaved.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/flower_small.q85_444_partially_interleaved.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/grayscale_patches.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/hdr_room.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/jpeg_reconstruction/1x1_exif_xmp.jpg" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/spline_on_first_frame.png" />
+    <Image Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/traffic_light.gif" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/research/img/enwik9_brotli.png" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/research/img/enwik9_diff.png" />
     <Image Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/research/img/enwik9_opt.png" />
@@ -1214,6 +1301,7 @@
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/developing_in_windows_msys.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/developing_in_windows_vcpkg.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/developing_with_crossroad.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/encode_effort.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/format_overview.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/fuzzing.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/doc/man/cjxl.txt" />
@@ -1272,6 +1360,23 @@
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/plugins/gimp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/plugins/mime/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/plugins/mime/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/PngSuite.README" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/pngsuite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/raw.pixls/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wesaturate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/external/wide-gamut-tests/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/generate.md" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/non_interleaved_scan.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/jxl/flower/partially_interleaved_scan.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/position_encoding/bike_dots.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/position_encoding/keong_dots.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/position_encoding/non_square.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/position_encoding/repeated_dots.txt" />
+    <Text Include="../../thirdparty/owemdjee/jpeg-xl/testdata/position_encoding/woman_dots.txt" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/HEVCSoftware/README.md" />
     <Text Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/CMakeLists.txt" />
@@ -1776,7 +1881,8 @@
     <Xml Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/java/org/brotli/integration/pom.xml" />
     <Xml Include="../../thirdparty/owemdjee/jpeg-xl/third_party/brotli/java/org/brotli/pom.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

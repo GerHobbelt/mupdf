@@ -51,20 +51,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -103,7 +103,7 @@
     <CustomBuildAfterTargets>
     </CustomBuildAfterTargets>
   </PropertyGroup>
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -135,8 +135,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTESSERACT;TESSERACT_STATICLIB;HAVE_TESSERACT_CONFIG_H;HAVE_MUPDF;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;DEBUG</PreprocessorDefinitions>
@@ -353,6 +353,16 @@
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixneon.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/intsimdmatrixsse.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/arch/simddetect.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_dotproduct.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_dotproductavx.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_dotproductfma.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_dotproductneon.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_dotproductsse.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_intsimdmatrix.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_intsimdmatrixavx2.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_intsimdmatrixneon.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_intsimdmatrixsse.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/arch_sse/sse_simddetect.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccmain/adaptions.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccmain/applybox.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/ccmain/control.cpp" />
@@ -478,6 +488,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/dict/permdawg.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/stopper.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/trie.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/fmt/src/format.cc" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/convolve.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/fullyconnected.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/functions.cpp" />
@@ -495,6 +506,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/series.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/stridemap.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/tfnetwork.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/lstm/tfnetwork.pb.cc" />
     <ClCompile Include="../../thirdparty/tesseract/src/lstm/weightmatrix.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/opencl/openclwrapper.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/svpaint.cpp" />
@@ -606,6 +618,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/tface.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/wordclass.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/wordrec/wordrec.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/sw.cpp" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/assert.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/baseapi.h" />
     <ClInclude Include="../../thirdparty/tesseract/include/tesseract/capi.h" />
@@ -888,6 +901,7 @@
     <Image Include="../../thirdparty/tesseract/test/testing/phototest-rotated-R.png" />
     <Text Include="../../thirdparty/tesseract/CMakeLists.txt" />
     <Text Include="../../thirdparty/tesseract/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/tesseract/ChangeLog" />
     <Text Include="../../thirdparty/tesseract/INSTALL.GIT.md" />
     <Text Include="../../thirdparty/tesseract/Makefile.am" />
     <Text Include="../../thirdparty/tesseract/README.md" />
@@ -943,7 +957,8 @@
     <Text Include="../../thirdparty/tesseract/unittest/README.md" />
     <Text Include="../../thirdparty/tesseract/unittest/fuzzers/oss-fuzz-build.sh" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

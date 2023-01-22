@@ -47,20 +47,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -106,8 +106,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/dirent/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -279,6 +279,7 @@
     <ClInclude Include="../../thirdparty/freetype/src/autofit/aftypes.h" />
     <ClInclude Include="../../thirdparty/freetype/src/autofit/afws-decl.h" />
     <ClInclude Include="../../thirdparty/freetype/src/autofit/afws-iter.h" />
+    <ClInclude Include="../../thirdparty/freetype/src/autofit/ft-hb.h" />
     <ClInclude Include="../../thirdparty/freetype/src/base/ftbase.h" />
     <ClInclude Include="../../thirdparty/freetype/src/base/md5.h" />
     <ClInclude Include="../../thirdparty/freetype/src/bdf/bdf.h" />
@@ -428,8 +429,10 @@
     <ResourceCompile Include="../../thirdparty/freetype/src/base/ftver.rc" />
     <Text Include="../../thirdparty/freetype/CMakeLists.txt" />
     <Text Include="../../thirdparty/freetype/LICENSE.TXT" />
+    <Text Include="../../thirdparty/freetype/README" />
     <Text Include="../../thirdparty/freetype/README.git" />
     <Text Include="../../thirdparty/freetype/autogen.sh" />
+    <Text Include="../../thirdparty/freetype/builds/amiga/README" />
     <Text Include="../../thirdparty/freetype/builds/atari/README.TXT" />
     <Text Include="../../thirdparty/freetype/builds/atari/gen-purec-patch.sh" />
     <Text Include="../../thirdparty/freetype/builds/cmake/testbuild.sh" />
@@ -437,6 +440,7 @@
     <Text Include="../../thirdparty/freetype/builds/mac/FreeType.m68k_far.make.txt" />
     <Text Include="../../thirdparty/freetype/builds/mac/FreeType.ppc_carbon.make.txt" />
     <Text Include="../../thirdparty/freetype/builds/mac/FreeType.ppc_classic.make.txt" />
+    <Text Include="../../thirdparty/freetype/builds/mac/README" />
     <Text Include="../../thirdparty/freetype/builds/mac/ascii2mpw.py" />
     <Text Include="../../thirdparty/freetype/builds/meson/extract_freetype_version.py" />
     <Text Include="../../thirdparty/freetype/builds/meson/extract_libtool_version.py" />
@@ -448,8 +452,11 @@
     <Text Include="../../thirdparty/freetype/builds/unix/ftconfig.h.in" />
     <Text Include="../../thirdparty/freetype/builds/unix/unix-cc.in" />
     <Text Include="../../thirdparty/freetype/builds/unix/unix-def.in" />
+    <Text Include="../../thirdparty/freetype/docs/CHANGES" />
     <Text Include="../../thirdparty/freetype/docs/FTL.TXT" />
     <Text Include="../../thirdparty/freetype/docs/GPLv2.TXT" />
+    <Text Include="../../thirdparty/freetype/docs/README" />
+    <Text Include="../../thirdparty/freetype/docs/TODO" />
     <Text Include="../../thirdparty/freetype/docs/VERSIONS.TXT" />
     <Text Include="../../thirdparty/freetype/docs/formats.txt" />
     <Text Include="../../thirdparty/freetype/docs/markdown/javascripts/extra.js" />
@@ -466,16 +473,22 @@
     <Text Include="../../thirdparty/freetype/docs/oldlogs/ChangeLog.29" />
     <Text Include="../../thirdparty/freetype/docs/raster.txt" />
     <Text Include="../../thirdparty/freetype/meson_options.txt" />
+    <Text Include="../../thirdparty/freetype/objs/README" />
+    <Text Include="../../thirdparty/freetype/src/bdf/README" />
+    <Text Include="../../thirdparty/freetype/src/gxvalid/README" />
     <Text Include="../../thirdparty/freetype/src/gzip/README.freetype" />
+    <Text Include="../../thirdparty/freetype/src/pcf/README" />
     <Text Include="../../thirdparty/freetype/src/tools/chktrcmp.py" />
     <Text Include="../../thirdparty/freetype/src/tools/cordic.py" />
+    <Text Include="../../thirdparty/freetype/src/tools/ftrandom/README" />
     <Text Include="../../thirdparty/freetype/src/tools/glnames.py" />
     <Text Include="../../thirdparty/freetype/src/tools/make_distribution_archives.py" />
     <Text Include="../../thirdparty/freetype/tests/README.md" />
     <Text Include="../../thirdparty/freetype/tests/scripts/download-test-fonts.py" />
     <Xml Include="../../thirdparty/freetype/builds/mac/ftlib.prj.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

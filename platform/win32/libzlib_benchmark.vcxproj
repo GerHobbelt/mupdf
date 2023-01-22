@@ -165,6 +165,17 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libgbenchmark.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/zlib/test/benchmarks/benchmark_adler32.cc" />
     <ClCompile Include="../../thirdparty/zlib/test/benchmarks/benchmark_adler32_copy.cc" />
     <ClCompile Include="../../thirdparty/zlib/test/benchmarks/benchmark_compare256.cc" />
@@ -177,6 +188,7 @@
     <ClInclude Include="../../thirdparty/zlib/adler32_p.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/arm/arm_features.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/arm/ctzl.h" />
+    <ClInclude Include="../../thirdparty/zlib/arch/arm/neon_intrins.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/generic/chunk_permute_table.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/power/crc32_constants.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/power/fallback_builtins.h" />
@@ -214,13 +226,12 @@
     <ClInclude Include="../../thirdparty/zlib/insert_string_tpl.h" />
     <ClInclude Include="../../thirdparty/zlib/match_tpl.h" />
     <ClInclude Include="../../thirdparty/zlib/test/benchmarks/benchmark_png_shared.h" />
+    <ClInclude Include="../../thirdparty/zlib/test/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/zlib/test/test_shared.h" />
+    <ClInclude Include="../../thirdparty/zlib/test/test_shared_ng.h" />
     <ClInclude Include="../../thirdparty/zlib/trees.h" />
     <ClInclude Include="../../thirdparty/zlib/trees_emit.h" />
     <ClInclude Include="../../thirdparty/zlib/trees_tbl.h" />
-    <ClInclude Include="../../thirdparty/zlib/wx/zconf-ng.h" />
-    <ClInclude Include="../../thirdparty/zlib/wx/zconf.h" />
-    <ClInclude Include="../../thirdparty/zlib/wx/zlib-ng.h" />
     <ClInclude Include="../../thirdparty/zlib/wx/zlib_name_mangling-ng.h" />
     <ClInclude Include="../../thirdparty/zlib/zbuild.h" />
     <ClInclude Include="../../thirdparty/zlib/zendian.h" />
@@ -228,7 +239,6 @@
     <ClInclude Include="../../thirdparty/zlib/zutil_p.h" />
     <Image Include="../../thirdparty/zlib/test/data/fireworks.jpg" />
     <ResourceCompile Include="../../thirdparty/zlib/win32/zlib-ng1.rc" />
-    <Text Include="../../thirdparty/zlib/win32/zlib1.rc" />
     <Text Include="../../thirdparty/zlib/CMakeLists.txt" />
     <Text Include="../../thirdparty/zlib/INDEX.md" />
     <Text Include="../../thirdparty/zlib/LICENSE.md" />
@@ -275,17 +285,6 @@
     <Text Include="../../thirdparty/zlib/zlib.pc.in" />
     <Text Include="../../thirdparty/zlib/zlib_name_mangling-ng.h.in" />
     <Text Include="../../thirdparty/zlib/zlib_name_mangling.h.in" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libgbenchmark.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff6fa4e9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libpng.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libzlib.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -51,20 +51,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -78,7 +78,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,8 +110,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Custom</Optimization>
@@ -207,7 +207,305 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\fitz\tessocr.h" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/adaptmap_dark.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/adaptmap_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/adaptnorm_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/affine_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/alltests_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/alphaops_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/alphaxform_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/arabic_lines.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/arithtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/autogen.137.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/autogentest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/autogentest2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/barcodetest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/baseline_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/bilateral1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/bilateral2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/bilinear_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binarize_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binarize_set.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binarizefiles.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/bincompare.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binmorph1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binmorph2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binmorph3_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binmorph4_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binmorph5_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/binmorph6_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/blackwhite_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/blend1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/blend2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/blend3_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/blend4_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/blend5_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/blendcmaptest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/boxa1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/boxa2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/boxa3_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/boxa4_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/buffertest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/bytea_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/ccbord_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/ccbordtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/cctest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/ccthin1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/ccthin2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/checkerboard_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/circle_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/cleanpdf.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/cmapquant_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colorcontent_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colorfill_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/coloring_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colorize_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colormask_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colormorph_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colorquant_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colorseg_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colorsegtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/colorspace_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/compare_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/comparepages.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/comparepixa.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/comparetest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/compfilter_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/concatpdf.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/conncomp_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/contrasttest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/conversion_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/convertfilestopdf.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/convertfilestops.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/convertformat.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/convertsegfilestopdf.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/convertsegfilestops.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/converttogray.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/converttopdf.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/converttops.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/convolve_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/cornertest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/corrupttest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/crop_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/croptext.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/deskew_it.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dewarp_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dewarprules.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dewarptest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dewarptest2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dewarptest3.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dewarptest4.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dewarptest5.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/digitprep1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/displayboxa.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/displayboxes_on_pixa.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/displaypix.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/displaypixa.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/distance_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dither_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dna_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dwalinear.3.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dwalineargen.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dwalinearlow.3.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dwamorph1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/dwamorph2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/edge_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/encoding_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/enhance_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/equal_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/expand_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/extrema_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/falsecolor_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fcombautogen.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fhmtauto_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fhmtautogen.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fileinfo.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/files_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/find_colorregions.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/findbinding.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/findcorners_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/findpattern1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/findpattern2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/findpattern3.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/findpattern_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/flipdetect_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fmorphauto_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fmorphautogen.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fpix1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fpix2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/fpixcontours.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/gammatest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/genfonts_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/gifio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/graphicstest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/grayfill_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/graymorph1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/graymorph2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/graymorphtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/grayquant_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/hardlight_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/hash_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/hashtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/heap_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/histoduptest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/histotest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/htmlviewer.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/imagetops.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/insert_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/ioformats_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/iomisc_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/italic_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/jbclass_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/jbcorrelation.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/jbrankhaus.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/jbwords.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/jp2kio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/jpegio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/kernel_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/label_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/lightcolortest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/lineremoval_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/listtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/livre_adapt.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/livre_hmt.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/livre_makefigs.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/livre_orient.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/livre_pageseg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/livre_seedgen.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/livre_tophat.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/locminmax_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/logicops_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/lowaccess_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/lowsat_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/maketile.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/maptest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/maze_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/messagetest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/misctest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/modifyhuesat.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/morphseq_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/morphtest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/mtiff_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/multitype_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/nearline_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/newspaper_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/numa1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/numa2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/numa3_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/numaranktest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/otsutest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/otsutest2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/overlap_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pageseg_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pagesegtest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pagesegtest2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/paint_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/paintmask_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/partifytest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/partitiontest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pdfio1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pdfio2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pdfseg_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/percolatetest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixa1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixa2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixaatest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixadisp_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixafileinfo.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixalloc_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixcomp_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixmem_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixserial_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pixtile_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/plottest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pngio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pnmio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/printimage.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/printsplitimage.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/printtiff.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/projection_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/projective_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/psio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/psioseg_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/pta_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/ptra1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/ptra2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/quadtree_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rank_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rankbin_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rankhisto_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rasterop_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rasteropip_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rasteroptest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rbtreetest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recog_bootnum1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recog_bootnum2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recog_bootnum3.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogsort.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogtest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogtest2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogtest3.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogtest4.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogtest5.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogtest6.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/recogtest7.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rectangle_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/reducetest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/removecmap.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/renderfonts.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/replacebytes.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rotate1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rotate2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rotate_it.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rotatefastalt.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rotateorth_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rotateorthtest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/rotatetest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/runlengthtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/scale_it.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/scale_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/scaleandtile.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/scaletest1.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/scaletest2.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/seedfilltest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/seedspread_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/selio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/settest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/sharptest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/shear1_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/shear2_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/sheartest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/showedges.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/skew_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/skewtest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/smallpix_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/smoothedge_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/sorttest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/speckle_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/splitcomp_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/splitimage2pdf.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/string_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/subpixel_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/sudokutest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/textorient.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/texturefill_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/threshnorm_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/tiffpdftest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/translate_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/trctest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/underlinetest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/warper_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/warpertest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/watershed_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/webpanimio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/webpio_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/wordboxes_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/wordsinorder.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/writemtiff.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/writetext_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/xformbox_reg.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/xtractprotos.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/yuvtest.c" />
     <ClCompile Include="../../thirdparty/leptonica/src/adaptmap.c" />
     <ClCompile Include="../../thirdparty/leptonica/src/affine.c" />
     <ClCompile Include="../../thirdparty/leptonica/src/affinecompose.c" />
@@ -387,6 +685,7 @@
     <ClCompile Include="../../thirdparty/leptonica/src/writefile.c" />
     <ClCompile Include="../../thirdparty/leptonica/src/zlibmem.c" />
     <ClCompile Include="../../thirdparty/leptonica/src/zlibmemstub.c" />
+    <ClCompile Include="../../thirdparty/leptonica/sw.cpp" />
     <ClInclude Include="../../thirdparty/leptonica/prog/autogen.137.h" />
     <ClInclude Include="../../thirdparty/leptonica/src/allheaders.h" />
     <ClInclude Include="../../thirdparty/leptonica/src/alltypes.h" />
@@ -640,7 +939,8 @@
     <Text Include="../../thirdparty/leptonica/src/stringtemplate2.txt" />
     <Text Include="../../thirdparty/leptonica/style-guide.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

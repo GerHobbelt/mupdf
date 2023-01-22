@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibtool/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibtool/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibtool/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBIBTOOL;BIBTOOL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bibtool/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -231,11 +231,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/binding.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/boolean.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/crecord.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/db.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/function.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/list.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/number.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\bibtool\cmd\class\crecord.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/class/string.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/lcore.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/cmd/linereader.c" />
@@ -268,7 +268,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/fileregex.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/g++malloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/iregex.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\bibtool\regex-0.12\test\testmain.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/malloc-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/other.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/printchar.c" />
@@ -279,6 +278,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-interf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/psx-interv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/testmain.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/tregress.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/upcase.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/xmalloc.c" />
@@ -289,8 +289,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/com_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/commands.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/eval_term.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/selterm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/select/tagged.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\bibtool\select\selterm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/stack.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/symbols.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bibtool/tex_aux.c" />
@@ -371,23 +371,30 @@
     <Text Include="../../thirdparty/owemdjee/bibtool/AutoConf/makefile.in" />
     <Text Include="../../thirdparty/owemdjee/bibtool/AutoConf/reconfig.h.in" />
     <Text Include="../../thirdparty/owemdjee/bibtool/BibTcl/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/BibTcl/README" />
     <Text Include="../../thirdparty/owemdjee/bibtool/BibTcl/configure.in" />
     <Text Include="../../thirdparty/owemdjee/bibtool/BibTcl/main.tcl" />
     <Text Include="../../thirdparty/owemdjee/bibtool/Changes.tex" />
     <Text Include="../../thirdparty/owemdjee/bibtool/MSDOS/link.msc" />
     <Text Include="../../thirdparty/owemdjee/bibtool/README.md" />
     <Text Include="../../thirdparty/owemdjee/bibtool/Tcl/bibtool.tcl" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/ToDo" />
     <Text Include="../../thirdparty/owemdjee/bibtool/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/bibtool/html/lib/Changes.lh" />
     <Text Include="../../thirdparty/owemdjee/bibtool/html/profile/site.js" />
     <Text Include="../../thirdparty/owemdjee/bibtool/makefile.unx" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/README" />
     <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/configure.in" />
     <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/bibtool/regex-0.12/test/Makefile.in" />
     <Text Include="../../thirdparty/owemdjee/bibtool/select/commands.y" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

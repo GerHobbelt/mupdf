@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFORT;FORT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,14 +124,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libfort/lib;../../thirdparty/owemdjee/libfort/src;../../thirdparty/owemdjee/libfort/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFORT;FORT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFORT;FORT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libfort/lib;../../thirdparty/owemdjee/libfort/src;../../thirdparty/owemdjee/libfort/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFORT;FORT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libfort/lib;../../thirdparty/owemdjee/libfort/src;../../thirdparty/owemdjee/libfort/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,14 +179,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libfort/lib;../../thirdparty/owemdjee/libfort/src;../../thirdparty/owemdjee/libfort/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFORT;FORT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFORT;FORT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libfort/lib;../../thirdparty/owemdjee/libfort/src;../../thirdparty/owemdjee/libfort/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFORT;FORT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libfort/lib;../../thirdparty/owemdjee/libfort/src;../../thirdparty/owemdjee/libfort/tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -226,22 +226,21 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\examples\1-simple_table_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/1-simple_table.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\examples\2-custom_table_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/1-simple_table_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/2-custom_table.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\examples\3-complex_layout_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/2-custom_table_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/3-complex_layout.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\examples\4-fill_table_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/3-complex_layout_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/4-fill_table.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\examples\5-beautiful_table_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/4-fill_table_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/5-beautiful_table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/5-beautiful_table_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/6-print_styles.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/7-custom_border_style.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/8-math_table.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\examples\9-non_ascii_table_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/9-non_ascii_table.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libfort/lib/fort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/examples/9-non_ascii_table_c.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/src/cell.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/src/fort_impl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/src/fort_utils.c" />
@@ -251,8 +250,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/libfort/src/table.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/src/vector.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/src/wcwidth.c" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\tests\add_subdirectory_tests\subdir_foo-app.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\tests\add_subdirectory_tests\subdir_foo-lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/add_subdirectory_tests/subdir_foo-app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/add_subdirectory_tests/subdir_foo-lib.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/bb_tests/test_error_codes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/bb_tests/test_memory_errors.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/bb_tests/test_table_basic.c" />
@@ -262,16 +261,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/bb_tests_cpp/test_table_properties.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/main_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/main_test_cpp.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\tests\package_tests\pkg_foo-app.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\libfort\tests\package_tests\pkg_foo-lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/package_tests/pkg_foo-app.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/package_tests/pkg_foo-lib.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/test_utils.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/test_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/tests.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/wb_tests/test_string_buffer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/wb_tests/test_table_geometry.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libfort/tests/wb_tests/test_vector.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libfort/lib/fort.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libfort/lib/fort.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libfort/src/cell.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libfort/src/fort.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libfort/src/fort.hpp" />
@@ -293,7 +290,6 @@
     <Text Include="../../thirdparty/owemdjee/libfort/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/libfort/ChangeLog.md" />
     <Text Include="../../thirdparty/owemdjee/libfort/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libfort/amalgamate.py" />
     <Text Include="../../thirdparty/owemdjee/libfort/cmake/libfort-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libfort/docs/conf.py" />
     <Text Include="../../thirdparty/owemdjee/libfort/docs/index.md" />
@@ -311,14 +307,14 @@
     <Text Include="../../thirdparty/owemdjee/libfort/docs/tutorial/C_API/Table-life-cycle.md" />
     <Text Include="../../thirdparty/owemdjee/libfort/docs/tutorial/Tutorial.md" />
     <Text Include="../../thirdparty/owemdjee/libfort/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libfort/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libfort/lib/libfort.pc.in" />
     <Text Include="../../thirdparty/owemdjee/libfort/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libfort/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libfort/tests/add_subdirectory_tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libfort/tests/package_tests/CMakeLists.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQLITEODBC;SQLITEODBC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -225,8 +225,76 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  
-  <ImportGroup Label="PropertySheets">
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/SQLiteODBCInstaller.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/adddsn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/blobtoxy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/csvtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/fixup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/impexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/inst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/mkopc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/mkopc3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqlite+tcc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqlite3odbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqlite4odbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqliteodbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/tccex/obench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/tccex/samplext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/tccex/sbench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/tccex/sqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/tccex/sqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/xpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sqliteodbc/zipfile.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqliteodbc/impexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqliteodbc/missing/ini.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqliteodbc/missing/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqliteodbc/resourceos2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqliteodbc/sqlite3odbc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqliteodbc/sqlite4odbc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sqliteodbc/sqliteodbc.h" />
+    <Image Include="../../thirdparty/owemdjee/sqliteodbc/osx/diskimage/odbc_connection_config.png" />
+    <Image Include="../../thirdparty/owemdjee/sqliteodbc/osx/diskimage/odbc_driver_config.png" />
+    <Image Include="../../thirdparty/owemdjee/sqliteodbc/osx/odbc_driver_config.png" />
+    <Image Include="../../thirdparty/owemdjee/sqliteodbc/sqlite.ico" />
+    <Image Include="../../thirdparty/owemdjee/sqliteodbc/sqliteodbc.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/adddsn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/blobtoxy.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/csvtable.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/impexp.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/inst.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqlite3odbc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqlite4odbc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqliteodbc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/sqliteodbcos2.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/xpath.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/sqliteodbc/zipfile.rc" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/README" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/README.OS2" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/README.ic" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/README.sqlite+tcc" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/debian/changelog.in" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/drvdsninst.sh" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/drvdsnuninst.sh" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/mingw-cross-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/mingw64-cross-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/mkall.sh" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/osx/NOTES-N9YTY.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/osx/diskimage/README-OSX.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/osx/diskimage/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/osx/make_package.sh" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/resource.h.in" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/sqliteodbc.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/tccex/README.bench" />
+    <Text Include="../../thirdparty/owemdjee/sqliteodbc/tccex/a10n/README.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

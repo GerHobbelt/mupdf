@@ -281,7 +281,7 @@ if (projname.endsWith("_DLL")) {
 
 if (projname.startsWith("libboost-")) {
 	let tst_projname = projname.replace(/^libboost-/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/boost/boost/${tst_projname}`;
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/boost/libs/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
@@ -364,6 +364,7 @@ const projectMap = {
 	"libyaml-tests": "libyaml",
 	"libtiff_contribs": "libtiff/contrib",
 	"libpng_contribs": "libpng/contrib",
+	"libmupdf": "../../source;../../include",
 	"uberlogger": "uberlog",
 	"uberlog_test": "uberlog",
 	"filesystem_tests_exception": "filesystem/test",

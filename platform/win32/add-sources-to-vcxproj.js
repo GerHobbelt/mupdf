@@ -1,5 +1,5 @@
 ﻿//
-// add C/C++ source files to a vcxproj file & vcxproj.filter file
+// add C/C++ source files to a vcxproj file & vcxproj.filters file
 // 
 // usage: run as
 //
@@ -77,10 +77,34 @@ function xmlEncode(path) {
 	});
 }
 
-let ignores = [];
+let ignores = [
+	'thirdparty/',
+	'third_party/',
+	'owemdjee/',
+	'3rd/',
+];
+
+let filepath = process.argv[2];
+if (!fs.existsSync(filepath)) {
+    console.error("must specify valid vcxproj file");
+    console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
+    process.exit(1);
+}
+
 let rawIgnoresPath = process.argv[4] || '';
+if (rawIgnoresPath.trim() === '') {
+	rawIgnoresPath = filepath.replace(/\.vcxproj/, '.ignore_paths.lst');
+	console.error({rawIgnoresPath})
+	if (!fs.existsSync(rawIgnoresPath)) {
+		rawIgnoresPath = '';
+	}
+}
 if (rawIgnoresPath.trim() !== '') {
   let ignoresPath = unixify(path.resolve(rawIgnoresPath));
+  if (!fs.existsSync(ignoresPath)) {
+    console.error(`ERROR: user-specified ignores list file "${ignoresPath}" does not exist or is not a file.`);
+    process.exit(1);
+  }
   ignores = fs.readFileSync(ignoresPath, 'utf8').split('\n')
   .map((line) => line.trim())
   // filter out commented lines in the ignore spec
@@ -107,12 +131,6 @@ const globConfig = Object.assign({}, globDefaultOptions, {
 });
 
 
-let filepath = process.argv[2];
-if (!fs.existsSync(filepath)) {
-    console.error("must specify valid vcxproj file");
-    console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
-    process.exit(1);
-}
 let src = fs.readFileSync(filepath, 'utf8');
 
 let filterSrc = '';
@@ -167,11 +185,13 @@ function isSpecialMiscFile(f) {
 
 let ignoreCount = 0;
 
+console.error({globConfig, ignores})
 let pathWithWildCards = '*';
 glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   if (err) {
     throw new Error(`glob scan error: ${err}`);
   }
+  console.error({files})
 
   let filterDirs = new Set();
 
