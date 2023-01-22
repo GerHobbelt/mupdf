@@ -1,5 +1,5 @@
 #
-# ignore any files which havea path that includes any of these:
+# ignore any files which have a path that includes any of these:
 #
 
 /test/
