@@ -6860,6 +6860,30 @@ static void ffi_PDFDocument_deletePageLabels(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_PDFDocument_formatRemoteLinkURI(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	fz_link_dest dest = ffi_tolinkdest(J, 1);
+	const char *file = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
+	const char *name = js_iscoercible(J, 3) ? js_tostring(J, 3) : NULL;
+	int is_url = js_isdefined(J, 4) ? js_toboolean(J, 4) : 0;
+	char *uri = NULL;
+
+	fz_try(ctx)
+		uri = pdf_format_remote_link_uri(ctx, pdf, file, is_url, name, dest);
+	fz_catch(ctx)
+		rethrow(J);
+
+	if (js_try(J)) {
+		fz_free(ctx, uri);
+		js_throw(J);
+	}
+	js_pushstring(J, uri);
+	js_endtry(J);
+	fz_free(ctx, uri);
+}
+
 static void ffi_PDFGraftMap_graftObject(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -9946,6 +9970,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "PDFDocument.addFont", ffi_PDFDocument_addFont, 1);
 		jsB_propfun(J, "PDFDocument.addImage", ffi_PDFDocument_addImage, 1);
 		jsB_propfun(J, "PDFDocument.loadImage", ffi_PDFDocument_loadImage, 1);
+		jsB_propfun(J, "PDFDocument.formatRemoteLinkURI", ffi_PDFDocument_formatRemoteLinkURI, 1);
 
 		jsB_propfun(J, "PDFDocument.addEmbeddedFile", ffi_PDFDocument_addEmbeddedFile, 6);
 		jsB_propfun(J, "PDFDocument.getEmbeddedFileParams", ffi_PDFDocument_getEmbeddedFileParams, 1);

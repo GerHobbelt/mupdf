@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -29,14 +29,15 @@ import java.lang.Float;
 public class LinkDestination extends Location
 {
 	/* Destinations, keep in sync with FZ_LINK_DEST_* */
-	@Native public static final int LINK_DEST_FIT = 0;
-	@Native public static final int LINK_DEST_FIT_B = 1;
-	@Native public static final int LINK_DEST_FIT_H = 2;
-	@Native public static final int LINK_DEST_FIT_BH = 3;
-	@Native public static final int LINK_DEST_FIT_V = 4;
-	@Native public static final int LINK_DEST_FIT_BV = 5;
-	@Native public static final int LINK_DEST_FIT_R = 6;
-	@Native public static final int LINK_DEST_XYZ = 7;
+	@Native public static final int LINK_DEST_UNKNOWN = 0;
+	@Native public static final int LINK_DEST_FIT = 1;
+	@Native public static final int LINK_DEST_FIT_B = 2;
+	@Native public static final int LINK_DEST_FIT_H = 3;
+	@Native public static final int LINK_DEST_FIT_BH = 4;
+	@Native public static final int LINK_DEST_FIT_V = 5;
+	@Native public static final int LINK_DEST_FIT_BV = 6;
+	@Native public static final int LINK_DEST_FIT_R = 7;
+	@Native public static final int LINK_DEST_XYZ = 8;
 
 	public int type;
 	public float x;

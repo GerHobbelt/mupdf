@@ -265,7 +265,8 @@ fz_link_dest pdf_resolve_link_dest(fz_context *ctx, pdf_document *doc, const cha
 /*
 	Create a destination object given an internal link URI.
 */
-pdf_obj *pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri);
+pdf_obj *pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri, char **file);
+pdf_obj *pdf_new_destination_from_dest(fz_context *ctx, pdf_document *doc, fz_link_dest dest, int is_remote);
 
 /*
 	Create an action object given a link URI. The action will
@@ -283,13 +284,16 @@ pdf_obj *pdf_new_action_from_link(fz_context *ctx, pdf_document *doc, const char
 
 	The resulting string must be freed by the caller.
 */
-char *pdf_format_link_uri(fz_context *ctx, fz_link_dest dest);
+char *pdf_format_link_uri(fz_context *ctx, pdf_document *doc, fz_link_dest dest);
+char *pdf_format_remote_link_uri(fz_context *ctx, pdf_document *doc, const char *file, int is_url, const char *name, fz_link_dest dest);
+
+pdf_obj *pdf_new_filespec(fz_context *ctx, pdf_document *doc, const char *file, pdf_obj *embedded_file);
 
 /*
 	Parse an internal link URI that uses the Adobe specification
 	"parameters for opening PDF files".
 */
-fz_link_dest pdf_parse_link_uri(fz_context *ctx, const char *uri);
+fz_link_dest pdf_parse_link_uri(fz_context *ctx, const char *uri, char **file, char **name);
 
 /*
 	Create transform to fit appearance stream to annotation Rect
@@ -843,7 +847,8 @@ fz_buffer *pdf_load_embedded_file_contents(fz_context *ctx, pdf_obj *fs);
 */
 int pdf_verify_embedded_file_checksum(fz_context *ctx, pdf_obj *fs);
 
-char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *obj);
+char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *dest);
+char *pdf_parse_link_dest_to_file(fz_context *ctx, pdf_document *doc, const char *file, int is_url, pdf_obj *dest);
 char *pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *obj, int pagenum);
 pdf_obj *pdf_lookup_dest(fz_context *ctx, pdf_document *doc, pdf_obj *needle);
 fz_link *pdf_load_link_annots(fz_context *ctx, pdf_document *, pdf_page *, pdf_obj *annots, int pagenum, fz_matrix page_ctm);
