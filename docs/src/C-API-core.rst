@@ -12,7 +12,7 @@ Almost all functions in the :title:`MuPDF` library take a ``fz_context`` structu
 
 
 The :title:`Fitz` Context
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 
 .. note::
@@ -43,7 +43,7 @@ Here is the code to create a :title:`Fitz` context. The first two arguments are 
 
 
 Error Handling
-~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 :title:`MuPDF` uses a ``setjmp`` based exception handling system. This is encapsulated by the use of three macros: ``fz_try``, ``fz_always``, and ``fz_catch``. When an error is raised by ``fz_throw``, or re-raised by ``fz_rethrow``, execution will jump to the enclosing always/catch block.
 
@@ -102,7 +102,7 @@ Throwing a new exception can be done with ``fz_throw``. Passing an exception alo
 
 
 Memory Allocation
-~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 You should not need to do raw memory allocation using the :title:`Fitz` context, but if you do, here are the functions you need. These work just like the regular :title:`C` functions, but take a :title:`Fitz` context and throw an exception if the allocation fails. They will **not** return ``NULL``; either they will succeed or they will throw an exception.
 
@@ -128,7 +128,7 @@ In the rare case that you need an allocation that returns ``NULL`` on failure, t
 
 
 Pool Allocator
-~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 The pool allocator is used for allocating many small objects that live and die together. All objects allocated from the pool will be freed when the pool is freed.
 
@@ -144,14 +144,14 @@ The pool allocator is used for allocating many small objects that live and die t
 
 
 Reference Counting
-~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 Most objects in :title:`MuPDF` use reference counting to keep track of when they are no longer used and can be freed. We use the verbs "keep" and "drop" to increment and decrement the reference count. For simplicity, we also use the word "drop" for non-reference counted objects (so that in case we change our minds and decide to add reference counting to an object, the code that uses it need not change).
 
 
 
 Hash Table
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 We have a generic hash table structure with fixed length keys.
 
@@ -182,7 +182,7 @@ The keys and values are not reference counted by the hash table. Callers are res
 
 
 Binary Tree
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 The ``fz_tree`` structure is a self-balancing binary tree that maps text strings to values.
 
@@ -211,7 +211,7 @@ There is no constructor for this structure, since there is no containing root st
 
 
 :title:`XML` Parser
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 We have a rudimentary :title:`XML` parser that handles well formed :title:`XML`. It does not do any namespace processing, and it does not validate the :title:`XML` syntax.
 
@@ -259,7 +259,7 @@ If ``preserve_white`` is *false*, we will discard all *whitespace-only* text ele
 
 
 String Functions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 All text strings in :title:`MuPDF` use the ``UTF-8`` encoding. The following functions encode and decode ``UTF-8`` characters, and return the number of bytes used by the ``UTF-8`` character (at most ``FZ_UTFMAX``).
 
@@ -296,7 +296,7 @@ There are also a couple of functions to process filenames and :title:`URLs`:
 
 
 String Formatting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 Our ``printf`` family handles the common ``printf`` formatting characters, with a few minor differences. We also support several non-standard formatting characters. The same ``printf`` syntax is used in the ``printf`` functions in the :title:`I/O` module as well.
 
@@ -337,7 +337,7 @@ Our ``printf`` family handles the common ``printf`` formatting characters, with 
 
 
 Math Functions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 We obviously need to deal with lots of points, rectangles, and transformations in :title:`MuPDF`.
 

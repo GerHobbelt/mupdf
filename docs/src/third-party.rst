@@ -9,10 +9,10 @@
    :keywords: MuPDF, pdf, epub
 
 
-Third Party Libraries Used by MuPDF
-==========================================
+Third Party Libraries Used by :title:`MuPDF`
+==================================================
 
-These are the third party libraries used by MuPDF.
+These are the third party libraries used by :title:`MuPDF`.
 
 
 .. list-table::
@@ -83,7 +83,7 @@ These are the third party libraries used by MuPDF.
 
 .. note::
 
-   jbig2dec_ and MuJS_ are included in "thirdparty" but are copyright Artifex Software Inc.
+   jbig2dec_ and MuJS_ are included in "thirdparty" but are copyright :title:`Artifex Software Inc`.
 
 
 

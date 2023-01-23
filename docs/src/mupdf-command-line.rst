@@ -19,8 +19,8 @@
 :title:`MuPDF` has few command line options available:
 
 - :ref:`mupdf-gl<mupdf_command_line_mupdf_gl>` A handy viewer UI.
-- :ref:`muraster<mupdf_command_line_muraster>` Can be used to convert PDF pages to raster images.
-- :ref:`mutool<mupdf_command_line_mutool>` An all purpose tool for dealing with PDF files. Used in conjunction with the :ref:`mutool JavaScript API<mupdf_command_line_mutool_js_api>`
+- :ref:`muraster<mupdf_command_line_muraster>` Can be used to convert :title:`PDF` pages to raster images.
+- :ref:`mutool<mupdf_command_line_mutool>` An all purpose tool for dealing with :title:`PDF` files. Used in conjunction with the :ref:`mutool JavaScript API<mupdf_command_line_mutool_js_api>`
 
 .. _mupdf_command_line_mupdf_gl:
 
@@ -29,7 +29,7 @@
 ---------------------
 
 
-The OpenGL based viewer can read :title:`PDF`, :title:`XPS`, :title:`CBZ`, :title:`EPUB`, & :title:`FB2` documents as well as typical image formats including :title:`SVG`. It compiles on any platform that has a GLUT_ library. The latest release builds on Linux, Windows, and MacOS.
+The :title:`OpenGL` based viewer can read :title:`PDF`, :title:`XPS`, :title:`CBZ`, :title:`EPUB`, & :title:`FB2` documents as well as typical image formats including :title:`SVG`. It compiles on any platform that has a GLUT_ library. The latest release builds on :title:`Linux`, :title:`Windows`, and :title:`MacOS`.
 
 
 
@@ -49,7 +49,7 @@ Command Line Options
    ``-p`` password
       The password needed to open a password protected :title:`PDF` file.
    ``-r`` resolution
-      Set the initial zoom level, specified as DPI. The default value is 72.
+      Set the initial zoom level, specified as DPI. The default value is ``72``.
    ``-W`` width
       Set the page width in points for :title:`EPUB` layout.
    ``-H`` height
@@ -75,9 +75,9 @@ Command Line Options
    ``-I``
       Start in inverted color mode.
    ``-B`` hex-color
-      Set black tint color (default 303030).
+      Set black tint color (default ``303030``).
    ``-C`` hex-color
-      Set white tint color (default FFFFF0).
+      Set white tint color (default ``FFFFF0``).
    ``-Y`` factor
       Set UI scaling factor (default calculated from screen DPI).
 
@@ -189,7 +189,7 @@ Several commands can take a number argument entered before the key, to modify th
      - Rotate counter-clockwise.
    * - **]**
      - Rotate clockwise.
-   * - **[arrows]** or **h**, **j**, **k**, **l**
+   * - **⬅️➡️⬆️⬇️** or **h**, **j**, **k**, **l**
      - Pan page in small increments.
 
 
