@@ -353,6 +353,7 @@ const projectMap = {
 	"libjpeg-xl-test": "jpeg-xl",
 	"libcxxtest_catch2_2_gtest": "cxxtest_catch_2_gtest",
 	"otl-ml": "OptimizationTemplateLibrary",
+	"gperf": "gperf-hash",
 	"manticore": "manticoresearch",
 	"libharfbuzz_tests": "harfbuzz",
 	"libopenjpeg_tools": "openjpeg",

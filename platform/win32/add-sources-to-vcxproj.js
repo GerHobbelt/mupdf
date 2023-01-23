@@ -33,12 +33,13 @@ const globDefaultOptions = {
   noprocess: false,
   absolute: false,
   maxLength: Infinity,
-  cache: {},
-  statCache: {},
-  symlinks: {},
+  //cache: {},
+  //statCache: {},
+  //symlinks: {},
   cwd: null,    // changed to, during the scan
   root: null,
-  nomount: false
+  nomount: false,
+  sync: true
 };
 
 
@@ -77,13 +78,6 @@ function xmlEncode(path) {
 	});
 }
 
-let ignores = [
-	'thirdparty/',
-	'third_party/',
-	'owemdjee/',
-	'3rd/',
-];
-
 let filepath = process.argv[2];
 if (!fs.existsSync(filepath)) {
     console.error("must specify valid vcxproj file");
@@ -91,44 +85,97 @@ if (!fs.existsSync(filepath)) {
     process.exit(1);
 }
 
-let rawIgnoresPath = process.argv[4] || '';
-if (rawIgnoresPath.trim() === '') {
-	rawIgnoresPath = filepath.replace(/\.vcxproj/, '.ignore_paths.lst');
-	console.error({rawIgnoresPath})
-	if (!fs.existsSync(rawIgnoresPath)) {
-		rawIgnoresPath = '';
-	}
+let spec = {
+	nasm_or_masm: 0,   // 0: auto; -1: masm; +1: nasm
+	ignores: [
+		'/thirdparty/',
+		'/third_party/',
+		'/3rd_party/',
+		'/owemdjee/',
+		'/3rd/',
+	],
+	sources: [],
+	directories: [],
+};
+
+let specPath = filepath.replace(/\.vcxproj/, '.spec');
+if (fs.existsSync(specPath)) {
+  if (DEBUG > 0) console.error("read .spec file:", {specPath, content: fs.readFileSync(specPath, 'utf8') })
+  let rawSpec = fs.readFileSync(specPath, 'utf8').split('\n')
+  .map((line) => line.trimEnd().replace(/\t/g, '    '))
+  // filter out commented lines in the ignore spec
+  .filter((line) => line.trim().length > 0 && !/^[#;]/.test(line))
+  .join('\n');
+
+  rawSpec = '\n' + rawSpec + '\n';
+  
+  if (DEBUG > 1) console.error("RAW PREPROC'D SPEC [START]:", {rawSpec, spec});
+  
+  if (/^NASM/im.test(rawSpec))
+	  spec.nasm_or_masm = 1;
+  else if (/^MASM/im.test(rawSpec))
+	  spec.nasm_or_masm = -1;
+
+  if (/^ignore:/m.test(rawSpec)) {
+    if (DEBUG > 0) console.log("SPEC include [ignore] section...");
+    spec.ignores = rawSpec.replace(/^.*\nignore:(.*?)\n(?:[^\s].*)?$/s, '$1')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.trim().length > 0);
+  }
+
+  if (/^sources:/m.test(rawSpec)) {
+    if (DEBUG > 0) console.log("SPEC include [sources] section...");
+    spec.sources = rawSpec.replace(/^.*\nsources:(.*?)\n(?:[^\s].*)?$/s, '$1')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.trim().length > 0);
+  }
+
+  if (/^directories:/m.test(rawSpec)) {
+    if (DEBUG > 0) console.log("SPEC include [directories] section...");
+    spec.directories = rawSpec.replace(/^.*\ndirectories:(.*?)\n(?:[^\s].*)?$/s, '$1')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.trim().length > 0);
+  }
+
+  if (DEBUG > 0) console.error("PROC'D SPEC [DONE]:", {rawSpec, spec});
 }
+
+let rawIgnoresPath = process.argv[4] || '';
 if (rawIgnoresPath.trim() !== '') {
   let ignoresPath = unixify(path.resolve(rawIgnoresPath));
   if (!fs.existsSync(ignoresPath)) {
     console.error(`ERROR: user-specified ignores list file "${ignoresPath}" does not exist or is not a file.`);
     process.exit(1);
   }
-  ignores = fs.readFileSync(ignoresPath, 'utf8').split('\n')
+  spec.ignores = fs.readFileSync(ignoresPath, 'utf8').split('\n')
   .map((line) => line.trim())
   // filter out commented lines in the ignore spec
   .filter((line) => line.length > 0 && !/^[#;]/.test(line));
 
-  console.log('Will ignore any paths which include: ', ignores);
+  console.info('Will ignore any paths which include: ', spec.ignores);
 }
 
-let rawSourcesPath = process.argv[3];
-if (!rawSourcesPath) {
-  console.error("Missing sources directory argument");
-  console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
-  process.exit(1);
+let rawSourcesPath = process.argv[3] || '';
+if (DEBUG > 2) console.error({argv: process.argv, rawSourcesPath})
+if (rawSourcesPath.trim() === '') {
+	if (spec.sources.length + spec.directories.length === 0) {
+	  console.error("Missing sources directory argument or spec file.");
+	  console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
+	  process.exit(1);
+	}
 }
-let sourcesPath = unixify(path.resolve(rawSourcesPath));
-if (!fs.existsSync(sourcesPath)) {
-    console.error("must specify valid sources directory argument");
-    console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
-    process.exit(1);
+else {
+	let pa = rawSourcesPath
+	.split(';')
+	.map((line) => line.trim());
+
+	spec.directories.push(...pa);
 }
-const globConfig = Object.assign({}, globDefaultOptions, {
-  nodir: false,
-  cwd: sourcesPath
-});
+
+if (DEBUG > 2) console.error({spec})
 
 
 let src = fs.readFileSync(filepath, 'utf8');
@@ -171,7 +218,7 @@ function isSpecialMiscFile(f) {
   let name = path.basename(f);
   if (specialFilenameRes.length === 0) {
     for (let i = 0, len = specialFilenames.length; i < len; i++) {
-      let mre = new RegExp(specialFilenames[i], 'i');
+      let mre = new RegExp(`${ specialFilenames[i] }$`, 'i');
       specialFilenameRes[i] = mre;
     }
   }
@@ -183,26 +230,62 @@ function isSpecialMiscFile(f) {
   return false;
 }
 
-let ignoreCount = 0;
 
-console.error({globConfig, ignores})
-let pathWithWildCards = '*';
-glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
-  if (err) {
-    throw new Error(`glob scan error: ${err}`);
-  }
-  console.error({files})
+let ignoreCount = 0;
+let addedCount = 0;
+
+let fsrc1_arr = [];
+let fsrc2_arr = [];
+
+if (DEBUG > 2) console.error({spec})
+
+// turn all ignores[] into regexes:
+spec.ignores = spec.ignores
+.map(f => {
+	// we use the next heuristic to detect 'literal paths' instead of regexes: when the path does not
+	// contain any special regex char (except '.') then it's a literal filename; 
+	// when does not start with a '/' we assume it's an *entire* directory or file name, i.e.
+	// 'ger.c' would then not be meant to match 'bugger.c'...
+	if (!/[()\[\]?:*+{}]/.test(f)) {
+		// convert to regex format:
+		f = f.replace(/[.]/g, '[.]');
+
+		if (!f.startsWith('/')) {
+			f = '[/]' + f;
+		}
+	}
+
+	// when ignore path starts with '/' it means to match from start of (reduced) file path!
+	if (f.startsWith('/')) {
+		f = '^' + f;
+	}
+	
+	if (DEBUG > 1) console.error("'ignore' line half-way through conversion to regex:", {f})
+	
+	let re = new RegExp(f);
+	
+	return re;
+});
+
+if (DEBUG > 1) console.error({spec})
+
+
+
+function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
+  if (DEBUG > 2) console.error("process_glob_list:", {files, sourcesPath, is_dir, spec})
 
   let filterDirs = new Set();
 
   let a = files.map((f) => {
+    if (DEBUG > 2) console.error("files.map:", {f, dst: f.replace(sourcesPath + '/', ''), sourcesPath })
     return f.replace(sourcesPath + '/', '');
   })
   .filter((f) => {
-    if (ignores.length > 0) {
-      for (const spec of ignores) {
-        if (f.includes(spec)) {
-          //console.log('IGNORE: testing:', f, {spec});
+    let f4f = '/' + f;	  
+    if (spec.ignores.length > 0) {
+      for (const sp of spec.ignores) {
+        if (sp.test(f4f)) {
+          if (DEBUG > 1) console.log('IGNORE:', {f, f4f, sp});
           ignoreCount++;
           return false;
         }
@@ -212,6 +295,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     return true;
   })
   .filter((f) => {
+    if (DEBUG > 2) console.error("files.filter:", {f})
     let base;
     switch (path.extname(f).toLowerCase()) {
     case '.c':
@@ -238,6 +322,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
     case '.cppcode':
     case '.csv':
     case '.gcc':
+    case '.gperf':
     case '.htcpp':
     case '.in':
     case '.js':
@@ -341,9 +426,11 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   let extraFilters = [];
   let m = filterSrc;            // scratchpad: add new slots as we create them to prevent duplicate new entries
   let fcnt = 0;
+  if (DEBUG > 3) console.error("filterDirs:", {filterDirs})
   for (let item of Array.from(filterDirs.keys()).sort().values()) {
     item = item.replace(/\//g, '\\');
     do {
+      if (DEBUG > 3) console.error("item -- dir build-up:", {item})
       if (!m.includes(`<Filter Include="${xmlEncode(item)}">`)) {
         fcnt++;
         let cntstr = '' + fcnt;
@@ -388,6 +475,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Misc Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <Text Include="${xmlEncode(f)}">
@@ -418,6 +506,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Source Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <ClCompile Include="${xmlEncode(f)}">
@@ -450,6 +539,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Header Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <ClInclude Include="${xmlEncode(f)}">
@@ -476,6 +566,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Resource Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <ResourceCompile Include="${xmlEncode(f)}">
@@ -506,6 +597,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Resource Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <Image Include="${xmlEncode(f)}">
@@ -534,6 +626,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Resource Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <Font Include="${xmlEncode(f)}">
@@ -562,6 +655,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Resource Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <Text Include="${xmlEncode(f)}">
@@ -588,6 +682,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Source Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <NASM Include="${xmlEncode(f)}">
@@ -615,6 +710,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Resource Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <None Include="${xmlEncode(f)}">
@@ -641,6 +737,7 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
             base = 'Misc Files';
         }
         base = base.replace(/\//g, '\\');
+        if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
         slot = `
     <Xml Include="${xmlEncode(f)}">
@@ -668,40 +765,86 @@ glob(pathWithWildCards, globConfig, function processGlobResults(err, files) {
   <ItemGroup>
     ${ filesToAdd.join('\n') }
   </ItemGroup>
-</Project>
     `;
   
   let fsrc1 = `
   <ItemGroup>
     ${ filesToAddToProj.join('\n') }
   </ItemGroup>
-</Project>
     `;
-  
+
   //console.error({files, a, sourcesPath, extraFilters, filesToAdd, fsrc1, fsrc2});
+  addedCount += a.length;
 
-  filterSrc = filterSrc.replace(/<\/Project>[\s\r\n]*$/, fsrc2)
-  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '')
-  // and trim out empty lines:
-  .replace(/[\s\r\n]+\n/g, '\n');
+  fsrc1_arr.push(fsrc1);
+  fsrc2_arr.push(fsrc2);
+}
 
-  src = src.replace(/[\s\r\n]<\/Project>[\s\r\n]*$/, fsrc1)
-  .replace(/<ItemGroup>[\s\r\n]*<\/ItemGroup>/g, '')
-  // fix ProjectDependencies: MSVC2019 is quite critical about whitespace around the UUID:
-  .replace(/<Project>[\s\r\n]+[{]/g, '<Project>{')
-  .replace(/[}][\s\r\n]+<\/Project>/g, '}</Project>')
-  // and trim out empty lines:
-  .replace(/[\s\r\n]+\n/g, '\n');
 
-  fs.writeFileSync(filepath, src, 'utf8');
-  fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
 
-  if (ignores.length > 0) {
-    console.log("Added", a.length, "entries. (", ignoreCount, " files IGNORED due to IgnoreSpec.)");
-  } else {
-    console.log("Added", a.length, "entries.");
-  }
-});
+function process_path(rawSourcesPath, is_dir) {
+
+	if (DEBUG > 1) console.error("process_path RAW:", {rawSourcesPath});
+	while (/\/[^.\/][^\/]*\/\.\.\//.test(rawSourcesPath)) {
+		rawSourcesPath = rawSourcesPath.replace(/\/[^.\/][^\/]*\/\.\.\//, '/')
+	}
+	
+	let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
+	if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath});
+	if (!fs.existsSync(sourcesPath)) {
+	    console.error("Non-existing path specified:", sourcesPath);
+	    process.exit(1);
+	}
+
+	const globConfig = Object.assign({}, globDefaultOptions, {
+	  nodir: !is_dir,
+	  cwd: is_dir ? sourcesPath : path.basedir(sourcesPath)
+	});
+
+	let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
+	if (DEBUG > 2) console.error("process_path GLOB:", {pathWithWildCards, globConfig, cwd: globConfig.cwd, is_dir});
+
+	let files_rec = glob(pathWithWildCards, globConfig);
+	if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir});
+	process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
+}
+
+
+
+
+for (let f of spec.sources) {
+	process_path(f, false);
+}
+for (let f of spec.directories) {
+	process_path(f, true);
+}
+
+	
+filterSrc = filterSrc.replace(/<\/Project>[\s\r\n]*$/, fsrc2_arr.join('\n') + `
+</Project>
+`)
+.replace(/<ItemGroup>[\s\r\n]*?<\/ItemGroup>/g, '')
+// and trim out empty lines:
+.replace(/[\s\r\n]+\n/g, '\n');
+
+src = src.replace(/[\s\r\n]<\/Project>[\s\r\n]*$/, fsrc1_arr.join('\n') + `
+</Project>
+`)
+.replace(/<ItemGroup>[\s\r\n]*?<\/ItemGroup>/g, '')
+// fix ProjectDependencies: MSVC2019 is quite critical about whitespace around the UUID:
+.replace(/<Project>[\s\r\n]+[{]/g, '<Project>{')
+.replace(/[}][\s\r\n]+<\/Project>/g, '}</Project>')
+// and trim out empty lines:
+.replace(/[\s\r\n]+\n/g, '\n');
+
+fs.writeFileSync(filepath, src, 'utf8');
+fs.writeFileSync(filterFilepath, filterSrc, 'utf8');
+
+if (spec.ignores.length > 0) {
+console.info("Added", addedCount, "entries. (", ignoreCount, " files IGNORED due to IgnoreSpec.)");
+} else {
+console.info("Added", addedCount, "entries.");
+}
 
 
 
