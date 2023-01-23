@@ -151,11 +151,11 @@ if (projname.endsWith("_tools")) {
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
-	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+	testpath = `${scriptpath}/../../thirdparty/${tool_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
-	testpath = `${scriptpath}/../../thirdparty/lib${tst_projname}`;
+	testpath = `${scriptpath}/../../thirdparty/lib${tool_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
