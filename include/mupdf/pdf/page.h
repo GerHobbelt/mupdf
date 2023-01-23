@@ -25,7 +25,7 @@
 
 #include "mupdf/pdf/interpret.h"
 
-#if FZ_ENABLE_RENDER_CORE 
+#if FZ_ENABLE_PDF 
 
 #ifdef __cplusplus
 extern "C" {

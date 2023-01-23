@@ -22,7 +22,10 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "pixmap-imp.h"
+#include "image-imp.h"
 
 #include <jbig2.h>
 
@@ -233,3 +236,5 @@ fz_load_jbig2_info(fz_context *ctx, const unsigned char *buf, size_t len, int *w
 {
 	fz_load_jbig2_info_subimage(ctx, buf, len, wp, hp, xresp, yresp, cspacep, 0);
 }
+
+#endif

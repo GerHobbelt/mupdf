@@ -29,6 +29,8 @@ typedef struct fz_color_converter fz_color_converter;
 
 /* Color management engine */
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #if FZ_ENABLE_ICC
 
 /*
@@ -115,6 +117,6 @@ void fz_fast_any_to_alpha(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst,
 void fz_convert_fast_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst, int copy_spots);
 void fz_convert_slow_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst, fz_colorspace *prf, fz_color_params params, int copy_spots);
 
-
+#endif
 
 #endif

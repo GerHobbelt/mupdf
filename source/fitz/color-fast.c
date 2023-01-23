@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "color-imp.h"
 
 #include <math.h>
@@ -1728,3 +1730,5 @@ fz_convert_fast_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap 
 slow:
 	fz_convert_slow_pixmap_samples(ctx, src, dst, NULL, fz_default_color_params, copy_spots);
 }
+
+#endif

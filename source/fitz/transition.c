@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include <string.h>
 
 /*
@@ -223,3 +225,5 @@ int fz_generate_transition(fz_context *ctx, fz_pixmap *tpix, fz_pixmap *opix, fz
 		}
 	}
 }
+
+#endif

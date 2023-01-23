@@ -22,14 +22,14 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "color-imp.h"
 #include "draw-imp.h"
 #include "pixmap-imp.h"
 
 #include "mupdf/assertions.h"
 #include <math.h>
-
-#if FZ_ENABLE_RENDER_CORE 
 
 enum { MAXN = 2 + FZ_MAX_COLORS };
 

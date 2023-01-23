@@ -21,14 +21,15 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "draw-imp.h"
 #include "glyph-imp.h"
 #include "pixmap-imp.h"
 
 #include <string.h>
 #include <math.h>
-
-#if FZ_ENABLE_RENDER_CORE 
 
 #define MAX_GLYPH_SIZE 256
 #define MAX_CACHE_SIZE (1024*1024)

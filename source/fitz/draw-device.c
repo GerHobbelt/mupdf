@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "context-imp.h"
 #include "color-imp.h"
 #include "draw-imp.h"
@@ -32,8 +34,6 @@
 #include "mupdf/assertions.h"
 #include <math.h>
 #include <float.h>
-
-#if FZ_ENABLE_RENDER_CORE 
 
 #define STACK_SIZE 96
 

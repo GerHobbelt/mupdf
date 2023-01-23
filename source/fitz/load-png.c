@@ -22,7 +22,10 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "pixmap-imp.h"
+#include "image-imp.h"
 #include "z-imp.h"
 
 #include <limits.h>
@@ -698,3 +701,5 @@ fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp,
 	*xresp = png.xres;
 	*yresp = png.xres;
 }
+
+#endif

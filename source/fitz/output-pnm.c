@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 /*
  * Write pixmap to PNM file (without alpha channel)
  */
@@ -394,3 +396,5 @@ fz_save_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, const char *file
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif

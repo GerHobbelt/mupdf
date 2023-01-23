@@ -73,6 +73,7 @@ fz_load_webp_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen,
 
 fz_pixmap *
 fz_load_webp(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
+{
 	fz_throw(ctx, FZ_ERROR_GENERIC, "WebP codec not available");
 }
 

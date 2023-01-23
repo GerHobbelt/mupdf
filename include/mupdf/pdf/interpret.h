@@ -27,7 +27,7 @@
 #include "mupdf/pdf/resource.h"
 #include "mupdf/pdf/document.h"
 
-#if FZ_ENABLE_RENDER_CORE 
+#if FZ_ENABLE_PDF 
 
 #ifdef __cplusplus
 extern "C" {

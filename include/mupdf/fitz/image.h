@@ -33,6 +33,8 @@
 #include "mupdf/fitz/stream.h"
 #include "mupdf/fitz/compressed-buffer.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -435,6 +437,8 @@ fz_pixmap *fz_load_bmp_subimage(fz_context *ctx, const unsigned char *buf, size_
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

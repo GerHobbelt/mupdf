@@ -24,6 +24,8 @@
 
 #include <string.h>
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 void
 fz_save_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)
 {
@@ -406,3 +408,5 @@ fz_band_writer *fz_new_psd_band_writer(fz_context *ctx, fz_output *out)
 
 	return &writer->super;
 }
+
+#endif

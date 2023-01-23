@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -555,3 +557,5 @@ fz_load_jpeg_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen, int *
 		fz_rethrow(ctx);
 	}
 }
+
+#endif

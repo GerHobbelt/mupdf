@@ -33,6 +33,8 @@
 #include "mupdf/fitz/image.h"
 #include "mupdf/fitz/writer.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -597,6 +599,8 @@ void fz_write_pwg_file_header(fz_context *ctx, fz_output *out); /* for use by mu
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

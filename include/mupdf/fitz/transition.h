@@ -26,6 +26,8 @@
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/pixmap.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -79,6 +81,8 @@ int fz_generate_transition(fz_context *ctx, fz_pixmap *tpix, fz_pixmap *opix, fz
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

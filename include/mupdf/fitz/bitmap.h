@@ -27,6 +27,8 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/pixmap.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -171,6 +173,8 @@ void fz_drop_halftone(fz_context *ctx, fz_halftone *ht);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

@@ -27,6 +27,8 @@
 #include "mupdf/fitz/context.h"
 #include "mupdf/fitz/color.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -134,6 +136,8 @@ void fz_separation_equivalent(fz_context *ctx, const fz_separations *seps, int i
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

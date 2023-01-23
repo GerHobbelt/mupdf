@@ -1420,6 +1420,9 @@ fz_save_buffer(fz_context *ctx, fz_buffer *buf, const char *filename)
 		fz_rethrow(ctx);
 }
 
+
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 fz_band_writer *fz_new_band_writer_of_size(fz_context *ctx, size_t size, fz_output *out)
 {
 	fz_band_writer *writer = fz_calloc(ctx, size, 1);
@@ -1486,6 +1489,9 @@ void fz_drop_band_writer(fz_context *ctx, fz_band_writer *writer)
 	fz_drop_separations(ctx, writer->seps);
 	fz_free(ctx, writer);
 }
+
+#endif
+
 
 int fz_output_supports_stream(fz_context *ctx, fz_output *out)
 {

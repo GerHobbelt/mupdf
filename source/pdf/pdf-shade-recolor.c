@@ -27,6 +27,8 @@
 #include <math.h>
 #include <float.h>
 
+#if FZ_ENABLE_PDF
+
 typedef struct
 {
 	void *opaque;
@@ -1034,3 +1036,5 @@ pdf_recolor_shade(fz_context *ctx, pdf_obj *shade, pdf_shade_recolorer *reshade,
 
 	return rewritten ? rewritten : shade;
 }
+
+#endif

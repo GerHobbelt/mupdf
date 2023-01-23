@@ -28,6 +28,8 @@
 #include <math.h>
 #include <string.h>
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #if FZ_ENABLE_ICC
 
 #include "icc/gray.icc.h"
@@ -1524,3 +1526,5 @@ fz_convert_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst,
 	fz_convert_fast_pixmap_samples(ctx, src, dst, copy_spots);
 #endif
 }
+
+#endif

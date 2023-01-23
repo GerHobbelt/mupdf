@@ -22,7 +22,10 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "pixmap-imp.h"
+#include "image-imp.h"
 
 #include "mupdf/assertions.h"
 #include <string.h>
@@ -655,5 +658,7 @@ fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *w
 {
 	fz_throw(ctx, FZ_ERROR_GENERIC, "JPX support disabled");
 }
+
+#endif
 
 #endif

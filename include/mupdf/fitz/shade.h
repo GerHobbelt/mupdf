@@ -30,6 +30,8 @@
 #include "mupdf/fitz/pixmap.h"
 #include "mupdf/fitz/compressed-buffer.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -234,6 +236,8 @@ void fz_drop_shade_imp(fz_context *ctx, fz_storable *shade);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

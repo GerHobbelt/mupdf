@@ -29,6 +29,8 @@
 #include "mupdf/fitz/color.h"
 #include "mupdf/fitz/separation.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -119,6 +121,8 @@ fz_band_writer *fz_new_band_writer_of_size(fz_context *ctx, size_t size, fz_outp
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

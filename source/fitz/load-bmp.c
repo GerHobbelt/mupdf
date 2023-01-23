@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "image-imp.h"
 #include "pixmap-imp.h"
 
@@ -1336,3 +1338,5 @@ fz_load_bmp_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len
 
 	return count;
 }
+
+#endif

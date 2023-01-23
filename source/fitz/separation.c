@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "color-imp.h"
 #include "pixmap-imp.h"
 
@@ -1173,3 +1175,5 @@ fz_separation_equivalent(fz_context *ctx,
 	colors[seps->cs_pos[i]] = 1;
 	fz_convert_color(ctx, seps->cs[i], colors, dst_cs, convert, prf, color_params);
 }
+
+#endif

@@ -22,7 +22,10 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "pixmap-imp.h"
+#include "image-imp.h"
 
 #include <string.h>
 #include <limits.h>
@@ -1058,3 +1061,5 @@ fz_load_pnm_subimage_count(fz_context *ctx, const unsigned char *p, size_t total
 	(void) pnm_read_image(ctx, &pnm, p, total, 1, -1);
 	return pnm.subimages;
 }
+
+#endif

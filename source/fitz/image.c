@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "context-imp.h"
 #include "image-imp.h"
 #include "pixmap-imp.h"
@@ -29,8 +31,6 @@
 #include <string.h>
 #include <math.h>
 #include "mupdf/assertions.h"
-
-#if FZ_ENABLE_RENDER_CORE 
 
 /* TODO: here or public? */
 static int

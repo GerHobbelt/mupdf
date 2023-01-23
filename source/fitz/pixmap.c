@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "color-imp.h"
 #include "pixmap-imp.h"
 
@@ -2048,3 +2050,6 @@ fz_convert_separation_pixmap_to_base(fz_context *ctx, const fz_pixmap *src)
 
 	return dst;
 }
+
+#endif
+

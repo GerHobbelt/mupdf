@@ -22,12 +22,12 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "glyph-imp.h"
 #include "pixmap-imp.h"
 
 #include <string.h>
-
-#if FZ_ENABLE_RENDER_CORE 
 
 #define RLE_THRESHOLD 256
 

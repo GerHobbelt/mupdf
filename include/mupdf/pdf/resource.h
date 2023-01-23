@@ -29,6 +29,12 @@
 #include "mupdf/fitz/store.h"
 #include "mupdf/pdf/object.h"
 
+#if FZ_ENABLE_PDF
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void pdf_store_item(fz_context *ctx, pdf_obj *key, void *val, size_t itemsize);
 void *pdf_find_item(fz_context *ctx, fz_store_drop_fn *drop, pdf_obj *key);
 void pdf_remove_item(fz_context *ctx, fz_store_drop_fn *drop, pdf_obj *key);
@@ -131,5 +137,11 @@ int pdf_xobject_transparency(fz_context *ctx, pdf_obj *xobj);
 fz_colorspace *pdf_xobject_colorspace(fz_context *ctx, pdf_obj *xobj);
 
 int pdf_resources_use_blending(fz_context *ctx, pdf_obj *rdb, pdf_cycle_list *cycle_up);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
 #endif

@@ -23,12 +23,12 @@
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "draw-imp.h"
 #include "color-imp.h"
 #include "glyph-imp.h"
 #include "pixmap-imp.h"
-
-#if FZ_ENABLE_RENDER_CORE 
 
 #include <ft2build.h>
 #include "hb.h"

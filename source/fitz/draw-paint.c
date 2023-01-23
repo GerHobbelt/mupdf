@@ -22,14 +22,14 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "draw-imp.h"
 #include "glyph-imp.h"
 #include "pixmap-imp.h"
 
 #include <string.h>
 #include "mupdf/assertions.h"
-
-#if FZ_ENABLE_RENDER_CORE 
 
 /*
 

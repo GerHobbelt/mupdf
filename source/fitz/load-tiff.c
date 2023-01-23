@@ -22,9 +22,10 @@
 
 #include "mupdf/fitz.h"
 
-#if FZ_ENABLE_TIFF
+#if FZ_ENABLE_TIFF && BUILDING_MUPDF_MINIMAL_CORE < 2
 
 #include "pixmap-imp.h"
+#include "image-imp.h"
 
 #include <limits.h>
 #include "mupdf/assertions.h"

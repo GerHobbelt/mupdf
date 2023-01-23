@@ -29,6 +29,8 @@
 #include "mupdf/fitz/store.h"
 #include "mupdf/fitz/separation.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -484,6 +486,8 @@ fz_detect_document(fz_context* ctx, fz_point* points, const fz_pixmap* src);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

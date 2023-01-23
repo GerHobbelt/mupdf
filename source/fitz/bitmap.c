@@ -24,6 +24,8 @@
 
 #include <string.h>
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 static const unsigned char pkm[256*8] =
 {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -563,3 +565,5 @@ void fz_bitmap_details(fz_bitmap *bit, int *w, int *h, int *n, int *stride)
 	if (stride)
 		*stride = bit->stride;
 }
+
+#endif

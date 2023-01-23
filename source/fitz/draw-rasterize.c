@@ -22,12 +22,12 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "draw-imp.h"
 #include "pixmap-imp.h"
 
 #include <string.h>
-
-#if FZ_ENABLE_RENDER_CORE 
 
 void fz_init_aa_context(fz_context *ctx)
 {

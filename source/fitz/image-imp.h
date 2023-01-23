@@ -23,6 +23,8 @@
 #ifndef FITZ_IMAGE_IMP_H
 #define FITZ_IMAGE_IMP_H
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 fz_pixmap *fz_load_jpeg(fz_context *ctx, const unsigned char *data, size_t size);
 fz_pixmap *fz_load_png(fz_context *ctx, const unsigned char *data, size_t size);
 #if FZ_ENABLE_TIFF
@@ -58,6 +60,8 @@ void fz_load_pnm_info(fz_context *ctx, const unsigned char *data, size_t size, i
 void fz_load_jbig2_info(fz_context *ctx, const unsigned char *data, size_t size, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace);
 #if FZ_ENABLE_JPEGXL
 void fz_load_jpegxl_info(fz_context *ctx, const unsigned char *data, size_t size, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation);
+#endif
+
 #endif
 
 #endif

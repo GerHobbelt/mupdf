@@ -21,6 +21,9 @@
 // CA 94945, U.S.A., +1(415)492-9861, for further information.
 
 #include "mupdf/fitz.h"
+
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "draw-imp.h"
 
 #include <string.h>
@@ -489,3 +492,5 @@ fz_unpack_stream(fz_context *ctx, fz_stream *src, int depth, int w, int h, int n
 
 	return fz_new_stream(ctx, state, unpack_next, unpack_drop);
 }
+
+#endif

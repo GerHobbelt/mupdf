@@ -25,6 +25,8 @@
 
 #include <string.h>
 
+#if FZ_ENABLE_PDF
+
 enum {
 	UNMARKED_STROKE = 1,
 	UNMARKED_FILL = 2
@@ -1772,3 +1774,5 @@ pdf_new_color_filter(
 
 	return (pdf_processor*)proc;
 }
+
+#endif

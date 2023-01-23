@@ -22,14 +22,14 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include "draw-imp.h"
 #include "pixmap-imp.h"
 
 #include <string.h>
 #include <math.h>
 #include "mupdf/assertions.h"
-
-#if FZ_ENABLE_RENDER_CORE 
 
 /* PDF 1.4 blend modes. These are slow. */
 

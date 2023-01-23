@@ -34,6 +34,8 @@ intermediate results rather than ints.
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "draw-imp.h"
 #include "pixmap-imp.h"
 
@@ -1864,3 +1866,5 @@ fz_new_scale_cache(fz_context *ctx)
 {
 	return fz_malloc_struct(ctx, fz_scale_cache);
 }
+
+#endif

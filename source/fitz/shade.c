@@ -25,6 +25,8 @@
 #include <string.h>
 #include <math.h>
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 typedef struct
 {
 	fz_shade *shade;
@@ -1133,3 +1135,5 @@ fz_bound_shade(fz_context *ctx, fz_shade *shade, fz_matrix ctm)
 	}
 	return fz_transform_rect(shade->bbox, ctm);
 }
+
+#endif

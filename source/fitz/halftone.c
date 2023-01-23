@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 #include "mupdf/assertions.h"
 
 struct fz_halftone
@@ -620,3 +622,5 @@ fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, const fz_pixmap *pix,
 
 	return out;
 }
+
+#endif
