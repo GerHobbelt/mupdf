@@ -14,24 +14,26 @@ ignore:
 	/tools/
 	/tests/
 	
-	pdf/
-	html/
-	xps/
-	cbz/
-	svg/
+	#pdf/
+	#html/
+	#xps/
+	#cbz/
+	#svg/
 	
 	# the quickest way to mark this next item as a direct regex is using set brackets: []
-	tesserac[t]
-	oc[r]
-	output[-]
-	load[-]
-	stext[-]
-	color[-]
-	draw[-]
-	filter[-]
-	crypt[-]
-	noto.c
-	pkcs[7]
-	reflow/
-	fon[t]
+	#tesserac[t]
+	#oc[r]
+	#output[-]
+	#load[-]
+	#stext[-]
+	#color[-]
+	#draw[-]
+	#filter[-]
+	#noto.c
+	#reflow/
+	#fon[t]
+	#pixmap.c
+	#image.c
+	#colorspace.c
+	#separation.c
 	
