@@ -55,12 +55,12 @@ The ``Buffer`` objects are used for working with binary data. They can be used m
 
 
 
-.. property:: length
+``length``
 
    The number of bytes in the buffer. `Read-only`.
 
 
-.. property:: [n]
+``[n]``
 
     Read/write the byte at index 'n'. Will throw exceptions on out of bounds accesses.
 

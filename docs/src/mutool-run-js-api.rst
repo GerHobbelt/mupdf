@@ -129,9 +129,15 @@ Matrices are simply 6-element arrays representing a 3-by-3 transformation matrix
 
 This matrix is represented in :title:`JavaScript` as ``[a,b,c,d,e,f]``.
 
-.. property:: Identity
+
+**Properties**
+
+``Identity``
 
     The identity matrix, short hand for ``[1,0,0,1,0,0]``.
+
+
+**Methods**
 
 .. method:: Scale(sx, sy)
 
@@ -214,72 +220,14 @@ Alpha values are floats between ``0`` and ``1``, whereby ``0`` denotes full tran
 
 
 
-.. _mutool_run_js_api_links:
-
-
-Links
----------
-
-
-.. _mutool_run_js_api_link_dict:
-
-Link dictionary
-~~~~~~~~~~~~~~~~~~~
+.. include:: mutool-object-protocols.rst
 
 
 
-A link is a dictionary with keys for:
-
-``bounds``
-    A rectangle describing the link's location on the page.
-
-``uri``
-    A uri describing either a document internal destination or a URL for a web page.
 
 
-.. _mutool_run_js_api_link_dest:
 
 
-Link destination
-~~~~~~~~~~~~~~~~~~~
-
-A link destination points to a location within a document and how a document viewer should show that destination.
-
-It consists of a dictionary with keys for:
-
-``chapter``
-    The chapter within the document.
-
-``page``
-    The page within the document.
-
-``type``
-    Either "Fit", "FitB", "FitH", "FitBH", "FitV", "FitBV", "FitR" or "XYZ", controlling which of the keys below exist.
-
-``x``
-    The left coordinate, valid for FitV, FitBV, FitR and XYZ.
-
-``y``
-    The top coordinate, valid for FitH, FitBH, FitR and XYZ.
-
-``width``
-    The width of the zoomed in region, valid for XYZ.
-
-``height``
-    The height of the zoomed in region, valid for XYZ.
-
-``zoom``
-    The zoom factor, valid for "XYZ".
-
-
-.. _mutool_run_js_api_file_spec_object:
-
-File specification object
-----------------------------
-
-This object is used to represent a file.
-
-In order to retieve information from this object see methods described within :ref:`Embedded files in PDFs<mutool_object_pdf_document_embedded_files>`.
 
 .. include:: mutool-object-buffer.rst
 

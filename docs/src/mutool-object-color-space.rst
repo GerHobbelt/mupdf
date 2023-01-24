@@ -15,25 +15,30 @@
 ``ColorSpace``
 ----------------------------
 
+**Properties**
 
 
-
-.. property:: DeviceGray
+``DeviceGray``
 
     The default grayscale colorspace.
 
-.. property:: DeviceRGB
+``DeviceRGB``
 
     The default RGB colorspace.
 
-.. property:: DeviceBGR
+``DeviceBGR``
 
     The default RGB colorspace, but with components in reverse order.
 
-.. property:: DeviceCMYK
+``DeviceCMYK``
 
     The default CMYK colorspace.
 
+
+----
+
+
+**Instance methods**
 
 
 .. method:: getNumberOfComponents()

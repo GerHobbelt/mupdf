@@ -41,7 +41,7 @@
 
 .. method:: place(rect)
 
-    Place (or continue placing) a ``Story`` into the supplied rectangle, returning a :ref:`Placement Result object<mutool_run_js_api_object_story_placement_result_object>`. Call ``draw()`` to draw the placed content before calling ``place()`` again to continue placing remaining content.
+    Place (or continue placing) a ``Story`` into the supplied rectangle, returning a :ref:`Placement Result Object<mutool_run_js_api_object_story_placement_result_object>`. Call ``draw()`` to draw the placed content before calling ``place()`` again to continue placing remaining content.
 
     :arg rect: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
@@ -54,12 +54,3 @@
     :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
-.. _mutool_run_js_api_object_story_placement_result_object:
-
-**Placement Result object**
-
-``filled``
-    The rectangle of the actual area that was used.
-
-``more``
-    *True* if more content remains to be placed, otherwise *false* if all content fit in the ``Story``.

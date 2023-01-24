@@ -25,10 +25,18 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 - The translation goes both ways: :title:`PDF` dictionaries and arrays can be accessed similarly to :title:`JavaScript` objects and arrays by getting and setting their properties.
 
 
-.. property:: length
+----
+
+**Instance properties**
+
+``length``
 
     Length of the array.
 
+
+----
+
+**Instance methods**
 
 .. method:: get(ref)
 
@@ -38,7 +46,7 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
     :return: The value for the key or index.
 
 
-.. method:: put(key or index, value)
+.. method:: put(ref, value)
 
     Put information into dictionaries and arrays in the ``PDFObject``. Dictionaries and arrays can also be accessed using normal property syntax: ``obj.Foo = 42; delete obj.Foo; x = obj[5]``.
 

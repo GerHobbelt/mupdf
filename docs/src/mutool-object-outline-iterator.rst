@@ -24,7 +24,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
 .. method:: item()
 
-    Return an :ref:`Outline Iterator item<mutool_run_js_api_outline_iterator_item_object>` object or ``undefined`` if out of range.
+    Return an :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>` or ``undefined`` if out of range.
 
     :return: ``Object``.
 
@@ -64,7 +64,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     Insert item before the current item. The position does not change. Returns ``0`` if the position has a valid item, or ``1`` if the position has no valid item.
 
-    :arg item: ``Object`` which conforms to the :ref:`Outline Iterator item<mutool_run_js_api_outline_iterator_item_object>` object.
+    :arg item: ``Object`` which conforms to the :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>`.
 
     :return: ``Int``.
 
@@ -78,21 +78,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     Updates the current item with the properties of the supplied item.
 
-    :arg item: ``Object`` which conforms to the :ref:`Outline Iterator item<mutool_run_js_api_outline_iterator_item_object>` object.
+    :arg item: ``Object`` which conforms to the :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>`.
 
 
-.. _mutool_run_js_api_outline_iterator_item_object:
-
-**Outline Iterator item**
-
-This ``Object`` has properties for:
-
-``title``
-    The title of the item.
-
-``uri``
-    A :title:`URI` pointing to the destination. Likely to be a document internal link that can be resolved by :ref:`Document.resolveLink()<mutool_run_js_api_document_resolveLink>`, otherwise a link to a web page.
-
-``open``
-    *True* if the item should be opened when shown in a tree view.
 
