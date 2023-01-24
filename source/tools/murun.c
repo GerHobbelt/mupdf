@@ -8173,28 +8173,28 @@ static void ffi_PDFAnnotation_setIsOpen(js_State *J)
 		rethrow(J);
 }
 
-static void ffi_PDFAnnotation_getHidden(js_State *J)
+static void ffi_PDFAnnotation_getHiddenForEditing(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
 	int hidden = 0;
 
 	fz_try(ctx)
-		hidden = pdf_annot_hidden(ctx, annot);
+		hidden = pdf_annot_hidden_for_editing(ctx, annot);
 	fz_catch(ctx)
 		rethrow(J);
 
 	js_pushboolean(J, hidden);
 }
 
-static void ffi_PDFAnnotation_setHidden(js_State *J)
+static void ffi_PDFAnnotation_setHiddenForEditing(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = js_touserdata(J, 0, "pdf_annot");
 	int hidden = js_toboolean(J, 1);
 
 	fz_try(ctx)
-		pdf_set_annot_hidden(ctx, annot, hidden);
+		pdf_set_annot_hidden_for_editing(ctx, annot, hidden);
 	fz_catch(ctx)
 		rethrow(J);
 }
@@ -9314,8 +9314,8 @@ int murun_main(int argc, const char** argv)
 
 		jsB_propfun(J, "PDFAnnotation.process", ffi_PDFAnnotation_process, 1);
 
-		jsB_propfun(J, "PDFAnnotation.getHidden", ffi_PDFAnnotation_getHidden, 0);
-		jsB_propfun(J, "PDFAnnotation.setHidden", ffi_PDFAnnotation_setHidden, 1);
+		jsB_propfun(J, "PDFAnnotation.getHiddenForEditing", ffi_PDFAnnotation_getHiddenForEditing, 0);
+		jsB_propfun(J, "PDFAnnotation.setHiddenForEditing", ffi_PDFAnnotation_setHiddenForEditing, 1);
 	}
 	js_dup(J);
 	js_setglobal(J, "PDFAnnotation");

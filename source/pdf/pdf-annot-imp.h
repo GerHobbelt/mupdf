@@ -44,7 +44,7 @@ struct pdf_annot
 	int needs_new_ap; /* If set, then a resynthesis of this annotation has been requested. */
 	int has_new_ap; /* If set, then the appearance stream has changed since last queried. */
 	int is_being_edited; /* Avoids triggering events during editing of e.g. text field widgets. */
-	int hidden; /* Hides annotation from rendering e.g. during editing. */
+	int hidden_editing; /* Hides annotation from rendering e.g. during editing. */
 
 	pdf_annot *next;
 };

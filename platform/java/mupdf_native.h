@@ -2710,18 +2710,18 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setStampImage
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
- * Method:    getHidden
+ * Method:    getHiddenForEditing
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_getHidden
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_getHiddenForEditing
   (JNIEnv *, jobject);
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
- * Method:    setHidden
+ * Method:    setHiddenForEditing
  * Signature: (Z)V
  */
-JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setHidden
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_setHiddenForEditing
   (JNIEnv *, jobject, jboolean);
 
 #ifdef __cplusplus

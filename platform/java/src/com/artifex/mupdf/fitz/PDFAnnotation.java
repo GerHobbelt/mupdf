@@ -345,6 +345,6 @@ public class PDFAnnotation
 	private native void updateAppearanceFromDisplayList(DisplayList dlist);
 	public void updateAppearance(DisplayList dlist) {updateAppearanceFromDisplayList(dlist);}
 
-	public native boolean getHidden();
-	public native void setHidden(boolean hidden);
+	public native boolean getHiddenForEditing();
+	public native void setHiddenForEditing(boolean hidden);
 }

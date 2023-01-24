@@ -933,11 +933,11 @@ void pdf_set_annot_filespec(fz_context *ctx, pdf_annot *annot, pdf_obj *obj);
 
 /*
 	Get/set a hidden flag preventing the annotation from being
-	rendered. This flag is independent of the hidden flag in the
-	PDF annotation object described in the PDF specification.
+	rendered when it is being edited. This flag is independent
+	of the hidden flag in the PDF annotation object described in the PDF specification.
 */
-int pdf_annot_hidden(fz_context *ctx, pdf_annot *annot);
-void pdf_set_annot_hidden(fz_context *ctx, pdf_annot *annot, int hidden);
+int pdf_annot_hidden_for_editing(fz_context *ctx, pdf_annot *annot);
+void pdf_set_annot_hidden_for_editing(fz_context *ctx, pdf_annot *annot, int hidden);
 
 #endif // FZ_ENABLE_PDF
 

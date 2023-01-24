@@ -1178,7 +1178,7 @@ pdf_process_annot(fz_context *ctx, pdf_processor *proc, pdf_annot *annot)
 {
 	int flags = pdf_dict_get_int(ctx, annot->obj, PDF_NAME(F));
 
-	if (flags & (PDF_ANNOT_IS_INVISIBLE | PDF_ANNOT_IS_HIDDEN) || annot->hidden)
+	if ((flags & (PDF_ANNOT_IS_INVISIBLE | PDF_ANNOT_IS_HIDDEN)) || annot->hidden_editing)
 		return;
 
 	/* popup annotations should never be drawn */
