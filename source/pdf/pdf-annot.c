@@ -3364,3 +3364,15 @@ pdf_set_annot_filespec(fz_context *ctx, pdf_annot *annot, pdf_obj *fs)
 
 	pdf_dirty_annot(ctx, annot);
 }
+
+int
+pdf_annot_hidden(fz_context *ctx, pdf_annot *annot)
+{
+	return annot->hidden;
+}
+
+void
+pdf_set_annot_hidden(fz_context *ctx, pdf_annot *annot, int hidden)
+{
+	annot->hidden = hidden;
+}
