@@ -1626,6 +1626,7 @@ begin_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 		return;
 	}
 
+#if 0
 	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
@@ -1640,6 +1641,7 @@ begin_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	{
 		begin_layer(ctx, proc, pdf_array_get(ctx, obj, i));
 	}
+#endif	
 }
 
 static void
@@ -1656,6 +1658,7 @@ end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 		return;
 	}
 
+#if 0
 	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
@@ -1669,6 +1672,7 @@ end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	{
 		end_layer(ctx, proc, pdf_array_get(ctx, obj, i));
 	}
+#endif	
 }
 
 static void
