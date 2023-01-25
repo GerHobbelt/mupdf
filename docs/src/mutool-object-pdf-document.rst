@@ -167,9 +167,9 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: getJournal()
 
-    Returns a "PDF journal object".
+    Returns a :ref:`PDF Journal Object<mutool_run_js_api_pdf_journal_object>`.
 
-    :return: :ref:`PDF journal object<mutool_run_js_api_pdf_journal_object>`.
+    :return: ``Object`` :ref:`PDF Journal Object<mutool_run_js_api_pdf_journal_object>`.
 
 .. method:: beginOperation()
 
@@ -204,18 +204,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     Move forwards in the undo history.
 
 
-.. _mutool_run_js_api_pdf_journal_object:
 
-**PDF journal object**
-
-
-A "PDF journal object" contains a numbered array of operations and a reference into this list indicating the current position.
-
-``position``
-    The current position in the journal.
-
-``steps``
-    An array containing the name of each step in the journal.
 
 
 ----
@@ -494,7 +483,7 @@ The following functions can be used to copy objects from one document to another
 
 .. method:: addEmbeddedFile(filename, mimetype, contents, creationDate, modificationDate, addChecksum)
 
-    Embedded a file into the document. If a checksum is added then the file contents can be verified later. An indirect reference to the :ref:`filespec PDF object<mutool_run_js_api_file_spec_object>` is returned.
+    Embedded a file into the document. If a checksum is added then the file contents can be verified later. An indirect reference to a :ref:`File Specification Object<mutool_run_js_api_file_spec_object>` is returned.
 
 
     :arg filename: ``String``.
@@ -504,7 +493,7 @@ The following functions can be used to copy objects from one document to another
     :arg modificationDate: ``Integer`` Milliseconds value.
     :arg addChecksum: ``Boolean``.
 
-    :return: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+    :return: ``Object`` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
 
     .. note::
@@ -516,15 +505,15 @@ The following functions can be used to copy objects from one document to another
 
     Return an object describing the file referenced by the ``filespecObject``.
 
-    :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+    :arg fileSpecObject: ``Object`` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
-    :return: :ref:`Embedded file object<mutool_run_js_api_pdf_document_embedded_file_object>`.
+    :return: ``Object`` :ref:`Embedded File Object<mutool_run_js_api_pdf_document_embedded_file_object>`.
 
 .. method:: getEmbeddedFileContents(fileSpecObject)
 
     Returns a ``Buffer`` with the contents of the embedded file referenced by the ``filespecObject``.
 
-    :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+    :arg fileSpecObject: ``Object`` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
     :return: :ref:`Buffer<mutool_object_buffer>`.
 
@@ -532,31 +521,12 @@ The following functions can be used to copy objects from one document to another
 
     Verify the :title:`MD5` checksum of the embedded file contents.
 
-     :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+     :arg fileSpecObject: ``Object`` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
      :return: ``Boolean``.
 
 
-.. _mutool_run_js_api_pdf_document_embedded_file_object:
 
-**Embedded file object**
-
-This ``Object`` contains metadata about an embedded file, it has properties for:
-
-``filename``
-    The name of the embedded file.
-
-``mimetype``
-    The :title:`MIME` type of the embedded file, or ``undefined`` if none exists.
-
-``size``
-    The size in bytes of the embedded file contents.
-
-``creationDate``
-    The creation date of the embedded file.
-
-``modificationDate``
-    The modification date of the embedded file.
 
 
 

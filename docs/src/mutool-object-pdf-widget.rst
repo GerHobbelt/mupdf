@@ -80,7 +80,7 @@
 
 .. method:: layoutTextWidget()
 
-    Layout the value of a text widget. Returns a :ref:`Text Layout object<mutool_run_js_api_pdf_widget_text_layout_object>`.
+    Layout the value of a text widget. Returns a :ref:`Text Layout Object<mutool_run_js_api_pdf_widget_text_layout_object>`.
 
     :return: ``Object``.
 
@@ -148,7 +148,7 @@
     Return a :ref:`Pixmap<mutool_object_pixmap>` preview of what the signature would look like if signed with the given configuration. Reason and location may be ``undefined``, in which case they are not shown.
 
     :arg signer: :ref:`PDFPKCS7Signer<mutool_object_pdf_widget_signer>`.
-    :arg signatureConfig: :ref:`Signature configuration object<mutool_object_pdf_widget_signature_configuration>`.
+    :arg signatureConfig: :ref:`Signature Configuration Object<mutool_object_pdf_widget_signature_configuration>`.
     :arg image: :ref:`Image<mutool_object_image>`.
     :arg reason: ``String``.
     :arg location: ``String``.
@@ -163,10 +163,10 @@
     Sign the signature with the given configuration. Reason and location may be ``undefined``, in which case they are not shown.
 
     :arg signer: :ref:`PDFPKCS7Signer<mutool_object_pdf_widget_signer>`.
-    :arg signatureConfig: :ref:`Signature configuration object<mutool_object_pdf_widget_signature_configuration>`.
-    :arg image:
-    :arg reason:
-    :arg location:
+    :arg signatureConfig: :ref:`Signature Configuration Object<mutool_object_pdf_widget_signature_configuration>`.
+    :arg image: :ref:`Image<mutool_object_image>`.
+    :arg reason: ``String``.
+    :arg location: ``String``.
 
 .. method:: clearSignature()
 
@@ -224,63 +224,6 @@ To create a signer object an instance of ``PDFPKCS7Signer`` is required.
     .. code-block:: javascript
 
         var signer = new PDFPKCS7Signer(<file_name>,<password>);
-
-
-.. _mutool_object_pdf_widget_signature_configuration:
-
-**Signature configuration object**
-
-A signature configuration object has properties with ``Boolean`` values as follows:
-
-``showLabels``
-    Whether to include both labels and values or just values on the right hand side.
-
-``showDN``
-    Whether to include the distinguished name on the right hand side.
-
-``showTextName``
-    Whether to include the name of the signatory on the right hand side.
-
-``showDate``
-    Whether to include the date of signing on the right hand side.
-
-``showGraphicName``
-    Whether to include the signatory name on the left hand side.
-
-``showLogo``
-    Whether to include the :title:`MuPDF` logo in the background.
-
-
-
-.. _mutool_run_js_api_pdf_widget_text_layout_object:
-
-**Text Layout object**
-
-A description of layouted text value from a text widget with keys:
-
-``matrix``
-    Normal transform matrix for the layouted text.
-
-``invMatrix``
-    Inverted transform matrix for the layouted text.
-
-``lines``
-    An array of text lines belonging to the layouted text, a ``lines`` object contains:
-
-    - ``x`` The X coordinate for the text line.
-    - ``y`` The Y coordinate for the text line.
-    - ``fontSize`` The text size used for the layouted text line.
-    - ``index`` The index of the beginning of the line in the text string.
-    - ``rect`` The bounding rectangle for the text line.
-    - ``chars`` An array of characters in the text line.
-
-        A ``chars`` object contains:
-
-        - ``x`` The position of the character.
-        - ``advance`` The advance of the character.
-        - ``index`` The index of the character in the text string.
-        - ``rect`` The bounding :ref:`Rectangle<mutool_run_js_api_rectangle>` for the character.
-
 
 
 

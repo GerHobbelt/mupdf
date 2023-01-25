@@ -247,42 +247,6 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
 
 
-----
-
-.. _mutool_run_js_api_stroke_dictionary:
-
-**Stroke**
-
-The stroking state is a dictionary with keys for:
-
-    - ``startCap``, ``dashCap``, ``endCap``
-        "Butt", "Round", "Square", or "Triangle".
-
-    - ``lineCap``
-        Set ``startCap``, ``dashCap``, and ``endCap`` all at once.
-
-    - ``lineJoin``
-        "Miter", "Round", "Bevel", or "MiterXPS".
-
-    - ``lineWidth``
-        Thickness of the line.
-
-    - ``miterLimit``
-        Maximum ratio of the miter length to line width, before beveling the join instead.
-
-    - ``dashPhase``
-        Starting offset for dash pattern.
-
-    - ``dashes``
-        Array of on/off dash lengths.
-
-
-**Example:**
-
-    ``{dashes:[5,10], lineWidth:3, lineCap:'Round'}``
-
-
-
 
 .. External links:
 

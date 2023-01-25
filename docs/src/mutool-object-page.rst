@@ -58,6 +58,7 @@
     :return: ``[]``.
 
 
+
 .. method:: getLinks()
 
     Return an array of all the links on the page. Each link is an object with a 'bounds' property, and either a 'page' or 'uri' property, depending on whether it's an internal or external link. See: :ref:`Links<mutool_run_js_api_links>`.
@@ -74,7 +75,7 @@
 
     :arg rect: :ref:`Rectangle<mutool_run_js_api_rectangle>` for the link.
     :arg destinationUri: ``String``.
-    :return: :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
+    :return: ``Object`` :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
 
     **Example**
 
@@ -87,12 +88,15 @@
 
     Delete the link from the page.
 
-    :arg link: :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
+    :arg link: ``Object`` :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
 
 .. method:: isPDF()
 
     Returns *true* if the page is from a :title:`PDF` document.
 
     :return: ``Boolean``.
+
+
+
 
 

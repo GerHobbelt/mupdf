@@ -533,7 +533,7 @@ These properties are only present for some annotation types, so support for them
 
     Gets the file specification object.
 
-    :return: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+    :return: ``Object`` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
 
 
@@ -544,7 +544,7 @@ These properties are only present for some annotation types, so support for them
 
     Sets the file specification object.
 
-    :arg fileSpecObject: :ref:`File specification object<mutool_run_js_api_file_spec_object>`.
+    :arg fileSpecObject: ``Object`` :ref:`File Specification object<mutool_run_js_api_file_spec_object>`.
 
 
 ----
