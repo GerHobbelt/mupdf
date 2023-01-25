@@ -118,7 +118,7 @@
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateMapFile>true</GenerateMapFile>
@@ -143,7 +143,7 @@
     <Link>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateMapFile>true</GenerateMapFile>
@@ -167,7 +167,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
@@ -192,7 +192,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
@@ -207,6 +207,9 @@
   <ItemGroup>
     <ProjectReference Include="bin2coff.vcxproj">
       <Project>{bfe316b3-bd90-433a-a20d-c73975f1caa7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
     </ProjectReference>
     <ProjectReference Include="libcurl.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
@@ -234,6 +237,9 @@
     </ProjectReference>
     <ProjectReference Include="libjpeg-turbo.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
     </ProjectReference>
     <ProjectReference Include="liblcms2.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
