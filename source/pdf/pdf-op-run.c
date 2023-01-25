@@ -292,7 +292,7 @@ pdf_push_tk_group(fz_context *ctx, pdf_run_processor *pr)
 {
 	fz_rect rect = fz_infinite_rect;
 
-	fz_begin_group(ctx, pr->dev, rect, NULL, 0, 1, FZ_BLEND_NORMAL, 1);
+	fz_begin_group(ctx, pr->dev, rect, NULL, 0 /* isolated */, 1, FZ_BLEND_NORMAL, 1.0);
 	pr->tos.tk_group_pushed = 1;
 }
 

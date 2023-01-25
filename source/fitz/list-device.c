@@ -1164,6 +1164,7 @@ fz_list_begin_group(fz_context *ctx, fz_device *dev, fz_rect rect, fz_colorspace
 
 	fz_try(ctx)
 	{
+#if 01
 		fz_append_display_node(
 			ctx,
 			dev,
@@ -1178,6 +1179,7 @@ fz_list_begin_group(fz_context *ctx, fz_device *dev, fz_rect rect, fz_colorspace
 			NULL, /* stroke */
 			&colorspace, /* private_data */
 			sizeof(colorspace)); /* private_data_len */
+#endif
 	}
 	fz_catch(ctx)
 	{
@@ -1189,6 +1191,7 @@ fz_list_begin_group(fz_context *ctx, fz_device *dev, fz_rect rect, fz_colorspace
 static void
 fz_list_end_group(fz_context *ctx, fz_device *dev)
 {
+#if 01
 	fz_append_display_node(
 		ctx,
 		dev,
@@ -1203,6 +1206,7 @@ fz_list_end_group(fz_context *ctx, fz_device *dev)
 		NULL, /* stroke */
 		NULL, /* private_data */
 		0); /* private_data_len */
+#endif
 }
 
 typedef struct
@@ -1673,7 +1677,6 @@ fz_run_display_list(fz_context *ctx, fz_display_list *list, fz_device *dev, fz_m
 	fz_display_node *next_node;
 	int clipped = 0;
 	int tiled = 0;
-
 
 	/* Current graphics state as unpacked from list */
 	fz_path *path = NULL;

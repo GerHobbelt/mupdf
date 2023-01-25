@@ -183,7 +183,7 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 			else
 				colorspace = fz_keep_colorspace(ctx, fz_default_output_intent(ctx, default_cs));
 
-			fz_begin_group(ctx, dev, mediabox, colorspace, 1, 0, 0, 1);
+			fz_begin_group(ctx, dev, mediabox, colorspace, 1 /* isolated */, 0, FZ_BLEND_NORMAL, 1.0);
 		}
 
 		struct_parent = pdf_dict_get(ctx, page->obj, PDF_NAME(StructParents));
