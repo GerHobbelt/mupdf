@@ -747,8 +747,6 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 
 	fz_var(mdev);
 
-	fz_attach_cookie_to_context(app->ctx, &cookie);
-
 	fz_drop_display_list(app->ctx, app->page_list);
 	fz_drop_display_list(app->ctx, app->annotations_list);
 	fz_drop_separations(app->ctx, app->seps);
@@ -779,8 +777,6 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 	}
 	fz_catch(app->ctx)
 	{
-		fz_detach_cookie_from_context(app->ctx);
-
 		if (fz_caught(app->ctx) == FZ_ERROR_TRYLATER)
 			app->incomplete = 1;
 		else
@@ -822,8 +818,6 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 		}
 		fz_catch(app->ctx)
 		{
-			fz_detach_cookie_from_context(app->ctx);
-
 			if (fz_caught(app->ctx) == FZ_ERROR_TRYLATER)
 				app->incomplete = 1;
 			else
@@ -860,7 +854,6 @@ static void pdfapp_loadpage(pdfapp_t *app, int no_cache)
 	fz_always(app->ctx)
 	{
 		fz_drop_device(app->ctx, mdev);
-		fz_detach_cookie_from_context(app->ctx);
 	}
 	fz_catch(app->ctx)
 	{
@@ -972,6 +965,11 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 					fz_rethrow(app->ctx);
 				}
 			}
+		}
+
+		if (!app->ctx->cookie)
+		{
+			int x = 1;
 		}
 
 		if (drawpage)
