@@ -1615,13 +1615,21 @@ static void
 begin_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 {
 	/* val has been resolved to a dict for us by the originally specified name
-	 * having been looked up in Properties already for us. Go with the 'Title'
-	 * entry. */
-	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Title));
+	 * having been looked up in Properties already for us. Either there will
+	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
+	int i, n;
+	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
-		pdf_flush_text(ctx, proc);
-		push_begin_layer(ctx, proc, pdf_to_text_string(ctx, obj, NULL));
+		fz_begin_layer(ctx, proc->dev, pdf_to_name(ctx, obj));
+		return;
+	}
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(OCGs));
+	n = pdf_array_len(ctx, obj);
+	for (i = 0; i < n; i++)
+	{
+		begin_layer(ctx, proc, pdf_array_get(ctx, obj, i));
 	}
 }
 
@@ -1629,12 +1637,21 @@ static void
 end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 {
 	/* val has been resolved to a dict for us by the originally specified name
-	 * having been looked up in Properties already for us. Go with the 'Title'
-	 * entry. */
-	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Title));
+	 * having been looked up in Properties already for us. Either there will
+	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
+	int i, n;
+	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
 		fz_end_layer(ctx, proc->dev);
+		return;
+	}
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(OCGs));
+	n = pdf_array_len(ctx, obj);
+	for (i = n-1; i >= 0; i--)
+	{
+		end_layer(ctx, proc, pdf_array_get(ctx, obj, i));
 	}
 }
 
@@ -1702,7 +1719,7 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 		tag = pdf_dict_get(ctx, send, PDF_NAME(S));
 		standard = structure_type(ctx, proc, tag);
 		if (standard != FZ_STRUCTURE_INVALID)
-			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag));
+			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), 0);
 
 		pdf_drop_obj(ctx, proc->mcid_sent);
 		proc->mcid_sent = pdf_keep_obj(ctx, send);
@@ -1755,7 +1772,7 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 			if (standard != FZ_STRUCTURE_INVALID)
 			{
 				pdf_flush_text(ctx, proc);
-				fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag));
+				fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), 0);
 			}
 		}
 

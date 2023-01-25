@@ -402,7 +402,7 @@ enum {
 
 /* A spot of voodoo to allow pdf_name_eq to avoid a function call in most cases. */
 #define pdf_name_eq(ctx, a, b) pdf_name_eq_fast(ctx, a, b)
-static int
+static int inline
 pdf_name_eq_fast(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 {
 	if (a <= PDF_FALSE || b <= PDF_FALSE)
