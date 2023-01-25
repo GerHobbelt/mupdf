@@ -567,7 +567,7 @@ fz_trace_begin_structure(fz_context *ctx, fz_device *dev_, fz_structure standard
 	if (raw && strcmp(str, raw))
 		fz_write_printf(ctx, out, " raw=\"%s\"", raw);
 	if (uid != 0)
-		fz_write_printf(ctx, out, " uid=%d", uid);
+		fz_write_printf(ctx, out, " uid=\"%d\"", uid);
 	fz_write_printf(ctx, out, ">\n");
 	dev->depth++;
 }
@@ -579,7 +579,7 @@ fz_trace_end_structure(fz_context *ctx, fz_device *dev_)
 	fz_output *out = dev->out;
 	dev->depth--;
 	fz_trace_indent(ctx, out, dev->depth);
-	fz_write_printf(ctx, out, "<end_structure>\n");
+	fz_write_printf(ctx, out, "</structure>\n");
 }
 
 static const char *

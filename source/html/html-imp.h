@@ -414,7 +414,7 @@ struct fz_story
 enum
 {
 	FZ_HTML_STRUCT_UNKNOWN = 0,
-	FZ_HTML_STRUCT_DOC,
+	FZ_HTML_STRUCT_BODY,
 	FZ_HTML_STRUCT_DIV,
 	FZ_HTML_STRUCT_SPAN,
 	FZ_HTML_STRUCT_BLOCKQUOTE,
@@ -591,7 +591,7 @@ fz_archive *fz_extract_html_from_mobi(fz_context *ctx, fz_buffer *mobi);
 
 int fz_html_heading_from_struct(int structure);
 const char *fz_html_structure_to_string(int structure);
-fz_structure fz_html_structure_to_struct(int s);
+fz_structure fz_html_structure_to_structure(int s);
 
 #ifdef __cplusplus
 }

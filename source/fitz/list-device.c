@@ -1382,7 +1382,7 @@ fz_list_begin_structure(fz_context *ctx, fz_device *dev, fz_structure standard, 
 		NULL, /* private_data */
 		len+2+sizeof(uid)); /* private_data_len */
 	data[0] = (char)standard;
-	memcpy(data, &uid, sizeof(uid));
+	memcpy(data+1, &uid, sizeof(uid));
 	if (len)
 		memcpy(data+1+sizeof(uid), raw, len+1);
 	else

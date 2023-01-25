@@ -931,7 +931,7 @@ structure_from_tag(const char *tag, struct genstate *g)
 		return g->section_depth ? (FZ_HTML_STRUCT_H1 - 1 + fz_mini(g->section_depth, 6)) : FZ_HTML_STRUCT_UNKNOWN;
 	}
 	else if (!strcmp(tag, "body"))
-		return FZ_HTML_STRUCT_DOC;
+		return FZ_HTML_STRUCT_BODY;
 	else if (!strcmp(tag, "div"))
 		return FZ_HTML_STRUCT_DIV;
 	else if (!strcmp(tag, "span"))
@@ -1965,8 +1965,8 @@ fz_html_structure_to_string(int structure)
 	{
 	case FZ_HTML_STRUCT_UNKNOWN:
 		return "unknown";
-	case FZ_HTML_STRUCT_DOC:
-		return "doc";
+	case FZ_HTML_STRUCT_BODY:
+		return "body";
 	case FZ_HTML_STRUCT_DIV:
 		return "div";
 	case FZ_HTML_STRUCT_SPAN:
@@ -2011,11 +2011,11 @@ fz_html_structure_to_string(int structure)
 
 }
 
-fz_structure fz_html_structure_to_struct(int s)
+fz_structure fz_html_structure_to_structure(int s)
 {
 	switch (s)
 	{
-	case FZ_HTML_STRUCT_DOC:
+	case FZ_HTML_STRUCT_BODY:
 		return FZ_STRUCTURE_DOCUMENT;
 	case FZ_HTML_STRUCT_DIV:
 		return FZ_STRUCTURE_DIV;

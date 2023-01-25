@@ -1616,64 +1616,28 @@ static void
 begin_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 {
 	/* val has been resolved to a dict for us by the originally specified name
-	 * having been looked up in Properties already for us. Either there will
-	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
-	int i, n;
+	 * having been looked up in Properties already for us. Go with the 'Title'
+	 * entry. */
 	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Title));
 	if (obj)
 	{
 		pdf_flush_text(ctx, proc);
 		push_begin_layer(ctx, proc, pdf_to_text_string(ctx, obj, NULL));
-		return;
 	}
-
-#if 0
-	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
-	if (obj)
-	{
-		pdf_flush_text(ctx, proc);
-		push_begin_layer(ctx, proc, pdf_to_name(ctx, obj));
-		return;
-	}
-
-	obj = pdf_dict_get(ctx, val, PDF_NAME(OCGs));
-	n = pdf_array_len(ctx, obj);
-	for (i = 0; i < n; i++)
-	{
-		begin_layer(ctx, proc, pdf_array_get(ctx, obj, i));
-	}
-#endif	
 }
 
 static void
 end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 {
 	/* val has been resolved to a dict for us by the originally specified name
-	 * having been looked up in Properties already for us. Either there will
-	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
-	int i, n;
+	 * having been looked up in Properties already for us. Go with the 'Title'
+	 * entry. */
 	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Title));
 	if (obj)
 	{
 		fz_end_layer(ctx, proc->dev);
 		return;
 	}
-
-#if 0
-	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
-	if (obj)
-	{
-		fz_end_layer(ctx, proc->dev);
-		return;
-	}
-
-	obj = pdf_dict_get(ctx, val, PDF_NAME(OCGs));
-	n = pdf_array_len(ctx, obj);
-	for (i = n-1; i >= 0; i--)
-	{
-		end_layer(ctx, proc, pdf_array_get(ctx, obj, i));
-	}
-#endif	
 }
 
 static void

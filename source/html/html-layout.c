@@ -1878,7 +1878,7 @@ static int draw_box(fz_context *ctx, fz_html_box *box, float page_top, float pag
 	int ret = 0;
 
 	if (box->structure != FZ_HTML_STRUCT_UNKNOWN)
-		fz_begin_structure(ctx, dev, fz_html_structure_to_struct(box->structure), fz_html_structure_to_string(box->structure), 0);
+		fz_begin_structure(ctx, dev, fz_html_structure_to_structure(box->structure), fz_html_structure_to_string(box->structure), 0);
 	switch (box->type)
 	{
 	case BOX_TABLE:
