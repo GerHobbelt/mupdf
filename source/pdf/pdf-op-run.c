@@ -1618,10 +1618,19 @@ begin_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	 * having been looked up in Properties already for us. Either there will
 	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
 	int i, n;
-	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
+	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Title));
 	if (obj)
 	{
-		fz_begin_layer(ctx, proc->dev, pdf_to_name(ctx, obj));
+		pdf_flush_text(ctx, proc);
+		push_begin_layer(ctx, proc, pdf_to_text_string(ctx, obj, NULL));
+		return;
+	}
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
+	if (obj)
+	{
+		pdf_flush_text(ctx, proc);
+		push_begin_layer(ctx, proc, pdf_to_name(ctx, obj));
 		return;
 	}
 
@@ -1640,7 +1649,14 @@ end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	 * having been looked up in Properties already for us. Either there will
 	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
 	int i, n;
-	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
+	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Title));
+	if (obj)
+	{
+		fz_end_layer(ctx, proc->dev);
+		return;
+	}
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
 		fz_end_layer(ctx, proc->dev);
