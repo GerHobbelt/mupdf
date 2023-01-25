@@ -116,9 +116,9 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateMapFile>true</GenerateMapFile>
@@ -141,9 +141,9 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateMapFile>true</GenerateMapFile>
@@ -163,11 +163,11 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
@@ -188,11 +188,11 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <MapExports>true</MapExports>
@@ -215,11 +215,98 @@
     <Image Include="..\x11\mupdf.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="bin2coff.vcxproj">
+      <Project>{bfe316b3-bd90-433a-a20d-c73975f1caa7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{c39f4b46-6e89-4074-902e-ca57073044d2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libglog.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffbe90d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
     <ProjectReference Include="libjpeg-xl.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
     </ProjectReference>
-    <ProjectReference Include="MuPDFLib.vcxproj">
-      <Project>{c21b464f-7799-4b39-8ca6-67ce0468966c}</Project>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libplf_nanotimer.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe7ea82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libthirdparty.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-d58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="pthread_lib.2019.vcxproj">
+      <Project>{c431b5c5-ff25-4450-a13c-ea3123456789}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
