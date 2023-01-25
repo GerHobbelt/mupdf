@@ -186,7 +186,7 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 			fz_begin_group(ctx, dev, mediabox, colorspace, 1, 0, 0, 1);
 		}
 
-		struct_parent = pdf_dict_getl(ctx, page->obj, PDF_NAME(StructParents));
+		struct_parent = pdf_dict_get(ctx, page->obj, PDF_NAME(StructParents));
 		if (pdf_is_number(ctx, struct_parent))
 			struct_parent_num = pdf_to_int(ctx, struct_parent);
 
