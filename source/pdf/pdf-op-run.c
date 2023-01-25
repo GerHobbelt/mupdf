@@ -292,8 +292,10 @@ pdf_push_tk_group(fz_context *ctx, pdf_run_processor *pr)
 {
 	fz_rect rect = fz_infinite_rect;
 
+#if 0
 	fz_begin_group(ctx, pr->dev, rect, NULL, 0 /* isolated */, 1, FZ_BLEND_NORMAL, 1.0);
 	pr->tos.tk_group_pushed = 1;
+#endif
 }
 
 static pdf_gstate *
@@ -316,9 +318,8 @@ pdf_begin_group(fz_context *ctx, pdf_run_processor *pr, fz_rect bbox, softmask_s
 static void
 pdf_end_group(fz_context *ctx, pdf_run_processor *pr, softmask_save *softmask)
 {
-	pdf_gstate *gstate;
+	pdf_gstate *gstate = pr->gstate + pr->gtop;
 
-	gstate = pr->gstate + pr->gtop;
 	if (gstate->blendmode)
 		fz_end_group(ctx, pr->dev);
 
