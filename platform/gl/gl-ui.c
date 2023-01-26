@@ -271,12 +271,16 @@ void ui_draw_ibevel_rect(fz_irect area, unsigned int fill, int depressed)
 	glRectf(area.x0, area.y0, area.x1, area.y1);
 }
 
+static const char* m = NULL;
+
 #if defined(FREEGLUT) && (GLUT_API_VERSION >= 6)
 static void on_keyboard(int key, int x, int y)
 #else
 static void on_keyboard(unsigned char key, int x, int y)
 #endif
 {
+	//m = "onKbd...";
+
 #ifdef __APPLE__
 	/* Apple's GLUT has swapped DELETE and BACKSPACE */
 	if (key == 8)
@@ -292,6 +296,31 @@ static void on_keyboard(unsigned char key, int x, int y)
 	run_main_loop();
 	ui.key = ui.plain = 0;
 	ui_invalidate(); // TODO: leave this to caller
+}
+
+
+static void on_keyboardExt(int key, int x, int y)
+{
+	//m = "KbdExt";
+	on_keyboard(key, x, y);
+}
+
+static void on_keyboardUp(unsigned char key, int x, int y)
+{
+	//m = "KbdUp";
+	on_keyboard(key, x, y);
+}
+
+static void on_keyboardDown(unsigned char key, int x, int y)
+{
+	//m = "KbdDown";
+	on_keyboard(key, x, y);
+}
+
+static void on_keyboardRegular(unsigned char key, int x, int y)
+{
+	m = "Kbd--";
+	on_keyboard(key, x, y);
 }
 
 static void on_special(int key, int x, int y)
@@ -496,7 +525,10 @@ void ui_init(int w, int h, const char *title)
 	glutReshapeFunc(on_reshape);
 	glutDisplayFunc(on_display);
 #if defined(FREEGLUT) && (GLUT_API_VERSION >= 6)
-	glutKeyboardExtFunc(on_keyboard);
+	glutKeyboardExtFunc(on_keyboardExt);
+	glutKeyboardFunc(on_keyboardRegular);
+	glutKeyboardUpFunc(on_keyboardUp);
+	glutKeyboardDownFunc(on_keyboardDown);
 #else
 	fz_warn(ctx, "This version of MuPDF has been built WITHOUT clipboard or unicode input support!");
 	fz_warn(ctx, "Please file a complaint with your friendly local distribution manager.");
