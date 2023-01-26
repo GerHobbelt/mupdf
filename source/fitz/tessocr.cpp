@@ -2,7 +2,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
 
-#if FZ_ENABLE_OCR
+// special exception for when we compile this code for a monolithic tesseract stand-alone app: ALWAYS offer the leptonica_malloc/free APIs availalbe in here!
+//#if FZ_ENABLE_OCR 
 
 // Include tesseract configuration file (which should be available on both autoconf and Windows/MSVC platforms)
 #define HAVE_TESSERACT_CONFIG_H			1
@@ -68,6 +69,8 @@ void *leptonica_realloc(void *ptr, size_t blocksize)
 #endif
 	return ret;
 }
+
+#if FZ_ENABLE_OCR 
 
 #if TESSERACT_MAJOR_VERSION >= 5
 
@@ -145,6 +148,9 @@ tess_file_reader(const STRING& fname, GenericVector<char> *out)
 
 #endif
 
+#endif // FZ_ENABLE_OCR 
+
+
 void
 ocr_set_leptonica_mem(fz_context *ctx)
 {
@@ -172,6 +178,9 @@ ocr_clear_leptonica_mem(fz_context *ctx)
 	if (die)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Attempt to use Tesseract from 2 threads at once!");
 }
+
+
+#if FZ_ENABLE_OCR 
 
 void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 {
@@ -430,6 +439,6 @@ void ocr_recognise(fz_context *ctx,
 		fz_rethrow(ctx);
 }
 
-}
+#endif // FZ_ENABLE_OCR 
 
-#endif
+}

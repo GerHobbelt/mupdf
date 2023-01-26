@@ -22,15 +22,26 @@
 
 #include "mupdf/fitz.h"
 
-#if BUILDING_MUPDF_MINIMAL_CORE < 2
+// special exception for when we compile this code for a monolithic tesseract stand-alone app: ALWAYS offer the leptonica_malloc/free APIs availalbe in here!
+//#if FZ_ENABLE_JPX
+// hence we use this condition combo instead:
+#if (BUILDING_MUPDF_MINIMAL_CORE < 2) && FZ_ENABLE_JPX
+#define JPX_ENABLE_IMG_SUPPORT  1
+#else
+#define JPX_ENABLE_IMG_SUPPORT  0
+#endif
+
+#if JPX_ENABLE_IMG_SUPPORT
 
 #include "pixmap-imp.h"
 #include "image-imp.h"
 
+#endif
+
 #include "mupdf/assertions.h"
 #include <string.h>
 
-#if FZ_ENABLE_JPX
+#if JPX_ENABLE_IMG_SUPPORT
 
 static void
 jpx_ycc_to_rgb(fz_context *ctx, fz_pixmap *pix, int cbsign, int crsign)
@@ -80,6 +91,12 @@ typedef struct
 	OPJ_SIZE_T size;
 	OPJ_SIZE_T pos;
 } stream_block;
+
+#else
+
+#include <openjpeg.h>
+
+#endif
 
 /* OpenJPEG does not provide a safe mechanism to intercept
  * allocations. In the latest version all allocations go
@@ -209,6 +226,8 @@ void * opj_aligned_realloc(void *ptr, size_t size)
 	return opj_realloc(ptr, size);
 }
 #endif
+
+#if JPX_ENABLE_IMG_SUPPORT
 
 static void fz_opj_error_callback(const char *msg, void *client_data)
 {
@@ -659,6 +678,4 @@ fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *w
 	fz_throw(ctx, FZ_ERROR_GENERIC, "JPX support disabled");
 }
 
-#endif
-
-#endif
+#endif // JPX_ENABLE_IMG_SUPPORT

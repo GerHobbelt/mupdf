@@ -22,6 +22,7 @@ MONOLITHIC_CMD_TABLE_START()
 	{ "blueprint", { .f = crow_example_blueprint_main } },
 	{ "middleware", { .f = crow_example_middleware_main } },
 	{ "test_multi_file", { .f = crow_test_multi_file_main } },
+    { "test_external_definition", {.f = crow_test_external_definition_main } },
 MONOLITHIC_CMD_TABLE_END();
 
 #include "monolithic_main_tpl.h"

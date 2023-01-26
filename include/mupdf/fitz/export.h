@@ -36,10 +36,12 @@
 		/* Building DLL. */
 		#define FZ_FUNCTION __declspec(dllexport)
 		#define FZ_DATA __declspec(dllexport)
+#error X
 	#elif defined(FZ_DLL_CLIENT)
 		/* Building DLL client code. */
 		#define FZ_FUNCTION __declspec(dllimport)
 		#define FZ_DATA __declspec(dllimport)
+#error Y
 	#else
 		#define FZ_FUNCTION
 		#define FZ_DATA
