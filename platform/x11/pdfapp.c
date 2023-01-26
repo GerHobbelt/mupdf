@@ -184,6 +184,7 @@ char *pdfapp_usage(pdfapp_t *app)
 		"C\t\t-- toggle tinted color mode\n"
 		"E\t\t-- enable/disable ICC color mode\n"
 		"e\t\t-- enable/disable spot color mode\n"
+		"A\t\t-- toggle renderer anti-aliasing on/off\n"
 		"q\t\t-- quit\n"
 	;
 }
@@ -965,11 +966,6 @@ static void pdfapp_showpage(pdfapp_t *app, int loadpage, int drawpage, int repai
 					fz_rethrow(app->ctx);
 				}
 			}
-		}
-
-		if (!app->ctx->cookie)
-		{
-			int x = 1;
 		}
 
 		if (drawpage)
