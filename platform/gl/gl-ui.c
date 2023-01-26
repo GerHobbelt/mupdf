@@ -319,13 +319,13 @@ static void on_keyboardExt(int key, int x, int y)
 static void on_keyboardUp(unsigned char key, int x, int y)
 {
 	MSVC_SPECIAL_SNOWFLAKE("KbdUp");
-	//on_keyboard(key, x, y);
+	/* no-op */
 }
 
 static void on_keyboardDown(unsigned char key, int x, int y)
 {
 	MSVC_SPECIAL_SNOWFLAKE("KbdDown");
-	//on_keyboard(key, x, y);
+	/* no-op */
 }
 
 static void on_keyboardRegular(unsigned char key, int x, int y)
@@ -387,7 +387,7 @@ static void on_keyboardSpecial(int key, int x, int y)
 static void on_keyboardSpecialUp(int key, int x, int y)
 {
 	MSVC_SPECIAL_SNOWFLAKE("KbdSpecialUp");
-	//on_special(key, x, y);
+	/* no-op */
 }
 
 
@@ -553,14 +553,14 @@ void ui_init(int w, int h, const char *title)
 	glutKeyboardFunc(on_keyboardRegular);   // regular QWERTY bit of thee keyboard...
 	glutKeyboardUpFunc(on_keyboardUp);     
 	glutKeyboardDownFunc(on_keyboardDown);
-	//glutSpecialFunc(on_keyboardSpecial);			// arrow keys...
+	glutSpecialFunc(on_keyboardSpecial);			// arrow keys...
 	glutSpecialUpFunc(on_keyboardSpecialUp);
 #else
 	fz_warn(ctx, "This version of MuPDF has been built WITHOUT clipboard or unicode input support!");
 	fz_warn(ctx, "Please file a complaint with your friendly local distribution manager.");
 	glutKeyboardFunc(on_keyboard);
+	glutSpecialFunc(on_special);
 #endif
-	glutSpecialFunc(on_keyboardSpecial);
 	glutMouseFunc(on_mouse);
 	glutMotionFunc(on_motion);
 	glutPassiveMotionFunc(on_passive_motion);
