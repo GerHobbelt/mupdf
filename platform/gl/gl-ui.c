@@ -271,7 +271,18 @@ void ui_draw_ibevel_rect(fz_irect area, unsigned int fill, int depressed)
 	glRectf(area.x0, area.y0, area.x1, area.y1);
 }
 
+#if defined(_MSC_VER) /* && defined(NDEBUG) */ && 01
+// quick harmless hack to ensure MSVC linker doesn't get too smart and does function folding, while NOT CORRECTLY UPDATING the debug info,
+// which would result in the MSVC debugger jumping to weird locations in the codebase when you step through these keyboard callbacks/handlers.
+//
+// You can quickly turn this hack on/off by changing the last bit (`&& 01` <-> `&& 0`) of the #if condition above.
 static const char* m = NULL;
+#define MSVC_SPECIAL_SNOWFLAKE(x)	m = x; 	fz_info(ctx, "MuPDF-GL: keyboard event: %s: %c(=%d)\n", x, (isprint(key) ? (char)key : '?'), key)
+
+#else
+#define MSVC_SPECIAL_SNOWFLAKE(x)	/* nil */
+#endif
+
 
 #if defined(FREEGLUT) && (GLUT_API_VERSION >= 6)
 static void on_keyboard(int key, int x, int y)
@@ -279,7 +290,7 @@ static void on_keyboard(int key, int x, int y)
 static void on_keyboard(unsigned char key, int x, int y)
 #endif
 {
-	//m = "onKbd...";
+	MSVC_SPECIAL_SNOWFLAKE("onKbd...");
 
 #ifdef __APPLE__
 	/* Apple's GLUT has swapped DELETE and BACKSPACE */
@@ -301,25 +312,25 @@ static void on_keyboard(unsigned char key, int x, int y)
 
 static void on_keyboardExt(int key, int x, int y)
 {
-	//m = "KbdExt";
+	MSVC_SPECIAL_SNOWFLAKE("KbdExt");
 	on_keyboard(key, x, y);
 }
 
 static void on_keyboardUp(unsigned char key, int x, int y)
 {
-	//m = "KbdUp";
-	on_keyboard(key, x, y);
+	MSVC_SPECIAL_SNOWFLAKE("KbdUp");
+	//on_keyboard(key, x, y);
 }
 
 static void on_keyboardDown(unsigned char key, int x, int y)
 {
-	//m = "KbdDown";
-	on_keyboard(key, x, y);
+	MSVC_SPECIAL_SNOWFLAKE("KbdDown");
+	//on_keyboard(key, x, y);
 }
 
 static void on_keyboardRegular(unsigned char key, int x, int y)
 {
-	m = "Kbd--";
+	MSVC_SPECIAL_SNOWFLAKE("Kbd--");
 	on_keyboard(key, x, y);
 }
 
@@ -366,6 +377,19 @@ static void on_special(int key, int x, int y)
 		ui_invalidate(); // TODO: leave this to caller
 	}
 }
+
+static void on_keyboardSpecial(int key, int x, int y)
+{
+	MSVC_SPECIAL_SNOWFLAKE("KbdSpecial");
+	on_special(key, x, y);
+}
+
+static void on_keyboardSpecialUp(int key, int x, int y)
+{
+	MSVC_SPECIAL_SNOWFLAKE("KbdSpecialUp");
+	//on_special(key, x, y);
+}
+
 
 static void on_wheel(int wheel, int direction, int x, int y)
 {
@@ -525,16 +549,18 @@ void ui_init(int w, int h, const char *title)
 	glutReshapeFunc(on_reshape);
 	glutDisplayFunc(on_display);
 #if defined(FREEGLUT) && (GLUT_API_VERSION >= 6)
-	glutKeyboardExtFunc(on_keyboardExt);
-	glutKeyboardFunc(on_keyboardRegular);
-	glutKeyboardUpFunc(on_keyboardUp);
+	glutKeyboardExtFunc(on_keyboardExt);    // function keys, ...
+	glutKeyboardFunc(on_keyboardRegular);   // regular QWERTY bit of thee keyboard...
+	glutKeyboardUpFunc(on_keyboardUp);     
 	glutKeyboardDownFunc(on_keyboardDown);
+	//glutSpecialFunc(on_keyboardSpecial);			// arrow keys...
+	glutSpecialUpFunc(on_keyboardSpecialUp);
 #else
 	fz_warn(ctx, "This version of MuPDF has been built WITHOUT clipboard or unicode input support!");
 	fz_warn(ctx, "Please file a complaint with your friendly local distribution manager.");
 	glutKeyboardFunc(on_keyboard);
 #endif
-	glutSpecialFunc(on_special);
+	glutSpecialFunc(on_keyboardSpecial);
 	glutMouseFunc(on_mouse);
 	glutMotionFunc(on_motion);
 	glutPassiveMotionFunc(on_passive_motion);
