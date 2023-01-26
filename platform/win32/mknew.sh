@@ -257,11 +257,11 @@ hocr-tools
 honggfuzz
 hopscotch-map
 horsejs
-html2openxml
+##############.NET########html2openxml
 htmlstreamparser
 http-parser
 hunspell
-hunspell-dictionarries
+hunspell-dictionaries
 hunspell-hyphen
 hyperscan
 hypertextcpp
