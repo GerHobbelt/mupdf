@@ -26,14 +26,14 @@ extern "C" {
  * we have to use a nasty global here. */
 static fz_context *leptonica_mem = NULL;
 
-#ifdef DEBUG_ALLOCS
+#if DEBUG_ALLOCS
 static int event = 0;
 #endif
 
 void *leptonica_malloc(size_t size)
 {
 	void *ret = Memento_label(fz_malloc_no_throw(leptonica_mem, size), "leptonica_malloc");
-#ifdef DEBUG_ALLOCS
+#if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_MALLOC(%p) %d -> %p\n", event++, leptonica_mem, (int)size, ret);
 #endif
 	return ret;
@@ -41,7 +41,7 @@ void *leptonica_malloc(size_t size)
 
 void leptonica_free(void *ptr)
 {
-#ifdef DEBUG_ALLOCS
+#if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_FREE(%p) %p\n", event++, leptonica_mem, ptr);
 #endif
 	fz_free(leptonica_mem, ptr);
@@ -53,7 +53,7 @@ void *leptonica_calloc(size_t numelm, size_t elemsize)
 
 	if (ret)
 		memset(ret, 0, numelm * elemsize);
-#ifdef DEBUG_ALLOCS
+#if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_CALLOC %d,%d -> %p\n", event++, (int)numelm, (int)elemsize, ret);
 #endif
 	return ret;
@@ -64,7 +64,7 @@ void *leptonica_realloc(void *ptr, size_t blocksize)
 {
 	void *ret = fz_realloc_no_throw(leptonica_mem, ptr, blocksize);
 
-#ifdef DEBUG_ALLOCS
+#if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_REALLOC %p,%d -> %p\n", event++, ptr, (int)blocksize, ret);
 #endif
 	return ret;
