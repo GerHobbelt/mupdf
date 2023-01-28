@@ -523,6 +523,10 @@ void fz_write_string(fz_context *ctx, fz_output *out, const char *s);
 /**
 	Write different sized data to an output stream.
 */
+void fz_write_int64_be(fz_context *ctx, fz_output *out, int64_t x);
+void fz_write_int64_le(fz_context *ctx, fz_output *out, int64_t x);
+void fz_write_uint64_be(fz_context *ctx, fz_output *out, uint64_t x);
+void fz_write_uint64_le(fz_context *ctx, fz_output *out, uint64_t x);
 void fz_write_int32_be(fz_context *ctx, fz_output *out, int x);
 void fz_write_int32_le(fz_context *ctx, fz_output *out, int x);
 void fz_write_uint32_be(fz_context *ctx, fz_output *out, unsigned int x);

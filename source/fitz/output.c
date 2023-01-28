@@ -1217,6 +1217,52 @@ fz_write_string(fz_context *ctx, fz_output *out, const char *s)
 }
 
 void
+fz_write_int64_be(fz_context* ctx, fz_output* out, int64_t x)
+{
+	char data[8];
+
+	data[0] = x >> 56;
+	data[1] = x >> 48;
+	data[2] = x >> 40;
+	data[3] = x >> 32;
+	data[4] = x >> 24;
+	data[5] = x >> 16;
+	data[6] = x >> 8;
+	data[7] = x;
+
+	fz_write_data(ctx, out, data, 8);
+}
+
+void
+fz_write_uint64_be(fz_context* ctx, fz_output* out, uint64_t x)
+{
+	fz_write_int64_be(ctx, out, x);
+}
+
+void
+fz_write_int64_le(fz_context* ctx, fz_output* out, int64_t x)
+{
+	char data[8];
+
+	data[0] = x;
+	data[1] = x >> 8;
+	data[2] = x >> 16;
+	data[3] = x >> 24;
+	data[4] = x >> 32;
+	data[5] = x >> 40;
+	data[6] = x >> 48;
+	data[7] = x >> 56;
+
+	fz_write_data(ctx, out, data, 8);
+}
+
+void
+fz_write_uint64_le(fz_context* ctx, fz_output* out, uint64_t x)
+{
+	fz_write_int64_le(ctx, out, x);
+}
+
+void
 fz_write_int32_be(fz_context *ctx, fz_output *out, int x)
 {
 	char data[4];
