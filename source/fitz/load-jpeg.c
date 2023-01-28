@@ -33,6 +33,8 @@
 
 #ifdef SHARE_JPEG
 
+#error "Currently unsupported build mode!"
+
 #define JZ_CTX_FROM_CINFO(c) (fz_context *)((c)->client_data)
 
 static void fz_jpg_mem_init(j_common_ptr cinfo, fz_context *ctx)
@@ -47,7 +49,7 @@ static void fz_jpg_mem_init(j_common_ptr cinfo, fz_context *ctx)
 typedef void * backing_store_ptr;
 #include "jmemcust.h"
 
-#define JZ_CTX_FROM_CINFO(c) (fz_context *)(GET_CUST_MEM_DATA(c)->priv)
+#define JZ_CTX_FROM_CINFO(c) (GET_CUST_MEM_DATA(c)->priv_ctx)
 
 static void *
 fz_jpg_mem_alloc(j_common_ptr cinfo, size_t size)
@@ -68,7 +70,7 @@ fz_jpg_mem_init(j_common_ptr cinfo, fz_context *ctx)
 {
 	jpeg_cust_mem_data *custmptr;
 	custmptr = fz_malloc_struct(ctx, jpeg_cust_mem_data);
-	if (!jpeg_cust_mem_init(custmptr, (void *) ctx, NULL, NULL, NULL,
+	if (!jpeg_cust_mem_init(custmptr, ctx, NULL, NULL, NULL, NULL, NULL,
 				fz_jpg_mem_alloc, fz_jpg_mem_free,
 				fz_jpg_mem_alloc, fz_jpg_mem_free, NULL))
 	{
@@ -350,7 +352,7 @@ static int extract_app13_resolution(jpeg_saved_marker_ptr marker, int *xres, int
 fz_pixmap *
 fz_load_jpeg(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 {
-	struct jpeg_decompress_struct cinfo;
+	struct jpeg_decompress_struct cinfo = { 0 };
 	struct jpeg_error_mgr err;
 	struct jpeg_source_mgr src;
 	unsigned char *row[1], *sp, *dp;
@@ -474,7 +476,7 @@ fz_load_jpeg(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 void
 fz_load_jpeg_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen, int *xp, int *yp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientation)
 {
-	struct jpeg_decompress_struct cinfo;
+	struct jpeg_decompress_struct cinfo = { 0 };
 	struct jpeg_error_mgr err;
 	struct jpeg_source_mgr src;
 	fz_colorspace *icc = NULL;

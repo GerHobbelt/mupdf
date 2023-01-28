@@ -25,7 +25,7 @@ typedef JMETHOD(void *, j_cust_mem_get_large_ptr, (j_common_ptr cinfo, size_t si
 typedef JMETHOD(void, j_custmem_free_large_ptr, (j_common_ptr cinfo, void *object, size_t size));
 typedef JMETHOD(void, j_custmem_open_backing_store_ptr, (j_common_ptr cinfo, backing_store_ptr info, long total_bytes_needed));
 
-typedef struct {
+typedef struct jpeg_cust_mem_data_s {
 	j_custmem_init_ptr j_mem_init;
 	j_custmem_term_ptr j_mem_term;
 	j_custmem_avail_ptr j_mem_avail;
@@ -34,13 +34,17 @@ typedef struct {
 	j_cust_mem_get_large_ptr j_mem_get_large;
 	j_custmem_free_large_ptr j_mem_free_large;
 	j_custmem_open_backing_store_ptr j_mem_open_backing_store;
-	void *priv;
+	fz_context *priv_ctx;
+	jmp_buf *priv_longjmp_ref;			// used by the tesseract lib in monolithic build mode, i.e. when built mixed with libmupdf
+	void *priv_ref_extra;               // used to transport fz_dctd struct ref, used by libmupdf
 } jpeg_cust_mem_data;
 
-#define GET_CUST_MEM_DATA(c) ((jpeg_cust_mem_data *)c->client_data)
+#define GET_CUST_MEM_DATA(c) (c->client_data)
 
 GLOBAL(jpeg_cust_mem_data *)
-	jpeg_cust_mem_init(jpeg_cust_mem_data *custm, void *priv,
+	jpeg_cust_mem_init(jpeg_cust_mem_data *custm, fz_context *priv_ctx,
+            jmp_buf *priv_longjmp_ref,			// used by the tesseract lib in monolithic build mode, i.e. when built mixed with libmupdf
+		    void *priv_extra_ref,               // used to transport fz_dctd struct ref, used by libmupdf
 			j_custmem_init_ptr init,
 			j_custmem_term_ptr term,
 			j_custmem_avail_ptr avail,

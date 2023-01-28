@@ -154,7 +154,9 @@ jpeg_mem_term (j_common_ptr cinfo)
 }
 
 GLOBAL(jpeg_cust_mem_data *)
-jpeg_cust_mem_init(jpeg_cust_mem_data *custm, void *priv,
+jpeg_cust_mem_init(jpeg_cust_mem_data *custm, fz_context* priv_ctx,
+	    jmp_buf* priv_longjmp_ref,			// used by the tesseract lib in monolithic build mode, i.e. when built mixed with libmupdf
+	    void *priv_extra_ref,               // used to transport fz_dctd struct ref, used by libmupdf
 		j_custmem_init_ptr init,
 		j_custmem_term_ptr term,
 		j_custmem_avail_ptr avail,
@@ -171,7 +173,10 @@ jpeg_cust_mem_init(jpeg_cust_mem_data *custm, void *priv,
 	{
 		lcustm = custm;
 
-		lcustm->priv = priv;
+		lcustm->priv_ctx = priv_ctx;
+		lcustm->priv_longjmp_ref = priv_longjmp_ref;
+		lcustm->priv_ref_extra = priv_extra_ref;
+
 		lcustm->j_mem_init = init;
 		lcustm->j_mem_term = term;
 		lcustm->j_mem_avail = avail;
@@ -180,6 +185,10 @@ jpeg_cust_mem_init(jpeg_cust_mem_data *custm, void *priv,
 		lcustm->j_mem_get_large = get_large;
 		lcustm->j_mem_free_large = free_large;
 		lcustm->j_mem_open_backing_store = open_backing_store;
+	}
+	else
+	{
+		memset(custm, 0, sizeof(*custm));
 	}
 	return lcustm;
 }
