@@ -27,6 +27,7 @@
 #include "mupdf/fitz.h"
 #include "mupdf/mutool.h"
 #include "mupdf/helpers/mu-threads.h"
+#include "mupdf/helpers/jmemcust.h"
 
 #define BUILD_MONOLITHIC 1
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
@@ -590,7 +591,11 @@ int mutool_main(int argc, const char** argv)
     {
         ctx = fz_get_global_context();
     }
-    atexit(mu_drop_context);
+
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	fz_set_default_jpeg_sys_mem_mgr();
+
+	atexit(mu_drop_context);
 
     if (argc == 0)
     {

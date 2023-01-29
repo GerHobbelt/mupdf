@@ -27,6 +27,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/jmemcust.h"
 
 #include "mupdf/assertions.h"
 #include <stdlib.h>
@@ -200,6 +201,9 @@ int muconvert_main(int argc, const char** argv)
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
+
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	fz_set_default_jpeg_sys_mem_mgr();
 
 	/* Register the default file types to handle. */
 	fz_try(ctx)

@@ -13,6 +13,7 @@
 
 #include "mupdf/helpers/pkcs7-openssl.h"
 #include "mupdf/helpers/dir.h"
+#include "mupdf/helpers/jmemcust.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -2456,6 +2457,9 @@ int pdfmetadump_main(int argc, const char** argv)
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
+
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	fz_set_default_jpeg_sys_mem_mgr();
 
 	// keep the original error + warn callbacks and replace them with ones, which collect the log data
 	// in a buffer, to be appended at the end of the metadata file.

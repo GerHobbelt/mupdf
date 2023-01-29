@@ -165,6 +165,7 @@
 #include "mupdf/helpers/mu-threads.h"
 #include "mupdf/helpers/cpu.h"
 #include "mupdf/helpers/system-header-files.h"
+#include "mupdf/helpers/jmemcust.h"
 
 #if FZ_ENABLE_RENDER_CORE 
 
@@ -2042,6 +2043,10 @@ int main(int argc, const char** argv)
 
 		muraster_is_toplevel_ctx = 1;
 	}
+
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	fz_set_default_jpeg_sys_mem_mgr();
+
 	atexit(mu_drop_context);
 
 	if (ctx != __fz_get_RAW_global_context())

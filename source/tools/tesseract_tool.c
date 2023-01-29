@@ -6,6 +6,7 @@
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
+#include "mupdf/helpers/jmemcust.h"
 
 #include "../../source/fitz/tessocr.h"
 
@@ -43,6 +44,9 @@ int main(int argc, const char** argv)
 		fz_error(ctx, "No command name found!");
 		return EXIT_FAILURE;
 	}
+
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	fz_set_default_jpeg_sys_mem_mgr();
 
 	ocr_set_leptonica_mem(ctx);
 

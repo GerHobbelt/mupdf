@@ -4,6 +4,7 @@
 #include "mupdf/assertions.h"
 #include "mupdf/helpers/mu-threads.h"
 #include "mupdf/helpers/system-header-files.h"
+#include "mupdf/helpers/jmemcust.h"
 
 #include "timeval.h"
 
@@ -1930,7 +1931,11 @@ bulktest_main(int argc, const char **argv)
 
         bulktest_is_toplevel_ctx = 1;
     }
-    atexit(mu_drop_context_at_exit);
+
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	fz_set_default_jpeg_sys_mem_mgr();
+
+	atexit(mu_drop_context_at_exit);
 
     if (ctx != __fz_get_RAW_global_context())
     {

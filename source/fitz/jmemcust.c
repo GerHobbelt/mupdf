@@ -27,7 +27,7 @@
 #include <jpeglib.h>
 #include "jerror.h"
 
-#include "jmemcust.h"
+#include "mupdf/helpers/jmemcust.h"
 
 
 static void *
@@ -93,5 +93,12 @@ int fz_jpeg_dflt_sys_mem_register(j_common_ptr cinfo)
 	cinfo->sys_mem_if.mem_term = fz_jpeg_dflt_mem_term;
 
 	return 0;
+}
+
+
+void fz_set_default_jpeg_sys_mem_mgr(void)
+{
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	jpeg_sys_mem_set_default_setup(fz_jpeg_dflt_sys_mem_register);
 }
 

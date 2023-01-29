@@ -27,6 +27,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/helpers/jmemcust.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -258,6 +259,9 @@ int pdfposter_main(int argc, const char** argv)
 		fz_error(ctx, "cannot initialise MuPDF context");
 		return EXIT_FAILURE;
 	}
+
+	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	fz_set_default_jpeg_sys_mem_mgr();
 
 	infile = argv[fz_optind++];
 
