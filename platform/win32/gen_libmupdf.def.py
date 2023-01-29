@@ -162,8 +162,6 @@ EXPORTS
 
 	sqlite3OSTrace                    DATA
 
-	jpeg_cust_mem_init
-
 	fz_report_failed_assertion
 	fz_report_failed_assertion_and_continue
 
