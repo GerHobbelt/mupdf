@@ -68,13 +68,13 @@ fz_dct_mem_free(j_common_ptr cinfo, void *object, size_t size)
 }
 
 static long
-fz_dct_mem_init(struct jpeg_decompress_struct *cinfo)
+fz_dct_mem_init(j_common_ptr cinfo)
 {
 	return 0; 			/* just set max_memory_to_use to 0 */
 }
 
 static void
-fz_dct_mem_term(struct jpeg_decompress_struct* cinfo)
+fz_dct_mem_term(j_common_ptr cinfo)
 {
 	cinfo->client_data_ref = NULL;
 	cinfo->client_init_callback = NULL;
@@ -100,8 +100,10 @@ static void fz_dct_open_backing_store(j_common_ptr cinfo,
 
 
 
-static int fz_jpeg_dct_sys_mem_register(struct jpeg_decompress_struct* cinfo)
+static int fz_jpeg_dct_sys_mem_register(j_common_ptr _cinfo)
 {
+	struct jpeg_decompress_struct* cinfo = (struct jpeg_decompress_struct*)_cinfo;
+
 	cinfo->sys_mem_if.get_small = fz_dct_mem_alloc;
 	cinfo->sys_mem_if.free_small = fz_dct_mem_free;
 
@@ -331,7 +333,7 @@ close_dctd(fz_context *ctx, fz_stream* stm)
 		jpeg_destroy_decompress(&state->cinfo);
 	}
 
-	fz_dct_mem_term(&state->cinfo);
+	fz_dct_mem_term((j_common_ptr) &state->cinfo);
 
 	if (state->cinfo.src)
 		state->curr_stm->rp = state->curr_stm->wp - state->cinfo.src->bytes_in_buffer;
