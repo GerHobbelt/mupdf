@@ -60,7 +60,7 @@ static fz_image *
 pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict, fz_stream *cstm, int forcemask)
 {
 	fz_image *image = NULL;
-	pdf_obj *obj, *res;
+	pdf_obj *obj, *res, *cs;
 
 	int w, h, bpc, n;
 	int imagemask;
@@ -72,13 +72,13 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 	float decode[FZ_MAX_COLORS * 2];
 	int colorkey[FZ_MAX_COLORS * 2];
 	int stride;
+	int is_jpx;
 
 	int i;
 	fz_compressed_buffer *buffer;
 
 	/* special case for JPEG2000 images */
-	if (pdf_is_jpx_image(ctx, dict))
-		return pdf_load_jpx_imp(ctx, doc, rdb, dict, cstm, forcemask);
+	is_jpx = pdf_is_jpx_image(ctx, dict);
 
 	w = pdf_to_int(ctx, pdf_dict_geta(ctx, dict, PDF_NAME(Width), PDF_NAME(W)));
 	h = pdf_to_int(ctx, pdf_dict_geta(ctx, dict, PDF_NAME(Height), PDF_NAME(H)));
@@ -113,18 +113,18 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 
 	fz_try(ctx)
 	{
-		obj = pdf_dict_geta(ctx, dict, PDF_NAME(ColorSpace), PDF_NAME(CS));
-		if (obj && !imagemask && !forcemask)
+		cs = pdf_dict_geta(ctx, dict, PDF_NAME(ColorSpace), PDF_NAME(CS));
+		if (cs && !imagemask && !forcemask)
 		{
 			/* colorspace resource lookup is only done for inline images */
-			if (pdf_is_name(ctx, obj))
+			if (pdf_is_name(ctx, cs))
 			{
-				res = pdf_dict_get(ctx, pdf_dict_get(ctx, rdb, PDF_NAME(ColorSpace)), obj);
+				res = pdf_dict_get(ctx, pdf_dict_get(ctx, rdb, PDF_NAME(ColorSpace)), cs);
 				if (res)
-					obj = res;
+					cs = res;
 			}
 
-			colorspace = pdf_load_colorspace(ctx, obj);
+			colorspace = pdf_load_colorspace(ctx, cs);
 			indexed = fz_colorspace_is_indexed(ctx, colorspace);
 
 			n = fz_colorspace_n(ctx, colorspace);
@@ -193,8 +193,21 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 			}
 		}
 
+		if (is_jpx)
+		{
+			fz_try(ctx)
+				image = pdf_load_jpx_imp(ctx, doc, rdb, dict, cstm, forcemask);
+			fz_catch(ctx)
+			{
+				fz_pixmap *pix = fz_new_pixmap(ctx, colorspace, w, h, NULL, 0);
+				fz_clear_pixmap_with_value(ctx, pix, 0);
+				image = fz_new_image_from_pixmap(ctx, pix, NULL);
+				fz_drop_pixmap(ctx, pix);
+				fz_warn(ctx, "JPX image replace with empty image");
+			}
+		}
 		/* Do we load from a ref, or do we load an inline stream? */
-		if (cstm == NULL)
+		else if (cstm == NULL)
 		{
 			/* Just load the compressed image data now and we can decode it on demand. */
 			size_t worst_case = w * (size_t)h;
