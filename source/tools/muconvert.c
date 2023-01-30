@@ -229,11 +229,18 @@ int muconvert_main(int argc, const char** argv)
 	/* Open the output document. */
 	fz_try(ctx)
     {
-        char file_path[PATH_MAX];
-        fz_format_output_path(ctx, file_path, sizeof file_path, output, 0);
-        fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
-        fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
-        out = fz_new_document_writer(ctx, file_path, format, options);
+		if (output[0] == '-' && output[1] == 0)
+		{
+			out = fz_new_document_writer_with_output(ctx, fz_stdout(ctx), format, options);
+		}
+		else
+		{
+	        char file_path[PATH_MAX];
+	        fz_format_output_path(ctx, file_path, sizeof file_path, output, 0);
+	        fz_normalize_path(ctx, file_path, sizeof file_path, file_path);
+	        fz_sanitize_path(ctx, file_path, sizeof file_path, file_path);
+	        out = fz_new_document_writer(ctx, file_path, format, options);
+		}
     }
 	fz_catch(ctx)
 	{
