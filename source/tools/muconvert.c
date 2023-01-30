@@ -183,7 +183,10 @@ int muconvert_main(int argc, char **argv)
 
 	/* Open the output document. */
 	fz_try(ctx)
-		out = fz_new_document_writer(ctx, output, format, options);
+		if (output[0] == '-' && output[1] == 0)
+			out = fz_new_document_writer_with_output(ctx, fz_stdout(ctx), format, options);
+		else
+			out = fz_new_document_writer(ctx, output, format, options);
 	fz_catch(ctx)
 	{
 		fprintf(stderr, "cannot create document: %s\n", fz_caught_message(ctx));
