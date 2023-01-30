@@ -197,6 +197,8 @@ int main(int argc, const char** argv)
 
 			ocr_set_leptonica_mem(ctx);
 
+			ocr_set_leptonica_stderr_handler(ctx);
+
 			rv |= RUN_ALL_TESTS();
 
 #if 0

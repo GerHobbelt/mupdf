@@ -54,6 +54,8 @@ void ocr_recognise(fz_context *ctx,
 
 // --------
 
+void ocr_set_leptonica_stderr_handler(fz_context *ctx);
+
 #ifdef __cplusplus
 }
 #endif

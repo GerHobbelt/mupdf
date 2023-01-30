@@ -50,6 +50,8 @@ int main(int argc, const char** argv)
 
 	ocr_set_leptonica_mem(ctx);
 
+	ocr_set_leptonica_stderr_handler(ctx);
+
 	//fz_info(ctx, "usage: tesseract <command> [options]");
 	int rv = tesseract_main(argc, argv);
 

@@ -41,10 +41,10 @@
 #define HAVE_NEON                        1
 #endif
 
-#define TESSERACT_DISABLE_DEBUG_FONTS    1
+#undef TESSERACT_DISABLE_DEBUG_FONTS    
 #define TESSERACT_IMAGEDATA_AS_PIX       1
 
-#undef GRAPHICS_DISABLED
+#define GRAPHICS_DISABLED                1
 #define DISABLED_LEGACY_ENGINE           0
 
 #if !defined(DISABLED_LEGACY_ENGINE)

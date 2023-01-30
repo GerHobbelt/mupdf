@@ -1,16 +1,16 @@
 #ifndef __MUPDF_HELPERS_DIR_H__
 #define __MUPDF_HELPERS_DIR_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "mupdf/fitz/version.h"
 #include "mupdf/fitz/config.h"
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
 
 #include <errno.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef E_OK
 #define E_OK 0

@@ -187,6 +187,8 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	tesseract::TessBaseAPI *api;
 
 	ocr_set_leptonica_mem(ctx);
+	ocr_set_leptonica_stderr_handler(ctx);
+
 	setPixMemoryManager(leptonica_malloc, leptonica_free);
 #if defined(_DEBUG) && defined(_CRTDBG_REPORT_FLAG)
 	api = new (_CLIENT_BLOCK, __FILE__, __LINE__) tesseract::TessBaseAPI();
@@ -440,5 +442,18 @@ void ocr_recognise(fz_context *ctx,
 }
 
 #endif // FZ_ENABLE_OCR 
+
+static void lept_stderr_print(const char *msg)
+{
+	fz_context *ctx = fz_get_global_context();
+
+	fz_write_string(ctx, fz_stderr(ctx), msg);
+}
+
+
+void ocr_set_leptonica_stderr_handler(fz_context *ctx)
+{
+	leptSetStderrHandler(lept_stderr_print);
+}
 
 }
