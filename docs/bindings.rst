@@ -270,7 +270,7 @@ The Python and C# MuPDF APIs
 * A C# namespace called ``mupdf``.
 
   * C# bindings are experimental as of 2021-10-14.
-* Generated from the C++ MuPDF API's header files, so inherits the abstractions of the C++ API:
+* Auto-generated from the C++ MuPDF API using SWIG, so inherits the abstractions of the C++ API:
 
   * No ``fz_context*`` arguments.
   * Automatic reference counting, so no need to call ``fz_keep_*()`` or ``fz_drop_*()``, and we have value-semantics for class instances.
