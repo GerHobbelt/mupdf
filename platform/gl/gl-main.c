@@ -2986,8 +2986,6 @@ static void cleanup(void)
 
 	trace_action("quit(0);\n");
 
-	console_fin();
-
 	fz_drop_output(ctx, trace_file);
 	fz_drop_stext_page(ctx, page_text);
 	fz_drop_separations(ctx, seps);
@@ -2996,6 +2994,8 @@ static void cleanup(void)
 	fz_drop_outline(ctx, outline);
 	fz_drop_document(ctx, doc);
 	fz_drop_context(ctx);
+
+	console_fin();
 }
 
 int reloadrequested = 0;
