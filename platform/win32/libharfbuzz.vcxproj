@@ -47,20 +47,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -106,8 +106,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../scripts/harfbuzz/src;..\..\thirdparty\lcms2\include;..\..\scripts\freetype;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\scripts\libjpeg-turbo;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\freetype\include;..\..\thirdparty\freetype\include\freetype;../../thirdparty/harfbuzz/src;..\..\thirdparty\gumbo-parser\src;..\..\thirdparty\gumbo-parser\visualc\include;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\include\;..\..\include\mupdf;..\..\scripts\zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -231,6 +231,7 @@
     <ClCompile Include="../../thirdparty/harfbuzz/src/main.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/util/hb-fc-list.c" />
     <ClCompile Include="../../thirdparty/harfbuzz/util/hb-fc.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/util/hb-info.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/util/hb-ot-shape-closure.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/util/hb-shape-util.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/util/hb-subset-util.cc" />
@@ -245,6 +246,7 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/Common/CoverageFormat1.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/Common/CoverageFormat2.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/Common/RangeRecord.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/GDEF/GDEF.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/GPOS/Anchor.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/GPOS/AnchorFormat1.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/Layout/GPOS/AnchorFormat2.hh" />
@@ -312,6 +314,7 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/glyf.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/loca.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/OT/glyf/path-builder.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/OT/name/name.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/graph/classdef-graph.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/graph/coverage-graph.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/graph/graph.hh" />
@@ -1800,6 +1803,18 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1/TestCOLRv1.retain-gids.E003.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1/TestCOLRv1.retain-gids.E004.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1/TestCOLRv1.retain-gids.retain-all-codepoint.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.default.41,42.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.default.41.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.default.retain-all-codepoint.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.drop-hints-retain-gids.41,42.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.drop-hints-retain-gids.41.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.drop-hints-retain-gids.retain-all-codepoint.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.drop-hints.41,42.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.drop-hints.41.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.drop-hints.retain-all-codepoint.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.retain-gids.41,42.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.retain-gids.41.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.retain-gids.retain-all-codepoint.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/full-font/Roboto-Regular.default.1FC,21,41,20,62,63.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/full-font/Roboto-Regular.default.61,62,63,64,65,66,67,68,69,6A,6B.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/full-font/Roboto-Regular.default.61,62,63.ttf" />
@@ -2305,6 +2320,7 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/BungeeColor-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Caudex-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Comfortaa-Regular-new.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Foldit.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Fraunces.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Handjet.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Harmattan-Regular.ttf" />
@@ -2518,7 +2534,8 @@
     <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-utilities.xml" />
     <Xml Include="../../thirdparty/harfbuzz/docs/usermanual-what-is-harfbuzz.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
