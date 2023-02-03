@@ -192,7 +192,7 @@ Environmental variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All builds
-^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * **MUPDF_mt_ctx**
 
@@ -208,7 +208,7 @@ All builds
   single-threaded mode. This should be done before any other use of MuPDF.
 
 Debug builds only
-^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 Debug builds contain diagnostics/checking code that is activated via these
 environmental variables:
@@ -666,7 +666,7 @@ Setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 General requirements
-^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * Linux, Windows or OpenBSD.
 
@@ -680,7 +680,7 @@ General requirements
 
 
 Windows
-^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 Install Python using the Python Windows installer from the python.org website:
 
@@ -720,7 +720,7 @@ Other:
 
 
 Linux
-^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 (Debian-specific; similar packages exist on other distributions.)
 
@@ -738,7 +738,7 @@ Notes:
 
 
 OpenBSD
-^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * ``sudo pkg_add python py3-llvm swig``
 * For C#: ``sudo pkg_add mono``
@@ -781,13 +781,13 @@ How building the APIs works
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Building the MuPDF shared library
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * On Unix, runs ``make`` on MuPDF's Makefile.
 * On Windows, runs ``devenv.com`` on ``.sln`` and ``.vcxproj`` files within `platform/win32/ <https://git.ghostscript.com/?p=mupdf.git;a=tree;f=platform/win32>`_.
 
 Generation of the C++ MuPDF API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * Uses clang-python to parse MuPDF's C API.
 
@@ -807,7 +807,7 @@ Generation of the C++ MuPDF API
 
 
 Generation of the Python and C# MuPDF APIs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * Uses SWIG to parse the previously-generated C++ headers and generate C++,
   Python and C# code.
@@ -1071,7 +1071,7 @@ We cope with this in two ways:
 
 
 Default constructors
-^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 Some POD classes have a default constructor that sets the various fields to
 default values.
@@ -1081,7 +1081,7 @@ sets ``m_internal`` to null.
 
 
 Raw constructors
-^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 Many wrapper classes have constructors that take a pointer to the underlying
 MuPDF C struct. These are usually for internal use only. They do not call
@@ -1225,7 +1225,7 @@ Python differences from C API
 [The functions listed below are also available as class methods.]
 
 New functions
-^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * ``fz_buffer_extract_copy()``: Returns copy of buffer data as a Python ``bytes``.
 * ``fz_buffer_storage_memoryview()``: Returns Python ``memoryview`` onto buffer data. Relies on buffer contents not changing.
@@ -1233,7 +1233,7 @@ New functions
 
 
 Implemented in Python
-^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * ``fz_format_output_path()``
 * ``pdf_dict_getl()``
@@ -1241,7 +1241,7 @@ Implemented in Python
 
 
 Non-standard API or implementation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 * ``fz_buffer_extract()``: Returns a *copy* of the original buffer data as a Python ``bytes``. Still clears the buffer.
 * ``fz_convert_color()``: No ``float *fv`` param, instead returns ``(rgb0, rgb1, rgb2, rgb3)``.
