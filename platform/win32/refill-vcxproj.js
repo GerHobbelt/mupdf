@@ -76,8 +76,8 @@ if (projname.startsWith("wxCharts-sample-")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
-if (projname.endsWith("_tests")) {
-	let tst_projname = projname.replace(/_tests$/, '');
+if (/[_-]tests$/.test(projname)) {
+	let tst_projname = projname.replace(/[_-]tests$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -86,35 +86,7 @@ if (projname.endsWith("_tests")) {
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
-	tst_projname = nonlib_projname.replace(/_tests$/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/lib${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-}
-
-if (projname.endsWith("_test")) {
-	let tst_projname = projname.replace(/_test$/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	tst_projname = nonlib_projname.replace(/_test$/, '');
+	tst_projname = nonlib_projname.replace(/[_-]tests$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -132,8 +104,36 @@ if (projname.endsWith("_test")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
-if (projname.endsWith("_tools")) {
-	let tool_projname = projname.replace(/_tools$/, '');
+if (/[_-]test$/.test(projname)) {
+	let tst_projname = projname.replace(/[_-]test$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/[_-]test$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (/[_-]tools$/.test(projname)) {
+	let tool_projname = projname.replace(/[_-]tools$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tool_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -142,7 +142,7 @@ if (projname.endsWith("_tools")) {
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
-	tool_projname = nonlib_projname.replace(/_tools$/, '');
+	tool_projname = nonlib_projname.replace(/[_-]tools$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tool_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -160,8 +160,8 @@ if (projname.endsWith("_tools")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
-if (projname.endsWith("_demos")) {
-	let tst_projname = projname.replace(/_demos$/, '');
+if (/[_-]demos$/.test(projname)) {
+	let tst_projname = projname.replace(/[_-]demos$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -170,35 +170,7 @@ if (projname.endsWith("_demos")) {
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
-	tst_projname = nonlib_projname.replace(/_demos$/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/lib${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-}
-
-if (projname.endsWith("_demo")) {
-	let tst_projname = projname.replace(/_demo$/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-
-	tst_projname = nonlib_projname.replace(/_demo$/, '');
+	tst_projname = nonlib_projname.replace(/[_-]demos$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -216,8 +188,8 @@ if (projname.endsWith("_demo")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
-if (projname.endsWith("_benchmark")) {
-	let tst_projname = projname.replace(/_benchmark$/, '');
+if (/[_-]demo$/.test(projname)) {
+	let tst_projname = projname.replace(/[_-]demo$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -226,7 +198,7 @@ if (projname.endsWith("_benchmark")) {
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
-	tst_projname = nonlib_projname.replace(/_benchmark$/, '');
+	tst_projname = nonlib_projname.replace(/[_-]demo$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -244,8 +216,8 @@ if (projname.endsWith("_benchmark")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
-if (projname.endsWith("_examples")) {
-	let tst_projname = projname.replace(/_examples$/, '');
+if (/[_-]benchmark$/.test(projname)) {
+	let tst_projname = projname.replace(/[_-]benchmark$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
@@ -254,7 +226,35 @@ if (projname.endsWith("_examples")) {
 
 	checkDirAndReportPlusExitOnSuccess(testpath);
 
-	tst_projname = nonlib_projname.replace(/_examples$/, '');
+	tst_projname = nonlib_projname.replace(/[_-]benchmark$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/lib${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (/[_-]examples$/.test(projname)) {
+	let tst_projname = projname.replace(/[_-]examples$/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	testpath = `${scriptpath}/../../thirdparty/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+
+	tst_projname = nonlib_projname.replace(/[_-]examples$/, '');
 	testpath = `${scriptpath}/../../thirdparty/owemdjee/${tst_projname}`;
 
 	checkDirAndReportPlusExitOnSuccess(testpath);

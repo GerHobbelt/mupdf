@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libmerror</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7F07F1}</ProjectGuid>
-    <RootNamespace>libmerror</RootNamespace>
+    <ProjectName>libresult-cpp-tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-6518FF45ECF0}</ProjectGuid>
+    <RootNamespace>libresult-cpp-tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -114,7 +114,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -124,14 +124,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,15 +150,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,14 +179,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -197,7 +197,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,15 +205,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMERROR;MERROR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRESULT_CPP;RESULT_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/merror;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -226,70 +226,25 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/adl_hooks_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/base_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/bool_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/default_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/defer_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/description_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/error_passthrough_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/fill_error_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/forward_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/function_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/internal/indenting_stream_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/internal/type_map_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/logging.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/logging_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/method_hooks_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/observer_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/optional_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/pointer_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/print_operands_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/print_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/return_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/status_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/tee_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/domain/verify_via_try_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/internal/expand_expr_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/internal/preprocessor_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/internal/tls_map_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/macros_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/types.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/merror/merror/types_test.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/adl_hooks.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/base.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/bool.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/default.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/defer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/description.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/error_passthrough.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/fill_error.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/forward.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/function.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/internal/capture_stream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/internal/indenting_stream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/internal/stringstream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/internal/type_map.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/logging.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/method_hooks.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/observer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/optional.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/pointer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/print.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/print_operands.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/return.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/status.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/tee.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/domain/verify_via_try.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/internal/expand_expr.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/internal/preprocessor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/internal/tls_map.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/macros.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/merror.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/merror/merror/types.h" />
-    <Text Include="../../thirdparty/owemdjee/merror/README.md" />
-    <Text Include="../../thirdparty/owemdjee/merror/docs/code-of-conduct.md" />
-    <Text Include="../../thirdparty/owemdjee/merror/docs/contributing.md" />
+    <ClCompile Include="../../thirdparty/owemdjee/result-cpp/test/src/failure.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/result-cpp/test/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/result-cpp/test/src/result.constexpr.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/result-cpp/test/src/result.test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/result-cpp/include/result.hpp" />
+    <Image Include="../../thirdparty/owemdjee/result-cpp/doc/feature-preview-banner.gif" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/cmake/ResultConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/doc/building-tests.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/doc/commit-standards.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/doc/deviations-from-proposal.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/doc/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/doc/installing.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/doc/legal.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/doc/tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/result-cpp/test/CMakeLists.txt" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
