@@ -1131,18 +1131,17 @@ FUN(PDFAnnotation_setNativeAppearance)(JNIEnv *env, jobject self, jstring jappea
 JNIEXPORT void JNICALL
 FUN(PDFAnnotation_setNativeAppearanceImage)(JNIEnv *env, jobject self, jobject jimage)
 {
-    fz_context *ctx = get_context(env);
-    pdf_annot *annot = from_PDFAnnotation(env, self);
-    fz_image *image = from_Image(env, jimage);
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	fz_image *image = from_Image(env, jimage);
 
-    if (!ctx || !annot || !image)
-        return;
+	if (!ctx || !annot || !image)
+		return;
 
-    fz_var(image);
-    fz_try(ctx)
-        pdf_set_annot_stamp_image(ctx, annot, image);
-    fz_catch(ctx)
-        jni_rethrow_void(env, ctx);
+	fz_try(ctx)
+		pdf_set_annot_stamp_image(ctx, annot, image);
+	fz_catch(ctx)
+		jni_rethrow_void(env, ctx);
 }
 
 JNIEXPORT void JNICALL
