@@ -305,6 +305,7 @@ public class PDFAnnotation
 
 	protected native void setNativeAppearance(String appearance, String state, Matrix ctm, Rect bbox, PDFObject res, Buffer contents);
 	protected native void setNativeAppearanceDisplayList(String appearance, String state, Matrix ctm, DisplayList list);
+	protected native void setNativeAppearanceImage(Image image);
 
 	public void setAppearance(String appearance, String state, Matrix ctm, Rect bbox, PDFObject res, Buffer contents) {
 		setNativeAppearance(appearance, state, ctm, bbox, res, contents);
@@ -340,6 +341,11 @@ public class PDFAnnotation
 	public native boolean hasFileSpecification();
 	public native void setFileSpecification(PDFObject fs);
 	public native PDFObject getFileSpecification();
+
+	public void setAppearance(Image image) {
+		setNativeAppearanceImage(image);
+	}
+	
 	public native void setStampImage(Image image);
 
 	private native void updateAppearanceFromDisplayList(DisplayList dlist);
