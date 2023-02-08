@@ -134,7 +134,7 @@ fz_buffer *fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t s
 	truncating data if required.
 
 	capacity: The desired capacity for the buffer. If the current
-	size of the buffer contents is smaller than capacity, it is
+	size of the buffer contents is larger than the requested capacity, it is
 	truncated.
 */
 void fz_resize_buffer(fz_context *ctx, fz_buffer *buf, size_t capacity);
@@ -144,6 +144,15 @@ void fz_resize_buffer(fz_context *ctx, fz_buffer *buf, size_t capacity);
 	capacity > size).
 */
 void fz_grow_buffer(fz_context *ctx, fz_buffer *buf);
+
+/**
+	Ensure that a buffer has a given *minimum* capacity. Data is NOT 
+	truncated.
+
+	`min_capacity`: The desired *minimum* capacity for the buffer. If the current
+	size of the buffer is larger than capacity, it is kept as-is.
+*/
+void fz_ensure_buffer(fz_context *ctx, fz_buffer *buf, size_t min_capacity);
 
 /**
 	Trim wasted capacity from a buffer by resizing internal memory.
