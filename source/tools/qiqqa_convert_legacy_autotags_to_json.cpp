@@ -56,7 +56,7 @@ static void mu_drop_context(void)
 	ctx = NULL;
 }
 
-size_t decode_length(const uint8_t *bufptr, size_t &pos)
+static size_t decode_length(const uint8_t *bufptr, size_t &pos)
 {
 	size_t rv = 0;
 	size_t shift = 0;
@@ -73,6 +73,27 @@ size_t decode_length(const uint8_t *bufptr, size_t &pos)
 	rv += ((size_t)v) << shift;
 	return rv;
 }
+
+// pop the marker byte at the given position; replace it with a NUL sentinel in the buffer as (previous) string termination.
+static uint8_t pop_marker_and_plug_sentinel(uint8_t *bufptr, const size_t pos)
+{
+	uint8_t marker = bufptr[pos];
+	bufptr[pos] = 0;
+	return marker;
+}
+
+static void check(int truth, fz_context *ctx, uint8_t marker, uint8_t *bufptr, size_t pos)
+{
+	if (!truth)
+	{
+		if (bufptr[pos] == 0)
+			bufptr[pos] = marker;
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte $%02X at offset %zu in the autotags file", bufptr[pos], pos);
+	}
+}
+
+#define CHECK(truth)											\
+	check((truth), ctx, marker, bufptr, pos)
 
 
 extern "C" int
@@ -156,7 +177,10 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 			int64_t suggested_filesize = fz_stat_size(ctx, datafilename);
 			if (suggested_filesize < 0)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot determine the size of autotags file: %s", datafilename);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot determine the size of autotags file");
+
+			// make sure there's a "run out" area at the end of the buffer:
+			suggested_filesize += 16;
 
 			datafeed = fz_open_file(ctx, datafilename);
 			if (datafeed == NULL)
@@ -164,7 +188,9 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 			buf = fz_read_all(ctx, datafeed, suggested_filesize);
 			if (buf == NULL)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read the data in the autotags file: %s", datafilename);
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read the data in the autotags file");
+
+			fz_ensure_buffer(ctx, buf, suggested_filesize);
 
 			uint8_t *bufptr = NULL;
 			size_t bufsize = fz_buffer_storage(ctx, buf, &bufptr);
@@ -422,22 +448,25 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 			//
 			//   
 
-			uint8_t timestamp[16] ={0};
+			uint8_t *timestamp = nullptr;
+
+			size_t pos = 0;
+
+			uint8_t marker = pop_marker_and_plug_sentinel(bufptr, pos);
 
 			// timestamp field:
-			size_t pos = 0;
-			if (bufptr[pos] != 0x0A)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
+			CHECK(marker == 0x0A);
 
 			pos++;
 			size_t offset = pos;
 			size_t timestamp_part_len = decode_length(bufptr, offset);
-			if (timestamp_part_len > 16)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
+			CHECK(timestamp_part_len <= 16);
 
-			memcpy(timestamp, bufptr + offset, timestamp_part_len);
+			timestamp = bufptr + offset;
 
 			pos = offset + timestamp_part_len;
+
+			marker = pop_marker_and_plug_sentinel(bufptr, pos);
 
 			for (int multimap_id = 1; multimap_id <= 2; multimap_id++)
 			{
@@ -446,67 +475,54 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 				if (multimap_id == 1)
 				{
-					if (bufptr[pos] != 0x12)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
-
-					pos++;
-					offset = pos;
-					bundle_len = decode_length(bufptr, offset);
-					if (bundle_len > bufsize)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
-
-					end_of_multimap_pos = offset + bundle_len;
-
-					pos = offset;
+					CHECK(marker == 0x12);
 				}
 				else
 				{
-					if (bufptr[pos] != 0x1A)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
-
-					pos++;
-					offset = pos;
-					bundle_len = decode_length(bufptr, offset);
-					if (bundle_len > bufsize)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
-
-					end_of_multimap_pos = offset + bundle_len;
-
-					pos = offset;
+					CHECK(marker == 0x1A);
 				}
+
+				pos++;
+				offset = pos;
+				bundle_len = decode_length(bufptr, offset);
+
+				end_of_multimap_pos = offset + bundle_len;
+				CHECK(end_of_multimap_pos <= bufsize);
+
+				pos = offset;
+
+				marker = pop_marker_and_plug_sentinel(bufptr, pos);
 
 				// load multimap:
 				while (pos < end_of_multimap_pos)
 				{
 					// tag dictionary #1: 
-					if (bufptr[pos] != 0x0A)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
+					CHECK(marker == 0x0A);
 
 					pos++;
 					offset = pos;
 					size_t multimap_dictionary1_len = decode_length(bufptr, offset);
-					if (multimap_dictionary1_len > bufsize)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
 
 					size_t end_of_hashtable_pos = offset + multimap_dictionary1_len;
+					CHECK(end_of_hashtable_pos <= end_of_multimap_pos);
 
 					pos = offset;
 
+					marker = pop_marker_and_plug_sentinel(bufptr, pos);
+
 					// tag dictionary #1: tag -> dictionary entry: key (tag)
-					if (bufptr[pos] != 0x0A)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
+					CHECK(marker == 0x0A);
 
 					pos++;
 					offset = pos;
 					size_t dict_entry_key_len = decode_length(bufptr, offset);
-					if (dict_entry_key_len > bufsize)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
 
-					char strbuf[4000];
-					memcpy(strbuf, bufptr + offset, dict_entry_key_len);
-					strbuf[dict_entry_key_len] = 0;
+					const char *hash_key = (const char *)(bufptr + offset);
 
 					pos = offset + dict_entry_key_len;
+					CHECK(pos <= end_of_hashtable_pos);
+
+					marker = pop_marker_and_plug_sentinel(bufptr, pos);
 
 					size_t slot_count = 0;
 
@@ -514,21 +530,20 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 					while (pos < end_of_hashtable_pos)
 					{
 						// dictionary entry: hash value
-						if (bufptr[pos] != 0x12)
-							fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
+						CHECK(marker == 0x12);
 
 						pos++;
 						offset = pos;
 						size_t doc_hash_value_len = decode_length(bufptr, offset);
-						if (doc_hash_value_len > bufsize)
-							fz_throw(ctx, FZ_ERROR_GENERIC, "Unexpected format byte %.*H at offset %zu in the autotags file: %s", 1, bufptr + pos, pos, datafilename);
 
-						memcpy(strbuf, bufptr + offset, doc_hash_value_len);
-						strbuf[doc_hash_value_len] = 0;
+						const char *hash_value = (const char *)(bufptr + offset);
 
 						slot_count++;
 
 						pos = offset + doc_hash_value_len;
+						CHECK(pos <= end_of_hashtable_pos);
+
+						marker = pop_marker_and_plug_sentinel(bufptr, pos);
 					}
 				}
 			}
@@ -554,7 +569,7 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 			buf = NULL;
 		}
 
-		fz_error(ctx, "Failure while processing %q: %s", datafilename, fz_caught_message(ctx));
+		fz_error(ctx, "Failure while processing %q: %s.", datafilename, fz_caught_message(ctx));
 
 		errored = 1;
 	}
