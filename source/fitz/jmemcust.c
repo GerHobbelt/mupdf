@@ -26,7 +26,6 @@
 
 #include <jpeglib.h>
 #include "jerror.h"
-
 #include "mupdf/helpers/jmemcust.h"
 
 

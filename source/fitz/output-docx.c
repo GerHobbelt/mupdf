@@ -569,7 +569,7 @@ dev_begin_structure(fz_context *ctx, fz_device *dev_, fz_structure standard, con
 	dev->writer->ctx = ctx;
 	fz_try(ctx)
 	{
-		if (extract_begin_struct(extract, fz_struct_to_extract(standard), uid))
+		if (extract_begin_struct(extract, fz_struct_to_extract(standard), uid, 0))
 			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to begin struct");
 	}
 	fz_always(ctx)

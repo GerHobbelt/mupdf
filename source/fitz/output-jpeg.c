@@ -23,60 +23,11 @@
 #include "mupdf/fitz.h"
 
 #include <jpeglib.h>
+#include "jerror.h"
+#include "mupdf/helpers/jmemcust.h"
 
-#ifdef SHARE_JPEG
 
-#define JZ_CTX_FROM_CINFO(c) (fz_context *)((c)->client_data)
-
-#else /* SHARE_JPEG */
-
-typedef void * backing_store_ptr;
-
-#include "jmemcust.h"
-
-#define JZ_CTX_FROM_CINFO(c) (fz_context *)(GET_CUST_MEM_DATA(c)->priv)
-
-static void *
-fz_jpg_mem_alloc(j_common_ptr cinfo, size_t size)
-{
-	fz_context *ctx = JZ_CTX_FROM_CINFO(cinfo);
-	return fz_malloc_no_throw(ctx, size);
-}
-
-static void
-fz_jpg_mem_free(j_common_ptr cinfo, void *object, size_t size)
-{
-	fz_context *ctx = JZ_CTX_FROM_CINFO(cinfo);
-	fz_free(ctx, object);
-}
-
-static void
-fz_jpg_mem_init(j_common_ptr cinfo, fz_context *ctx)
-{
-	jpeg_cust_mem_data *custmptr;
-	custmptr = fz_malloc_struct(ctx, jpeg_cust_mem_data);
-	if (!jpeg_cust_mem_init(custmptr, (void *) ctx, NULL, NULL, NULL,
-				fz_jpg_mem_alloc, fz_jpg_mem_free,
-				fz_jpg_mem_alloc, fz_jpg_mem_free, NULL))
-	{
-		fz_free(ctx, custmptr);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot initialize custom JPEG memory handler");
-	}
-	cinfo->client_data = custmptr;
-}
-
-static void
-fz_jpg_mem_term(j_common_ptr cinfo)
-{
-	if (cinfo->client_data)
-	{
-		fz_context *ctx = JZ_CTX_FROM_CINFO(cinfo);
-		fz_free(ctx, cinfo->client_data);
-		cinfo->client_data = NULL;
-	}
-}
-
-#endif
+#define JZ_CTX_FROM_CINFO(c) (fz_context *)((c)->client_data_ref)
 
 #define OUTPUT_BUF_SIZE (16<<10)
 
@@ -128,14 +79,15 @@ static void term_destination(j_compress_ptr cinfo)
 }
 
 void
-fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int quality)
+fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, const fz_pixmap *pix, int quality)
 {
-	struct jpeg_compress_struct cinfo;
-	struct jpeg_error_mgr err;
+	struct jpeg_compress_struct cinfo = { 0 };
+	struct jpeg_error_mgr err = { 0 };
+
 	my_destination_mgr dest;
 	JSAMPROW row_pointer[1];
 
-	unsigned char *outbuffer = NULL;
+	unsigned char* outbuffer = NULL;
 	size_t outsize = 0;
 
 	if (pix->n != 1 && pix->n != 3 && pix->n != 4)
@@ -150,8 +102,8 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 	cinfo.err = jpeg_std_error(&err);
 	err.error_exit = error_exit;
 
-	cinfo.client_data = NULL;
-	fz_jpg_mem_init((j_common_ptr)&cinfo, ctx);
+	cinfo.client_data_ref = (void*)ctx;
+	cinfo.client_init_callback = fz_jpeg_sys_mem_register;
 
 	fz_try(ctx)
 	{
@@ -184,7 +136,10 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 		jpeg_start_compress(&cinfo, TRUE);
 
 		if (fz_colorspace_is_subtractive(ctx, pix->colorspace))
-			fz_invert_pixmap_raw(ctx, pix);
+		{
+			// treat `fz_pixmap *pix` as mutable:
+			fz_invert_pixmap_raw(ctx, (fz_pixmap *)pix);
+		}
 
 		while (cinfo.next_scanline < cinfo.image_height) {
 			row_pointer[0] = &pix->samples[cinfo.next_scanline * pix->stride];
@@ -192,7 +147,10 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 		}
 
 		if (fz_colorspace_is_subtractive(ctx, pix->colorspace))
-			fz_invert_pixmap_raw(ctx, pix);
+		{
+			// treat `fz_pixmap *pix` as mutable: reverseee the invert op now.
+			fz_invert_pixmap_raw(ctx, (fz_pixmap*)pix);
+		}
 
 		jpeg_finish_compress(&cinfo);
 
@@ -201,7 +159,6 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 	fz_always(ctx)
 	{
 		jpeg_destroy_compress(&cinfo);
-		fz_jpg_mem_term((j_common_ptr)&cinfo);
 		fz_free(ctx, outbuffer);
 	}
 	fz_catch(ctx)
@@ -211,7 +168,7 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int qua
 }
 
 void
-fz_save_pixmap_as_jpeg(fz_context *ctx, fz_pixmap *pixmap, const char *filename, int quality)
+fz_save_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, const char *filename, int quality)
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_try(ctx)

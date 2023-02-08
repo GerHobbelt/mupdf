@@ -34,6 +34,8 @@
 */
 int fz_jpeg_dflt_sys_mem_register(j_common_ptr cinfo);
 
+int fz_jpeg_sys_mem_register(j_common_ptr cinfo);
+
 #endif
 
 /*

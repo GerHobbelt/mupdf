@@ -80,7 +80,7 @@ static void fz_jpeg_open_backing_store(j_common_ptr cinfo,
 }
 
 
-static int fz_jpeg_sys_mem_register(j_common_ptr cinfo)
+int fz_jpeg_sys_mem_register(j_common_ptr cinfo)
 {
 	cinfo->sys_mem_if.get_small = fz_jpeg_mem_alloc;
 	cinfo->sys_mem_if.free_small = fz_jpeg_mem_free;

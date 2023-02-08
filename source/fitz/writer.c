@@ -119,7 +119,7 @@ fz_document_writer *fz_new_document_writer_of_size(fz_context *ctx, size_t size,
 	return wri;
 }
 
-static void fz_save_pixmap_as_jpeg_default(fz_context *ctx, fz_pixmap *pixmap, const char *filename)
+static void fz_save_pixmap_as_jpeg_default(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)
 {
 	fz_save_pixmap_as_jpeg(ctx, pixmap, filename, 90);
 }

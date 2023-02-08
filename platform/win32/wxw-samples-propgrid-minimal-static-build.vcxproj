@@ -47,20 +47,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -77,7 +77,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -109,11 +109,11 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../thirdparty/owemdjee/nanosvg/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -143,7 +143,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../thirdparty/owemdjee/nanosvg/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -171,7 +171,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../thirdparty/owemdjee/nanosvg/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -201,7 +201,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/include;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/owemdjee/pcre/src/wx;../../thirdparty/curl/include;../../thirdparty/owemdjee/libexpat/expat/lib;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../scripts/zlib;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/src;../../thirdparty/owemdjee/wxWidgets/src/stc/scintilla/lexlib;../../scripts/wxWidgets/webview2/build/native/include;../../thirdparty/owemdjee/nanosvg/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_PROPGRID;BUILDING_WXWIDGETS;BUILDING_WXWIDGETS_MINIMAL_WITH_GUI;WXBUILDING;WXWIDGETS_STATICLIB;XML_UNICODE;XML_UNICODE_WCHAR_T;XML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -240,8 +240,7 @@
     <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/propgrid/makefile.vc" />
     <Text Include="../../thirdparty/owemdjee/wxWidgets/samples/propgrid/propgrid.bkl" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

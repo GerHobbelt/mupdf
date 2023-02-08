@@ -3455,7 +3455,7 @@ pdf_set_annot_filespec(fz_context *ctx, pdf_annot *annot, pdf_obj *fs)
 }
 
 int
-pdf_annot_hidden_for_editing(fz_context *ctx, pdf_annot *annot)
+pdf_annot_hidden_for_editing(fz_context *ctx, const pdf_annot *annot)
 {
 	return annot->hidden_editing;
 }
