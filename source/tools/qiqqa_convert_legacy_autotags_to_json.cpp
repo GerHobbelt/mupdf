@@ -17,7 +17,10 @@
 #if defined(_WIN32)
 #include <windows.h>
 #endif
+#include <unordered_map>
+#include <unordered_set>
 #include <string>
+#include <functional>
 
 
 static inline void memclr(void* ptr, size_t size)
@@ -448,6 +451,42 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 			//
 			//   
 
+			// Create an unordered_map of string->string_collection.
+			//
+			// Be reminded: all strings are kept in the file buffer space,
+			// so their pointers are only valid as long as we keep the file buffer intact.
+
+			typedef const char *Key;
+
+			struct KeyHash
+			{
+				std::size_t operator()(const Key& k) const
+				{
+					// https://www.enseignement.polytechnique.fr/informatique/INF478/docs/Cpp/en/cpp/utility/hash.html#:~:text=There%20is%20no%20specialization%20for%20C%20strings.%20std%3A%3Ahash%3Cconst,not%20examine%20the%20contents%20of%20any%20character%20array.
+					// -->
+					// There is no specialization for C strings. std::hash<const char*> produces a hash of the value of the pointer (the memory address), it does not examine the contents of any character array.
+					//return std::hash<const char *>()(k);
+					const std::string str = k;
+					std::hash<std::string> hash_fn;
+					std::size_t str_hash = hash_fn(str);
+					return str_hash;
+				}
+			};
+
+			struct KeyEqual
+			{
+				bool operator()(const Key& lhs, const Key& rhs) const
+				{
+					return strcmp(lhs, rhs) == 0;
+				}
+			};
+
+			typedef std::unordered_set<Key, KeyHash, KeyEqual> value_set_t;
+
+			typedef std::unordered_map<Key, value_set_t, KeyHash, KeyEqual> dictionary_t;
+
+			dictionary_t dictionary(bufsize / 1000);
+
 			uint8_t *timestamp = nullptr;
 
 			size_t pos = 0;
@@ -524,6 +563,20 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 					marker = pop_marker_and_plug_sentinel(bufptr, pos);
 
+					value_set_t *slot = nullptr;
+
+					if (multimap_id == 1)
+					{
+						auto has_slot = dictionary.contains(hash_key);
+						if (!has_slot)
+						{
+							value_set_t table(multimap_dictionary1_len / 50);
+
+							dictionary.insert_or_assign(hash_key, table);
+						}
+						slot = &dictionary.at(hash_key);
+					}
+
 					size_t slot_count = 0;
 
 					// load hash table for the given key/tag:
@@ -544,7 +597,43 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 						CHECK(pos <= end_of_hashtable_pos);
 
 						marker = pop_marker_and_plug_sentinel(bufptr, pos);
+
+						if (multimap_id == 1)
+						{
+							if (!slot->contains(hash_value))
+							{
+								slot->insert(hash_value);
+							}
+						}
+						else
+						{
+							// situation is swapped around for the second multimap: hash_value is the KEY, whilee hash_key is the VALUE:
+							auto has_slot = dictionary.contains(hash_value);
+							if (!has_slot)
+							{
+								value_set_t table(multimap_dictionary1_len / 50);
+
+								dictionary.insert_or_assign(hash_value, table);
+							}
+							slot = &dictionary.at(hash_value);
+
+							if (!slot->contains(hash_key))
+							{
+								slot->insert(hash_key);
+							}
+						}
 					}
+				}
+			}
+
+			for (const std::pair<const char *, value_set_t>& n : dictionary)
+			{
+				const char *key = n.first;
+				const value_set_t &values = n.second;
+				for (const auto& value_ref : values)
+				{
+					const char *value = value_ref;
+					fz_info(ctx, "key: %q --> value: %q\n", key, value);
 				}
 			}
 
