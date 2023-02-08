@@ -901,6 +901,96 @@ fz_stat_mtime(fz_context* ctx, const char* path)
 	return info.st_mtime;
 }
 
+int64_t
+fz_stat_atime(fz_context* ctx, const char* path)
+{
+	struct _stat info;
+	wchar_t wpath[PATH_MAX];
+
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
+		return 0;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return 0;
+	}
+
+	return info.st_atime;
+}
+
+int64_t
+fz_stat_size(fz_context* ctx, const char* path)
+{
+	struct _stat info;
+	wchar_t wpath[PATH_MAX];
+
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
+		return 0;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
+	}
+
+	// directories should be reported as size=0 or 1...
+
+	if (info.st_mode & _S_IFDIR)
+		return 0;
+	if (info.st_mode & _S_IFREG)
+		return info.st_size;
+	return 0;
+}
+
+int
+fz_path_is_regular_file(fz_context* ctx, const char* path)
+{
+	struct _stat info;
+	wchar_t wpath[PATH_MAX];
+
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
+		return FALSE;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return FALSE;
+	}
+
+	// directories should be reported as size=0 or 1...
+
+	return (info.st_mode & _S_IFREG) && !(info.st_mode & _S_IFDIR);
+}
+
+int
+fz_path_is_directory(fz_context* ctx, const char* path)
+{
+	struct _stat info;
+	wchar_t wpath[PATH_MAX];
+
+	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
+		return FALSE;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return FALSE;
+	}
+
+	// directories should be reported as size=0 or 1...
+
+	return !!(info.st_mode & _S_IFDIR);
+}
+
 #else
 
 int64_t
@@ -927,6 +1017,64 @@ fz_stat_mtime(fz_context* ctx, const char* path)
 		return 0;
 	}
 	return info.st_mtime;
+}
+
+int64_t
+fz_stat_atime(fz_context* ctx, const char* path)
+{
+	struct stat info;
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return 0;
+	}
+	return info.st_atime;
+}
+
+int64_t
+fz_stat_size(fz_context* ctx, const char* path)
+{
+	struct stat info;
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return -1;
+	}
+	if (info.st_mode & _S_IFDIR)
+		return 0;
+	if (info.st_mode & _S_IFREG)
+		return info.st_size;
+	return 0;
+}
+
+int
+fz_path_is_regular_file(fz_context* ctx, const char* path)
+{
+	struct stat info;
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return FALSE;
+	}
+
+	return (info.st_mode & _S_IFREG) && !(info.st_mode & _S_IFDIR);
+}
+
+int
+fz_path_is_directory(fz_context* ctx, const char* path)
+{
+	struct stat info;
+	if (stat(path, &info))
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return FALSE;
+	}
+
+	return !!(info.st_mode & _S_IFDIR);
 }
 
 #endif /* _WIN32 */

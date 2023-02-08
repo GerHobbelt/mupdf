@@ -22,8 +22,52 @@ FILE *fz_fopen_utf8(fz_context *ctx, const char *name, const char *mode);
 int fz_remove_utf8(fz_context *ctx, const char *name);
 int fz_mkdirp_utf8(fz_context *ctx, const char* name);
 
+/**
+* Return the file's Creation Timestamp.
+*
+* Return 0 on error.
+*/
 int64_t fz_stat_ctime(fz_context *ctx, const char *path);
+
+/**
+* Return the file's Last-Modification Timestamp.
+*
+* Return 0 on error.
+*/
 int64_t fz_stat_mtime(fz_context *ctx, const char *path);
+
+/**
+* Return the file's Last-Accessed Timestamp.
+*
+* NOTE: some operating systems, file systems and/or user-configured security/privacy seettings
+* may preveent the OS from tracking this timestamp for each file. In that case, expect bogus
+* timestamps to be produced; this function does not check whether the OS-produced `atime` is
+* indeed valid or bogus after all, hence YMMV.
+* 
+* Return 0 on error.
+*/
+int64_t fz_stat_mtime(fz_context *ctx, const char *path);
+
+/**
+* Return the file's size (in bytes).
+*
+* Return -1 on error -- 0 is a valid file size, after all.
+*/
+int64_t fz_stat_size(fz_context *ctx, const char *path);
+
+/**
+* Return TRUE when the path is a regular file (or a link to a regular file).
+*
+* Return FALSE when it is not, or when the path does not exist at all / an error was reported by the OS.
+*/
+int fz_path_is_regular_file(fz_context *ctx, const char *path);
+
+/**
+* Return TRUE when the given path is a directory (or a link to a directory).
+*
+* Return FALSE when it is not, or when the path does not exist at all / an error was reported by the OS.
+*/
+int fz_path_is_directory(fz_context *ctx, const char *path);
 
 
 /**

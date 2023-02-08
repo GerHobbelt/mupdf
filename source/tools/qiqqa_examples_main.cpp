@@ -14,6 +14,10 @@ MONOLITHIC_CMD_TABLE_START()
 	{ "content_proc", { .fa = qiqqa_content_processor_main } },
 	{ "content_import", { .fa = qiqqa_content_importer_main } },
 	{ "safe_file_copier", { .fa = qiqqa_safe_file_copier_main } },
+    { "cvt_annot_blob", { .fa = qiqqa_convert_legacy_annot_blobs_main } },
+    { "cvt_autotags", { .fa = qiqqa_convert_legacy_autotags_main } },
+    { "cvt_configfile", { .fa = qiqqa_convert_legacy_configuration_main } },
+    { "cvt_expedition", { .fa = qiqqa_convert_legacy_expedition_main } },
 
 MONOLITHIC_CMD_TABLE_END();
 
