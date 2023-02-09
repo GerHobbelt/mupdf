@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-21907802CACD}</ProjectGuid>
+    <RootNamespace>nsis</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NSIS;NSIS_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NSIS;NSIS_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NSIS;NSIS_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_NSIS;NSIS_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{c39f4b46-6e89-4074-902e-ca57073044d2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="pthread_lib.2019.vcxproj">
+      <Project>{C431B5C5-FF25-4450-A13C-EA3123456789}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/AdvSplash/advsplash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Banner/Banner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/BgImage/BgImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Dialer/dialer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/ExDLL/exdll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/ExDLL/pluginapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/InstallOptions/InstallerOptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/LangDLL/LangDLL.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Library/RegTool/RegTool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Library/TypeLib/TypeLib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/MakeLangId/MakeLangId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/lookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/makensisw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/update.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/wndspy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Math/Source/Math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Math/Source/MyMath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Math/Source/plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/nsismenu/nsismenu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/nsismenu/nslinks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/asyncdns.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/connection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/httpget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/nsisdl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Splash/splash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/StartMenu/StartMenu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/SubStart/substart.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/System/Resource/Main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/Buffers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/Plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/System.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/stdafx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UserInfo/UserInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/Checksums.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/ChunkedFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/FileFormat1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/GlobalTypes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/POSIXUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/PatchGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/adler32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/Plugin/apply_patch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/Plugin/checksum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/Plugin/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/Plugin/vpatchdll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/browse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/nsDialogs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/rtl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/nsExec/nsexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/zlib/ioapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/zlib/unzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/biblio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/bk_xhtml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/contents.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/help.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/keywords.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/licence.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/style.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/tree234.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/ustring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/SCons/Config/memcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/SCons/Config/memset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zGuids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Common/InBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Common/OutBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Common/StreamUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/LZInWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/LZOutWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZMA/LZMAEncoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/RangeCoder/RangeCoderBit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/Alloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/CRC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/7zip/LZMADecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/BinInterop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/DialogTemplate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Plugins.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/ResourceEditor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/ResourceVersionInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/ShConstants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/DialogTemplate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/Platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/ResourceEditor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/decompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/endian.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/memcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/mmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/specmatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/textrunner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/Tests/winchar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/build.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/bzip2/blocksort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/bzip2/bzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/bzip2/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/bzip2/decompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/bzip2/huffman.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/clzma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/dirreader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/Main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/Ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/bgbg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/components.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/exec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/fileform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/fileform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/growbuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/icon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/lang.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/lineparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/makenssi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/manifest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/mmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/script.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/scriptpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/strlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/tokens.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/tstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/utf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/validateunicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/winchar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/nsis/Source/zlib/INFBLOCK.C" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/ExDLL/exdll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/ExDLL/extdll.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/ExDLL/nsis_tchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/ExDLL/pluginapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/InstallOptions/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/LangDLL/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/MakeLangId/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/afxres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/makensisw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Math/Source/Math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/Math/Source/MyMath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/nsismenu/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/wx/setup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/asyncdns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/httpget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/netinc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/StartMenu/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/System/Resource/Resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/Buffers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/Plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/System.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/Checksums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/ChunkedFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/FileFormat1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/GlobalTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/POSIXUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/PatchGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/adler32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/GenPat/tchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/Plugin/apply_patch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/Plugin/checksum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/Source/Plugin/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/rtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/zlib/crypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/zlib/ioapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/zlib/unzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/halibut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Docs/src/bin/halibut/tree234.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Common/InBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Common/OutBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Common/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Common/StreamUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTree2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTree3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTree3Z.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTree3ZMain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTree4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTree4b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTreeMF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTreeMFMain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/BinTree/BinTreeMain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/IMatchFinder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/LZInWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/LZOutWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZ/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZMA/LZMA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZMA/LZMAEncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/LZMA/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/RangeCoder/RangeCoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/RangeCoder/RangeCoderBit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/RangeCoder/RangeCoderBitTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/RangeCoder/RangeCoderOpt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/Compress/RangeCoder/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/ICoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/7zip/IStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/Alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/CRC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/Defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/MyCom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/MyGuidDef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/MyUnknown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/MyWindows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/Common/Types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/7zip/LZMADecode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/BinInterop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/DialogTemplate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/Platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/Plugins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/ResourceEditor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/ResourceVersionInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/ShConstants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/Tests/decompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/afxres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/boost/checked_delete.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/boost/detail/workaround.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/boost/scoped_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/boost/scoped_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/build.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/bzip2/bzlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/cbzip2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/clzma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/czlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/dirreader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/afxres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/components.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/exec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/fileform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/lang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/exehead/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/fileform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/growbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/icon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/lang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/lineparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/manifest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/strlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/tchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/tokens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/tstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/uservars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/validateunicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/winchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/zlib/ZCONF.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/zlib/ZLIB.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/nsis/Source/zlib/ZUTIL.H" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/big.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/classic-cross.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/classic.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/colorful.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/grey-cross.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/grey.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/modern.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/red-round.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/red.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/simple-round.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/simple-round2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Checks/simple.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis-r.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-branding-r.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-branding.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-grey-right.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-grey.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-metro-right.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-metro.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-vintage-right.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/nsis3-vintage.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange-nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange-r-nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange-r.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange-uninstall-nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange-uninstall-r-nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange-uninstall-r.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange-uninstall.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/orange.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Header/win.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/arrow-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/arrow-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/arrow2-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/arrow2-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/box-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/box-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/classic-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/classic-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/llama-blue.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/llama-grey.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-install-blue-full.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-install-blue.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-install-colorful.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-install-full.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-uninstall-blue-full.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-uninstall-blue.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-uninstall-colorful.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-uninstall-full.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/modern-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/nsis-menu.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/nsis1-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/nsis1-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/nsis3-install-alt.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/nsis3-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/nsis3-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/orange-install-nsis.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/orange-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/orange-uninstall-nsis.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/orange-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/pixel-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/pixel-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/win-install.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Icons/win-uninstall.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/arrow.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/llama.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/modern-xl-install.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/modern-xl-uninstall.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/modern-xxl-install.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/modern-xxl-uninstall.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/nsis3-branding.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/nsis3-grey.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/nsis3-metro.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/nsis3-vintage.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/nullsoft.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/orange-nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/orange-uninstall-nsis.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/orange-uninstall.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/orange.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Graphics/Wizard/win.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/MakeLangId/MakeLangId.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/assoc_nsh.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/assoc_nsi.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar16d24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar16h24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar16n24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar24d24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar24h24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar24n24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar32d24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar32h24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/toolbar32n24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI/images/closed.gif" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI/images/header.gif" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI/images/open.gif" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI/images/screen1.png" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI/images/screen2.png" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/nsismenu/nsisicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/System/Resource/Icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/icon.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Docs/unreleased.png" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Menu/images/header-notext.gif" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Menu/images/header.gif" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Menu/images/line.gif" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Menu/images/site.gif" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Source/exehead/bitmap1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Source/exehead/nsis.ico" />
+    <Image Include="../../thirdparty/owemdjee/nsis/Source/exehead/uninst.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/InstallOptions/ioptdll.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/LangDLL/resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/MakeLangId/resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/nsismenu/nsismenu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/StartMenu/StartMenu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/System/Resource/Resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/default.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/modern.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/modern_headerbmp.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/modern_headerbmpr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/modern_nodesc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/modern_smalldesc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/sdbarker_tiny.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/ui.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xl_headerbmp.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xl_headerbmpr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xl_nodesc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xl_smalldesc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xxl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xxl_headerbmp.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xxl_headerbmpr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xxl_nodesc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/UIs/xxl_smalldesc.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/nsDialogs/dialog.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/res.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/nsis/Source/exehead/resource.rc" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/AdvSplash/advsplash.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Banner/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/BgImage/BgImage.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Dialer/Dialer.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/InstallOptions/Changelog.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Math/Math.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Math/mathtest.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI 2/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI/Changelog.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Modern UI/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/wx/build.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/NSIS Menu/wx/wxbuild.bat" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/NSISdl/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/Splash/splash.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/StartMenu/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/Call-amd64.S" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/Call-amd64CPP.S" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/Call.S" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/System/Source/CallCPP.S" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/System/WhatsNew.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/newfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/VPatch/oldfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Contrib/nsExec/nsExec.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Docs/src/chmlink.js" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Include/StrFunc.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/README.md" />
+    <Text Include="../../thirdparty/owemdjee/nsis/SCons/Tools/crossmingw.py" />
+    <Text Include="../../thirdparty/owemdjee/nsis/SCons/Tools/mstoolkit.py" />
+    <Text Include="../../thirdparty/owemdjee/nsis/SCons/config.py" />
+    <Text Include="../../thirdparty/owemdjee/nsis/SCons/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Scripts/release.py" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Source/Tests/icons.py" />
+    <Text Include="../../thirdparty/owemdjee/nsis/Source/Tests/root.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/TODO.txt" />
+    <Text Include="../../thirdparty/owemdjee/nsis/_build_ALL.bat" />
+    <Text Include="../../thirdparty/owemdjee/nsis/_build_NSIS.bat" />
+    <Text Include="../../thirdparty/owemdjee/nsis/_build_zlib.bat" />
+    <Text Include="../../thirdparty/owemdjee/nsis/_cleanup.bat" />
+    <Text Include="../../thirdparty/owemdjee/nsis/_config.bat" />
+    <Xml Include="../../thirdparty/owemdjee/nsis/Contrib/MakeLangId/MakeLangId.xml" />
+    <Xml Include="../../thirdparty/owemdjee/nsis/Contrib/Makensisw/makensisw.xml" />
+    <Xml Include="../../thirdparty/owemdjee/nsis/Contrib/zip2exe/zip2exe.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

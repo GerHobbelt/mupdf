@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV;OPENCV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -951,6 +951,25 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/iw/src/iw_image_transform_rotate.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/iw/src/iw_image_transform_warpaffine.c" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/iw/src/iw_own.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckIncludeFiles/HAVE_INTRIN_H.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckIncludeFiles/OPJ_HAVE_MALLOC_H.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/OFF64_T.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_PTRDIFF_T.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_SIGNED_INT.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_SIGNED_LONG.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_SIGNED_LONG_LONG.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_SIGNED_SHORT.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_SIZE_T.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_UNSIGNED_CHAR_P.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_UNSIGNED_INT.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_UNSIGNED_LONG.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_UNSIGNED_LONG_LONG.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/CheckTypeSize/SIZEOF_UNSIGNED_SHORT.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/FindOpenMP/OpenMPCheckVersion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/FindOpenMP/OpenMPTryFlag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/build/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/modules/core/arithm.avx2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/modules/core/arithm.sse2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/modules/core/arithm.sse4_1.cpp" />
@@ -1033,6 +1052,45 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/modules/imgproc/sumpixels.avx2.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/modules/imgproc/sumpixels.avx512_skx.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/build/modules/imgproc/sumpixels.sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/atomic_check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cann.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512clx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512cnl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512icl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512knl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512knm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_avx512skx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_dotprod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_fp16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_lasx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_msa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_neon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_popcnt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_rvv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_sse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_sse2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_sse3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_sse41.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_sse42.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_ssse3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_vsx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_vsx3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cpu_vsx_asm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/cxx11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/directx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/ffmpeg_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/lapack_check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/opencl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/openvx_refenum_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/runtime/cpu_vsx_aligned.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/vtk_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/vulkan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/webnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/cmake/checks/win32uitest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/calib3d/perf/opencl/perf_stereobm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/calib3d/perf/perf_affine2d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/calib3d/perf/perf_cicrlesGrid.cpp" />
@@ -5362,7 +5420,6 @@
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libjasper/jasper/jas_config.h.in" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libjpeg-turbo/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libjpeg-turbo/LICENSE.md" />
-    <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libjpeg-turbo/README.ijg" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libjpeg-turbo/README.md" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libjpeg-turbo/jconfig.h.in" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libjpeg-turbo/jconfig.h.win.in" />
@@ -5386,8 +5443,6 @@
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libtiff/tiffconf.h.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/libwebp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/openexr/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/openexr/ChangeLog.ilmbase" />
-    <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/openexr/ChangeLog.openexr" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/openjpeg/AUTHORS.md" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/openjpeg/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/opencv/3rdparty/openjpeg/CMakeLists.txt" />
@@ -5432,9 +5487,7 @@
     <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ade/ade-0.1.1f/tutorial/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ade/ade-0.1.1f/tutorial/README.md" />
     <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/EULA.rtf" />
-    <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/icv/readme.htm" />
     <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/iw/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/iw/readme.htm" />
     <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/support.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/build/3rdparty/ippicv/ippicv_win/third-party-programs.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/build/CMakeCache.txt" />
@@ -5741,7 +5794,6 @@
     <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/plugin_gstreamer/build.sh" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/python/test/test_videoio.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/world/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/opencv/platforms/android/README.android" />
     <Text Include="../../thirdparty/owemdjee/opencv/platforms/android/build-tests/test_cmake_build.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/platforms/android/build-tests/test_gradle.sh" />
     <Text Include="../../thirdparty/owemdjee/opencv/platforms/android/build_sdk.py" />
@@ -6184,7 +6236,8 @@
     <Xml Include="../../thirdparty/owemdjee/opencv/samples/wp8/OpenCVXaml/OpenCVXaml/Properties/AppManifest.xml" />
     <Xml Include="../../thirdparty/owemdjee/opencv/samples/wp8/OpenCVXaml/OpenCVXaml/Properties/WMAppManifest.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

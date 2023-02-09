@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcairo-demos</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF181F10}</ProjectGuid>
+    <RootNamespace>libcairo-demos</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCAIRO_DEMOS;CAIRO_DEMOS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/PS/basket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/X11/cairo-demo-xcb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/X11/cairo-demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/X11/cairo-knockout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/X11/cairo-spline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/cairo-clock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/wobbly-zini.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/cairo-samples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/sample-list-store.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/cairo_snippets_gtk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/cairo_snippets_html.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/cairo_snippets_pdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/cairo_snippets_png.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/cairo_snippets_ps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/cairo_snippets_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/prepare_snippets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/fbdev/cairo-fb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/fixedpt/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/cgol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/cgolwin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/ctk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gtk/hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gtk/mouse_events.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gtk_slide/cairo_custom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gtk_slide/gtk_slide.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/gtk_slide/puzzle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/kapow/kapow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/path_paint/path_paint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/bevels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/caps_joins.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/hering.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/outline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/snapping.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/spiral.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/spline-pipelines.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/splines_tolerance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/star_and_ring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/stars.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/text-rotate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/png/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/qcairo/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/qcairo/mainwindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/qcairo/qcairowidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/qcairo/qkapow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/quartz/fdface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/quartz/fdhand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/quartz/fdlogo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/quartz/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/sdl/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/sproing/sproing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar-cpp/svgspacewar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar/svgspacewar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cairo-demos/tsetse/tsetse.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/PS/write_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/cairo-samples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/sample-list-store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/snippets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/fixedpt/src/fixedpt/fixedptc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/fixedpt/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/cgol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/cgolwin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/ctk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/gtk_slide/cairo_custom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/gtk_slide/puzzle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/qcairo/mainwindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/qcairo/qcairowidget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/qcairo/qkapow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/quartz/fdface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/quartz/fdhand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cairo-demos/quartz/fdlogo.h" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/cairo-clock-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/wobbly-zini-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/cairo-in-motion.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/gotroot.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/kapow/kapow.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar-cpp/docs/action.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar-cpp/docs/zoomed.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar/docs/action.png" />
+    <Image Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar/docs/zoomed.png" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/PS/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/X11/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/X11/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-candy/TODO" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo-in-motion/TODO" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/cairo_snippets/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/fixedpt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/fixedpt/todo.md" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/gameoflife/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/gtk/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/gtk/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/gtk_slide/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/gtk_slide/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/kapow/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/path_paint/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/path_paint/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/png/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/png/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/qcairo/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/qcairo/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/stamp-h1.in" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sdl/stamp-h2.in" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/sproing/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar-cpp/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar-cpp/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/svgspacewar/README" />
+    <Text Include="../../thirdparty/owemdjee/cairo-demos/tsetse/ChangeLog" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

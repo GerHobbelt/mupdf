@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libfftw3</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF685E16}</ProjectGuid>
+    <RootNamespace>libfftw3</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFFTW3;FFTW3_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/apiplan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/configure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute-r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute-split-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute-split-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute-split-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/execute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/export-wisdom-to-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/export-wisdom-to-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/export-wisdom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/f77api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/flops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/forget-wisdom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/import-system-wisdom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/import-wisdom-from-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/import-wisdom-from-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/import-wisdom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/map-r2r-kind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/mapflags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/mkprinter-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/mkprinter-str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/mktensor-iodims.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/mktensor-iodims64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/mktensor-rowmajor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-c2r-1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-c2r-2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-c2r-3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-r2c-1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-r2c-2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-r2c-3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-split-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-split-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-split-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru64-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru64-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru64-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru64-r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru64-split-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru64-split-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-guru64-split-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-many-dft-c2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-many-dft-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-many-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-many-r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-r2r-1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-r2r-2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-r2r-3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/plan-r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/print-plan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/rdft2-pad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/the-planner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/api/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/bluestein.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/buffered.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/ct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/dftw-direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/dftw-directsq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/dftw-generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/dftw-genericbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/indirect-transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/indirect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/kdft-dif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/kdft-difsq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/kdft-dit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/kdft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/nop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/plan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/rader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/rank-geq2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/scalar/n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/scalar/t.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/simd/common/genus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/vrank-geq1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/dft/zero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/align.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/assert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/awake.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/buffered.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/cpy1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/cpy2d-pair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/cpy2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/ct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/extract-reim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/iabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/kalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/md5-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/minmax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/ops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/pickdim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/plan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/planner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/primes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/rader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/solver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/solvtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/stride.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tensor9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/tile2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/trig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/kernel/twiddle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/after-ccopy-from.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/after-ccopy-to.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/after-hccopy-from.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/after-hccopy-to.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/after-rcopy-from.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/after-rcopy-to.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/allocate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/aset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/bench-cost-postprocess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/bench-exit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/bench-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/can-do.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/caset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/dotens2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/mflops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/mp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/my-getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/ovtpvt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/pow2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/report.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/speed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/tensor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/useropt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/verify-dft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/verify-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/verify-r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/verify-rdft2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/libbench2/zero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/any-true.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/choose-radix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dft-problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dft-rank-geq2-transposed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dft-rank-geq2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dft-rank1-bigvec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dft-rank1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dft-serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dft-solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/dtensor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/mpi-bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft-problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft-rank-geq2-transposed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft-rank-geq2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft-rank1-bigvec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft-serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft-solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft2-problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft2-rank-geq2-transposed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft2-rank-geq2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft2-serial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rdft2-solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/rearrange.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/testsched.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/transpose-alltoall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/transpose-pairwise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/transpose-problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/transpose-recurse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/transpose-solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/mpi/wisdom-api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/buffered.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/buffered2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/ct-hc2c-direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/ct-hc2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/dft-r2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/dht-r2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/dht-rader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/direct-r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/direct-r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/direct2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/hc2hc-direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/hc2hc-generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/hc2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/indirect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/khc2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/khc2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/kr2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/kr2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/nop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/nop2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/plan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/plan2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/problem2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rank-geq2-rdft2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rank-geq2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rank0-rdft2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rank0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rdft-dht.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rdft2-inplace-strides.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rdft2-rdft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rdft2-strides.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/rdft2-tensor-max-index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/hc2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/hfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/simd/common/genus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/solve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/solve2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/vrank-geq1-rdft2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/vrank-geq1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/rdft/vrank3-transpose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/redft00e-r2hc-pad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/redft00e-r2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/reodft00e-splitradix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/reodft010e-r2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/reodft11e-r2hc-odd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/reodft11e-r2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/reodft11e-radix2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/rodft00e-r2hc-pad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/reodft/rodft00e-r2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/avx-128-fma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/avx2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/avx512.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/kcvi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/taint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/simd-support/vsx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/support/addchain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/tests/bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/tests/fftw-bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/tests/hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/tests/trigtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/ct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/dft-vrank-geq1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/f77api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/hc2hc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/openmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/rdft-vrank-geq1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/threads/vrank-geq1-rdft2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fftw3/tools/fftw-wisdom.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/f77funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/fftw3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/guru.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/guru64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/mktensor-iodims.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-dft-c2r.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-dft-r2c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-dft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-r2r.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-split-dft-c2r.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-split-dft-r2c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/plan-guru-split-dft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/api/x77.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/codelet-dft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/dft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/scalar/f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/scalar/n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/scalar/q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/scalar/t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/n1b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/n1f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/n2b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/n2f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/n2s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/q1b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/q1f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t1b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t1bu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t1f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t1fu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t2b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t2f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t3b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/t3f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/dft/simd/ts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/kernel/cycle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/kernel/ifftw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/libbench2/bench-user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/libbench2/bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/libbench2/my-getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/libbench2/verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/mpi/fftw3-mpi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/mpi/ifftw-mpi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/mpi/mpi-dft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/mpi/mpi-rdft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/mpi/mpi-rdft2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/mpi/mpi-transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/codelet-rdft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/ct-hc2c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/hc2hc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/rdft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/hb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/hc2cb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/hc2cf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/hf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2cb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2cbIII.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2cf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2cfII.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2r.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/simd/hc2cbv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/rdft/simd/hc2cfv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/reodft/reodft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/amd64-cpuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-altivec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-avx-128-fma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-avx2-128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-avx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-avx512.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-generic128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-generic256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-kcvi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-neon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/simd-vsx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/simd-support/x86-cpuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/tests/fftw-bench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/threads/f77funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fftw3/threads/threads.h" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-dft.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-dht.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-idft.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-redft00.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-redft01.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-redft10.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-redft11.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-rodft00.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-rodft01.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-rodft10.png" />
+    <Image Include="../../thirdparty/owemdjee/fftw3/doc/equation-rodft11.png" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/FFTW3Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/FFTW3ConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/README" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/README-perfcnt.md" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/TODO" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/api/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/api/f03api.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/cmake.config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/codemeta.json" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/commercialize.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/scalar/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/scalar/codelets/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/altivec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/avx-128-fma/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/avx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/avx2-128/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/avx2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/avx512/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/common/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/generic-simd128/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/generic-simd256/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/kcvi/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/neon/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/sse2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/dft/simd/vsx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/doc/FAQ/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/fftw.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/genfft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/kernel/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/libbench2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/m4/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/mkdist.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/mpi/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/mpi/f03-wrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/mpi/f03api.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2cb/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2cf/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/scalar/r2r/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/altivec/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/avx-128-fma/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/avx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/avx2-128/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/avx2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/avx512/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/common/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/generic-simd128/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/generic-simd256/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/kcvi/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/neon/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/sse2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/rdft/simd/vsx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/reodft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/simd-support/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/support/BUILD-MINGW32.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/support/BUILD-MINGW64.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/support/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/support/twovers.sh" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/tests/README" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/threads/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/tools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/tools/fftw-wisdom-to-conf.in" />
+    <Text Include="../../thirdparty/owemdjee/fftw3/tools/fftw_wisdom.1.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

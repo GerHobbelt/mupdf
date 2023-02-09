@@ -364,14 +364,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\scripts\tesseract-unittest\main.cpp" />
-    <ClCompile Include="..\..\scripts\tesseract-unittest\pch.cpp" />
-    <ClCompile Include="..\..\scripts\tesseract-unittest\test.cpp" />
-    <ClInclude Include="..\..\scripts\tesseract-unittest\pch.h" />
-    <ClInclude Include="..\..\scripts\tesseract-unittest\testdata.h" />
-    <None Include="..\..\scripts\tesseract-unittest\packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="../../thirdparty/tesseract/unittest/apiexample_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/applybox_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/baseapi_test.cc" />
@@ -388,6 +380,8 @@
     <ClCompile Include="../../thirdparty/tesseract/unittest/dotproduct_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/equationdetect_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/fileio_test.cc" />
+    <ClCompile Include="../../thirdparty/tesseract/unittest/fuzzers/fast.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/unittest/fuzzers/fuzzer-api.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/heap_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/imagedata_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/indexmapbidi_test.cc" />
@@ -431,7 +425,6 @@
     <ClCompile Include="../../thirdparty/tesseract/unittest/tfile_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/tfloat_benchmark.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/tfloat_matrix_benchmark.cc" />
-    <ClCompile Include="../../thirdparty/tesseract/unittest/third_party/utf/rune.c" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/unichar_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/unicharcompress_test.cc" />
     <ClCompile Include="../../thirdparty/tesseract/unittest/unicharset_test.cc" />
@@ -449,12 +442,9 @@
     <ClInclude Include="../../thirdparty/tesseract/unittest/lstm_test.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/normstrngs_test.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/syntaxnet/base.h" />
-    <ClInclude Include="../../thirdparty/tesseract/unittest/third_party/utf/utf.h" />
-    <ClInclude Include="../../thirdparty/tesseract/unittest/third_party/utf/utfdef.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/util/utf8/unicodetext.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/util/utf8/unilib.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/util/utf8/unilib_utf8_utils.h" />
-    <Image Include="../../thirdparty/tesseract/unittest/third_party/googletest/Google_Cloud_Developer_PosterDark_2021-3-1.max-2200x2200.jpg" />
     <Text Include="../../thirdparty/tesseract/unittest/README.md" />
     <Text Include="../../thirdparty/tesseract/unittest/fuzzers/oss-fuzz-build.sh" />
   </ItemGroup>

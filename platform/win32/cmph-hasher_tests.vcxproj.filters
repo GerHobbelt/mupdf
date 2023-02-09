@@ -21,44 +21,41 @@
     <Filter Include="Misc Files\cxxmph">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\docs">
+    <Filter Include="Misc Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\examples">
+    <Filter Include="Misc Files\man">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\man">
+    <Filter Include="Misc Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src">
+    <Filter Include="Misc Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Resource Files\figs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\figs">
+    <Filter Include="Resource Files\figs\bdz">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\figs\bdz">
+    <Filter Include="Resource Files\figs\brz">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\figs\brz">
+    <Filter Include="Source Files\cxxmph">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\cxxmph">
+    <Filter Include="Source Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\examples">
+    <Filter Include="Source Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +63,9 @@
       <Filter>Source Files\cxxmph</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/benchmark.cc">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bfcr_map_test.cc">
       <Filter>Source Files\cxxmph</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_common.cc">
@@ -80,7 +80,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/cxxmph.cc">
       <Filter>Source Files\cxxmph</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/debruijn_index_test.cc">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/dense_hash_map_test.cc">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/dummy_map_test.cc">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/flatten_iterator_test.cc">
       <Filter>Source Files\cxxmph</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/hollow_iterator_test.cc">
@@ -105,6 +114,18 @@
       <Filter>Source Files\cxxmph</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_map_test.cc">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/perfect_cuckoo_test.cc">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/power_map_test.cc">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank9.cpp">
+      <Filter>Source Files\cxxmph</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank_select_index_test.cc">
       <Filter>Source Files\cxxmph</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/seeded_hash_test.cc">
@@ -269,10 +290,25 @@
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/benchmark.h">
       <Filter>Header Files\cxxmph</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bfcr_map.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_common.h">
       <Filter>Header Files\cxxmph</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/debruijn_index.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/dummy_map.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/flatten_iterator.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/hollow_iterator.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/macros.h">
       <Filter>Header Files\cxxmph</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/map_tester.h">
@@ -285,6 +321,18 @@
       <Filter>Header Files\cxxmph</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_map.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/perfect_cuckoo_map.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/power_map.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank9.h">
+      <Filter>Header Files\cxxmph</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank_select_index.h">
       <Filter>Header Files\cxxmph</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/seeded_hash.h">
@@ -1925,23 +1973,17 @@
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/NEWS">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cmph-hasher/NEWSLOG.t2t">
-      <Filter>Misc Files</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/README">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/README.md">
       <Filter>Misc Files</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cmph-hasher/README.t2t">
+    <Text Include="../../thirdparty/owemdjee/cmph-hasher/configure.ac">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/Makefile.am">
       <Filter>Misc Files\cxxmph</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/cmph-hasher/docs/newslog.html">
-      <Filter>Misc Files\docs</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/examples/Makefile.am">
       <Filter>Misc Files\examples</Filter>

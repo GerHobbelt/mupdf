@@ -1,0 +1,1237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsimd-imgproc</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF573BD4}</ProjectGuid>
+    <RootNamespace>libsimd-imgproc</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16Cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetConvolution8iDirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetConvolution8iDirect1x1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetConvolution8iDirectAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetMergedConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetMergedConvolution32fBf16Input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetMergedConvolution32fBf16Output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetMergedConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetMergedConvolution8iInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16SynetMergedConvolution8iOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Float32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Gemm32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1HogLite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Neural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1NeuralConvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Resizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1ResizerBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Svm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Synet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetActivation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetConvolution32fDirectNchw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetConvolution32fDirectNhwc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetConvolution32fNhwcDirect2f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetConvolution32fNhwcDirect2r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetConvolution32fNhwcDirect3r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetDeconvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetFused.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetInnerProduct32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetMergedConvolution32fCd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetMergedConvolution32fCdc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetMergedConvolution32fDc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetPooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1SynetScale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Winograd1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Winograd2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1Winograd3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2AbsDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2AbsDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2AbsGradientSaturatedSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2AddFeatureDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2AlphaBlending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Background.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BayerToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BayerToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BgrToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BgrToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BgrToRgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BgrToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BgraToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BgraToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2BgraToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Binarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Conditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Deinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Detection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2EdgeBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Float16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Float32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2GaussianBlur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Gemm32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2GrayToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2GrayToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Hog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2HogLite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ImageLoad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ImageSave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ImageSaveJpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ImageSavePng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Int16ToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Integral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Interference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Interleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Laplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Lbp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2MeanFilter3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2MedianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Neural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2NeuralConvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Operation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2RecursiveBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ReduceGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ReduceGray3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ReduceGray4x4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ReduceGray5x5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ResizeBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Resizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ResizerArea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ResizerBicubic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ResizerBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ResizerNearest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Segmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2ShiftBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Statistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2StatisticMoments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2StretchGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Synet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetActivation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution32fDirectNchw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution32fDirectNhwc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution32fNhwcDirect2f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution32fNhwcDirect2r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution32fNhwcDirect3r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution8iDepthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution8iDirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution8iDirect1x1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetConvolution8iDirectAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetDeconvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetInnerProduct32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution32fBf16Depthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution32fBf16Input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution32fBf16Output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution32fCd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution32fCdc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution32fDc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution8iDepthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution8iInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetMergedConvolution8iOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetNormalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetPermute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetPooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2SynetScale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Texture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2Transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2UyvyToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2UyvyToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2WarpAffine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2YuvToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2YuvToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2YuvToHue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2YuvToUyvy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16BFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16Cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16SynetConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16SynetMergedConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16SynetMergedConvolution32fBf16Depthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16SynetMergedConvolution32fBf16Input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16SynetMergedConvolution32fBf16Output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwAbsDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwAbsDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwAbsGradientSaturatedSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwAddFeatureDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwAlphaBlending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBase64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBayerToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBayerToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgrToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgrToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgrToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgrToRgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgrToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgraToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgraToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgraToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBgraToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwBinarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwCpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwDeinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwDetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwEdgeBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwFill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwFloat32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwGaussianBlur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwGemm32fNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwGemm32fNT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwGemm32fPack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwGrayToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwGrayToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwHistogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwHog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwHogLite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwImageLoad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwImageSave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwImageSaveJpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwImageSavePng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwInt16ToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwIntegral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwInterference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwInterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwLaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwLbp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwMeanFilter3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwMedianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwNeural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwNeuralConvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwOperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwReduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwReduceGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwReduceGray3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwReduceGray4x4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwReduceGray5x5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwReorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwResizeBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwResizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwResizerArea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwResizerBicubic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwResizerBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwResizerNearest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSegmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwShiftBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwStatistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwStatisticMoments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwStretchGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSvm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetActivation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution32fDirectNchw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution32fDirectNhwc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution32fNhwcDirect2f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution32fNhwcDirect2r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution32fNhwcDirect3r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution8iDepthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution8iDirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution8iDirect1x1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetConvolution8iDirectAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetDeconvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetFused.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetInnerProduct32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution32fBf16Depthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution32fBf16Input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution32fBf16Output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution32fCd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution32fCdc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution32fDc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution8iDepthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution8iInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetMergedConvolution8iOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetNormalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetPermute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetPooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwSynetScale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwTile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwUyvyToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwUyvyToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwWarpAffine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwWinograd1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwWinograd2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwWinograd3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwYuv420pToBgraV2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwYuv444pToBgraV2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwYuvToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwYuvToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwYuvToHue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bwYuvToUyvy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniCpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniSynetConvolution8iDepthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniSynetConvolution8iDirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniSynetConvolution8iDirect1x1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniSynetConvolution8iDirectAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniSynetMergedConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniSynetMergedConvolution8iInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnniSynetMergedConvolution8iOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseAbsDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseAbsDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseAbsGradientSaturatedSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseAddFeatureDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseAlphaBlending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBase64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBayerToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBayerToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgrToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgrToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgrToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgrToHsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgrToHsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgrToRgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgrToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgraToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgraToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgraToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBgraToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseBinarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseCopy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseCpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseCrc32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseDeinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseDetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseEdgeBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseFill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseFloat32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseGaussianBlur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseGemm32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseGrayToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseGrayToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseHistogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseHog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseHogLite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseImageLoad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseImageLoadJpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseImageLoadPng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseImageSave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseImageSaveJpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseImageSavePng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseInt16ToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseIntegral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseInterference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseInterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseLaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseLbp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseMeanFilter3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseMedianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseNeural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseOperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBasePerformance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseRecursiveBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseReduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseReduceGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseReduceGray3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseReduceGray4x4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseReduceGray5x5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseReorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseResizeBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseResizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseResizerArea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseResizerBicubic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseResizerBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseResizerNearest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSegmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseShiftBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseStatistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseStatisticMoments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseStretchGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSvm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetActivation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetDeconvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetFused.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetInnerProduct32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetMergedConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetMergedConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetMergedConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetNormalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetPermute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetPooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseSynetScale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseUyvyToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseUyvyToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseWarpAffine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseWinograd1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseWinograd2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseWinograd3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseYuvToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseYuvToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseYuvToHsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseYuvToHsv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseYuvToHue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBaseYuvToUyvy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdLib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonAbsDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonAbsDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonAbsGradientSaturatedSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonAddFeatureDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonAlphaBlending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBase64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBayerToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBayerToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgrToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgrToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgrToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgrToRgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgrToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgraToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgraToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgraToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBgraToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonBinarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonCpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonDeinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonDetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonEdgeBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonFill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonFloat32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonGaussianBlur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonGemm32fNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonGemm32fNT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonGemm32fPack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonGrayToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonGrayToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonHistogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonHog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonHogLite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonImageLoad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonImageSave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonImageSaveJpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonImageSavePng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonInt16ToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonInterference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonInterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonLaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonLbp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonMeanFilter3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonMedianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonNeural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonNeuralConvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonOperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonReduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonReduceGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonReduceGray3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonReduceGray4x4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonReduceGray5x5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonReorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonResizeBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonResizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSegmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonShiftBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonStatistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonStatisticMoments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonStretchGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSvm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetActivation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution32fDirectNchw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution32fDirectNhwc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution32fNhwcDirect2f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution32fNhwcDirect2r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution32fNhwcDirect3r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution32fNhwcDirect4r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetDeconvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetFused.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetInnerProduct32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetMergedConvolution32fCd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetMergedConvolution32fCdc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetMergedConvolution32fDc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetPermute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonSynetPooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonUyvyToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonUyvyToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonWinograd1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonWinograd2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonWinograd3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonYuvToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonYuvToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonYuvToHue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeonYuvToUyvy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41AbsDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41AbsDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41AbsGradientSaturatedSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41AddFeatureDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41AlphaBlending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Background.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BayerToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BayerToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgrToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgrToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgrToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgrToRgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgrToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgraToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgraToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgraToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41BgraToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Binarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Conditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Crc32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Deinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Detection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41EdgeBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Float16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Float32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41GaussianBlur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41GaussianBlur3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Gemm32fNN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Gemm32fNT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Gemm32fPack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41GrayToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41GrayToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Hog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41HogLite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ImageLoad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ImageLoadPng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ImageSave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ImageSaveJpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ImageSavePng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Int16ToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Interference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Interleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Laplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Lbp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41MeanFilter3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41MedianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Neural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41NeuralConvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Operation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41RecursiveBilateralFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Reduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ReduceGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ReduceGray3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ReduceGray4x4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ReduceGray5x5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Reorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ResizeBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Resizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ResizerArea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ResizerBicubic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ResizerBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ResizerNearest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Segmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41ShiftBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Sobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Statistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41StatisticMoments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41StretchGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Svm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Synet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetActivation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution32fDirectNchw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution32fDirectNhwc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution32fNhwcDirect2f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution32fNhwcDirect2r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution32fNhwcDirect3r.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution8iNhwcDepthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution8iNhwcDirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution8iNhwcDirect1x1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetConvolution8iNhwcDirectAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetDeconvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetFused.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetInnerProduct32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetInnerProduct8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution32fBf16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution32fBf16Depthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution32fBf16Input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution32fBf16Output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution32fCd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution32fCdc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution32fDc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution8iDepthwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution8iInput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetMergedConvolution8iOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetNormalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetPermute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetPooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41SynetScale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Texture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41UyvyToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41UyvyToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41WarpAffine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Winograd1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Winograd2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41Winograd3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41YuvToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41YuvToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41YuvToHue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41YuvToUyvy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxAbsDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxAbsGradientSaturatedSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxAddFeatureDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxAlphaBlending.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgrToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgrToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgrToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgrToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgraToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgraToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgraToGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBgraToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxBinarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxCpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxDeinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxEdgeBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxFill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxGaussianBlur3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxGrayToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxGrayToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxHistogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxInterference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxInterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxLaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxLbp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxMeanFilter3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxMedianFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxOperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxReduceGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxReduceGray3x3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxReduceGray4x4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxReduceGray5x5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxReorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxResizeBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxSegmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxShiftBilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxSobel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxSquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxStatistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxStretchGray2x2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxYuvToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmxYuvToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVsxCpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVsxHog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVsxNeural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVsxSquaredDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVsxSvm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVsxYuvToHue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestAbsDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestAddFeatureDifference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestAnyToAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestAnyToBayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestAnyToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestAnyToYuv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestBFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestBase64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestBayerToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestBayerToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestBgr48pToBgra32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestBinarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestCheckC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestCheckCpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestCompare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestConditional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestContour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestCopy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestCrc32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestDeinterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestDetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestDifferenceSum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestDrawing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestEdgeBackground.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestFill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestFloat16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestFloat32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestFont.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestGemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestHistogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestHog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestHogLite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestHtml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestImageIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestImageMatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestIntegral.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestInterference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestInterleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestMotion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestNeural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestNeuralConvolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestOperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestPerformance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestRandom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestReduce.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestReorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestResize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSegmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestShift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestStatistic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestStretchGray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSvm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetActivation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetConversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetDeconvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetFused.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetInnerProduct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetMergedConvolution32f.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetMergedConvolution8i.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetNormalize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetPermute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetPooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetScale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestTexture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestUyvyToBgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestVideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestWarpAffine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestWinograd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestYuvToAny.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestYuvToBgra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Use/Use.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Use/UseFaceDetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Use/UseMotionDetector.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAlignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAllocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAlphaBlending.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAmxBf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bf16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512bw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdAvx512vnni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBFloat16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBase64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdBayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdCompare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdConst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdContour.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdConversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdCopyPixel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdCpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdDefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdDeinterleave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdDetection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdDetection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdDrawing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdEmpty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdEnable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdExp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdExtract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdFloat16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdFmadd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdFont.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdFrame.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdGather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdGaussianBlur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdGemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdImageLoad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdImageMatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdImageSave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdImageSaveJpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdImageSavePng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdInit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdIntegral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdInterleave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdLib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdLib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdLoad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdLoadBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdMath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdMemory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdMemoryStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdMotion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeural.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdNeural.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdParallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdPerformance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdPixel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdPoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdPow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdPrefetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdPyramid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdRectangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdRecursiveBilateralFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdResizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdResizerCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdRuntime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdShift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdShuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSse41.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdStore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetConvolution32f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetConvolution32fBf16Common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetConvolution32fCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetConvolution8i.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetConvolution8iCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetDeconvolution32f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetInnerProduct32f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetMergedConvolution32f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetMergedConvolution8i.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetPermute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdSynetScale8i.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdTile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdTime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdTranspose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdUnpack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdUpdate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdView.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVmx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdVsx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdWarpAffine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdWarpAffineCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdWinograd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdXml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Simd/SimdYuvToBgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestCompare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestConsole.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestHtml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestPerformance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestRandom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestSynetConvolutionParam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestTensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simd-imgproc/src/Test/TestVideo.h" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/city.jpg" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/forest.jpg" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/freckles.jpg" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgai4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgai4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgan6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgan6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgbn4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bggn4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgwn6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgyn6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s01i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s01n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s02i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s02n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s03i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s03n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s04i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s04n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s05i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s05n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s06i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s06n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s07i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s07n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s08i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s08n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s09i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s09n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s32i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s32n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s33i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s33n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s34i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s34n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s35i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s35n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s36i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s36n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s37i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s37n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s38i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s38n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s39i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s39n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s40i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s40n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbbn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbbn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbbn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbgn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbgn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbrn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbwn0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbwn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbyn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tm3n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp0n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp0n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp0n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp1n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/text.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/bdwn.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_average_pooling_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_convolutional_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_dropout_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_fully_connected_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_input_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_max_pooling_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_pooling_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/doc.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/nav_g.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/open.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/sync_off.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/sync_on.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/logo.png" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/data/network/digit.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/dynsections.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/menu.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/menudata.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/BuildAll.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/CreateRelease.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/FindAndReplace.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/GenerateHelp.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/GetVersion.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/TestAll.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/conan/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/sh/GetVersion.sh" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/sh/UpdateCopyrights.sh" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenConfig.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenData.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenFooter.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenHeader.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/SimdVersion.h.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/UserVersion.txt" />
+    <Xml Include="../../thirdparty/owemdjee/simd-imgproc/data/cascade/haar_face_0.xml" />
+    <Xml Include="../../thirdparty/owemdjee/simd-imgproc/data/cascade/haar_face_1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/simd-imgproc/data/cascade/lbp_face.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;../../thirdparty/owemdjee/cmph-hasher;..\..\thirdparty\owemdjee\plf_nanotimer;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;../../thirdparty/owemdjee/cmph-hasher;..\..\thirdparty\owemdjee\plf_nanotimer;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;../../thirdparty/owemdjee/cmph-hasher;..\..\thirdparty\owemdjee\plf_nanotimer;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CMPH_HASHER;CMPH_HASHER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/cmph-hasher/src;../../thirdparty/owemdjee/cmph-hasher;..\..\thirdparty\owemdjee\plf_nanotimer;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -232,12 +232,35 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/MurmurHash3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bfcr_map_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_index.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_map.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/cxxmph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/debruijn_index_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/dense_hash_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/dummy_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/flatten_iterator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/hollow_iterator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/map_tester.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/map_tester_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_bits.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_bits_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_index.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_index_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/perfect_cuckoo_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/power_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank9.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank_select_index_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/seeded_hash_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/string_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/string_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/test_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/trigraph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/trigraph_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/examples/file_adapter_ex2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/examples/small_set_ex4.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/examples/struct_vector_adapter_ex3.c" />
@@ -246,6 +269,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz_gen_lookup_table.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bdz_ph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bm_numbers.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/bmz8.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/brz.c" />
@@ -255,6 +279,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/chd_ph.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/chm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_benchmark.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/cmph_structs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/compressed_rank.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/compressed_seq.c" />
@@ -274,14 +299,30 @@
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/vqueue.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/vstack.c" />
     <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/src/wingetopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/cmph_benchmark_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/compressed_rank_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/compressed_seq_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/graph_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/mphf_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/packed_mphf_tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/cmph-hasher/tests/select_tests.c" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/MurmurHash3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bfcr_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/bm_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/debruijn_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/dummy_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/flatten_iterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/hollow_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/map_tester.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_bits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_index.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/mph_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/perfect_cuckoo_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/power_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/rank_select_index.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/seeded_hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/string_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/stringpiece.h" />
@@ -828,19 +869,18 @@
     <Image Include="../../thirdparty/owemdjee/cmph-hasher/figs/img99.png" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/NEWS" />
-    <Text Include="../../thirdparty/owemdjee/cmph-hasher/NEWSLOG.t2t" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/README" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/README.md" />
-    <Text Include="../../thirdparty/owemdjee/cmph-hasher/README.t2t" />
+    <Text Include="../../thirdparty/owemdjee/cmph-hasher/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/cxxmph/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/cmph-hasher/docs/newslog.html" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/examples/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/examples/keys.txt" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/man/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/src/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/cmph-hasher/tests/Makefile.am" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

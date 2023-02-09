@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpango</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFE9919}</ProjectGuid>
+    <RootNamespace>libpango</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPANGO;PANGO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pango/examples/cairoshape.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/examples/cairosimple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/examples/cairotwisted.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/examples/pangowin32tobmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/break-arabic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/break-indic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/break-latin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/break-thai.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/break.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/ellipsize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/emoji_presentation_scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/fonts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/glyphstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/itemize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/json/gtkjsonparser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/json/gtkjsonprinter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/modules.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-attributes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-bidi-type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-coverage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-emoji.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-engine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-fontset-simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-fontset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-glyph-item.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-gravity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-item.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-language.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-layout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-markup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-ot-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-ot-info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-ot-ruleset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-ot-tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-renderer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-script.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-tabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-trace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pango-utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-coretextfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-coretextfontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-fcfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-fcfontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-win32font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocairo-win32fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocoretext-fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangocoretext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangofc-decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangofc-font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangofc-fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangoft2-fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangoft2-render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangoft2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangowin32-dwrite-fontmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangowin32-fontcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangowin32-fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangowin32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangoxft-font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangoxft-fontmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/pangoxft-render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/reorder-items.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/serializer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/pango/shape.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/cxx-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/dump-boundaries.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/gen-all-unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/markup-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-bidi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-break.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-coverage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-ellipsize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-fonts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-harfbuzz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-itemize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-layout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-no-fonts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-ot-tags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-pangocairo-threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/test-shape.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testattributes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testboundaries.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testboundaries_ucd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testcontext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testiter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testlanguage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testmatrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testmisc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testrandom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testscript.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testserialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/testtabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tests/validate-log-attrs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/tools/gen-script-for-lang.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/pango-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/pango-segmentation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/pango-view.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/viewer-cairo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/viewer-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/viewer-pangocairo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/viewer-pangoft2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/viewer-pangoxft.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/viewer-render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pango/utils/viewer-x.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/json/gtkjsonparserprivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/json/gtkjsonprinterprivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-attributes-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-attributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-bidi-type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-break-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-break.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-color-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-context-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-coverage-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-coverage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-direction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-emoji-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-emoji-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-font-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-fontmap-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-fontmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-fontset-simple-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-fontset-simple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-fontset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-glyph-item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-glyph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-gravity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-impl-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-item-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-language-sample-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-language.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-layout-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-markup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-modules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-ot-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-ot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-renderer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-script-lang-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-script-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-tabs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-trace-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-utils-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-utils-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango-version-macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pango.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocairo-coretext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocairo-coretextfont.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocairo-fc-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocairo-fc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocairo-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocairo-win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocairo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocoretext-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangocoretext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangofc-decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangofc-font-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangofc-font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangofc-fontmap-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangofc-fontmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangofc-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangoft2-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangoft2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangowin32-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangowin32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangoxft-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangoxft-render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/pango/pangoxft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/tests/test-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/tests/validate-log-attrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/utils/viewer-cairo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/utils/viewer-render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/utils/viewer-x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pango/utils/viewer.h" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/Cantarell-VF.otf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/DejaVuSans-Bold.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/DejaVuSans.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/DejaVuSansMono.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/amiri-06dd.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/droid-sans-subset.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/emoji-subset.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/fa-regular-f2db.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/fa-solid-f2db.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pango/tests/fonts/noto-sans-cjk.ttf" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/align-center-justify.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/align-center.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/align-left-justify.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/align-left.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/align-right-justify.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/align-right.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/arabic-markup.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/baseline-shift-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/baseline-shift-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/bidi-annotate-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/bidi-annotate-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/bidi-annotate.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/bidi-input-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/bidi-input-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/bidi-input.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/blue-text.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/caret-metrics-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/caret-metrics-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/cursor-positions-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/cursor-positions-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/fontmetrics-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/fontmetrics-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/glyphstring-positions-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/glyphstring-positions-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/layout-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/layout-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/layout.gif" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/layout.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/m-east.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/m-north.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/m-south.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/m-west.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/pango-name-black.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/pango-name-solid.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/pango-name-white.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/pango-name.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/pipeline-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/pipeline-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/pipeline.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/rects1.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/rects2.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/rects3.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/rotated-text.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/split-cursor-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/split-cursor-light.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/split-cursor.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/vertical-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/pango/docs/vertical-light.png" />
+    <Text Include="../../thirdparty/owemdjee/pango/CODING_STYLE.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/pango/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/build-aux/meson/dist-docs.py" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango.types.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango_bidi.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango_cairo.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango_fonts.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango_markup.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango_rendering.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pango_xft.md" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pangocairo.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pangofc.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pangoft2.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pangoot.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/pangoxft.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/docs/urlmap.js" />
+    <Text Include="../../thirdparty/owemdjee/pango/make-release.sh" />
+    <Text Include="../../thirdparty/owemdjee/pango/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/pango/pango.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/pango/pangocairo.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/pango/pangoft2.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/pango/pangowin32.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/pango/pangoxft.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/CharBreakTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/EmojiBreakTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/GraphemeBreakTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/SentenceBreakTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/WordBreakTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/fonts/README" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/gen-all-unicode.py" />
+    <Text Include="../../thirdparty/owemdjee/pango/tests/gen-installed-test.py" />
+    <Text Include="../../thirdparty/owemdjee/pango/tools/gen-break-table.py" />
+    <Text Include="../../thirdparty/owemdjee/pango/tools/gen-emoji-table.py" />
+    <Text Include="../../thirdparty/owemdjee/pango/tools/gen-vertical-orientation-U-table.py" />
+    <Text Include="../../thirdparty/owemdjee/pango/tools/rgb.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/EMOJI-MODIFIERS.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/GLASS.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/HELLO.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-arabic.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-chinese.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-devanagari.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-gurmukhi.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-hebrew.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-hyphens.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-ipa.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-justify.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-lao.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-latin.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-long-paragraph.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-mixed.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-mongolian.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-nko.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-syriac.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-tamil.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-thai.txt" />
+    <Text Include="../../thirdparty/owemdjee/pango/utils/test-tibetan.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

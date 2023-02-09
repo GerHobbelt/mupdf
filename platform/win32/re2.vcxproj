@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_RE2;RE2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -226,10 +226,19 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libmupdf_minimal_core.vcxproj">
+      <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libre2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff49f979}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/bitstate.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/compile.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/dfa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/filtered_re2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2/re2/fuzzing/re2_fuzzer.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/mimics_pcre.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/nfa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/onepass.cc" />
@@ -276,6 +285,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/re2/re2/unicode_groups.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/testinstall.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/re2/util/fuzz.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/monolithic_main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/pcre.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/re2/util/rune.cc" />
@@ -326,15 +336,8 @@
     <Text Include="../../thirdparty/owemdjee/re2/re2/unicode.py" />
     <Text Include="../../thirdparty/owemdjee/re2/re2Config.cmake.in" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="libmupdf_minimal_core.vcxproj">
-      <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="libre2.vcxproj">
-      <Project>{a60d8644-5a1c-4d29-8970-7518ff49f979}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

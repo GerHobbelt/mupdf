@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libngtcp2</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF38285F}</ProjectGuid>
+    <RootNamespace>libngtcp2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNGTCP2;NGTCP2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/boringssl/boringssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/gnutls/gnutls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/openssl/openssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/picotls/picotls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/shared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/crypto/wolfssl/wolfssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/client_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/debug.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/examplestest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/gtlssimpleclient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/h09client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/h09server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/http.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/server_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/shared.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/simpleclient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_gnutls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_picotls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_wolfssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_gnutls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_picotls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_wolfssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_gnutls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_picotls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_wolfssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_boringssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_gnutls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_picotls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_wolfssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_gnutls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_picotls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_wolfssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_shared_picotls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/util_gnutls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/util_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/examples/util_wolfssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/fuzz/decode_frame.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/fuzz/ksl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_acktr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_addr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_balloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_bbr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_bbr2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_crypto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_gaptr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_idtr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ksl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_objalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_opl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pkt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pmtud.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ppe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_qlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ringbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rtb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_strm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_unreachable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_vec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_window_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_acktr_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conn_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conv_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_crypto_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_gaptr_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_idtr_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ksl_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_map_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pkt_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pmtud_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pv_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_range_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ringbuf_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rob_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rtb_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_str_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_strm_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_test_helper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_vec_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/bench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/contrib/parsertrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/contrib/url_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/http_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/ngtcp2/ngtcp2_crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/ngtcp2/ngtcp2_crypto_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/ngtcp2/ngtcp2_crypto_gnutls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/ngtcp2/ngtcp2_crypto_openssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/ngtcp2/ngtcp2_crypto_picotls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/ngtcp2/ngtcp2_crypto_wolfssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/crypto/shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/client_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/h09client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/h09server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/network.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/server_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_gnutls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_openssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_picotls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_context_wolfssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_gnutls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_openssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_picotls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_client_session_wolfssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_gnutls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_openssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_picotls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_context_wolfssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_gnutls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_openssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_picotls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_server_session_wolfssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_gnutls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_openssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_picotls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_session_base_wolfssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/tls_shared_picotls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/examples/util_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/includes/ngtcp2/ngtcp2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_acktr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_addr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_balloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_bbr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_bbr2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_cid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_gaptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_idtr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ksl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_net.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_objalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_opl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pkt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pmtud.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ppe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_pv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_qlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rcvry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_ringbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_rtb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_str.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_strm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_unreachable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_vec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/lib/ngtcp2_window_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_acktr_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conn_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_conv_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_crypto_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_gaptr_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_idtr_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ksl_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_map_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pkt_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pmtud_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_pv_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_range_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_ringbuf_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rob_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_rtb_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_str_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_strm_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_test_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/tests/ngtcp2_vec_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/http_parser.h" />
+    <Font Include="../../thirdparty/owemdjee/ngtcp2/doc/source/_themes/sphinx_rtd_theme/static/css/fonts/fontawesome-webfont.ttf" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/CMakeOptions.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/README" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/build_boringssl.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/build_nghttp3.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/build_openssl1.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/build_openssl1_cross.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/build_openssl3.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/build_picotls.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/build_wolfssl.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/ci/gen-certificate.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/cmakeconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/boringssl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/boringssl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/boringssl/libngtcp2_crypto_boringssl.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/gnutls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/gnutls/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/gnutls/libngtcp2_crypto_gnutls.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/includes/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/openssl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/openssl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/openssl/libngtcp2_crypto_openssl.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/picotls/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/picotls/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/picotls/libngtcp2_crypto_picotls.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/wolfssl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/wolfssl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/crypto/wolfssl/libngtcp2_crypto_wolfssl.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/mkapiref.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/source/_themes/sphinx_rtd_theme/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/source/_themes/sphinx_rtd_theme/static/js/badge_only.js" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/source/_themes/sphinx_rtd_theme/static/js/theme.js" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/source/conf.py.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/doc/source/programmers-guide.rst" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/config.ini.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/ngtcp2test/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/ngtcp2test/certs.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/ngtcp2test/client.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/ngtcp2test/env.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/ngtcp2test/log.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/ngtcp2test/server.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/ngtcp2test/tls.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/test_01_handshake.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/test_02_resume.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/test_03_earlydata.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/test_04_clientcert.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/examples/tests/test_05_ciphers.py" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/interop/run_endpoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/lib/includes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/lib/includes/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/lib/includes/ngtcp2/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/lib/libngtcp2.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/third-party/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/third-party/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ngtcp2/third-party/http-parser/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

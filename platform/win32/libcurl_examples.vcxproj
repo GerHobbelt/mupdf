@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -226,9 +226,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\scripts\curl\tool_hugehelp.c" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="../../thirdparty/curl/CMake/CurlTests.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/10-at-a-time.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/altsvc_demo.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/anyauthput.c" />
@@ -343,6 +341,172 @@
     <ClCompile Include="../../thirdparty/curl/docs/examples/urlapi_demo.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/usercertinmem.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/xmlstream.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/altsvc.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/amigaos.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/asyn-ares.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/asyn-thread.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/base64.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/bufref.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/c-hyper.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cf-socket.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cfilters.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/conncache.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/connect.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/content_encoding.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cookie.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_addrinfo.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_des.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_endian.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_fnmatch.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_get_line.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_gethostname.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_gssapi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_log.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_memrchr.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_multibyte.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_ntlm_core.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_ntlm_wb.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_path.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_range.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_rtmp.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_sasl.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_sspi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/curl_threads.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/dict.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/doh.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/dynbuf.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/easy.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/easygetopt.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/easyoptions.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/escape.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/file.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/fileinfo.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/fopen.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/formdata.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/ftp.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/ftplistparser.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/getenv.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/getinfo.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/gopher.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/h2h3.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hash.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/headers.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hmac.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hostasyn.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hostip.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hostip4.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hostip6.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hostsyn.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/hsts.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http2.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http_aws_sigv4.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http_chunks.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http_digest.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http_negotiate.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http_ntlm.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http_proxy.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/idn.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/if2ip.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/imap.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/inet_ntop.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/inet_pton.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/krb5.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/ldap.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/llist.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/md4.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/md5.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/memdebug.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/mime.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/mprintf.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/mqtt.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/multi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/netrc.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/nonblock.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/noproxy.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/openldap.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/openlock.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/parsedate.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/pingpong.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/pop3.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/progress.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/psl.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/rand.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/rename.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/rtsp.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/select.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/sendf.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/setopt.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/sha256.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/share.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/slist.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/smb.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/smtp.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/socketpair.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/socks.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/socks_gssapi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/socks_sspi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/speedcheck.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/splay.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/strcase.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/strdup.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/strerror.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/strtok.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/strtoofft.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/system_win32.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/telnet.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/tftp.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/timediff.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/timeval.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/transfer.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/url.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/urlapi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/cleartext.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/cram.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/digest.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/digest_sspi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/gsasl.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/krb5_gssapi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/krb5_sspi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/ntlm.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/ntlm_sspi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/oauth2.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/spnego_gssapi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/spnego_sspi.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vauth/vauth.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/version.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/version_win32.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/curl_msh3.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/curl_ngtcp2.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/curl_quiche.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vquic/vquic.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vssh/libssh.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vssh/libssh2.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vssh/wolfssh.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/bearssl.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/gskit.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/gtls.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/hostcheck.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/keylog.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/mbedtls.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/mbedtls_threadlock.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/nss.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/openssl.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/rustls.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/schannel.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/schannel_verify.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/sectransp.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/vtls.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/wolfssl.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/x509asn1.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/warnless.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/wildcard.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/ws.c" />
+    <ClCompile Include="../../thirdparty/curl/packages/OS400/ccsidcurl.c" />
+    <ClCompile Include="../../thirdparty/curl/packages/OS400/chkstrings.c" />
+    <ClCompile Include="../../thirdparty/curl/packages/OS400/os400sys.c" />
+    <ClCompile Include="../../thirdparty/curl/packages/vms/curl_crtl_init.c" />
+    <ClCompile Include="../../thirdparty/curl/packages/vms/report_openssl_version.c" />
     <ClCompile Include="../../thirdparty/curl/src/slist_wc.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_binmode.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_bname.c" />
@@ -593,6 +757,7 @@
     <ClCompile Include="../../thirdparty/curl/tests/server/testpart.c" />
     <ClCompile Include="../../thirdparty/curl/tests/server/tftpd.c" />
     <ClCompile Include="../../thirdparty/curl/tests/server/util.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/tests-httpd/testenv/mod_curltest/mod_curltest.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1300.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1302.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1303.c" />
@@ -633,6 +798,7 @@
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1655.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1660.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1661.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/unit/unit2600.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit3200.c" />
     <ClInclude Include="../../thirdparty/curl/docs/cmdline-opts/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/docs/examples/Makefile.inc" />
@@ -969,7 +1135,6 @@
     <Text Include="../../thirdparty/curl/libcurl.pc.in" />
     <Text Include="../../thirdparty/curl/mlc_config.json" />
     <Text Include="../../thirdparty/curl/packages/Makefile.am" />
-    <Text Include="../../thirdparty/curl/packages/OS400/README.OS400" />
     <Text Include="../../thirdparty/curl/packages/OS400/curl.inc.in" />
     <Text Include="../../thirdparty/curl/packages/OS400/initscript.sh" />
     <Text Include="../../thirdparty/curl/packages/OS400/make-include.sh" />
@@ -997,7 +1162,6 @@
     <Text Include="../../thirdparty/curl/scripts/coverage.sh" />
     <Text Include="../../thirdparty/curl/scripts/firefox-db2pem.sh" />
     <Text Include="../../thirdparty/curl/scripts/installcheck.sh" />
-    <Text Include="../../thirdparty/curl/scripts/log2changes.pl" />
     <Text Include="../../thirdparty/curl/scripts/zuul/before_script.sh" />
     <Text Include="../../thirdparty/curl/scripts/zuul/script.sh" />
     <Text Include="../../thirdparty/curl/src/CMakeLists.txt" />
@@ -1045,7 +1209,8 @@
     <Text Include="../../thirdparty/curl/winbuild/gen_resp_file.bat" />
     <Text Include="../../thirdparty/curl/winbuild/makedebug.cmd" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

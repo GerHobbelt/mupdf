@@ -1,0 +1,1008 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libboringssl</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF831533}</ProjectGuid>
+    <RootNamespace>libboringssl</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBORINGSSL;BORINGSSL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/abi_self_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_bitstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_bool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_d2i_fp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_dup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_gentm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_i2d_fp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_mbstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_octet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_strex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_strnid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/a_utctm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/asn1_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/asn1_par.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/asn1_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/asn_pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/f_int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/f_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/posix_time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/tasn_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/tasn_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/tasn_fre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/tasn_new.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/tasn_typ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/tasn_utl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/base64/base64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/base64/base64_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/bio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/bio_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/bio_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/fd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/hexdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/pair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bio/socket_helper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/blake2/blake2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/blake2/blake2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bn_extra/bn_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bn_extra/convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/buf/buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/buf/buf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/asn1_compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/ber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/bytestring_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/cbb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/cbs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/chacha/chacha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/chacha/chacha_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/aead_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/cipher_extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/cipher_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/derive_key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_aesctrhmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_aesgcmsiv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_chacha20poly1305.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_des.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_rc2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_rc4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/e_tls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/tls_cbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/compiler_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/conf/conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/conf/conf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/constant_time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_aarch64_apple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_aarch64_freebsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_aarch64_fuchsia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_aarch64_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_aarch64_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_arm_freebsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_arm_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_arm_linux_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_intel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/crypto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/crypto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/curve25519.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/ed25519_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/spake25519.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/spake25519_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/x25519_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/des/des.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/dh_extra/dh_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/dh_extra/dh_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/dh_extra/params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/digest_extra/digest_extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/digest_extra/digest_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/dsa/dsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/dsa/dsa_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/dsa/dsa_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ec_extra/ec_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ec_extra/ec_derive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ec_extra/hash_to_curve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdh_extra/ecdh_extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdh_extra/ecdh_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ecdsa_extra/ecdsa_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/engine/engine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/err/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/err/err_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/evp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/evp_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/evp_ctx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/evp_extra_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/evp_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_dsa_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_ec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_ec_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_ed25519.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_ed25519_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_hkdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_rsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_rsa_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_x25519.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/p_x25519_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/pbkdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/pbkdf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/scrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/scrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/evp/sign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/ex_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/aes_nohw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/aes_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/key_wrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/mode_wrappers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bcm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/asm/x86_64-gcc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/bn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/bn_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/bytes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/ctx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/div.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/div_extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/exponentiation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/gcd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/gcd_extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/jacobi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/montgomery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/montgomery_inv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/prime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/rsaz_exp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/shift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/sqrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cipher/aead.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cipher/cipher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cipher/e_aes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cipher/e_aesccm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cmac/cmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cmac/cmac_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/dh/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/dh/dh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/digest/digest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/digest/digests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/digestsign/digestsign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/ec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/ec_key.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/ec_montgomery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/ec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/felem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/oct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p224-64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p256-nistz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p256-nistz_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/scalar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/simple_mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/wnaf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ecdh/ecdh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ecdsa/ecdsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ecdsa/ecdsa_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/fips_shared_support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/hmac/hmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/md4/md4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/md5/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/md5/md5_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/cbc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/cfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/ctr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/gcm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/gcm_nohw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/gcm_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/ofb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/polyval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/ctrdrbg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/ctrdrbg_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/fork_detect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/fork_detect_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/urandom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/urandom_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rsa/blinding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rsa/padding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rsa/rsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rsa/rsa_impl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/self_check/fips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/self_check/self_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/service_indicator/service_indicator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/service_indicator/service_indicator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/sha/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/sha/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/sha/sha512.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/sha/sha_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/tls/kdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hkdf/hkdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hkdf/hkdf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hmac_extra/hmac_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/hpke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/hpke_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hrss/hrss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hrss/hrss_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/impl_dispatch_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/lhash/lhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/lhash/lhash_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/obj/obj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/obj/obj_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/obj/obj_xref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_all.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_oth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_pk8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_pkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pem/pem_xaux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/pkcs7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/pkcs7_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/pkcs7_x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/p5_pbev2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/pkcs12_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/pkcs8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/pkcs8_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/pkcs8_x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/poly1305.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/poly1305_arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/poly1305_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/poly1305_vec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pool/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/pool/pool_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rand_extra/deterministic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rand_extra/forkunsafe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rand_extra/fuchsia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rand_extra/passive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rand_extra/rand_extra.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rand_extra/rand_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rand_extra/windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rc4/rc4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/refcount_c11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/refcount_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/refcount_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rsa_extra/rsa_asn1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rsa_extra/rsa_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/rsa_extra/rsa_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/self_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/siphash/siphash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/siphash/siphash_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/stack/stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/stack/stack_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/test/abi_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/test/file_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/test/file_test_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/test/gtest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/test/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/test/wycheproof_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/thread_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/thread_pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/thread_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/thread_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/trust_token/pmbtoken.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/trust_token/trust_token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/trust_token/trust_token_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/trust_token/voprf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/a_digest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/a_sign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/a_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/algorithm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/asn1_gen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/by_dir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/by_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/i2d_pr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/name_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/policy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/rsa_pss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/t_crl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/t_req.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/t_x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/t_x509a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_att.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_d2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_def.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_ext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_lu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_obj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_req.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_trs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_txt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_v3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_vfy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509_vpm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509cset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509rset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x509spki.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_algor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_all.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_attrib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_crl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_exten.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_pkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_pubkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_req.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_sig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_spki.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_val.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_x509.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509/x_x509a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/tab_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_akey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_akeya.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_alt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_bcons.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_bitst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_cpols.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_crld.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_enum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_extku.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_genn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_ia5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_int.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_ncons.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_ocsp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pci.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pcia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pcons.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pmaps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_prn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_purp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_skey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_utl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/bio/base64_bio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/blowfish/blowfish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/blowfish/blowfish_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/cast/cast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/cast/cast_tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/cast/cast_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/cfb/cfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/cfb/cfb_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/des/cfb64ede.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/dh/dh_decrepit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/dsa/dsa_decrepit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/evp/dss1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/evp/evp_do_all.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/evp/evp_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/obj/obj_decrepit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/rc4/rc4_decrepit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/ripemd/ripemd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/ripemd/ripemd_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/rsa/rsa_decrepit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/ssl/ssl_decrepit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/x509/x509_decrepit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/xts/xts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/decrepit/xts/xts_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/arm_cpuinfo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/bn_div.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/bn_mod_exp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/cert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/conf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/decode_client_hello_inner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/der_roundtrip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/dtls_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/dtls_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/pkcs12.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/pkcs8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/privkey.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/read_pem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/spki.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/fuzz/ssl_ctx_api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/rust/rust_wrapper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/bio_ssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/d1_both.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/d1_lib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/d1_pkt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/d1_srtp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/dtls_method.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/dtls_record.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/encrypted_client_hello.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/extensions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/handoff.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/handshake.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/handshake_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/handshake_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/s3_both.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/s3_lib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/s3_pkt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/span_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_aead_ctx.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_asn1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_c_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_cert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_cipher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_key_share.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_lib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_privkey.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_session.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_stat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_transcript.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_versions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/ssl_x509.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/t1_enc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/async_bio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/bssl_shim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/handshake_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/handshaker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/mock_quic_transport.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/packeted_bio.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/settings_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/test_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/test/test_state.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/tls13_both.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/tls13_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/tls13_enc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/tls13_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/tls_method.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/ssl/tls_record.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/args.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/ciphers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/const.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/digest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/fd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/generate_ech.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/generate_ed25519.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/genrsa.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/pkcs12.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/rand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/sign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/speed.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/tool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/tool/transport_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/util/ar/testdata/sample/bar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/util/ar/testdata/sample/foo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/modulewrapper/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/modulewrapper/modulewrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/util/fipstools/test_fips.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/asn1/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/bio/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/bytestring/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/chacha/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/conf/conf_def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/conf/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/cpu_arm_linux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/curve25519_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/des/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/dsa/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/ec_extra/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/err/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/evp/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/rsaz_exp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cipher/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/delocate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/dh/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/digest/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/digest/md32_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p256-nistz-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p256-nistz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p256_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ecdsa/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/md5/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/fork_detect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/getrandom_fillin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rsa/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/service_indicator/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/sha/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/tls/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/hrss/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/lhash/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/obj/obj_dat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs8/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/pool/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/test/abi_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/test/file_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/test/gtest_main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/test/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/test/wycheproof_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/trust_token/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/x509/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/ext_dat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/decrepit/cast/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/decrepit/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/aead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/arm_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/asn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/asn1_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/asn1t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/blake2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/blowfish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/bn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/bytestring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/chacha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cipher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ctrdrbg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/curve25519.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/des.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/dh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/digest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/dsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/dtls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/e_os2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ec_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ecdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/evp_errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ex_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/hkdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/hpke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/hrss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/is_boringssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/kdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/lhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/md4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/nid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/obj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/obj_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/opensslconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/opensslv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ossl_typ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/pem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/pkcs12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/pkcs7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/pkcs8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/poly1305.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/rc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ripemd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/safestack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/service_indicator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/sha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/siphash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/srtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/ssl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/tls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/trust_token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/type_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/x509.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/x509_vfy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/include/openssl/x509v3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/rust/rust_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/rust/wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/async_bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/fuzzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/fuzzer_tags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/handshake_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/mock_quic_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/packeted_bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/settings_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/test_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/ssl/test/test_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/tool/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/tool/transport_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/modulewrapper/modulewrapper.h" />
+    <Image Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/intcheck1.png" />
+    <Image Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/intcheck2.png" />
+    <Image Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/intcheck3.png" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/API-CONVENTIONS.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/BREAKING-CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/BUILDING.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/FUZZING.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/INCORPORATING.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/PORTING.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/SANDBOXING.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/STYLE.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/blake2/blake2b256_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_cbc_sha1_tls_implicit_iv_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_cbc_sha1_tls_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_ccm_bluetooth_8_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_ccm_bluetooth_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_ccm_matter_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_ctr_hmac_sha256.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_gcm_randnonce_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_gcm_siv_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_128_gcm_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_192_gcm_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_256_cbc_sha1_tls_implicit_iv_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_256_cbc_sha1_tls_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_256_ctr_hmac_sha256.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_256_gcm_randnonce_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_256_gcm_siv_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/aes_256_gcm_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/chacha20_poly1305_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/cipher_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/des_ede3_cbc_sha1_tls_implicit_iv_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/des_ede3_cbc_sha1_tls_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/make_all_legacy_aead_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_128_cbc.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_128_ctr.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_128_gcm.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_192_cbc.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_192_ctr.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_256_cbc.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_256_ctr.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/aes_256_gcm.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/tdes_cbc.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/nist_cavp/tdes_ecb.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/cipher_extra/test/xchacha20_poly1305_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/asm/x25519-asm-arm.S" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/ed25519_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/curve25519/make_curve25519_tables.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/ecdh_extra/ecdh_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/evp/evp_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/evp/scrypt_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/FIPS.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/aes/aes_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/exp_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/gcd_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/miller_rabin_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/mod_exp_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/mod_inv_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/mod_mul_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/mod_sqrt_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/product_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/quotient_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/shift_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/bn/test/sum_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cmac/cavp_3des_cmac_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cmac/cavp_aes128_cmac_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cmac/cavp_aes192_cmac_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/cmac/cavp_aes256_cmac_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/ec_scalar_base_mult_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ec/p256-nistz_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ecdsa/ecdsa_sign_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/ecdsa/ecdsa_verify_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/modes/gcm_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/rand/ctrdrbg_vectors.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hmac_extra/hmac_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/hpke_test_vectors.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/test-vectors.json" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/translate_test_vectors.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/obj/README" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/obj/objects.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/perlasm/readme" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/poly1305_arm_asm.S" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/poly1305/poly1305_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/siphash/siphash_tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/decrepit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/fuzz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/fuzz/minimise_corpora.sh" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/fuzz/refresh_ssl_corpora.sh" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/rust/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/ssl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/ssl/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/ssl/test/PORTING.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/ssl/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/ssl/test/runner/fuzzer_mode.json" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/ssl/test/runner/hpke/testdata/test-vectors.json" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/tool/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/all_tests.json" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/ar/testdata/sample/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/README" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/extract.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/go/env.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/update_clang.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/vs_env.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/bot/vs_toolchain.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/ACVP.md" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/acvptool/test/tests.json" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/acvp/modulewrapper/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/break-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/aarch64-Basic/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/aarch64-Basic/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/generic-FileDirectives/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/generic-FileDirectives/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-BSS/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-BSS/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-Basic/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-Basic/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-GOTRewrite/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-GOTRewrite/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-LabelRewrite/in1.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-LabelRewrite/in2.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-LabelRewrite/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-LargeMemory/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-LargeMemory/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-Sections/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-Sections/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-ThreeArg/in.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/delocate/testdata/x86_64-ThreeArg/out.s" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/fipstools/test-break-kat.sh" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/generate-asm-lcov.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/generate-coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/generate_build_files.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/util/whitespace.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

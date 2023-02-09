@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libfribidi</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1EACE4}</ProjectGuid>
+    <RootNamespace>libfribidi</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFRIBIDI;FRIBIDI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/bin/fribidi-benchmark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/bin/fribidi-bidi-types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/bin/fribidi-caprtl2utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/bin/fribidi-fuzzer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/bin/fribidi-main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/bin/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/bin/getopt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-arabic-shaping-tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-bidi-type-tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-brackets-tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-brackets-type-tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-joining-type-tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-mirroring-tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-unicode-version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/gen.tab/packtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-arabic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-bidi-types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-bidi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-brackets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-cap-rtl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-cp1255.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-cp1256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-iso8859-6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-iso8859-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-deprecated.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-joining-types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-joining.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-mirroring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-shape.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/lib/fribidi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/test/unicode-conformance/BidiCharacterTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fribidi/test/unicode-conformance/BidiTest.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/bin/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/bin/getopt_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/bin/gettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/gen.tab/packtab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/bidi-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-arabic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-begindecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-bidi-types-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-bidi-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-bidi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-brackets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-cap-rtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-cp1255.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-cp1256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-iso8859-6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-iso8859-8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets-utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-char-sets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-deprecated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-enddecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-joining-types-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-joining-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-joining.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-mirroring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-shape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/fribidi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/joining-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fribidi/lib/run.h" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/README" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/TODO" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/bin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/fribidi.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/gen.tab/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/gen.tab/gen-arabic-liga.sh" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/gen.tab/unidata/ArabicShaping.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/gen.tab/unidata/BidiBrackets.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/gen.tab/unidata/BidiMirroring.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/gen.tab/unidata/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/gen.tab/unidata/UnicodeData.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/lib/fribidi-config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/test/test-runner.py" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/test/unicode-conformance/BidiCharacterTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/test/unicode-conformance/BidiTest.txt" />
+    <Text Include="../../thirdparty/owemdjee/fribidi/test/unicode-conformance/Makefile.am" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -684,15 +684,20 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         base = base.replace(/\//g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath})
         f = unixify(`${rawSourcesPath}/${item}`).replace(/\/\//g, '/');
+	let do_nasm = spec.nasm_or_masm;
+	if (!do_nasm) {
+		do_nasm = /masm/.test(f) ? -1 : +1;
+	}
+	let asmexe =  do_nasm < 0 ? "MASM" : "NASM";
         slot = `
-    <NASM Include="${xmlEncode(f)}">
+    <${ asmexe } Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
-    </NASM>
+    </${ asmexe }>
         `;
         filesToAdd.push(slot);
 
         slot = `
-    <NASM Include="${xmlEncode(f)}" />
+    <${ asmexe } Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
         break;
