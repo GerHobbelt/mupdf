@@ -3390,7 +3390,6 @@ static void fmt_obj(fz_context *ctx, struct fmt *fmt, pdf_obj *obj)
 			{
 				fz_terminate_buffer(ctx, fbuf);
 				fdatalen = fz_buffer_storage(ctx, fbuf, &fdata);
-				// fdata = fz_string_from_buffer(ctx, fbuf);
 			}
 
 			fmt_printf(ctx, fmt, "filename:%q type:%s length:%zu", fs_params.filename, fs_params.mimetype, (size_t)fs_params.size);

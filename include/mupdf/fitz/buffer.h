@@ -89,7 +89,7 @@ size_t fz_buffer_storage(fz_context *ctx, fz_buffer *buf, unsigned char **datap)
 	to obtain an equivalent NUL-terminated string *with* the
 	string length specified in `string_length` (including embedded NUL bytes).
 */
-const char *fz_string_from_buffer(fz_context *ctx, fz_buffer *buf);
+char *fz_string_from_buffer(fz_context *ctx, fz_buffer *buf);
 
 fz_buffer *fz_new_buffer(fz_context *ctx, size_t capacity);
 

@@ -65,6 +65,13 @@ typedef unsigned __int64 uint64_t;
 #include <stdint.h> /* needed for int64_t */
 #endif
 
+
+// See also https://en.cppreference.com/w/c/string/byte/strtok 'Note' section:
+#if defined(_MSC_VER)
+#define strtok_r	strtok_s
+#endif
+
+
 #include "mupdf/assertions.h"
 #include "mupdf/memento.h"
 #include "mupdf/fitz/track-usage.h"

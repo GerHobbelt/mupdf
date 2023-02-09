@@ -199,7 +199,7 @@ fz_keep_buffer(fz_context *ctx, fz_buffer *buf)
 void
 fz_drop_buffer(fz_context *ctx, fz_buffer *buf)
 {
-	if (fz_drop_imp(ctx, buf, &buf->refs))
+	if (buf && fz_drop_imp(ctx, buf, &buf->refs))
 	{
 		if (!buf->shared)
 			fz_free(ctx, buf->data);
@@ -277,13 +277,18 @@ fz_buffer_storage(fz_context *ctx, fz_buffer *buf, unsigned char **datap)
 	return (buf ? buf->len : 0);
 }
 
-const char *
+char *
 fz_string_from_buffer(fz_context *ctx, fz_buffer *buf)
 {
 	if (!buf)
-		return "";
+	{
+		// we'll return a bogus scratch buffer then...
+		static char str[4];
+		str[0] = 0;
+		return str;
+	}
 	fz_terminate_buffer(ctx, buf);
-	return (const char *)buf->data;
+	return (char *)buf->data;
 }
 
 size_t

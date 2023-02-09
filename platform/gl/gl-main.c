@@ -645,7 +645,7 @@ static void info_dialog(void)
 	ui_layout(ALL, BOTH, CENTER, ui.padsize, ui.padsize);
 
 	info_text = format_info_text();
-	ui_label_with_scrollbar((char*)fz_string_from_buffer(ctx, info_text), 0, 0, &scroll, NULL);
+	ui_label_with_scrollbar(fz_string_from_buffer(ctx, info_text), 0, 0, &scroll, NULL);
 	fz_drop_buffer(ctx, info_text);
 
 	ui_dialog_end();
@@ -2235,7 +2235,7 @@ void do_console(void)
 	glColorHex(0xF5F5F5);
 	glRectf(ui.cavity->x0, ui.cavity->y0, ui.cavity->x1, ui.cavity->y1);
 
-	char *console_string = (char *) fz_string_from_buffer(ctx, console_buffer);
+	char *console_string = fz_string_from_buffer(ctx, console_buffer);
 	ui_label_with_scrollbar(console_string, 0, 10, &console_scroll, &console_sticky);
 
 	ui_panel_end();

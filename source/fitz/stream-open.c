@@ -93,7 +93,7 @@ fz_keep_stream(fz_context *ctx, fz_stream *stm)
 void
 fz_drop_stream(fz_context *ctx, fz_stream *stm)
 {
-	if (fz_drop_imp(ctx, stm, &stm->refs))
+	if (stm && fz_drop_imp(ctx, stm, &stm->refs))
 	{
 		if (stm->drop)
 			stm->drop(ctx, stm);
