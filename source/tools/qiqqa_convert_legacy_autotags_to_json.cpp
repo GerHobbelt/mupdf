@@ -170,6 +170,46 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 			// load a datafile if we already have a script AND we're in "template mode".
 			datafilename = argv[fz_optind++];
 
+			// did the user speec a load/batch list file?
+			if (datafilename[0] == '@')
+			{
+				datafilename++;
+
+				datafeed = fz_open_file(ctx, datafilename);
+				if (datafeed == NULL)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open batch list file: %s", datafilename);
+
+				buf = fz_read_all(ctx, datafeed, 0);
+				if (buf == NULL)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read the data from the batch list file");
+
+				fz_drop_stream(ctx, datafeed);
+				datafeed = NULL;
+
+				char *liststr = fz_strdup(ctx, fz_string_from_buffer(ctx, buf));
+				const char **argv_subst = (const char **)fz_malloc(ctx, strlen(liststr) * sizeof(char *));
+
+				// scan batch list file to produce a new argv[] set:
+				argv_subst[0] = argv[0];
+
+				int idx = 1;
+				char *list_state = NULL;
+				for (char *p = strtok_r(liststr, "\r\n", &list_state); p; p = strtok_r(NULL, "\r\n", &list_state))
+				{
+					argv_subst[idx++] = p;
+				}
+				argv_subst[idx] = NULL;
+
+				fz_drop_buffer(ctx, buf);
+				buf = NULL;
+
+				argc = idx;
+				argv = argv_subst;
+				fz_optind = 1;
+
+				continue;
+			}
+
 			if (fz_path_is_directory(ctx, datafilename))
 			{
 				datafilename = fz_asprintf(ctx, "%s/Qiqqa.autotags", *datafilename ? datafilename : ".");
@@ -184,6 +224,10 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 			// make sure there's a "run out" area at the end of the buffer:
 			suggested_filesize += 16;
+
+
+			fz_info(ctx, "Processing autotags input file %q...", datafilename);
+
 
 			datafeed = fz_open_file(ctx, datafilename);
 			if (datafeed == NULL)
@@ -201,6 +245,17 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 			fz_drop_stream(ctx, datafeed);
 			datafeed = NULL;
 
+
+			static const uint8_t empty[512] = {0};
+			if (memcmp(empty, bufptr, std::min(sizeof(empty), bufsize)) == 0)
+			{
+				fz_error(ctx, "File %q is zero-filled, at least at the head. This is NOT a valid Qiqqa autotags file. Skipping...", datafilename);
+				fz_free(ctx, datafilename);
+				datafilename = NULL;
+				fz_drop_buffer(ctx, buf);
+				buf = NULL;
+				continue;
+			}
 
 
 			if (!output || *output == 0 || !strcmp(output, "-"))
@@ -737,7 +792,8 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 	fz_drop_output(ctx, out);
 
-	fz_free(ctx, datafilename);
+	//fz_free(ctx, datafilename); -- not all code paths produce a heap pointer for datafilename, so we'd better tolerate a little leakage, rather than corruption.
+
 	fz_flush_warnings(ctx);
 	mu_drop_context();
 
