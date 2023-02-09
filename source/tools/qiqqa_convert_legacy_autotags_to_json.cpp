@@ -32,18 +32,28 @@ static fz_context* ctx = NULL;
 static fz_output* out = NULL;
 static fz_stream* datafeed = NULL;
 
+static const char *app = "cvt_autotags2json";
+
+
 static void usage(void)
 {
 	fz_info(ctx,
-		"muserver: Convert legacy Qiqqa autotags files to JSON format.\n"
+		"%s: Convert legacy Qiqqa autotags files to JSON format.\n"
 		"\n"
-		"Syntax: muserver [options] <autotagfile>\n"
+		"Syntax: %s [options] <autotagfile>\n"
 		"\n"
 		"Options:\n"
+		"  -o <destination>\n"
+		"          write output to given destination file instead of default (STDOUT).\n"
+		"     -    destination = '-' means STDOUT.\n"
+		"     !    specify `-o !` to signal you want the output file to be derived off\n"
+		"          the source file, with '.json' extension appended.\n"
+		"\n"
 		"  -v      verbose (repeat to increase the chattiness of the application)\n"
 		"  -q      quiet ~ not verbose at all\n"
 		"\n"
 		"  -V      display the version of this application and terminate\n"
+	, app, app
 	);
 }
 
@@ -110,6 +120,11 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 	out = NULL;
 	datafeed = NULL;
 
+	if (argc >= 1 && argv && argv[0] && *argv[0])
+	{
+		app = fz_basename(argv[0]);
+	}
+
 	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
 	if (!ctx)
 	{
@@ -128,7 +143,7 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 		case 'v': verbosity++; break;
 
-		case 'V': fz_info(ctx, "muserver version %s/%s", FZ_VERSION, "SHA1"); return EXIT_FAILURE;
+		case 'V': fz_info(ctx, "%s version %s/%s", app, FZ_VERSION, "SHA1"); return EXIT_FAILURE;
 
 		default: usage(); return EXIT_FAILURE;
 		}
@@ -150,20 +165,6 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 	fz_try(ctx)
 	{
-		if (!output || *output == 0 || !strcmp(output, "-"))
-		{
-			out = fz_stdout(ctx);
-			output = NULL;
-		}
-		else
-		{
-			char fbuf[PATH_MAX];
-			fz_format_output_path(ctx, fbuf, sizeof fbuf, output, 0);
-			fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
-			fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
-			out = fz_new_output_with_path(ctx, fbuf, 0);
-		}
-
 		while (fz_optind < argc)
 		{
 			// load a datafile if we already have a script AND we're in "template mode".
@@ -172,8 +173,7 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 			if (fz_path_is_directory(ctx, datafilename))
 			{
 				datafilename = fz_asprintf(ctx, "%s/Qiqqa.autotags", *datafilename ? datafilename : ".");
-			}
-			else
+			} else
 			{
 				datafilename = fz_strdup(ctx, datafilename);
 			}
@@ -200,6 +200,28 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 			fz_drop_stream(ctx, datafeed);
 			datafeed = NULL;
+
+
+
+			if (!output || *output == 0 || !strcmp(output, "-"))
+			{
+				out = fz_stdout(ctx);
+				output = NULL;
+			} else
+			{
+				// specify `-o !` to signal we want the output file to be derived off the source file PLUS .json extension:
+				const char *fpath = output;
+				if (!strcmp(output, "!"))
+				{
+					fpath = fz_asprintf(ctx, "%s.json", datafilename);
+				}
+
+				char fbuf[PATH_MAX];
+				fz_format_output_path(ctx, fbuf, sizeof fbuf, fpath, 0);
+				fz_normalize_path(ctx, fbuf, sizeof fbuf, fbuf);
+				fz_sanitize_path(ctx, fbuf, sizeof fbuf, fbuf);
+				out = fz_new_output_with_path(ctx, fbuf, 0);
+			}
 
 			//
 			// AITags format:
@@ -515,8 +537,7 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 				if (multimap_id == 1)
 				{
 					CHECK(marker == 0x12);
-				}
-				else
+				} else
 				{
 					CHECK(marker == 0x1A);
 				}
@@ -604,8 +625,7 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 							{
 								slot->insert(hash_value);
 							}
-						}
-						else
+						} else
 						{
 							// situation is swapped around for the second multimap: hash_value is the KEY, whilee hash_key is the VALUE:
 							auto has_slot = dictionary.contains(hash_value);
@@ -626,15 +646,67 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 				}
 			}
 
+			// write JSON format:
+			// 
+			//   {
+			//     tag: {dochash, dochash, ... }
+			//   }
+
+			fz_write_strings(ctx, out, "{\n", NULL);
+
+			// defer printing of the end-of-set marker so we can ditch the last comma in the set:
+			bool set_end_marker = false;
+
 			for (const std::pair<const char *, value_set_t>& n : dictionary)
 			{
 				const char *key = n.first;
 				const value_set_t &values = n.second;
+
+				if (set_end_marker)
+				{
+					fz_write_printf(ctx, out, "  ],\n");
+				}
+				fz_write_printf(ctx, out, "  %q: [\n", key);
+				set_end_marker = true;
+
+				// defer printing of the value so we can ditch the last comma in the set:
+				const char *prev_value = nullptr;
+
 				for (const auto& value_ref : values)
 				{
 					const char *value = value_ref;
-					fz_info(ctx, "key: %q --> value: %q\n", key, value);
+
+					//fz_info(ctx, "key: %q --> value: %q\n", key, value);
+					if (prev_value)
+					{
+						fz_write_printf(ctx, out, "    %q,\n", prev_value);
+					}
+					prev_value = value;
 				}
+
+				if (prev_value)
+				{
+					fz_write_printf(ctx, out, "    %q\n", prev_value);
+				}
+				//fz_write_strings(ctx, out, "  },\n", NULL); -- deferred via `set_end_marker`.
+			}
+
+			if (set_end_marker)
+			{
+				fz_write_printf(ctx, out, "  ]\n");
+			}
+			fz_write_printf(ctx, out, "}\n");
+
+			if (!fz_channel_is_any_stdout(ctx, out))
+			{
+				fz_close_output(ctx, out);
+				fz_drop_output(ctx, out);
+				out = NULL;
+			}
+			else
+			{
+				fz_write_printf(ctx, out, "\n\n\n\n");
+				fz_flush_all_std_logging_channels(ctx);
 			}
 
 			if (buf)
@@ -662,6 +734,8 @@ qiqqa_convert_legacy_autotags_main(int argc, const char** argv)
 
 		errored = 1;
 	}
+
+	fz_drop_output(ctx, out);
 
 	fz_free(ctx, datafilename);
 	fz_flush_warnings(ctx);
