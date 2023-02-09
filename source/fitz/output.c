@@ -465,6 +465,22 @@ void fz_set_stddbg(fz_context *ctx, fz_output *out)
 	ctx->stddbg = out;
 }
 
+
+int fz_channel_is_any_stdout(fz_context* ctx, fz_output* stream)
+{
+	fz_output* f = fz_stdout(ctx);
+	if (f == stream)
+		return TRUE;
+	f = fz_stderr(ctx);
+	if (f == stream)
+		return TRUE;
+	f = fz_stdods(ctx);
+	if (f == stream)
+		return TRUE;
+	return FALSE;
+}
+
+
 static int
 file_seek(fz_context *ctx, fz_output* out, int64_t off, int whence)
 {

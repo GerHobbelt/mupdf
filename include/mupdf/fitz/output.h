@@ -353,6 +353,12 @@ void fz_set_stddbg(fz_context *ctx, fz_output *out);
 fz_output *fz_stddbg(fz_context *ctx);
 
 /**
+	Return TRUE when the specified `fz_output` stream is one of the global stdout/stderr/stddbg.
+*/
+int fz_channel_is_any_stdout(fz_context *ctx, fz_output *stream);
+
+
+/**
 	Format and write data to an output stream.
 	See fz_format_string for formatting details.
 	Does not write zero terminator.
