@@ -269,3 +269,20 @@ FUN(Image_getDecode)(JNIEnv *env, jobject self)
 	memcpy(decode, img->decode, 2 * img->n * sizeof(float));
 	return to_floatArray(ctx, env, decode, 2 * img->n);
 }
+
+JNIEXPORT jobject JNICALL
+FUN(Image_getImageData)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	fz_image *img = from_Image(env, self);
+	fz_compressed_buffer *cbuf = NULL;
+
+	if (!ctx || !img) return NULL;
+
+	fz_try(ctx)
+		cbuf = fz_compressed_image_buffer(ctx, img);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return to_ImageData_safe_own(ctx, env, cbuf);
+}
