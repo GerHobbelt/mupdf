@@ -489,10 +489,9 @@ pdf_copy_jbig2_random_segments(fz_context *ctx, fz_buffer *output, const unsigne
 }
 
 static fz_buffer *
-pdf_jbig2_stream_from_file(fz_context *ctx, fz_buffer *input, fz_jbig2_globals *globals_, int embedded, int page)
+pdf_jbig2_stream_from_file(fz_context *ctx, fz_buffer *input, fz_jbig2_globals *globals, int embedded, int page)
 {
-	fz_buffer *globals = fz_jbig2_globals_data(ctx, globals_);
-	size_t globals_size = globals ? globals->len : 0;
+	size_t globals_size = (globals && globals->encoded) ? fz_buffer_storage(ctx, globals->encoded, NULL) : 0;
 	fz_buffer *output;
 	int flags;
 	size_t header = 9;
@@ -516,8 +515,8 @@ pdf_jbig2_stream_from_file(fz_context *ctx, fz_buffer *input, fz_jbig2_globals *
 	output = fz_new_buffer(ctx, input->len + globals_size);
 	fz_try(ctx)
 	{
-		if (globals_size > 0)
-			fz_append_buffer(ctx, output, globals);
+		if (globals && globals->encoded)
+			fz_append_buffer(ctx, output, globals->encoded);
 		if (embedded)
 			fz_append_buffer(ctx, output, input);
 		else

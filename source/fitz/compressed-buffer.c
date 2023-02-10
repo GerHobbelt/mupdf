@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -126,7 +126,9 @@ fz_open_image_decomp_stream(fz_context *ctx, fz_stream *tail, fz_compression_par
 		}
 	}
 	fz_always(ctx)
+	{
 		fz_drop_stream(ctx, body);
+	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 

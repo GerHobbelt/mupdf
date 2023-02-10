@@ -33,8 +33,6 @@
 extern "C" {
 #endif
 
-typedef struct fz_jbig2_globals fz_jbig2_globals;
-
 typedef struct
 {
 	int64_t offset;
@@ -187,44 +185,77 @@ fz_stream *fz_open_lzwd(fz_context *ctx, fz_stream *chain, int early_change, int
 */
 fz_stream *fz_open_predict(fz_context *ctx, fz_stream *chain, int predictor, int columns, int colors, int bpc);
 
-/**
-	Open a filter that performs jbig2 decompression on the chained
-	stream, using the optional globals record.
+/*
+	A jbig2 globals structure that can be put into the store.
+
+	encoded: a buffer with encoded globals segments, or NULL
+	if no global segments exist.
+
+	decoded: a Jbig2GlobalCtx* with decoded global segments,
+	decoded from the buffer of encoded data above, or NULL if
+	not yet decoded.
+
+	alloc: a structure containing allocators used when freeing the
+	Jbig2GlobalCtx* stored in data, if the fz_buffer* has been decoded.
 */
-fz_stream *fz_open_jbig2d(fz_context *ctx, fz_stream *chain, fz_jbig2_globals *globals, int embedded);
+typedef struct
+{
+	fz_storable storable;
+	fz_buffer *encoded;
+	void *decoded;
+	void *alloc;
+} fz_jbig2_globals;
 
 /**
-	Create a jbig2 globals record from a buffer.
+	Increment the reference count for the jbig2 globals. The same
+	pointer is returned.
 
-	Immutable once created.
-*/
-fz_jbig2_globals *fz_load_jbig2_globals(fz_context *ctx, fz_buffer *buf);
-
-/**
-	Increment the reference count for a jbig2 globals record.
-
-	Never throws an exception.
+	Never throws exceptions.
 */
 fz_jbig2_globals *fz_keep_jbig2_globals(fz_context *ctx, fz_jbig2_globals *globals);
 
 /**
-	Decrement the reference count for a jbig2 globals record.
-	When the reference count hits zero, the record is freed.
+	Decrement the reference count for the jbig2 globals. When the
+	reference count hits 0, the jbig2 globals are freed.
 
-	Never throws an exception.
+	Never throws exceptions.
 */
 void fz_drop_jbig2_globals(fz_context *ctx, fz_jbig2_globals *globals);
 
 /**
-	Special jbig2 globals drop function for use in implementing
-	store support.
+	Create a new jbig2 globals structure and embed the buffer
+	containing encoded global segments.
 */
-void fz_drop_jbig2_globals_imp(fz_context *ctx, fz_storable *globals);
+fz_jbig2_globals *fz_new_jbig2_globals(fz_context *ctx, fz_buffer *buffer);
 
 /**
-	Return buffer containing jbig2 globals data stream.
+	Check whether the store contains cached jbig2 globals.
+
+	key: The key used to index the jbig2 globals.
+
+	type: Functions used to manipulate the key.
+
+	Returns NULL if not found, otherwise returns a pointer to the
+	jbig2 globals indexed by key to which a reference has been taken.
 */
-fz_buffer * fz_jbig2_globals_data(fz_context *ctx, fz_jbig2_globals *globals);
+fz_jbig2_globals *fz_lookup_jbig2_globals(fz_context *ctx, void *key, const fz_store_type *type);
+
+/**
+	Add encoded jbig2 global segments to the store.
+
+	key: The key used to index the jbig2 globals.
+
+	type: Functions used to manipulate the key.
+
+	buffer: A buffer containing encoded jbig2 global segments.
+*/
+fz_jbig2_globals *fz_store_jbig2_globals(fz_context *ctx, void *key, const fz_store_type *type, fz_buffer *buffer);
+
+/**
+	Open a filter that performs jbig2 decompression on the chained
+	stream, using the optional globals buffer.
+*/
+fz_stream *fz_open_jbig2d(fz_context *ctx, fz_stream *chain, fz_jbig2_globals *globals, int embedded);
 
 /* Extra filters for tiff */
 

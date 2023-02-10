@@ -84,41 +84,72 @@ pdf_stream_has_crypt(fz_context *ctx, pdf_obj *stm)
 	return 0;
 }
 
-static fz_buffer *pdf_load_stream_no_cycle(fz_context *ctx, pdf_obj *ref, pdf_cycle_list *cycle);
+typedef struct {
+	int refs;
+	void *doc;
+	int num;
+} pdf_jbig2_globals_key;
 
-static fz_jbig2_globals *
-pdf_load_jbig2_globals(fz_context *ctx, pdf_obj *dict, pdf_cycle_list *cycle_up)
+static pdf_jbig2_globals_key *
+pdf_new_jbig2_globals_key(fz_context *ctx, void *doc, int num)
 {
-	pdf_cycle_list cycle;
-	fz_jbig2_globals *globals;
-	fz_buffer *buf = NULL;
-
-	fz_var(buf);
-
-	if ((globals = pdf_find_item(ctx, fz_drop_jbig2_globals_imp, dict)) != NULL)
-		return globals;
-
-	// TODO: Detect malicious mutually recursive JBIG2Globals
-	if (pdf_cycle(ctx, &cycle, cycle_up, dict))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cyclic reference when loading JBIG2 globals");
-
-	fz_try(ctx)
-	{
-		buf = pdf_load_stream_no_cycle(ctx, dict, &cycle);
-		globals = fz_load_jbig2_globals(ctx, buf);
-		pdf_store_item(ctx, dict, globals, fz_buffer_storage(ctx, buf, NULL));
-	}
-	fz_always(ctx)
-	{
-		fz_drop_buffer(ctx, buf);
-	}
-	fz_catch(ctx)
-	{
-		fz_rethrow(ctx);
-	}
-
-	return globals;
+	pdf_jbig2_globals_key *key = fz_malloc_struct(ctx, pdf_jbig2_globals_key);
+	key->refs = 1;
+	key->doc = doc;
+	key->num = num;
+	return key;
 }
+
+static int
+pdf_jbig2_globals_make_hash_key(fz_context *ctx, fz_store_hash *hash, void *key_)
+{
+	pdf_jbig2_globals_key *key = key_;
+	hash->u.pi.ptr = key->doc;
+	hash->u.pi.i = key->num;
+	return 1;
+}
+
+static void *
+pdf_jbig2_globals_keep_key(fz_context *ctx, void *key_)
+{
+	pdf_jbig2_globals_key *key = key_;
+	return fz_keep_imp(ctx, key, &key->refs);
+}
+
+static void
+pdf_jbig2_globals_drop_key(fz_context *ctx, void *key_)
+{
+	pdf_jbig2_globals_key *key = key_;
+	if (fz_drop_imp(ctx, key, &key->refs))
+		fz_free(ctx, key);
+}
+
+static int
+pdf_jbig2_globals_cmp_key(fz_context *ctx, void *key0_, void *key1_)
+{
+	pdf_jbig2_globals_key *key0 = key0_;
+	pdf_jbig2_globals_key *key1 = key1_;
+	return key0->doc == key1->doc && key0->num == key1->num;
+}
+
+static void
+pdf_jbig2_globals_format_key(fz_context *ctx, char *s, size_t n, void *key_)
+{
+	pdf_jbig2_globals_key *key = key_;
+	fz_snprintf(s, n, "(jbig2_globals doc=%x num=%d)",
+			key->doc, key->num);
+}
+
+static const fz_store_type pdf_jbig2_globals_store_type =
+{
+	"pdf_jbig2_globals",
+	pdf_jbig2_globals_make_hash_key,
+	pdf_jbig2_globals_keep_key,
+	pdf_jbig2_globals_drop_key,
+	pdf_jbig2_globals_cmp_key,
+	pdf_jbig2_globals_format_key,
+	NULL
+};
 
 static void
 build_compression_params(fz_context *ctx, pdf_obj *f, pdf_obj *p, fz_compression_params *params, pdf_cycle_list *cycle)
@@ -183,18 +214,43 @@ build_compression_params(fz_context *ctx, pdf_obj *f, pdf_obj *p, fz_compression
 	}
 	else if (pdf_name_eq(ctx, f, PDF_NAME(JBIG2Decode)))
 	{
-		pdf_obj *g = pdf_dict_get(ctx, p, PDF_NAME(JBIG2Globals));
+		pdf_obj *g;
 
 		params->type = FZ_IMAGE_JBIG2;
-		params->u.jbig2.globals = NULL;
 		params->u.jbig2.embedded = 1; /* jbig2 streams are always embedded without file headers */
+
+		g = pdf_dict_get(ctx, p, PDF_NAME(JBIG2Globals));
+		if (g && !pdf_is_stream(ctx, g))
+		{
+			fz_warn(ctx, "jbig2 globals is not a stream, skipping globals");
+			g = NULL;
+		}
 		if (g)
 		{
-			if (!pdf_is_stream(ctx, g))
-				fz_warn(ctx, "jbig2 globals is not a stream, skipping globals");
-			else
-				params->u.jbig2.globals = pdf_load_jbig2_globals(ctx, g, cycle);
+			pdf_jbig2_globals_key *key = pdf_new_jbig2_globals_key(ctx, pdf_get_bound_document(ctx, g), pdf_to_num(ctx, g));
+			fz_buffer *buf = NULL;
+
+			fz_var(buf);
+
+			fz_try(ctx)
+			{
+				params->u.jbig2.globals = fz_lookup_jbig2_globals(ctx, key, &pdf_jbig2_globals_store_type);
+				if (!params->u.jbig2.globals)
+				{
+					buf = pdf_load_stream(ctx, g);
+					params->u.jbig2.globals = fz_store_jbig2_globals(ctx, key, &pdf_jbig2_globals_store_type, buf);
+				}
+			}
+			fz_always(ctx)
+			{
+				fz_drop_buffer(ctx, buf);
+				pdf_jbig2_globals_drop_key(ctx, key);
+			}
+			fz_catch(ctx)
+				fz_rethrow(ctx);
 		}
+		else
+			params->u.jbig2.globals = NULL;
 	}
 }
 
