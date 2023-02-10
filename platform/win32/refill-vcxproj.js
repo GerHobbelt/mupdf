@@ -365,7 +365,7 @@ const projectMap = {
 	"libyaml-tests": "libyaml",
 	"libtiff_contribs": "libtiff/contrib",
 	"libpng_contribs": "libpng/contrib",
-	"libmupdf": "../../source;../../include",
+	//"libmupdf": "../../source;../../include",
 	"uberlogger": "uberlog",
 	"uberlog_test": "uberlog",
 	"filesystem_tests_exception": "filesystem/test",

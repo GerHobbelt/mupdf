@@ -1,0 +1,6 @@
+
+also-ignore:
+	/tests/
+	/src/
+	
+	

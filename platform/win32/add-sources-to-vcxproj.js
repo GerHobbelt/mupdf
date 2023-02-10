@@ -13,6 +13,7 @@ let path = require('path');
 let glob = require('@gerhobbelt/glob');
 
 let DEBUG = 0;
+
 const globDefaultOptions = {
   debug: (DEBUG > 4),
   matchBase: true, // true: pattern starting with / matches the basedir, while non-/-prefixed patterns will match in any subdirectory --> act like **/<pattern>
@@ -206,6 +207,7 @@ if (DEBUG > 2) console.error({spec})
 if (spec.sources.length + spec.directories.length === 0) {
   console.error("Missing sources directory argument or spec file.");
   console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
+  console.error("\n\nCould not infer source/submodule directory for given MSVC vcxproj.");
   process.exit(1);
 }
 

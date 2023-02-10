@@ -1,5 +1,5 @@
 
-sourcees:
+sources:
 	..\..\scripts\curl\tool_hugehelp.c
 	
 also-ignore:

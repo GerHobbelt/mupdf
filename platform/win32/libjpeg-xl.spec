@@ -2,9 +2,6 @@
 # used by the refill-vcxproj.sh tool
 #
 
-directories:
-	../../thirdparty/owemdjee/jpeg-xl
-	
 ignore:
 	/tests/
 	.*test.*

@@ -17,8 +17,8 @@ if test -z "$2" ; then
 		if ! test -f "$SPECFILE" ; then
 			echo "Cannot infer source/submodule directory for $1. Please either specify as second command-line parameter or provide a suitable SPEC file."
 			exit 2
-		else
-			echo "NOTE: could not infer source/submodule directory for $1, but SPEC file is available: assuming that one will provide."
+		#else
+		#	echo "NOTE: could not infer source/submodule directory for $1, but SPEC file is available: assuming that one will provide."
 		fi
 	fi
 else

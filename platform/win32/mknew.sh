@@ -771,7 +771,6 @@ math-atlas
 c-blosc2
 cpp-btree
 CHM-lib
-djvulibre
 dtl-diff-template-library
 enkiTS-TaskScheduler
 lda-Familia

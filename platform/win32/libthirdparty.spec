@@ -1,0 +1,4 @@
+
+sources:
+	dummy.c
+	
