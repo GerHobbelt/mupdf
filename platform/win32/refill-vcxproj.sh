@@ -9,16 +9,16 @@
 # 
 
 if test -z "$2" ; then
-	# cheeck if a .spec for this project exists: if so, takee that one!
-	SPECFILE=$( echo $1 | sed -e 's/\.vcxproj/.spec/' )
-	if test -f "$SPECFILE" ; then
-		SRCDIR=
-	else
-		# see if we can *infer* the source directory from the project name
-		SRCDIR=$( node $0/../refill-vcxproj.js $1 )
-		if test -z "$SRCDIR" ; then
-			echo "Cannot infer source/submodule directory for $1. Please specify as second command-line parameter."
+	# see if we can *infer* the source directory from the project name
+	SRCDIR=$( node $0/../refill-vcxproj.js $1 )
+	if test -z "$SRCDIR" ; then
+		# check if a .spec for this project exists: if so, assume that one has a proper 'directories:' and/or 'sources:' entry!
+		SPECFILE=$( echo $1 | sed -e 's/\.vcxproj/.spec/' )
+		if ! test -f "$SPECFILE" ; then
+			echo "Cannot infer source/submodule directory for $1. Please either specify as second command-line parameter or provide a suitable SPEC file."
 			exit 2
+		else
+			echo "NOTE: could not infer source/submodule directory for $1, but SPEC file is available: assuming that one will provide."
 		fi
 	fi
 else

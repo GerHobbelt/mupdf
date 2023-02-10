@@ -88,15 +88,36 @@ if (!fs.existsSync(filepath)) {
 let spec = {
 	nasm_or_masm: 0,   // 0: auto; -1: masm; +1: nasm
 	ignores: [
-		'/thirdparty/',
-		'/third_party/',
-		'/3rd_party/',
-		'/owemdjee/',
-		'/3rd/',
+		'thirdparty/',
+		'third_party/',
+		'3rd_party/',
+		'3rdparty/',
+		'owemdjee/',
+		'3rd/',
+		'/b/',             // our in-company default cmake build work directory. NOT '/build/' as many projects already have that one as part of their source tree!
+		'CMakeFiles/',
+		'CMakeModules/',
+		'cmake/modules/',
+		'cmake/checks/',
+		'fuzz.*',
+		'node_modules/',
+		'obj/Debug[^/]*',
+		'obj/Release[^/]*',
 	],
 	sources: [],
 	directories: [],
+	special_inject: null,
 };
+
+let rawSourcesPath = process.argv[3] || '';
+if (DEBUG > 2) console.error({argv: process.argv, rawSourcesPath})
+if (rawSourcesPath.trim() !== '') {
+	let pa = rawSourcesPath
+	.split(';')
+	.map((line) => line.trim());
+
+	spec.directories.push(...pa);
+}
 
 let specPath = filepath.replace(/\.vcxproj/, '.spec');
 if (fs.existsSync(specPath)) {
@@ -123,6 +144,20 @@ if (fs.existsSync(specPath)) {
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
   }
+  if (/^also-ignore:/m.test(rawSpec)) {
+    if (DEBUG > 0) console.log("SPEC include [also-ignore] section...");
+    let a = rawSpec.replace(/^.*\nalso-ignore:(.*?)\n(?:[^\s].*)?$/s, '$1')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.trim().length > 0);
+    
+    spec.ignores = spec.ignores.concat(a);
+  }
+
+  if (/^special-inject:/m.test(rawSpec)) {
+    if (DEBUG > 0) console.log("SPEC include [special-inject] section...");
+    spec.special_inject = rawSpec.replace(/^.*\nspecial-inject:(.*?)\n(?:[^\s].*)?$/s, '$1');
+  }
 
   if (/^sources:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [sources] section...");
@@ -134,10 +169,11 @@ if (fs.existsSync(specPath)) {
 
   if (/^directories:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [directories] section...");
-    spec.directories = rawSpec.replace(/^.*\ndirectories:(.*?)\n(?:[^\s].*)?$/s, '$1')
+    let a = rawSpec.replace(/^.*\ndirectories:(.*?)\n(?:[^\s].*)?$/s, '$1')
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
+    spec.directories = spec.directories.concat(a);
   }
 
   if (DEBUG > 0) console.error("PROC'D SPEC [DONE]:", {rawSpec, spec});
@@ -158,24 +194,14 @@ if (rawIgnoresPath.trim() !== '') {
   console.info('Will ignore any paths which include: ', spec.ignores);
 }
 
-let rawSourcesPath = process.argv[3] || '';
-if (DEBUG > 2) console.error({argv: process.argv, rawSourcesPath})
-if (rawSourcesPath.trim() === '') {
-	if (spec.sources.length + spec.directories.length === 0) {
-	  console.error("Missing sources directory argument or spec file.");
-	  console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
-	  process.exit(1);
-	}
-}
-else {
-	let pa = rawSourcesPath
-	.split(';')
-	.map((line) => line.trim());
-
-	spec.directories.push(...pa);
-}
-
 if (DEBUG > 2) console.error({spec})
+
+
+if (spec.sources.length + spec.directories.length === 0) {
+  console.error("Missing sources directory argument or spec file.");
+  console.error("call:\n  add-sources-to-vcxproj.js xyz.vcxproj directory-of-sourcefiles");
+  process.exit(1);
+}
 
 
 let src = fs.readFileSync(filepath, 'utf8');
@@ -205,11 +231,11 @@ if (!filterSrc.match(/<\/Project>/)) {
 
 
 const specialFilenames = [
-  "README", 
+  "README[^/]*", 
   "NEWS", 
   "TODO", 
   "CHANGES", 
-  "ChangeLog", 
+  "ChangeLog[^/]*", 
   "Contributors"
 ];
 let specialFilenameRes = [];
@@ -242,24 +268,33 @@ if (DEBUG > 2) console.error({spec})
 // turn all ignores[] into regexes:
 spec.ignores = spec.ignores
 .map(f => {
-	// we use the next heuristic to detect 'literal paths' instead of regexes: when the path does not
-	// contain any special regex char (except '.') then it's a literal filename; 
-	// when does not start with a '/' we assume it's an *entire* directory or file name, i.e.
-	// 'ger.c' would then not be meant to match 'bugger.c'...
+	//
+	// we use the next heuristic to detect 'literal paths' instead of regexes: 
+	//
+	// 1. when the path does not contain any special regex char (except '.') 
+	//    then it's a literal filename (or directory/path); 
+	// 2. when it does not start with a '/' we assume it's an *entire* directory or file name, 
+	//    i.e. 'ger.c' would then not be meant to match 'bugger.c'...
+	// 3. anything else is a regex that can match ANY part of a filename/path.
+	//
+	// When these regexes are tested, the path-to-test has ALWAYS been prefixed with '/'
+	// so the obvious and easy way to write a regex which matches only whole file and
+	// directory names is to start it with a '/', e.g. regex '/[A-D]+' would match
+	// '/x/y/AAAA/z' but not '/x/yAAAA/z'.
+	//
 	if (!/[()\[\]?:*+{}]/.test(f)) {
 		// convert to regex format:
 		f = f.replace(/[.]/g, '[.]');
 
-		if (!f.startsWith('/')) {
-			f = '[/]' + f;
+		// when ignore path starts with '/' it means to match from start of (reduced) file path!
+		if (f.startsWith('/')) {
+			f = '^' + f;
+		}
+		else {
+			f = '/' + f;
 		}
 	}
 
-	// when ignore path starts with '/' it means to match from start of (reduced) file path!
-	if (f.startsWith('/')) {
-		f = '^' + f;
-	}
-	
 	if (DEBUG > 1) console.error("'ignore' line half-way through conversion to regex:", {f})
 	
 	let re = new RegExp(f);
@@ -803,7 +838,7 @@ function process_path(rawSourcesPath, is_dir) {
 
 	const globConfig = Object.assign({}, globDefaultOptions, {
 	  nodir: !is_dir,
-	  cwd: is_dir ? sourcesPath : path.basedir(sourcesPath)
+	  cwd: is_dir ? sourcesPath : path.dirname(sourcesPath)
 	});
 
 	let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
@@ -814,6 +849,11 @@ function process_path(rawSourcesPath, is_dir) {
 	process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
 }
 
+
+
+if (spec.special_inject != null) {
+	fsrc1_arr.push(spec.special_inject);
+}
 
 
 
