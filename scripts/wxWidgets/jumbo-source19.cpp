@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// maskededit.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/maskededit.cpp"
-
-
-//------------------------------------------------------------------------
 // matrix.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/matrix.cpp"
@@ -246,4 +240,16 @@
 
 #if defined(__WXX11__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/x11/minifram.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// mnemonics.cpp
+
+#if defined(__WXGTK20__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/mnemonics.cpp"
+#endif
+
+#if defined(__WXGTK__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/mnemonics.cpp"
 #endif

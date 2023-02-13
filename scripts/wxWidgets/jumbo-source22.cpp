@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// popupcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/popupcmn.cpp"
-
-
-//------------------------------------------------------------------------
 // popupwin.cpp
 
 #if defined(__WXGTK20__)
@@ -173,3 +167,9 @@
 // propdlg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/propdlg.cpp"
+
+
+//------------------------------------------------------------------------
+// property.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/propgrid/property.cpp"

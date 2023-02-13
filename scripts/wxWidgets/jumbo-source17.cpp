@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// imagtga.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagtga.cpp"
-
-
-//------------------------------------------------------------------------
 // imagtiff.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/imagtiff.cpp"
@@ -173,3 +167,9 @@
 // listctrlcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/listctrlcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// log.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/log.cpp"

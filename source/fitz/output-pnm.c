@@ -22,7 +22,7 @@
 
 #include "mupdf/fitz.h"
 
-#if BUILDING_MUPDF_MINIMAL_CORE < 2
+#if FZ_ENABLE_RENDER_CORE 
 
 /*
  * Write pixmap to PNM file (without alpha channel)

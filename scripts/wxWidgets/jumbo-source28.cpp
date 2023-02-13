@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// stockitem.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/stockitem.cpp"
-
-
-//------------------------------------------------------------------------
 // stopwatch.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/stopwatch.cpp"
@@ -145,3 +139,9 @@
 #if defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/msw/taskbarbutton.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// taskbarcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/taskbarcmn.cpp"

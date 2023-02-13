@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// taskbarcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/taskbarcmn.cpp"
-
-
-//------------------------------------------------------------------------
 // taskbarx11.cpp
 
 #if !defined(__WINDOWS__)
@@ -204,4 +198,12 @@
 
 #if defined(__WXGTK__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/threadno.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// threadpsx.cpp
+
+#if !defined(__WINDOWS__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/threadpsx.cpp"
 #endif

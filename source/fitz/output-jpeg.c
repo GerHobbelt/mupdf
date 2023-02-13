@@ -22,6 +22,8 @@
 
 #include "mupdf/fitz.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 #include <jpeglib.h>
 #include "jerror.h"
 #include "mupdf/helpers/jmemcust.h"
@@ -190,3 +192,5 @@ fz_save_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, const char *fil
 		fz_rethrow(ctx);
 	}
 }
+
+#endif

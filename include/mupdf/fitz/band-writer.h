@@ -29,7 +29,7 @@
 #include "mupdf/fitz/color.h"
 #include "mupdf/fitz/separation.h"
 
-#if BUILDING_MUPDF_MINIMAL_CORE < 2
+#if FZ_ENABLE_RENDER_CORE 
 
 #ifdef __cplusplus
 extern "C" {

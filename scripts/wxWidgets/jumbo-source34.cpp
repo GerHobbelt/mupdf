@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// wxcrt.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxcrt.cpp"
-
-
-//------------------------------------------------------------------------
 // wxprintf.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/wxprintf.cpp"
@@ -125,3 +119,9 @@
 // xh_collpane.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_collpane.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_combo.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_combo.cpp"

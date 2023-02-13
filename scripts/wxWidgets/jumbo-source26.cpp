@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// sockunix.cpp
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/sockunix.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // sound.cpp
 
 #if defined(__WXMSW__)
@@ -214,4 +206,12 @@
 
 #if !defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/univ/statbmp.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// statbmp_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/statbmp_osx.cpp"
 #endif

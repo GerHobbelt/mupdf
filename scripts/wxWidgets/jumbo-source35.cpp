@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// xh_combo.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_combo.cpp"
-
-
-//------------------------------------------------------------------------
 // xh_comboctrl.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_comboctrl.cpp"
@@ -125,3 +119,9 @@
 // xh_listbk.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listbk.cpp"
+
+
+//------------------------------------------------------------------------
+// xh_listc.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/xrc/xh_listc.cpp"

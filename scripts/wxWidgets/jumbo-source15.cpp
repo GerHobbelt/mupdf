@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// headerctrl.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/headerctrl.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // headerctrlcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/headerctrlcmn.cpp"
@@ -137,3 +129,9 @@
 // htmltag.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/html/htmltag.cpp"
+
+
+//------------------------------------------------------------------------
+// htmlwin.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/html/htmlwin.cpp"

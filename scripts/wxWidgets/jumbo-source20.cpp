@@ -8,18 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// mnemonics.cpp
-
-#if defined(__WXGTK20__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk/mnemonics.cpp"
-#endif
-
-#if defined(__WXGTK__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/gtk1/mnemonics.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // modalhook.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/modalhook.cpp"
@@ -207,3 +195,9 @@
 // notifmsgcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/notifmsgcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// notifmsgg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/notifmsgg.cpp"

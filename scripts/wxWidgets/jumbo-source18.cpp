@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// log.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/log.cpp"
-
-
-//------------------------------------------------------------------------
 // logg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/logg.cpp"
@@ -135,3 +129,9 @@
 // mask.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/mask.cpp"
+
+
+//------------------------------------------------------------------------
+// maskededit.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/maskededit.cpp"

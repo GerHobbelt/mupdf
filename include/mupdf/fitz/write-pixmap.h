@@ -33,7 +33,7 @@
 #include "mupdf/fitz/image.h"
 #include "mupdf/fitz/writer.h"
 
-#if BUILDING_MUPDF_MINIMAL_CORE < 2
+#if FZ_ENABLE_RENDER_CORE 
 
 #ifdef __cplusplus
 extern "C" {

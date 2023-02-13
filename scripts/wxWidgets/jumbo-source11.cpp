@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// ffile.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/ffile.cpp"
-
-
-//------------------------------------------------------------------------
 // file.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/file.cpp"
@@ -149,3 +143,9 @@
 // fldlgcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/fldlgcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// floatpane.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/aui/floatpane.cpp"

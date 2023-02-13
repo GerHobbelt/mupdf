@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// notifmsgg.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/generic/notifmsgg.cpp"
-
-
-//------------------------------------------------------------------------
 // numdlgg.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/numdlgg.cpp"
@@ -177,3 +171,9 @@
 // platinfo.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/platinfo.cpp"
+
+
+//------------------------------------------------------------------------
+// popupcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/popupcmn.cpp"

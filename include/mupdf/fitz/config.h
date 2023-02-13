@@ -292,7 +292,7 @@
 #endif
 
 #ifndef FZ_ENABLE_BUILTIN_FONTS
-#define FZ_ENABLE_BUILTIN_FONTS 1
+#define FZ_ENABLE_BUILTIN_FONTS FZ_ENABLE_PDF
 #endif
 
 #if !defined(HAVE_LEPTONICA) || !defined(HAVE_TESSERACT)

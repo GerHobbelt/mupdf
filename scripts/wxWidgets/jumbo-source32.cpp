@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// utils_osx.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/utils_osx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // utilscmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/utilscmn.cpp"
@@ -155,3 +147,11 @@
 // vlbox.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/vlbox.cpp"
+
+
+//------------------------------------------------------------------------
+// volume.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/volume.cpp"
+#endif

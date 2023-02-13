@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// geometry.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/geometry.cpp"
-
-
-//------------------------------------------------------------------------
 // gifdecod.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/gifdecod.cpp"
@@ -163,3 +157,11 @@
 // headercolcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/headercolcmn.cpp"
+
+
+//------------------------------------------------------------------------
+// headerctrl.cpp
+
+#if defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/headerctrl.cpp"
+#endif

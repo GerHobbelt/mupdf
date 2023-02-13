@@ -27,17 +27,3 @@ MONOLITHIC_CMD_TABLE_START()
 MONOLITHIC_CMD_TABLE_END();
 
 #include "monolithic_main_tpl.h"
-
-
-
-// ----------------------
-
-
-extern "C" void fz_error(fz_context* ctx, const char* fmt, ...)
-{
-	va_list ap;
-	va_start(ap, fmt);
-	vfprintf(stderr, fmt, ap);
-	va_end(ap);
-}
-

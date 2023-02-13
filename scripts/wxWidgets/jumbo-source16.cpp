@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// htmlwin.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/html/htmlwin.cpp"
-
-
-//------------------------------------------------------------------------
 // htmprint.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/html/htmprint.cpp"
@@ -145,3 +139,9 @@
 // imagpnm.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/imagpnm.cpp"
+
+
+//------------------------------------------------------------------------
+// imagtga.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/imagtga.cpp"

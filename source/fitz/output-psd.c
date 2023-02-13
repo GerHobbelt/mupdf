@@ -24,7 +24,7 @@
 
 #include <string.h>
 
-#if BUILDING_MUPDF_MINIMAL_CORE < 2
+#if FZ_ENABLE_RENDER_CORE 
 
 void
 fz_save_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pixmap, const char *filename)

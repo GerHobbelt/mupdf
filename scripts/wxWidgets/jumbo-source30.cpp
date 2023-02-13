@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// threadpsx.cpp
-
-#if !defined(__WINDOWS__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/unix/threadpsx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // threadsgi.cpp
 
 #if defined(__WXGTK__)
@@ -227,3 +219,9 @@
 #if !defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/univ/topluniv.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// toplvcmn.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/toplvcmn.cpp"

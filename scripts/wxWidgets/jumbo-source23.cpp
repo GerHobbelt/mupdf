@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// property.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/propgrid/property.cpp"
-
-
-//------------------------------------------------------------------------
 // propgrid.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/propgrid/propgrid.cpp"
@@ -217,3 +211,9 @@
 #if defined(__WXMAC__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/osx/carbon/renderer.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// renderg.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/generic/renderg.cpp"

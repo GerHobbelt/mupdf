@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// volume.cpp
-
-#if defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/msw/volume.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // vscroll.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/generic/vscroll.cpp"
@@ -175,3 +167,9 @@
 // wrapsizer.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/wrapsizer.cpp"
+
+
+//------------------------------------------------------------------------
+// wxcrt.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/wxcrt.cpp"

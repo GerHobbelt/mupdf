@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// statbmp_osx.cpp
-
-#if defined(__WXMAC__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/statbmp_osx.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // statbmpcmn.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/statbmpcmn.cpp"
@@ -217,3 +209,9 @@
 // stdstream.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/stdstream.cpp"
+
+
+//------------------------------------------------------------------------
+// stockitem.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/stockitem.cpp"

@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// toplvcmn.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/common/toplvcmn.cpp"
-
-
-//------------------------------------------------------------------------
 // translation.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/translation.cpp"
@@ -170,4 +164,12 @@
 
 #if defined(__WXX11__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/x11/utils.cpp"
+#endif
+
+
+//------------------------------------------------------------------------
+// utils_osx.cpp
+
+#if defined(__WXMAC__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/osx/utils_osx.cpp"
 #endif

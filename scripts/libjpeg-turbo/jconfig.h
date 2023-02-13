@@ -48,7 +48,11 @@
  * We do not support run-time selection of data precision, sorry.
  */
 
+#ifndef BITS_IN_JSAMPLE  
 #define BITS_IN_JSAMPLE  8      /* use 8 or 12 */
+#endif
+
+#undef HAVE_JPEGTURBO_DUAL_MODE_8_12 
 
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H

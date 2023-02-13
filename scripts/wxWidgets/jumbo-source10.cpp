@@ -167,3 +167,9 @@
 #if defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/msw/fdrepdlg.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// ffile.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/ffile.cpp"

@@ -8,12 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// floatpane.cpp
-
-#include "../../thirdparty/owemdjee/wxWidgets/src/aui/floatpane.cpp"
-
-
-//------------------------------------------------------------------------
 // fmapbase.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/fmapbase.cpp"
@@ -235,3 +229,11 @@
 // framemanager.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/aui/framemanager.cpp"
+
+
+//------------------------------------------------------------------------
+// framuniv.cpp
+
+#if !defined(__WXMSW__)
+#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/framuniv.cpp"
+#endif

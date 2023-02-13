@@ -8,14 +8,6 @@
 
 
 //------------------------------------------------------------------------
-// framuniv.cpp
-
-#if !defined(__WXMSW__)
-#  include "../../thirdparty/owemdjee/wxWidgets/src/univ/framuniv.cpp"
-#endif
-
-
-//------------------------------------------------------------------------
 // fs_arc.cpp
 
 #include "../../thirdparty/owemdjee/wxWidgets/src/common/fs_arc.cpp"
@@ -169,3 +161,9 @@
 #if defined(__WXMSW__)
 #  include "../../thirdparty/owemdjee/wxWidgets/src/msw/gdiplus.cpp"
 #endif
+
+
+//------------------------------------------------------------------------
+// geometry.cpp
+
+#include "../../thirdparty/owemdjee/wxWidgets/src/common/geometry.cpp"
