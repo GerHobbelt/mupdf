@@ -3599,6 +3599,20 @@ static void ffi_Page_deleteLink(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_Page_getLabel(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_page *page = ffi_topage(J, 0);
+	char buf[100];
+
+	fz_try(ctx)
+		fz_page_label(ctx, page, buf, sizeof buf);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_pushstring(J, buf);
+}
+
 static void ffi_Link_get_bounds(js_State *J)
 {
 	fz_link *link = js_touserdata(J, 0, "fz_link");
@@ -8942,6 +8956,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Page.getLinks", ffi_Page_getLinks, 0);
 		jsB_propfun(J, "Page.createLink", ffi_Page_createLink, 2);
 		jsB_propfun(J, "Page.deleteLink", ffi_Page_deleteLink, 1);
+		jsB_propfun(J, "Page.getLabel", ffi_Page_getLabel, 0);
 	}
 	js_setregistry(J, "fz_page");
 
