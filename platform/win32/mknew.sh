@@ -721,6 +721,8 @@ zsv
 zsync2
 zxing-cpp
 
+SymSpell
+
 EOT
 )
 
@@ -757,6 +759,9 @@ podofo
 poppler
 pyclustering
 tensorflow-docs
+
+wordfreq
+wordfrequency
 
 EOT
 )

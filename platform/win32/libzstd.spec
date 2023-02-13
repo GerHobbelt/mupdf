@@ -2,6 +2,7 @@
 also-ignore:
 	/build/single_file_libs/examples/
 	/build/single_file_libs/
+	/build/VS201.*
 	/contrib/diagnose_corruption/
 	/contrib/gen_html/
 	/contrib/largeNbDicts/
@@ -22,4 +23,7 @@ also-ignore:
 	/tests/
 	
 	/zlibWrapper/
+	
+	zstd.rc
+	
 	

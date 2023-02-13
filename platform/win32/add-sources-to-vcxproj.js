@@ -126,7 +126,7 @@ if (fs.existsSync(specPath)) {
   let rawSpec = fs.readFileSync(specPath, 'utf8').split('\n')
   .map((line) => line.trimEnd().replace(/\t/g, '    '))
   // filter out commented lines in the ignore spec
-  .filter((line) => line.trim().length > 0 && !/^[#;]/.test(line))
+  .filter((line) => line.trim().length > 0 && !/^[#;]/.test(line.trim()))
   .join('\n');
 
   rawSpec = '\n' + rawSpec + '\n';
@@ -141,7 +141,7 @@ if (fs.existsSync(specPath)) {
   if (/^ignore:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [ignore] section...");
     spec.ignores = rawSpec.replace(/^.*\nignore:(.*?)\n(?:[^\s].*)?$/s, '$1')
-    .replace(/\\/g, '/')
+    // .replace(/\\/g, '/')   -- some backslashes are quitee relevant in here as some lines will specify REGEXES, so we'll have to apply this path conversion later!
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
@@ -149,7 +149,7 @@ if (fs.existsSync(specPath)) {
   if (/^also-ignore:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [also-ignore] section...");
     let a = rawSpec.replace(/^.*\nalso-ignore:(.*?)\n(?:[^\s].*)?$/s, '$1')
-    .replace(/\\/g, '/')
+    // .replace(/\\/g, '/')   -- some backslashes are quitee relevant in here as some lines will specify REGEXES, so we'll have to apply this path conversion later!
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
@@ -192,11 +192,11 @@ if (rawIgnoresPath.trim() !== '') {
     process.exit(1);
   }
   spec.ignores = fs.readFileSync(ignoresPath, 'utf8')
-  .replace(/\\/g, '/')
+  // .replace(/\\/g, '/')   -- some backslashes are quitee relevant in here as some lines will specify REGEXES, so we'll have to apply this path conversion later!
   .split('\n')
   .map((line) => line.trim())
   // filter out commented lines in the ignore spec
-  .filter((line) => line.length > 0 && !/^[#;]/.test(line));
+  .filter((line) => line.length > 0 && !/^[#;]/.test(line.trim()));
 
   console.info('Will ignore any paths which include: ', spec.ignores);
 }
@@ -291,8 +291,9 @@ spec.ignores = spec.ignores
 	// '/x/y/AAAA/z' but not '/x/yAAAA/z'.
 	//
 	if (!/[()\[\]?:*+{}]/.test(f)) {
-		// convert to regex format:
-		f = f.replace(/[.]/g, '[.]');
+		// a literal path --> convert to regex format:
+		f = f.replace(/[.]/g, '[.]')
+		.replace(/\\/g, '/');
 
 		// when ignore path starts with '/' it means to match from start of (reduced) file path!
 		if (f.startsWith('/')) {
@@ -301,6 +302,9 @@ spec.ignores = spec.ignores
 		else {
 			f = '/' + f;
 		}
+	}
+	else {
+		// a regex: no path \ -> / conversion applied as that mistake any regex escape character for a path separator!
 	}
 
 	if (DEBUG > 1) console.error("'ignore' line half-way through conversion to regex:", {f})

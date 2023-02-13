@@ -2,7 +2,18 @@
 # used by the refill-vcxproj.sh tool
 #
 
-ignore:
+sources:
+	..\..\scripts\QuickJS\quickjs-config.h
+	
+also-ignore:
 	/test262
 	/thirdparty/uint128_t
+	/examples/
+	/sample_app/
+
+	/get[^/]+[.]c
+	/lib[^/]+[.]c
+	/[qju][^/]+[.]c
+	/bjson.c
+	
 	

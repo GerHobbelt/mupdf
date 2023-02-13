@@ -12,16 +12,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="../../scripts/libyaml/include/config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <Filter Include="Header Files\include">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0001}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0002}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\tests">
+    <Filter Include="Misc Files\cmake">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\cmake">
+    <Filter Include="Misc Files\docker">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\include">
@@ -42,14 +47,8 @@
     <Filter Include="Misc Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -77,53 +76,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/writer.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-deconstructor-alt.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-deconstructor.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-reformatter-alt.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-reformatter.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-dumper.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-emitter-test-suite.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-emitter.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-loader.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-parser-test-suite.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-parser.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-scanner.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-reader.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-version.c">
-      <Filter>Source Files\tests</Filter>
-    </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/libyaml/include/yaml.h">
       <Filter>Header Files\include</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/libyaml/src/yaml_private.h">
       <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/libyaml/tests/monolithic_examples.h">
-      <Filter>Header Files\tests</Filter>
     </ClInclude>
     <Text Include="../../thirdparty/owemdjee/libyaml/CMakeLists.txt">
       <Filter>Misc Files</Filter>
@@ -143,6 +100,9 @@
     <Text Include="../../thirdparty/owemdjee/libyaml/configure.ac">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/libyaml/docker/README.mkd">
+      <Filter>Misc Files\docker</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/libyaml/include/Makefile.am">
       <Filter>Misc Files\include</Filter>
     </Text>
@@ -157,18 +117,6 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/libyaml/src/Makefile.am">
       <Filter>Misc Files\src</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libyaml/tests/CMakeLists.txt">
-      <Filter>Misc Files\tests</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libyaml/tests/Makefile.am">
-      <Filter>Misc Files\tests</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libyaml/tests/ReadMe.md">
-      <Filter>Misc Files\tests</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/libyaml/tests/run-all-tests.sh">
-      <Filter>Misc Files\tests</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/libyaml/yaml-0.1.pc.in">
       <Filter>Misc Files</Filter>

@@ -329,7 +329,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/misc/explain.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/misc/fileio.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/misc/fossildelta.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/misc/fuzzer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/misc/ieee754.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/misc/memstat.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/misc/memtrace.c" />
@@ -374,7 +373,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/rtree/rtree.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/rtree/test_rtreedoc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/session/changeset.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/session/changesetfuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/session/session_speed_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/session/sqlite3session.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/ext/session/test_session.c" />
@@ -517,16 +515,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/src/window.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/atrc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/crashtest1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/dbfuzz.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/dbfuzz2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/fuzzcheck.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/fuzzinvariants.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/kvtest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/optfuzz-db01.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/optfuzz.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/ossfuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/ossshell.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/sessionfuzz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/speedtest1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/startup.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/test/threadtest1.c" />
@@ -547,7 +537,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/tool/enlargedb.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/tool/extract.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/tool/fast_vacuum.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/tool/fuzzershell.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/tool/getlock.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/tool/index_usage.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sqlcipher/tool/lemon.c" />
@@ -653,6 +642,7 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/SQLCipher.podspec.json" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/autoconf/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/autoconf/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/autoconf/README.first" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/autoconf/README.txt" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/autoconf/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/autoconf/tea/Makefile.in" />
@@ -683,8 +673,12 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fiddle/testing1.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fiddle/testing2.js" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts1/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts2/README.tokenizers" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts2/README.txt" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts2/mkfts2amal.tcl" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts3/README.content" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts3/README.syntax" />
+    <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts3/README.tokenizers" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts3/README.txt" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts3/fts3speed.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/ext/fts3/tool/fts3cov.sh" />
@@ -737,14 +731,12 @@
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/boundary4.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/filter2.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/fts3_common.tcl" />
-    <Text Include="../../thirdparty/owemdjee/sqlcipher/test/fuzz_common.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/genesis.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/lemon-test01.y" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/lock_common.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/make-where7.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/malloc_common.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/malloctraceviewer.tcl" />
-    <Text Include="../../thirdparty/owemdjee/sqlcipher/test/optfuzz-db01.txt" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/pg_common.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/randexpr1.tcl" />
     <Text Include="../../thirdparty/owemdjee/sqlcipher/test/releasetest_data.tcl" />

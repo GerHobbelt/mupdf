@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="qjsc.vcxproj">
+      <Project>{930733ab-101f-4699-894c-e8ff37d8bdc0}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\scripts\libQuickJS\compile_scripts.js" />
+    <None Include="..\..\scripts\libQuickJS\Makefile" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{C6303E5B-2FFB-4CDE-A1D5-141E7552BD4A}</ProjectGuid>
@@ -49,20 +58,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -70,26 +79,46 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NMakeBuildCommandLine>qjsc.exe -h</NMakeBuildCommandLine>
-    <NMakeOutput>qjsc_precompile_task.exe</NMakeOutput>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile all PROJDIR=$(ProjectDir) </NMakeBuildCommandLine>
+    <NMakeOutput>
+    </NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>qjsc.exe -h</NMakeBuildCommandLine>
-    <NMakeOutput>qjsc_precompile_task.exe</NMakeOutput>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile all PROJDIR=$(ProjectDir) </NMakeBuildCommandLine>
+    <NMakeOutput>
+    </NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeBuildCommandLine>qjsc.exe -h</NMakeBuildCommandLine>
-    <NMakeOutput>qjsc_precompile_task.exe</NMakeOutput>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile all PROJDIR=$(ProjectDir) </NMakeBuildCommandLine>
+    <NMakeOutput>
+    </NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <NMakeBuildCommandLine>qjsc.exe -h</NMakeBuildCommandLine>
-    <NMakeOutput>qjsc_precompile_task.exe</NMakeOutput>
+    <NMakeBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile all PROJDIR=$(ProjectDir) </NMakeBuildCommandLine>
+    <NMakeOutput>
+    </NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <NMakeReBuildCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile forced-rebuild PROJDIR=$(ProjectDir) </NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -f $(ProjectDir)../../scripts/libQuickJS/Makefile clean PROJDIR=$(ProjectDir) </NMakeCleanCommandLine>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -121,16 +150,13 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

@@ -18,7 +18,7 @@ let targetDir = argv[2];
 let binDir = argv[3];		// OutputDir
 let binDir2 = argv[4];		// TargetDir
 
-const mutoolExe = binDir + 'mutool_ex.exe';
+const mutoolExe = binDir + 'qjsc.exe';
 const replJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/repl.js';
 const calcJSfile = targetDir + '../../thirdparty/owemdjee/QuickJS/qjscalc.js';
 const replCfile = targetDir + 'qjsrepl.c';
@@ -80,7 +80,7 @@ let bootstrap_calc = false;
 try {
 	if (!fs.existsSync(replCfile)) {
 		if (fs.existsSync(mutoolExe)) {
-			let stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-m', '-c', '-o', replCfile, replJSfile]);
+			let stdout = execFileSync(mutoolExe, ['-v', '-m', '-c', '-o', replCfile, replJSfile]);
 			console.log("REPL compile:", stdout);
 			if (fs.existsSync(replCfile)) {
 				console.log("Successfully generated the repl C source file from repl.js");
@@ -97,7 +97,7 @@ try {
 try {
 	if (!fs.existsSync(calcCfile)) {
 		if (fs.existsSync(mutoolExe)) {
-			stdout = execFileSync(mutoolExe, ['qjsc', '-v', '-fbignum', '-m', '-c', '-o', calcCfile, calcJSfile]);
+			stdout = execFileSync(mutoolExe, ['-v', '-fbignum', '-m', '-c', '-o', calcCfile, calcJSfile]);
 			console.log("CALC compile:", stdout);
 			if (fs.existsSync(calcCfile)) {
 				console.log("Successfully generated the calc C source file from qjscalc.js");

@@ -165,15 +165,15 @@
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\include\mupdf\helpers\mu-threads.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\source\helpers\mu-threads\mu-threads.c" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/helpers/mu-threads/mu-threads.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="../../include/mupdf/helpers/mu-threads.h" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

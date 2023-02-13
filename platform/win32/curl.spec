@@ -5,6 +5,7 @@ also-ignore:
 	/lib/
 	/src/
 	/tests/
+	/packages/
 	
 sources:
 	..\..\source\tools\curl_tool.c

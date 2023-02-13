@@ -11,4 +11,5 @@ also-ignore:
 	striptest.*
 	
 	/bazel/
+	/cmake/
 	

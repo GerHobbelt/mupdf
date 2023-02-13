@@ -31,7 +31,157 @@ function checkDirAndReportPlusExitOnSuccess(p) {
 	}
 }
 
-let testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname}`;
+
+if (projname.startsWith("libboost-")) {
+	let tst_projname = projname.replace(/^libboost-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/boost/libs/${tst_projname}`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.startsWith("wxw-samples-")) {
+	let tst_projname = projname.replace(/^wxw-samples-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/${ tst_projname.replace(/-/, '/') }`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.startsWith("wxw-samples-sockets-")) {
+	let tst_projname = projname.replace(/^wxw-samples-sockets-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/sockets/${ tst_projname.replace(/-/, '/') }`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+if (projname.startsWith("wxw-samples-ipc-")) {
+	let tst_projname = projname.replace(/^wxw-samples-ipc-/, '');
+	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/ipc/${ tst_projname.replace(/-/, '/') }`;
+
+	checkDirAndReportPlusExitOnSuccess(testpath);
+}
+
+
+// now things get a little hairier: we need to MAP to projectname to a submodule directory path...
+
+const projectMap = {
+	"cryptest": "cryptopp",
+	"cryptlib": "cryptopp",
+	"libatlas": "math-atlas",
+	"libblosc": "c-blosc2",
+	"libbtree": "cpp-btree",
+	"binlog_bread": "binlog",
+	"binlog_brecovery": "binlog",
+	"libCHM": "CHM-lib",
+	"libdjvu": "djvulibre",
+	"libdtldiff": "dtl-diff-template-library",
+	"libenkiTaskScheduler": "enkiTS-TaskScheduler",
+	"libfamilia": "lda-Familia",
+	"libgdiff": "google-diff-match-patch",
+	"libhashmapbtree": "parallel-hashmap",
+	"libhdiff": "HDiffPatch",
+	"libmarl": "google-marl",
+	"libmarl_tests": "google-marl",
+	"libmegamime": "mime-mega",
+	"libprocess": "subprocess",
+	"libpromise": "promise-cpp",
+	"libQuickJSpp": "QuickJS-C++-Wrapper",
+	"libQuickJSpp2": "QuickJS-C++-Wrapper2",
+	"librobust-bibtex": "bibtex-robust-decoder",
+	"libsvgcharter": "svg-charter",
+	"libtbb": "oneTBB",
+	"libtidyhtml": "tidy-html5",
+	"libtoml": "tomlpp",
+	"libtorch": "pytorch",
+	"libuint128": "uint128_t",
+	"libuint128_tests": "uint128_t",
+	"libupskirt": "upskirt-markdown",
+	"libXMP-Toolkit": "XMP-Toolkit-SDK",
+	"qrencode-test": "libqrencode",
+	"libicu": "unicode-icu",
+	"libicu_tests": "unicode-icu",
+	"liblcms2_tests": "lcms2",
+	"libleptonica_tools": "leptonica",
+	"libjansson": "json-jansson",
+	"libjpeg-xl-benchmark": "jpeg-xl",
+	"libjpeg-xl-test": "jpeg-xl",
+	"libcxxtest_catch2_2_gtest": "cxxtest_catch_2_gtest",
+	"otl-ml": "OptimizationTemplateLibrary",
+	"gperf": "gperf-hash",
+	"manticore": "manticoresearch",
+	"libharfbuzz_tests": "harfbuzz",
+	"libopenjpeg_tools": "openjpeg",
+	"libYAC": "YACLib",
+	"libhnsw": "hnswlib",
+	"libnms": "nmslib",
+	"libsafestring": "safestringlib",
+	"libCache": "CacheLib",
+	"libyaml-tests": "libyaml",
+	"libtiff_contribs": "libtiff/contrib",
+	"libpng_contribs": "libpng/contrib",
+	//"libmupdf": "../../source;../../include",
+	"uberlogger": "uberlog",
+	"uberlog_test": "uberlog",
+	"filesystem_tests_exception": "filesystem/test",
+	"filesystem_tests_fs": "filesystem/test",
+	"filesystem_tests_fwd": "filesystem/test",
+	"filesystem_tests_multifile": "filesystem/test",
+	"googletest-demos": "googletest/googletest/test",
+	"googlegtest-demos": "googletest/googletest/test",
+	"googlelog-unittest": "glog",
+	//googlemock-demos
+	//googletest-demo-invalid-param-name1
+	//googletest-demo-invalid-param-name2
+	//googletest-samples
+	"png-pmt-tools-lib": "pmt-png-tools",
+	"png-pmt-tools": "pmt-png-tools",
+	"tesseract-unittests": "tesseract/unittest",
+	"wxCharts-tests": "wxCharts/tests",
+	//wxFormBuilder-test-events
+	//wxFormBuilder-test
+	//wxFormBuilder-tinyXML
+	//wxFormBuilderPlugin-SDK
+	"wxFormBuilderPlugin-additional": "wxFormBuilder/plugins/additional",
+	"wxFormBuilderPlugin-common": "wxFormBuilder/plugins/common",
+	"wxFormBuilderPlugin-containers": "wxFormBuilder/plugins/containers",
+	"wxFormBuilderPlugin-forms": "wxFormBuilder/plugins/forms",
+	"wxFormBuilderPlugin-layout": "wxFormBuilder/plugins/layout",
+	"wxScintilla": "wxWidgets/src/stc/scintilla",
+	//wxw-build-bakefiles-wxpresets-sample
+	//wxw-misc-theme-test
+	//wxw-samples-aui-minimal-static-build
+	//wxw-samples-console-minimal-static-build
+	//wxw-samples-dll-exe
+	//wxw-samples-dll-test-exe
+	"wxw-samples-htmlbox": "wxWidgets/samples/htlbox",
+	"wxw-samples-maskedctrl": "wxWidgets\samples\maskededit",
+	//wxw-samples-minimal-static-build
+	//wxw-samples-propgrid-minimal-static-build
+	"wxw-tests-benchmarks": "wxWidgets/tests/benchmarks",
+	"wxw-tests": "wxWidgets/tests",
+	"wxw-utils-helpview-client": "wxWidgets/utils/helpview",
+	"wxw-utils-mk-ctable": "wxWidgets/misc/unictabl",
+	
+	"sqlite_tools": "sqlite-amalgamation",
+};
+
+let testpath;
+
+for (const key in projectMap) {
+	let value = projectMap[key];
+	if (projname === key) {
+		testpath = `${scriptpath}/../../thirdparty/owemdjee/${value}`;
+
+		checkDirAndReportPlusExitOnSuccess(testpath);
+
+		testpath = `${scriptpath}/../../thirdparty/${value}`;
+
+		checkDirAndReportPlusExitOnSuccess(testpath);
+	}
+}
+
+
+
+testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname}`;
 
 checkDirAndReportPlusExitOnSuccess(testpath);
 
@@ -279,148 +429,6 @@ if (projname.endsWith("_DLL")) {
 	checkDirAndReportPlusExitOnSuccess(testpath);
 }
 
-if (projname.startsWith("libboost-")) {
-	let tst_projname = projname.replace(/^libboost-/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/boost/libs/${tst_projname}`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-}
-
-if (projname.startsWith("wxw-samples-")) {
-	let tst_projname = projname.replace(/^wxw-samples-/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/${ tst_projname.replace(/-/, '/') }`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-}
-
-if (projname.startsWith("wxw-samples-sockets-")) {
-	let tst_projname = projname.replace(/^wxw-samples-sockets-/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/sockets/${ tst_projname.replace(/-/, '/') }`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-}
-
-if (projname.startsWith("wxw-samples-ipc-")) {
-	let tst_projname = projname.replace(/^wxw-samples-ipc-/, '');
-	testpath = `${scriptpath}/../../thirdparty/owemdjee/wxWidgets/samples/ipc/${ tst_projname.replace(/-/, '/') }`;
-
-	checkDirAndReportPlusExitOnSuccess(testpath);
-}
-
-
-// now things get a little hairier: we need to MAP to projectname to a submodule directory path...
-
-const projectMap = {
-	"cryptest": "cryptopp",
-	"cryptlib": "cryptopp",
-	"libatlas": "math-atlas",
-	"libblosc": "c-blosc2",
-	"libbtree": "cpp-btree",
-	"binlog_bread": "binlog",
-	"binlog_brecovery": "binlog",
-	"libCHM": "CHM-lib",
-	"libdjvu": "djvulibre",
-	"libdtldiff": "dtl-diff-template-library",
-	"libenkiTaskScheduler": "enkiTS-TaskScheduler",
-	"libfamilia": "lda-Familia",
-	"libgdiff": "google-diff-match-patch",
-	"libhashmapbtree": "parallel-hashmap",
-	"libhdiff": "HDiffPatch",
-	"libmarl": "google-marl",
-	"libmarl_tests": "google-marl",
-	"libmegamime": "mime-mega",
-	"libprocess": "subprocess",
-	"libpromise": "promise-cpp",
-	"libQuickJSpp": "QuickJS-C++-Wrapper",
-	"libQuickJSpp2": "QuickJS-C++-Wrapper2",
-	"librobust-bibtex": "bibtex-robust-decoder",
-	"libsvgcharter": "svg-charter",
-	"libtbb": "oneTBB",
-	"libtidyhtml": "tidy-html5",
-	"libtoml": "tomlpp",
-	"libtorch": "pytorch",
-	"libuint128": "uint128_t",
-	"libuint128_tests": "uint128_t",
-	"libupskirt": "upskirt-markdown",
-	"libXMP-Toolkit": "XMP-Toolkit-SDK",
-	"qrencode-test": "libqrencode",
-	"libicu": "unicode-icu",
-	"libicu_tests": "unicode-icu",
-	"liblcms2_tests": "lcms2",
-	"libleptonica_tools": "leptonica",
-	"libjansson": "json-jansson",
-	"libjpeg-xl-benchmark": "jpeg-xl",
-	"libjpeg-xl-test": "jpeg-xl",
-	"libcxxtest_catch2_2_gtest": "cxxtest_catch_2_gtest",
-	"otl-ml": "OptimizationTemplateLibrary",
-	"gperf": "gperf-hash",
-	"manticore": "manticoresearch",
-	"libharfbuzz_tests": "harfbuzz",
-	"libopenjpeg_tools": "openjpeg",
-	"libYAC": "YACLib",
-	"libhnsw": "hnswlib",
-	"libnms": "nmslib",
-	"libsafestring": "safestringlib",
-	"libCache": "CacheLib",
-	"libyaml-tests": "libyaml",
-	"libtiff_contribs": "libtiff/contrib",
-	"libpng_contribs": "libpng/contrib",
-	//"libmupdf": "../../source;../../include",
-	"uberlogger": "uberlog",
-	"uberlog_test": "uberlog",
-	"filesystem_tests_exception": "filesystem/test",
-	"filesystem_tests_fs": "filesystem/test",
-	"filesystem_tests_fwd": "filesystem/test",
-	"filesystem_tests_multifile": "filesystem/test",
-	"googletest-demos": "googletest/googletest/test",
-	"googlegtest-demos": "googletest/googletest/test",
-	"googlelog-unittest": "glog",
-	//googlemock-demos
-	//googletest-demo-invalid-param-name1
-	//googletest-demo-invalid-param-name2
-	//googletest-samples
-	"png-pmt-tools-lib": "pmt-png-tools",
-	"png-pmt-tools": "pmt-png-tools",
-	"tesseract-unittests": "tesseract/unittest",
-	"wxCharts-tests": "wxCharts/tests",
-	//wxFormBuilder-test-events
-	//wxFormBuilder-test
-	//wxFormBuilder-tinyXML
-	//wxFormBuilderPlugin-SDK
-	"wxFormBuilderPlugin-additional": "wxFormBuilder/plugins/additional",
-	"wxFormBuilderPlugin-common": "wxFormBuilder/plugins/common",
-	"wxFormBuilderPlugin-containers": "wxFormBuilder/plugins/containers",
-	"wxFormBuilderPlugin-forms": "wxFormBuilder/plugins/forms",
-	"wxFormBuilderPlugin-layout": "wxFormBuilder/plugins/layout",
-	"wxScintilla": "wxWidgets/src/stc/scintilla",
-	//wxw-build-bakefiles-wxpresets-sample
-	//wxw-misc-theme-test
-	//wxw-samples-aui-minimal-static-build
-	//wxw-samples-console-minimal-static-build
-	//wxw-samples-dll-exe
-	//wxw-samples-dll-test-exe
-	"wxw-samples-htmlbox": "wxWidgets/samples/htlbox",
-	"wxw-samples-maskedctrl": "wxWidgets\samples\maskededit",
-	//wxw-samples-minimal-static-build
-	//wxw-samples-propgrid-minimal-static-build
-	"wxw-tests-benchmarks": "wxWidgets/tests/benchmarks",
-	"wxw-tests": "wxWidgets/tests",
-	"wxw-utils-helpview-client": "wxWidgets/utils/helpview",
-	"wxw-utils-mk-ctable": "wxWidgets/misc/unictabl",
-};
-
-for (const key in projectMap) {
-	let value = projectMap[key];
-	if (projname === key) {
-		testpath = `${scriptpath}/../../thirdparty/owemdjee/${value}`;
-
-		checkDirAndReportPlusExitOnSuccess(testpath);
-
-		testpath = `${scriptpath}/../../thirdparty/${value}`;
-
-		checkDirAndReportPlusExitOnSuccess(testpath);
-	}
-}
 
 // no mapping found.
 console.error(`No known mapping for ${projname}.`);
