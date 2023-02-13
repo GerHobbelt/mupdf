@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\nasm.props" />
@@ -80,7 +80,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -112,8 +112,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJPEG_TURBO;JPEG_TURBO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -254,190 +254,6 @@
     <ClInclude Include="../../scripts/libjpeg-turbo/jconfigint.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-cdjpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-cjpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-djpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-example.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jaricom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcapimin.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcapistd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcarith.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jccoefct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jccolext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jccolor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcdctmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcdiffct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jchuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcicc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcinit.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jclhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jclossls.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcmainct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcmarker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcmaster.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcomapi.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcparam.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcphuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcprepct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcsample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jcstest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jctrans.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdapimin.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdapistd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdarith.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdatadst-tj.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdatadst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdatasrc-tj.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdatasrc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdcoefct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdcol565.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdcolext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdcolor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jddctmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jddiffct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdicc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdinput.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdlhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdlossls.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdmainct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdmarker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdmaster.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdmerge.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdmrg565.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdmrgext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdphuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdpostct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdsample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jdtrans.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jerror.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jfdctflt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jfdctfst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jfdctint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jidctflt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jidctfst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jidctint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jidctred.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jmemmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jmemnobs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jpegtran.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jquant1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jquant2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jsimd_none.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jstdhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-jutils.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-rdbmp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-rdcolmap.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-rdgif.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-rdjpgcom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-rdppm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-rdswitch.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-rdtarga.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-strtest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-tjbench.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-tjexample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-tjunittest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-tjutil.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-transupp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-turbojpeg-mp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-turbojpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-wrbmp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-wrgif.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-wrjpgcom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-wrppm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/12-bits/12-wrtarga.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-cdjpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-cjpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-djpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-example.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jaricom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcapimin.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcapistd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcarith.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jccoefct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jccolext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jccolor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcdctmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcdiffct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jchuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcicc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcinit.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jclhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jclossls.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcmainct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcmarker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcmaster.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcomapi.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcparam.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcphuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcprepct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcsample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jcstest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jctrans.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdapimin.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdapistd.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdarith.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdatadst-tj.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdatadst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdatasrc-tj.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdatasrc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdcoefct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdcol565.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdcolext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdcolor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jddctmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jddiffct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdicc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdinput.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdlhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdlossls.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdmainct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdmarker.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdmaster.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdmerge.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdmrg565.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdmrgext.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdphuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdpostct.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdsample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jdtrans.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jerror.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jfdctflt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jfdctfst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jfdctint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jidctflt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jidctfst.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jidctint.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jidctred.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jmemmgr.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jmemnobs.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jpegtran.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jquant1.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jquant2.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jsimd_none.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jstdhuff.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-jutils.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-rdbmp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-rdcolmap.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-rdgif.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-rdjpgcom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-rdppm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-rdswitch.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-rdtarga.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-strtest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-tjbench.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-tjexample.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-tjunittest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-tjutil.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-transupp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-turbojpeg-mp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-turbojpeg.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-wrbmp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-wrgif.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-wrjpgcom.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-wrppm.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/16-bits/16-wrtarga.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/cdjpeg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/cjpeg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libjpeg-turbo/djpeg.c" />
@@ -775,8 +591,7 @@
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/win/vc/projectTargets-release.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libjpeg-turbo/wizard.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
