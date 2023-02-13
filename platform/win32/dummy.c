@@ -25,4 +25,39 @@
  * Since we need different object files for 32 and 64 bit builds,
  * we can't just include them in the file list.
  */
+
+// quick hack: use this area for debugging Why The EFF the resource compile phase in MSVC2022 sometimes (rarely!) spits out an error about VS_FF_DEBUG being undefined...
+
+#if defined(_MSC_VER)
+
+//#define RC_INVOKED   //<-- SHOULD've been set by the resource compiler itself.
+
+//#define WIN32_LEAN_AND_MEAN
+#define APSTUDIO_READONLY_SYMBOLS
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include <windows.h>
+#include <winver.h>      //<-- is included by winresrc.h: the "winresrc.h" header file cannot deal with this extra include and b0rks.
+//#include <verrsrc.h>   //<-- doubly-defines the stuff in winver.h: those stupid header files don't have reload protection.
+//#include <winres.h>    //<-- don't even TRY to use this one as you'll get severe collisions with winver.h et al.!
+//#include <winresrc.h>  //<-- don't even TRY to use this one as you'll get severe collisions with winver.h et al.!
+
+#include <afxres.h>      // -- for MFC stuff; no collisions or b0rks with the (uncommented!) includes above. 
+
+
+// ... and now in the repeat, testing the header include protections of those darned system files:
+
+//#define WIN32_LEAN_AND_MEAN
+#define APSTUDIO_READONLY_SYMBOLS
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include <windows.h>
+#include <winver.h>
+
+
+#ifdef _DEBUG
+int rc_fileflags_dummy = VS_FF_DEBUG;
+#endif
+
+#endif   // end of MSVC/RC hack area
+
+
 int libresources_dummy;
