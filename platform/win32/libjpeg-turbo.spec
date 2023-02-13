@@ -12,3 +12,9 @@ also-ignore:
 	/java/
 	example.c
 	
+	# temporarily REVERT the 8/12/16 bit depth TurboJPEG feature:
+	
+	/12-bits/
+	/16-bits/
+	
+	
