@@ -125,7 +125,7 @@
 	unwanted fonts.
 */
 /* To avoid all noto fonts except CJK, enable: */
-/* #define TOFU */
+//#define TOFU // <=== PyMuPDF: not the complete NOTO!
 
 /* To skip the CJK font, enable: (this implicitly enables TOFU_CJK_EXT
  * and TOFU_CJK_LANG) */
@@ -133,19 +133,19 @@
 
 /* To skip CJK Extension A, enable: (this implicitly enables
  * TOFU_CJK_LANG) */
-/* #define TOFU_CJK_EXT */
+//#define TOFU_CJK_EXT // <=== PyMuPDF: causes 1.5 MB extra size
 
 /* To skip CJK language specific fonts, enable: */
-/* #define TOFU_CJK_LANG */
+//#define TOFU_CJK_LANG // <=== PyMuPDF
 
 /* To skip the Emoji font, enable: */
-/* #define TOFU_EMOJI */
+//#define TOFU_EMOJI // <=== PyMuPDF
 
 /* To skip the ancient/historic scripts, enable: */
-/* #define TOFU_HISTORIC */
+//#define TOFU_HISTORIC // <=== PyMuPDF
 
 /* To skip the symbol font, enable: */
-/* #define TOFU_SYMBOL */
+//#define TOFU_SYMBOL // <=== PyMuPDF
 
 /* To skip the SIL fonts, enable: */
 /* #define TOFU_SIL */
