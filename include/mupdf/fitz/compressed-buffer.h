@@ -126,6 +126,19 @@ fz_stream *fz_open_image_decomp_stream(fz_context *ctx, fz_stream *, fz_compress
 */
 int fz_recognize_image_format(fz_context *ctx, const unsigned char *p, int size);
 
+/**
+	Map from FZ_IMAGE_* value to string.
+
+	The returned string is static and therefore must not be freed.
+*/
+const char *fz_image_type_name(int type);
+
+/**
+	Map from (case sensitive) image type string to FZ_IMAGE_*
+	type value.
+*/
+int fz_lookup_image_type(const char *type);
+
 enum
 {
 	FZ_IMAGE_UNKNOWN = 0,

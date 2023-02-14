@@ -1232,6 +1232,51 @@ void fz_set_pixmap_image_tile(fz_context *ctx, fz_pixmap_image *image, fz_pixmap
 	((fz_pixmap_image *)image)->tile = pix;
 }
 
+const char *
+fz_image_type_name(int type)
+{
+	switch (type)
+	{
+	default:
+	case FZ_IMAGE_UNKNOWN: return "unknown";
+	case FZ_IMAGE_RAW: return "raw";
+	case FZ_IMAGE_FAX: return "fax";
+	case FZ_IMAGE_FLATE: return "flate";
+	case FZ_IMAGE_LZW: return "lzw";
+	case FZ_IMAGE_RLD: return "rld";
+	case FZ_IMAGE_BMP: return "bmp";
+	case FZ_IMAGE_GIF: return "gif";
+	case FZ_IMAGE_JBIG2: return "jbig2";
+	case FZ_IMAGE_JPEG: return "jpeg";
+	case FZ_IMAGE_JPX: return "jpx";
+	case FZ_IMAGE_JXR: return "jxr";
+	case FZ_IMAGE_PNG: return "png";
+	case FZ_IMAGE_PNM: return "pnm";
+	case FZ_IMAGE_TIFF: return "tiff";
+	}
+}
+
+int
+fz_lookup_image_type(const char *type)
+{
+	if (type == NULL) return FZ_IMAGE_UNKNOWN;
+	if (!strcmp(type, "raw")) return FZ_IMAGE_RAW;
+	if (!strcmp(type, "fax")) return FZ_IMAGE_FAX;
+	if (!strcmp(type, "flate")) return FZ_IMAGE_FLATE;
+	if (!strcmp(type, "lzw")) return FZ_IMAGE_LZW;
+	if (!strcmp(type, "rld")) return FZ_IMAGE_RLD;
+	if (!strcmp(type, "bmp")) return FZ_IMAGE_BMP;
+	if (!strcmp(type, "gif")) return FZ_IMAGE_GIF;
+	if (!strcmp(type, "jbig2")) return FZ_IMAGE_JBIG2;
+	if (!strcmp(type, "jpeg")) return FZ_IMAGE_JPEG;
+	if (!strcmp(type, "jpx")) return FZ_IMAGE_JPX;
+	if (!strcmp(type, "jxr")) return FZ_IMAGE_JXR;
+	if (!strcmp(type, "png")) return FZ_IMAGE_PNG;
+	if (!strcmp(type, "pnm")) return FZ_IMAGE_PNM;
+	if (!strcmp(type, "tiff")) return FZ_IMAGE_TIFF;
+	return FZ_IMAGE_UNKNOWN;
+}
+
 int
 fz_recognize_image_format(fz_context *ctx, const unsigned char *p, int n)
 {
